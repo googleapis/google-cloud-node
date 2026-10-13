@@ -13,11 +13,17 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {EventEmitter} from 'events';
 import {describe, it, before, after, beforeEach} from 'mocha';
 import * as Module from 'module';
 import * as arrow from 'apache-arrow';
 import {BigQuery, Job, Query} from '../src';
-import {checkArrowDependencies} from '../src/arrow';
+import {
+  BigQueryReadClient,
+  checkArrowDependencies,
+  getStorageReadClient,
+  StorageModule,
+} from '../src/arrow';
 import bigquery from '../src/types';
 
 /**
@@ -25,7 +31,9 @@ import bigquery from '../src/types';
  * on which copy of the package is installed (for example, an unbuilt in-repo
  * workspace link).
  */
-const storageStub = {};
+const storageStub = {
+  BigQueryReadClient: class {},
+};
 
 /**
  * Serializes an Arrow Table into separate base64 `serializedSchema` and
@@ -82,6 +90,40 @@ function stubJobsQuery(
   return () => capturedReq;
 }
 
+/**
+ * Registers a stub `BigQueryReadClient` on `bq` via `getStorageReadClient`.
+ */
+type ReadRowsRequest = Parameters<BigQueryReadClient['readRows']>[0];
+
+/**
+ * A fake ReadRows stream. google-gax streams always have `cancel`, `pause`,
+ * and `resume`; `stubStorageReadClient` adds no-op ones when a fake omits them.
+ */
+type FakeReadRowsStream = EventEmitter &
+  Partial<Record<'cancel' | 'pause' | 'resume', () => void>>;
+
+/**
+ * Registers a fake `BigQueryReadClient` as the shared client for `bq`.
+ */
+function stubStorageReadClient(
+  bq: BigQuery,
+  client: {readRows: (req: ReadRowsRequest) => FakeReadRowsStream},
+): BigQueryReadClient {
+  const noop = () => {};
+  return getStorageReadClient(bq, {
+    BigQueryReadClient: class {
+      readRows(req: ReadRowsRequest) {
+        const grpcStream = client.readRows(req);
+        return Object.assign(grpcStream, {
+          cancel: grpcStream.cancel ?? noop,
+          pause: grpcStream.pause ?? noop,
+          resume: grpcStream.resume ?? noop,
+        });
+      }
+    },
+  });
+}
+
 describe('Arrow Support', () => {
   let originalRequire: typeof Module.prototype.require;
 
@@ -107,9 +149,10 @@ describe('Arrow Support', () => {
 
   describe('checkArrowDependencies', () => {
     it('should succeed when @google-cloud/bigquery-storage >= 6.1.0 is installed', () => {
-      const arrowMod = checkArrowDependencies();
-      // Verify the returned module exposes the Arrow RecordBatchReader API.
+      const {arrow: arrowMod, storage} = checkArrowDependencies();
+      // Verify the returned modules expose RecordBatchReader and BigQueryReadClient.
       assert.strictEqual(typeof arrowMod.RecordBatchReader.from, 'function');
+      assert.strictEqual(typeof storage.BigQueryReadClient, 'function');
     });
 
     it('should throw an actionable error when @google-cloud/bigquery-storage is missing', () => {
@@ -406,30 +449,422 @@ describe('Arrow Support', () => {
         /Query did not complete within the jobs\.query timeout\./,
       );
     });
+  });
 
-    it('should fail when jobs.query does not return all rows inline', async () => {
+  describe('BigQuery#createQueryArrowStream (default job stream)', () => {
+    let bq: BigQuery;
+
+    beforeEach(() => {
+      bq = new BigQuery({
+        projectId: 'test-project',
+        universeDomain: 'example.universe.goog',
+      });
+    });
+
+    it('should lazily create and reuse one BigQueryReadClient with credentials, universeDomain, and keepalive', () => {
+      const capturedOpts: Array<Record<string, unknown>> = [];
+      const fakeStorage: StorageModule = {
+        BigQueryReadClient: class FakeReadClient {
+          constructor(opts?: Record<string, unknown>) {
+            capturedOpts.push(opts || {});
+          }
+          readRows(): never {
+            throw new Error('not called');
+          }
+        },
+      };
+
+      const client1 = getStorageReadClient(bq, fakeStorage);
+      const client2 = getStorageReadClient(bq, fakeStorage);
+
+      // Verify the same BigQueryReadClient instance is reused across queries on the same BigQuery client.
+      assert.strictEqual(client1, client2);
+      assert.strictEqual(capturedOpts.length, 1);
+      assert.strictEqual(capturedOpts[0].auth, bq.authClient);
+      assert.strictEqual(capturedOpts[0].projectId, 'test-project');
+      assert.strictEqual(
+        capturedOpts[0].universeDomain,
+        'example.universe.goog',
+      );
+      assert.strictEqual(capturedOpts[0]['grpc.keepalive_time_ms'], 60_000);
+      assert.strictEqual(capturedOpts[0]['grpc.keepalive_timeout_ms'], 60_000);
+    });
+
+    it('should emit inline batches first and stream remaining rows from streams/_default at offset = pageRowCount', async () => {
+      const page2Payload = serializeArrowTable(
+        makeSampleTable([3, 4], ['carol', 'dave']),
+      );
+
       stubJobsQuery(bq, {
-        res: {jobComplete: true, pageRowCount: '2', totalRows: '5'},
+        res: {
+          jobComplete: true,
+          queryId: 'multi-page-query',
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-multi-1',
+            location: 'EU',
+          },
+          pageRowCount: '2',
+          totalRows: '4',
+          arrowSchema: {serializedSchema: SAMPLE_PAYLOAD.serializedSchema},
+          arrowRecordBatch: {
+            serializedRecordBatch: SAMPLE_PAYLOAD.serializedRecordBatch,
+          },
+        },
       });
 
-      // TODO: Replace with default job stream (pageRowCount < totalRows) tests once added.
-      await assert.rejects(
-        bq.createQueryArrowStream('SELECT 1').toArray(),
-        /Query results were not returned inline in the jobs\.query response\./,
+      const capturedReadRowsReqs: Array<{
+        readStream?: string;
+        offset?: number;
+      }> = [];
+      stubStorageReadClient(bq, {
+        readRows: (req: {readStream?: string; offset?: number}) => {
+          capturedReadRowsReqs.push(req);
+          const grpcStream = new EventEmitter();
+          process.nextTick(() => {
+            grpcStream.emit('data', {
+              arrowSchema: {
+                serializedSchema: Buffer.from(
+                  page2Payload.serializedSchema,
+                  'base64',
+                ),
+              },
+              arrowRecordBatch: {
+                serializedRecordBatch: Buffer.from(
+                  page2Payload.serializedRecordBatch,
+                  'base64',
+                ),
+              },
+            });
+            grpcStream.emit('end');
+          });
+          return grpcStream;
+        },
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream('SELECT id, name FROM tbl')
+        .toArray();
+
+      // Verify ReadRows was called on streams/_default using the job's EU location and offset = pageRowCount (2).
+      assert.deepStrictEqual(capturedReadRowsReqs, [
+        {
+          readStream:
+            'projects/test-project/locations/EU/jobs/job-multi-1/streams/_default',
+          offset: 2,
+        },
+      ]);
+
+      // Verify both the inline batch and streamed batch are emitted in order.
+      assert.strictEqual(batches.length, 2);
+      const table = new arrow.Table(batches);
+      assert.deepStrictEqual(
+        Array.from(table.getChild('id')!.toArray()),
+        [1, 2, 3, 4],
+      );
+      assert.deepStrictEqual(table.getChild('name')!.toArray(), [
+        'alice',
+        'bob',
+        'carol',
+        'dave',
+      ]);
+    });
+
+    it('should pause ReadRows while the consumer is behind and resume it when the consumer reads', async () => {
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-backpressure-1',
+            location: 'US',
+          },
+          pageRowCount: '2',
+          totalRows: '42',
+          arrowSchema: {serializedSchema: SAMPLE_PAYLOAD.serializedSchema},
+          arrowRecordBatch: {
+            serializedRecordBatch: SAMPLE_PAYLOAD.serializedRecordBatch,
+          },
+        },
+      });
+
+      const streamedBatches = 20;
+      const page2Payload = serializeArrowTable(
+        makeSampleTable([3, 4], ['carol', 'dave']),
+      );
+      const flowEvents: string[] = [];
+      stubStorageReadClient(bq, {
+        readRows: () => {
+          let ended = false;
+          const grpcStream = Object.assign(new EventEmitter(), {
+            pause: () => flowEvents.push('pause'),
+            // Like a real paused gRPC stream, only finish once resumed.
+            resume: () => {
+              flowEvents.push('resume');
+              if (flowEvents.includes('pause') && !ended) {
+                ended = true;
+                process.nextTick(() => grpcStream.emit('end'));
+              }
+            },
+          });
+          process.nextTick(() => {
+            // Emit more batches in one tick than the output stream buffers
+            // (highWaterMark 16), before the consumer can read any of them.
+            for (let i = 0; i < streamedBatches; i++) {
+              grpcStream.emit('data', {
+                arrowSchema: {
+                  serializedSchema: Buffer.from(
+                    page2Payload.serializedSchema,
+                    'base64',
+                  ),
+                },
+                arrowRecordBatch: {
+                  serializedRecordBatch: Buffer.from(
+                    page2Payload.serializedRecordBatch,
+                    'base64',
+                  ),
+                },
+              });
+            }
+          });
+          return grpcStream;
+        },
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream('SELECT id, name FROM tbl')
+        .toArray();
+
+      // Verify ReadRows was paused once the buffer filled, resumed when the
+      // consumer read, and no batches were lost.
+      const firstPause = flowEvents.indexOf('pause');
+      assert.ok(firstPause >= 0, 'expected ReadRows to be paused');
+      assert.ok(
+        flowEvents.indexOf('resume', firstPause) > firstPause,
+        'expected ReadRows to be resumed after pausing',
+      );
+      assert.strictEqual(batches.length, 1 + streamedBatches);
+    });
+
+    it('should cancel only the active ReadRows stream when the caller ends iteration early', async () => {
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-cancel-1',
+            location: 'US',
+          },
+          pageRowCount: '2',
+          totalRows: '6',
+          arrowSchema: {serializedSchema: SAMPLE_PAYLOAD.serializedSchema},
+          arrowRecordBatch: {
+            serializedRecordBatch: SAMPLE_PAYLOAD.serializedRecordBatch,
+          },
+        },
+      });
+
+      let cancelCount = 0;
+      const sharedClient = stubStorageReadClient(bq, {
+        readRows: () => {
+          const grpcStream = new EventEmitter() as EventEmitter & {
+            cancel: () => void;
+          };
+          grpcStream.cancel = () => {
+            cancelCount++;
+          };
+          process.nextTick(() => {
+            grpcStream.emit('data', {
+              arrowSchema: {
+                serializedSchema: Buffer.from(
+                  SAMPLE_PAYLOAD.serializedSchema,
+                  'base64',
+                ),
+              },
+              arrowRecordBatch: {
+                serializedRecordBatch: Buffer.from(
+                  SAMPLE_PAYLOAD.serializedRecordBatch,
+                  'base64',
+                ),
+              },
+            });
+          });
+          return grpcStream;
+        },
+      });
+
+      const stream = bq.createQueryArrowStream('SELECT id, name FROM tbl');
+      const received: arrow.RecordBatch[] = [];
+      for await (const batch of stream) {
+        received.push(batch);
+        if (received.length === 2) {
+          break;
+        }
+      }
+
+      // ReadRows is cancelled from the stream's 'close' event, which Node emits
+      // on the next tick after the loop destroys the stream.
+      await new Promise(resolve => setImmediate(resolve));
+      // Verify breaking out of the stream cancels the active gRPC stream while keeping the shared client.
+      assert.strictEqual(received.length, 2);
+      assert.strictEqual(cancelCount, 1);
+      assert.strictEqual(
+        getStorageReadClient(bq, {
+          BigQueryReadClient: class {
+            readRows(): never {
+              throw new Error('should not instantiate a new client');
+            }
+          },
+        }),
+        sharedClient,
       );
     });
 
-    it('should fail when jobs.query returns a pageToken with totalRows = 0', async () => {
-      // Cached multi-page results can report totalRows "0" and omit pageRowCount.
+    it('should raise a ReadRows error after the batches already emitted', async () => {
       stubJobsQuery(bq, {
-        res: {jobComplete: true, totalRows: '0', pageToken: 'token-1'},
+        res: {
+          jobComplete: true,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-err-1',
+            location: 'US',
+          },
+          pageRowCount: '2',
+          totalRows: '4',
+          arrowSchema: {serializedSchema: SAMPLE_PAYLOAD.serializedSchema},
+          arrowRecordBatch: {
+            serializedRecordBatch: SAMPLE_PAYLOAD.serializedRecordBatch,
+          },
+        },
+      });
+      const readRowsError = Object.assign(new Error('permission denied'), {
+        code: 7,
+      });
+      stubStorageReadClient(bq, {
+        readRows: () => {
+          const grpcStream = new EventEmitter();
+          process.nextTick(() => grpcStream.emit('error', readRowsError));
+          return grpcStream;
+        },
       });
 
-      // TODO: Replace with default job stream (pageToken) tests once added.
+      const stream = bq.createQueryArrowStream('SELECT id, name FROM tbl');
+      const received: arrow.RecordBatch[] = [];
+      const errors: Error[] = [];
+      stream.on('data', batch => received.push(batch));
+      stream.on('error', err => errors.push(err));
+      stream.on('end', () => errors.push(new Error('unexpected end')));
+      // The error and 'close' are emitted on later ticks.
+      await new Promise(resolve => stream.once('close', resolve));
+
+      // Verify the inline batch was delivered, then exactly one terminal event:
+      // the ReadRows error.
+      assert.strictEqual(received.length, 1);
+      assert.deepStrictEqual(errors, [readRowsError]);
+    });
+
+    it('should cancel ReadRows and raise the error when a streamed batch fails to decode', async () => {
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-bad-1',
+            location: 'US',
+          },
+          totalRows: '2',
+          arrowSchema: {serializedSchema: SAMPLE_PAYLOAD.serializedSchema},
+        },
+      });
+      let cancelCount = 0;
+      stubStorageReadClient(bq, {
+        readRows: () => {
+          const grpcStream = Object.assign(new EventEmitter(), {
+            cancel: () => cancelCount++,
+          });
+          process.nextTick(() =>
+            grpcStream.emit('data', {
+              arrowRecordBatch: {
+                serializedRecordBatch: Buffer.from('not an arrow batch'),
+              },
+            }),
+          );
+          return grpcStream;
+        },
+      });
+
+      // Verify the decode error is raised and the gRPC stream is cancelled.
+      await assert.rejects(
+        bq.createQueryArrowStream('SELECT id, name FROM tbl').toArray(),
+      );
+      assert.strictEqual(cancelCount, 1);
+    });
+
+    it('should fail when remaining rows must be streamed but jobReference is missing', async () => {
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          pageRowCount: '2',
+          totalRows: '5',
+          arrowSchema: {serializedSchema: SAMPLE_PAYLOAD.serializedSchema},
+          arrowRecordBatch: {
+            serializedRecordBatch: SAMPLE_PAYLOAD.serializedRecordBatch,
+          },
+        },
+      });
+
+      // Verify an actionable error is raised if BigQuery omits jobReference on a multi-page response.
       await assert.rejects(
         bq.createQueryArrowStream('SELECT 1').toArray(),
-        /Query results were not returned inline in the jobs\.query response\./,
+        /Cannot stream remaining Arrow rows without a jobReference\./,
       );
+    });
+
+    it('should stream from streams/_default at offset 0 when jobs.query returns a pageToken with totalRows = 0', async () => {
+      // Cached multi-page ARROW results can report totalRows "0", omit
+      // pageRowCount, and return no inline rows while setting pageToken.
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-cached-1',
+            location: 'US',
+          },
+          totalRows: '0',
+          pageToken: 'token-1',
+          arrowSchema: {serializedSchema: SAMPLE_PAYLOAD.serializedSchema},
+        },
+      });
+
+      const capturedOffsets: Array<number | undefined> = [];
+      stubStorageReadClient(bq, {
+        readRows: (req: {offset?: number}) => {
+          capturedOffsets.push(req.offset);
+          const grpcStream = new EventEmitter();
+          process.nextTick(() => {
+            grpcStream.emit('data', {
+              arrowRecordBatch: {
+                serializedRecordBatch: Buffer.from(
+                  SAMPLE_PAYLOAD.serializedRecordBatch,
+                  'base64',
+                ),
+              },
+            });
+            grpcStream.emit('end');
+          });
+          return grpcStream;
+        },
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream('SELECT id, name FROM tbl')
+        .toArray();
+
+      // Verify the rows are read from the start of the default stream instead
+      // of returning an empty result.
+      assert.deepStrictEqual(capturedOffsets, [0]);
+      assert.strictEqual(new arrow.Table(batches).numRows, 2);
     });
   });
 });

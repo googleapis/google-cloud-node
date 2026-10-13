@@ -21,6 +21,31 @@ import type bigquery from './types';
 
 type ArrowModule = typeof import('apache-arrow');
 
+interface IReadRowsResponse {
+  arrowSchema?: {
+    serializedSchema?: Uint8Array | string | null;
+  } | null;
+  arrowRecordBatch?: {
+    serializedRecordBatch?: Uint8Array | string | null;
+  } | null;
+}
+
+interface ReadRowsStream extends NodeJS.EventEmitter {
+  cancel(): void;
+  pause(): void;
+  resume(): void;
+}
+
+export interface BigQueryReadClient {
+  readRows(request: {readStream: string; offset?: number}): ReadRowsStream;
+}
+
+export interface StorageModule {
+  BigQueryReadClient: new (
+    options?: Record<string, unknown>,
+  ) => BigQueryReadClient;
+}
+
 /**
  * [Beta] A stream of Apache Arrow `RecordBatch` objects returned by
  * {@link BigQuery#createQueryArrowStream}.
@@ -36,6 +61,40 @@ export type ArrowRecordBatchStream = ResourceStream<RecordBatch> & {
   /** The job reference, when BigQuery creates a job for the query. */
   jobReference?: bigquery.IJobReference;
 };
+
+/**
+ * State shared by the helpers that stream rows for one
+ * {@link BigQuery#createQueryArrowStream} call.
+ */
+interface ArrowStreamContext {
+  bq: BigQuery;
+  arrow: ArrowModule;
+  storage: StorageModule;
+  stream: ArrowRecordBatchStream;
+  /** Called when the consumer wants more batches. */
+  onRead?: () => void;
+}
+
+const readClients = new WeakMap<BigQuery, BigQueryReadClient>();
+
+/**
+ * Returns the first project ID from `candidates`, falling back to the
+ * `BigQuery` client's project and ignoring the uninitialized `'{{projectId}}'`
+ * placeholder.
+ *
+ * @private
+ */
+function resolveProjectId(
+  bq: BigQuery,
+  ...candidates: Array<string | null | undefined>
+): string | undefined {
+  for (const candidate of [...candidates, bq.projectId]) {
+    if (candidate && candidate !== '{{projectId}}') {
+      return candidate;
+    }
+  }
+  return undefined;
+}
 
 /**
  * Requires a dependency and verifies its minimum major.minor version.
@@ -81,17 +140,18 @@ function requireWithMinVersion<T = unknown>(
 }
 
 /**
- * Loads `apache-arrow` and verifies that the optional
- * `@google-cloud/bigquery-storage` (>= 6.1.0) package is installed.
+ * Loads `apache-arrow` and the optional `@google-cloud/bigquery-storage`
+ * (>= 6.1.0) package, verifying the latter's version.
  *
  * `apache-arrow` is a regular dependency, so its version is guaranteed by
  * `package.json`. It is loaded lazily so that only Arrow callers pay for it.
  *
  * @private
  */
-export function checkArrowDependencies(
-  requireFn: NodeRequire = require,
-): ArrowModule {
+export function checkArrowDependencies(requireFn: NodeRequire = require): {
+  arrow: ArrowModule;
+  storage: StorageModule;
+} {
   const arrow: ArrowModule = requireFn('apache-arrow');
   // Package managers only warn when an installed version is outside an
   // optional peer range, and an older version's protos silently drop newer
@@ -99,8 +159,40 @@ export function checkArrowDependencies(
   // TODO: Bump minimum version (here and in package.json) once
   // @google-cloud/bigquery-storage is released with
   // @google-cloud/bigquery-storage-api >= 0.5.0.
-  requireWithMinVersion(requireFn, '@google-cloud/bigquery-storage', 6, 1);
-  return arrow;
+  const storage = requireWithMinVersion<StorageModule>(
+    requireFn,
+    '@google-cloud/bigquery-storage',
+    6,
+    1,
+  );
+  return {arrow, storage};
+}
+
+/**
+ * Returns the shared `BigQueryReadClient` for a `BigQuery` instance, creating
+ * it lazily on first use with the `BigQuery` client's credentials, universe
+ * domain, and gRPC keepalive settings.
+ *
+ * @private
+ */
+export function getStorageReadClient(
+  bq: BigQuery,
+  storage: StorageModule,
+): BigQueryReadClient {
+  let client = readClients.get(bq);
+  if (!client) {
+    client = new storage.BigQueryReadClient({
+      auth: bq.authClient,
+      projectId: resolveProjectId(bq),
+      universeDomain: bq.universeDomain,
+      // Ping while ReadRows is paused for a slow consumer, so a connection
+      // silently dropped by a proxy or NAT errors instead of hanging.
+      'grpc.keepalive_time_ms': 60_000,
+      'grpc.keepalive_timeout_ms': 60_000,
+    });
+    readClients.set(bq, client);
+  }
+  return client;
 }
 
 /**
@@ -164,6 +256,138 @@ export function decodeArrowPayload(
 }
 
 /**
+ * Streams Arrow `RecordBatch`es from a job's sessionless default stream
+ * (`projects/{projectId}/locations/{location}/jobs/{jobId}/streams/_default`)
+ * starting at `offset`.
+ *
+ * @private
+ */
+function streamDefaultJobStream(
+  ctx: ArrowStreamContext,
+  jobRef: bigquery.IJobReference | undefined,
+  offset: number,
+  initialSchema?: Uint8Array | string,
+): void {
+  const {bq, stream} = ctx;
+  const projectId = resolveProjectId(bq, jobRef?.projectId);
+  const jobId = jobRef?.jobId;
+  const location = jobRef?.location || bq.location;
+
+  if (!projectId || !jobId || !location) {
+    stream.destroy(
+      new Error('Cannot stream remaining Arrow rows without a jobReference.'),
+    );
+    return;
+  }
+
+  const readStream = `projects/${projectId}/locations/${location}/jobs/${jobId}/streams/_default`;
+  streamReadRows(ctx, {readStream, offset, initialSchema});
+}
+
+/**
+ * Streams Arrow `RecordBatch`es from a Storage Read API stream starting at
+ * `offset`, pausing `ReadRows` while the consumer is behind.
+ *
+ * @private
+ */
+function streamReadRows(
+  ctx: ArrowStreamContext,
+  options: {
+    readStream: string;
+    offset: number;
+    initialSchema?: Uint8Array | string;
+  },
+): void {
+  const {bq, arrow, storage, stream} = ctx;
+  const {readStream, offset, initialSchema} = options;
+
+  let readClient: BigQueryReadClient;
+  try {
+    readClient = getStorageReadClient(bq, storage);
+  } catch (err) {
+    stream.destroy(err as Error);
+    return;
+  }
+
+  const grpcStream = readClient.readRows({
+    readStream,
+    offset,
+  });
+
+  // Cancel only the active ReadRows gRPC stream if the caller ends iteration
+  // early, keeping the shared BigQueryReadClient open for subsequent queries.
+  let finished = false;
+  const cancelGrpcStream = () => {
+    if (!finished) {
+      finished = true;
+      grpcStream.cancel();
+    }
+  };
+  stream.once('close', cancelGrpcStream);
+
+  // ReadRows is paused when push() reports a full buffer; resume it when the
+  // consumer asks for more so slow consumers don't buffer the whole result.
+  ctx.onRead = () => grpcStream.resume();
+
+  let serializedSchema: Uint8Array | undefined = initialSchema
+    ? toUint8Array(initialSchema)
+    : undefined;
+
+  grpcStream.on('data', (resp: IReadRowsResponse) => {
+    if (stream._ended || stream.destroyed) {
+      cancelGrpcStream();
+      return;
+    }
+    // The Storage Read API sends arrowSchema on the first ReadRowsResponse and
+    // may also emit responses without record batch bytes (e.g., heartbeats).
+    if (resp.arrowSchema?.serializedSchema) {
+      serializedSchema = toUint8Array(resp.arrowSchema.serializedSchema);
+    }
+    const rawBatch = resp.arrowRecordBatch?.serializedRecordBatch;
+    const hasBatchBytes =
+      rawBatch &&
+      (typeof rawBatch === 'string'
+        ? rawBatch.length > 0
+        : rawBatch.byteLength > 0);
+    if (!hasBatchBytes) {
+      return;
+    }
+    try {
+      const batches = decodeArrowPayload(arrow, serializedSchema, rawBatch);
+      for (const batch of batches) {
+        if (stream._ended || stream.destroyed) {
+          cancelGrpcStream();
+          return;
+        }
+        if (!stream.push(batch)) {
+          grpcStream.pause();
+        }
+      }
+    } catch (parseErr) {
+      cancelGrpcStream();
+      stream.destroy(parseErr as Error);
+    }
+  });
+
+  grpcStream.on('error', (err: Error) => {
+    stream.removeListener('close', cancelGrpcStream);
+    if (finished || stream._ended || stream.destroyed) {
+      return;
+    }
+    finished = true;
+    stream.destroy(err);
+  });
+
+  grpcStream.on('end', () => {
+    stream.removeListener('close', cancelGrpcStream);
+    finished = true;
+    if (!stream._ended && !stream.destroyed) {
+      stream.end();
+    }
+  });
+}
+
+/**
  * Executes a query and returns a stream of `apache-arrow` `RecordBatch` objects.
  *
  * @private
@@ -178,15 +402,19 @@ export function createQueryArrowStream_(
   ) as ArrowRecordBatchStream;
 
   let started = false;
+  // Set once the query starts, so later reads can resume the active ReadRows.
+  let readCtx: ArrowStreamContext | undefined;
   stream._read = () => {
     if (started) {
+      readCtx?.onRead?.();
       return;
     }
     started = true;
 
     let arrow: ArrowModule;
+    let storage: StorageModule;
     try {
-      arrow = checkArrowDependencies();
+      ({arrow, storage} = checkArrowDependencies());
     } catch (err) {
       stream.destroy(err as Error);
       return;
@@ -218,6 +446,9 @@ export function createQueryArrowStream_(
       );
       return;
     }
+
+    const ctx: ArrowStreamContext = {bq, arrow, storage, stream};
+    readCtx = ctx;
 
     let queryReq: bigquery.IQueryRequest | undefined;
     try {
@@ -264,39 +495,51 @@ export function createQueryArrowStream_(
       }
 
       // pageRowCount and totalRows are returned as uint64 strings in REST JSON.
+      const inlineRowsCount = BigInt(res?.pageRowCount ?? 0);
+      const totalRowsCount = BigInt(res?.totalRows ?? 0);
       // Also check pageToken: on cached multi-page results, jobs.query can
       // return totalRows "0" and omit pageRowCount while setting pageToken.
-      if (
-        Boolean(res?.pageToken) ||
-        BigInt(res?.pageRowCount ?? 0) < BigInt(res?.totalRows ?? 0)
-      ) {
-        // TODO: Stream remaining rows via @google-cloud/bigquery-storage (streams/_default).
-        stream.destroy(
-          new Error(
-            'Query results were not returned inline in the jobs.query response.',
-          ),
-        );
-        return;
+      const hasRemainingRows =
+        Boolean(res?.pageToken) || inlineRowsCount < totalRowsCount;
+
+      // Emit the inline first page (or 0-row schema-preserving batch when totalRows is 0)
+      // before resuming remaining rows from streams/_default at offset = pageRowCount.
+      if (!hasRemainingRows || inlineRowsCount > 0n) {
+        try {
+          const batches = decodeArrowPayload(
+            arrow,
+            res?.arrowSchema?.serializedSchema,
+            res?.arrowRecordBatch?.serializedRecordBatch,
+          );
+          for (const batch of batches) {
+            if (stream._ended || stream.destroyed) {
+              return;
+            }
+            stream.push(batch);
+          }
+        } catch (parseErr) {
+          stream.destroy(parseErr as Error);
+          return;
+        }
       }
 
-      try {
-        const batches = decodeArrowPayload(
-          arrow,
-          res?.arrowSchema?.serializedSchema,
-          res?.arrowRecordBatch?.serializedRecordBatch,
-        );
-        for (const batch of batches) {
-          if (stream._ended || stream.destroyed) {
-            return;
-          }
-          stream.push(batch);
-        }
+      if (!hasRemainingRows) {
         if (!stream._ended && !stream.destroyed) {
           stream.end();
         }
-      } catch (parseErr) {
-        stream.destroy(parseErr as Error);
+        return;
       }
+
+      if (stream._ended || stream.destroyed) {
+        return;
+      }
+
+      streamDefaultJobStream(
+        ctx,
+        res?.jobReference,
+        Number(inlineRowsCount),
+        res?.arrowSchema?.serializedSchema,
+      );
     });
   };
 
