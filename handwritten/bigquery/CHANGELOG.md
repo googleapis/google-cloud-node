@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery?activeTab=versions
 
+## [9.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.2.0...bigquery-v9.3.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
 ## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.1.0...bigquery-v9.2.0) (2026-10-07)
 
 

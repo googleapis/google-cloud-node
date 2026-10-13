@@ -1,6 +1,6 @@
 {
   "name": "google-auth-library",
-  "version": "11.2.0",
+  "version": "11.3.0",
   "author": "Google Inc.",
   "description": "Google APIs Authentication Client Library for Node.js",
   "engines": {
@@ -51,7 +51,6 @@
     "karma-mocha": "^2.0.0",
     "karma-sourcemap-loader": "^0.4.0",
     "karma-webpack": "^5.0.0",
-    "keypair": "^1.0.4",
     "mocha": "^11.1.0",
     "mv": "^2.1.1",
     "ncp": "^2.0.0",
@@ -69,7 +68,7 @@
     "!build/src/**/*.map"
   ],
   "scripts": {
-    "test": "node ../../../bin/run-test.cjs --fetch-shim --gaxios-shim --assert-deep-equal-shim --crypto-verify-shim --keypair-shim build/test",
+    "test": "node ../../../bin/run-test.cjs --fetch-shim --gaxios-shim --crypto-verify-shim build/test",
     "clean": "gts clean",
     "prepare": "npm run compile",
     "lint": "gts check --no-inline-config",

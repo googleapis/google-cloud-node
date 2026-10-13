@@ -41,9 +41,6 @@ if (
   const enableProxyquireShim =
     process.env.BUN_ENABLE_PROXYQUIRE_SHIM === 'true' ||
     process.env.BUN_PROXYQUIRE_SHIM === 'true';
-  const enableKeypairShim =
-    process.env.BUN_ENABLE_KEYPAIR_SHIM === 'true' ||
-    process.env.BUN_KEYPAIR_SHIM === 'true';
   const enableRequireShim =
     process.env.BUN_ENABLE_REQUIRE_SHIM === 'true' ||
     process.env.BUN_REQUIRE_SHIM === 'true';
@@ -53,9 +50,6 @@ if (
   const enableCryptoVerifyShim =
     process.env.BUN_ENABLE_CRYPTO_VERIFY_SHIM === 'true' ||
     process.env.BUN_CRYPTO_VERIFY_SHIM === 'true';
-  const enableAssertDeepEqualShim =
-    process.env.BUN_ENABLE_ASSERT_DEEP_EQUAL_SHIM === 'true' ||
-    process.env.BUN_ASSERT_DEEP_EQUAL_SHIM === 'true';
 
   // ---------------------------------------------------------------------------
   // 1. Module._load Delegation
@@ -356,36 +350,6 @@ if (
             });
           }
           return origVerify.call(this, object, signature, sigEncoding);
-        };
-      }
-    } catch {
-      // ignore
-    }
-  }
-
-  if (enableAssertDeepEqualShim) {
-    try {
-      const assert = require('assert');
-      const origDeepEqual = assert.deepEqual;
-      if (
-        typeof origDeepEqual === 'function' &&
-        typeof Headers !== 'undefined'
-      ) {
-        assert.deepEqual = function (actual, expected, message) {
-          if (actual instanceof Headers && expected instanceof Headers) {
-            const actualEntries = Object.fromEntries(actual.entries());
-            const expectedEntries = Object.fromEntries(expected.entries());
-            if (Object.keys(actualEntries).length === 0) {
-              return;
-            }
-            return origDeepEqual.call(
-              this,
-              actualEntries,
-              expectedEntries,
-              message,
-            );
-          }
-          return origDeepEqual.call(this, actual, expected, message);
         };
       }
     } catch {
@@ -796,29 +760,10 @@ if (
     return res;
   }
 
-  if (
-    enableRequireShim ||
-    enableProxyquireShim ||
-    enableKeypairShim ||
-    enableGaxiosShim
-  ) {
+  if (enableRequireShim || enableProxyquireShim || enableGaxiosShim) {
     Module.prototype.require = function (id) {
       if (enableProxyquireShim && id === 'proxyquire') {
         return makeProxyquire(this);
-      }
-      if (enableKeypairShim && id === 'keypair') {
-        return function (opts) {
-          const bits = typeof opts === 'number' ? opts : (opts?.bits ?? 2048);
-          const {publicKey, privateKey} = require('crypto').generateKeyPairSync(
-            'rsa',
-            {
-              modulusLength: Math.max(bits, 512),
-              publicKeyEncoding: {type: 'pkcs1', format: 'pem'},
-              privateKeyEncoding: {type: 'pkcs1', format: 'pem'},
-            },
-          );
-          return {public: publicKey, private: privateKey};
-        };
       }
       if (enableProxyquireShim) {
         const fr = frames[frames.length - 1];
