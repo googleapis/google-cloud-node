@@ -4316,6 +4316,12 @@
                           }
                         }
                       },
+                      "reserved": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
                       "nested": {
                         "EndUserAuthenticationConfig": {
                           "fields": {
@@ -10496,6 +10502,12 @@
                           }
                         }
                       },
+                      "reserved": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
                       "nested": {
                         "EndUserAuthenticationConfig": {
                           "fields": {

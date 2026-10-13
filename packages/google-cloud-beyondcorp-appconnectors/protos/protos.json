@@ -81,6 +81,7 @@
                         },
                         "AppConnectorsService": {
                           "options": {
+                            "deprecated": true,
                             "(google.api.default_host)": "beyondcorp.googleapis.com",
                             "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                           },
@@ -89,10 +90,14 @@
                               "requestType": "ListAppConnectorsRequest",
                               "responseType": "ListAppConnectorsResponse",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/appConnectors",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "get": "/v1/{parent=projects/*/locations/*}/appConnectors"
@@ -107,10 +112,14 @@
                               "requestType": "GetAppConnectorRequest",
                               "responseType": "AppConnector",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).get": "/v1/{name=projects/*/locations/*/appConnectors/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "get": "/v1/{name=projects/*/locations/*/appConnectors/*}"
@@ -125,6 +134,7 @@
                               "requestType": "CreateAppConnectorRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/appConnectors",
                                 "(google.api.http).body": "app_connector",
                                 "(google.api.method_signature)": "parent,app_connector,app_connector_id",
@@ -132,6 +142,9 @@
                                 "(google.longrunning.operation_info).metadata_type": "AppConnectorOperationMetadata"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "post": "/v1/{parent=projects/*/locations/*}/appConnectors",
@@ -153,6 +166,7 @@
                               "requestType": "UpdateAppConnectorRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).patch": "/v1/{app_connector.name=projects/*/locations/*/appConnectors/*}",
                                 "(google.api.http).body": "app_connector",
                                 "(google.api.method_signature)": "app_connector,update_mask",
@@ -160,6 +174,9 @@
                                 "(google.longrunning.operation_info).metadata_type": "AppConnectorOperationMetadata"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "patch": "/v1/{app_connector.name=projects/*/locations/*/appConnectors/*}",
@@ -181,12 +198,16 @@
                               "requestType": "DeleteAppConnectorRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/appConnectors/*}",
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                                 "(google.longrunning.operation_info).metadata_type": "AppConnectorOperationMetadata"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "delete": "/v1/{name=projects/*/locations/*/appConnectors/*}"
@@ -203,10 +224,33 @@
                                 }
                               ]
                             },
+                            "ResolveInstanceConfig": {
+                              "requestType": "ResolveInstanceConfigRequest",
+                              "responseType": "ResolveInstanceConfigResponse",
+                              "options": {
+                                "deprecated": true,
+                                "(google.api.http).get": "/v1/{app_connector=projects/*/locations/*/appConnectors/*}:resolveInstanceConfig",
+                                "(google.api.method_signature)": "app_connector"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{app_connector=projects/*/locations/*/appConnectors/*}:resolveInstanceConfig"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "app_connector"
+                                }
+                              ]
+                            },
                             "ReportStatus": {
                               "requestType": "ReportStatusRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).post": "/v1/{app_connector=projects/*/locations/*/appConnectors/*}:reportStatus",
                                 "(google.api.http).body": "*",
                                 "(google.api.method_signature)": "app_connector,resource_info",
@@ -214,6 +258,9 @@
                                 "(google.longrunning.operation_info).metadata_type": "AppConnectorOperationMetadata"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "post": "/v1/{app_connector=projects/*/locations/*/appConnectors/*}:reportStatus",
@@ -398,6 +445,26 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            }
+                          }
+                        },
+                        "ResolveInstanceConfigRequest": {
+                          "fields": {
+                            "appConnector": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "beyondcorp.googleapis.com/AppConnector"
+                              }
+                            }
+                          }
+                        },
+                        "ResolveInstanceConfigResponse": {
+                          "fields": {
+                            "instanceConfig": {
+                              "type": "AppConnectorInstanceConfig",
+                              "id": 1
                             }
                           }
                         },
@@ -632,6 +699,30 @@
                               "id": 5
                             }
                           }
+                        },
+                        "ContainerHealthDetails": {
+                          "fields": {
+                            "expectedConfigVersion": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "currentConfigVersion": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "extendedStatus": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 3
+                            },
+                            "errorMsg": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
+                        "RemoteAgentDetails": {
+                          "fields": {}
                         }
                       }
                     }

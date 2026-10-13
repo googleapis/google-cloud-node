@@ -2,6 +2,7 @@
   "../../protos/google/cloud/sql/v1/cloud_sql_available_database_versions.proto",
   "../../protos/google/cloud/sql/v1/cloud_sql_backup_runs.proto",
   "../../protos/google/cloud/sql/v1/cloud_sql_backups.proto",
+  "../../protos/google/cloud/sql/v1/cloud_sql_blue_green_deployments.proto",
   "../../protos/google/cloud/sql/v1/cloud_sql_connect.proto",
   "../../protos/google/cloud/sql/v1/cloud_sql_databases.proto",
   "../../protos/google/cloud/sql/v1/cloud_sql_events.proto",
@@ -15,5 +16,6 @@
   "../../protos/google/cloud/sql/v1/cloud_sql_resources.proto",
   "../../protos/google/cloud/sql/v1/cloud_sql_ssl_certs.proto",
   "../../protos/google/cloud/sql/v1/cloud_sql_tiers.proto",
-  "../../protos/google/cloud/sql/v1/cloud_sql_users.proto"
+  "../../protos/google/cloud/sql/v1/cloud_sql_users.proto",
+  "../../protos/google/cloud/sql/v1/cloud_sql_workload_captures.proto"
 ]

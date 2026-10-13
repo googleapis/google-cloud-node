@@ -41,6 +41,7 @@ function main() {
   const contentBundleServiceClient = new admanager.ContentBundleServiceClient();
   const contentLabelServiceClient = new admanager.ContentLabelServiceClient();
   const contentServiceClient = new admanager.ContentServiceClient();
+  const creativeServiceClient = new admanager.CreativeServiceClient();
   const creativeSetServiceClient = new admanager.CreativeSetServiceClient();
   const creativeTemplateServiceClient = new admanager.CreativeTemplateServiceClient();
   const creativeWrapperServiceClient = new admanager.CreativeWrapperServiceClient();
@@ -54,9 +55,12 @@ function main() {
   const deviceCategoryServiceClient = new admanager.DeviceCategoryServiceClient();
   const deviceManufacturerServiceClient = new admanager.DeviceManufacturerServiceClient();
   const entitySignalsMappingServiceClient = new admanager.EntitySignalsMappingServiceClient();
+  const forecastServiceClient = new admanager.ForecastServiceClient();
   const geoTargetServiceClient = new admanager.GeoTargetServiceClient();
   const labelServiceClient = new admanager.LabelServiceClient();
+  const lineItemCreativeAssociationServiceClient = new admanager.LineItemCreativeAssociationServiceClient();
   const lineItemServiceClient = new admanager.LineItemServiceClient();
+  const lineItemTemplateServiceClient = new admanager.LineItemTemplateServiceClient();
   const linkedDeviceServiceClient = new admanager.LinkedDeviceServiceClient();
   const liveStreamServiceClient = new admanager.LiveStreamServiceClient();
   const mcmEarningsServiceClient = new admanager.McmEarningsServiceClient();

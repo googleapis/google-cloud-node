@@ -375,7 +375,7 @@ describe('🛸 retry & exponential backoff', () => {
     async function onRetryAttempt({config, message}: GaxiosError) {
       assert(config.signal?.reason instanceof DOMException);
       assert.equal(config.signal.reason.name, 'TimeoutError');
-      assert.match(message, /timeout/i);
+      assert.match(message, /timeout|timed out/i);
 
       // increase timeout to something higher to avoid time-sensitive flaky tests
       // note: the second `nock` GET is not delayed like the first one
@@ -387,6 +387,34 @@ describe('🛸 retry & exponential backoff', () => {
       timeout,
       // NOTE: `node-fetch` does not yet support `TimeoutError` - testing with native `fetch` for now.
       fetchImplementation: fetch,
+      retryConfig: {
+        onRetryAttempt,
+      },
+    });
+
+    assert.equal(res.status, 204);
+    assert.equal(res.config?.retryConfig?.currentRetryAttempt, 1);
+
+    scope.done();
+  });
+
+  it('should retry on `timeout` with default fetch implementation', async () => {
+    const scope = nock(url).get('/').delay(500).reply(400).get('/').reply(204);
+
+    const gaxios = new Gaxios();
+    const timeout = 100;
+
+    async function onRetryAttempt(err: GaxiosError) {
+      assert(err.config.signal?.reason instanceof DOMException);
+      assert.equal(err.config.signal.reason.name, 'TimeoutError');
+      assert.equal(err.code, 'TimeoutError');
+      assert.match(err.message, /timeout|timed out/i);
+      err.config.timeout = 10000;
+    }
+
+    const res = await gaxios.request({
+      url,
+      timeout,
       retryConfig: {
         onRetryAttempt,
       },
