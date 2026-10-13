@@ -94,7 +94,7 @@ describe('util lazy imports', () => {
 
         Module.prototype.require = Object.assign(function (
           this: NodeModule,
-          request: string
+          request: string,
         ) {
           if (request === 'mime' && shouldFail) {
             throw new Error('Simulated mime import failure');
@@ -193,7 +193,7 @@ describe('util lazy imports', () => {
 
         Module.prototype.require = Object.assign(function (
           this: NodeModule,
-          request: string
+          request: string,
         ) {
           if (request === 'p-limit' && shouldFail) {
             throw new Error('Simulated p-limit import failure');
