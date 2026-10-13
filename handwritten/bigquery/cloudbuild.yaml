@@ -27,6 +27,9 @@ steps:
   dir: 'handwritten/bigquery'
   env:
   - 'GCLOUD_PROJECT=${_GCP_PROJECT_ID}' # Pass project ID via build variable
+  # Run the picosecond TIMESTAMP(12) system tests; the system test project
+  # has picosecond timestamps enabled.
+  - 'BIGQUERY_PICOSECOND_SUPPORT=true'
   # If you need specific credentials from Secret Manager, uncomment these:
   # - 'GOOGLE_APPLICATION_CREDENTIALS=/secrets/sa-key.json'
   id: 'run-system-tests'
