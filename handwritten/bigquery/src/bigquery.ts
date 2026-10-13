@@ -37,6 +37,14 @@ import {
 import * as Big from 'big.js';
 import * as extend from 'extend';
 import {randomUUID} from 'crypto';
+import {Readable} from 'stream';
+import {
+  ArrowQueryResponse,
+  createArrowBatchStream,
+  createArrowRowStream,
+  executeArrowRowsQuery,
+  executeQueryArrow,
+} from './arrow';
 
 import {Dataset, DatasetOptions} from './dataset';
 import {Job, JobOptions, QueryResultsOptions} from './job';
@@ -130,6 +138,8 @@ export type Query = JobRequest<bigquery.IJobConfigurationQuery> & {
   skipParsing?: boolean;
   // Overrides default job creation mode set on the client.
   jobCreationMode?: JobCreationMode;
+  queryResultsFormat?: bigquery.IQueryRequest['queryResultsFormat'];
+  arrowSerializationOptions?: bigquery.IArrowSerializationOptions;
 };
 
 export type QueryParamTypeStruct = {
@@ -467,7 +477,23 @@ export class BigQuery extends Service {
      *   });
      * ```
      */
-    this.createQueryStream = paginator.streamify<RowMetadata>('queryAsStream_');
+    const jsonQueryStream = paginator.streamify<RowMetadata>('queryAsStream_');
+    this.createQueryStream =
+      typeof jsonQueryStream === 'function'
+        ? (query?: Query | string) =>
+            query &&
+            typeof query === 'object' &&
+            query.queryResultsFormat === 'ARROW'
+              ? (createArrowRowStream(
+                  this,
+                  query,
+                ) as ResourceStream<RowMetadata>)
+              : jsonQueryStream.call(
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  this as any,
+                  query,
+                )
+        : jsonQueryStream;
 
     /**
      * List all or some of the {@link Dataset} objects in your project as
@@ -1514,6 +1540,8 @@ export class BigQuery extends Service {
       },
       options,
     );
+    delete query.queryResultsFormat;
+    delete query.arrowSerializationOptions;
     this.trace_('[createQueryJob]', query);
 
     if (options.destination) {
@@ -2216,6 +2244,22 @@ export class BigQuery extends Service {
     const callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb;
 
+    if (
+      (query &&
+        typeof query === 'object' &&
+        query.queryResultsFormat === 'ARROW') ||
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (options as any).queryResultsFormat === 'ARROW'
+    ) {
+      executeArrowRowsQuery(
+        this,
+        query,
+        options,
+        callback as QueryRowsCallback,
+      );
+      return;
+    }
+
     this.trace_('[query]', query, options);
     const queryReq = this.buildQueryRequest_(query, options);
     this.trace_('[query] queryReq', queryReq);
@@ -2383,7 +2427,7 @@ export class BigQuery extends Service {
       timeoutMs: options.timeoutMs,
       location: queryObj.location || options.location,
       formatOptions,
-      maxResults: queryObj.maxResults || options.maxResults,
+      maxResults: queryObj.maxResults ?? options.maxResults,
       query: queryObj.query,
       useLegacySql: false,
       requestId: randomUUID(),
@@ -2410,7 +2454,37 @@ export class BigQuery extends Service {
     if (parameterMode) {
       req.parameterMode = parameterMode;
     }
+    if (queryObj.queryResultsFormat) {
+      req.queryResultsFormat = queryObj.queryResultsFormat;
+    }
+    if (queryObj.arrowSerializationOptions) {
+      req.arrowSerializationOptions = queryObj.arrowSerializationOptions;
+    }
     return req;
+  }
+
+  /**
+   * Run a SQL query and stream Apache Arrow `RecordBatch` instances over an
+   * object-mode `Readable` stream (`for await (const batch of stream)`).
+   */
+  createQueryArrowStream(options?: Query | string): Readable {
+    return createArrowBatchStream(this, options);
+  }
+
+  /**
+   * Run a SQL query and return the assembled zero-copy Apache Arrow `Table`
+   * in `[table, null, apiResponse]`.
+   */
+  queryArrow(
+    options?: Query | string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    callback?: any,
+  ): Promise<ArrowQueryResponse> {
+    return executeQueryArrow(
+      this,
+      options,
+      callback,
+    ) as unknown as Promise<ArrowQueryResponse>;
   }
 
   private runJobsQuery(
@@ -2504,7 +2578,7 @@ promisifyAll(BigQuery, {
   ],
 });
 
-function convertSchemaFieldValue(
+export function convertSchemaFieldValue(
   schemaField: TableField,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any,
