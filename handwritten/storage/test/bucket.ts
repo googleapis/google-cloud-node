@@ -3348,6 +3348,9 @@ describe('Bucket', () => {
       const options = {destination: fakeFile};
       fakeFile.createWriteStream = () => {
         const ws = new stream.Writable({
+          write(_chunk, _enc, cb) {
+            cb();
+          },
           final() {},
         });
         setImmediate(() => {

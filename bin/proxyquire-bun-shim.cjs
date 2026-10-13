@@ -450,6 +450,7 @@ if (
         throw err;
       }
     };
+    globalThis.fetch = globalThis.__googleCloudBunFetch;
   }
 
   if (

@@ -39,7 +39,7 @@
   "dependencies": {
     "chalk": "^5.0.0",
     "figures": "^6.0.0",
-    "gaxios": "^7.0.0-rc",
+    "gaxios": "^8.3.0",
     "parse-link-header": "^2.0.0"
   },
   "devDependencies": {
@@ -61,6 +61,8 @@
   },
   "pnpm": {
     "overrides": {
+      "gcp-metadata>gaxios": "^8.3.0",
+      "google-auth-library>gaxios": "^8.3.0",
       "yargs": "^17.7.2"
     }
   }

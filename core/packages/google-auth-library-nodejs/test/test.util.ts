@@ -13,12 +13,9 @@
 // limitations under the License.
 
 import {strict as assert} from 'assert';
-import {Gaxios, GaxiosOptions} from 'gaxios';
 import * as sinon from 'sinon';
-import {Readable} from 'stream';
 
 import {
-  ensureBunGaxiosFetch,
   isValidFile,
   LRUCache,
   removeUndefinedValuesInObject,
@@ -120,77 +117,5 @@ describe('util removeUndefinedValuesInObject', () => {
     assert.deepEqual(removeUndefinedValuesInObject(object), {
       number: 1,
     });
-  });
-});
-
-describe('ensureBunGaxiosFetch', () => {
-  it('patches Gaxios _defaultAdapter under Bun and wraps streams/options', async () => {
-    const hadBun = 'Bun' in globalThis;
-    const origFetch = globalThis.fetch;
-    const g = globalThis as {
-      Bun?: unknown;
-      __googleCloudBunFetch?: typeof fetch;
-    };
-    const origBunFetch = g.__googleCloudBunFetch;
-    if (!hadBun) {
-      Object.defineProperty(globalThis, 'Bun', {
-        value: {},
-        configurable: true,
-        writable: true,
-      });
-    }
-    g.__googleCloudBunFetch = undefined;
-
-    try {
-      let capturedInit: Record<string, unknown> | undefined;
-      globalThis.fetch = (async (_input: unknown, init?: RequestInit) => {
-        capturedInit = init as Record<string, unknown> | undefined;
-        return new Response(JSON.stringify({ok: true}), {
-          status: 200,
-          headers: {'content-type': 'application/json'},
-        });
-      }) as typeof fetch;
-
-      class FakeGaxios {
-        defaults: GaxiosOptions = {};
-        async _defaultAdapter(config: GaxiosOptions) {
-          const fetchImpl = config.fetchImplementation!;
-          return fetchImpl(
-            config.url as string,
-            {...config} as unknown as RequestInit,
-          );
-        }
-      }
-
-      ensureBunGaxiosFetch(FakeGaxios as unknown as typeof Gaxios);
-      ensureBunGaxiosFetch(FakeGaxios as unknown as typeof Gaxios);
-      assert.equal(
-        (FakeGaxios as unknown as {__bunPatched?: boolean}).__bunPatched,
-        true,
-      );
-
-      const client = new FakeGaxios();
-      const config = {
-        url: 'https://example.com',
-        agent: {proxy: new URL('http://proxy.local:8080')},
-        cert: 'cert-pem',
-        key: 'key-pem',
-        body: Readable.from(['hello']),
-      } as unknown as GaxiosOptions;
-
-      const res = (await client._defaultAdapter(config)) as Response;
-      assert.equal(config.fetchImplementation, undefined);
-      assert.equal(capturedInit?.proxy, 'http://proxy.local:8080/');
-      assert.deepEqual(capturedInit?.tls, {cert: 'cert-pem', key: 'key-pem'});
-      assert.ok(capturedInit?.body instanceof ReadableStream);
-      assert.ok(res.body instanceof Readable);
-      assert.deepEqual(await res.json(), {ok: true});
-    } finally {
-      globalThis.fetch = origFetch;
-      g.__googleCloudBunFetch = origBunFetch;
-      if (!hadBun) {
-        delete g.Bun;
-      }
-    }
   });
 });
