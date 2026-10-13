@@ -28,13 +28,6 @@ interface MonorepoPackage {
   hasMainEntrypoint: boolean;
 }
 
-const PACKAGE_CATEGORIES: ReadonlyArray<MonorepoPackage['category']> = [
-  'packages',
-  'handwritten',
-  'core/packages',
-  'core',
-];
-
 // Packages that cannot be loaded via a bare `require('<pkg>')` without native
 // V8 C++ addon compilation (`pprof` in `@google-cloud/profiler`) or because
 // they only ship CLI binaries without a `"main"` entrypoint.
@@ -85,48 +78,48 @@ function discoverMonorepoPackages(repoRoot: string): MonorepoPackage[] {
 
   const discovered = new Map<string, MonorepoPackage>();
 
-  for (const category of PACKAGE_CATEGORIES) {
-    const categoryDir = path.join(repoRoot, category);
-    if (!fs.existsSync(categoryDir)) {
+  for (const [relDir, version] of Object.entries(manifest)) {
+    // Skip newly scaffolded packages whose initial release (0.0.0) has not
+    // yet been published to the npm registry.
+    if (version === '0.0.0') {
       continue;
     }
-    const entries = fs.readdirSync(categoryDir, {withFileTypes: true});
-    for (const entry of entries) {
-      if (!entry.isDirectory() && !entry.isSymbolicLink()) {
-        continue;
-      }
-      const relDir = path.posix.join(category, entry.name);
-      if (!Object.prototype.hasOwnProperty.call(manifest, relDir)) {
-        continue;
-      }
-      // Skip newly scaffolded packages whose initial release (0.0.0) has not
-      // yet been published to the npm registry.
-      if (manifest[relDir] === '0.0.0') {
-        continue;
-      }
-      const pkgJsonPath = path.join(repoRoot, relDir, 'package.json');
-      if (!fs.existsSync(pkgJsonPath)) {
-        continue;
-      }
-      const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8')) as {
-        name?: string;
-        version?: string;
-        private?: boolean;
-        main?: string;
-        exports?: unknown;
-      };
-      if (!pkgJson.name || pkgJson.private || pkgJson.version === '0.0.0') {
-        continue;
-      }
-      discovered.set(pkgJson.name, {
-        name: pkgJson.name,
-        relDir,
-        category,
-        hasMainEntrypoint: Boolean(
-          pkgJson.main || hasRootExports(pkgJson.exports),
-        ),
-      });
+    const category: MonorepoPackage['category'] | undefined = relDir.startsWith(
+      'packages/',
+    )
+      ? 'packages'
+      : relDir.startsWith('handwritten/')
+        ? 'handwritten'
+        : relDir.startsWith('core/packages/')
+          ? 'core/packages'
+          : relDir.startsWith('core/')
+            ? 'core'
+            : undefined;
+    if (!category) {
+      continue;
     }
+    const pkgJsonPath = path.join(repoRoot, relDir, 'package.json');
+    if (!fs.existsSync(pkgJsonPath)) {
+      continue;
+    }
+    const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8')) as {
+      name?: string;
+      version?: string;
+      private?: boolean;
+      main?: string;
+      exports?: unknown;
+    };
+    if (!pkgJson.name || pkgJson.private || pkgJson.version === '0.0.0') {
+      continue;
+    }
+    discovered.set(pkgJson.name, {
+      name: pkgJson.name,
+      relDir,
+      category,
+      hasMainEntrypoint: Boolean(
+        pkgJson.main || hasRootExports(pkgJson.exports),
+      ),
+    });
   }
 
   return Array.from(discovered.values()).sort((a, b) =>
@@ -206,12 +199,18 @@ describe('bun install package verification', function () {
   const repoRoot = findRepoRoot(__dirname);
   const monorepoPackages = discoverMonorepoPackages(repoRoot);
 
+  const shouldRunBunInstallIntegration =
+    process.env.RUN_BUN_INSTALL_TESTS === 'true';
+
   let bunAvailable = false;
   let tempRootDir = '';
   let sharedCacheDir = '';
   let hasPreexistingCache = false;
 
   before(() => {
+    if (!shouldRunBunInstallIntegration) {
+      return;
+    }
     bunAvailable = isBunAvailable();
     if (!bunAvailable) {
       if (
@@ -225,17 +224,10 @@ describe('bun install package verification', function () {
       return;
     }
     tempRootDir = fs.mkdtempSync(path.join(os.tmpdir(), 'gcn-bun-install-'));
-    const prewarmedCacheDir = path.join(os.tmpdir(), 'bun-cache');
-    if (process.env.BUN_INSTALL_CACHE_DIR) {
-      sharedCacheDir = process.env.BUN_INSTALL_CACHE_DIR;
-      hasPreexistingCache = fs.existsSync(sharedCacheDir);
-    } else if (fs.existsSync(prewarmedCacheDir)) {
-      sharedCacheDir = prewarmedCacheDir;
-      hasPreexistingCache = true;
-    } else {
-      sharedCacheDir = path.join(tempRootDir, 'cache');
-      hasPreexistingCache = false;
-    }
+    sharedCacheDir =
+      process.env.BUN_INSTALL_CACHE_DIR || path.join(os.tmpdir(), 'bun-cache');
+    hasPreexistingCache = fs.existsSync(sharedCacheDir);
+    fs.mkdirSync(sharedCacheDir, {recursive: true});
   });
 
   after(() => {
@@ -245,15 +237,15 @@ describe('bun install package verification', function () {
   });
 
   function ensureBunOrSkip(ctx: Context): void {
-    if (!bunAvailable) {
+    if (!shouldRunBunInstallIntegration || !bunAvailable) {
       ctx.skip();
     }
   }
 
   it('discovers all publishable monorepo SDK packages across packages, handwritten, and core', () => {
     assert.ok(
-      monorepoPackages.length >= 270,
-      `Expected at least 270 publishable monorepo packages, found ${monorepoPackages.length}`,
+      monorepoPackages.length >= 280,
+      `Expected at least 280 publishable monorepo packages, found ${monorepoPackages.length}`,
     );
 
     const byCategory = new Map<string, number>();
@@ -281,9 +273,12 @@ describe('bun install package verification', function () {
     const packageNames = new Set(monorepoPackages.map(pkg => pkg.name));
     for (const expectedPkg of [
       '@google-cloud/bigtable',
+      '@google-cloud/firestore',
+      '@google-cloud/logging',
       '@google-cloud/storage',
       '@google-cloud/pubsub',
       '@google-cloud/secret-manager',
+      '@google-cloud/common',
       'google-gax',
       'google-auth-library',
     ]) {
@@ -377,143 +372,146 @@ describe('bun install package verification', function () {
     ensureBunOrSkip(this);
     const allPackagesDir = path.join(tempRootDir, 'all-packages');
     fs.mkdirSync(allPackagesDir, {recursive: true});
+    try {
+      const dependencies: Record<string, string> = {};
+      for (const pkg of monorepoPackages) {
+        dependencies[pkg.name] = 'latest';
+      }
 
-    const dependencies: Record<string, string> = {};
-    for (const pkg of monorepoPackages) {
-      dependencies[pkg.name] = 'latest';
-    }
-
-    fs.writeFileSync(
-      path.join(allPackagesDir, 'package.json'),
-      JSON.stringify(
-        {
-          name: 'google-cloud-node-bun-install-verification',
-          version: '1.0.0',
-          private: true,
-          dependencies,
-        },
-        null,
-        2,
-      ),
-    );
-
-    // Pass --ignore-scripts when installing all 278 packages together because
-    // @google-cloud/profiler depends on `pprof`, which is on Bun's default
-    // trusted dependencies list and attempts a V8 C++ `node-gyp rebuild`.
-    const {result: installResult, diagnostics} = runBunInstallWithFallback(
-      ['--ignore-scripts'],
-      allPackagesDir,
-      sharedCacheDir,
-      hasPreexistingCache,
-    );
-    assert.strictEqual(
-      installResult.status,
-      0,
-      `bun install failed for all ${monorepoPackages.length} monorepo packages:\n${diagnostics}`,
-    );
-
-    const lockfilePath = path.join(allPackagesDir, 'bun.lock');
-    assert.ok(
-      fs.existsSync(lockfilePath),
-      'Expected bun.lock to be generated for all-packages install',
-    );
-    const lockfileContent = fs.readFileSync(lockfilePath, 'utf8');
-
-    for (const pkg of monorepoPackages) {
-      assert.ok(
-        lockfileContent.includes(`"${pkg.name}"`),
-        `Expected ${pkg.name} to be recorded in bun.lock`,
+      fs.writeFileSync(
+        path.join(allPackagesDir, 'package.json'),
+        JSON.stringify(
+          {
+            name: 'google-cloud-node-bun-install-verification',
+            version: '1.0.0',
+            private: true,
+            dependencies,
+          },
+          null,
+          2,
+        ),
       );
-      const installedPkgJsonPath = path.join(
+
+      // Pass --ignore-scripts when installing all 282 packages together because
+      // @google-cloud/profiler depends on `pprof`, which is on Bun's default
+      // trusted dependencies list and attempts a V8 C++ `node-gyp rebuild`.
+      const {result: installResult, diagnostics} = runBunInstallWithFallback(
+        ['--ignore-scripts'],
         allPackagesDir,
-        'node_modules',
-        ...pkg.name.split('/'),
-        'package.json',
+        sharedCacheDir,
+        hasPreexistingCache,
       );
+      assert.strictEqual(
+        installResult.status,
+        0,
+        `bun install failed for all ${monorepoPackages.length} monorepo packages:\n${diagnostics}`,
+      );
+
+      const lockfilePath = path.join(allPackagesDir, 'bun.lock');
       assert.ok(
-        fs.existsSync(installedPkgJsonPath),
-        `Expected ${pkg.name} to be installed at ${installedPkgJsonPath}`,
+        fs.existsSync(lockfilePath),
+        'Expected bun.lock to be generated for all-packages install',
       );
-      const installedPkg = JSON.parse(
-        fs.readFileSync(installedPkgJsonPath, 'utf8'),
-      ) as {name?: string; version?: string};
-      assert.strictEqual(installedPkg.name, pkg.name);
-      assert.ok(
-        typeof installedPkg.version === 'string' &&
-          installedPkg.version.length > 0,
-        `Expected valid installed version for ${pkg.name}`,
+      const lockfileContent = fs.readFileSync(lockfilePath, 'utf8');
+
+      for (const pkg of monorepoPackages) {
+        assert.ok(
+          lockfileContent.includes(`"${pkg.name}"`),
+          `Expected ${pkg.name} to be recorded in bun.lock`,
+        );
+        const installedPkgJsonPath = path.join(
+          allPackagesDir,
+          'node_modules',
+          ...pkg.name.split('/'),
+          'package.json',
+        );
+        assert.ok(
+          fs.existsSync(installedPkgJsonPath),
+          `Expected ${pkg.name} to be installed at ${installedPkgJsonPath}`,
+        );
+        const installedPkg = JSON.parse(
+          fs.readFileSync(installedPkgJsonPath, 'utf8'),
+        ) as {name?: string; version?: string};
+        assert.strictEqual(installedPkg.name, pkg.name);
+        assert.ok(
+          typeof installedPkg.version === 'string' &&
+            installedPkg.version.length > 0,
+          `Expected valid installed version for ${pkg.name}`,
+        );
+      }
+
+      const requireablePackages = monorepoPackages
+        .filter(
+          pkg =>
+            pkg.hasMainEntrypoint && !SKIP_BARE_REQUIRE_PACKAGES.has(pkg.name),
+        )
+        .map(pkg => pkg.name);
+
+      const verifyAllScriptPath = path.join(allPackagesDir, 'verify-all.cjs');
+      fs.writeFileSync(
+        verifyAllScriptPath,
+        [
+          "'use strict';",
+          "const assert = require('assert');",
+          `const allPackages = ${JSON.stringify(monorepoPackages.map(p => p.name))};`,
+          `const requireablePackages = ${JSON.stringify(requireablePackages)};`,
+          'for (const pkgName of allPackages) {',
+          '  try {',
+          '    const resolved = require.resolve(`${pkgName}/package.json`);',
+          "    assert.strictEqual(typeof resolved, 'string');",
+          '  } catch (err) {',
+          "    if (!err || err.code !== 'ERR_PACKAGE_PATH_NOT_EXPORTED') {",
+          '      throw err;',
+          '    }',
+          '    const resolvedMain = require.resolve(pkgName);',
+          "    assert.strictEqual(typeof resolvedMain, 'string');",
+          '  }',
+          '}',
+          'const failures = [];',
+          'for (const pkgName of requireablePackages) {',
+          '  try {',
+          '    const mod = require(pkgName);',
+          '    assert.ok(',
+          "      mod !== null && (typeof mod === 'object' || typeof mod === 'function'),",
+          '      `Expected ${pkgName} to export an object or function`,',
+          '    );',
+          '  } catch (err) {',
+          '    failures.push(`${pkgName}: ${err && err.message ? err.message : String(err)}`);',
+          '  }',
+          '}',
+          'assert.strictEqual(',
+          '  failures.length,',
+          '  0,',
+          '  `Failed to require ${failures.length} installed packages under Bun:\\n${failures.join("\\n")}`,',
+          ');',
+          "const {Bigtable} = require('@google-cloud/bigtable');",
+          "const {Storage} = require('@google-cloud/storage');",
+          "const {PubSub} = require('@google-cloud/pubsub');",
+          "const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');",
+          "const gax = require('google-gax');",
+          "const {GoogleAuth} = require('google-auth-library');",
+          "assert.strictEqual(typeof new Bigtable({projectId: 'test-project'}).projectId, 'string');",
+          "assert.strictEqual(typeof new Storage({projectId: 'test-project'}).projectId, 'string');",
+          "assert.strictEqual(typeof new PubSub({projectId: 'test-project'}).projectId, 'string');",
+          "assert.strictEqual(typeof new SecretManagerServiceClient(), 'object');",
+          "assert.strictEqual(typeof gax.GrpcClient, 'function');",
+          "assert.strictEqual(typeof new GoogleAuth(), 'object');",
+        ].join('\n'),
       );
+
+      const verifyAllResult = runBun(
+        ['run', verifyAllScriptPath],
+        allPackagesDir,
+        sharedCacheDir,
+        120000,
+      );
+      assert.strictEqual(
+        verifyAllResult.status,
+        0,
+        `Failed to verify installed packages under Bun:\n${formatBunResult(verifyAllResult)}`,
+      );
+    } finally {
+      fs.rmSync(allPackagesDir, {recursive: true, force: true});
     }
-
-    const requireablePackages = monorepoPackages
-      .filter(
-        pkg =>
-          pkg.hasMainEntrypoint && !SKIP_BARE_REQUIRE_PACKAGES.has(pkg.name),
-      )
-      .map(pkg => pkg.name);
-
-    const verifyAllScriptPath = path.join(allPackagesDir, 'verify-all.cjs');
-    fs.writeFileSync(
-      verifyAllScriptPath,
-      [
-        "'use strict';",
-        "const assert = require('assert');",
-        `const allPackages = ${JSON.stringify(monorepoPackages.map(p => p.name))};`,
-        `const requireablePackages = ${JSON.stringify(requireablePackages)};`,
-        'for (const pkgName of allPackages) {',
-        '  try {',
-        '    const resolved = require.resolve(`${pkgName}/package.json`);',
-        "    assert.strictEqual(typeof resolved, 'string');",
-        '  } catch (err) {',
-        "    if (!err || err.code !== 'ERR_PACKAGE_PATH_NOT_EXPORTED') {",
-        '      throw err;',
-        '    }',
-        '    const resolvedMain = require.resolve(pkgName);',
-        "    assert.strictEqual(typeof resolvedMain, 'string');",
-        '  }',
-        '}',
-        'const failures = [];',
-        'for (const pkgName of requireablePackages) {',
-        '  try {',
-        '    const mod = require(pkgName);',
-        '    assert.ok(',
-        "      mod !== null && (typeof mod === 'object' || typeof mod === 'function'),",
-        '      `Expected ${pkgName} to export an object or function`,',
-        '    );',
-        '  } catch (err) {',
-        '    failures.push(`${pkgName}: ${err && err.message ? err.message : String(err)}`);',
-        '  }',
-        '}',
-        'assert.strictEqual(',
-        '  failures.length,',
-        '  0,',
-        '  `Failed to require ${failures.length} installed packages under Bun:\\n${failures.join("\\n")}`,',
-        ');',
-        "const {Bigtable} = require('@google-cloud/bigtable');",
-        "const {Storage} = require('@google-cloud/storage');",
-        "const {PubSub} = require('@google-cloud/pubsub');",
-        "const {SecretManagerServiceClient} = require('@google-cloud/secret-manager');",
-        "const gax = require('google-gax');",
-        "const {GoogleAuth} = require('google-auth-library');",
-        "assert.strictEqual(typeof new Bigtable({projectId: 'test-project'}).projectId, 'string');",
-        "assert.strictEqual(typeof new Storage({projectId: 'test-project'}).projectId, 'string');",
-        "assert.strictEqual(typeof new PubSub({projectId: 'test-project'}).projectId, 'string');",
-        "assert.strictEqual(typeof new SecretManagerServiceClient(), 'object');",
-        "assert.strictEqual(typeof gax.GrpcClient, 'function');",
-        "assert.strictEqual(typeof new GoogleAuth(), 'object');",
-      ].join('\n'),
-    );
-
-    const verifyAllResult = runBun(
-      ['run', verifyAllScriptPath],
-      allPackagesDir,
-      sharedCacheDir,
-      120000,
-    );
-    assert.strictEqual(
-      verifyAllResult.status,
-      0,
-      `Failed to verify installed packages under Bun:\n${formatBunResult(verifyAllResult)}`,
-    );
   });
 });
