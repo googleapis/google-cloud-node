@@ -379,6 +379,21 @@ describe('Subscriber', () => {
 
       await done.promise;
     });
+
+    it('should ignore empty keepalive responses without receivedMessages', () => {
+      const sub = new Subscriber(subscription);
+      sub.isOpen = true;
+      const subint = getSubInternals(sub);
+      const modAckStub = sandbox.stub(sub, 'modAck');
+      subint._inventory = new FakeLeaseManager(sub, {});
+      const addStub = sandbox.stub(subint._inventory, 'add');
+
+      subint._onData({});
+      subint._onData({receivedMessages: []});
+
+      assert.strictEqual(modAckStub.callCount, 0);
+      assert.strictEqual(addStub.callCount, 0);
+    });
   });
 
   describe('modAckLatency', () => {

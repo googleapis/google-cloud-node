@@ -226,6 +226,12 @@ export class CloudRedisClusterClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      aclPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/aclPolicies/{acl_policy}',
+      ),
+      aclPolicyRevisionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/aclPolicies/{acl_policy}/revisions/{revision}',
+      ),
       backupPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/backupCollections/{backup_collection}/backups/{backup}',
       ),
@@ -276,6 +282,16 @@ export class CloudRedisClusterClient {
         'pageToken',
         'nextPageToken',
         'clusters',
+      ),
+      listAclPolicies: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'aclPolicies',
+      ),
+      listAclPolicyRevisions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'aclPolicyRevisions',
       ),
       listBackupCollections: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -335,11 +351,23 @@ export class CloudRedisClusterClient {
     const updateClusterMetadata = protoFilesRoot.lookup(
       '.google.protobuf.Any',
     ) as gax.protobuf.Type;
+    const updateAclPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.redis.cluster.v1beta1.AclPolicy',
+    ) as gax.protobuf.Type;
+    const updateAclPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.redis.cluster.v1beta1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteClusterResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty',
     ) as gax.protobuf.Type;
     const deleteClusterMetadata = protoFilesRoot.lookup(
       '.google.protobuf.Any',
+    ) as gax.protobuf.Type;
+    const deleteAclPolicyResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteAclPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.redis.cluster.v1beta1.OperationMetadata',
     ) as gax.protobuf.Type;
     const createClusterResponse = protoFilesRoot.lookup(
       '.google.cloud.redis.cluster.v1beta1.Cluster',
@@ -378,10 +406,20 @@ export class CloudRedisClusterClient {
         updateClusterResponse.decode.bind(updateClusterResponse),
         updateClusterMetadata.decode.bind(updateClusterMetadata),
       ),
+      updateAclPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateAclPolicyResponse.decode.bind(updateAclPolicyResponse),
+        updateAclPolicyMetadata.decode.bind(updateAclPolicyMetadata),
+      ),
       deleteCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteClusterResponse.decode.bind(deleteClusterResponse),
         deleteClusterMetadata.decode.bind(deleteClusterMetadata),
+      ),
+      deleteAclPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteAclPolicyResponse.decode.bind(deleteAclPolicyResponse),
+        deleteAclPolicyMetadata.decode.bind(deleteAclPolicyMetadata),
       ),
       createCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -466,10 +504,17 @@ export class CloudRedisClusterClient {
     // and create an API call method for each.
     const cloudRedisClusterStubMethods = [
       'listClusters',
+      'listAclPolicies',
       'getCluster',
+      'getAclPolicy',
       'updateCluster',
+      'updateAclPolicy',
       'deleteCluster',
+      'deleteAclPolicy',
+      'getAclPolicyRevision',
+      'listAclPolicyRevisions',
       'createCluster',
+      'createAclPolicy',
       'getClusterCertificateAuthority',
       'getSharedRegionalCertificateAuthority',
       'rescheduleClusterMaintenance',
@@ -716,6 +761,457 @@ export class CloudRedisClusterClient {
           {} | undefined,
         ]) => {
           this._log.info('getCluster response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets the details of a specific Redis Cluster ACL policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis ACL policy resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/aclPolicies/{acl_policy_id}`
+   *   where `location_id` refers to a Google Cloud region.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.redis.cluster.v1beta1.AclPolicy|AclPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.get_acl_policy.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_GetAclPolicy_async
+   */
+  getAclPolicy(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+      (
+        | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAclPolicy(
+    request: protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+      | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAclPolicy(
+    request: protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+      | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAclPolicy(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+          | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+      | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+      (
+        | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAclPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+          | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAclPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAclPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+          (
+            | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAclPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a specific ACL policy revision.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis ACL policy revision resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/aclPolicies/{acl_policy_id}/revisions/{revision_id}`
+   *   where `location_id` refers to a Google Cloud region.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.redis.cluster.v1beta1.AclPolicyRevision|AclPolicyRevision}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.get_acl_policy_revision.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_GetAclPolicyRevision_async
+   */
+  getAclPolicyRevision(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision,
+      (
+        | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getAclPolicyRevision(
+    request: protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision,
+      | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAclPolicyRevision(
+    request: protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision,
+      | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getAclPolicyRevision(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision,
+          | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision,
+      | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision,
+      (
+        | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getAclPolicyRevision request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision,
+          | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getAclPolicyRevision response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getAclPolicyRevision(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision,
+          (
+            | protos.google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getAclPolicyRevision response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Creates an ACL policy.
+   * The creation is executed synchronously and the policy is available for use
+   * immediately after the RPC returns.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the cluster location using the form:
+   *       `projects/{project_id}/locations/{location_id}`
+   *   where `location_id` refers to a Google Cloud region.
+   * @param {string} request.aclPolicyId
+   *   Required. The logical name of the ACL policy in the customer project
+   *   with the following restrictions:
+   *
+   *   * Must contain only lowercase letters, numbers, and hyphens.
+   *   * Must start with a letter.
+   *   * Must be between 1-63 characters.
+   *   * Must end with a number or a letter.
+   *   * Must be unique within the customer project / location
+   * @param {google.cloud.redis.cluster.v1beta1.AclPolicy} request.aclPolicy
+   *   Required. The ACL policy that is to be created.
+   * @param {string} [request.requestId]
+   *   Optional. Idempotent request UUID.
+   *   .
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.redis.cluster.v1beta1.AclPolicy|AclPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.create_acl_policy.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_CreateAclPolicy_async
+   */
+  createAclPolicy(
+    request?: protos.google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+      (
+        | protos.google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  createAclPolicy(
+    request: protos.google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+      | protos.google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAclPolicy(
+    request: protos.google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+      | protos.google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createAclPolicy(
+    request?: protos.google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+          | protos.google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+      | protos.google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+      (
+        | protos.google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createAclPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+          | protos.google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createAclPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createAclPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+          (
+            | protos.google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('createAclPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1507,6 +2003,192 @@ export class CloudRedisClusterClient {
     >;
   }
   /**
+   * Updates the ACL policy.
+   *
+   * The operation applies the updated ACL policy to all of the linked clusters.
+   * If Memorystore can apply the policy to all clusters, then the operation
+   * returns a SUCCESS status. If Memorystore can't apply the policy to all
+   * clusters, then to ensure eventual consistency, Memorystore uses
+   * reconciliation to apply the policy to the failed clusters.
+   *
+   * Completed longrunning.Operation will contain the new ACL policy object in
+   * the response field.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.redis.cluster.v1beta1.AclPolicy} request.aclPolicy
+   *   Required. The ACL policy to be updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Mask of fields to be updated. At least one path must be supplied
+   *   in this field. The elements of the repeated paths field may only include
+   *   these fields from `AclPolicy`:
+   *
+   *    *   `rules`
+   * @param {string} [request.requestId]
+   *   Optional. Idempotent request UUID.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.update_acl_policy.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_UpdateAclPolicy_async
+   */
+  updateAclPolicy(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IUpdateAclPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateAclPolicy(
+    request: protos.google.cloud.redis.cluster.v1beta1.IUpdateAclPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAclPolicy(
+    request: protos.google.cloud.redis.cluster.v1beta1.IUpdateAclPolicyRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAclPolicy(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IUpdateAclPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'acl_policy.name': request.aclPolicy!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateAclPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateAclPolicy request %j', request);
+    return this.innerApiCalls
+      .updateAclPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.redis.cluster.v1beta1.IAclPolicy,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAclPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateAclPolicy()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.update_acl_policy.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_UpdateAclPolicy_async
+   */
+  async checkUpdateAclPolicyProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.redis.cluster.v1beta1.AclPolicy,
+      protos.google.cloud.redis.cluster.v1beta1.OperationMetadata
+    >
+  > {
+    this._log.info('updateAclPolicy long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateAclPolicy,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.redis.cluster.v1beta1.AclPolicy,
+      protos.google.cloud.redis.cluster.v1beta1.OperationMetadata
+    >;
+  }
+  /**
    * Deletes a specific Redis cluster. Cluster stops serving and data is
    * deleted.
    *
@@ -1660,6 +2342,184 @@ export class CloudRedisClusterClient {
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
       protos.google.protobuf.Any
+    >;
+  }
+  /**
+   * Deletes a specific ACL policy. This action will delete the ACL policy and
+   * all the rules associated with it. An ACL policy cannot be deleted if it is
+   * attached to a cluster.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Redis ACL policy resource name using the form:
+   *       `projects/{project_id}/locations/{location_id}/aclPolicies/{acl_policy_id}`
+   *   where `location_id` refers to a Google Cloud region.
+   * @param {string} [request.requestId]
+   *   Optional. Idempotent request UUID.
+   * @param {string} [request.etag]
+   *   Optional. Etag of the ACL policy. If this is different from the server's
+   *   etag, the request will fail with an ABORTED error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.delete_acl_policy.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_DeleteAclPolicy_async
+   */
+  deleteAclPolicy(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IDeleteAclPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteAclPolicy(
+    request: protos.google.cloud.redis.cluster.v1beta1.IDeleteAclPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteAclPolicy(
+    request: protos.google.cloud.redis.cluster.v1beta1.IDeleteAclPolicyRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteAclPolicy(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IDeleteAclPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteAclPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteAclPolicy request %j', request);
+    return this.innerApiCalls
+      .deleteAclPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.redis.cluster.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteAclPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteAclPolicy()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.delete_acl_policy.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_DeleteAclPolicy_async
+   */
+  async checkDeleteAclPolicyProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.redis.cluster.v1beta1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteAclPolicy long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteAclPolicy,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.redis.cluster.v1beta1.OperationMetadata
     >;
   }
   /**
@@ -2807,6 +3667,496 @@ export class CloudRedisClusterClient {
     ) as AsyncIterable<protos.google.cloud.redis.cluster.v1beta1.ICluster>;
   }
   /**
+   * Lists all ACL policies owned by a project in either the specified
+   * location (region) or all locations.
+   *
+   * The location should have the following format:
+   *
+   * * `projects/{project_id}/locations/{location_id}`
+   *
+   * If `location_id` is specified as `-` (wildcard), then all regions
+   * available to the project are queried, and the results are aggregated.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the ACL policy location using the form:
+   *       `projects/{project_id}/locations/{location_id}`
+   *   where `location_id` refers to a Google Cloud region.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *
+   *   If not specified, a default value of 1000 will be used by the service.
+   *   Regardless of the page_size value, the response may include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.redis.cluster.v1beta1.ListAclPoliciesResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more ACL policies left to be queried.
+   *
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   `ListAclPolicies` request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.redis.cluster.v1beta1.AclPolicy|AclPolicy}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAclPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAclPolicies(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy[],
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest | null,
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesResponse,
+    ]
+  >;
+  listAclPolicies(
+    request: protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest,
+      | protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy
+    >,
+  ): void;
+  listAclPolicies(
+    request: protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest,
+      | protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy
+    >,
+  ): void;
+  listAclPolicies(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest,
+          | protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicy
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest,
+      | protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicy[],
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest | null,
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest,
+          | protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAclPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAclPolicies request %j', request);
+    return this.innerApiCalls
+      .listAclPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicy[],
+          protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest | null,
+          protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesResponse,
+        ]) => {
+          this._log.info('listAclPolicies values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listAclPolicies`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the ACL policy location using the form:
+   *       `projects/{project_id}/locations/{location_id}`
+   *   where `location_id` refers to a Google Cloud region.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *
+   *   If not specified, a default value of 1000 will be used by the service.
+   *   Regardless of the page_size value, the response may include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.redis.cluster.v1beta1.ListAclPoliciesResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more ACL policies left to be queried.
+   *
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   `ListAclPolicies` request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.redis.cluster.v1beta1.AclPolicy|AclPolicy} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAclPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAclPoliciesStream(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAclPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAclPolicies stream %j', request);
+    return this.descriptors.page.listAclPolicies.createStream(
+      this.innerApiCalls.listAclPolicies as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listAclPolicies`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the ACL policy location using the form:
+   *       `projects/{project_id}/locations/{location_id}`
+   *   where `location_id` refers to a Google Cloud region.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *
+   *   If not specified, a default value of 1000 will be used by the service.
+   *   Regardless of the page_size value, the response may include a partial list
+   *   and a caller should only rely on response's
+   *   {@link protos.google.cloud.redis.cluster.v1beta1.ListAclPoliciesResponse.next_page_token|`next_page_token`}
+   *   to determine if there are more ACL policies left to be queried.
+   *
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   `ListAclPolicies` request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.redis.cluster.v1beta1.AclPolicy|AclPolicy}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.list_acl_policies.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_ListAclPolicies_async
+   */
+  listAclPoliciesAsync(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.redis.cluster.v1beta1.IAclPolicy> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAclPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAclPolicies iterate %j', request);
+    return this.descriptors.page.listAclPolicies.asyncIterate(
+      this.innerApiCalls['listAclPolicies'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.redis.cluster.v1beta1.IAclPolicy>;
+  }
+  /**
+   * Lists all ACL policy revisions in a given ACL policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the ACL policy to list revisions for.
+   *   Format:
+   *   "projects/{project_id}/locations/{location_id}/aclPolicies/{acl_policy_id}"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   `ListAclPolicyRevisions` request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.redis.cluster.v1beta1.AclPolicyRevision|AclPolicyRevision}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAclPolicyRevisionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAclPolicyRevisions(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision[],
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest | null,
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsResponse,
+    ]
+  >;
+  listAclPolicyRevisions(
+    request: protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest,
+      | protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision
+    >,
+  ): void;
+  listAclPolicyRevisions(
+    request: protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest,
+      | protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision
+    >,
+  ): void;
+  listAclPolicyRevisions(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest,
+          | protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest,
+      | protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsResponse
+      | null
+      | undefined,
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision[],
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest | null,
+      protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest,
+          | protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsResponse
+          | null
+          | undefined,
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listAclPolicyRevisions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listAclPolicyRevisions request %j', request);
+    return this.innerApiCalls
+      .listAclPolicyRevisions(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision[],
+          protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest | null,
+          protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsResponse,
+        ]) => {
+          this._log.info('listAclPolicyRevisions values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listAclPolicyRevisions`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the ACL policy to list revisions for.
+   *   Format:
+   *   "projects/{project_id}/locations/{location_id}/aclPolicies/{acl_policy_id}"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   `ListAclPolicyRevisions` request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.redis.cluster.v1beta1.AclPolicyRevision|AclPolicyRevision} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAclPolicyRevisionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listAclPolicyRevisionsStream(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAclPolicyRevisions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAclPolicyRevisions stream %j', request);
+    return this.descriptors.page.listAclPolicyRevisions.createStream(
+      this.innerApiCalls.listAclPolicyRevisions as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listAclPolicyRevisions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the ACL policy to list revisions for.
+   *   Format:
+   *   "projects/{project_id}/locations/{location_id}/aclPolicies/{acl_policy_id}"
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   * @param {string} [request.pageToken]
+   *   Optional. The `next_page_token` value returned from a previous
+   *   `ListAclPolicyRevisions` request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.redis.cluster.v1beta1.AclPolicyRevision|AclPolicyRevision}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/cloud_redis_cluster.list_acl_policy_revisions.js</caption>
+   * region_tag:redis_v1beta1_generated_CloudRedisCluster_ListAclPolicyRevisions_async
+   */
+  listAclPolicyRevisionsAsync(
+    request?: protos.google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listAclPolicyRevisions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listAclPolicyRevisions iterate %j', request);
+    return this.descriptors.page.listAclPolicyRevisions.asyncIterate(
+      this.innerApiCalls['listAclPolicyRevisions'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.redis.cluster.v1beta1.IAclPolicyRevision>;
+  }
+  /**
    * Lists all backup collections owned by a consumer project in either the
    * specified location (region) or all locations.
    *
@@ -3608,6 +4958,133 @@ export class CloudRedisClusterClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified aclPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} acl_policy
+   * @returns {string} Resource name string.
+   */
+  aclPolicyPath(project: string, location: string, aclPolicy: string) {
+    return this.pathTemplates.aclPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      acl_policy: aclPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from AclPolicy resource.
+   *
+   * @param {string} aclPolicyName
+   *   A fully-qualified path representing AclPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAclPolicyName(aclPolicyName: string) {
+    return this.pathTemplates.aclPolicyPathTemplate.match(aclPolicyName)
+      .project;
+  }
+
+  /**
+   * Parse the location from AclPolicy resource.
+   *
+   * @param {string} aclPolicyName
+   *   A fully-qualified path representing AclPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAclPolicyName(aclPolicyName: string) {
+    return this.pathTemplates.aclPolicyPathTemplate.match(aclPolicyName)
+      .location;
+  }
+
+  /**
+   * Parse the acl_policy from AclPolicy resource.
+   *
+   * @param {string} aclPolicyName
+   *   A fully-qualified path representing AclPolicy resource.
+   * @returns {string} A string representing the acl_policy.
+   */
+  matchAclPolicyFromAclPolicyName(aclPolicyName: string) {
+    return this.pathTemplates.aclPolicyPathTemplate.match(aclPolicyName)
+      .acl_policy;
+  }
+
+  /**
+   * Return a fully-qualified aclPolicyRevision resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} acl_policy
+   * @param {string} revision
+   * @returns {string} Resource name string.
+   */
+  aclPolicyRevisionPath(
+    project: string,
+    location: string,
+    aclPolicy: string,
+    revision: string,
+  ) {
+    return this.pathTemplates.aclPolicyRevisionPathTemplate.render({
+      project: project,
+      location: location,
+      acl_policy: aclPolicy,
+      revision: revision,
+    });
+  }
+
+  /**
+   * Parse the project from AclPolicyRevision resource.
+   *
+   * @param {string} aclPolicyRevisionName
+   *   A fully-qualified path representing AclPolicyRevision resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAclPolicyRevisionName(aclPolicyRevisionName: string) {
+    return this.pathTemplates.aclPolicyRevisionPathTemplate.match(
+      aclPolicyRevisionName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from AclPolicyRevision resource.
+   *
+   * @param {string} aclPolicyRevisionName
+   *   A fully-qualified path representing AclPolicyRevision resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromAclPolicyRevisionName(aclPolicyRevisionName: string) {
+    return this.pathTemplates.aclPolicyRevisionPathTemplate.match(
+      aclPolicyRevisionName,
+    ).location;
+  }
+
+  /**
+   * Parse the acl_policy from AclPolicyRevision resource.
+   *
+   * @param {string} aclPolicyRevisionName
+   *   A fully-qualified path representing AclPolicyRevision resource.
+   * @returns {string} A string representing the acl_policy.
+   */
+  matchAclPolicyFromAclPolicyRevisionName(aclPolicyRevisionName: string) {
+    return this.pathTemplates.aclPolicyRevisionPathTemplate.match(
+      aclPolicyRevisionName,
+    ).acl_policy;
+  }
+
+  /**
+   * Parse the revision from AclPolicyRevision resource.
+   *
+   * @param {string} aclPolicyRevisionName
+   *   A fully-qualified path representing AclPolicyRevision resource.
+   * @returns {string} A string representing the revision.
+   */
+  matchRevisionFromAclPolicyRevisionName(aclPolicyRevisionName: string) {
+    return this.pathTemplates.aclPolicyRevisionPathTemplate.match(
+      aclPolicyRevisionName,
+    ).revision;
+  }
 
   /**
    * Return a fully-qualified backup resource name string.

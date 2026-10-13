@@ -227,6 +227,7 @@ describe('EndToEnd', async () => {
             'Begin Transaction',
             'Transaction Creation Done',
             ...cacheSessionEvents,
+            'Using Session',
             'Starting stream',
           ];
           await verifySpansAndEvents(
@@ -319,6 +320,7 @@ describe('EndToEnd', async () => {
           'Starting Commit',
           'Commit Done',
           ...cacheSessionEvents,
+          'Using Session',
         ];
 
         await verifySpansAndEvents(
@@ -1174,9 +1176,6 @@ SELECT 1p
   function assertRunBadSyntaxExpectations() {
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
-    spans.sort((spanA, spanB) => {
-      return spanA.startTime < spanB.startTime;
-    });
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
@@ -1324,9 +1323,6 @@ SELECT 1p
   function assertDatabaseRunPlusAwaitTransactionForAlreadyExistentData() {
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
-    spans.sort((spanA, spanB) => {
-      return spanA.startTime < spanB.startTime;
-    });
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
@@ -1799,9 +1795,6 @@ describe('Traces for ExecuteStream broken stream retries', () => {
               .then(() => {
                 traceExporter.forceFlush();
                 const spans = traceExporter.getFinishedSpans();
-                spans.sort((spanA, spanB) => {
-                  return spanA.startTime < spanB.startTime;
-                });
 
                 const actualSpanNames: string[] = [];
                 const actualEventNames: string[] = [];
@@ -1866,9 +1859,6 @@ describe('Traces for ExecuteStream broken stream retries', () => {
 
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
-    spans.sort((spanA, spanB) => {
-      return spanA.startTime < spanB.startTime;
-    });
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];

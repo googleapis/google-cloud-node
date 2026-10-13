@@ -21,6 +21,7 @@
 const sql = require('@google-cloud/sql');
 
 function main() {
+  const blueGreenDeploymentsServiceClient = new sql.BlueGreenDeploymentsServiceClient();
   
   const sqlBackupRunsServiceClient = new sql.SqlBackupRunsServiceClient();
   
@@ -37,6 +38,7 @@ function main() {
   const sqlSslCertsServiceClient = new sql.SqlSslCertsServiceClient();
   const sqlTiersServiceClient = new sql.SqlTiersServiceClient();
   const sqlUsersServiceClient = new sql.SqlUsersServiceClient();
+  const sqlWorkloadCapturesServiceClient = new sql.SqlWorkloadCapturesServiceClient();
 }
 
 main();

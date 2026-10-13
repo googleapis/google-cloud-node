@@ -40,6 +40,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ResolveInstanceConfig": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ReportStatus": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

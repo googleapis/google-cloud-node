@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/dns-v6.2.0...dns-v6.3.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/dns-v6.1.0...dns-v6.2.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/dns-v6.0.1...dns-v6.1.0) (2026-09-15)
 
 

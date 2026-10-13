@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v4 from './v4';
+import * as v4beta from './v4beta';
 
 const DataPointsServiceClient = v4.DataPointsServiceClient;
 type DataPointsServiceClient = v4.DataPointsServiceClient;
@@ -25,7 +26,7 @@ type DataSubscriptionServiceClient = v4.DataSubscriptionServiceClient;
 const HealthProfileServiceClient = v4.HealthProfileServiceClient;
 type HealthProfileServiceClient = v4.HealthProfileServiceClient;
 
-export {v4, DataPointsServiceClient, DataSubscriptionServiceClient, HealthProfileServiceClient};
-export default {v4, DataPointsServiceClient, DataSubscriptionServiceClient, HealthProfileServiceClient};
+export {v4, v4beta, DataPointsServiceClient, DataSubscriptionServiceClient, HealthProfileServiceClient};
+export default {v4, v4beta, DataPointsServiceClient, DataSubscriptionServiceClient, HealthProfileServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

@@ -729,6 +729,12 @@ export namespace google {
 
                         /** AppGateway hostType */
                         hostType?: (google.cloud.beyondcorp.appgateways.v1.AppGateway.HostType|keyof typeof google.cloud.beyondcorp.appgateways.v1.AppGateway.HostType|null);
+
+                        /** AppGateway satisfiesPzs */
+                        satisfiesPzs?: (boolean|null);
+
+                        /** AppGateway satisfiesPzi */
+                        satisfiesPzi?: (boolean|null);
                     }
 
                     /** Represents an AppGateway. */
@@ -772,6 +778,12 @@ export namespace google {
 
                         /** AppGateway hostType. */
                         public hostType: (google.cloud.beyondcorp.appgateways.v1.AppGateway.HostType|keyof typeof google.cloud.beyondcorp.appgateways.v1.AppGateway.HostType);
+
+                        /** AppGateway satisfiesPzs. */
+                        public satisfiesPzs?: (boolean|null);
+
+                        /** AppGateway satisfiesPzi. */
+                        public satisfiesPzi?: (boolean|null);
 
                         /**
                          * Creates a new AppGateway instance using the specified properties.

@@ -32,7 +32,7 @@ import {isNodeJS} from './featureDetection';
 import {generateServiceStub} from './fallbackServiceStub';
 import {StreamType} from './streamingCalls/streaming';
 import {toLowerCamelCase} from './util';
-import {StaticTraceContext} from './observability/TracerHelper';
+import {StaticTraceContext} from './observability/contextUtil';
 import {google} from '../protos/http';
 import * as IamProtos from '../protos/iam_service';
 import * as LocationProtos from '../protos/locations';
@@ -108,6 +108,8 @@ export class GrpcClient {
   httpRules?: Array<google.api.IHttpRule>;
   numericEnums: boolean;
   minifyJson: boolean;
+  private _servicePath?: string;
+  private _port?: number;
 
   /**
    * In rare cases users might need to deallocate all memory consumed by loaded protos.
@@ -156,6 +158,11 @@ export class GrpcClient {
     this.httpRules = (options as GrpcClientOptions).httpRules;
     this.numericEnums = (options as GrpcClientOptions).numericEnums ?? false;
     this.minifyJson = (options as GrpcClientOptions).minifyJson ?? false;
+    this._servicePath =
+      (options as GrpcClientOptions).servicePath ||
+      (options as GrpcClientOptions).apiEndpoint;
+    const rawPort = (options as GrpcClientOptions).port;
+    this._port = typeof rawPort === 'string' ? parseInt(rawPort, 10) : rawPort;
   }
 
   /**
@@ -279,12 +286,21 @@ export class GrpcClient {
       }
       return metadata;
     }
+    const otherArgs: Record<string, unknown> = {
+      metadataBuilder: buildMetadata,
+    };
+    if (this._servicePath) {
+      otherArgs.servicePath = this._servicePath;
+    }
+    if (this._port !== undefined) {
+      otherArgs.port = this._port;
+    }
     return gax.constructSettings(
       serviceName,
       clientConfig,
       configOverrides,
       Status,
-      {metadataBuilder: buildMetadata},
+      otherArgs,
       enableTelemetryTracing,
       internalTelemetryInfo,
     );
@@ -356,7 +372,8 @@ export class GrpcClient {
       servicePort = parseInt(match[2]);
     }
     if (opts.port) {
-      servicePort = opts.port;
+      servicePort =
+        typeof opts.port === 'string' ? parseInt(opts.port, 10) : opts.port;
     } else if (!servicePort) {
       servicePort = 443;
     }

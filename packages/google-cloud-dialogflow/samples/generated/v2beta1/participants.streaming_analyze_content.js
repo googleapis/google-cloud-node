@@ -83,6 +83,10 @@ function main(participant) {
    */
   // const inputEvent = 'abc123'
   /**
+   *  Optional. Input for confirming, revising, or canceling a suggestion.
+   */
+  // const suggestionInput = {}
+  /**
    *  Parameters for a Dialogflow virtual-agent query.
    */
   // const queryParams = {}

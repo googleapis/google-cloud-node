@@ -216,6 +216,9 @@ export class ConversationProfilesClient {
       cXSecuritySettingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/securitySettings/{security_settings}',
       ),
+      companionAgentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/companionAgents/{companion_agent}',
+      ),
       encryptionSpecPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/encryptionSpec',
       ),
@@ -2199,6 +2202,65 @@ export class ConversationProfilesClient {
     return this.pathTemplates.cXSecuritySettingsPathTemplate.match(
       cXSecuritySettingsName,
     ).security_settings;
+  }
+
+  /**
+   * Return a fully-qualified companionAgent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} companion_agent
+   * @returns {string} Resource name string.
+   */
+  companionAgentPath(
+    project: string,
+    location: string,
+    companionAgent: string,
+  ) {
+    return this.pathTemplates.companionAgentPathTemplate.render({
+      project: project,
+      location: location,
+      companion_agent: companionAgent,
+    });
+  }
+
+  /**
+   * Parse the project from CompanionAgent resource.
+   *
+   * @param {string} companionAgentName
+   *   A fully-qualified path representing CompanionAgent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCompanionAgentName(companionAgentName: string) {
+    return this.pathTemplates.companionAgentPathTemplate.match(
+      companionAgentName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from CompanionAgent resource.
+   *
+   * @param {string} companionAgentName
+   *   A fully-qualified path representing CompanionAgent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCompanionAgentName(companionAgentName: string) {
+    return this.pathTemplates.companionAgentPathTemplate.match(
+      companionAgentName,
+    ).location;
+  }
+
+  /**
+   * Parse the companion_agent from CompanionAgent resource.
+   *
+   * @param {string} companionAgentName
+   *   A fully-qualified path representing CompanionAgent resource.
+   * @returns {string} A string representing the companion_agent.
+   */
+  matchCompanionAgentFromCompanionAgentName(companionAgentName: string) {
+    return this.pathTemplates.companionAgentPathTemplate.match(
+      companionAgentName,
+    ).companion_agent;
   }
 
   /**

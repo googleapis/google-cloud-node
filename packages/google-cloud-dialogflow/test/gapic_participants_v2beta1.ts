@@ -1629,6 +1629,100 @@ describe('v2beta1.ParticipantsClient', () => {
     });
   });
 
+  describe('streamingReactiveCompanionSuggestions', () => {
+    it('invokes streamingReactiveCompanionSuggestions without error', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.StreamingReactiveCompanionSuggestionsRequest(),
+      );
+
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.StreamingReactiveCompanionSuggestionsResponse(),
+      );
+      client.innerApiCalls.streamingReactiveCompanionSuggestions =
+        stubBidiStreamingCall(expectedResponse);
+      const stream = client.streamingReactiveCompanionSuggestions();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.dialogflow.v2beta1.StreamingReactiveCompanionSuggestionsResponse,
+          ) => {
+            resolve(response);
+          },
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .streamingReactiveCompanionSuggestions as SinonStub
+        )
+          .getCall(0)
+          .calledWith(null),
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request,
+      );
+    });
+
+    it('invokes streamingReactiveCompanionSuggestions with error', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.StreamingReactiveCompanionSuggestionsRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.streamingReactiveCompanionSuggestions =
+        stubBidiStreamingCall(undefined, expectedError);
+      const stream = client.streamingReactiveCompanionSuggestions();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.dialogflow.v2beta1.StreamingReactiveCompanionSuggestionsResponse,
+          ) => {
+            resolve(response);
+          },
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.innerApiCalls
+            .streamingReactiveCompanionSuggestions as SinonStub
+        )
+          .getCall(0)
+          .calledWith(null),
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request,
+      );
+    });
+  });
+
   describe('bidiStreamingAnalyzeContent', () => {
     it('invokes bidiStreamingAnalyzeContent without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
@@ -2592,6 +2686,71 @@ describe('v2beta1.ParticipantsClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('companionAgent', async () => {
+      const fakePath = '/rendered/path/companionAgent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        companion_agent: 'companionAgentValue',
+      };
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.companionAgentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.companionAgentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('companionAgentPath', () => {
+        const result = client.companionAgentPath(
+          'projectValue',
+          'locationValue',
+          'companionAgentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromCompanionAgentName', () => {
+        const result = client.matchProjectFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromCompanionAgentName', () => {
+        const result = client.matchLocationFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCompanionAgentFromCompanionAgentName', () => {
+        const result =
+          client.matchCompanionAgentFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'companionAgentValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('encryptionSpec', async () => {
       const fakePath = '/rendered/path/encryptionSpec';
       const expectedParameters = {

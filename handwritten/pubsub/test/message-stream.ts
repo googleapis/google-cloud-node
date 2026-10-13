@@ -596,6 +596,91 @@ describe('MessageStream', () => {
 
         ms.destroy();
       });
+
+      it('should not close stream if paused when keepalive runs', async () => {
+        messageStream.destroy();
+        client.streams.length = 0;
+
+        const ms = new MessageStream(subscriber);
+        await ms.start();
+
+        const writeSpies = client.streams.map(s => sandbox.spy(s, 'write'));
+        const cancelSpies = client.streams.map(s => sandbox.spy(s, 'cancel'));
+
+        ms.pause();
+
+        // Wait for keepalive ping (30s) + 15s timeout
+        sandbox.clock.tick(45000);
+
+        writeSpies.forEach(spy => {
+          assert.deepStrictEqual(spy.lastCall.args[0], {});
+        });
+        cancelSpies.forEach(spy => {
+          assert.strictEqual(spy.callCount, 0);
+        });
+
+        ms.destroy();
+      });
+
+      it('should not close stream if paused after keepalive ping is sent', async () => {
+        messageStream.destroy();
+        client.streams.length = 0;
+
+        const ms = new MessageStream(subscriber);
+        await ms.start();
+
+        const cancelSpies = client.streams.map(s => sandbox.spy(s, 'cancel'));
+
+        // Trigger keepalive ping at 30s
+        sandbox.clock.tick(30000);
+
+        // Pause before server keepalive response arrives
+        ms.pause();
+
+        // Wait for 15s timeout window to pass
+        sandbox.clock.tick(15000);
+
+        cancelSpies.forEach(spy => {
+          assert.strictEqual(spy.callCount, 0);
+        });
+
+        ms.destroy();
+      });
+    });
+
+    describe('pause and resume', () => {
+      it('should pause and resume all underlying streams', () => {
+        const pauseSpies = client.streams.map(s => sandbox.spy(s, 'pause'));
+        const resumeSpies = client.streams.map(s => sandbox.spy(s, 'resume'));
+
+        messageStream.pause();
+
+        pauseSpies.forEach((spy, i) => {
+          assert.strictEqual(spy.callCount, 1);
+          assert.strictEqual(client.streams[i].isPaused(), true);
+        });
+
+        messageStream.resume();
+
+        resumeSpies.forEach((spy, i) => {
+          assert.strictEqual(spy.callCount, 1);
+          assert.strictEqual(client.streams[i].isPaused(), false);
+        });
+      });
+
+      it('should pause newly replaced streams if message stream is paused', async () => {
+        const [firstStream] = client.streams;
+        firstStream.emit('status', {code: grpc.status.CANCELLED});
+
+        await promisify(process.nextTick)();
+        messageStream.pause();
+
+        await sandbox.clock.tickAsync(1000);
+
+        assert.strictEqual(client.streams.length, 6);
+        const replacementStream = client.streams[5];
+        assert.strictEqual(replacementStream.isPaused(), true);
+      });
     });
 
     it('should allow updating the ack deadline', async () => {

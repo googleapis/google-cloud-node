@@ -18,3 +18,13 @@ export {
   TokenMaker,
   defaultMaker as defaultTokenMaker,
 } from './testResources';
+export {
+  READONLY_PROPERTY_ERROR_REGEX,
+  RuntimeVersions,
+  assertArraySubclassStrictEqual,
+  getNodeMajorVersion,
+  isBun,
+  isNode,
+  isReadOnlyPropertyError,
+  requiresStrictArrayPrototypeEquality,
+} from './runtime';
