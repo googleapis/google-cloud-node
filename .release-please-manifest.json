@@ -25,7 +25,7 @@
   "handwritten/bigquery": "9.3.0",
   "handwritten/bigquery-storage": "6.2.0",
   "handwritten/bigtable": "7.5.0",
-  "handwritten/cloud-profiler": "8.2.0",
+  "handwritten/cloud-profiler": "8.2.1",
   "handwritten/datastore": "11.3.0",
   "handwritten/error-reporting": "4.3.0",
   "handwritten/firestore": "9.3.1",

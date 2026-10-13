@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## [8.2.1](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v8.2.0...cloud-profiler-v8.2.1) (2026-10-09)
+
+
+### Bug Fixes
+
+* Use npm in prepare/compile lifecycle scripts ([#9587](https://github.com/googleapis/google-cloud-node/issues/9587)) ([64c3a2b](https://github.com/googleapis/google-cloud-node/commit/64c3a2bafc62273f7cdc3b9612756d631afc3f97))
+
 ## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v8.1.0...cloud-profiler-v8.2.0) (2026-10-08)
 
 
