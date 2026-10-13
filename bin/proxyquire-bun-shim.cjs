@@ -32,9 +32,6 @@ if (
   const enableFetchShim =
     process.env.BUN_ENABLE_FETCH_SHIM === 'true' ||
     process.env.BUN_FETCH_SHIM === 'true';
-  const enableGaxiosShim =
-    process.env.BUN_ENABLE_GAXIOS_SHIM === 'true' ||
-    process.env.BUN_GAXIOS_SHIM === 'true';
   const enableProxyquireShim =
     process.env.BUN_ENABLE_PROXYQUIRE_SHIM === 'true' ||
     process.env.BUN_PROXYQUIRE_SHIM === 'true';
@@ -141,12 +138,12 @@ if (
   //   - OAuth token failures (`invalid_grant: account not found`)
   //   - `Mocks not yet satisfied` assertions from `nock`
   //
-  // When opted into via `--fetch-shim` (`BUN_ENABLE_FETCH_SHIM=true`) or
-  // `--gaxios-shim` (`BUN_ENABLE_GAXIOS_SHIM=true`), `__googleCloudBunFetch`
-  // intercepts HTTP/HTTPS requests and routes them through Node's `http.request` /
-  // `https.request` stack, allowing `nock` to intercept requests seamlessly while
-  // returning standard Fetch `Response` objects expected by caller libraries.
-  if (enableFetchShim || enableGaxiosShim) {
+  // When opted into via `--fetch-shim` (`BUN_ENABLE_FETCH_SHIM=true`),
+  // `__googleCloudBunFetch` intercepts HTTP/HTTPS requests and routes them
+  // through Node's `http.request` / `https.request` stack, allowing `nock` to
+  // intercept requests seamlessly while returning standard Fetch `Response`
+  // objects expected by caller libraries.
+  if (enableFetchShim) {
     const origFetch = globalThis.fetch;
     globalThis.__googleCloudBunFetch = async (url, init = {}) => {
       let parsedUrl;
@@ -453,6 +450,7 @@ if (
         throw err;
       }
     };
+    globalThis.fetch = globalThis.__googleCloudBunFetch;
   }
 
   if (
@@ -475,65 +473,33 @@ if (
     };
   }
 
-  function patchGaxiosIfPresent(res) {
-    if (
-      enableGaxiosShim &&
-      res &&
-      typeof res === 'object' &&
-      typeof res.Gaxios === 'function' &&
-      !res.Gaxios.__bunPatched
-    ) {
-      res.Gaxios.__bunPatched = true;
-      const origAdapter = res.Gaxios.prototype._defaultAdapter;
-      if (typeof origAdapter === 'function') {
-        res.Gaxios.prototype._defaultAdapter = function (config) {
-          if (
-            config &&
-            !config.fetchImplementation &&
-            !this.defaults?.fetchImplementation &&
-            typeof window === 'undefined'
-          ) {
-            config.fetchImplementation = (...a) =>
-              globalThis.__googleCloudBunFetch(...a);
-          }
-          return origAdapter.call(this, config);
-        };
-      }
-    }
-    return res;
-  }
-
-  if (enableProxyquireShim || enableGaxiosShim) {
+  if (enableProxyquireShim) {
     Module.prototype.require = function (id) {
-      if (enableProxyquireShim && id === 'proxyquire') {
+      if (id === 'proxyquire') {
         return makeProxyquire(this);
       }
-      if (enableProxyquireShim) {
-        const fr = frames[frames.length - 1];
-        if (fr && this && this.filename) {
-          const isSut = this.filename === fr.sut;
-          if (isSut || fr.containsGlobal) {
-            let found = false;
-            let stub;
-            if (Object.prototype.hasOwnProperty.call(fr.stubs, id)) {
+      const fr = frames[frames.length - 1];
+      if (fr && this && this.filename) {
+        const isSut = this.filename === fr.sut;
+        if (isSut || fr.containsGlobal) {
+          let found = false;
+          let stub;
+          if (Object.prototype.hasOwnProperty.call(fr.stubs, id)) {
+            found = true;
+            stub = fr.stubs[id];
+          } else {
+            const resolved = resolveFrom(this.filename, id);
+            if (Object.prototype.hasOwnProperty.call(fr.resolved, resolved)) {
               found = true;
-              stub = fr.stubs[id];
-            } else {
-              const resolved = resolveFrom(this.filename, id);
-              if (Object.prototype.hasOwnProperty.call(fr.resolved, resolved)) {
-                found = true;
-                stub = fr.resolved[resolved];
-              }
+              stub = fr.resolved[resolved];
             }
-            if (found && (isSut || isGlobalStub(stub))) {
-              return patchGaxiosIfPresent(
-                applyStub(this, id, stub, fr.noCallThru),
-              );
-            }
+          }
+          if (found && (isSut || isGlobalStub(stub))) {
+            return applyStub(this, id, stub, fr.noCallThru);
           }
         }
       }
-      return patchGaxiosIfPresent(origRequire.apply(this, arguments));
+      return origRequire.apply(this, arguments);
     };
   }
 
