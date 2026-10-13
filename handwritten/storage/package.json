@@ -71,7 +71,7 @@
     "pretest": "pnpm run compile --sourceMap",
     "system-test:esm": "mkdir -p $HOME/.config && node ../../bin/run-test.cjs --no-parallel build/esm/system-test --timeout 600000 --exit",
     "system-test": "mkdir -p $HOME/.config && node ../../bin/run-test.cjs --no-parallel build/cjs/system-test --timeout 600000 --exit",
-    "test": "cross-env NODE_OPTIONS=\"--require ./scripts/preload-yargs.cjs --no-deprecation\" node ../../bin/run-test.cjs --fetch-shim --gaxios-shim --proxyquire-shim --require-shim build/cjs/test"
+    "test": "cross-env NODE_OPTIONS=\"--require ./scripts/preload-yargs.cjs --no-deprecation\" node ../../bin/run-test.cjs --fetch-shim --gaxios-shim --proxyquire-shim build/cjs/test"
   },
   "dependencies": {
     "@google-cloud/paginator": "^7.0.1",
