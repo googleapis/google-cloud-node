@@ -41,174 +41,10 @@ if (
   const enableProxyquireShim =
     process.env.BUN_ENABLE_PROXYQUIRE_SHIM === 'true' ||
     process.env.BUN_PROXYQUIRE_SHIM === 'true';
-  const enableRequireShim =
-    process.env.BUN_ENABLE_REQUIRE_SHIM === 'true' ||
-    process.env.BUN_REQUIRE_SHIM === 'true';
   const enableCryptoVerifyShim =
     process.env.BUN_ENABLE_CRYPTO_VERIFY_SHIM === 'true' ||
     process.env.BUN_CRYPTO_VERIFY_SHIM === 'true';
 
-  // ---------------------------------------------------------------------------
-  // 1. Module._load Delegation
-  // ---------------------------------------------------------------------------
-  // In Node.js, `require()` internally delegates to `Module._load(request, parent, isMain)`.
-  // Several test suites (such as lazy import error-recovery tests in Storage `test/util.ts`)
-  // temporarily monkeypatch `Module._load` to simulate import failures or intercept requires.
-  // In Bun, `require()` is implemented natively in C++ and bypasses `Module._load` entirely.
-  //
-  // To preserve compatibility, we register a default `Module._load` stub and inspect it
-  // inside our `Module.prototype.require` hook. Whenever a test replaces `Module._load`
-  // with a custom implementation, we delegate to that custom loader.
-  const defaultModuleLoad = function (request, parent) {
-    const ctx =
-      parent && typeof parent.require === 'function' ? parent : module;
-    return origRequire.call(ctx, request);
-  };
-  if (enableRequireShim) {
-    Module._load = defaultModuleLoad;
-  }
-
-  // ---------------------------------------------------------------------------
-  // 2. Generational Module Cache Snapshots (Module._cache & require.cache)
-  // ---------------------------------------------------------------------------
-  // Test isolation libraries (such as `mockery` in `handwritten/storage`) swap
-  // the module cache using the following idiom:
-  //
-  //   const originalCache = Module._cache; // or `require.cache`
-  //   Module._cache = {};                  // clear cache for isolated load
-  //   // ... run tests with mocks ...
-  //   Module._cache = originalCache;       // restore previous cache
-  //
-  // In Bun, `require.cache` and `Module._cache` are native proxies to the C++ runtime's
-  // internal module table (`bunNativeCache`). If we simply delete keys from `bunNativeCache`
-  // in-place on assignment, `originalCache` (which holds a direct reference to that same object)
-  // has its properties deleted too. Consequently, when `mockery` attempts to
-  // restore `Module._cache = originalCache`, the saved cache is already empty. This caused
-  // previously loaded singletons/classes (like `Bucket` in Storage) to be re-required as distinct
-  // instances, breaking `instanceof` checks across subsequent test files.
-  //
-  // To solve this in Bun, we implement generational cache management under `enableRequireShim`:
-  // - `createCacheGeneration`: Wraps the active cache state in a Proxy. While active, reads and
-  //   writes reflect directly into Bun's native C++ cache (`bunNativeCache`) so Bun's native loader
-  //   sees newly required modules.
-  // - When `setCache(newCache)` is invoked (e.g., `Module._cache = {}` or `Module._cache = originalCache`),
-  //   the outgoing generation is `detach()`ed: it takes a snapshot of all active entries in
-  //   `bunNativeCache` and decouples from future mutations. The caller's `originalCache` variable
-  //   thus safely preserves all previously loaded modules.
-  // - `bunNativeCache` is then synchronized to match `newCache` (clearing deleted entries and
-  //   repopulating new ones so Bun's native loader sees the clean or restored state).
-  // - A new active generation is created and bound to both `Module._cache` and `require.cache`.
-  if (enableRequireShim) {
-    const bunNativeCache = require.cache;
-
-    function createCacheGeneration(initialEntries = {}) {
-      const map = Object.assign(Object.create(null), initialEntries);
-      let detached = false;
-
-      const proxy = new Proxy(map, {
-        get(target, prop) {
-          if (typeof prop === 'symbol') return target[prop];
-          if (!detached && prop in bunNativeCache) return bunNativeCache[prop];
-          return target[prop];
-        },
-        set(target, prop, val) {
-          target[prop] = val;
-          if (!detached) bunNativeCache[prop] = val;
-          return true;
-        },
-        deleteProperty(target, prop) {
-          delete target[prop];
-          if (!detached) delete bunNativeCache[prop];
-          return true;
-        },
-        has(target, prop) {
-          if (typeof prop === 'symbol') return prop in target;
-          if (!detached && prop in bunNativeCache) return true;
-          return prop in target;
-        },
-        ownKeys(target) {
-          if (!detached) {
-            const keys = new Set([
-              ...Object.keys(bunNativeCache),
-              ...Object.keys(target),
-            ]);
-            return Array.from(keys);
-          }
-          return Object.keys(target);
-        },
-        getOwnPropertyDescriptor(target, prop) {
-          if (
-            !detached &&
-            Object.prototype.hasOwnProperty.call(bunNativeCache, prop)
-          ) {
-            return Object.getOwnPropertyDescriptor(bunNativeCache, prop);
-          }
-          return Object.getOwnPropertyDescriptor(target, prop);
-        },
-      });
-
-      return {
-        map,
-        proxy,
-        detach() {
-          for (const k of Object.keys(bunNativeCache)) {
-            map[k] = bunNativeCache[k];
-          }
-          detached = true;
-        },
-      };
-    }
-
-    let currentGen = createCacheGeneration(bunNativeCache);
-
-    function getCache() {
-      return currentGen.proxy;
-    }
-
-    function setCache(newCache) {
-      // 1. Detach the current generation, saving all active entries before mutating native cache.
-      currentGen.detach();
-
-      // 2. Synchronize Bun's native cache to match the incoming newCache object.
-      const newKeys = new Set(
-        newCache && typeof newCache === 'object' ? Object.keys(newCache) : [],
-      );
-      for (const k of Object.keys(bunNativeCache)) {
-        if (!newKeys.has(k)) {
-          delete bunNativeCache[k];
-        }
-      }
-      if (newCache && typeof newCache === 'object') {
-        for (const [k, v] of Object.entries(newCache)) {
-          bunNativeCache[k] = v;
-        }
-      }
-
-      // 3. Initialize a fresh generation representing the synchronized native cache.
-      currentGen = createCacheGeneration(bunNativeCache);
-    }
-
-    Object.defineProperty(Module, '_cache', {
-      get: getCache,
-      set: setCache,
-      configurable: true,
-      enumerable: true,
-    });
-
-    try {
-      const proto = Object.getPrototypeOf(require);
-      if (proto) {
-        Object.defineProperty(proto, 'cache', {
-          get: getCache,
-          set: setCache,
-          configurable: true,
-          enumerable: true,
-        });
-      }
-    } catch {
-      // Ignore if prototype is not configurable
-    }
-  }
   const hasOwn = (o, k) =>
     o !== null &&
     typeof o === 'object' &&
@@ -346,7 +182,7 @@ if (
   const {Readable, PassThrough} = require('stream');
 
   // ---------------------------------------------------------------------------
-  // 3. Nock-Compatible HTTP/HTTPS Fetch Transport (__googleCloudBunFetch)
+  // 1. Nock-Compatible HTTP/HTTPS Fetch Transport (__googleCloudBunFetch)
   // ---------------------------------------------------------------------------
   // Libraries such as `gaxios` and `teeny-request` use Fetch API calls when
   // running in modern runtimes. In Bun, native `globalThis.fetch` is written
@@ -743,7 +579,7 @@ if (
     return res;
   }
 
-  if (enableRequireShim || enableProxyquireShim || enableGaxiosShim) {
+  if (enableProxyquireShim || enableGaxiosShim) {
     Module.prototype.require = function (id) {
       if (enableProxyquireShim && id === 'proxyquire') {
         return makeProxyquire(this);
@@ -772,18 +608,6 @@ if (
             }
           }
         }
-      }
-      // If a test suite has monkeypatched Module._load (e.g. testing dynamic import
-      // error recovery in test/util.ts), route the require through Module._load so
-      // the monkeypatched behavior takes effect under Bun.
-      if (
-        enableRequireShim &&
-        typeof Module._load === 'function' &&
-        Module._load !== defaultModuleLoad
-      ) {
-        return patchGaxiosIfPresent(
-          Module._load(id, this, /* isMain */ false),
-        );
       }
       return patchGaxiosIfPresent(origRequire.apply(this, arguments));
     };
