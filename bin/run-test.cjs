@@ -60,11 +60,6 @@ const SHIM_FLAGS = [
     envOut: 'BUN_ENABLE_REQUIRE_SHIM',
   },
   {
-    flag: '--promise-any-shim',
-    envIn: 'BUN_PROMISE_ANY_SHIM',
-    envOut: 'BUN_ENABLE_PROMISE_ANY_SHIM',
-  },
-  {
     flag: '--crypto-verify-shim',
     envIn: 'BUN_CRYPTO_VERIFY_SHIM',
     envOut: 'BUN_ENABLE_CRYPTO_VERIFY_SHIM',
