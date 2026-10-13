@@ -3439,8 +3439,8 @@ importers:
         specifier: 6.0.0
         version: 6.0.0
       nock:
-        specifier: ~13.5.0
-        version: 13.5.6
+        specifier: ^14.0.5
+        version: 14.0.16
       pack-n-play:
         specifier: ^5.0.1
         version: 5.1.0

@@ -21,9 +21,9 @@
 // - Under Bun (`typeof Bun !== 'undefined'` or `JS_RUNTIME === 'bun'`):
 //   Skips `c8` (which relies on Node's `NODE_V8_COVERAGE`), disables Mocha
 //   worker-thread parallelism (`--no-parallel`), preloads the Bun `proxyquire`
-//   shim (`bin/proxyquire-bun-shim.cjs`), and loads `mocha/bin/mocha.js`
-//   directly in-process so `#!/usr/bin/env node` shebangs never switch back to
-//   Node.js.
+//   shim (`bin/proxyquire-bun-shim.cjs`) when `--proxyquire-shim` is passed,
+//   and loads `mocha/bin/mocha.js` directly in-process so `#!/usr/bin/env node`
+//   shebangs never switch back to Node.js.
 'use strict';
 
 const {spawnSync} = require('child_process');
@@ -34,11 +34,6 @@ const rawArgs = process.argv.slice(2);
 const noC8 = rawArgs.includes('--no-c8');
 
 const SHIM_FLAGS = [
-  {
-    flag: '--fetch-shim',
-    envIn: 'BUN_FETCH_SHIM',
-    envOut: 'BUN_ENABLE_FETCH_SHIM',
-  },
   {
     flag: '--proxyquire-shim',
     envIn: 'BUN_PROXYQUIRE_SHIM',
@@ -562,20 +557,21 @@ if (require.main === module) {
 
     const {args: resolvedArgs} = resolveTestArgs(args);
 
-    // Running inside Bun: preload the proxyquire shim and also pass --require
-    // so if mocha/bin/mocha.js spawns a child `lib/cli/cli.js` for node flags
-    // (--enable-source-maps, --throw-deprecation), the child loads the shim too.
-    const shimPath = path.resolve(__dirname, 'proxyquire-bun-shim.cjs');
-    require(shimPath);
-
     const mochaBin = resolveBin('mocha/bin/mocha.js');
     const mochaArgs = resolvedArgs.filter(a => !isParallelFlag(a));
     if (!mochaArgs.includes('--no-parallel')) {
       mochaArgs.unshift('--no-parallel');
     }
-    if (!mochaArgs.includes(shimPath)) {
-      mochaArgs.unshift('--require', shimPath);
+
+    // Only preload the proxyquire shim when `--proxyquire-shim` is requested.
+    if (shimEnvVars.BUN_ENABLE_PROXYQUIRE_SHIM === 'true') {
+      const shimPath = path.resolve(__dirname, 'proxyquire-bun-shim.cjs');
+      require(shimPath);
+      if (!mochaArgs.includes(shimPath)) {
+        mochaArgs.unshift('--require', shimPath);
+      }
     }
+
     if (!mochaArgs.includes('--exit')) {
       mochaArgs.unshift('--exit');
     }

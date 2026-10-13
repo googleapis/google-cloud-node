@@ -38,3 +38,4 @@ runs:
         pnpm install --config.link-workspace-packages=deep --config.prefer-workspace-packages=true --no-frozen-lockfile --ignore-scripts --prefer-offline
         git checkout -- pnpm-lock.yaml
         pnpm --dir core/packages/gaxios run compile
+        pnpm --dir core/packages/teeny-request run compile
