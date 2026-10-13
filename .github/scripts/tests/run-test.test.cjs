@@ -31,6 +31,7 @@ const {
   expandTargetFiles,
   resolveTestArgs,
   resolveBin,
+  ensureWorkspacePackagesLinked,
 } = require(runTestPath);
 
 describe('bin/run-test.cjs .only support', () => {
@@ -366,5 +367,114 @@ describe('bin/run-test.cjs .only support', () => {
       () => resolveBin('@nonexistent-scope/nonexistent-pkg/bin/cli.js'),
       {code: 'MODULE_NOT_FOUND'},
     );
+  });
+
+  it('links compiled in-repo workspace packages (gaxios, teeny-request) in .pnpm and package node_modules when versions diverge', () => {
+    const gaxiosWorkspaceDir = path.join(tmpDir, 'core/packages/gaxios');
+    const teenyWorkspaceDir = path.join(tmpDir, 'core/packages/teeny-request');
+    const pnpmGaxios8Dir = path.join(
+      tmpDir,
+      'node_modules/.pnpm/gaxios@8.3.0/node_modules/gaxios',
+    );
+    const pnpmGaxios7Dir = path.join(
+      tmpDir,
+      'node_modules/.pnpm/gaxios@7.1.3/node_modules/gaxios',
+    );
+    const consumerDir = path.join(tmpDir, 'core/packages/gcp-metadata');
+    const consumerGaxiosDir = path.join(consumerDir, 'node_modules/gaxios');
+    const consumerTeenyDir = path.join(
+      consumerDir,
+      'node_modules/teeny-request',
+    );
+    const legacyConsumerDir = path.join(tmpDir, 'packages/legacy-pkg');
+    const legacyConsumerGaxiosDir = path.join(
+      legacyConsumerDir,
+      'node_modules/gaxios',
+    );
+
+    fs.mkdirSync(pnpmGaxios8Dir, {recursive: true});
+    fs.writeFileSync(
+      path.join(pnpmGaxios8Dir, 'package.json'),
+      JSON.stringify({name: 'gaxios', version: '8.3.0'}),
+    );
+    fs.mkdirSync(pnpmGaxios7Dir, {recursive: true});
+    fs.writeFileSync(
+      path.join(pnpmGaxios7Dir, 'package.json'),
+      JSON.stringify({name: 'gaxios', version: '7.1.3'}),
+    );
+    fs.mkdirSync(path.join(consumerDir, 'node_modules'), {recursive: true});
+    fs.symlinkSync(pnpmGaxios8Dir, consumerGaxiosDir, 'junction');
+    fs.mkdirSync(consumerTeenyDir, {recursive: true});
+    fs.writeFileSync(
+      path.join(consumerTeenyDir, 'package.json'),
+      JSON.stringify({name: 'teeny-request', version: '11.0.1'}),
+    );
+    fs.mkdirSync(path.join(legacyConsumerDir, 'node_modules'), {
+      recursive: true,
+    });
+    fs.symlinkSync(pnpmGaxios7Dir, legacyConsumerGaxiosDir, 'junction');
+
+    // Before workspace packages are compiled, existing node_modules entries remain untouched.
+    ensureWorkspacePackagesLinked(tmpDir, [
+      consumerDir,
+      legacyConsumerDir,
+      tmpDir,
+    ]);
+    assert.notStrictEqual(
+      fs.realpathSync(pnpmGaxios8Dir),
+      fs.existsSync(gaxiosWorkspaceDir)
+        ? fs.realpathSync(gaxiosWorkspaceDir)
+        : '',
+    );
+
+    // Populate compiled workspace packages with release-please bumped versions.
+    fs.mkdirSync(path.join(gaxiosWorkspaceDir, 'build/cjs/src'), {
+      recursive: true,
+    });
+    fs.writeFileSync(
+      path.join(gaxiosWorkspaceDir, 'package.json'),
+      JSON.stringify({name: 'gaxios', version: '8.3.1'}),
+    );
+    fs.writeFileSync(
+      path.join(gaxiosWorkspaceDir, 'build/cjs/src/index.js'),
+      'module.exports = {};\n',
+    );
+
+    fs.mkdirSync(path.join(teenyWorkspaceDir, 'build/src'), {recursive: true});
+    fs.writeFileSync(
+      path.join(teenyWorkspaceDir, 'package.json'),
+      JSON.stringify({name: 'teeny-request', version: '11.1.1'}),
+    );
+    fs.writeFileSync(
+      path.join(teenyWorkspaceDir, 'build/src/index.js'),
+      'module.exports = {};\n',
+    );
+
+    ensureWorkspacePackagesLinked(tmpDir, [
+      consumerDir,
+      legacyConsumerDir,
+      gaxiosWorkspaceDir,
+      tmpDir,
+    ]);
+
+    const realGaxiosWorkspace = fs.realpathSync(gaxiosWorkspaceDir);
+    const realTeenyWorkspace = fs.realpathSync(teenyWorkspaceDir);
+    assert.strictEqual(fs.realpathSync(pnpmGaxios8Dir), realGaxiosWorkspace);
+    assert.strictEqual(fs.realpathSync(consumerGaxiosDir), realGaxiosWorkspace);
+    assert.strictEqual(fs.realpathSync(consumerTeenyDir), realTeenyWorkspace);
+    // Older major version in .pnpm store and in legacy consumer must not be replaced.
+    assert.notStrictEqual(fs.realpathSync(pnpmGaxios7Dir), realGaxiosWorkspace);
+    assert.notStrictEqual(
+      fs.realpathSync(legacyConsumerGaxiosDir),
+      realGaxiosWorkspace,
+    );
+
+    // Calling a second time is idempotent.
+    ensureWorkspacePackagesLinked(tmpDir, [
+      consumerDir,
+      legacyConsumerDir,
+      tmpDir,
+    ]);
+    assert.strictEqual(fs.realpathSync(consumerGaxiosDir), realGaxiosWorkspace);
   });
 });

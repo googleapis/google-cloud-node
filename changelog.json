@@ -5,6 +5,168 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "fca6160fce7932d5491fb9fcca9c42c3de2102c1",
+          "message": "Bump bigquery-storage-api to ^0.5.0",
+          "issues": [
+            "9595"
+          ],
+          "scope": "deps"
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage",
+      "id": "f587dd9e-7053-466a-81c5-10635b91e675",
+      "createTime": "2026-10-13T10:58:49.214Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "62559f18d902330c546c787233dcaa7578774463",
+          "message": "Remove --fetch-shim and handle Bun fetch natively",
+          "issues": [
+            "9573"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "11.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "teeny-request",
+      "id": "ce809d61-f15c-4d0d-acbe-f4571ca9e6e4",
+      "createTime": "2026-10-13T10:58:49.169Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "62559f18d902330c546c787233dcaa7578774463",
+          "message": "Remove --fetch-shim and handle Bun fetch natively",
+          "issues": [
+            "9573"
+          ],
+          "scope": "core"
+        },
+        {
+          "type": "fix",
+          "sha": "640bf5136c7e9002d65cb257af976c336110d33f",
+          "message": "Remove --gaxios-shim and configure Bun Gaxios fetch",
+          "issues": [
+            "9569"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "9.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "googleapis-common",
+      "id": "3b07d54b-4559-437f-8d0b-8ffc92eff844",
+      "createTime": "2026-10-13T10:58:49.132Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "62559f18d902330c546c787233dcaa7578774463",
+          "message": "Remove --fetch-shim and handle Bun fetch natively",
+          "issues": [
+            "9573"
+          ],
+          "scope": "core"
+        },
+        {
+          "type": "fix",
+          "sha": "640bf5136c7e9002d65cb257af976c336110d33f",
+          "message": "Remove --gaxios-shim and configure Bun Gaxios fetch",
+          "issues": [
+            "9569"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "11.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "ad69274f-5e40-4a13-bd33-18f6ef076542",
+      "createTime": "2026-10-13T10:58:49.089Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "62559f18d902330c546c787233dcaa7578774463",
+          "message": "Remove --fetch-shim and handle Bun fetch natively",
+          "issues": [
+            "9573"
+          ],
+          "scope": "core"
+        },
+        {
+          "type": "fix",
+          "sha": "640bf5136c7e9002d65cb257af976c336110d33f",
+          "message": "Remove --gaxios-shim and configure Bun Gaxios fetch",
+          "issues": [
+            "9569"
+          ],
+          "scope": "core"
+        },
+        {
+          "type": "fix",
+          "sha": "64bdaee933ebda0752722d98f226765a373c79f8",
+          "message": "Remove --promise-any-shim and backfill AggregateError",
+          "issues": [
+            "9557"
+          ],
+          "scope": "gcp-metadata"
+        }
+      ],
+      "version": "9.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "gcp-metadata",
+      "id": "f4d3c64f-10fd-4455-99a4-9575cd6324a9",
+      "createTime": "2026-10-13T10:58:49.050Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "93b426d1b94e6c42e3f4b0ef8f1be213f3bc1187",
+          "message": "Remove --bun-plugin-shim and support Bun fetch natively",
+          "issues": [
+            "9561"
+          ],
+          "scope": "gaxios"
+        },
+        {
+          "type": "fix",
+          "sha": "1b10df061581851f05bdd4f9162711b68726297c",
+          "message": "Normalize TimeoutError in _request and propagate retry timeout",
+          "issues": [
+            "9582"
+          ],
+          "scope": "gaxios"
+        },
+        {
+          "type": "fix",
+          "sha": "29d8a5e19b4498b63caa7de97bda6c1474ba19b1",
+          "message": "Remove --abort-signal-timeout-shim",
+          "issues": [
+            "9555"
+          ],
+          "scope": "gaxios"
+        }
+      ],
+      "version": "8.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "gaxios",
+      "id": "1eb30db3-a784-4407-b060-238057437f0e",
+      "createTime": "2026-10-13T10:58:49.010Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "dd43d94a4cde1de6f7573434a377e358fee3b931",
           "message": "Remove session pool and only use multiplexed sessions",
           "issues": [
