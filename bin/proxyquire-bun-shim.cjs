@@ -32,9 +32,6 @@ if (
   const enableFetchShim =
     process.env.BUN_ENABLE_FETCH_SHIM === 'true' ||
     process.env.BUN_FETCH_SHIM === 'true';
-  const enableBunPluginShim =
-    process.env.BUN_ENABLE_BUN_PLUGIN_SHIM === 'true' ||
-    process.env.BUN_PLUGIN_SHIM === 'true';
   const enableGaxiosShim =
     process.env.BUN_ENABLE_GAXIOS_SHIM === 'true' ||
     process.env.BUN_GAXIOS_SHIM === 'true';
@@ -196,13 +193,12 @@ if (
   //   - OAuth token failures (`invalid_grant: account not found`)
   //   - `Mocks not yet satisfied` assertions from `nock`
   //
-  // When opted into via `--fetch-shim` (`BUN_ENABLE_FETCH_SHIM=true`),
-  // `--bun-plugin-shim` (`BUN_ENABLE_BUN_PLUGIN_SHIM=true`), or `--gaxios-shim`
-  // (`BUN_ENABLE_GAXIOS_SHIM=true`), `__googleCloudBunFetch` intercepts
-  // HTTP/HTTPS requests and routes them through Node's `http.request` /
+  // When opted into via `--fetch-shim` (`BUN_ENABLE_FETCH_SHIM=true`) or
+  // `--gaxios-shim` (`BUN_ENABLE_GAXIOS_SHIM=true`), `__googleCloudBunFetch`
+  // intercepts HTTP/HTTPS requests and routes them through Node's `http.request` /
   // `https.request` stack, allowing `nock` to intercept requests seamlessly while
   // returning standard Fetch `Response` objects expected by caller libraries.
-  if (enableFetchShim || enableBunPluginShim || enableGaxiosShim) {
+  if (enableFetchShim || enableGaxiosShim) {
     const origFetch = globalThis.fetch;
     globalThis.__googleCloudBunFetch = async (url, init = {}) => {
       let parsedUrl;
@@ -529,26 +525,6 @@ if (
       }
       return origJsExt.apply(this, arguments);
     };
-  }
-
-  if (enableBunPluginShim && typeof Bun.plugin === 'function') {
-    Bun.plugin({
-      name: 'bun-gaxios-global-fetch-esm',
-      setup(build) {
-        build.onLoad(
-          {filter: /build[\\/]+esm[\\/]+src[\\/]+gaxios\.js$/},
-          args => {
-            const code = fs
-              .readFileSync(args.path, 'utf8')
-              .replaceAll(
-                "(await import('node-fetch')).default",
-                '((...a) => globalThis.__googleCloudBunFetch(...a))',
-              );
-            return {contents: code, loader: 'js'};
-          },
-        );
-      },
-    });
   }
 
   function patchGaxiosIfPresent(res) {
