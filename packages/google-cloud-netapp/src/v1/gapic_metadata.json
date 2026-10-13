@@ -20,6 +20,11 @@
                 "getVolume"
               ]
             },
+            "GetSplitStatus": {
+              "methods": [
+                "getSplitStatus"
+              ]
+            },
             "GetSnapshot": {
               "methods": [
                 "getSnapshot"
@@ -133,6 +138,11 @@
             "RevertVolume": {
               "methods": [
                 "revertVolume"
+              ]
+            },
+            "StartSplit": {
+              "methods": [
+                "startSplit"
               ]
             },
             "EstablishVolumePeering": {
@@ -310,6 +320,16 @@
                 "deleteHostGroup"
               ]
             },
+            "RestoreVolume": {
+              "methods": [
+                "restoreVolume"
+              ]
+            },
+            "UpdateBackupConfig": {
+              "methods": [
+                "updateBackupConfig"
+              ]
+            },
             "ListStoragePools": {
               "methods": [
                 "listStoragePools",
@@ -385,6 +405,13 @@
                 "listHostGroups",
                 "listHostGroupsStream",
                 "listHostGroupsAsync"
+              ]
+            },
+            "ListBackupConfigs": {
+              "methods": [
+                "listBackupConfigs",
+                "listBackupConfigsStream",
+                "listBackupConfigsAsync"
               ]
             }
           }
@@ -402,6 +429,11 @@
                 "getVolume"
               ]
             },
+            "GetSplitStatus": {
+              "methods": [
+                "getSplitStatus"
+              ]
+            },
             "GetSnapshot": {
               "methods": [
                 "getSnapshot"
@@ -515,6 +547,11 @@
             "RevertVolume": {
               "methods": [
                 "revertVolume"
+              ]
+            },
+            "StartSplit": {
+              "methods": [
+                "startSplit"
               ]
             },
             "EstablishVolumePeering": {
@@ -692,6 +729,16 @@
                 "deleteHostGroup"
               ]
             },
+            "RestoreVolume": {
+              "methods": [
+                "restoreVolume"
+              ]
+            },
+            "UpdateBackupConfig": {
+              "methods": [
+                "updateBackupConfig"
+              ]
+            },
             "ListStoragePools": {
               "methods": [
                 "listStoragePools",
@@ -767,6 +814,13 @@
                 "listHostGroups",
                 "listHostGroupsStream",
                 "listHostGroupsAsync"
+              ]
+            },
+            "ListBackupConfigs": {
+              "methods": [
+                "listBackupConfigs",
+                "listBackupConfigsStream",
+                "listBackupConfigsAsync"
               ]
             }
           }

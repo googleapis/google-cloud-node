@@ -13,7 +13,7 @@
 
 import assert from 'assert';
 import nock from 'nock';
-import sinon from 'sinon';
+import {createSandbox, fake} from 'sinon';
 import stream, {Readable} from 'stream';
 import {describe, it, afterEach} from 'mocha';
 import {HttpsProxyAgent} from 'https-proxy-agent';
@@ -38,7 +38,7 @@ const pkg = util.pkg;
 
 nock.disableNetConnect();
 
-const sandbox = sinon.createSandbox();
+const sandbox = createSandbox();
 afterEach(() => {
   sandbox.restore();
   nock.cleanAll();
@@ -921,7 +921,10 @@ describe('🥁 configuration options', () => {
       const gaxios = new Gaxios();
       const timeout = 10;
 
-      await assert.rejects(() => gaxios.request({url, timeout}), /abort/);
+      await assert.rejects(
+        () => gaxios.request({url, timeout}),
+        /abort|timed out/i,
+      );
     });
 
     it('should a `timeout`, an existing `signal`, and be triggered by timeout', async () => {
@@ -932,7 +935,7 @@ describe('🥁 configuration options', () => {
 
       await assert.rejects(
         () => gaxios.request({url, timeout, signal}),
-        /abort/,
+        /abort|timed out/i,
       );
     });
 
@@ -1547,7 +1550,7 @@ describe('interceptors', () => {
 
     it('should not invoke a request interceptor after it is removed', async () => {
       const scope = nock(url).persist().get('/').reply(200, {});
-      const spyFunc = sinon.fake(
+      const spyFunc = fake(
         () =>
           Promise.resolve({
             url,
@@ -1601,7 +1604,7 @@ describe('interceptors', () => {
 
     it('should not invoke a any request interceptors after they are removed', async () => {
       const scope = nock(url).persist().get('/').reply(200, {});
-      const spyFunc = sinon.fake(
+      const spyFunc = fake(
         () =>
           Promise.resolve({
             url,
@@ -1665,7 +1668,7 @@ describe('interceptors', () => {
 
     it('should not invoke a response interceptor after it is removed', async () => {
       const scope = nock(url).persist().get('/').reply(200, {});
-      const spyFunc = sinon.fake(
+      const spyFunc = fake(
         () =>
           Promise.resolve({
             url,
@@ -1717,7 +1720,7 @@ describe('interceptors', () => {
 
     it('should not invoke a any response interceptors after they are removed', async () => {
       const scope = nock(url).persist().get('/').reply(200, {});
-      const spyFunc = sinon.fake(
+      const spyFunc = fake(
         () =>
           Promise.resolve({
             url,

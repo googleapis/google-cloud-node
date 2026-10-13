@@ -60,6 +60,16 @@
                 "getApplication"
               ]
             },
+            "GetBoundary": {
+              "methods": [
+                "getBoundary"
+              ]
+            },
+            "GetExtendedMetadataSchema": {
+              "methods": [
+                "getExtendedMetadataSchema"
+              ]
+            },
             "CreateServiceProjectAttachment": {
               "methods": [
                 "createServiceProjectAttachment"
@@ -115,6 +125,11 @@
                 "deleteApplication"
               ]
             },
+            "UpdateBoundary": {
+              "methods": [
+                "updateBoundary"
+              ]
+            },
             "ListServiceProjectAttachments": {
               "methods": [
                 "listServiceProjectAttachments",
@@ -155,6 +170,13 @@
                 "listApplications",
                 "listApplicationsStream",
                 "listApplicationsAsync"
+              ]
+            },
+            "ListExtendedMetadataSchemas": {
+              "methods": [
+                "listExtendedMetadataSchemas",
+                "listExtendedMetadataSchemasStream",
+                "listExtendedMetadataSchemasAsync"
               ]
             }
           }
@@ -212,6 +234,16 @@
                 "getApplication"
               ]
             },
+            "GetBoundary": {
+              "methods": [
+                "getBoundary"
+              ]
+            },
+            "GetExtendedMetadataSchema": {
+              "methods": [
+                "getExtendedMetadataSchema"
+              ]
+            },
             "CreateServiceProjectAttachment": {
               "methods": [
                 "createServiceProjectAttachment"
@@ -267,6 +299,11 @@
                 "deleteApplication"
               ]
             },
+            "UpdateBoundary": {
+              "methods": [
+                "updateBoundary"
+              ]
+            },
             "ListServiceProjectAttachments": {
               "methods": [
                 "listServiceProjectAttachments",
@@ -307,6 +344,13 @@
                 "listApplications",
                 "listApplicationsStream",
                 "listApplicationsAsync"
+              ]
+            },
+            "ListExtendedMetadataSchemas": {
+              "methods": [
+                "listExtendedMetadataSchemas",
+                "listExtendedMetadataSchemasStream",
+                "listExtendedMetadataSchemasAsync"
               ]
             }
           }

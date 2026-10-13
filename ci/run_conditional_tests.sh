@@ -17,7 +17,6 @@
 # `-e` enables the script to automatically fail when a command fails
 # `-o pipefail` sets the exit code to the rightmost comment to exit
 # with a non-zero
-# Trigger full unit test suite in CI to verify Bun monkey-patch shim flags across all packages.
 set -eo pipefail
 
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
