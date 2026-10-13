@@ -49,11 +49,6 @@ const SHIM_FLAGS = [
     envIn: 'BUN_PROXYQUIRE_SHIM',
     envOut: 'BUN_ENABLE_PROXYQUIRE_SHIM',
   },
-  {
-    flag: '--crypto-verify-shim',
-    envIn: 'BUN_CRYPTO_VERIFY_SHIM',
-    envOut: 'BUN_ENABLE_CRYPTO_VERIFY_SHIM',
-  },
 ];
 
 const shimFlagSet = new Set(SHIM_FLAGS.map(s => s.flag));
