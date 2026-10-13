@@ -3168,7 +3168,9 @@ declare namespace FirebaseFirestore {
    * Firestore v1beta1 RPCs.
    * @deprecated Prefer the v1 client instead of the v1beta1 client. If your use case requires the v1beta1 client, it is published as part of the standalone @google-cloud/firestore-api package.
    */
-  export const v1beta1: typeof import('@google-cloud/firestore-api').v1beta1;
+  export const v1beta1: {
+    FirestoreClient: typeof import('./v1beta1/firestore_client').FirestoreClient;
+  };
   /**
    * The v1 Veneer clients. These clients provide access to the Firestore Admin
    * API and the underlying Firestore v1 RPCs.
