@@ -2577,6 +2577,9 @@ export {Session};
 /**
  * {@link SessionPool} class.
  *
+ * @deprecated Session pool is deprecated and will be removed in a future release.
+ *     Multiplexed sessions are now used for all operations by default, eliminating
+ *     the need for session pooling.
  * @name Spanner.SessionPool
  * @see SessionPool
  * @type {Constructor}

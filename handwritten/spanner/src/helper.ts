@@ -15,8 +15,10 @@
 
 import {grpc} from 'google-gax';
 import {Stream} from 'stream';
+
 /**
  * Checks whether the given error is a 'Database not found' error.
+ * @deprecated Session pool is deprecated and will be removed in a future release.
  * @param {Error} error The error to check.
  * @return {boolean} True if the error is a 'Database not found' error, and otherwise false.
  */
@@ -32,6 +34,7 @@ export function isDatabaseNotFoundError(
 
 /**
  * Checks whether the given error is an 'Instance not found' error.
+ * @deprecated Session pool is deprecated and will be removed in a future release.
  * @param {Error} error The error to check.
  * @return {boolean} True if the error is an 'Instance not found' error, and otherwise false.
  */
@@ -47,6 +50,7 @@ export function isInstanceNotFoundError(
 
 /**
  * Checks whether the given error is a 'Could not load the default credentials' error.
+ * @deprecated Session pool is deprecated and will be removed in a future release.
  * @param {Error} error The error to check.
  * @return {boolean} True if the error is a 'Could not load the default credentials' error, and otherwise false.
  */
@@ -61,6 +65,7 @@ export function isDefaultCredentialsNotSetError(
 
 /**
  * Checks whether the given error is an 'Unable to detect a Project Id in the current environment' error.
+ * @deprecated Session pool is deprecated and will be removed in a future release.
  * @param {Error} error The error to check.
  * @return {boolean} True if the error is an 'Unable to detect a Project Id in the current environment' error, and otherwise false.
  */
@@ -77,6 +82,7 @@ export function isProjectIdNotSetInEnvironmentError(
 
 /**
  * Checks whether the given error is a 'Create session permission' error.
+ * @deprecated Session pool is deprecated and will be removed in a future release.
  * @param {Error} error The error to check.
  * @return {boolean} True if the error is a 'Create session permission' error, and otherwise false.
  */

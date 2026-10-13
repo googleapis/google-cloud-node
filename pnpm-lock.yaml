@@ -3080,9 +3080,6 @@ importers:
       '@types/big.js':
         specifier: ^6.2.2
         version: 6.2.2
-      '@types/stack-trace':
-        specifier: ^0.0.33
-        version: 0.0.33
       big.js:
         specifier: ^7.0.0
         version: 7.0.1
@@ -3104,18 +3101,12 @@ importers:
       lodash.snakecase:
         specifier: ^4.1.1
         version: 4.1.1
-      p-queue:
-        specifier: ^6.0.2
-        version: 6.6.2
       protobufjs:
         specifier: ^7.4.0
         version: 7.5.9
       retry-request:
         specifier: ^9.0.0
         version: 9.0.1
-      stack-trace:
-        specifier: 0.0.10
-        version: 0.0.10
       stream-events:
         specifier: ^1.0.5
         version: 1.0.5
@@ -3237,6 +3228,9 @@ importers:
       p-limit:
         specifier: ^3.0.1
         version: 3.1.0
+      p-queue:
+        specifier: ^6.0.2
+        version: 6.6.2
       path-to-regexp:
         specifier: ^8.2.0
         version: 8.4.2
