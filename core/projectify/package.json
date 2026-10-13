@@ -10,7 +10,7 @@
     "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "scripts": {
-    "test": "c8 mocha build/test",
+    "test": "node ../../bin/run-test.cjs build/test",
     "lint": "gts check",
     "clean": "gts clean",
     "compile": "tsc -p .",
