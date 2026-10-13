@@ -218,8 +218,11 @@ async function fastFailMetadataRequest<T>(
   try {
     return await Promise.any([r1, r2]);
   } catch (err) {
-    // Backfill the error message in case it is empty (e.g., in Bun/JavaScriptCore
-    // where Promise.any initializes AggregateError with an empty message).
+    // Per ECMA-262 (PerformPromiseAny), Promise.any constructs AggregateError
+    // without a message argument, so err.message defaults to '' in Bun
+    // (JavaScriptCore), whereas Node.js (V8) sets 'All promises were rejected'.
+    // Backfill 'All promises were rejected' so Bun matches Node.js behavior
+    // (including MetadataLookupWarning output and test expectations).
     if (err instanceof AggregateError && !err.message) {
       err.message = 'All promises were rejected';
     }
