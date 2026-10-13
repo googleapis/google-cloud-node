@@ -207,6 +207,10 @@ describe('SessionFactory', () => {
       });
     });
 
+    it('should return the session pool object', () => {
+      assert.strictEqual(sessionFactory.getPool(), sessionFactory.pool_);
+    });
+
     it('should return true for isMultiplexedEnabled and isMultiplexedEnabledForRW', () => {
       assert.strictEqual(sessionFactory.isMultiplexedEnabled(), true);
       assert.strictEqual(sessionFactory.isMultiplexedEnabledForRW(), true);

@@ -19,6 +19,12 @@ import {
   MultiplexedSession,
   MultiplexedSessionInterface,
 } from './multiplexed-session';
+import {
+  SessionPool,
+  SessionPoolInterface,
+  SessionPoolOptions,
+} from './session-pool';
+import {SessionPoolConstructor} from './database';
 import {ServiceObjectConfig} from '@google-cloud/common';
 import {ServiceError} from 'google-gax';
 const common = require('./common-grpc/service-object');
@@ -77,6 +83,14 @@ export interface SessionFactoryInterface {
   getSessionForReadWrite?(callback: GetSessionCallback): void;
 
   /**
+   * When called returns the pool object.
+   *
+   * @deprecated Session pool is deprecated and will be removed in a future release.
+   * @name SessionFactoryInterface#getPool
+   */
+  getPool?(): SessionPoolInterface;
+
+  /**
    * Releases a session back into the pool. No-op for multiplexed sessions.
    *
    * @deprecated Regular session pooling has been removed; this method is a no-op.
@@ -124,12 +138,23 @@ export class SessionFactory
   extends common.GrpcServiceObject
   implements SessionFactoryInterface
 {
+  pool_: SessionPoolInterface;
   multiplexedSession_: MultiplexedSessionInterface;
-  constructor(database: Database, name: String) {
+  constructor(
+    database: Database,
+    name: String,
+    poolOptions?: SessionPoolConstructor | SessionPoolOptions,
+  ) {
     super({
       parent: database,
       id: name,
     } as {} as ServiceObjectConfig);
+
+    // initialize regular pool
+    this.pool_ =
+      typeof poolOptions === 'function'
+        ? new (poolOptions as SessionPoolConstructor)(database, null)
+        : new SessionPool(database, poolOptions);
 
     // initialize multiplexed session
     this.multiplexedSession_ = new MultiplexedSession(database);
@@ -182,6 +207,16 @@ export class SessionFactory
         transaction ?? session.transaction(database?.queryOptions_);
       callback(null, session, activeTransaction);
     });
+  }
+
+  /**
+   * Returns the regular session pool object.
+   *
+   * @deprecated Session pool is deprecated and will be removed in a future release.
+   * @returns {SessionPoolInterface} The session pool used by current instance.
+   */
+  getPool(): SessionPoolInterface {
+    return this.pool_;
   }
 
   /**

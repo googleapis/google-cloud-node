@@ -364,6 +364,7 @@ export interface WriteAtLeastOnceOptions extends CallOptions {
 class Database extends common.GrpcServiceObject {
   private instance: Instance;
   formattedName_: string;
+  pool_: SessionPoolInterface;
   sessionFactory_: SessionFactoryInterface;
   queryOptions_?: spannerClient.spanner.v1.ExecuteSqlRequest.IQueryOptions;
   commonHeaders_: {[k: string]: string};
@@ -498,7 +499,8 @@ class Database extends common.GrpcServiceObject {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.requestStream = instance.requestStream as any;
-    this.sessionFactory_ = new SessionFactory(this, name);
+    this.sessionFactory_ = new SessionFactory(this, name, poolOptions);
+    this.pool_ = this.sessionFactory_.getPool!();
     this.queryOptions_ = Object.assign(
       Object.assign({}, queryOptions),
       Database.getEnvironmentQueryOptions(),
@@ -807,7 +809,7 @@ class Database extends common.GrpcServiceObject {
    * @param {?Error} err Request error, if any.
    */
   /**
-   * Close the database connection and destroy all sessions associated with it.
+   * Close the database connection.
    *
    * @param {CloseDatabaseCallback} [callback] Callback function.
    * @returns {Promise}
@@ -3545,9 +3547,10 @@ class Database extends common.GrpcServiceObject {
       },
       async span => {
         try {
-          const [session, transaction] = await promisify(getSession)();
-          const activeTransaction =
-            transaction ?? session.transaction(this.queryOptions_);
+          const session =
+            this.sessionFactory_.getSessionSync?.() ??
+            (await promisify(getSession)())[0];
+          const activeTransaction = session.transaction(this.queryOptions_);
           activeTransaction.requestOptions = Object.assign(
             activeTransaction.requestOptions || {},
             options.requestOptions,

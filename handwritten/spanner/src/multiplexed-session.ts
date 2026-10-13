@@ -16,6 +16,7 @@
 
 import {EventEmitter} from 'events';
 import {context, ROOT_CONTEXT} from '@opentelemetry/api';
+import {GoogleError} from 'google-gax';
 import {Database} from './database';
 import {Session} from './session';
 import {GetSessionCallback} from './session-factory';
@@ -229,7 +230,7 @@ export class MultiplexedSession
    * @returns {Session|null} The cached multiplexed session or null.
    */
   getSessionSync(): Session | null {
-    if (this._multiplexedSession !== null) {
+    if (!this._isClosed && this._multiplexedSession !== null) {
       const span = getActiveOrNoopSpan();
       span.addEvent('Cache hit: has usable multiplexed session');
       return this._multiplexedSession;
@@ -289,6 +290,10 @@ export class MultiplexedSession
    *
    */
   async _getSession(): Promise<Session | null> {
+    if (this._isClosed) {
+      throw new GoogleError('Database is closed.');
+    }
+
     // Check if the multiplexed session is already available
     const cachedSession = this.getSessionSync();
     if (cachedSession !== null) {

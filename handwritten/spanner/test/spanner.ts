@@ -47,7 +47,7 @@ import google = protos.google;
 import {ExecuteSqlRequest, RunResponse} from '../src/transaction';
 import {Row} from '../src/partial-result-stream';
 import {GetDatabaseOperationsOptions} from '../src/instance';
-import {SessionPoolOptions} from '../src/session-pool';
+import {SessionPool, SessionPoolOptions} from '../src/session-pool';
 import {Float, Int, Json, Numeric, SpannerDate} from '../src/codec';
 import * as stream from 'stream';
 import * as util from 'util';
@@ -3095,12 +3095,15 @@ describe('Spanner with mock server', () => {
       describe('when session mode is default', () => {
         it('should use multiplexed session', async () => {
           const database = newTestDatabase({min: 0, incStep: 1});
+          const pool = database.pool_ as SessionPool;
           const multiplexedSession = (
             database.sessionFactory_ as SessionFactory
           ).multiplexedSession_ as MultiplexedSession;
-          assert.strictEqual(database.pool_, undefined);
+          // pool is empty before call to createBatchTransaction
+          assert.strictEqual(pool.size, 0);
           const [transaction] = await database.createBatchTransaction();
-          assert.strictEqual(database.pool_, undefined);
+          // pool is empty after call to createBatchTransaction
+          assert.strictEqual(pool.size, 0);
           // multiplexed session will get created by default
           assert.notEqual(multiplexedSession._multiplexedSession, null);
           transaction.close();
@@ -5919,7 +5922,7 @@ describe('Spanner with mock server', () => {
       // Assert that listing the databases does not cause a session pool to be
       // initialized for the databases.
       for (const db of databases) {
-        assert.strictEqual(db.pool_, undefined);
+        assert.strictEqual((db.pool_ as SessionPool).size, 0);
       }
     });
 

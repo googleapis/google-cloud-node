@@ -213,6 +213,12 @@ describe('MultiplexedSession', () => {
       multiplexedSession._multiplexedSession = fakeMuxSession;
       assert.strictEqual(multiplexedSession.getSessionSync(), fakeMuxSession);
     });
+
+    it('should return null when closed even if a session is cached', () => {
+      multiplexedSession._multiplexedSession = fakeMuxSession;
+      multiplexedSession.close();
+      assert.strictEqual(multiplexedSession.getSessionSync(), null);
+    });
   });
 
   describe('getSession', () => {
@@ -223,6 +229,22 @@ describe('MultiplexedSession', () => {
         restoreProcessListeners();
         restoreProcessListeners = null;
       }
+    });
+
+    it('should return an error asynchronously when closed', done => {
+      multiplexedSession._multiplexedSession = fakeMuxSession;
+      multiplexedSession.close();
+      let callbackInvoked = false;
+
+      multiplexedSession.getSession((err, session) => {
+        callbackInvoked = true;
+        assert(err instanceof Error);
+        assert.strictEqual(err.message, 'Database is closed.');
+        assert.strictEqual(session, undefined);
+        done();
+      });
+
+      assert.strictEqual(callbackInvoked, false);
     });
 
     it('should acquire a session', done => {
@@ -395,6 +417,14 @@ describe('MultiplexedSession', () => {
       }
       // ensure _createSession was called
       sinon.assert.calledOnce(createSessionStub);
+    });
+
+    it('should reject if closed before or during _getSession', async () => {
+      multiplexedSession.close();
+      await assert.rejects(
+        () => multiplexedSession._getSession(),
+        /Database is closed\./,
+      );
     });
   });
 });

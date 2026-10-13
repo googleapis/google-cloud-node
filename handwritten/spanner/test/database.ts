@@ -148,6 +148,9 @@ export class FakeMultiplexedSession extends EventEmitter {
   getSessionSync(): FakeSession | null {
     return null;
   }
+  getPool(): FakeSessionPool {
+    return new FakeSessionPool();
+  }
   close() {}
 }
 
@@ -160,6 +163,9 @@ export class FakeSessionFactory extends EventEmitter {
   getSession() {}
   getSessionSync(): FakeSession | null {
     return null;
+  }
+  getPool(): FakeSessionPool {
+    return new FakeSessionPool();
   }
   close() {}
 }
@@ -3253,10 +3259,11 @@ describe('Database', () => {
 
     beforeEach(() => {
       fakeSessionFactory = database.sessionFactory_;
+      sandbox.stub(SESSION, 'transaction').returns(TRANSACTION);
       (
         sandbox.stub(fakeSessionFactory, 'getSession') as sinon.SinonStub
       ).callsFake(callback => {
-        callback(null, SESSION, TRANSACTION);
+        callback(null, SESSION);
       });
     });
 
@@ -3313,6 +3320,19 @@ describe('Database', () => {
 
       const value = await database.runTransactionAsync(assert.ifError);
       assert.strictEqual(value, fakeValue);
+    });
+
+    it('should use getSessionSync when a cached multiplexed session is available', async () => {
+      const getSessionSyncStub = sandbox
+        .stub(fakeSessionFactory, 'getSessionSync')
+        .returns(SESSION);
+      const getSessionStub = fakeSessionFactory.getSession as sinon.SinonStub;
+
+      await database.runTransactionAsync(assert.ifError);
+
+      assert.strictEqual(getSessionSyncStub.callCount, 1);
+      assert.strictEqual(getSessionStub.callCount, 0);
+      assert.strictEqual(fakeAsyncTransactionRunner.calledWith_[0], SESSION);
     });
   });
 
