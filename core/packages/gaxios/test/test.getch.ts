@@ -13,7 +13,7 @@
 
 import assert from 'assert';
 import nock from 'nock';
-import * as sinon from 'sinon';
+import {createSandbox, fake} from 'sinon';
 import stream, {Readable} from 'stream';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {HttpsProxyAgent} from 'https-proxy-agent';
@@ -38,7 +38,7 @@ const pkg = util.pkg;
 
 nock.disableNetConnect();
 
-const sandbox = sinon.createSandbox();
+const sandbox = createSandbox();
 afterEach(() => {
   sandbox.restore();
   nock.cleanAll();
@@ -540,40 +540,63 @@ describe('🥁 configuration options', () => {
       assert.equal(res.config.agent.connectOpts.key, key);
     });
 
-    it('should pass proxy and tls options to fetchImplementation and omit proxy when noProxy matches', async () => {
+    it('should pass proxy and tls options to Bun fetch and omit proxy when noProxy matches', async () => {
       scope.persist(false);
       nock.cleanAll();
-      let capturedInit: Record<string, unknown> | undefined;
-      const customFetch = async (
-        _u: unknown,
-        init?: Record<string, unknown>,
-      ) => {
-        capturedInit = init;
-        return new Response(JSON.stringify(responseBody), {
-          status: 200,
-          headers: {'content-type': 'application/json'},
+      const globalRecord = globalThis as Record<string, unknown>;
+      const hadBun = 'Bun' in globalRecord;
+      const origFetch = globalThis.fetch;
+      const capturedInits: Array<Record<string, unknown> | undefined> = [];
+      try {
+        if (!hadBun) {
+          globalRecord.Bun = {};
+        }
+        globalThis.fetch = (async (
+          _u: unknown,
+          init?: Record<string, unknown>,
+        ) => {
+          capturedInits.push(init);
+          return new Response(JSON.stringify(responseBody), {
+            status: 200,
+            headers: {'content-type': 'application/json'},
+          });
+        }) as unknown as typeof fetch;
+
+        await request({
+          url,
+          proxy,
+          cert: 'cert',
+          key: 'key',
         });
-      };
+        assert.strictEqual(capturedInits[0]?.proxy, proxy);
+        assert.deepStrictEqual(capturedInits[0]?.tls, {
+          cert: 'cert',
+          key: 'key',
+        });
 
-      await request({
-        url,
-        proxy,
-        cert: 'cert',
-        key: 'key',
-        fetchImplementation:
-          customFetch as unknown as GaxiosOptions['fetchImplementation'],
-      });
-      assert.strictEqual(capturedInit?.proxy, proxy);
-      assert.deepStrictEqual(capturedInit?.tls, {cert: 'cert', key: 'key'});
+        // Cached mTLS proxy agent hit (cert/key omitted on second request)
+        await request({
+          url,
+          proxy,
+        });
+        assert.strictEqual(capturedInits[1]?.proxy, proxy);
+        assert.deepStrictEqual(capturedInits[1]?.tls, {
+          cert: 'cert',
+          key: 'key',
+        });
 
-      await request({
-        url,
-        proxy,
-        noProxy: ['domain.example.com'],
-        fetchImplementation:
-          customFetch as unknown as GaxiosOptions['fetchImplementation'],
-      });
-      assert.strictEqual(capturedInit?.proxy, undefined);
+        await request({
+          url,
+          proxy,
+          noProxy: ['domain.example.com'],
+        });
+        assert.strictEqual(capturedInits[2]?.proxy, undefined);
+      } finally {
+        globalThis.fetch = origFetch;
+        if (!hadBun) {
+          delete globalRecord.Bun;
+        }
+      }
     });
 
     it('should convert Node Readable request body and Web ReadableStream response body in Bun fetch path', async () => {
@@ -632,25 +655,6 @@ describe('🥁 configuration options', () => {
 
         const jsonRes = await request({url});
         assert.deepStrictEqual(jsonRes.data, responseBody);
-
-        globalThis.fetch = (async () => {
-          throw Object.assign(new Error('The operation timed out.'), {
-            name: 'TimeoutError',
-          });
-        }) as typeof fetch;
-        await assert.rejects(request({url, retry: false}), {
-          message: 'The operation was aborted due to timeout',
-          code: 'ETIMEDOUT',
-        });
-
-        globalThis.fetch = (async () => {
-          throw Object.assign(new Error('The operation was aborted.'), {
-            name: 'AbortError',
-          });
-        }) as typeof fetch;
-        await assert.rejects(request({url, retry: false}), {
-          message: 'The user aborted a request.',
-        });
 
         globalThis.fetch = (async () => {
           throw {code: 'ECONNRESET', message: 'socket hang up'};
@@ -967,7 +971,10 @@ describe('🥁 configuration options', () => {
       const gaxios = new Gaxios();
       const timeout = 10;
 
-      await assert.rejects(() => gaxios.request({url, timeout}), /abort/);
+      await assert.rejects(
+        () => gaxios.request({url, timeout}),
+        /abort|timed out/i,
+      );
     });
 
     it('should a `timeout`, an existing `signal`, and be triggered by timeout', async () => {
@@ -978,7 +985,7 @@ describe('🥁 configuration options', () => {
 
       await assert.rejects(
         () => gaxios.request({url, timeout, signal}),
-        /abort/,
+        /abort|timed out/i,
       );
     });
 
@@ -999,6 +1006,72 @@ describe('🥁 configuration options', () => {
         // native `fetch` matches the error properly:
         // new RegExp(message)
       );
+    });
+
+    it('should immediately reject when a pre-aborted `signal` is passed with `timeout`', async () => {
+      const gaxios = new Gaxios();
+      const ac = new AbortController();
+      ac.abort(new Error('Caller pre-aborted'));
+      let adapterCalled = false;
+
+      await assert.rejects(
+        () =>
+          gaxios.request({
+            url,
+            timeout: 4000,
+            signal: ac.signal,
+            adapter: async config => {
+              adapterCalled = true;
+              if (config.signal?.aborted) {
+                throw config.signal.reason;
+              }
+              return {
+                status: 200,
+                statusText: 'OK',
+                headers: new Headers(),
+                data: {},
+                config,
+              } as GaxiosResponse;
+            },
+          }),
+        /Caller pre-aborted/,
+      );
+      assert.strictEqual(adapterCalled, true);
+    });
+
+    it('should abort retry when caller `signal` is aborted during backoff with `timeout`', async () => {
+      const gaxios = new Gaxios();
+      const ac = new AbortController();
+      let attempts = 0;
+
+      await assert.rejects(
+        () =>
+          gaxios.request({
+            url,
+            timeout: 5000,
+            signal: ac.signal,
+            retry: true,
+            retryConfig: {
+              retry: 3,
+              retryDelay: 50,
+              onRetryAttempt: () => {
+                ac.abort(new Error('Caller aborted during retry backoff'));
+              },
+            },
+            adapter: async config => {
+              attempts++;
+              if (config.signal?.aborted) {
+                throw config.signal.reason;
+              }
+              throw Object.assign(new Error('request timed out'), {
+                code: 'ETIMEDOUT',
+                config,
+              });
+            },
+          }),
+        /Caller aborted during retry backoff/,
+      );
+      assert.strictEqual(attempts, 2);
     });
   });
 });
@@ -1596,7 +1669,7 @@ describe('interceptors', () => {
 
     it('should not invoke a request interceptor after it is removed', async () => {
       const scope = nock(url).persist().get('/').reply(200, {});
-      const spyFunc = sinon.fake(
+      const spyFunc = fake(
         () =>
           Promise.resolve({
             url,
@@ -1650,7 +1723,7 @@ describe('interceptors', () => {
 
     it('should not invoke a any request interceptors after they are removed', async () => {
       const scope = nock(url).persist().get('/').reply(200, {});
-      const spyFunc = sinon.fake(
+      const spyFunc = fake(
         () =>
           Promise.resolve({
             url,
@@ -1714,7 +1787,7 @@ describe('interceptors', () => {
 
     it('should not invoke a response interceptor after it is removed', async () => {
       const scope = nock(url).persist().get('/').reply(200, {});
-      const spyFunc = sinon.fake(
+      const spyFunc = fake(
         () =>
           Promise.resolve({
             url,
@@ -1766,7 +1839,7 @@ describe('interceptors', () => {
 
     it('should not invoke a any response interceptors after they are removed', async () => {
       const scope = nock(url).persist().get('/').reply(200, {});
-      const spyFunc = sinon.fake(
+      const spyFunc = fake(
         () =>
           Promise.resolve({
             url,

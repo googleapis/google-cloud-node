@@ -17,18 +17,20 @@
 import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {
+  buildInitialAttributes,
   clearMetadataCache,
+  DynamicTraceContext,
   extractClientServiceFromPackageName,
   extractFromEnvironment,
   extractFromSettings,
   extractServiceFromApiName,
   resolveStaticTraceContext,
+  StaticTraceContext,
   DEFAULT_GCP_REPO,
-} from '../../src/observability/metadataResolver';
+} from '../../src/observability/contextUtil';
 import {CallSettings} from '../../src/gax';
-import {StaticTraceContext} from '../../src/observability/TracerHelper';
 
-describe('metadataResolver', () => {
+describe('contextUtil', () => {
   beforeEach(() => {
     clearMetadataCache();
     delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
@@ -379,6 +381,64 @@ describe('metadataResolver', () => {
       const metadata = resolveStaticTraceContext();
       assert.strictEqual(metadata.serverAddress, 'custom.endpoint.com');
       assert.strictEqual(metadata.serverPort, 8443);
+    });
+  });
+
+  describe('buildInitialAttributes', () => {
+    it('builds initial client, transport, and url.domain attributes', () => {
+      const dynamicArgs: DynamicTraceContext = {
+        clientName: 'StorageClient',
+        methodName: 'GetObject',
+        rpcType: 'grpc',
+      };
+      const staticArgs: StaticTraceContext = {
+        gcpClientService: 'storage',
+        gcpVersion: '1.2.3',
+        gcpRepo: DEFAULT_GCP_REPO,
+        gcpArtifact: '@google-cloud/storage',
+      };
+
+      assert.deepStrictEqual(
+        buildInitialAttributes(
+          dynamicArgs,
+          staticArgs,
+          'storage.googleapis.com',
+        ),
+        {
+          'gcp.client.service': 'storage',
+          'gcp.client.version': '1.2.3',
+          'gcp.client.repo': DEFAULT_GCP_REPO,
+          'gcp.client.artifact': '@google-cloud/storage',
+          'rpc.system.name': 'grpc',
+          'url.domain': 'storage.googleapis.com',
+        },
+      );
+
+      assert.deepStrictEqual(buildInitialAttributes(dynamicArgs, staticArgs), {
+        'gcp.client.service': 'storage',
+        'gcp.client.version': '1.2.3',
+        'gcp.client.repo': DEFAULT_GCP_REPO,
+        'gcp.client.artifact': '@google-cloud/storage',
+        'rpc.system.name': 'grpc',
+      });
+
+      assert.deepStrictEqual(
+        buildInitialAttributes(
+          {
+            clientName: 'ComputeClient',
+            methodName: 'InsertInstance',
+            rpcType: 'http',
+          },
+          {},
+        ),
+        {
+          'gcp.client.service': undefined,
+          'gcp.client.version': undefined,
+          'gcp.client.repo': undefined,
+          'gcp.client.artifact': undefined,
+          'rpc.system.name': 'http',
+        },
+      );
     });
   });
 });

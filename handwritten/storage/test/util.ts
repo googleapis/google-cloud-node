@@ -13,26 +13,38 @@
 // limitations under the License.
 
 import assert from 'assert';
-import {describe, it, afterEach} from 'mocha';
+import {describe, it, before, after, beforeEach, afterEach} from 'mocha';
 import Module from 'module';
 
-interface ModuleWithLoad {
-  _load: (this: unknown, request: string, ...args: unknown[]) => unknown;
-}
-
-const moduleWithLoad = Module as unknown as ModuleWithLoad;
+const utilPath = require.resolve('../src/util.js');
 
 function loadFreshUtil(): typeof import('../src/util.js') {
-  const utilPath = require.resolve('../src/util.js');
   delete require.cache[utilPath];
   return module.require(utilPath);
 }
 
 describe('util lazy imports', () => {
-  const originalLoad = moduleWithLoad._load;
+  let originalRequire: typeof Module.prototype.require;
+  let originalUtilCacheEntry: NodeModule | undefined;
+
+  before(() => {
+    originalUtilCacheEntry = require.cache[utilPath];
+  });
+
+  after(() => {
+    if (originalUtilCacheEntry) {
+      require.cache[utilPath] = originalUtilCacheEntry;
+    } else {
+      delete require.cache[utilPath];
+    }
+  });
+
+  beforeEach(() => {
+    originalRequire = Module.prototype.require;
+  });
 
   afterEach(() => {
-    moduleWithLoad._load = originalLoad;
+    Module.prototype.require = originalRequire;
   });
 
   describe('getMime', () => {
@@ -80,16 +92,15 @@ describe('util lazy imports', () => {
         const util = loadFreshUtil();
         let shouldFail = true;
 
-        moduleWithLoad._load = function (
-          this: unknown,
-          request: string,
-          ...args: unknown[]
+        Module.prototype.require = Object.assign(function (
+          this: NodeModule,
+          request: string
         ) {
           if (request === 'mime' && shouldFail) {
             throw new Error('Simulated mime import failure');
           }
-          return originalLoad.call(this, request, ...args);
-        };
+          return originalRequire.call(this, request);
+        }, originalRequire);
 
         await assert.rejects(
           async () => {
@@ -180,16 +191,15 @@ describe('util lazy imports', () => {
         const util = loadFreshUtil();
         let shouldFail = true;
 
-        moduleWithLoad._load = function (
-          this: unknown,
-          request: string,
-          ...args: unknown[]
+        Module.prototype.require = Object.assign(function (
+          this: NodeModule,
+          request: string
         ) {
           if (request === 'p-limit' && shouldFail) {
             throw new Error('Simulated p-limit import failure');
           }
-          return originalLoad.call(this, request, ...args);
-        };
+          return originalRequire.call(this, request);
+        }, originalRequire);
 
         await assert.rejects(
           async () => {

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/video-stitcher",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "stitcher client for Node.js",
   "repository": {
     "type": "git",
