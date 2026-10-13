@@ -27,7 +27,7 @@ import * as protobuf from 'protobufjs';
 import objectHash from 'object-hash';
 
 import * as gax from './gax';
-import {StaticTraceContext} from './observability/TracerHelper';
+import {StaticTraceContext} from './observability/contextUtil';
 import {ClientOptions} from '@grpc/grpc-js/build/src/client';
 
 const googleProtoFilesDir = path.join(__dirname, '..', '..', 'build', 'protos');

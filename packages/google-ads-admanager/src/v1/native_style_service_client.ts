@@ -226,6 +226,9 @@ export class NativeStyleServiceClient {
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/applications/{application}',
       ),
+      assetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/assets/{asset}',
+      ),
       audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/audienceSegments/{audience_segment}',
       ),
@@ -322,6 +325,12 @@ export class NativeStyleServiceClient {
       ),
       lineItemPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/lineItems/{line_item}',
+      ),
+      lineItemCreativeAssociationPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItems/{line_item}/creatives/{creative}',
+      ),
+      lineItemTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItemTemplates/{line_item_template}',
       ),
       linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/linkedDevices/{linked_device}',
@@ -475,7 +484,9 @@ export class NativeStyleServiceClient {
     const nativeStyleServiceStubMethods = [
       'getNativeStyle',
       'listNativeStyles',
+      'createNativeStyle',
       'batchCreateNativeStyles',
+      'updateNativeStyle',
       'batchUpdateNativeStyles',
       'batchActivateNativeStyles',
       'batchDeactivateNativeStyles',
@@ -727,6 +738,143 @@ export class NativeStyleServiceClient {
       });
   }
   /**
+   * Creates a `NativeStyle` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this `NativeStyle` will be created.
+   *   Format: `networks/{network_code}`
+   * @param {google.ads.admanager.v1.NativeStyle} request.nativeStyle
+   *   Required. The `NativeStyle` to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.NativeStyle|NativeStyle}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_style_service.create_native_style.js</caption>
+   * region_tag:admanager_v1_generated_NativeStyleService_CreateNativeStyle_async
+   */
+  createNativeStyle(
+    request?: protos.google.ads.admanager.v1.ICreateNativeStyleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.INativeStyle,
+      protos.google.ads.admanager.v1.ICreateNativeStyleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createNativeStyle(
+    request: protos.google.ads.admanager.v1.ICreateNativeStyleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.INativeStyle,
+      | protos.google.ads.admanager.v1.ICreateNativeStyleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createNativeStyle(
+    request: protos.google.ads.admanager.v1.ICreateNativeStyleRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.INativeStyle,
+      | protos.google.ads.admanager.v1.ICreateNativeStyleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createNativeStyle(
+    request?: protos.google.ads.admanager.v1.ICreateNativeStyleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.INativeStyle,
+          | protos.google.ads.admanager.v1.ICreateNativeStyleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.INativeStyle,
+      | protos.google.ads.admanager.v1.ICreateNativeStyleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.INativeStyle,
+      protos.google.ads.admanager.v1.ICreateNativeStyleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createNativeStyle request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.INativeStyle,
+          | protos.google.ads.admanager.v1.ICreateNativeStyleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createNativeStyle response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createNativeStyle(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.INativeStyle,
+          protos.google.ads.admanager.v1.ICreateNativeStyleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createNativeStyle response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
    * Creates `NativeStyle` objects.
    *
    * @param {Object} request
@@ -855,6 +1003,144 @@ export class NativeStyleServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('batchCreateNativeStyles response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates a `NativeStyle` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.ads.admanager.v1.NativeStyle} request.nativeStyle
+   *   Required. The `NativeStyle` to update.
+   *
+   *   The `NativeStyle`'s `name` is used to identify the `NativeStyle` to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.NativeStyle|NativeStyle}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/native_style_service.update_native_style.js</caption>
+   * region_tag:admanager_v1_generated_NativeStyleService_UpdateNativeStyle_async
+   */
+  updateNativeStyle(
+    request?: protos.google.ads.admanager.v1.IUpdateNativeStyleRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.INativeStyle,
+      protos.google.ads.admanager.v1.IUpdateNativeStyleRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateNativeStyle(
+    request: protos.google.ads.admanager.v1.IUpdateNativeStyleRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.INativeStyle,
+      | protos.google.ads.admanager.v1.IUpdateNativeStyleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateNativeStyle(
+    request: protos.google.ads.admanager.v1.IUpdateNativeStyleRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.INativeStyle,
+      | protos.google.ads.admanager.v1.IUpdateNativeStyleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateNativeStyle(
+    request?: protos.google.ads.admanager.v1.IUpdateNativeStyleRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.INativeStyle,
+          | protos.google.ads.admanager.v1.IUpdateNativeStyleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.INativeStyle,
+      | protos.google.ads.admanager.v1.IUpdateNativeStyleRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.INativeStyle,
+      protos.google.ads.admanager.v1.IUpdateNativeStyleRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'native_style.name': request.nativeStyle!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateNativeStyle request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.INativeStyle,
+          | protos.google.ads.admanager.v1.IUpdateNativeStyleRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateNativeStyle response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateNativeStyle(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.INativeStyle,
+          protos.google.ads.admanager.v1.IUpdateNativeStyleRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateNativeStyle response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2019,6 +2305,42 @@ export class NativeStyleServiceClient {
   matchApplicationFromApplicationName(applicationName: string) {
     return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .application;
+  }
+
+  /**
+   * Return a fully-qualified asset resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} asset
+   * @returns {string} Resource name string.
+   */
+  assetPath(networkCode: string, asset: string) {
+    return this.pathTemplates.assetPathTemplate.render({
+      network_code: networkCode,
+      asset: asset,
+    });
+  }
+
+  /**
+   * Parse the network_code from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).network_code;
+  }
+
+  /**
+   * Parse the asset from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the asset.
+   */
+  matchAssetFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).asset;
   }
 
   /**
@@ -3269,6 +3591,111 @@ export class NativeStyleServiceClient {
   matchLineItemFromLineItemName(lineItemName: string) {
     return this.pathTemplates.lineItemPathTemplate.match(lineItemName)
       .line_item;
+  }
+
+  /**
+   * Return a fully-qualified lineItemCreativeAssociation resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  lineItemCreativeAssociationPath(
+    networkCode: string,
+    lineItem: string,
+    creative: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.render({
+      network_code: networkCode,
+      line_item: lineItem,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the line_item.
+   */
+  matchLineItemFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).line_item;
+  }
+
+  /**
+   * Parse the creative from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).creative;
+  }
+
+  /**
+   * Return a fully-qualified lineItemTemplate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item_template
+   * @returns {string} Resource name string.
+   */
+  lineItemTemplatePath(networkCode: string, lineItemTemplate: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.render({
+      network_code: networkCode,
+      line_item_template: lineItemTemplate,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item_template from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the line_item_template.
+   */
+  matchLineItemTemplateFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).line_item_template;
   }
 
   /**

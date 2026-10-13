@@ -32607,11 +32607,317 @@ export namespace google {
                 }
             }
 
+            /** Properties of a SessionScopeDiversionConfiguration. */
+            interface ISessionScopeDiversionConfiguration {
+
+                /** SessionScopeDiversionConfiguration sessionLoad */
+                sessionLoad?: (number|null);
+            }
+
+            /** Represents a SessionScopeDiversionConfiguration. */
+            class SessionScopeDiversionConfiguration implements ISessionScopeDiversionConfiguration {
+
+                /**
+                 * Constructs a new SessionScopeDiversionConfiguration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.bigtable.v2.ISessionScopeDiversionConfiguration);
+
+                /** SessionScopeDiversionConfiguration sessionLoad. */
+                public sessionLoad: number;
+
+                /**
+                 * Creates a new SessionScopeDiversionConfiguration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SessionScopeDiversionConfiguration instance
+                 */
+                public static create(properties?: google.bigtable.v2.ISessionScopeDiversionConfiguration): google.bigtable.v2.SessionScopeDiversionConfiguration;
+
+                /**
+                 * Encodes the specified SessionScopeDiversionConfiguration message. Does not implicitly {@link google.bigtable.v2.SessionScopeDiversionConfiguration.verify|verify} messages.
+                 * @param message SessionScopeDiversionConfiguration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.bigtable.v2.ISessionScopeDiversionConfiguration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SessionScopeDiversionConfiguration message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionScopeDiversionConfiguration.verify|verify} messages.
+                 * @param message SessionScopeDiversionConfiguration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.bigtable.v2.ISessionScopeDiversionConfiguration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SessionScopeDiversionConfiguration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SessionScopeDiversionConfiguration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionScopeDiversionConfiguration;
+
+                /**
+                 * Decodes a SessionScopeDiversionConfiguration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SessionScopeDiversionConfiguration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionScopeDiversionConfiguration;
+
+                /**
+                 * Verifies a SessionScopeDiversionConfiguration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SessionScopeDiversionConfiguration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SessionScopeDiversionConfiguration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionScopeDiversionConfiguration;
+
+                /**
+                 * Creates a plain object from a SessionScopeDiversionConfiguration message. Also converts values to other types if specified.
+                 * @param message SessionScopeDiversionConfiguration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.bigtable.v2.SessionScopeDiversionConfiguration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SessionScopeDiversionConfiguration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SessionScopeDiversionConfiguration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SessionDiversionConfiguration. */
+            interface ISessionDiversionConfiguration {
+
+                /** SessionDiversionConfiguration globalDiversion */
+                globalDiversion?: (google.bigtable.v2.ISessionScopeDiversionConfiguration|null);
+
+                /** SessionDiversionConfiguration perScopeDiversion */
+                perScopeDiversion?: (google.bigtable.v2.SessionDiversionConfiguration.IPerScopeDiversion|null);
+            }
+
+            /** Represents a SessionDiversionConfiguration. */
+            class SessionDiversionConfiguration implements ISessionDiversionConfiguration {
+
+                /**
+                 * Constructs a new SessionDiversionConfiguration.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.bigtable.v2.ISessionDiversionConfiguration);
+
+                /** SessionDiversionConfiguration globalDiversion. */
+                public globalDiversion?: (google.bigtable.v2.ISessionScopeDiversionConfiguration|null);
+
+                /** SessionDiversionConfiguration perScopeDiversion. */
+                public perScopeDiversion?: (google.bigtable.v2.SessionDiversionConfiguration.IPerScopeDiversion|null);
+
+                /** SessionDiversionConfiguration diversionStrategy. */
+                public diversionStrategy?: ("globalDiversion"|"perScopeDiversion");
+
+                /**
+                 * Creates a new SessionDiversionConfiguration instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SessionDiversionConfiguration instance
+                 */
+                public static create(properties?: google.bigtable.v2.ISessionDiversionConfiguration): google.bigtable.v2.SessionDiversionConfiguration;
+
+                /**
+                 * Encodes the specified SessionDiversionConfiguration message. Does not implicitly {@link google.bigtable.v2.SessionDiversionConfiguration.verify|verify} messages.
+                 * @param message SessionDiversionConfiguration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.bigtable.v2.ISessionDiversionConfiguration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SessionDiversionConfiguration message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionDiversionConfiguration.verify|verify} messages.
+                 * @param message SessionDiversionConfiguration message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.bigtable.v2.ISessionDiversionConfiguration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SessionDiversionConfiguration message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SessionDiversionConfiguration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionDiversionConfiguration;
+
+                /**
+                 * Decodes a SessionDiversionConfiguration message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SessionDiversionConfiguration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionDiversionConfiguration;
+
+                /**
+                 * Verifies a SessionDiversionConfiguration message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SessionDiversionConfiguration message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SessionDiversionConfiguration
+                 */
+                public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionDiversionConfiguration;
+
+                /**
+                 * Creates a plain object from a SessionDiversionConfiguration message. Also converts values to other types if specified.
+                 * @param message SessionDiversionConfiguration
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.bigtable.v2.SessionDiversionConfiguration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SessionDiversionConfiguration to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SessionDiversionConfiguration
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace SessionDiversionConfiguration {
+
+                /** Properties of a PerScopeDiversion. */
+                interface IPerScopeDiversion {
+
+                    /** PerScopeDiversion scopeDiversions */
+                    scopeDiversions?: ({ [k: string]: google.bigtable.v2.ISessionScopeDiversionConfiguration }|null);
+                }
+
+                /** Represents a PerScopeDiversion. */
+                class PerScopeDiversion implements IPerScopeDiversion {
+
+                    /**
+                     * Constructs a new PerScopeDiversion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.bigtable.v2.SessionDiversionConfiguration.IPerScopeDiversion);
+
+                    /** PerScopeDiversion scopeDiversions. */
+                    public scopeDiversions: { [k: string]: google.bigtable.v2.ISessionScopeDiversionConfiguration };
+
+                    /**
+                     * Creates a new PerScopeDiversion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PerScopeDiversion instance
+                     */
+                    public static create(properties?: google.bigtable.v2.SessionDiversionConfiguration.IPerScopeDiversion): google.bigtable.v2.SessionDiversionConfiguration.PerScopeDiversion;
+
+                    /**
+                     * Encodes the specified PerScopeDiversion message. Does not implicitly {@link google.bigtable.v2.SessionDiversionConfiguration.PerScopeDiversion.verify|verify} messages.
+                     * @param message PerScopeDiversion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.bigtable.v2.SessionDiversionConfiguration.IPerScopeDiversion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PerScopeDiversion message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionDiversionConfiguration.PerScopeDiversion.verify|verify} messages.
+                     * @param message PerScopeDiversion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.bigtable.v2.SessionDiversionConfiguration.IPerScopeDiversion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PerScopeDiversion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PerScopeDiversion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionDiversionConfiguration.PerScopeDiversion;
+
+                    /**
+                     * Decodes a PerScopeDiversion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PerScopeDiversion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionDiversionConfiguration.PerScopeDiversion;
+
+                    /**
+                     * Verifies a PerScopeDiversion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PerScopeDiversion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PerScopeDiversion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionDiversionConfiguration.PerScopeDiversion;
+
+                    /**
+                     * Creates a plain object from a PerScopeDiversion message. Also converts values to other types if specified.
+                     * @param message PerScopeDiversion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.bigtable.v2.SessionDiversionConfiguration.PerScopeDiversion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PerScopeDiversion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PerScopeDiversion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
             /** Properties of a SessionClientConfiguration. */
             interface ISessionClientConfiguration {
 
                 /** SessionClientConfiguration sessionLoad */
                 sessionLoad?: (number|null);
+
+                /** SessionClientConfiguration sessionDiversionConfiguration */
+                sessionDiversionConfiguration?: (google.bigtable.v2.ISessionDiversionConfiguration|null);
 
                 /** SessionClientConfiguration loadBalancingOptions */
                 loadBalancingOptions?: (google.bigtable.v2.ILoadBalancingOptions|null);
@@ -32634,6 +32940,9 @@ export namespace google {
 
                 /** SessionClientConfiguration sessionLoad. */
                 public sessionLoad: number;
+
+                /** SessionClientConfiguration sessionDiversionConfiguration. */
+                public sessionDiversionConfiguration?: (google.bigtable.v2.ISessionDiversionConfiguration|null);
 
                 /** SessionClientConfiguration loadBalancingOptions. */
                 public loadBalancingOptions?: (google.bigtable.v2.ILoadBalancingOptions|null);
@@ -33163,6 +33472,9 @@ export namespace google {
                     /** SessionPoolConfiguration newSessionCreationPenalty */
                     newSessionCreationPenalty?: (google.protobuf.IDuration|null);
 
+                    /** SessionPoolConfiguration softSessionCloseBudget */
+                    softSessionCloseBudget?: (number|null);
+
                     /** SessionPoolConfiguration consecutiveSessionFailureThreshold */
                     consecutiveSessionFailureThreshold?: (number|null);
 
@@ -33196,6 +33508,9 @@ export namespace google {
 
                     /** SessionPoolConfiguration newSessionCreationPenalty. */
                     public newSessionCreationPenalty?: (google.protobuf.IDuration|null);
+
+                    /** SessionPoolConfiguration softSessionCloseBudget. */
+                    public softSessionCloseBudget: number;
 
                     /** SessionPoolConfiguration consecutiveSessionFailureThreshold. */
                     public consecutiveSessionFailureThreshold: number;
@@ -33638,6 +33953,12 @@ export namespace google {
 
                 /** SessionRequest virtualRpc */
                 virtualRpc?: (google.bigtable.v2.IVirtualRpcRequest|null);
+
+                /** SessionRequest continueVirtualRpc */
+                continueVirtualRpc?: (google.bigtable.v2.IContinueVirtualRpcRequest|null);
+
+                /** SessionRequest cancelVirtualRpc */
+                cancelVirtualRpc?: (google.bigtable.v2.ICancelVirtualRpcRequest|null);
             }
 
             /** Represents a SessionRequest. */
@@ -33658,8 +33979,14 @@ export namespace google {
                 /** SessionRequest virtualRpc. */
                 public virtualRpc?: (google.bigtable.v2.IVirtualRpcRequest|null);
 
+                /** SessionRequest continueVirtualRpc. */
+                public continueVirtualRpc?: (google.bigtable.v2.IContinueVirtualRpcRequest|null);
+
+                /** SessionRequest cancelVirtualRpc. */
+                public cancelVirtualRpc?: (google.bigtable.v2.ICancelVirtualRpcRequest|null);
+
                 /** SessionRequest payload. */
-                public payload?: ("openSession"|"closeSession"|"virtualRpc");
+                public payload?: ("openSession"|"closeSession"|"virtualRpc"|"continueVirtualRpc"|"cancelVirtualRpc");
 
                 /**
                  * Creates a new SessionRequest instance using the specified properties.
@@ -35083,6 +35410,9 @@ export namespace google {
 
                     /** Metadata traceparent */
                     traceparent?: (string|null);
+
+                    /** Metadata delay */
+                    delay?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a Metadata. */
@@ -35102,6 +35432,9 @@ export namespace google {
 
                     /** Metadata traceparent. */
                     public traceparent: string;
+
+                    /** Metadata delay. */
+                    public delay?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new Metadata instance using the specified properties.
@@ -35180,6 +35513,200 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+            }
+
+            /** Properties of a ContinueVirtualRpcRequest. */
+            interface IContinueVirtualRpcRequest {
+
+                /** ContinueVirtualRpcRequest rpcId */
+                rpcId?: (number|Long|string|null);
+            }
+
+            /** Represents a ContinueVirtualRpcRequest. */
+            class ContinueVirtualRpcRequest implements IContinueVirtualRpcRequest {
+
+                /**
+                 * Constructs a new ContinueVirtualRpcRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.bigtable.v2.IContinueVirtualRpcRequest);
+
+                /** ContinueVirtualRpcRequest rpcId. */
+                public rpcId: (number|Long|string);
+
+                /**
+                 * Creates a new ContinueVirtualRpcRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ContinueVirtualRpcRequest instance
+                 */
+                public static create(properties?: google.bigtable.v2.IContinueVirtualRpcRequest): google.bigtable.v2.ContinueVirtualRpcRequest;
+
+                /**
+                 * Encodes the specified ContinueVirtualRpcRequest message. Does not implicitly {@link google.bigtable.v2.ContinueVirtualRpcRequest.verify|verify} messages.
+                 * @param message ContinueVirtualRpcRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.bigtable.v2.IContinueVirtualRpcRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ContinueVirtualRpcRequest message, length delimited. Does not implicitly {@link google.bigtable.v2.ContinueVirtualRpcRequest.verify|verify} messages.
+                 * @param message ContinueVirtualRpcRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.bigtable.v2.IContinueVirtualRpcRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ContinueVirtualRpcRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ContinueVirtualRpcRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.ContinueVirtualRpcRequest;
+
+                /**
+                 * Decodes a ContinueVirtualRpcRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ContinueVirtualRpcRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.ContinueVirtualRpcRequest;
+
+                /**
+                 * Verifies a ContinueVirtualRpcRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ContinueVirtualRpcRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ContinueVirtualRpcRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.bigtable.v2.ContinueVirtualRpcRequest;
+
+                /**
+                 * Creates a plain object from a ContinueVirtualRpcRequest message. Also converts values to other types if specified.
+                 * @param message ContinueVirtualRpcRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.bigtable.v2.ContinueVirtualRpcRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ContinueVirtualRpcRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ContinueVirtualRpcRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a CancelVirtualRpcRequest. */
+            interface ICancelVirtualRpcRequest {
+
+                /** CancelVirtualRpcRequest rpcId */
+                rpcId?: (number|Long|string|null);
+            }
+
+            /** Represents a CancelVirtualRpcRequest. */
+            class CancelVirtualRpcRequest implements ICancelVirtualRpcRequest {
+
+                /**
+                 * Constructs a new CancelVirtualRpcRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.bigtable.v2.ICancelVirtualRpcRequest);
+
+                /** CancelVirtualRpcRequest rpcId. */
+                public rpcId: (number|Long|string);
+
+                /**
+                 * Creates a new CancelVirtualRpcRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns CancelVirtualRpcRequest instance
+                 */
+                public static create(properties?: google.bigtable.v2.ICancelVirtualRpcRequest): google.bigtable.v2.CancelVirtualRpcRequest;
+
+                /**
+                 * Encodes the specified CancelVirtualRpcRequest message. Does not implicitly {@link google.bigtable.v2.CancelVirtualRpcRequest.verify|verify} messages.
+                 * @param message CancelVirtualRpcRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.bigtable.v2.ICancelVirtualRpcRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified CancelVirtualRpcRequest message, length delimited. Does not implicitly {@link google.bigtable.v2.CancelVirtualRpcRequest.verify|verify} messages.
+                 * @param message CancelVirtualRpcRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.bigtable.v2.ICancelVirtualRpcRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a CancelVirtualRpcRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns CancelVirtualRpcRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.CancelVirtualRpcRequest;
+
+                /**
+                 * Decodes a CancelVirtualRpcRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns CancelVirtualRpcRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.CancelVirtualRpcRequest;
+
+                /**
+                 * Verifies a CancelVirtualRpcRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a CancelVirtualRpcRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns CancelVirtualRpcRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.bigtable.v2.CancelVirtualRpcRequest;
+
+                /**
+                 * Creates a plain object from a CancelVirtualRpcRequest message. Also converts values to other types if specified.
+                 * @param message CancelVirtualRpcRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.bigtable.v2.CancelVirtualRpcRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this CancelVirtualRpcRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for CancelVirtualRpcRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
             /** Properties of a ClusterInformation. */
@@ -35396,6 +35923,9 @@ export namespace google {
 
                 /** VirtualRpcResponse payload */
                 payload?: (Uint8Array|Buffer|string|null);
+
+                /** VirtualRpcResponse hasMore */
+                hasMore?: (boolean|null);
             }
 
             /** Represents a VirtualRpcResponse. */
@@ -35418,6 +35948,9 @@ export namespace google {
 
                 /** VirtualRpcResponse payload. */
                 public payload: (Uint8Array|Buffer|string);
+
+                /** VirtualRpcResponse hasMore. */
+                public hasMore: boolean;
 
                 /**
                  * Creates a new VirtualRpcResponse instance using the specified properties.
@@ -35621,8 +36154,17 @@ export namespace google {
                 /** TableRequest mutateRow */
                 mutateRow?: (google.bigtable.v2.ISessionMutateRowRequest|null);
 
+                /** TableRequest readRows */
+                readRows?: (google.bigtable.v2.ISessionReadRowsRequest|null);
+
                 /** TableRequest checkAndMutateRow */
                 checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowRequest|null);
+
+                /** TableRequest readModifyWriteRow */
+                readModifyWriteRow?: (google.bigtable.v2.ISessionReadModifyWriteRowRequest|null);
+
+                /** TableRequest mutateRows */
+                mutateRows?: (google.bigtable.v2.ISessionMutateRowsRequest|null);
             }
 
             /** Represents a TableRequest. */
@@ -35640,11 +36182,20 @@ export namespace google {
                 /** TableRequest mutateRow. */
                 public mutateRow?: (google.bigtable.v2.ISessionMutateRowRequest|null);
 
+                /** TableRequest readRows. */
+                public readRows?: (google.bigtable.v2.ISessionReadRowsRequest|null);
+
                 /** TableRequest checkAndMutateRow. */
                 public checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowRequest|null);
 
+                /** TableRequest readModifyWriteRow. */
+                public readModifyWriteRow?: (google.bigtable.v2.ISessionReadModifyWriteRowRequest|null);
+
+                /** TableRequest mutateRows. */
+                public mutateRows?: (google.bigtable.v2.ISessionMutateRowsRequest|null);
+
                 /** TableRequest payload. */
-                public payload?: ("readRow"|"mutateRow"|"checkAndMutateRow");
+                public payload?: ("readRow"|"mutateRow"|"readRows"|"checkAndMutateRow"|"readModifyWriteRow"|"mutateRows");
 
                 /**
                  * Creates a new TableRequest instance using the specified properties.
@@ -35733,8 +36284,17 @@ export namespace google {
                 /** TableResponse mutateRow */
                 mutateRow?: (google.bigtable.v2.ISessionMutateRowResponse|null);
 
+                /** TableResponse readRows */
+                readRows?: (google.bigtable.v2.ISessionReadRowsResponse|null);
+
                 /** TableResponse checkAndMutateRow */
                 checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowResponse|null);
+
+                /** TableResponse readModifyWriteRow */
+                readModifyWriteRow?: (google.bigtable.v2.ISessionReadModifyWriteRowResponse|null);
+
+                /** TableResponse mutateRows */
+                mutateRows?: (google.bigtable.v2.ISessionMutateRowsResponse|null);
             }
 
             /** Represents a TableResponse. */
@@ -35752,11 +36312,20 @@ export namespace google {
                 /** TableResponse mutateRow. */
                 public mutateRow?: (google.bigtable.v2.ISessionMutateRowResponse|null);
 
+                /** TableResponse readRows. */
+                public readRows?: (google.bigtable.v2.ISessionReadRowsResponse|null);
+
                 /** TableResponse checkAndMutateRow. */
                 public checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowResponse|null);
 
+                /** TableResponse readModifyWriteRow. */
+                public readModifyWriteRow?: (google.bigtable.v2.ISessionReadModifyWriteRowResponse|null);
+
+                /** TableResponse mutateRows. */
+                public mutateRows?: (google.bigtable.v2.ISessionMutateRowsResponse|null);
+
                 /** TableResponse payload. */
-                public payload?: ("readRow"|"mutateRow"|"checkAndMutateRow");
+                public payload?: ("readRow"|"mutateRow"|"readRows"|"checkAndMutateRow"|"readModifyWriteRow"|"mutateRows");
 
                 /**
                  * Creates a new TableResponse instance using the specified properties.
@@ -35845,8 +36414,17 @@ export namespace google {
                 /** AuthorizedViewRequest mutateRow */
                 mutateRow?: (google.bigtable.v2.ISessionMutateRowRequest|null);
 
+                /** AuthorizedViewRequest readRows */
+                readRows?: (google.bigtable.v2.ISessionReadRowsRequest|null);
+
                 /** AuthorizedViewRequest checkAndMutateRow */
                 checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowRequest|null);
+
+                /** AuthorizedViewRequest readModifyWriteRow */
+                readModifyWriteRow?: (google.bigtable.v2.ISessionReadModifyWriteRowRequest|null);
+
+                /** AuthorizedViewRequest mutateRows */
+                mutateRows?: (google.bigtable.v2.ISessionMutateRowsRequest|null);
             }
 
             /** Represents an AuthorizedViewRequest. */
@@ -35864,11 +36442,20 @@ export namespace google {
                 /** AuthorizedViewRequest mutateRow. */
                 public mutateRow?: (google.bigtable.v2.ISessionMutateRowRequest|null);
 
+                /** AuthorizedViewRequest readRows. */
+                public readRows?: (google.bigtable.v2.ISessionReadRowsRequest|null);
+
                 /** AuthorizedViewRequest checkAndMutateRow. */
                 public checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowRequest|null);
 
+                /** AuthorizedViewRequest readModifyWriteRow. */
+                public readModifyWriteRow?: (google.bigtable.v2.ISessionReadModifyWriteRowRequest|null);
+
+                /** AuthorizedViewRequest mutateRows. */
+                public mutateRows?: (google.bigtable.v2.ISessionMutateRowsRequest|null);
+
                 /** AuthorizedViewRequest payload. */
-                public payload?: ("readRow"|"mutateRow"|"checkAndMutateRow");
+                public payload?: ("readRow"|"mutateRow"|"readRows"|"checkAndMutateRow"|"readModifyWriteRow"|"mutateRows");
 
                 /**
                  * Creates a new AuthorizedViewRequest instance using the specified properties.
@@ -35957,8 +36544,17 @@ export namespace google {
                 /** AuthorizedViewResponse mutateRow */
                 mutateRow?: (google.bigtable.v2.ISessionMutateRowResponse|null);
 
+                /** AuthorizedViewResponse readRows */
+                readRows?: (google.bigtable.v2.ISessionReadRowsResponse|null);
+
                 /** AuthorizedViewResponse checkAndMutateRow */
                 checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowResponse|null);
+
+                /** AuthorizedViewResponse readModifyWriteRow */
+                readModifyWriteRow?: (google.bigtable.v2.ISessionReadModifyWriteRowResponse|null);
+
+                /** AuthorizedViewResponse mutateRows */
+                mutateRows?: (google.bigtable.v2.ISessionMutateRowsResponse|null);
             }
 
             /** Represents an AuthorizedViewResponse. */
@@ -35976,11 +36572,20 @@ export namespace google {
                 /** AuthorizedViewResponse mutateRow. */
                 public mutateRow?: (google.bigtable.v2.ISessionMutateRowResponse|null);
 
+                /** AuthorizedViewResponse readRows. */
+                public readRows?: (google.bigtable.v2.ISessionReadRowsResponse|null);
+
                 /** AuthorizedViewResponse checkAndMutateRow. */
                 public checkAndMutateRow?: (google.bigtable.v2.ISessionCheckAndMutateRowResponse|null);
 
+                /** AuthorizedViewResponse readModifyWriteRow. */
+                public readModifyWriteRow?: (google.bigtable.v2.ISessionReadModifyWriteRowResponse|null);
+
+                /** AuthorizedViewResponse mutateRows. */
+                public mutateRows?: (google.bigtable.v2.ISessionMutateRowsResponse|null);
+
                 /** AuthorizedViewResponse payload. */
-                public payload?: ("readRow"|"mutateRow"|"checkAndMutateRow");
+                public payload?: ("readRow"|"mutateRow"|"readRows"|"checkAndMutateRow"|"readModifyWriteRow"|"mutateRows");
 
                 /**
                  * Creates a new AuthorizedViewResponse instance using the specified properties.
@@ -36065,6 +36670,9 @@ export namespace google {
 
                 /** MaterializedViewRequest readRow */
                 readRow?: (google.bigtable.v2.ISessionReadRowRequest|null);
+
+                /** MaterializedViewRequest readRows */
+                readRows?: (google.bigtable.v2.ISessionReadRowsRequest|null);
             }
 
             /** Represents a MaterializedViewRequest. */
@@ -36079,8 +36687,11 @@ export namespace google {
                 /** MaterializedViewRequest readRow. */
                 public readRow?: (google.bigtable.v2.ISessionReadRowRequest|null);
 
+                /** MaterializedViewRequest readRows. */
+                public readRows?: (google.bigtable.v2.ISessionReadRowsRequest|null);
+
                 /** MaterializedViewRequest payload. */
-                public payload?: "readRow";
+                public payload?: ("readRow"|"readRows");
 
                 /**
                  * Creates a new MaterializedViewRequest instance using the specified properties.
@@ -36165,6 +36776,9 @@ export namespace google {
 
                 /** MaterializedViewResponse readRow */
                 readRow?: (google.bigtable.v2.ISessionReadRowResponse|null);
+
+                /** MaterializedViewResponse readRows */
+                readRows?: (google.bigtable.v2.ISessionReadRowsResponse|null);
             }
 
             /** Represents a MaterializedViewResponse. */
@@ -36179,8 +36793,11 @@ export namespace google {
                 /** MaterializedViewResponse readRow. */
                 public readRow?: (google.bigtable.v2.ISessionReadRowResponse|null);
 
+                /** MaterializedViewResponse readRows. */
+                public readRows?: (google.bigtable.v2.ISessionReadRowsResponse|null);
+
                 /** MaterializedViewResponse payload. */
-                public payload?: "readRow";
+                public payload?: ("readRow"|"readRows");
 
                 /**
                  * Creates a new MaterializedViewResponse instance using the specified properties.
@@ -36460,6 +37077,224 @@ export namespace google {
 
                 /**
                  * Gets the default type url for SessionReadRowResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SessionReadRowsRequest. */
+            interface ISessionReadRowsRequest {
+
+                /** SessionReadRowsRequest rows */
+                rows?: (google.bigtable.v2.IRowSet|null);
+
+                /** SessionReadRowsRequest filter */
+                filter?: (google.bigtable.v2.IRowFilter|null);
+
+                /** SessionReadRowsRequest rowsLimit */
+                rowsLimit?: (number|Long|string|null);
+
+                /** SessionReadRowsRequest reversed */
+                reversed?: (boolean|null);
+            }
+
+            /** Represents a SessionReadRowsRequest. */
+            class SessionReadRowsRequest implements ISessionReadRowsRequest {
+
+                /**
+                 * Constructs a new SessionReadRowsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.bigtable.v2.ISessionReadRowsRequest);
+
+                /** SessionReadRowsRequest rows. */
+                public rows?: (google.bigtable.v2.IRowSet|null);
+
+                /** SessionReadRowsRequest filter. */
+                public filter?: (google.bigtable.v2.IRowFilter|null);
+
+                /** SessionReadRowsRequest rowsLimit. */
+                public rowsLimit: (number|Long|string);
+
+                /** SessionReadRowsRequest reversed. */
+                public reversed: boolean;
+
+                /**
+                 * Creates a new SessionReadRowsRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SessionReadRowsRequest instance
+                 */
+                public static create(properties?: google.bigtable.v2.ISessionReadRowsRequest): google.bigtable.v2.SessionReadRowsRequest;
+
+                /**
+                 * Encodes the specified SessionReadRowsRequest message. Does not implicitly {@link google.bigtable.v2.SessionReadRowsRequest.verify|verify} messages.
+                 * @param message SessionReadRowsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.bigtable.v2.ISessionReadRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SessionReadRowsRequest message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionReadRowsRequest.verify|verify} messages.
+                 * @param message SessionReadRowsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.bigtable.v2.ISessionReadRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SessionReadRowsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SessionReadRowsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionReadRowsRequest;
+
+                /**
+                 * Decodes a SessionReadRowsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SessionReadRowsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionReadRowsRequest;
+
+                /**
+                 * Verifies a SessionReadRowsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SessionReadRowsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SessionReadRowsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionReadRowsRequest;
+
+                /**
+                 * Creates a plain object from a SessionReadRowsRequest message. Also converts values to other types if specified.
+                 * @param message SessionReadRowsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.bigtable.v2.SessionReadRowsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SessionReadRowsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SessionReadRowsRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SessionReadRowsResponse. */
+            interface ISessionReadRowsResponse {
+
+                /** SessionReadRowsResponse row */
+                row?: (google.bigtable.v2.IRow[]|null);
+
+                /** SessionReadRowsResponse stats */
+                stats?: (google.bigtable.v2.IRequestStats|null);
+            }
+
+            /** Represents a SessionReadRowsResponse. */
+            class SessionReadRowsResponse implements ISessionReadRowsResponse {
+
+                /**
+                 * Constructs a new SessionReadRowsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.bigtable.v2.ISessionReadRowsResponse);
+
+                /** SessionReadRowsResponse row. */
+                public row: google.bigtable.v2.IRow[];
+
+                /** SessionReadRowsResponse stats. */
+                public stats?: (google.bigtable.v2.IRequestStats|null);
+
+                /**
+                 * Creates a new SessionReadRowsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SessionReadRowsResponse instance
+                 */
+                public static create(properties?: google.bigtable.v2.ISessionReadRowsResponse): google.bigtable.v2.SessionReadRowsResponse;
+
+                /**
+                 * Encodes the specified SessionReadRowsResponse message. Does not implicitly {@link google.bigtable.v2.SessionReadRowsResponse.verify|verify} messages.
+                 * @param message SessionReadRowsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.bigtable.v2.ISessionReadRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SessionReadRowsResponse message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionReadRowsResponse.verify|verify} messages.
+                 * @param message SessionReadRowsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.bigtable.v2.ISessionReadRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SessionReadRowsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SessionReadRowsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionReadRowsResponse;
+
+                /**
+                 * Decodes a SessionReadRowsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SessionReadRowsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionReadRowsResponse;
+
+                /**
+                 * Verifies a SessionReadRowsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SessionReadRowsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SessionReadRowsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionReadRowsResponse;
+
+                /**
+                 * Creates a plain object from a SessionReadRowsResponse message. Also converts values to other types if specified.
+                 * @param message SessionReadRowsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.bigtable.v2.SessionReadRowsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SessionReadRowsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SessionReadRowsResponse
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -36872,11 +37707,735 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of a SessionReadModifyWriteRowRequest. */
+            interface ISessionReadModifyWriteRowRequest {
+
+                /** SessionReadModifyWriteRowRequest key */
+                key?: (Uint8Array|Buffer|string|null);
+
+                /** SessionReadModifyWriteRowRequest rules */
+                rules?: (google.bigtable.v2.IReadModifyWriteRule[]|null);
+            }
+
+            /** Represents a SessionReadModifyWriteRowRequest. */
+            class SessionReadModifyWriteRowRequest implements ISessionReadModifyWriteRowRequest {
+
+                /**
+                 * Constructs a new SessionReadModifyWriteRowRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.bigtable.v2.ISessionReadModifyWriteRowRequest);
+
+                /** SessionReadModifyWriteRowRequest key. */
+                public key: (Uint8Array|Buffer|string);
+
+                /** SessionReadModifyWriteRowRequest rules. */
+                public rules: google.bigtable.v2.IReadModifyWriteRule[];
+
+                /**
+                 * Creates a new SessionReadModifyWriteRowRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SessionReadModifyWriteRowRequest instance
+                 */
+                public static create(properties?: google.bigtable.v2.ISessionReadModifyWriteRowRequest): google.bigtable.v2.SessionReadModifyWriteRowRequest;
+
+                /**
+                 * Encodes the specified SessionReadModifyWriteRowRequest message. Does not implicitly {@link google.bigtable.v2.SessionReadModifyWriteRowRequest.verify|verify} messages.
+                 * @param message SessionReadModifyWriteRowRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.bigtable.v2.ISessionReadModifyWriteRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SessionReadModifyWriteRowRequest message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionReadModifyWriteRowRequest.verify|verify} messages.
+                 * @param message SessionReadModifyWriteRowRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.bigtable.v2.ISessionReadModifyWriteRowRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SessionReadModifyWriteRowRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SessionReadModifyWriteRowRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionReadModifyWriteRowRequest;
+
+                /**
+                 * Decodes a SessionReadModifyWriteRowRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SessionReadModifyWriteRowRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionReadModifyWriteRowRequest;
+
+                /**
+                 * Verifies a SessionReadModifyWriteRowRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SessionReadModifyWriteRowRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SessionReadModifyWriteRowRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionReadModifyWriteRowRequest;
+
+                /**
+                 * Creates a plain object from a SessionReadModifyWriteRowRequest message. Also converts values to other types if specified.
+                 * @param message SessionReadModifyWriteRowRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.bigtable.v2.SessionReadModifyWriteRowRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SessionReadModifyWriteRowRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SessionReadModifyWriteRowRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SessionReadModifyWriteRowResponse. */
+            interface ISessionReadModifyWriteRowResponse {
+
+                /** SessionReadModifyWriteRowResponse row */
+                row?: (google.bigtable.v2.IRow|null);
+            }
+
+            /** Represents a SessionReadModifyWriteRowResponse. */
+            class SessionReadModifyWriteRowResponse implements ISessionReadModifyWriteRowResponse {
+
+                /**
+                 * Constructs a new SessionReadModifyWriteRowResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.bigtable.v2.ISessionReadModifyWriteRowResponse);
+
+                /** SessionReadModifyWriteRowResponse row. */
+                public row?: (google.bigtable.v2.IRow|null);
+
+                /**
+                 * Creates a new SessionReadModifyWriteRowResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SessionReadModifyWriteRowResponse instance
+                 */
+                public static create(properties?: google.bigtable.v2.ISessionReadModifyWriteRowResponse): google.bigtable.v2.SessionReadModifyWriteRowResponse;
+
+                /**
+                 * Encodes the specified SessionReadModifyWriteRowResponse message. Does not implicitly {@link google.bigtable.v2.SessionReadModifyWriteRowResponse.verify|verify} messages.
+                 * @param message SessionReadModifyWriteRowResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.bigtable.v2.ISessionReadModifyWriteRowResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SessionReadModifyWriteRowResponse message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionReadModifyWriteRowResponse.verify|verify} messages.
+                 * @param message SessionReadModifyWriteRowResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.bigtable.v2.ISessionReadModifyWriteRowResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SessionReadModifyWriteRowResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SessionReadModifyWriteRowResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionReadModifyWriteRowResponse;
+
+                /**
+                 * Decodes a SessionReadModifyWriteRowResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SessionReadModifyWriteRowResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionReadModifyWriteRowResponse;
+
+                /**
+                 * Verifies a SessionReadModifyWriteRowResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SessionReadModifyWriteRowResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SessionReadModifyWriteRowResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionReadModifyWriteRowResponse;
+
+                /**
+                 * Creates a plain object from a SessionReadModifyWriteRowResponse message. Also converts values to other types if specified.
+                 * @param message SessionReadModifyWriteRowResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.bigtable.v2.SessionReadModifyWriteRowResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SessionReadModifyWriteRowResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SessionReadModifyWriteRowResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a SessionMutateRowsRequest. */
+            interface ISessionMutateRowsRequest {
+
+                /** SessionMutateRowsRequest entries */
+                entries?: (google.bigtable.v2.SessionMutateRowsRequest.IEntry[]|null);
+            }
+
+            /** Represents a SessionMutateRowsRequest. */
+            class SessionMutateRowsRequest implements ISessionMutateRowsRequest {
+
+                /**
+                 * Constructs a new SessionMutateRowsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.bigtable.v2.ISessionMutateRowsRequest);
+
+                /** SessionMutateRowsRequest entries. */
+                public entries: google.bigtable.v2.SessionMutateRowsRequest.IEntry[];
+
+                /**
+                 * Creates a new SessionMutateRowsRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SessionMutateRowsRequest instance
+                 */
+                public static create(properties?: google.bigtable.v2.ISessionMutateRowsRequest): google.bigtable.v2.SessionMutateRowsRequest;
+
+                /**
+                 * Encodes the specified SessionMutateRowsRequest message. Does not implicitly {@link google.bigtable.v2.SessionMutateRowsRequest.verify|verify} messages.
+                 * @param message SessionMutateRowsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.bigtable.v2.ISessionMutateRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SessionMutateRowsRequest message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionMutateRowsRequest.verify|verify} messages.
+                 * @param message SessionMutateRowsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.bigtable.v2.ISessionMutateRowsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SessionMutateRowsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SessionMutateRowsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionMutateRowsRequest;
+
+                /**
+                 * Decodes a SessionMutateRowsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SessionMutateRowsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionMutateRowsRequest;
+
+                /**
+                 * Verifies a SessionMutateRowsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SessionMutateRowsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SessionMutateRowsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionMutateRowsRequest;
+
+                /**
+                 * Creates a plain object from a SessionMutateRowsRequest message. Also converts values to other types if specified.
+                 * @param message SessionMutateRowsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.bigtable.v2.SessionMutateRowsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SessionMutateRowsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SessionMutateRowsRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace SessionMutateRowsRequest {
+
+                /** Properties of an Entry. */
+                interface IEntry {
+
+                    /** Entry key */
+                    key?: (Uint8Array|Buffer|string|null);
+
+                    /** Entry mutations */
+                    mutations?: (google.bigtable.v2.IMutation[]|null);
+
+                    /** Entry idempotency */
+                    idempotency?: (google.bigtable.v2.IIdempotency|null);
+                }
+
+                /** Represents an Entry. */
+                class Entry implements IEntry {
+
+                    /**
+                     * Constructs a new Entry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.bigtable.v2.SessionMutateRowsRequest.IEntry);
+
+                    /** Entry key. */
+                    public key: (Uint8Array|Buffer|string);
+
+                    /** Entry mutations. */
+                    public mutations: google.bigtable.v2.IMutation[];
+
+                    /** Entry idempotency. */
+                    public idempotency?: (google.bigtable.v2.IIdempotency|null);
+
+                    /**
+                     * Creates a new Entry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Entry instance
+                     */
+                    public static create(properties?: google.bigtable.v2.SessionMutateRowsRequest.IEntry): google.bigtable.v2.SessionMutateRowsRequest.Entry;
+
+                    /**
+                     * Encodes the specified Entry message. Does not implicitly {@link google.bigtable.v2.SessionMutateRowsRequest.Entry.verify|verify} messages.
+                     * @param message Entry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.bigtable.v2.SessionMutateRowsRequest.IEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Entry message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionMutateRowsRequest.Entry.verify|verify} messages.
+                     * @param message Entry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.bigtable.v2.SessionMutateRowsRequest.IEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Entry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Entry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionMutateRowsRequest.Entry;
+
+                    /**
+                     * Decodes an Entry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Entry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionMutateRowsRequest.Entry;
+
+                    /**
+                     * Verifies an Entry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Entry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Entry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionMutateRowsRequest.Entry;
+
+                    /**
+                     * Creates a plain object from an Entry message. Also converts values to other types if specified.
+                     * @param message Entry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.bigtable.v2.SessionMutateRowsRequest.Entry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Entry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Entry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
+            /** Properties of a SessionMutateRowsResponse. */
+            interface ISessionMutateRowsResponse {
+
+                /** SessionMutateRowsResponse entries */
+                entries?: (google.bigtable.v2.SessionMutateRowsResponse.IEntry[]|null);
+
+                /** SessionMutateRowsResponse rateLimitInfo */
+                rateLimitInfo?: (google.bigtable.v2.SessionMutateRowsResponse.IRateLimitInfo|null);
+            }
+
+            /** Represents a SessionMutateRowsResponse. */
+            class SessionMutateRowsResponse implements ISessionMutateRowsResponse {
+
+                /**
+                 * Constructs a new SessionMutateRowsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.bigtable.v2.ISessionMutateRowsResponse);
+
+                /** SessionMutateRowsResponse entries. */
+                public entries: google.bigtable.v2.SessionMutateRowsResponse.IEntry[];
+
+                /** SessionMutateRowsResponse rateLimitInfo. */
+                public rateLimitInfo?: (google.bigtable.v2.SessionMutateRowsResponse.IRateLimitInfo|null);
+
+                /**
+                 * Creates a new SessionMutateRowsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SessionMutateRowsResponse instance
+                 */
+                public static create(properties?: google.bigtable.v2.ISessionMutateRowsResponse): google.bigtable.v2.SessionMutateRowsResponse;
+
+                /**
+                 * Encodes the specified SessionMutateRowsResponse message. Does not implicitly {@link google.bigtable.v2.SessionMutateRowsResponse.verify|verify} messages.
+                 * @param message SessionMutateRowsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.bigtable.v2.ISessionMutateRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SessionMutateRowsResponse message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionMutateRowsResponse.verify|verify} messages.
+                 * @param message SessionMutateRowsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.bigtable.v2.ISessionMutateRowsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SessionMutateRowsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SessionMutateRowsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionMutateRowsResponse;
+
+                /**
+                 * Decodes a SessionMutateRowsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SessionMutateRowsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionMutateRowsResponse;
+
+                /**
+                 * Verifies a SessionMutateRowsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SessionMutateRowsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SessionMutateRowsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionMutateRowsResponse;
+
+                /**
+                 * Creates a plain object from a SessionMutateRowsResponse message. Also converts values to other types if specified.
+                 * @param message SessionMutateRowsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.bigtable.v2.SessionMutateRowsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SessionMutateRowsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SessionMutateRowsResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace SessionMutateRowsResponse {
+
+                /** Properties of an Entry. */
+                interface IEntry {
+
+                    /** Entry index */
+                    index?: (number|Long|string|null);
+
+                    /** Entry status */
+                    status?: (google.rpc.IStatus|null);
+                }
+
+                /** Represents an Entry. */
+                class Entry implements IEntry {
+
+                    /**
+                     * Constructs a new Entry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.bigtable.v2.SessionMutateRowsResponse.IEntry);
+
+                    /** Entry index. */
+                    public index: (number|Long|string);
+
+                    /** Entry status. */
+                    public status?: (google.rpc.IStatus|null);
+
+                    /**
+                     * Creates a new Entry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Entry instance
+                     */
+                    public static create(properties?: google.bigtable.v2.SessionMutateRowsResponse.IEntry): google.bigtable.v2.SessionMutateRowsResponse.Entry;
+
+                    /**
+                     * Encodes the specified Entry message. Does not implicitly {@link google.bigtable.v2.SessionMutateRowsResponse.Entry.verify|verify} messages.
+                     * @param message Entry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.bigtable.v2.SessionMutateRowsResponse.IEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Entry message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionMutateRowsResponse.Entry.verify|verify} messages.
+                     * @param message Entry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.bigtable.v2.SessionMutateRowsResponse.IEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Entry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Entry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionMutateRowsResponse.Entry;
+
+                    /**
+                     * Decodes an Entry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Entry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionMutateRowsResponse.Entry;
+
+                    /**
+                     * Verifies an Entry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Entry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Entry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionMutateRowsResponse.Entry;
+
+                    /**
+                     * Creates a plain object from an Entry message. Also converts values to other types if specified.
+                     * @param message Entry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.bigtable.v2.SessionMutateRowsResponse.Entry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Entry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Entry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RateLimitInfo. */
+                interface IRateLimitInfo {
+
+                    /** RateLimitInfo period */
+                    period?: (google.protobuf.IDuration|null);
+
+                    /** RateLimitInfo factor */
+                    factor?: (number|null);
+                }
+
+                /** Represents a RateLimitInfo. */
+                class RateLimitInfo implements IRateLimitInfo {
+
+                    /**
+                     * Constructs a new RateLimitInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.bigtable.v2.SessionMutateRowsResponse.IRateLimitInfo);
+
+                    /** RateLimitInfo period. */
+                    public period?: (google.protobuf.IDuration|null);
+
+                    /** RateLimitInfo factor. */
+                    public factor: number;
+
+                    /**
+                     * Creates a new RateLimitInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RateLimitInfo instance
+                     */
+                    public static create(properties?: google.bigtable.v2.SessionMutateRowsResponse.IRateLimitInfo): google.bigtable.v2.SessionMutateRowsResponse.RateLimitInfo;
+
+                    /**
+                     * Encodes the specified RateLimitInfo message. Does not implicitly {@link google.bigtable.v2.SessionMutateRowsResponse.RateLimitInfo.verify|verify} messages.
+                     * @param message RateLimitInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.bigtable.v2.SessionMutateRowsResponse.IRateLimitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RateLimitInfo message, length delimited. Does not implicitly {@link google.bigtable.v2.SessionMutateRowsResponse.RateLimitInfo.verify|verify} messages.
+                     * @param message RateLimitInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.bigtable.v2.SessionMutateRowsResponse.IRateLimitInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RateLimitInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RateLimitInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.bigtable.v2.SessionMutateRowsResponse.RateLimitInfo;
+
+                    /**
+                     * Decodes a RateLimitInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RateLimitInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.bigtable.v2.SessionMutateRowsResponse.RateLimitInfo;
+
+                    /**
+                     * Verifies a RateLimitInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RateLimitInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RateLimitInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.bigtable.v2.SessionMutateRowsResponse.RateLimitInfo;
+
+                    /**
+                     * Creates a plain object from a RateLimitInfo message. Also converts values to other types if specified.
+                     * @param message RateLimitInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.bigtable.v2.SessionMutateRowsResponse.RateLimitInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RateLimitInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RateLimitInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+            }
+
             /** Properties of a SessionParametersResponse. */
             interface ISessionParametersResponse {
 
                 /** SessionParametersResponse keepAlive */
                 keepAlive?: (google.protobuf.IDuration|null);
+
+                /** SessionParametersResponse softmaxStreamingPrefetchBufferBytes */
+                softmaxStreamingPrefetchBufferBytes?: (number|null);
             }
 
             /** Represents a SessionParametersResponse. */
@@ -36890,6 +38449,9 @@ export namespace google {
 
                 /** SessionParametersResponse keepAlive. */
                 public keepAlive?: (google.protobuf.IDuration|null);
+
+                /** SessionParametersResponse softmaxStreamingPrefetchBufferBytes. */
+                public softmaxStreamingPrefetchBufferBytes: number;
 
                 /**
                  * Creates a new SessionParametersResponse instance using the specified properties.

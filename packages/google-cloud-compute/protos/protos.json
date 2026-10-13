@@ -189930,6 +189930,36 @@
                         }
                       }
                     },
+                    "InterconnectsSetNameRequest": {
+                      "oneofs": {
+                        "_currentName": {
+                          "oneof": [
+                            "currentName"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "currentName": {
+                          "type": "string",
+                          "id": 394983825,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "Interval": {
                       "oneofs": {
                         "_endTime": {
@@ -239222,6 +239252,46 @@
                         }
                       }
                     },
+                    "SetNameInterconnectRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "interconnect": {
+                          "type": "string",
+                          "id": 224601230,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "interconnectsSetNameRequestResource": {
+                          "type": "InterconnectsSetNameRequest",
+                          "id": 316267707,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "SetNamedPortsInstanceGroupRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -266834,6 +266904,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project,resource,global_set_labels_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "SetName": {
+                          "requestType": "SetNameInterconnectRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "interconnects_set_name_request_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/global/interconnects/{interconnect}/setName",
+                            "(google.api.method_signature)": "project,interconnect,interconnects_set_name_request_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "interconnects_set_name_request_resource",
+                                "post": "/compute/beta/projects/{project}/global/interconnects/{interconnect}/setName"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,interconnect,interconnects_set_name_request_resource"
                             },
                             {
                               "(google.cloud.operation_service)": "GlobalOperations"

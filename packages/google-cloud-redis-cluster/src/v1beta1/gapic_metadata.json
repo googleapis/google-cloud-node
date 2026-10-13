@@ -15,6 +15,21 @@
                 "getCluster"
               ]
             },
+            "GetAclPolicy": {
+              "methods": [
+                "getAclPolicy"
+              ]
+            },
+            "GetAclPolicyRevision": {
+              "methods": [
+                "getAclPolicyRevision"
+              ]
+            },
+            "CreateAclPolicy": {
+              "methods": [
+                "createAclPolicy"
+              ]
+            },
             "GetClusterCertificateAuthority": {
               "methods": [
                 "getClusterCertificateAuthority"
@@ -40,9 +55,19 @@
                 "updateCluster"
               ]
             },
+            "UpdateAclPolicy": {
+              "methods": [
+                "updateAclPolicy"
+              ]
+            },
             "DeleteCluster": {
               "methods": [
                 "deleteCluster"
+              ]
+            },
+            "DeleteAclPolicy": {
+              "methods": [
+                "deleteAclPolicy"
               ]
             },
             "CreateCluster": {
@@ -75,6 +100,20 @@
                 "listClusters",
                 "listClustersStream",
                 "listClustersAsync"
+              ]
+            },
+            "ListAclPolicies": {
+              "methods": [
+                "listAclPolicies",
+                "listAclPoliciesStream",
+                "listAclPoliciesAsync"
+              ]
+            },
+            "ListAclPolicyRevisions": {
+              "methods": [
+                "listAclPolicyRevisions",
+                "listAclPolicyRevisionsStream",
+                "listAclPolicyRevisionsAsync"
               ]
             },
             "ListBackupCollections": {
@@ -101,6 +140,21 @@
                 "getCluster"
               ]
             },
+            "GetAclPolicy": {
+              "methods": [
+                "getAclPolicy"
+              ]
+            },
+            "GetAclPolicyRevision": {
+              "methods": [
+                "getAclPolicyRevision"
+              ]
+            },
+            "CreateAclPolicy": {
+              "methods": [
+                "createAclPolicy"
+              ]
+            },
             "GetClusterCertificateAuthority": {
               "methods": [
                 "getClusterCertificateAuthority"
@@ -126,9 +180,19 @@
                 "updateCluster"
               ]
             },
+            "UpdateAclPolicy": {
+              "methods": [
+                "updateAclPolicy"
+              ]
+            },
             "DeleteCluster": {
               "methods": [
                 "deleteCluster"
+              ]
+            },
+            "DeleteAclPolicy": {
+              "methods": [
+                "deleteAclPolicy"
               ]
             },
             "CreateCluster": {
@@ -161,6 +225,20 @@
                 "listClusters",
                 "listClustersStream",
                 "listClustersAsync"
+              ]
+            },
+            "ListAclPolicies": {
+              "methods": [
+                "listAclPolicies",
+                "listAclPoliciesStream",
+                "listAclPoliciesAsync"
+              ]
+            },
+            "ListAclPolicyRevisions": {
+              "methods": [
+                "listAclPolicyRevisions",
+                "listAclPolicyRevisionsStream",
+                "listAclPolicyRevisionsAsync"
               ]
             },
             "ListBackupCollections": {

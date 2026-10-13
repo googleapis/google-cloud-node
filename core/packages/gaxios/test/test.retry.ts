@@ -375,7 +375,7 @@ describe('🛸 retry & exponential backoff', () => {
     async function onRetryAttempt({config, message}: GaxiosError) {
       assert(config.signal?.reason instanceof DOMException);
       assert.equal(config.signal.reason.name, 'TimeoutError');
-      assert.match(message, /timeout/i);
+      assert.match(message, /timeout|timed out/i);
 
       // increase timeout to something higher to avoid time-sensitive flaky tests
       // note: the second `nock` GET is not delayed like the first one

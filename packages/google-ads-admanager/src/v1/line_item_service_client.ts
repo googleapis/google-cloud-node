@@ -226,6 +226,9 @@ export class LineItemServiceClient {
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/applications/{application}',
       ),
+      assetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/assets/{asset}',
+      ),
       audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/audienceSegments/{audience_segment}',
       ),
@@ -322,6 +325,12 @@ export class LineItemServiceClient {
       ),
       lineItemPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/lineItems/{line_item}',
+      ),
+      lineItemCreativeAssociationPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItems/{line_item}/creatives/{creative}',
+      ),
+      lineItemTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItemTemplates/{line_item_template}',
       ),
       linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/linkedDevices/{linked_device}',
@@ -472,7 +481,24 @@ export class LineItemServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const lineItemServiceStubMethods = ['getLineItem', 'listLineItems'];
+    const lineItemServiceStubMethods = [
+      'getLineItem',
+      'listLineItems',
+      'createLineItem',
+      'batchCreateLineItems',
+      'updateLineItem',
+      'batchUpdateLineItems',
+      'batchActivateLineItems',
+      'batchPauseLineItems',
+      'batchResumeLineItems',
+      'batchResumeAndOverbookLineItems',
+      'batchDeleteLineItems',
+      'batchReserveLineItems',
+      'batchReserveAndOverbookLineItems',
+      'batchReleaseLineItems',
+      'batchArchiveLineItems',
+      'batchUnarchiveLineItems',
+    ];
     for (const methodName of lineItemServiceStubMethods) {
       const callPromise = this.lineItemServiceStub.then(
         stub =>
@@ -694,6 +720,1995 @@ export class LineItemServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('getLineItem response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Creates a `LineItem` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this `LineItem` will be created.
+   *   Format: `networks/{network_code}`
+   * @param {google.ads.admanager.v1.LineItem} request.lineItem
+   *   Required. The `LineItem` to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.LineItem|LineItem}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.create_line_item.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_CreateLineItem_async
+   */
+  createLineItem(
+    request?: protos.google.ads.admanager.v1.ICreateLineItemRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILineItem,
+      protos.google.ads.admanager.v1.ICreateLineItemRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createLineItem(
+    request: protos.google.ads.admanager.v1.ICreateLineItemRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILineItem,
+      protos.google.ads.admanager.v1.ICreateLineItemRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createLineItem(
+    request: protos.google.ads.admanager.v1.ICreateLineItemRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILineItem,
+      protos.google.ads.admanager.v1.ICreateLineItemRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createLineItem(
+    request?: protos.google.ads.admanager.v1.ICreateLineItemRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.ILineItem,
+          | protos.google.ads.admanager.v1.ICreateLineItemRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.ILineItem,
+      protos.google.ads.admanager.v1.ICreateLineItemRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILineItem,
+      protos.google.ads.admanager.v1.ICreateLineItemRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createLineItem request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.ILineItem,
+          | protos.google.ads.admanager.v1.ICreateLineItemRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createLineItem response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createLineItem(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.ILineItem,
+          protos.google.ads.admanager.v1.ICreateLineItemRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createLineItem response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Creates `LineItem` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItems` will be created.
+   *   Format: `networks/{network_code}`
+   *   The parent field in the CreateLineItemRequest must match this
+   *   field.
+   * @param {number[]} request.requests
+   *   Required. The `LineItem` objects to create.
+   *   A maximum of 100 objects can be created in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchCreateLineItemsResponse|BatchCreateLineItemsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.batch_create_line_items.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_BatchCreateLineItems_async
+   */
+  batchCreateLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchCreateLineItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchCreateLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchCreateLineItems(
+    request: protos.google.ads.admanager.v1.IBatchCreateLineItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchCreateLineItems(
+    request: protos.google.ads.admanager.v1.IBatchCreateLineItemsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchCreateLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchCreateLineItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchCreateLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchCreateLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchCreateLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchCreateLineItems request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchCreateLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchCreateLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateLineItems response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateLineItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchCreateLineItemsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchCreateLineItemsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateLineItems response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates a `LineItem` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.ads.admanager.v1.LineItem} request.lineItem
+   *   Required. The `LineItem` to update.
+   *
+   *   The `LineItem`'s `name` is used to identify the `LineItem` to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.LineItem|LineItem}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.update_line_item.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_UpdateLineItem_async
+   */
+  updateLineItem(
+    request?: protos.google.ads.admanager.v1.IUpdateLineItemRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILineItem,
+      protos.google.ads.admanager.v1.IUpdateLineItemRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateLineItem(
+    request: protos.google.ads.admanager.v1.IUpdateLineItemRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILineItem,
+      protos.google.ads.admanager.v1.IUpdateLineItemRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateLineItem(
+    request: protos.google.ads.admanager.v1.IUpdateLineItemRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.ILineItem,
+      protos.google.ads.admanager.v1.IUpdateLineItemRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateLineItem(
+    request?: protos.google.ads.admanager.v1.IUpdateLineItemRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.ILineItem,
+          | protos.google.ads.admanager.v1.IUpdateLineItemRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.ILineItem,
+      protos.google.ads.admanager.v1.IUpdateLineItemRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.ILineItem,
+      protos.google.ads.admanager.v1.IUpdateLineItemRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'line_item.name': request.lineItem!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateLineItem request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.ILineItem,
+          | protos.google.ads.admanager.v1.IUpdateLineItemRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateLineItem response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateLineItem(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.ILineItem,
+          protos.google.ads.admanager.v1.IUpdateLineItemRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateLineItem response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch updates `LineItem` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItems` will be updated.
+   *   Format: `networks/{network_code}`
+   *   The parent segment of the `line_item.name` in each `UpdateLineItemRequest`
+   *   must match this field.
+   * @param {number[]} request.requests
+   *   Required. The `LineItem` objects to update.
+   *   A maximum of 100 objects can be updated in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateLineItemsResponse|BatchUpdateLineItemsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.batch_update_line_items.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_BatchUpdateLineItems_async
+   */
+  batchUpdateLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateLineItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchUpdateLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchUpdateLineItems(
+    request: protos.google.ads.admanager.v1.IBatchUpdateLineItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateLineItems(
+    request: protos.google.ads.admanager.v1.IBatchUpdateLineItemsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateLineItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchUpdateLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchUpdateLineItems request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateLineItems response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateLineItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchUpdateLineItemsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchUpdateLineItemsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateLineItems response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch activates `LineItem` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItems` will be updated.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The names of the `LineItem` objects to activate.
+   *   Format: `networks/{network_code}/lineItems/{line_item}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchActivateLineItemsResponse|BatchActivateLineItemsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.batch_activate_line_items.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_BatchActivateLineItems_async
+   */
+  batchActivateLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchActivateLineItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchActivateLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchActivateLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchActivateLineItems(
+    request: protos.google.ads.admanager.v1.IBatchActivateLineItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchActivateLineItems(
+    request: protos.google.ads.admanager.v1.IBatchActivateLineItemsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchActivateLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchActivateLineItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchActivateLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchActivateLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchActivateLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchActivateLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchActivateLineItems request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchActivateLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchActivateLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchActivateLineItems response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchActivateLineItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchActivateLineItemsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchActivateLineItemsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchActivateLineItems response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch pauses `LineItem` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItems` will be updated.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The names of the `LineItem` objects to pause.
+   *   Format: `networks/{network_code}/lineItems/{line_item}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchPauseLineItemsResponse|BatchPauseLineItemsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.batch_pause_line_items.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_BatchPauseLineItems_async
+   */
+  batchPauseLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchPauseLineItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchPauseLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchPauseLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchPauseLineItems(
+    request: protos.google.ads.admanager.v1.IBatchPauseLineItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchPauseLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchPauseLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchPauseLineItems(
+    request: protos.google.ads.admanager.v1.IBatchPauseLineItemsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchPauseLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchPauseLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchPauseLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchPauseLineItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchPauseLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchPauseLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchPauseLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchPauseLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchPauseLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchPauseLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchPauseLineItems request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchPauseLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchPauseLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchPauseLineItems response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchPauseLineItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchPauseLineItemsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchPauseLineItemsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchPauseLineItems response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch resumes `LineItem` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItems` will be updated.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The names of the `LineItem` objects to resume.
+   *   Format: `networks/{network_code}/lineItems/{line_item}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchResumeLineItemsResponse|BatchResumeLineItemsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.batch_resume_line_items.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_BatchResumeLineItems_async
+   */
+  batchResumeLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchResumeLineItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchResumeLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchResumeLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchResumeLineItems(
+    request: protos.google.ads.admanager.v1.IBatchResumeLineItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchResumeLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchResumeLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchResumeLineItems(
+    request: protos.google.ads.admanager.v1.IBatchResumeLineItemsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchResumeLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchResumeLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchResumeLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchResumeLineItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchResumeLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchResumeLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchResumeLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchResumeLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchResumeLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchResumeLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchResumeLineItems request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchResumeLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchResumeLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchResumeLineItems response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchResumeLineItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchResumeLineItemsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchResumeLineItemsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchResumeLineItems response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch resumes and overbooks `LineItem` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItems` will be updated.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The names of the `LineItem` objects to resume and overbook.
+   *   Format: `networks/{network_code}/lineItems/{line_item}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchResumeAndOverbookLineItemsResponse|BatchResumeAndOverbookLineItemsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.batch_resume_and_overbook_line_items.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_BatchResumeAndOverbookLineItems_async
+   */
+  batchResumeAndOverbookLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchResumeAndOverbookLineItems(
+    request: protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchResumeAndOverbookLineItems(
+    request: protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchResumeAndOverbookLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchResumeAndOverbookLineItems request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchResumeAndOverbookLineItems response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchResumeAndOverbookLineItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchResumeAndOverbookLineItemsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchResumeAndOverbookLineItems response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch deletes `LineItem` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItems` will be updated.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The names of the `LineItem` objects to delete.
+   *   Format: `networks/{network_code}/lineItems/{line_item}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.batch_delete_line_items.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_BatchDeleteLineItems_async
+   */
+  batchDeleteLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchDeleteLineItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.ads.admanager.v1.IBatchDeleteLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchDeleteLineItems(
+    request: protos.google.ads.admanager.v1.IBatchDeleteLineItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ads.admanager.v1.IBatchDeleteLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeleteLineItems(
+    request: protos.google.ads.admanager.v1.IBatchDeleteLineItemsRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ads.admanager.v1.IBatchDeleteLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeleteLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchDeleteLineItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ads.admanager.v1.IBatchDeleteLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.ads.admanager.v1.IBatchDeleteLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.ads.admanager.v1.IBatchDeleteLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchDeleteLineItems request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.ads.admanager.v1.IBatchDeleteLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeleteLineItems response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDeleteLineItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.ads.admanager.v1.IBatchDeleteLineItemsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeleteLineItems response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch reserves `LineItem` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItems` will be updated.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The names of the `LineItem` objects to reserve.
+   *   Format: `networks/{network_code}/lineItems/{line_item}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchReserveLineItemsResponse|BatchReserveLineItemsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.batch_reserve_line_items.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_BatchReserveLineItems_async
+   */
+  batchReserveLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchReserveLineItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchReserveLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchReserveLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchReserveLineItems(
+    request: protos.google.ads.admanager.v1.IBatchReserveLineItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchReserveLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchReserveLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchReserveLineItems(
+    request: protos.google.ads.admanager.v1.IBatchReserveLineItemsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchReserveLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchReserveLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchReserveLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchReserveLineItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchReserveLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchReserveLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchReserveLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchReserveLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchReserveLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchReserveLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchReserveLineItems request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchReserveLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchReserveLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchReserveLineItems response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchReserveLineItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchReserveLineItemsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchReserveLineItemsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchReserveLineItems response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch reserves and overbooks `LineItem` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItems` will be updated.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The names of the `LineItem` objects to reserve and overbook.
+   *   Format: `networks/{network_code}/lineItems/{line_item}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchReserveAndOverbookLineItemsResponse|BatchReserveAndOverbookLineItemsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.batch_reserve_and_overbook_line_items.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_BatchReserveAndOverbookLineItems_async
+   */
+  batchReserveAndOverbookLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchReserveAndOverbookLineItems(
+    request: protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchReserveAndOverbookLineItems(
+    request: protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchReserveAndOverbookLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchReserveAndOverbookLineItems request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info(
+            'batchReserveAndOverbookLineItems response %j',
+            response,
+          );
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchReserveAndOverbookLineItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchReserveAndOverbookLineItemsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'batchReserveAndOverbookLineItems response %j',
+            response,
+          );
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch releases `LineItem` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItems` will be updated.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The names of the `LineItem` objects to release.
+   *   Format: `networks/{network_code}/lineItems/{line_item}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchReleaseLineItemsResponse|BatchReleaseLineItemsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.batch_release_line_items.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_BatchReleaseLineItems_async
+   */
+  batchReleaseLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchReleaseLineItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchReleaseLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchReleaseLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchReleaseLineItems(
+    request: protos.google.ads.admanager.v1.IBatchReleaseLineItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchReleaseLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchReleaseLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchReleaseLineItems(
+    request: protos.google.ads.admanager.v1.IBatchReleaseLineItemsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchReleaseLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchReleaseLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchReleaseLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchReleaseLineItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchReleaseLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchReleaseLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchReleaseLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchReleaseLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchReleaseLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchReleaseLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchReleaseLineItems request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchReleaseLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchReleaseLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchReleaseLineItems response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchReleaseLineItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchReleaseLineItemsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchReleaseLineItemsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchReleaseLineItems response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch archives `LineItem` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItems` will be updated.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The names of the `LineItem` objects to archive.
+   *   Format: `networks/{network_code}/lineItems/{line_item}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchArchiveLineItemsResponse|BatchArchiveLineItemsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.batch_archive_line_items.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_BatchArchiveLineItems_async
+   */
+  batchArchiveLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchArchiveLineItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchArchiveLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchArchiveLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchArchiveLineItems(
+    request: protos.google.ads.admanager.v1.IBatchArchiveLineItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchArchiveLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchArchiveLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchArchiveLineItems(
+    request: protos.google.ads.admanager.v1.IBatchArchiveLineItemsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchArchiveLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchArchiveLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchArchiveLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchArchiveLineItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchArchiveLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchArchiveLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchArchiveLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchArchiveLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchArchiveLineItemsResponse,
+      protos.google.ads.admanager.v1.IBatchArchiveLineItemsRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchArchiveLineItems request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchArchiveLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchArchiveLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchArchiveLineItems response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchArchiveLineItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchArchiveLineItemsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchArchiveLineItemsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchArchiveLineItems response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch unarchives `LineItem` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `LineItems` will be unarchived.
+   *   Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The names of the `LineItem` objects to extract.
+   *   Format: `networks/{network_code}/lineItems/{line_item}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUnarchiveLineItemsResponse|BatchUnarchiveLineItemsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/line_item_service.batch_unarchive_line_items.js</caption>
+   * region_tag:admanager_v1_generated_LineItemService_BatchUnarchiveLineItems_async
+   */
+  batchUnarchiveLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchUnarchiveLineItems(
+    request: protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUnarchiveLineItems(
+    request: protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUnarchiveLineItems(
+    request?: protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsResponse,
+      | protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchUnarchiveLineItems request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsResponse,
+          | protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUnarchiveLineItems response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUnarchiveLineItems(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchUnarchiveLineItemsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUnarchiveLineItems response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1351,6 +3366,42 @@ export class LineItemServiceClient {
   matchApplicationFromApplicationName(applicationName: string) {
     return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .application;
+  }
+
+  /**
+   * Return a fully-qualified asset resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} asset
+   * @returns {string} Resource name string.
+   */
+  assetPath(networkCode: string, asset: string) {
+    return this.pathTemplates.assetPathTemplate.render({
+      network_code: networkCode,
+      asset: asset,
+    });
+  }
+
+  /**
+   * Parse the network_code from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).network_code;
+  }
+
+  /**
+   * Parse the asset from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the asset.
+   */
+  matchAssetFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).asset;
   }
 
   /**
@@ -2601,6 +4652,111 @@ export class LineItemServiceClient {
   matchLineItemFromLineItemName(lineItemName: string) {
     return this.pathTemplates.lineItemPathTemplate.match(lineItemName)
       .line_item;
+  }
+
+  /**
+   * Return a fully-qualified lineItemCreativeAssociation resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  lineItemCreativeAssociationPath(
+    networkCode: string,
+    lineItem: string,
+    creative: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.render({
+      network_code: networkCode,
+      line_item: lineItem,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the line_item.
+   */
+  matchLineItemFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).line_item;
+  }
+
+  /**
+   * Parse the creative from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).creative;
+  }
+
+  /**
+   * Return a fully-qualified lineItemTemplate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item_template
+   * @returns {string} Resource name string.
+   */
+  lineItemTemplatePath(networkCode: string, lineItemTemplate: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.render({
+      network_code: networkCode,
+      line_item_template: lineItemTemplate,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item_template from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the line_item_template.
+   */
+  matchLineItemTemplateFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).line_item_template;
   }
 
   /**
