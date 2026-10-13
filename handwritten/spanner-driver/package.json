@@ -46,10 +46,10 @@
     "test:pg-suite": "node test/pg-suite/run_pg_suite.cjs"
   },
   "dependencies": {
-    "@google-cloud/spanner-api": "^0.3.0"
+    "@google-cloud/spanner-api": "^0.5.0"
   },
   "devDependencies": {
-    "@google-cloud/spanner": "^8.7.1",
+    "@google-cloud/spanner": "^9.0.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.13.9",
     "@types/sinon": "^17.0.4",

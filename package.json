@@ -61,8 +61,6 @@
   },
   "pnpm": {
     "overrides": {
-      "gcp-metadata>gaxios": "^8.3.0",
-      "google-auth-library>gaxios": "^8.3.0",
       "yargs": "^17.7.2"
     }
   }
