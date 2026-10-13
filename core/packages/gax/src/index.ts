@@ -126,18 +126,15 @@ export {
   PaginationResponse,
 } from './clientInterface';
 
-export {
-  makeUUID,
-  decodeAnyProtosInArray,
-  decodeProtobufAny,
-  checkTelemetryEnabled,
-} from './util';
+export {makeUUID, decodeAnyProtosInArray, decodeProtobufAny} from './util';
 
-export {StaticTraceContext, traceCall} from './observability/TracerHelper';
+export {checkTelemetryEnabled} from './observability/util';
 export {
+  StaticTraceContext,
   resolveStaticTraceContext,
   clearMetadataCache,
-} from './observability/metadataResolver';
+} from './observability/contextUtil';
+export {traceCall} from './observability/TracerHelper';
 
 export {ServiceError, ChannelCredentials} from '@grpc/grpc-js';
 export {warn} from './warnings';

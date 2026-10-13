@@ -55,29 +55,14 @@ const SHIM_FLAGS = [
     envOut: 'BUN_ENABLE_PROXYQUIRE_SHIM',
   },
   {
-    flag: '--keypair-shim',
-    envIn: 'BUN_KEYPAIR_SHIM',
-    envOut: 'BUN_ENABLE_KEYPAIR_SHIM',
-  },
-  {
     flag: '--require-shim',
     envIn: 'BUN_REQUIRE_SHIM',
     envOut: 'BUN_ENABLE_REQUIRE_SHIM',
   },
   {
-    flag: '--abort-signal-timeout-shim',
-    envIn: 'BUN_ABORT_SIGNAL_TIMEOUT_SHIM',
-    envOut: 'BUN_ENABLE_ABORT_SIGNAL_TIMEOUT_SHIM',
-  },
-  {
     flag: '--crypto-verify-shim',
     envIn: 'BUN_CRYPTO_VERIFY_SHIM',
     envOut: 'BUN_ENABLE_CRYPTO_VERIFY_SHIM',
-  },
-  {
-    flag: '--assert-deep-equal-shim',
-    envIn: 'BUN_ASSERT_DEEP_EQUAL_SHIM',
-    envOut: 'BUN_ENABLE_ASSERT_DEEP_EQUAL_SHIM',
   },
 ];
 

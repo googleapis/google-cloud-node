@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
+## [6.12.1](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.12.0...google-gax-v6.12.1) (2026-10-08)
+
+
+### Bug Fixes
+
+* **gax:** Resolve low level network attributes ([#9564](https://github.com/googleapis/google-cloud-node/issues/9564)) ([4bab312](https://github.com/googleapis/google-cloud-node/commit/4bab3123317218621cf627a31235cecb9e4ab1dc))
+
 ## [6.12.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.11.1...google-gax-v6.12.0) (2026-10-07)
 
 
