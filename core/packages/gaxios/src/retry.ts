@@ -103,9 +103,9 @@ function shouldRetryRequest(err: GaxiosError) {
   const config = getConfig(err);
 
   // Classify the error as a timeout if `err.code` is already `'TimeoutError'`
-  // (e.g., extracted from a `DOMException` cause) or if the request's
-  // `AbortSignal` aborted with a `'TimeoutError'` reason from
-  // `AbortSignal.timeout()` (which can happen when `node-fetch` or a
+  // (e.g., extracted from a `DOMException` cause or normalized in `_request`)
+  // or if the request's `AbortSignal` aborted with a `'TimeoutError'` reason
+  // from `AbortSignal.timeout()` (which can happen when `node-fetch` or a
   // custom/shimmed fetch adapter in Node.js or Bun rejects with a generic
   // `AbortError` instead of propagating `signal.reason`).
   const isTimeoutError =
