@@ -23,6 +23,7 @@
                       "nested": {
                         "AppConnectionsService": {
                           "options": {
+                            "deprecated": true,
                             "(google.api.default_host)": "beyondcorp.googleapis.com",
                             "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                           },
@@ -31,10 +32,14 @@
                               "requestType": "ListAppConnectionsRequest",
                               "responseType": "ListAppConnectionsResponse",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/appConnections",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "get": "/v1/{parent=projects/*/locations/*}/appConnections"
@@ -49,10 +54,14 @@
                               "requestType": "GetAppConnectionRequest",
                               "responseType": "AppConnection",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).get": "/v1/{name=projects/*/locations/*/appConnections/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "get": "/v1/{name=projects/*/locations/*/appConnections/*}"
@@ -67,6 +76,7 @@
                               "requestType": "CreateAppConnectionRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/appConnections",
                                 "(google.api.http).body": "app_connection",
                                 "(google.api.method_signature)": "parent,app_connection,app_connection_id",
@@ -74,6 +84,9 @@
                                 "(google.longrunning.operation_info).metadata_type": "AppConnectionOperationMetadata"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "post": "/v1/{parent=projects/*/locations/*}/appConnections",
@@ -95,6 +108,7 @@
                               "requestType": "UpdateAppConnectionRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).patch": "/v1/{app_connection.name=projects/*/locations/*/appConnections/*}",
                                 "(google.api.http).body": "app_connection",
                                 "(google.api.method_signature)": "app_connection,update_mask",
@@ -102,6 +116,9 @@
                                 "(google.longrunning.operation_info).metadata_type": "AppConnectionOperationMetadata"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "patch": "/v1/{app_connection.name=projects/*/locations/*/appConnections/*}",
@@ -123,12 +140,16 @@
                               "requestType": "DeleteAppConnectionRequest",
                               "responseType": "google.longrunning.Operation",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/appConnections/*}",
                                 "(google.api.method_signature)": "name",
                                 "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                                 "(google.longrunning.operation_info).metadata_type": "AppConnectionOperationMetadata"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "delete": "/v1/{name=projects/*/locations/*/appConnections/*}"
@@ -149,10 +170,14 @@
                               "requestType": "ResolveAppConnectionsRequest",
                               "responseType": "ResolveAppConnectionsResponse",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/appConnections:resolve",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
+                                {
+                                  "deprecated": true
+                                },
                                 {
                                   "(google.api.http)": {
                                     "get": "/v1/{parent=projects/*/locations/*}/appConnections:resolve"
@@ -412,6 +437,18 @@
                             "(google.api.resource).type": "beyondcorp.googleapis.com/AppConnection",
                             "(google.api.resource).pattern": "projects/{project}/locations/{location}/appConnections/{app_connection}"
                           },
+                          "oneofs": {
+                            "_satisfiesPzs": {
+                              "oneof": [
+                                "satisfiesPzs"
+                              ]
+                            },
+                            "_satisfiesPzi": {
+                              "oneof": [
+                                "satisfiesPzi"
+                              ]
+                            }
+                          },
                           "fields": {
                             "name": {
                               "type": "string",
@@ -491,6 +528,22 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "satisfiesPzs": {
+                              "type": "bool",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "satisfiesPzi": {
+                              "type": "bool",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
                             }
                           },
                           "nested": {
@@ -541,6 +594,13 @@
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED",
                                     "(google.api.resource_reference).type": "beyondcorp.googleapis.com/AppGateway"
+                                  }
+                                },
+                                "l7psc": {
+                                  "type": "string",
+                                  "id": 6,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OUTPUT_ONLY"
                                   }
                                 }
                               },

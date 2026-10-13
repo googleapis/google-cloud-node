@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/area120-tables-v5.1.1...area120-tables-v5.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
 ## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/area120-tables-v5.1.0...area120-tables-v5.1.1) (2026-09-28)
 
 

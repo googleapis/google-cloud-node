@@ -18,6 +18,7 @@
 
 export {AgentsClient} from './agents_client';
 export {AnswerRecordsClient} from './answer_records_client';
+export {CompanionAgentsClient} from './companion_agents_client';
 export {ContextsClient} from './contexts_client';
 export {ConversationProfilesClient} from './conversation_profiles_client';
 export {ConversationsClient} from './conversations_client';

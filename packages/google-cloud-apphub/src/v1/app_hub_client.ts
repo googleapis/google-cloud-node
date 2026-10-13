@@ -220,11 +220,17 @@ export class AppHubClient {
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/applications/{application}',
       ),
+      boundaryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/boundary',
+      ),
       discoveredServicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/discoveredServices/{discovered_service}',
       ),
       discoveredWorkloadPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/discoveredWorkloads/{discovered_workload}',
+      ),
+      extendedMetadataSchemaPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/extendedMetadataSchemas/{extended_metadata_schema}',
       ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}',
@@ -276,6 +282,11 @@ export class AppHubClient {
         'pageToken',
         'nextPageToken',
         'applications',
+      ),
+      listExtendedMetadataSchemas: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'extendedMetadataSchemas',
       ),
     };
 
@@ -400,6 +411,12 @@ export class AppHubClient {
     const deleteApplicationMetadata = protoFilesRoot.lookup(
       '.google.cloud.apphub.v1.OperationMetadata',
     ) as gax.protobuf.Type;
+    const updateBoundaryResponse = protoFilesRoot.lookup(
+      '.google.cloud.apphub.v1.Boundary',
+    ) as gax.protobuf.Type;
+    const updateBoundaryMetadata = protoFilesRoot.lookup(
+      '.google.cloud.apphub.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createServiceProjectAttachment: new this._gaxModule.LongrunningDescriptor(
@@ -464,6 +481,11 @@ export class AppHubClient {
         this.operationsClient,
         deleteApplicationResponse.decode.bind(deleteApplicationResponse),
         deleteApplicationMetadata.decode.bind(deleteApplicationMetadata),
+      ),
+      updateBoundary: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateBoundaryResponse.decode.bind(updateBoundaryResponse),
+        updateBoundaryMetadata.decode.bind(updateBoundaryMetadata),
       ),
     };
 
@@ -544,6 +566,10 @@ export class AppHubClient {
       'getApplication',
       'updateApplication',
       'deleteApplication',
+      'getBoundary',
+      'updateBoundary',
+      'getExtendedMetadataSchema',
+      'listExtendedMetadataSchemas',
     ];
     for (const methodName of appHubStubMethods) {
       const callPromise = this.appHubStub.then(
@@ -2063,6 +2089,279 @@ export class AppHubClient {
         throw error;
       });
   }
+  /**
+   * Gets a Boundary.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the boundary to retrieve.
+   *   Format: `projects/{project}/locations/{location}/boundary`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.Boundary|Boundary}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/app_hub.get_boundary.js</caption>
+   * region_tag:apphub_v1_generated_AppHub_GetBoundary_async
+   */
+  getBoundary(
+    request?: protos.google.cloud.apphub.v1.IGetBoundaryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apphub.v1.IBoundary,
+      protos.google.cloud.apphub.v1.IGetBoundaryRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getBoundary(
+    request: protos.google.cloud.apphub.v1.IGetBoundaryRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.apphub.v1.IBoundary,
+      protos.google.cloud.apphub.v1.IGetBoundaryRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getBoundary(
+    request: protos.google.cloud.apphub.v1.IGetBoundaryRequest,
+    callback: Callback<
+      protos.google.cloud.apphub.v1.IBoundary,
+      protos.google.cloud.apphub.v1.IGetBoundaryRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getBoundary(
+    request?: protos.google.cloud.apphub.v1.IGetBoundaryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.apphub.v1.IBoundary,
+          protos.google.cloud.apphub.v1.IGetBoundaryRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.apphub.v1.IBoundary,
+      protos.google.cloud.apphub.v1.IGetBoundaryRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apphub.v1.IBoundary,
+      protos.google.cloud.apphub.v1.IGetBoundaryRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getBoundary request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apphub.v1.IBoundary,
+          protos.google.cloud.apphub.v1.IGetBoundaryRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getBoundary response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getBoundary(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apphub.v1.IBoundary,
+          protos.google.cloud.apphub.v1.IGetBoundaryRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getBoundary response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets an Extended Metadata Schema.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Schema resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/extendedMetadataSchemas/{extended_metadata_schema}`.
+   *
+   *   `{extended_metadata_schema}` has the format
+   *   `"apphub.googleapis.com/{SchemaName}"`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.apphub.v1.ExtendedMetadataSchema|ExtendedMetadataSchema}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/app_hub.get_extended_metadata_schema.js</caption>
+   * region_tag:apphub_v1_generated_AppHub_GetExtendedMetadataSchema_async
+   */
+  getExtendedMetadataSchema(
+    request?: protos.google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apphub.v1.IExtendedMetadataSchema,
+      (
+        | protos.google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getExtendedMetadataSchema(
+    request: protos.google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.apphub.v1.IExtendedMetadataSchema,
+      | protos.google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getExtendedMetadataSchema(
+    request: protos.google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest,
+    callback: Callback<
+      protos.google.cloud.apphub.v1.IExtendedMetadataSchema,
+      | protos.google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getExtendedMetadataSchema(
+    request?: protos.google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.apphub.v1.IExtendedMetadataSchema,
+          | protos.google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.apphub.v1.IExtendedMetadataSchema,
+      | protos.google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apphub.v1.IExtendedMetadataSchema,
+      (
+        | protos.google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getExtendedMetadataSchema request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.apphub.v1.IExtendedMetadataSchema,
+          | protos.google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getExtendedMetadataSchema response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getExtendedMetadataSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.apphub.v1.IExtendedMetadataSchema,
+          (
+            | protos.google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getExtendedMetadataSchema response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
   /**
    * Attaches a service project to the host project.
@@ -2649,8 +2948,8 @@ export class AppHubClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
    *   Service resource by the update.
    *   The fields specified in the update_mask are relative to the resource, not
    *   the full request.
@@ -3219,8 +3518,8 @@ export class AppHubClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
    *   Workload resource by the update.
    *   The fields specified in the update_mask are relative to the resource, not
    *   the full request.
@@ -3788,8 +4087,8 @@ export class AppHubClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
    *   Application resource by the update.
    *   The fields specified in the update_mask are relative to the resource, not
    *   the full request.
@@ -4158,6 +4457,195 @@ export class AppHubClient {
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
+      protos.google.cloud.apphub.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates a Boundary.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   Boundary resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.apphub.v1.Boundary} request.boundary
+   *   Required. The boundary to update.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/app_hub.update_boundary.js</caption>
+   * region_tag:apphub_v1_generated_AppHub_UpdateBoundary_async
+   */
+  updateBoundary(
+    request?: protos.google.cloud.apphub.v1.IUpdateBoundaryRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.apphub.v1.IBoundary,
+        protos.google.cloud.apphub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateBoundary(
+    request: protos.google.cloud.apphub.v1.IUpdateBoundaryRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.apphub.v1.IBoundary,
+        protos.google.cloud.apphub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateBoundary(
+    request: protos.google.cloud.apphub.v1.IUpdateBoundaryRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.apphub.v1.IBoundary,
+        protos.google.cloud.apphub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateBoundary(
+    request?: protos.google.cloud.apphub.v1.IUpdateBoundaryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.apphub.v1.IBoundary,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.apphub.v1.IBoundary,
+        protos.google.cloud.apphub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.apphub.v1.IBoundary,
+        protos.google.cloud.apphub.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'boundary.name': request.boundary!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.apphub.v1.IBoundary,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateBoundary response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateBoundary request %j', request);
+    return this.innerApiCalls
+      .updateBoundary(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.apphub.v1.IBoundary,
+            protos.google.cloud.apphub.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBoundary response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateBoundary()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/app_hub.update_boundary.js</caption>
+   * region_tag:apphub_v1_generated_AppHub_UpdateBoundary_async
+   */
+  async checkUpdateBoundaryProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.apphub.v1.Boundary,
+      protos.google.cloud.apphub.v1.OperationMetadata
+    >
+  > {
+    this._log.info('updateBoundary long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateBoundary,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.apphub.v1.Boundary,
       protos.google.cloud.apphub.v1.OperationMetadata
     >;
   }
@@ -5589,6 +6077,232 @@ export class AppHubClient {
     ) as AsyncIterable<protos.google.cloud.apphub.v1.IApplication>;
   }
   /**
+   * Lists Extended Metadata Schemas available in a host project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Project and location to list Extended Metadata Schemas on.
+   *   Expected format: `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.apphub.v1.ExtendedMetadataSchema|ExtendedMetadataSchema}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listExtendedMetadataSchemasAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listExtendedMetadataSchemas(
+    request?: protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apphub.v1.IExtendedMetadataSchema[],
+      protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest | null,
+      protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasResponse,
+    ]
+  >;
+  listExtendedMetadataSchemas(
+    request: protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest,
+      | protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasResponse
+      | null
+      | undefined,
+      protos.google.cloud.apphub.v1.IExtendedMetadataSchema
+    >,
+  ): void;
+  listExtendedMetadataSchemas(
+    request: protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest,
+      | protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasResponse
+      | null
+      | undefined,
+      protos.google.cloud.apphub.v1.IExtendedMetadataSchema
+    >,
+  ): void;
+  listExtendedMetadataSchemas(
+    request?: protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest,
+          | protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasResponse
+          | null
+          | undefined,
+          protos.google.cloud.apphub.v1.IExtendedMetadataSchema
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest,
+      | protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasResponse
+      | null
+      | undefined,
+      protos.google.cloud.apphub.v1.IExtendedMetadataSchema
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apphub.v1.IExtendedMetadataSchema[],
+      protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest | null,
+      protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest,
+          | protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasResponse
+          | null
+          | undefined,
+          protos.google.cloud.apphub.v1.IExtendedMetadataSchema
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listExtendedMetadataSchemas values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listExtendedMetadataSchemas request %j', request);
+    return this.innerApiCalls
+      .listExtendedMetadataSchemas(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apphub.v1.IExtendedMetadataSchema[],
+          protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest | null,
+          protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasResponse,
+        ]) => {
+          this._log.info('listExtendedMetadataSchemas values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listExtendedMetadataSchemas`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Project and location to list Extended Metadata Schemas on.
+   *   Expected format: `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.apphub.v1.ExtendedMetadataSchema|ExtendedMetadataSchema} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listExtendedMetadataSchemasAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listExtendedMetadataSchemasStream(
+    request?: protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listExtendedMetadataSchemas'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listExtendedMetadataSchemas stream %j', request);
+    return this.descriptors.page.listExtendedMetadataSchemas.createStream(
+      this.innerApiCalls.listExtendedMetadataSchemas as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listExtendedMetadataSchemas`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Project and location to list Extended Metadata Schemas on.
+   *   Expected format: `projects/{project}/locations/{location}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server may return fewer items than
+   *   requested. If unspecified, server will pick an appropriate default.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.apphub.v1.ExtendedMetadataSchema|ExtendedMetadataSchema}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/app_hub.list_extended_metadata_schemas.js</caption>
+   * region_tag:apphub_v1_generated_AppHub_ListExtendedMetadataSchemas_async
+   */
+  listExtendedMetadataSchemasAsync(
+    request?: protos.google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.apphub.v1.IExtendedMetadataSchema> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listExtendedMetadataSchemas'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listExtendedMetadataSchemas iterate %j', request);
+    return this.descriptors.page.listExtendedMetadataSchemas.asyncIterate(
+      this.innerApiCalls['listExtendedMetadataSchemas'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.apphub.v1.IExtendedMetadataSchema>;
+  }
+  /**
    * Gets the access control policy for a resource. Returns an empty policy
    * if the resource exists and does not have a policy set.
    *
@@ -6083,6 +6797,42 @@ export class AppHubClient {
   }
 
   /**
+   * Return a fully-qualified boundary resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  boundaryPath(project: string, location: string) {
+    return this.pathTemplates.boundaryPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Boundary resource.
+   *
+   * @param {string} boundaryName
+   *   A fully-qualified path representing Boundary resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBoundaryName(boundaryName: string) {
+    return this.pathTemplates.boundaryPathTemplate.match(boundaryName).project;
+  }
+
+  /**
+   * Parse the location from Boundary resource.
+   *
+   * @param {string} boundaryName
+   *   A fully-qualified path representing Boundary resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBoundaryName(boundaryName: string) {
+    return this.pathTemplates.boundaryPathTemplate.match(boundaryName).location;
+  }
+
+  /**
    * Return a fully-qualified discoveredService resource name string.
    *
    * @param {string} project
@@ -6202,6 +6952,71 @@ export class AppHubClient {
     return this.pathTemplates.discoveredWorkloadPathTemplate.match(
       discoveredWorkloadName,
     ).discovered_workload;
+  }
+
+  /**
+   * Return a fully-qualified extendedMetadataSchema resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} extended_metadata_schema
+   * @returns {string} Resource name string.
+   */
+  extendedMetadataSchemaPath(
+    project: string,
+    location: string,
+    extendedMetadataSchema: string,
+  ) {
+    return this.pathTemplates.extendedMetadataSchemaPathTemplate.render({
+      project: project,
+      location: location,
+      extended_metadata_schema: extendedMetadataSchema,
+    });
+  }
+
+  /**
+   * Parse the project from ExtendedMetadataSchema resource.
+   *
+   * @param {string} extendedMetadataSchemaName
+   *   A fully-qualified path representing ExtendedMetadataSchema resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExtendedMetadataSchemaName(
+    extendedMetadataSchemaName: string,
+  ) {
+    return this.pathTemplates.extendedMetadataSchemaPathTemplate.match(
+      extendedMetadataSchemaName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ExtendedMetadataSchema resource.
+   *
+   * @param {string} extendedMetadataSchemaName
+   *   A fully-qualified path representing ExtendedMetadataSchema resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExtendedMetadataSchemaName(
+    extendedMetadataSchemaName: string,
+  ) {
+    return this.pathTemplates.extendedMetadataSchemaPathTemplate.match(
+      extendedMetadataSchemaName,
+    ).location;
+  }
+
+  /**
+   * Parse the extended_metadata_schema from ExtendedMetadataSchema resource.
+   *
+   * @param {string} extendedMetadataSchemaName
+   *   A fully-qualified path representing ExtendedMetadataSchema resource.
+   * @returns {string} A string representing the extended_metadata_schema.
+   */
+  matchExtendedMetadataSchemaFromExtendedMetadataSchemaName(
+    extendedMetadataSchemaName: string,
+  ) {
+    return this.pathTemplates.extendedMetadataSchemaPathTemplate.match(
+      extendedMetadataSchemaName,
+    ).extended_metadata_schema;
   }
 
   /**

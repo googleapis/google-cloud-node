@@ -230,6 +230,11 @@ export class AppTopologyClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
+      exploreSchema: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'nodeTypes',
+      ),
       listDomains: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -289,6 +294,7 @@ export class AppTopologyClient {
     const appTopologyStubMethods = [
       'generateDiscoveredResourcesTopology',
       'getSchema',
+      'exploreSchema',
       'getDomain',
       'listDomains',
     ];
@@ -835,6 +841,293 @@ export class AppTopologyClient {
       });
   }
 
+  /**
+   * Explores the topology schema starting from given node types or label names
+   * up to a specified hop depth.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the singleton domain schema resource.
+   *   Format: `projects/{project}/locations/{location}/domains/{domain}/schema`
+   * @param {string[]} [request.startLabels]
+   *   Optional. Starting label names to begin traversal.
+   *   Substring, case-insensitive matches are performed against allowed label
+   *   names in the schema. A maximum of 10 `start_labels` can be specified;
+   *   providing more will result in an `INVALID_ARGUMENT` error.
+   *   If `start_labels` is unset or empty, all authorized node types will be used
+   *   as the starting set.
+   * @param {number} [request.depth]
+   *   Optional. The maximum depth of BFS traversal hops to perform from the
+   *   starting node types or label names. Defaults to 0 if unspecified.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of schema elements to return in a single page.
+   *
+   *   - The service might return fewer elements than this value if adding another
+   *     edge and its required endpoint nodes exceeds `page_size`.
+   *   - If omitted or set to 0, default (100) will be used.
+   *   - Minimum page_size is 3 to ensure at least one edge and its endpoint
+   *     nodes fit on a page; values below 3 (e.g. 1 or 2) are changed to 3.
+   *   - Maximum value is 500.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ExploreSchema` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters (except page_size) provided to
+   *   `ExploreSchema` must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.apptopology.v1.NodeType|NodeType}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `exploreSchemaAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  exploreSchema(
+    request?: protos.google.cloud.apptopology.v1.IExploreSchemaRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.apptopology.v1.INodeType[],
+      protos.google.cloud.apptopology.v1.IExploreSchemaRequest | null,
+      protos.google.cloud.apptopology.v1.IExploreSchemaResponse,
+    ]
+  >;
+  exploreSchema(
+    request: protos.google.cloud.apptopology.v1.IExploreSchemaRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.apptopology.v1.IExploreSchemaRequest,
+      | protos.google.cloud.apptopology.v1.IExploreSchemaResponse
+      | null
+      | undefined,
+      protos.google.cloud.apptopology.v1.INodeType
+    >,
+  ): void;
+  exploreSchema(
+    request: protos.google.cloud.apptopology.v1.IExploreSchemaRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.apptopology.v1.IExploreSchemaRequest,
+      | protos.google.cloud.apptopology.v1.IExploreSchemaResponse
+      | null
+      | undefined,
+      protos.google.cloud.apptopology.v1.INodeType
+    >,
+  ): void;
+  exploreSchema(
+    request?: protos.google.cloud.apptopology.v1.IExploreSchemaRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.apptopology.v1.IExploreSchemaRequest,
+          | protos.google.cloud.apptopology.v1.IExploreSchemaResponse
+          | null
+          | undefined,
+          protos.google.cloud.apptopology.v1.INodeType
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.apptopology.v1.IExploreSchemaRequest,
+      | protos.google.cloud.apptopology.v1.IExploreSchemaResponse
+      | null
+      | undefined,
+      protos.google.cloud.apptopology.v1.INodeType
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.apptopology.v1.INodeType[],
+      protos.google.cloud.apptopology.v1.IExploreSchemaRequest | null,
+      protos.google.cloud.apptopology.v1.IExploreSchemaResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.apptopology.v1.IExploreSchemaRequest,
+          | protos.google.cloud.apptopology.v1.IExploreSchemaResponse
+          | null
+          | undefined,
+          protos.google.cloud.apptopology.v1.INodeType
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('exploreSchema values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exploreSchema request %j', request);
+    return this.innerApiCalls
+      .exploreSchema(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.apptopology.v1.INodeType[],
+          protos.google.cloud.apptopology.v1.IExploreSchemaRequest | null,
+          protos.google.cloud.apptopology.v1.IExploreSchemaResponse,
+        ]) => {
+          this._log.info('exploreSchema values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `exploreSchema`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the singleton domain schema resource.
+   *   Format: `projects/{project}/locations/{location}/domains/{domain}/schema`
+   * @param {string[]} [request.startLabels]
+   *   Optional. Starting label names to begin traversal.
+   *   Substring, case-insensitive matches are performed against allowed label
+   *   names in the schema. A maximum of 10 `start_labels` can be specified;
+   *   providing more will result in an `INVALID_ARGUMENT` error.
+   *   If `start_labels` is unset or empty, all authorized node types will be used
+   *   as the starting set.
+   * @param {number} [request.depth]
+   *   Optional. The maximum depth of BFS traversal hops to perform from the
+   *   starting node types or label names. Defaults to 0 if unspecified.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of schema elements to return in a single page.
+   *
+   *   - The service might return fewer elements than this value if adding another
+   *     edge and its required endpoint nodes exceeds `page_size`.
+   *   - If omitted or set to 0, default (100) will be used.
+   *   - Minimum page_size is 3 to ensure at least one edge and its endpoint
+   *     nodes fit on a page; values below 3 (e.g. 1 or 2) are changed to 3.
+   *   - Maximum value is 500.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ExploreSchema` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters (except page_size) provided to
+   *   `ExploreSchema` must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.apptopology.v1.NodeType|NodeType} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `exploreSchemaAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  exploreSchemaStream(
+    request?: protos.google.cloud.apptopology.v1.IExploreSchemaRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['exploreSchema'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('exploreSchema stream %j', request);
+    return this.descriptors.page.exploreSchema.createStream(
+      this.innerApiCalls.exploreSchema as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `exploreSchema`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the singleton domain schema resource.
+   *   Format: `projects/{project}/locations/{location}/domains/{domain}/schema`
+   * @param {string[]} [request.startLabels]
+   *   Optional. Starting label names to begin traversal.
+   *   Substring, case-insensitive matches are performed against allowed label
+   *   names in the schema. A maximum of 10 `start_labels` can be specified;
+   *   providing more will result in an `INVALID_ARGUMENT` error.
+   *   If `start_labels` is unset or empty, all authorized node types will be used
+   *   as the starting set.
+   * @param {number} [request.depth]
+   *   Optional. The maximum depth of BFS traversal hops to perform from the
+   *   starting node types or label names. Defaults to 0 if unspecified.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of schema elements to return in a single page.
+   *
+   *   - The service might return fewer elements than this value if adding another
+   *     edge and its required endpoint nodes exceeds `page_size`.
+   *   - If omitted or set to 0, default (100) will be used.
+   *   - Minimum page_size is 3 to ensure at least one edge and its endpoint
+   *     nodes fit on a page; values below 3 (e.g. 1 or 2) are changed to 3.
+   *   - Maximum value is 500.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token received from a previous `ExploreSchema` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters (except page_size) provided to
+   *   `ExploreSchema` must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.apptopology.v1.NodeType|NodeType}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/app_topology.explore_schema.js</caption>
+   * region_tag:apptopology_v1_generated_AppTopology_ExploreSchema_async
+   */
+  exploreSchemaAsync(
+    request?: protos.google.cloud.apptopology.v1.IExploreSchemaRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.apptopology.v1.INodeType> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['exploreSchema'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('exploreSchema iterate %j', request);
+    return this.descriptors.page.exploreSchema.asyncIterate(
+      this.innerApiCalls['exploreSchema'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.apptopology.v1.INodeType>;
+  }
   /**
    * Lists the topology domains available in a specific location.
    * Only `global` location is supported.

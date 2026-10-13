@@ -947,6 +947,9 @@ export namespace google {
 
                     /** Backup enforcedRetentionEndTime */
                     enforcedRetentionEndTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup ontapSource */
+                    ontapSource?: (google.cloud.netapp.v1.IOntapSource|null);
                 }
 
                 /** Represents a Backup. */
@@ -1002,6 +1005,9 @@ export namespace google {
 
                     /** Backup enforcedRetentionEndTime. */
                     public enforcedRetentionEndTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup ontapSource. */
+                    public ontapSource?: (google.cloud.netapp.v1.IOntapSource|null);
 
                     /**
                      * Creates a new Backup instance using the specified properties.
@@ -1732,6 +1738,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateBackupRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OntapSource. */
+                interface IOntapSource {
+
+                    /** OntapSource storagePool */
+                    storagePool?: (string|null);
+
+                    /** OntapSource volumeUuid */
+                    volumeUuid?: (string|null);
+
+                    /** OntapSource snapshotUuid */
+                    snapshotUuid?: (string|null);
+                }
+
+                /** Represents an OntapSource. */
+                class OntapSource implements IOntapSource {
+
+                    /**
+                     * Constructs a new OntapSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IOntapSource);
+
+                    /** OntapSource storagePool. */
+                    public storagePool?: (string|null);
+
+                    /** OntapSource volumeUuid. */
+                    public volumeUuid: string;
+
+                    /** OntapSource snapshotUuid. */
+                    public snapshotUuid: string;
+
+                    /**
+                     * Creates a new OntapSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OntapSource instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IOntapSource): google.cloud.netapp.v1.OntapSource;
+
+                    /**
+                     * Encodes the specified OntapSource message. Does not implicitly {@link google.cloud.netapp.v1.OntapSource.verify|verify} messages.
+                     * @param message OntapSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IOntapSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OntapSource message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.OntapSource.verify|verify} messages.
+                     * @param message OntapSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IOntapSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OntapSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OntapSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.OntapSource;
+
+                    /**
+                     * Decodes an OntapSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OntapSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.OntapSource;
+
+                    /**
+                     * Verifies an OntapSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OntapSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OntapSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.OntapSource;
+
+                    /**
+                     * Creates a plain object from an OntapSource message. Also converts values to other types if specified.
+                     * @param message OntapSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.OntapSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OntapSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OntapSource
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -3702,6 +3817,34 @@ export namespace google {
                     public revertVolume(request: google.cloud.netapp.v1.IRevertVolumeRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls StartSplit.
+                     * @param request StartSplitRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public startSplit(request: google.cloud.netapp.v1.IStartSplitRequest, callback: google.cloud.netapp.v1.NetApp.StartSplitCallback): void;
+
+                    /**
+                     * Calls StartSplit.
+                     * @param request StartSplitRequest message or plain object
+                     * @returns Promise
+                     */
+                    public startSplit(request: google.cloud.netapp.v1.IStartSplitRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetSplitStatus.
+                     * @param request GetSplitStatusRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and SplitStatus
+                     */
+                    public getSplitStatus(request: google.cloud.netapp.v1.IGetSplitStatusRequest, callback: google.cloud.netapp.v1.NetApp.GetSplitStatusCallback): void;
+
+                    /**
+                     * Calls GetSplitStatus.
+                     * @param request GetSplitStatusRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSplitStatus(request: google.cloud.netapp.v1.IGetSplitStatusRequest): Promise<google.cloud.netapp.v1.SplitStatus>;
+
+                    /**
                      * Calls EstablishVolumePeering.
                      * @param request EstablishVolumePeeringRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -4512,6 +4655,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public executeOntapPatch(request: google.cloud.netapp.v1.IExecuteOntapPatchRequest): Promise<google.cloud.netapp.v1.ExecuteOntapPatchResponse>;
+
+                    /**
+                     * Calls RestoreVolume.
+                     * @param request RestoreVolumeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public restoreVolume(request: google.cloud.netapp.v1.IRestoreVolumeRequest, callback: google.cloud.netapp.v1.NetApp.RestoreVolumeCallback): void;
+
+                    /**
+                     * Calls RestoreVolume.
+                     * @param request RestoreVolumeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public restoreVolume(request: google.cloud.netapp.v1.IRestoreVolumeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListBackupConfigs.
+                     * @param request ListBackupConfigsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBackupConfigsResponse
+                     */
+                    public listBackupConfigs(request: google.cloud.netapp.v1.IListBackupConfigsRequest, callback: google.cloud.netapp.v1.NetApp.ListBackupConfigsCallback): void;
+
+                    /**
+                     * Calls ListBackupConfigs.
+                     * @param request ListBackupConfigsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBackupConfigs(request: google.cloud.netapp.v1.IListBackupConfigsRequest): Promise<google.cloud.netapp.v1.ListBackupConfigsResponse>;
+
+                    /**
+                     * Calls UpdateBackupConfig.
+                     * @param request UpdateBackupConfigRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateBackupConfig(request: google.cloud.netapp.v1.IUpdateBackupConfigRequest, callback: google.cloud.netapp.v1.NetApp.UpdateBackupConfigCallback): void;
+
+                    /**
+                     * Calls UpdateBackupConfig.
+                     * @param request UpdateBackupConfigRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateBackupConfig(request: google.cloud.netapp.v1.IUpdateBackupConfigRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace NetApp {
@@ -4606,6 +4791,20 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type RevertVolumeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.netapp.v1.NetApp|startSplit}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type StartSplitCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.netapp.v1.NetApp|getSplitStatus}.
+                     * @param error Error, if any
+                     * @param [response] SplitStatus
+                     */
+                    type GetSplitStatusCallback = (error: (Error|null), response?: google.cloud.netapp.v1.SplitStatus) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.netapp.v1.NetApp|establishVolumePeering}.
@@ -5012,6 +5211,27 @@ export namespace google {
                      * @param [response] ExecuteOntapPatchResponse
                      */
                     type ExecuteOntapPatchCallback = (error: (Error|null), response?: google.cloud.netapp.v1.ExecuteOntapPatchResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.netapp.v1.NetApp|restoreVolume}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RestoreVolumeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.netapp.v1.NetApp|listBackupConfigs}.
+                     * @param error Error, if any
+                     * @param [response] ListBackupConfigsResponse
+                     */
+                    type ListBackupConfigsCallback = (error: (Error|null), response?: google.cloud.netapp.v1.ListBackupConfigsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.netapp.v1.NetApp|updateBackupConfig}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateBackupConfigCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of an OperationMetadata. */
@@ -6021,6 +6241,9 @@ export namespace google {
 
                     /** LocationMetadata hasOntapProxy */
                     hasOntapProxy?: (boolean|null);
+
+                    /** LocationMetadata flexPerformanceTier */
+                    flexPerformanceTier?: (google.cloud.netapp.v1.LocationMetadata.FlexPerformanceTier|keyof typeof google.cloud.netapp.v1.LocationMetadata.FlexPerformanceTier|null);
                 }
 
                 /** Represents a LocationMetadata. */
@@ -6043,6 +6266,9 @@ export namespace google {
 
                     /** LocationMetadata hasOntapProxy. */
                     public hasOntapProxy: boolean;
+
+                    /** LocationMetadata flexPerformanceTier. */
+                    public flexPerformanceTier: (google.cloud.netapp.v1.LocationMetadata.FlexPerformanceTier|keyof typeof google.cloud.netapp.v1.LocationMetadata.FlexPerformanceTier);
 
                     /**
                      * Creates a new LocationMetadata instance using the specified properties.
@@ -6120,6 +6346,15 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace LocationMetadata {
+
+                    /** FlexPerformanceTier enum. */
+                    enum FlexPerformanceTier {
+                        FLEX_PERFORMANCE_TIER_UNSPECIFIED = 0,
+                        LIMITED = 1
+                    }
                 }
 
                 /** Properties of a UserCommands. */
@@ -10716,7 +10951,8 @@ export namespace google {
                     NFSV3 = 1,
                     NFSV4 = 2,
                     SMB = 3,
-                    ISCSI = 4
+                    ISCSI = 4,
+                    NVME = 5
                 }
 
                 /** AccessType enum. */
@@ -10739,6 +10975,14 @@ export namespace google {
                     SHOW_PREVIOUS_VERSIONS = 7,
                     ACCESS_BASED_ENUMERATION = 8,
                     CONTINUOUSLY_AVAILABLE = 9
+                }
+
+                /** SplitState enum. */
+                enum SplitState {
+                    SPLIT_STATE_UNSPECIFIED = 0,
+                    SPLIT_STATE_NOT_SPLITTING = 1,
+                    SPLIT_STATE_IN_PROGRESS = 2,
+                    SPLIT_STATE_FAILED = 3
                 }
 
                 /** SecurityStyle enum. */
@@ -10978,6 +11222,339 @@ export namespace google {
 
                     /**
                      * Gets the default type url for ListVolumesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBackupConfigsRequest. */
+                interface IListBackupConfigsRequest {
+
+                    /** ListBackupConfigsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListBackupConfigsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListBackupConfigsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListBackupConfigsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListBackupConfigsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListBackupConfigsRequest. */
+                class ListBackupConfigsRequest implements IListBackupConfigsRequest {
+
+                    /**
+                     * Constructs a new ListBackupConfigsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IListBackupConfigsRequest);
+
+                    /** ListBackupConfigsRequest parent. */
+                    public parent: string;
+
+                    /** ListBackupConfigsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListBackupConfigsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListBackupConfigsRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListBackupConfigsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListBackupConfigsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBackupConfigsRequest instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IListBackupConfigsRequest): google.cloud.netapp.v1.ListBackupConfigsRequest;
+
+                    /**
+                     * Encodes the specified ListBackupConfigsRequest message. Does not implicitly {@link google.cloud.netapp.v1.ListBackupConfigsRequest.verify|verify} messages.
+                     * @param message ListBackupConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IListBackupConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBackupConfigsRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListBackupConfigsRequest.verify|verify} messages.
+                     * @param message ListBackupConfigsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IListBackupConfigsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBackupConfigsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBackupConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.ListBackupConfigsRequest;
+
+                    /**
+                     * Decodes a ListBackupConfigsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBackupConfigsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.ListBackupConfigsRequest;
+
+                    /**
+                     * Verifies a ListBackupConfigsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBackupConfigsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBackupConfigsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.ListBackupConfigsRequest;
+
+                    /**
+                     * Creates a plain object from a ListBackupConfigsRequest message. Also converts values to other types if specified.
+                     * @param message ListBackupConfigsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.ListBackupConfigsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBackupConfigsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBackupConfigsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListBackupConfigsResponse. */
+                interface IListBackupConfigsResponse {
+
+                    /** ListBackupConfigsResponse volumeBackupConfigs */
+                    volumeBackupConfigs?: (google.cloud.netapp.v1.IVolumeBackupConfig[]|null);
+
+                    /** ListBackupConfigsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListBackupConfigsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListBackupConfigsResponse. */
+                class ListBackupConfigsResponse implements IListBackupConfigsResponse {
+
+                    /**
+                     * Constructs a new ListBackupConfigsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IListBackupConfigsResponse);
+
+                    /** ListBackupConfigsResponse volumeBackupConfigs. */
+                    public volumeBackupConfigs: google.cloud.netapp.v1.IVolumeBackupConfig[];
+
+                    /** ListBackupConfigsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListBackupConfigsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListBackupConfigsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBackupConfigsResponse instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IListBackupConfigsResponse): google.cloud.netapp.v1.ListBackupConfigsResponse;
+
+                    /**
+                     * Encodes the specified ListBackupConfigsResponse message. Does not implicitly {@link google.cloud.netapp.v1.ListBackupConfigsResponse.verify|verify} messages.
+                     * @param message ListBackupConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IListBackupConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBackupConfigsResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.ListBackupConfigsResponse.verify|verify} messages.
+                     * @param message ListBackupConfigsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IListBackupConfigsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBackupConfigsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBackupConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.ListBackupConfigsResponse;
+
+                    /**
+                     * Decodes a ListBackupConfigsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBackupConfigsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.ListBackupConfigsResponse;
+
+                    /**
+                     * Verifies a ListBackupConfigsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBackupConfigsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBackupConfigsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.ListBackupConfigsResponse;
+
+                    /**
+                     * Creates a plain object from a ListBackupConfigsResponse message. Also converts values to other types if specified.
+                     * @param message ListBackupConfigsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.ListBackupConfigsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBackupConfigsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListBackupConfigsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a VolumeBackupConfig. */
+                interface IVolumeBackupConfig {
+
+                    /** VolumeBackupConfig volumeUuid */
+                    volumeUuid?: (string|null);
+
+                    /** VolumeBackupConfig backupConfig */
+                    backupConfig?: (google.cloud.netapp.v1.IBackupConfig|null);
+                }
+
+                /** Represents a VolumeBackupConfig. */
+                class VolumeBackupConfig implements IVolumeBackupConfig {
+
+                    /**
+                     * Constructs a new VolumeBackupConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IVolumeBackupConfig);
+
+                    /** VolumeBackupConfig volumeUuid. */
+                    public volumeUuid: string;
+
+                    /** VolumeBackupConfig backupConfig. */
+                    public backupConfig?: (google.cloud.netapp.v1.IBackupConfig|null);
+
+                    /**
+                     * Creates a new VolumeBackupConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns VolumeBackupConfig instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IVolumeBackupConfig): google.cloud.netapp.v1.VolumeBackupConfig;
+
+                    /**
+                     * Encodes the specified VolumeBackupConfig message. Does not implicitly {@link google.cloud.netapp.v1.VolumeBackupConfig.verify|verify} messages.
+                     * @param message VolumeBackupConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IVolumeBackupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified VolumeBackupConfig message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.VolumeBackupConfig.verify|verify} messages.
+                     * @param message VolumeBackupConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IVolumeBackupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a VolumeBackupConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns VolumeBackupConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.VolumeBackupConfig;
+
+                    /**
+                     * Decodes a VolumeBackupConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns VolumeBackupConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.VolumeBackupConfig;
+
+                    /**
+                     * Verifies a VolumeBackupConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a VolumeBackupConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns VolumeBackupConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.VolumeBackupConfig;
+
+                    /**
+                     * Creates a plain object from a VolumeBackupConfig message. Also converts values to other types if specified.
+                     * @param message VolumeBackupConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.VolumeBackupConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this VolumeBackupConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for VolumeBackupConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -11499,6 +12076,309 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a StartSplitRequest. */
+                interface IStartSplitRequest {
+
+                    /** StartSplitRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a StartSplitRequest. */
+                class StartSplitRequest implements IStartSplitRequest {
+
+                    /**
+                     * Constructs a new StartSplitRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IStartSplitRequest);
+
+                    /** StartSplitRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new StartSplitRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StartSplitRequest instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IStartSplitRequest): google.cloud.netapp.v1.StartSplitRequest;
+
+                    /**
+                     * Encodes the specified StartSplitRequest message. Does not implicitly {@link google.cloud.netapp.v1.StartSplitRequest.verify|verify} messages.
+                     * @param message StartSplitRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IStartSplitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StartSplitRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.StartSplitRequest.verify|verify} messages.
+                     * @param message StartSplitRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IStartSplitRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StartSplitRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StartSplitRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.StartSplitRequest;
+
+                    /**
+                     * Decodes a StartSplitRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StartSplitRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.StartSplitRequest;
+
+                    /**
+                     * Verifies a StartSplitRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StartSplitRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StartSplitRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.StartSplitRequest;
+
+                    /**
+                     * Creates a plain object from a StartSplitRequest message. Also converts values to other types if specified.
+                     * @param message StartSplitRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.StartSplitRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StartSplitRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StartSplitRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetSplitStatusRequest. */
+                interface IGetSplitStatusRequest {
+
+                    /** GetSplitStatusRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSplitStatusRequest. */
+                class GetSplitStatusRequest implements IGetSplitStatusRequest {
+
+                    /**
+                     * Constructs a new GetSplitStatusRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IGetSplitStatusRequest);
+
+                    /** GetSplitStatusRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSplitStatusRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSplitStatusRequest instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IGetSplitStatusRequest): google.cloud.netapp.v1.GetSplitStatusRequest;
+
+                    /**
+                     * Encodes the specified GetSplitStatusRequest message. Does not implicitly {@link google.cloud.netapp.v1.GetSplitStatusRequest.verify|verify} messages.
+                     * @param message GetSplitStatusRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IGetSplitStatusRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSplitStatusRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.GetSplitStatusRequest.verify|verify} messages.
+                     * @param message GetSplitStatusRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IGetSplitStatusRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSplitStatusRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSplitStatusRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.GetSplitStatusRequest;
+
+                    /**
+                     * Decodes a GetSplitStatusRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSplitStatusRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.GetSplitStatusRequest;
+
+                    /**
+                     * Verifies a GetSplitStatusRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSplitStatusRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSplitStatusRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.GetSplitStatusRequest;
+
+                    /**
+                     * Creates a plain object from a GetSplitStatusRequest message. Also converts values to other types if specified.
+                     * @param message GetSplitStatusRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.GetSplitStatusRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSplitStatusRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetSplitStatusRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SplitStatus. */
+                interface ISplitStatus {
+
+                    /** SplitStatus splitState */
+                    splitState?: (google.cloud.netapp.v1.SplitState|keyof typeof google.cloud.netapp.v1.SplitState|null);
+
+                    /** SplitStatus stateDetails */
+                    stateDetails?: (string|null);
+
+                    /** SplitStatus progressPercent */
+                    progressPercent?: (number|null);
+                }
+
+                /** Represents a SplitStatus. */
+                class SplitStatus implements ISplitStatus {
+
+                    /**
+                     * Constructs a new SplitStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.ISplitStatus);
+
+                    /** SplitStatus splitState. */
+                    public splitState: (google.cloud.netapp.v1.SplitState|keyof typeof google.cloud.netapp.v1.SplitState);
+
+                    /** SplitStatus stateDetails. */
+                    public stateDetails: string;
+
+                    /** SplitStatus progressPercent. */
+                    public progressPercent: number;
+
+                    /**
+                     * Creates a new SplitStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SplitStatus instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.ISplitStatus): google.cloud.netapp.v1.SplitStatus;
+
+                    /**
+                     * Encodes the specified SplitStatus message. Does not implicitly {@link google.cloud.netapp.v1.SplitStatus.verify|verify} messages.
+                     * @param message SplitStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.ISplitStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SplitStatus message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.SplitStatus.verify|verify} messages.
+                     * @param message SplitStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.ISplitStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SplitStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SplitStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.SplitStatus;
+
+                    /**
+                     * Decodes a SplitStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SplitStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.SplitStatus;
+
+                    /**
+                     * Verifies a SplitStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SplitStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SplitStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.SplitStatus;
+
+                    /**
+                     * Creates a plain object from a SplitStatus message. Also converts values to other types if specified.
+                     * @param message SplitStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.SplitStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SplitStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SplitStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Volume. */
                 interface IVolume {
 
@@ -11867,6 +12747,9 @@ export namespace google {
 
                         /** CloneDetails sharedSpaceGib */
                         sharedSpaceGib?: (number|Long|string|null);
+
+                        /** CloneDetails splitState */
+                        splitState?: (google.cloud.netapp.v1.SplitState|keyof typeof google.cloud.netapp.v1.SplitState|null);
                     }
 
                     /** Represents a CloneDetails. */
@@ -11886,6 +12769,9 @@ export namespace google {
 
                         /** CloneDetails sharedSpaceGib. */
                         public sharedSpaceGib: (number|Long|string);
+
+                        /** CloneDetails splitState. */
+                        public splitState: (google.cloud.netapp.v1.SplitState|keyof typeof google.cloud.netapp.v1.SplitState);
 
                         /**
                          * Creates a new CloneDetails instance using the specified properties.
@@ -14279,6 +15165,418 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a RestoreVolumeRequest. */
+                interface IRestoreVolumeRequest {
+
+                    /** RestoreVolumeRequest backupSource */
+                    backupSource?: (google.cloud.netapp.v1.IBackupSource|null);
+
+                    /** RestoreVolumeRequest ontapVolumeTarget */
+                    ontapVolumeTarget?: (google.cloud.netapp.v1.IOntapVolumeTarget|null);
+
+                    /** RestoreVolumeRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a RestoreVolumeRequest. */
+                class RestoreVolumeRequest implements IRestoreVolumeRequest {
+
+                    /**
+                     * Constructs a new RestoreVolumeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IRestoreVolumeRequest);
+
+                    /** RestoreVolumeRequest backupSource. */
+                    public backupSource?: (google.cloud.netapp.v1.IBackupSource|null);
+
+                    /** RestoreVolumeRequest ontapVolumeTarget. */
+                    public ontapVolumeTarget?: (google.cloud.netapp.v1.IOntapVolumeTarget|null);
+
+                    /** RestoreVolumeRequest name. */
+                    public name: string;
+
+                    /** RestoreVolumeRequest source. */
+                    public source?: "backupSource";
+
+                    /** RestoreVolumeRequest target. */
+                    public target?: "ontapVolumeTarget";
+
+                    /**
+                     * Creates a new RestoreVolumeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreVolumeRequest instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IRestoreVolumeRequest): google.cloud.netapp.v1.RestoreVolumeRequest;
+
+                    /**
+                     * Encodes the specified RestoreVolumeRequest message. Does not implicitly {@link google.cloud.netapp.v1.RestoreVolumeRequest.verify|verify} messages.
+                     * @param message RestoreVolumeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IRestoreVolumeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreVolumeRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.RestoreVolumeRequest.verify|verify} messages.
+                     * @param message RestoreVolumeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IRestoreVolumeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreVolumeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreVolumeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.RestoreVolumeRequest;
+
+                    /**
+                     * Decodes a RestoreVolumeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreVolumeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.RestoreVolumeRequest;
+
+                    /**
+                     * Verifies a RestoreVolumeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreVolumeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreVolumeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.RestoreVolumeRequest;
+
+                    /**
+                     * Creates a plain object from a RestoreVolumeRequest message. Also converts values to other types if specified.
+                     * @param message RestoreVolumeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.RestoreVolumeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreVolumeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreVolumeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BackupSource. */
+                interface IBackupSource {
+
+                    /** BackupSource backup */
+                    backup?: (string|null);
+
+                    /** BackupSource fileList */
+                    fileList?: (string[]|null);
+                }
+
+                /** Represents a BackupSource. */
+                class BackupSource implements IBackupSource {
+
+                    /**
+                     * Constructs a new BackupSource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IBackupSource);
+
+                    /** BackupSource backup. */
+                    public backup: string;
+
+                    /** BackupSource fileList. */
+                    public fileList: string[];
+
+                    /**
+                     * Creates a new BackupSource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BackupSource instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IBackupSource): google.cloud.netapp.v1.BackupSource;
+
+                    /**
+                     * Encodes the specified BackupSource message. Does not implicitly {@link google.cloud.netapp.v1.BackupSource.verify|verify} messages.
+                     * @param message BackupSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BackupSource message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.BackupSource.verify|verify} messages.
+                     * @param message BackupSource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IBackupSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BackupSource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BackupSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.BackupSource;
+
+                    /**
+                     * Decodes a BackupSource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BackupSource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.BackupSource;
+
+                    /**
+                     * Verifies a BackupSource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BackupSource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BackupSource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.BackupSource;
+
+                    /**
+                     * Creates a plain object from a BackupSource message. Also converts values to other types if specified.
+                     * @param message BackupSource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.BackupSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BackupSource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BackupSource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OntapVolumeTarget. */
+                interface IOntapVolumeTarget {
+
+                    /** OntapVolumeTarget volumeUuid */
+                    volumeUuid?: (string|null);
+
+                    /** OntapVolumeTarget restoreDestinationPath */
+                    restoreDestinationPath?: (string|null);
+                }
+
+                /** Represents an OntapVolumeTarget. */
+                class OntapVolumeTarget implements IOntapVolumeTarget {
+
+                    /**
+                     * Constructs a new OntapVolumeTarget.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IOntapVolumeTarget);
+
+                    /** OntapVolumeTarget volumeUuid. */
+                    public volumeUuid: string;
+
+                    /** OntapVolumeTarget restoreDestinationPath. */
+                    public restoreDestinationPath: string;
+
+                    /**
+                     * Creates a new OntapVolumeTarget instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OntapVolumeTarget instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IOntapVolumeTarget): google.cloud.netapp.v1.OntapVolumeTarget;
+
+                    /**
+                     * Encodes the specified OntapVolumeTarget message. Does not implicitly {@link google.cloud.netapp.v1.OntapVolumeTarget.verify|verify} messages.
+                     * @param message OntapVolumeTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IOntapVolumeTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OntapVolumeTarget message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.OntapVolumeTarget.verify|verify} messages.
+                     * @param message OntapVolumeTarget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IOntapVolumeTarget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OntapVolumeTarget message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OntapVolumeTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.OntapVolumeTarget;
+
+                    /**
+                     * Decodes an OntapVolumeTarget message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OntapVolumeTarget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.OntapVolumeTarget;
+
+                    /**
+                     * Verifies an OntapVolumeTarget message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OntapVolumeTarget message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OntapVolumeTarget
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.OntapVolumeTarget;
+
+                    /**
+                     * Creates a plain object from an OntapVolumeTarget message. Also converts values to other types if specified.
+                     * @param message OntapVolumeTarget
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.OntapVolumeTarget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OntapVolumeTarget to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OntapVolumeTarget
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RestoreVolumeResponse. */
+                interface IRestoreVolumeResponse {
+                }
+
+                /** Represents a RestoreVolumeResponse. */
+                class RestoreVolumeResponse implements IRestoreVolumeResponse {
+
+                    /**
+                     * Constructs a new RestoreVolumeResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IRestoreVolumeResponse);
+
+                    /**
+                     * Creates a new RestoreVolumeResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreVolumeResponse instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IRestoreVolumeResponse): google.cloud.netapp.v1.RestoreVolumeResponse;
+
+                    /**
+                     * Encodes the specified RestoreVolumeResponse message. Does not implicitly {@link google.cloud.netapp.v1.RestoreVolumeResponse.verify|verify} messages.
+                     * @param message RestoreVolumeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IRestoreVolumeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreVolumeResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.RestoreVolumeResponse.verify|verify} messages.
+                     * @param message RestoreVolumeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IRestoreVolumeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreVolumeResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreVolumeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.RestoreVolumeResponse;
+
+                    /**
+                     * Decodes a RestoreVolumeResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreVolumeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.RestoreVolumeResponse;
+
+                    /**
+                     * Verifies a RestoreVolumeResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreVolumeResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreVolumeResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.RestoreVolumeResponse;
+
+                    /**
+                     * Creates a plain object from a RestoreVolumeResponse message. Also converts values to other types if specified.
+                     * @param message RestoreVolumeResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.RestoreVolumeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreVolumeResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RestoreVolumeResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an EstablishVolumePeeringRequest. */
                 interface IEstablishVolumePeeringRequest {
 
@@ -14394,6 +15692,224 @@ export namespace google {
 
                     /**
                      * Gets the default type url for EstablishVolumePeeringRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateBackupConfigRequest. */
+                interface IUpdateBackupConfigRequest {
+
+                    /** UpdateBackupConfigRequest name */
+                    name?: (string|null);
+
+                    /** UpdateBackupConfigRequest volumeUuid */
+                    volumeUuid?: (string|null);
+
+                    /** UpdateBackupConfigRequest backupConfig */
+                    backupConfig?: (google.cloud.netapp.v1.IBackupConfig|null);
+
+                    /** UpdateBackupConfigRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateBackupConfigRequest. */
+                class UpdateBackupConfigRequest implements IUpdateBackupConfigRequest {
+
+                    /**
+                     * Constructs a new UpdateBackupConfigRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IUpdateBackupConfigRequest);
+
+                    /** UpdateBackupConfigRequest name. */
+                    public name: string;
+
+                    /** UpdateBackupConfigRequest volumeUuid. */
+                    public volumeUuid: string;
+
+                    /** UpdateBackupConfigRequest backupConfig. */
+                    public backupConfig?: (google.cloud.netapp.v1.IBackupConfig|null);
+
+                    /** UpdateBackupConfigRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateBackupConfigRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateBackupConfigRequest instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IUpdateBackupConfigRequest): google.cloud.netapp.v1.UpdateBackupConfigRequest;
+
+                    /**
+                     * Encodes the specified UpdateBackupConfigRequest message. Does not implicitly {@link google.cloud.netapp.v1.UpdateBackupConfigRequest.verify|verify} messages.
+                     * @param message UpdateBackupConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IUpdateBackupConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateBackupConfigRequest message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.UpdateBackupConfigRequest.verify|verify} messages.
+                     * @param message UpdateBackupConfigRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IUpdateBackupConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateBackupConfigRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateBackupConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.UpdateBackupConfigRequest;
+
+                    /**
+                     * Decodes an UpdateBackupConfigRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateBackupConfigRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.UpdateBackupConfigRequest;
+
+                    /**
+                     * Verifies an UpdateBackupConfigRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateBackupConfigRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateBackupConfigRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.UpdateBackupConfigRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateBackupConfigRequest message. Also converts values to other types if specified.
+                     * @param message UpdateBackupConfigRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.UpdateBackupConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateBackupConfigRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateBackupConfigRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateBackupConfigResponse. */
+                interface IUpdateBackupConfigResponse {
+
+                    /** UpdateBackupConfigResponse volumeUuid */
+                    volumeUuid?: (string|null);
+
+                    /** UpdateBackupConfigResponse backupConfig */
+                    backupConfig?: (google.cloud.netapp.v1.IBackupConfig|null);
+                }
+
+                /** Represents an UpdateBackupConfigResponse. */
+                class UpdateBackupConfigResponse implements IUpdateBackupConfigResponse {
+
+                    /**
+                     * Constructs a new UpdateBackupConfigResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.netapp.v1.IUpdateBackupConfigResponse);
+
+                    /** UpdateBackupConfigResponse volumeUuid. */
+                    public volumeUuid: string;
+
+                    /** UpdateBackupConfigResponse backupConfig. */
+                    public backupConfig?: (google.cloud.netapp.v1.IBackupConfig|null);
+
+                    /**
+                     * Creates a new UpdateBackupConfigResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateBackupConfigResponse instance
+                     */
+                    public static create(properties?: google.cloud.netapp.v1.IUpdateBackupConfigResponse): google.cloud.netapp.v1.UpdateBackupConfigResponse;
+
+                    /**
+                     * Encodes the specified UpdateBackupConfigResponse message. Does not implicitly {@link google.cloud.netapp.v1.UpdateBackupConfigResponse.verify|verify} messages.
+                     * @param message UpdateBackupConfigResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.netapp.v1.IUpdateBackupConfigResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateBackupConfigResponse message, length delimited. Does not implicitly {@link google.cloud.netapp.v1.UpdateBackupConfigResponse.verify|verify} messages.
+                     * @param message UpdateBackupConfigResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.netapp.v1.IUpdateBackupConfigResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateBackupConfigResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateBackupConfigResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.netapp.v1.UpdateBackupConfigResponse;
+
+                    /**
+                     * Decodes an UpdateBackupConfigResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateBackupConfigResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.netapp.v1.UpdateBackupConfigResponse;
+
+                    /**
+                     * Verifies an UpdateBackupConfigResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateBackupConfigResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateBackupConfigResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.netapp.v1.UpdateBackupConfigResponse;
+
+                    /**
+                     * Creates a plain object from an UpdateBackupConfigResponse message. Also converts values to other types if specified.
+                     * @param message UpdateBackupConfigResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.netapp.v1.UpdateBackupConfigResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateBackupConfigResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateBackupConfigResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
