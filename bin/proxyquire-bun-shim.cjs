@@ -14,8 +14,8 @@
 
 // A drop-in `proxyquire` replacement for the Bun runtime, built on the two
 // seams Bun supports (`Module.prototype.require` dispatch + `require.cache`),
-// loaded automatically when running tests under Bun so no test files need to
-// change. Completely inert when running under Node.js (`typeof Bun === 'undefined'`).
+// loaded when running unit tests with `--proxyquire-shim` under Bun so no test
+// files need to change. Completely inert when running under Node.js (`typeof Bun === 'undefined'`).
 'use strict';
 
 const Module = require('module');
@@ -25,455 +25,96 @@ if (
   typeof Bun !== 'undefined' &&
   !globalThis.__GOOGLE_CLOUD_BUN_PROXYQUIRE_SHIM__
 ) {
-  globalThis.__GOOGLE_CLOUD_BUN_PROXYQUIRE_SHIM__ = true;
-
-  const origRequire = Module.prototype.require;
-
-  const enableFetchShim =
-    process.env.BUN_ENABLE_FETCH_SHIM === 'true' ||
-    process.env.BUN_FETCH_SHIM === 'true';
   const enableProxyquireShim =
     process.env.BUN_ENABLE_PROXYQUIRE_SHIM === 'true' ||
     process.env.BUN_PROXYQUIRE_SHIM === 'true';
 
-  const hasOwn = (o, k) =>
-    o !== null &&
-    typeof o === 'object' &&
-    Object.prototype.hasOwnProperty.call(o, k);
-  const frames = [];
+  if (enableProxyquireShim) {
+    globalThis.__GOOGLE_CLOUD_BUN_PROXYQUIRE_SHIM__ = true;
 
-  // Mirror of proxyquire's Proxyquire.prototype._resolveModule: resolve
-  // `request` from `baseFile`'s directory; on failure keep bare specifiers as
-  // they are and fall back to a plain path.resolve for relative ones.
-  function resolveFrom(baseFile, request) {
-    try {
-      return require.resolve(request, {paths: [path.dirname(baseFile)]});
-    } catch {
-      if (request[0] !== '.') return request;
-      return path.resolve(path.dirname(baseFile), request);
-    }
-  }
+    const origRequire = Module.prototype.require;
+    const hasOwn = (o, k) =>
+      o !== null &&
+      typeof o === 'object' &&
+      Object.prototype.hasOwnProperty.call(o, k);
+    const frames = [];
 
-  function isGlobalStub(stub) {
-    return hasOwn(stub, '@global') || hasOwn(stub, '@runtimeGlobal');
-  }
-
-  function applyStub(self, id, stub, noCallThru) {
-    if (stub === null) {
-      const e = new Error("Cannot find module '" + id + "'");
-      e.code = 'MODULE_NOT_FOUND';
-      throw e;
-    }
-    const skip = hasOwn(stub, '@noCallThru') ? stub['@noCallThru'] : noCallThru;
-    if (!skip) {
-      let real;
+    // Mirror of proxyquire's Proxyquire.prototype._resolveModule: resolve
+    // `request` from `baseFile`'s directory; on failure keep bare specifiers as
+    // they are and fall back to a plain path.resolve for relative ones.
+    function resolveFrom(baseFile, request) {
       try {
-        real = origRequire.call(self, id);
+        return require.resolve(request, {paths: [path.dirname(baseFile)]});
       } catch {
-        real = undefined;
+        if (request[0] !== '.') return request;
+        return path.resolve(path.dirname(baseFile), request);
       }
-      if (real && (typeof real === 'object' || typeof real === 'function')) {
-        for (const k of Object.keys(real)) {
-          if (!(k in stub)) stub[k] = real[k];
+    }
+
+    function isGlobalStub(stub) {
+      return hasOwn(stub, '@global') || hasOwn(stub, '@runtimeGlobal');
+    }
+
+    function applyStub(self, id, stub, noCallThru) {
+      if (stub === null) {
+        const e = new Error("Cannot find module '" + id + "'");
+        e.code = 'MODULE_NOT_FOUND';
+        throw e;
+      }
+      const skip = hasOwn(stub, '@noCallThru') ? stub['@noCallThru'] : noCallThru;
+      if (!skip) {
+        let real;
+        try {
+          real = origRequire.call(self, id);
+        } catch {
+          real = undefined;
+        }
+        if (real && (typeof real === 'object' || typeof real === 'function')) {
+          for (const k of Object.keys(real)) {
+            if (!(k in stub)) stub[k] = real[k];
+          }
         }
       }
+      return stub;
     }
-    return stub;
-  }
 
-  // proxyquire's _disableModuleCache: drop just the SUT, restore afterwards.
-  function disableModuleCache(id) {
-    const cache = require.cache;
-    const saved = cache[id];
-    delete cache[id];
-    return function restore(preserve) {
+    // proxyquire's _disableModuleCache: drop just the SUT, restore afterwards.
+    function disableModuleCache(id) {
+      const cache = require.cache;
+      const saved = cache[id];
       delete cache[id];
-      if (saved && preserve) cache[id] = saved;
-    };
-  }
-
-  // proxyquire's _disableGlobalCache: empty the entire cache so that an
-  // already-loaded intermediate is re-executed and its require() calls can be
-  // intercepted. Native (.node) modules are kept.
-  function disableGlobalCache(sut) {
-    const cache = require.cache;
-    const saved = Object.create(null);
-    for (const id of Object.keys(cache)) {
-      if (/\.node$/.test(id)) continue;
-      saved[id] = cache[id];
-      delete cache[id];
+      return function restore(preserve) {
+        delete cache[id];
+        if (saved && preserve) cache[id] = saved;
+      };
     }
-    return function restore(preserve) {
+
+    // proxyquire's _disableGlobalCache: empty the entire cache so that an
+    // already-loaded intermediate is re-executed and its require() calls can be
+    // intercepted. Native (.node) modules are kept.
+    function disableGlobalCache(sut) {
+      const cache = require.cache;
+      const saved = Object.create(null);
       for (const id of Object.keys(cache)) {
         if (/\.node$/.test(id)) continue;
+        saved[id] = cache[id];
         delete cache[id];
       }
-      if (preserve) {
-        for (const id of Object.keys(saved)) cache[id] = saved[id];
-      } else {
-        for (const id of Object.keys(saved)) {
-          if (id !== sut) cache[id] = saved[id];
+      return function restore(preserve) {
+        for (const id of Object.keys(cache)) {
+          if (/\.node$/.test(id)) continue;
+          delete cache[id];
         }
-      }
-    };
-  }
-
-  const fs = require('fs');
-  const http = require('http');
-  const https = require('https');
-  const {Readable, PassThrough} = require('stream');
-
-  // ---------------------------------------------------------------------------
-  // 1. Nock-Compatible HTTP/HTTPS Fetch Transport (__googleCloudBunFetch)
-  // ---------------------------------------------------------------------------
-  // Libraries such as `gaxios` and `teeny-request` use Fetch API calls when
-  // running in modern runtimes. In Bun, native `globalThis.fetch` is written
-  // in C++ and bypasses Node's `http` and `https` modules entirely.
-  //
-  // However, HTTP mocking libraries (primarily `nock`) work by monkeypatching
-  // Node's `http.ClientRequest` and `https.request`. Because native fetch never
-  // touches those Node modules, tests asserting on mocked HTTP endpoints
-  // (e.g., Storage `resumable-upload` tests) failed with:
-  //   - DNS lookup / connection timeouts (`ETIMEOUT fake.local:80`)
-  //   - OAuth token failures (`invalid_grant: account not found`)
-  //   - `Mocks not yet satisfied` assertions from `nock`
-  //
-  // When opted into via `--fetch-shim` (`BUN_ENABLE_FETCH_SHIM=true`),
-  // `__googleCloudBunFetch` intercepts HTTP/HTTPS requests and routes them
-  // through Node's `http.request` / `https.request` stack, allowing `nock` to
-  // intercept requests seamlessly while returning standard Fetch `Response`
-  // objects expected by caller libraries.
-  if (enableFetchShim) {
-    const origFetch = globalThis.fetch;
-    globalThis.__googleCloudBunFetch = async (url, init = {}) => {
-      let parsedUrl;
-      try {
-        parsedUrl = new URL(String(url));
-      } catch {
-        parsedUrl = undefined;
-      }
-
-      if (
-        (globalThis.fetch === origFetch ||
-          globalThis.fetch === globalThis.__googleCloudBunFetch) &&
-        parsedUrl &&
-        (parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:')
-      ) {
-        const isHttps = parsedUrl.protocol === 'https:';
-        const transport = isHttps ? https : http;
-
-        // Normalize headers from plain objects, Header instances, Arrays of tuples, or Maps.
-        let headers = {};
-        if (init.headers) {
-          if (
-            typeof Headers !== 'undefined' &&
-            init.headers instanceof Headers
-          ) {
-            for (const [k, v] of init.headers.entries()) {
-              headers[k] = v;
-            }
-          } else if (Array.isArray(init.headers)) {
-            for (const [k, v] of init.headers) {
-              headers[k] = v;
-            }
-          } else if (typeof init.headers.entries === 'function') {
-            for (const [k, v] of init.headers.entries()) {
-              headers[k] = v;
-            }
-          } else {
-            headers = {...init.headers};
+        if (preserve) {
+          for (const id of Object.keys(saved)) cache[id] = saved[id];
+        } else {
+          for (const id of Object.keys(saved)) {
+            if (id !== sut) cache[id] = saved[id];
           }
         }
+      };
+    }
 
-        const reqOptions = {
-          method: init.method || 'GET',
-          hostname: parsedUrl.hostname,
-          port: parsedUrl.port || (isHttps ? 443 : 80),
-          path: (parsedUrl.pathname || '/') + parsedUrl.search,
-          headers,
-          agent: init.agent,
-        };
-
-        try {
-          const res = await new Promise((resolve, reject) => {
-            // Route through Node http/https transport so nock can intercept.
-            const req = transport.request(reqOptions, incoming => {
-              const responseStream = new PassThrough();
-              incoming.pipe(responseStream);
-
-              const fetchHeaders = new Headers();
-              for (const [k, v] of Object.entries(incoming.headers)) {
-                if (Array.isArray(v)) {
-                  v.forEach(val => fetchHeaders.append(k, val));
-                } else if (v !== undefined) {
-                  fetchHeaders.set(k, v);
-                }
-              }
-
-              const response = new Response(Readable.toWeb(responseStream), {
-                status: incoming.statusCode || 200,
-                statusText: incoming.statusMessage || '',
-                headers: fetchHeaders,
-              });
-              Object.defineProperty(response, 'url', {value: String(url)});
-
-              let nodeStream;
-              const rawBody = response.body;
-              const origText = response.text.bind(response);
-              const origJson = response.json.bind(response);
-              Object.defineProperty(response, 'body', {
-                get() {
-                  nodeStream ||= Readable.fromWeb(rawBody);
-                  return nodeStream;
-                },
-                configurable: true,
-                enumerable: true,
-              });
-              response.text = async () => {
-                if (!nodeStream) return origText();
-                const chunks = [];
-                for await (const chunk of nodeStream) {
-                  chunks.push(
-                    Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk),
-                  );
-                }
-                return Buffer.concat(chunks).toString('utf8');
-              };
-              response.json = async () => {
-                return JSON.parse(await response.text());
-              };
-
-              resolve(response);
-            });
-
-            if (init.signal) {
-              if (init.signal.aborted) {
-                req.destroy(
-                  Object.assign(new Error('The user aborted a request.'), {
-                    name: 'AbortError',
-                  }),
-                );
-                return reject(
-                  Object.assign(new Error('The user aborted a request.'), {
-                    name: 'AbortError',
-                  }),
-                );
-              }
-              const abortHandler = () => {
-                req.destroy(
-                  Object.assign(new Error('The user aborted a request.'), {
-                    name: 'AbortError',
-                  }),
-                );
-              };
-              init.signal.addEventListener('abort', abortHandler, {once: true});
-              req.on('close', () => {
-                init.signal.removeEventListener('abort', abortHandler);
-              });
-            }
-
-            if (init.timeout && !init.signal) {
-              req.setTimeout(init.timeout, () => {
-                req.destroy(
-                  Object.assign(
-                    new Error('The operation was aborted due to timeout'),
-                    {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
-                  ),
-                );
-              });
-            }
-
-            req.on('error', reject);
-
-            if (init.body) {
-              if (typeof init.body.pipe === 'function') {
-                init.body.pipe(req);
-              } else if (
-                typeof init.body === 'string' ||
-                Buffer.isBuffer(init.body) ||
-                init.body instanceof Uint8Array ||
-                init.body instanceof ArrayBuffer ||
-                (typeof ArrayBuffer !== 'undefined' &&
-                  ArrayBuffer.isView(init.body))
-              ) {
-                const chunk =
-                  init.body instanceof ArrayBuffer
-                    ? new Uint8Array(init.body)
-                    : init.body instanceof Uint8Array
-                    ? init.body
-                    : ArrayBuffer.isView(init.body)
-                    ? new Uint8Array(
-                        init.body.buffer,
-                        init.body.byteOffset,
-                        init.body.byteLength,
-                      )
-                    : init.body;
-                req.write(chunk);
-                req.end();
-              } else if (
-                typeof Readable.fromWeb === 'function' &&
-                typeof ReadableStream !== 'undefined' &&
-                init.body instanceof ReadableStream
-              ) {
-                Readable.fromWeb(init.body).pipe(req);
-              } else {
-                req.end();
-              }
-            } else {
-              req.end();
-            }
-          });
-          return res;
-        } catch (err) {
-          const msg = String(err?.message || err || '');
-          // Check `ETIMEDOUT` in addition to `TimeoutError` and message text so
-          // socket timeouts (`req.setTimeout`) and nock/network errors with
-          // `code: 'ETIMEDOUT'` preserve their timeout code instead of falling
-          // through to the generic `AbortError` branch below when a signal is
-          // also present.
-          if (
-            err?.name === 'TimeoutError' ||
-            err?.code === 'ETIMEDOUT' ||
-            /timeout|timed out/i.test(msg)
-          ) {
-            throw Object.assign(
-              new Error('The operation was aborted due to timeout'),
-              {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
-            );
-          }
-          if (
-            err?.name === 'AbortError' ||
-            /aborted/i.test(msg) ||
-            init?.signal?.aborted
-          ) {
-            throw Object.assign(new Error('The user aborted a request.'), {
-              name: 'AbortError',
-              type: 'aborted',
-            });
-          }
-          if (!(err instanceof Error) && err && typeof err === 'object') {
-            throw Object.assign(
-              new Error(err.message || err.code || 'Error'),
-              err,
-            );
-          }
-          throw err;
-        }
-      }
-
-      if (
-        init &&
-        init.body &&
-        typeof init.body === 'object' &&
-        typeof init.body.pipe === 'function' &&
-        typeof Readable.toWeb === 'function' &&
-        (typeof ReadableStream === 'undefined' ||
-          !(init.body instanceof ReadableStream))
-      ) {
-        const stream =
-          init.body instanceof Readable
-            ? init.body
-            : init.body.pipe(new PassThrough());
-        init = {...init, body: Readable.toWeb(stream)};
-      }
-      try {
-        const res = await (
-          globalThis.fetch === globalThis.__googleCloudBunFetch
-            ? origFetch
-            : globalThis.fetch
-        )(url, init);
-        if (
-          res &&
-          res.body &&
-          typeof Readable.fromWeb === 'function' &&
-          !(res.body instanceof Readable)
-        ) {
-          let nodeStream;
-          const rawBody = res.body;
-          const origText = res.text.bind(res);
-          const origJson = res.json.bind(res);
-          Object.defineProperty(res, 'body', {
-            get() {
-              nodeStream ||= Readable.fromWeb(rawBody);
-              return nodeStream;
-            },
-            configurable: true,
-            enumerable: true,
-          });
-          res.text = async () => {
-            if (!nodeStream) return origText();
-            const chunks = [];
-            for await (const chunk of nodeStream) {
-              chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
-            }
-            return Buffer.concat(chunks).toString('utf8');
-          };
-          res.json = async () => {
-            if (!nodeStream) return origJson();
-            return JSON.parse(await res.text());
-          };
-        }
-        return res;
-      } catch (err) {
-        const msg = String(err?.message || err || '');
-        // Check `ETIMEDOUT` in addition to `TimeoutError` and message text so
-        // underlying fetch/socket errors that already carry `code: 'ETIMEDOUT'`
-        // (even without `'timed out'` in the message or when `name` is
-        // `'AbortError'`) retain `code: 'ETIMEDOUT'` rather than being rewritten
-        // as a user-initiated abort by the `AbortError` check below.
-        if (
-          err?.name === 'TimeoutError' ||
-          err?.code === 'ETIMEDOUT' ||
-          /timeout|timed out/i.test(msg)
-        ) {
-          throw Object.assign(
-            new Error('The operation was aborted due to timeout'),
-            {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
-          );
-        }
-        if (
-          err?.name === 'AbortError' ||
-          /aborted/i.test(msg) ||
-          init?.signal?.aborted
-        ) {
-          throw Object.assign(new Error('The user aborted a request.'), {
-            name: 'AbortError',
-            type: 'aborted',
-          });
-        }
-        if (!(err instanceof Error) && err && typeof err === 'object') {
-          throw Object.assign(
-            new Error(err.message || err.code || 'Error'),
-            err,
-          );
-        }
-        throw err;
-      }
-    };
-    globalThis.fetch = globalThis.__googleCloudBunFetch;
-  }
-
-  if (
-    enableFetchShim &&
-    Module._extensions &&
-    typeof Module._extensions['.js'] === 'function'
-  ) {
-    const origJsExt = Module._extensions['.js'];
-    Module._extensions['.js'] = function (mod, filename) {
-      if (/teeny-request[\\/]+build[\\/]+src[\\/]+index\.js$/.test(filename)) {
-        const code = fs
-          .readFileSync(filename, 'utf8')
-          .replaceAll(
-            "import('node-fetch')",
-            'Promise.resolve({default: globalThis.__googleCloudBunFetch})',
-          );
-        return mod._compile(code, filename);
-      }
-      return origJsExt.apply(this, arguments);
-    };
-  }
-
-  if (enableProxyquireShim) {
     Module.prototype.require = function (id) {
       if (id === 'proxyquire') {
         return makeProxyquire(this);
@@ -501,48 +142,48 @@ if (
       }
       return origRequire.apply(this, arguments);
     };
-  }
 
-  function makeProxyquire(parent) {
-    let noCallThru = false;
-    let preserveCache = true;
-    const fn = function (request, stubs) {
-      const sut = Module._resolveFilename(request, parent);
-      stubs = stubs || {};
-      const resolved = {};
-      let containsGlobal = false;
-      for (const k of Object.keys(stubs)) {
-        if (isGlobalStub(stubs[k])) containsGlobal = true;
-        resolved[resolveFrom(sut, k)] = stubs[k];
-      }
-      const restore = containsGlobal
-        ? disableGlobalCache(sut)
-        : disableModuleCache(sut);
-      frames.push({sut, stubs, resolved, noCallThru, containsGlobal});
-      try {
-        return origRequire.call(parent, request);
-      } finally {
-        frames.pop();
-        restore(preserveCache);
-      }
-    };
-    fn.load = fn;
-    fn.noCallThru = function () {
-      noCallThru = true;
+    function makeProxyquire(parent) {
+      let noCallThru = false;
+      let preserveCache = true;
+      const fn = function (request, stubs) {
+        const sut = Module._resolveFilename(request, parent);
+        stubs = stubs || {};
+        const resolved = {};
+        let containsGlobal = false;
+        for (const k of Object.keys(stubs)) {
+          if (isGlobalStub(stubs[k])) containsGlobal = true;
+          resolved[resolveFrom(sut, k)] = stubs[k];
+        }
+        const restore = containsGlobal
+          ? disableGlobalCache(sut)
+          : disableModuleCache(sut);
+        frames.push({sut, stubs, resolved, noCallThru, containsGlobal});
+        try {
+          return origRequire.call(parent, request);
+        } finally {
+          frames.pop();
+          restore(preserveCache);
+        }
+      };
+      fn.load = fn;
+      fn.noCallThru = function () {
+        noCallThru = true;
+        return fn;
+      };
+      fn.callThru = function () {
+        noCallThru = false;
+        return fn;
+      };
+      fn.noPreserveCache = function () {
+        preserveCache = false;
+        return fn;
+      };
+      fn.preserveCache = function () {
+        preserveCache = true;
+        return fn;
+      };
       return fn;
-    };
-    fn.callThru = function () {
-      noCallThru = false;
-      return fn;
-    };
-    fn.noPreserveCache = function () {
-      preserveCache = false;
-      return fn;
-    };
-    fn.preserveCache = function () {
-      preserveCache = true;
-      return fn;
-    };
-    return fn;
+    }
   }
 }
