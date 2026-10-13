@@ -18,6 +18,7 @@ import {ContextManager, context} from '@opentelemetry/api';
 import * as assert from 'assert';
 const {ReadableSpan} = require('@opentelemetry/sdk-trace-base');
 import {SEMATTRS_DB_NAME} from '@opentelemetry/semantic-conventions';
+import {_resetTracingEnabledForTest} from '../src/instrument';
 
 export const createSessionEvents = [
   'Requesting a multiplexed session',
@@ -43,6 +44,7 @@ export const cacheSessionEvents = ['Cache hit: has usable multiplexed session'];
  * and referring to context causes type/value collision errors.
  */
 export function setGlobalContextManager(manager: ContextManager) {
+  context.disable();
   if (typeof manager.enable === 'function') {
     manager.enable();
   }
@@ -56,6 +58,7 @@ export function setGlobalContextManager(manager: ContextManager) {
 export function disableContextAndManager(manager: ContextManager) {
   manager.disable();
   context.disable();
+  _resetTracingEnabledForTest();
 }
 
 export function generateWithAllSpansHaveDBName(dbName: String): Function {
