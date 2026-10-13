@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v2.0.1...google-logging-utils-v2.1.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
 ## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/google-logging-utils-v2.0.0...google-logging-utils-v2.0.1) (2026-08-10)
 
 

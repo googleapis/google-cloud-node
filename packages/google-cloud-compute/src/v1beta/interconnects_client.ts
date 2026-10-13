@@ -267,6 +267,7 @@ export class InterconnectsClient {
       'list',
       'patch',
       'setLabels',
+      'setName',
       'testIamPermissions',
     ];
     for (const methodName of interconnectsStubMethods) {
@@ -1447,6 +1448,173 @@ export class InterconnectsClient {
       : undefined;
     return this.innerApiCalls
       .setLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Sets name of an interconnect.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.interconnect
+   *   Name of the interconnect to update.
+   * @param {google.cloud.compute.v1beta.InterconnectsSetNameRequest} request.interconnectsSetNameRequestResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1beta/interconnects.set_name.js</caption>
+   * region_tag:compute_v1beta_generated_Interconnects_SetName_async
+   */
+  setName(
+    request?: protos.google.cloud.compute.v1beta.ISetNameInterconnectRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  setName(
+    request: protos.google.cloud.compute.v1beta.ISetNameInterconnectRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.ISetNameInterconnectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setName(
+    request: protos.google.cloud.compute.v1beta.ISetNameInterconnectRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.ISetNameInterconnectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setName(
+    request?: protos.google.cloud.compute.v1beta.ISetNameInterconnectRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1beta.IOperation,
+          | protos.google.cloud.compute.v1beta.ISetNameInterconnectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IOperation,
+      | protos.google.cloud.compute.v1beta.ISetNameInterconnectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1beta.IOperation, null>,
+      protos.google.cloud.compute.v1beta.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        interconnect: request.interconnect ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('setName request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.IOperation,
+          | protos.google.cloud.compute.v1beta.ISetNameInterconnectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('setName response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setName(request, options, wrappedCallback)
       ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,

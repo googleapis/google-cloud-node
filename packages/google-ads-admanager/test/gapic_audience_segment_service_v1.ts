@@ -769,6 +769,296 @@ describe('v1.AudienceSegmentServiceClient', () => {
     });
   });
 
+  describe('updateAudienceSegment', () => {
+    it('invokes updateAudienceSegment without error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateAudienceSegmentRequest(),
+      );
+      request.audienceSegment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateAudienceSegmentRequest',
+        ['audienceSegment', 'name'],
+      );
+      request.audienceSegment.name = defaultValue1;
+      const expectedHeaderRequestParams = `audience_segment.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.AudienceSegment(),
+      );
+      client.innerApiCalls.updateAudienceSegment =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateAudienceSegment(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAudienceSegment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAudienceSegment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAudienceSegment without error using callback', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateAudienceSegmentRequest(),
+      );
+      request.audienceSegment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateAudienceSegmentRequest',
+        ['audienceSegment', 'name'],
+      );
+      request.audienceSegment.name = defaultValue1;
+      const expectedHeaderRequestParams = `audience_segment.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.AudienceSegment(),
+      );
+      client.innerApiCalls.updateAudienceSegment =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAudienceSegment(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IAudienceSegment | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAudienceSegment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAudienceSegment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAudienceSegment with error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateAudienceSegmentRequest(),
+      );
+      request.audienceSegment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateAudienceSegmentRequest',
+        ['audienceSegment', 'name'],
+      );
+      request.audienceSegment.name = defaultValue1;
+      const expectedHeaderRequestParams = `audience_segment.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAudienceSegment = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.updateAudienceSegment(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.updateAudienceSegment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAudienceSegment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAudienceSegment with closed client', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.UpdateAudienceSegmentRequest(),
+      );
+      request.audienceSegment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.UpdateAudienceSegmentRequest',
+        ['audienceSegment', 'name'],
+      );
+      request.audienceSegment.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.updateAudienceSegment(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchUpdateAudienceSegments', () => {
+    it('invokes batchUpdateAudienceSegments without error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateAudienceSegmentsResponse(),
+      );
+      client.innerApiCalls.batchUpdateAudienceSegments =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchUpdateAudienceSegments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateAudienceSegments without error using callback', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateAudienceSegmentsResponse(),
+      );
+      client.innerApiCalls.batchUpdateAudienceSegments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchUpdateAudienceSegments(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateAudienceSegments with error', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchUpdateAudienceSegments = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.batchUpdateAudienceSegments(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateAudienceSegments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateAudienceSegments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchUpdateAudienceSegments with closed client', async () => {
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchUpdateAudienceSegmentsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchUpdateAudienceSegmentsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchUpdateAudienceSegments(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('batchActivateAudienceSegments', () => {
     it('invokes batchActivateAudienceSegments without error', async () => {
       const client =
@@ -2151,6 +2441,56 @@ describe('v1.AudienceSegmentServiceClient', () => {
         assert.strictEqual(result, 'applicationValue');
         assert(
           (client.pathTemplates.applicationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('asset', async () => {
+      const fakePath = '/rendered/path/asset';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        asset: 'assetValue',
+      };
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.assetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.assetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('assetPath', () => {
+        const result = client.assetPath('networkCodeValue', 'assetValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.assetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAssetName', () => {
+        const result = client.matchNetworkCodeFromAssetName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.assetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAssetFromAssetName', () => {
+        const result = client.matchAssetFromAssetName(fakePath);
+        assert.strictEqual(result, 'assetValue');
+        assert(
+          (client.pathTemplates.assetPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -3914,6 +4254,143 @@ describe('v1.AudienceSegmentServiceClient', () => {
         assert.strictEqual(result, 'lineItemValue');
         assert(
           (client.pathTemplates.lineItemPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('lineItemCreativeAssociation', async () => {
+      const fakePath = '/rendered/path/lineItemCreativeAssociation';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        line_item: 'lineItemValue',
+        creative: 'creativeValue',
+      };
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.lineItemCreativeAssociationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.lineItemCreativeAssociationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lineItemCreativeAssociationPath', () => {
+        const result = client.lineItemCreativeAssociationPath(
+          'networkCodeValue',
+          'lineItemValue',
+          'creativeValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.lineItemCreativeAssociationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromLineItemCreativeAssociationName', () => {
+        const result =
+          client.matchNetworkCodeFromLineItemCreativeAssociationName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.lineItemCreativeAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLineItemFromLineItemCreativeAssociationName', () => {
+        const result =
+          client.matchLineItemFromLineItemCreativeAssociationName(fakePath);
+        assert.strictEqual(result, 'lineItemValue');
+        assert(
+          (
+            client.pathTemplates.lineItemCreativeAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeFromLineItemCreativeAssociationName', () => {
+        const result =
+          client.matchCreativeFromLineItemCreativeAssociationName(fakePath);
+        assert.strictEqual(result, 'creativeValue');
+        assert(
+          (
+            client.pathTemplates.lineItemCreativeAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('lineItemTemplate', async () => {
+      const fakePath = '/rendered/path/lineItemTemplate';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        line_item_template: 'lineItemTemplateValue',
+      };
+      const client =
+        new audiencesegmentserviceModule.v1.AudienceSegmentServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.lineItemTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.lineItemTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lineItemTemplatePath', () => {
+        const result = client.lineItemTemplatePath(
+          'networkCodeValue',
+          'lineItemTemplateValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.lineItemTemplatePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromLineItemTemplateName', () => {
+        const result =
+          client.matchNetworkCodeFromLineItemTemplateName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.lineItemTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLineItemTemplateFromLineItemTemplateName', () => {
+        const result =
+          client.matchLineItemTemplateFromLineItemTemplateName(fakePath);
+        assert.strictEqual(result, 'lineItemTemplateValue');
+        assert(
+          (client.pathTemplates.lineItemTemplatePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

@@ -35,7 +35,7 @@
     "predocs": "pnpm run compile",
     "lint": "gts check",
     "system-test": "node ../../bin/run-test.cjs build/system-test --timeout 1600000",
-    "observability-test": "node ../../bin/run-test.cjs build/observability-test --timeout 1600000",
+    "observability-test": "node ../../bin/run-test.cjs --proxyquire-shim build/observability-test --timeout 1600000",
     "cleanup": "node ../../bin/run-test.cjs scripts/cleanup.js --timeout 30000",
     "test": "node ../../bin/run-test.cjs --proxyquire-shim build/test build/test/common build/observability-test",
     "ycsb": "node ./benchmark/ycsb.js  run -P ./benchmark/workloada -p table=usertable -p cloudspanner.instance=ycsb-instance -p operationcount=100 -p cloudspanner.database=ycsb",
