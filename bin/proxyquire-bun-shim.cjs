@@ -44,9 +44,6 @@ if (
   const enableRequireShim =
     process.env.BUN_ENABLE_REQUIRE_SHIM === 'true' ||
     process.env.BUN_REQUIRE_SHIM === 'true';
-  const enableAbortSignalTimeoutShim =
-    process.env.BUN_ENABLE_ABORT_SIGNAL_TIMEOUT_SHIM === 'true' ||
-    process.env.BUN_ABORT_SIGNAL_TIMEOUT_SHIM === 'true';
   const enablePromiseAnyShim =
     process.env.BUN_ENABLE_PROMISE_ANY_SHIM === 'true' ||
     process.env.BUN_PROMISE_ANY_SHIM === 'true';
@@ -297,32 +294,6 @@ if (
     };
   }
 
-  // Override Bun's native AbortSignal.timeout so its abort reason DOMException
-  // uses the exact V8 message string ('The operation was aborted due to timeout')
-  // asserted by core/packages/gaxios unit tests.
-  if (
-    enableAbortSignalTimeoutShim &&
-    typeof AbortSignal !== 'undefined' &&
-    typeof AbortSignal.timeout === 'function' &&
-    typeof DOMException !== 'undefined'
-  ) {
-    AbortSignal.timeout = function (ms) {
-      const controller = new AbortController();
-      const timer = setTimeout(() => {
-        controller.abort(
-          new DOMException(
-            'The operation was aborted due to timeout',
-            'TimeoutError',
-          ),
-        );
-      }, ms);
-      if (timer && typeof timer.unref === 'function') {
-        timer.unref();
-      }
-      return controller.signal;
-    };
-  }
-
   if (enablePromiseAnyShim) {
     const origPromiseAny = Promise.any;
     if (typeof origPromiseAny === 'function') {
@@ -541,7 +512,7 @@ if (
               });
             }
 
-            if (init.timeout) {
+            if (init.timeout && !init.signal) {
               req.setTimeout(init.timeout, () => {
                 req.destroy(
                   Object.assign(
@@ -595,7 +566,16 @@ if (
           return res;
         } catch (err) {
           const msg = String(err?.message || err || '');
-          if (err?.name === 'TimeoutError' || /timed out/i.test(msg)) {
+          // Check `ETIMEDOUT` in addition to `TimeoutError` and message text so
+          // socket timeouts (`req.setTimeout`) and nock/network errors with
+          // `code: 'ETIMEDOUT'` preserve their timeout code instead of falling
+          // through to the generic `AbortError` branch below when a signal is
+          // also present.
+          if (
+            err?.name === 'TimeoutError' ||
+            err?.code === 'ETIMEDOUT' ||
+            /timeout|timed out/i.test(msg)
+          ) {
             throw Object.assign(
               new Error('The operation was aborted due to timeout'),
               {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
@@ -676,7 +656,16 @@ if (
         return res;
       } catch (err) {
         const msg = String(err?.message || err || '');
-        if (err?.name === 'TimeoutError' || /timed out/i.test(msg)) {
+        // Check `ETIMEDOUT` in addition to `TimeoutError` and message text so
+        // underlying fetch/socket errors that already carry `code: 'ETIMEDOUT'`
+        // (even without `'timed out'` in the message or when `name` is
+        // `'AbortError'`) retain `code: 'ETIMEDOUT'` rather than being rewritten
+        // as a user-initiated abort by the `AbortError` check below.
+        if (
+          err?.name === 'TimeoutError' ||
+          err?.code === 'ETIMEDOUT' ||
+          /timeout|timed out/i.test(msg)
+        ) {
           throw Object.assign(
             new Error('The operation was aborted due to timeout'),
             {name: 'AbortError', type: 'aborted', code: 'ETIMEDOUT'},
