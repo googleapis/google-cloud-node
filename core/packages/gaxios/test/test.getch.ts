@@ -15,7 +15,7 @@ import assert from 'assert';
 import nock from 'nock';
 import {createSandbox, fake} from 'sinon';
 import stream, {Readable} from 'stream';
-import {describe, it, afterEach} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import {HttpsProxyAgent} from 'https-proxy-agent';
 import {
   Gaxios,
@@ -540,40 +540,63 @@ describe('🥁 configuration options', () => {
       assert.equal(res.config.agent.connectOpts.key, key);
     });
 
-    it('should pass proxy and tls options to fetchImplementation and omit proxy when noProxy matches', async () => {
+    it('should pass proxy and tls options to Bun fetch and omit proxy when noProxy matches', async () => {
       scope.persist(false);
       nock.cleanAll();
-      let capturedInit: Record<string, unknown> | undefined;
-      const customFetch = async (
-        _u: unknown,
-        init?: Record<string, unknown>,
-      ) => {
-        capturedInit = init;
-        return new Response(JSON.stringify(responseBody), {
-          status: 200,
-          headers: {'content-type': 'application/json'},
+      const globalRecord = globalThis as Record<string, unknown>;
+      const hadBun = 'Bun' in globalRecord;
+      const origFetch = globalThis.fetch;
+      const capturedInits: Array<Record<string, unknown> | undefined> = [];
+      try {
+        if (!hadBun) {
+          globalRecord.Bun = {};
+        }
+        globalThis.fetch = (async (
+          _u: unknown,
+          init?: Record<string, unknown>,
+        ) => {
+          capturedInits.push(init);
+          return new Response(JSON.stringify(responseBody), {
+            status: 200,
+            headers: {'content-type': 'application/json'},
+          });
+        }) as unknown as typeof fetch;
+
+        await request({
+          url,
+          proxy,
+          cert: 'cert',
+          key: 'key',
         });
-      };
+        assert.strictEqual(capturedInits[0]?.proxy, proxy);
+        assert.deepStrictEqual(capturedInits[0]?.tls, {
+          cert: 'cert',
+          key: 'key',
+        });
 
-      await request({
-        url,
-        proxy,
-        cert: 'cert',
-        key: 'key',
-        fetchImplementation:
-          customFetch as unknown as GaxiosOptions['fetchImplementation'],
-      });
-      assert.strictEqual(capturedInit?.proxy, proxy);
-      assert.deepStrictEqual(capturedInit?.tls, {cert: 'cert', key: 'key'});
+        // Cached mTLS proxy agent hit (cert/key omitted on second request)
+        await request({
+          url,
+          proxy,
+        });
+        assert.strictEqual(capturedInits[1]?.proxy, proxy);
+        assert.deepStrictEqual(capturedInits[1]?.tls, {
+          cert: 'cert',
+          key: 'key',
+        });
 
-      await request({
-        url,
-        proxy,
-        noProxy: ['domain.example.com'],
-        fetchImplementation:
-          customFetch as unknown as GaxiosOptions['fetchImplementation'],
-      });
-      assert.strictEqual(capturedInit?.proxy, undefined);
+        await request({
+          url,
+          proxy,
+          noProxy: ['domain.example.com'],
+        });
+        assert.strictEqual(capturedInits[2]?.proxy, undefined);
+      } finally {
+        globalThis.fetch = origFetch;
+        if (!hadBun) {
+          delete globalRecord.Bun;
+        }
+      }
     });
 
     it('should convert Node Readable request body and Web ReadableStream response body in Bun fetch path', async () => {
@@ -581,14 +604,12 @@ describe('🥁 configuration options', () => {
       nock.cleanAll();
       const globalRecord = globalThis as Record<string, unknown>;
       const hadBun = 'Bun' in globalRecord;
-      const origBunFetch = globalRecord.__googleCloudBunFetch;
       const origFetch = globalThis.fetch;
       let capturedBody: unknown;
       try {
         if (!hadBun) {
           globalRecord.Bun = {};
         }
-        delete globalRecord.__googleCloudBunFetch;
         globalThis.fetch = (async (_u: unknown, init?: RequestInit) => {
           capturedBody = init?.body;
           return new Response(JSON.stringify(responseBody), {
@@ -605,16 +626,45 @@ describe('🥁 configuration options', () => {
         });
         assert(capturedBody instanceof ReadableStream);
         assert(streamRes.data instanceof Readable);
+        assert.deepStrictEqual(await streamRes.json(), responseBody);
+
+        const byteReadable = new Readable({
+          read() {
+            this.push(Buffer.from('raw'));
+            this.push(null);
+          },
+        });
+        const streamRes2 = await request<Readable>({
+          url,
+          method: 'POST',
+          data: byteReadable,
+          responseType: 'stream',
+        });
+        assert(streamRes2.data instanceof Readable);
+        assert.strictEqual(
+          (await streamRes2.arrayBuffer()).byteLength,
+          Buffer.byteLength(JSON.stringify(responseBody)),
+        );
+
+        const streamRes3 = await request<Readable>({
+          url,
+          responseType: 'stream',
+        });
+        assert(streamRes3.data instanceof Readable);
+        assert.strictEqual((await streamRes3.blob()).size > 0, true);
 
         const jsonRes = await request({url});
         assert.deepStrictEqual(jsonRes.data, responseBody);
+
+        globalThis.fetch = (async () => {
+          throw {code: 'ECONNRESET', message: 'socket hang up'};
+        }) as typeof fetch;
+        await assert.rejects(request({url, retry: false}), {
+          code: 'ECONNRESET',
+          message: 'socket hang up',
+        });
       } finally {
         globalThis.fetch = origFetch;
-        if (origBunFetch !== undefined) {
-          globalRecord.__googleCloudBunFetch = origBunFetch;
-        } else {
-          delete globalRecord.__googleCloudBunFetch;
-        }
         if (!hadBun) {
           delete globalRecord.Bun;
         }
@@ -956,6 +1006,72 @@ describe('🥁 configuration options', () => {
         // native `fetch` matches the error properly:
         // new RegExp(message)
       );
+    });
+
+    it('should immediately reject when a pre-aborted `signal` is passed with `timeout`', async () => {
+      const gaxios = new Gaxios();
+      const ac = new AbortController();
+      ac.abort(new Error('Caller pre-aborted'));
+      let adapterCalled = false;
+
+      await assert.rejects(
+        () =>
+          gaxios.request({
+            url,
+            timeout: 4000,
+            signal: ac.signal,
+            adapter: async config => {
+              adapterCalled = true;
+              if (config.signal?.aborted) {
+                throw config.signal.reason;
+              }
+              return {
+                status: 200,
+                statusText: 'OK',
+                headers: new Headers(),
+                data: {},
+                config,
+              } as GaxiosResponse;
+            },
+          }),
+        /Caller pre-aborted/,
+      );
+      assert.strictEqual(adapterCalled, true);
+    });
+
+    it('should abort retry when caller `signal` is aborted during backoff with `timeout`', async () => {
+      const gaxios = new Gaxios();
+      const ac = new AbortController();
+      let attempts = 0;
+
+      await assert.rejects(
+        () =>
+          gaxios.request({
+            url,
+            timeout: 5000,
+            signal: ac.signal,
+            retry: true,
+            retryConfig: {
+              retry: 3,
+              retryDelay: 50,
+              onRetryAttempt: () => {
+                ac.abort(new Error('Caller aborted during retry backoff'));
+              },
+            },
+            adapter: async config => {
+              attempts++;
+              if (config.signal?.aborted) {
+                throw config.signal.reason;
+              }
+              throw Object.assign(new Error('request timed out'), {
+                code: 'ETIMEDOUT',
+                config,
+              });
+            },
+          }),
+        /Caller aborted during retry backoff/,
+      );
+      assert.strictEqual(attempts, 2);
     });
   });
 });
@@ -1484,6 +1600,9 @@ describe('🍂 defaults & instances', () => {
   });
 
   describe('mtls', () => {
+    beforeEach(() => {
+      setEnv({});
+    });
     class GaxiosAssertAgentCache extends Gaxios {
       getAgentCache() {
         return this.agentCache;

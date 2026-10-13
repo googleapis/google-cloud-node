@@ -110,12 +110,12 @@ function shouldRetryRequest(err: GaxiosError) {
   // `AbortError` instead of propagating `signal.reason`).
   const isTimeoutError =
     err.code === 'TimeoutError' ||
-    err.config.signal?.reason?.name === 'TimeoutError';
+    err.config?.signal?.reason?.name === 'TimeoutError';
 
   // User-initiated aborts (`signal.aborted` or `AbortError`) should not be
   // retried, except when the abort was triggered by a request timeout.
   if (
-    (err.config.signal?.aborted && !isTimeoutError) ||
+    (err.config?.signal?.aborted && !isTimeoutError) ||
     (err.code === 'AbortError' && !isTimeoutError)
   ) {
     return false;

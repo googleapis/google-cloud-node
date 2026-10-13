@@ -26,7 +26,7 @@ import {
   defaultErrorRedactor,
 } from './common.js';
 import {getRetryConfig} from './retry.js';
-import {PassThrough, Readable} from 'stream';
+import {PassThrough, Readable, pipeline} from 'stream';
 import {GaxiosInterceptorManager} from './interceptor.js';
 
 const randomUUID = async () =>
@@ -154,27 +154,8 @@ export class Gaxios implements FetchCompliance {
 
     // node-fetch v3 warns when `data` is present
     // https://github.com/node-fetch/node-fetch/issues/1000
-    const preparedOpts = {...config} as GaxiosOptionsPrepared & {
-      tls?: {cert: string; key: string};
-    };
+    const preparedOpts = {...config};
     delete preparedOpts.data;
-
-    const proxyAgent = config.agent as {
-      proxy?: URL;
-      connectOpts?: {cert?: string; key?: string};
-    };
-    if (proxyAgent?.proxy) {
-      preparedOpts.proxy = proxyAgent.proxy.toString();
-    } else {
-      delete preparedOpts.proxy;
-    }
-
-    if (config.cert && config.key) {
-      preparedOpts.tls = {
-        cert: config.cert,
-        key: config.key,
-      };
-    }
 
     const res = (await fetchImpl(config.url, preparedOpts as {})) as Response;
     const data = await this.getResponseData(config, res);
@@ -246,6 +227,14 @@ export class Gaxios implements FetchCompliance {
         err = e;
       } else if (e instanceof Error) {
         err = new GaxiosError(e.message, opts, undefined, e);
+      } else if (opts.signal?.aborted) {
+        err = new GaxiosError(
+          `The operation was aborted: ${e}`,
+          opts,
+          undefined,
+          e,
+        );
+        err.code = 'AbortError';
       } else {
         err = new GaxiosError('Unexpected Gaxios Error', opts, undefined, e);
       }
@@ -253,16 +242,13 @@ export class Gaxios implements FetchCompliance {
       // When `opts.timeout` is configured, `#appendTimeoutToSignal` attaches
       // `AbortSignal.timeout(opts.timeout)` to `opts.signal`, which sets
       // `opts.signal.reason` to a `TimeoutError` `DOMException` when it fires.
-      // However, `node-fetch` (and Bun's fetch/http shim when `nock` intercepts
-      // requests) rejects an aborted signal with a generic `AbortError`
-      // ('The user aborted a request.') rather than `opts.signal.reason`, and
-      // Bun's native `AbortSignal.timeout` uses the message 'The operation
-      // timed out.' instead of V8's 'The operation was aborted due to timeout'.
-      // Normalizing `err.code = 'TimeoutError'` and ensuring `err.message`
-      // describes the timeout allows `getRetryConfig` / `shouldRetryRequest`
-      // to recognize the error as a retriable timeout (retrying up to the
-      // configured retry limit, e.g. 3 attempts / `noResponseRetries`) rather
-      // than treating the aborted signal as a non-retriable user abort.
+      // However, `node-fetch` rejects an aborted signal with a generic
+      // `AbortError` ('The user aborted a request.') rather than
+      // `opts.signal.reason`, and Bun's native `AbortSignal.timeout` uses the
+      // message 'The operation timed out.' instead of V8's 'The operation was
+      // aborted due to timeout'. Normalizing `err.code = 'TimeoutError'` and
+      // ensuring `err.message` describes the timeout allows `getRetryConfig` /
+      // `shouldRetryRequest` to recognize the error as a retriable timeout.
       if (
         !err.response &&
         opts.signal?.aborted &&
@@ -272,6 +258,12 @@ export class Gaxios implements FetchCompliance {
         if (!/timeout|timed out/i.test(err.message)) {
           err.message = 'The operation was aborted due to timeout';
         }
+      } else if (
+        !err.response &&
+        opts.signal?.aborted &&
+        err.code !== 'TimeoutError'
+      ) {
+        err.code ||= 'AbortError';
       }
 
       const {shouldRetry, config} = await getRetryConfig(err);
@@ -610,12 +602,18 @@ export class Gaxios implements FetchCompliance {
     });
   }
 
+  #callerSignals = new WeakMap<GaxiosOptions, AbortSignal | undefined>();
+
   #appendTimeoutToSignal(opts: GaxiosOptions) {
     if (opts.timeout) {
+      if (!this.#callerSignals.has(opts)) {
+        this.#callerSignals.set(opts, opts.signal ?? undefined);
+      }
+      const callerSignal = this.#callerSignals.get(opts);
       const timeoutSignal = AbortSignal.timeout(opts.timeout);
 
-      if (opts.signal && !opts.signal.aborted) {
-        opts.signal = AbortSignal.any([opts.signal, timeoutSignal]);
+      if (callerSignal) {
+        opts.signal = AbortSignal.any([callerSignal, timeoutSignal]);
       } else {
         opts.signal = timeoutSignal;
       }
@@ -719,14 +717,37 @@ export class Gaxios implements FetchCompliance {
 
   static #createBunFetch(): typeof fetch {
     return async (input, init) => {
-      const bunFetch = (globalThis as {__googleCloudBunFetch?: typeof fetch})
-        .__googleCloudBunFetch;
-      if (typeof bunFetch === 'function') {
-        return bunFetch(input, init);
+      const rawInit = init
+        ? ({...init} as Omit<RequestInit, 'body'> & {
+            body?: unknown;
+            agent?: {
+              proxy?: URL;
+              connectOpts?: {cert?: string; key?: string};
+            };
+            proxy?: string;
+            cert?: string;
+            key?: string;
+            tls?: {cert?: string; key?: string};
+          })
+        : undefined;
+      if (rawInit) {
+        const proxyAgent = rawInit.agent;
+        if (proxyAgent?.proxy) {
+          rawInit.proxy = proxyAgent.proxy.toString();
+        } else {
+          delete rawInit.proxy;
+        }
+        const cert = rawInit.cert ?? proxyAgent?.connectOpts?.cert;
+        const key = rawInit.key ?? proxyAgent?.connectOpts?.key;
+        if (cert && key) {
+          rawInit.tls = {
+            ...rawInit.tls,
+            cert,
+            key,
+          };
+        }
       }
-
-      let fetchInit = init as
-        (Omit<RequestInit, 'body'> & {body?: unknown}) | undefined;
+      let fetchInit = rawInit;
       if (
         fetchInit?.body &&
         typeof fetchInit.body === 'object' &&
@@ -744,10 +765,8 @@ export class Gaxios implements FetchCompliance {
         } else {
           const passThrough = new PassThrough();
           const src = fetchInit.body as Readable;
-          if (typeof src.on === 'function') {
-            src.on('error', err => passThrough.destroy(err));
-          }
-          stream = src.pipe(passThrough);
+          pipeline(src, passThrough, () => {});
+          stream = passThrough;
         }
         fetchInit = {
           ...fetchInit,
@@ -755,10 +774,38 @@ export class Gaxios implements FetchCompliance {
         };
       }
 
-      const res = await globalThis.fetch(
-        input,
-        fetchInit as RequestInit | undefined,
-      );
+      let res: Response;
+      try {
+        res = await globalThis.fetch(
+          input,
+          fetchInit as RequestInit | undefined,
+        );
+      } catch (err) {
+        const errorObj = err as {message?: string; code?: string};
+        if (
+          errorObj?.code === 'ConnectionRefused' ||
+          errorObj?.code === 'FailedToOpenSocket'
+        ) {
+          errorObj.code = 'ECONNREFUSED';
+        } else if (
+          errorObj?.code === 'ConnectionReset' ||
+          errorObj?.code === 'ConnectionClosed'
+        ) {
+          errorObj.code = 'ECONNRESET';
+        }
+        if (
+          !(err instanceof Error) &&
+          err &&
+          typeof err === 'object' &&
+          !init?.signal?.aborted
+        ) {
+          throw Object.assign(
+            new Error(errorObj.message || errorObj.code || 'Error'),
+            err,
+          );
+        }
+        throw err;
+      }
       if (
         res?.body &&
         typeof Readable.fromWeb === 'function' &&
@@ -807,7 +854,8 @@ export class Gaxios implements FetchCompliance {
         res.blob = async () => {
           if (!nodeStream) return origBlob();
           const buf = await readBuffer();
-          return new Blob([buf]);
+          const contentType = res.headers?.get?.('content-type') ?? '';
+          return new Blob([buf], contentType ? {type: contentType} : undefined);
         };
       }
       return res;
