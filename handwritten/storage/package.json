@@ -118,7 +118,7 @@
     "mocha": "^11.1.0",
     "mockery": "^2.1.0",
     "nise": "6.0.0",
-    "nock": "~13.5.0",
+    "nock": "^14.0.5",
     "pack-n-play": "^5.0.1",
     "path-to-regexp": "6.3.0",
     "proxyquire": "^2.1.3",

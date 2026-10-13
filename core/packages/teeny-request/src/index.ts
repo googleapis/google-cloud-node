@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 
-import * as https from 'https';
 import {Agent, AgentOptions as HttpsAgentOptions} from 'https';
-import * as http from 'http';
+import * as https from 'https';
 import {AgentOptions as HttpAgentOptions} from 'http';
+import * as http from 'http';
 import type * as f from 'node-fetch' with {'resolution-mode': 'import'};
 import {PassThrough, Readable, pipeline} from 'stream';
 import * as zlib from 'zlib';
@@ -30,9 +30,13 @@ const streamEvents = require('stream-events');
 
 import type nodeFetch from 'node-fetch' with {'resolution-mode': 'import'};
 
+const MAX_REDIRECTS = 20;
+const REDIRECT_STATUS_CODES = new Set([301, 302, 303, 307, 308]);
+
 function bunFetch(
   url: URL | f.RequestInfo,
   init: f.RequestInit & {timeout?: number} = {},
+  redirectCount = 0,
 ): Promise<f.Response> {
   const urlStr = String(url);
   const parsedUrl = new URL(urlStr);
@@ -83,7 +87,7 @@ function bunFetch(
     protocol: parsedUrl.protocol,
     proto: isHttps ? 'https' : 'http',
     method: init.method || 'GET',
-    hostname: parsedUrl.hostname,
+    hostname: parsedUrl.hostname.replace(/^\[|\]$/g, ''),
     port: parsedUrl.port || (isHttps ? 443 : 80),
     path: (parsedUrl.pathname || '/') + parsedUrl.search,
     headers,
@@ -91,6 +95,8 @@ function bunFetch(
   };
 
   return new Promise<f.Response>((resolve, reject) => {
+    let timedOut = false;
+    let activeIncoming: http.IncomingMessage | undefined;
     let activeResponseStream: PassThrough | undefined;
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
     const clearReqTimeout = () => {
@@ -99,13 +105,103 @@ function bunFetch(
         timeoutId = undefined;
       }
     };
+    const onTimeout = () => {
+      if (timedOut) {
+        return;
+      }
+      timedOut = true;
+      clearReqTimeout();
+      const timeoutErr = Object.assign(
+        new Error(`network timeout at: ${urlStr}`),
+        {
+          name: 'AbortError',
+          type: 'request-timeout',
+          code: 'ETIMEDOUT',
+        },
+      );
+      activeIncoming?.destroy(timeoutErr);
+      activeResponseStream?.destroy(timeoutErr);
+      req.destroy();
+      reject(timeoutErr);
+    };
+    const resetReqTimeout = () => {
+      if (init.timeout) {
+        clearReqTimeout();
+        timeoutId = setTimeout(onTimeout, init.timeout);
+      }
+    };
+
     const req = transport.request(reqOptions, incoming => {
+      const status = incoming.statusCode || 200;
+      const location = incoming.headers.location;
+      if (
+        init.redirect !== 'manual' &&
+        REDIRECT_STATUS_CODES.has(status) &&
+        location
+      ) {
+        clearReqTimeout();
+        incoming.resume();
+        if (init.redirect === 'error') {
+          reject(
+            Object.assign(
+              new Error(`uri requested responds with a redirect: ${urlStr}`),
+              {type: 'no-redirect'},
+            ),
+          );
+          return;
+        }
+        const maxFollow =
+          typeof init.follow === 'number' ? init.follow : MAX_REDIRECTS;
+        if (redirectCount >= maxFollow) {
+          reject(
+            Object.assign(new Error(`maximum redirect reached at: ${urlStr}`), {
+              type: 'max-redirect',
+            }),
+          );
+          return;
+        }
+        const redirectUrl = new URL(String(location), parsedUrl);
+        const currentMethod = (init.method || 'GET').toUpperCase();
+        const switchToGet =
+          status === 303 ||
+          ((status === 301 || status === 302) && currentMethod === 'POST');
+        const nextHeaders: Record<string, string> = {...headers};
+        for (const k of Object.keys(nextHeaders)) {
+          const lower = k.toLowerCase();
+          if (
+            lower === 'host' ||
+            (switchToGet &&
+              (lower === 'content-length' ||
+                lower === 'content-type' ||
+                lower === 'transfer-encoding')) ||
+            (redirectUrl.origin !== parsedUrl.origin &&
+              (lower === 'authorization' ||
+                lower === 'proxy-authorization' ||
+                lower === 'cookie'))
+          ) {
+            delete nextHeaders[k];
+          }
+        }
+        const nextInit: f.RequestInit & {timeout?: number} = {
+          ...init,
+          method: switchToGet ? 'GET' : init.method,
+          body: switchToGet ? undefined : init.body,
+          headers: nextHeaders,
+        };
+        bunFetch(redirectUrl.toString(), nextInit, redirectCount + 1)
+          .then(resolve)
+          .catch(reject);
+        return;
+      }
+
+      resetReqTimeout();
+      incoming.on('data', resetReqTimeout);
       incoming.on('end', clearReqTimeout);
       incoming.on('close', clearReqTimeout);
+
       const responseStream = new PassThrough();
+      activeIncoming = incoming;
       activeResponseStream = responseStream;
-      incoming.on('error', err => responseStream.destroy(err));
-      const status = incoming.statusCode || 200;
       const encoding = (
         incoming.headers['content-encoding'] || ''
       ).toLowerCase();
@@ -127,6 +223,7 @@ function bunFetch(
         decompressor.on('error', err => responseStream.destroy(err));
         incoming.pipe(decompressor).pipe(responseStream);
       } else {
+        incoming.on('error', err => responseStream.destroy(err));
         incoming.pipe(responseStream);
       }
 
@@ -172,26 +269,13 @@ function bunFetch(
     });
 
     if (init.timeout) {
-      const onTimeout = () => {
-        clearReqTimeout();
-        const timeoutErr = Object.assign(
-          new Error(`network timeout at: ${urlStr}`),
-          {
-            name: 'AbortError',
-            type: 'request-timeout',
-            code: 'ETIMEDOUT',
-          },
-        );
-        activeResponseStream?.destroy(timeoutErr);
-        req.destroy();
-        reject(timeoutErr);
-      };
       req.setTimeout(init.timeout, onTimeout);
-      timeoutId = setTimeout(onTimeout, init.timeout);
+      resetReqTimeout();
     }
 
     req.on('error', err => {
       clearReqTimeout();
+      activeIncoming?.destroy(err);
       activeResponseStream?.destroy(err);
       reject(err);
     });
@@ -409,9 +493,9 @@ function createMultipartStream(boundary: string, multipart: RequestPart[]) {
   return stream;
 }
 
+/* eslint-disable promise/always-return, promise/catch-or-return, promise/no-callback-in-promise */
 function teenyRequest(reqOpts: Options): Request;
 function teenyRequest(reqOpts: Options, callback: RequestCallback): void;
-/* eslint-disable promise/catch-or-return, promise/always-return, promise/no-callback-in-promise */
 function teenyRequest(
   reqOpts: Options,
   callback?: RequestCallback,
@@ -437,10 +521,7 @@ function teenyRequest(
         const header = res.headers.get('content-type');
         const response = fetchToRequestResponse(options, res);
         const body = response.body;
-        if (
-          header === 'application/json' ||
-          header === 'application/json; charset=utf-8'
-        ) {
+        if (/^application\/json(?:\s*;|$)/i.test(header || '')) {
           res.json().then(
             json => {
               response.body = json;
@@ -520,10 +601,7 @@ function teenyRequest(
       const header = res.headers.get('content-type');
       const response = fetchToRequestResponse(options, res);
       const body = response.body;
-      if (
-        header === 'application/json' ||
-        header === 'application/json; charset=utf-8'
-      ) {
+      if (/^application\/json(?:\s*;|$)/i.test(header || '')) {
         if (response.statusCode === 204) {
           // Probably a DELETE
           callback(null, response, body);
@@ -559,6 +637,7 @@ function teenyRequest(
   );
   return;
 }
+/* eslint-enable promise/always-return, promise/catch-or-return, promise/no-callback-in-promise */
 
 teenyRequest.defaults = (defaults: CoreOptions) => {
   return (reqOpts: Options, callback?: RequestCallback): Request | void => {
