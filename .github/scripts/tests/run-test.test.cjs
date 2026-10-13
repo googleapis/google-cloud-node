@@ -30,6 +30,7 @@ const {
   findOnlyFiles,
   expandTargetFiles,
   resolveTestArgs,
+  resolveBin,
 } = require(runTestPath);
 
 describe('bin/run-test.cjs .only support', () => {
@@ -43,7 +44,7 @@ describe('bin/run-test.cjs .only support', () => {
     fs.rmSync(tmpDir, {recursive: true, force: true});
   });
 
-  it('ignores .only inside comments and string literals', () => {
+  it('ignores .only inside comments, string literals, and regex literals', () => {
     const file = path.join(tmpDir, 'commented.js');
     fs.writeFileSync(
       file,
@@ -52,6 +53,7 @@ describe('bin/run-test.cjs .only support', () => {
         '/* describe.only("block comment", () => {}); */',
         'const str = "it.only(\'in string\')";',
         'const tpl = `describe.only("in template")`;',
+        'const rx = /it\\.only\\(/;',
         'it("normal test with https://example.com//not-a-comment", () => {});',
       ].join('\n'),
     );
@@ -78,7 +80,10 @@ describe('bin/run-test.cjs .only support', () => {
       file3,
       [
         "const rx = /can't match/;",
-        '/* inline comment */specify.only("still detected after single quote in regex", () => {});',
+        'const rxUrl = /https?:\\/\\/foo\\/*bar/;',
+        'const rxTick = /`/;',
+        "const rxSameLine = /can't/; specify.only('still detected after regex literals', () => {});",
+        '/* trailing comment */',
       ].join('\n'),
     );
     assert.strictEqual(fileHasOnly(file3), true);
@@ -105,6 +110,8 @@ describe('bin/run-test.cjs .only support', () => {
         '-c',
         '--timeouts',
         '--parallel',
+        '--parallel=true',
+        '-p=true',
         'build/test',
       ],
       tmpDir,
@@ -143,7 +150,7 @@ describe('bin/run-test.cjs .only support', () => {
     assert.deepStrictEqual(defaultOnly, [compiledFile]);
   });
 
-  it('auto-compiles when .only is added to or removed from a .ts source file', () => {
+  it('auto-compiles when .only is added to or removed from a .ts source file and skips compile when dual CJS/ESM builds are in sync', () => {
     const buildTestDir = path.join(tmpDir, 'build/test');
     const srcTestDir = path.join(tmpDir, 'test');
     fs.mkdirSync(buildTestDir, {recursive: true});
@@ -189,6 +196,28 @@ describe('bin/run-test.cjs .only support', () => {
     const removedResolved = resolveTestArgs(['build/test'], tmpDir);
     assert.strictEqual(removedResolved.hasOnly, false);
     assert.deepStrictEqual(removedResolved.onlyFiles, []);
+    assert.strictEqual(fs.readFileSync(compileMarker, 'utf8'), '2');
+
+    // 3. Dual CJS + ESM build targets do not trigger redundant compile when stems are in sync
+    const cjsDir = path.join(tmpDir, 'build/cjs/test');
+    const esmDir = path.join(tmpDir, 'build/esm/test');
+    fs.mkdirSync(cjsDir, {recursive: true});
+    fs.mkdirSync(esmDir, {recursive: true});
+    const cjsFile = path.join(cjsDir, 'sample.js');
+    const esmFile = path.join(esmDir, 'sample.js');
+    fs.writeFileSync(srcFile, 'it.only("dual", () => {});');
+    fs.writeFileSync(cjsFile, 'it.only("dual", () => {});');
+    fs.writeFileSync(esmFile, 'it.only("dual", () => {});');
+    const now = Date.now() / 1000;
+    fs.utimesSync(srcFile, now - 60, now - 60);
+    fs.utimesSync(cjsFile, now, now);
+    fs.utimesSync(esmFile, now, now);
+
+    const dualResolved = resolveTestArgs(
+      ['build/cjs/test', 'build/esm/test'],
+      tmpDir,
+    );
+    assert.strictEqual(dualResolved.hasOnly, true);
     assert.strictEqual(fs.readFileSync(compileMarker, 'utf8'), '2');
   });
 
@@ -298,8 +327,8 @@ describe('bin/run-test.cjs .only support', () => {
     assert.match(res.stdout, /1 passing/);
   });
 
-  it('exits 0 when invoked with build/test in a package without test directories', () => {
-    const res = spawnSync(
+  it('exits 0 when invoked with build/test in a package without test directories, but does not exit 0 when one of multiple targets exists', () => {
+    const resEmpty = spawnSync(
       process.execPath,
       [runTestPath, '--no-c8', 'build/test'],
       {
@@ -308,6 +337,34 @@ describe('bin/run-test.cjs .only support', () => {
         env: {...process.env, JS_RUNTIME: 'node'},
       },
     );
-    assert.strictEqual(res.status, 0);
+    assert.strictEqual(resEmpty.status, 0);
+
+    // When build/esm/test is missing but cjs/test and build/cjs/test exist with a failing test, it must fail
+    fs.mkdirSync(path.join(tmpDir, 'cjs/test'), {recursive: true});
+    fs.mkdirSync(path.join(tmpDir, 'build/cjs/test'), {recursive: true});
+    fs.writeFileSync(
+      path.join(tmpDir, 'cjs/test/fail.ts'),
+      'it("fails", () => { throw new Error("boom"); });\n',
+    );
+    fs.writeFileSync(
+      path.join(tmpDir, 'build/cjs/test/fail.js'),
+      'it("fails", () => { throw new Error("boom"); });\n',
+    );
+    const resMulti = spawnSync(
+      process.execPath,
+      [runTestPath, '--no-c8', 'build/esm/test', 'build/cjs/test'],
+      {
+        cwd: tmpDir,
+        encoding: 'utf8',
+        env: {...process.env, JS_RUNTIME: 'node'},
+      },
+    );
+    assert.strictEqual(resMulti.status, 1);
+
+    // And resolveBin rethrows MODULE_NOT_FOUND cleanly for missing scoped packages
+    assert.throws(
+      () => resolveBin('@nonexistent-scope/nonexistent-pkg/bin/cli.js'),
+      {code: 'MODULE_NOT_FOUND'},
+    );
   });
 });

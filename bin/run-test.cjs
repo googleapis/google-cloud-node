@@ -78,28 +78,6 @@ for (const {flag, envIn, envOut} of SHIM_FLAGS) {
 
 const args = rawArgs.filter(a => a !== '--no-c8' && !shimFlagSet.has(a));
 
-// Exit 0 if a package has no unit tests (e.g., single-service packages where
-// the service is marked deprecated and no test directory was generated). Every
-// requested compiled test directory and all source test directories must be
-// absent so running `pnpm test` before `pnpm run compile` (or with another
-// non-empty target directory) still runs/fails as expected.
-const normalizedArgs = new Set(
-  args.map(a => a.replace(/^\.\//, '').replace(/\/+$/, '')),
-);
-const hasSourceTests = ['test', 'esm/test', 'cjs/test'].some(dir =>
-  fs.existsSync(dir),
-);
-const targets = ['build/test', 'build/esm/test', 'build/cjs/test'].filter(t =>
-  normalizedArgs.has(t),
-);
-if (
-  !hasSourceTests &&
-  targets.length > 0 &&
-  targets.every(t => !fs.existsSync(t))
-) {
-  process.exit(0);
-}
-
 const isBunRuntime = typeof Bun !== 'undefined';
 const isBunUserAgent = /^bun\//i.test(process.env.npm_config_user_agent || '');
 const wantsBunRuntime =
@@ -108,7 +86,45 @@ const wantsBunRuntime =
   (process.env.JS_RUNTIME !== 'node' && isBunUserAgent);
 
 const repoRoot = path.resolve(__dirname, '..');
-const searchPaths = [process.cwd(), repoRoot];
+
+function findPackageRoot(startPath) {
+  let curr = path.resolve(startPath);
+  try {
+    if (fs.existsSync(curr) && fs.statSync(curr).isFile()) {
+      curr = path.dirname(curr);
+    }
+  } catch {
+    curr = path.dirname(curr);
+  }
+  while (curr.startsWith(repoRoot) && curr !== repoRoot) {
+    if (fs.existsSync(path.join(curr, 'package.json'))) {
+      return curr;
+    }
+    const parent = path.dirname(curr);
+    if (parent === curr) break;
+    curr = parent;
+  }
+  return null;
+}
+
+const targetPkgRoots = [];
+for (const a of args) {
+  if (!a.startsWith('-')) {
+    const clean = a.replace(/^(['"])(.*)\1$/, '$2');
+    const nonGlob = clean
+      .split(/[/\\]/)
+      .filter(s => !/[*?]/.test(s))
+      .join(path.sep);
+    if (nonGlob) {
+      const pkgRoot = findPackageRoot(path.resolve(process.cwd(), nonGlob));
+      if (pkgRoot && !targetPkgRoots.includes(pkgRoot)) {
+        targetPkgRoots.push(pkgRoot);
+      }
+    }
+  }
+}
+
+const searchPaths = [...new Set([...targetPkgRoots, process.cwd(), repoRoot])];
 
 const VALUE_FLAGS = new Set([
   '--config',
@@ -176,8 +192,13 @@ const ONLY_PATTERN = /\b(?:it|describe|context|suite|test|specify)\.only\s*\(/;
 
 function stripCommentsAndStrings(code) {
   return code.replace(
-    /\/\*[\s\S]*?\*\/|\/\/.*$|'(?:\\[\s\S]|[^'\\\r\n])*'|"(?:\\[\s\S]|[^"\\\r\n])*"|`(?:\\[\s\S]|[^`\\])*`/gm,
-    match => (match.startsWith('//') || match.startsWith('/*') ? ' ' : '""'),
+    /\/\*[\s\S]*?\*\/|\/\/.*$|'(?:\\[\s\S]|[^'\\\r\n])*'|"(?:\\[\s\S]|[^"\\\r\n])*"|`(?:\\[\s\S]|[^`\\])*`|\/(?![/*])(?:\\[\s\S]|\[(?:\\[\s\S]|[^\]\\\r\n])*\]|[^/\\\r\n])+\/[dgimsuvy]*/gm,
+    match =>
+      match.startsWith('//') || match.startsWith('/*')
+        ? ' '
+        : match.startsWith('/')
+          ? '//'
+          : '""',
   );
 }
 
@@ -197,14 +218,22 @@ function isTestFileName(name) {
   return /\.(?:[cm]?js|[cm]?ts)$/.test(name) && !name.endsWith('.d.ts');
 }
 
-function getTestStem(filePath) {
-  return path.basename(filePath).replace(/\.[cm]?[jt]s$/, '');
+function getRelativeTestStem(filePath, cwd) {
+  const rel = path
+    .relative(cwd, filePath)
+    .split(path.sep)
+    .join('/')
+    .replace(/^build\/(?:cjs\/|esm\/)?/, '')
+    .replace(/^(?:esm|cjs|dev)\//, '');
+  return rel.replace(/\.[cm]?[jt]s$/, '');
 }
 
 function collectFilesFromDir(dirPath, out = []) {
   let entries;
   try {
-    entries = fs.readdirSync(dirPath, {withFileTypes: true});
+    entries = fs
+      .readdirSync(dirPath, {withFileTypes: true})
+      .sort((a, b) => a.name.localeCompare(b.name));
   } catch {
     return out;
   }
@@ -281,6 +310,7 @@ function expandTargetFiles(rawTarget, cwd) {
       }
       return fs
         .readdirSync(baseDir, {withFileTypes: true})
+        .sort((a, b) => a.name.localeCompare(b.name))
         .filter(
           e => e.isFile() && isTestFileName(e.name) && pattern.test(e.name),
         )
@@ -392,15 +422,26 @@ function maybeCompileStaleSourceOnly(targets, onlyFiles, cwd) {
   if (!hasTsFiles || (sourceOnlyFiles.length === 0 && onlyFiles.length === 0)) {
     return onlyFiles;
   }
-  const onlyStems = onlyFiles.map(getTestStem).sort().join('\0');
-  const sourceOnlyStems = sourceOnlyFiles.map(getTestStem).sort().join('\0');
-  const maxSourceOnlyMtime =
-    sourceOnlyFiles.length > 0
-      ? Math.max(...sourceOnlyFiles.map(f => fs.statSync(f).mtimeMs))
-      : 0;
+  const onlyStems = [
+    ...new Set(onlyFiles.map(f => getRelativeTestStem(f, cwd))),
+  ]
+    .sort()
+    .join('\0');
+  const sourceOnlyStems = [
+    ...new Set(sourceOnlyFiles.map(f => getRelativeTestStem(f, cwd))),
+  ]
+    .sort()
+    .join('\0');
+  const maxSourceOnlyMtime = sourceOnlyFiles.reduce(
+    (max, f) => Math.max(max, fs.statSync(f).mtimeMs),
+    0,
+  );
   const minTargetMtime =
     onlyFiles.length > 0
-      ? Math.min(...onlyFiles.map(f => fs.statSync(f).mtimeMs))
+      ? onlyFiles.reduce(
+          (min, f) => Math.min(min, fs.statSync(f).mtimeMs),
+          Infinity,
+        )
       : 0;
   const isInSync =
     onlyStems === sourceOnlyStems &&
@@ -415,7 +456,13 @@ function maybeCompileStaleSourceOnly(targets, onlyFiles, cwd) {
   try {
     const pkg = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8'));
     if (pkg.scripts && pkg.scripts.compile) {
-      const compileRes = spawnSync('npm', ['run', 'compile'], {
+      const ua = process.env.npm_config_user_agent || '';
+      const pm = /^pnpm\//i.test(ua)
+        ? 'pnpm'
+        : /^bun\//i.test(ua)
+          ? 'bun'
+          : 'npm';
+      const compileRes = spawnSync(pm, ['run', 'compile'], {
         cwd,
         stdio: 'inherit',
         env: {...process.env, RUN_TEST_SKIP_COMPILE: 'true'},
@@ -430,6 +477,15 @@ function maybeCompileStaleSourceOnly(targets, onlyFiles, cwd) {
   return onlyFiles;
 }
 
+function isParallelFlag(arg) {
+  return (
+    arg === '--parallel' ||
+    arg === '-p' ||
+    /^--parallel=/.test(arg) ||
+    /^-p=/.test(arg)
+  );
+}
+
 function resolveTestArgs(inputArgs, cwd = process.cwd()) {
   const {optionArgs, positionalArgs} = splitMochaArgs(inputArgs);
   let onlyFiles = findOnlyFiles(positionalArgs, cwd);
@@ -437,9 +493,7 @@ function resolveTestArgs(inputArgs, cwd = process.cwd()) {
   if (onlyFiles.length === 0) {
     return {args: [...inputArgs], hasOnly: false, onlyFiles: []};
   }
-  const filteredOptions = optionArgs.filter(
-    a => a !== '--parallel' && a !== '-p',
-  );
+  const filteredOptions = optionArgs.filter(a => !isParallelFlag(a));
   if (!filteredOptions.includes('--no-parallel')) {
     filteredOptions.push('--no-parallel');
   }
@@ -461,18 +515,21 @@ function resolveBin(pkgBin) {
   try {
     return require.resolve(pkgBin, {paths: searchPaths});
   } catch (err) {
-    const pkgName = pkgBin.split('/')[0];
+    const parts = pkgBin.split('/');
+    const pnpmPrefix = pkgBin.startsWith('@')
+      ? `${parts[0]}+${parts[1]}@`
+      : `${parts[0]}@`;
     const pnpmDir = path.join(repoRoot, 'node_modules', '.pnpm');
-    if (fs.existsSync(pnpmDir)) {
-      const entry = fs
-        .readdirSync(pnpmDir)
-        .find(d => d.startsWith(`${pkgName}@`));
+    try {
+      const entry = fs.readdirSync(pnpmDir).find(d => d.startsWith(pnpmPrefix));
       if (entry) {
         const pnpmCandidate = path.join(pnpmDir, entry, 'node_modules', pkgBin);
         if (fs.existsSync(pnpmCandidate)) {
           return pnpmCandidate;
         }
       }
+    } catch {
+      // Ignore pnpm store scan errors and rethrow original resolution error.
     }
     throw err;
   }
@@ -480,20 +537,23 @@ function resolveBin(pkgBin) {
 
 if (require.main === module) {
   // Exit 0 if a package has no unit tests (e.g., single-service packages where
-  // the service is marked deprecated and no test directory was generated).
+  // the service is marked deprecated and no test directory was generated). Every
+  // requested compiled test directory and all source test directories must be
+  // absent so running `pnpm test` before `pnpm run compile` (or with another
+  // non-empty target directory) still runs/fails as expected.
+  const normalizedArgs = new Set(
+    args.map(a => a.replace(/^\.\//, '').replace(/\/+$/, '')),
+  );
+  const hasSourceTests = ['test', 'esm/test', 'cjs/test', 'dev/test'].some(
+    dir => fs.existsSync(dir),
+  );
+  const targets = ['build/test', 'build/esm/test', 'build/cjs/test'].filter(t =>
+    normalizedArgs.has(t),
+  );
   if (
-    (args.includes('build/test') &&
-      !fs.existsSync('build/test') &&
-      !fs.existsSync('test') &&
-      !fs.existsSync('dev/test')) ||
-    (args.includes('build/esm/test') &&
-      !fs.existsSync('build/esm/test') &&
-      !fs.existsSync('esm/test') &&
-      !fs.existsSync('test')) ||
-    (args.includes('build/cjs/test') &&
-      !fs.existsSync('build/cjs/test') &&
-      !fs.existsSync('esm/test') &&
-      !fs.existsSync('test'))
+    !hasSourceTests &&
+    targets.length > 0 &&
+    targets.every(t => !fs.existsSync(t))
   ) {
     process.exit(0);
   }
@@ -529,9 +589,7 @@ if (require.main === module) {
     require(shimPath);
 
     const mochaBin = resolveBin('mocha/bin/mocha.js');
-    const mochaArgs = resolvedArgs.filter(
-      a => a !== '--parallel' && a !== '-p',
-    );
+    const mochaArgs = resolvedArgs.filter(a => !isParallelFlag(a));
     if (!mochaArgs.includes('--no-parallel')) {
       mochaArgs.unshift('--no-parallel');
     }
@@ -581,4 +639,5 @@ module.exports = {
   expandTargetFiles,
   resolveTestArgs,
   splitMochaArgs,
+  resolveBin,
 };
