@@ -39,13 +39,15 @@ import {warn} from './warnings';
 import {
   traceCall,
   traceAttempt,
+  ResendRecorder,
+} from './observability/TracerHelper';
+import {checkTelemetryEnabled} from './observability/util';
+import {
   StaticTraceContext,
   DynamicTraceContext,
   AttemptTraceContext,
-  ResendRecorder,
-} from './observability/TracerHelper';
-import {resolveStaticTraceContext} from './observability/metadataResolver';
-import {checkTelemetryEnabled} from './util';
+  resolveStaticTraceContext,
+} from './observability/contextUtil';
 
 /**
  * Converts an rpc call into an API call governed by the settings.

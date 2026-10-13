@@ -32,7 +32,7 @@ import {isNodeJS} from './featureDetection';
 import {generateServiceStub} from './fallbackServiceStub';
 import {StreamType} from './streamingCalls/streaming';
 import {toLowerCamelCase} from './util';
-import {StaticTraceContext} from './observability/TracerHelper';
+import {StaticTraceContext} from './observability/contextUtil';
 import {google} from '../protos/http';
 import * as IamProtos from '../protos/iam_service';
 import * as LocationProtos from '../protos/locations';
