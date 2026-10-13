@@ -275,9 +275,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           done();
           return;
         })
-        .catch(err => {
-          throw err;
-        });
+        .catch(done);
     });
 
     it('has close method for the non-initialized client', done => {
@@ -293,9 +291,7 @@ describe('v3.ServiceMonitoringServiceClient', () => {
           done();
           return;
         })
-        .catch(err => {
-          throw err;
-        });
+        .catch(done);
     });
 
     it('has getProjectId method', async () => {

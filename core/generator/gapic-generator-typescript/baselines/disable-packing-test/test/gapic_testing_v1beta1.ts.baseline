@@ -213,9 +213,7 @@ describe('v1beta1.TestingClient', () => {
           done();
           return;
         })
-        .catch(err => {
-          throw err;
-        });
+        .catch(done);
     });
 
     it('has close method for the non-initialized client', done => {
@@ -230,9 +228,7 @@ describe('v1beta1.TestingClient', () => {
           done();
           return;
         })
-        .catch(err => {
-          throw err;
-        });
+        .catch(done);
     });
 
     it('has getProjectId method', async () => {
