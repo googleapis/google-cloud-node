@@ -92,7 +92,7 @@ describe('util lazy imports', () => {
         const util = loadFreshUtil();
         let shouldFail = true;
 
-        Module.prototype.require = function (
+        Module.prototype.require = Object.assign(function (
           this: NodeModule,
           request: string
         ) {
@@ -100,7 +100,7 @@ describe('util lazy imports', () => {
             throw new Error('Simulated mime import failure');
           }
           return originalRequire.call(this, request);
-        } as NodeRequire;
+        }, originalRequire);
 
         await assert.rejects(
           async () => {
@@ -191,7 +191,7 @@ describe('util lazy imports', () => {
         const util = loadFreshUtil();
         let shouldFail = true;
 
-        Module.prototype.require = function (
+        Module.prototype.require = Object.assign(function (
           this: NodeModule,
           request: string
         ) {
@@ -199,7 +199,7 @@ describe('util lazy imports', () => {
             throw new Error('Simulated p-limit import failure');
           }
           return originalRequire.call(this, request);
-        } as NodeRequire;
+        }, originalRequire);
 
         await assert.rejects(
           async () => {
