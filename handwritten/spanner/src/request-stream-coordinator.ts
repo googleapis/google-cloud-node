@@ -26,16 +26,23 @@ import {MetricsTracer} from './metrics/metrics-tracer';
 export class RequestStreamCoordinator {
   private readonly stream: Transform;
   private readonly metricsTracer: MetricsTracer | null;
+  private readonly deferOperationCompletion: boolean;
   private callStream: CancellableStream | null = null;
   private statusReceived = false;
+  private callStreamErrored = false;
   private streamFinished = false;
   private operationCompleted = false;
   private requestStarted = false;
   private streamClosed = false;
 
-  constructor(stream: Transform, metricsTracer: MetricsTracer | null) {
+  constructor(
+    stream: Transform,
+    metricsTracer: MetricsTracer | null,
+    deferOperationCompletion = false,
+  ) {
     this.stream = stream;
     this.metricsTracer = metricsTracer;
+    this.deferOperationCompletion = deferOperationCompletion;
   }
 
   /**
@@ -100,14 +107,21 @@ export class RequestStreamCoordinator {
     // This guard preserves OK status for normally drained streams as well as queries
     // using the PartialResultSet.last optimization (where the user stream completes early
     // while remaining trailers drain in the background).
-    if (this.streamFinished || this.statusReceived) {
+    if (this.streamFinished || this.statusReceived || this.callStreamErrored) {
       return;
     }
     if (this.callStream) {
       // In google-gax, callStream is a StreamProxy wrapping the underlying gRPC call.
       // Calling .destroy() on StreamProxy alone does not cancel the active gRPC call;
       // .cancel() must be invoked explicitly to abort the RPC on the client.
-      if (typeof this.callStream.cancel === 'function') {
+      // Guard against StreamProxy wrapping a PassThrough stream (e.g. when client is closed)
+      // which does not implement .cancel().
+      const innerStream = (this.callStream as {stream?: {cancel?: unknown}})
+        .stream;
+      if (
+        typeof this.callStream.cancel === 'function' &&
+        (!innerStream || typeof innerStream.cancel === 'function')
+      ) {
         this.callStream.cancel();
       }
       // Clean up proxy and stream resources once cancellation has been requested.
@@ -162,6 +176,7 @@ export class RequestStreamCoordinator {
     });
     callStream
       .on('error', (error: Error) => {
+        this.callStreamErrored = true;
         if (!this.stream.destroyed && !this.streamClosed) {
           this.stream.destroy(error);
         }
@@ -221,7 +236,7 @@ export class RequestStreamCoordinator {
    * Completes the OpenTelemetry operation metric. Idempotent.
    */
   completeOperation(): void {
-    if (this.operationCompleted) {
+    if (this.operationCompleted || this.deferOperationCompletion) {
       return;
     }
     this.operationCompleted = true;
