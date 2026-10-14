@@ -43,6 +43,24 @@
                                 }
                               ]
                             },
+                            "ListAclPolicies": {
+                              "requestType": "ListAclPoliciesRequest",
+                              "responseType": "ListAclPoliciesResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/aclPolicies",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}/aclPolicies"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
                             "GetCluster": {
                               "requestType": "GetClusterRequest",
                               "responseType": "Cluster",
@@ -54,6 +72,24 @@
                                 {
                                   "(google.api.http)": {
                                     "get": "/v1/{name=projects/*/locations/*/clusters/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "GetAclPolicy": {
+                              "requestType": "GetAclPolicyRequest",
+                              "responseType": "AclPolicy",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/aclPolicies/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/aclPolicies/*}"
                                   }
                                 },
                                 {
@@ -89,6 +125,34 @@
                                 }
                               ]
                             },
+                            "UpdateAclPolicy": {
+                              "requestType": "UpdateAclPolicyRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).patch": "/v1/{acl_policy.name=projects/*/locations/*/aclPolicies/*}",
+                                "(google.api.http).body": "acl_policy",
+                                "(google.api.method_signature)": "acl_policy,update_mask",
+                                "(google.longrunning.operation_info).response_type": "AclPolicy",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "patch": "/v1/{acl_policy.name=projects/*/locations/*/aclPolicies/*}",
+                                    "body": "acl_policy"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "acl_policy,update_mask"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "AclPolicy",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
                             "DeleteCluster": {
                               "requestType": "DeleteClusterRequest",
                               "responseType": "google.longrunning.Operation",
@@ -112,6 +176,68 @@
                                     "response_type": "google.protobuf.Empty",
                                     "metadata_type": "google.protobuf.Any"
                                   }
+                                }
+                              ]
+                            },
+                            "DeleteAclPolicy": {
+                              "requestType": "DeleteAclPolicyRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/aclPolicies/*}",
+                                "(google.api.method_signature)": "name",
+                                "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/aclPolicies/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.protobuf.Empty",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "GetAclPolicyRevision": {
+                              "requestType": "GetAclPolicyRevisionRequest",
+                              "responseType": "AclPolicyRevision",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/aclPolicies/*/revisions/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/aclPolicies/*/revisions/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListAclPolicyRevisions": {
+                              "requestType": "ListAclPolicyRevisionsRequest",
+                              "responseType": "ListAclPolicyRevisionsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*/aclPolicies/*}/revisions",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*/aclPolicies/*}/revisions"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
                                 }
                               ]
                             },
@@ -140,6 +266,26 @@
                                     "response_type": "Cluster",
                                     "metadata_type": "google.protobuf.Any"
                                   }
+                                }
+                              ]
+                            },
+                            "CreateAclPolicy": {
+                              "requestType": "CreateAclPolicyRequest",
+                              "responseType": "AclPolicy",
+                              "options": {
+                                "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/aclPolicies",
+                                "(google.api.http).body": "acl_policy",
+                                "(google.api.method_signature)": "parent,acl_policy,acl_policy_id"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{parent=projects/*/locations/*}/aclPolicies",
+                                    "body": "acl_policy"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,acl_policy,acl_policy_id"
                                 }
                               ]
                             },
@@ -356,6 +502,186 @@
                                   }
                                 }
                               ]
+                            },
+                            "ListTokenAuthUsers": {
+                              "requestType": "ListTokenAuthUsersRequest",
+                              "responseType": "ListTokenAuthUsersResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*/clusters/*}/tokenAuthUsers",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*/clusters/*}/tokenAuthUsers"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetTokenAuthUser": {
+                              "requestType": "GetTokenAuthUserRequest",
+                              "responseType": "TokenAuthUser",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListAuthTokens": {
+                              "requestType": "ListAuthTokensRequest",
+                              "responseType": "ListAuthTokensResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*/clusters/*/tokenAuthUsers/*}/authTokens",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*/clusters/*/tokenAuthUsers/*}/authTokens"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetAuthToken": {
+                              "requestType": "GetAuthTokenRequest",
+                              "responseType": "AuthToken",
+                              "options": {
+                                "(google.api.http).get": "/v1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*/authTokens/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*/authTokens/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "AddTokenAuthUser": {
+                              "requestType": "AddTokenAuthUserRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v1/{cluster=projects/*/locations/*/clusters/*}:addTokenAuthUser",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "cluster,token_auth_user",
+                                "(google.longrunning.operation_info).response_type": "Cluster",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{cluster=projects/*/locations/*/clusters/*}:addTokenAuthUser",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "cluster,token_auth_user"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "Cluster",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "DeleteTokenAuthUser": {
+                              "requestType": "DeleteTokenAuthUserRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*}",
+                                "(google.api.method_signature)": "name",
+                                "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.protobuf.Empty",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "AddAuthToken": {
+                              "requestType": "AddAuthTokenRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v1/{token_auth_user=projects/*/locations/*/clusters/*/tokenAuthUsers/*}:addAuthToken",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "token_auth_user,auth_token",
+                                "(google.longrunning.operation_info).response_type": "TokenAuthUser",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1/{token_auth_user=projects/*/locations/*/clusters/*/tokenAuthUsers/*}:addAuthToken",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "token_auth_user,auth_token"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "TokenAuthUser",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "DeleteAuthToken": {
+                              "requestType": "DeleteAuthTokenRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).delete": "/v1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*/authTokens/*}",
+                                "(google.api.method_signature)": "name",
+                                "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*/authTokens/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.protobuf.Empty",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
                             }
                           }
                         },
@@ -370,7 +696,8 @@
                           "values": {
                             "AUTH_MODE_UNSPECIFIED": 0,
                             "AUTH_MODE_IAM_AUTH": 1,
-                            "AUTH_MODE_DISABLED": 2
+                            "AUTH_MODE_DISABLED": 2,
+                            "AUTH_MODE_TOKEN_AUTH": 3
                           }
                         },
                         "NodeType": {
@@ -438,6 +765,40 @@
                             }
                           }
                         },
+                        "CreateAclPolicyRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "redis.googleapis.com/AclPolicy"
+                              }
+                            },
+                            "aclPolicyId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "aclPolicy": {
+                              "type": "AclPolicy",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "ListClustersRequest": {
                           "fields": {
                             "parent": {
@@ -476,6 +837,100 @@
                             }
                           }
                         },
+                        "ListAclPoliciesRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "redis.googleapis.com/AclPolicy"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ListAclPoliciesResponse": {
+                          "fields": {
+                            "aclPolicies": {
+                              "rule": "repeated",
+                              "type": "AclPolicy",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "UNORDERED_LIST"
+                              }
+                            }
+                          }
+                        },
+                        "ListAclPolicyRevisionsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "redis.googleapis.com/AclPolicyRevision"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ListAclPolicyRevisionsResponse": {
+                          "fields": {
+                            "aclPolicyRevisions": {
+                              "rule": "repeated",
+                              "type": "AclPolicyRevision",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "UNORDERED_LIST"
+                              }
+                            }
+                          }
+                        },
                         "UpdateClusterRequest": {
                           "fields": {
                             "updateMask": {
@@ -498,6 +953,32 @@
                             }
                           }
                         },
+                        "UpdateAclPolicyRequest": {
+                          "fields": {
+                            "aclPolicy": {
+                              "type": "AclPolicy",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "updateMask": {
+                              "type": "google.protobuf.FieldMask",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "GetClusterRequest": {
                           "fields": {
                             "name": {
@@ -506,6 +987,30 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "redis.googleapis.com/Cluster"
+                              }
+                            }
+                          }
+                        },
+                        "GetAclPolicyRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/AclPolicy"
+                              }
+                            }
+                          }
+                        },
+                        "GetAclPolicyRevisionRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/AclPolicyRevision"
                               }
                             }
                           }
@@ -523,6 +1028,33 @@
                             "requestId": {
                               "type": "string",
                               "id": 2
+                            }
+                          }
+                        },
+                        "DeleteAclPolicyRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/AclPolicy"
+                              }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -723,6 +1255,230 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ListTokenAuthUsersRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "redis.googleapis.com/TokenAuthUser"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ListTokenAuthUsersResponse": {
+                          "fields": {
+                            "tokenAuthUsers": {
+                              "rule": "repeated",
+                              "type": "TokenAuthUser",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "UNORDERED_LIST"
+                              }
+                            }
+                          }
+                        },
+                        "GetTokenAuthUserRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/TokenAuthUser"
+                              }
+                            }
+                          }
+                        },
+                        "ListAuthTokensRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "redis.googleapis.com/AuthToken"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ListAuthTokensResponse": {
+                          "fields": {
+                            "authTokens": {
+                              "rule": "repeated",
+                              "type": "AuthToken",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "UNORDERED_LIST"
+                              }
+                            }
+                          }
+                        },
+                        "GetAuthTokenRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/AuthToken"
+                              }
+                            }
+                          }
+                        },
+                        "AddTokenAuthUserRequest": {
+                          "fields": {
+                            "cluster": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/Cluster"
+                              }
+                            },
+                            "tokenAuthUser": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/TokenAuthUser"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteTokenAuthUserRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/TokenAuthUser"
+                              }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "force": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "AddAuthTokenRequest": {
+                          "fields": {
+                            "tokenAuthUser": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/TokenAuthUser"
+                              }
+                            },
+                            "authToken": {
+                              "type": "AuthToken",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteAuthTokenRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/AuthToken"
                               }
                             }
                           }
@@ -1067,6 +1823,21 @@
                                 "(google.api.field_behavior)": "INPUT_ONLY",
                                 "proto3_optional": true
                               }
+                            },
+                            "aclPolicy": {
+                              "type": "string",
+                              "id": 56,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/AclPolicy"
+                              }
+                            },
+                            "aclPolicyInfo": {
+                              "type": "AclPolicyInfo",
+                              "id": 58,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -1147,6 +1918,248 @@
                                 "ACTIVE": 2,
                                 "UPDATING": 3,
                                 "DELETING": 4
+                              }
+                            }
+                          }
+                        },
+                        "AclPolicyInfo": {
+                          "fields": {
+                            "appliedAclPolicy": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/AclPolicy"
+                              }
+                            },
+                            "appliedAclPolicyRevision": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/AclPolicyRevision"
+                              }
+                            },
+                            "appliedAclPolicyRevisionNumber": {
+                              "type": "int64",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "aclPolicyRevisionStatuses": {
+                              "rule": "repeated",
+                              "type": "AclPolicyRevisionStatus",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "AclPolicy": {
+                          "options": {
+                            "(google.api.resource).type": "redis.googleapis.com/AclPolicy",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/aclPolicies/{acl_policy}",
+                            "(google.api.resource).plural": "aclPolicies",
+                            "(google.api.resource).singular": "aclPolicy"
+                          },
+                          "oneofs": {
+                            "_etag": {
+                              "oneof": [
+                                "etag"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "rules": {
+                              "rule": "repeated",
+                              "type": "AclRule",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "etag": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "proto3_optional": true
+                              }
+                            },
+                            "clusterAclPolicyAttachments": {
+                              "rule": "repeated",
+                              "type": "ClusterAclPolicyAttachment",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "ACTIVE": 1,
+                                "UPDATING": 2,
+                                "DELETING": 3
+                              }
+                            }
+                          }
+                        },
+                        "AclPolicyRevisionStatus": {
+                          "fields": {
+                            "aclPolicyRevision": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/AclPolicyRevision"
+                              }
+                            },
+                            "aclPolicyRevisionNumber": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "errorMessage": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "APPLYING": 1,
+                                "APPLIED": 2,
+                                "FAILED": 3
+                              }
+                            }
+                          }
+                        },
+                        "ClusterAclPolicyAttachment": {
+                          "fields": {
+                            "cluster": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/Cluster"
+                              }
+                            },
+                            "aclPolicyRevisionStatuses": {
+                              "rule": "repeated",
+                              "type": "AclPolicyRevisionStatus",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "AclPolicyRevision": {
+                          "options": {
+                            "(google.api.resource).type": "redis.googleapis.com/AclPolicyRevision",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/aclPolicies/{acl_policy}/revisions/{revision}",
+                            "(google.api.resource).plural": "aclPolicyRevisions",
+                            "(google.api.resource).singular": "aclPolicyRevision"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "revisionNumber": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "snapshot": {
+                              "type": "AclPolicy",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "attachedClusters": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/Cluster"
+                              }
+                            }
+                          }
+                        },
+                        "AclRule": {
+                          "fields": {
+                            "username": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "rule": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
                               }
                             }
                           }
@@ -1881,6 +2894,89 @@
                               "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "TokenAuthUser": {
+                          "options": {
+                            "(google.api.resource).type": "redis.googleapis.com/TokenAuthUser",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}",
+                            "(google.api.resource).plural": "tokenAuthUsers",
+                            "(google.api.resource).singular": "tokenAuthUser"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "ACTIVE": 1,
+                                "CREATING": 2,
+                                "UPDATING": 3,
+                                "DELETING": 4
+                              }
+                            }
+                          }
+                        },
+                        "AuthToken": {
+                          "options": {
+                            "(google.api.resource).type": "redis.googleapis.com/AuthToken",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}/authTokens/{auth_token}",
+                            "(google.api.resource).plural": "authTokens",
+                            "(google.api.resource).singular": "authToken"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "token": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "ACTIVE": 1,
+                                "CREATING": 2,
+                                "DELETING": 3
                               }
                             }
                           }

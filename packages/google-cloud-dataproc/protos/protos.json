@@ -2051,6 +2051,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "masterFlexibleConfig": {
+                          "type": "FlexibleInstanceGroupConfig",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "workerFlexibleConfig": {
+                          "type": "FlexibleInstanceGroupConfig",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "secondaryWorkerFlexibleConfig": {
+                          "type": "FlexibleInstanceGroupConfig",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2193,6 +2214,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "multiZoneConfig": {
+                          "type": "MultiZoneConfig",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "networkUri": {
                           "type": "string",
                           "id": 2,
@@ -2294,6 +2322,25 @@
                             "INHERIT_FROM_SUBNETWORK": 1,
                             "OUTBOUND": 2,
                             "BIDIRECTIONAL": 3
+                          }
+                        }
+                      }
+                    },
+                    "MultiZoneConfig": {
+                      "fields": {
+                        "targetShape": {
+                          "type": "TargetShape",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TargetShape": {
+                          "values": {
+                            "TARGET_SHAPE_UNSPECIFIED": 0,
+                            "ANY": 1
                           }
                         }
                       }
@@ -2677,6 +2724,47 @@
                                 "proto3_optional": true
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "FlexibleInstanceGroupConfig": {
+                      "fields": {
+                        "numInstances": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "coreCount": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "bootDiskSizeGb": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "hardwareClass": {
+                          "type": "HardwareClass",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HardwareClass": {
+                          "values": {
+                            "HARDWARE_CLASS_UNSPECIFIED": 0,
+                            "STANDARD": 1,
+                            "PERFORMANCE": 2
                           }
                         }
                       }

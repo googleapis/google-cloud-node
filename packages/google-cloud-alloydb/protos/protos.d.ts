@@ -3164,8 +3164,14 @@ export namespace google {
                     /** Instance queryInsightsConfig */
                     queryInsightsConfig?: (google.cloud.alloydb.v1.Instance.IQueryInsightsInstanceConfig|null);
 
+                    /** Instance queryInsightsInfo */
+                    queryInsightsInfo?: (google.cloud.alloydb.v1.Instance.IQueryInsightsInstanceInfo|null);
+
                     /** Instance observabilityConfig */
                     observabilityConfig?: (google.cloud.alloydb.v1.Instance.IObservabilityInstanceConfig|null);
+
+                    /** Instance observabilityInstanceInfo */
+                    observabilityInstanceInfo?: (google.cloud.alloydb.v1.Instance.IObservabilityInstanceInfo|null);
 
                     /** Instance readPoolConfig */
                     readPoolConfig?: (google.cloud.alloydb.v1.Instance.IReadPoolConfig|null);
@@ -3264,8 +3270,14 @@ export namespace google {
                     /** Instance queryInsightsConfig. */
                     public queryInsightsConfig?: (google.cloud.alloydb.v1.Instance.IQueryInsightsInstanceConfig|null);
 
+                    /** Instance queryInsightsInfo. */
+                    public queryInsightsInfo?: (google.cloud.alloydb.v1.Instance.IQueryInsightsInstanceInfo|null);
+
                     /** Instance observabilityConfig. */
                     public observabilityConfig?: (google.cloud.alloydb.v1.Instance.IObservabilityInstanceConfig|null);
+
+                    /** Instance observabilityInstanceInfo. */
+                    public observabilityInstanceInfo?: (google.cloud.alloydb.v1.Instance.IObservabilityInstanceInfo|null);
 
                     /** Instance readPoolConfig. */
                     public readPoolConfig?: (google.cloud.alloydb.v1.Instance.IReadPoolConfig|null);
@@ -3719,6 +3731,127 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a QueryInsightsInstanceInfo. */
+                    interface IQueryInsightsInstanceInfo {
+
+                        /** QueryInsightsInstanceInfo enabled */
+                        enabled?: (boolean|null);
+
+                        /** QueryInsightsInstanceInfo recordApplicationTags */
+                        recordApplicationTags?: (boolean|null);
+
+                        /** QueryInsightsInstanceInfo recordClientAddress */
+                        recordClientAddress?: (boolean|null);
+
+                        /** QueryInsightsInstanceInfo queryStringLength */
+                        queryStringLength?: (number|null);
+
+                        /** QueryInsightsInstanceInfo queryPlansPerMinute */
+                        queryPlansPerMinute?: (number|null);
+                    }
+
+                    /** Represents a QueryInsightsInstanceInfo. */
+                    class QueryInsightsInstanceInfo implements IQueryInsightsInstanceInfo {
+
+                        /**
+                         * Constructs a new QueryInsightsInstanceInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1.Instance.IQueryInsightsInstanceInfo);
+
+                        /** QueryInsightsInstanceInfo enabled. */
+                        public enabled: boolean;
+
+                        /** QueryInsightsInstanceInfo recordApplicationTags. */
+                        public recordApplicationTags: boolean;
+
+                        /** QueryInsightsInstanceInfo recordClientAddress. */
+                        public recordClientAddress: boolean;
+
+                        /** QueryInsightsInstanceInfo queryStringLength. */
+                        public queryStringLength: number;
+
+                        /** QueryInsightsInstanceInfo queryPlansPerMinute. */
+                        public queryPlansPerMinute: number;
+
+                        /**
+                         * Creates a new QueryInsightsInstanceInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QueryInsightsInstanceInfo instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1.Instance.IQueryInsightsInstanceInfo): google.cloud.alloydb.v1.Instance.QueryInsightsInstanceInfo;
+
+                        /**
+                         * Encodes the specified QueryInsightsInstanceInfo message. Does not implicitly {@link google.cloud.alloydb.v1.Instance.QueryInsightsInstanceInfo.verify|verify} messages.
+                         * @param message QueryInsightsInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1.Instance.IQueryInsightsInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QueryInsightsInstanceInfo message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.Instance.QueryInsightsInstanceInfo.verify|verify} messages.
+                         * @param message QueryInsightsInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1.Instance.IQueryInsightsInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QueryInsightsInstanceInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QueryInsightsInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.Instance.QueryInsightsInstanceInfo;
+
+                        /**
+                         * Decodes a QueryInsightsInstanceInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QueryInsightsInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.Instance.QueryInsightsInstanceInfo;
+
+                        /**
+                         * Verifies a QueryInsightsInstanceInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QueryInsightsInstanceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QueryInsightsInstanceInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.Instance.QueryInsightsInstanceInfo;
+
+                        /**
+                         * Creates a plain object from a QueryInsightsInstanceInfo message. Also converts values to other types if specified.
+                         * @param message QueryInsightsInstanceInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1.Instance.QueryInsightsInstanceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QueryInsightsInstanceInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QueryInsightsInstanceInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of an ObservabilityInstanceConfig. */
                     interface IObservabilityInstanceConfig {
 
@@ -3852,6 +3985,145 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ObservabilityInstanceConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ObservabilityInstanceInfo. */
+                    interface IObservabilityInstanceInfo {
+
+                        /** ObservabilityInstanceInfo enabled */
+                        enabled?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo preserveComments */
+                        preserveComments?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo trackWaitEvents */
+                        trackWaitEvents?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo trackWaitEventTypes */
+                        trackWaitEventTypes?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo maxQueryStringLength */
+                        maxQueryStringLength?: (number|null);
+
+                        /** ObservabilityInstanceInfo recordApplicationTags */
+                        recordApplicationTags?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo queryPlansPerMinute */
+                        queryPlansPerMinute?: (number|null);
+
+                        /** ObservabilityInstanceInfo trackActiveQueries */
+                        trackActiveQueries?: (boolean|null);
+                    }
+
+                    /** Represents an ObservabilityInstanceInfo. */
+                    class ObservabilityInstanceInfo implements IObservabilityInstanceInfo {
+
+                        /**
+                         * Constructs a new ObservabilityInstanceInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1.Instance.IObservabilityInstanceInfo);
+
+                        /** ObservabilityInstanceInfo enabled. */
+                        public enabled: boolean;
+
+                        /** ObservabilityInstanceInfo preserveComments. */
+                        public preserveComments: boolean;
+
+                        /** ObservabilityInstanceInfo trackWaitEvents. */
+                        public trackWaitEvents: boolean;
+
+                        /** ObservabilityInstanceInfo trackWaitEventTypes. */
+                        public trackWaitEventTypes: boolean;
+
+                        /** ObservabilityInstanceInfo maxQueryStringLength. */
+                        public maxQueryStringLength: number;
+
+                        /** ObservabilityInstanceInfo recordApplicationTags. */
+                        public recordApplicationTags: boolean;
+
+                        /** ObservabilityInstanceInfo queryPlansPerMinute. */
+                        public queryPlansPerMinute: number;
+
+                        /** ObservabilityInstanceInfo trackActiveQueries. */
+                        public trackActiveQueries: boolean;
+
+                        /**
+                         * Creates a new ObservabilityInstanceInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ObservabilityInstanceInfo instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1.Instance.IObservabilityInstanceInfo): google.cloud.alloydb.v1.Instance.ObservabilityInstanceInfo;
+
+                        /**
+                         * Encodes the specified ObservabilityInstanceInfo message. Does not implicitly {@link google.cloud.alloydb.v1.Instance.ObservabilityInstanceInfo.verify|verify} messages.
+                         * @param message ObservabilityInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1.Instance.IObservabilityInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ObservabilityInstanceInfo message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1.Instance.ObservabilityInstanceInfo.verify|verify} messages.
+                         * @param message ObservabilityInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1.Instance.IObservabilityInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ObservabilityInstanceInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ObservabilityInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1.Instance.ObservabilityInstanceInfo;
+
+                        /**
+                         * Decodes an ObservabilityInstanceInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ObservabilityInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1.Instance.ObservabilityInstanceInfo;
+
+                        /**
+                         * Verifies an ObservabilityInstanceInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ObservabilityInstanceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ObservabilityInstanceInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1.Instance.ObservabilityInstanceInfo;
+
+                        /**
+                         * Creates a plain object from an ObservabilityInstanceInfo message. Also converts values to other types if specified.
+                         * @param message ObservabilityInstanceInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1.Instance.ObservabilityInstanceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ObservabilityInstanceInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ObservabilityInstanceInfo
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -17923,8 +18195,14 @@ export namespace google {
                     /** Instance queryInsightsConfig */
                     queryInsightsConfig?: (google.cloud.alloydb.v1alpha.Instance.IQueryInsightsInstanceConfig|null);
 
+                    /** Instance queryInsightsInfo */
+                    queryInsightsInfo?: (google.cloud.alloydb.v1alpha.Instance.IQueryInsightsInstanceInfo|null);
+
                     /** Instance observabilityConfig */
                     observabilityConfig?: (google.cloud.alloydb.v1alpha.Instance.IObservabilityInstanceConfig|null);
+
+                    /** Instance observabilityInstanceInfo */
+                    observabilityInstanceInfo?: (google.cloud.alloydb.v1alpha.Instance.IObservabilityInstanceInfo|null);
 
                     /** Instance readPoolConfig */
                     readPoolConfig?: (google.cloud.alloydb.v1alpha.Instance.IReadPoolConfig|null);
@@ -18038,8 +18316,14 @@ export namespace google {
                     /** Instance queryInsightsConfig. */
                     public queryInsightsConfig?: (google.cloud.alloydb.v1alpha.Instance.IQueryInsightsInstanceConfig|null);
 
+                    /** Instance queryInsightsInfo. */
+                    public queryInsightsInfo?: (google.cloud.alloydb.v1alpha.Instance.IQueryInsightsInstanceInfo|null);
+
                     /** Instance observabilityConfig. */
                     public observabilityConfig?: (google.cloud.alloydb.v1alpha.Instance.IObservabilityInstanceConfig|null);
+
+                    /** Instance observabilityInstanceInfo. */
+                    public observabilityInstanceInfo?: (google.cloud.alloydb.v1alpha.Instance.IObservabilityInstanceInfo|null);
 
                     /** Instance readPoolConfig. */
                     public readPoolConfig?: (google.cloud.alloydb.v1alpha.Instance.IReadPoolConfig|null);
@@ -18508,6 +18792,127 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a QueryInsightsInstanceInfo. */
+                    interface IQueryInsightsInstanceInfo {
+
+                        /** QueryInsightsInstanceInfo enabled */
+                        enabled?: (boolean|null);
+
+                        /** QueryInsightsInstanceInfo recordApplicationTags */
+                        recordApplicationTags?: (boolean|null);
+
+                        /** QueryInsightsInstanceInfo recordClientAddress */
+                        recordClientAddress?: (boolean|null);
+
+                        /** QueryInsightsInstanceInfo queryStringLength */
+                        queryStringLength?: (number|null);
+
+                        /** QueryInsightsInstanceInfo queryPlansPerMinute */
+                        queryPlansPerMinute?: (number|null);
+                    }
+
+                    /** Represents a QueryInsightsInstanceInfo. */
+                    class QueryInsightsInstanceInfo implements IQueryInsightsInstanceInfo {
+
+                        /**
+                         * Constructs a new QueryInsightsInstanceInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1alpha.Instance.IQueryInsightsInstanceInfo);
+
+                        /** QueryInsightsInstanceInfo enabled. */
+                        public enabled: boolean;
+
+                        /** QueryInsightsInstanceInfo recordApplicationTags. */
+                        public recordApplicationTags: boolean;
+
+                        /** QueryInsightsInstanceInfo recordClientAddress. */
+                        public recordClientAddress: boolean;
+
+                        /** QueryInsightsInstanceInfo queryStringLength. */
+                        public queryStringLength: number;
+
+                        /** QueryInsightsInstanceInfo queryPlansPerMinute. */
+                        public queryPlansPerMinute: number;
+
+                        /**
+                         * Creates a new QueryInsightsInstanceInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QueryInsightsInstanceInfo instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1alpha.Instance.IQueryInsightsInstanceInfo): google.cloud.alloydb.v1alpha.Instance.QueryInsightsInstanceInfo;
+
+                        /**
+                         * Encodes the specified QueryInsightsInstanceInfo message. Does not implicitly {@link google.cloud.alloydb.v1alpha.Instance.QueryInsightsInstanceInfo.verify|verify} messages.
+                         * @param message QueryInsightsInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1alpha.Instance.IQueryInsightsInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QueryInsightsInstanceInfo message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.Instance.QueryInsightsInstanceInfo.verify|verify} messages.
+                         * @param message QueryInsightsInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1alpha.Instance.IQueryInsightsInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QueryInsightsInstanceInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QueryInsightsInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1alpha.Instance.QueryInsightsInstanceInfo;
+
+                        /**
+                         * Decodes a QueryInsightsInstanceInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QueryInsightsInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1alpha.Instance.QueryInsightsInstanceInfo;
+
+                        /**
+                         * Verifies a QueryInsightsInstanceInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QueryInsightsInstanceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QueryInsightsInstanceInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1alpha.Instance.QueryInsightsInstanceInfo;
+
+                        /**
+                         * Creates a plain object from a QueryInsightsInstanceInfo message. Also converts values to other types if specified.
+                         * @param message QueryInsightsInstanceInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1alpha.Instance.QueryInsightsInstanceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QueryInsightsInstanceInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QueryInsightsInstanceInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of an ObservabilityInstanceConfig. */
                     interface IObservabilityInstanceConfig {
 
@@ -18653,6 +19058,163 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ObservabilityInstanceConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ObservabilityInstanceInfo. */
+                    interface IObservabilityInstanceInfo {
+
+                        /** ObservabilityInstanceInfo enabled */
+                        enabled?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo preserveComments */
+                        preserveComments?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo trackWaitEvents */
+                        trackWaitEvents?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo trackWaitEventTypes */
+                        trackWaitEventTypes?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo maxQueryStringLength */
+                        maxQueryStringLength?: (number|null);
+
+                        /** ObservabilityInstanceInfo recordApplicationTags */
+                        recordApplicationTags?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo queryPlansPerMinute */
+                        queryPlansPerMinute?: (number|null);
+
+                        /** ObservabilityInstanceInfo trackActiveQueries */
+                        trackActiveQueries?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo trackClientAddress */
+                        trackClientAddress?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo assistiveExperiencesEnabled */
+                        assistiveExperiencesEnabled?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo trackActiveQueryPlan */
+                        trackActiveQueryPlan?: (boolean|null);
+                    }
+
+                    /** Represents an ObservabilityInstanceInfo. */
+                    class ObservabilityInstanceInfo implements IObservabilityInstanceInfo {
+
+                        /**
+                         * Constructs a new ObservabilityInstanceInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1alpha.Instance.IObservabilityInstanceInfo);
+
+                        /** ObservabilityInstanceInfo enabled. */
+                        public enabled: boolean;
+
+                        /** ObservabilityInstanceInfo preserveComments. */
+                        public preserveComments: boolean;
+
+                        /** ObservabilityInstanceInfo trackWaitEvents. */
+                        public trackWaitEvents: boolean;
+
+                        /** ObservabilityInstanceInfo trackWaitEventTypes. */
+                        public trackWaitEventTypes: boolean;
+
+                        /** ObservabilityInstanceInfo maxQueryStringLength. */
+                        public maxQueryStringLength: number;
+
+                        /** ObservabilityInstanceInfo recordApplicationTags. */
+                        public recordApplicationTags: boolean;
+
+                        /** ObservabilityInstanceInfo queryPlansPerMinute. */
+                        public queryPlansPerMinute: number;
+
+                        /** ObservabilityInstanceInfo trackActiveQueries. */
+                        public trackActiveQueries: boolean;
+
+                        /** ObservabilityInstanceInfo trackClientAddress. */
+                        public trackClientAddress: boolean;
+
+                        /** ObservabilityInstanceInfo assistiveExperiencesEnabled. */
+                        public assistiveExperiencesEnabled: boolean;
+
+                        /** ObservabilityInstanceInfo trackActiveQueryPlan. */
+                        public trackActiveQueryPlan: boolean;
+
+                        /**
+                         * Creates a new ObservabilityInstanceInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ObservabilityInstanceInfo instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1alpha.Instance.IObservabilityInstanceInfo): google.cloud.alloydb.v1alpha.Instance.ObservabilityInstanceInfo;
+
+                        /**
+                         * Encodes the specified ObservabilityInstanceInfo message. Does not implicitly {@link google.cloud.alloydb.v1alpha.Instance.ObservabilityInstanceInfo.verify|verify} messages.
+                         * @param message ObservabilityInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1alpha.Instance.IObservabilityInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ObservabilityInstanceInfo message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1alpha.Instance.ObservabilityInstanceInfo.verify|verify} messages.
+                         * @param message ObservabilityInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1alpha.Instance.IObservabilityInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ObservabilityInstanceInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ObservabilityInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1alpha.Instance.ObservabilityInstanceInfo;
+
+                        /**
+                         * Decodes an ObservabilityInstanceInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ObservabilityInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1alpha.Instance.ObservabilityInstanceInfo;
+
+                        /**
+                         * Verifies an ObservabilityInstanceInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ObservabilityInstanceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ObservabilityInstanceInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1alpha.Instance.ObservabilityInstanceInfo;
+
+                        /**
+                         * Creates a plain object from an ObservabilityInstanceInfo message. Also converts values to other types if specified.
+                         * @param message ObservabilityInstanceInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1alpha.Instance.ObservabilityInstanceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ObservabilityInstanceInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ObservabilityInstanceInfo
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -33552,8 +34114,14 @@ export namespace google {
                     /** Instance queryInsightsConfig */
                     queryInsightsConfig?: (google.cloud.alloydb.v1beta.Instance.IQueryInsightsInstanceConfig|null);
 
+                    /** Instance queryInsightsInfo */
+                    queryInsightsInfo?: (google.cloud.alloydb.v1beta.Instance.IQueryInsightsInstanceInfo|null);
+
                     /** Instance observabilityConfig */
                     observabilityConfig?: (google.cloud.alloydb.v1beta.Instance.IObservabilityInstanceConfig|null);
+
+                    /** Instance observabilityInstanceInfo */
+                    observabilityInstanceInfo?: (google.cloud.alloydb.v1beta.Instance.IObservabilityInstanceInfo|null);
 
                     /** Instance readPoolConfig */
                     readPoolConfig?: (google.cloud.alloydb.v1beta.Instance.IReadPoolConfig|null);
@@ -33664,8 +34232,14 @@ export namespace google {
                     /** Instance queryInsightsConfig. */
                     public queryInsightsConfig?: (google.cloud.alloydb.v1beta.Instance.IQueryInsightsInstanceConfig|null);
 
+                    /** Instance queryInsightsInfo. */
+                    public queryInsightsInfo?: (google.cloud.alloydb.v1beta.Instance.IQueryInsightsInstanceInfo|null);
+
                     /** Instance observabilityConfig. */
                     public observabilityConfig?: (google.cloud.alloydb.v1beta.Instance.IObservabilityInstanceConfig|null);
+
+                    /** Instance observabilityInstanceInfo. */
+                    public observabilityInstanceInfo?: (google.cloud.alloydb.v1beta.Instance.IObservabilityInstanceInfo|null);
 
                     /** Instance readPoolConfig. */
                     public readPoolConfig?: (google.cloud.alloydb.v1beta.Instance.IReadPoolConfig|null);
@@ -34131,6 +34705,127 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a QueryInsightsInstanceInfo. */
+                    interface IQueryInsightsInstanceInfo {
+
+                        /** QueryInsightsInstanceInfo enabled */
+                        enabled?: (boolean|null);
+
+                        /** QueryInsightsInstanceInfo recordApplicationTags */
+                        recordApplicationTags?: (boolean|null);
+
+                        /** QueryInsightsInstanceInfo recordClientAddress */
+                        recordClientAddress?: (boolean|null);
+
+                        /** QueryInsightsInstanceInfo queryStringLength */
+                        queryStringLength?: (number|null);
+
+                        /** QueryInsightsInstanceInfo queryPlansPerMinute */
+                        queryPlansPerMinute?: (number|null);
+                    }
+
+                    /** Represents a QueryInsightsInstanceInfo. */
+                    class QueryInsightsInstanceInfo implements IQueryInsightsInstanceInfo {
+
+                        /**
+                         * Constructs a new QueryInsightsInstanceInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1beta.Instance.IQueryInsightsInstanceInfo);
+
+                        /** QueryInsightsInstanceInfo enabled. */
+                        public enabled: boolean;
+
+                        /** QueryInsightsInstanceInfo recordApplicationTags. */
+                        public recordApplicationTags: boolean;
+
+                        /** QueryInsightsInstanceInfo recordClientAddress. */
+                        public recordClientAddress: boolean;
+
+                        /** QueryInsightsInstanceInfo queryStringLength. */
+                        public queryStringLength: number;
+
+                        /** QueryInsightsInstanceInfo queryPlansPerMinute. */
+                        public queryPlansPerMinute: number;
+
+                        /**
+                         * Creates a new QueryInsightsInstanceInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns QueryInsightsInstanceInfo instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1beta.Instance.IQueryInsightsInstanceInfo): google.cloud.alloydb.v1beta.Instance.QueryInsightsInstanceInfo;
+
+                        /**
+                         * Encodes the specified QueryInsightsInstanceInfo message. Does not implicitly {@link google.cloud.alloydb.v1beta.Instance.QueryInsightsInstanceInfo.verify|verify} messages.
+                         * @param message QueryInsightsInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1beta.Instance.IQueryInsightsInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified QueryInsightsInstanceInfo message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.Instance.QueryInsightsInstanceInfo.verify|verify} messages.
+                         * @param message QueryInsightsInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1beta.Instance.IQueryInsightsInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a QueryInsightsInstanceInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns QueryInsightsInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.Instance.QueryInsightsInstanceInfo;
+
+                        /**
+                         * Decodes a QueryInsightsInstanceInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns QueryInsightsInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.Instance.QueryInsightsInstanceInfo;
+
+                        /**
+                         * Verifies a QueryInsightsInstanceInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a QueryInsightsInstanceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns QueryInsightsInstanceInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.Instance.QueryInsightsInstanceInfo;
+
+                        /**
+                         * Creates a plain object from a QueryInsightsInstanceInfo message. Also converts values to other types if specified.
+                         * @param message QueryInsightsInstanceInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1beta.Instance.QueryInsightsInstanceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this QueryInsightsInstanceInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for QueryInsightsInstanceInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of an ObservabilityInstanceConfig. */
                     interface IObservabilityInstanceConfig {
 
@@ -34276,6 +34971,163 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ObservabilityInstanceConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an ObservabilityInstanceInfo. */
+                    interface IObservabilityInstanceInfo {
+
+                        /** ObservabilityInstanceInfo enabled */
+                        enabled?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo preserveComments */
+                        preserveComments?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo trackWaitEvents */
+                        trackWaitEvents?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo trackWaitEventTypes */
+                        trackWaitEventTypes?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo maxQueryStringLength */
+                        maxQueryStringLength?: (number|null);
+
+                        /** ObservabilityInstanceInfo recordApplicationTags */
+                        recordApplicationTags?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo queryPlansPerMinute */
+                        queryPlansPerMinute?: (number|null);
+
+                        /** ObservabilityInstanceInfo trackActiveQueries */
+                        trackActiveQueries?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo trackClientAddress */
+                        trackClientAddress?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo assistiveExperiencesEnabled */
+                        assistiveExperiencesEnabled?: (boolean|null);
+
+                        /** ObservabilityInstanceInfo trackActiveQueryPlan */
+                        trackActiveQueryPlan?: (boolean|null);
+                    }
+
+                    /** Represents an ObservabilityInstanceInfo. */
+                    class ObservabilityInstanceInfo implements IObservabilityInstanceInfo {
+
+                        /**
+                         * Constructs a new ObservabilityInstanceInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.alloydb.v1beta.Instance.IObservabilityInstanceInfo);
+
+                        /** ObservabilityInstanceInfo enabled. */
+                        public enabled: boolean;
+
+                        /** ObservabilityInstanceInfo preserveComments. */
+                        public preserveComments: boolean;
+
+                        /** ObservabilityInstanceInfo trackWaitEvents. */
+                        public trackWaitEvents: boolean;
+
+                        /** ObservabilityInstanceInfo trackWaitEventTypes. */
+                        public trackWaitEventTypes: boolean;
+
+                        /** ObservabilityInstanceInfo maxQueryStringLength. */
+                        public maxQueryStringLength: number;
+
+                        /** ObservabilityInstanceInfo recordApplicationTags. */
+                        public recordApplicationTags: boolean;
+
+                        /** ObservabilityInstanceInfo queryPlansPerMinute. */
+                        public queryPlansPerMinute: number;
+
+                        /** ObservabilityInstanceInfo trackActiveQueries. */
+                        public trackActiveQueries: boolean;
+
+                        /** ObservabilityInstanceInfo trackClientAddress. */
+                        public trackClientAddress: boolean;
+
+                        /** ObservabilityInstanceInfo assistiveExperiencesEnabled. */
+                        public assistiveExperiencesEnabled: boolean;
+
+                        /** ObservabilityInstanceInfo trackActiveQueryPlan. */
+                        public trackActiveQueryPlan: boolean;
+
+                        /**
+                         * Creates a new ObservabilityInstanceInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ObservabilityInstanceInfo instance
+                         */
+                        public static create(properties?: google.cloud.alloydb.v1beta.Instance.IObservabilityInstanceInfo): google.cloud.alloydb.v1beta.Instance.ObservabilityInstanceInfo;
+
+                        /**
+                         * Encodes the specified ObservabilityInstanceInfo message. Does not implicitly {@link google.cloud.alloydb.v1beta.Instance.ObservabilityInstanceInfo.verify|verify} messages.
+                         * @param message ObservabilityInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.alloydb.v1beta.Instance.IObservabilityInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ObservabilityInstanceInfo message, length delimited. Does not implicitly {@link google.cloud.alloydb.v1beta.Instance.ObservabilityInstanceInfo.verify|verify} messages.
+                         * @param message ObservabilityInstanceInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.alloydb.v1beta.Instance.IObservabilityInstanceInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ObservabilityInstanceInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ObservabilityInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.alloydb.v1beta.Instance.ObservabilityInstanceInfo;
+
+                        /**
+                         * Decodes an ObservabilityInstanceInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ObservabilityInstanceInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.alloydb.v1beta.Instance.ObservabilityInstanceInfo;
+
+                        /**
+                         * Verifies an ObservabilityInstanceInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ObservabilityInstanceInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ObservabilityInstanceInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.alloydb.v1beta.Instance.ObservabilityInstanceInfo;
+
+                        /**
+                         * Creates a plain object from an ObservabilityInstanceInfo message. Also converts values to other types if specified.
+                         * @param message ObservabilityInstanceInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.alloydb.v1beta.Instance.ObservabilityInstanceInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ObservabilityInstanceInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ObservabilityInstanceInfo
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
