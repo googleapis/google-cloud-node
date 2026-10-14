@@ -51,4 +51,17 @@ describe('marshallGaxiosResponse', () => {
     // status and other props should exist
     assert.equal(newRes.status, status);
   });
+
+  it('should accept response objects from distinct gaxios type instances', () => {
+    const headers = new Headers({'x-test': 'value'});
+    const crossVersionRes = {
+      headers,
+      status: 200,
+      data: {ok: true},
+    };
+
+    const newRes = marshallGaxiosResponse(crossVersionRes);
+    assert.deepEqual(newRes.headers, {'x-test': 'value'});
+    assert.equal(newRes.status, 200);
+  });
 });

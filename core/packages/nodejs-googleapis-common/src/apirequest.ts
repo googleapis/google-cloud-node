@@ -388,7 +388,9 @@ async function createAPIRequestAsync<T>(
       mooOpts.headers = Gaxios.mergeHeaders(mooOpts.headers!, authHeaders);
       return h2.request<T>(mooOpts);
     } else {
-      const res = await (authClient as GoogleAuth).request<T>(options);
+      const res = await (authClient as GoogleAuth).request<T>(
+        options as Parameters<GoogleAuth['request']>[0],
+      );
 
       return marshallGaxiosResponse(res);
     }

@@ -23,7 +23,8 @@ import * as sinon from 'sinon';
 import {GlobalOptions, MethodOptions} from '../src/api';
 import {createAPIRequest} from '../src/apirequest';
 import {GoogleAuth} from 'google-auth-library';
-import {GaxiosResponse} from 'gaxios';
+
+type AuthRequestResponse = Awaited<ReturnType<GoogleAuth['request']>>;
 
 interface MyWritableOptions {
   highWaterMark?: number;
@@ -487,7 +488,9 @@ describe('createAPIRequest', () => {
 
     it('should allow passing a GoogleAuth param for auth', async () => {
       const auth = new GoogleAuth();
-      const stub = sandbox.stub(auth, 'request').resolves({} as GaxiosResponse);
+      const stub = sandbox
+        .stub(auth, 'request')
+        .resolves({} as unknown as AuthRequestResponse);
       await createAPIRequest<FakeParams>({
         options: {url},
         params: {},
@@ -515,7 +518,7 @@ describe('createAPIRequest', () => {
       sandbox.stub(auth, 'getRequestHeaders').resolves(new Headers());
       const requestStub = sandbox
         .stub(auth, 'request')
-        .resolves({data: fakeResponse} as GaxiosResponse);
+        .resolves({data: fakeResponse} as unknown as AuthRequestResponse);
       const result = await createAPIRequest<FakeParams>({
         options: {url: gduUrl},
         params: {},
@@ -549,7 +552,7 @@ describe('createAPIRequest', () => {
       sandbox.stub(auth, 'getRequestHeaders').resolves(new Headers());
       const requestStub = sandbox
         .stub(auth, 'request')
-        .resolves({data: fakeResponse} as GaxiosResponse);
+        .resolves({data: fakeResponse} as unknown as AuthRequestResponse);
       const result = await createAPIRequest<FakeParams>({
         options: {url: gduUrl},
         params: {},
@@ -608,7 +611,7 @@ describe('createAPIRequest', () => {
         sandbox.stub(auth, 'getRequestHeaders').resolves(new Headers());
         const requestStub = sandbox
           .stub(auth, 'request')
-          .resolves({data: fakeResponse} as GaxiosResponse);
+          .resolves({data: fakeResponse} as unknown as AuthRequestResponse);
         const result = await createAPIRequest<FakeParams>({
           options: {url: gduUrl},
           params: {},
@@ -648,7 +651,7 @@ describe('createAPIRequest', () => {
         sandbox.stub(auth, 'getRequestHeaders').resolves(new Headers());
         const requestStub = sandbox
           .stub(auth, 'request')
-          .resolves({data: fakeResponse} as GaxiosResponse);
+          .resolves({data: fakeResponse} as unknown as AuthRequestResponse);
         const result = await createAPIRequest<FakeParams>({
           options: {url: gduUrl},
           params: {},

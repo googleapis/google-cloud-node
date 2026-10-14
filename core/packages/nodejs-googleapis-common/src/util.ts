@@ -49,7 +49,9 @@ export function headersToClassicHeaders<T extends Record<string, string>>(
  * @param res the Gaxios Response
  * @returns the GaxiosResponse with HTTP2-ready/compatible headers
  */
-export function marshallGaxiosResponse<T extends GaxiosResponse>(res?: T) {
+export function marshallGaxiosResponse<
+  T extends {headers?: HeadersInit} = GaxiosResponse,
+>(res?: T) {
   return Object.defineProperties(res || {}, {
     headers: {
       configurable: true,
