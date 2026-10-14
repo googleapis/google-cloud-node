@@ -43,6 +43,10 @@ export function headersToClassicHeaders<T extends Record<string, string>>(
   return classicHeaders as T;
 }
 
+type ResponseData<T> = T extends {data: infer D}
+  ? D
+  : ReturnType<JSON['parse']>;
+
 /**
  * marshall a GaxiosResponse into a library-friendly type.
  *
@@ -51,13 +55,13 @@ export function headersToClassicHeaders<T extends Record<string, string>>(
  */
 export function marshallGaxiosResponse<
   T extends {headers?: HeadersInit} = GaxiosResponse,
->(res: T): GaxiosResponseWithHTTP2;
+>(res: T): GaxiosResponseWithHTTP2<ResponseData<T>>;
 export function marshallGaxiosResponse<
   T extends {headers?: HeadersInit} = GaxiosResponse,
->(res?: T): GaxiosResponseWithHTTP2 | undefined;
+>(res?: T): GaxiosResponseWithHTTP2<ResponseData<T>> | undefined;
 export function marshallGaxiosResponse<
   T extends {headers?: HeadersInit} = GaxiosResponse,
->(res?: T): GaxiosResponseWithHTTP2 | undefined {
+>(res?: T): GaxiosResponseWithHTTP2<ResponseData<T>> | undefined {
   if (!res) {
     return res;
   }
@@ -68,5 +72,5 @@ export function marshallGaxiosResponse<
       enumerable: true,
       value: headersToClassicHeaders(res.headers),
     },
-  }) as unknown as GaxiosResponseWithHTTP2;
+  }) as unknown as GaxiosResponseWithHTTP2<ResponseData<T>>;
 }
