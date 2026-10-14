@@ -21,7 +21,6 @@ import * as through from 'through2';
 import {Session} from './session';
 import {Transaction} from './transaction';
 import {NormalCallback} from './common';
-import {isSessionNotFoundError} from './session-pool';
 import {Database} from './database';
 import {protos} from '@google-cloud/spanner-api';
 import google = protos.google;
@@ -174,11 +173,6 @@ export abstract class Runner<T> {
 
       return secondsInMs + nanosInMs;
     }
-    // A 'Session not found' error without any specific retry info should not
-    // cause any delay between retries.
-    if (isSessionNotFoundError(err)) {
-      return 0;
-    }
 
     // Max backoff should be 32 seconds.
     return (
@@ -189,11 +183,7 @@ export abstract class Runner<T> {
 
   /** Returns whether the given error should cause a transaction retry. */
   shouldRetry(err: grpc.ServiceError): boolean {
-    return (
-      RETRYABLE.includes(err.code!) ||
-      isSessionNotFoundError(err) ||
-      isRetryableInternalError(err)
-    );
+    return RETRYABLE.includes(err.code!) || isRetryableInternalError(err);
   }
   /**
    * Retrieves a transaction to run against.
@@ -250,9 +240,6 @@ export abstract class Runner<T> {
         this.multiplexedSessionPreviousTransactionId = transaction.id;
       }
 
-      // Note that if the error is a 'Session not found' error, it will be
-      // thrown here. We do this to bubble this error up to the caller who is
-      // responsible for retrying the transaction on a different session.
       if (
         !RETRYABLE.includes(lastError.code!) &&
         !isRetryableInternalError(lastError)

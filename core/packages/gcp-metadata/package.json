@@ -21,7 +21,7 @@
     "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
     "presystem-test": "npm run compile",
     "system-test": "mocha build/system-test --timeout 600000",
-    "test": "node ../../../bin/run-test.cjs --fetch-shim --gaxios-shim --timeout=5000 build/test",
+    "test": "node ../../../bin/run-test.cjs --timeout=5000 build/test",
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
     "prelint": "cd samples; npm link ../; npm install",
@@ -40,7 +40,7 @@
   "author": "Google LLC",
   "license": "Apache-2.0",
   "dependencies": {
-    "gaxios": "^7.1.3",
+    "gaxios": "^8.3.0",
     "google-logging-utils": "^2.0.0",
     "json-bigint": "^1.0.0"
   },
