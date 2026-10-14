@@ -5,6 +5,15 @@
 
 [1]: https://www.npmjs.com/package/gcp-metadata?activeTab=versions
 
+## [9.2.1](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.2.0...gcp-metadata-v9.2.1) (2026-10-14)
+
+
+### Bug Fixes
+
+* **core:** Remove --fetch-shim and handle Bun fetch natively ([#9573](https://github.com/googleapis/google-cloud-node/issues/9573)) ([62559f1](https://github.com/googleapis/google-cloud-node/commit/62559f18d902330c546c787233dcaa7578774463))
+* **core:** Remove --gaxios-shim and configure Bun Gaxios fetch ([#9569](https://github.com/googleapis/google-cloud-node/issues/9569)) ([640bf51](https://github.com/googleapis/google-cloud-node/commit/640bf5136c7e9002d65cb257af976c336110d33f))
+* **gcp-metadata:** Remove --promise-any-shim and backfill AggregateError ([#9557](https://github.com/googleapis/google-cloud-node/issues/9557)) ([64bdaee](https://github.com/googleapis/google-cloud-node/commit/64bdaee933ebda0752722d98f226765a373c79f8))
+
 ## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.1.0...gcp-metadata-v9.2.0) (2026-10-08)
 
 
