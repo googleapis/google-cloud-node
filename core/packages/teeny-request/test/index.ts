@@ -46,6 +46,17 @@ describe('teeny', () => {
   let statsStub: sinon.SinonStubbedInstance<TeenyStatistics>;
 
   beforeEach(() => {
+    for (const v of [
+      'http_proxy',
+      'https_proxy',
+      'HTTP_PROXY',
+      'HTTPS_PROXY',
+      'no_proxy',
+      'NO_PROXY',
+    ]) {
+      delete process.env[v];
+    }
+
     emitWarnStub = sandbox.stub(process, 'emitWarning');
 
     // don't mask other process warns
@@ -465,5 +476,240 @@ describe('teeny', () => {
       /Missing uri or url in reqOpts/,
       'Did not throw with expected message',
     );
+  });
+
+  it('should support bunFetch transport for json, text, multipart, gzip, redirects, and timeouts', async () => {
+    const globalRecord = globalThis as Record<string, unknown>;
+    const hadBun = 'Bun' in globalRecord;
+    try {
+      if (!hadBun) {
+        globalRecord.Bun = {};
+      }
+      const jsonScope = nock(uri)
+        .post('/')
+        .reply(200, {ok: true}, {
+          'content-type': 'application/json',
+          'x-multi': ['a', 'b'],
+        } as unknown as Record<string, string>);
+      await new Promise<void>((resolve, reject) => {
+        const customHeaders = {} as Headers;
+        Object.defineProperty(customHeaders, 'entries', {
+          value: () =>
+            [
+              ['x-custom', '1'],
+              ['accept-encoding', 'gzip'],
+            ][Symbol.iterator](),
+          enumerable: false,
+        });
+        teenyRequest(
+          {uri, method: 'POST', json: {hi: 1}, headers: customHeaders},
+          (err, res, body) => {
+            if (err) return reject(err);
+            try {
+              assert.strictEqual(res.statusCode, 200);
+              assert.deepStrictEqual(body, {ok: true});
+              jsonScope.done();
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          },
+        );
+      });
+
+      const redirectScope = nock(uri)
+        .get('/old')
+        .reply(302, '', {Location: `${uri}/new`})
+        .get('/new')
+        .reply(200, {redirected: true});
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest({uri: `${uri}/old`}, (err, res, body) => {
+          if (err) return reject(err);
+          try {
+            assert.strictEqual(res.statusCode, 200);
+            assert.deepStrictEqual(body, {redirected: true});
+            redirectScope.done();
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        });
+      });
+
+      const badJsonScope = nock(uri)
+        .get('/')
+        .reply(200, 'not-json', {'content-type': 'application/json'});
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest({uri}, err => {
+          try {
+            assert.ok(err);
+            assert.match(err.message, /^invalid json response body/);
+            badJsonScope.done();
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        });
+      });
+
+      const multipartScope = nock(uri).post('/').reply(200, 'uploaded');
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest(
+          {
+            uri,
+            method: 'POST',
+            headers: {},
+            multipart: [{body: 'part1'}, {body: Readable.from(['part2'])}],
+          },
+          (err, res, body) => {
+            if (err) return reject(err);
+            try {
+              assert.strictEqual(res.statusCode, 200);
+              assert.strictEqual(body, 'uploaded');
+              multipartScope.done();
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          },
+        );
+      });
+
+      const zlib = await import('zlib');
+      const gzipped = zlib.gzipSync(
+        Buffer.from(JSON.stringify({zipped: true})),
+      );
+      const gzipScope = nock(uri).get('/').reply(200, gzipped, {
+        'content-type': 'application/json',
+        'content-encoding': 'gzip',
+      });
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest({uri, gzip: true}, (err, res, body) => {
+          if (err) return reject(err);
+          try {
+            assert.strictEqual(res.statusCode, 200);
+            assert.deepStrictEqual(body, {zipped: true});
+            gzipScope.done();
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        });
+      });
+
+      const crossOriginRedirectScope = nock(uri)
+        .get('/cross')
+        .reply(302, '', {Location: 'https://other.example.com/target'});
+      const otherOriginScope = nock('https://other.example.com', {
+        badheaders: ['authorization', 'proxy-authorization', 'cookie'],
+      })
+        .get('/target')
+        .reply(200, JSON.stringify({compactJson: true}), {
+          'content-type': 'application/json;charset=utf-8',
+        });
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest(
+          {
+            uri: `${uri}/cross`,
+            headers: {
+              Authorization: 'Bearer secret',
+              'Proxy-Authorization': 'Basic proxy-secret',
+              Cookie: 'sid=123',
+            },
+          },
+          (err, res, body) => {
+            if (err) return reject(err);
+            try {
+              assert.strictEqual(res.statusCode, 200);
+              assert.deepStrictEqual(body, {compactJson: true});
+              crossOriginRedirectScope.done();
+              otherOriginScope.done();
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          },
+        );
+      });
+
+      const timeoutScope = nock(uri).get('/').delayConnection(100).reply(200);
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest({uri, timeout: 10}, err => {
+          try {
+            assert.ok(err);
+            assert.strictEqual((err as {code?: string}).code, 'ETIMEDOUT');
+            timeoutScope.done();
+            resolve();
+          } catch (e) {
+            reject(e);
+          }
+        });
+      });
+
+      const http = await import('http');
+      nock.enableNetConnect('127.0.0.1');
+      const server = http.createServer((req, res) => {
+        if (req.url === '/mid-body-stall') {
+          res.writeHead(200, {'content-type': 'text/plain'});
+          res.write('partial-chunk');
+          // Intentionally stall mid-body without calling res.end()
+        } else if (req.url === '/gzip-reset') {
+          res.writeHead(200, {
+            'content-type': 'application/json',
+            'content-encoding': 'gzip',
+          });
+          res.write(gzipped.subarray(0, 8));
+          setTimeout(() => {
+            res.socket?.destroy();
+          }, 10);
+        }
+      });
+      await new Promise<void>(resolve =>
+        server.listen(0, '127.0.0.1', resolve),
+      );
+      const port = (server.address() as {port: number}).port;
+      try {
+        await new Promise<void>((resolve, reject) => {
+          teenyRequest(
+            {uri: `http://127.0.0.1:${port}/mid-body-stall`, timeout: 40},
+            err => {
+              try {
+                assert.ok(err);
+                assert.strictEqual((err as {code?: string}).code, 'ETIMEDOUT');
+                assert.strictEqual(
+                  (err as {type?: string}).type,
+                  'request-timeout',
+                );
+                resolve();
+              } catch (e) {
+                reject(e);
+              }
+            },
+          );
+        });
+
+        await new Promise<void>((resolve, reject) => {
+          teenyRequest(
+            {uri: `http://127.0.0.1:${port}/gzip-reset`, gzip: true},
+            err => {
+              try {
+                assert.ok(err);
+                resolve();
+              } catch (e) {
+                reject(e);
+              }
+            },
+          );
+        });
+      } finally {
+        server.closeAllConnections?.();
+        await new Promise<void>(resolve => server.close(() => resolve()));
+        nock.disableNetConnect();
+      }
+    } finally {
+      if (!hadBun) {
+        delete globalRecord.Bun;
+      }
+    }
   });
 });

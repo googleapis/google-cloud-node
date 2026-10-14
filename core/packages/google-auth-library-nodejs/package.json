@@ -23,7 +23,7 @@
   "dependencies": {
     "base64-js": "^1.3.0",
     "ecdsa-sig-formatter": "^1.0.11",
-    "gaxios": "^7.1.4",
+    "gaxios": "^8.3.0",
     "gcp-metadata": "^9.0.0",
     "google-logging-utils": "^2.0.0",
     "jws": "^4.0.0"
@@ -68,7 +68,7 @@
     "!build/src/**/*.map"
   ],
   "scripts": {
-    "test": "node ../../../bin/run-test.cjs --fetch-shim --gaxios-shim build/test",
+    "test": "node ../../../bin/run-test.cjs build/test",
     "clean": "gts clean",
     "prepare": "npm run compile",
     "lint": "gts check --no-inline-config",
