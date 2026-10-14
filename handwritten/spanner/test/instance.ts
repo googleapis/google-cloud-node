@@ -511,6 +511,32 @@ describe('Instance', () => {
         fakeDatabaseWithSessionPoolOptions,
       );
     });
+
+    it('should create and cache different objects when called with different databaseRole values', () => {
+      const dbRole1 = instance.database(
+        NAME,
+        undefined,
+        undefined,
+        'role1',
+      ) as {} as FakeDatabase;
+      const dbRole2 = instance.database(
+        NAME,
+        undefined,
+        undefined,
+        'role2',
+      ) as {} as FakeDatabase;
+      const dbRole1Again = instance.database(
+        NAME,
+        undefined,
+        undefined,
+        'role1',
+      ) as {} as FakeDatabase;
+
+      assert.notStrictEqual(dbRole1, dbRole2);
+      assert.strictEqual(dbRole1, dbRole1Again);
+      assert.strictEqual(dbRole1.calledWith_[4], 'role1');
+      assert.strictEqual(dbRole2.calledWith_[4], 'role2');
+    });
   });
 
   describe('delete', () => {

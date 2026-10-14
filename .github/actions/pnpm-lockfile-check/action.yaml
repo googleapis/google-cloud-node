@@ -1,5 +1,10 @@
 name: "Check PNPM Lockfile and Install Workspace Dependencies"
 description: "Sets up pnpm and installs workspace dependencies with frozen lockfile check"
+inputs:
+  link-workspace-packages:
+    description: "Whether to link matching in-repo workspace packages after verifying the frozen lockfile"
+    required: false
+    default: "true"
 runs:
   using: "composite"
   steps:
@@ -24,3 +29,14 @@ runs:
           echo ""
           exit 1
         fi
+    - name: Link In-Repo Workspace Packages
+      if: ${{ inputs.link-workspace-packages == 'true' }}
+      shell: bash
+      run: |
+        pnpm install --config.link-workspace-packages=deep --config.prefer-workspace-packages=true --no-frozen-lockfile --resolution-only --ignore-scripts --prefer-offline
+        rm -f node_modules/.pnpm-workspace-state.json
+        pnpm install --config.link-workspace-packages=deep --config.prefer-workspace-packages=true --no-frozen-lockfile --ignore-scripts --prefer-offline
+        git checkout -- pnpm-lock.yaml
+        pnpm --dir core/packages/gaxios run compile
+        pnpm --dir core/packages/teeny-request run compile
+        pnpm --dir core/packages/google-auth-library-nodejs run compile
