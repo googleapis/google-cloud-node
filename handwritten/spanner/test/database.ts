@@ -773,6 +773,25 @@ describe('Database', () => {
       );
     });
 
+    it('should call `requestStream` without setting `excludeTxnFromChangeStreams` when options are not provided', () => {
+      const expectedReqOpts: google.spanner.v1.IBatchWriteRequest = {
+        session: fakeSession!.formattedName_!,
+        mutationGroups: mutationGroups.map(mg => mg.proto()),
+        requestOptions: undefined,
+        excludeTxnFromChangeStreams: undefined,
+      };
+
+      database.batchWriteAtLeastOnce(mutationGroups);
+
+      assert.strictEqual(requestStreamStub.callCount, 1);
+      const args = requestStreamStub.firstCall.args[0];
+      assert.strictEqual(args.client, 'SpannerClient');
+      assert.strictEqual(args.method, 'batchWrite');
+      assert.deepStrictEqual(args.reqOpts, expectedReqOpts);
+      assert.strictEqual(args.reqOpts.excludeTxnFromChangeStreams, undefined);
+      assert.deepStrictEqual(args.gaxOpts, {});
+    });
+
     it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
       database.instance = {
         parent: {

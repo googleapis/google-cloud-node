@@ -1167,13 +1167,13 @@ describe('Database', () => {
     let fakeDataStream: Transform;
     let getSessionStub: sinon.SinonStub;
 
-    const options = {
+    const options: BatchWriteOptions = {
       requestOptions: {
         transactionTag: 'batch-write-tag',
       },
-      excludeTxnFromChangeStream: true,
+      excludeTxnFromChangeStreams: true,
       gaxOptions: {autoPaginate: false},
-    } as BatchWriteOptions;
+    };
 
     beforeEach(() => {
       fakeSessionFactory = database.sessionFactory_;
