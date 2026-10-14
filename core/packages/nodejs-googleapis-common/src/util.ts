@@ -24,7 +24,7 @@ export type HeadersInit = ConstructorParameters<typeof Headers>[0];
  * @returns the headers in `Record<string, string>` form.
  */
 export function headersToClassicHeaders<T extends Record<string, string>>(
-  headers: HeadersInit,
+  headers?: HeadersInit,
 ): T {
   let classicHeaders: Record<string, string> = {};
 
@@ -43,19 +43,34 @@ export function headersToClassicHeaders<T extends Record<string, string>>(
   return classicHeaders as T;
 }
 
+type ResponseData<T> = T extends {data: infer D}
+  ? D
+  : ReturnType<JSON['parse']>;
+
 /**
  * marshall a GaxiosResponse into a library-friendly type.
  *
  * @param res the Gaxios Response
- * @returns the GaxiosResponse with HTTP2-ready/compatible headers
+ * @returns the GaxiosResponse with HTTP2-ready/compatible headers, or the falsy response if not provided
  */
-export function marshallGaxiosResponse<T extends GaxiosResponse>(res?: T) {
-  return Object.defineProperties(res || {}, {
+export function marshallGaxiosResponse<
+  T extends {headers?: HeadersInit} = GaxiosResponse,
+>(res: T): GaxiosResponseWithHTTP2<ResponseData<T>>;
+export function marshallGaxiosResponse<
+  T extends {headers?: HeadersInit} = GaxiosResponse,
+>(res?: T): GaxiosResponseWithHTTP2<ResponseData<T>> | undefined;
+export function marshallGaxiosResponse<
+  T extends {headers?: HeadersInit} = GaxiosResponse,
+>(res?: T): GaxiosResponseWithHTTP2<ResponseData<T>> | undefined {
+  if (!res) {
+    return res;
+  }
+  return Object.defineProperties(res, {
     headers: {
       configurable: true,
       writable: true,
       enumerable: true,
-      value: headersToClassicHeaders(res?.headers),
+      value: headersToClassicHeaders(res.headers),
     },
-  }) as unknown as GaxiosResponseWithHTTP2;
+  }) as unknown as GaxiosResponseWithHTTP2<ResponseData<T>>;
 }

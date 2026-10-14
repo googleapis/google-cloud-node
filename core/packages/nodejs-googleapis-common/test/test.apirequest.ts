@@ -23,7 +23,8 @@ import * as sinon from 'sinon';
 import {GlobalOptions, MethodOptions} from '../src/api';
 import {createAPIRequest} from '../src/apirequest';
 import {GoogleAuth} from 'google-auth-library';
-import {GaxiosResponse} from 'gaxios';
+
+type AuthRequestResponse = Awaited<ReturnType<GoogleAuth['request']>>;
 
 interface MyWritableOptions {
   highWaterMark?: number;
@@ -487,7 +488,9 @@ describe('createAPIRequest', () => {
 
     it('should allow passing a GoogleAuth param for auth', async () => {
       const auth = new GoogleAuth();
-      const stub = sandbox.stub(auth, 'request').resolves({} as GaxiosResponse);
+      const stub = sandbox
+        .stub(auth, 'request')
+        .resolves({} as unknown as AuthRequestResponse);
       await createAPIRequest<FakeParams>({
         options: {url},
         params: {},
@@ -500,6 +503,49 @@ describe('createAPIRequest', () => {
         },
       });
       assert.ok(stub.calledOnce);
+    });
+
+    it('should marshall headers when auth client resolves a response from a distinct gaxios instance', async () => {
+      const foreignGaxiosSymbol: unique symbol = Symbol('foreign-gaxios-error');
+      const auth = new GoogleAuth();
+      const foreignResponse = Object.assign(
+        new Response(null, {
+          headers: new Headers({'x-custom-header': 'custom-value'}),
+          status: 200,
+        }),
+        {
+          config: {
+            headers: new Headers({'x-custom-header': 'custom-value'}),
+            url: new URL(url),
+            retryConfig: {
+              onRetryAttempt: (err: {[foreignGaxiosSymbol]: string}) =>
+                void err,
+            },
+          },
+          data: {hello: 'world'},
+          [foreignGaxiosSymbol]: '7.0.0',
+        },
+      );
+      const stub = sandbox
+        .stub(auth, 'request')
+        .resolves(foreignResponse as unknown as AuthRequestResponse);
+
+      const res = await createAPIRequest<{hello: string}>({
+        options: {url},
+        params: {},
+        requiredParams: [],
+        pathParams: [],
+        context: {
+          _options: {
+            auth,
+          },
+        },
+      });
+
+      assert.ok(stub.calledOnce);
+      assert.deepStrictEqual(res.headers, {'x-custom-header': 'custom-value'});
+      assert.deepStrictEqual(res.data, {hello: 'world'});
+      assert.strictEqual(res.status, 200);
     });
   });
 
@@ -515,7 +561,7 @@ describe('createAPIRequest', () => {
       sandbox.stub(auth, 'getRequestHeaders').resolves(new Headers());
       const requestStub = sandbox
         .stub(auth, 'request')
-        .resolves({data: fakeResponse} as GaxiosResponse);
+        .resolves({data: fakeResponse} as unknown as AuthRequestResponse);
       const result = await createAPIRequest<FakeParams>({
         options: {url: gduUrl},
         params: {},
@@ -549,7 +595,7 @@ describe('createAPIRequest', () => {
       sandbox.stub(auth, 'getRequestHeaders').resolves(new Headers());
       const requestStub = sandbox
         .stub(auth, 'request')
-        .resolves({data: fakeResponse} as GaxiosResponse);
+        .resolves({data: fakeResponse} as unknown as AuthRequestResponse);
       const result = await createAPIRequest<FakeParams>({
         options: {url: gduUrl},
         params: {},
@@ -608,7 +654,7 @@ describe('createAPIRequest', () => {
         sandbox.stub(auth, 'getRequestHeaders').resolves(new Headers());
         const requestStub = sandbox
           .stub(auth, 'request')
-          .resolves({data: fakeResponse} as GaxiosResponse);
+          .resolves({data: fakeResponse} as unknown as AuthRequestResponse);
         const result = await createAPIRequest<FakeParams>({
           options: {url: gduUrl},
           params: {},
@@ -648,7 +694,7 @@ describe('createAPIRequest', () => {
         sandbox.stub(auth, 'getRequestHeaders').resolves(new Headers());
         const requestStub = sandbox
           .stub(auth, 'request')
-          .resolves({data: fakeResponse} as GaxiosResponse);
+          .resolves({data: fakeResponse} as unknown as AuthRequestResponse);
         const result = await createAPIRequest<FakeParams>({
           options: {url: gduUrl},
           params: {},
