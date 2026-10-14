@@ -12,7 +12,9 @@
 // limitations under the License.
 
 import assert from 'assert';
+import {execFileSync} from 'child_process';
 import nock from 'nock';
+import path from 'path';
 import {createSandbox, fake} from 'sinon';
 import stream, {Readable} from 'stream';
 import {describe, it, beforeEach, afterEach} from 'mocha';
@@ -1985,14 +1987,107 @@ describe('merge headers', () => {
 });
 
 describe('package.json files allowlist', () => {
-  it('should restrict published files to build/cjs/src, build/esm/src, and build/esm/package.json', () => {
-    const pkgFiles = (pkg as {files?: string[]}).files;
-    assert.deepStrictEqual(pkgFiles, [
+  it('should include required build entrypoints in package.json files without broad build wildcard', () => {
+    const pkgFiles = (pkg as {files?: string[]}).files ?? [];
+    const normalizedEntries = new Set(
+      pkgFiles.map(entry => entry.replace(/\/+$/, '')),
+    );
+
+    for (const requiredEntry of [
       'build/cjs/src',
       'build/esm/src',
       'build/esm/package.json',
       '!build/**/*.map',
-    ]);
-    assert.strictEqual(pkgFiles?.includes('build/'), false);
+    ]) {
+      assert.strictEqual(
+        normalizedEntries.has(requiredEntry),
+        true,
+        `Expected package.json files to include ${requiredEntry}`,
+      );
+    }
+
+    for (const forbiddenWildcard of ['build', 'build/*', 'build/**']) {
+      assert.strictEqual(
+        normalizedEntries.has(forbiddenWildcard),
+        false,
+        `Expected package.json files not to include broad wildcard ${forbiddenWildcard}`,
+      );
+    }
+  });
+
+  it('should pack every compiled src file and exclude compiled tests, sourcemaps, and .tsbuildinfo per file', function () {
+    this.timeout(30000);
+    const cwdPkgPath = path.join(process.cwd(), 'package.json');
+    const packageRoot =
+      fs.existsSync(cwdPkgPath) &&
+      (JSON.parse(fs.readFileSync(cwdPkgPath, 'utf8')) as {name?: string})
+        .name === pkg.name
+        ? process.cwd()
+        : path.resolve(process.cwd(), 'core/packages/gaxios');
+
+    const stdout = execFileSync(
+      'npm',
+      ['pack', '--dry-run', '--json', '--ignore-scripts'],
+      {
+        cwd: packageRoot,
+        encoding: 'utf8',
+        shell: process.platform === 'win32',
+      },
+    );
+    const packResult = JSON.parse(stdout.slice(stdout.indexOf('['))) as Array<{
+      files: Array<{path: string}>;
+    }>;
+    const packedPaths = new Set<string>(
+      packResult[0].files.map(file => file.path),
+    );
+
+    for (const subdir of ['build/cjs/src', 'build/esm/src']) {
+      const diskFiles = fs
+        .readdirSync(path.join(packageRoot, subdir))
+        .filter(file => !file.endsWith('.map'));
+      assert.ok(
+        diskFiles.length > 0,
+        `Expected compiled files in ${subdir} to exist on disk`,
+      );
+      for (const file of diskFiles) {
+        const expectedPath = `${subdir}/${file}`;
+        assert.strictEqual(
+          packedPaths.has(expectedPath),
+          true,
+          `Expected packed tarball to include ${expectedPath}`,
+        );
+      }
+    }
+
+    for (const metadataFile of [
+      'build/esm/package.json',
+      'package.json',
+      'README.md',
+      'LICENSE',
+    ]) {
+      assert.strictEqual(
+        packedPaths.has(metadataFile),
+        true,
+        `Expected packed tarball to include ${metadataFile}`,
+      );
+    }
+
+    for (const packedPath of packedPaths) {
+      assert.strictEqual(
+        /^build\/(cjs|esm)\/(test|system-test|browser-test)\//.test(packedPath),
+        false,
+        `Expected packed tarball not to include test artifact ${packedPath}`,
+      );
+      assert.strictEqual(
+        packedPath.endsWith('.tsbuildinfo'),
+        false,
+        `Expected packed tarball not to include build cache ${packedPath}`,
+      );
+      assert.strictEqual(
+        packedPath.endsWith('.map'),
+        false,
+        `Expected packed tarball not to include sourcemap ${packedPath}`,
+      );
+    }
   });
 });
