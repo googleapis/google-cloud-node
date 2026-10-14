@@ -177,6 +177,108 @@ describe('RequestStreamCoordinator', () => {
     );
   });
 
+  it('should not call recordOperationCompletion when deferOperationCompletion is true', () => {
+    const stream = streamEvents(through.obj());
+    const tracer = createMockTracer();
+    const coordinator = new RequestStreamCoordinator(stream, tracer, true);
+    coordinator.setup();
+
+    stream.destroy();
+    coordinator.completeOperation();
+
+    assert.strictEqual(
+      (tracer.recordOperationCompletion as sinon.SinonSpy).called,
+      false,
+    );
+  });
+
+  it('should initialize and assign config.metricsTracer when config.metricsTracer is undefined', () => {
+    const spanner = new Spanner({projectId: 'test-project'});
+    const fakeTracer = createMockTracer();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (spanner as any)._initMetricsTracer = sandbox.stub().returns(fakeTracer);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const config: any = {client: 'SpannerClient', method: 'batchWrite'};
+    spanner.requestStream(config);
+
+    assert.strictEqual(config.metricsTracer, fakeTracer);
+    assert.strictEqual(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ((spanner as any)._initMetricsTracer as sinon.SinonStub).calledOnce,
+      true,
+    );
+  });
+
+  it('should reuse existing config.metricsTracer and not call _initMetricsTracer when config.metricsTracer is provided', () => {
+    const spanner = new Spanner({projectId: 'test-project'});
+    const existingTracer = createMockTracer();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (spanner as any)._initMetricsTracer = sandbox.stub();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const config: any = {
+      client: 'SpannerClient',
+      method: 'batchWrite',
+      metricsTracer: existingTracer,
+    };
+    spanner.requestStream(config);
+
+    assert.strictEqual(config.metricsTracer, existingTracer);
+    assert.strictEqual(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ((spanner as any)._initMetricsTracer as sinon.SinonStub).called,
+      false,
+    );
+  });
+
+  it('should preserve config.metricsTracer when set to null and not call _initMetricsTracer', () => {
+    const spanner = new Spanner({projectId: 'test-project'});
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (spanner as any)._initMetricsTracer = sandbox.stub();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const config: any = {
+      client: 'SpannerClient',
+      method: 'batchWrite',
+      metricsTracer: null,
+    };
+    spanner.requestStream(config);
+
+    assert.strictEqual(config.metricsTracer, null);
+    assert.strictEqual(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ((spanner as any)._initMetricsTracer as sinon.SinonStub).called,
+      false,
+    );
+  });
+
+  it('should not throw if callStream is a StreamProxy wrapping a PassThrough without cancel()', () => {
+    const stream = streamEvents(through.obj());
+    const tracer = createMockTracer();
+    const coordinator = new RequestStreamCoordinator(stream, tracer);
+    coordinator.setup();
+
+    const emitter = new EventEmitter();
+    const streamProxyWithoutInnerCancel = Object.assign(emitter, {
+      stream: through.obj(), // PassThrough/Transform without .cancel()
+      cancel: function () {
+        // Simulates google-gax StreamProxy.cancel() calling this.stream.cancel()
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (this as any).stream.cancel();
+      },
+      destroy: sandbox.spy(),
+      pipe: sandbox.spy((destination: unknown) => destination),
+      destroyed: false,
+    }) as unknown as CancellableStream;
+
+    coordinator.attachCallStream(streamProxyWithoutInnerCancel);
+
+    assert.doesNotThrow(() => {
+      stream.destroy();
+    });
+  });
+
   it('should invoke requestFn and attach callStream if stream is active', () => {
     const stream = streamEvents(through.obj());
     const tracer = createMockTracer();
@@ -843,6 +945,134 @@ describe('RequestStreamCoordinator with in-memory mock Spanner server', () => {
     assert.ok(
       operationCancelled,
       'Expected executeStreamingSql operation with status CANCELLED on loop break',
+    );
+    assert.strictEqual(operationCancelled?.value, 1);
+  });
+
+  it('should record 1 operation count and N attempt counts when batchWriteAtLeastOnce retries on UNAVAILABLE', async () => {
+    const {MutationGroup} = require('../src/transaction');
+    const mg0 = new MutationGroup();
+    mg0.upsert('FOO', {Id: '1', Name: 'One'});
+    const mg1 = new MutationGroup();
+    mg1.upsert('FOO', {Id: '2', Name: 'Two'});
+
+    const unavailableErr = Object.assign(new Error('Mid-stream unavailable'), {
+      code: grpc.status.UNAVAILABLE,
+      streamIndex: 1,
+      metadata: mock.MockSpanner.createMinimalRetryDelayMetadata(),
+    }) as mock.MockError;
+
+    spannerMock.setExecutionTime(
+      spannerMock.batchWrite,
+      mock.SimulatedExecutionTime.ofError(unavailableErr),
+    );
+
+    const stream = database.batchWriteAtLeastOnce([mg0, mg1]);
+    const responses: unknown[] = [];
+
+    await new Promise<void>((resolve, reject) => {
+      stream.on('data', row => responses.push(row));
+      stream.on('end', () => resolve());
+      stream.on('error', reject);
+    });
+
+    assert.strictEqual(responses.length, 2);
+
+    const resourceMetrics = await waitForMetrics(reader, resMetrics => {
+      const opPoints = getMetricDataPoints(
+        resMetrics,
+        METRIC_NAME_OPERATION_COUNT,
+      );
+      return opPoints.some(
+        dp =>
+          dp.attributes.method === 'batchWrite' &&
+          dp.attributes.status === 'OK',
+      );
+    });
+
+    const attemptPoints = getMetricDataPoints(
+      resourceMetrics,
+      METRIC_NAME_ATTEMPT_COUNT,
+    );
+    const operationPoints = getMetricDataPoints(
+      resourceMetrics,
+      METRIC_NAME_OPERATION_COUNT,
+    );
+
+    const attemptUnavailable = findDataPoint(
+      attemptPoints,
+      'batchWrite',
+      'UNAVAILABLE',
+    );
+    const attemptOk = findDataPoint(attemptPoints, 'batchWrite', 'OK');
+    const operationOk = findDataPoint(operationPoints, 'batchWrite', 'OK');
+    const operationUnavailable = findDataPoint(
+      operationPoints,
+      'batchWrite',
+      'UNAVAILABLE',
+    );
+
+    assert.strictEqual(attemptUnavailable?.value, 1);
+    assert.strictEqual(attemptOk?.value, 1);
+    assert.strictEqual(operationOk?.value, 1);
+    assert.strictEqual(operationUnavailable, undefined);
+  });
+
+  it('should record CANCELLED for both attempt and operation when batchWriteAtLeastOnce stream is cancelled early', async () => {
+    const {MutationGroup} = require('../src/transaction');
+    const mg0 = new MutationGroup();
+    mg0.upsert('FOO', {Id: '1', Name: 'One'});
+    const mg1 = new MutationGroup();
+    mg1.upsert('FOO', {Id: '2', Name: 'Two'});
+
+    const stream = database.batchWriteAtLeastOnce([mg0, mg1]);
+
+    // Read first response and break out of loop (destroying the stream early)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    for await (const _ of stream) {
+      break;
+    }
+
+    const resourceMetrics = await waitForMetrics(reader, resMetrics => {
+      const opPoints = getMetricDataPoints(
+        resMetrics,
+        METRIC_NAME_OPERATION_COUNT,
+      );
+      return opPoints.some(
+        dp =>
+          dp.attributes.method === 'batchWrite' &&
+          dp.attributes.status === 'CANCELLED',
+      );
+    });
+
+    const attemptPoints = getMetricDataPoints(
+      resourceMetrics,
+      METRIC_NAME_ATTEMPT_COUNT,
+    );
+    const operationPoints = getMetricDataPoints(
+      resourceMetrics,
+      METRIC_NAME_OPERATION_COUNT,
+    );
+
+    const attemptCancelled = findDataPoint(
+      attemptPoints,
+      'batchWrite',
+      'CANCELLED',
+    );
+    const operationCancelled = findDataPoint(
+      operationPoints,
+      'batchWrite',
+      'CANCELLED',
+    );
+
+    assert.ok(
+      attemptCancelled,
+      'Expected batchWrite attempt with status CANCELLED on early stream destruction',
+    );
+    assert.strictEqual(attemptCancelled?.value, 1);
+    assert.ok(
+      operationCancelled,
+      'Expected batchWrite operation with status CANCELLED on early stream destruction',
     );
     assert.strictEqual(operationCancelled?.value, 1);
   });

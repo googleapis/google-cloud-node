@@ -745,7 +745,12 @@ describe('Database', () => {
     });
 
     it('should call `requestStream` with correct arguments', () => {
-      const expectedGaxOpts = extend(true, {}, options?.gaxOptions);
+      const expectedGaxOpts = extend(true, {}, options?.gaxOptions, {
+        retryRequestOptions: {
+          noResponseRetries: 0,
+          retries: 0,
+        },
+      });
       const expectedReqOpts: google.spanner.v1.IBatchWriteRequest = {
         session: fakeSession!.formattedName_!,
         mutationGroups: mutationGroups.map(mg => mg.proto()),
@@ -789,7 +794,12 @@ describe('Database', () => {
       assert.strictEqual(args.method, 'batchWrite');
       assert.deepStrictEqual(args.reqOpts, expectedReqOpts);
       assert.strictEqual(args.reqOpts.excludeTxnFromChangeStreams, undefined);
-      assert.deepStrictEqual(args.gaxOpts, {});
+      assert.deepStrictEqual(args.gaxOpts, {
+        retryRequestOptions: {
+          noResponseRetries: 0,
+          retries: 0,
+        },
+      });
     });
 
     it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
@@ -810,13 +820,33 @@ describe('Database', () => {
       );
     });
 
-    it('should return error when passing an empty list of mutationGroups', done => {
-      const fakeError = new Error('err');
-      database.batchWriteAtLeastOnce([], options).on('error', error => {
-        assert.strictEqual(error, fakeError);
-        done();
-      });
-      fakeDataStream.emit('error', fakeError);
+    it('should immediately end stream with zero RPCs and no session when passing an empty list of mutationGroups', done => {
+      database
+        .batchWriteAtLeastOnce([], options)
+        .on('data', () => {
+          done(new Error('Should not emit data'));
+        })
+        .on('error', done)
+        .on('end', () => {
+          assert.strictEqual(getSessionStub.callCount, 0);
+          assert.strictEqual(requestStreamStub.callCount, 0);
+          done();
+        });
+    });
+
+    it('should immediately end stream with zero RPCs and no session when mutationGroups is omitted', done => {
+      database
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        .batchWriteAtLeastOnce(undefined as any, options)
+        .on('data', () => {
+          done(new Error('Should not emit data'));
+        })
+        .on('error', done)
+        .on('end', () => {
+          assert.strictEqual(getSessionStub.callCount, 0);
+          assert.strictEqual(requestStreamStub.callCount, 0);
+          done();
+        });
     });
 
     it('should return data when passing a valid list of mutationGroups', done => {
@@ -877,6 +907,175 @@ describe('Database', () => {
       fakeDataStream.emit('data', 'testData');
       fakeDataStream.emit('error', fakeError);
       done();
+    });
+
+    it('should retry only remaining unacknowledged mutationGroups on UNAVAILABLE and increment attempt in request ID header', done => {
+      const stream1 = through.obj();
+      const stream2 = through.obj();
+      requestStreamStub.onCall(0).returns(stream1);
+      requestStreamStub.onCall(1).returns(stream2);
+
+      const retryOptions: BatchWriteOptions = {
+        ...options,
+        gaxOptions: {
+          retry: {
+            backoffSettings: {
+              initialRetryDelayMillis: 1,
+              retryDelayMultiplier: 1.3,
+              maxRetryDelayMillis: 5,
+              totalTimeoutMillis: 5000,
+            },
+          },
+        },
+      };
+
+      const receivedResponses: google.spanner.v1.IBatchWriteResponse[] = [];
+      database
+        .batchWriteAtLeastOnce(mutationGroups, retryOptions)
+        .on('data', (resp: google.spanner.v1.IBatchWriteResponse) => {
+          receivedResponses.push(resp);
+        })
+        .on('error', done)
+        .on('end', () => {
+          assert.strictEqual(requestStreamStub.callCount, 2);
+
+          const firstCallArgs = requestStreamStub.getCall(0).args[0];
+          const secondCallArgs = requestStreamStub.getCall(1).args[0];
+
+          assert.deepStrictEqual(
+            firstCallArgs.reqOpts.mutationGroups,
+            mutationGroups.map(mg => mg.proto()),
+          );
+          assert.strictEqual(firstCallArgs.gaxOpts.retry, undefined);
+          assert.ok(
+            typeof firstCallArgs.gaxOpts.timeout === 'number' &&
+              firstCallArgs.gaxOpts.timeout > 0 &&
+              firstCallArgs.gaxOpts.timeout <= 5000,
+          );
+          assert.deepStrictEqual(firstCallArgs.gaxOpts.retryRequestOptions, {
+            noResponseRetries: 0,
+            retries: 0,
+          });
+          assert.strictEqual(
+            firstCallArgs.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER],
+            craftRequestId(1, 1, 1, 1),
+          );
+
+          // Second attempt only sends mutationGroup2 (unacknowledged)
+          assert.deepStrictEqual(secondCallArgs.reqOpts.mutationGroups, [
+            mutationGroup2.proto(),
+          ]);
+          assert.ok(
+            typeof secondCallArgs.gaxOpts.timeout === 'number' &&
+              secondCallArgs.gaxOpts.timeout > 0 &&
+              secondCallArgs.gaxOpts.timeout <= firstCallArgs.gaxOpts.timeout,
+          );
+          // Same nthRequest (1), attempt incremented to 2
+          assert.strictEqual(
+            secondCallArgs.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER],
+            craftRequestId(1, 1, 1, 2),
+          );
+
+          assert.strictEqual(receivedResponses.length, 2);
+          assert.deepStrictEqual(receivedResponses[0].indexes, [0]);
+          // Retry-local index 0 in attempt 2 is translated back to original index 1
+          assert.deepStrictEqual(receivedResponses[1].indexes, [1]);
+          done();
+        });
+
+      stream1.write({indexes: [0], status: {code: grpc.status.OK}});
+      stream1.emit(
+        'error',
+        Object.assign(new Error('Unavailable'), {
+          code: grpc.status.UNAVAILABLE,
+        }),
+      );
+
+      setTimeout(() => {
+        stream2.write({indexes: [0], status: {code: grpc.status.OK}});
+        stream2.end();
+      }, 15);
+    });
+
+    it('should propagate and reuse metricsTracer across retry attempts in batchWriteAtLeastOnce', done => {
+      const stream1 = through.obj();
+      const stream2 = through.obj();
+      const fakeTracer = {
+        recordOperationCompletion: sandbox.spy(),
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let firstAttemptPassedTracer: any;
+      requestStreamStub.onCall(0).callsFake(config => {
+        firstAttemptPassedTracer = config.metricsTracer;
+        config.metricsTracer = fakeTracer;
+        return stream1;
+      });
+      requestStreamStub.onCall(1).returns(stream2);
+
+      const retryOptions: BatchWriteOptions = {
+        gaxOptions: {
+          retry: {
+            backoffSettings: {
+              initialRetryDelayMillis: 1,
+              retryDelayMultiplier: 1.3,
+              maxRetryDelayMillis: 5,
+              totalTimeoutMillis: 5000,
+            },
+          },
+        },
+      };
+
+      database
+        .batchWriteAtLeastOnce(mutationGroups, retryOptions)
+        .on('data', () => {})
+        .on('error', done)
+        .on('end', () => {
+          assert.strictEqual(requestStreamStub.callCount, 2);
+          const secondCallArgs = requestStreamStub.getCall(1).args[0];
+
+          assert.strictEqual(firstAttemptPassedTracer, undefined);
+          assert.strictEqual(secondCallArgs.metricsTracer, fakeTracer);
+          assert.strictEqual(
+            fakeTracer.recordOperationCompletion.calledOnce,
+            true,
+          );
+          assert.strictEqual(
+            fakeTracer.recordOperationCompletion.firstCall.args[0],
+            grpc.status.OK,
+          );
+          done();
+        });
+
+      stream1.write({indexes: [0], status: {code: grpc.status.OK}});
+      stream1.emit(
+        'error',
+        Object.assign(new Error('Unavailable'), {
+          code: grpc.status.UNAVAILABLE,
+        }),
+      );
+
+      setTimeout(() => {
+        stream2.write({indexes: [0], status: {code: grpc.status.OK}});
+        stream2.end();
+      }, 15);
+    });
+
+    it('should not call `requestStream` or initialize metrics if stream is destroyed before `getSession` resolves', done => {
+      let sessionCallback:
+        ((err: Error | null, session?: FakeSession) => void) | null = null;
+      getSessionStub.callsFake(callback => {
+        sessionCallback = callback;
+      });
+
+      const stream = database.batchWriteAtLeastOnce(mutationGroups, options);
+      stream.destroy();
+
+      setImmediate(() => {
+        assert.ok(sessionCallback);
+        sessionCallback!(null, fakeSession);
+        assert.strictEqual(requestStreamStub.callCount, 0);
+        done();
+      });
     });
   });
 
