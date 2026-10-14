@@ -24,7 +24,7 @@ export type HeadersInit = ConstructorParameters<typeof Headers>[0];
  * @returns the headers in `Record<string, string>` form.
  */
 export function headersToClassicHeaders<T extends Record<string, string>>(
-  headers: HeadersInit,
+  headers?: HeadersInit,
 ): T {
   let classicHeaders: Record<string, string> = {};
 
@@ -47,7 +47,7 @@ export function headersToClassicHeaders<T extends Record<string, string>>(
  * marshall a GaxiosResponse into a library-friendly type.
  *
  * @param res the Gaxios Response
- * @returns the GaxiosResponse with HTTP2-ready/compatible headers, or `undefined` if `res` is falsy
+ * @returns the GaxiosResponse with HTTP2-ready/compatible headers, or the falsy response if not provided
  */
 export function marshallGaxiosResponse<
   T extends {headers?: HeadersInit} = GaxiosResponse,

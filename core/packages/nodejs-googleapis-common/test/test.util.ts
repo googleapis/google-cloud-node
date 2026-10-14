@@ -73,8 +73,17 @@ describe('marshallGaxiosResponse', () => {
     assert.deepEqual(newRes.data, {ok: true});
   });
 
-  it('should return undefined when response is undefined', () => {
-    const newRes = marshallGaxiosResponse(undefined);
-    assert.strictEqual(newRes, undefined);
+  it('should return falsy response values directly', () => {
+    assert.strictEqual(marshallGaxiosResponse(), undefined);
+    assert.strictEqual(marshallGaxiosResponse(undefined), undefined);
+    assert.strictEqual(
+      marshallGaxiosResponse(null as unknown as GaxiosResponse),
+      null,
+    );
+  });
+
+  it('should handle a response with undefined headers', () => {
+    const newRes = marshallGaxiosResponse({headers: undefined});
+    assert.deepEqual(newRes.headers, {});
   });
 });
