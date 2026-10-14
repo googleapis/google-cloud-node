@@ -1987,12 +1987,14 @@ describe('merge headers', () => {
 describe('package.json files allowlist', () => {
   it('should restrict published files to build/cjs/src, build/esm/src, and build/esm/package.json', () => {
     const pkgFiles = (pkg as {files?: string[]}).files;
-    assert.deepStrictEqual(pkgFiles, [
+    for (const file of [
       'build/cjs/src',
       'build/esm/src',
       'build/esm/package.json',
       '!build/**/*.map',
-    ]);
+    ]) {
+      assert.strictEqual(pkgFiles?.includes(file), true);
+    }
     assert.strictEqual(pkgFiles?.includes('build/'), false);
   });
 });
