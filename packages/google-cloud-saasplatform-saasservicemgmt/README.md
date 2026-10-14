@@ -97,7 +97,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list rollouts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-saasplatform-saasservicemgmt/samples/generated/v1beta1/saas_rollouts.list_rollouts.js) |
 | update rollout | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-saasplatform-saasservicemgmt/samples/generated/v1beta1/saas_rollouts.update_rollout.js) |
 | update rollout kind | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-saasplatform-saasservicemgmt/samples/generated/v1beta1/saas_rollouts.update_rollout_kind.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-saasplatform-saasservicemgmt/samples/generated/v1beta1/snippet_metadata_google.cloud.saasplatform.saasservicemgmt.v1beta1.json) |
 
 
 ## Supported Node.js Versions

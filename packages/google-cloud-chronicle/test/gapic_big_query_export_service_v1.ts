@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as bigqueryexportserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -188,7 +188,7 @@ describe('v1.BigQueryExportServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.bigQueryExportServiceStub, undefined);
@@ -196,13 +196,13 @@ describe('v1.BigQueryExportServiceClient', () => {
       assert(client.bigQueryExportServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.bigQueryExportServiceStub);
@@ -211,15 +211,15 @@ describe('v1.BigQueryExportServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.bigQueryExportServiceStub, undefined);
@@ -228,7 +228,7 @@ describe('v1.BigQueryExportServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -237,7 +237,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -250,7 +250,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -274,7 +274,7 @@ describe('v1.BigQueryExportServiceClient', () => {
     it('invokes getBigQueryExport without error', async () => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -306,7 +306,7 @@ describe('v1.BigQueryExportServiceClient', () => {
     it('invokes getBigQueryExport without error using callback', async () => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1.BigQueryExportServiceClient', () => {
     it('invokes getBigQueryExport with error', async () => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v1.BigQueryExportServiceClient', () => {
     it('invokes getBigQueryExport with closed client', async () => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBigQueryExport(request), expectedError);
@@ -410,7 +410,7 @@ describe('v1.BigQueryExportServiceClient', () => {
     it('invokes updateBigQueryExport without error', async () => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -444,7 +444,7 @@ describe('v1.BigQueryExportServiceClient', () => {
     it('invokes updateBigQueryExport without error using callback', async () => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -493,7 +493,7 @@ describe('v1.BigQueryExportServiceClient', () => {
     it('invokes updateBigQueryExport with error', async () => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -526,7 +526,7 @@ describe('v1.BigQueryExportServiceClient', () => {
     it('invokes updateBigQueryExport with closed client', async () => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -540,7 +540,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       );
       request.bigQueryExport.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateBigQueryExport(request), expectedError);
@@ -551,7 +551,7 @@ describe('v1.BigQueryExportServiceClient', () => {
     it('invokes provisionBigQueryExport without error', async () => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -584,7 +584,7 @@ describe('v1.BigQueryExportServiceClient', () => {
     it('invokes provisionBigQueryExport without error using callback', async () => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -632,7 +632,7 @@ describe('v1.BigQueryExportServiceClient', () => {
     it('invokes provisionBigQueryExport with error', async () => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -667,7 +667,7 @@ describe('v1.BigQueryExportServiceClient', () => {
     it('invokes provisionBigQueryExport with closed client', async () => {
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -680,7 +680,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -700,7 +700,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -766,7 +766,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -920,7 +920,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -998,7 +998,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1076,7 +1076,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1153,7 +1153,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1252,7 +1252,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1341,7 +1341,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1427,6 +1427,538 @@ describe('v1.BigQueryExportServiceClient', () => {
       });
     });
 
+    describe('feed', async () => {
+      const fakePath = '/rendered/path/feed';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        feed: 'feedValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.feedPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.feedPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('feedPath', () => {
+        const result = client.feedPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'feedValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.feedPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFeedName', () => {
+        const result = client.matchProjectFromFeedName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.feedPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFeedName', () => {
+        const result = client.matchLocationFromFeedName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.feedPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFeedName', () => {
+        const result = client.matchInstanceFromFeedName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.feedPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFeedFromFeedName', () => {
+        const result = client.matchFeedFromFeedName(fakePath);
+        assert.strictEqual(result, 'feedValue');
+        assert(
+          (client.pathTemplates.feedPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('feedPack', async () => {
+      const fakePath = '/rendered/path/feedPack';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        feed_pack: 'feedPackValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.feedPackPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.feedPackPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('feedPackPath', () => {
+        const result = client.feedPackPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'feedPackValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.feedPackPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFeedPackName', () => {
+        const result = client.matchProjectFromFeedPackName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.feedPackPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFeedPackName', () => {
+        const result = client.matchLocationFromFeedPackName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.feedPackPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFeedPackName', () => {
+        const result = client.matchInstanceFromFeedPackName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.feedPackPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFeedPackFromFeedPackName', () => {
+        const result = client.matchFeedPackFromFeedPackName(fakePath);
+        assert.strictEqual(result, 'feedPackValue');
+        assert(
+          (client.pathTemplates.feedPackPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('feedServiceAccount', async () => {
+      const fakePath = '/rendered/path/feedServiceAccount';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        feed_service_account: 'feedServiceAccountValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.feedServiceAccountPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.feedServiceAccountPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('feedServiceAccountPath', () => {
+        const result = client.feedServiceAccountPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'feedServiceAccountValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.feedServiceAccountPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFeedServiceAccountName', () => {
+        const result = client.matchProjectFromFeedServiceAccountName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.feedServiceAccountPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFeedServiceAccountName', () => {
+        const result = client.matchLocationFromFeedServiceAccountName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.feedServiceAccountPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFeedServiceAccountName', () => {
+        const result = client.matchInstanceFromFeedServiceAccountName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.feedServiceAccountPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFeedServiceAccountFromFeedServiceAccountName', () => {
+        const result =
+          client.matchFeedServiceAccountFromFeedServiceAccountName(fakePath);
+        assert.strictEqual(result, 'feedServiceAccountValue');
+        assert(
+          (
+            client.pathTemplates.feedServiceAccountPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('feedSourceTypeSchema', async () => {
+      const fakePath = '/rendered/path/feedSourceTypeSchema';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        feed_source_type: 'feedSourceTypeValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.feedSourceTypeSchemaPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.feedSourceTypeSchemaPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('feedSourceTypeSchemaPath', () => {
+        const result = client.feedSourceTypeSchemaPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'feedSourceTypeValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.feedSourceTypeSchemaPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFeedSourceTypeSchemaName', () => {
+        const result =
+          client.matchProjectFromFeedSourceTypeSchemaName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.feedSourceTypeSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFeedSourceTypeSchemaName', () => {
+        const result =
+          client.matchLocationFromFeedSourceTypeSchemaName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.feedSourceTypeSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFeedSourceTypeSchemaName', () => {
+        const result =
+          client.matchInstanceFromFeedSourceTypeSchemaName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.feedSourceTypeSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFeedSourceTypeFromFeedSourceTypeSchemaName', () => {
+        const result =
+          client.matchFeedSourceTypeFromFeedSourceTypeSchemaName(fakePath);
+        assert.strictEqual(result, 'feedSourceTypeValue');
+        assert(
+          (
+            client.pathTemplates.feedSourceTypeSchemaPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('findingsRefinement', async () => {
+      const fakePath = '/rendered/path/findingsRefinement';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        findings_refinement: 'findingsRefinementValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.findingsRefinementPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.findingsRefinementPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('findingsRefinementPath', () => {
+        const result = client.findingsRefinementPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'findingsRefinementValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFindingsRefinementName', () => {
+        const result = client.matchProjectFromFindingsRefinementName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFindingsRefinementName', () => {
+        const result = client.matchLocationFromFindingsRefinementName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFindingsRefinementName', () => {
+        const result = client.matchInstanceFromFindingsRefinementName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFindingsRefinementFromFindingsRefinementName', () => {
+        const result =
+          client.matchFindingsRefinementFromFindingsRefinementName(fakePath);
+        assert.strictEqual(result, 'findingsRefinementValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('findingsRefinementDeployment', async () => {
+      const fakePath = '/rendered/path/findingsRefinementDeployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        findings_refinement: 'findingsRefinementValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.findingsRefinementDeploymentPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.findingsRefinementDeploymentPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('findingsRefinementDeploymentPath', () => {
+        const result = client.findingsRefinementDeploymentPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'findingsRefinementValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromFindingsRefinementDeploymentName', () => {
+        const result =
+          client.matchProjectFromFindingsRefinementDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromFindingsRefinementDeploymentName', () => {
+        const result =
+          client.matchLocationFromFindingsRefinementDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromFindingsRefinementDeploymentName', () => {
+        const result =
+          client.matchInstanceFromFindingsRefinementDeploymentName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFindingsRefinementFromFindingsRefinementDeploymentName', () => {
+        const result =
+          client.matchFindingsRefinementFromFindingsRefinementDeploymentName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'findingsRefinementValue');
+        assert(
+          (
+            client.pathTemplates.findingsRefinementDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('instance', async () => {
       const fakePath = '/rendered/path/instance';
       const expectedParameters = {
@@ -1436,7 +1968,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1500,7 +2032,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1542,6 +2074,96 @@ describe('v1.BigQueryExportServiceClient', () => {
       });
     });
 
+    describe('logTypeSchema', async () => {
+      const fakePath = '/rendered/path/logTypeSchema';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        feed_source_type: 'feedSourceTypeValue',
+        log_type: 'logTypeValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.logTypeSchemaPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.logTypeSchemaPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('logTypeSchemaPath', () => {
+        const result = client.logTypeSchemaPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'feedSourceTypeValue',
+          'logTypeValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.logTypeSchemaPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromLogTypeSchemaName', () => {
+        const result = client.matchProjectFromLogTypeSchemaName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.logTypeSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromLogTypeSchemaName', () => {
+        const result = client.matchLocationFromLogTypeSchemaName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.logTypeSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromLogTypeSchemaName', () => {
+        const result = client.matchInstanceFromLogTypeSchemaName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.logTypeSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchFeedSourceTypeFromLogTypeSchemaName', () => {
+        const result =
+          client.matchFeedSourceTypeFromLogTypeSchemaName(fakePath);
+        assert.strictEqual(result, 'feedSourceTypeValue');
+        assert(
+          (client.pathTemplates.logTypeSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLogTypeFromLogTypeSchemaName', () => {
+        const result = client.matchLogTypeFromLogTypeSchemaName(fakePath);
+        assert.strictEqual(result, 'logTypeValue');
+        assert(
+          (client.pathTemplates.logTypeSchemaPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('nativeDashboard', async () => {
       const fakePath = '/rendered/path/nativeDashboard';
       const expectedParameters = {
@@ -1552,7 +2174,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1626,7 +2248,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1668,7 +2290,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1746,7 +2368,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1834,7 +2456,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1911,7 +2533,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1978,6 +2600,99 @@ describe('v1.BigQueryExportServiceClient', () => {
       });
     });
 
+    describe('ruleExecutionError', async () => {
+      const fakePath = '/rendered/path/ruleExecutionError';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+        rule_execution_error: 'ruleExecutionErrorValue',
+      };
+      const client =
+        new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.ruleExecutionErrorPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.ruleExecutionErrorPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('ruleExecutionErrorPath', () => {
+        const result = client.ruleExecutionErrorPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue',
+          'ruleExecutionErrorValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromRuleExecutionErrorName', () => {
+        const result = client.matchProjectFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromRuleExecutionErrorName', () => {
+        const result = client.matchLocationFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromRuleExecutionErrorName', () => {
+        const result = client.matchInstanceFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchRuleExecutionErrorFromRuleExecutionErrorName', () => {
+        const result =
+          client.matchRuleExecutionErrorFromRuleExecutionErrorName(fakePath);
+        assert.strictEqual(result, 'ruleExecutionErrorValue');
+        assert(
+          (
+            client.pathTemplates.ruleExecutionErrorPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('watchlist', async () => {
       const fakePath = '/rendered/path/watchlist';
       const expectedParameters = {
@@ -1988,7 +2703,7 @@ describe('v1.BigQueryExportServiceClient', () => {
       };
       const client =
         new bigqueryexportserviceModule.v1.BigQueryExportServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

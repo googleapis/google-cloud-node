@@ -1,5 +1,58 @@
 # Changelog
 
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.13.1...geminidataanalytics-v0.14.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [0.13.1](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.13.0...geminidataanalytics-v0.13.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.12.0...geminidataanalytics-v0.13.0) (2026-09-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#9427](https://github.com/googleapis/google-cloud-node/issues/9427)) ([5cd945d](https://github.com/googleapis/google-cloud-node/commit/5cd945de7f4fd96878c1956d68bcf505e48686ce))
+
+## [0.12.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.11.0...geminidataanalytics-v0.12.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.10.0...geminidataanalytics-v0.11.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.9.0...geminidataanalytics-v0.10.0) (2026-09-03)
+
+
+### Features
+
+* Update API sources and regenerate ([#9238](https://github.com/googleapis/google-cloud-node/issues/9238)) ([4c2bc95](https://github.com/googleapis/google-cloud-node/commit/4c2bc9510562e753340276ff5b21e1f18c71e7b2))
+
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.8.0...geminidataanalytics-v0.9.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/geminidataanalytics-v0.7.1...geminidataanalytics-v0.8.0) (2026-06-01)
 
 

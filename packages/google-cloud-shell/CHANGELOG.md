@@ -1,5 +1,44 @@
 # Changelog
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/shell-v5.1.1...shell-v5.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/shell-v5.1.0...shell-v5.1.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/shell-v5.0.0...shell-v5.1.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/shell-v4.2.0...shell-v5.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/shell-v4.1.2...shell-v4.2.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 3 ([#8614](https://github.com/googleapis/google-cloud-node/issues/8614)) ([fae15ec](https://github.com/googleapis/google-cloud-node/commit/fae15ecca725f8e978341156e2c99c623ce74fcc))
+
 ## [4.1.2](https://github.com/googleapis/google-cloud-node/compare/shell-v4.1.1...shell-v4.1.2) (2026-05-01)
 
 

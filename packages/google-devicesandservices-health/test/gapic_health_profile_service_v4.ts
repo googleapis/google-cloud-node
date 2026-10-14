@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as healthprofileserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -249,7 +249,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.healthProfileServiceStub, undefined);
@@ -257,13 +257,13 @@ describe('v4.HealthProfileServiceClient', () => {
       assert(client.healthProfileServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.healthProfileServiceStub);
@@ -272,15 +272,15 @@ describe('v4.HealthProfileServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.healthProfileServiceStub, undefined);
@@ -289,7 +289,7 @@ describe('v4.HealthProfileServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -298,7 +298,7 @@ describe('v4.HealthProfileServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -311,7 +311,7 @@ describe('v4.HealthProfileServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -335,7 +335,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getProfile without error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -367,7 +367,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getProfile without error using callback', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -415,7 +415,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getProfile with error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -447,7 +447,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getProfile with closed client', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -460,7 +460,7 @@ describe('v4.HealthProfileServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProfile(request), expectedError);
@@ -471,7 +471,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes updateProfile without error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -504,7 +504,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes updateProfile without error using callback', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -553,7 +553,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes updateProfile with error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -586,7 +586,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes updateProfile with closed client', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v4.HealthProfileServiceClient', () => {
       );
       request.profile.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateProfile(request), expectedError);
@@ -611,7 +611,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getSettings without error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -643,7 +643,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getSettings without error using callback', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -691,7 +691,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getSettings with error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -723,7 +723,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getSettings with closed client', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -736,7 +736,7 @@ describe('v4.HealthProfileServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSettings(request), expectedError);
@@ -747,7 +747,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes updateSettings without error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -780,7 +780,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes updateSettings without error using callback', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes updateSettings with error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -862,7 +862,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes updateSettings with closed client', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -876,7 +876,7 @@ describe('v4.HealthProfileServiceClient', () => {
       );
       request.settings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSettings(request), expectedError);
@@ -887,7 +887,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getIdentity without error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -919,7 +919,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getIdentity without error using callback', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -967,7 +967,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getIdentity with error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -999,7 +999,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getIdentity with closed client', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1012,7 +1012,7 @@ describe('v4.HealthProfileServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIdentity(request), expectedError);
@@ -1023,7 +1023,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getIrnProfile without error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1055,7 +1055,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getIrnProfile without error using callback', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1103,7 +1103,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getIrnProfile with error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1135,7 +1135,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getIrnProfile with closed client', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1148,7 +1148,7 @@ describe('v4.HealthProfileServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIrnProfile(request), expectedError);
@@ -1159,7 +1159,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getPairedDevice without error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1191,7 +1191,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getPairedDevice without error using callback', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1239,7 +1239,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getPairedDevice with error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1271,7 +1271,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes getPairedDevice with closed client', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1284,7 +1284,7 @@ describe('v4.HealthProfileServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPairedDevice(request), expectedError);
@@ -1295,7 +1295,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes listPairedDevices without error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1335,7 +1335,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes listPairedDevices without error using callback', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1367,8 +1367,7 @@ describe('v4.HealthProfileServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.devicesandservices.health.v4.IPairedDevice[]
-              | null,
+              protos.google.devicesandservices.health.v4.IPairedDevice[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1393,7 +1392,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes listPairedDevices with error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1425,7 +1424,7 @@ describe('v4.HealthProfileServiceClient', () => {
     it('invokes listPairedDevicesStream without error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1480,16 +1479,16 @@ describe('v4.HealthProfileServiceClient', () => {
       assert(
         (client.descriptors.page.listPairedDevices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPairedDevicesStream with error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1533,16 +1532,16 @@ describe('v4.HealthProfileServiceClient', () => {
       assert(
         (client.descriptors.page.listPairedDevices.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPairedDevices without error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1584,16 +1583,16 @@ describe('v4.HealthProfileServiceClient', () => {
       assert(
         (client.descriptors.page.listPairedDevices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPairedDevices with error', async () => {
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1626,9 +1625,9 @@ describe('v4.HealthProfileServiceClient', () => {
       assert(
         (client.descriptors.page.listPairedDevices.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1643,7 +1642,7 @@ describe('v4.HealthProfileServiceClient', () => {
       };
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1707,7 +1706,7 @@ describe('v4.HealthProfileServiceClient', () => {
       };
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1756,7 +1755,7 @@ describe('v4.HealthProfileServiceClient', () => {
       };
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1795,7 +1794,7 @@ describe('v4.HealthProfileServiceClient', () => {
       };
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1835,7 +1834,7 @@ describe('v4.HealthProfileServiceClient', () => {
       };
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1887,7 +1886,7 @@ describe('v4.HealthProfileServiceClient', () => {
       };
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1926,7 +1925,7 @@ describe('v4.HealthProfileServiceClient', () => {
       };
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1966,7 +1965,7 @@ describe('v4.HealthProfileServiceClient', () => {
       };
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2017,7 +2016,7 @@ describe('v4.HealthProfileServiceClient', () => {
       };
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2080,7 +2079,7 @@ describe('v4.HealthProfileServiceClient', () => {
       };
       const client =
         new healthprofileserviceModule.v4.HealthProfileServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

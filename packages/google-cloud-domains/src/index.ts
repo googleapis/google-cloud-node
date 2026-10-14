@@ -17,13 +17,13 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1alpha2 from './v1alpha2';
 import * as v1beta1 from './v1beta1';
+import * as v1alpha2 from './v1alpha2';
 
 const DomainsClient = v1.DomainsClient;
 type DomainsClient = v1.DomainsClient;
 
-export {v1, v1alpha2, v1beta1, DomainsClient};
-export default {v1, v1alpha2, v1beta1, DomainsClient};
+export {v1, v1beta1, v1alpha2, DomainsClient};
+export default {v1, v1beta1, v1alpha2, DomainsClient};
 import * as protos from '../protos/protos';
 export {protos};

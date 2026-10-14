@@ -26,14 +26,14 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 // @ts-ignore
 import type * as protos from '../../../protos/protos.js';
 import * as testing_client_config from './testing_client_config.json';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import { getJSON } from '../json-helper.cjs';
+import {fileURLToPath} from 'url';
+import {getJSON} from '../json-helper.cjs';
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -47,7 +47,7 @@ const gapicConfig = getJSON(path.join(dirname, 'testing_client_config.json'));
 const jsonProtos = getJSON(
   path.join(dirname, '..', '..', '..', 'protos/protos.json'),
 );
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 const version = getJSON(
   path.join(dirname, '..', '..', '..', '..', 'package.json'),
 ).version;
@@ -65,7 +65,7 @@ export class TestingClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('showcase');
@@ -77,9 +77,9 @@ export class TestingClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  testingStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  testingStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of TestingClient.
@@ -156,7 +156,7 @@ export class TestingClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -275,7 +275,7 @@ export class TestingClient {
       'google.showcase.v1beta1.Testing',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -315,7 +315,7 @@ export class TestingClient {
           (this._protos as any).google.showcase.v1beta1.Testing,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -331,7 +331,7 @@ export class TestingClient {
     ];
     for (const methodName of testingStubMethods) {
       const callPromise = this.testingStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -522,7 +522,7 @@ export class TestingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createSession request %j', request);
@@ -648,7 +648,7 @@ export class TestingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSession request %j', request);
@@ -774,7 +774,7 @@ export class TestingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteSession request %j', request);
@@ -904,7 +904,7 @@ export class TestingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('reportSession request %j', request);
@@ -1035,7 +1035,7 @@ export class TestingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteTest request %j', request);
@@ -1166,7 +1166,7 @@ export class TestingClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('verifyTest request %j', request);
@@ -1294,7 +1294,7 @@ export class TestingClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1355,7 +1355,7 @@ export class TestingClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSessions stream %j', request);
@@ -1398,7 +1398,7 @@ export class TestingClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSessions iterate %j', request);
@@ -1494,7 +1494,7 @@ export class TestingClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1559,7 +1559,7 @@ export class TestingClient {
       });
     const defaultCallSettings = this._defaults['listTests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTests stream %j', request);
@@ -1608,7 +1608,7 @@ export class TestingClient {
       });
     const defaultCallSettings = this._defaults['listTests'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listTests iterate %j', request);
@@ -2042,7 +2042,7 @@ export class TestingClient {
    */
   close(): Promise<void> {
     if (this.testingStub && !this._terminated) {
-      return this.testingStub.then((stub) => {
+      return this.testingStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

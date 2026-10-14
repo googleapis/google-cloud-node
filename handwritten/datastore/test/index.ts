@@ -33,7 +33,7 @@ import {ExplainOptions, ExplainMetrics, RunQueryInfo} from '../src/query';
 import * as is from 'is';
 import * as sinon from 'sinon';
 import * as extend from 'extend';
-import {google} from '../protos/protos';
+import {google} from '../src/protos';
 import {ServiceError} from 'google-gax';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -1598,6 +1598,7 @@ async.each(
               [
                 "Cannot read properties of null (reading 'toString')", // Later Node versions
                 "Cannot read property 'toString' of null", // Node 14
+                "null is not an object (evaluating 'data.name.toString')", // Bun / JavaScriptCore
               ].includes((err as {message: string}).message),
             );
             done();

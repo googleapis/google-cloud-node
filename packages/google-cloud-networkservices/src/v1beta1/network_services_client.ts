@@ -18,7 +18,20 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall} from 'google-gax';
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  GrpcClientOptions,
+  LROperation,
+  PaginationCallback,
+  GaxCall,
+  IamClient,
+  IamProtos,
+  LocationsClient,
+  LocationProtos,
+} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -58,6 +71,8 @@ export class NetworkServicesClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  iamClient: IamClient;
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   networkServicesStub?: Promise<{[name: string]: Function}>;
@@ -101,20 +116,41 @@ export class NetworkServicesClient {
    *     const client = new NetworkServicesClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof NetworkServicesClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'networkservices.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -140,7 +176,7 @@ export class NetworkServicesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -152,12 +188,15 @@ export class NetworkServicesClient {
     if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
+
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts,
+    );
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -179,13 +218,16 @@ export class NetworkServicesClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       endpointPolicyPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/endpointPolicies/{endpoint_policy}'
+        'projects/{project}/locations/{location}/endpointPolicies/{endpoint_policy}',
+      ),
+      extensionBindingPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/extensionBindings/{extension_binding}',
       ),
       lbRouteExtensionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}'
+        'projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}',
       ),
       lbTrafficExtensionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}'
+        'projects/{project}/locations/{location}/lbTrafficExtensions/{lb_traffic_extension}',
       ),
     };
 
@@ -193,8 +235,11 @@ export class NetworkServicesClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      listEndpointPolicies:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'endpointPolicies')
+      listEndpointPolicies: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'endpointPolicies',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -203,45 +248,99 @@ export class NetworkServicesClient {
     // rather than holding a request open.
     const lroOptions: GrpcClientOptions = {
       auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
     };
     if (opts.fallback) {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v1beta1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v1beta1/{name=projects/*}/locations',},{selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',get: '/v1beta1/{resource=projects/*/locations/*/endpointPolicies/*}:getIamPolicy',},{selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',post: '/v1beta1/{resource=projects/*/locations/*/endpointPolicies/*}:setIamPolicy',body: '*',},{selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',post: '/v1beta1/{resource=projects/*/locations/*/endpointPolicies/*}:testIamPermissions',body: '*',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v1beta1/{name=projects/*/locations/*/operations/*}:cancel',body: '*',},{selector: 'google.longrunning.Operations.DeleteOperation',delete: '/v1beta1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.GetOperation',get: '/v1beta1/{name=projects/*/locations/*/operations/*}',},{selector: 'google.longrunning.Operations.ListOperations',get: '/v1beta1/{name=projects/*/locations/*}/operations',}];
+      lroOptions.httpRules = [
+        {
+          selector: 'google.cloud.location.Locations.GetLocation',
+          get: '/v1beta1/{name=projects/*/locations/*}',
+        },
+        {
+          selector: 'google.cloud.location.Locations.ListLocations',
+          get: '/v1beta1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1beta1/{resource=projects/*/locations/*/endpointPolicies/*}:getIamPolicy',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1beta1/{resource=projects/*/locations/*/endpointPolicies/*}:setIamPolicy',
+          body: '*',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1beta1/{resource=projects/*/locations/*/endpointPolicies/*}:testIamPermissions',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.CancelOperation',
+          post: '/v1beta1/{name=projects/*/locations/*/operations/*}:cancel',
+          body: '*',
+        },
+        {
+          selector: 'google.longrunning.Operations.DeleteOperation',
+          delete: '/v1beta1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v1beta1/{name=projects/*/locations/*/operations/*}',
+        },
+        {
+          selector: 'google.longrunning.Operations.ListOperations',
+          get: '/v1beta1/{name=projects/*/locations/*}/operations',
+        },
+      ];
     }
-    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro(lroOptions)
+      .operationsClient(opts);
     const createEndpointPolicyResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1beta1.EndpointPolicy') as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1beta1.EndpointPolicy',
+    ) as gax.protobuf.Type;
     const createEndpointPolicyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1beta1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1beta1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const updateEndpointPolicyResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1beta1.EndpointPolicy') as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1beta1.EndpointPolicy',
+    ) as gax.protobuf.Type;
     const updateEndpointPolicyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1beta1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1beta1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteEndpointPolicyResponse = protoFilesRoot.lookup(
-      '.google.protobuf.Empty') as gax.protobuf.Type;
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
     const deleteEndpointPolicyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkservices.v1beta1.OperationMetadata') as gax.protobuf.Type;
+      '.google.cloud.networkservices.v1beta1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createEndpointPolicy: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createEndpointPolicyResponse.decode.bind(createEndpointPolicyResponse),
-        createEndpointPolicyMetadata.decode.bind(createEndpointPolicyMetadata)),
+        createEndpointPolicyMetadata.decode.bind(createEndpointPolicyMetadata),
+      ),
       updateEndpointPolicy: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         updateEndpointPolicyResponse.decode.bind(updateEndpointPolicyResponse),
-        updateEndpointPolicyMetadata.decode.bind(updateEndpointPolicyMetadata)),
+        updateEndpointPolicyMetadata.decode.bind(updateEndpointPolicyMetadata),
+      ),
       deleteEndpointPolicy: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteEndpointPolicyResponse.decode.bind(deleteEndpointPolicyResponse),
-        deleteEndpointPolicyMetadata.decode.bind(deleteEndpointPolicyMetadata))
+        deleteEndpointPolicyMetadata.decode.bind(deleteEndpointPolicyMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.networkservices.v1beta1.NetworkServices', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.networkservices.v1beta1.NetworkServices',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')},
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -272,28 +371,40 @@ export class NetworkServicesClient {
     // Put together the "service stub" for
     // google.cloud.networkservices.v1beta1.NetworkServices.
     this.networkServicesStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.networkservices.v1beta1.NetworkServices') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.networkservices.v1beta1.NetworkServices,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.networkservices.v1beta1.NetworkServices',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.networkservices.v1beta1
+            .NetworkServices,
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const networkServicesStubMethods =
-        ['listEndpointPolicies', 'getEndpointPolicy', 'createEndpointPolicy', 'updateEndpointPolicy', 'deleteEndpointPolicy'];
+    const networkServicesStubMethods = [
+      'listEndpointPolicies',
+      'getEndpointPolicy',
+      'createEndpointPolicy',
+      'updateEndpointPolicy',
+      'deleteEndpointPolicy',
+    ];
     for (const methodName of networkServicesStubMethods) {
       const callPromise = this.networkServicesStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
       const descriptor =
         this.descriptors.page[methodName] ||
@@ -303,7 +414,7 @@ export class NetworkServicesClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -318,8 +429,14 @@ export class NetworkServicesClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networkservices.googleapis.com';
   }
@@ -330,8 +447,14 @@ export class NetworkServicesClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'networkservices.googleapis.com';
   }
@@ -362,9 +485,7 @@ export class NetworkServicesClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -373,8 +494,9 @@ export class NetworkServicesClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -385,521 +507,781 @@ export class NetworkServicesClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Gets details of a single EndpointPolicy.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. A name of the EndpointPolicy to get. Must be in the format
- *   `projects/* /locations/global/endpointPolicies/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.cloud.networkservices.v1beta1.EndpointPolicy|EndpointPolicy}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/network_services.get_endpoint_policy.js</caption>
- * region_tag:networkservices_v1beta1_generated_NetworkServices_GetEndpointPolicy_async
- */
+  /**
+   * Gets details of a single EndpointPolicy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the EndpointPolicy to get. Must be in the format
+   *   `projects/* /locations/global/endpointPolicies/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.networkservices.v1beta1.EndpointPolicy|EndpointPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/network_services.get_endpoint_policy.js</caption>
+   * region_tag:networkservices_v1beta1_generated_NetworkServices_GetEndpointPolicy_async
+   */
   getEndpointPolicy(
-      request?: protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
-        protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+      (
+        | protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
   getEndpointPolicy(
-      request: protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
-          protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+      | protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEndpointPolicy(
-      request: protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
-          protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+      | protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getEndpointPolicy(
-      request?: protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
-          protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
-          protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
-        protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+      | protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+      (
+        | protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getEndpointPolicy request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
-        protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+          | protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getEndpointPolicy response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getEndpointPolicy(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
-        protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getEndpointPolicy response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getEndpointPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+          (
+            | protos.google.cloud.networkservices.v1beta1.IGetEndpointPolicyRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getEndpointPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
-/**
- * Creates a new EndpointPolicy in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The parent resource of the EndpointPolicy. Must be in the
- *   format `projects/* /locations/global`.
- * @param {string} request.endpointPolicyId
- *   Required. Short name of the EndpointPolicy resource to be created.
- *   E.g. "CustomECS".
- * @param {google.cloud.networkservices.v1beta1.EndpointPolicy} request.endpointPolicy
- *   Required. EndpointPolicy resource to be created.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/network_services.create_endpoint_policy.js</caption>
- * region_tag:networkservices_v1beta1_generated_NetworkServices_CreateEndpointPolicy_async
- */
+  /**
+   * Creates a new EndpointPolicy in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the EndpointPolicy. Must be in the
+   *   format `projects/* /locations/global`.
+   * @param {string} request.endpointPolicyId
+   *   Required. Short name of the EndpointPolicy resource to be created.
+   *   E.g. "CustomECS".
+   * @param {google.cloud.networkservices.v1beta1.EndpointPolicy} request.endpointPolicy
+   *   Required. EndpointPolicy resource to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/network_services.create_endpoint_policy.js</caption>
+   * region_tag:networkservices_v1beta1_generated_NetworkServices_CreateEndpointPolicy_async
+   */
   createEndpointPolicy(
-      request?: protos.google.cloud.networkservices.v1beta1.ICreateEndpointPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networkservices.v1beta1.ICreateEndpointPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   createEndpointPolicy(
-      request: protos.google.cloud.networkservices.v1beta1.ICreateEndpointPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkservices.v1beta1.ICreateEndpointPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEndpointPolicy(
-      request: protos.google.cloud.networkservices.v1beta1.ICreateEndpointPolicyRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkservices.v1beta1.ICreateEndpointPolicyRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createEndpointPolicy(
-      request?: protos.google.cloud.networkservices.v1beta1.ICreateEndpointPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networkservices.v1beta1.ICreateEndpointPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('createEndpointPolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('createEndpointPolicy request %j', request);
-    return this.innerApiCalls.createEndpointPolicy(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('createEndpointPolicy response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .createEndpointPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createEndpointPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `createEndpointPolicy()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/network_services.create_endpoint_policy.js</caption>
- * region_tag:networkservices_v1beta1_generated_NetworkServices_CreateEndpointPolicy_async
- */
-  async checkCreateEndpointPolicyProgress(name: string): Promise<LROperation<protos.google.cloud.networkservices.v1beta1.EndpointPolicy, protos.google.cloud.networkservices.v1beta1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `createEndpointPolicy()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/network_services.create_endpoint_policy.js</caption>
+   * region_tag:networkservices_v1beta1_generated_NetworkServices_CreateEndpointPolicy_async
+   */
+  async checkCreateEndpointPolicyProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networkservices.v1beta1.EndpointPolicy,
+      protos.google.cloud.networkservices.v1beta1.OperationMetadata
+    >
+  > {
     this._log.info('createEndpointPolicy long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createEndpointPolicy, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networkservices.v1beta1.EndpointPolicy, protos.google.cloud.networkservices.v1beta1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createEndpointPolicy,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networkservices.v1beta1.EndpointPolicy,
+      protos.google.cloud.networkservices.v1beta1.OperationMetadata
+    >;
   }
-/**
- * Updates the parameters of a single EndpointPolicy.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask is used to specify the fields to be overwritten in the
- *   EndpointPolicy resource by the update.
- *   The fields specified in the update_mask are relative to the resource, not
- *   the full request. A field will be overwritten if it is in the mask. If the
- *   user does not provide a mask then all fields will be overwritten.
- * @param {google.cloud.networkservices.v1beta1.EndpointPolicy} request.endpointPolicy
- *   Required. Updated EndpointPolicy resource.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/network_services.update_endpoint_policy.js</caption>
- * region_tag:networkservices_v1beta1_generated_NetworkServices_UpdateEndpointPolicy_async
- */
+  /**
+   * Updates the parameters of a single EndpointPolicy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   EndpointPolicy resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields will be overwritten.
+   * @param {google.cloud.networkservices.v1beta1.EndpointPolicy} request.endpointPolicy
+   *   Required. Updated EndpointPolicy resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/network_services.update_endpoint_policy.js</caption>
+   * region_tag:networkservices_v1beta1_generated_NetworkServices_UpdateEndpointPolicy_async
+   */
   updateEndpointPolicy(
-      request?: protos.google.cloud.networkservices.v1beta1.IUpdateEndpointPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networkservices.v1beta1.IUpdateEndpointPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   updateEndpointPolicy(
-      request: protos.google.cloud.networkservices.v1beta1.IUpdateEndpointPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkservices.v1beta1.IUpdateEndpointPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEndpointPolicy(
-      request: protos.google.cloud.networkservices.v1beta1.IUpdateEndpointPolicyRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkservices.v1beta1.IUpdateEndpointPolicyRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateEndpointPolicy(
-      request?: protos.google.cloud.networkservices.v1beta1.IUpdateEndpointPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networkservices.v1beta1.IUpdateEndpointPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'endpoint_policy.name': request.endpointPolicy!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'endpoint_policy.name': request.endpointPolicy!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('updateEndpointPolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('updateEndpointPolicy request %j', request);
-    return this.innerApiCalls.updateEndpointPolicy(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('updateEndpointPolicy response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .updateEndpointPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.networkservices.v1beta1.IEndpointPolicy,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateEndpointPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `updateEndpointPolicy()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/network_services.update_endpoint_policy.js</caption>
- * region_tag:networkservices_v1beta1_generated_NetworkServices_UpdateEndpointPolicy_async
- */
-  async checkUpdateEndpointPolicyProgress(name: string): Promise<LROperation<protos.google.cloud.networkservices.v1beta1.EndpointPolicy, protos.google.cloud.networkservices.v1beta1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `updateEndpointPolicy()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/network_services.update_endpoint_policy.js</caption>
+   * region_tag:networkservices_v1beta1_generated_NetworkServices_UpdateEndpointPolicy_async
+   */
+  async checkUpdateEndpointPolicyProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.networkservices.v1beta1.EndpointPolicy,
+      protos.google.cloud.networkservices.v1beta1.OperationMetadata
+    >
+  > {
     this._log.info('updateEndpointPolicy long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateEndpointPolicy, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.networkservices.v1beta1.EndpointPolicy, protos.google.cloud.networkservices.v1beta1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateEndpointPolicy,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.networkservices.v1beta1.EndpointPolicy,
+      protos.google.cloud.networkservices.v1beta1.OperationMetadata
+    >;
   }
-/**
- * Deletes a single EndpointPolicy.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. A name of the EndpointPolicy to delete. Must be in the format
- *   `projects/* /locations/global/endpointPolicies/*`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/network_services.delete_endpoint_policy.js</caption>
- * region_tag:networkservices_v1beta1_generated_NetworkServices_DeleteEndpointPolicy_async
- */
+  /**
+   * Deletes a single EndpointPolicy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. A name of the EndpointPolicy to delete. Must be in the format
+   *   `projects/* /locations/global/endpointPolicies/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/network_services.delete_endpoint_policy.js</caption>
+   * region_tag:networkservices_v1beta1_generated_NetworkServices_DeleteEndpointPolicy_async
+   */
   deleteEndpointPolicy(
-      request?: protos.google.cloud.networkservices.v1beta1.IDeleteEndpointPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.networkservices.v1beta1.IDeleteEndpointPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
   deleteEndpointPolicy(
-      request: protos.google.cloud.networkservices.v1beta1.IDeleteEndpointPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkservices.v1beta1.IDeleteEndpointPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEndpointPolicy(
-      request: protos.google.cloud.networkservices.v1beta1.IDeleteEndpointPolicyRequest,
-      callback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.networkservices.v1beta1.IDeleteEndpointPolicyRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   deleteEndpointPolicy(
-      request?: protos.google.cloud.networkservices.v1beta1.IDeleteEndpointPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request?: protos.google.cloud.networkservices.v1beta1.IDeleteEndpointPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: Callback<
-          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, rawResponse, _) => {
           this._log.info('deleteEndpointPolicy response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified callback above.
         }
       : undefined;
     this._log.info('deleteEndpointPolicy request %j', request);
-    return this.innerApiCalls.deleteEndpointPolicy(request, options, wrappedCallback)
-    ?.then(([response, rawResponse, _]: [
-      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1beta1.IOperationMetadata>,
-      protos.google.longrunning.IOperation|undefined, {}|undefined
-    ]) => {
-      this._log.info('deleteEndpointPolicy response %j', rawResponse);
-      return [response, rawResponse, _];
-    });
+    return this.innerApiCalls
+      .deleteEndpointPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.networkservices.v1beta1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteEndpointPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
   }
-/**
- * Check the status of the long running operation returned by `deleteEndpointPolicy()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/network_services.delete_endpoint_policy.js</caption>
- * region_tag:networkservices_v1beta1_generated_NetworkServices_DeleteEndpointPolicy_async
- */
-  async checkDeleteEndpointPolicyProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1beta1.OperationMetadata>>{
+  /**
+   * Check the status of the long running operation returned by `deleteEndpointPolicy()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/network_services.delete_endpoint_policy.js</caption>
+   * region_tag:networkservices_v1beta1_generated_NetworkServices_DeleteEndpointPolicy_async
+   */
+  async checkDeleteEndpointPolicyProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networkservices.v1beta1.OperationMetadata
+    >
+  > {
     this._log.info('deleteEndpointPolicy long-running');
-    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteEndpointPolicy, this._gaxModule.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1beta1.OperationMetadata>;
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteEndpointPolicy,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.networkservices.v1beta1.OperationMetadata
+    >;
   }
- /**
- * Lists EndpointPolicies in a given project and location.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project and location from which the EndpointPolicies should
- *   be listed, specified in the format `projects/* /locations/global`.
- * @param {number} request.pageSize
- *   Maximum number of EndpointPolicies to return per call.
- * @param {string} request.pageToken
- *   The value returned by the last `ListEndpointPoliciesResponse`
- *   Indicates that this is a continuation of a prior
- *   `ListEndpointPolicies` call, and that the system should return the
- *   next page of data.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is Array of {@link protos.google.cloud.networkservices.v1beta1.EndpointPolicy|EndpointPolicy}.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed and will merge results from all the pages into this array.
- *   Note that it can affect your quota.
- *   We recommend using `listEndpointPoliciesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Lists EndpointPolicies in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the EndpointPolicies should
+   *   be listed, specified in the format `projects/* /locations/global`.
+   * @param {number} request.pageSize
+   *   Maximum number of EndpointPolicies to return per call.
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListEndpointPoliciesResponse`
+   *   Indicates that this is a continuation of a prior
+   *   `ListEndpointPolicies` call, and that the system should return the
+   *   next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.networkservices.v1beta1.EndpointPolicy|EndpointPolicy}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listEndpointPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEndpointPolicies(
-      request?: protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy[],
-        protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest|null,
-        protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse
-      ]>;
+    request?: protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.networkservices.v1beta1.IEndpointPolicy[],
+      protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest | null,
+      protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse,
+    ]
+  >;
   listEndpointPolicies(
-      request: protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
-      options: CallOptions,
-      callback: PaginationCallback<
-          protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
-          protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse|null|undefined,
-          protos.google.cloud.networkservices.v1beta1.IEndpointPolicy>): void;
+    request: protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
+      | protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkservices.v1beta1.IEndpointPolicy
+    >,
+  ): void;
   listEndpointPolicies(
-      request: protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
-      callback: PaginationCallback<
-          protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
-          protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse|null|undefined,
-          protos.google.cloud.networkservices.v1beta1.IEndpointPolicy>): void;
+    request: protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
+      | protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkservices.v1beta1.IEndpointPolicy
+    >,
+  ): void;
   listEndpointPolicies(
-      request?: protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
-      optionsOrCallback?: CallOptions|PaginationCallback<
+    request?: protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
           protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
-          protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse|null|undefined,
-          protos.google.cloud.networkservices.v1beta1.IEndpointPolicy>,
-      callback?: PaginationCallback<
-          protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
-          protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse|null|undefined,
-          protos.google.cloud.networkservices.v1beta1.IEndpointPolicy>):
-      Promise<[
-        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy[],
-        protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest|null,
-        protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse
-      ]>|void {
+          | protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1beta1.IEndpointPolicy
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
+      | protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.networkservices.v1beta1.IEndpointPolicy
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.networkservices.v1beta1.IEndpointPolicy[],
+      protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest | null,
+      protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
-    const wrappedCallback: PaginationCallback<
-      protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
-      protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse|null|undefined,
-      protos.google.cloud.networkservices.v1beta1.IEndpointPolicy>|undefined = callback
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
+          | protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.networkservices.v1beta1.IEndpointPolicy
+        >
+      | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
           this._log.info('listEndpointPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
@@ -908,116 +1290,558 @@ export class NetworkServicesClient {
     this._log.info('listEndpointPolicies request %j', request);
     return this.innerApiCalls
       .listEndpointPolicies(request, options, wrappedCallback)
-      ?.then(([response, input, output]: [
-        protos.google.cloud.networkservices.v1beta1.IEndpointPolicy[],
-        protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest|null,
-        protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse
-      ]) => {
-        this._log.info('listEndpointPolicies values %j', response);
-        return [response, input, output];
-      });
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.networkservices.v1beta1.IEndpointPolicy[],
+          protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest | null,
+          protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesResponse,
+        ]) => {
+          this._log.info('listEndpointPolicies values %j', response);
+          return [response, input, output];
+        },
+      );
   }
 
-/**
- * Equivalent to `listEndpointPolicies`, but returns a NodeJS Stream object.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project and location from which the EndpointPolicies should
- *   be listed, specified in the format `projects/* /locations/global`.
- * @param {number} request.pageSize
- *   Maximum number of EndpointPolicies to return per call.
- * @param {string} request.pageToken
- *   The value returned by the last `ListEndpointPoliciesResponse`
- *   Indicates that this is a continuation of a prior
- *   `ListEndpointPolicies` call, and that the system should return the
- *   next page of data.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Stream}
- *   An object stream which emits an object representing {@link protos.google.cloud.networkservices.v1beta1.EndpointPolicy|EndpointPolicy} on 'data' event.
- *   The client library will perform auto-pagination by default: it will call the API as many
- *   times as needed. Note that it can affect your quota.
- *   We recommend using `listEndpointPoliciesAsync()`
- *   method described below for async iteration which you can stop as needed.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- */
+  /**
+   * Equivalent to `listEndpointPolicies`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the EndpointPolicies should
+   *   be listed, specified in the format `projects/* /locations/global`.
+   * @param {number} request.pageSize
+   *   Maximum number of EndpointPolicies to return per call.
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListEndpointPoliciesResponse`
+   *   Indicates that this is a continuation of a prior
+   *   `ListEndpointPolicies` call, and that the system should return the
+   *   next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.networkservices.v1beta1.EndpointPolicy|EndpointPolicy} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listEndpointPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
   listEndpointPoliciesStream(
-      request?: protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
-      options?: CallOptions):
-    Transform{
+    request?: protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
+    options?: CallOptions,
+  ): Transform {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEndpointPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEndpointPolicies stream %j', request);
     return this.descriptors.page.listEndpointPolicies.createStream(
       this.innerApiCalls.listEndpointPolicies as GaxCall,
       request,
-      callSettings
+      callSettings,
     );
   }
 
-/**
- * Equivalent to `listEndpointPolicies`, but returns an iterable object.
- *
- * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.parent
- *   Required. The project and location from which the EndpointPolicies should
- *   be listed, specified in the format `projects/* /locations/global`.
- * @param {number} request.pageSize
- *   Maximum number of EndpointPolicies to return per call.
- * @param {string} request.pageToken
- *   The value returned by the last `ListEndpointPoliciesResponse`
- *   Indicates that this is a continuation of a prior
- *   `ListEndpointPolicies` call, and that the system should return the
- *   next page of data.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Object}
- *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
- *   When you iterate the returned iterable, each element will be an object representing
- *   {@link protos.google.cloud.networkservices.v1beta1.EndpointPolicy|EndpointPolicy}. The API will be called under the hood as needed, once per the page,
- *   so you can stop the iteration when you don't need more results.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v1beta1/network_services.list_endpoint_policies.js</caption>
- * region_tag:networkservices_v1beta1_generated_NetworkServices_ListEndpointPolicies_async
- */
+  /**
+   * Equivalent to `listEndpointPolicies`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The project and location from which the EndpointPolicies should
+   *   be listed, specified in the format `projects/* /locations/global`.
+   * @param {number} request.pageSize
+   *   Maximum number of EndpointPolicies to return per call.
+   * @param {string} request.pageToken
+   *   The value returned by the last `ListEndpointPoliciesResponse`
+   *   Indicates that this is a continuation of a prior
+   *   `ListEndpointPolicies` call, and that the system should return the
+   *   next page of data.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.networkservices.v1beta1.EndpointPolicy|EndpointPolicy}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/network_services.list_endpoint_policies.js</caption>
+   * region_tag:networkservices_v1beta1_generated_NetworkServices_ListEndpointPolicies_async
+   */
   listEndpointPoliciesAsync(
-      request?: protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
-      options?: CallOptions):
-    AsyncIterable<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy>{
+    request?: protos.google.cloud.networkservices.v1beta1.IListEndpointPoliciesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'parent': request.parent ?? '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
     const defaultCallSettings = this._defaults['listEndpointPolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('listEndpointPolicies iterate %j', request);
     return this.descriptors.page.listEndpointPolicies.asyncIterate(
       this.innerApiCalls['listEndpointPolicies'] as GaxCall,
       request as {},
-      callSettings
+      callSettings,
     ) as AsyncIterable<protos.google.cloud.networkservices.v1beta1.IEndpointPolicy>;
   }
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  getIamPolicy(
+    request: IamProtos.google.iam.v1.GetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+    return this.iamClient.getIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  setIamPolicy(
+    request: IamProtos.google.iam.v1.SetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+    return this.iamClient.setIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
+  testIamPermissions(
+    request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.TestIamPermissionsResponse,
+          IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.TestIamPermissionsResponse,
+      IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    return this.iamClient.testIamPermissions(request, options, callback);
+  }
+
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html | CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.cloud.location.Location | Location}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link google.cloud.location.Location | Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >,
+  ): Promise<[protos.google.longrunning.Operation]> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions,
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >,
+  ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >,
+  ): Promise<protos.google.protobuf.Empty> {
+    let options: gax.CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as gax.CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1030,7 +1854,11 @@ export class NetworkServicesClient {
    * @param {string} endpoint_policy
    * @returns {string} Resource name string.
    */
-  endpointPolicyPath(project:string,location:string,endpointPolicy:string) {
+  endpointPolicyPath(
+    project: string,
+    location: string,
+    endpointPolicy: string,
+  ) {
     return this.pathTemplates.endpointPolicyPathTemplate.render({
       project: project,
       location: location,
@@ -1046,7 +1874,9 @@ export class NetworkServicesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromEndpointPolicyName(endpointPolicyName: string) {
-    return this.pathTemplates.endpointPolicyPathTemplate.match(endpointPolicyName).project;
+    return this.pathTemplates.endpointPolicyPathTemplate.match(
+      endpointPolicyName,
+    ).project;
   }
 
   /**
@@ -1057,7 +1887,9 @@ export class NetworkServicesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromEndpointPolicyName(endpointPolicyName: string) {
-    return this.pathTemplates.endpointPolicyPathTemplate.match(endpointPolicyName).location;
+    return this.pathTemplates.endpointPolicyPathTemplate.match(
+      endpointPolicyName,
+    ).location;
   }
 
   /**
@@ -1068,7 +1900,68 @@ export class NetworkServicesClient {
    * @returns {string} A string representing the endpoint_policy.
    */
   matchEndpointPolicyFromEndpointPolicyName(endpointPolicyName: string) {
-    return this.pathTemplates.endpointPolicyPathTemplate.match(endpointPolicyName).endpoint_policy;
+    return this.pathTemplates.endpointPolicyPathTemplate.match(
+      endpointPolicyName,
+    ).endpoint_policy;
+  }
+
+  /**
+   * Return a fully-qualified extensionBinding resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} extension_binding
+   * @returns {string} Resource name string.
+   */
+  extensionBindingPath(
+    project: string,
+    location: string,
+    extensionBinding: string,
+  ) {
+    return this.pathTemplates.extensionBindingPathTemplate.render({
+      project: project,
+      location: location,
+      extension_binding: extensionBinding,
+    });
+  }
+
+  /**
+   * Parse the project from ExtensionBinding resource.
+   *
+   * @param {string} extensionBindingName
+   *   A fully-qualified path representing ExtensionBinding resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExtensionBindingName(extensionBindingName: string) {
+    return this.pathTemplates.extensionBindingPathTemplate.match(
+      extensionBindingName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ExtensionBinding resource.
+   *
+   * @param {string} extensionBindingName
+   *   A fully-qualified path representing ExtensionBinding resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExtensionBindingName(extensionBindingName: string) {
+    return this.pathTemplates.extensionBindingPathTemplate.match(
+      extensionBindingName,
+    ).location;
+  }
+
+  /**
+   * Parse the extension_binding from ExtensionBinding resource.
+   *
+   * @param {string} extensionBindingName
+   *   A fully-qualified path representing ExtensionBinding resource.
+   * @returns {string} A string representing the extension_binding.
+   */
+  matchExtensionBindingFromExtensionBindingName(extensionBindingName: string) {
+    return this.pathTemplates.extensionBindingPathTemplate.match(
+      extensionBindingName,
+    ).extension_binding;
   }
 
   /**
@@ -1079,7 +1972,11 @@ export class NetworkServicesClient {
    * @param {string} lb_route_extension
    * @returns {string} Resource name string.
    */
-  lbRouteExtensionPath(project:string,location:string,lbRouteExtension:string) {
+  lbRouteExtensionPath(
+    project: string,
+    location: string,
+    lbRouteExtension: string,
+  ) {
     return this.pathTemplates.lbRouteExtensionPathTemplate.render({
       project: project,
       location: location,
@@ -1095,7 +1992,9 @@ export class NetworkServicesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLbRouteExtensionName(lbRouteExtensionName: string) {
-    return this.pathTemplates.lbRouteExtensionPathTemplate.match(lbRouteExtensionName).project;
+    return this.pathTemplates.lbRouteExtensionPathTemplate.match(
+      lbRouteExtensionName,
+    ).project;
   }
 
   /**
@@ -1106,7 +2005,9 @@ export class NetworkServicesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromLbRouteExtensionName(lbRouteExtensionName: string) {
-    return this.pathTemplates.lbRouteExtensionPathTemplate.match(lbRouteExtensionName).location;
+    return this.pathTemplates.lbRouteExtensionPathTemplate.match(
+      lbRouteExtensionName,
+    ).location;
   }
 
   /**
@@ -1117,7 +2018,9 @@ export class NetworkServicesClient {
    * @returns {string} A string representing the lb_route_extension.
    */
   matchLbRouteExtensionFromLbRouteExtensionName(lbRouteExtensionName: string) {
-    return this.pathTemplates.lbRouteExtensionPathTemplate.match(lbRouteExtensionName).lb_route_extension;
+    return this.pathTemplates.lbRouteExtensionPathTemplate.match(
+      lbRouteExtensionName,
+    ).lb_route_extension;
   }
 
   /**
@@ -1128,7 +2031,11 @@ export class NetworkServicesClient {
    * @param {string} lb_traffic_extension
    * @returns {string} Resource name string.
    */
-  lbTrafficExtensionPath(project:string,location:string,lbTrafficExtension:string) {
+  lbTrafficExtensionPath(
+    project: string,
+    location: string,
+    lbTrafficExtension: string,
+  ) {
     return this.pathTemplates.lbTrafficExtensionPathTemplate.render({
       project: project,
       location: location,
@@ -1144,7 +2051,9 @@ export class NetworkServicesClient {
    * @returns {string} A string representing the project.
    */
   matchProjectFromLbTrafficExtensionName(lbTrafficExtensionName: string) {
-    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(lbTrafficExtensionName).project;
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(
+      lbTrafficExtensionName,
+    ).project;
   }
 
   /**
@@ -1155,7 +2064,9 @@ export class NetworkServicesClient {
    * @returns {string} A string representing the location.
    */
   matchLocationFromLbTrafficExtensionName(lbTrafficExtensionName: string) {
-    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(lbTrafficExtensionName).location;
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(
+      lbTrafficExtensionName,
+    ).location;
   }
 
   /**
@@ -1165,8 +2076,12 @@ export class NetworkServicesClient {
    *   A fully-qualified path representing LbTrafficExtension resource.
    * @returns {string} A string representing the lb_traffic_extension.
    */
-  matchLbTrafficExtensionFromLbTrafficExtensionName(lbTrafficExtensionName: string) {
-    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(lbTrafficExtensionName).lb_traffic_extension;
+  matchLbTrafficExtensionFromLbTrafficExtensionName(
+    lbTrafficExtensionName: string,
+  ) {
+    return this.pathTemplates.lbTrafficExtensionPathTemplate.match(
+      lbTrafficExtensionName,
+    ).lb_traffic_extension;
   }
 
   /**
@@ -1181,6 +2096,12 @@ export class NetworkServicesClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
+        this.iamClient.close().catch(err => {
+          throw err;
+        });
+        this.locationsClient.close().catch(err => {
+          throw err;
+        });
         void this.operationsClient.close();
       });
     }

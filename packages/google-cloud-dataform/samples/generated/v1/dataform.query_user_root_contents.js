@@ -29,7 +29,7 @@ function main(location) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Location of the user root folder whose contents to list.
+   *  Required. Location of the user root folder to list contents for.
    *  Format: projects/* /locations/*
    */
   // const location = 'abc123'
@@ -52,15 +52,15 @@ function main(location) {
    *  Will order Folders before Repositories, and then by `order_by` in ascending
    *  order. Supported keywords: display_name (default), created_at,
    *  last_modified_at. Examples:
-   *    - `orderBy="display_name"`
-   *    - `orderBy="display_name desc"`
+   *  * `orderBy="display_name"`
+   *  * `orderBy="display_name desc"`
    */
   // const orderBy = 'abc123'
   /**
    *  Optional. Optional filtering for the returned list. Filtering is currently
    *  only supported on the `display_name` field.
    *  Example:
-   *   - `filter="display_name="MyFolder""`
+   *  * `filter="display_name="MyFolder""`
    */
   // const filter = 'abc123'
 

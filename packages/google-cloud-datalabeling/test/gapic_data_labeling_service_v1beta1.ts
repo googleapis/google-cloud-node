@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datalabelingserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -286,7 +286,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataLabelingServiceStub, undefined);
@@ -294,13 +294,13 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(client.dataLabelingServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataLabelingServiceStub);
@@ -309,15 +309,15 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataLabelingServiceStub, undefined);
@@ -326,7 +326,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -335,7 +335,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -348,7 +348,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -372,7 +372,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createDataset without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -404,7 +404,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createDataset without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -452,7 +452,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createDataset with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createDataset with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -497,7 +497,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDataset(request), expectedError);
@@ -508,7 +508,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getDataset without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -540,7 +540,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getDataset without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getDataset with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -620,7 +620,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getDataset with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -633,7 +633,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataset(request), expectedError);
@@ -644,7 +644,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteDataset without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -676,7 +676,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteDataset without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -724,7 +724,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteDataset with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteDataset with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -769,7 +769,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDataset(request), expectedError);
@@ -780,7 +780,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getDataItem without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -812,7 +812,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getDataItem without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -860,7 +860,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getDataItem with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -892,7 +892,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getDataItem with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -905,7 +905,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataItem(request), expectedError);
@@ -916,7 +916,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getAnnotatedDataset without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -949,7 +949,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getAnnotatedDataset without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -997,7 +997,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getAnnotatedDataset with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1029,7 +1029,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getAnnotatedDataset with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1042,7 +1042,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAnnotatedDataset(request), expectedError);
@@ -1053,7 +1053,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteAnnotatedDataset without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1086,7 +1086,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteAnnotatedDataset without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1134,7 +1134,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteAnnotatedDataset with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1169,7 +1169,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteAnnotatedDataset with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1182,7 +1182,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1196,7 +1196,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getExample without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1228,7 +1228,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getExample without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1276,7 +1276,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getExample with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1308,7 +1308,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getExample with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1321,7 +1321,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getExample(request), expectedError);
@@ -1332,7 +1332,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createAnnotationSpecSet without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1365,7 +1365,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createAnnotationSpecSet without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1413,7 +1413,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createAnnotationSpecSet with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1448,7 +1448,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createAnnotationSpecSet with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1461,7 +1461,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1475,7 +1475,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getAnnotationSpecSet without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1508,7 +1508,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getAnnotationSpecSet without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1556,7 +1556,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getAnnotationSpecSet with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1588,7 +1588,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getAnnotationSpecSet with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1601,7 +1601,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAnnotationSpecSet(request), expectedError);
@@ -1612,7 +1612,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteAnnotationSpecSet without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1645,7 +1645,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteAnnotationSpecSet without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1693,7 +1693,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteAnnotationSpecSet with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1728,7 +1728,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteAnnotationSpecSet with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1741,7 +1741,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1755,7 +1755,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getInstruction without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1787,7 +1787,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getInstruction without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1835,7 +1835,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getInstruction with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1867,7 +1867,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getInstruction with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1880,7 +1880,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstruction(request), expectedError);
@@ -1891,7 +1891,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteInstruction without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1923,7 +1923,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteInstruction without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1971,7 +1971,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteInstruction with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2003,7 +2003,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteInstruction with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2016,7 +2016,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteInstruction(request), expectedError);
@@ -2027,7 +2027,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getEvaluation without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2059,7 +2059,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getEvaluation without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2107,7 +2107,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getEvaluation with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2139,7 +2139,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getEvaluation with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2152,7 +2152,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEvaluation(request), expectedError);
@@ -2163,7 +2163,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createEvaluationJob without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2196,7 +2196,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createEvaluationJob without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2244,7 +2244,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createEvaluationJob with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2276,7 +2276,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createEvaluationJob with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2289,7 +2289,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createEvaluationJob(request), expectedError);
@@ -2300,7 +2300,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes updateEvaluationJob without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2334,7 +2334,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes updateEvaluationJob without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2383,7 +2383,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes updateEvaluationJob with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2416,7 +2416,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes updateEvaluationJob with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2430,7 +2430,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.evaluationJob.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateEvaluationJob(request), expectedError);
@@ -2441,7 +2441,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getEvaluationJob without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2473,7 +2473,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getEvaluationJob without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2521,7 +2521,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getEvaluationJob with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2553,7 +2553,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes getEvaluationJob with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2566,7 +2566,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEvaluationJob(request), expectedError);
@@ -2577,7 +2577,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes pauseEvaluationJob without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2610,7 +2610,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes pauseEvaluationJob without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2658,7 +2658,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes pauseEvaluationJob with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2690,7 +2690,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes pauseEvaluationJob with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2703,7 +2703,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.pauseEvaluationJob(request), expectedError);
@@ -2714,7 +2714,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes resumeEvaluationJob without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2747,7 +2747,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes resumeEvaluationJob without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2795,7 +2795,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes resumeEvaluationJob with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2827,7 +2827,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes resumeEvaluationJob with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2840,7 +2840,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.resumeEvaluationJob(request), expectedError);
@@ -2851,7 +2851,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteEvaluationJob without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2884,7 +2884,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteEvaluationJob without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2932,7 +2932,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteEvaluationJob with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2964,7 +2964,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes deleteEvaluationJob with closed client', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2977,7 +2977,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteEvaluationJob(request), expectedError);
@@ -2988,7 +2988,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes importData without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3021,7 +3021,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes importData without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3076,7 +3076,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes importData with call error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3108,7 +3108,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes importData with LRO error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3142,7 +3142,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes checkImportDataProgress without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3150,8 +3150,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportDataProgress(
@@ -3165,7 +3165,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes checkImportDataProgress with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3184,7 +3184,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes exportData without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3217,7 +3217,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes exportData without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3272,7 +3272,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes exportData with call error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3304,7 +3304,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes exportData with LRO error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3338,7 +3338,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes checkExportDataProgress without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3346,8 +3346,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportDataProgress(
@@ -3361,7 +3361,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes checkExportDataProgress with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3380,7 +3380,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes labelImage without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3413,7 +3413,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes labelImage without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3468,7 +3468,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes labelImage with call error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3500,7 +3500,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes labelImage with LRO error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3534,7 +3534,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes checkLabelImageProgress without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3542,8 +3542,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkLabelImageProgress(
@@ -3557,7 +3557,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes checkLabelImageProgress with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3576,7 +3576,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes labelVideo without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3609,7 +3609,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes labelVideo without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3664,7 +3664,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes labelVideo with call error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3696,7 +3696,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes labelVideo with LRO error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3730,7 +3730,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes checkLabelVideoProgress without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3738,8 +3738,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkLabelVideoProgress(
@@ -3753,7 +3753,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes checkLabelVideoProgress with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3772,7 +3772,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes labelText without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3805,7 +3805,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes labelText without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3860,7 +3860,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes labelText with call error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3892,7 +3892,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes labelText with LRO error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3926,7 +3926,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes checkLabelTextProgress without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3934,8 +3934,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkLabelTextProgress(
@@ -3949,7 +3949,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes checkLabelTextProgress with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3968,7 +3968,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createInstruction without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4002,7 +4002,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createInstruction without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4057,7 +4057,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createInstruction with call error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4089,7 +4089,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes createInstruction with LRO error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4123,7 +4123,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes checkCreateInstructionProgress without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4131,8 +4131,8 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateInstructionProgress(
@@ -4146,7 +4146,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes checkCreateInstructionProgress with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4168,7 +4168,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listDatasets without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4208,7 +4208,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listDatasets without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4264,7 +4264,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listDatasets with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4296,7 +4296,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listDatasetsStream without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4349,16 +4349,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDatasetsStream with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4402,16 +4402,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasets without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4452,16 +4452,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasets with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4494,9 +4494,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4505,7 +4505,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listDataItems without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4545,7 +4545,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listDataItems without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4577,8 +4577,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datalabeling.v1beta1.IDataItem[]
-              | null,
+              protos.google.cloud.datalabeling.v1beta1.IDataItem[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4603,7 +4602,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listDataItems with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4635,7 +4634,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listDataItemsStream without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4688,16 +4687,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataItemsStream with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4739,16 +4738,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataItems without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4790,16 +4789,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataItems with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4832,9 +4831,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listDataItems.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4843,7 +4842,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listAnnotatedDatasets without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4884,7 +4883,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listAnnotatedDatasets without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4942,7 +4941,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listAnnotatedDatasets with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4977,7 +4976,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listAnnotatedDatasetsStream without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5047,7 +5046,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listAnnotatedDatasetsStream with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5106,7 +5105,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('uses async iteration with listAnnotatedDatasets without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5161,7 +5160,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('uses async iteration with listAnnotatedDatasets with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5209,7 +5208,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listExamples without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5249,7 +5248,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listExamples without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5305,7 +5304,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listExamples with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5337,7 +5336,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listExamplesStream without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5390,16 +5389,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listExamples.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listExamplesStream with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5443,16 +5442,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listExamples.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExamples without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5493,16 +5492,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listExamples.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExamples with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5535,9 +5534,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listExamples.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5546,7 +5545,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listAnnotationSpecSets without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5587,7 +5586,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listAnnotationSpecSets without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5645,7 +5644,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listAnnotationSpecSets with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5680,7 +5679,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listAnnotationSpecSetsStream without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5750,7 +5749,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listAnnotationSpecSetsStream with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5809,7 +5808,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('uses async iteration with listAnnotationSpecSets without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5864,7 +5863,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('uses async iteration with listAnnotationSpecSets with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5912,7 +5911,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listInstructions without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5952,7 +5951,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listInstructions without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -5984,8 +5983,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datalabeling.v1beta1.IInstruction[]
-              | null,
+              protos.google.cloud.datalabeling.v1beta1.IInstruction[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6010,7 +6008,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listInstructions with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6042,7 +6040,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listInstructionsStream without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6095,16 +6093,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listInstructions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInstructionsStream with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6146,16 +6144,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listInstructions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstructions without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6197,16 +6195,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listInstructions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstructions with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6239,9 +6237,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listInstructions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6250,7 +6248,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes searchEvaluations without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6290,7 +6288,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes searchEvaluations without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6322,8 +6320,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datalabeling.v1beta1.IEvaluation[]
-              | null,
+              protos.google.cloud.datalabeling.v1beta1.IEvaluation[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6348,7 +6345,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes searchEvaluations with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6380,7 +6377,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes searchEvaluationsStream without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6433,16 +6430,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.searchEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes searchEvaluationsStream with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6484,16 +6481,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.searchEvaluations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchEvaluations without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6535,16 +6532,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.searchEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with searchEvaluations with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6577,9 +6574,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.searchEvaluations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6588,7 +6585,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes searchExampleComparisons without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6629,7 +6626,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes searchExampleComparisons without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6687,7 +6684,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes searchExampleComparisons with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6722,7 +6719,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes searchExampleComparisonsStream without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6792,7 +6789,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes searchExampleComparisonsStream with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6851,7 +6848,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('uses async iteration with searchExampleComparisons without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6906,7 +6903,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('uses async iteration with searchExampleComparisons with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6954,7 +6951,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listEvaluationJobs without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -6995,7 +6992,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listEvaluationJobs without error using callback', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7027,8 +7024,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[]
-              | null,
+              protos.google.cloud.datalabeling.v1beta1.IEvaluationJob[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7053,7 +7049,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listEvaluationJobs with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7085,7 +7081,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
     it('invokes listEvaluationJobsStream without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7140,16 +7136,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluationJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEvaluationJobsStream with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7193,16 +7189,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluationJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvaluationJobs without error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7244,16 +7240,16 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluationJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEvaluationJobs with error', async () => {
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7286,9 +7282,9 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       assert(
         (client.descriptors.page.listEvaluationJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7303,7 +7299,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       };
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7371,7 +7367,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       };
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7435,7 +7431,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       };
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7499,7 +7495,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       };
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7550,7 +7546,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       };
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7614,7 +7610,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       };
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7669,7 +7665,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       };
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7744,7 +7740,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       };
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -7796,7 +7792,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       };
       const client =
         new datalabelingserviceModule.v1beta1.DataLabelingServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,7 +54,7 @@ export class RecommenderClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('recommender');
@@ -67,9 +67,9 @@ export class RecommenderClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  recommenderStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  recommenderStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of RecommenderClient.
@@ -145,7 +145,7 @@ export class RecommenderClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -312,7 +312,7 @@ export class RecommenderClient {
       'google.cloud.recommender.v1.Recommender',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -352,7 +352,7 @@ export class RecommenderClient {
           (this._protos as any).google.cloud.recommender.v1.Recommender,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -373,7 +373,7 @@ export class RecommenderClient {
     ];
     for (const methodName of recommenderStubMethods) {
       const callPromise = this.recommenderStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -566,7 +566,7 @@ export class RecommenderClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInsight request %j', request);
@@ -716,7 +716,7 @@ export class RecommenderClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('markInsightAccepted request %j', request);
@@ -854,7 +854,7 @@ export class RecommenderClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRecommendation request %j', request);
@@ -1007,7 +1007,7 @@ export class RecommenderClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('markRecommendationDismissed request %j', request);
@@ -1166,7 +1166,7 @@ export class RecommenderClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('markRecommendationClaimed request %j', request);
@@ -1326,7 +1326,7 @@ export class RecommenderClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('markRecommendationSucceeded request %j', request);
@@ -1486,7 +1486,7 @@ export class RecommenderClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('markRecommendationFailed request %j', request);
@@ -1640,7 +1640,7 @@ export class RecommenderClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRecommenderConfig request %j', request);
@@ -1789,7 +1789,7 @@ export class RecommenderClient {
       this._gaxModule.routingHeader.fromParams({
         'recommender_config.name': request.recommenderConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateRecommenderConfig request %j', request);
@@ -1943,7 +1943,7 @@ export class RecommenderClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getInsightTypeConfig request %j', request);
@@ -2092,7 +2092,7 @@ export class RecommenderClient {
       this._gaxModule.routingHeader.fromParams({
         'insight_type_config.name': request.insightTypeConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateInsightTypeConfig request %j', request);
@@ -2288,7 +2288,7 @@ export class RecommenderClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2405,7 +2405,7 @@ export class RecommenderClient {
       });
     const defaultCallSettings = this._defaults['listInsights'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInsights stream %j', request);
@@ -2504,7 +2504,7 @@ export class RecommenderClient {
       });
     const defaultCallSettings = this._defaults['listInsights'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listInsights iterate %j', request);
@@ -2659,7 +2659,7 @@ export class RecommenderClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2776,7 +2776,7 @@ export class RecommenderClient {
       });
     const defaultCallSettings = this._defaults['listRecommendations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRecommendations stream %j', request);
@@ -2875,7 +2875,7 @@ export class RecommenderClient {
       });
     const defaultCallSettings = this._defaults['listRecommendations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRecommendations iterate %j', request);
@@ -4507,7 +4507,7 @@ export class RecommenderClient {
    */
   close(): Promise<void> {
     if (this.recommenderStub && !this._terminated) {
-      return this.recommenderStub.then((stub) => {
+      return this.recommenderStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

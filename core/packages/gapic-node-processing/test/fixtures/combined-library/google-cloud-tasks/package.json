@@ -53,7 +53,7 @@
   "scripts": {
     "clean": "gts clean",
     "compile-protos": "compileProtos esm/src --esm ",
-    "docs": "jsdoc -c .jsdoc.cjs",
+    "docs": "jsdoc -c .jsdoc.json",
     "postpack": "minifyProtoJson build/cjs && minifyProtoJson build/esm",
     "fix": "gts fix",
     "lint": "gts check",
@@ -98,6 +98,6 @@
     "webpack-cli": "^6.0.1"
   },
   "engines": {
-    "node": ">=v18"
+    "node": ">=18"
   }
 }

@@ -20,14 +20,14 @@
 import * as protos from '../../protos/protos.js';
 import assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as sequenceserviceModule from '../src/index.js';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -54,7 +54,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -140,7 +140,7 @@ describe('v1beta1.SequenceServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sequenceServiceStub, undefined);
@@ -148,12 +148,12 @@ describe('v1beta1.SequenceServiceClient', () => {
       assert(client.sequenceServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sequenceServiceStub);
@@ -162,14 +162,14 @@ describe('v1beta1.SequenceServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sequenceServiceStub, undefined);
@@ -178,7 +178,7 @@ describe('v1beta1.SequenceServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -186,7 +186,7 @@ describe('v1beta1.SequenceServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -198,7 +198,7 @@ describe('v1beta1.SequenceServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -221,7 +221,7 @@ describe('v1beta1.SequenceServiceClient', () => {
   describe('createSequence', () => {
     it('invokes createSequence without error', async () => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -238,7 +238,7 @@ describe('v1beta1.SequenceServiceClient', () => {
 
     it('invokes createSequence without error using callback', async () => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -271,7 +271,7 @@ describe('v1beta1.SequenceServiceClient', () => {
 
     it('invokes createSequence with error', async () => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -288,7 +288,7 @@ describe('v1beta1.SequenceServiceClient', () => {
 
     it('invokes createSequence with closed client', async () => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -296,7 +296,7 @@ describe('v1beta1.SequenceServiceClient', () => {
         new protos.google.showcase.v1beta1.CreateSequenceRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSequence(request), expectedError);
@@ -306,7 +306,7 @@ describe('v1beta1.SequenceServiceClient', () => {
   describe('getSequenceReport', () => {
     it('invokes getSequenceReport without error', async () => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -337,7 +337,7 @@ describe('v1beta1.SequenceServiceClient', () => {
 
     it('invokes getSequenceReport without error using callback', async () => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -384,7 +384,7 @@ describe('v1beta1.SequenceServiceClient', () => {
 
     it('invokes getSequenceReport with error', async () => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -415,7 +415,7 @@ describe('v1beta1.SequenceServiceClient', () => {
 
     it('invokes getSequenceReport with closed client', async () => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -428,7 +428,7 @@ describe('v1beta1.SequenceServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSequenceReport(request), expectedError);
@@ -438,7 +438,7 @@ describe('v1beta1.SequenceServiceClient', () => {
   describe('attemptSequence', () => {
     it('invokes attemptSequence without error', async () => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -469,7 +469,7 @@ describe('v1beta1.SequenceServiceClient', () => {
 
     it('invokes attemptSequence without error using callback', async () => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -516,7 +516,7 @@ describe('v1beta1.SequenceServiceClient', () => {
 
     it('invokes attemptSequence with error', async () => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -547,7 +547,7 @@ describe('v1beta1.SequenceServiceClient', () => {
 
     it('invokes attemptSequence with closed client', async () => {
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -560,7 +560,7 @@ describe('v1beta1.SequenceServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.attemptSequence(request), expectedError);
@@ -576,10 +576,10 @@ describe('v1beta1.SequenceServiceClient', () => {
         blueprint: 'blueprintValue',
       };
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.blueprintPathTemplate.render = sinon
@@ -640,10 +640,10 @@ describe('v1beta1.SequenceServiceClient', () => {
         room: 'roomValue',
       };
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.roomPathTemplate.render = sinon
@@ -681,10 +681,10 @@ describe('v1beta1.SequenceServiceClient', () => {
         blurb: 'blurbValue',
       };
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.roomBlurbPathTemplate.render = sinon
@@ -733,10 +733,10 @@ describe('v1beta1.SequenceServiceClient', () => {
         blurb: 'blurbValue',
       };
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.roomBlurbsLegacyRoomBlurbPathTemplate.render = sinon
@@ -812,10 +812,10 @@ describe('v1beta1.SequenceServiceClient', () => {
         sequence: 'sequenceValue',
       };
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.sequencePathTemplate.render = sinon
@@ -852,10 +852,10 @@ describe('v1beta1.SequenceServiceClient', () => {
         sequence: 'sequenceValue',
       };
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.sequenceReportPathTemplate.render = sinon
@@ -892,10 +892,10 @@ describe('v1beta1.SequenceServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.sessionPathTemplate.render = sinon
@@ -933,10 +933,10 @@ describe('v1beta1.SequenceServiceClient', () => {
         test: 'testValue',
       };
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.testPathTemplate.render = sinon
@@ -983,10 +983,10 @@ describe('v1beta1.SequenceServiceClient', () => {
         user: 'userValue',
       };
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.userPathTemplate.render = sinon
@@ -1024,10 +1024,10 @@ describe('v1beta1.SequenceServiceClient', () => {
         blurb: 'blurbValue',
       };
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.userProfileBlurbPathTemplate.render = sinon
@@ -1079,10 +1079,10 @@ describe('v1beta1.SequenceServiceClient', () => {
         blurb: 'blurbValue',
       };
       const client = new sequenceserviceModule.v1beta1.SequenceServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.userProfileBlurbsLegacyUserBlurbPathTemplate.render =

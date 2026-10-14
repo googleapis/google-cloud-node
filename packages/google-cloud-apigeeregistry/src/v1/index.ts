@@ -16,5 +16,5 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ProvisioningClient} from './provisioning_client';
-export {RegistryClient} from './registry_client';
+export { ProvisioningClient } from './provisioning_client';
+export { RegistryClient } from './registry_client';

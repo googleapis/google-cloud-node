@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as completionserviceModule from '../src';
 
 import {
@@ -48,7 +48,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -114,9 +114,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -164,7 +164,7 @@ describe('v1beta.CompletionServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
@@ -172,7 +172,7 @@ describe('v1beta.CompletionServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
@@ -247,7 +247,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -256,14 +256,14 @@ describe('v1beta.CompletionServiceClient', () => {
       assert(client.completionServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.completionServiceStub);
@@ -272,15 +272,15 @@ describe('v1beta.CompletionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -290,7 +290,7 @@ describe('v1beta.CompletionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -299,7 +299,7 @@ describe('v1beta.CompletionServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -313,7 +313,7 @@ describe('v1beta.CompletionServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -338,7 +338,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes completeQuery without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -371,7 +371,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes completeQuery without error using callback', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -420,7 +420,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes completeQuery with error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -453,7 +453,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes completeQuery with closed client', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -467,7 +467,7 @@ describe('v1beta.CompletionServiceClient', () => {
       );
       request.dataStore = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.completeQuery(request), expectedError);
@@ -478,7 +478,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes advancedCompleteQuery without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -512,7 +512,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes advancedCompleteQuery without error using callback', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -561,7 +561,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes advancedCompleteQuery with error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -597,7 +597,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes advancedCompleteQuery with closed client', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -611,7 +611,7 @@ describe('v1beta.CompletionServiceClient', () => {
       );
       request.completionConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -621,11 +621,151 @@ describe('v1beta.CompletionServiceClient', () => {
     });
   });
 
+  describe('removeSuggestion', () => {
+    it('invokes removeSuggestion without error', async () => {
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.RemoveSuggestionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.RemoveSuggestionRequest',
+        ['completionConfig'],
+      );
+      request.completionConfig = defaultValue1;
+      const expectedHeaderRequestParams = `completion_config=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.RemoveSuggestionResponse(),
+      );
+      client.innerApiCalls.removeSuggestion = stubSimpleCall(expectedResponse);
+      const [response] = await client.removeSuggestion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removeSuggestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeSuggestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeSuggestion without error using callback', async () => {
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.RemoveSuggestionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.RemoveSuggestionRequest',
+        ['completionConfig'],
+      );
+      request.completionConfig = defaultValue1;
+      const expectedHeaderRequestParams = `completion_config=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.RemoveSuggestionResponse(),
+      );
+      client.innerApiCalls.removeSuggestion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.removeSuggestion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.discoveryengine.v1beta.IRemoveSuggestionResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.removeSuggestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeSuggestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeSuggestion with error', async () => {
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.RemoveSuggestionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.RemoveSuggestionRequest',
+        ['completionConfig'],
+      );
+      request.completionConfig = defaultValue1;
+      const expectedHeaderRequestParams = `completion_config=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeSuggestion = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.removeSuggestion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.removeSuggestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeSuggestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes removeSuggestion with closed client', async () => {
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.discoveryengine.v1beta.RemoveSuggestionRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.discoveryengine.v1beta.RemoveSuggestionRequest',
+        ['completionConfig'],
+      );
+      request.completionConfig = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.removeSuggestion(request), expectedError);
+    });
+  });
+
   describe('importSuggestionDenyListEntries', () => {
     it('invokes importSuggestionDenyListEntries without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -660,7 +800,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes importSuggestionDenyListEntries without error using callback', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -716,7 +856,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes importSuggestionDenyListEntries with call error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -750,7 +890,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes importSuggestionDenyListEntries with LRO error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -782,7 +922,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes checkImportSuggestionDenyListEntriesProgress without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -791,8 +931,8 @@ describe('v1beta.CompletionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -807,7 +947,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes checkImportSuggestionDenyListEntriesProgress with error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -830,7 +970,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes purgeSuggestionDenyListEntries without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -865,7 +1005,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes purgeSuggestionDenyListEntries without error using callback', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -921,7 +1061,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes purgeSuggestionDenyListEntries with call error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -957,7 +1097,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes purgeSuggestionDenyListEntries with LRO error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -992,7 +1132,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes checkPurgeSuggestionDenyListEntriesProgress without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1001,8 +1141,8 @@ describe('v1beta.CompletionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1017,7 +1157,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes checkPurgeSuggestionDenyListEntriesProgress with error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1040,7 +1180,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes importCompletionSuggestions without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1075,7 +1215,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes importCompletionSuggestions without error using callback', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1131,7 +1271,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes importCompletionSuggestions with call error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1167,7 +1307,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes importCompletionSuggestions with LRO error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1202,7 +1342,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes checkImportCompletionSuggestionsProgress without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1211,8 +1351,8 @@ describe('v1beta.CompletionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1227,7 +1367,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes checkImportCompletionSuggestionsProgress with error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1250,7 +1390,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes purgeCompletionSuggestions without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1285,7 +1425,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes purgeCompletionSuggestions without error using callback', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1341,7 +1481,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes purgeCompletionSuggestions with call error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1377,7 +1517,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes purgeCompletionSuggestions with LRO error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1412,7 +1552,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes checkPurgeCompletionSuggestionsProgress without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1421,8 +1561,8 @@ describe('v1beta.CompletionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1437,7 +1577,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes checkPurgeCompletionSuggestionsProgress with error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1459,7 +1599,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1491,7 +1631,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1537,7 +1677,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1574,7 +1714,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1624,7 +1764,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1667,7 +1807,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1690,7 +1830,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1719,7 +1859,7 @@ describe('v1beta.CompletionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1730,7 +1870,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1756,7 +1896,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1780,7 +1920,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1809,7 +1949,7 @@ describe('v1beta.CompletionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1820,7 +1960,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1846,7 +1986,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1870,7 +2010,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1899,7 +2039,7 @@ describe('v1beta.CompletionServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1910,7 +2050,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1936,7 +2076,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1973,7 +2113,7 @@ describe('v1beta.CompletionServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2002,6 +2142,249 @@ describe('v1beta.CompletionServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('aclConfig', async () => {
+      const fakePath = '/rendered/path/aclConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.aclConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.aclConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('aclConfigPath', () => {
+        const result = client.aclConfigPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.aclConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAclConfigName', () => {
+        const result = client.matchProjectFromAclConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.aclConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAclConfigName', () => {
+        const result = client.matchLocationFromAclConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.aclConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('assistAnswer', async () => {
+      const fakePath = '/rendered/path/assistAnswer';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+        session: 'sessionValue',
+        assist_answer: 'assistAnswerValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.assistAnswerPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.assistAnswerPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('assistAnswerPath', () => {
+        const result = client.assistAnswerPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'engineValue',
+          'sessionValue',
+          'assistAnswerValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAssistAnswerName', () => {
+        const result = client.matchProjectFromAssistAnswerName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAssistAnswerName', () => {
+        const result = client.matchLocationFromAssistAnswerName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollectionFromAssistAnswerName', () => {
+        const result = client.matchCollectionFromAssistAnswerName(fakePath);
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchEngineFromAssistAnswerName', () => {
+        const result = client.matchEngineFromAssistAnswerName(fakePath);
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSessionFromAssistAnswerName', () => {
+        const result = client.matchSessionFromAssistAnswerName(fakePath);
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAssistAnswerFromAssistAnswerName', () => {
+        const result = client.matchAssistAnswerFromAssistAnswerName(fakePath);
+        assert.strictEqual(result, 'assistAnswerValue');
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('assistant', async () => {
+      const fakePath = '/rendered/path/assistant';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+        assistant: 'assistantValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.assistantPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.assistantPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('assistantPath', () => {
+        const result = client.assistantPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'engineValue',
+          'assistantValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.assistantPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAssistantName', () => {
+        const result = client.matchProjectFromAssistantName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.assistantPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAssistantName', () => {
+        const result = client.matchLocationFromAssistantName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.assistantPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollectionFromAssistantName', () => {
+        const result = client.matchCollectionFromAssistantName(fakePath);
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (client.pathTemplates.assistantPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchEngineFromAssistantName', () => {
+        const result = client.matchEngineFromAssistantName(fakePath);
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (client.pathTemplates.assistantPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAssistantFromAssistantName', () => {
+        const result = client.matchAssistantFromAssistantName(fakePath);
+        assert.strictEqual(result, 'assistantValue');
+        assert(
+          (client.pathTemplates.assistantPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('engine', async () => {
       const fakePath = '/rendered/path/engine';
       const expectedParameters = {
@@ -2012,7 +2395,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2089,7 +2472,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2155,7 +2538,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2213,6 +2596,155 @@ describe('v1beta.CompletionServiceClient', () => {
       });
     });
 
+    describe('identityMappingStore', async () => {
+      const fakePath = '/rendered/path/identityMappingStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        identity_mapping_store: 'identityMappingStoreValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.identityMappingStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.identityMappingStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('identityMappingStorePath', () => {
+        const result = client.identityMappingStorePath(
+          'projectValue',
+          'locationValue',
+          'identityMappingStoreValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.identityMappingStorePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromIdentityMappingStoreName', () => {
+        const result =
+          client.matchProjectFromIdentityMappingStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.identityMappingStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromIdentityMappingStoreName', () => {
+        const result =
+          client.matchLocationFromIdentityMappingStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.identityMappingStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchIdentityMappingStoreFromIdentityMappingStoreName', () => {
+        const result =
+          client.matchIdentityMappingStoreFromIdentityMappingStoreName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'identityMappingStoreValue');
+        assert(
+          (
+            client.pathTemplates.identityMappingStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('licenseConfig', async () => {
+      const fakePath = '/rendered/path/licenseConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        license_config: 'licenseConfigValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.licenseConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.licenseConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('licenseConfigPath', () => {
+        const result = client.licenseConfigPath(
+          'projectValue',
+          'locationValue',
+          'licenseConfigValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.licenseConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromLicenseConfigName', () => {
+        const result = client.matchProjectFromLicenseConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.licenseConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromLicenseConfigName', () => {
+        const result = client.matchLocationFromLicenseConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.licenseConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLicenseConfigFromLicenseConfigName', () => {
+        const result = client.matchLicenseConfigFromLicenseConfigName(fakePath);
+        assert.strictEqual(result, 'licenseConfigValue');
+        assert(
+          (client.pathTemplates.licenseConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {
@@ -2220,7 +2752,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2253,6 +2785,152 @@ describe('v1beta.CompletionServiceClient', () => {
       });
     });
 
+    describe('projectLocationCmekConfig', async () => {
+      const fakePath = '/rendered/path/projectLocationCmekConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.projectLocationCmekConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationCmekConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationCmekConfigPath', () => {
+        const result = client.projectLocationCmekConfigPath(
+          'projectValue',
+          'locationValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationCmekConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCmekConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationCmekConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCmekConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationCmekConfigs', async () => {
+      const fakePath = '/rendered/path/projectLocationCmekConfigs';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cmek_config: 'cmekConfigValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.projectLocationCmekConfigsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationCmekConfigsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationCmekConfigsPath', () => {
+        const result = client.projectLocationCmekConfigsPath(
+          'projectValue',
+          'locationValue',
+          'cmekConfigValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationCmekConfigsName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCmekConfigsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationCmekConfigsName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCmekConfigsName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCmekConfigFromProjectLocationCmekConfigsName', () => {
+        const result =
+          client.matchCmekConfigFromProjectLocationCmekConfigsName(fakePath);
+        assert.strictEqual(result, 'cmekConfigValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('projectLocationCollectionDataStore', async () => {
       const fakePath = '/rendered/path/projectLocationCollectionDataStore';
       const expectedParameters = {
@@ -2263,7 +2941,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2369,7 +3047,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2518,7 +3196,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2682,7 +3360,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2793,7 +3471,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2921,7 +3599,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3050,7 +3728,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3178,7 +3856,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3289,7 +3967,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3417,7 +4095,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3547,7 +4225,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3694,7 +4372,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3821,7 +4499,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -3932,7 +4610,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4061,7 +4739,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4178,6 +4856,154 @@ describe('v1beta.CompletionServiceClient', () => {
       });
     });
 
+    describe('projectLocationCollectionEngineCollaborativeProjectSessions', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionEngineCollaborativeProjectSessions';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+        collaborative_project: 'collaborativeProjectValue',
+        session: 'sessionValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionEngineCollaborativeProjectSessionsPath', () => {
+        const result =
+          client.projectLocationCollectionEngineCollaborativeProjectSessionsPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'engineValue',
+            'collaborativeProjectValue',
+            'sessionValue',
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchEngineFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchEngineFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollaborativeProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchCollaborativeProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'collaborativeProjectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSessionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchSessionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('projectLocationCollectionEngineCompletionConfig', async () => {
       const fakePath =
         '/rendered/path/projectLocationCollectionEngineCompletionConfig';
@@ -4189,7 +5015,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4299,7 +5125,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4427,7 +5253,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4555,7 +5381,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4684,7 +5510,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4829,7 +5655,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -4954,7 +5780,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5037,7 +5863,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5166,7 +5992,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5310,7 +6136,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5400,7 +6226,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5497,7 +6323,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5606,7 +6432,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5714,7 +6540,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5805,7 +6631,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -5900,7 +6726,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6009,7 +6835,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6135,7 +6961,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6234,7 +7060,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6325,7 +7151,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6435,7 +7261,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6544,7 +7370,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6621,7 +7447,7 @@ describe('v1beta.CompletionServiceClient', () => {
       };
       const client = new completionserviceModule.v1beta.CompletionServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -6673,6 +7499,72 @@ describe('v1beta.CompletionServiceClient', () => {
         assert.strictEqual(result, 'sampleQuerySetValue');
         assert(
           (client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('userStore', async () => {
+      const fakePath = '/rendered/path/userStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        user_store: 'userStoreValue',
+      };
+      const client = new completionserviceModule.v1beta.CompletionServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        },
+      );
+      await client.initialize();
+      client.pathTemplates.userStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userStorePath', () => {
+        const result = client.userStorePath(
+          'projectValue',
+          'locationValue',
+          'userStoreValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.userStorePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromUserStoreName', () => {
+        const result = client.matchProjectFromUserStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.userStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromUserStoreName', () => {
+        const result = client.matchLocationFromUserStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.userStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchUserStoreFromUserStoreName', () => {
+        const result = client.matchUserStoreFromUserStoreName(fakePath);
+        assert.strictEqual(result, 'userStoreValue');
+        assert(
+          (client.pathTemplates.userStorePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

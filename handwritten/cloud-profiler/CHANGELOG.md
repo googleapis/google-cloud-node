@@ -5,6 +5,69 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+## [8.2.1](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v8.2.0...cloud-profiler-v8.2.1) (2026-10-09)
+
+
+### Bug Fixes
+
+* Use npm in prepare/compile lifecycle scripts ([#9587](https://github.com/googleapis/google-cloud-node/issues/9587)) ([64c3a2b](https://github.com/googleapis/google-cloud-node/commit/64c3a2bafc62273f7cdc3b9612756d631afc3f97))
+
+## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v8.1.0...cloud-profiler-v8.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [8.1.0](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v8.0.1...cloud-profiler-v8.1.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+## [8.0.1](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v8.0.0...cloud-profiler-v8.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v7.0.1...cloud-profiler-v8.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update cloud-profiler to minimum Node version of 22. ([#9043](https://github.com/googleapis/google-cloud-node/issues/9043))
+
+### Features
+
+* Update cloud-profiler to minimum Node version of 22. ([#9043](https://github.com/googleapis/google-cloud-node/issues/9043)) ([e46dbc3](https://github.com/googleapis/google-cloud-node/commit/e46dbc3a95ee2c77b5a32cfe432fb39a1dc0adea)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [7.0.1](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v7.0.0...cloud-profiler-v7.0.1) (2026-07-22)
+
+
+### Bug Fixes
+
+* Remove owlbot template updater from cloud-profiler ([#8915](https://github.com/googleapis/google-cloud-node/issues/8915)) ([ecba5e3](https://github.com/googleapis/google-cloud-node/commit/ecba5e3d36eee9a6cdcf26d8fa7439b7b4244686))
+
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v6.0.5...cloud-profiler-v7.0.0) (2026-07-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* Drop support for Node.js versions < 18.
+
+### Bug Fixes
+
+* **cloud-profiler:** Re-enable tests ([#8828](https://github.com/googleapis/google-cloud-node/issues/8828)) ([be6bfb4](https://github.com/googleapis/google-cloud-node/commit/be6bfb42b768fafb40ab0d7298367acbccefc6ae))
+* **deps:** Update dependency protobufjs to v7.5.5 [security] ([#8071](https://github.com/googleapis/google-cloud-node/issues/8071)) ([ea623da](https://github.com/googleapis/google-cloud-node/commit/ea623da20f374cfa480fb9fdb7758afd0a993a8e))
+
+
+### Miscellaneous Chores
+
+* Upgrade to Node 18 ([#8824](https://github.com/googleapis/google-cloud-node/issues/8824)) ([bd61260](https://github.com/googleapis/google-cloud-node/commit/bd61260a93db997e09c39958eb4e4f89916203c6))
+
 ## [6.0.5](https://github.com/googleapis/google-cloud-node/compare/cloud-profiler-v6.0.4...cloud-profiler-v6.0.5) (2026-05-11)
 
 

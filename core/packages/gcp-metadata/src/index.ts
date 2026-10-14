@@ -13,12 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {
-  type GaxiosError,
-  type GaxiosOptions,
-  type GaxiosResponse,
-  request,
-} from 'gaxios';
+import {type GaxiosOptions, type GaxiosResponse, request} from 'gaxios';
 import jsonBigint = require('json-bigint');
 import {detectGCPResidency} from './gcp-residency';
 import * as logger from 'google-logging-utils';
@@ -220,7 +215,19 @@ async function fastFailMetadataRequest<T>(
   //
   const r1: Promise<GaxiosResponse> = request<T>(options);
   const r2: Promise<GaxiosResponse> = request<T>(secondaryOptions);
-  return Promise.any([r1, r2]);
+  try {
+    return await Promise.any([r1, r2]);
+  } catch (err) {
+    // Per ECMA-262 (PerformPromiseAny), Promise.any constructs AggregateError
+    // without a message argument, so err.message defaults to '' in Bun
+    // (JavaScriptCore), whereas Node.js (V8) sets 'All promises were rejected'.
+    // Backfill 'All promises were rejected' so Bun matches Node.js behavior
+    // (including MetadataLookupWarning output and test expectations).
+    if (err instanceof AggregateError && !err.message) {
+      err.message = 'All promises were rejected';
+    }
+    throw err;
+  }
 }
 
 /**
@@ -323,6 +330,93 @@ function detectGCPAvailableRetries(): number {
 
 let cachedIsAvailableResponse: Promise<boolean> | undefined;
 
+interface ErrorWithDetails {
+  readonly name?: string;
+  readonly message?: string;
+  readonly code?: string | number;
+  readonly type?: string;
+  readonly response?: {
+    readonly status?: number;
+  };
+  readonly errors?: readonly unknown[];
+  readonly cause?: unknown;
+  readonly error?: unknown;
+}
+
+const EXPECTED_NETWORK_ERROR_CODES: ReadonlySet<string> = new Set([
+  'EHOSTDOWN',
+  'EHOSTUNREACH',
+  'ENETUNREACH',
+  'ENOENT',
+  'ENOTFOUND',
+  'ECONNREFUSED',
+  'ConnectionRefused',
+  'FailedToOpenSocket',
+]);
+
+const TIMEOUT_NAMES_AND_CODES: ReadonlySet<string | number> = new Set([
+  'AbortError',
+  'TimeoutError',
+]);
+
+const TIMEOUT_TYPES: ReadonlySet<string> = new Set([
+  'aborted',
+  'request-timeout',
+]);
+
+const MAX_ERROR_DEPTH = 20;
+
+function isErrorWithDetails(val: unknown): val is ErrorWithDetails {
+  return typeof val === 'object' && val !== null;
+}
+
+/**
+ * Recursively extracts and normalizes POSIX/network error codes from potentially
+ * nested Error objects (`AggregateError.errors` from `Promise.any`, `.cause`, `.error`).
+ * Guards against circular references and deep recursion.
+ */
+function getErrorCodes(
+  err: unknown,
+  visited = new Set<unknown>(),
+  depth = 0,
+): string[] {
+  if (!isErrorWithDetails(err) || visited.has(err) || depth > MAX_ERROR_DEPTH) {
+    return ['UNKNOWN'];
+  }
+  visited.add(err);
+
+  if (err.name === 'AggregateError' && Array.isArray(err.errors)) {
+    if (err.errors.length === 0) {
+      return ['UNKNOWN'];
+    }
+    return err.errors.flatMap(subErr =>
+      getErrorCodes(subErr, visited, depth + 1),
+    );
+  }
+
+  if (
+    (err.name !== undefined && TIMEOUT_NAMES_AND_CODES.has(err.name)) ||
+    (err.code !== undefined && TIMEOUT_NAMES_AND_CODES.has(err.code)) ||
+    (err.type !== undefined && TIMEOUT_TYPES.has(err.type))
+  ) {
+    return ['ETIMEDOUT'];
+  }
+
+  if (
+    (typeof err.code === 'string' || typeof err.code === 'number') &&
+    err.code !== ''
+  ) {
+    return [String(err.code)];
+  }
+
+  const nested = err.cause ?? err.error;
+  if (nested !== undefined) {
+    return getErrorCodes(nested, visited, depth + 1);
+  }
+
+  return ['UNKNOWN'];
+}
+
 /**
  * Determine if the metadata server is currently available.
  */
@@ -369,49 +463,40 @@ export async function isAvailable() {
             !(process.env.GCE_METADATA_IP || process.env.GCE_METADATA_HOST),
           );
           return true;
-        } catch (e) {
-          const err = e as GaxiosError & {type: string};
+        } catch (e: unknown) {
           if (process.env.DEBUG_AUTH) {
-            console.info(err);
+            console.info(e);
           }
 
-          if (err.type === 'request-timeout') {
+          if (!isErrorWithDetails(e)) {
+            process.emitWarning(
+              `received unexpected error = ${String(e)} code = UNKNOWN`,
+              'MetadataLookupWarning',
+            );
+            return false;
+          }
+
+          if (e.type === 'request-timeout' || e.response?.status === 404) {
             // If running in a GCP environment, metadata endpoint should return
             // within ms.
             return false;
           }
-          if (err.response && err.response.status === 404) {
-            return false;
-          } else {
-            const codes =
-              e instanceof Error && e.name === 'AggregateError'
-                ? (e as any).errors.map((error: any) =>
-                    error.code ? error.code.toString() : 'UNKNOWN',
-                  )
-                : [err.code ? err.code.toString() : 'UNKNOWN'];
 
-            const isExpected = codes.every((code: string) =>
-              [
-                'EHOSTDOWN',
-                'EHOSTUNREACH',
-                'ENETUNREACH',
-                'ENOENT',
-                'ENOTFOUND',
-                'ECONNREFUSED',
-              ].includes(code),
+          const codes = getErrorCodes(e);
+          const isExpected =
+            codes.length > 0 &&
+            codes.every(code => EXPECTED_NETWORK_ERROR_CODES.has(code));
+
+          if (!isExpected) {
+            const code = [...new Set(codes)].join(', ');
+            process.emitWarning(
+              `received unexpected error = ${e.message} code = ${code}`,
+              'MetadataLookupWarning',
             );
-
-            if (!isExpected) {
-              const code = err.code ? err.code.toString() : 'UNKNOWN';
-              process.emitWarning(
-                `received unexpected error = ${err.message} code = ${code}`,
-                'MetadataLookupWarning',
-              );
-            }
-
-            // Failure to resolve the metadata service means that it is not available.
-            return false;
           }
+
+          // Failure to resolve the metadata service means that it is not available.
+          return false;
         }
       })();
     }

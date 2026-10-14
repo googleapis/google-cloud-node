@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datafusionModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -271,7 +271,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataFusionStub, undefined);
@@ -279,12 +279,12 @@ describe('v1beta1.DataFusionClient', () => {
       assert(client.dataFusionStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataFusionStub);
@@ -293,14 +293,14 @@ describe('v1beta1.DataFusionClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataFusionStub, undefined);
@@ -309,7 +309,7 @@ describe('v1beta1.DataFusionClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -317,7 +317,7 @@ describe('v1beta1.DataFusionClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -329,7 +329,7 @@ describe('v1beta1.DataFusionClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -352,7 +352,7 @@ describe('v1beta1.DataFusionClient', () => {
   describe('getInstance', () => {
     it('invokes getInstance without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -383,7 +383,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes getInstance without error using callback', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes getInstance with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -461,7 +461,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes getInstance with closed client', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v1beta1.DataFusionClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -484,7 +484,7 @@ describe('v1beta1.DataFusionClient', () => {
   describe('removeIamPolicy', () => {
     it('invokes removeIamPolicy without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -515,7 +515,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes removeIamPolicy without error using callback', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes removeIamPolicy with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes removeIamPolicy with closed client', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v1beta1.DataFusionClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.removeIamPolicy(request), expectedError);
@@ -616,7 +616,7 @@ describe('v1beta1.DataFusionClient', () => {
   describe('addDnsPeering', () => {
     it('invokes addDnsPeering without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -647,7 +647,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes addDnsPeering without error using callback', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes addDnsPeering with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -725,7 +725,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes addDnsPeering with closed client', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -738,7 +738,7 @@ describe('v1beta1.DataFusionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.addDnsPeering(request), expectedError);
@@ -748,7 +748,7 @@ describe('v1beta1.DataFusionClient', () => {
   describe('removeDnsPeering', () => {
     it('invokes removeDnsPeering without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -779,7 +779,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes removeDnsPeering without error using callback', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -826,7 +826,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes removeDnsPeering with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -857,7 +857,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes removeDnsPeering with closed client', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -870,7 +870,7 @@ describe('v1beta1.DataFusionClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.removeDnsPeering(request), expectedError);
@@ -880,7 +880,7 @@ describe('v1beta1.DataFusionClient', () => {
   describe('createInstance', () => {
     it('invokes createInstance without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -913,7 +913,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes createInstance without error using callback', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -967,7 +967,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes createInstance with call error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -998,7 +998,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes createInstance with LRO error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1031,7 +1031,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes checkCreateInstanceProgress without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1039,8 +1039,8 @@ describe('v1beta1.DataFusionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateInstanceProgress(
@@ -1053,7 +1053,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes checkCreateInstanceProgress with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1074,7 +1074,7 @@ describe('v1beta1.DataFusionClient', () => {
   describe('deleteInstance', () => {
     it('invokes deleteInstance without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1107,7 +1107,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes deleteInstance without error using callback', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1161,7 +1161,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes deleteInstance with call error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1192,7 +1192,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes deleteInstance with LRO error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1225,7 +1225,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes checkDeleteInstanceProgress without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1233,8 +1233,8 @@ describe('v1beta1.DataFusionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteInstanceProgress(
@@ -1247,7 +1247,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes checkDeleteInstanceProgress with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1268,7 +1268,7 @@ describe('v1beta1.DataFusionClient', () => {
   describe('updateInstance', () => {
     it('invokes updateInstance without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1302,7 +1302,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes updateInstance without error using callback', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1357,7 +1357,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes updateInstance with call error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1389,7 +1389,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes updateInstance with LRO error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1423,7 +1423,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes checkUpdateInstanceProgress without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1431,8 +1431,8 @@ describe('v1beta1.DataFusionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateInstanceProgress(
@@ -1445,7 +1445,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes checkUpdateInstanceProgress with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1466,7 +1466,7 @@ describe('v1beta1.DataFusionClient', () => {
   describe('restartInstance', () => {
     it('invokes restartInstance without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1499,7 +1499,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes restartInstance without error using callback', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1553,7 +1553,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes restartInstance with call error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1584,7 +1584,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes restartInstance with LRO error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1617,7 +1617,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes checkRestartInstanceProgress without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1625,8 +1625,8 @@ describe('v1beta1.DataFusionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestartInstanceProgress(
@@ -1639,7 +1639,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes checkRestartInstanceProgress with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1660,7 +1660,7 @@ describe('v1beta1.DataFusionClient', () => {
   describe('upgradeInstance', () => {
     it('invokes upgradeInstance without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1693,7 +1693,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes upgradeInstance without error using callback', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1747,7 +1747,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes upgradeInstance with call error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1778,7 +1778,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes upgradeInstance with LRO error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1811,7 +1811,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes checkUpgradeInstanceProgress without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1819,8 +1819,8 @@ describe('v1beta1.DataFusionClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpgradeInstanceProgress(
@@ -1833,7 +1833,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes checkUpgradeInstanceProgress with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1854,7 +1854,7 @@ describe('v1beta1.DataFusionClient', () => {
   describe('listAvailableVersions', () => {
     it('invokes listAvailableVersions without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1894,7 +1894,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes listAvailableVersions without error using callback', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1949,7 +1949,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes listAvailableVersions with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1983,7 +1983,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes listAvailableVersionsStream without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2049,7 +2049,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes listAvailableVersionsStream with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2104,7 +2104,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('uses async iteration with listAvailableVersions without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2157,7 +2157,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('uses async iteration with listAvailableVersions with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2203,7 +2203,7 @@ describe('v1beta1.DataFusionClient', () => {
   describe('listInstances', () => {
     it('invokes listInstances without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2242,7 +2242,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes listInstances without error using callback', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2297,7 +2297,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes listInstances with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2328,7 +2328,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes listInstancesStream without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2380,15 +2380,15 @@ describe('v1beta1.DataFusionClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInstancesStream with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2429,15 +2429,15 @@ describe('v1beta1.DataFusionClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2478,15 +2478,15 @@ describe('v1beta1.DataFusionClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2519,9 +2519,9 @@ describe('v1beta1.DataFusionClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2529,7 +2529,7 @@ describe('v1beta1.DataFusionClient', () => {
   describe('listNamespaces', () => {
     it('invokes listNamespaces without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2568,7 +2568,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes listNamespaces without error using callback', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2623,7 +2623,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes listNamespaces with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2654,7 +2654,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes listNamespacesStream without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2707,15 +2707,15 @@ describe('v1beta1.DataFusionClient', () => {
       assert(
         (client.descriptors.page.listNamespaces.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listNamespacesStream with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2757,15 +2757,15 @@ describe('v1beta1.DataFusionClient', () => {
       assert(
         (client.descriptors.page.listNamespaces.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNamespaces without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2806,15 +2806,15 @@ describe('v1beta1.DataFusionClient', () => {
       assert(
         (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listNamespaces with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2847,9 +2847,9 @@ describe('v1beta1.DataFusionClient', () => {
       assert(
         (client.descriptors.page.listNamespaces.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2857,7 +2857,7 @@ describe('v1beta1.DataFusionClient', () => {
   describe('listDnsPeerings', () => {
     it('invokes listDnsPeerings without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2896,7 +2896,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes listDnsPeerings without error using callback', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2928,8 +2928,7 @@ describe('v1beta1.DataFusionClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.datafusion.v1beta1.IDnsPeering[]
-              | null,
+              protos.google.cloud.datafusion.v1beta1.IDnsPeering[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2953,7 +2952,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes listDnsPeerings with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2984,7 +2983,7 @@ describe('v1beta1.DataFusionClient', () => {
 
     it('invokes listDnsPeeringsStream without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3037,15 +3036,15 @@ describe('v1beta1.DataFusionClient', () => {
       assert(
         (client.descriptors.page.listDnsPeerings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDnsPeeringsStream with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3087,15 +3086,15 @@ describe('v1beta1.DataFusionClient', () => {
       assert(
         (client.descriptors.page.listDnsPeerings.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDnsPeerings without error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3137,15 +3136,15 @@ describe('v1beta1.DataFusionClient', () => {
       assert(
         (client.descriptors.page.listDnsPeerings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDnsPeerings with error', async () => {
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3178,9 +3177,9 @@ describe('v1beta1.DataFusionClient', () => {
       assert(
         (client.descriptors.page.listDnsPeerings.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3195,7 +3194,7 @@ describe('v1beta1.DataFusionClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3270,7 +3269,7 @@ describe('v1beta1.DataFusionClient', () => {
         instance: 'instanceValue',
       };
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3333,7 +3332,7 @@ describe('v1beta1.DataFusionClient', () => {
         location: 'locationValue',
       };
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3384,7 +3383,7 @@ describe('v1beta1.DataFusionClient', () => {
         namespace: 'namespaceValue',
       };
       const client = new datafusionModule.v1beta1.DataFusionClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

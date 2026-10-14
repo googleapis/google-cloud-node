@@ -28,10 +28,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform, PassThrough } from 'stream';
+import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -54,7 +54,7 @@ export class ParticipantsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dialogflow');
@@ -67,10 +67,10 @@ export class ParticipantsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  participantsStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  participantsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ParticipantsClient.
@@ -146,7 +146,7 @@ export class ParticipantsClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -210,6 +210,9 @@ export class ParticipantsClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      companionAgentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/companionAgents/{companion_agent}',
+      ),
       encryptionSpecPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/encryptionSpec',
       ),
@@ -380,6 +383,12 @@ export class ParticipantsClient {
         !!opts.fallback,
         !!opts.gaxServerStreamingRetries,
       ),
+      streamingReactiveCompanionSuggestions:
+        new this._gaxModule.StreamDescriptor(
+          this._gaxModule.StreamType.BIDI_STREAMING,
+          !!opts.fallback,
+          !!opts.gaxServerStreamingRetries,
+        ),
       bidiStreamingAnalyzeContent: new this._gaxModule.StreamDescriptor(
         this._gaxModule.StreamType.BIDI_STREAMING,
         !!opts.fallback,
@@ -392,7 +401,7 @@ export class ParticipantsClient {
       'google.cloud.dialogflow.v2beta1.Participants',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -432,7 +441,7 @@ export class ParticipantsClient {
           (this._protos as any).google.cloud.dialogflow.v2beta1.Participants,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -443,6 +452,7 @@ export class ParticipantsClient {
       'updateParticipant',
       'analyzeContent',
       'streamingAnalyzeContent',
+      'streamingReactiveCompanionSuggestions',
       'bidiStreamingAnalyzeContent',
       'suggestArticles',
       'suggestFaqAnswers',
@@ -453,11 +463,11 @@ export class ParticipantsClient {
     ];
     for (const methodName of participantsStubMethods) {
       const callPromise = this.participantsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -679,7 +689,7 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createParticipant request %j', request);
@@ -818,7 +828,7 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getParticipant request %j', request);
@@ -963,7 +973,7 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         'participant.name': request.participant!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateParticipant request %j', request);
@@ -1169,7 +1179,7 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         participant: request.participant ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('analyzeContent request %j', request);
@@ -1335,7 +1345,7 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('suggestArticles request %j', request);
@@ -1493,7 +1503,7 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('suggestFaqAnswers request %j', request);
@@ -1653,7 +1663,7 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('suggestSmartReplies request %j', request);
@@ -1813,7 +1823,7 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('suggestKnowledgeAssist request %j', request);
@@ -1983,7 +1993,7 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -2068,11 +2078,38 @@ export class ParticipantsClient {
    * region_tag:dialogflow_v2beta1_generated_Participants_StreamingAnalyzeContent_async
    */
   streamingAnalyzeContent(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('streamingAnalyzeContent stream %j', options);
     return this.innerApiCalls.streamingAnalyzeContent(null, options);
+  }
+
+  /**
+   * External streaming API for human-agent queries to the companion bot.
+   *
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which is both readable and writable. It accepts objects
+   *   representing {@link protos.google.cloud.dialogflow.v2beta1.StreamingReactiveCompanionSuggestionsRequest|StreamingReactiveCompanionSuggestionsRequest} for write() method, and
+   *   will emit objects representing {@link protos.google.cloud.dialogflow.v2beta1.StreamingReactiveCompanionSuggestionsResponse|StreamingReactiveCompanionSuggestionsResponse} on 'data' event asynchronously.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#bi-directional-streaming | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2beta1/participants.streaming_reactive_companion_suggestions.js</caption>
+   * region_tag:dialogflow_v2beta1_generated_Participants_StreamingReactiveCompanionSuggestions_async
+   */
+  streamingReactiveCompanionSuggestions(
+    options?: CallOptions,
+  ): gax.CancellableStream {
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('streamingReactiveCompanionSuggestions stream %j', options);
+    return this.innerApiCalls.streamingReactiveCompanionSuggestions(
+      null,
+      options,
+    );
   }
 
   /**
@@ -2091,7 +2128,7 @@ export class ParticipantsClient {
    * region_tag:dialogflow_v2beta1_generated_Participants_BidiStreamingAnalyzeContent_async
    */
   bidiStreamingAnalyzeContent(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('bidiStreamingAnalyzeContent stream %j', options);
@@ -2195,7 +2232,7 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2265,7 +2302,7 @@ export class ParticipantsClient {
       });
     const defaultCallSettings = this._defaults['listParticipants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listParticipants stream %j', request);
@@ -2317,7 +2354,7 @@ export class ParticipantsClient {
       });
     const defaultCallSettings = this._defaults['listParticipants'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listParticipants iterate %j', request);
@@ -2453,7 +2490,7 @@ export class ParticipantsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -2538,7 +2575,7 @@ export class ParticipantsClient {
       });
     const defaultCallSettings = this._defaults['listSuggestions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -2605,7 +2642,7 @@ export class ParticipantsClient {
       });
     const defaultCallSettings = this._defaults['listSuggestions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this.warn(
@@ -2701,6 +2738,65 @@ export class ParticipantsClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified companionAgent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} companion_agent
+   * @returns {string} Resource name string.
+   */
+  companionAgentPath(
+    project: string,
+    location: string,
+    companionAgent: string,
+  ) {
+    return this.pathTemplates.companionAgentPathTemplate.render({
+      project: project,
+      location: location,
+      companion_agent: companionAgent,
+    });
+  }
+
+  /**
+   * Parse the project from CompanionAgent resource.
+   *
+   * @param {string} companionAgentName
+   *   A fully-qualified path representing CompanionAgent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromCompanionAgentName(companionAgentName: string) {
+    return this.pathTemplates.companionAgentPathTemplate.match(
+      companionAgentName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from CompanionAgent resource.
+   *
+   * @param {string} companionAgentName
+   *   A fully-qualified path representing CompanionAgent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromCompanionAgentName(companionAgentName: string) {
+    return this.pathTemplates.companionAgentPathTemplate.match(
+      companionAgentName,
+    ).location;
+  }
+
+  /**
+   * Parse the companion_agent from CompanionAgent resource.
+   *
+   * @param {string} companionAgentName
+   *   A fully-qualified path representing CompanionAgent resource.
+   * @returns {string} A string representing the companion_agent.
+   */
+  matchCompanionAgentFromCompanionAgentName(companionAgentName: string) {
+    return this.pathTemplates.companionAgentPathTemplate.match(
+      companionAgentName,
+    ).companion_agent;
+  }
 
   /**
    * Return a fully-qualified encryptionSpec resource name string.
@@ -5304,11 +5400,11 @@ export class ParticipantsClient {
    */
   close(): Promise<void> {
     if (this.participantsStub && !this._terminated) {
-      return this.participantsStub.then((stub) => {
+      return this.participantsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
       });

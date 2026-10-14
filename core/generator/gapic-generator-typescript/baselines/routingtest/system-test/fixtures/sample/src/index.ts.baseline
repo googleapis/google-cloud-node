@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { TestServiceClient } from 'routingtest';
+import {TestServiceClient} from 'routingtest';
 
 // check that the client class type name can be used
 function doStuffWithTestServiceClient(client: TestServiceClient) {

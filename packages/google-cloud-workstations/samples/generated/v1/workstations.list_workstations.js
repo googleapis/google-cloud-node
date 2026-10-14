@@ -41,6 +41,11 @@ function main(parent) {
    *  any.
    */
   // const pageToken = 'abc123'
+  /**
+   *  Optional. Filter the Workstations to be listed. Possible filters are
+   *  described in https://google.aip.dev/160.
+   */
+  // const filter = 'abc123'
 
   // Imports the Workstations library
   const {WorkstationsClient} = require('@google-cloud/workstations').v1;

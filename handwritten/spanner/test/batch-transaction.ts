@@ -20,12 +20,10 @@ import {util} from '@google-cloud/common';
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
-import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 
-import {Session, Database, Spanner} from '../src';
-import {protos} from '../src';
+import {Session, Database, Spanner, protos} from '../src';
 import * as bt from '../src/batch-transaction';
 import {PartialResultStream} from '../src/partial-result-stream';
 import {
@@ -36,7 +34,7 @@ import {ExecuteSqlRequest} from '../src/transaction';
 import {CallOptions} from 'google-gax';
 
 let promisified = false;
-const fakePfy = extend({}, pfy, {
+const fakePfy = Object.assign({}, pfy, {
   promisifyAll(klass, options) {
     if (klass.name !== 'BatchTransaction') {
       return;
@@ -217,6 +215,25 @@ describe('BatchTransaction', () => {
       assert.strictEqual(gaxOpts, undefined);
     });
 
+    it('should not mutate the original query object', () => {
+      const query = {
+        sql: 'SELECT * FROM Singers',
+        gaxOptions: GAX_OPTS as CallOptions,
+        params: {},
+        types: {},
+        dataBoostEnabled: true,
+      };
+      const queryCopy = Object.assign({}, query);
+      sandbox.stub(batchTransaction, 'createPartitions_');
+      (sandbox.stub(FakeTransaction, 'encodeParams') as sinon.SinonStub)
+        .withArgs(query)
+        .returns({});
+
+      batchTransaction.createQueryPartitions(query, assert.ifError);
+
+      assert.deepStrictEqual(query, queryCopy);
+    });
+
     it('should make the correct request using await', async () => {
       const fakeParams = {
         params: {a: 'b'},
@@ -313,7 +330,11 @@ describe('BatchTransaction', () => {
         assert.ifError(err);
 
         parts.forEach((partition, i) => {
-          const expectedPartition = extend({}, expectedQuery, PARTITIONS[i]);
+          const expectedPartition = Object.assign(
+            {},
+            expectedQuery,
+            PARTITIONS[i],
+          );
           assert.deepStrictEqual(partition, expectedPartition);
         });
 
@@ -322,7 +343,7 @@ describe('BatchTransaction', () => {
     });
 
     it('should update the transaction with returned metadata', done => {
-      const response = extend({}, RESPONSE, {
+      const response = Object.assign({}, RESPONSE, {
         transaction: {
           id: ID,
           readTimestamp: TIMESTAMP,
@@ -341,6 +362,21 @@ describe('BatchTransaction', () => {
         assert(timestamp instanceof FakeTimestamp);
         assert.strictEqual(timestamp.calledWith_[0], TIMESTAMP);
 
+        done();
+      });
+    });
+
+    it('should not mutate config.reqOpts and should omit partitionOptions from returned partitions', done => {
+      const partitionOptions = {maxPartitions: 10};
+      const reqOpts = {sql: 'SELECT 1', partitionOptions};
+      const config = {reqOpts};
+
+      batchTransaction.createPartitions_(config, (err, parts) => {
+        assert.ifError(err);
+        assert.strictEqual(reqOpts.partitionOptions, partitionOptions);
+        parts.forEach(part => {
+          assert.strictEqual('partitionOptions' in part, false);
+        });
         done();
       });
     });
@@ -425,6 +461,25 @@ describe('BatchTransaction', () => {
         headers,
         Object.assign({[LEADER_AWARE_ROUTING_HEADER]: 'true'}),
       );
+    });
+
+    it('should not mutate the original options object', () => {
+      const options = {
+        table: 'abc',
+        keys: ['a', 'b'],
+        ranges: [{}, {}],
+        gaxOptions: GAX_OPTS,
+        dataBoostEnabled: true,
+      };
+      const optionsCopy = Object.assign({}, options);
+      sandbox.stub(batchTransaction, 'createPartitions_');
+      (sandbox.stub(FakeTransaction, 'encodeKeySet') as sinon.SinonStub)
+        .withArgs(options)
+        .returns({});
+
+      batchTransaction.createReadPartitions(options, assert.ifError);
+
+      assert.deepStrictEqual(options, optionsCopy);
     });
   });
 

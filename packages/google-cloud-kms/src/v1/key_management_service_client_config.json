@@ -105,6 +105,14 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "ImportTrustedKeyWrappedCryptoKeyVersion": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ExportTrustedKeyWrappedCryptoKeyVersion": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateImportJob": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",

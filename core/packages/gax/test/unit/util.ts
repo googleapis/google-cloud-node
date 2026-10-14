@@ -15,7 +15,7 @@
  */
 
 import assert from 'assert';
-import {describe, it} from 'mocha';
+import {afterEach, describe, it} from 'mocha';
 import {
   toCamelCase as snakeToCamelCase,
   camelToSnakeCase,
@@ -24,7 +24,11 @@ import {
   getProtoNameFromFullName,
   decodeProtobufAny,
   decodeAnyProtosInArray,
+  ignoredClientHeaderTokens,
 } from '../../src/util';
+import {checkTelemetryEnabled} from '../../src/observability/util';
+import {StaticTraceContext} from '../../src/observability/contextUtil';
+import {CallSettings} from '../../src/gax';
 import * as protobuf from 'protobufjs';
 import protosJson from '../../protos/status.json';
 
@@ -195,5 +199,172 @@ describe('util.ts', () => {
       ),
       JSON.stringify([{reason: 'SERVICE_DISABLED'}]),
     );
+  });
+
+  describe('checkTelemetryEnabled', () => {
+    afterEach(() => {
+      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
+    });
+
+    const mockTelemetryInfo: StaticTraceContext = {
+      gcpClientService: 'test.googleapis.com',
+      gcpVersion: '1.0.0',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: 'google-cloud-test',
+    };
+
+    const mockSettings = new CallSettings({
+      enableTelemetryTracing: true,
+      otherArgs: {
+        internalTelemetryInfo: mockTelemetryInfo,
+      },
+    });
+
+    it('returns true when settings are configured with enableTelemetryTracing', () => {
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), true);
+    });
+
+    it('ignores GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED even when set to false', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED = 'false';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), true);
+    });
+
+    it('returns false when enableTelemetryTracing is false on settings', () => {
+      const disabledSettings = new CallSettings({
+        enableTelemetryTracing: false,
+        otherArgs: {
+          internalTelemetryInfo: mockTelemetryInfo,
+        },
+      });
+      assert.strictEqual(checkTelemetryEnabled(disabledSettings), false);
+    });
+
+    it('returns false when enableTelemetryTracing is not set on settings', () => {
+      const noTracingSettings = new CallSettings({
+        otherArgs: {
+          internalTelemetryInfo: {
+            gcpClientService: 'test.googleapis.com',
+          },
+        },
+      });
+      assert.strictEqual(checkTelemetryEnabled(noTracingSettings), false);
+    });
+
+    it('returns false when internalTelemetryInfo is not set on settings', () => {
+      const noInfoSettings = new CallSettings({
+        enableTelemetryTracing: true,
+      });
+      assert.strictEqual(checkTelemetryEnabled(noInfoSettings), false);
+    });
+
+    it('returns false when settings is undefined', () => {
+      assert.strictEqual(checkTelemetryEnabled(undefined), false);
+    });
+
+    it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true and the client option is not set', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      const noOptInSettings = new CallSettings({
+        otherArgs: {
+          internalTelemetryInfo: mockTelemetryInfo,
+        },
+      });
+      assert.strictEqual(checkTelemetryEnabled(noOptInSettings), true);
+    });
+
+    it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true even if internalTelemetryInfo is not set', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      assert.strictEqual(checkTelemetryEnabled(new CallSettings({})), true);
+    });
+
+    it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true even if settings is undefined', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      assert.strictEqual(checkTelemetryEnabled(undefined), true);
+    });
+
+    it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true without passing any arguments', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      assert.strictEqual(checkTelemetryEnabled(), true);
+    });
+
+    it('accepts GOOGLE_SDK_NODE_ENABLE_TRACING case-insensitively', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'TRUE';
+      const noOptInSettings = new CallSettings({
+        otherArgs: {
+          internalTelemetryInfo: mockTelemetryInfo,
+        },
+      });
+      assert.strictEqual(checkTelemetryEnabled(noOptInSettings), true);
+    });
+
+    it('returns false when GOOGLE_SDK_NODE_ENABLE_TRACING=false overrides the client option', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'false';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+    });
+
+    it('returns false when GOOGLE_SDK_NODE_ENABLE_TRACING=0 overrides the client option', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '0';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+    });
+
+    it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true overrides enableTelemetryTracing=false on client settings', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      const disabledSettings = new CallSettings({
+        enableTelemetryTracing: false,
+      });
+      assert.strictEqual(checkTelemetryEnabled(disabledSettings), true);
+    });
+
+    it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=1 overrides enableTelemetryTracing=false on client settings', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '1';
+      const disabledSettings = new CallSettings({
+        enableTelemetryTracing: false,
+      });
+      assert.strictEqual(checkTelemetryEnabled(disabledSettings), true);
+    });
+
+    it('falls back to the client option when GOOGLE_SDK_NODE_ENABLE_TRACING is empty or whitespace', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), true);
+
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = '   ';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), true);
+    });
+
+    it('treats an unrecognized GOOGLE_SDK_NODE_ENABLE_TRACING value as disabled', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'yes';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'foo';
+      assert.strictEqual(checkTelemetryEnabled(mockSettings), false);
+    });
+
+    it('does not throw when process is undefined, as in a browser', () => {
+      const globals = globalThis as {process?: NodeJS.Process};
+      const originalProcess = globals.process;
+      // The result is captured and `process` restored before asserting,
+      // because mocha and assert need `process` themselves.
+      let result: boolean | undefined;
+      let thrown: unknown;
+      delete globals.process;
+      try {
+        result = checkTelemetryEnabled(mockSettings);
+      } catch (e) {
+        thrown = e;
+      } finally {
+        globals.process = originalProcess;
+      }
+      assert.strictEqual(thrown, undefined);
+      assert.strictEqual(result, true);
+    });
+  });
+
+  describe('ignoredClientHeaderTokens', () => {
+    it('defines ignoredClientHeaderTokens containing ignored client header tokens', () => {
+      assert(Array.isArray(ignoredClientHeaderTokens));
+      assert(ignoredClientHeaderTokens.includes('gl-node'));
+      assert(ignoredClientHeaderTokens.includes('gax'));
+      assert(ignoredClientHeaderTokens.includes('gapic'));
+    });
   });
 });

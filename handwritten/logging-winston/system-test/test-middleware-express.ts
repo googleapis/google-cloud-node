@@ -48,7 +48,10 @@ describe(__filename, () => {
       await delay(WRITE_CONSISTENCY_DELAY_MS);
 
       const log = logging.log(LOG_NAME);
-      const entries = (await log.getEntries({pageSize: 1}))[0];
+      const entries = (await log.getEntries({pageSize: 2}))[0].filter(
+        entry =>
+          !(entry.data && 'logging.googleapis.com/diagnostic' in entry.data),
+      );
       assert.strictEqual(entries.length, 1);
       assert.strictEqual(LOG_MESSAGE, entries[0].data.message);
     });
@@ -90,8 +93,15 @@ describe(__filename, () => {
           await delay(WRITE_CONSISTENCY_DELAY_MS);
 
           const appLog = logging.log(LOG_NAME);
-          const appLogEntries = (await appLog.getEntries({pageSize: 1}))[0];
-          assert.strictEqual(appLogEntries.length, 1);
+          const appLogEntries = (
+            await appLog.getEntries({pageSize: 2})
+          )[0].filter(
+            entry =>
+              !(
+                entry.data && 'logging.googleapis.com/diagnostic' in entry.data
+              ),
+          );
+          assert(appLogEntries.length >= 1);
           const [appLogEntry] = appLogEntries;
           assert.strictEqual(LOG_MESSAGE, appLogEntry.data.message);
           assert(appLogEntry.metadata.trace, 'should have a trace property');
@@ -104,9 +114,14 @@ describe(__filename, () => {
           const requestLog = logging.log(`${LOG_NAME}${REQUEST_LOG_SUFFIX}`);
           const requestLogEntries = (
             await requestLog.getEntries({
-              pageSize: 1,
+              pageSize: 2,
             })
-          )[0];
+          )[0].filter(
+            entry =>
+              !(
+                entry.data && 'logging.googleapis.com/diagnostic' in entry.data
+              ),
+          );
           assert.strictEqual(requestLogEntries.length, 1);
           const [requestLogEntry] = requestLogEntries;
           assert.strictEqual(

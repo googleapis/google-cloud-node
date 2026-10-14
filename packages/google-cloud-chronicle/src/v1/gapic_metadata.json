@@ -527,6 +527,288 @@
         }
       }
     },
+    "FeedsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FeedsServiceClient",
+          "rpcs": {
+            "FetchServiceAccountForCustomer": {
+              "methods": [
+                "fetchServiceAccountForCustomer"
+              ]
+            },
+            "CreateFeed": {
+              "methods": [
+                "createFeed"
+              ]
+            },
+            "GetFeed": {
+              "methods": [
+                "getFeed"
+              ]
+            },
+            "DeleteFeed": {
+              "methods": [
+                "deleteFeed"
+              ]
+            },
+            "EnableFeed": {
+              "methods": [
+                "enableFeed"
+              ]
+            },
+            "DisableFeed": {
+              "methods": [
+                "disableFeed"
+              ]
+            },
+            "GetFeedPack": {
+              "methods": [
+                "getFeedPack"
+              ]
+            },
+            "UpdateFeed": {
+              "methods": [
+                "updateFeed"
+              ]
+            },
+            "ImportPushLogs": {
+              "methods": [
+                "importPushLogs"
+              ]
+            },
+            "GenerateSecret": {
+              "methods": [
+                "generateSecret"
+              ]
+            },
+            "ListFeeds": {
+              "methods": [
+                "listFeeds",
+                "listFeedsStream",
+                "listFeedsAsync"
+              ]
+            },
+            "ListFeedPacks": {
+              "methods": [
+                "listFeedPacks",
+                "listFeedPacksStream",
+                "listFeedPacksAsync"
+              ]
+            },
+            "ListFeedSourceTypeSchemas": {
+              "methods": [
+                "listFeedSourceTypeSchemas",
+                "listFeedSourceTypeSchemasStream",
+                "listFeedSourceTypeSchemasAsync"
+              ]
+            },
+            "ListLogTypeSchemas": {
+              "methods": [
+                "listLogTypeSchemas",
+                "listLogTypeSchemasStream",
+                "listLogTypeSchemasAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FeedsServiceClient",
+          "rpcs": {
+            "FetchServiceAccountForCustomer": {
+              "methods": [
+                "fetchServiceAccountForCustomer"
+              ]
+            },
+            "CreateFeed": {
+              "methods": [
+                "createFeed"
+              ]
+            },
+            "GetFeed": {
+              "methods": [
+                "getFeed"
+              ]
+            },
+            "DeleteFeed": {
+              "methods": [
+                "deleteFeed"
+              ]
+            },
+            "EnableFeed": {
+              "methods": [
+                "enableFeed"
+              ]
+            },
+            "DisableFeed": {
+              "methods": [
+                "disableFeed"
+              ]
+            },
+            "GetFeedPack": {
+              "methods": [
+                "getFeedPack"
+              ]
+            },
+            "UpdateFeed": {
+              "methods": [
+                "updateFeed"
+              ]
+            },
+            "ImportPushLogs": {
+              "methods": [
+                "importPushLogs"
+              ]
+            },
+            "GenerateSecret": {
+              "methods": [
+                "generateSecret"
+              ]
+            },
+            "ListFeeds": {
+              "methods": [
+                "listFeeds",
+                "listFeedsStream",
+                "listFeedsAsync"
+              ]
+            },
+            "ListFeedPacks": {
+              "methods": [
+                "listFeedPacks",
+                "listFeedPacksStream",
+                "listFeedPacksAsync"
+              ]
+            },
+            "ListFeedSourceTypeSchemas": {
+              "methods": [
+                "listFeedSourceTypeSchemas",
+                "listFeedSourceTypeSchemasStream",
+                "listFeedSourceTypeSchemasAsync"
+              ]
+            },
+            "ListLogTypeSchemas": {
+              "methods": [
+                "listLogTypeSchemas",
+                "listLogTypeSchemasStream",
+                "listLogTypeSchemasAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FindingsRefinementService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FindingsRefinementServiceClient",
+          "rpcs": {
+            "GetFindingsRefinement": {
+              "methods": [
+                "getFindingsRefinement"
+              ]
+            },
+            "CreateFindingsRefinement": {
+              "methods": [
+                "createFindingsRefinement"
+              ]
+            },
+            "UpdateFindingsRefinement": {
+              "methods": [
+                "updateFindingsRefinement"
+              ]
+            },
+            "GetFindingsRefinementDeployment": {
+              "methods": [
+                "getFindingsRefinementDeployment"
+              ]
+            },
+            "UpdateFindingsRefinementDeployment": {
+              "methods": [
+                "updateFindingsRefinementDeployment"
+              ]
+            },
+            "ComputeFindingsRefinementActivity": {
+              "methods": [
+                "computeFindingsRefinementActivity"
+              ]
+            },
+            "ComputeAllFindingsRefinementActivities": {
+              "methods": [
+                "computeAllFindingsRefinementActivities"
+              ]
+            },
+            "ListFindingsRefinements": {
+              "methods": [
+                "listFindingsRefinements",
+                "listFindingsRefinementsStream",
+                "listFindingsRefinementsAsync"
+              ]
+            },
+            "ListAllFindingsRefinementDeployments": {
+              "methods": [
+                "listAllFindingsRefinementDeployments",
+                "listAllFindingsRefinementDeploymentsStream",
+                "listAllFindingsRefinementDeploymentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FindingsRefinementServiceClient",
+          "rpcs": {
+            "GetFindingsRefinement": {
+              "methods": [
+                "getFindingsRefinement"
+              ]
+            },
+            "CreateFindingsRefinement": {
+              "methods": [
+                "createFindingsRefinement"
+              ]
+            },
+            "UpdateFindingsRefinement": {
+              "methods": [
+                "updateFindingsRefinement"
+              ]
+            },
+            "GetFindingsRefinementDeployment": {
+              "methods": [
+                "getFindingsRefinementDeployment"
+              ]
+            },
+            "UpdateFindingsRefinementDeployment": {
+              "methods": [
+                "updateFindingsRefinementDeployment"
+              ]
+            },
+            "ComputeFindingsRefinementActivity": {
+              "methods": [
+                "computeFindingsRefinementActivity"
+              ]
+            },
+            "ComputeAllFindingsRefinementActivities": {
+              "methods": [
+                "computeAllFindingsRefinementActivities"
+              ]
+            },
+            "ListFindingsRefinements": {
+              "methods": [
+                "listFindingsRefinements",
+                "listFindingsRefinementsStream",
+                "listFindingsRefinementsAsync"
+              ]
+            },
+            "ListAllFindingsRefinementDeployments": {
+              "methods": [
+                "listAllFindingsRefinementDeployments",
+                "listAllFindingsRefinementDeploymentsStream",
+                "listAllFindingsRefinementDeploymentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "InstanceService": {
       "clients": {
         "grpc": {
@@ -709,6 +991,11 @@
                 "updateReferenceList"
               ]
             },
+            "VerifyReferenceList": {
+              "methods": [
+                "verifyReferenceList"
+              ]
+            },
             "ListReferenceLists": {
               "methods": [
                 "listReferenceLists",
@@ -736,11 +1023,44 @@
                 "updateReferenceList"
               ]
             },
+            "VerifyReferenceList": {
+              "methods": [
+                "verifyReferenceList"
+              ]
+            },
             "ListReferenceLists": {
               "methods": [
                 "listReferenceLists",
                 "listReferenceListsStream",
                 "listReferenceListsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RuleExecutionErrorService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RuleExecutionErrorServiceClient",
+          "rpcs": {
+            "ListRuleExecutionErrors": {
+              "methods": [
+                "listRuleExecutionErrors",
+                "listRuleExecutionErrorsStream",
+                "listRuleExecutionErrorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RuleExecutionErrorServiceClient",
+          "rpcs": {
+            "ListRuleExecutionErrors": {
+              "methods": [
+                "listRuleExecutionErrors",
+                "listRuleExecutionErrorsStream",
+                "listRuleExecutionErrorsAsync"
               ]
             }
           }
@@ -770,6 +1090,11 @@
             "DeleteRule": {
               "methods": [
                 "deleteRule"
+              ]
+            },
+            "VerifyRuleText": {
+              "methods": [
+                "verifyRuleText"
               ]
             },
             "GetRetrohunt": {
@@ -843,6 +1168,11 @@
             "DeleteRule": {
               "methods": [
                 "deleteRule"
+              ]
+            },
+            "VerifyRuleText": {
+              "methods": [
+                "verifyRuleText"
               ]
             },
             "GetRetrohunt": {

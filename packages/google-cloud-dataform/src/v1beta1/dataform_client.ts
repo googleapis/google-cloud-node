@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -58,7 +58,7 @@ export class DataformClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('dataform');
@@ -71,12 +71,12 @@ export class DataformClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  dataformStub?: Promise<{ [name: string]: Function }>;
+  dataformStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DataformClient.
@@ -152,7 +152,7 @@ export class DataformClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -306,6 +306,11 @@ export class DataformClient {
         'nextPageToken',
         'workspaces',
       ),
+      fetchWorkspaceBranches: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'branches',
+      ),
       queryDirectoryContents: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -389,11 +394,29 @@ export class DataformClient {
     this.operationsClient = this._gaxModule
       .lro(lroOptions)
       .operationsClient(opts);
+    const deleteTeamFolderTreeResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteTeamFolderTreeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata',
+    ) as gax.protobuf.Type;
+    const deleteFolderTreeResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteFolderTreeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata',
+    ) as gax.protobuf.Type;
     const moveFolderResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty',
     ) as gax.protobuf.Type;
     const moveFolderMetadata = protoFilesRoot.lookup(
       '.google.cloud.dataform.v1beta1.MoveFolderMetadata',
+    ) as gax.protobuf.Type;
+    const deleteRepositoryLongRunningResponse = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse',
+    ) as gax.protobuf.Type;
+    const deleteRepositoryLongRunningMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata',
     ) as gax.protobuf.Type;
     const moveRepositoryResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty',
@@ -403,10 +426,29 @@ export class DataformClient {
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
+      deleteTeamFolderTree: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteTeamFolderTreeResponse.decode.bind(deleteTeamFolderTreeResponse),
+        deleteTeamFolderTreeMetadata.decode.bind(deleteTeamFolderTreeMetadata),
+      ),
+      deleteFolderTree: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteFolderTreeResponse.decode.bind(deleteFolderTreeResponse),
+        deleteFolderTreeMetadata.decode.bind(deleteFolderTreeMetadata),
+      ),
       moveFolder: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         moveFolderResponse.decode.bind(moveFolderResponse),
         moveFolderMetadata.decode.bind(moveFolderMetadata),
+      ),
+      deleteRepositoryLongRunning: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteRepositoryLongRunningResponse.decode.bind(
+          deleteRepositoryLongRunningResponse,
+        ),
+        deleteRepositoryLongRunningMetadata.decode.bind(
+          deleteRepositoryLongRunningMetadata,
+        ),
       ),
       moveRepository: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -420,7 +462,7 @@ export class DataformClient {
       'google.cloud.dataform.v1beta1.Dataform',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -460,7 +502,7 @@ export class DataformClient {
           (this._protos as any).google.cloud.dataform.v1beta1.Dataform,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -469,12 +511,14 @@ export class DataformClient {
       'createTeamFolder',
       'updateTeamFolder',
       'deleteTeamFolder',
+      'deleteTeamFolderTree',
       'queryTeamFolderContents',
       'searchTeamFolders',
       'getFolder',
       'createFolder',
       'updateFolder',
       'deleteFolder',
+      'deleteFolderTree',
       'queryFolderContents',
       'queryUserRootContents',
       'moveFolder',
@@ -483,6 +527,7 @@ export class DataformClient {
       'createRepository',
       'updateRepository',
       'deleteRepository',
+      'deleteRepositoryLongRunning',
       'moveRepository',
       'commitRepositoryChanges',
       'readRepositoryFile',
@@ -496,6 +541,11 @@ export class DataformClient {
       'deleteWorkspace',
       'installNpmPackages',
       'pullGitCommits',
+      'syncWorkspaceRefs',
+      'fetchWorkspaceBranches',
+      'deleteBranch',
+      'checkoutWorkspaceBranch',
+      'fetchCurrentWorkspaceBranch',
       'pushGitCommits',
       'fetchFileGitStatuses',
       'fetchGitAheadBehind',
@@ -539,7 +589,7 @@ export class DataformClient {
     ];
     for (const methodName of dataformStubMethods) {
       const callPromise = this.dataformStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -743,7 +793,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getTeamFolder request %j', request);
@@ -804,6 +854,8 @@ export class DataformClient {
    * @param {google.cloud.dataform.v1beta1.TeamFolder} request.teamFolder
    *   Required. The TeamFolder to create.
    * @param {string} request.teamFolderId
+   *   Deprecated: This field is not used. The resource name is generated
+   *   automatically.
    *   The ID to use for the TeamFolder, which will become the final component of
    *   the TeamFolder's resource name.
    * @param {object} [options]
@@ -886,7 +938,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createTeamFolder request %j', request);
@@ -1026,7 +1078,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         'team_folder.name': request.teamFolder!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateTeamFolder request %j', request);
@@ -1163,7 +1215,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteTeamFolder request %j', request);
@@ -1294,7 +1346,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getFolder request %j', request);
@@ -1352,6 +1404,8 @@ export class DataformClient {
    * @param {google.cloud.dataform.v1beta1.Folder} request.folder
    *   Required. The Folder to create.
    * @param {string} request.folderId
+   *   Deprecated: This field is not used. The resource name is generated
+   *   automatically.
    *   The ID to use for the Folder, which will become the final component of
    *   the Folder's resource name.
    * @param {object} [options]
@@ -1434,7 +1488,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createFolder request %j', request);
@@ -1573,7 +1627,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         'folder.name': request.folder!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateFolder request %j', request);
@@ -1707,7 +1761,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteFolder request %j', request);
@@ -1841,7 +1895,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRepository request %j', request);
@@ -1984,7 +2038,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createRepository request %j', request);
@@ -2129,7 +2183,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         'repository.name': request.repository!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateRepository request %j', request);
@@ -2274,7 +2328,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteRepository request %j', request);
@@ -2427,7 +2481,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('commitRepositoryChanges request %j', request);
@@ -2576,7 +2630,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('readRepositoryFile request %j', request);
@@ -2719,7 +2773,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('computeRepositoryAccessTokenStatus request %j', request);
@@ -2868,7 +2922,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchRemoteBranches request %j', request);
@@ -3005,7 +3059,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getWorkspace request %j', request);
@@ -3145,7 +3199,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createWorkspace request %j', request);
@@ -3282,7 +3336,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteWorkspace request %j', request);
@@ -3339,6 +3393,9 @@ export class DataformClient {
    *   The request object that will be sent.
    * @param {string} request.workspace
    *   Required. The workspace's name.
+   * @param {google.cloud.dataform.v1beta1.PipelineConfig} [request.pipelineConfig]
+   *   Optional. The pipeline options which defines the pipeline type and path
+   *   within the Git repository.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3425,7 +3482,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('installNpmPackages request %j', request);
@@ -3568,7 +3625,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('pullGitCommits request %j', request);
@@ -3598,6 +3655,601 @@ export class DataformClient {
           {} | undefined,
         ]) => {
           this._log.info('pullGitCommits response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Syncs the refs of a Workspace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The workspace resource name.
+   *   Format:
+   *   projects/{project}/locations/{location}/repositories/{repository}/workspaces/{workspace}
+   * @param {string} [request.remoteBranchName]
+   *   Optional. The name of the branch in the Git remote to which the refs should
+   *   be fetched for. If left unset, all remote branches will be fetched.
+   * @param {number} [request.deepen]
+   *   Optional. Can be used to deepen the commit history of shallow clones.
+   *   Git documentation:
+   *   https://git-scm.com/docs/git-fetch#Documentation/git-fetch.txt---deependepth
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.SyncWorkspaceRefsResponse|SyncWorkspaceRefsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.sync_workspace_refs.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_SyncWorkspaceRefs_async
+   */
+  syncWorkspaceRefs(
+    request?: protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse,
+      (
+        | protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  syncWorkspaceRefs(
+    request: protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse,
+      | protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  syncWorkspaceRefs(
+    request: protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest,
+    callback: Callback<
+      protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse,
+      | protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  syncWorkspaceRefs(
+    request?: protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse,
+          | protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse,
+      | protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse,
+      (
+        | protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('syncWorkspaceRefs request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse,
+          | protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('syncWorkspaceRefs response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .syncWorkspaceRefs(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.ISyncWorkspaceRefsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('syncWorkspaceRefs response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deletes a branch in a Workspace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The workspace resource name.
+   *   Format:
+   *   projects/{project}/locations/{location}/repositories/{repository}/workspaces/{workspace}
+   * @param {string} request.branch
+   *   Required. The name of the branch in the Git repository to delete.
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any non-pushed commits on the branch will be
+   *   deleted. Upstream branch name will be the same as the branch to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.DeleteBranchResponse|DeleteBranchResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.delete_branch.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_DeleteBranch_async
+   */
+  deleteBranch(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteBranchRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.IDeleteBranchResponse,
+      protos.google.cloud.dataform.v1beta1.IDeleteBranchRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteBranch(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteBranchRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataform.v1beta1.IDeleteBranchResponse,
+      | protos.google.cloud.dataform.v1beta1.IDeleteBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteBranch(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteBranchRequest,
+    callback: Callback<
+      protos.google.cloud.dataform.v1beta1.IDeleteBranchResponse,
+      | protos.google.cloud.dataform.v1beta1.IDeleteBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteBranch(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteBranchRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IDeleteBranchResponse,
+          | protos.google.cloud.dataform.v1beta1.IDeleteBranchRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataform.v1beta1.IDeleteBranchResponse,
+      | protos.google.cloud.dataform.v1beta1.IDeleteBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.IDeleteBranchResponse,
+      protos.google.cloud.dataform.v1beta1.IDeleteBranchRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteBranch request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IDeleteBranchResponse,
+          | protos.google.cloud.dataform.v1beta1.IDeleteBranchRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteBranch response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteBranch(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IDeleteBranchResponse,
+          protos.google.cloud.dataform.v1beta1.IDeleteBranchRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteBranch response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Checkout a branch in a Workspace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The workspace resource name.
+   *   Format:
+   *   projects/{project}/locations/{location}/repositories/{repository}/workspaces/{workspace}
+   * @param {string} request.branch
+   *   Required. The name of the branch in the Git repository to which the
+   *   workspace should be checked out.
+   * @param {boolean} [request.createIfNotExists]
+   *   Optional. If set to true and the branch does not exist, it will be created.
+   *   Otherwise, an error will be thrown.
+   * @param {string} [request.sourceBranch]
+   *   Optional. The name of the branch in the Git repository from which the new
+   *   branch should be created. If left unset, the workspace's current branch
+   *   name will be used. Accepts only branch names from FetchWorkspaceBranches
+   *   response, and can only be set if `create_if_not_exists` is true. Oherwise,
+   *   an error will be thrown.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.checkout_workspace_branch.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_CheckoutWorkspaceBranch_async
+   */
+  checkoutWorkspaceBranch(
+    request?: protos.google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  checkoutWorkspaceBranch(
+    request: protos.google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  checkoutWorkspaceBranch(
+    request: protos.google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  checkoutWorkspaceBranch(
+    request?: protos.google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('checkoutWorkspaceBranch request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('checkoutWorkspaceBranch response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .checkoutWorkspaceBranch(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          (
+            | protos.google.cloud.dataform.v1beta1.ICheckoutWorkspaceBranchRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('checkoutWorkspaceBranch response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Fetches the current branch of a Workspace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The workspace resource name.
+   *   Format:
+   *   projects/{project}/locations/{location}/repositories/{repository}/workspaces/{workspace}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.dataform.v1beta1.FetchCurrentWorkspaceBranchResponse|FetchCurrentWorkspaceBranchResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.fetch_current_workspace_branch.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_FetchCurrentWorkspaceBranch_async
+   */
+  fetchCurrentWorkspaceBranch(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse,
+      (
+        | protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  fetchCurrentWorkspaceBranch(
+    request: protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse,
+      | protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  fetchCurrentWorkspaceBranch(
+    request: protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest,
+    callback: Callback<
+      protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse,
+      | protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  fetchCurrentWorkspaceBranch(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse,
+          | protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse,
+      | protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse,
+      (
+        | protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchCurrentWorkspaceBranch request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse,
+          | protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('fetchCurrentWorkspaceBranch response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .fetchCurrentWorkspaceBranch(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchResponse,
+          (
+            | protos.google.cloud.dataform.v1beta1.IFetchCurrentWorkspaceBranchRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('fetchCurrentWorkspaceBranch response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3709,7 +4361,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('pushGitCommits request %j', request);
@@ -3852,7 +4504,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchFileGitStatuses request %j', request);
@@ -3999,7 +4651,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchGitAheadBehind request %j', request);
@@ -4149,7 +4801,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('commitWorkspaceChanges request %j', request);
@@ -4297,7 +4949,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('resetWorkspaceChanges request %j', request);
@@ -4437,7 +5089,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchFileDiff request %j', request);
@@ -4577,7 +5229,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('makeDirectory request %j', request);
@@ -4717,7 +5369,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('removeDirectory request %j', request);
@@ -4861,7 +5513,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('moveDirectory request %j', request);
@@ -4998,7 +5650,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('readFile request %j', request);
@@ -5135,7 +5787,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('removeFile request %j', request);
@@ -5269,7 +5921,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('moveFile request %j', request);
@@ -5401,7 +6053,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('writeFile request %j', request);
@@ -5535,7 +6187,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getReleaseConfig request %j', request);
@@ -5684,7 +6336,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createReleaseConfig request %j', request);
@@ -5835,7 +6487,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         'release_config.name': request.releaseConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateReleaseConfig request %j', request);
@@ -5978,7 +6630,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteReleaseConfig request %j', request);
@@ -6121,7 +6773,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getCompilationResult request %j', request);
@@ -6267,7 +6919,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createCompilationResult request %j', request);
@@ -6410,7 +7062,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getWorkflowConfig request %j', request);
@@ -6559,7 +7211,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createWorkflowConfig request %j', request);
@@ -6710,7 +7362,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         'workflow_config.name': request.workflowConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateWorkflowConfig request %j', request);
@@ -6853,7 +7505,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteWorkflowConfig request %j', request);
@@ -6996,7 +7648,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getWorkflowInvocation request %j', request);
@@ -7142,7 +7794,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createWorkflowInvocation request %j', request);
@@ -7285,7 +7937,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteWorkflowInvocation request %j', request);
@@ -7428,7 +8080,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('cancelWorkflowInvocation request %j', request);
@@ -7559,7 +8211,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getConfig request %j', request);
@@ -7700,7 +8352,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         'config.name': request.config!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateConfig request %j', request);
@@ -7832,7 +8484,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIamPolicy request %j', request);
@@ -7971,7 +8623,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setIamPolicy request %j', request);
@@ -8107,7 +8759,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testIamPermissions request %j', request);
@@ -8153,6 +8805,364 @@ export class DataformClient {
       });
   }
 
+  /**
+   * Deletes a TeamFolder with its contents (Folders, Repositories, Workspaces,
+   * ReleaseConfigs, and WorkflowConfigs).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The TeamFolder's name.
+   *   Format: projects/{project}/locations/{location}/teamFolders/{team_folder}
+   * @param {boolean} [request.force]
+   *   Optional. If `false` (default): The operation will fail if any
+   *   Repository within the folder hierarchy has associated Release Configs or
+   *   Workflow Configs.
+   *
+   *   If `true`: The operation will attempt to delete everything, including any
+   *   Release Configs and Workflow Configs linked to Repositories within the
+   *   folder hierarchy. This permanently removes schedules and resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.delete_team_folder_tree.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_DeleteTeamFolderTree_async
+   */
+  deleteTeamFolderTree(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteTeamFolderTree(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteTeamFolderTree(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteTeamFolderTree(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteTeamFolderTreeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteTeamFolderTree response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteTeamFolderTree request %j', request);
+    return this.innerApiCalls
+      .deleteTeamFolderTree(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteTeamFolderTree response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteTeamFolderTree()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.delete_team_folder_tree.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_DeleteTeamFolderTree_async
+   */
+  async checkDeleteTeamFolderTreeProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+    >
+  > {
+    this._log.info('deleteTeamFolderTree long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteTeamFolderTree,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+    >;
+  }
+  /**
+   * Deletes a Folder with its contents (Folders, Repositories, Workspaces,
+   * ReleaseConfigs, and WorkflowConfigs).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The Folder's name.
+   *   Format: projects/{project}/locations/{location}/folders/{folder}
+   * @param {boolean} [request.force]
+   *   Optional. If `false` (default): The operation will fail if any
+   *   Repository within the folder hierarchy has associated Release Configs or
+   *   Workflow Configs.
+   *
+   *   If `true`: The operation will attempt to delete everything, including any
+   *   Release Configs and Workflow Configs linked to Repositories within the
+   *   folder hierarchy. This permanently removes schedules and resources.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.delete_folder_tree.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_DeleteFolderTree_async
+   */
+  deleteFolderTree(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteFolderTree(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteFolderTree(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteFolderTree(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteFolderTree response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteFolderTree request %j', request);
+    return this.innerApiCalls
+      .deleteFolderTree(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.dataform.v1beta1.IDeleteFolderTreeMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteFolderTree response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteFolderTree()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.delete_folder_tree.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_DeleteFolderTree_async
+   */
+  async checkDeleteFolderTreeProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+    >
+  > {
+    this._log.info('deleteFolderTree long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteFolderTree,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.dataform.v1beta1.DeleteFolderTreeMetadata
+    >;
+  }
   /**
    * Moves a Folder to a new Folder, TeamFolder, or the root location.
    *
@@ -8256,7 +9266,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8313,7 +9323,7 @@ export class DataformClient {
     this._log.info('moveFolder long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8324,6 +9334,189 @@ export class DataformClient {
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
       protos.google.cloud.dataform.v1beta1.MoveFolderMetadata
+    >;
+  }
+  /**
+   * Deletes a single repository asynchronously.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The repository's name.
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, child resources of this repository (compilation
+   *   results and workflow invocations) will also be deleted. Otherwise, the
+   *   request will only succeed if the repository has no child resources.
+   *
+   *   **Note:** *This flag doesn't support deletion of workspaces, release
+   *   configs or workflow configs. If any of such resources exists in the
+   *   repository, the request will fail.*
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.delete_repository_long_running.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_DeleteRepositoryLongRunning_async
+   */
+  deleteRepositoryLongRunning(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteRepositoryLongRunning(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteRepositoryLongRunning(
+    request: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteRepositoryLongRunning(
+    request?: protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+            protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+        protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+            protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'deleteRepositoryLongRunning response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteRepositoryLongRunning request %j', request);
+    return this.innerApiCalls
+      .deleteRepositoryLongRunning(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningResponse,
+            protos.google.cloud.dataform.v1beta1.IDeleteRepositoryLongRunningMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'deleteRepositoryLongRunning response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteRepositoryLongRunning()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.delete_repository_long_running.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_DeleteRepositoryLongRunning_async
+   */
+  async checkDeleteRepositoryLongRunningProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse,
+      protos.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
+    >
+  > {
+    this._log.info('deleteRepositoryLongRunning long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteRepositoryLongRunning,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningResponse,
+      protos.google.cloud.dataform.v1beta1.DeleteRepositoryLongRunningMetadata
     >;
   }
   /**
@@ -8430,7 +9623,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8487,7 +9680,7 @@ export class DataformClient {
     this._log.info('moveRepository long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8506,7 +9699,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.teamFolder
-   *   Required. Name of the team_folder whose contents to list.
+   *   Required. Resource name of the TeamFolder to list contents for.
    *   Format: `projects/* /locations/* /teamFolders/*`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -8525,14 +9718,16 @@ export class DataformClient {
    *   order. Supported keywords: `display_name` (default), `create_time`,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -8616,7 +9811,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         team_folder: request.teamFolder ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8653,7 +9848,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.teamFolder
-   *   Required. Name of the team_folder whose contents to list.
+   *   Required. Resource name of the TeamFolder to list contents for.
    *   Format: `projects/* /locations/* /teamFolders/*`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -8672,14 +9867,16 @@ export class DataformClient {
    *   order. Supported keywords: `display_name` (default), `create_time`,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -8705,7 +9902,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryTeamFolderContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryTeamFolderContents stream %j', request);
@@ -8723,7 +9920,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.teamFolder
-   *   Required. Name of the team_folder whose contents to list.
+   *   Required. Resource name of the TeamFolder to list contents for.
    *   Format: `projects/* /locations/* /teamFolders/*`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -8742,14 +9939,16 @@ export class DataformClient {
    *   order. Supported keywords: `display_name` (default), `create_time`,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -8776,7 +9975,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryTeamFolderContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryTeamFolderContents iterate %j', request);
@@ -8796,9 +9995,9 @@ export class DataformClient {
    *   Required. Location in which to query TeamFolders.
    *   Format: `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of TeamFolders to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
+   *   Optional. Maximum number of `TeamFolders` to return. The server may return
+   *   fewer items than requested. If unspecified, the server will pick a default
+   *   of `page_size` = 50.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `SearchTeamFolders` call.
    *   Provide this to retrieve the subsequent page.
@@ -8810,14 +10009,16 @@ export class DataformClient {
    *   Optional. Field to additionally sort results by.
    *   Supported keywords: `display_name` (default), `create_time`,
    *   `last_modified_time`. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -8901,7 +10102,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8941,9 +10142,9 @@ export class DataformClient {
    *   Required. Location in which to query TeamFolders.
    *   Format: `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of TeamFolders to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
+   *   Optional. Maximum number of `TeamFolders` to return. The server may return
+   *   fewer items than requested. If unspecified, the server will pick a default
+   *   of `page_size` = 50.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `SearchTeamFolders` call.
    *   Provide this to retrieve the subsequent page.
@@ -8955,14 +10156,16 @@ export class DataformClient {
    *   Optional. Field to additionally sort results by.
    *   Supported keywords: `display_name` (default), `create_time`,
    *   `last_modified_time`. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -8988,7 +10191,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['searchTeamFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchTeamFolders stream %j', request);
@@ -9009,9 +10212,9 @@ export class DataformClient {
    *   Required. Location in which to query TeamFolders.
    *   Format: `projects/* /locations/*`.
    * @param {number} [request.pageSize]
-   *   Optional. Maximum number of TeamFolders to return. The server may return
-   *   fewer items than requested. If unspecified, the server will pick an
-   *   appropriate default.
+   *   Optional. Maximum number of `TeamFolders` to return. The server may return
+   *   fewer items than requested. If unspecified, the server will pick a default
+   *   of `page_size` = 50.
    * @param {string} [request.pageToken]
    *   Optional. Page token received from a previous `SearchTeamFolders` call.
    *   Provide this to retrieve the subsequent page.
@@ -9023,14 +10226,16 @@ export class DataformClient {
    *   Optional. Field to additionally sort results by.
    *   Supported keywords: `display_name` (default), `create_time`,
    *   `last_modified_time`. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -9057,7 +10262,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['searchTeamFolders'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchTeamFolders iterate %j', request);
@@ -9073,7 +10278,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.folder
-   *   Required. Name of the folder whose contents to list.
+   *   Required. Resource name of the Folder to list contents for.
    *   Format: projects/* /locations/* /folders/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9092,14 +10297,16 @@ export class DataformClient {
    *   order. Supported keywords: display_name (default), create_time,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -9183,7 +10390,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         folder: request.folder ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9220,7 +10427,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.folder
-   *   Required. Name of the folder whose contents to list.
+   *   Required. Resource name of the Folder to list contents for.
    *   Format: projects/* /locations/* /folders/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9239,14 +10446,16 @@ export class DataformClient {
    *   order. Supported keywords: display_name (default), create_time,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -9272,7 +10481,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryFolderContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryFolderContents stream %j', request);
@@ -9290,7 +10499,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.folder
-   *   Required. Name of the folder whose contents to list.
+   *   Required. Resource name of the Folder to list contents for.
    *   Format: projects/* /locations/* /folders/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9309,14 +10518,16 @@ export class DataformClient {
    *   order. Supported keywords: display_name (default), create_time,
    *   last_modified_time.
    *   Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -9343,7 +10554,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryFolderContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryFolderContents iterate %j', request);
@@ -9361,7 +10572,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.location
-   *   Required. Location of the user root folder whose contents to list.
+   *   Required. Location of the user root folder to list contents for.
    *   Format: projects/* /locations/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9379,14 +10590,16 @@ export class DataformClient {
    *   Will order Folders before Repositories, and then by `order_by` in ascending
    *   order. Supported keywords: display_name (default), created_at,
    *   last_modified_at. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -9470,7 +10683,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9507,7 +10720,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.location
-   *   Required. Location of the user root folder whose contents to list.
+   *   Required. Location of the user root folder to list contents for.
    *   Format: projects/* /locations/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9525,14 +10738,16 @@ export class DataformClient {
    *   Will order Folders before Repositories, and then by `order_by` in ascending
    *   order. Supported keywords: display_name (default), created_at,
    *   last_modified_at. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -9558,7 +10773,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryUserRootContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryUserRootContents stream %j', request);
@@ -9576,7 +10791,7 @@ export class DataformClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.location
-   *   Required. Location of the user root folder whose contents to list.
+   *   Required. Location of the user root folder to list contents for.
    *   Format: projects/* /locations/*
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of paths to return. The server may return fewer
@@ -9594,14 +10809,16 @@ export class DataformClient {
    *   Will order Folders before Repositories, and then by `order_by` in ascending
    *   order. Supported keywords: display_name (default), created_at,
    *   last_modified_at. Examples:
-   *     - `orderBy="display_name"`
-   *     - `orderBy="display_name desc"`
+   *
+   *   * `orderBy="display_name"`
+   *   * `orderBy="display_name desc"`
    * @param {string} [request.filter]
    *   Optional. Optional filtering for the returned list. Filtering is currently
    *   only supported on the `display_name` field.
    *
    *   Example:
-   *    - `filter="display_name="MyFolder""`
+   *
+   *   * `filter="display_name="MyFolder""`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -9628,7 +10845,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryUserRootContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryUserRootContents iterate %j', request);
@@ -9749,7 +10966,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9830,7 +11047,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRepositories stream %j', request);
@@ -9893,7 +11110,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRepositories iterate %j', request);
@@ -10012,7 +11229,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10097,7 +11314,7 @@ export class DataformClient {
     const defaultCallSettings =
       this._defaults['queryRepositoryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryRepositoryDirectoryContents stream %j', request);
@@ -10161,7 +11378,7 @@ export class DataformClient {
     const defaultCallSettings =
       this._defaults['queryRepositoryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryRepositoryDirectoryContents iterate %j', request);
@@ -10273,7 +11490,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10347,7 +11564,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['fetchRepositoryHistory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchRepositoryHistory stream %j', request);
@@ -10403,7 +11620,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['fetchRepositoryHistory'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchRepositoryHistory iterate %j', request);
@@ -10521,7 +11738,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10602,7 +11819,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkspaces stream %j', request);
@@ -10665,7 +11882,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkspaces iterate %j', request);
@@ -10674,6 +11891,262 @@ export class DataformClient {
       request as {},
       callSettings,
     ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.IWorkspace>;
+  }
+  /**
+   * Fetches branches in a Workspace.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The workspace resource name.
+   *   Format:
+   *   projects/{project}/locations/{location}/repositories/{repository}/workspaces/{workspace}
+   * @param {google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest.BranchFilter} [request.filter]
+   *   Optional. Filter for the returned list.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of branches to return. The server may return fewer
+   *   items than requested. If unspecified, the server will pick an appropriate
+   *   default. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `FetchWorkspaceBranches`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `FetchWorkspaceBranches`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.dataform.v1beta1.BranchMetadata|BranchMetadata}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `fetchWorkspaceBranchesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchWorkspaceBranches(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.IBranchMetadata[],
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest | null,
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesResponse,
+    ]
+  >;
+  fetchWorkspaceBranches(
+    request: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest,
+      | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataform.v1beta1.IBranchMetadata
+    >,
+  ): void;
+  fetchWorkspaceBranches(
+    request: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest,
+      | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataform.v1beta1.IBranchMetadata
+    >,
+  ): void;
+  fetchWorkspaceBranches(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest,
+          | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.IBranchMetadata
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest,
+      | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesResponse
+      | null
+      | undefined,
+      protos.google.cloud.dataform.v1beta1.IBranchMetadata
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.dataform.v1beta1.IBranchMetadata[],
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest | null,
+      protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest,
+          | protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesResponse
+          | null
+          | undefined,
+          protos.google.cloud.dataform.v1beta1.IBranchMetadata
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('fetchWorkspaceBranches values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('fetchWorkspaceBranches request %j', request);
+    return this.innerApiCalls
+      .fetchWorkspaceBranches(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.dataform.v1beta1.IBranchMetadata[],
+          protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest | null,
+          protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesResponse,
+        ]) => {
+          this._log.info('fetchWorkspaceBranches values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `fetchWorkspaceBranches`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The workspace resource name.
+   *   Format:
+   *   projects/{project}/locations/{location}/repositories/{repository}/workspaces/{workspace}
+   * @param {google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest.BranchFilter} [request.filter]
+   *   Optional. Filter for the returned list.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of branches to return. The server may return fewer
+   *   items than requested. If unspecified, the server will pick an appropriate
+   *   default. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `FetchWorkspaceBranches`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `FetchWorkspaceBranches`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.dataform.v1beta1.BranchMetadata|BranchMetadata} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `fetchWorkspaceBranchesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  fetchWorkspaceBranchesStream(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchWorkspaceBranches'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchWorkspaceBranches stream %j', request);
+    return this.descriptors.page.fetchWorkspaceBranches.createStream(
+      this.innerApiCalls.fetchWorkspaceBranches as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `fetchWorkspaceBranches`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The workspace resource name.
+   *   Format:
+   *   projects/{project}/locations/{location}/repositories/{repository}/workspaces/{workspace}
+   * @param {google.cloud.dataform.v1beta1.FetchWorkspaceBranchesRequest.BranchFilter} [request.filter]
+   *   Optional. Filter for the returned list.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of branches to return. The server may return fewer
+   *   items than requested. If unspecified, the server will pick an appropriate
+   *   default. The maximum value is 1000; values above 1000 will be coerced to
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `FetchWorkspaceBranches`
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `FetchWorkspaceBranches`,
+   *   with the exception of `page_size`, must match the call that provided the
+   *   page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.dataform.v1beta1.BranchMetadata|BranchMetadata}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta1/dataform.fetch_workspace_branches.js</caption>
+   * region_tag:dataform_v1beta1_generated_Dataform_FetchWorkspaceBranches_async
+   */
+  fetchWorkspaceBranchesAsync(
+    request?: protos.google.cloud.dataform.v1beta1.IFetchWorkspaceBranchesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.dataform.v1beta1.IBranchMetadata> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    const defaultCallSettings = this._defaults['fetchWorkspaceBranches'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('fetchWorkspaceBranches iterate %j', request);
+    return this.descriptors.page.fetchWorkspaceBranches.asyncIterate(
+      this.innerApiCalls['fetchWorkspaceBranches'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.dataform.v1beta1.IBranchMetadata>;
   }
   /**
    * Returns the contents of a given Workspace directory.
@@ -10696,6 +12169,11 @@ export class DataformClient {
    *   When paginating, all other parameters provided to
    *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
    *   call that provided the page token.
+   * @param {google.cloud.dataform.v1beta1.DirectoryContentsView} [request.view]
+   *   Optional. Specifies the metadata to return for each directory entry.
+   *   If unspecified, the default is `DIRECTORY_CONTENTS_VIEW_BASIC`.
+   *   Currently the `DIRECTORY_CONTENTS_VIEW_METADATA` view is not supported by
+   *   CMEK-protected workspaces.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -10779,7 +12257,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10831,6 +12309,11 @@ export class DataformClient {
    *   When paginating, all other parameters provided to
    *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
    *   call that provided the page token.
+   * @param {google.cloud.dataform.v1beta1.DirectoryContentsView} [request.view]
+   *   Optional. Specifies the metadata to return for each directory entry.
+   *   If unspecified, the default is `DIRECTORY_CONTENTS_VIEW_BASIC`.
+   *   Currently the `DIRECTORY_CONTENTS_VIEW_METADATA` view is not supported by
+   *   CMEK-protected workspaces.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -10856,7 +12339,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryDirectoryContents stream %j', request);
@@ -10889,6 +12372,11 @@ export class DataformClient {
    *   When paginating, all other parameters provided to
    *   `QueryDirectoryContents`, with the exception of `page_size`, must match the
    *   call that provided the page token.
+   * @param {google.cloud.dataform.v1beta1.DirectoryContentsView} [request.view]
+   *   Optional. Specifies the metadata to return for each directory entry.
+   *   If unspecified, the default is `DIRECTORY_CONTENTS_VIEW_BASIC`.
+   *   Currently the `DIRECTORY_CONTENTS_VIEW_METADATA` view is not supported by
+   *   CMEK-protected workspaces.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -10915,7 +12403,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryDirectoryContents iterate %j', request);
@@ -11030,7 +12518,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         workspace: request.workspace ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11108,7 +12596,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['searchFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchFiles stream %j', request);
@@ -11168,7 +12656,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['searchFiles'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('searchFiles iterate %j', request);
@@ -11280,7 +12768,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11355,7 +12843,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listReleaseConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReleaseConfigs stream %j', request);
@@ -11412,7 +12900,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listReleaseConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReleaseConfigs iterate %j', request);
@@ -11530,7 +13018,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11611,7 +13099,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listCompilationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCompilationResults stream %j', request);
@@ -11674,7 +13162,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listCompilationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listCompilationResults iterate %j', request);
@@ -11789,7 +13277,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11867,7 +13355,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryCompilationResultActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryCompilationResultActions stream %j', request);
@@ -11927,7 +13415,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['queryCompilationResultActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryCompilationResultActions iterate %j', request);
@@ -12039,7 +13527,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12114,7 +13602,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkflowConfigs stream %j', request);
@@ -12171,7 +13659,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkflowConfigs iterate %j', request);
@@ -12289,7 +13777,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12370,7 +13858,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowInvocations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkflowInvocations stream %j', request);
@@ -12433,7 +13921,7 @@ export class DataformClient {
       });
     const defaultCallSettings = this._defaults['listWorkflowInvocations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listWorkflowInvocations iterate %j', request);
@@ -12545,7 +14033,7 @@ export class DataformClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12621,7 +14109,7 @@ export class DataformClient {
     const defaultCallSettings =
       this._defaults['queryWorkflowInvocationActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryWorkflowInvocationActions stream %j', request);
@@ -12679,7 +14167,7 @@ export class DataformClient {
     const defaultCallSettings =
       this._defaults['queryWorkflowInvocationActions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryWorkflowInvocationActions iterate %j', request);
@@ -13963,14 +15451,14 @@ export class DataformClient {
    */
   close(): Promise<void> {
     if (this.dataformStub && !this._terminated) {
-      return this.dataformStub.then((stub) => {
+      return this.dataformStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

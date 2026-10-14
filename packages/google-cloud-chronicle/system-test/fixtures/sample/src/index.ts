@@ -24,9 +24,12 @@ import {
   DataTableServiceClient,
   EntityServiceClient,
   FeaturedContentNativeDashboardServiceClient,
+  FeedsServiceClient,
+  FindingsRefinementServiceClient,
   InstanceServiceClient,
   NativeDashboardServiceClient,
   ReferenceListServiceClient,
+  RuleExecutionErrorServiceClient,
   RuleServiceClient,
 } from '@google-cloud/chronicle';
 
@@ -62,6 +65,14 @@ function doStuffWithFeaturedContentNativeDashboardServiceClient(
 ) {
   client.close();
 }
+function doStuffWithFeedsServiceClient(client: FeedsServiceClient) {
+  client.close();
+}
+function doStuffWithFindingsRefinementServiceClient(
+  client: FindingsRefinementServiceClient,
+) {
+  client.close();
+}
 function doStuffWithInstanceServiceClient(client: InstanceServiceClient) {
   client.close();
 }
@@ -72,6 +83,11 @@ function doStuffWithNativeDashboardServiceClient(
 }
 function doStuffWithReferenceListServiceClient(
   client: ReferenceListServiceClient,
+) {
+  client.close();
+}
+function doStuffWithRuleExecutionErrorServiceClient(
+  client: RuleExecutionErrorServiceClient,
 ) {
   client.close();
 }
@@ -105,6 +121,12 @@ function main() {
     featuredContentNativeDashboardServiceClient,
   );
   // check that the client instance can be created
+  const feedsServiceClient = new FeedsServiceClient();
+  doStuffWithFeedsServiceClient(feedsServiceClient);
+  // check that the client instance can be created
+  const findingsRefinementServiceClient = new FindingsRefinementServiceClient();
+  doStuffWithFindingsRefinementServiceClient(findingsRefinementServiceClient);
+  // check that the client instance can be created
   const instanceServiceClient = new InstanceServiceClient();
   doStuffWithInstanceServiceClient(instanceServiceClient);
   // check that the client instance can be created
@@ -113,6 +135,9 @@ function main() {
   // check that the client instance can be created
   const referenceListServiceClient = new ReferenceListServiceClient();
   doStuffWithReferenceListServiceClient(referenceListServiceClient);
+  // check that the client instance can be created
+  const ruleExecutionErrorServiceClient = new RuleExecutionErrorServiceClient();
+  doStuffWithRuleExecutionErrorServiceClient(ruleExecutionErrorServiceClient);
   // check that the client instance can be created
   const ruleServiceClient = new RuleServiceClient();
   doStuffWithRuleServiceClient(ruleServiceClient);

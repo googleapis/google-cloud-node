@@ -66,7 +66,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | sanitize user prompt | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1/model_armor.sanitize_user_prompt.js) |
 | update floor setting | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1/model_armor.update_floor_setting.js) |
 | update template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1/model_armor.update_template.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1/snippet_metadata_google.cloud.modelarmor.v1.json) |
 | create template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/model_armor.create_template.js) |
 | delete template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/model_armor.delete_template.js) |
 | get floor setting | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/model_armor.get_floor_setting.js) |
@@ -78,7 +77,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | stream sanitize user prompt | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/model_armor.stream_sanitize_user_prompt.js) |
 | update floor setting | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/model_armor.update_floor_setting.js) |
 | update template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/model_armor.update_template.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/samples/generated/v1beta/snippet_metadata_google.cloud.modelarmor.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -112,7 +110,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -122,7 +120,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-modelarmor/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

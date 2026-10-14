@@ -26,8 +26,16 @@ describe('Baseline tests', () => {
     baselineName: 'duplicate_methods_test',
     outputDir: '.test-out-duplicate_methods_test',
     protoPath: 'google/duplicatemethodstest/v1/duplicate_methods_test_v1.proto',
-    serviceYaml: 'google/duplicatemethodstest/v1/duplicate_methods_test_v1.yaml',
+    serviceYaml:
+      'google/duplicatemethodstest/v1/duplicate_methods_test_v1.yaml',
     useCommonProto: true,
+  });
+  runBaselineTest({
+    baselineName: 'resumable-upload',
+    outputDir: '.test-out-resumable-upload',
+    protoPath: 'google/samples/resumable/v1/resumable.proto',
+    useCommonProto: false,
+    resumableUploadMethods: 'ResumableUploadService.CreateResumableUpload',
   });
   runBaselineTest({
     baselineName: 'dlp',

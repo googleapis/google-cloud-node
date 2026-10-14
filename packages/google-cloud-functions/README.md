@@ -69,7 +69,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.set_iam_policy.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.test_iam_permissions.js) |
 | update function | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/cloud_functions_service.update_function.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v1/snippet_metadata_google.cloud.functions.v1.json) |
 | create function | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.create_function.js) |
 | delete function | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.delete_function.js) |
 | generate download url | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.generate_download_url.js) |
@@ -78,7 +77,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list functions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.list_functions.js) |
 | list runtimes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.list_runtimes.js) |
 | update function | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/function_service.update_function.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2/snippet_metadata_google.cloud.functions.v2.json) |
 | create function | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.create_function.js) |
 | delete function | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.delete_function.js) |
 | generate download url | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.generate_download_url.js) |
@@ -87,7 +85,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list functions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.list_functions.js) |
 | list runtimes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.list_runtimes.js) |
 | update function | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/function_service.update_function.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2alpha/snippet_metadata_google.cloud.functions.v2alpha.json) |
 | create function | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.create_function.js) |
 | delete function | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.delete_function.js) |
 | generate download url | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.generate_download_url.js) |
@@ -96,7 +93,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list functions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.list_functions.js) |
 | list runtimes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.list_runtimes.js) |
 | update function | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/function_service.update_function.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-functions/samples/generated/v2beta/snippet_metadata_google.cloud.functions.v2beta.json) |
 
 
 ## Supported Node.js Versions

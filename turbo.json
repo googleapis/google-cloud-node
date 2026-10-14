@@ -1,0 +1,18 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "compile": {
+      "dependsOn": ["^compile"],
+      "inputs": [
+        "src/**",
+        "test/**",
+        "system-test/**",
+        "protos/**",
+        "dev/**",
+        "types/**",
+        "tsconfig.json"
+      ],
+      "outputs": ["build/**", "esm/**"]
+    }
+  }
+}

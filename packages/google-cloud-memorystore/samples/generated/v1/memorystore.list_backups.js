@@ -38,13 +38,13 @@ function main(parent) {
    *  If not specified, a default value of 1000 will be used by the service.
    *  Regardless of the page_size value, the response may include a partial list
    *  and a caller should only rely on response's
-   *  `next_page_token` google.cloud.memorystore.v1.ListBackupsResponse.next_page_token 
+   *  `next_page_token`
    *  to determine if there are more clusters left to be queried.
    */
   // const pageSize = 1234
   /**
    *  Optional. The `next_page_token` value returned from a previous
-   *  ListBackupCollections  request, if any.
+   *  `ListBackupCollections` request, if any.
    */
   // const pageToken = 'abc123'
 

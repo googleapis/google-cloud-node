@@ -46,6 +46,12 @@ function main(name) {
    *  not supported (00000000-0000-0000-0000-000000000000).
    */
   // const requestId = 'abc123'
+  /**
+   *  Optional. If set to true, any Indexes and DataObjects from this Collection
+   *  will also be deleted. (Otherwise, the request will only work if the
+   *  Collection has no Indexes and DataObjects.)
+   */
+  // const force = true
 
   // Imports the Vectorsearch library
   const {VectorSearchServiceClient} = require('@google-cloud/vectorsearch').v1beta;

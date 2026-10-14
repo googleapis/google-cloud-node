@@ -22,14 +22,11 @@ import {
 } from '../../src/client-side-metrics/client-side-metrics-attributes';
 import {grpc} from 'google-gax';
 import {expectedRequestsHandled} from '../../test-common/metrics-handler-fixture';
-import * as path from 'path'; // Import the 'path' module
 import * as gax from 'google-gax';
 import * as proxyquire from 'proxyquire';
 import {GCPMetricsHandler} from '../../src/client-side-metrics/gcp-metrics-handler';
-const protoPath = path.join(
-  __dirname,
-  '../../protos/google/bigtable/v2/response_params.proto',
-);
+import {getProtoPath} from '../../src/utils/protos';
+const protoPath = getProtoPath('google/bigtable/v2/response_params.proto');
 const root = gax.protobuf.loadSync(protoPath);
 const ResponseParams = root.lookupType('ResponseParams');
 

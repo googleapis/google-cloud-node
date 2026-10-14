@@ -28,7 +28,8 @@ import {CallOptions} from 'google-gax';
 import {Instance} from './instance';
 import {ModifiableBackupFields} from './backup';
 import {CreateBackupCallback, CreateBackupResponse} from './cluster';
-import {google} from '../protos/protos';
+import {protos} from '.';
+import google = protos.google;
 import {TableUtils} from './utils/table';
 import * as is from 'is';
 import {

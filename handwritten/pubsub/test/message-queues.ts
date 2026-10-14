@@ -17,10 +17,10 @@
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import {EventEmitter} from 'events';
-import {CallOptions, GoogleError, loggingUtils, Status} from 'google-gax';
+import {CallOptions, GoogleError, Status} from 'google-gax';
 import * as sinon from 'sinon';
-import * as crypto from 'crypto';
 import defer = require('p-defer');
+import * as crypto from 'node:crypto';
 
 import * as messageTypes from '../src/message-queues';
 import {BatchError} from '../src/message-queues';
@@ -418,10 +418,7 @@ describe('MessageQueues', () => {
       fakeLog.remove();
 
       assert.strictEqual(fakeLog.called, true);
-      assert.strictEqual(
-        fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.INFO,
-      );
+      assert.strictEqual(fakeLog.fields!.severity, 'INFO');
       assert.strictEqual(fakeLog.args![1] as string, 'logtest');
     });
 
@@ -679,10 +676,7 @@ describe('MessageQueues', () => {
       fakeLog.remove();
 
       assert.strictEqual(fakeLog.called, true);
-      assert.strictEqual(
-        fakeLog.fields!.severity,
-        loggingUtils.LogSeverity.INFO,
-      );
+      assert.strictEqual(fakeLog.fields!.severity, 'INFO');
       assert.strictEqual(fakeLog.args![1] as string, 'logtest');
     });
 
@@ -739,8 +733,12 @@ describe('MessageQueues', () => {
         .resolves();
 
       modAckQueue.setOptions({callOptions: fakeCallOptions});
-      await modAckQueue.add(new FakeMessage() as Message, 10);
-      await modAckQueue.flush('test');
+      // add() returns a promise that only resolves when the batch is flushed.
+      // We must flush before awaiting completion; awaiting add() directly causes
+      // a deadlock that timed out under Bun where background fallback timers
+      // are not scheduled while blocked on unresolved promises.
+      const completion = modAckQueue.add(new FakeMessage() as Message, 10);
+      await Promise.all([completion, modAckQueue.flush('test')]);
 
       const [, callOptions] = stub.lastCall.args;
       assert.strictEqual(callOptions, fakeCallOptions);

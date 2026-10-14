@@ -48,4 +48,4 @@ export default {
   TestingClient,
 };
 import * as protos from '../protos/protos';
-export { protos };
+export {protos};

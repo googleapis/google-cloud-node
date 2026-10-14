@@ -111,6 +111,7 @@ export {
   CombineCallback,
   CombineOptions,
   CombineResponse,
+  ComposeCleanupError,
   CreateChannelCallback,
   CreateChannelConfig,
   CreateChannelOptions,
@@ -145,6 +146,7 @@ export {
   GetNotificationsCallback,
   GetNotificationsOptions,
   GetNotificationsResponse,
+  IpFilter,
   Labels,
   LifecycleAction,
   LifecycleCondition,
@@ -170,6 +172,8 @@ export {
 export * from './crc32c.js';
 export {Channel, StopCallback} from './channel.js';
 export {
+  Contexts,
+  ContextValue,
   CopyCallback,
   CopyOptions,
   CopyResponse,

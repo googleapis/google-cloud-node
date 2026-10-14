@@ -1,4 +1,5 @@
 [
+  "../../protos/google/ads/datamanager/v1/ad_event.proto",
   "../../protos/google/ads/datamanager/v1/age_range.proto",
   "../../protos/google/ads/datamanager/v1/audience.proto",
   "../../protos/google/ads/datamanager/v1/cart_data.proto",
@@ -19,6 +20,7 @@
   "../../protos/google/ads/datamanager/v1/processing_errors.proto",
   "../../protos/google/ads/datamanager/v1/request_status_per_destination.proto",
   "../../protos/google/ads/datamanager/v1/terms_of_service.proto",
+  "../../protos/google/ads/datamanager/v1/user.proto",
   "../../protos/google/ads/datamanager/v1/user_data.proto",
   "../../protos/google/ads/datamanager/v1/user_list.proto",
   "../../protos/google/ads/datamanager/v1/user_list_direct_license.proto",
@@ -31,5 +33,6 @@
   "../../protos/google/ads/datamanager/v1/user_list_license_pricing.proto",
   "../../protos/google/ads/datamanager/v1/user_list_license_status.proto",
   "../../protos/google/ads/datamanager/v1/user_list_service.proto",
-  "../../protos/google/ads/datamanager/v1/user_properties.proto"
+  "../../protos/google/ads/datamanager/v1/user_properties.proto",
+  "../../protos/google/ads/datamanager/v1/viewability_info.proto"
 ]

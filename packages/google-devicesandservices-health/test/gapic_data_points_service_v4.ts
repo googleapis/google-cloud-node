@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datapointsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -231,7 +231,7 @@ describe('v4.DataPointsServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new datapointsserviceModule.v4.DataPointsServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'health.configured.example.com');
@@ -272,7 +272,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataPointsServiceStub, undefined);
@@ -280,12 +280,12 @@ describe('v4.DataPointsServiceClient', () => {
       assert(client.dataPointsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataPointsServiceStub);
@@ -294,14 +294,14 @@ describe('v4.DataPointsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataPointsServiceStub, undefined);
@@ -310,7 +310,7 @@ describe('v4.DataPointsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -318,7 +318,7 @@ describe('v4.DataPointsServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -330,7 +330,7 @@ describe('v4.DataPointsServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -353,7 +353,7 @@ describe('v4.DataPointsServiceClient', () => {
   describe('getDataPoint', () => {
     it('invokes getDataPoint without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -384,7 +384,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes getDataPoint without error using callback', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes getDataPoint with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -462,7 +462,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes getDataPoint with closed client', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -475,7 +475,7 @@ describe('v4.DataPointsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataPoint(request), expectedError);
@@ -485,7 +485,7 @@ describe('v4.DataPointsServiceClient', () => {
   describe('dailyRollUpDataPoints', () => {
     it('invokes dailyRollUpDataPoints without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -517,7 +517,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes dailyRollUpDataPoints without error using callback', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes dailyRollUpDataPoints with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -598,7 +598,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes dailyRollUpDataPoints with closed client', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -611,7 +611,7 @@ describe('v4.DataPointsServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -624,7 +624,7 @@ describe('v4.DataPointsServiceClient', () => {
   describe('exportExerciseTcx', () => {
     it('invokes exportExerciseTcx without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -655,7 +655,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes exportExerciseTcx without error using callback', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -702,7 +702,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes exportExerciseTcx with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -733,7 +733,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes exportExerciseTcx with closed client', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -746,7 +746,7 @@ describe('v4.DataPointsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.exportExerciseTcx(request), expectedError);
@@ -756,7 +756,7 @@ describe('v4.DataPointsServiceClient', () => {
   describe('createDataPoint', () => {
     it('invokes createDataPoint without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -789,7 +789,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes createDataPoint without error using callback', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes createDataPoint with call error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -874,7 +874,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes createDataPoint with LRO error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -907,7 +907,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes checkCreateDataPointProgress without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -915,8 +915,8 @@ describe('v4.DataPointsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDataPointProgress(
@@ -929,7 +929,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes checkCreateDataPointProgress with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -950,7 +950,7 @@ describe('v4.DataPointsServiceClient', () => {
   describe('updateDataPoint', () => {
     it('invokes updateDataPoint without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -984,7 +984,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes updateDataPoint without error using callback', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1039,7 +1039,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes updateDataPoint with call error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1071,7 +1071,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes updateDataPoint with LRO error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1105,7 +1105,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes checkUpdateDataPointProgress without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1113,8 +1113,8 @@ describe('v4.DataPointsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDataPointProgress(
@@ -1127,7 +1127,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes checkUpdateDataPointProgress with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1148,7 +1148,7 @@ describe('v4.DataPointsServiceClient', () => {
   describe('batchDeleteDataPoints', () => {
     it('invokes batchDeleteDataPoints without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1181,7 +1181,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes batchDeleteDataPoints without error using callback', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1235,7 +1235,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes batchDeleteDataPoints with call error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1269,7 +1269,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes batchDeleteDataPoints with LRO error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1302,7 +1302,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes checkBatchDeleteDataPointsProgress without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1310,8 +1310,8 @@ describe('v4.DataPointsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchDeleteDataPointsProgress(
@@ -1324,7 +1324,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes checkBatchDeleteDataPointsProgress with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1345,7 +1345,7 @@ describe('v4.DataPointsServiceClient', () => {
   describe('listDataPoints', () => {
     it('invokes listDataPoints without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1384,7 +1384,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes listDataPoints without error using callback', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1416,8 +1416,7 @@ describe('v4.DataPointsServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.devicesandservices.health.v4.IDataPoint[]
-              | null,
+              protos.google.devicesandservices.health.v4.IDataPoint[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1441,7 +1440,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes listDataPoints with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1472,7 +1471,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes listDataPointsStream without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1525,15 +1524,15 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.listDataPoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataPointsStream with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1575,15 +1574,15 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.listDataPoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataPoints without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1625,15 +1624,15 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.listDataPoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataPoints with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1666,9 +1665,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.listDataPoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1676,7 +1675,7 @@ describe('v4.DataPointsServiceClient', () => {
   describe('reconcileDataPoints', () => {
     it('invokes reconcileDataPoints without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1716,7 +1715,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes reconcileDataPoints without error using callback', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1773,7 +1772,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes reconcileDataPoints with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1804,7 +1803,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes reconcileDataPointsStream without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1859,15 +1858,15 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.reconcileDataPoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes reconcileDataPointsStream with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1911,15 +1910,15 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.reconcileDataPoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with reconcileDataPoints without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1961,15 +1960,15 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.reconcileDataPoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with reconcileDataPoints with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2002,9 +2001,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.reconcileDataPoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2012,7 +2011,7 @@ describe('v4.DataPointsServiceClient', () => {
   describe('rollUpDataPoints', () => {
     it('invokes rollUpDataPoints without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2051,7 +2050,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes rollUpDataPoints without error using callback', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2108,7 +2107,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes rollUpDataPoints with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2139,7 +2138,7 @@ describe('v4.DataPointsServiceClient', () => {
 
     it('invokes rollUpDataPointsStream without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2194,15 +2193,15 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.rollUpDataPoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes rollUpDataPointsStream with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2246,15 +2245,15 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.rollUpDataPoints.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with rollUpDataPoints without error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2296,15 +2295,15 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.rollUpDataPoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with rollUpDataPoints with error', async () => {
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2337,9 +2336,9 @@ describe('v4.DataPointsServiceClient', () => {
       assert(
         (client.descriptors.page.rollUpDataPoints.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2353,7 +2352,7 @@ describe('v4.DataPointsServiceClient', () => {
         data_point: 'dataPointValue',
       };
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2416,7 +2415,7 @@ describe('v4.DataPointsServiceClient', () => {
         data_type: 'dataTypeValue',
       };
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2464,7 +2463,7 @@ describe('v4.DataPointsServiceClient', () => {
         user: 'userValue',
       };
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2502,7 +2501,7 @@ describe('v4.DataPointsServiceClient', () => {
         user: 'userValue',
       };
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2541,7 +2540,7 @@ describe('v4.DataPointsServiceClient', () => {
         paired_device: 'pairedDeviceValue',
       };
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2592,7 +2591,7 @@ describe('v4.DataPointsServiceClient', () => {
         user: 'userValue',
       };
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2630,7 +2629,7 @@ describe('v4.DataPointsServiceClient', () => {
         user: 'userValue',
       };
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2669,7 +2668,7 @@ describe('v4.DataPointsServiceClient', () => {
         subscriber: 'subscriberValue',
       };
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2719,7 +2718,7 @@ describe('v4.DataPointsServiceClient', () => {
         subscription: 'subscriptionValue',
       };
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2781,7 +2780,7 @@ describe('v4.DataPointsServiceClient', () => {
         user: 'userValue',
       };
       const client = new datapointsserviceModule.v4.DataPointsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

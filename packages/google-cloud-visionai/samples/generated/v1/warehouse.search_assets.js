@@ -34,7 +34,7 @@ function main(corpus) {
   // const schemaKeySortingStrategy = {}
   /**
    *  Required. The parent corpus to search.
-   *  Format: `projects/{project_id}/locations/{location_id}/corpora/{corpus_id}'
+   *  Format: `projects/{project_id}/locations/{location_id}/corpora/{corpus_id}`
    */
   // const corpus = 'abc123'
   /**

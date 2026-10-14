@@ -10,5 +10,7 @@
   "../../protos/google/cloud/support/v2beta/email_message.proto",
   "../../protos/google/cloud/support/v2beta/escalation.proto",
   "../../protos/google/cloud/support/v2beta/feed_item.proto",
-  "../../protos/google/cloud/support/v2beta/feed_service.proto"
+  "../../protos/google/cloud/support/v2beta/feed_service.proto",
+  "../../protos/google/cloud/support/v2beta/support_event_subscription.proto",
+  "../../protos/google/cloud/support/v2beta/support_event_subscription_service.proto"
 ]

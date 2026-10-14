@@ -1,0 +1,54 @@
+# Changelog
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/firestore-api-v0.6.0...firestore-api-v0.7.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-firestore-api-v0.5.0...google-cloud-firestore-api-v0.6.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-firestore-api-v0.4.0...google-cloud-firestore-api-v0.5.0) (2026-08-10)
+
+
+### Features
+
+* **firestore-api:** Add explicit ./protos/protos package subpath export ([#9105](https://github.com/googleapis/google-cloud-node/issues/9105)) ([4ac404d](https://github.com/googleapis/google-cloud-node/commit/4ac404d73721e787bee054d64358063ae23ce8e4))
+* Update API sources and regenerate ([#9104](https://github.com/googleapis/google-cloud-node/issues/9104)) ([61ea9c8](https://github.com/googleapis/google-cloud-node/commit/61ea9c807dfb3eda4ddd377da9a496d17ba48389))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-firestore-api-v0.3.0...google-cloud-firestore-api-v0.4.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* **firestore-api:** Implement subpath exports, declare long dependency, and discontinue v1beta1 ([#9073](https://github.com/googleapis/google-cloud-node/issues/9073)) ([d5b66ff](https://github.com/googleapis/google-cloud-node/commit/d5b66ff18167a4771f27f0d3e83528b6daec1933))
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-firestore-api-v0.2.0...google-cloud-firestore-api-v0.3.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-firestore-api-v0.1.0...google-cloud-firestore-api-v0.2.0) (2026-07-20)
+
+
+### Features
+
+* **google/firestore/v1:** Onboard a new library ([#8859](https://github.com/googleapis/google-cloud-node/issues/8859)) ([e39cdbd](https://github.com/googleapis/google-cloud-node/commit/e39cdbd4d8960bce42d02f82ef26277c418af74a))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))

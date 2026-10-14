@@ -18,7 +18,9 @@ import * as sinon from 'sinon';
 import {google} from '../protos/protos';
 import {PubSub} from '../src/pubsub';
 import {ISchema, Schema, SchemaTypes, SchemaViews} from '../src/schema';
-import {SchemaServiceClient} from '../src/v1';
+
+import {v1} from '../src';
+type SchemaServiceClient = v1.SchemaServiceClient;
 
 const sandbox = sinon.createSandbox();
 

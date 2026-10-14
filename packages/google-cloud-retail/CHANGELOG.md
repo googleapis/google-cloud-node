@@ -1,5 +1,72 @@
 # Changelog
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/retail-v5.4.0...retail-v5.5.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/retail-v5.3.1...retail-v5.4.0) (2026-09-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#9472](https://github.com/googleapis/google-cloud-node/issues/9472)) ([514e2f6](https://github.com/googleapis/google-cloud-node/commit/514e2f64ba67ad3ab956fbe3eeafa507d44ca597))
+
+## [5.3.1](https://github.com/googleapis/google-cloud-node/compare/retail-v5.3.0...retail-v5.3.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/retail-v5.2.0...retail-v5.3.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/retail-v5.1.0...retail-v5.2.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/retail-v5.0.1...retail-v5.1.0) (2026-08-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#9140](https://github.com/googleapis/google-cloud-node/issues/9140)) ([863bc96](https://github.com/googleapis/google-cloud-node/commit/863bc964abda34bc82b58409af164ff9c7346c55))
+
+## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/retail-v5.0.0...retail-v5.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies ([#9129](https://github.com/googleapis/google-cloud-node/issues/9129)) ([5f01912](https://github.com/googleapis/google-cloud-node/commit/5f0191225b96dabe41daa9f9d57a8c72749bf62d))
+
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/retail-v4.4.0...retail-v5.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/retail-v4.3.1...retail-v4.4.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 1 ([#8612](https://github.com/googleapis/google-cloud-node/issues/8612)) ([b4d5da7](https://github.com/googleapis/google-cloud-node/commit/b4d5da72a41c4d961eaeee7b7633c7885ecb9166))
+
 ## [4.3.1](https://github.com/googleapis/google-cloud-node/compare/retail-v4.3.0...retail-v4.3.1) (2026-05-01)
 
 

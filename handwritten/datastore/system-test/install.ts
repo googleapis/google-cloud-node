@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {packNTest} from 'pack-n-play';
-import {readFileSync} from 'fs';
-import {describe, it} from 'mocha';
+import { packNTest } from 'pack-n-play';
+import { readFileSync } from 'fs';
+import { describe, it } from 'mocha';
 
 describe('📦 pack-n-play test', () => {
   it('TypeScript code', async function () {
@@ -41,7 +41,7 @@ describe('📦 pack-n-play test', () => {
       packageDir: process.cwd(),
       sample: {
         description: 'JavaScript user can use the library',
-        ts: readFileSync(
+        cjs: readFileSync(
           './system-test/fixtures/sample/src/index.js',
         ).toString(),
       },

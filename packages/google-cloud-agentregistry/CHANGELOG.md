@@ -1,0 +1,53 @@
+# Changelog
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/agentregistry-v0.5.0...agentregistry-v0.6.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/agentregistry-v0.4.0...agentregistry-v0.5.0) (2026-09-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#9427](https://github.com/googleapis/google-cloud-node/issues/9427)) ([5cd945d](https://github.com/googleapis/google-cloud-node/commit/5cd945de7f4fd96878c1956d68bcf505e48686ce))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/agentregistry-v0.3.0...agentregistry-v0.4.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/agentregistry-v0.2.0...agentregistry-v0.3.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/agentregistry-v0.1.0...agentregistry-v0.2.0) (2026-07-13)
+
+
+### Features
+
+* Update googleapis source and regenerate client libraries ([#8821](https://github.com/googleapis/google-cloud-node/issues/8821)) ([2a3a77c](https://github.com/googleapis/google-cloud-node/commit/2a3a77ceaa4ff2c7e1a2ec0338a770fa60b738a9))
+
+## 0.1.0 (2026-06-25)
+
+
+### Features
+
+* **google/cloud/agentregistry/v1:** Onboard a new library ([#8673](https://github.com/googleapis/google-cloud-node/issues/8673)) ([b17c653](https://github.com/googleapis/google-cloud-node/commit/b17c6531144b6f52259342bde6570e5479f8be50))
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))

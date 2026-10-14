@@ -82,7 +82,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get place | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-places/samples/generated/v1/places.get_place.js) |
 | search nearby | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-places/samples/generated/v1/places.search_nearby.js) |
 | search text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-places/samples/generated/v1/places.search_text.js) |
-| maps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-places/samples/generated/v1/snippet_metadata_google.maps.places.v1.json) |
 
 
 ## Supported Node.js Versions

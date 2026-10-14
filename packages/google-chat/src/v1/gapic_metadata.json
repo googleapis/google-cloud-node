@@ -105,6 +105,16 @@
                 "deleteReaction"
               ]
             },
+            "CreateMessagePin": {
+              "methods": [
+                "createMessagePin"
+              ]
+            },
+            "DeleteMessagePin": {
+              "methods": [
+                "deleteMessagePin"
+              ]
+            },
             "CreateCustomEmoji": {
               "methods": [
                 "createCustomEmoji"
@@ -133,6 +143,31 @@
             "GetThreadReadState": {
               "methods": [
                 "getThreadReadState"
+              ]
+            },
+            "GetAvailability": {
+              "methods": [
+                "getAvailability"
+              ]
+            },
+            "MarkAsActive": {
+              "methods": [
+                "markAsActive"
+              ]
+            },
+            "MarkAsAway": {
+              "methods": [
+                "markAsAway"
+              ]
+            },
+            "MarkAsDoNotDisturb": {
+              "methods": [
+                "markAsDoNotDisturb"
+              ]
+            },
+            "UpdateAvailability": {
+              "methods": [
+                "updateAvailability"
               ]
             },
             "GetSpaceEvent": {
@@ -189,6 +224,13 @@
                 "listMembershipsAsync"
               ]
             },
+            "SearchMessages": {
+              "methods": [
+                "searchMessages",
+                "searchMessagesStream",
+                "searchMessagesAsync"
+              ]
+            },
             "ListSpaces": {
               "methods": [
                 "listSpaces",
@@ -215,6 +257,13 @@
                 "listReactions",
                 "listReactionsStream",
                 "listReactionsAsync"
+              ]
+            },
+            "ListMessagePins": {
+              "methods": [
+                "listMessagePins",
+                "listMessagePinsStream",
+                "listMessagePinsAsync"
               ]
             },
             "ListCustomEmojis": {
@@ -345,6 +394,16 @@
                 "deleteReaction"
               ]
             },
+            "CreateMessagePin": {
+              "methods": [
+                "createMessagePin"
+              ]
+            },
+            "DeleteMessagePin": {
+              "methods": [
+                "deleteMessagePin"
+              ]
+            },
             "CreateCustomEmoji": {
               "methods": [
                 "createCustomEmoji"
@@ -373,6 +432,31 @@
             "GetThreadReadState": {
               "methods": [
                 "getThreadReadState"
+              ]
+            },
+            "GetAvailability": {
+              "methods": [
+                "getAvailability"
+              ]
+            },
+            "MarkAsActive": {
+              "methods": [
+                "markAsActive"
+              ]
+            },
+            "MarkAsAway": {
+              "methods": [
+                "markAsAway"
+              ]
+            },
+            "MarkAsDoNotDisturb": {
+              "methods": [
+                "markAsDoNotDisturb"
+              ]
+            },
+            "UpdateAvailability": {
+              "methods": [
+                "updateAvailability"
               ]
             },
             "GetSpaceEvent": {
@@ -429,6 +513,13 @@
                 "listMembershipsAsync"
               ]
             },
+            "SearchMessages": {
+              "methods": [
+                "searchMessages",
+                "searchMessagesStream",
+                "searchMessagesAsync"
+              ]
+            },
             "ListSpaces": {
               "methods": [
                 "listSpaces",
@@ -455,6 +546,13 @@
                 "listReactions",
                 "listReactionsStream",
                 "listReactionsAsync"
+              ]
+            },
+            "ListMessagePins": {
+              "methods": [
+                "listMessagePins",
+                "listMessagePinsStream",
+                "listMessagePinsAsync"
               ]
             },
             "ListCustomEmojis": {

@@ -1,0 +1,2602 @@
+/**
+ * Copyright 2026 Google LLC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import * as assert from 'assert';
+import {EventEmitter} from 'events';
+import {Duplex, Writable} from 'stream';
+import {SpanKind, SpanStatusCode, trace} from '@opentelemetry/api';
+import {describe, it, beforeEach, afterEach} from 'mocha';
+import {
+  getGaxTracer,
+  traceCall,
+  traceAttempt,
+  setAttemptHttpMethod,
+  handlePromise,
+  handleStream,
+} from '../../src/observability/TracerHelper';
+import {
+  AttemptTraceContext,
+  DynamicTraceContext,
+  StaticTraceContext,
+} from '../../src/observability/contextUtil';
+import {
+  ResultTuple,
+  APICallback,
+  ResponseType,
+  NextPageRequestType,
+  RawResponseType,
+} from '../../src/apitypes';
+import {GoogleError} from '../../src/googleError';
+import {Status} from '../../src/status';
+import {OngoingCallPromise} from '../../src/call';
+import {OtelHarness} from './otelHarness';
+
+describe('TracerHelper', () => {
+  let harness: OtelHarness;
+
+  beforeEach(() => {
+    harness = new OtelHarness();
+    harness.setup();
+  });
+
+  afterEach(() => {
+    harness.teardown();
+  });
+
+  describe('getGaxTracer', () => {
+    it('returns a tracer for google-gax', () => {
+      const tracer = getGaxTracer();
+      assert.ok(tracer);
+    });
+  });
+
+  describe('traceCall', () => {
+    const dynamicArgs: DynamicTraceContext = {
+      clientName: 'StorageClient',
+      methodName: 'GetObject',
+      rpcType: 'grpc',
+    };
+
+    const staticArgs: StaticTraceContext = {
+      gcpClientService: 'storage.googleapis.com',
+      gcpVersion: '1.2.3',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: '@google-cloud/storage',
+    };
+
+    it('creates and ends a span with correct name and attributes on success', async () => {
+      const expectedResult = {data: 'test'};
+      const result = await traceCall(dynamicArgs, staticArgs, async () => {
+        return expectedResult;
+      });
+
+      assert.deepStrictEqual(result, expectedResult);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+
+      const span = spans[0];
+      assert.strictEqual(span.name, 'StorageClient.GetObject');
+      assert.strictEqual(span.ended, true);
+      assert.strictEqual(
+        span.attributes['gcp.client.service'],
+        'storage.googleapis.com',
+      );
+      assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
+      assert.strictEqual(
+        span.attributes['gcp.client.repo'],
+        'googleapis/google-cloud-node',
+      );
+      assert.strictEqual(
+        span.attributes['gcp.client.artifact'],
+        '@google-cloud/storage',
+      );
+      assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
+      assert.strictEqual(
+        span.attributes['url.domain'],
+        'storage.googleapis.com',
+      );
+      // A successful call reports no error.type, and leaves the status unset
+      // rather than claiming OK on the application's behalf.
+      assert.strictEqual(span.attributes['error.type'], undefined);
+      assert.strictEqual(span.attributes['status.message'], undefined);
+      assert.strictEqual(span.status.code, SpanStatusCode.UNSET);
+      assert.strictEqual(span.events.length, 0);
+    });
+
+    describe('child span propagation and hierarchy (client request tracing -> low level network tracing)', () => {
+      it('tags synchronous child spans with the client request parent span id', async () => {
+        const childTracer = trace.getTracer('child-tracer');
+        let childParentSpanId: string | undefined;
+
+        await traceCall(dynamicArgs, staticArgs, () => {
+          const childSpan = childTracer.startSpan('ChildOperation');
+          childParentSpanId = (
+            childSpan as unknown as {parentSpanContext?: {spanId?: string}}
+          ).parentSpanContext?.spanId;
+          childSpan.end();
+          return {data: 'sync-child'};
+        });
+
+        const allSpans = harness.exporter.getFinishedSpans();
+        assert.strictEqual(
+          allSpans.length,
+          2,
+          'Expected 2 spans (client request + low level network)',
+        );
+
+        const clientRequestSpan = harness.requireSingleSpan('google-gax');
+        const networkSpan = allSpans.find(s => s.name === 'ChildOperation');
+        assert.ok(networkSpan, 'low level network child span must exist');
+
+        assert.strictEqual(
+          childParentSpanId,
+          clientRequestSpan.spanContext().spanId,
+          'low level network parentSpanId should be client request spanId',
+        );
+        assert.strictEqual(
+          networkSpan?.parentSpanContext?.spanId,
+          clientRequestSpan.spanContext().spanId,
+          'Finished low level network span parentSpanId should match client request spanId',
+        );
+        assert.strictEqual(
+          networkSpan?.spanContext().traceId,
+          clientRequestSpan.spanContext().traceId,
+          'low level network span should share traceId with client request parent',
+        );
+      });
+
+      it('tags asynchronous promise child spans with the client request parent span id', async () => {
+        const childTracer = trace.getTracer('child-tracer');
+        let childParentSpanId: string | undefined;
+
+        await traceCall(dynamicArgs, staticArgs, async () => {
+          await new Promise<void>(resolve => setImmediate(resolve));
+          const childSpan = childTracer.startSpan('AsyncChildOperation');
+          childParentSpanId = (
+            childSpan as unknown as {parentSpanContext?: {spanId?: string}}
+          ).parentSpanContext?.spanId;
+          childSpan.end();
+          return {data: 'async-child'};
+        });
+
+        const allSpans = harness.exporter.getFinishedSpans();
+        assert.strictEqual(
+          allSpans.length,
+          2,
+          'Expected 2 spans (client request + low level network)',
+        );
+
+        const clientRequestSpan = harness.requireSingleSpan('google-gax');
+        const networkSpan = allSpans.find(
+          s => s.name === 'AsyncChildOperation',
+        );
+        assert.ok(networkSpan, 'low level network child span must exist');
+
+        assert.strictEqual(
+          childParentSpanId,
+          clientRequestSpan.spanContext().spanId,
+          'low level network parentSpanId should be client request spanId for async calls',
+        );
+        assert.strictEqual(
+          networkSpan?.parentSpanContext?.spanId,
+          clientRequestSpan.spanContext().spanId,
+        );
+        assert.strictEqual(
+          networkSpan?.spanContext().traceId,
+          clientRequestSpan.spanContext().traceId,
+        );
+      });
+
+      it('tags child spans in stream calls with the client request parent span id', async () => {
+        const childTracer = trace.getTracer('child-tracer');
+        const stream = new EventEmitter();
+        let childParentSpanId: string | undefined;
+
+        const streamResult = traceCall(
+          dynamicArgs,
+          staticArgs,
+          () => {
+            const childSpan = childTracer.startSpan('StreamChildOperation');
+            childParentSpanId = (
+              childSpan as unknown as {parentSpanContext?: {spanId?: string}}
+            ).parentSpanContext?.spanId;
+            childSpan.end();
+            return stream;
+          },
+          true,
+        );
+
+        assert.strictEqual(streamResult, stream);
+        stream.emit('end');
+
+        const allSpans = harness.exporter.getFinishedSpans();
+        assert.strictEqual(
+          allSpans.length,
+          2,
+          'Expected 2 spans (client request + low level network)',
+        );
+
+        const clientRequestSpan = harness.requireSingleSpan('google-gax');
+        const networkSpan = allSpans.find(
+          s => s.name === 'StreamChildOperation',
+        );
+        assert.ok(networkSpan, 'low level network child span must exist');
+
+        assert.strictEqual(
+          childParentSpanId,
+          clientRequestSpan.spanContext().spanId,
+          'low level network parentSpanId should be client request spanId in stream calls',
+        );
+        assert.strictEqual(
+          networkSpan?.parentSpanContext?.spanId,
+          clientRequestSpan.spanContext().spanId,
+        );
+      });
+    });
+
+    it('records error attributes, exceptions, and rethrows when fn throws an Error', async () => {
+      const error = new Error('RPC Failed');
+      error.name = 'CustomRpcError';
+
+      await assert.rejects(
+        async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
+            throw error;
+          });
+        },
+        (err: Error) => {
+          assert.strictEqual(err.message, 'RPC Failed');
+          return true;
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+
+      const span = spans[0];
+      assert.strictEqual(span.name, 'StorageClient.GetObject');
+      assert.strictEqual(span.ended, true);
+      // The message is carried by the status description and status.message.
+      // `error.message` is deprecated and NOT RECOMMENDED on spans, so it must not appear.
+      assert.strictEqual(span.status.message, 'RPC Failed');
+      assert.strictEqual(span.attributes['status.message'], 'RPC Failed');
+      assert.strictEqual(span.attributes['error.message'], undefined);
+      // No status code on this error, so error.type falls back to the class.
+      // The class is the bare `Error`, which says nothing, so the name the
+      // caller assigned is what gets reported.
+      assert.strictEqual(span.attributes['error.type'], 'CustomRpcError');
+      // exception.* belongs on the exception event, not on the span.
+      assert.strictEqual(span.attributes['exception.type'], undefined);
+      assert.strictEqual(span.events.length, 1);
+      assert.strictEqual(span.events[0].name, 'exception');
+      assert.strictEqual(
+        span.events[0].attributes?.['exception.type'],
+        'CustomRpcError',
+      );
+      assert.strictEqual(
+        span.events[0].attributes?.['exception.message'],
+        undefined,
+      );
+      assert.strictEqual(
+        span.events[0].attributes?.['exception.stacktrace'],
+        undefined,
+      );
+    });
+
+    it('reports the INTERNAL error.type when a non-Error is thrown', async () => {
+      await assert.rejects(async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => {
+          throw 'plain string failure';
+        });
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      // Something must be reported, or the failure is invisible to any
+      // error-rate query that groups on error.type.
+      assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
+      assert.strictEqual(span.attributes['exception.type'], undefined);
+      assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+      // The thrown value survives as the status description and status.message.
+      assert.strictEqual(span.status.message, 'plain string failure');
+      assert.strictEqual(
+        span.attributes['status.message'],
+        'plain string failure',
+      );
+      // No exception event: recordException on a bare string yields one with
+      // no type and no stacktrace, which adds nothing to the status above.
+      assert.strictEqual(span.events.length, 0);
+    });
+
+    // The two signals answer different questions, and the split between them
+    // is the part most easily broken by a well-meaning edit. Error information
+    // (span status + error.type) says how the operation ended and is what
+    // error-rate queries group on, so it must stay low-cardinality and must
+    // exist for every failure. Exception information (the `exception` event)
+    // records the exception type that was thrown (plus `exception.message` on
+    // low level network attempt spans), and only exists when an Error instance was thrown.
+    describe('error and exception reporting', () => {
+      const failWith = async (thrown: unknown) => {
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
+            throw thrown;
+          });
+        });
+        return harness.requireSingleSpan('google-gax');
+      };
+
+      it('keeps error information on the span and exception detail on the event', async () => {
+        const error = new GoogleError('object does not exist');
+        error.code = Status.NOT_FOUND;
+
+        const span = await failWith(error);
+
+        // Error information: the outcome, on the span itself.
+        assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(span.status.message, 'object does not exist');
+        assert.strictEqual(
+          span.attributes['status.message'],
+          'object does not exist',
+        );
+        assert.strictEqual(span.attributes['error.type'], 'NOT_FOUND');
+
+        // Exception information: the exception type, on the event (message and stacktrace omitted on client request spans).
+        assert.strictEqual(span.events.length, 1);
+        const event = span.events[0];
+        assert.strictEqual(event.name, 'exception');
+        // The class that was raised, not the stringified status code. The SDK
+        // would have derived '5' from the error's `code`, which names no type
+        // at all; error.type above is where the status belongs, and it says
+        // 'NOT_FOUND' rather than a bare number.
+        assert.strictEqual(event.attributes?.['exception.type'], 'GoogleError');
+        assert.strictEqual(event.attributes?.['exception.message'], undefined);
+        assert.strictEqual(
+          event.attributes?.['exception.stacktrace'],
+          undefined,
+        );
+
+        // Neither may leak into the other. exception.* on the span would
+        // duplicate the event at span cardinality, and error.* on the event
+        // would split the dimension that error-rate queries group on.
+        assert.strictEqual(span.attributes['exception.type'], undefined);
+        assert.strictEqual(span.attributes['exception.message'], undefined);
+        assert.strictEqual(span.attributes['exception.stacktrace'], undefined);
+        assert.strictEqual(event.attributes?.['error.type'], undefined);
+      });
+
+      it('never sets the deprecated error.message attribute', async () => {
+        // semconv deprecated it and calls it NOT RECOMMENDED on spans: it has
+        // unbounded cardinality and restates the status description. The
+        // message must be reachable, just not from here.
+        const span = await failWith(new Error('quota exceeded'));
+
+        assert.strictEqual(span.attributes['error.message'], undefined);
+        assert.strictEqual(span.attributes['status.message'], 'quota exceeded');
+        assert.strictEqual(span.status.message, 'quota exceeded');
+        assert.strictEqual(
+          span.events[0].attributes?.['exception.message'],
+          undefined,
+        );
+      });
+
+      it('survives traceCall when thrown error has circular cause', async () => {
+        const circularError = new GoogleError('wrapper error');
+        circularError.cause = circularError;
+
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
+            throw circularError;
+          });
+        });
+
+        const span = harness.requireSingleSpan('google-gax');
+        assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+      });
+
+      it('reports error.type consistently with the RPC status', async () => {
+        // semconv asks that error.type be applied consistently across the
+        // signals a single operation reports. The two are resolved by separate
+        // helpers, so nothing but a test keeps them from drifting apart.
+        const error = Object.assign(new Error('5 NOT_FOUND: gone'), {code: 5});
+
+        const span = await failWith(error);
+
+        assert.strictEqual(span.attributes['error.type'], 'NOT_FOUND');
+        harness.assertResponseStatus({rpcStatus: 'NOT_FOUND'}, {span});
+      });
+
+      it('records one exception event however many completion signals arrive', async () => {
+        // A stream can report 'error' and then still emit 'end' and 'close'.
+        // Only the first may be recorded: a second event would double-count
+        // the failure, and a later success signal must not overwrite it.
+        const emitter = new EventEmitter();
+        traceCall(dynamicArgs, staticArgs, () => emitter, true);
+
+        emitter.emit('error', new Error('stream broke'));
+        emitter.emit('end');
+        emitter.emit('close');
+
+        const span = harness.requireSingleSpan('google-gax');
+        assert.strictEqual(span.events.length, 1);
+        assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(span.status.message, 'stream broke');
+        assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
+      });
+
+      it('still resolves the RPC status for a non-Error carrying a code', async () => {
+        // error.type resolves to NOT_FOUND from the server error code, and the
+        // domain status is also resolved independently as NOT_FOUND.
+        const span = await failWith({code: Status.NOT_FOUND});
+
+        assert.strictEqual(span.attributes['error.type'], 'NOT_FOUND');
+        harness.assertResponseStatus({rpcStatus: 'NOT_FOUND'}, {span});
+        assert.strictEqual(span.events.length, 0);
+        // Nothing better is available for an object with no message, so the
+        // String() fallback stands and the status code above is what has to
+        // carry the meaning.
+        assert.strictEqual(span.status.message, '[object Object]');
+      });
+
+      it('keeps the first description when a second, different failure arrives', async () => {
+        // The first failure is the one that ended the call; a later error is
+        // fallout from the teardown. Overwriting the description would replace
+        // the cause with its symptom, which is the harder direction to debug.
+        const emitter = new EventEmitter();
+        // Attached up front: handleStream removes its own 'error' listener once
+        // the span is ended, and an EventEmitter with no 'error' listener
+        // throws on emit.
+        emitter.on('error', () => {});
+        traceCall(dynamicArgs, staticArgs, () => emitter, true);
+
+        emitter.emit('error', new Error('connection reset'));
+        emitter.emit('error', new Error('premature close'));
+
+        const span = harness.requireSingleSpan('google-gax');
+        assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(span.status.message, 'connection reset');
+        assert.strictEqual(span.events.length, 1);
+      });
+
+      it('survives a thrown null', async () => {
+        // resolveRpcStatusName and String() both have to tolerate it; a throw
+        // inside recordError would lose the span entirely.
+        const span = await failWith(null);
+
+        assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(span.status.message, 'null');
+        assert.strictEqual(span.attributes['error.type'], 'INTERNAL');
+        harness.assertResponseStatus({rpcStatus: undefined}, {span});
+      });
+    });
+
+    describe('response status attributes', () => {
+      const httpDynamicArgs: DynamicTraceContext = {
+        clientName: 'ComputeClient',
+        methodName: 'InsertInstance',
+        rpcType: 'http',
+      };
+
+      it('reports OK on a successful grpc call', async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => 'ok');
+
+        harness.assertResponseStatus({rpcStatus: 'OK'});
+      });
+
+      it('reports 200 on a successful http call', async () => {
+        await traceCall(httpDynamicArgs, staticArgs, async () => 'ok');
+
+        harness.assertResponseStatus({httpStatus: 200});
+      });
+
+      it('reports the gRPC status name on a failed grpc call', async () => {
+        // Shape produced by grpc-js callErrorFromStatus.
+        const error = Object.assign(new Error('5 NOT_FOUND'), {code: 5});
+
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
+            throw error;
+          });
+        });
+
+        harness.assertResponseStatus({rpcStatus: 'NOT_FOUND'});
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans[0].status.message, '5 NOT_FOUND');
+      });
+
+      it('reports the received http status on a failed http call', async () => {
+        // 418 is unmapped, so rpcCodeFromHttpStatusCode collapses it to
+        // FAILED_PRECONDITION. The received status is therefore not
+        // recoverable from `code`, which is why it is carried separately.
+        const error = new GoogleError('teapot');
+        error.code = Status.FAILED_PRECONDITION;
+        error.httpStatusCode = 418;
+
+        await assert.rejects(async () => {
+          await traceCall(httpDynamicArgs, staticArgs, async () => {
+            throw error;
+          });
+        });
+
+        harness.assertResponseStatus({
+          httpStatus: 418,
+        });
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans[0].status.message, 'teapot');
+      });
+
+      it('omits the http status when no response was received', async () => {
+        // What toDeadlineExceeded produces: a real gRPC status, but no
+        // response and so no HTTP status to report. Omitting httpStatus
+        // asserts the attribute is absent.
+        const error = new GoogleError('Deadline exceeded');
+        error.code = Status.DEADLINE_EXCEEDED;
+
+        await assert.rejects(async () => {
+          await traceCall(httpDynamicArgs, staticArgs, async () => {
+            throw error;
+          });
+        });
+
+        harness.assertResponseStatus({});
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans[0].status.message, 'Deadline exceeded');
+      });
+
+      it('does not set response status codes for a zero status code', async () => {
+        // Zero is the proto3 default for an unset code, so a failed call must
+        // not be labelled OK or report a response status.
+        const error = Object.assign(new Error('unset code'), {code: 0});
+
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
+            throw error;
+          });
+        });
+
+        harness.assertResponseStatus({rpcStatus: undefined});
+      });
+
+      it('does not set response status codes for client-side errors on gRPC or HTTP', async () => {
+        const connErr = Object.assign(new Error('connect ECONNREFUSED'), {
+          code: 'ECONNREFUSED',
+        });
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
+            throw connErr;
+          });
+        });
+        harness.assertResponseStatus({rpcStatus: undefined});
+
+        harness.reset();
+        const typeErr = new TypeError('client-side http error');
+        await assert.rejects(async () => {
+          await traceCall(httpDynamicArgs, staticArgs, async () => {
+            throw typeErr;
+          });
+        });
+        harness.assertResponseStatus({});
+      });
+
+      it('reports server.address and server.port when call succeeds', async () => {
+        const staticWithServer: StaticTraceContext = {
+          ...staticArgs,
+          serverAddress: 'storage.googleapis.com',
+          serverPort: 443,
+        };
+        await traceCall(dynamicArgs, staticWithServer, async () => 'ok');
+        harness.assertServerAddressAndPort({
+          address: 'storage.googleapis.com',
+          port: 443,
+        });
+      });
+
+      it('reports server.address and server.port for a server-side gRPC error', async () => {
+        const staticWithServer: StaticTraceContext = {
+          ...staticArgs,
+          serverAddress: 'storage.googleapis.com',
+          serverPort: 443,
+        };
+        const error = Object.assign(new Error('3 INVALID_ARGUMENT'), {
+          code: Status.INVALID_ARGUMENT,
+        });
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticWithServer, async () => {
+            throw error;
+          });
+        });
+        harness.assertServerAddressAndPort({
+          address: 'storage.googleapis.com',
+          port: 443,
+        });
+      });
+
+      it('reports server.address and server.port for a server-side HTTP error', async () => {
+        const staticWithServer: StaticTraceContext = {
+          ...staticArgs,
+          serverAddress: 'storage.googleapis.com',
+          serverPort: 443,
+        };
+        const error = Object.assign(new GoogleError('Bad Request'), {
+          httpStatusCode: 400,
+        });
+        await assert.rejects(async () => {
+          await traceCall(httpDynamicArgs, staticWithServer, async () => {
+            throw error;
+          });
+        });
+        harness.assertServerAddressAndPort({
+          address: 'storage.googleapis.com',
+          port: 443,
+        });
+      });
+
+      it('omits server.address and server.port for pre-connection and client validation failures', async () => {
+        const staticWithServer: StaticTraceContext = {
+          ...staticArgs,
+          serverAddress: 'storage.googleapis.com',
+          serverPort: 443,
+        };
+        const errors = [
+          Object.assign(new Error('getaddrinfo ENOTFOUND'), {
+            code: 'ENOTFOUND',
+          }),
+          Object.assign(new Error('connect ECONNREFUSED'), {
+            code: 'ECONNREFUSED',
+          }),
+          Object.assign(new TypeError('Invalid argument'), {
+            code: 'ERR_INVALID_ARG_TYPE',
+          }),
+        ];
+
+        for (const error of errors) {
+          await assert.rejects(async () => {
+            await traceCall(dynamicArgs, staticWithServer, async () => {
+              throw error;
+            });
+          });
+          harness.assertServerAddressAndPort({
+            address: undefined,
+            port: undefined,
+          });
+          harness.reset();
+        }
+      });
+
+      it('reports the status of a stream failure', () => {
+        const emitter = new EventEmitter();
+        const error = new GoogleError('stream failed');
+        error.code = Status.UNAVAILABLE;
+
+        traceCall(dynamicArgs, staticArgs, () => emitter, true);
+        emitter.emit('error', error);
+
+        harness.assertResponseStatus({rpcStatus: 'UNAVAILABLE'});
+      });
+
+      it('reports the status of a failure delivered to a callback', done => {
+        const error = new GoogleError('permission denied');
+        error.code = Status.PERMISSION_DENIED;
+
+        // Mimics an API caller that returns OngoingCall (no `.promise`), so
+        // the span is bound to the callback rather than to a promise.
+        const returned = traceCall(
+          dynamicArgs,
+          staticArgs,
+          tracedCallback => {
+            tracedCallback!(error);
+            return undefined as unknown as ResultTuple;
+          },
+          false,
+          () => {
+            harness.assertResponseStatus({rpcStatus: 'PERMISSION_DENIED'});
+            done();
+          },
+        );
+
+        assert.strictEqual(returned, undefined);
+      });
+
+      // The harness derives the transport from the span, so these guard the
+      // guard: a regression that moved an attribute onto the wrong transport
+      // has to be caught rather than quietly accepted.
+      it('rejects an expected http status on a grpc span', async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => 'ok');
+
+        assert.throws(
+          () =>
+            harness.assertResponseStatus({rpcStatus: 'OK', httpStatus: 200}),
+          /can never hold one/,
+        );
+      });
+
+      it('rejects a grpc status name that does not match', async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => 'ok');
+
+        assert.throws(
+          () => harness.assertResponseStatus({rpcStatus: 'NOT_FOUND'}),
+          /rpc\.response\.status_code/,
+        );
+      });
+    });
+
+    describe('resend count', () => {
+      it('does not set gcp.grpc.resend_count or http.request.resend_count on client request spans', async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => {
+          return traceAttempt(
+            {
+              ...dynamicArgs,
+              apiName: 'google.cloud.storage.v2.Storage',
+              resendCount: 2,
+            },
+            staticArgs,
+            async () => 'ok',
+          );
+        });
+
+        const httpArgs: DynamicTraceContext = {...dynamicArgs, rpcType: 'http'};
+        await traceCall(httpArgs, staticArgs, async () => {
+          return traceAttempt(
+            {
+              ...httpArgs,
+              apiName: 'google.cloud.storage.v2.Storage',
+              resendCount: 3,
+            },
+            staticArgs,
+            async () => 'ok',
+          );
+        });
+
+        const spans = harness.getSpans('google-gax');
+        const clientSpans = spans.filter(
+          s => s.name === 'StorageClient.GetObject',
+        );
+        assert.strictEqual(clientSpans.length, 2);
+        for (const span of clientSpans) {
+          harness.assertResendCount(0, {span});
+        }
+      });
+    });
+
+    it('does not end span prematurely for pending asynchronous promises', async () => {
+      let resolvePromise: (val: string) => void;
+      const asyncPromise = new Promise<string>(resolve => {
+        resolvePromise = resolve;
+      });
+
+      const resultPromise = traceCall(
+        dynamicArgs,
+        staticArgs,
+        () => asyncPromise,
+      );
+
+      // Verify the span is NOT closed while the promise is pending
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      resolvePromise!('success');
+      const result = await resultPromise;
+      assert.strictEqual(result, 'success');
+
+      // Span should only be ended after resolution
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('supports Promise subclasses', async () => {
+      class CustomPromise<T> extends Promise<T> {}
+      const customPromise = new CustomPromise<string>(resolve => {
+        setTimeout(() => {
+          resolve('custom-result');
+        }, 10);
+      });
+
+      const result = traceCall(dynamicArgs, staticArgs, () => customPromise);
+      assert.strictEqual(result, customPromise);
+
+      const initialSpans = harness.getSpans('google-gax');
+      assert.strictEqual(initialSpans.length, 0);
+
+      await new Promise(resolve => setTimeout(resolve, 25));
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('supports custom thenables implementing CancellablePromise without inheriting from Promise', async () => {
+      class CustomCancellablePromise {
+        private readonly promise: Promise<string>;
+        constructor(executor: (resolve: (val: string) => void) => void) {
+          this.promise = new Promise(executor);
+        }
+        cancel(): void {}
+        then<TResult1 = string, TResult2 = never>(
+          onfulfilled?: (value: string) => TResult1 | PromiseLike<TResult1>,
+          onrejected?: (reason: unknown) => TResult2 | PromiseLike<TResult2>,
+        ): Promise<TResult1 | TResult2> {
+          return this.promise.then(onfulfilled, onrejected);
+        }
+        catch<TResult = never>(
+          onrejected?: (reason: unknown) => TResult | PromiseLike<TResult>,
+        ): Promise<string | TResult> {
+          return this.promise.catch(onrejected);
+        }
+      }
+
+      let resolvePromise: (val: string) => void;
+      const customPromise = new CustomCancellablePromise(resolve => {
+        resolvePromise = resolve;
+      });
+
+      // Verify it is NOT an instance of native Promise
+      assert.strictEqual(customPromise instanceof Promise, false);
+
+      const result = traceCall(dynamicArgs, staticArgs, () => customPromise);
+      assert.strictEqual(result, customPromise);
+
+      // Verify the span is NOT closed while the custom promise is pending
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      resolvePromise!('custom-success');
+      await new Promise(resolve => setTimeout(resolve, 20));
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('supports OngoingCallPromise objects whose promise property resolves', async () => {
+      const ongoingCall = new OngoingCallPromise();
+      assert.strictEqual(ongoingCall instanceof Promise, false);
+
+      const result = traceCall(dynamicArgs, staticArgs, () => ongoingCall);
+      assert.strictEqual(result, ongoingCall);
+
+      // Verify the span is NOT closed while ongoingCall is in flight
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Complete the call via callback
+      ongoingCall.callback!(null, {data: 'result'});
+      await new Promise(resolve => setTimeout(resolve, 20));
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('supports OngoingCallPromise objects whose promise property rejects', async () => {
+      const ongoingCall = new OngoingCallPromise();
+      assert.strictEqual(ongoingCall instanceof Promise, false);
+
+      const error = new Error('ongoing call failed');
+      const result = traceCall(dynamicArgs, staticArgs, () => ongoingCall);
+      assert.strictEqual(result, ongoingCall);
+
+      // Verify the span is NOT closed while ongoingCall is in flight
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Fail the call via callback
+      ongoingCall.callback!(error);
+      await new Promise(resolve => setTimeout(resolve, 20));
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+      assert.strictEqual(spans[0].status.message, 'ongoing call failed');
+    });
+
+    it('ends span synchronously if result is not a Promise', () => {
+      const syncResult = {data: 'sync-data'};
+
+      const result = traceCall(dynamicArgs, staticArgs, () => syncResult);
+      assert.strictEqual(result, syncResult);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('does not end span prematurely until asynchronous promise rejects', async () => {
+      let rejectPromise: (err: Error) => void;
+      const asyncPromise = new Promise((_resolve, reject) => {
+        rejectPromise = reject;
+      });
+
+      const error = new Error('async promise failure');
+      void traceCall(dynamicArgs, staticArgs, () => asyncPromise);
+
+      // Verify the span is NOT closed while the promise is pending
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      rejectPromise!(error);
+      await new Promise(resolve => setTimeout(resolve, 15));
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+      assert.strictEqual(spans[0].status.message, 'async promise failure');
+      assert.strictEqual(spans[0].events.length, 1);
+    });
+
+    it('does not end span prematurely while stream is active and emitting data', () => {
+      const emitter = new EventEmitter();
+      const result = traceCall(dynamicArgs, staticArgs, () => emitter, true);
+      assert.strictEqual(result, emitter);
+
+      // Span must not be finished when stream is created
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Emitting data chunks should not close the span
+      emitter.emit('data', 'chunk 1');
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      emitter.emit('data', 'chunk 2');
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Only when the stream finishes does the span end
+      emitter.emit('end');
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+      assert.strictEqual(spans[0].events.length, 0);
+    });
+
+    it('does not end span prematurely until stream emits error event', () => {
+      const emitter = new EventEmitter();
+      traceCall(dynamicArgs, staticArgs, () => emitter, true);
+
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      emitter.emit('data', 'chunk');
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      const error = new Error('stream failure');
+      emitter.emit('error', error);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+      assert.strictEqual(spans[0].status.message, 'stream failure');
+      assert.strictEqual(spans[0].events.length, 1);
+      assert.strictEqual(spans[0].events[0].name, 'exception');
+    });
+
+    it('does not end span prematurely until stream emits close event', () => {
+      const emitter = new EventEmitter();
+      traceCall(dynamicArgs, staticArgs, () => emitter, true);
+
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      emitter.emit('data', 'chunk');
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      emitter.emit('close');
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('ends span synchronously if isStreamCall is true but result is not an EventEmitter', () => {
+      const nonEmitter = {data: 'not-an-emitter'};
+      const result = traceCall(
+        dynamicArgs,
+        staticArgs,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        () => nonEmitter as any,
+        true,
+      );
+      assert.strictEqual(result, nonEmitter);
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+    });
+
+    it('correctly creates separate spans and cleans up listeners across retried stream attempts', () => {
+      const attempt1Stream = new EventEmitter();
+      const attempt2Stream = new EventEmitter();
+      const retryableError = new Error('transient stream failure');
+
+      let attempt = 0;
+      const executeStreamingCall = () => {
+        attempt++;
+        const currentStream = attempt === 1 ? attempt1Stream : attempt2Stream;
+        return traceCall(dynamicArgs, staticArgs, () => currentStream, true);
+      };
+
+      // Attempt 1
+      const stream1 = executeStreamingCall();
+      assert.strictEqual(stream1, attempt1Stream);
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Attempt 1 fails with transient error
+      attempt1Stream.emit('error', retryableError);
+
+      const spansAfterAttempt1 = harness.getSpans('google-gax');
+      assert.strictEqual(spansAfterAttempt1.length, 1);
+      assert.strictEqual(spansAfterAttempt1[0].ended, true);
+      assert.strictEqual(
+        spansAfterAttempt1[0].status.message,
+        'transient stream failure',
+      );
+      assert.strictEqual(spansAfterAttempt1[0].events.length, 1);
+      assert.strictEqual(attempt1Stream.listenerCount('error'), 0);
+
+      // Attempt 2 (retry)
+      const stream2 = executeStreamingCall();
+      assert.strictEqual(stream2, attempt2Stream);
+      assert.strictEqual(harness.getSpans('google-gax').length, 1);
+
+      // Data chunks received on attempt 2
+      attempt2Stream.emit('data', 'retry chunk 1');
+      assert.strictEqual(harness.getSpans('google-gax').length, 1);
+
+      // Attempt 2 completes successfully
+      attempt2Stream.emit('end');
+
+      const spansAfterAttempt2 = harness.getSpans('google-gax');
+      assert.strictEqual(spansAfterAttempt2.length, 2);
+      assert.strictEqual(spansAfterAttempt2[1].ended, true);
+      assert.strictEqual(spansAfterAttempt2[1].events.length, 0);
+      assert.strictEqual(attempt2Stream.listenerCount('end'), 0);
+    });
+
+    it('keeps span active when a stream handles retries internally before completing', () => {
+      const outerStream = new EventEmitter();
+      const result = traceCall(
+        dynamicArgs,
+        staticArgs,
+        () => outerStream,
+        true,
+      );
+      assert.strictEqual(result, outerStream);
+
+      // Initial chunk before internal retry
+      outerStream.emit('data', 'chunk-before-retry');
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Internal retry transparently recovers and delivers more data
+      outerStream.emit('data', 'chunk-after-retry');
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      // Final completion
+      outerStream.emit('end');
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 1);
+      assert.strictEqual(spans[0].ended, true);
+      assert.strictEqual(spans[0].events.length, 0);
+    });
+
+    describe('callback-style invocations', () => {
+      it('keeps the span open until the callback fires', done => {
+        let invokedCallback: APICallback | undefined;
+
+        // Mimics an API caller that returns OngoingCall (no `.promise`), so
+        // fn() yields undefined and there is nothing to await.
+        const returned = traceCall(
+          dynamicArgs,
+          staticArgs,
+          tracedCallback => {
+            invokedCallback = tracedCallback;
+            return undefined as unknown as ResultTuple;
+          },
+          false,
+          () => {
+            // Span must be ended by the time the user callback runs.
+            const spans = harness.getSpans('google-gax');
+            assert.strictEqual(spans.length, 1);
+            assert.strictEqual(spans[0].ended, true);
+            done();
+          },
+        );
+
+        assert.strictEqual(returned, undefined);
+        assert.ok(invokedCallback, 'fn should receive a traced callback');
+        // Critically: the span must NOT have closed synchronously.
+        assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+        // The RPC completes later.
+        setImmediate(() => invokedCallback!(null, {data: 'ok'}));
+      });
+
+      it('records the error on the span when the callback reports failure', done => {
+        const error = new GoogleError('RPC Failed');
+        error.name = 'CustomRpcError';
+        let invokedCallback: APICallback | undefined;
+
+        traceCall(
+          dynamicArgs,
+          staticArgs,
+          tracedCallback => {
+            invokedCallback = tracedCallback;
+            return undefined as unknown as ResultTuple;
+          },
+          false,
+          err => {
+            assert.strictEqual(err, error);
+
+            const spans = harness.getSpans('google-gax');
+            assert.strictEqual(spans.length, 1);
+            assert.strictEqual(spans[0].ended, true);
+            assert.strictEqual(spans[0].status.message, 'RPC Failed');
+            assert.strictEqual(
+              spans[0].attributes['exception.type'],
+              undefined,
+            );
+            assert.strictEqual(spans[0].events.length, 1);
+            assert.strictEqual(spans[0].events[0].name, 'exception');
+            // The class wins over the assigned name here, unlike the bare
+            // Error above: `GoogleError` is the type that was raised, and
+            // `name` is only consulted when the class is uninformative.
+            assert.strictEqual(
+              spans[0].events[0].attributes?.['exception.type'],
+              'GoogleError',
+            );
+            done();
+          },
+        );
+
+        assert.strictEqual(harness.getSpans('google-gax').length, 0);
+        setImmediate(() => invokedCallback!(error));
+      });
+
+      it('preserves `this` and the full argument list', done => {
+        let invokedCallback: APICallback | undefined;
+
+        const holder = {
+          marker: 'holder',
+          handler: function (
+            this: unknown,
+            err: GoogleError | null,
+            response?: ResponseType,
+            next?: NextPageRequestType,
+            rawResponse?: RawResponseType,
+          ) {
+            assert.strictEqual(this, holder);
+            assert.strictEqual(err, null);
+            assert.deepStrictEqual(response, {value: 42});
+            assert.strictEqual(next, 'NEXT');
+            assert.strictEqual(rawResponse, 'RAW');
+            done();
+          },
+        };
+
+        traceCall(
+          dynamicArgs,
+          staticArgs,
+          tracedCallback => {
+            invokedCallback = tracedCallback;
+            return undefined as unknown as ResultTuple;
+          },
+          false,
+          holder.handler,
+        );
+
+        setImmediate(() =>
+          invokedCallback!.call(
+            holder,
+            null,
+            {value: 42} as ResponseType,
+            'NEXT' as unknown as NextPageRequestType,
+            'RAW' as unknown as RawResponseType,
+          ),
+        );
+      });
+
+      it('ends the span only once if the callback fires more than once', done => {
+        let invokedCallback: APICallback | undefined;
+        let userCallbackCount = 0;
+
+        traceCall(
+          dynamicArgs,
+          staticArgs,
+          tracedCallback => {
+            invokedCallback = tracedCallback;
+            return undefined as unknown as ResultTuple;
+          },
+          false,
+          () => {
+            userCallbackCount++;
+          },
+        );
+
+        setImmediate(() => {
+          invokedCallback!(null, {first: true});
+          invokedCallback!(null, {second: true});
+
+          const spans = harness.getSpans('google-gax');
+          assert.strictEqual(spans.length, 1);
+          // The user callback is still forwarded every time.
+          assert.strictEqual(userCallbackCount, 2);
+          done();
+        });
+      });
+
+      it('wraps the callback for stream calls and ends the span once', () => {
+        const emitter = new EventEmitter();
+        let received: APICallback | undefined;
+        let userCallbackCalls = 0;
+
+        traceCall(
+          dynamicArgs,
+          staticArgs,
+          tracedCallback => {
+            received = tracedCallback;
+            return emitter;
+          },
+          true,
+          () => {
+            userCallbackCalls++;
+          },
+        );
+
+        // The callback is wrapped, so it can close the span itself.
+        assert.notStrictEqual(received, undefined);
+        assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+        received!(null);
+        assert.strictEqual(userCallbackCalls, 1);
+        assert.strictEqual(harness.getSpans('google-gax').length, 1);
+
+        // handleStream is still attached, so 'end' arrives second and must be
+        // absorbed rather than producing a second span.
+        emitter.emit('end');
+        assert.strictEqual(harness.getSpans('google-gax').length, 1);
+      });
+
+      it('lets stream events end the span when the callback never fires', () => {
+        const emitter = new EventEmitter();
+
+        traceCall(
+          dynamicArgs,
+          staticArgs,
+          () => emitter,
+          true,
+          () => {},
+        );
+
+        assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+        // Wrapping the callback must not disarm handleStream.
+        emitter.emit('end');
+        assert.strictEqual(harness.getSpans('google-gax').length, 1);
+      });
+    });
+
+    describe('span status', () => {
+      const lastStatus = () => {
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans.length, 1);
+        return spans[0].status;
+      };
+
+      // A successful call leaves the status UNSET rather than setting OK.
+      // semconv reserves OK for an application overriding the
+      // instrumentation's judgement, so a library must never emit it.
+      it('leaves the status unset for a synchronous non-promise result', () => {
+        traceCall(
+          dynamicArgs,
+          staticArgs,
+          () => ({data: 1}) as unknown as ResultTuple,
+        );
+        assert.strictEqual(lastStatus().code, SpanStatusCode.UNSET);
+      });
+
+      it('leaves the status unset when the promise resolves', async () => {
+        await traceCall(dynamicArgs, staticArgs, async () => ({data: 1}));
+        assert.strictEqual(lastStatus().code, SpanStatusCode.UNSET);
+      });
+
+      it('sets ERROR when the promise rejects', async () => {
+        await assert.rejects(async () => {
+          await traceCall(dynamicArgs, staticArgs, async () => {
+            throw new Error('promise boom');
+          });
+        });
+        const status = lastStatus();
+        assert.strictEqual(status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(status.message, 'promise boom');
+      });
+
+      it('sets ERROR when fn throws synchronously', () => {
+        assert.throws(() =>
+          traceCall(dynamicArgs, staticArgs, () => {
+            throw new Error('sync boom');
+          }),
+        );
+        const status = lastStatus();
+        assert.strictEqual(status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(status.message, 'sync boom');
+      });
+
+      it('leaves the status unset when the stream ends cleanly', () => {
+        const emitter = new EventEmitter();
+        traceCall(dynamicArgs, staticArgs, () => emitter, true);
+        emitter.emit('end');
+        assert.strictEqual(lastStatus().code, SpanStatusCode.UNSET);
+      });
+
+      it('sets ERROR when the stream errors', () => {
+        const emitter = new EventEmitter();
+        traceCall(dynamicArgs, staticArgs, () => emitter, true);
+        emitter.emit('error', new Error('stream boom'));
+        const status = lastStatus();
+        assert.strictEqual(status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(status.message, 'stream boom');
+      });
+
+      it('leaves the status unset when a client-streaming call finishes', async () => {
+        const writable = new Writable({
+          objectMode: true,
+          write(_chunk, _enc, cb) {
+            cb();
+          },
+        });
+        traceCall(dynamicArgs, staticArgs, () => writable, true);
+        writable.end();
+
+        await new Promise<void>(resolve => setImmediate(resolve));
+        assert.strictEqual(lastStatus().code, SpanStatusCode.UNSET);
+      });
+
+      it('sets ERROR when a client-streaming call fails', () => {
+        // The write-only path reaches endSpan through 'finish' rather than
+        // 'end', so its failure route is separate from the readable one above
+        // and needs its own description assertion.
+        const writable = new Writable({
+          objectMode: true,
+          write(_chunk, _enc, cb) {
+            cb();
+          },
+        });
+        traceCall(dynamicArgs, staticArgs, () => writable, true);
+        writable.emit('error', new GoogleError('upload aborted'));
+
+        const status = lastStatus();
+        assert.strictEqual(status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(status.message, 'upload aborted');
+      });
+
+      it('leaves the status unset when the callback reports success', () => {
+        let invokedCallback: APICallback | undefined;
+        traceCall(
+          dynamicArgs,
+          staticArgs,
+          tracedCallback => {
+            invokedCallback = tracedCallback;
+            return undefined as unknown as ResultTuple;
+          },
+          false,
+          () => {},
+        );
+        invokedCallback!(null, {ok: true});
+        assert.strictEqual(lastStatus().code, SpanStatusCode.UNSET);
+      });
+
+      it('sets ERROR when the callback reports failure', () => {
+        let invokedCallback: APICallback | undefined;
+        traceCall(
+          dynamicArgs,
+          staticArgs,
+          tracedCallback => {
+            invokedCallback = tracedCallback;
+            return undefined as unknown as ResultTuple;
+          },
+          false,
+          () => {},
+        );
+        invokedCallback!(new GoogleError('callback boom'));
+        const status = lastStatus();
+        assert.strictEqual(status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(status.message, 'callback boom');
+      });
+
+      it('does not clear an ERROR status when the span ends', () => {
+        // endSpan resolves the outcome centrally; a recorded error must win
+        // over the success path, which would otherwise leave it UNSET.
+        const emitter = new EventEmitter();
+        traceCall(dynamicArgs, staticArgs, () => emitter, true);
+        emitter.emit('error', new Error('stream boom'));
+        emitter.emit('end');
+        emitter.emit('close');
+
+        const status = lastStatus();
+        assert.strictEqual(status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(status.message, 'stream boom');
+      });
+
+      it('ignores a stream error that arrives after the callback closed the span', () => {
+        // Both the callback and the stream can terminate a stream call, so the
+        // loser of that race can still surface an error afterwards. The span is
+        // already exported by then and OTel drops writes to an ended span, so
+        // the late error must not reopen, restatus or re-export it.
+        const emitter = new EventEmitter();
+        let invokedCallback: APICallback | undefined;
+
+        traceCall(
+          dynamicArgs,
+          staticArgs,
+          tracedCallback => {
+            invokedCallback = tracedCallback;
+            return emitter;
+          },
+          true,
+          () => {},
+        );
+
+        invokedCallback!(null, {ok: true});
+        assert.strictEqual(lastStatus().code, SpanStatusCode.UNSET);
+
+        emitter.emit('error', new Error('too late'));
+
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans.length, 1);
+        assert.strictEqual(spans[0].status.code, SpanStatusCode.UNSET);
+        // The late failure must not leave a description behind either: a
+        // described UNSET status reads as a success that also failed.
+        assert.strictEqual(spans[0].status.message, undefined);
+        // No phantom exception event tacked onto the finished span.
+        assert.strictEqual(
+          spans[0].events.filter(e => e.name === 'exception').length,
+          0,
+        );
+      });
+    });
+  });
+
+  describe('handlePromise', () => {
+    it('waits for promise resolution before ending span', async () => {
+      let ended = false;
+      let resolvePromise: () => void;
+      const promise = new Promise<void>(resolve => {
+        resolvePromise = resolve;
+      });
+
+      handlePromise(
+        promise,
+        () => {},
+        () => {
+          ended = true;
+        },
+      );
+      assert.strictEqual(ended, false);
+
+      resolvePromise!();
+      await new Promise(resolve => setTimeout(resolve, 15));
+      assert.strictEqual(ended, true);
+    });
+
+    it('records error and ends span when promise rejects', async () => {
+      let ended = false;
+      let recordedError: unknown;
+      const error = new Error('promise error');
+
+      handlePromise(
+        Promise.reject(error),
+        err => {
+          recordedError = err;
+        },
+        () => {
+          ended = true;
+        },
+      );
+
+      await new Promise(resolve => setTimeout(resolve, 15));
+      assert.strictEqual(ended, true);
+      assert.strictEqual(recordedError, error);
+    });
+
+    it('supports custom thenables', async () => {
+      let ended = false;
+      const thenable = {
+        then(onfulfilled?: (val?: unknown) => unknown) {
+          setTimeout(() => {
+            onfulfilled?.();
+          }, 10);
+        },
+      };
+
+      handlePromise(
+        thenable,
+        () => {},
+        () => {
+          ended = true;
+        },
+      );
+      assert.strictEqual(ended, false);
+
+      await new Promise(resolve => setTimeout(resolve, 20));
+      assert.strictEqual(ended, true);
+    });
+
+    it('supports OngoingCallPromise wrappers in handlePromise', async () => {
+      let ended = false;
+      const ongoingCall = new OngoingCallPromise();
+
+      handlePromise(
+        ongoingCall,
+        () => {},
+        () => {
+          ended = true;
+        },
+      );
+      assert.strictEqual(ended, false);
+
+      ongoingCall.callback!(null, {data: 'hello'});
+      await new Promise(resolve => setTimeout(resolve, 20));
+      assert.strictEqual(ended, true);
+    });
+
+    it('ensures endSpan is called only once even with thenables that trigger both resolve and reject', async () => {
+      let endSpanCount = 0;
+      const buggyThenable = {
+        then(
+          onfulfilled?: (val?: unknown) => unknown,
+          onrejected?: (err: unknown) => unknown,
+        ) {
+          onfulfilled?.();
+          onrejected?.(new Error('buggy error'));
+        },
+      };
+
+      handlePromise(
+        buggyThenable,
+        () => {},
+        () => {
+          endSpanCount++;
+        },
+      );
+
+      await new Promise(resolve => setTimeout(resolve, 20));
+      assert.strictEqual(endSpanCount, 1);
+    });
+  });
+
+  describe('handleStream', () => {
+    it('manages stream events, ends span, and cleans up listeners on end', () => {
+      let ended = false;
+      const emitter = new EventEmitter();
+      handleStream(
+        emitter,
+        () => {},
+        () => {
+          ended = true;
+        },
+      );
+
+      assert.strictEqual(ended, false);
+      assert.strictEqual(emitter.listenerCount('end'), 1);
+      assert.strictEqual(emitter.listenerCount('close'), 1);
+      assert.strictEqual(emitter.listenerCount('error'), 1);
+
+      emitter.emit('data', 'chunk');
+      assert.strictEqual(ended, false);
+
+      emitter.emit('end');
+      assert.strictEqual(ended, true);
+      assert.strictEqual(emitter.listenerCount('end'), 0);
+      assert.strictEqual(emitter.listenerCount('close'), 0);
+      assert.strictEqual(emitter.listenerCount('error'), 0);
+    });
+
+    it('ends span and cleans up listeners on stream close', () => {
+      let ended = false;
+      const emitter = new EventEmitter();
+      handleStream(
+        emitter,
+        () => {},
+        () => {
+          ended = true;
+        },
+      );
+
+      assert.strictEqual(ended, false);
+      assert.strictEqual(emitter.listenerCount('close'), 1);
+
+      emitter.emit('close');
+      assert.strictEqual(ended, true);
+      assert.strictEqual(emitter.listenerCount('end'), 0);
+      assert.strictEqual(emitter.listenerCount('close'), 0);
+      assert.strictEqual(emitter.listenerCount('error'), 0);
+    });
+
+    it('records error, ends span, and cleans up listeners on stream error', () => {
+      let ended = false;
+      let recordedError: unknown;
+      const order: string[] = [];
+      const error = new Error('stream failure');
+      const emitter = new EventEmitter();
+
+      handleStream(
+        emitter,
+        err => {
+          order.push('recordError');
+          recordedError = err;
+        },
+        () => {
+          order.push('endSpan');
+          ended = true;
+        },
+      );
+
+      assert.strictEqual(ended, false);
+      assert.strictEqual(emitter.listenerCount('error'), 1);
+
+      emitter.emit('error', error);
+      assert.strictEqual(ended, true);
+      assert.strictEqual(recordedError, error);
+      assert.deepStrictEqual(order, ['recordError', 'endSpan']);
+      assert.strictEqual(emitter.listenerCount('end'), 0);
+      assert.strictEqual(emitter.listenerCount('close'), 0);
+      assert.strictEqual(emitter.listenerCount('error'), 0);
+    });
+
+    it('ensures endSpan is called only once if stream emits error followed by close', () => {
+      let endSpanCount = 0;
+      let recordedError: unknown;
+      const error = new Error('stream error');
+      const emitter = new EventEmitter();
+
+      handleStream(
+        emitter,
+        err => {
+          recordedError = err;
+        },
+        () => {
+          endSpanCount++;
+        },
+      );
+
+      assert.strictEqual(endSpanCount, 0);
+      emitter.emit('error', error);
+      emitter.emit('close');
+
+      assert.strictEqual(endSpanCount, 1);
+      assert.strictEqual(recordedError, error);
+      assert.strictEqual(emitter.listenerCount('end'), 0);
+      assert.strictEqual(emitter.listenerCount('close'), 0);
+      assert.strictEqual(emitter.listenerCount('error'), 0);
+    });
+
+    it('ensures endSpan is called only once if stream emits end followed by close', () => {
+      let endSpanCount = 0;
+      const emitter = new EventEmitter();
+
+      handleStream(
+        emitter,
+        () => {},
+        () => {
+          endSpanCount++;
+        },
+      );
+
+      assert.strictEqual(endSpanCount, 0);
+      emitter.emit('end');
+      emitter.emit('close');
+
+      assert.strictEqual(endSpanCount, 1);
+      assert.strictEqual(emitter.listenerCount('end'), 0);
+      assert.strictEqual(emitter.listenerCount('close'), 0);
+      assert.strictEqual(emitter.listenerCount('error'), 0);
+    });
+
+    it('ensures endSpan is called only once if stream emits close followed by end', () => {
+      let endSpanCount = 0;
+      const emitter = new EventEmitter();
+
+      handleStream(
+        emitter,
+        () => {},
+        () => {
+          endSpanCount++;
+        },
+      );
+
+      assert.strictEqual(endSpanCount, 0);
+      emitter.emit('close');
+      emitter.emit('end');
+
+      assert.strictEqual(endSpanCount, 1);
+      assert.strictEqual(emitter.listenerCount('end'), 0);
+      assert.strictEqual(emitter.listenerCount('close'), 0);
+      assert.strictEqual(emitter.listenerCount('error'), 0);
+    });
+
+    it('does not remove other error or event listeners (such as retry handlers) on cleanup', () => {
+      let ended = false;
+      let otherErrorHandled = false;
+      const error = new Error('retryable error');
+      const emitter = new EventEmitter();
+
+      // Simulate an external retry handler or middleware attached to the stream
+      emitter.on('error', err => {
+        assert.strictEqual(err, error);
+        otherErrorHandled = true;
+      });
+
+      handleStream(
+        emitter,
+        () => {},
+        () => {
+          ended = true;
+        },
+      );
+
+      // Verify two error listeners are present (external retry listener and handleStream listener)
+      assert.strictEqual(emitter.listenerCount('error'), 2);
+
+      emitter.emit('error', error);
+
+      assert.strictEqual(ended, true);
+      assert.strictEqual(otherErrorHandled, true);
+      // handleStream removed its own listener, but the external retry listener is preserved
+      assert.strictEqual(emitter.listenerCount('error'), 1);
+    });
+
+    it('ends span on finish for a write-only (client-streaming) stream', async () => {
+      let endSpanCount = 0;
+      // A client-streaming call yields a write-only stream: the readable side
+      // never opens, so 'end'/'close' never fire and only 'finish' does.
+      const writable = new Writable({
+        objectMode: true,
+        write(_chunk, _enc, cb) {
+          cb();
+        },
+      });
+
+      handleStream(
+        writable,
+        () => {},
+        () => {
+          endSpanCount++;
+        },
+      );
+
+      assert.strictEqual(writable.listenerCount('finish'), 1);
+
+      writable.write('foo');
+      writable.end();
+
+      await new Promise<void>(resolve => setImmediate(resolve));
+
+      // Without the 'finish' listener this span would leak forever.
+      assert.strictEqual(endSpanCount, 1);
+      assert.strictEqual(writable.listenerCount('finish'), 0);
+      assert.strictEqual(writable.listenerCount('end'), 0);
+      assert.strictEqual(writable.listenerCount('close'), 0);
+      assert.strictEqual(writable.listenerCount('error'), 0);
+    });
+
+    it('does not use finish on a write-only stream when a callback is supplied', async () => {
+      let endSpanCount = 0;
+      // autoDestroy is disabled so 'close' does not fire immediately after
+      // 'finish'. Otherwise 'close' would end the span on its own and the test
+      // could not tell whether 'finish' was the trigger.
+      const writable = new Writable({
+        objectMode: true,
+        autoDestroy: false,
+        write(_chunk, _enc, cb) {
+          cb();
+        },
+      });
+
+      handleStream(
+        writable,
+        () => {},
+        () => {
+          endSpanCount++;
+        },
+        true,
+      );
+
+      // The callback reports completion, so 'finish' must not be subscribed.
+      assert.strictEqual(writable.listenerCount('finish'), 0);
+
+      writable.write('foo');
+      writable.end();
+      await new Promise<void>(resolve => setImmediate(resolve));
+
+      // The client has stopped writing but the server has not responded yet.
+      assert.strictEqual(endSpanCount, 0);
+
+      // 'close' still terminates the span, so it cannot leak.
+      writable.destroy();
+      await new Promise<void>(resolve => setImmediate(resolve));
+      assert.strictEqual(endSpanCount, 1);
+    });
+
+    it('does not end a bidi span on finish while responses are still streaming', async () => {
+      let endSpanCount = 0;
+      const received: string[] = [];
+      let sawFinish = false;
+
+      // Bidi: the read side is driven independently of the write side, so the
+      // server can keep responding after the client has stopped writing.
+      const bidi = new Duplex({
+        objectMode: true,
+        write(_chunk, _enc, cb) {
+          cb();
+        },
+        read() {},
+      });
+
+      handleStream(
+        bidi,
+        () => {},
+        () => {
+          endSpanCount++;
+        },
+      );
+
+      // Readable streams must not subscribe to 'finish'.
+      assert.strictEqual(bidi.listenerCount('finish'), 0);
+
+      bidi.on('finish', () => {
+        sawFinish = true;
+      });
+      bidi.on('data', (d: string) => received.push(d));
+
+      // Client finishes writing immediately; this is when 'finish' fires.
+      bidi.write('req1');
+      bidi.end();
+
+      await new Promise<void>(resolve => setImmediate(resolve));
+
+      // Guard against a vacuous pass: 'finish' must really have fired here.
+      assert.strictEqual(sawFinish, true);
+      // The span must still be open: the server has not responded yet.
+      assert.strictEqual(endSpanCount, 0);
+
+      // Server now streams its responses back.
+      const ended = new Promise<void>(resolve => bidi.once('end', resolve));
+      bidi.push('late-response-1');
+      bidi.push('late-response-2');
+      bidi.push(null);
+      await ended;
+
+      assert.deepStrictEqual(received, ['late-response-1', 'late-response-2']);
+      // Exactly once, even though both 'finish' and 'end' fired.
+      assert.strictEqual(endSpanCount, 1);
+    });
+
+    it('ends a bidi span exactly once when an error follows finish', async () => {
+      let endSpanCount = 0;
+      let recordErrorCount = 0;
+      const error = new Error('server failed after client finished writing');
+
+      const bidi = new Duplex({
+        objectMode: true,
+        write(_chunk, _enc, cb) {
+          cb();
+        },
+        read() {},
+      });
+      // Keep the default error handler from throwing once we remove ours.
+      bidi.on('error', () => {});
+
+      handleStream(
+        bidi,
+        () => {
+          recordErrorCount++;
+        },
+        () => {
+          endSpanCount++;
+        },
+      );
+
+      bidi.write('req1');
+      bidi.end();
+      await new Promise<void>(resolve => setImmediate(resolve));
+
+      // 'finish' has fired but must not have ended the span.
+      assert.strictEqual(endSpanCount, 0);
+
+      bidi.emit('error', error);
+      bidi.emit('close');
+
+      assert.strictEqual(recordErrorCount, 1);
+      assert.strictEqual(endSpanCount, 1);
+    });
+  });
+
+  describe('traceAttempt', () => {
+    const telemetryInfo: StaticTraceContext = {
+      gcpClientService: 'echo.googleapis.com',
+      gcpVersion: '1.2.3',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: '@google-cloud/echo',
+    };
+
+    it('creates a CLIENT low level network span in traceAttempt with url.domain, server.address, server.port, and status_code', async () => {
+      const attemptArgs: AttemptTraceContext = {
+        apiName: 'google.example.v1.Echo',
+        clientName: 'EchoClient',
+        methodName: 'Echo',
+        rpcType: 'grpc',
+      };
+
+      await traceAttempt(attemptArgs, telemetryInfo, async () => {
+        return [{echo: 'ok'}, undefined, undefined];
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(span.name, 'google.example.v1.Echo/Echo');
+      assert.strictEqual(span.kind, SpanKind.CLIENT);
+      assert.strictEqual(span.attributes['url.domain'], 'echo.googleapis.com');
+      harness.assertServerAddressAndPort(
+        {address: 'echo.googleapis.com', port: 443},
+        {span},
+      );
+      assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
+      assert.strictEqual(
+        span.attributes['rpc.method'],
+        'google.example.v1.Echo/Echo',
+      );
+      assert.strictEqual(span.attributes['http.request.method'], undefined);
+      harness.assertResponseStatus({rpcStatus: 'OK'}, {span});
+      assert.strictEqual(
+        span.attributes['gcp.client.repo'],
+        'googleapis/google-cloud-node',
+      );
+      assert.strictEqual(
+        span.attributes['gcp.client.service'],
+        'echo.googleapis.com',
+      );
+      assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
+      assert.strictEqual(
+        span.attributes['gcp.client.artifact'],
+        '@google-cloud/echo',
+      );
+      assert.strictEqual(span.attributes['status.message'], undefined);
+    });
+
+    it('sets http.request.method on HTTP low level network spans and allows setAttemptHttpMethod to update it', async () => {
+      await traceAttempt(
+        {
+          apiName: 'google.example.v1.Echo',
+          clientName: 'EchoClient',
+          methodName: 'Echo',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => [{echo: 'ok'}, undefined, undefined],
+      );
+
+      await traceAttempt(
+        {
+          apiName: 'google.example.v1.Echo',
+          clientName: 'EchoClient',
+          methodName: 'Echo',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => {
+          setAttemptHttpMethod('GET');
+          return [{echo: 'ok'}, undefined, undefined];
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      assert.strictEqual(spans[0].name, 'POST');
+      assert.strictEqual(spans[0].attributes['http.request.method'], 'POST');
+      assert.strictEqual(spans[0].attributes['rpc.method'], undefined);
+      harness.assertResponseStatus({httpStatus: 200}, {span: spans[0]});
+      assert.strictEqual(spans[0].attributes['status.message'], undefined);
+      assert.strictEqual(spans[1].name, 'GET');
+      assert.strictEqual(spans[1].attributes['http.request.method'], 'GET');
+      assert.strictEqual(spans[1].attributes['rpc.method'], undefined);
+      harness.assertResponseStatus({httpStatus: 200}, {span: spans[1]});
+      assert.strictEqual(spans[1].attributes['status.message'], undefined);
+    });
+
+    it('names HTTP low level network spans "{http.request.method} {url.template}" when url.template is available, otherwise "{http.request.method}"', async () => {
+      await traceAttempt(
+        {
+          apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+          clientName: 'SecretManagerServiceClient',
+          methodName: 'AccessSecretVersion',
+          rpcType: 'http',
+          httpMethod: 'GET',
+          urlTemplate: '/v1/{name}:access',
+        },
+        telemetryInfo,
+        async () => [{payload: 'secret'}, undefined, undefined],
+      );
+
+      await traceAttempt(
+        {
+          apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+          clientName: 'SecretManagerServiceClient',
+          methodName: 'CreateSecret',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => [{name: 'secret'}, undefined, undefined],
+      );
+
+      await traceAttempt(
+        {
+          apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+          clientName: 'SecretManagerServiceClient',
+          methodName: 'AccessSecretVersion',
+          rpcType: 'http',
+          urlTemplate: '/v1/{name}:access',
+        },
+        telemetryInfo,
+        async () => {
+          setAttemptHttpMethod('GET');
+          return [{payload: 'secret'}, undefined, undefined];
+        },
+      );
+
+      await traceAttempt(
+        {
+          apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+          clientName: 'SecretManagerServiceClient',
+          methodName: 'AccessSecretVersion',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => {
+          setAttemptHttpMethod('GET', '/v1/{name}:access');
+          return [{payload: 'secret'}, undefined, undefined];
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 4);
+      assert.strictEqual(spans[0].name, 'GET /v1/{name}:access');
+      assert.strictEqual(spans[0].attributes['http.request.method'], 'GET');
+      assert.strictEqual(
+        spans[0].attributes['url.template'],
+        '/v1/{name}:access',
+      );
+      assert.strictEqual(spans[1].name, 'POST');
+      assert.strictEqual(spans[1].attributes['http.request.method'], 'POST');
+      assert.strictEqual(spans[1].attributes['url.template'], undefined);
+      assert.strictEqual(spans[2].name, 'GET /v1/{name}:access');
+      assert.strictEqual(spans[2].attributes['http.request.method'], 'GET');
+      assert.strictEqual(
+        spans[2].attributes['url.template'],
+        '/v1/{name}:access',
+      );
+      assert.strictEqual(spans[3].name, 'GET /v1/{name}:access');
+      assert.strictEqual(spans[3].attributes['http.request.method'], 'GET');
+      assert.strictEqual(
+        spans[3].attributes['url.template'],
+        '/v1/{name}:access',
+      );
+    });
+
+    it('omits server.address and server.port on low level network span for pre-connection failures while preserving url.domain', async () => {
+      const attemptArgs: AttemptTraceContext = {
+        apiName: 'google.example.v1.Echo',
+        clientName: 'EchoClient',
+        methodName: 'Echo',
+        rpcType: 'grpc',
+      };
+
+      const dnsError = Object.assign(new Error('getaddrinfo ENOTFOUND'), {
+        code: 'ENOTFOUND',
+      });
+
+      await assert.rejects(async () => {
+        await traceAttempt(attemptArgs, telemetryInfo, async () => {
+          throw dnsError;
+        });
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      assert.strictEqual(span.name, 'google.example.v1.Echo/Echo');
+      assert.strictEqual(span.kind, SpanKind.CLIENT);
+      assert.strictEqual(span.attributes['url.domain'], 'echo.googleapis.com');
+      harness.assertServerAddressAndPort(
+        {address: undefined, port: undefined},
+        {span},
+      );
+      assert.strictEqual(
+        span.attributes['error.type'],
+        'CLIENT_CONNECTION_ERROR',
+      );
+      assert.strictEqual(
+        span.attributes['status.message'],
+        'getaddrinfo ENOTFOUND',
+      );
+      assert.strictEqual(span.status.code, SpanStatusCode.ERROR);
+      assert.strictEqual(span.status.message, 'getaddrinfo ENOTFOUND');
+      assert.strictEqual(span.events.length, 1);
+      assert.strictEqual(span.events[0].name, 'exception');
+      assert.strictEqual(
+        span.events[0].attributes?.['exception.type'],
+        'Error',
+      );
+      assert.strictEqual(
+        span.events[0].attributes?.['exception.message'],
+        'getaddrinfo ENOTFOUND',
+      );
+      assert.strictEqual(
+        span.events[0].attributes?.['exception.stacktrace'],
+        undefined,
+      );
+    });
+
+    it('sets status.message attribute on both gRPC and HTTP low level network spans when an error occurs', async () => {
+      const grpcError = Object.assign(new GoogleError('5 NOT_FOUND: missing'), {
+        code: Status.NOT_FOUND,
+      });
+      await assert.rejects(async () => {
+        await traceAttempt(
+          {
+            apiName: 'google.example.v1.Echo',
+            clientName: 'EchoClient',
+            methodName: 'Echo',
+            rpcType: 'grpc',
+          },
+          telemetryInfo,
+          async () => {
+            throw grpcError;
+          },
+        );
+      });
+
+      const httpError = Object.assign(new GoogleError('404 Not Found'), {
+        code: Status.NOT_FOUND,
+        httpStatusCode: 404,
+      });
+      await assert.rejects(async () => {
+        await traceAttempt(
+          {
+            apiName: 'google.example.v1.Echo',
+            clientName: 'EchoClient',
+            methodName: 'Echo',
+            rpcType: 'http',
+            httpMethod: 'GET',
+            urlTemplate: '/v1/{name}:access',
+          },
+          telemetryInfo,
+          async () => {
+            throw httpError;
+          },
+        );
+      });
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+
+      assert.strictEqual(spans[0].name, 'google.example.v1.Echo/Echo');
+      assert.strictEqual(
+        spans[0].attributes['status.message'],
+        '5 NOT_FOUND: missing',
+      );
+      assert.strictEqual(spans[0].status.message, '5 NOT_FOUND: missing');
+
+      assert.strictEqual(spans[1].name, 'GET /v1/{name}:access');
+      assert.strictEqual(
+        spans[1].attributes['status.message'],
+        '404 Not Found',
+      );
+      assert.strictEqual(spans[1].status.message, '404 Not Found');
+    });
+
+    it('sets gcp.grpc.resend_count and http.request.resend_count on low level network spans when resendCount > 0', async () => {
+      await traceAttempt(
+        {
+          apiName: 'google.example.v1.Echo',
+          clientName: 'EchoClient',
+          methodName: 'Echo',
+          rpcType: 'grpc',
+          resendCount: 2,
+        },
+        telemetryInfo,
+        async () => [{echo: 'ok'}, undefined, undefined],
+      );
+
+      await traceAttempt(
+        {
+          apiName: 'google.example.v1.Echo',
+          clientName: 'EchoClient',
+          methodName: 'Echo',
+          rpcType: 'http',
+          resendCount: 3,
+        },
+        telemetryInfo,
+        async () => [{echo: 'ok'}, undefined, undefined],
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      harness.assertResendCount(2, {span: spans[0]});
+      harness.assertResendCount(3, {span: spans[1]});
+    });
+
+    it('sets rpc.method on both gRPC and HTTP client request spans based on the last low level network child span', async () => {
+      await traceCall(
+        {
+          clientName: 'EchoClient',
+          methodName: 'Echo',
+          rpcType: 'grpc',
+        },
+        telemetryInfo,
+        async () => {
+          await traceAttempt(
+            {
+              apiName: 'google.example.v1.Echo',
+              clientName: 'EchoClient',
+              methodName: 'FirstEcho',
+              rpcType: 'grpc',
+            },
+            telemetryInfo,
+            async () => [{echo: 'first'}, undefined, undefined],
+          );
+          return traceAttempt(
+            {
+              apiName: 'google.example.v1.Echo',
+              clientName: 'EchoClient',
+              methodName: 'FinalEcho',
+              rpcType: 'grpc',
+            },
+            telemetryInfo,
+            async () => [{echo: 'final'}, undefined, undefined],
+          );
+        },
+      );
+
+      await traceCall(
+        {
+          clientName: 'EchoClient',
+          methodName: 'Echo',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => {
+          await traceAttempt(
+            {
+              apiName: 'google.example.v1.Echo',
+              clientName: 'EchoClient',
+              methodName: 'FirstHttpEcho',
+              rpcType: 'http',
+              httpMethod: 'GET',
+              urlTemplate: '/v1/echo:first',
+            },
+            telemetryInfo,
+            async () => [{echo: 'first'}, undefined, undefined],
+          );
+          return traceAttempt(
+            {
+              apiName: 'google.example.v1.Echo',
+              clientName: 'EchoClient',
+              methodName: 'FinalHttpEcho',
+              rpcType: 'http',
+              httpMethod: 'POST',
+              urlTemplate: '/v1/echo:final',
+            },
+            telemetryInfo,
+            async () => [{echo: 'final'}, undefined, undefined],
+          );
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 6);
+
+      const grpcClientRequestSpan = spans.find(
+        s =>
+          s.name === 'EchoClient.Echo' &&
+          s.attributes['rpc.system.name'] === 'grpc',
+      )!;
+      const httpClientRequestSpan = spans.find(
+        s =>
+          s.name === 'EchoClient.Echo' &&
+          s.attributes['rpc.system.name'] === 'http',
+      )!;
+      assert.ok(grpcClientRequestSpan);
+      assert.ok(httpClientRequestSpan);
+
+      assert.strictEqual(
+        grpcClientRequestSpan.attributes['rpc.method'],
+        'google.example.v1.Echo/FinalEcho',
+      );
+      assert.strictEqual(
+        grpcClientRequestSpan.attributes['url.template'],
+        undefined,
+      );
+      assert.strictEqual(
+        httpClientRequestSpan.attributes['rpc.method'],
+        'google.example.v1.Echo/FinalHttpEcho',
+      );
+      assert.strictEqual(
+        httpClientRequestSpan.attributes['url.template'],
+        '/v1/echo:first',
+      );
+    });
+
+    it('sets url.template on client request span based on its first low level network child span when setAttemptHttpMethod is called', async () => {
+      await traceCall(
+        {
+          clientName: 'SecretManagerServiceClient',
+          methodName: 'AccessSecretVersion',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => {
+          await traceAttempt(
+            {
+              apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+              clientName: 'SecretManagerServiceClient',
+              methodName: 'AccessSecretVersion',
+              rpcType: 'http',
+            },
+            telemetryInfo,
+            async () => {
+              setAttemptHttpMethod('GET', '/v1/{name}:access');
+              return [{payload: 'secret-1'}, undefined, undefined];
+            },
+          );
+          return traceAttempt(
+            {
+              apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+              clientName: 'SecretManagerServiceClient',
+              methodName: 'AccessSecretVersion',
+              rpcType: 'http',
+            },
+            telemetryInfo,
+            async () => {
+              setAttemptHttpMethod('POST', '/v1/{name}:other');
+              return [{payload: 'secret-2'}, undefined, undefined];
+            },
+          );
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 3);
+
+      const firstAttemptSpan = spans.find(
+        s => s.name === 'GET /v1/{name}:access',
+      )!;
+      const secondAttemptSpan = spans.find(
+        s => s.name === 'POST /v1/{name}:other',
+      )!;
+      const clientRequestSpan = spans.find(
+        s => s.name === 'SecretManagerServiceClient.AccessSecretVersion',
+      )!;
+      assert.ok(firstAttemptSpan);
+      assert.ok(secondAttemptSpan);
+      assert.ok(clientRequestSpan);
+
+      assert.strictEqual(
+        firstAttemptSpan.attributes['url.template'],
+        '/v1/{name}:access',
+      );
+      assert.strictEqual(
+        secondAttemptSpan.attributes['url.template'],
+        '/v1/{name}:other',
+      );
+      assert.strictEqual(
+        clientRequestSpan.attributes['url.template'],
+        '/v1/{name}:access',
+      );
+    });
+
+    it('propagates url.template to client request span when first attempt fails before resolving a template and second attempt succeeds with one', async () => {
+      await traceCall(
+        {
+          clientName: 'SecretManagerServiceClient',
+          methodName: 'AccessSecretVersion',
+          rpcType: 'http',
+        },
+        telemetryInfo,
+        async () => {
+          try {
+            await traceAttempt(
+              {
+                apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+                clientName: 'SecretManagerServiceClient',
+                methodName: 'AccessSecretVersion',
+                rpcType: 'http',
+              },
+              telemetryInfo,
+              async () => {
+                throw new GoogleError('pre-template failure');
+              },
+            );
+          } catch {
+            // Retry on second attempt
+          }
+          return traceAttempt(
+            {
+              apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+              clientName: 'SecretManagerServiceClient',
+              methodName: 'AccessSecretVersion',
+              rpcType: 'http',
+              resendCount: 1,
+            },
+            telemetryInfo,
+            async () => {
+              setAttemptHttpMethod('GET', '/v1/{name}:access');
+              return [{payload: 'secret-2'}, undefined, undefined];
+            },
+          );
+        },
+      );
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 3);
+
+      const firstAttemptSpan = spans.find(s => s.name === 'POST')!;
+      const secondAttemptSpan = spans.find(
+        s => s.name === 'GET /v1/{name}:access',
+      )!;
+      const clientRequestSpan = spans.find(
+        s => s.name === 'SecretManagerServiceClient.AccessSecretVersion',
+      )!;
+      assert.ok(firstAttemptSpan);
+      assert.ok(secondAttemptSpan);
+      assert.ok(clientRequestSpan);
+
+      assert.strictEqual(
+        firstAttemptSpan.attributes['url.template'],
+        undefined,
+      );
+      assert.strictEqual(
+        secondAttemptSpan.attributes['url.template'],
+        '/v1/{name}:access',
+      );
+      assert.strictEqual(
+        clientRequestSpan.attributes['url.template'],
+        '/v1/{name}:access',
+      );
+    });
+
+    it('ensures client request and low level network spans only set their respective allowed attributes', async () => {
+      const allowedClientRequestAttributes = new Set([
+        'error.type',
+        'gcp.client.artifact',
+        'gcp.client.repo',
+        'gcp.client.service',
+        'gcp.client.version',
+        'http.response.status_code',
+        'rpc.method',
+        'rpc.response.status_code',
+        'rpc.system.name',
+        'server.address',
+        'server.port',
+        'status.message',
+        'url.domain',
+        'url.template',
+      ]);
+      const allowedClientRequestEventAttributes = new Set(['exception.type']);
+
+      const allowedNetworkAttributes = new Set([
+        'error.type',
+        'gcp.client.artifact',
+        'gcp.client.repo',
+        'gcp.client.service',
+        'gcp.client.version',
+        'gcp.grpc.resend_count',
+        'http.request.method',
+        'http.request.resend_count',
+        'http.response.status_code',
+        'rpc.method',
+        'rpc.response.status_code',
+        'rpc.system.name',
+        'server.address',
+        'server.port',
+        'status.message',
+        'url.domain',
+        'url.template',
+      ]);
+      const allowedNetworkEventAttributes = new Set([
+        'exception.message',
+        'exception.type',
+      ]);
+
+      const grpcErr = Object.assign(new GoogleError('gRPC failure'), {
+        code: Status.UNAVAILABLE,
+        details: 'Service unavailable',
+      });
+      await assert.rejects(async () => {
+        await traceCall(
+          {clientName: 'EchoClient', methodName: 'Echo', rpcType: 'grpc'},
+          telemetryInfo,
+          async () =>
+            traceAttempt(
+              {
+                apiName: 'google.example.v1.Echo',
+                clientName: 'EchoClient',
+                methodName: 'Echo',
+                rpcType: 'grpc',
+                resendCount: 1,
+              },
+              telemetryInfo,
+              async () => {
+                throw grpcErr;
+              },
+            ),
+        );
+      });
+
+      const httpErr = Object.assign(new GoogleError('HTTP failure'), {
+        code: Status.UNAVAILABLE,
+        httpStatusCode: 503,
+        details: 'Backend unavailable',
+      });
+      await assert.rejects(async () => {
+        await traceCall(
+          {clientName: 'EchoClient', methodName: 'Echo', rpcType: 'http'},
+          telemetryInfo,
+          async () =>
+            traceAttempt(
+              {
+                apiName: 'google.example.v1.Echo',
+                clientName: 'EchoClient',
+                methodName: 'Echo',
+                rpcType: 'http',
+                resendCount: 1,
+                httpMethod: 'POST',
+                urlTemplate: '/v1/echo:echo',
+              },
+              telemetryInfo,
+              async () => {
+                throw httpErr;
+              },
+            ),
+        );
+      });
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 4);
+
+      for (const span of spans) {
+        const isNetworkSpan = span.kind === SpanKind.CLIENT;
+        const spanTypeLabel = isNetworkSpan
+          ? 'low level network'
+          : 'client request';
+        const allowedAttrs = isNetworkSpan
+          ? allowedNetworkAttributes
+          : allowedClientRequestAttributes;
+        const allowedEventAttrs = isNetworkSpan
+          ? allowedNetworkEventAttributes
+          : allowedClientRequestEventAttributes;
+
+        for (const key of Object.keys(span.attributes)) {
+          assert.ok(
+            allowedAttrs.has(key),
+            `Unexpected attribute '${key}' on ${spanTypeLabel} span '${span.name}'`,
+          );
+        }
+
+        assert.strictEqual(span.events.length, 1);
+        const eventAttrs = span.events[0].attributes ?? {};
+        for (const key of Object.keys(eventAttrs)) {
+          assert.ok(
+            allowedEventAttrs.has(key),
+            `Unexpected event attribute '${key}' on ${spanTypeLabel} span '${span.name}'`,
+          );
+        }
+        if (isNetworkSpan) {
+          assert.ok(
+            typeof eventAttrs['exception.message'] === 'string' &&
+              eventAttrs['exception.message'].length > 0,
+            'Expected exception.message on low level network span exception event',
+          );
+        } else {
+          assert.strictEqual(eventAttrs['exception.message'], undefined);
+        }
+      }
+    });
+  });
+});

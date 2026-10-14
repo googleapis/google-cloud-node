@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as projectserviceModule from '../src';
 
 import {
@@ -48,7 +48,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -114,9 +114,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -237,7 +237,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.projectServiceStub, undefined);
@@ -245,12 +245,12 @@ describe('v2alpha.ProjectServiceClient', () => {
       assert(client.projectServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.projectServiceStub);
@@ -259,14 +259,14 @@ describe('v2alpha.ProjectServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.projectServiceStub, undefined);
@@ -275,7 +275,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -283,7 +283,7 @@ describe('v2alpha.ProjectServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -295,7 +295,7 @@ describe('v2alpha.ProjectServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -318,7 +318,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('getProject', () => {
     it('invokes getProject without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes getProject without error using callback', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes getProject with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -427,7 +427,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes getProject with closed client', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v2alpha.ProjectServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getProject(request), expectedError);
@@ -450,7 +450,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('acceptTerms', () => {
     it('invokes acceptTerms without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes acceptTerms without error using callback', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -528,7 +528,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes acceptTerms with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -559,7 +559,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes acceptTerms with closed client', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v2alpha.ProjectServiceClient', () => {
       );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.acceptTerms(request), expectedError);
@@ -582,7 +582,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('listEnrolledSolutions', () => {
     it('invokes listEnrolledSolutions without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -614,7 +614,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes listEnrolledSolutions without error using callback', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -661,7 +661,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes listEnrolledSolutions with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -695,7 +695,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes listEnrolledSolutions with closed client', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v2alpha.ProjectServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -721,7 +721,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('getLoggingConfig', () => {
     it('invokes getLoggingConfig without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes getLoggingConfig without error using callback', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -799,7 +799,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes getLoggingConfig with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes getLoggingConfig with closed client', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v2alpha.ProjectServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLoggingConfig(request), expectedError);
@@ -853,7 +853,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('updateLoggingConfig', () => {
     it('invokes updateLoggingConfig without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes updateLoggingConfig without error using callback', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -934,7 +934,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes updateLoggingConfig with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -966,7 +966,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes updateLoggingConfig with closed client', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -980,7 +980,7 @@ describe('v2alpha.ProjectServiceClient', () => {
       );
       request.loggingConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateLoggingConfig(request), expectedError);
@@ -990,7 +990,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('getAlertConfig', () => {
     it('invokes getAlertConfig without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1021,7 +1021,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes getAlertConfig without error using callback', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1068,7 +1068,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes getAlertConfig with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1099,7 +1099,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes getAlertConfig with closed client', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1112,7 +1112,7 @@ describe('v2alpha.ProjectServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAlertConfig(request), expectedError);
@@ -1122,7 +1122,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('updateAlertConfig', () => {
     it('invokes updateAlertConfig without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1154,7 +1154,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes updateAlertConfig without error using callback', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1202,7 +1202,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes updateAlertConfig with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1234,7 +1234,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes updateAlertConfig with closed client', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1248,7 +1248,7 @@ describe('v2alpha.ProjectServiceClient', () => {
       );
       request.alertConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAlertConfig(request), expectedError);
@@ -1258,7 +1258,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('enrollSolution', () => {
     it('invokes enrollSolution without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1291,7 +1291,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes enrollSolution without error using callback', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1345,7 +1345,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes enrollSolution with call error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1376,7 +1376,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes enrollSolution with LRO error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1409,7 +1409,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes checkEnrollSolutionProgress without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1417,8 +1417,8 @@ describe('v2alpha.ProjectServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkEnrollSolutionProgress(
@@ -1431,7 +1431,7 @@ describe('v2alpha.ProjectServiceClient', () => {
 
     it('invokes checkEnrollSolutionProgress with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1451,7 +1451,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1481,7 +1481,7 @@ describe('v2alpha.ProjectServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1525,7 +1525,7 @@ describe('v2alpha.ProjectServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1560,7 +1560,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1608,7 +1608,7 @@ describe('v2alpha.ProjectServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1649,7 +1649,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1670,7 +1670,7 @@ describe('v2alpha.ProjectServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1698,7 +1698,7 @@ describe('v2alpha.ProjectServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1708,7 +1708,7 @@ describe('v2alpha.ProjectServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1732,7 +1732,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1754,7 +1754,7 @@ describe('v2alpha.ProjectServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1782,7 +1782,7 @@ describe('v2alpha.ProjectServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1792,7 +1792,7 @@ describe('v2alpha.ProjectServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1816,7 +1816,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1838,7 +1838,7 @@ describe('v2alpha.ProjectServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1866,7 +1866,7 @@ describe('v2alpha.ProjectServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1876,7 +1876,7 @@ describe('v2alpha.ProjectServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1900,7 +1900,7 @@ describe('v2alpha.ProjectServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1935,7 +1935,7 @@ describe('v2alpha.ProjectServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1969,7 +1969,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         project: 'projectValue',
       };
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2009,7 +2009,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2077,7 +2077,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         branch: 'branchValue',
       };
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2152,7 +2152,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2216,7 +2216,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         catalog: 'catalogValue',
       };
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2284,7 +2284,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         control: 'controlValue',
       };
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2357,7 +2357,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         project: 'projectValue',
       };
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2398,7 +2398,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         merchant_center_account_link: 'merchantCenterAccountLinkValue',
       };
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2495,7 +2495,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         model: 'modelValue',
       };
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2572,7 +2572,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         product: 'productValue',
       };
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2656,7 +2656,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         project: 'projectValue',
       };
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2694,7 +2694,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         project: 'projectValue',
       };
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2735,7 +2735,7 @@ describe('v2alpha.ProjectServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new projectserviceModule.v2alpha.ProjectServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

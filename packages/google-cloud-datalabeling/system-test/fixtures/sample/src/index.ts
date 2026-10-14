@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { DataLabelingServiceClient } from '@google-cloud/datalabeling';
+import {DataLabelingServiceClient} from '@google-cloud/datalabeling';
 
 // check that the client class type name can be used
 function doStuffWithDataLabelingServiceClient(

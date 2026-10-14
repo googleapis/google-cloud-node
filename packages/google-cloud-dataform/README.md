@@ -130,7 +130,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update team folder | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1/dataform.update_team_folder.js) |
 | update workflow config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1/dataform.update_workflow_config.js) |
 | write file | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1/dataform.write_file.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1/snippet_metadata_google.cloud.dataform.v1.json) |
 | cancel workflow invocation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.cancel_workflow_invocation.js) |
 | commit repository changes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.commit_repository_changes.js) |
 | commit workspace changes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.commit_workspace_changes.js) |
@@ -202,7 +201,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update team folder | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_team_folder.js) |
 | update workflow config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.update_workflow_config.js) |
 | write file | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/dataform.write_file.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataform/samples/generated/v1beta1/snippet_metadata_google.cloud.dataform.v1beta1.json) |
 
 
 ## Supported Node.js Versions

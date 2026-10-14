@@ -31,8 +31,11 @@ option (google.api.resource_definition) = {
   pattern: "projects/{project}/locations/{location}/apps/{app}"
 };
 
+// Deprecated: Use `CesToolSpec` instead.
 // Spec of CES app that the generator can choose from.
 message CesAppSpec {
+  option deprecated = true;
+
   // Optional. Format: `projects/<Project ID>/locations/<Location ID>/apps/<app
   // ID>`.
   string ces_app = 1 [
@@ -43,4 +46,16 @@ message CesAppSpec {
   // Optional. Indicates whether the app requires human confirmation.
   Tool.ConfirmationRequirement confirmation_requirement = 2
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Only applicable for CompanionAgent.
+  // Indicates whether the ces app is enabled in proactive mode.
+  // At least one of `proactive_enabled` or `reactive_enabled` should be
+  // true; otherwise, the ces app will be ignored.
+  optional bool proactive_enabled = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Only applicable for CompanionAgent.
+  // Indicates whether the ces app is enabled in reactive mode.
+  // At least one of `proactive_enabled` or `reactive_enabled` should be
+  // true; otherwise, the ces app will be ignored.
+  optional bool reactive_enabled = 4 [(google.api.field_behavior) = OPTIONAL];
 }

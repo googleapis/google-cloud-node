@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as localinventoryserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -251,7 +251,7 @@ describe('v1.LocalInventoryServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.localInventoryServiceStub, undefined);
@@ -259,13 +259,13 @@ describe('v1.LocalInventoryServiceClient', () => {
       assert(client.localInventoryServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.localInventoryServiceStub);
@@ -274,15 +274,15 @@ describe('v1.LocalInventoryServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.localInventoryServiceStub, undefined);
@@ -291,7 +291,7 @@ describe('v1.LocalInventoryServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v1.LocalInventoryServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v1.LocalInventoryServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v1.LocalInventoryServiceClient', () => {
     it('invokes insertLocalInventory without error', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v1.LocalInventoryServiceClient', () => {
     it('invokes insertLocalInventory without error using callback', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v1.LocalInventoryServiceClient', () => {
     it('invokes insertLocalInventory with error', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -450,7 +450,7 @@ describe('v1.LocalInventoryServiceClient', () => {
     it('invokes insertLocalInventory with closed client', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -463,7 +463,7 @@ describe('v1.LocalInventoryServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.insertLocalInventory(request), expectedError);
@@ -474,7 +474,7 @@ describe('v1.LocalInventoryServiceClient', () => {
     it('invokes deleteLocalInventory without error', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -507,7 +507,7 @@ describe('v1.LocalInventoryServiceClient', () => {
     it('invokes deleteLocalInventory without error using callback', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -555,7 +555,7 @@ describe('v1.LocalInventoryServiceClient', () => {
     it('invokes deleteLocalInventory with error', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -587,7 +587,7 @@ describe('v1.LocalInventoryServiceClient', () => {
     it('invokes deleteLocalInventory with closed client', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v1.LocalInventoryServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteLocalInventory(request), expectedError);
@@ -611,7 +611,7 @@ describe('v1.LocalInventoryServiceClient', () => {
     it('invokes listLocalInventories without error', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -652,7 +652,7 @@ describe('v1.LocalInventoryServiceClient', () => {
     it('invokes listLocalInventories without error using callback', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v1.LocalInventoryServiceClient', () => {
     it('invokes listLocalInventories with error', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1.LocalInventoryServiceClient', () => {
     it('invokes listLocalInventoriesStream without error', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -797,16 +797,16 @@ describe('v1.LocalInventoryServiceClient', () => {
       assert(
         (client.descriptors.page.listLocalInventories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLocalInventoriesStream with error', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -850,16 +850,16 @@ describe('v1.LocalInventoryServiceClient', () => {
       assert(
         (client.descriptors.page.listLocalInventories.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLocalInventories without error', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -901,16 +901,16 @@ describe('v1.LocalInventoryServiceClient', () => {
       assert(
         (client.descriptors.page.listLocalInventories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLocalInventories with error', async () => {
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -943,9 +943,9 @@ describe('v1.LocalInventoryServiceClient', () => {
       assert(
         (client.descriptors.page.listLocalInventories.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -960,7 +960,7 @@ describe('v1.LocalInventoryServiceClient', () => {
       };
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1024,7 +1024,7 @@ describe('v1.LocalInventoryServiceClient', () => {
       };
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1075,7 +1075,7 @@ describe('v1.LocalInventoryServiceClient', () => {
       };
       const client =
         new localinventoryserviceModule.v1.LocalInventoryServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

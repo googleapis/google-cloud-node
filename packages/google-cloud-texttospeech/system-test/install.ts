@@ -21,29 +21,31 @@ import {readFileSync} from 'fs';
 import {describe, it} from 'mocha';
 
 describe('📦 pack-n-play test', () => {
-
-  it('TypeScript code', async function() {
+  it('TypeScript code', async function () {
     this.timeout(300000);
     const options = {
       packageDir: process.cwd(),
       sample: {
         description: 'TypeScript user can use the type definitions',
-        ts: readFileSync('./system-test/fixtures/sample/src/index.ts').toString()
-      }
+        ts: readFileSync(
+          './system-test/fixtures/sample/src/index.ts',
+        ).toString(),
+      },
     };
     await packNTest(options);
   });
 
-  it('JavaScript code', async function() {
+  it('JavaScript code', async function () {
     this.timeout(300000);
     const options = {
       packageDir: process.cwd(),
       sample: {
         description: 'JavaScript user can use the library',
-        cjs: readFileSync('./system-test/fixtures/sample/src/index.js').toString()
-      }
+        cjs: readFileSync(
+          './system-test/fixtures/sample/src/index.js',
+        ).toString(),
+      },
     };
     await packNTest(options);
   });
-
 });

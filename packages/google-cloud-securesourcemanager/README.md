@@ -110,7 +110,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update pull request | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_pull_request.js) |
 | update pull request comment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_pull_request_comment.js) |
 | update repository | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/secure_source_manager.update_repository.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-securesourcemanager/samples/generated/v1/snippet_metadata_google.cloud.securesourcemanager.v1.json) |
 
 
 ## Supported Node.js Versions

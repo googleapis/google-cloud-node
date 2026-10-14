@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class EvaluationServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('ces');
@@ -68,11 +68,11 @@ export class EvaluationServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  evaluationServiceStub?: Promise<{ [name: string]: Function }>;
+  evaluationServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of EvaluationServiceClient.
@@ -148,7 +148,7 @@ export class EvaluationServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -381,6 +381,24 @@ export class EvaluationServiceClient {
     const exportEvaluationsMetadata = protoFilesRoot.lookup(
       '.google.cloud.ces.v1beta.OperationMetadata',
     ) as gax.protobuf.Type;
+    const exportEvaluationRunsResponse = protoFilesRoot.lookup(
+      '.google.cloud.ces.v1beta.ExportEvaluationRunsResponse',
+    ) as gax.protobuf.Type;
+    const exportEvaluationRunsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata',
+    ) as gax.protobuf.Type;
+    const exportEvaluationResultsResponse = protoFilesRoot.lookup(
+      '.google.cloud.ces.v1beta.ExportEvaluationResultsResponse',
+    ) as gax.protobuf.Type;
+    const exportEvaluationResultsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata',
+    ) as gax.protobuf.Type;
+    const runEvaluationResultMetricsResponse = protoFilesRoot.lookup(
+      '.google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse',
+    ) as gax.protobuf.Type;
+    const runEvaluationResultMetricsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       runEvaluation: new this._gaxModule.LongrunningDescriptor(
@@ -408,6 +426,29 @@ export class EvaluationServiceClient {
         exportEvaluationsResponse.decode.bind(exportEvaluationsResponse),
         exportEvaluationsMetadata.decode.bind(exportEvaluationsMetadata),
       ),
+      exportEvaluationRuns: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportEvaluationRunsResponse.decode.bind(exportEvaluationRunsResponse),
+        exportEvaluationRunsMetadata.decode.bind(exportEvaluationRunsMetadata),
+      ),
+      exportEvaluationResults: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportEvaluationResultsResponse.decode.bind(
+          exportEvaluationResultsResponse,
+        ),
+        exportEvaluationResultsMetadata.decode.bind(
+          exportEvaluationResultsMetadata,
+        ),
+      ),
+      runEvaluationResultMetrics: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        runEvaluationResultMetricsResponse.decode.bind(
+          runEvaluationResultMetricsResponse,
+        ),
+        runEvaluationResultMetricsMetadata.decode.bind(
+          runEvaluationResultMetricsMetadata,
+        ),
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -415,7 +456,7 @@ export class EvaluationServiceClient {
       'google.cloud.ces.v1beta.EvaluationService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -455,7 +496,7 @@ export class EvaluationServiceClient {
           (this._protos as any).google.cloud.ces.v1beta.EvaluationService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -492,10 +533,13 @@ export class EvaluationServiceClient {
       'deleteScheduledEvaluationRun',
       'testPersonaVoice',
       'exportEvaluations',
+      'exportEvaluationRuns',
+      'exportEvaluationResults',
+      'runEvaluationResultMetrics',
     ];
     for (const methodName of evaluationServiceStubMethods) {
       const callPromise = this.evaluationServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -711,7 +755,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('uploadEvaluationAudio request %j', request);
@@ -856,7 +900,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createEvaluation request %j', request);
@@ -1004,7 +1048,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createEvaluationDataset request %j', request);
@@ -1144,7 +1188,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'evaluation.name': request.evaluation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateEvaluation request %j', request);
@@ -1287,7 +1331,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'evaluation_dataset.name': request.evaluationDataset!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateEvaluationDataset request %j', request);
@@ -1437,7 +1481,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEvaluation request %j', request);
@@ -1571,7 +1615,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEvaluationResult request %j', request);
@@ -1719,7 +1763,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEvaluationDataset request %j', request);
@@ -1850,7 +1894,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEvaluation request %j', request);
@@ -1984,7 +2028,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEvaluationResult request %j', request);
@@ -2121,7 +2165,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEvaluationDataset request %j', request);
@@ -2258,7 +2302,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEvaluationRun request %j', request);
@@ -2398,7 +2442,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEvaluationExpectation request %j', request);
@@ -2550,7 +2594,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createEvaluationExpectation request %j', request);
@@ -2697,7 +2741,7 @@ export class EvaluationServiceClient {
         'evaluation_expectation.name':
           request.evaluationExpectation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateEvaluationExpectation request %j', request);
@@ -2845,7 +2889,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteEvaluationExpectation request %j', request);
@@ -2996,7 +3040,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createScheduledEvaluationRun request %j', request);
@@ -3139,7 +3183,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getScheduledEvaluationRun request %j', request);
@@ -3286,7 +3330,7 @@ export class EvaluationServiceClient {
         'scheduled_evaluation_run.name':
           request.scheduledEvaluationRun!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateScheduledEvaluationRun request %j', request);
@@ -3432,7 +3476,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteScheduledEvaluationRun request %j', request);
@@ -3575,7 +3619,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         app: request.app ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testPersonaVoice request %j', request);
@@ -3669,6 +3713,8 @@ export class EvaluationServiceClient {
    *   not set, default to STABLE.
    * @param {boolean} [request.generateLatencyReport]
    *   Optional. Whether to generate a latency report for the evaluation run.
+   * @param {google.cloud.ces.v1beta.EvaluationRunCachingSettings} [request.evaluationRunCachingSettings]
+   *   Optional. The caching settings to use for the evaluation run.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3761,7 +3807,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         app: request.app ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3818,7 +3864,7 @@ export class EvaluationServiceClient {
     this._log.info('runEvaluation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3843,6 +3889,9 @@ export class EvaluationServiceClient {
    * @param {google.cloud.ces.v1beta.Conversation.Source} [request.source]
    *   Optional. Indicate the source of the conversation. If not set, all sources
    *   will be searched.
+   * @param {google.cloud.ces.v1beta.GenerateEvaluationRequest.EvaluationType} [request.evaluationType]
+   *   Optional. The type of evaluation to generate. Defaults to GOLDEN if
+   *   unspecified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3935,7 +3984,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         conversation: request.conversation ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3992,7 +4041,7 @@ export class EvaluationServiceClient {
     this._log.info('generateEvaluation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4116,7 +4165,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4173,7 +4222,7 @@ export class EvaluationServiceClient {
     this._log.info('importEvaluations long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4285,7 +4334,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4342,7 +4391,7 @@ export class EvaluationServiceClient {
     this._log.info('deleteEvaluationRun long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4465,7 +4514,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4522,7 +4571,7 @@ export class EvaluationServiceClient {
     this._log.info('exportEvaluations long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4533,6 +4582,526 @@ export class EvaluationServiceClient {
     return decodeOperation as LROperation<
       protos.google.cloud.ces.v1beta.ExportEvaluationsResponse,
       protos.google.cloud.ces.v1beta.OperationMetadata
+    >;
+  }
+  /**
+   * Exports evaluations runs.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the app to export evaluation runs from.
+   *   Format: `projects/{project}/locations/{location}/apps/{app}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the evaluation runs to export.
+   * @param {google.cloud.ces.v1beta.ExportOptions} [request.exportOptions]
+   *   Optional. The export options for the evaluation runs.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.export_evaluation_runs.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ExportEvaluationRuns_async
+   */
+  exportEvaluationRuns(
+    request?: protos.google.cloud.ces.v1beta.IExportEvaluationRunsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationRunsResponse,
+        protos.google.cloud.ces.v1beta.IExportEvaluationRunsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  exportEvaluationRuns(
+    request: protos.google.cloud.ces.v1beta.IExportEvaluationRunsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationRunsResponse,
+        protos.google.cloud.ces.v1beta.IExportEvaluationRunsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  exportEvaluationRuns(
+    request: protos.google.cloud.ces.v1beta.IExportEvaluationRunsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationRunsResponse,
+        protos.google.cloud.ces.v1beta.IExportEvaluationRunsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  exportEvaluationRuns(
+    request?: protos.google.cloud.ces.v1beta.IExportEvaluationRunsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IExportEvaluationRunsResponse,
+            protos.google.cloud.ces.v1beta.IExportEvaluationRunsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationRunsResponse,
+        protos.google.cloud.ces.v1beta.IExportEvaluationRunsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationRunsResponse,
+        protos.google.cloud.ces.v1beta.IExportEvaluationRunsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IExportEvaluationRunsResponse,
+            protos.google.cloud.ces.v1beta.IExportEvaluationRunsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportEvaluationRuns response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportEvaluationRuns request %j', request);
+    return this.innerApiCalls
+      .exportEvaluationRuns(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.ces.v1beta.IExportEvaluationRunsResponse,
+            protos.google.cloud.ces.v1beta.IExportEvaluationRunsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportEvaluationRuns response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `exportEvaluationRuns()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.export_evaluation_runs.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ExportEvaluationRuns_async
+   */
+  async checkExportEvaluationRunsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.ces.v1beta.ExportEvaluationRunsResponse,
+      protos.google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata
+    >
+  > {
+    this._log.info('exportEvaluationRuns long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportEvaluationRuns,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.ces.v1beta.ExportEvaluationRunsResponse,
+      protos.google.cloud.ces.v1beta.ExportEvaluationRunsOperationMetadata
+    >;
+  }
+  /**
+   * Exports evaluations results.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the evaluation to export evaluation results
+   *   from. Format:
+   *   `projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the evaluation results to export.
+   * @param {google.cloud.ces.v1beta.ExportOptions} [request.exportOptions]
+   *   Optional. The export options for the evaluation results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.export_evaluation_results.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ExportEvaluationResults_async
+   */
+  exportEvaluationResults(
+    request?: protos.google.cloud.ces.v1beta.IExportEvaluationResultsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationResultsResponse,
+        protos.google.cloud.ces.v1beta.IExportEvaluationResultsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  exportEvaluationResults(
+    request: protos.google.cloud.ces.v1beta.IExportEvaluationResultsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationResultsResponse,
+        protos.google.cloud.ces.v1beta.IExportEvaluationResultsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  exportEvaluationResults(
+    request: protos.google.cloud.ces.v1beta.IExportEvaluationResultsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationResultsResponse,
+        protos.google.cloud.ces.v1beta.IExportEvaluationResultsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  exportEvaluationResults(
+    request?: protos.google.cloud.ces.v1beta.IExportEvaluationResultsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IExportEvaluationResultsResponse,
+            protos.google.cloud.ces.v1beta.IExportEvaluationResultsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationResultsResponse,
+        protos.google.cloud.ces.v1beta.IExportEvaluationResultsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IExportEvaluationResultsResponse,
+        protos.google.cloud.ces.v1beta.IExportEvaluationResultsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IExportEvaluationResultsResponse,
+            protos.google.cloud.ces.v1beta.IExportEvaluationResultsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportEvaluationResults response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportEvaluationResults request %j', request);
+    return this.innerApiCalls
+      .exportEvaluationResults(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.ces.v1beta.IExportEvaluationResultsResponse,
+            protos.google.cloud.ces.v1beta.IExportEvaluationResultsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('exportEvaluationResults response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `exportEvaluationResults()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.export_evaluation_results.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_ExportEvaluationResults_async
+   */
+  async checkExportEvaluationResultsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.ces.v1beta.ExportEvaluationResultsResponse,
+      protos.google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata
+    >
+  > {
+    this._log.info('exportEvaluationResults long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.exportEvaluationResults,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.ces.v1beta.ExportEvaluationResultsResponse,
+      protos.google.cloud.ces.v1beta.ExportEvaluationResultsOperationMetadata
+    >;
+  }
+  /**
+   * Runs metrics on an existing evaluation result.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.evaluationResultId
+   *   Required. The evaluation result to run metrics for.
+   *   Format:
+   *   `projects/{project}/locations/{location}/apps/{app}/evaluations/{evaluation}/results/{evaluation_result_id}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.run_evaluation_result_metrics.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_RunEvaluationResultMetrics_async
+   */
+  runEvaluationResultMetrics(
+    request?: protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsResponse,
+        protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  runEvaluationResultMetrics(
+    request: protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsResponse,
+        protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  runEvaluationResultMetrics(
+    request: protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsResponse,
+        protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  runEvaluationResultMetrics(
+    request?: protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsResponse,
+            protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsResponse,
+        protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsResponse,
+        protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        evaluation_result_id: request.evaluationResultId?.toString() ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsResponse,
+            protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('runEvaluationResultMetrics response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('runEvaluationResultMetrics request %j', request);
+    return this.innerApiCalls
+      .runEvaluationResultMetrics(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsResponse,
+            protos.google.cloud.ces.v1beta.IRunEvaluationResultMetricsOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('runEvaluationResultMetrics response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `runEvaluationResultMetrics()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/evaluation_service.run_evaluation_result_metrics.js</caption>
+   * region_tag:ces_v1beta_generated_EvaluationService_RunEvaluationResultMetrics_async
+   */
+  async checkRunEvaluationResultMetricsProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse,
+      protos.google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata
+    >
+  > {
+    this._log.info('runEvaluationResultMetrics long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.runEvaluationResultMetrics,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.ces.v1beta.RunEvaluationResultMetricsResponse,
+      protos.google.cloud.ces.v1beta.RunEvaluationResultMetricsOperationMetadata
     >;
   }
   /**
@@ -4654,7 +5223,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4746,7 +5315,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluations stream %j', request);
@@ -4820,7 +5389,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluations iterate %j', request);
@@ -4941,7 +5510,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5025,7 +5594,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationResults stream %j', request);
@@ -5091,7 +5660,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationResults'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationResults iterate %j', request);
@@ -5209,7 +5778,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5290,7 +5859,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationDatasets stream %j', request);
@@ -5353,7 +5922,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationDatasets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationDatasets iterate %j', request);
@@ -5471,7 +6040,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5552,7 +6121,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationRuns stream %j', request);
@@ -5615,7 +6184,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationRuns iterate %j', request);
@@ -5734,7 +6303,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5816,7 +6385,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationExpectations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationExpectations stream %j', request);
@@ -5880,7 +6449,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listEvaluationExpectations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listEvaluationExpectations iterate %j', request);
@@ -6003,7 +6572,7 @@ export class EvaluationServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -6089,7 +6658,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listScheduledEvaluationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listScheduledEvaluationRuns stream %j', request);
@@ -6157,7 +6726,7 @@ export class EvaluationServiceClient {
       });
     const defaultCallSettings = this._defaults['listScheduledEvaluationRuns'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listScheduledEvaluationRuns iterate %j', request);
@@ -7748,11 +8317,11 @@ export class EvaluationServiceClient {
    */
   close(): Promise<void> {
     if (this.evaluationServiceStub && !this._terminated) {
-      return this.evaluationServiceStub.then((stub) => {
+      return this.evaluationServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

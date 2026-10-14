@@ -34,12 +34,16 @@ function main() {
    */
   // const instance = 'abc123'
   /**
-   *  Project ID of the source as well as the clone Cloud SQL instance.
+   *  Project ID of the source Cloud SQL instance.
    */
   // const project = 'my-project'
   /**
    */
   // const body = {}
+  /**
+   *  Optional. Region of the Cloud SQL instance.
+   */
+  // const location = 'abc123'
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1beta4;

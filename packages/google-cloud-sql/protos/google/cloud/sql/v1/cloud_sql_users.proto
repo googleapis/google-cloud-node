@@ -19,6 +19,7 @@ package google.cloud.sql.v1;
 import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
+import "google/api/resource.proto";
 import "google/cloud/sql/v1/cloud_sql_resources.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
@@ -85,6 +86,9 @@ message SqlUsersDeleteRequest {
 
   // Project ID of the project that contains the instance.
   string project = 4;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Request message for Users Get RPC
@@ -100,6 +104,9 @@ message SqlUsersGetRequest {
 
   // Host of a user of the instance.
   string host = 4;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
 message SqlUsersInsertRequest {
@@ -110,6 +117,9 @@ message SqlUsersInsertRequest {
   string project = 2;
 
   User body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 message SqlUsersListRequest {
@@ -118,6 +128,9 @@ message SqlUsersListRequest {
 
   // Project ID of the project that contains the instance.
   string project = 2;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 message SqlUsersUpdateRequest {
@@ -143,7 +156,21 @@ message SqlUsersUpdateRequest {
   optional bool revoke_existing_roles = 6
       [(google.api.field_behavior) = OPTIONAL];
 
+  // Optional. The server roles to grant to the SQL Server login. Existing
+  // server roles will not be revoked if revoke_existing_roles is false.
+  // body.server_roles will be ignored for update request.
+  repeated string server_roles = 7 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Specifies whether to revoke existing roles that are not present
+  // in the `server_roles` field. If `false` or unset, the server roles
+  // specified in `server_roles` are added to the user's existing server roles.
+  optional bool revoke_existing_server_roles = 8
+      [(google.api.field_behavior) = OPTIONAL];
+
   User body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 9 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // User level password validation policy.
@@ -196,6 +223,10 @@ message User {
     // Read-only. Login for a service account that belongs to the
     // Cloud IAM group.
     CLOUD_IAM_GROUP_SERVICE_ACCOUNT = 5;
+
+    // Cloud IAM workforce identity managed by Workforce Identity
+    // Federation.
+    CLOUD_IAM_WORKFORCE_IDENTITY = 6;
 
     // Microsoft Entra ID user.
     ENTRAID_USER = 7;
@@ -288,14 +319,17 @@ message User {
 
   // Optional. Role memberships of the user
   repeated string database_roles = 15 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The server roles for the SQL Server login.
+  repeated string server_roles = 16 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Represents a Sql Server user on the Cloud SQL instance.
 message SqlServerUserDetails {
-  // If the user has been disabled
+  // Indicates if the user has been disabled.
   bool disabled = 1;
 
-  // The server roles for this user
+  // Indicates the server roles for this user.
   repeated string server_roles = 2;
 }
 

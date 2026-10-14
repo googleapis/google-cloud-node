@@ -19,7 +19,9 @@
 import {CloudLocationFinderClient} from '@google-cloud/locationfinder';
 
 // check that the client class type name can be used
-function doStuffWithCloudLocationFinderClient(client: CloudLocationFinderClient) {
+function doStuffWithCloudLocationFinderClient(
+  client: CloudLocationFinderClient,
+) {
   client.close();
 }
 

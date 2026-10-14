@@ -61,12 +61,10 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get mcp tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1/cloud_api_registry.get_mcp_tool.js) |
 | list mcp servers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1/cloud_api_registry.list_mcp_servers.js) |
 | list mcp tools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1/cloud_api_registry.list_mcp_tools.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1/snippet_metadata_google.cloud.apiregistry.v1.json) |
 | get mcp server | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1beta/cloud_api_registry.get_mcp_server.js) |
 | get mcp tool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1beta/cloud_api_registry.get_mcp_tool.js) |
 | list mcp servers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1beta/cloud_api_registry.list_mcp_servers.js) |
 | list mcp tools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1beta/cloud_api_registry.list_mcp_tools.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/samples/generated/v1beta/snippet_metadata_google.cloud.apiregistry.v1beta.json) |
 
 
 ## Supported Node.js Versions
@@ -100,7 +98,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -110,7 +108,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apiregistry/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

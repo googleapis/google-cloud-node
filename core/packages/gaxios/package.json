@@ -1,11 +1,14 @@
 {
   "name": "gaxios",
-  "version": "7.1.5",
+  "version": "8.3.1",
   "description": "A simple common HTTP client specifically for Google APIs and services.",
   "main": "build/cjs/src/index.js",
   "types": "build/cjs/src/index.d.ts",
   "files": [
-    "build/"
+    "build/cjs/src",
+    "build/esm/src",
+    "build/esm/package.json",
+    "!build/**/*.map"
   ],
   "exports": {
     ".": {
@@ -17,11 +20,16 @@
         "types": "./build/cjs/src/index.d.ts",
         "default": "./build/cjs/src/index.js"
       }
-    }
+    },
+    "./build/src/common": {
+      "import": "./build/esm/src/common.js",
+      "require": "./build/cjs/src/common.js"
+    },
+    "./package.json": "./package.json"
   },
   "scripts": {
     "lint": "gts check --no-inline-config",
-    "test": "c8 mocha build/esm/test",
+    "test": "node ../../../bin/run-test.cjs build/esm/test",
     "presystem-test": "npm run compile",
     "system-test": "mocha build/esm/system-test --timeout 80000",
     "compile": "tsc -b ./tsconfig.json ./tsconfig.cjs.json && node utils/enable-esm.mjs",
@@ -38,14 +46,14 @@
   },
   "repository": {
     "type": "git",
-    "directory": "packages/gaxios",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/gaxios",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "keywords": [
     "google"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "author": "Google, LLC",
   "license": "Apache-2.0",
@@ -69,8 +77,8 @@
     "gts": "^6.0.2",
     "is-docker": "^3.0.0",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^5.0.0",
-    "jsdoc-region-tag": "^4.0.0",
+    "jsdoc-fresh": "^6.0.0",
+    "jsdoc-region-tag": "^5.0.0",
     "karma": "^6.0.0",
     "karma-chrome-launcher": "^3.0.0",
     "karma-coverage": "^2.0.0",
@@ -78,7 +86,7 @@
     "karma-mocha": "^2.0.0",
     "karma-remap-coverage": "^0.1.5",
     "karma-sourcemap-loader": "^0.4.0",
-    "karma-webpack": "^5.0.1",
+    "karma-webpack": "^5.0.0",
     "mocha": "^11.1.0",
     "multiparty": "^4.2.1",
     "mv": "^2.1.1",
@@ -89,7 +97,7 @@
     "puppeteer": "^24.0.0",
     "sinon": "21.0.3",
     "stream-browserify": "^3.0.0",
-    "tmp": "0.2.6",
+    "tmp": "0.2.7",
     "ts-loader": "^9.5.2",
     "typescript": "5.8.3",
     "undici-types": "^7.24.1",
@@ -101,5 +109,5 @@
     "https-proxy-agent": "^7.0.1",
     "node-fetch": "^3.3.2"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/gaxios"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/gaxios"
 }

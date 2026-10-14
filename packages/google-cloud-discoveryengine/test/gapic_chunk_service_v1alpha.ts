@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as chunkserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -242,7 +242,7 @@ describe('v1alpha.ChunkServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.chunkServiceStub, undefined);
@@ -250,12 +250,12 @@ describe('v1alpha.ChunkServiceClient', () => {
       assert(client.chunkServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.chunkServiceStub);
@@ -264,14 +264,14 @@ describe('v1alpha.ChunkServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.chunkServiceStub, undefined);
@@ -280,7 +280,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1alpha.ChunkServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -300,7 +300,7 @@ describe('v1alpha.ChunkServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -323,7 +323,7 @@ describe('v1alpha.ChunkServiceClient', () => {
   describe('getChunk', () => {
     it('invokes getChunk without error', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1alpha.ChunkServiceClient', () => {
 
     it('invokes getChunk without error using callback', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -401,7 +401,7 @@ describe('v1alpha.ChunkServiceClient', () => {
 
     it('invokes getChunk with error', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v1alpha.ChunkServiceClient', () => {
 
     it('invokes getChunk with closed client', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1alpha.ChunkServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getChunk(request), expectedError);
@@ -452,7 +452,7 @@ describe('v1alpha.ChunkServiceClient', () => {
   describe('listChunks', () => {
     it('invokes listChunks without error', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -491,7 +491,7 @@ describe('v1alpha.ChunkServiceClient', () => {
 
     it('invokes listChunks without error using callback', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -523,8 +523,7 @@ describe('v1alpha.ChunkServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.discoveryengine.v1alpha.IChunk[]
-              | null,
+              protos.google.cloud.discoveryengine.v1alpha.IChunk[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -548,7 +547,7 @@ describe('v1alpha.ChunkServiceClient', () => {
 
     it('invokes listChunks with error', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -579,7 +578,7 @@ describe('v1alpha.ChunkServiceClient', () => {
 
     it('invokes listChunksStream without error', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -632,15 +631,15 @@ describe('v1alpha.ChunkServiceClient', () => {
       assert(
         (client.descriptors.page.listChunks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listChunksStream with error', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -684,15 +683,15 @@ describe('v1alpha.ChunkServiceClient', () => {
       assert(
         (client.descriptors.page.listChunks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChunks without error', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -734,15 +733,15 @@ describe('v1alpha.ChunkServiceClient', () => {
       assert(
         (client.descriptors.page.listChunks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChunks with error', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -777,16 +776,16 @@ describe('v1alpha.ChunkServiceClient', () => {
       assert(
         (client.descriptors.page.listChunks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -816,7 +815,7 @@ describe('v1alpha.ChunkServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -860,7 +859,7 @@ describe('v1alpha.ChunkServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -895,7 +894,7 @@ describe('v1alpha.ChunkServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -943,7 +942,7 @@ describe('v1alpha.ChunkServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -990,7 +989,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         location: 'locationValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1041,7 +1040,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         engine: 'engineValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1116,7 +1115,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1178,7 +1177,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         project: 'projectValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1219,7 +1218,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1323,7 +1322,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         document: 'documentValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1470,7 +1469,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1633,7 +1632,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         control: 'controlValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1759,7 +1758,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1886,7 +1885,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2012,7 +2011,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2121,7 +2120,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2247,7 +2246,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2375,7 +2374,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2520,7 +2519,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2645,7 +2644,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2754,7 +2753,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2880,7 +2879,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         control: 'controlValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3006,7 +3005,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3132,7 +3131,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3259,7 +3258,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3402,7 +3401,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3525,7 +3524,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3606,7 +3605,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         document: 'documentValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3733,7 +3732,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         chunk: 'chunkValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3875,7 +3874,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         control: 'controlValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3970,7 +3969,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4077,7 +4076,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         custom_tuning_model: 'customTuningModelValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4183,7 +4182,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4272,7 +4271,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         schema: 'schemaValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4365,7 +4364,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         serving_config: 'servingConfigValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4472,7 +4471,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         answer: 'answerValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4596,7 +4595,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4693,7 +4692,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         data_store: 'dataStoreValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4782,7 +4781,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         target_site: 'targetSiteValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4889,7 +4888,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         sample_query: 'sampleQueryValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4964,7 +4963,7 @@ describe('v1alpha.ChunkServiceClient', () => {
         sample_query_set: 'sampleQuerySetValue',
       };
       const client = new chunkserviceModule.v1alpha.ChunkServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

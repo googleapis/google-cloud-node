@@ -27,6 +27,8 @@ import {
   DecorateRequestOptions,
   MakeAuthenticatedRequest,
   PackageJson,
+  encodeAbsoluteURI,
+  joinURIComponents,
   util,
 } from './util';
 
@@ -212,19 +214,19 @@ export class Service {
     uriComponents.push(reqOpts.uri);
 
     if (isAbsoluteUrl) {
-      uriComponents.splice(0, uriComponents.indexOf(reqOpts.uri));
+      // Encode only the pathname to preserve protocol, host, and query params.
+      // We cannot pass uriComponents through encodeURIPath after splicing
+      // because it will percent-encode parts we do not want to encode.
+      reqOpts.uri = encodeAbsoluteURI(reqOpts.uri);
+    } else {
+      // Relative path components contain only path segments (no protocol or host),
+      // so we encode each segment directly and join them with '/'.
+      reqOpts.uri = joinURIComponents(uriComponents)
+        // Some URIs have colon separators.
+        // Bad: https://.../projects/:list
+        // Good: https://.../projects:list
+        .replace(/\/:/g, ':');
     }
-
-    reqOpts.uri = uriComponents
-      .map(uriComponent => {
-        const trimSlashesRegex = /^\/*|\/*$/g;
-        return uriComponent.replace(trimSlashesRegex, '');
-      })
-      .join('/')
-      // Some URIs have colon separators.
-      // Bad: https://.../projects/:list
-      // Good: https://.../projects:list
-      .replace(/\/:/g, ':');
 
     const requestInterceptors = this.getRequestInterceptors();
 

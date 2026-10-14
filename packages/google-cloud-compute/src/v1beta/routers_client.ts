@@ -27,10 +27,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -52,7 +52,7 @@ export class RoutersClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('compute');
@@ -65,8 +65,8 @@ export class RoutersClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  routersStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  routersStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of RoutersClient.
@@ -141,14 +141,14 @@ export class RoutersClient {
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = { fallback: true };
+      opts = {fallback: true};
     } else {
       opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -239,7 +239,7 @@ export class RoutersClient {
       'google.cloud.compute.v1beta.Routers',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -279,7 +279,7 @@ export class RoutersClient {
           (this._protos as any).google.cloud.compute.v1beta.Routers,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -310,7 +310,7 @@ export class RoutersClient {
     ];
     for (const methodName of routersStubMethods) {
       const callPromise = this.routersStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -429,6 +429,11 @@ export class RoutersClient {
    *
    * @param {Object} request
    *   The request object that will be sent.
+   * @param {string} request.etag
+   *   ETag for optimistic concurrency control as described by AIP 154. Used to
+   *   prevent conflicting updates. If provided, the request will succeed only if
+   *   the etag matches the current etag of the router; otherwise, the request
+   *   fails with an ABORTED error.
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
@@ -536,7 +541,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('delete request %j', request);
@@ -706,7 +711,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteNamedSet request %j', request);
@@ -876,7 +881,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteRoutePolicy request %j', request);
@@ -1019,7 +1024,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('get request %j', request);
@@ -1162,7 +1167,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNamedSet request %j', request);
@@ -1310,7 +1315,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNatIpInfo request %j', request);
@@ -1462,7 +1467,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRoutePolicy request %j', request);
@@ -1611,7 +1616,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRouterStatus request %j', request);
@@ -1773,7 +1778,7 @@ export class RoutersClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('insert request %j', request);
@@ -1940,7 +1945,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('patch request %j', request);
@@ -2110,7 +2115,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('patchNamedSet request %j', request);
@@ -2280,7 +2285,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('patchRoutePolicy request %j', request);
@@ -2432,7 +2437,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('preview request %j', request);
@@ -2580,7 +2585,7 @@ export class RoutersClient {
         region: request.region ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testIamPermissions request %j', request);
@@ -2747,7 +2752,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('update request %j', request);
@@ -2917,7 +2922,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateNamedSet request %j', request);
@@ -3087,7 +3092,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateRoutePolicy request %j', request);
@@ -3282,7 +3287,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('aggregatedList iterate %j', request);
@@ -3483,7 +3488,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3645,7 +3650,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['getNatMappingInfo'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNatMappingInfo stream %j', request);
@@ -3789,7 +3794,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['getNatMappingInfo'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNatMappingInfo iterate %j', request);
@@ -3972,7 +3977,7 @@ export class RoutersClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4124,7 +4129,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list stream %j', request);
@@ -4260,7 +4265,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list iterate %j', request);
@@ -4470,7 +4475,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4643,7 +4648,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listBgpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBgpRoutes stream %j', request);
@@ -4798,7 +4803,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listBgpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBgpRoutes iterate %j', request);
@@ -4994,7 +4999,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5152,7 +5157,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listNamedSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNamedSets stream %j', request);
@@ -5292,7 +5297,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listNamedSets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listNamedSets iterate %j', request);
@@ -5488,7 +5493,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5646,7 +5651,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listRoutePolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRoutePolicies stream %j', request);
@@ -5786,7 +5791,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listRoutePolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRoutePolicies iterate %j', request);
@@ -5805,7 +5810,7 @@ export class RoutersClient {
    */
   close(): Promise<void> {
     if (this.routersStub && !this._terminated) {
-      return this.routersStub.then((stub) => {
+      return this.routersStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

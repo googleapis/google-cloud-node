@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.networkconnectivity.v1beta",
-  "libraryPackage": "@google-cloud/networkconnectivity",
+  "libraryPackage": "@google-cloud/network-connectivity",
   "services": {
     "DataTransferService": {
       "clients": {
@@ -545,6 +545,11 @@
                 "getRemoteTransportProfile"
               ]
             },
+            "ParseFromActivationKey": {
+              "methods": [
+                "parseFromActivationKey"
+              ]
+            },
             "GetTransport": {
               "methods": [
                 "getTransport"
@@ -592,6 +597,11 @@
             "GetRemoteTransportProfile": {
               "methods": [
                 "getRemoteTransportProfile"
+              ]
+            },
+            "ParseFromActivationKey": {
+              "methods": [
+                "parseFromActivationKey"
               ]
             },
             "GetTransport": {

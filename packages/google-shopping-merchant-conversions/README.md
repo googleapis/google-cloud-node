@@ -64,14 +64,12 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list conversion sources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.list_conversion_sources.js) |
 | undelete conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.undelete_conversion_source.js) |
 | update conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/conversion_sources_service.update_conversion_source.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1/snippet_metadata_google.shopping.merchant.conversions.v1.json) |
 | create conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.create_conversion_source.js) |
 | delete conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.delete_conversion_source.js) |
 | get conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.get_conversion_source.js) |
 | list conversion sources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.list_conversion_sources.js) |
 | undelete conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.undelete_conversion_source.js) |
 | update conversion source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/conversion_sources_service.update_conversion_source.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-conversions/samples/generated/v1beta/snippet_metadata_google.shopping.merchant.conversions.v1beta.json) |
 
 
 ## Supported Node.js Versions

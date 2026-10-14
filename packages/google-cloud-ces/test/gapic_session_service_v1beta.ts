@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as sessionserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -114,9 +114,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -236,7 +236,7 @@ describe('v1beta.SessionServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sessionServiceStub, undefined);
@@ -244,12 +244,12 @@ describe('v1beta.SessionServiceClient', () => {
       assert(client.sessionServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sessionServiceStub);
@@ -258,14 +258,14 @@ describe('v1beta.SessionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sessionServiceStub, undefined);
@@ -274,7 +274,7 @@ describe('v1beta.SessionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -282,7 +282,7 @@ describe('v1beta.SessionServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -294,7 +294,7 @@ describe('v1beta.SessionServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -317,7 +317,7 @@ describe('v1beta.SessionServiceClient', () => {
   describe('runSession', () => {
     it('invokes runSession without error', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -349,7 +349,7 @@ describe('v1beta.SessionServiceClient', () => {
 
     it('invokes runSession without error using callback', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -397,7 +397,7 @@ describe('v1beta.SessionServiceClient', () => {
 
     it('invokes runSession with error', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v1beta.SessionServiceClient', () => {
 
     it('invokes runSession with closed client', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1beta.SessionServiceClient', () => {
       );
       request.config.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.runSession(request), expectedError);
@@ -453,7 +453,7 @@ describe('v1beta.SessionServiceClient', () => {
   describe('streamRunSession', () => {
     it('invokes streamRunSession without error', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -498,7 +498,7 @@ describe('v1beta.SessionServiceClient', () => {
 
     it('invokes streamRunSession without error and gaxServerStreamingRetries enabled', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
         gaxServerStreamingRetries: true,
       });
@@ -544,7 +544,7 @@ describe('v1beta.SessionServiceClient', () => {
 
     it('invokes streamRunSession with error', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v1beta.SessionServiceClient', () => {
 
     it('invokes streamRunSession with closed client', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,11 +602,11 @@ describe('v1beta.SessionServiceClient', () => {
       );
       request.config.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.streamRunSession(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -632,7 +632,7 @@ describe('v1beta.SessionServiceClient', () => {
   describe('bidiRunSession', () => {
     it('invokes bidiRunSession without error', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -677,7 +677,7 @@ describe('v1beta.SessionServiceClient', () => {
 
     it('invokes bidiRunSession with error', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -721,7 +721,7 @@ describe('v1beta.SessionServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v1beta.SessionServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -795,7 +795,7 @@ describe('v1beta.SessionServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v1beta.SessionServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v1beta.SessionServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -927,7 +927,7 @@ describe('v1beta.SessionServiceClient', () => {
         agent: 'agentValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1002,7 +1002,7 @@ describe('v1beta.SessionServiceClient', () => {
         app: 'appValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1067,7 +1067,7 @@ describe('v1beta.SessionServiceClient', () => {
         version: 'versionValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1143,7 +1143,7 @@ describe('v1beta.SessionServiceClient', () => {
         changelog: 'changelogValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1219,7 +1219,7 @@ describe('v1beta.SessionServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1295,7 +1295,7 @@ describe('v1beta.SessionServiceClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1371,7 +1371,7 @@ describe('v1beta.SessionServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1447,7 +1447,7 @@ describe('v1beta.SessionServiceClient', () => {
         evaluation_dataset: 'evaluationDatasetValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1539,7 +1539,7 @@ describe('v1beta.SessionServiceClient', () => {
         evaluation_expectation: 'evaluationExpectationValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1636,7 +1636,7 @@ describe('v1beta.SessionServiceClient', () => {
         evaluation_result: 'evaluationResultValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1727,7 +1727,7 @@ describe('v1beta.SessionServiceClient', () => {
         evaluation_run: 'evaluationRunValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1803,7 +1803,7 @@ describe('v1beta.SessionServiceClient', () => {
         example: 'exampleValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1879,7 +1879,7 @@ describe('v1beta.SessionServiceClient', () => {
         guardrail: 'guardrailValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1954,7 +1954,7 @@ describe('v1beta.SessionServiceClient', () => {
         omnichannel: 'omnichannelValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2019,7 +2019,7 @@ describe('v1beta.SessionServiceClient', () => {
         scheduled_evaluation_run: 'scheduledEvaluationRunValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2113,7 +2113,7 @@ describe('v1beta.SessionServiceClient', () => {
         location: 'locationValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2170,7 +2170,7 @@ describe('v1beta.SessionServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2246,7 +2246,7 @@ describe('v1beta.SessionServiceClient', () => {
         tool: 'toolValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2322,7 +2322,7 @@ describe('v1beta.SessionServiceClient', () => {
         toolset: 'toolsetValue',
       };
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

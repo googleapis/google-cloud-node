@@ -17,21 +17,20 @@
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
-import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
-import {split} from 'split-array-stream';
 import {Transform} from 'stream';
 import * as through from 'through2';
 
 import {TimestampBounds} from '../src/transaction';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import RequestOptions = google.spanner.v1.RequestOptions;
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
 
 let promisified = false;
-const fakePfy = extend({}, pfy, {
+const fakePfy = Object.assign({}, pfy, {
   promisifyAll(klass, options) {
     if (klass.name !== 'Table') {
       return;
@@ -84,11 +83,11 @@ describe('Table', () => {
     Table = proxyquire('../src/table.js', {
       '@google-cloud/promisify': fakePfy,
     }).Table;
-    TableCached = extend({}, Table);
+    TableCached = Object.assign({}, Table);
   });
 
   beforeEach(() => {
-    extend(Table, TableCached);
+    Object.assign(Table, TableCached);
     table = new Table(DATABASE, NAME);
     tableWithSchema = new Table(DATABASE, NAMEWITHSCHEMA);
     transaction = new FakeTransaction();
@@ -595,9 +594,9 @@ describe('Table', () => {
 
         const stream = through.obj();
 
-        setImmediate(async () => {
+        setImmediate(() => {
           try {
-            await split(rows, stream);
+            rows.forEach(row => stream.push(row));
             stream.end();
           } catch (err) {
             stream.destroy(err as Error);

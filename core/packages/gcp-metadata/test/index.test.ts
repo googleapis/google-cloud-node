@@ -16,13 +16,13 @@
 
 import assert from 'assert';
 
+import {GaxiosError} from 'gaxios';
 import {beforeEach, afterEach, describe, it} from 'mocha';
 import nock from 'nock';
 import {SinonSandbox, createSandbox} from 'sinon';
 
 import * as gcp from '../src';
 import {GCPResidencyUtil} from './utils/gcp-residency';
-import {GaxiosError} from 'gaxios';
 
 // the metadata IP entry:
 const HOST = gcp.HOST_ADDRESS;
@@ -237,7 +237,7 @@ describe('unit test', () => {
 
     try {
       await gcp.instance();
-    } catch (err: any) {
+    } catch (err: unknown) {
       assert(err instanceof GaxiosError);
       assert.strictEqual(err.status, 404);
     }
@@ -480,6 +480,8 @@ describe('unit test', () => {
     'ENOENT',
     'ENOTFOUND',
     'ECONNREFUSED',
+    'ConnectionRefused',
+    'FailedToOpenSocket',
   ].forEach(errorCode => {
     it(`should fail on isAvailable if ${errorCode} is returned for primary and secondary requests`, async () => {
       const secondary = secondaryHostRequest(500, errorCode);
@@ -491,6 +493,148 @@ describe('unit test', () => {
       primary.done();
       assert.strictEqual(false, isGCE);
     });
+  });
+
+  ['ConnectionRefused', 'FailedToOpenSocket'].forEach(errorCode => {
+    it(`should not emit MetadataLookupWarning when Bun socket error ${errorCode} is returned`, async () => {
+      const primary = nock(HOST)
+        .get(`${PATH}/${TYPE}`)
+        .replyWithError(Object.assign(new Error(errorCode), {code: errorCode}));
+      const secondary = nock(SECONDARY_HOST)
+        .get(`${PATH}/${TYPE}`)
+        .replyWithError(Object.assign(new Error(errorCode), {code: errorCode}));
+
+      const emitWarningStub = sandbox.stub(process, 'emitWarning');
+      const isGCE = await gcp.isAvailable();
+      assert.strictEqual(isGCE, false);
+      assert.strictEqual(emitWarningStub.called, false);
+      primary.done();
+      secondary.done();
+    });
+  });
+
+  it('should fail on isAvailable if ENOTFOUND is wrapped in error.cause', async () => {
+    const secondary = secondaryHostRequest(500, 'ENOTFOUND');
+    const innerErr = Object.assign(new Error('ENOTFOUND'), {code: 'ENOTFOUND'});
+    const wrapperErr = Object.assign(new Error('Wrapper error'), {
+      cause: innerErr,
+    });
+    const primary = nock(HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError(wrapperErr);
+    const isGCE = await gcp.isAvailable();
+    await secondary;
+    primary.done();
+    assert.strictEqual(false, isGCE);
+  });
+
+  it('should fail on isAvailable if ENOTFOUND is wrapped inside an AggregateError or nested cause', async () => {
+    const secondary = secondaryHostRequest(500, 'ENOTFOUND');
+    const innerErr1 = Object.assign(new Error('ENOTFOUND'), {
+      code: 'ENOTFOUND',
+    });
+    const innerErr2 = Object.assign(new Error('EHOSTUNREACH'), {
+      code: 'EHOSTUNREACH',
+    });
+    const wrapperErr = Object.assign(new Error('Wrapper error'), {
+      cause: innerErr1,
+    });
+    const aggregateErr = new AggregateError(
+      [wrapperErr, innerErr2],
+      'Aggregate error',
+    );
+    const primary = nock(HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError(aggregateErr);
+    const isGCE = await gcp.isAvailable();
+    await secondary;
+    primary.done();
+    assert.strictEqual(false, isGCE);
+  });
+
+  it('should emit MetadataLookupWarning with unwrapped error codes when AggregateError contains unexpected errors', async () => {
+    const primary = nock(HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError({message: 'Request aborted', code: 'AbortError'});
+    const secondary = nock(SECONDARY_HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError({message: 'connect ETIMEDOUT', code: 'ETIMEDOUT'});
+
+    const emitWarningStub = sandbox.stub(process, 'emitWarning');
+
+    const isGCE = await gcp.isAvailable();
+    assert.strictEqual(isGCE, false);
+    assert.strictEqual(emitWarningStub.calledOnce, true);
+    assert.match(String(emitWarningStub.firstCall.args[0]), /code = ETIMEDOUT/);
+    assert.strictEqual(
+      emitWarningStub.firstCall.args[1],
+      'MetadataLookupWarning',
+    );
+    primary.done();
+    secondary.done();
+  });
+
+  it('should emit MetadataLookupWarning with non-empty error message when AggregateError has empty message', async () => {
+    const subErr1 = Object.assign(new Error('Request aborted'), {
+      code: 'AbortError',
+    });
+    const subErr2 = Object.assign(new Error('connect ETIMEDOUT'), {
+      code: 'ETIMEDOUT',
+    });
+    const origPromiseAny = Promise.any.bind(Promise);
+    sandbox.stub(Promise, 'any').callsFake(async promises => {
+      try {
+        return await origPromiseAny(promises);
+      } catch {
+        throw new AggregateError([subErr1, subErr2], '');
+      }
+    });
+
+    const primary = nock(HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError({message: 'Request aborted', code: 'AbortError'});
+    const secondary = nock(SECONDARY_HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError({message: 'connect ETIMEDOUT', code: 'ETIMEDOUT'});
+
+    const emitWarningStub = sandbox.stub(process, 'emitWarning');
+
+    const isGCE = await gcp.isAvailable();
+    assert.strictEqual(isGCE, false);
+    assert.strictEqual(emitWarningStub.calledOnce, true);
+    assert.match(
+      String(emitWarningStub.firstCall.args[0]),
+      /received unexpected error = All promises were rejected code = ETIMEDOUT/,
+    );
+    assert.strictEqual(
+      emitWarningStub.firstCall.args[1],
+      'MetadataLookupWarning',
+    );
+    primary.done();
+    secondary.done();
+  });
+
+  it('should safely handle circular error cause chains and empty AggregateError in isAvailable', async () => {
+    const cyclicErrorA = new Error('cycle A') as Error & {cause?: unknown};
+    const cyclicErrorB = new Error('cycle B') as Error & {cause?: unknown};
+    cyclicErrorB.cause = cyclicErrorA;
+    cyclicErrorA.cause = cyclicErrorB;
+
+    const primary = nock(HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError(cyclicErrorA);
+    const secondary = nock(SECONDARY_HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError(new AggregateError([], 'empty aggregate'));
+
+    const emitWarningStub = sandbox.stub(process, 'emitWarning');
+
+    const isGCE = await gcp.isAvailable();
+    assert.strictEqual(isGCE, false);
+    assert.strictEqual(emitWarningStub.calledOnce, true);
+    assert.match(String(emitWarningStub.firstCall.args[0]), /code = UNKNOWN/);
+    primary.done();
+    secondary.done();
   });
 
   it('should return first successful response', async () => {

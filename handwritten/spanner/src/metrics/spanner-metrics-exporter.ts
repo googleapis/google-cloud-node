@@ -34,7 +34,7 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
   private _metricsExportFailureLogged = false;
 
   constructor({auth}: ExporterOptions, projectId: string) {
-    this._client = new MetricServiceClient({auth: auth});
+    this._client = new MetricServiceClient({auth: auth as any});
 
     this._projectId = projectId;
   }
@@ -57,13 +57,16 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
       now.getTime() - this._lastExported.getTime() <=
       MIN_EXPORT_FREQUENCY_MS
     ) {
+      resultCallback({code: ExportResultCode.SUCCESS});
       return;
     }
 
     this._lastExported = now;
-    this._exportAsync(metrics).then(resultCallback, err => {
-      resultCallback({code: ExportResultCode.FAILED, error: err});
-    });
+    this._exportAsync(metrics)
+      .then(resultCallback)
+      .catch(err => {
+        resultCallback({code: ExportResultCode.FAILED, error: err});
+      });
   }
 
   async shutdown(): Promise<void> {}
@@ -79,6 +82,9 @@ export class CloudMonitoringMetricsExporter implements PushMetricExporter {
   private async _exportAsync(
     resourceMetrics: ResourceMetrics,
   ): Promise<ExportResult> {
+    if (resourceMetrics?.resource?.asyncAttributesPending) {
+      await resourceMetrics.resource.waitForAsyncAttributes?.();
+    }
     const timeSeriesList = transformResourceMetricToTimeSeriesArray(
       resourceMetrics,
       this._projectId,

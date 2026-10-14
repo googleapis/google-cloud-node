@@ -19,7 +19,7 @@ import {
   RecordBatchStreamReader,
   DataType,
 } from 'apache-arrow';
-import * as protos from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 
 type ReadRowsResponse =
   protos.google.cloud.bigquery.storage.v1.IReadRowsResponse;

@@ -4,6 +4,59 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/speech-v8.1.1...speech-v8.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [8.1.1](https://github.com/googleapis/google-cloud-node/compare/speech-v8.1.0...speech-v8.1.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [8.1.0](https://github.com/googleapis/google-cloud-node/compare/speech-v8.0.1...speech-v8.1.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [8.0.1](https://github.com/googleapis/google-cloud-node/compare/speech-v8.0.0...speech-v8.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Upgrade generated package dependencies to Node 22 version for all core, handwritten and generated dependencies ([#9129](https://github.com/googleapis/google-cloud-node/issues/9129)) ([5f01912](https://github.com/googleapis/google-cloud-node/commit/5f0191225b96dabe41daa9f9d57a8c72749bf62d))
+
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.5.0...speech-v8.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.4.0...speech-v7.5.0) (2026-06-25)
+
+
+### Features
+
+* Migrate google-cloud-speech to librarian (keep helpers) ([#8648](https://github.com/googleapis/google-cloud-node/issues/8648)) ([4436002](https://github.com/googleapis/google-cloud-node/commit/44360026d32a0461beb10de497803b658c96c668))
+
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.2...speech-v7.4.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 4 ([#8615](https://github.com/googleapis/google-cloud-node/issues/8615)) ([f629251](https://github.com/googleapis/google-cloud-node/commit/f629251e27e51aa06003b4846a497d5a7c411cc2))
+
 ## [7.3.2](https://github.com/googleapis/google-cloud-node/compare/speech-v7.3.1...speech-v7.3.2) (2026-06-01)
 
 

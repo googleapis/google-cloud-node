@@ -20,7 +20,7 @@ import * as crypto from 'crypto';
 import * as gax from 'google-gax';
 import * as sinon from 'sinon';
 import {BigQuery, TableSchema} from '@google-cloud/bigquery';
-import * as protos from '../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 import * as bigquerywriter from '../src';
 import * as protobuf from 'protobufjs';
 import {ClientOptions} from 'google-gax';
@@ -109,11 +109,12 @@ describe('managedwriter.WriterClient', () => {
     ],
   };
 
-  before(async () => {
+  before(async function () {
+    this.timeout(2 * 60 * 1000);
     await cleanupDatasets(bigquery, GCLOUD_TESTS_PREFIX);
 
     await bigquery.createDataset(datasetId);
-  }).timeout(2 * 60 * 1000);
+  });
 
   beforeEach(async () => {
     tableId = generateUuid();

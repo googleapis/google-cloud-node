@@ -59,9 +59,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
 | create order tracking signal | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-ordertracking/samples/generated/v1/order_tracking_signals_service.create_order_tracking_signal.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-ordertracking/samples/generated/v1/snippet_metadata_google.shopping.merchant.ordertracking.v1.json) |
 | create order tracking signal | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-ordertracking/samples/generated/v1beta/order_tracking_signals_service.create_order_tracking_signal.js) |
-| shopping | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-shopping-merchant-ordertracking/samples/generated/v1beta/snippet_metadata_google.shopping.merchant.ordertracking.v1beta.json) |
 
 
 ## Supported Node.js Versions

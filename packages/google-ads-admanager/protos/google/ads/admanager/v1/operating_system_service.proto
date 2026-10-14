@@ -37,7 +37,7 @@ service OperatingSystemService {
       "https://www.googleapis.com/auth/admanager,"
       "https://www.googleapis.com/auth/admanager.readonly";
 
-  // API to retrieve a `OperatingSystem` object.
+  // Retrieves a `OperatingSystem` object.
   rpc GetOperatingSystem(GetOperatingSystemRequest) returns (OperatingSystem) {
     option (google.api.http) = {
       get: "/v1/{name=networks/*/operatingSystems/*}"
@@ -45,7 +45,7 @@ service OperatingSystemService {
     option (google.api.method_signature) = "name";
   }
 
-  // API to retrieve a list of `OperatingSystem` objects.
+  // Lists `OperatingSystem` objects.
   rpc ListOperatingSystems(ListOperatingSystemsRequest)
       returns (ListOperatingSystemsResponse) {
     option (google.api.http) = {
@@ -95,11 +95,10 @@ message ListOperatingSystemsRequest {
   //  See syntax details at
   //  https://developers.google.com/ad-manager/api/beta/filters
   //
-  // <b>Filterable fields:</b>
-  // <ul style="list-style-type:none">
-  //   <li><code>displayName</code></li>
-  //   <li><code>name</code></li>
-  // </ul>
+  // **Filterable fields:**
+  //
+  // * `displayName`
+  // * `name`
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.

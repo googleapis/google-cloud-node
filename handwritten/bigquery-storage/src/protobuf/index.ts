@@ -14,7 +14,7 @@
 
 import 'protobufjs';
 import 'protobufjs/ext/descriptor';
-import * as protos from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 
 type IDescriptorProto = protos.google.protobuf.IDescriptorProto;
 

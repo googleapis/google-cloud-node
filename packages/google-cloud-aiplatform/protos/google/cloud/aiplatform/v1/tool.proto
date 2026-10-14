@@ -89,6 +89,14 @@ message Tool {
     // See https://docs.parallel.ai/search/search-quickstart for more details.
     string api_key = 1 [(google.api.field_behavior) = OPTIONAL];
 
+    // Optional. Instructs Vertex Grounding to use Parallel's Zero Data
+    // Retention Marketplace product. If this value is "false" or omitted, the
+    // Parallel Web Search for Grounding standard subscription will be used. If
+    // this value is "true", the Parallel Web Search for Grounding - ZDR
+    // subscription will be used.
+    bool enable_zero_data_retention = 4
+        [(google.api.field_behavior) = OPTIONAL];
+
     // Optional. Custom configs for ParallelAiSearch.
     // This field can be used to pass any parameter from the Parallel.ai
     // Search API.
@@ -107,6 +115,18 @@ message Tool {
     //   }
     // }
     google.protobuf.Struct custom_configs = 3
+        [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // ExaAiSearch tool type.
+  // A tool that uses the Exa.ai search engine for grounding.
+  message ExaAiSearch {
+    // Required. The API key for ExaAiSearch.
+    string api_key = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // Optional. This field can be used to pass any parameter from the Exa.ai
+    // Search API.
+    google.protobuf.Struct custom_configs = 2
         [(google.api.field_behavior) = OPTIONAL];
   }
 
@@ -182,6 +202,11 @@ message Tool {
   // Parallel.ai and presented to the model for response generation
   ParallelAiSearch parallel_ai_search = 13
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Uses Exa.ai to search for information to
+  // answer user queries. The search results will be grounded on Exa.ai
+  // and presented to the model for response generation
+  ExaAiSearch exa_ai_search = 15 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. CodeExecution tool type.
   // Enables the model to execute code as part of generation.

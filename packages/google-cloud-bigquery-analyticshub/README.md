@@ -86,7 +86,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update data exchange | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_data_exchange.js) |
 | update listing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_listing.js) |
 | update query template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_query_template.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/snippet_metadata_google.cloud.bigquery.analyticshub.v1.json) |
 
 
 ## Supported Node.js Versions

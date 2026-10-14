@@ -90,8 +90,37 @@ interface traceConfig {
   opts?: ObservabilityOptions;
 }
 
+interface QueryWithRequestOptions {
+  sql?: string | SQLStatement;
+  requestOptions?: {
+    requestTag?: string | null;
+    transactionTag?: string | null;
+  } | null;
+}
+
+function getQueryTraceConfig(query?: string | QueryWithRequestOptions | null): {
+  sql?: string | SQLStatement;
+  requestTag?: string | null;
+} {
+  if (typeof query === 'string') {
+    return {sql: query};
+  }
+  if (query && typeof query === 'object') {
+    return {
+      sql: query.sql,
+      requestTag: query.requestOptions?.requestTag,
+    };
+  }
+  return {};
+}
+
 const SPAN_NAMESPACE_PREFIX = 'CloudSpanner'; // TODO: discuss & standardize this prefix.
-export {SPAN_NAMESPACE_PREFIX, traceConfig};
+export {
+  SPAN_NAMESPACE_PREFIX,
+  traceConfig,
+  QueryWithRequestOptions,
+  getQueryTraceConfig,
+};
 
 const {
   AsyncHooksContextManager,
@@ -133,10 +162,13 @@ const CACHE_TTL_MS = 10000; // 10 seconds TTL
  * @returns {boolean} True if global tracing is enabled.
  */
 function isGlobalTracingEnabled(): boolean {
+  if (globalTracingEnabled === true) {
+    return true;
+  }
   const now = Date.now();
   if (
     globalTracingEnabled !== undefined &&
-    (globalTracingEnabled || now - lastCheckTime < CACHE_TTL_MS)
+    now - lastCheckTime < CACHE_TTL_MS
   ) {
     return globalTracingEnabled;
   }
@@ -197,7 +229,7 @@ export function startTrace<T>(
   cb: (span: Span) => T,
 ): T {
   if (!isTracingEnabled(config?.opts)) {
-    return cb(new noopSpan());
+    return cb(NOOP_SPAN);
   }
 
   if (!config) {
@@ -317,18 +349,18 @@ export function getActiveOrNoopSpan(): Span {
   if (span) {
     return span;
   }
-  return new noopSpan();
+  return NOOP_SPAN;
 }
 
 /**
- * noopSpan is a pass-through Span that does nothing and shall not
+ * NoopSpan is a pass-through Span that does nothing and shall not
  * be exported, nor added into any context. It serves as a placeholder
  * to allow calls in sensitive areas like sessionPools to transparently
  * add attributes to spans without lots of ugly null checks.
  *
  * It exists because OpenTelemetry-JS does not seem to export the NoopSpan.
  */
-class noopSpan implements Span {
+class NoopSpan implements Span {
   constructor() {}
 
   spanContext(): SpanContext {
@@ -371,3 +403,5 @@ class noopSpan implements Span {
     return this;
   }
 }
+
+const NOOP_SPAN: Span = new NoopSpan();

@@ -16,10 +16,18 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {CloudQuotasClient} from '@google-cloud/cloudquotas';
+import {
+  CloudQuotasClient,
+  QuotaAdjusterSettingsManagerClient,
+} from '@google-cloud/cloudquotas';
 
 // check that the client class type name can be used
 function doStuffWithCloudQuotasClient(client: CloudQuotasClient) {
+  client.close();
+}
+function doStuffWithQuotaAdjusterSettingsManagerClient(
+  client: QuotaAdjusterSettingsManagerClient,
+) {
   client.close();
 }
 
@@ -27,6 +35,12 @@ function main() {
   // check that the client instance can be created
   const cloudQuotasClient = new CloudQuotasClient();
   doStuffWithCloudQuotasClient(cloudQuotasClient);
+  // check that the client instance can be created
+  const quotaAdjusterSettingsManagerClient =
+    new QuotaAdjusterSettingsManagerClient();
+  doStuffWithQuotaAdjusterSettingsManagerClient(
+    quotaAdjusterSettingsManagerClient,
+  );
 }
 
 main();

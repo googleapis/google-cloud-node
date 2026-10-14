@@ -7,5 +7,8 @@
 **/protos
 **/system-test
 **/samples/generated
-bazel-gapic-generator-typescript/
 test-fixtures/
+baselines/
+baselines-esm/
+.test-out*
+library/

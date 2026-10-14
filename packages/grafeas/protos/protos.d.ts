@@ -867,6 +867,9 @@ export namespace grafeas {
 
             /** FileLocation layerDetails */
             layerDetails?: (grafeas.v1.ILayerDetails|null);
+
+            /** FileLocation lineNumber */
+            lineNumber?: (number|null);
         }
 
         /** Represents a FileLocation. */
@@ -883,6 +886,9 @@ export namespace grafeas {
 
             /** FileLocation layerDetails. */
             public layerDetails?: (grafeas.v1.ILayerDetails|null);
+
+            /** FileLocation lineNumber. */
+            public lineNumber: number;
 
             /**
              * Creates a new FileLocation instance using the specified properties.
@@ -973,6 +979,9 @@ export namespace grafeas {
 
             /** BaseImage layerCount */
             layerCount?: (number|null);
+
+            /** BaseImage registry */
+            registry?: (string|null);
         }
 
         /** Represents a BaseImage. */
@@ -992,6 +1001,9 @@ export namespace grafeas {
 
             /** BaseImage layerCount. */
             public layerCount: number;
+
+            /** BaseImage registry. */
+            public registry: string;
 
             /**
              * Creates a new BaseImage instance using the specified properties.
@@ -6981,6 +6993,30 @@ export namespace grafeas {
 
             /** CVSS availabilityImpact */
             availabilityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS attackRequirements */
+            attackRequirements?: (grafeas.v1.CVSS.AttackRequirements|keyof typeof grafeas.v1.CVSS.AttackRequirements|null);
+
+            /** CVSS vulnerableSystemConfidentialityImpact */
+            vulnerableSystemConfidentialityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS vulnerableSystemIntegrityImpact */
+            vulnerableSystemIntegrityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS vulnerableSystemAvailabilityImpact */
+            vulnerableSystemAvailabilityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS subsequentSystemConfidentialityImpact */
+            subsequentSystemConfidentialityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS subsequentSystemIntegrityImpact */
+            subsequentSystemIntegrityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS subsequentSystemAvailabilityImpact */
+            subsequentSystemAvailabilityImpact?: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact|null);
+
+            /** CVSS exploitMaturity */
+            exploitMaturity?: (grafeas.v1.CVSS.ExploitMaturity|keyof typeof grafeas.v1.CVSS.ExploitMaturity|null);
         }
 
         /** Represents a CVSS. */
@@ -7027,6 +7063,30 @@ export namespace grafeas {
 
             /** CVSS availabilityImpact. */
             public availabilityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS attackRequirements. */
+            public attackRequirements: (grafeas.v1.CVSS.AttackRequirements|keyof typeof grafeas.v1.CVSS.AttackRequirements);
+
+            /** CVSS vulnerableSystemConfidentialityImpact. */
+            public vulnerableSystemConfidentialityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS vulnerableSystemIntegrityImpact. */
+            public vulnerableSystemIntegrityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS vulnerableSystemAvailabilityImpact. */
+            public vulnerableSystemAvailabilityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS subsequentSystemConfidentialityImpact. */
+            public subsequentSystemConfidentialityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS subsequentSystemIntegrityImpact. */
+            public subsequentSystemIntegrityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS subsequentSystemAvailabilityImpact. */
+            public subsequentSystemAvailabilityImpact: (grafeas.v1.CVSS.Impact|keyof typeof grafeas.v1.CVSS.Impact);
+
+            /** CVSS exploitMaturity. */
+            public exploitMaturity: (grafeas.v1.CVSS.ExploitMaturity|keyof typeof grafeas.v1.CVSS.ExploitMaturity);
 
             /**
              * Creates a new CVSS instance using the specified properties.
@@ -7145,7 +7205,9 @@ export namespace grafeas {
             enum UserInteraction {
                 USER_INTERACTION_UNSPECIFIED = 0,
                 USER_INTERACTION_NONE = 1,
-                USER_INTERACTION_REQUIRED = 2
+                USER_INTERACTION_REQUIRED = 2,
+                USER_INTERACTION_PASSIVE = 3,
+                USER_INTERACTION_ACTIVE = 4
             }
 
             /** Scope enum. */
@@ -7164,13 +7226,30 @@ export namespace grafeas {
                 IMPACT_PARTIAL = 4,
                 IMPACT_COMPLETE = 5
             }
+
+            /** AttackRequirements enum. */
+            enum AttackRequirements {
+                ATTACK_REQUIREMENTS_UNSPECIFIED = 0,
+                ATTACK_REQUIREMENTS_NONE = 1,
+                ATTACK_REQUIREMENTS_PRESENT = 2
+            }
+
+            /** ExploitMaturity enum. */
+            enum ExploitMaturity {
+                EXPLOIT_MATURITY_UNSPECIFIED = 0,
+                EXPLOIT_MATURITY_NOT_DEFINED = 1,
+                EXPLOIT_MATURITY_ATTACKED = 2,
+                EXPLOIT_MATURITY_POC = 3,
+                EXPLOIT_MATURITY_UNREPORTED = 4
+            }
         }
 
         /** CVSSVersion enum. */
         enum CVSSVersion {
             CVSS_VERSION_UNSPECIFIED = 0,
             CVSS_VERSION_2 = 1,
-            CVSS_VERSION_3 = 2
+            CVSS_VERSION_3 = 2,
+            CVSS_VERSION_4 = 3
         }
 
         /** Properties of a DeploymentNote. */
@@ -7543,6 +7622,12 @@ export namespace grafeas {
 
             /** DiscoveryOccurrence vulnerabilityAttestation */
             vulnerabilityAttestation?: (grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation|null);
+
+            /** DiscoveryOccurrence files */
+            files?: (grafeas.v1.DiscoveryOccurrence.IFile[]|null);
+
+            /** DiscoveryOccurrence lastVulnerabilityUpdateTime */
+            lastVulnerabilityUpdateTime?: (google.protobuf.ITimestamp|null);
         }
 
         /** Represents a DiscoveryOccurrence. */
@@ -7583,6 +7668,12 @@ export namespace grafeas {
 
             /** DiscoveryOccurrence vulnerabilityAttestation. */
             public vulnerabilityAttestation?: (grafeas.v1.DiscoveryOccurrence.IVulnerabilityAttestation|null);
+
+            /** DiscoveryOccurrence files. */
+            public files: grafeas.v1.DiscoveryOccurrence.IFile[];
+
+            /** DiscoveryOccurrence lastVulnerabilityUpdateTime. */
+            public lastVulnerabilityUpdateTime?: (google.protobuf.ITimestamp|null);
 
             /**
              * Creates a new DiscoveryOccurrence instance using the specified properties.
@@ -8009,6 +8100,109 @@ export namespace grafeas {
                     SUCCESS = 1,
                     FAILURE = 2
                 }
+            }
+
+            /** Properties of a File. */
+            interface IFile {
+
+                /** File name */
+                name?: (string|null);
+
+                /** File digest */
+                digest?: ({ [k: string]: string }|null);
+            }
+
+            /** Represents a File. */
+            class File implements IFile {
+
+                /**
+                 * Constructs a new File.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: grafeas.v1.DiscoveryOccurrence.IFile);
+
+                /** File name. */
+                public name: string;
+
+                /** File digest. */
+                public digest: { [k: string]: string };
+
+                /**
+                 * Creates a new File instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns File instance
+                 */
+                public static create(properties?: grafeas.v1.DiscoveryOccurrence.IFile): grafeas.v1.DiscoveryOccurrence.File;
+
+                /**
+                 * Encodes the specified File message. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.File.verify|verify} messages.
+                 * @param message File message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: grafeas.v1.DiscoveryOccurrence.IFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified File message, length delimited. Does not implicitly {@link grafeas.v1.DiscoveryOccurrence.File.verify|verify} messages.
+                 * @param message File message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: grafeas.v1.DiscoveryOccurrence.IFile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a File message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns File
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.DiscoveryOccurrence.File;
+
+                /**
+                 * Decodes a File message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns File
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.DiscoveryOccurrence.File;
+
+                /**
+                 * Verifies a File message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a File message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns File
+                 */
+                public static fromObject(object: { [k: string]: any }): grafeas.v1.DiscoveryOccurrence.File;
+
+                /**
+                 * Creates a plain object from a File message. Also converts values to other types if specified.
+                 * @param message File
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: grafeas.v1.DiscoveryOccurrence.File, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this File to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for File
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
             }
         }
 
@@ -9184,6 +9378,9 @@ export namespace grafeas {
 
             /** ListOccurrencesRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListOccurrencesRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListOccurrencesRequest. */
@@ -9206,6 +9403,9 @@ export namespace grafeas {
 
             /** ListOccurrencesRequest pageToken. */
             public pageToken: string;
+
+            /** ListOccurrencesRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListOccurrencesRequest instance using the specified properties.
@@ -9293,6 +9493,9 @@ export namespace grafeas {
 
             /** ListOccurrencesResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListOccurrencesResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListOccurrencesResponse. */
@@ -9309,6 +9512,9 @@ export namespace grafeas {
 
             /** ListOccurrencesResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListOccurrencesResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListOccurrencesResponse instance using the specified properties.
@@ -9905,6 +10111,9 @@ export namespace grafeas {
 
             /** ListNotesRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListNotesRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListNotesRequest. */
@@ -9927,6 +10136,9 @@ export namespace grafeas {
 
             /** ListNotesRequest pageToken. */
             public pageToken: string;
+
+            /** ListNotesRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListNotesRequest instance using the specified properties.
@@ -10014,6 +10226,9 @@ export namespace grafeas {
 
             /** ListNotesResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListNotesResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListNotesResponse. */
@@ -10030,6 +10245,9 @@ export namespace grafeas {
 
             /** ListNotesResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListNotesResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListNotesResponse instance using the specified properties.
@@ -12687,6 +12905,12 @@ export namespace grafeas {
 
             /** SecretOccurrence statuses */
             statuses?: (grafeas.v1.ISecretStatus[]|null);
+
+            /** SecretOccurrence data */
+            data?: (google.protobuf.IAny|null);
+
+            /** SecretOccurrence digest */
+            digest?: (grafeas.v1.IDigest|null);
         }
 
         /** Represents a SecretOccurrence. */
@@ -12706,6 +12930,12 @@ export namespace grafeas {
 
             /** SecretOccurrence statuses. */
             public statuses: grafeas.v1.ISecretStatus[];
+
+            /** SecretOccurrence data. */
+            public data?: (google.protobuf.IAny|null);
+
+            /** SecretOccurrence digest. */
+            public digest?: (grafeas.v1.IDigest|null);
 
             /**
              * Creates a new SecretOccurrence instance using the specified properties.
@@ -13009,7 +13239,27 @@ export namespace grafeas {
         enum SecretKind {
             SECRET_KIND_UNSPECIFIED = 0,
             SECRET_KIND_UNKNOWN = 1,
-            SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY = 2
+            SECRET_KIND_GCP_SERVICE_ACCOUNT_KEY = 2,
+            SECRET_KIND_GCP_API_KEY = 3,
+            SECRET_KIND_GCP_OAUTH2_CLIENT_CREDENTIALS = 4,
+            SECRET_KIND_GCP_OAUTH2_ACCESS_TOKEN = 5,
+            SECRET_KIND_ANTHROPIC_ADMIN_API_KEY = 6,
+            SECRET_KIND_ANTHROPIC_API_KEY = 7,
+            SECRET_KIND_AZURE_ACCESS_TOKEN = 8,
+            SECRET_KIND_AZURE_IDENTITY_TOKEN = 9,
+            SECRET_KIND_DOCKER_HUB_PERSONAL_ACCESS_TOKEN = 10,
+            SECRET_KIND_GITHUB_APP_REFRESH_TOKEN = 11,
+            SECRET_KIND_GITHUB_APP_SERVER_TO_SERVER_TOKEN = 12,
+            SECRET_KIND_GITHUB_APP_USER_TO_SERVER_TOKEN = 13,
+            SECRET_KIND_GITHUB_CLASSIC_PERSONAL_ACCESS_TOKEN = 14,
+            SECRET_KIND_GITHUB_FINE_GRAINED_PERSONAL_ACCESS_TOKEN = 15,
+            SECRET_KIND_GITHUB_OAUTH_TOKEN = 16,
+            SECRET_KIND_HUGGINGFACE_API_KEY = 17,
+            SECRET_KIND_OPENAI_API_KEY = 18,
+            SECRET_KIND_PERPLEXITY_API_KEY = 19,
+            SECRET_KIND_STRIPE_SECRET_KEY = 20,
+            SECRET_KIND_STRIPE_RESTRICTED_KEY = 21,
+            SECRET_KIND_STRIPE_WEBHOOK_SECRET = 22
         }
 
         /** Properties of an UpgradeNote. */
@@ -14477,6 +14727,12 @@ export namespace grafeas {
 
             /** VulnerabilityNote cvssV2 */
             cvssV2?: (grafeas.v1.ICVSS|null);
+
+            /** VulnerabilityNote advisoryPublishTime */
+            advisoryPublishTime?: (google.protobuf.ITimestamp|null);
+
+            /** VulnerabilityNote cvssV4 */
+            cvssV4?: (grafeas.v1.ICVSS|null);
         }
 
         /** Represents a VulnerabilityNote. */
@@ -14511,6 +14767,12 @@ export namespace grafeas {
 
             /** VulnerabilityNote cvssV2. */
             public cvssV2?: (grafeas.v1.ICVSS|null);
+
+            /** VulnerabilityNote advisoryPublishTime. */
+            public advisoryPublishTime?: (google.protobuf.ITimestamp|null);
+
+            /** VulnerabilityNote cvssV4. */
+            public cvssV4?: (grafeas.v1.ICVSS|null);
 
             /**
              * Creates a new VulnerabilityNote instance using the specified properties.
@@ -15033,6 +15295,12 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence extraDetails */
             extraDetails?: (string|null);
+
+            /** VulnerabilityOccurrence risk */
+            risk?: (grafeas.v1.IRisk|null);
+
+            /** VulnerabilityOccurrence cvssV4 */
+            cvssV4?: (grafeas.v1.ICVSS|null);
         }
 
         /** Represents a VulnerabilityOccurrence. */
@@ -15085,6 +15353,12 @@ export namespace grafeas {
 
             /** VulnerabilityOccurrence extraDetails. */
             public extraDetails: string;
+
+            /** VulnerabilityOccurrence risk. */
+            public risk?: (grafeas.v1.IRisk|null);
+
+            /** VulnerabilityOccurrence cvssV4. */
+            public cvssV4?: (grafeas.v1.ICVSS|null);
 
             /**
              * Creates a new VulnerabilityOccurrence instance using the specified properties.
@@ -15455,6 +15729,309 @@ export namespace grafeas {
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
+        }
+
+        /** Properties of a Risk. */
+        interface IRisk {
+
+            /** Risk cisaKev */
+            cisaKev?: (grafeas.v1.ICISAKnownExploitedVulnerabilities|null);
+
+            /** Risk epss */
+            epss?: (grafeas.v1.IExploitPredictionScoringSystem|null);
+        }
+
+        /** Represents a Risk. */
+        class Risk implements IRisk {
+
+            /**
+             * Constructs a new Risk.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IRisk);
+
+            /** Risk cisaKev. */
+            public cisaKev?: (grafeas.v1.ICISAKnownExploitedVulnerabilities|null);
+
+            /** Risk epss. */
+            public epss?: (grafeas.v1.IExploitPredictionScoringSystem|null);
+
+            /**
+             * Creates a new Risk instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Risk instance
+             */
+            public static create(properties?: grafeas.v1.IRisk): grafeas.v1.Risk;
+
+            /**
+             * Encodes the specified Risk message. Does not implicitly {@link grafeas.v1.Risk.verify|verify} messages.
+             * @param message Risk message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IRisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Risk message, length delimited. Does not implicitly {@link grafeas.v1.Risk.verify|verify} messages.
+             * @param message Risk message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IRisk, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Risk message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Risk
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.Risk;
+
+            /**
+             * Decodes a Risk message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Risk
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.Risk;
+
+            /**
+             * Verifies a Risk message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Risk message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Risk
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.Risk;
+
+            /**
+             * Creates a plain object from a Risk message. Also converts values to other types if specified.
+             * @param message Risk
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.Risk, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Risk to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Risk
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a CISAKnownExploitedVulnerabilities. */
+        interface ICISAKnownExploitedVulnerabilities {
+
+            /** CISAKnownExploitedVulnerabilities knownRansomwareCampaignUse */
+            knownRansomwareCampaignUse?: (string|null);
+        }
+
+        /** Represents a CISAKnownExploitedVulnerabilities. */
+        class CISAKnownExploitedVulnerabilities implements ICISAKnownExploitedVulnerabilities {
+
+            /**
+             * Constructs a new CISAKnownExploitedVulnerabilities.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.ICISAKnownExploitedVulnerabilities);
+
+            /** CISAKnownExploitedVulnerabilities knownRansomwareCampaignUse. */
+            public knownRansomwareCampaignUse: string;
+
+            /**
+             * Creates a new CISAKnownExploitedVulnerabilities instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CISAKnownExploitedVulnerabilities instance
+             */
+            public static create(properties?: grafeas.v1.ICISAKnownExploitedVulnerabilities): grafeas.v1.CISAKnownExploitedVulnerabilities;
+
+            /**
+             * Encodes the specified CISAKnownExploitedVulnerabilities message. Does not implicitly {@link grafeas.v1.CISAKnownExploitedVulnerabilities.verify|verify} messages.
+             * @param message CISAKnownExploitedVulnerabilities message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.ICISAKnownExploitedVulnerabilities, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CISAKnownExploitedVulnerabilities message, length delimited. Does not implicitly {@link grafeas.v1.CISAKnownExploitedVulnerabilities.verify|verify} messages.
+             * @param message CISAKnownExploitedVulnerabilities message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.ICISAKnownExploitedVulnerabilities, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CISAKnownExploitedVulnerabilities message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CISAKnownExploitedVulnerabilities
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.CISAKnownExploitedVulnerabilities;
+
+            /**
+             * Decodes a CISAKnownExploitedVulnerabilities message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CISAKnownExploitedVulnerabilities
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.CISAKnownExploitedVulnerabilities;
+
+            /**
+             * Verifies a CISAKnownExploitedVulnerabilities message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CISAKnownExploitedVulnerabilities message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CISAKnownExploitedVulnerabilities
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.CISAKnownExploitedVulnerabilities;
+
+            /**
+             * Creates a plain object from a CISAKnownExploitedVulnerabilities message. Also converts values to other types if specified.
+             * @param message CISAKnownExploitedVulnerabilities
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.CISAKnownExploitedVulnerabilities, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CISAKnownExploitedVulnerabilities to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for CISAKnownExploitedVulnerabilities
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an ExploitPredictionScoringSystem. */
+        interface IExploitPredictionScoringSystem {
+
+            /** ExploitPredictionScoringSystem percentile */
+            percentile?: (number|null);
+
+            /** ExploitPredictionScoringSystem score */
+            score?: (number|null);
+        }
+
+        /** Represents an ExploitPredictionScoringSystem. */
+        class ExploitPredictionScoringSystem implements IExploitPredictionScoringSystem {
+
+            /**
+             * Constructs a new ExploitPredictionScoringSystem.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: grafeas.v1.IExploitPredictionScoringSystem);
+
+            /** ExploitPredictionScoringSystem percentile. */
+            public percentile: number;
+
+            /** ExploitPredictionScoringSystem score. */
+            public score: number;
+
+            /**
+             * Creates a new ExploitPredictionScoringSystem instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ExploitPredictionScoringSystem instance
+             */
+            public static create(properties?: grafeas.v1.IExploitPredictionScoringSystem): grafeas.v1.ExploitPredictionScoringSystem;
+
+            /**
+             * Encodes the specified ExploitPredictionScoringSystem message. Does not implicitly {@link grafeas.v1.ExploitPredictionScoringSystem.verify|verify} messages.
+             * @param message ExploitPredictionScoringSystem message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: grafeas.v1.IExploitPredictionScoringSystem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ExploitPredictionScoringSystem message, length delimited. Does not implicitly {@link grafeas.v1.ExploitPredictionScoringSystem.verify|verify} messages.
+             * @param message ExploitPredictionScoringSystem message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: grafeas.v1.IExploitPredictionScoringSystem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an ExploitPredictionScoringSystem message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ExploitPredictionScoringSystem
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): grafeas.v1.ExploitPredictionScoringSystem;
+
+            /**
+             * Decodes an ExploitPredictionScoringSystem message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ExploitPredictionScoringSystem
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): grafeas.v1.ExploitPredictionScoringSystem;
+
+            /**
+             * Verifies an ExploitPredictionScoringSystem message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an ExploitPredictionScoringSystem message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ExploitPredictionScoringSystem
+             */
+            public static fromObject(object: { [k: string]: any }): grafeas.v1.ExploitPredictionScoringSystem;
+
+            /**
+             * Creates a plain object from an ExploitPredictionScoringSystem message. Also converts values to other types if specified.
+             * @param message ExploitPredictionScoringSystem
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: grafeas.v1.ExploitPredictionScoringSystem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ExploitPredictionScoringSystem to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ExploitPredictionScoringSystem
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 }
@@ -16105,6 +16682,8 @@ export namespace google {
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -18476,6 +19055,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved */
                 editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
             }
 
             /** Represents a FeatureSupport. */
@@ -18498,6 +19080,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved. */
                 public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
 
                 /**
                  * Creates a new FeatureSupport instance using the specified properties.
@@ -19437,6 +20022,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility */
             defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -19471,6 +20059,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility. */
             public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -19599,7 +20190,8 @@ export namespace google {
             enum EnforceNamingStyle {
                 ENFORCE_NAMING_STYLE_UNKNOWN = 0,
                 STYLE2024 = 1,
-                STYLE_LEGACY = 2
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
             }
 
             /** Properties of a VisibilityFeature. */
@@ -19702,6 +20294,107 @@ export namespace google {
                     EXPORT_TOP_LEVEL = 2,
                     LOCAL_ALL = 3,
                     STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
                 }
             }
         }
@@ -21688,6 +22381,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -21701,6 +22397,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -22430,6 +23129,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -22449,6 +23151,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -22762,6 +23467,365 @@ export namespace google {
 
             /**
              * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

@@ -17,7 +17,7 @@ Workload Manager API client for Node.js
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG][homepage_changelog].
 
-* [Workload Manager API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/workloadmanager/latest)
+* [Workload Manager API Nodejs Client API Reference](https://docs.cloud.google.com/nodejs/docs/reference/workloadmanager/latest)
 * [Workload Manager API Documentation](https://docs.cloud.google.com/workload-manager/docs)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -57,7 +57,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workloadmanager/samples/generated/v1/snippet_metadata_google.cloud.workloadmanager.v1.json) |
 | create evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workloadmanager/samples/generated/v1/workload_manager.create_evaluation.js) |
 | delete evaluation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workloadmanager/samples/generated/v1/workload_manager.delete_evaluation.js) |
 | delete execution | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workloadmanager/samples/generated/v1/workload_manager.delete_execution.js) |
@@ -103,7 +102,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workloadmanager/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -113,7 +112,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-workloadmanager/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

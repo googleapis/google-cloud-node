@@ -20,9 +20,9 @@ import {grpc} from 'google-gax';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {Duplex, PassThrough} from 'stream';
-import * as crypto from 'crypto';
 import * as defer from 'p-defer';
 import {promisify} from 'util';
+import * as crypto from 'node:crypto';
 
 import * as messageTypes from '../src/message-stream';
 import {Subscriber} from '../src/subscriber';
@@ -160,7 +160,7 @@ describe('MessageStream', () => {
   before(() => {
     MessageStream = proxyquire('../src/message-stream.js', {
       stream: {PassThrough: FakePassThrough},
-      './v1/subscriber_client_config.json': FAKE_CLIENT_CONFIG,
+      './v1-old/subscriber_client_config.json': FAKE_CLIENT_CONFIG,
     }).MessageStream;
   });
 
@@ -523,6 +523,24 @@ describe('MessageStream', () => {
     });
 
     describe('keeping streams alive', () => {
+      it('should set protocolVersion in the initial packet', async () => {
+        // The special handling for messageStream and the spy below are
+        // so that we can test the initial message.
+        messageStream.destroy();
+
+        const spy = sandbox.spy(FakeGrpcStream.prototype, 'write');
+        const ms = new MessageStream(subscriber);
+        await ms.start();
+
+        assert.strictEqual(spy.callCount, 5);
+        const {args} = spy.firstCall;
+        const request = args[0] as {protocolVersion?: string | number};
+
+        assert.strictEqual(String(request.protocolVersion), '1');
+
+        ms.destroy();
+      });
+
       it('should keep the streams alive', () => {
         const frequency = 30000;
         const stubs = client.streams.map(stream => {
@@ -535,6 +553,133 @@ describe('MessageStream', () => {
           const [data] = stub.lastCall.args;
           assert.deepStrictEqual(data, {});
         });
+      });
+
+      it('should close stream if no data received for 15 seconds after keepalive', async () => {
+        messageStream.destroy();
+        client.streams.length = 0;
+
+        const ms = new MessageStream(subscriber);
+        await ms.start();
+
+        const cancelSpies = client.streams.map(s => sandbox.spy(s, 'cancel'));
+
+        // wait for keepalive ping (30s) + 15s timeout
+        sandbox.clock.tick(45000);
+
+        cancelSpies.forEach(spy => {
+          assert.strictEqual(spy.callCount, 1);
+        });
+
+        ms.destroy();
+      });
+
+      it('should not close stream if data received within 15 seconds of keepalive', async () => {
+        messageStream.destroy();
+
+        const ms = new MessageStream(subscriber);
+        await ms.start();
+
+        const cancelSpies = client.streams.map(s => sandbox.spy(s, 'cancel'));
+
+        sandbox.clock.tick(30000);
+
+        // Simulating data prevents timeout
+        client.streams.forEach(s => s.emit('data', {}));
+
+        // Wait for 15s timeout to pass
+        sandbox.clock.tick(15000);
+
+        cancelSpies.forEach(spy => {
+          assert.strictEqual(spy.callCount, 0);
+        });
+
+        ms.destroy();
+      });
+
+      it('should not close stream if paused when keepalive runs', async () => {
+        messageStream.destroy();
+        client.streams.length = 0;
+
+        const ms = new MessageStream(subscriber);
+        await ms.start();
+
+        const writeSpies = client.streams.map(s => sandbox.spy(s, 'write'));
+        const cancelSpies = client.streams.map(s => sandbox.spy(s, 'cancel'));
+
+        ms.pause();
+
+        // Wait for keepalive ping (30s) + 15s timeout
+        sandbox.clock.tick(45000);
+
+        writeSpies.forEach(spy => {
+          assert.deepStrictEqual(spy.lastCall.args[0], {});
+        });
+        cancelSpies.forEach(spy => {
+          assert.strictEqual(spy.callCount, 0);
+        });
+
+        ms.destroy();
+      });
+
+      it('should not close stream if paused after keepalive ping is sent', async () => {
+        messageStream.destroy();
+        client.streams.length = 0;
+
+        const ms = new MessageStream(subscriber);
+        await ms.start();
+
+        const cancelSpies = client.streams.map(s => sandbox.spy(s, 'cancel'));
+
+        // Trigger keepalive ping at 30s
+        sandbox.clock.tick(30000);
+
+        // Pause before server keepalive response arrives
+        ms.pause();
+
+        // Wait for 15s timeout window to pass
+        sandbox.clock.tick(15000);
+
+        cancelSpies.forEach(spy => {
+          assert.strictEqual(spy.callCount, 0);
+        });
+
+        ms.destroy();
+      });
+    });
+
+    describe('pause and resume', () => {
+      it('should pause and resume all underlying streams', () => {
+        const pauseSpies = client.streams.map(s => sandbox.spy(s, 'pause'));
+        const resumeSpies = client.streams.map(s => sandbox.spy(s, 'resume'));
+
+        messageStream.pause();
+
+        pauseSpies.forEach((spy, i) => {
+          assert.strictEqual(spy.callCount, 1);
+          assert.strictEqual(client.streams[i].isPaused(), true);
+        });
+
+        messageStream.resume();
+
+        resumeSpies.forEach((spy, i) => {
+          assert.strictEqual(spy.callCount, 1);
+          assert.strictEqual(client.streams[i].isPaused(), false);
+        });
+      });
+
+      it('should pause newly replaced streams if message stream is paused', async () => {
+        const [firstStream] = client.streams;
+        firstStream.emit('status', {code: grpc.status.CANCELLED});
+
+        await promisify(process.nextTick)();
+        messageStream.pause();
+
+        await sandbox.clock.tickAsync(1000);
+
+        assert.strictEqual(client.streams.length, 6);
+        const replacementStream = client.streams[5];
+        assert.strictEqual(replacementStream.isPaused(), true);
       });
     });
 

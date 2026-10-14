@@ -27,10 +27,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -42,6 +42,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  The Interconnects API.
+ *
+ *  This client uses Interconnects version 2026-09-01.
  * @class
  * @memberof v1
  */
@@ -52,7 +54,7 @@ export class InterconnectsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('compute');
@@ -65,8 +67,8 @@ export class InterconnectsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  interconnectsStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  interconnectsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of InterconnectsClient.
@@ -141,14 +143,14 @@ export class InterconnectsClient {
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = { fallback: true };
+      opts = {fallback: true};
     } else {
       opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -214,7 +216,10 @@ export class InterconnectsClient {
       'google.cloud.compute.v1.Interconnects',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {
+        'x-goog-api-client': clientHeader.join(' '),
+        'x-goog-api-version': '2026-09-01',
+      },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -254,7 +259,7 @@ export class InterconnectsClient {
           (this._protos as any).google.cloud.compute.v1.Interconnects,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -267,10 +272,11 @@ export class InterconnectsClient {
       'list',
       'patch',
       'setLabels',
+      'setName',
     ];
     for (const methodName of interconnectsStubMethods) {
       const callPromise = this.interconnectsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -493,7 +499,7 @@ export class InterconnectsClient {
         project: request.project ?? '',
         interconnect: request.interconnect ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('delete request %j', request);
@@ -634,7 +640,7 @@ export class InterconnectsClient {
         project: request.project ?? '',
         interconnect: request.interconnect ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('get request %j', request);
@@ -786,7 +792,7 @@ export class InterconnectsClient {
         project: request.project ?? '',
         interconnect: request.interconnect ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDiagnostics request %j', request);
@@ -933,7 +939,7 @@ export class InterconnectsClient {
         project: request.project ?? '',
         interconnect: request.interconnect ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getMacsecConfig request %j', request);
@@ -1092,7 +1098,7 @@ export class InterconnectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('insert request %j', request);
@@ -1262,7 +1268,7 @@ export class InterconnectsClient {
         project: request.project ?? '',
         interconnect: request.interconnect ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('patch request %j', request);
@@ -1417,7 +1423,7 @@ export class InterconnectsClient {
         project: request.project ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setLabels request %j', request);
@@ -1437,6 +1443,173 @@ export class InterconnectsClient {
       : undefined;
     return this.innerApiCalls
       .setLabels(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Sets name of an interconnect.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.interconnect
+   *   Name of the interconnect to update.
+   * @param {google.cloud.compute.v1.InterconnectsSetNameRequest} request.interconnectsSetNameRequestResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/interconnects.set_name.js</caption>
+   * region_tag:compute_v1_generated_Interconnects_SetName_async
+   */
+  setName(
+    request?: protos.google.cloud.compute.v1.ISetNameInterconnectRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  setName(
+    request: protos.google.cloud.compute.v1.ISetNameInterconnectRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.ISetNameInterconnectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setName(
+    request: protos.google.cloud.compute.v1.ISetNameInterconnectRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.ISetNameInterconnectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setName(
+    request?: protos.google.cloud.compute.v1.ISetNameInterconnectRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.ISetNameInterconnectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.ISetNameInterconnectRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        interconnect: request.interconnect ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('setName request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.ISetNameInterconnectRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('setName response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .setName(request, options, wrappedCallback)
       ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
@@ -1562,13 +1735,6 @@ export class InterconnectsClient {
    *   the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1644,7 +1810,7 @@ export class InterconnectsClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1761,13 +1927,6 @@ export class InterconnectsClient {
    *   the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1793,7 +1952,7 @@ export class InterconnectsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list stream %j', request);
@@ -1893,13 +2052,6 @@ export class InterconnectsClient {
    *   the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1926,7 +2078,7 @@ export class InterconnectsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list iterate %j', request);
@@ -1945,7 +2097,7 @@ export class InterconnectsClient {
    */
   close(): Promise<void> {
     if (this.interconnectsStub && !this._terminated) {
-      return this.interconnectsStub.then((stub) => {
+      return this.interconnectsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import * as path from 'path';
-import * as assert from 'assert';
+import path from 'path';
+import assert from 'assert';
 import {describe, it} from 'mocha';
-import * as cp from 'child_process';
+import cp from 'child_process';
 
 const cwd = path.join(__dirname, '../..');
 

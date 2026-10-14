@@ -1,4 +1,4 @@
-// Copyright 2025 Google LLC
+// Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,13 +16,13 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1alpha from './v1alpha';
 import * as v1beta from './v1beta';
+import * as v1alpha from './v1alpha';
 
 const BetaAnalyticsDataClient = v1beta.BetaAnalyticsDataClient;
 type BetaAnalyticsDataClient = v1beta.BetaAnalyticsDataClient;
 
-export {v1alpha, v1beta, BetaAnalyticsDataClient};
-export default {v1alpha, v1beta, BetaAnalyticsDataClient};
+export {v1beta, v1alpha, BetaAnalyticsDataClient};
+export default {v1beta, v1alpha, BetaAnalyticsDataClient};
 import * as protos from '../protos/protos';
 export {protos};

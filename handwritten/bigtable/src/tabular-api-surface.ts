@@ -25,7 +25,8 @@ import {
 } from './index';
 import {BoundData, RawFilter} from './filter';
 import {Row} from './row';
-import {google} from '../protos/protos';
+import {protos} from '.';
+import google = protos.google;
 import {CallOptions, grpc, ServiceError} from 'google-gax';
 import {Transform} from 'stream';
 import {GoogleInnerError} from './table';

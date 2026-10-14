@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as amlModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -277,7 +277,7 @@ describe('v1.AMLClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.aMLStub, undefined);
@@ -285,12 +285,12 @@ describe('v1.AMLClient', () => {
       assert(client.aMLStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.aMLStub);
@@ -299,14 +299,14 @@ describe('v1.AMLClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.aMLStub, undefined);
@@ -315,7 +315,7 @@ describe('v1.AMLClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -323,7 +323,7 @@ describe('v1.AMLClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -335,7 +335,7 @@ describe('v1.AMLClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -358,7 +358,7 @@ describe('v1.AMLClient', () => {
   describe('getInstance', () => {
     it('invokes getInstance without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -389,7 +389,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getInstance without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -436,7 +436,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getInstance with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -467,7 +467,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getInstance with closed client', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v1.AMLClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getInstance(request), expectedError);
@@ -490,7 +490,7 @@ describe('v1.AMLClient', () => {
   describe('getDataset', () => {
     it('invokes getDataset without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -521,7 +521,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getDataset without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -568,7 +568,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getDataset with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -599,7 +599,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getDataset with closed client', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -612,7 +612,7 @@ describe('v1.AMLClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataset(request), expectedError);
@@ -622,7 +622,7 @@ describe('v1.AMLClient', () => {
   describe('getModel', () => {
     it('invokes getModel without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -653,7 +653,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getModel without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -700,7 +700,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getModel with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getModel with closed client', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -741,7 +741,7 @@ describe('v1.AMLClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getModel(request), expectedError);
@@ -751,7 +751,7 @@ describe('v1.AMLClient', () => {
   describe('getEngineConfig', () => {
     it('invokes getEngineConfig without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -782,7 +782,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getEngineConfig without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getEngineConfig with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -860,7 +860,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getEngineConfig with closed client', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v1.AMLClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEngineConfig(request), expectedError);
@@ -883,7 +883,7 @@ describe('v1.AMLClient', () => {
   describe('getEngineVersion', () => {
     it('invokes getEngineVersion without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -914,7 +914,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getEngineVersion without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -961,7 +961,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getEngineVersion with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -992,7 +992,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getEngineVersion with closed client', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v1.AMLClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEngineVersion(request), expectedError);
@@ -1015,7 +1015,7 @@ describe('v1.AMLClient', () => {
   describe('getPredictionResult', () => {
     it('invokes getPredictionResult without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1047,7 +1047,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getPredictionResult without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1094,7 +1094,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getPredictionResult with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1125,7 +1125,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getPredictionResult with closed client', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1138,7 +1138,7 @@ describe('v1.AMLClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPredictionResult(request), expectedError);
@@ -1148,7 +1148,7 @@ describe('v1.AMLClient', () => {
   describe('getBacktestResult', () => {
     it('invokes getBacktestResult without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1179,7 +1179,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getBacktestResult without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1226,7 +1226,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getBacktestResult with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1257,7 +1257,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes getBacktestResult with closed client', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1270,7 +1270,7 @@ describe('v1.AMLClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getBacktestResult(request), expectedError);
@@ -1280,7 +1280,7 @@ describe('v1.AMLClient', () => {
   describe('createInstance', () => {
     it('invokes createInstance without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1313,7 +1313,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createInstance without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1367,7 +1367,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createInstance with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1398,7 +1398,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createInstance with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1431,7 +1431,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkCreateInstanceProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1439,8 +1439,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateInstanceProgress(
@@ -1453,7 +1453,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkCreateInstanceProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1474,7 +1474,7 @@ describe('v1.AMLClient', () => {
   describe('updateInstance', () => {
     it('invokes updateInstance without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1508,7 +1508,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateInstance without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1563,7 +1563,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateInstance with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1595,7 +1595,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateInstance with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1629,7 +1629,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkUpdateInstanceProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1637,8 +1637,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateInstanceProgress(
@@ -1651,7 +1651,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkUpdateInstanceProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1672,7 +1672,7 @@ describe('v1.AMLClient', () => {
   describe('deleteInstance', () => {
     it('invokes deleteInstance without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1705,7 +1705,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteInstance without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1759,7 +1759,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteInstance with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1790,7 +1790,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteInstance with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1823,7 +1823,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkDeleteInstanceProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1831,8 +1831,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteInstanceProgress(
@@ -1845,7 +1845,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkDeleteInstanceProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1866,7 +1866,7 @@ describe('v1.AMLClient', () => {
   describe('importRegisteredParties', () => {
     it('invokes importRegisteredParties without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1899,7 +1899,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes importRegisteredParties without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1953,7 +1953,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes importRegisteredParties with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1987,7 +1987,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes importRegisteredParties with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2020,7 +2020,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkImportRegisteredPartiesProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2028,8 +2028,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2043,7 +2043,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkImportRegisteredPartiesProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2064,7 +2064,7 @@ describe('v1.AMLClient', () => {
   describe('exportRegisteredParties', () => {
     it('invokes exportRegisteredParties without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2097,7 +2097,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportRegisteredParties without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2151,7 +2151,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportRegisteredParties with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2185,7 +2185,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportRegisteredParties with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2218,7 +2218,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkExportRegisteredPartiesProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2226,8 +2226,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2241,7 +2241,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkExportRegisteredPartiesProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2262,7 +2262,7 @@ describe('v1.AMLClient', () => {
   describe('createDataset', () => {
     it('invokes createDataset without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2295,7 +2295,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createDataset without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2349,7 +2349,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createDataset with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2380,7 +2380,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createDataset with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2413,7 +2413,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkCreateDatasetProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2421,8 +2421,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDatasetProgress(
@@ -2435,7 +2435,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkCreateDatasetProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2456,7 +2456,7 @@ describe('v1.AMLClient', () => {
   describe('updateDataset', () => {
     it('invokes updateDataset without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2490,7 +2490,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateDataset without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2545,7 +2545,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateDataset with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2577,7 +2577,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateDataset with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2611,7 +2611,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkUpdateDatasetProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2619,8 +2619,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDatasetProgress(
@@ -2633,7 +2633,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkUpdateDatasetProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2654,7 +2654,7 @@ describe('v1.AMLClient', () => {
   describe('deleteDataset', () => {
     it('invokes deleteDataset without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2687,7 +2687,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteDataset without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2741,7 +2741,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteDataset with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2772,7 +2772,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteDataset with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2805,7 +2805,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkDeleteDatasetProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2813,8 +2813,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDatasetProgress(
@@ -2827,7 +2827,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkDeleteDatasetProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2848,7 +2848,7 @@ describe('v1.AMLClient', () => {
   describe('createModel', () => {
     it('invokes createModel without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2880,7 +2880,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createModel without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2934,7 +2934,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createModel with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2965,7 +2965,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createModel with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2998,7 +2998,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkCreateModelProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3006,8 +3006,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateModelProgress(
@@ -3020,7 +3020,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkCreateModelProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3038,7 +3038,7 @@ describe('v1.AMLClient', () => {
   describe('updateModel', () => {
     it('invokes updateModel without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3071,7 +3071,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateModel without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3126,7 +3126,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateModel with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3158,7 +3158,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateModel with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3192,7 +3192,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkUpdateModelProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3200,8 +3200,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateModelProgress(
@@ -3214,7 +3214,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkUpdateModelProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3232,7 +3232,7 @@ describe('v1.AMLClient', () => {
   describe('exportModelMetadata', () => {
     it('invokes exportModelMetadata without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3265,7 +3265,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportModelMetadata without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3319,7 +3319,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportModelMetadata with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3350,7 +3350,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportModelMetadata with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3383,7 +3383,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkExportModelMetadataProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3391,8 +3391,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportModelMetadataProgress(
@@ -3405,7 +3405,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkExportModelMetadataProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3426,7 +3426,7 @@ describe('v1.AMLClient', () => {
   describe('deleteModel', () => {
     it('invokes deleteModel without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3458,7 +3458,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteModel without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3512,7 +3512,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteModel with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3543,7 +3543,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteModel with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3576,7 +3576,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkDeleteModelProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3584,8 +3584,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteModelProgress(
@@ -3598,7 +3598,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkDeleteModelProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3616,7 +3616,7 @@ describe('v1.AMLClient', () => {
   describe('createEngineConfig', () => {
     it('invokes createEngineConfig without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3649,7 +3649,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createEngineConfig without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3703,7 +3703,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createEngineConfig with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3734,7 +3734,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createEngineConfig with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3767,7 +3767,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkCreateEngineConfigProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3775,8 +3775,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateEngineConfigProgress(
@@ -3789,7 +3789,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkCreateEngineConfigProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3810,7 +3810,7 @@ describe('v1.AMLClient', () => {
   describe('updateEngineConfig', () => {
     it('invokes updateEngineConfig without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3844,7 +3844,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateEngineConfig without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3899,7 +3899,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateEngineConfig with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3931,7 +3931,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateEngineConfig with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3965,7 +3965,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkUpdateEngineConfigProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3973,8 +3973,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateEngineConfigProgress(
@@ -3987,7 +3987,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkUpdateEngineConfigProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4008,7 +4008,7 @@ describe('v1.AMLClient', () => {
   describe('exportEngineConfigMetadata', () => {
     it('invokes exportEngineConfigMetadata without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4041,7 +4041,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportEngineConfigMetadata without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4095,7 +4095,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportEngineConfigMetadata with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4129,7 +4129,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportEngineConfigMetadata with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4162,7 +4162,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkExportEngineConfigMetadataProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4170,8 +4170,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4185,7 +4185,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkExportEngineConfigMetadataProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4206,7 +4206,7 @@ describe('v1.AMLClient', () => {
   describe('deleteEngineConfig', () => {
     it('invokes deleteEngineConfig without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4239,7 +4239,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteEngineConfig without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4293,7 +4293,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteEngineConfig with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4324,7 +4324,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteEngineConfig with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4357,7 +4357,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkDeleteEngineConfigProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4365,8 +4365,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteEngineConfigProgress(
@@ -4379,7 +4379,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkDeleteEngineConfigProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4400,7 +4400,7 @@ describe('v1.AMLClient', () => {
   describe('createPredictionResult', () => {
     it('invokes createPredictionResult without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4433,7 +4433,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createPredictionResult without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4487,7 +4487,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createPredictionResult with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4521,7 +4521,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createPredictionResult with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4554,7 +4554,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkCreatePredictionResultProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4562,8 +4562,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreatePredictionResultProgress(
@@ -4576,7 +4576,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkCreatePredictionResultProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4597,7 +4597,7 @@ describe('v1.AMLClient', () => {
   describe('updatePredictionResult', () => {
     it('invokes updatePredictionResult without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4631,7 +4631,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updatePredictionResult without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4686,7 +4686,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updatePredictionResult with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4721,7 +4721,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updatePredictionResult with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4755,7 +4755,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkUpdatePredictionResultProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4763,8 +4763,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdatePredictionResultProgress(
@@ -4777,7 +4777,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkUpdatePredictionResultProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4798,7 +4798,7 @@ describe('v1.AMLClient', () => {
   describe('exportPredictionResultMetadata', () => {
     it('invokes exportPredictionResultMetadata without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4831,7 +4831,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportPredictionResultMetadata without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4885,7 +4885,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportPredictionResultMetadata with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4919,7 +4919,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportPredictionResultMetadata with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4952,7 +4952,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkExportPredictionResultMetadataProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4960,8 +4960,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4975,7 +4975,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkExportPredictionResultMetadataProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4996,7 +4996,7 @@ describe('v1.AMLClient', () => {
   describe('deletePredictionResult', () => {
     it('invokes deletePredictionResult without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5029,7 +5029,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deletePredictionResult without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5083,7 +5083,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deletePredictionResult with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5117,7 +5117,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deletePredictionResult with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5150,7 +5150,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkDeletePredictionResultProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5158,8 +5158,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeletePredictionResultProgress(
@@ -5172,7 +5172,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkDeletePredictionResultProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5193,7 +5193,7 @@ describe('v1.AMLClient', () => {
   describe('createBacktestResult', () => {
     it('invokes createBacktestResult without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5226,7 +5226,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createBacktestResult without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5280,7 +5280,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createBacktestResult with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5311,7 +5311,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes createBacktestResult with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5344,7 +5344,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkCreateBacktestResultProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5352,8 +5352,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateBacktestResultProgress(
@@ -5366,7 +5366,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkCreateBacktestResultProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5387,7 +5387,7 @@ describe('v1.AMLClient', () => {
   describe('updateBacktestResult', () => {
     it('invokes updateBacktestResult without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5421,7 +5421,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateBacktestResult without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5476,7 +5476,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateBacktestResult with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5508,7 +5508,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes updateBacktestResult with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5542,7 +5542,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkUpdateBacktestResultProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5550,8 +5550,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateBacktestResultProgress(
@@ -5564,7 +5564,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkUpdateBacktestResultProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5585,7 +5585,7 @@ describe('v1.AMLClient', () => {
   describe('exportBacktestResultMetadata', () => {
     it('invokes exportBacktestResultMetadata without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5618,7 +5618,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportBacktestResultMetadata without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5672,7 +5672,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportBacktestResultMetadata with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5706,7 +5706,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes exportBacktestResultMetadata with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5739,7 +5739,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkExportBacktestResultMetadataProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5747,8 +5747,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5762,7 +5762,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkExportBacktestResultMetadataProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5783,7 +5783,7 @@ describe('v1.AMLClient', () => {
   describe('deleteBacktestResult', () => {
     it('invokes deleteBacktestResult without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5816,7 +5816,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteBacktestResult without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5870,7 +5870,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteBacktestResult with call error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5901,7 +5901,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes deleteBacktestResult with LRO error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5934,7 +5934,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkDeleteBacktestResultProgress without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5942,8 +5942,8 @@ describe('v1.AMLClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteBacktestResultProgress(
@@ -5956,7 +5956,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes checkDeleteBacktestResultProgress with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5977,7 +5977,7 @@ describe('v1.AMLClient', () => {
   describe('listInstances', () => {
     it('invokes listInstances without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6016,7 +6016,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listInstances without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6048,8 +6048,7 @@ describe('v1.AMLClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.financialservices.v1.IInstance[]
-              | null,
+              protos.google.cloud.financialservices.v1.IInstance[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6073,7 +6072,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listInstances with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6104,7 +6103,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listInstancesStream without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6157,15 +6156,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listInstancesStream with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6207,15 +6206,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listInstances.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6257,15 +6256,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listInstances with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6298,9 +6297,9 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listInstances.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6308,7 +6307,7 @@ describe('v1.AMLClient', () => {
   describe('listDatasets', () => {
     it('invokes listDatasets without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6347,7 +6346,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listDatasets without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6402,7 +6401,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listDatasets with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6433,7 +6432,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listDatasetsStream without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6486,15 +6485,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDatasetsStream with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6538,15 +6537,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listDatasets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasets without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6587,15 +6586,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDatasets with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6628,9 +6627,9 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6638,7 +6637,7 @@ describe('v1.AMLClient', () => {
   describe('listModels', () => {
     it('invokes listModels without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6677,7 +6676,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listModels without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6732,7 +6731,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listModels with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6763,7 +6762,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listModelsStream without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6815,15 +6814,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listModels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listModelsStream with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6866,15 +6865,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listModels.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listModels without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6915,15 +6914,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listModels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listModels with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6957,9 +6956,9 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listModels.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6967,7 +6966,7 @@ describe('v1.AMLClient', () => {
   describe('listEngineConfigs', () => {
     it('invokes listEngineConfigs without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7006,7 +7005,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listEngineConfigs without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7038,8 +7037,7 @@ describe('v1.AMLClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.financialservices.v1.IEngineConfig[]
-              | null,
+              protos.google.cloud.financialservices.v1.IEngineConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7063,7 +7061,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listEngineConfigs with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7094,7 +7092,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listEngineConfigsStream without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7147,15 +7145,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listEngineConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEngineConfigsStream with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7197,15 +7195,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listEngineConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEngineConfigs without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7247,15 +7245,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listEngineConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEngineConfigs with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7288,9 +7286,9 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listEngineConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7298,7 +7296,7 @@ describe('v1.AMLClient', () => {
   describe('listEngineVersions', () => {
     it('invokes listEngineVersions without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7338,7 +7336,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listEngineVersions without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7370,8 +7368,7 @@ describe('v1.AMLClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.financialservices.v1.IEngineVersion[]
-              | null,
+              protos.google.cloud.financialservices.v1.IEngineVersion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7395,7 +7392,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listEngineVersions with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7426,7 +7423,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listEngineVersionsStream without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7481,15 +7478,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listEngineVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEngineVersionsStream with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7533,15 +7530,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listEngineVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEngineVersions without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7583,15 +7580,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listEngineVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEngineVersions with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7624,9 +7621,9 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listEngineVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7634,7 +7631,7 @@ describe('v1.AMLClient', () => {
   describe('listPredictionResults', () => {
     it('invokes listPredictionResults without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7674,7 +7671,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listPredictionResults without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7731,7 +7728,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listPredictionResults with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7765,7 +7762,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listPredictionResultsStream without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7834,7 +7831,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listPredictionResultsStream with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7892,7 +7889,7 @@ describe('v1.AMLClient', () => {
 
     it('uses async iteration with listPredictionResults without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7946,7 +7943,7 @@ describe('v1.AMLClient', () => {
 
     it('uses async iteration with listPredictionResults with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7993,7 +7990,7 @@ describe('v1.AMLClient', () => {
   describe('listBacktestResults', () => {
     it('invokes listBacktestResults without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8033,7 +8030,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listBacktestResults without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8065,8 +8062,7 @@ describe('v1.AMLClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.financialservices.v1.IBacktestResult[]
-              | null,
+              protos.google.cloud.financialservices.v1.IBacktestResult[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -8090,7 +8086,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listBacktestResults with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8121,7 +8117,7 @@ describe('v1.AMLClient', () => {
 
     it('invokes listBacktestResultsStream without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8176,15 +8172,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listBacktestResults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listBacktestResultsStream with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8228,15 +8224,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listBacktestResults.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBacktestResults without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8278,15 +8274,15 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listBacktestResults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listBacktestResults with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8319,16 +8315,16 @@ describe('v1.AMLClient', () => {
       assert(
         (client.descriptors.page.listBacktestResults.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8358,7 +8354,7 @@ describe('v1.AMLClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8402,7 +8398,7 @@ describe('v1.AMLClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8437,7 +8433,7 @@ describe('v1.AMLClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8485,7 +8481,7 @@ describe('v1.AMLClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8526,7 +8522,7 @@ describe('v1.AMLClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8547,7 +8543,7 @@ describe('v1.AMLClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8575,7 +8571,7 @@ describe('v1.AMLClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8585,7 +8581,7 @@ describe('v1.AMLClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8609,7 +8605,7 @@ describe('v1.AMLClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8631,7 +8627,7 @@ describe('v1.AMLClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8659,7 +8655,7 @@ describe('v1.AMLClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8669,7 +8665,7 @@ describe('v1.AMLClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8693,7 +8689,7 @@ describe('v1.AMLClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8715,7 +8711,7 @@ describe('v1.AMLClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8743,7 +8739,7 @@ describe('v1.AMLClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8753,7 +8749,7 @@ describe('v1.AMLClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8777,7 +8773,7 @@ describe('v1.AMLClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8812,7 +8808,7 @@ describe('v1.AMLClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8849,7 +8845,7 @@ describe('v1.AMLClient', () => {
         backtest_result: 'backtestResultValue',
       };
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8926,7 +8922,7 @@ describe('v1.AMLClient', () => {
         dataset: 'datasetValue',
       };
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9002,7 +8998,7 @@ describe('v1.AMLClient', () => {
         engine_config: 'engineConfigValue',
       };
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9078,7 +9074,7 @@ describe('v1.AMLClient', () => {
         engine_version: 'engineVersionValue',
       };
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9153,7 +9149,7 @@ describe('v1.AMLClient', () => {
         instance: 'instanceValue',
       };
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9218,7 +9214,7 @@ describe('v1.AMLClient', () => {
         model: 'modelValue',
       };
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9294,7 +9290,7 @@ describe('v1.AMLClient', () => {
         prediction_result: 'predictionResultValue',
       };
       const client = new amlModule.v1.AMLClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

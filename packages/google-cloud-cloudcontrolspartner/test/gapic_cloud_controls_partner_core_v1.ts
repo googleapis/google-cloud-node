@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as cloudcontrolspartnercoreModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -206,7 +206,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -254,7 +254,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.cloudControlsPartnerCoreStub, undefined);
@@ -262,13 +262,13 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       assert(client.cloudControlsPartnerCoreStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.cloudControlsPartnerCoreStub);
@@ -277,15 +277,15 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.cloudControlsPartnerCoreStub, undefined);
@@ -294,7 +294,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -303,7 +303,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -316,7 +316,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -340,7 +340,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getWorkload without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -372,7 +372,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getWorkload without error using callback', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -420,7 +420,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getWorkload with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -452,7 +452,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getWorkload with closed client', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getWorkload(request), expectedError);
@@ -476,7 +476,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getCustomer without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -508,7 +508,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getCustomer without error using callback', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -556,7 +556,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getCustomer with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getCustomer with closed client', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -601,7 +601,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCustomer(request), expectedError);
@@ -612,7 +612,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getEkmConnections without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -644,7 +644,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getEkmConnections without error using callback', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -692,7 +692,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getEkmConnections with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -724,7 +724,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getEkmConnections with closed client', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -737,7 +737,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEkmConnections(request), expectedError);
@@ -748,7 +748,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getPartnerPermissions without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -781,7 +781,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getPartnerPermissions without error using callback', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getPartnerPermissions with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -864,7 +864,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getPartnerPermissions with closed client', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -891,7 +891,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getPartner without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -923,7 +923,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getPartner without error using callback', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -971,7 +971,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getPartner with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1003,7 +1003,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes getPartner with closed client', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1016,7 +1016,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPartner(request), expectedError);
@@ -1027,7 +1027,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes createCustomer without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1059,7 +1059,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes createCustomer without error using callback', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1107,7 +1107,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes createCustomer with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1139,7 +1139,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes createCustomer with closed client', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1152,7 +1152,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createCustomer(request), expectedError);
@@ -1163,7 +1163,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes updateCustomer without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1196,7 +1196,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes updateCustomer without error using callback', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1245,7 +1245,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes updateCustomer with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1278,7 +1278,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes updateCustomer with closed client', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1292,7 +1292,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       );
       request.customer.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateCustomer(request), expectedError);
@@ -1303,7 +1303,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes deleteCustomer without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1335,7 +1335,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes deleteCustomer without error using callback', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1383,7 +1383,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes deleteCustomer with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1415,7 +1415,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes deleteCustomer with closed client', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1428,7 +1428,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteCustomer(request), expectedError);
@@ -1439,7 +1439,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes listWorkloads without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1479,7 +1479,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes listWorkloads without error using callback', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1511,8 +1511,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.cloudcontrolspartner.v1.IWorkload[]
-              | null,
+              protos.google.cloud.cloudcontrolspartner.v1.IWorkload[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1537,7 +1536,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes listWorkloads with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1569,7 +1568,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes listWorkloadsStream without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1622,16 +1621,16 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listWorkloadsStream with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1673,16 +1672,16 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkloads without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1724,16 +1723,16 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listWorkloads with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1766,9 +1765,9 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listWorkloads.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1777,7 +1776,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes listCustomers without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1817,7 +1816,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes listCustomers without error using callback', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1849,8 +1848,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.cloudcontrolspartner.v1.ICustomer[]
-              | null,
+              protos.google.cloud.cloudcontrolspartner.v1.ICustomer[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1875,7 +1873,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes listCustomers with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1907,7 +1905,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes listCustomersStream without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1960,16 +1958,16 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listCustomers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCustomersStream with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2011,16 +2009,16 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listCustomers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomers without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2062,16 +2060,16 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCustomers with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2104,9 +2102,9 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       assert(
         (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2115,7 +2113,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes listAccessApprovalRequests without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -2158,7 +2156,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes listAccessApprovalRequests without error using callback', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -2218,7 +2216,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes listAccessApprovalRequests with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -2255,7 +2253,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes listAccessApprovalRequestsStream without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -2327,7 +2325,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('invokes listAccessApprovalRequestsStream with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -2388,7 +2386,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('uses async iteration with listAccessApprovalRequests without error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -2445,7 +2443,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
     it('uses async iteration with listAccessApprovalRequests with error', async () => {
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const stub = sinon.stub(client, 'warn');
@@ -2503,7 +2501,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       };
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2615,7 +2613,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       };
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2681,7 +2679,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       };
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2756,7 +2754,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       };
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2808,7 +2806,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       };
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2902,7 +2900,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       };
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2990,7 +2988,7 @@ describe('v1.CloudControlsPartnerCoreClient', () => {
       };
       const client =
         new cloudcontrolspartnercoreModule.v1.CloudControlsPartnerCoreClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

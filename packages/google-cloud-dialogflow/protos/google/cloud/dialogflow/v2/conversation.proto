@@ -332,11 +332,15 @@ message Conversation {
       google.protobuf.Timestamp ingestion_time = 3
           [(google.api.field_behavior) = OUTPUT_ONLY];
 
-      // If the context content was generated from a tool call, specify the
-      // answer record associated with the tool call.
+      // Optional. The answer record of the tool execution result.
       // Format: `projects/<Project ID>/locations/<Location
       // ID>/answerRecords/<Answer Record ID>`.
-      string answer_record = 4;
+      string answer_record = 4 [
+        (google.api.field_behavior) = OPTIONAL,
+        (google.api.resource_reference) = {
+          type: "dialogflow.googleapis.com/AnswerRecord"
+        }
+      ];
     }
 
     // Represents the mode in which context reference contents are updated.
@@ -1202,6 +1206,10 @@ message SearchKnowledgeDebugInfo {
 
   // The latency of the service.
   ServiceLatency service_latency = 4;
+
+  // Optional. Debug info from the Customer Engagement Suite (CES) execution.
+  google.protobuf.Struct ces_debug_info = 5
+      [(google.api.field_behavior) = OPTIONAL];
 }
 
 // The response message for
@@ -1233,6 +1241,12 @@ message SearchKnowledgeAnswer {
 
     // The answer is from intent matching.
     INTENT = 3;
+
+    // The answer is from Playbook.
+    PLAYBOOK = 4;
+
+    // The answer is from event.
+    EVENT = 5;
   }
 
   // The sources of the answers.

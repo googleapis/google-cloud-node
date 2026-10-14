@@ -1,0 +1,185 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.maps.mapmanagement.v2",
+  "libraryPackage": "@google-cloud/mapmanagement",
+  "services": {
+    "MapManagement": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MapManagementClient",
+          "rpcs": {
+            "CreateMapConfig": {
+              "methods": [
+                "createMapConfig"
+              ]
+            },
+            "GetMapConfig": {
+              "methods": [
+                "getMapConfig"
+              ]
+            },
+            "UpdateMapConfig": {
+              "methods": [
+                "updateMapConfig"
+              ]
+            },
+            "DeleteMapConfig": {
+              "methods": [
+                "deleteMapConfig"
+              ]
+            },
+            "CreateStyleConfig": {
+              "methods": [
+                "createStyleConfig"
+              ]
+            },
+            "GetStyleConfig": {
+              "methods": [
+                "getStyleConfig"
+              ]
+            },
+            "UpdateStyleConfig": {
+              "methods": [
+                "updateStyleConfig"
+              ]
+            },
+            "DeleteStyleConfig": {
+              "methods": [
+                "deleteStyleConfig"
+              ]
+            },
+            "CreateMapContextConfig": {
+              "methods": [
+                "createMapContextConfig"
+              ]
+            },
+            "GetMapContextConfig": {
+              "methods": [
+                "getMapContextConfig"
+              ]
+            },
+            "UpdateMapContextConfig": {
+              "methods": [
+                "updateMapContextConfig"
+              ]
+            },
+            "DeleteMapContextConfig": {
+              "methods": [
+                "deleteMapContextConfig"
+              ]
+            },
+            "ListMapConfigs": {
+              "methods": [
+                "listMapConfigs",
+                "listMapConfigsStream",
+                "listMapConfigsAsync"
+              ]
+            },
+            "ListStyleConfigs": {
+              "methods": [
+                "listStyleConfigs",
+                "listStyleConfigsStream",
+                "listStyleConfigsAsync"
+              ]
+            },
+            "ListMapContextConfigs": {
+              "methods": [
+                "listMapContextConfigs",
+                "listMapContextConfigsStream",
+                "listMapContextConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MapManagementClient",
+          "rpcs": {
+            "CreateMapConfig": {
+              "methods": [
+                "createMapConfig"
+              ]
+            },
+            "GetMapConfig": {
+              "methods": [
+                "getMapConfig"
+              ]
+            },
+            "UpdateMapConfig": {
+              "methods": [
+                "updateMapConfig"
+              ]
+            },
+            "DeleteMapConfig": {
+              "methods": [
+                "deleteMapConfig"
+              ]
+            },
+            "CreateStyleConfig": {
+              "methods": [
+                "createStyleConfig"
+              ]
+            },
+            "GetStyleConfig": {
+              "methods": [
+                "getStyleConfig"
+              ]
+            },
+            "UpdateStyleConfig": {
+              "methods": [
+                "updateStyleConfig"
+              ]
+            },
+            "DeleteStyleConfig": {
+              "methods": [
+                "deleteStyleConfig"
+              ]
+            },
+            "CreateMapContextConfig": {
+              "methods": [
+                "createMapContextConfig"
+              ]
+            },
+            "GetMapContextConfig": {
+              "methods": [
+                "getMapContextConfig"
+              ]
+            },
+            "UpdateMapContextConfig": {
+              "methods": [
+                "updateMapContextConfig"
+              ]
+            },
+            "DeleteMapContextConfig": {
+              "methods": [
+                "deleteMapContextConfig"
+              ]
+            },
+            "ListMapConfigs": {
+              "methods": [
+                "listMapConfigs",
+                "listMapConfigsStream",
+                "listMapConfigsAsync"
+              ]
+            },
+            "ListStyleConfigs": {
+              "methods": [
+                "listStyleConfigs",
+                "listStyleConfigsStream",
+                "listStyleConfigsAsync"
+              ]
+            },
+            "ListMapContextConfigs": {
+              "methods": [
+                "listMapContextConfigs",
+                "listMapContextConfigsStream",
+                "listMapContextConfigsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

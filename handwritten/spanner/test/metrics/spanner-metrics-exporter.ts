@@ -31,7 +31,7 @@ import {
 } from '../../src/metrics/constants';
 import {Counter, Meter, Histogram} from '@opentelemetry/api';
 import {ExportResult, ExportResultCode} from '@opentelemetry/core';
-import {Resource} from '@opentelemetry/resources';
+import {resourceFromAttributes} from '@opentelemetry/resources';
 
 const PROJECT_ID = 'test-project';
 const INSTANCE_ID = 'test-instance';
@@ -95,7 +95,7 @@ describe('Export', () => {
   beforeEach(() => {
     exporter = new CloudMonitoringMetricsExporter({auth}, PROJECT_ID);
     reader = new InMemoryMetricReader();
-    const resource = new Resource({
+    const resource = resourceFromAttributes({
       ['project_id']: PROJECT_ID,
       ['client_hash']: CLIENT_HASH,
       ['location']: LOCATION,
@@ -265,5 +265,21 @@ describe('Export', () => {
 
     const callbackResult = resultCallbackSpy.getCall(0).args[0];
     assert.strictEqual(callbackResult.code, ExportResultCode.SUCCESS);
+  });
+
+  it('should invoke resultCallback with SUCCESS when throttled by MIN_EXPORT_FREQUENCY_MS', async () => {
+    const {resourceMetrics} = await reader.collect();
+    // Simulate an export that just occurred 1 second ago
+    (exporter as any)._lastExported = new Date();
+
+    const resultCallbackSpy = sinon.spy();
+    exporter.export(resourceMetrics, resultCallbackSpy);
+
+    // Must be called synchronously / immediately rather than hanging
+    assert.strictEqual(resultCallbackSpy.calledOnce, true);
+    assert.strictEqual(
+      resultCallbackSpy.getCall(0).args[0].code,
+      ExportResultCode.SUCCESS,
+    );
   });
 });

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as participantsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -131,9 +131,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -253,7 +253,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.participantsStub, undefined);
@@ -261,12 +261,12 @@ describe('v2beta1.ParticipantsClient', () => {
       assert(client.participantsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.participantsStub);
@@ -275,14 +275,14 @@ describe('v2beta1.ParticipantsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.participantsStub, undefined);
@@ -291,7 +291,7 @@ describe('v2beta1.ParticipantsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -299,7 +299,7 @@ describe('v2beta1.ParticipantsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -311,7 +311,7 @@ describe('v2beta1.ParticipantsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -334,7 +334,7 @@ describe('v2beta1.ParticipantsClient', () => {
   describe('createParticipant', () => {
     it('invokes createParticipant without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -365,7 +365,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes createParticipant without error using callback', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -412,7 +412,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes createParticipant with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes createParticipant with closed client', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -456,7 +456,7 @@ describe('v2beta1.ParticipantsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createParticipant(request), expectedError);
@@ -466,7 +466,7 @@ describe('v2beta1.ParticipantsClient', () => {
   describe('getParticipant', () => {
     it('invokes getParticipant without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -497,7 +497,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes getParticipant without error using callback', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -544,7 +544,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes getParticipant with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -575,7 +575,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes getParticipant with closed client', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -588,7 +588,7 @@ describe('v2beta1.ParticipantsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getParticipant(request), expectedError);
@@ -598,7 +598,7 @@ describe('v2beta1.ParticipantsClient', () => {
   describe('updateParticipant', () => {
     it('invokes updateParticipant without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -630,7 +630,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes updateParticipant without error using callback', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -678,7 +678,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes updateParticipant with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes updateParticipant with closed client', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -724,7 +724,7 @@ describe('v2beta1.ParticipantsClient', () => {
       );
       request.participant.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateParticipant(request), expectedError);
@@ -734,7 +734,7 @@ describe('v2beta1.ParticipantsClient', () => {
   describe('analyzeContent', () => {
     it('invokes analyzeContent without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -765,7 +765,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes analyzeContent without error using callback', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -812,7 +812,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes analyzeContent with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -843,7 +843,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes analyzeContent with closed client', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -856,7 +856,7 @@ describe('v2beta1.ParticipantsClient', () => {
       );
       request.participant = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.analyzeContent(request), expectedError);
@@ -866,7 +866,7 @@ describe('v2beta1.ParticipantsClient', () => {
   describe('suggestArticles', () => {
     it('invokes suggestArticles without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -897,7 +897,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes suggestArticles without error using callback', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -944,7 +944,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes suggestArticles with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -975,7 +975,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes suggestArticles with closed client', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -988,7 +988,7 @@ describe('v2beta1.ParticipantsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.suggestArticles(request), expectedError);
@@ -998,7 +998,7 @@ describe('v2beta1.ParticipantsClient', () => {
   describe('suggestFaqAnswers', () => {
     it('invokes suggestFaqAnswers without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1029,7 +1029,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes suggestFaqAnswers without error using callback', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1076,7 +1076,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes suggestFaqAnswers with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1107,7 +1107,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes suggestFaqAnswers with closed client', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1120,7 +1120,7 @@ describe('v2beta1.ParticipantsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.suggestFaqAnswers(request), expectedError);
@@ -1130,7 +1130,7 @@ describe('v2beta1.ParticipantsClient', () => {
   describe('suggestSmartReplies', () => {
     it('invokes suggestSmartReplies without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1162,7 +1162,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes suggestSmartReplies without error using callback', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1209,7 +1209,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes suggestSmartReplies with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1240,7 +1240,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes suggestSmartReplies with closed client', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1253,7 +1253,7 @@ describe('v2beta1.ParticipantsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.suggestSmartReplies(request), expectedError);
@@ -1263,7 +1263,7 @@ describe('v2beta1.ParticipantsClient', () => {
   describe('suggestKnowledgeAssist', () => {
     it('invokes suggestKnowledgeAssist without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1295,7 +1295,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes suggestKnowledgeAssist without error using callback', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1342,7 +1342,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes suggestKnowledgeAssist with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1376,7 +1376,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes suggestKnowledgeAssist with closed client', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1389,7 +1389,7 @@ describe('v2beta1.ParticipantsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1402,7 +1402,7 @@ describe('v2beta1.ParticipantsClient', () => {
   describe('compileSuggestion', () => {
     it('invokes compileSuggestion without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -1435,7 +1435,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes compileSuggestion without error using callback', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -1484,7 +1484,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes compileSuggestion with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -1517,7 +1517,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes compileSuggestion with closed client', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -1531,7 +1531,7 @@ describe('v2beta1.ParticipantsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.compileSuggestion(request), expectedError);
@@ -1542,7 +1542,7 @@ describe('v2beta1.ParticipantsClient', () => {
   describe('streamingAnalyzeContent', () => {
     it('invokes streamingAnalyzeContent without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1587,7 +1587,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes streamingAnalyzeContent with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1629,10 +1629,104 @@ describe('v2beta1.ParticipantsClient', () => {
     });
   });
 
+  describe('streamingReactiveCompanionSuggestions', () => {
+    it('invokes streamingReactiveCompanionSuggestions without error', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.StreamingReactiveCompanionSuggestionsRequest(),
+      );
+
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.StreamingReactiveCompanionSuggestionsResponse(),
+      );
+      client.innerApiCalls.streamingReactiveCompanionSuggestions =
+        stubBidiStreamingCall(expectedResponse);
+      const stream = client.streamingReactiveCompanionSuggestions();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.dialogflow.v2beta1.StreamingReactiveCompanionSuggestionsResponse,
+          ) => {
+            resolve(response);
+          },
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .streamingReactiveCompanionSuggestions as SinonStub
+        )
+          .getCall(0)
+          .calledWith(null),
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request,
+      );
+    });
+
+    it('invokes streamingReactiveCompanionSuggestions with error', async () => {
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.v2beta1.StreamingReactiveCompanionSuggestionsRequest(),
+      );
+      const expectedError = new Error('expected');
+      client.innerApiCalls.streamingReactiveCompanionSuggestions =
+        stubBidiStreamingCall(undefined, expectedError);
+      const stream = client.streamingReactiveCompanionSuggestions();
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.dialogflow.v2beta1.StreamingReactiveCompanionSuggestionsResponse,
+          ) => {
+            resolve(response);
+          },
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+        stream.write(request);
+        stream.end();
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.innerApiCalls
+            .streamingReactiveCompanionSuggestions as SinonStub
+        )
+          .getCall(0)
+          .calledWith(null),
+      );
+      assert.deepStrictEqual(
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
+        request,
+      );
+    });
+  });
+
   describe('bidiStreamingAnalyzeContent', () => {
     it('invokes bidiStreamingAnalyzeContent without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1677,7 +1771,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes bidiStreamingAnalyzeContent with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1722,7 +1816,7 @@ describe('v2beta1.ParticipantsClient', () => {
   describe('listParticipants', () => {
     it('invokes listParticipants without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1761,7 +1855,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes listParticipants without error using callback', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1793,8 +1887,7 @@ describe('v2beta1.ParticipantsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.v2beta1.IParticipant[]
-              | null,
+              protos.google.cloud.dialogflow.v2beta1.IParticipant[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1818,7 +1911,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes listParticipants with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1849,7 +1942,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes listParticipantsStream without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1902,15 +1995,15 @@ describe('v2beta1.ParticipantsClient', () => {
       assert(
         (client.descriptors.page.listParticipants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listParticipantsStream with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1952,15 +2045,15 @@ describe('v2beta1.ParticipantsClient', () => {
       assert(
         (client.descriptors.page.listParticipants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listParticipants without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2002,15 +2095,15 @@ describe('v2beta1.ParticipantsClient', () => {
       assert(
         (client.descriptors.page.listParticipants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listParticipants with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2043,9 +2136,9 @@ describe('v2beta1.ParticipantsClient', () => {
       assert(
         (client.descriptors.page.listParticipants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2053,7 +2146,7 @@ describe('v2beta1.ParticipantsClient', () => {
   describe('listSuggestions', () => {
     it('invokes listSuggestions without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -2094,7 +2187,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes listSuggestions without error using callback', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -2127,8 +2220,7 @@ describe('v2beta1.ParticipantsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.v2beta1.ISuggestion[]
-              | null,
+              protos.google.cloud.dialogflow.v2beta1.ISuggestion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -2153,7 +2245,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes listSuggestions with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -2186,7 +2278,7 @@ describe('v2beta1.ParticipantsClient', () => {
 
     it('invokes listSuggestionsStream without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -2241,15 +2333,15 @@ describe('v2beta1.ParticipantsClient', () => {
       assert(
         (client.descriptors.page.listSuggestions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSuggestionsStream with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -2293,15 +2385,15 @@ describe('v2beta1.ParticipantsClient', () => {
       assert(
         (client.descriptors.page.listSuggestions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSuggestions without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -2345,15 +2437,15 @@ describe('v2beta1.ParticipantsClient', () => {
       assert(
         (client.descriptors.page.listSuggestions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSuggestions with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const stub = sinon.stub(client, 'warn');
@@ -2388,16 +2480,16 @@ describe('v2beta1.ParticipantsClient', () => {
       assert(
         (client.descriptors.page.listSuggestions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2427,7 +2519,7 @@ describe('v2beta1.ParticipantsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2471,7 +2563,7 @@ describe('v2beta1.ParticipantsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2506,7 +2598,7 @@ describe('v2beta1.ParticipantsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2554,7 +2646,7 @@ describe('v2beta1.ParticipantsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2594,6 +2686,71 @@ describe('v2beta1.ParticipantsClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('companionAgent', async () => {
+      const fakePath = '/rendered/path/companionAgent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        companion_agent: 'companionAgentValue',
+      };
+      const client = new participantsModule.v2beta1.ParticipantsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.companionAgentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.companionAgentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('companionAgentPath', () => {
+        const result = client.companionAgentPath(
+          'projectValue',
+          'locationValue',
+          'companionAgentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromCompanionAgentName', () => {
+        const result = client.matchProjectFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromCompanionAgentName', () => {
+        const result = client.matchLocationFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCompanionAgentFromCompanionAgentName', () => {
+        const result =
+          client.matchCompanionAgentFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'companionAgentValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('encryptionSpec', async () => {
       const fakePath = '/rendered/path/encryptionSpec';
       const expectedParameters = {
@@ -2601,7 +2758,7 @@ describe('v2beta1.ParticipantsClient', () => {
         location: 'locationValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2654,7 +2811,7 @@ describe('v2beta1.ParticipantsClient', () => {
         generator: 'generatorValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2719,7 +2876,7 @@ describe('v2beta1.ParticipantsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2810,7 +2967,7 @@ describe('v2beta1.ParticipantsClient', () => {
         project: 'projectValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2848,7 +3005,7 @@ describe('v2beta1.ParticipantsClient', () => {
         project: 'projectValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2887,7 +3044,7 @@ describe('v2beta1.ParticipantsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2950,7 +3107,7 @@ describe('v2beta1.ParticipantsClient', () => {
         environment: 'environmentValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3017,7 +3174,7 @@ describe('v2beta1.ParticipantsClient', () => {
         context: 'contextValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3143,7 +3300,7 @@ describe('v2beta1.ParticipantsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3264,7 +3421,7 @@ describe('v2beta1.ParticipantsClient', () => {
         project: 'projectValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3310,7 +3467,7 @@ describe('v2beta1.ParticipantsClient', () => {
         intent: 'intentValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3372,7 +3529,7 @@ describe('v2beta1.ParticipantsClient', () => {
         context: 'contextValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3451,7 +3608,7 @@ describe('v2beta1.ParticipantsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3527,7 +3684,7 @@ describe('v2beta1.ParticipantsClient', () => {
         version: 'versionValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3588,7 +3745,7 @@ describe('v2beta1.ParticipantsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3651,7 +3808,7 @@ describe('v2beta1.ParticipantsClient', () => {
         message: 'messageValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3730,7 +3887,7 @@ describe('v2beta1.ParticipantsClient', () => {
         participant: 'participantValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3810,7 +3967,7 @@ describe('v2beta1.ParticipantsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3875,7 +4032,7 @@ describe('v2beta1.ParticipantsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3938,7 +4095,7 @@ describe('v2beta1.ParticipantsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4002,7 +4159,7 @@ describe('v2beta1.ParticipantsClient', () => {
         document: 'documentValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4080,7 +4237,7 @@ describe('v2beta1.ParticipantsClient', () => {
         location: 'locationValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4144,7 +4301,7 @@ describe('v2beta1.ParticipantsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4223,7 +4380,7 @@ describe('v2beta1.ParticipantsClient', () => {
         environment: 'environmentValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4306,7 +4463,7 @@ describe('v2beta1.ParticipantsClient', () => {
         context: 'contextValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4452,7 +4609,7 @@ describe('v2beta1.ParticipantsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4593,7 +4750,7 @@ describe('v2beta1.ParticipantsClient', () => {
         location: 'locationValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4655,7 +4812,7 @@ describe('v2beta1.ParticipantsClient', () => {
         intent: 'intentValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4735,7 +4892,7 @@ describe('v2beta1.ParticipantsClient', () => {
         context: 'contextValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4836,7 +4993,7 @@ describe('v2beta1.ParticipantsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4941,7 +5098,7 @@ describe('v2beta1.ParticipantsClient', () => {
         version: 'versionValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5019,7 +5176,7 @@ describe('v2beta1.ParticipantsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5098,7 +5255,7 @@ describe('v2beta1.ParticipantsClient', () => {
         message: 'messageValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5199,7 +5356,7 @@ describe('v2beta1.ParticipantsClient', () => {
         participant: 'participantValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5304,7 +5461,7 @@ describe('v2beta1.ParticipantsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5387,7 +5544,7 @@ describe('v2beta1.ParticipantsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5466,7 +5623,7 @@ describe('v2beta1.ParticipantsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5546,7 +5703,7 @@ describe('v2beta1.ParticipantsClient', () => {
         document: 'documentValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5651,7 +5808,7 @@ describe('v2beta1.ParticipantsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5729,7 +5886,7 @@ describe('v2beta1.ParticipantsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5792,7 +5949,7 @@ describe('v2beta1.ParticipantsClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5856,7 +6013,7 @@ describe('v2beta1.ParticipantsClient', () => {
         tool: 'toolValue',
       };
       const client = new participantsModule.v2beta1.ParticipantsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

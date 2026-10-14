@@ -21,9 +21,8 @@ import {
   ResourceMetrics,
 } from '@opentelemetry/sdk-metrics';
 import {Resource} from '@opentelemetry/resources';
-import {MonitoredResource} from '@google-cloud/opentelemetry-resource-util';
 import * as path from 'path';
-import {MetricKind, ValueType} from './external-types';
+import {MetricKind, MonitoredResource, ValueType} from './external-types';
 import {
   SPANNER_METER_NAME,
   CLIENT_METRICS_PREFIX,
@@ -33,6 +32,7 @@ import {
   METRIC_NAMES,
   METRIC_LABEL_KEY_CLIENT_UID,
   METRIC_LABEL_KEY_CLIENT_NAME,
+  MONITORED_RES_LABEL_KEY_LOCATION,
   UNKNOWN_ATTRIBUTE,
 } from './constants';
 import {MetricsTracerFactory} from './metrics-tracer-factory';
@@ -125,10 +125,10 @@ function _createTimeSeries<T>(
 ) {
   const type = path.posix.join(CLIENT_METRICS_PREFIX, metric.descriptor.name);
   const resourceLabels = resource
-    ? _extractLabels(resource, projectId)
+    ? _extractLabels(resource, projectId, true)
     : {metricLabels: {}, monitoredResourceLabels: {}};
 
-  const dataLabels = _extractLabels(dataPoint, projectId);
+  const dataLabels = _extractLabels(dataPoint, projectId, false);
 
   const labels = {
     ...resourceLabels.metricLabels,
@@ -206,18 +206,27 @@ function _transformPoint<T>(metric: MetricData, dataPoint: DataPoint<T>) {
   }
 }
 
-/** Extracts metric and monitored resource labels from data point */
+/** Extracts metric and monitored resource labels from data point or resource */
 function _extractLabels<T>(
   {attributes = {}}: DataPoint<T> | Resource,
   projectId: string,
+  isResource = false,
 ) {
   const factory = MetricsTracerFactory.getInstance(projectId);
-  // Add Client name and Client UID metric labels
-  attributes[METRIC_LABEL_KEY_CLIENT_UID] =
-    factory?.clientUid ?? UNKNOWN_ATTRIBUTE;
-  attributes[METRIC_LABEL_KEY_CLIENT_NAME] =
-    factory?.clientName ?? UNKNOWN_ATTRIBUTE;
-  return Object.entries(attributes).reduce(
+  const combinedAttributes: Record<string, unknown> = {
+    ...attributes,
+    [METRIC_LABEL_KEY_CLIENT_UID]: factory?.clientUid ?? UNKNOWN_ATTRIBUTE,
+    [METRIC_LABEL_KEY_CLIENT_NAME]: factory?.clientName ?? UNKNOWN_ATTRIBUTE,
+  };
+  if (
+    isResource &&
+    factory?.location &&
+    (!combinedAttributes[MONITORED_RES_LABEL_KEY_LOCATION] ||
+      combinedAttributes[MONITORED_RES_LABEL_KEY_LOCATION] === 'global')
+  ) {
+    combinedAttributes[MONITORED_RES_LABEL_KEY_LOCATION] = factory.location;
+  }
+  return Object.entries(combinedAttributes).reduce(
     (result, [key, value]) => {
       const normalizedKey = _normalizeLabelKey(key);
       const val = value?.toString();

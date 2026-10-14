@@ -69,7 +69,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | reschedule maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.reschedule_maintenance.js) |
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.update_instance.js) |
 | upgrade instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.upgrade_instance.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/snippet_metadata_google.cloud.redis.v1.json) |
 | create instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.create_instance.js) |
 | delete instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.delete_instance.js) |
 | export instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.export_instance.js) |
@@ -81,7 +80,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | reschedule maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.reschedule_maintenance.js) |
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.update_instance.js) |
 | upgrade instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.upgrade_instance.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/snippet_metadata_google.cloud.redis.v1beta1.json) |
 
 
 ## Supported Node.js Versions

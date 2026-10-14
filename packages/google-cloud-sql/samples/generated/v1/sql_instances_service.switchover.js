@@ -42,6 +42,10 @@ function main() {
    *  minutes and can be modified to a maximum value of 24 hours.
    */
   // const dbTimeout = {}
+  /**
+   *  Optional. Region of the Cloud SQL instance.
+   */
+  // const location = 'abc123'
 
   // Imports the Sql library
   const {SqlInstancesServiceClient} = require('@google-cloud/sql').v1;

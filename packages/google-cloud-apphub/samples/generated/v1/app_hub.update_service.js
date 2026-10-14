@@ -20,7 +20,7 @@
 
 'use strict';
 
-function main(updateMask, service) {
+function main(service) {
   // [START apphub_v1_generated_AppHub_UpdateService_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
@@ -29,7 +29,7 @@ function main(updateMask, service) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Field mask is used to specify the fields to be overwritten in the
+   *  Optional. Field mask is used to specify the fields to be overwritten in the
    *  Service resource by the update.
    *  The fields specified in the update_mask are relative to the resource, not
    *  the full request.
@@ -68,7 +68,6 @@ function main(updateMask, service) {
   async function callUpdateService() {
     // Construct request
     const request = {
-      updateMask,
       service,
     };
 

@@ -20,16 +20,16 @@
 import * as protos from '../../protos/protos.js';
 import assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as bigquerystorageModule from '../src/index.js';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -56,7 +56,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -215,7 +215,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.bigQueryStorageStub, undefined);
@@ -223,12 +223,12 @@ describe('v1beta1.BigQueryStorageClient', () => {
       assert(client.bigQueryStorageStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.bigQueryStorageStub);
@@ -237,14 +237,14 @@ describe('v1beta1.BigQueryStorageClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.bigQueryStorageStub, undefined);
@@ -253,7 +253,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -261,7 +261,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -273,7 +273,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -296,7 +296,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
   describe('createReadSession', () => {
     it('invokes createReadSession without error', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -334,7 +334,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes createReadSession without error using callback', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes createReadSession with error', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -426,7 +426,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes createReadSession with closed client', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -446,7 +446,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
       );
       request.tableReference.datasetId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createReadSession(request), expectedError);
@@ -456,7 +456,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
   describe('batchCreateReadSessionStreams', () => {
     it('invokes batchCreateReadSessionStreams without error', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -489,7 +489,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes batchCreateReadSessionStreams without error using callback', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -537,7 +537,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes batchCreateReadSessionStreams with error', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes batchCreateReadSessionStreams with closed client', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -586,7 +586,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
       );
       request.session.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -599,7 +599,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
   describe('finalizeStream', () => {
     it('invokes finalizeStream without error', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -631,7 +631,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes finalizeStream without error using callback', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -679,7 +679,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes finalizeStream with error', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -711,7 +711,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes finalizeStream with closed client', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -725,7 +725,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
       );
       request.stream.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.finalizeStream(request), expectedError);
@@ -735,7 +735,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
   describe('splitReadStream', () => {
     it('invokes splitReadStream without error', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -767,7 +767,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes splitReadStream without error using callback', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -815,7 +815,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes splitReadStream with error', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -847,7 +847,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes splitReadStream with closed client', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -861,7 +861,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
       );
       request.originalStream.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.splitReadStream(request), expectedError);
@@ -871,7 +871,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
   describe('readRows', () => {
     it('invokes readRows without error', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -918,7 +918,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes readRows without error and gaxServerStreamingRetries enabled', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -965,7 +965,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes readRows with error', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1012,7 +1012,7 @@ describe('v1beta1.BigQueryStorageClient', () => {
 
     it('invokes readRows with closed client', async () => {
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1027,11 +1027,11 @@ describe('v1beta1.BigQueryStorageClient', () => {
       );
       request.readPosition.stream.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       const stream = client.readRows(request, {
-        retryRequestOptions: { noResponseRetries: 0 },
+        retryRequestOptions: {noResponseRetries: 0},
       });
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -1065,10 +1065,10 @@ describe('v1beta1.BigQueryStorageClient', () => {
         session: 'sessionValue',
       };
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.readSessionPathTemplate.render = sinon
@@ -1131,10 +1131,10 @@ describe('v1beta1.BigQueryStorageClient', () => {
         stream: 'streamValue',
       };
       const client = new bigquerystorageModule.v1beta1.BigQueryStorageClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.streamPathTemplate.render = sinon

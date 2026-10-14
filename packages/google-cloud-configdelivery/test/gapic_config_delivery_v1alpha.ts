@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as configdeliveryModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -280,7 +280,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.configDeliveryStub, undefined);
@@ -288,12 +288,12 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(client.configDeliveryStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.configDeliveryStub);
@@ -302,14 +302,14 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.configDeliveryStub, undefined);
@@ -318,7 +318,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -326,7 +326,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -338,7 +338,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -361,7 +361,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('getResourceBundle', () => {
     it('invokes getResourceBundle without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -392,7 +392,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getResourceBundle without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -439,7 +439,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getResourceBundle with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -470,7 +470,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getResourceBundle with closed client', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getResourceBundle(request), expectedError);
@@ -493,7 +493,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('getFleetPackage', () => {
     it('invokes getFleetPackage without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getFleetPackage without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getFleetPackage with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -602,7 +602,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getFleetPackage with closed client', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFleetPackage(request), expectedError);
@@ -625,7 +625,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('getRelease', () => {
     it('invokes getRelease without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -656,7 +656,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getRelease without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -703,7 +703,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getRelease with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -734,7 +734,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getRelease with closed client', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -747,7 +747,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRelease(request), expectedError);
@@ -757,7 +757,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('getVariant', () => {
     it('invokes getVariant without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -788,7 +788,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getVariant without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -835,7 +835,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getVariant with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -866,7 +866,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getVariant with closed client', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -879,7 +879,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVariant(request), expectedError);
@@ -889,7 +889,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('getRollout', () => {
     it('invokes getRollout without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -920,7 +920,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getRollout without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -967,7 +967,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getRollout with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -998,7 +998,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes getRollout with closed client', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1011,7 +1011,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRollout(request), expectedError);
@@ -1021,7 +1021,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('createResourceBundle', () => {
     it('invokes createResourceBundle without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1054,7 +1054,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes createResourceBundle without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1108,7 +1108,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes createResourceBundle with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1139,7 +1139,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes createResourceBundle with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1172,7 +1172,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkCreateResourceBundleProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1180,8 +1180,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateResourceBundleProgress(
@@ -1194,7 +1194,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkCreateResourceBundleProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1215,7 +1215,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('updateResourceBundle', () => {
     it('invokes updateResourceBundle without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1249,7 +1249,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes updateResourceBundle without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1304,7 +1304,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes updateResourceBundle with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1336,7 +1336,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes updateResourceBundle with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1370,7 +1370,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkUpdateResourceBundleProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1378,8 +1378,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateResourceBundleProgress(
@@ -1392,7 +1392,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkUpdateResourceBundleProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1413,7 +1413,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('deleteResourceBundle', () => {
     it('invokes deleteResourceBundle without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1446,7 +1446,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes deleteResourceBundle without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1500,7 +1500,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes deleteResourceBundle with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1531,7 +1531,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes deleteResourceBundle with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1564,7 +1564,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkDeleteResourceBundleProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1572,8 +1572,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteResourceBundleProgress(
@@ -1586,7 +1586,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkDeleteResourceBundleProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1607,7 +1607,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('createFleetPackage', () => {
     it('invokes createFleetPackage without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1640,7 +1640,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes createFleetPackage without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1694,7 +1694,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes createFleetPackage with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1725,7 +1725,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes createFleetPackage with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1758,7 +1758,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkCreateFleetPackageProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1766,8 +1766,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateFleetPackageProgress(
@@ -1780,7 +1780,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkCreateFleetPackageProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1801,7 +1801,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('updateFleetPackage', () => {
     it('invokes updateFleetPackage without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1835,7 +1835,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes updateFleetPackage without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1890,7 +1890,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes updateFleetPackage with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1922,7 +1922,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes updateFleetPackage with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1956,7 +1956,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkUpdateFleetPackageProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1964,8 +1964,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateFleetPackageProgress(
@@ -1978,7 +1978,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkUpdateFleetPackageProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1999,7 +1999,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('deleteFleetPackage', () => {
     it('invokes deleteFleetPackage without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2032,7 +2032,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes deleteFleetPackage without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2086,7 +2086,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes deleteFleetPackage with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2117,7 +2117,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes deleteFleetPackage with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2150,7 +2150,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkDeleteFleetPackageProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2158,8 +2158,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteFleetPackageProgress(
@@ -2172,7 +2172,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkDeleteFleetPackageProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2193,7 +2193,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('createRelease', () => {
     it('invokes createRelease without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2226,7 +2226,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes createRelease without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2280,7 +2280,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes createRelease with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2311,7 +2311,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes createRelease with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2344,7 +2344,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkCreateReleaseProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2352,8 +2352,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateReleaseProgress(
@@ -2366,7 +2366,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkCreateReleaseProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2387,7 +2387,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('updateRelease', () => {
     it('invokes updateRelease without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2421,7 +2421,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes updateRelease without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2476,7 +2476,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes updateRelease with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2508,7 +2508,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes updateRelease with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2542,7 +2542,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkUpdateReleaseProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2550,8 +2550,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateReleaseProgress(
@@ -2564,7 +2564,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkUpdateReleaseProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2585,7 +2585,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('deleteRelease', () => {
     it('invokes deleteRelease without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2618,7 +2618,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes deleteRelease without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2672,7 +2672,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes deleteRelease with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2703,7 +2703,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes deleteRelease with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2736,7 +2736,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkDeleteReleaseProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2744,8 +2744,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteReleaseProgress(
@@ -2758,7 +2758,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkDeleteReleaseProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2779,7 +2779,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('createVariant', () => {
     it('invokes createVariant without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2812,7 +2812,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes createVariant without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2866,7 +2866,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes createVariant with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2897,7 +2897,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes createVariant with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2930,7 +2930,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkCreateVariantProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2938,8 +2938,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateVariantProgress(
@@ -2952,7 +2952,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkCreateVariantProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2973,7 +2973,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('updateVariant', () => {
     it('invokes updateVariant without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3007,7 +3007,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes updateVariant without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3062,7 +3062,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes updateVariant with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3094,7 +3094,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes updateVariant with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3128,7 +3128,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkUpdateVariantProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3136,8 +3136,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateVariantProgress(
@@ -3150,7 +3150,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkUpdateVariantProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3171,7 +3171,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('deleteVariant', () => {
     it('invokes deleteVariant without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3204,7 +3204,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes deleteVariant without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3258,7 +3258,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes deleteVariant with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3289,7 +3289,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes deleteVariant with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3322,7 +3322,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkDeleteVariantProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3330,8 +3330,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteVariantProgress(
@@ -3344,7 +3344,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkDeleteVariantProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3365,7 +3365,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('suspendRollout', () => {
     it('invokes suspendRollout without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3398,7 +3398,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes suspendRollout without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3452,7 +3452,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes suspendRollout with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3483,7 +3483,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes suspendRollout with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3516,7 +3516,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkSuspendRolloutProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3524,8 +3524,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkSuspendRolloutProgress(
@@ -3538,7 +3538,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkSuspendRolloutProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3559,7 +3559,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('resumeRollout', () => {
     it('invokes resumeRollout without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3592,7 +3592,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes resumeRollout without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3646,7 +3646,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes resumeRollout with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3677,7 +3677,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes resumeRollout with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3710,7 +3710,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkResumeRolloutProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3718,8 +3718,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkResumeRolloutProgress(
@@ -3732,7 +3732,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkResumeRolloutProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3753,7 +3753,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('abortRollout', () => {
     it('invokes abortRollout without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3785,7 +3785,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes abortRollout without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3839,7 +3839,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes abortRollout with call error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3870,7 +3870,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes abortRollout with LRO error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3903,7 +3903,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkAbortRolloutProgress without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3911,8 +3911,8 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkAbortRolloutProgress(
@@ -3925,7 +3925,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes checkAbortRolloutProgress with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3943,7 +3943,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('listResourceBundles', () => {
     it('invokes listResourceBundles without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3983,7 +3983,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listResourceBundles without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4040,7 +4040,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listResourceBundles with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4071,7 +4071,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listResourceBundlesStream without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4126,15 +4126,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listResourceBundles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listResourceBundlesStream with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4178,15 +4178,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listResourceBundles.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listResourceBundles without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4228,15 +4228,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listResourceBundles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listResourceBundles with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4269,9 +4269,9 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listResourceBundles.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4279,7 +4279,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('listFleetPackages', () => {
     it('invokes listFleetPackages without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4318,7 +4318,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listFleetPackages without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4350,8 +4350,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.configdelivery.v1alpha.IFleetPackage[]
-              | null,
+              protos.google.cloud.configdelivery.v1alpha.IFleetPackage[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4375,7 +4374,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listFleetPackages with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4406,7 +4405,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listFleetPackagesStream without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4461,15 +4460,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listFleetPackages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFleetPackagesStream with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4513,15 +4512,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listFleetPackages.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFleetPackages without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4563,15 +4562,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listFleetPackages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFleetPackages with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4604,9 +4603,9 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listFleetPackages.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4614,7 +4613,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('listReleases', () => {
     it('invokes listReleases without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4653,7 +4652,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listReleases without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4685,8 +4684,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.configdelivery.v1alpha.IRelease[]
-              | null,
+              protos.google.cloud.configdelivery.v1alpha.IRelease[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4710,7 +4708,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listReleases with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4741,7 +4739,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listReleasesStream without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4794,15 +4792,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listReleases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listReleasesStream with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4846,15 +4844,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listReleases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReleases without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4896,15 +4894,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listReleases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listReleases with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4937,9 +4935,9 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listReleases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4947,7 +4945,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('listVariants', () => {
     it('invokes listVariants without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4986,7 +4984,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listVariants without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5018,8 +5016,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.configdelivery.v1alpha.IVariant[]
-              | null,
+              protos.google.cloud.configdelivery.v1alpha.IVariant[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5043,7 +5040,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listVariants with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5074,7 +5071,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listVariantsStream without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5127,15 +5124,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listVariants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listVariantsStream with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5179,15 +5176,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listVariants.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVariants without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5229,15 +5226,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listVariants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listVariants with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5270,9 +5267,9 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listVariants.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5280,7 +5277,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('listRollouts', () => {
     it('invokes listRollouts without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5319,7 +5316,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listRollouts without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5351,8 +5348,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.configdelivery.v1alpha.IRollout[]
-              | null,
+              protos.google.cloud.configdelivery.v1alpha.IRollout[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -5376,7 +5372,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listRollouts with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5407,7 +5403,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
 
     it('invokes listRolloutsStream without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5460,15 +5456,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listRollouts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRolloutsStream with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5512,15 +5508,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listRollouts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRollouts without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5562,15 +5558,15 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listRollouts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRollouts with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5603,16 +5599,16 @@ describe('v1alpha.ConfigDeliveryClient', () => {
       assert(
         (client.descriptors.page.listRollouts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5642,7 +5638,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5686,7 +5682,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5721,7 +5717,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5769,7 +5765,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5810,7 +5806,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5831,7 +5827,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5859,7 +5855,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5869,7 +5865,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5893,7 +5889,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5915,7 +5911,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5943,7 +5939,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -5953,7 +5949,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -5977,7 +5973,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5999,7 +5995,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6027,7 +6023,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6037,7 +6033,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6061,7 +6057,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6096,7 +6092,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6132,7 +6128,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         fleet_package: 'fleetPackageValue',
       };
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6195,7 +6191,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         location: 'locationValue',
       };
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6245,7 +6241,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         membership: 'membershipValue',
       };
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6307,7 +6303,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         project: 'projectValue',
       };
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6348,7 +6344,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         release: 'releaseValue',
       };
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6423,7 +6419,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         resource_bundle: 'resourceBundleValue',
       };
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6489,7 +6485,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         rollout: 'rolloutValue',
       };
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6566,7 +6562,7 @@ describe('v1alpha.ConfigDeliveryClient', () => {
         variant: 'variantValue',
       };
       const client = new configdeliveryModule.v1alpha.ConfigDeliveryClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

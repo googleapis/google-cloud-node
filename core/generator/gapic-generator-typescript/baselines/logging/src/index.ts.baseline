@@ -36,4 +36,4 @@ export default {
   MetricsServiceV2Client,
 };
 import * as protos from '../protos/protos';
-export { protos };
+export {protos};

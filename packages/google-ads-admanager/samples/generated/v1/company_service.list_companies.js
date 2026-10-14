@@ -29,15 +29,17 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent, which owns this collection of Companies.
-   *  Format: `networks/{network_code}`
+   *  Required. The parent, which owns this collection of
+   *  Companies google.ads.admanager.v1.Company. Format:
+   *  `networks/{network_code}`
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of `Companies` to return. The service may
-   *  return fewer than this value. If unspecified, at most 50 `Companies` will
-   *  be returned. The maximum value is 1000; values greater than 1000 will be
-   *  coerced to 1000.
+   *  Optional. The maximum number of
+   *  Companies google.ads.admanager.v1.Company  to return. The service may
+   *  return fewer than this value. If unspecified, at most 50
+   *  Companies google.ads.admanager.v1.Company  will be returned. The maximum
+   *  value is 1000; values greater than 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
   /**
@@ -51,22 +53,20 @@ function main(parent) {
    *  Optional. Expression to filter the response.
    *   See syntax details at
    *   https://developers.google.com/ad-manager/api/beta/filters
-   *  <b>Filterable fields:</b>
-   *  <ul style="list-style-type:none">
-   *    <li><code>address</code></li>
-   *    <li><code>comment</code></li>
-   *    <li><code>companyId</code></li>
-   *    <li><code>creditStatus</code></li>
-   *    <li><code>displayName</code></li>
-   *    <li><code>email</code></li>
-   *    <li><code>externalId</code></li>
-   *    <li><code>fax</code></li>
-   *    <li><code>name</code></li>
-   *    <li><code>phone</code></li>
-   *    <li><code>thirdPartyCompanyId</code></li>
-   *    <li><code>type</code></li>
-   *    <li><code>updateTime</code></li>
-   *  </ul>
+   *  **Filterable fields:**
+   *  * `address`
+   *  * `comment`
+   *  * `companyId`
+   *  * `creditStatus`
+   *  * `displayName`
+   *  * `email`
+   *  * `externalId`
+   *  * `fax`
+   *  * `name`
+   *  * `phone`
+   *  * `thirdPartyCompanyId`
+   *  * `type`
+   *  * `updateTime`
    */
   // const filter = 'abc123'
   /**

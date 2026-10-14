@@ -47,7 +47,7 @@ function main(parent) {
   // const pageSize = 1234
 
   // Imports the Securitycenter library
-  const {SecurityCenterClient} = require('@google-cloud/securitycenter').v2;
+  const {SecurityCenterClient} = require('@google-cloud/security-center').v2;
 
   // Instantiates a client
   const securitycenterClient = new SecurityCenterClient();

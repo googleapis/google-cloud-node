@@ -20,7 +20,9 @@ const packageRoot = __dirname;
 const utilDir = path.join(packageRoot, 'src', 'util');
 
 try {
-  execSync('npm install', {cwd: packageRoot, stdio: 'inherit'});
+  // --ignore-scripts: prevents recursive build loops and race conditions (stops npm from running the "prepare" script).
+  // --cache=/tmp/npm-cache: redirects cache to a writable directory, avoiding permission crashes in non-root Docker environments.
+  execSync('npm install --ignore-scripts --cache=/tmp/npm-cache', {cwd: packageRoot, stdio: 'inherit'});
 
   const tscPath = path.join(packageRoot, 'node_modules', '.bin', 'tsc');
   execSync(`${tscPath} src/util/storage_control_utils.ts`, {

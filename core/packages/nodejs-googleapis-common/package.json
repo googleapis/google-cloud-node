@@ -1,11 +1,11 @@
 {
   "name": "googleapis-common",
-  "version": "8.0.2",
+  "version": "9.3.1",
   "description": "A common tooling library used by the googleapis npm module. You probably don't want to use this directly.",
   "repository": {
     "type": "git",
-    "directory": "packages/nodejs-googleapis-common",
-    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+    "directory": "core/packages/nodejs-googleapis-common",
+    "url": "https://github.com/googleapis/google-cloud-node.git"
   },
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -17,8 +17,8 @@
     "prebenchmark": "npm run compile",
     "benchmark": "node build/benchmark/bench.js",
     "compile": "tsc -p .",
-    "test": "c8 mocha build/test",
-    "system-test": "c8 mocha build/system-test --timeout 600000",
+    "test": "node ../../../bin/run-test.cjs --proxyquire-shim build/test",
+    "system-test": "node ../../../bin/run-test.cjs build/system-test --timeout 600000",
     "presystem-test": "npm run compile",
     "fix": "gts fix",
     "prepare": "npm run compile",
@@ -37,13 +37,14 @@
   "license": "Apache-2.0",
   "dependencies": {
     "extend": "^3.0.2",
-    "gaxios": "7.1.3",
-    "google-auth-library": "10.5.0",
-    "google-logging-utils": "1.1.3",
+    "gaxios": "^8.3.0",
+    "google-auth-library": "^11.0.0",
+    "google-logging-utils": "^2.0.0",
     "qs": "^6.7.0",
     "url-template": "^2.0.8"
   },
   "devDependencies": {
+    "@googleapis/dialogflow": "^1.0.0",
     "@babel/plugin-proposal-private-methods": "^7.18.6",
     "@types/extend": "^3.0.1",
     "@types/mocha": "^10.0.10",
@@ -61,8 +62,8 @@
     "http2spy": "^2.0.0",
     "is-docker": "^3.0.0",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^5.0.0",
-    "jsdoc-region-tag": "^4.0.0",
+    "jsdoc-fresh": "^6.0.0",
+    "jsdoc-region-tag": "^5.0.0",
     "karma": "^6.0.0",
     "karma-chrome-launcher": "^3.0.0",
     "karma-coverage": "^2.0.0",
@@ -70,7 +71,7 @@
     "karma-mocha": "^2.0.0",
     "karma-remap-coverage": "^0.1.5",
     "karma-sourcemap-loader": "^0.4.0",
-    "karma-webpack": "^5.0.1",
+    "karma-webpack": "^5.0.0",
     "mocha": "^11.1.0",
     "mv": "^2.1.1",
     "ncp": "^2.0.0",
@@ -80,14 +81,14 @@
     "proxyquire": "^2.1.3",
     "puppeteer": "^24.0.0",
     "sinon": "21.0.3",
-    "tmp": "0.2.5",
+    "tmp": "0.2.7",
     "ts-loader": "^9.5.2",
     "typescript": "5.8.3",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22"
   },
-  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/nodejs-googleapis-common"
+  "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/packages/nodejs-googleapis-common"
 }

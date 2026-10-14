@@ -352,6 +352,16 @@
                 "importCryptoKeyVersion"
               ]
             },
+            "ImportTrustedKeyWrappedCryptoKeyVersion": {
+              "methods": [
+                "importTrustedKeyWrappedCryptoKeyVersion"
+              ]
+            },
+            "ExportTrustedKeyWrappedCryptoKeyVersion": {
+              "methods": [
+                "exportTrustedKeyWrappedCryptoKeyVersion"
+              ]
+            },
             "CreateImportJob": {
               "methods": [
                 "createImportJob"
@@ -530,6 +540,16 @@
             "ImportCryptoKeyVersion": {
               "methods": [
                 "importCryptoKeyVersion"
+              ]
+            },
+            "ImportTrustedKeyWrappedCryptoKeyVersion": {
+              "methods": [
+                "importTrustedKeyWrappedCryptoKeyVersion"
+              ]
+            },
+            "ExportTrustedKeyWrappedCryptoKeyVersion": {
+              "methods": [
+                "exportTrustedKeyWrappedCryptoKeyVersion"
               ]
             },
             "CreateImportJob": {

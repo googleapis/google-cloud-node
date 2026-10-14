@@ -24,7 +24,7 @@ import {google} from '../../protos/protos';
 import * as tracing from '../telemetry-tracing';
 import {filterMessage} from './pubsub-message';
 import {promisify} from 'util';
-import {logs as baseLogs} from '../logs';
+import {logs as baseLogs, LoggingFunction} from '../logs';
 
 /**
  * Loggers. Exported for unit tests.
@@ -32,7 +32,7 @@ import {logs as baseLogs} from '../logs';
  * @private
  */
 export const logs = {
-  publishBatch: baseLogs.pubsub.sublog('publish-batch'),
+  publishBatch: baseLogs.pubsub.sublog('publish-batch') as LoggingFunction,
 };
 
 /**

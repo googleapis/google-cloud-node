@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datastreamModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -271,7 +271,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.datastreamStub, undefined);
@@ -279,12 +279,12 @@ describe('v1alpha1.DatastreamClient', () => {
       assert(client.datastreamStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.datastreamStub);
@@ -293,14 +293,14 @@ describe('v1alpha1.DatastreamClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.datastreamStub, undefined);
@@ -309,7 +309,7 @@ describe('v1alpha1.DatastreamClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -317,7 +317,7 @@ describe('v1alpha1.DatastreamClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -329,7 +329,7 @@ describe('v1alpha1.DatastreamClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -352,7 +352,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('getConnectionProfile', () => {
     it('invokes getConnectionProfile without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -384,7 +384,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes getConnectionProfile without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes getConnectionProfile with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -462,7 +462,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes getConnectionProfile with closed client', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -475,7 +475,7 @@ describe('v1alpha1.DatastreamClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnectionProfile(request), expectedError);
@@ -485,7 +485,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('discoverConnectionProfile', () => {
     it('invokes discoverConnectionProfile without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -517,7 +517,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes discoverConnectionProfile without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes discoverConnectionProfile with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -598,7 +598,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes discoverConnectionProfile with closed client', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -611,7 +611,7 @@ describe('v1alpha1.DatastreamClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -624,7 +624,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('getStream', () => {
     it('invokes getStream without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -655,7 +655,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes getStream without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -702,7 +702,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes getStream with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -730,7 +730,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes getStream with closed client', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1alpha1.DatastreamClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getStream(request), expectedError);
@@ -753,7 +753,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('getPrivateConnection', () => {
     it('invokes getPrivateConnection without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -785,7 +785,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes getPrivateConnection without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes getPrivateConnection with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -863,7 +863,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes getPrivateConnection with closed client', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -876,7 +876,7 @@ describe('v1alpha1.DatastreamClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPrivateConnection(request), expectedError);
@@ -886,7 +886,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('getRoute', () => {
     it('invokes getRoute without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -917,7 +917,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes getRoute without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -964,7 +964,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes getRoute with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -992,7 +992,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes getRoute with closed client', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1005,7 +1005,7 @@ describe('v1alpha1.DatastreamClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRoute(request), expectedError);
@@ -1015,7 +1015,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('createConnectionProfile', () => {
     it('invokes createConnectionProfile without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1048,7 +1048,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes createConnectionProfile without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1102,7 +1102,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes createConnectionProfile with call error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1136,7 +1136,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes createConnectionProfile with LRO error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1169,7 +1169,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkCreateConnectionProfileProgress without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1177,8 +1177,8 @@ describe('v1alpha1.DatastreamClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1192,7 +1192,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkCreateConnectionProfileProgress with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1213,7 +1213,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('updateConnectionProfile', () => {
     it('invokes updateConnectionProfile without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1247,7 +1247,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes updateConnectionProfile without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1302,7 +1302,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes updateConnectionProfile with call error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1337,7 +1337,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes updateConnectionProfile with LRO error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1371,7 +1371,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkUpdateConnectionProfileProgress without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1379,8 +1379,8 @@ describe('v1alpha1.DatastreamClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1394,7 +1394,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkUpdateConnectionProfileProgress with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1415,7 +1415,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('deleteConnectionProfile', () => {
     it('invokes deleteConnectionProfile without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1448,7 +1448,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes deleteConnectionProfile without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1502,7 +1502,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes deleteConnectionProfile with call error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1536,7 +1536,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes deleteConnectionProfile with LRO error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1569,7 +1569,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkDeleteConnectionProfileProgress without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1577,8 +1577,8 @@ describe('v1alpha1.DatastreamClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1592,7 +1592,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkDeleteConnectionProfileProgress with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1613,7 +1613,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('createStream', () => {
     it('invokes createStream without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1645,7 +1645,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes createStream without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1699,7 +1699,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes createStream with call error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1730,7 +1730,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes createStream with LRO error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1763,7 +1763,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkCreateStreamProgress without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1771,8 +1771,8 @@ describe('v1alpha1.DatastreamClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateStreamProgress(
@@ -1785,7 +1785,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkCreateStreamProgress with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1803,7 +1803,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('updateStream', () => {
     it('invokes updateStream without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1836,7 +1836,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes updateStream without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1891,7 +1891,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes updateStream with call error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1923,7 +1923,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes updateStream with LRO error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1957,7 +1957,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkUpdateStreamProgress without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1965,8 +1965,8 @@ describe('v1alpha1.DatastreamClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateStreamProgress(
@@ -1979,7 +1979,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkUpdateStreamProgress with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1997,7 +1997,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('deleteStream', () => {
     it('invokes deleteStream without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2029,7 +2029,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes deleteStream without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2083,7 +2083,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes deleteStream with call error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2114,7 +2114,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes deleteStream with LRO error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2147,7 +2147,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkDeleteStreamProgress without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2155,8 +2155,8 @@ describe('v1alpha1.DatastreamClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteStreamProgress(
@@ -2169,7 +2169,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkDeleteStreamProgress with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2187,7 +2187,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('fetchErrors', () => {
     it('invokes fetchErrors without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2219,7 +2219,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes fetchErrors without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2273,7 +2273,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes fetchErrors with call error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2304,7 +2304,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes fetchErrors with LRO error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2337,7 +2337,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkFetchErrorsProgress without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2345,8 +2345,8 @@ describe('v1alpha1.DatastreamClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkFetchErrorsProgress(
@@ -2359,7 +2359,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkFetchErrorsProgress with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2377,7 +2377,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('createPrivateConnection', () => {
     it('invokes createPrivateConnection without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2410,7 +2410,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes createPrivateConnection without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2464,7 +2464,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes createPrivateConnection with call error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2498,7 +2498,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes createPrivateConnection with LRO error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2531,7 +2531,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkCreatePrivateConnectionProgress without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2539,8 +2539,8 @@ describe('v1alpha1.DatastreamClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2554,7 +2554,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkCreatePrivateConnectionProgress with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2575,7 +2575,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('deletePrivateConnection', () => {
     it('invokes deletePrivateConnection without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2608,7 +2608,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes deletePrivateConnection without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2662,7 +2662,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes deletePrivateConnection with call error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2696,7 +2696,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes deletePrivateConnection with LRO error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2729,7 +2729,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkDeletePrivateConnectionProgress without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2737,8 +2737,8 @@ describe('v1alpha1.DatastreamClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2752,7 +2752,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkDeletePrivateConnectionProgress with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2773,7 +2773,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('createRoute', () => {
     it('invokes createRoute without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2805,7 +2805,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes createRoute without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2859,7 +2859,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes createRoute with call error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2890,7 +2890,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes createRoute with LRO error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2923,7 +2923,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkCreateRouteProgress without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2931,8 +2931,8 @@ describe('v1alpha1.DatastreamClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateRouteProgress(
@@ -2945,7 +2945,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkCreateRouteProgress with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2963,7 +2963,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('deleteRoute', () => {
     it('invokes deleteRoute without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2995,7 +2995,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes deleteRoute without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3049,7 +3049,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes deleteRoute with call error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3080,7 +3080,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes deleteRoute with LRO error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3113,7 +3113,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkDeleteRouteProgress without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3121,8 +3121,8 @@ describe('v1alpha1.DatastreamClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteRouteProgress(
@@ -3135,7 +3135,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes checkDeleteRouteProgress with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3153,7 +3153,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('listConnectionProfiles', () => {
     it('invokes listConnectionProfiles without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3193,7 +3193,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listConnectionProfiles without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3250,7 +3250,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listConnectionProfiles with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3284,7 +3284,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listConnectionProfilesStream without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3353,7 +3353,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listConnectionProfilesStream with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3411,7 +3411,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('uses async iteration with listConnectionProfiles without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3465,7 +3465,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('uses async iteration with listConnectionProfiles with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3512,7 +3512,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('listStreams', () => {
     it('invokes listStreams without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3551,7 +3551,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listStreams without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3606,7 +3606,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listStreams with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3637,7 +3637,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listStreamsStream without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3689,15 +3689,15 @@ describe('v1alpha1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listStreams.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listStreamsStream with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3740,15 +3740,15 @@ describe('v1alpha1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listStreams.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStreams without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3789,15 +3789,15 @@ describe('v1alpha1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listStreams.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listStreams with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3831,9 +3831,9 @@ describe('v1alpha1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listStreams.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3841,7 +3841,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('fetchStaticIps', () => {
     it('invokes fetchStaticIps without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3870,7 +3870,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes fetchStaticIps without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3912,7 +3912,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes fetchStaticIps with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3943,7 +3943,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes fetchStaticIpsStream without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3982,15 +3982,15 @@ describe('v1alpha1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes fetchStaticIpsStream with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4028,15 +4028,15 @@ describe('v1alpha1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchStaticIps without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4067,15 +4067,15 @@ describe('v1alpha1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with fetchStaticIps with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4107,9 +4107,9 @@ describe('v1alpha1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.fetchStaticIps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4117,7 +4117,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('listPrivateConnections', () => {
     it('invokes listPrivateConnections without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4157,7 +4157,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listPrivateConnections without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4214,7 +4214,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listPrivateConnections with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4248,7 +4248,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listPrivateConnectionsStream without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4317,7 +4317,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listPrivateConnectionsStream with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4375,7 +4375,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('uses async iteration with listPrivateConnections without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4429,7 +4429,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('uses async iteration with listPrivateConnections with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4476,7 +4476,7 @@ describe('v1alpha1.DatastreamClient', () => {
   describe('listRoutes', () => {
     it('invokes listRoutes without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4515,7 +4515,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listRoutes without error using callback', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4570,7 +4570,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listRoutes with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4601,7 +4601,7 @@ describe('v1alpha1.DatastreamClient', () => {
 
     it('invokes listRoutesStream without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4653,15 +4653,15 @@ describe('v1alpha1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRoutesStream with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4704,15 +4704,15 @@ describe('v1alpha1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listRoutes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRoutes without error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4753,15 +4753,15 @@ describe('v1alpha1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRoutes with error', async () => {
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4795,9 +4795,9 @@ describe('v1alpha1.DatastreamClient', () => {
       assert(
         (client.descriptors.page.listRoutes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4811,7 +4811,7 @@ describe('v1alpha1.DatastreamClient', () => {
         connection_profile: 'connectionProfileValue',
       };
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4887,7 +4887,7 @@ describe('v1alpha1.DatastreamClient', () => {
         location: 'locationValue',
       };
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4937,7 +4937,7 @@ describe('v1alpha1.DatastreamClient', () => {
         private_connection: 'privateConnectionValue',
       };
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5012,7 +5012,7 @@ describe('v1alpha1.DatastreamClient', () => {
         project: 'projectValue',
       };
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5053,7 +5053,7 @@ describe('v1alpha1.DatastreamClient', () => {
         route: 'routeValue',
       };
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5128,7 +5128,7 @@ describe('v1alpha1.DatastreamClient', () => {
         stream: 'streamValue',
       };
       const client = new datastreamModule.v1alpha1.DatastreamClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

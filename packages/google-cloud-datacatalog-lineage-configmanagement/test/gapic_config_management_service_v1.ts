@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as configmanagementserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -188,7 +188,7 @@ describe('v1.ConfigManagementServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.configManagementServiceStub, undefined);
@@ -196,13 +196,13 @@ describe('v1.ConfigManagementServiceClient', () => {
       assert(client.configManagementServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.configManagementServiceStub);
@@ -211,15 +211,15 @@ describe('v1.ConfigManagementServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.configManagementServiceStub, undefined);
@@ -228,7 +228,7 @@ describe('v1.ConfigManagementServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -237,7 +237,7 @@ describe('v1.ConfigManagementServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -250,7 +250,7 @@ describe('v1.ConfigManagementServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -274,7 +274,7 @@ describe('v1.ConfigManagementServiceClient', () => {
     it('invokes getConfig without error', async () => {
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -306,7 +306,7 @@ describe('v1.ConfigManagementServiceClient', () => {
     it('invokes getConfig without error using callback', async () => {
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -354,7 +354,7 @@ describe('v1.ConfigManagementServiceClient', () => {
     it('invokes getConfig with error', async () => {
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -383,7 +383,7 @@ describe('v1.ConfigManagementServiceClient', () => {
     it('invokes getConfig with closed client', async () => {
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -396,7 +396,7 @@ describe('v1.ConfigManagementServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConfig(request), expectedError);
@@ -407,7 +407,7 @@ describe('v1.ConfigManagementServiceClient', () => {
     it('invokes updateConfig without error', async () => {
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v1.ConfigManagementServiceClient', () => {
     it('invokes updateConfig without error using callback', async () => {
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -489,7 +489,7 @@ describe('v1.ConfigManagementServiceClient', () => {
     it('invokes updateConfig with error', async () => {
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1.ConfigManagementServiceClient', () => {
     it('invokes updateConfig with closed client', async () => {
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -536,7 +536,7 @@ describe('v1.ConfigManagementServiceClient', () => {
       );
       request.config.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateConfig(request), expectedError);
@@ -552,7 +552,7 @@ describe('v1.ConfigManagementServiceClient', () => {
       };
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v1.ConfigManagementServiceClient', () => {
       };
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -679,7 +679,7 @@ describe('v1.ConfigManagementServiceClient', () => {
       };
       const client =
         new configmanagementserviceModule.v1.ConfigManagementServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

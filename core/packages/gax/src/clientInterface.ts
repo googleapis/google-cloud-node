@@ -25,13 +25,12 @@ import {
   PageDescriptor,
   StreamDescriptor,
 } from './descriptor';
+import {ResumableUploadDescriptor} from './resumableUpload';
 import * as longrunning from './longRunningCalls/longrunning';
 import * as operationProtos from '../protos/operations';
 
 export interface ClientOptions
-  extends GrpcClientOptions,
-    GoogleAuthOptions,
-    ClientStubOptions {
+  extends GrpcClientOptions, GoogleAuthOptions, ClientStubOptions {
   libName?: string;
   libVersion?: string;
   clientConfig?: gax.ClientConfig;
@@ -42,6 +41,13 @@ export interface ClientOptions
   // No preference; exception will be thrown if both are set to different values.
   universeDomain?: string;
   universe_domain?: string;
+  /**
+   * Whether to enable telemetry tracing for the client.
+   *
+   * The `GOOGLE_SDK_NODE_ENABLE_TRACING` environment variable overrides this
+   * option whenever it is set.
+   */
+  enableTelemetryTracing?: boolean;
 }
 
 export interface Descriptors {
@@ -49,6 +55,7 @@ export interface Descriptors {
   stream: {[name: string]: StreamDescriptor};
   longrunning: {[name: string]: LongrunningDescriptor};
   batching?: {[name: string]: BundleDescriptor};
+  resumableUpload?: {[name: string]: ResumableUploadDescriptor};
 }
 
 export interface Callback<

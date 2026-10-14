@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as vpcflowlogsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -282,7 +282,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.vpcFlowLogsServiceStub, undefined);
@@ -290,12 +290,12 @@ describe('v1.VpcFlowLogsServiceClient', () => {
       assert(client.vpcFlowLogsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.vpcFlowLogsServiceStub);
@@ -304,14 +304,14 @@ describe('v1.VpcFlowLogsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.vpcFlowLogsServiceStub, undefined);
@@ -320,7 +320,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -328,7 +328,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -340,7 +340,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -363,7 +363,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('getVpcFlowLogsConfig', () => {
     it('invokes getVpcFlowLogsConfig without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -395,7 +395,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes getVpcFlowLogsConfig without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes getVpcFlowLogsConfig with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -473,7 +473,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes getVpcFlowLogsConfig with closed client', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -486,7 +486,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getVpcFlowLogsConfig(request), expectedError);
@@ -496,7 +496,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('createVpcFlowLogsConfig', () => {
     it('invokes createVpcFlowLogsConfig without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -529,7 +529,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes createVpcFlowLogsConfig without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -583,7 +583,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes createVpcFlowLogsConfig with call error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -617,7 +617,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes createVpcFlowLogsConfig with LRO error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -650,7 +650,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes checkCreateVpcFlowLogsConfigProgress without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -658,8 +658,8 @@ describe('v1.VpcFlowLogsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -673,7 +673,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes checkCreateVpcFlowLogsConfigProgress with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('updateVpcFlowLogsConfig', () => {
     it('invokes updateVpcFlowLogsConfig without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes updateVpcFlowLogsConfig without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -783,7 +783,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes updateVpcFlowLogsConfig with call error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -818,7 +818,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes updateVpcFlowLogsConfig with LRO error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -852,7 +852,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes checkUpdateVpcFlowLogsConfigProgress without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -860,8 +860,8 @@ describe('v1.VpcFlowLogsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -875,7 +875,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes checkUpdateVpcFlowLogsConfigProgress with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -896,7 +896,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('deleteVpcFlowLogsConfig', () => {
     it('invokes deleteVpcFlowLogsConfig without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -929,7 +929,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes deleteVpcFlowLogsConfig without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -983,7 +983,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes deleteVpcFlowLogsConfig with call error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1017,7 +1017,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes deleteVpcFlowLogsConfig with LRO error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1050,7 +1050,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes checkDeleteVpcFlowLogsConfigProgress without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1058,8 +1058,8 @@ describe('v1.VpcFlowLogsServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -1073,7 +1073,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes checkDeleteVpcFlowLogsConfigProgress with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1094,7 +1094,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('listVpcFlowLogsConfigs', () => {
     it('invokes listVpcFlowLogsConfigs without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1134,7 +1134,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes listVpcFlowLogsConfigs without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1191,7 +1191,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes listVpcFlowLogsConfigs with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1225,7 +1225,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes listVpcFlowLogsConfigsStream without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1294,7 +1294,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes listVpcFlowLogsConfigsStream with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1352,7 +1352,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('uses async iteration with listVpcFlowLogsConfigs without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1406,7 +1406,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('uses async iteration with listVpcFlowLogsConfigs with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1453,7 +1453,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('queryOrgVpcFlowLogsConfigs', () => {
     it('invokes queryOrgVpcFlowLogsConfigs without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1493,7 +1493,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes queryOrgVpcFlowLogsConfigs without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1550,7 +1550,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes queryOrgVpcFlowLogsConfigs with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1584,7 +1584,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes queryOrgVpcFlowLogsConfigsStream without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1653,7 +1653,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes queryOrgVpcFlowLogsConfigsStream with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1711,7 +1711,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('uses async iteration with queryOrgVpcFlowLogsConfigs without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1765,7 +1765,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('uses async iteration with queryOrgVpcFlowLogsConfigs with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1812,7 +1812,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('showEffectiveFlowLogsConfigs', () => {
     it('invokes showEffectiveFlowLogsConfigs without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1852,7 +1852,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes showEffectiveFlowLogsConfigs without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1909,7 +1909,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes showEffectiveFlowLogsConfigs with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1943,7 +1943,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes showEffectiveFlowLogsConfigsStream without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2015,7 +2015,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('invokes showEffectiveFlowLogsConfigsStream with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2076,7 +2076,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('uses async iteration with showEffectiveFlowLogsConfigs without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2130,7 +2130,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
 
     it('uses async iteration with showEffectiveFlowLogsConfigs with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2176,7 +2176,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2206,7 +2206,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2244,7 +2244,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2254,7 +2254,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2286,7 +2286,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2316,7 +2316,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2354,7 +2354,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2364,7 +2364,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2396,7 +2396,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2429,7 +2429,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2467,7 +2467,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2477,7 +2477,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2512,7 +2512,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2542,7 +2542,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2586,7 +2586,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2621,7 +2621,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2669,7 +2669,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2710,7 +2710,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2731,7 +2731,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2759,7 +2759,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2769,7 +2769,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2793,7 +2793,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2815,7 +2815,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2843,7 +2843,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2853,7 +2853,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2877,7 +2877,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2899,7 +2899,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2927,7 +2927,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2937,7 +2937,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2961,7 +2961,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2996,7 +2996,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3031,7 +3031,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
         test: 'testValue',
       };
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3083,7 +3083,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
         location: 'locationValue',
       };
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3133,7 +3133,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
         vpc_flow_logs_config: 'vpcFlowLogsConfigValue',
       };
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3218,7 +3218,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
         project: 'projectValue',
       };
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3258,7 +3258,7 @@ describe('v1.VpcFlowLogsServiceClient', () => {
         vpc_flow_logs_config: 'vpcFlowLogsConfigValue',
       };
       const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

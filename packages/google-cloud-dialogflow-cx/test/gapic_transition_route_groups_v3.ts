@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as transitionroutegroupsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, operationsProtos, LocationProtos } from 'google-gax';
+import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -251,7 +251,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.transitionRouteGroupsStub, undefined);
@@ -259,13 +259,13 @@ describe('v3.TransitionRouteGroupsClient', () => {
       assert(client.transitionRouteGroupsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.transitionRouteGroupsStub);
@@ -274,15 +274,15 @@ describe('v3.TransitionRouteGroupsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.transitionRouteGroupsStub, undefined);
@@ -291,7 +291,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -300,7 +300,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -313,7 +313,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -337,7 +337,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes getTransitionRouteGroup without error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -370,7 +370,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes getTransitionRouteGroup without error using callback', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -418,7 +418,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes getTransitionRouteGroup with error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes getTransitionRouteGroup with closed client', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -480,7 +480,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes createTransitionRouteGroup without error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -513,7 +513,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes createTransitionRouteGroup without error using callback', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes createTransitionRouteGroup with error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes createTransitionRouteGroup with closed client', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -623,7 +623,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes updateTransitionRouteGroup without error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -657,7 +657,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes updateTransitionRouteGroup without error using callback', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes updateTransitionRouteGroup with error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes updateTransitionRouteGroup with closed client', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       );
       request.transitionRouteGroup.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -770,7 +770,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes deleteTransitionRouteGroup without error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -803,7 +803,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes deleteTransitionRouteGroup without error using callback', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -851,7 +851,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes deleteTransitionRouteGroup with error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -886,7 +886,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes deleteTransitionRouteGroup with closed client', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -899,7 +899,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -913,7 +913,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes listTransitionRouteGroups without error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -954,7 +954,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes listTransitionRouteGroups without error using callback', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1012,7 +1012,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes listTransitionRouteGroups with error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1047,7 +1047,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes listTransitionRouteGroupsStream without error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1117,7 +1117,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes listTransitionRouteGroupsStream with error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1176,7 +1176,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('uses async iteration with listTransitionRouteGroups without error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1231,7 +1231,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('uses async iteration with listTransitionRouteGroups with error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1278,7 +1278,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes getLocation without error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1309,7 +1309,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1354,7 +1354,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes getLocation with error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1390,7 +1390,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1439,7 +1439,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1481,7 +1481,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes getOperation without error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1503,7 +1503,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1531,7 +1531,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1542,7 +1542,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes getOperation with error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1567,7 +1567,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1590,7 +1590,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1618,7 +1618,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1629,7 +1629,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1654,7 +1654,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1677,7 +1677,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1705,7 +1705,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1716,7 +1716,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1741,7 +1741,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       const request = generateSampleMessage(
@@ -1777,7 +1777,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1814,7 +1814,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1879,7 +1879,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1959,7 +1959,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2039,7 +2039,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2117,7 +2117,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2230,7 +2230,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2318,7 +2318,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2395,7 +2395,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2473,7 +2473,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2562,7 +2562,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2650,7 +2650,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2727,7 +2727,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2821,7 +2821,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2898,7 +2898,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2973,7 +2973,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3026,7 +3026,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3114,7 +3114,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3192,7 +3192,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3277,7 +3277,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3322,7 +3322,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3468,7 +3468,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3594,7 +3594,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3720,7 +3720,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3826,7 +3826,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3896,7 +3896,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -3974,7 +3974,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4062,7 +4062,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4140,7 +4140,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4229,7 +4229,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -4317,7 +4317,7 @@ describe('v3.TransitionRouteGroupsClient', () => {
       };
       const client =
         new transitionroutegroupsModule.v3.TransitionRouteGroupsClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

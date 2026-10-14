@@ -1,17 +1,16 @@
 {
-  "name": "routeoptimization",
-  "name_pretty": "Route Optimization API",
-  "product_documentation": "https://developers.google.com/maps/documentation/route-optimization",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/routeoptimization/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@googlemaps/routeoptimization",
-  "api_id": "routeoptimization.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "routeoptimization"
+    "api_description": "The Route Optimization API assigns tasks and routes to a vehicle fleet,\noptimizing against the objectives and constraints that you supply for your\ntransportation goals.",
+    "api_id": "routeoptimization.googleapis.com",
+    "api_shortname": "routeoptimization",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/routeoptimization/latest",
+    "default_version": "v1",
+    "distribution_name": "@googlemaps/routeoptimization",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1546507",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "routeoptimization",
+    "name_pretty": "Route Optimization",
+    "product_documentation": "https://developers.google.com/maps/documentation/route-optimization",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

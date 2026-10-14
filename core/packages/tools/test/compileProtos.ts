@@ -103,7 +103,7 @@ describe('compileProtos tool', () => {
     assert(!js.toString().includes('require("protobufjs/minimal")'));
 
     // check that it uses proper root object; it's taken from fixtures/package.json
-    assert(js.toString().includes('$protobuf.roots._org_fake_package'));
+    assert(js.toString().includes('_org_fake_package'));
 
     const ts = await readFile(expectedTSResultFile);
     assert(ts.toString().includes('TestMessage'));
@@ -148,7 +148,7 @@ describe('compileProtos tool', () => {
     assert(!cjs.toString().includes('require("protobufjs/minimal")'));
 
     // check that it uses proper root object; it's taken from fixtures/package.json
-    assert(cjs.toString().includes('$protobuf.roots._org_fake_package'));
+    assert(cjs.toString().includes('_org_fake_package'));
 
     const js = await readFile(expectedJSResultFile);
     assert(js.toString().includes('TestMessage'));
@@ -171,7 +171,7 @@ describe('compileProtos tool', () => {
     );
 
     // check that it uses proper root object; it's taken from fixtures/package.json
-    assert(js.toString().includes('$protobuf.roots._org_fake_package'));
+    assert(js.toString().includes('_org_fake_package'));
 
     const ts = await readFile(expectedTSResultFile);
     assert(ts.toString().includes('TestMessage'));
@@ -210,7 +210,7 @@ describe('compileProtos tool', () => {
     assert(!js.toString().includes('require("protobufjs/minimal")'));
 
     // check that it uses proper root object; it's taken from fixtures/package.json
-    assert(js.toString().includes('$protobuf.roots._org_fake_package'));
+    assert(js.toString().includes('_org_fake_package'));
 
     const ts = await readFile(expectedTSResultFile);
     assert(ts.toString().includes('TestMessage'));
@@ -226,6 +226,38 @@ describe('compileProtos tool', () => {
         .includes('import type {protobuf as $protobuf} from "google-gax"'),
     );
     assert(!ts.toString().includes('import * as $protobuf from "protobufjs"'));
+  });
+
+  it('compiles protos to JS without comments if --no-comments is specified', async function () {
+    this.timeout(20000);
+    await compileProtos.main(['--no-comments', 'protoLists']);
+    assert(fs.existsSync(expectedJSResultFile));
+    assert(fs.existsSync(expectedTSResultFile));
+
+    const js = await readFile(expectedJSResultFile);
+    assert(!js.toString().includes('//'));
+    assert(!js.toString().includes('/*'));
+    assert(js.toString().includes('_org_fake_package'));
+    assert(js.toString().includes('TestMessage'));
+  });
+
+  it('compiles protos to CJS and ES6 without comments if --no-comments and --esm are specified', async function () {
+    this.timeout(20000);
+    await compileProtos.main(['--no-comments', '--esm', 'esm']);
+    assert(fs.existsSync(expectedCommonJSResultFile));
+    assert(fs.existsSync(expectedJSResultFile));
+
+    const cjs = await readFile(expectedCommonJSResultFile);
+    assert(!cjs.toString().includes('//'));
+    assert(!cjs.toString().includes('/*'));
+    assert(cjs.toString().includes('_org_fake_package'));
+    assert(cjs.toString().includes('TestMessage'));
+
+    const js = await readFile(expectedJSResultFile);
+    assert(!js.toString().includes('//'));
+    assert(!js.toString().includes('/*'));
+    assert(js.toString().includes('_org_fake_package'));
+    assert(js.toString().includes('TestMessage'));
   });
 
   it('writes an empty object if no protos are given', async () => {

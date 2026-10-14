@@ -10,6 +10,21 @@
         "grpc": {
           "libraryClient": "AuditManagerClient",
           "rpcs": {
+            "CreateAuditSchedule": {
+              "methods": [
+                "createAuditSchedule"
+              ]
+            },
+            "UpdateAuditSchedule": {
+              "methods": [
+                "updateAuditSchedule"
+              ]
+            },
+            "GetAuditSchedule": {
+              "methods": [
+                "getAuditSchedule"
+              ]
+            },
             "EnrollResource": {
               "methods": [
                 "enrollResource"
@@ -33,6 +48,13 @@
             "GenerateAuditReport": {
               "methods": [
                 "generateAuditReport"
+              ]
+            },
+            "ListAuditSchedules": {
+              "methods": [
+                "listAuditSchedules",
+                "listAuditSchedulesStream",
+                "listAuditSchedulesAsync"
               ]
             },
             "ListAuditReports": {
@@ -61,6 +83,21 @@
         "grpc-fallback": {
           "libraryClient": "AuditManagerClient",
           "rpcs": {
+            "CreateAuditSchedule": {
+              "methods": [
+                "createAuditSchedule"
+              ]
+            },
+            "UpdateAuditSchedule": {
+              "methods": [
+                "updateAuditSchedule"
+              ]
+            },
+            "GetAuditSchedule": {
+              "methods": [
+                "getAuditSchedule"
+              ]
+            },
             "EnrollResource": {
               "methods": [
                 "enrollResource"
@@ -84,6 +121,13 @@
             "GenerateAuditReport": {
               "methods": [
                 "generateAuditReport"
+              ]
+            },
+            "ListAuditSchedules": {
+              "methods": [
+                "listAuditSchedules",
+                "listAuditSchedulesStream",
+                "listAuditSchedulesAsync"
               ]
             },
             "ListAuditReports": {

@@ -16,16 +16,16 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta from './v1beta';
-import * as v2 from './v2';
-import * as v2beta from './v2beta';
 import * as v3 from './v3';
+import * as v2 from './v2';
 import * as v3beta from './v3beta';
+import * as v2beta from './v2beta';
+import * as v1beta from './v1beta';
 
 const PoliciesClient = v2.PoliciesClient;
 type PoliciesClient = v2.PoliciesClient;
 
-export {v1beta, v2, v2beta, v3, v3beta, PoliciesClient};
-export default {v1beta, v2, v2beta, v3, v3beta, PoliciesClient};
+export {v3, v2, v3beta, v2beta, v1beta, PoliciesClient};
+export default {v3, v2, v3beta, v2beta, v1beta, PoliciesClient};
 import * as protos from '../protos/protos';
 export {protos};

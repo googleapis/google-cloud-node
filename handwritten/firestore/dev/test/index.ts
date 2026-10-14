@@ -17,11 +17,24 @@ import {expect, use} from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 import * as extend from 'extend';
 import {GoogleError, GrpcClient, Status} from 'google-gax';
+import * as sinon from 'sinon';
 
 import {google} from '../protos/firestore_v1_proto_api';
 
 import * as Firestore from '../src';
-import {DocumentSnapshot, FieldPath, FieldValue} from '../src';
+import {
+  DocumentSnapshot,
+  FieldPath,
+  FieldValue,
+  Bytes,
+  BsonObjectId,
+  BsonTimestamp,
+  Decimal128Value,
+  Int32Value,
+  MaxKey,
+  MinKey,
+  RegexValue,
+} from '../src';
 import {setTimeoutHandler} from '../src/backoff';
 import {QualifiedResourcePath} from '../src/path';
 import {
@@ -150,6 +163,104 @@ const allSupportedTypesProtobufJs = document(
       },
     },
   },
+  'minKeyValue',
+  {
+    mapValue: {
+      fields: {
+        __min__: {
+          nullValue: 'NULL_VALUE',
+        },
+      },
+    },
+  },
+  'maxKeyValue',
+  {
+    mapValue: {
+      fields: {
+        __max__: {
+          nullValue: 'NULL_VALUE',
+        },
+      },
+    },
+  },
+  'regexValue',
+  {
+    mapValue: {
+      fields: {
+        __regex__: {
+          mapValue: {
+            fields: {
+              pattern: {
+                stringValue: 'myRegexPattern',
+              },
+              options: {
+                stringValue: 'myRegexOptions',
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  'bsonObjectIdValue',
+  {
+    mapValue: {
+      fields: {
+        __oid__: {
+          stringValue: 'my24CharacterHexString',
+        },
+      },
+    },
+  },
+  'int32Value',
+  {
+    mapValue: {
+      fields: {
+        __int__: {
+          integerValue: 789,
+        },
+      },
+    },
+  },
+  'decimal128Value',
+  {
+    mapValue: {
+      fields: {
+        __decimal128__: {
+          stringValue: '1.2e-3',
+        },
+      },
+    },
+  },
+  'bsonTimestampValue',
+  {
+    mapValue: {
+      fields: {
+        __request_timestamp__: {
+          mapValue: {
+            fields: {
+              seconds: {
+                integerValue: 123,
+              },
+              increment: {
+                integerValue: 456,
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  'bsonBinaryValue',
+  {
+    mapValue: {
+      fields: {
+        __binary__: {
+          bytesValue: Buffer.from([155, 7, 90, 250]),
+        },
+      },
+    },
+  },
   'emptyObject',
   {
     mapValue: {},
@@ -260,6 +371,96 @@ const allSupportedTypesJson = {
         },
       },
     },
+    minKeyValue: {
+      mapValue: {
+        fields: {
+          __min__: {
+            nullValue: 'NULL_VALUE',
+          },
+        },
+      },
+    },
+    maxKeyValue: {
+      mapValue: {
+        fields: {
+          __max__: {
+            nullValue: 'NULL_VALUE',
+          },
+        },
+      },
+    },
+    regexValue: {
+      mapValue: {
+        fields: {
+          __regex__: {
+            mapValue: {
+              fields: {
+                pattern: {
+                  stringValue: 'myRegexPattern',
+                },
+                options: {
+                  stringValue: 'myRegexOptions',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    bsonObjectIdValue: {
+      mapValue: {
+        fields: {
+          __oid__: {
+            stringValue: 'my24CharacterHexString',
+          },
+        },
+      },
+    },
+    int32Value: {
+      mapValue: {
+        fields: {
+          __int__: {
+            integerValue: 789,
+          },
+        },
+      },
+    },
+    decimal128Value: {
+      mapValue: {
+        fields: {
+          __decimal128__: {
+            stringValue: '1.2e-3',
+          },
+        },
+      },
+    },
+    bsonTimestampValue: {
+      mapValue: {
+        fields: {
+          __request_timestamp__: {
+            mapValue: {
+              fields: {
+                seconds: {
+                  integerValue: 123,
+                },
+                increment: {
+                  integerValue: 456,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    bsonBinaryValue: {
+      mapValue: {
+        fields: {
+          __binary__: {
+            bytesValue: Buffer.from([155, 7, 90, 250]),
+          },
+        },
+      },
+    },
     pathValue: {
       referenceValue: `${DATABASE_ROOT}/documents/collection/document`,
     },
@@ -289,11 +490,19 @@ const allSupportedTypesInput = {
   falseValue: false,
   integerValue: 0,
   doubleValue: 0.1,
+  int32Value: new Int32Value(789),
+  decimal128Value: new Decimal128Value('1.2e-3'),
   infinityValue: Infinity,
   negativeInfinityValue: -Infinity,
   objectValue: {foo: 'bar'},
   emptyObject: {},
   vectorValue: FieldValue.vector([0.1, 0.2, 0.3]),
+  minKeyValue: MinKey.instance(),
+  maxKeyValue: MaxKey.instance(),
+  regexValue: new RegexValue('myRegexPattern', 'myRegexOptions'),
+  bsonTimestampValue: new BsonTimestamp(123, 456),
+  bsonBinaryValue: Bytes.fromUint8Array(Buffer.from([7, 90, 250]), 155),
+  bsonObjectIdValue: new BsonObjectId('my24CharacterHexString'),
   dateValue: new Date('Mar 18, 1985 08:20:00.123 GMT+0100 (CET)'),
   timestampValue: Firestore.Timestamp.fromDate(
     new Date('Mar 18, 1985 08:20:00.123 GMT+0100 (CET)'),
@@ -323,11 +532,19 @@ const allSupportedTypesOutput: {[field: string]: unknown} = {
   falseValue: false,
   integerValue: 0,
   doubleValue: 0.1,
+  int32Value: new Int32Value(789),
+  decimal128Value: new Decimal128Value('1.2e-3'),
   infinityValue: Infinity,
   negativeInfinityValue: -Infinity,
   objectValue: {foo: 'bar'},
   emptyObject: {},
   vectorValue: FieldValue.vector([0.1, 0.2, 0.3]),
+  minKeyValue: MinKey.instance(),
+  maxKeyValue: MaxKey.instance(),
+  regexValue: new RegexValue('myRegexPattern', 'myRegexOptions'),
+  bsonTimestampValue: new BsonTimestamp(123, 456),
+  bsonBinaryValue: Bytes.fromUint8Array(Buffer.from([7, 90, 250]), 155),
+  bsonObjectIdValue: new BsonObjectId('my24CharacterHexString'),
   dateValue: Firestore.Timestamp.fromDate(
     new Date('Mar 18, 1985 08:20:00.123 GMT+0100 (CET)'),
   ),
@@ -793,6 +1010,68 @@ describe('instantiation', () => {
         Firestore.FieldValue.delete(),
       ),
     ).to.be.false;
+  });
+
+  describe('grpcOptions flow control window size and subchannel pool', () => {
+    let createStubSpy: sinon.SinonSpy;
+
+    beforeEach(() => {
+      createStubSpy = sinon.spy(GrpcClient.prototype, 'createStub');
+    });
+
+    afterEach(() => {
+      createStubSpy.restore();
+    });
+
+    it('defaults flow_control_window to 256 KB and use_local_subchannel_pool to 1', async () => {
+      const firestore = new Firestore.Firestore(DEFAULT_SETTINGS);
+      // Trigger client creation & initialize() which calls createStub
+      await firestore['_clientPool'].run(
+        'tag',
+        /* requiresGrpc= */ true,
+        async (client: any) => {
+          await client.initialize();
+        },
+      );
+
+      expect(createStubSpy.calledOnce).to.be.true;
+      const clientOpts = createStubSpy.firstCall.args[1];
+      expect(clientOpts.grpcOptions).to.exist;
+      expect(clientOpts.grpcOptions['grpc-node.flow_control_window']).to.equal(
+        256 * 1024, // 256 KB
+      );
+      expect(clientOpts.grpcOptions['grpc.use_local_subchannel_pool']).to.equal(
+        1,
+      );
+    });
+
+    it('allows user to override flow_control_window and use_local_subchannel_pool defaults', async () => {
+      const firestore = new Firestore.Firestore({
+        ...DEFAULT_SETTINGS,
+        grpcOptions: {
+          'grpc-node.flow_control_window': 512 * 1024,
+          'grpc.use_local_subchannel_pool': 0,
+        },
+      });
+      // Trigger client creation & initialize() which calls createStub
+      await firestore['_clientPool'].run(
+        'tag',
+        /* requiresGrpc= */ true,
+        async (client: any) => {
+          await client.initialize();
+        },
+      );
+
+      expect(createStubSpy.calledOnce).to.be.true;
+      const clientOpts = createStubSpy.firstCall.args[1];
+      expect(clientOpts.grpcOptions).to.exist;
+      expect(clientOpts.grpcOptions['grpc-node.flow_control_window']).to.equal(
+        512 * 1024,
+      );
+      expect(clientOpts.grpcOptions['grpc.use_local_subchannel_pool']).to.equal(
+        0,
+      );
+    });
   });
 });
 

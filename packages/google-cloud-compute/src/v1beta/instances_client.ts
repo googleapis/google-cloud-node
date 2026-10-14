@@ -27,10 +27,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -52,7 +52,7 @@ export class InstancesClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('compute');
@@ -65,8 +65,8 @@ export class InstancesClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  instancesStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  instancesStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of InstancesClient.
@@ -141,14 +141,14 @@ export class InstancesClient {
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = { fallback: true };
+      opts = {fallback: true};
     } else {
       opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -217,6 +217,11 @@ export class InstancesClient {
         'nextPageToken',
         'items',
       ),
+      listVmExtensionStates: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'items',
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -224,7 +229,7 @@ export class InstancesClient {
       'google.cloud.compute.v1beta.Instances',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -264,7 +269,7 @@ export class InstancesClient {
           (this._protos as any).google.cloud.compute.v1beta.Instances,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -288,9 +293,11 @@ export class InstancesClient {
       'getSerialPortOutput',
       'getShieldedInstanceIdentity',
       'getShieldedVmIdentity',
+      'getVmExtensionState',
       'insert',
       'list',
       'listReferrers',
+      'listVmExtensionStates',
       'patchPartnerMetadata',
       'performMaintenance',
       'removeResourcePolicies',
@@ -328,7 +335,7 @@ export class InstancesClient {
     ];
     for (const methodName of instancesStubMethods) {
       const callPromise = this.instancesStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -558,7 +565,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('addAccessConfig request %j', request);
@@ -729,7 +736,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('addNetworkInterface request %j', request);
@@ -901,7 +908,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('addResourcePolicies request %j', request);
@@ -1078,7 +1085,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('attachDisk request %j', request);
@@ -1247,7 +1254,7 @@ export class InstancesClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('bulkInsert request %j', request);
@@ -1418,7 +1425,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('delete request %j', request);
@@ -1590,7 +1597,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAccessConfig request %j', request);
@@ -1765,7 +1772,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteNetworkInterface request %j', request);
@@ -1936,7 +1943,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('detachDisk request %j', request);
@@ -2082,7 +2089,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('get request %j', request);
@@ -2230,7 +2237,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEffectiveFirewalls request %j', request);
@@ -2383,7 +2390,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGuestAttributes request %j', request);
@@ -2535,7 +2542,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIamPolicy request %j', request);
@@ -2686,7 +2693,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPartnerMetadata request %j', request);
@@ -2835,7 +2842,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getScreenshot request %j', request);
@@ -3004,7 +3011,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSerialPortOutput request %j', request);
@@ -3153,7 +3160,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getShieldedInstanceIdentity request %j', request);
@@ -3302,7 +3309,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getShieldedVmIdentity request %j', request);
@@ -3332,6 +3339,159 @@ export class InstancesClient {
           {} | undefined,
         ]) => {
           this._log.info('getShieldedVmIdentity response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Retrieves details of a specific VM extension state.
+   * This is a read-only API.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.extensionName
+   *   The name of the extension to get the state for.
+   * @param {string} request.instance
+   *   Name or id of the instance resource.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.zone
+   *   Name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.VmExtensionState|VmExtensionState}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/instances.get_vm_extension_state.js</caption>
+   * region_tag:compute_v1beta_generated_Instances_GetVmExtensionState_async
+   */
+  getVmExtensionState(
+    request?: protos.google.cloud.compute.v1beta.IGetVmExtensionStateInstanceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IVmExtensionState,
+      (
+        | protos.google.cloud.compute.v1beta.IGetVmExtensionStateInstanceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  getVmExtensionState(
+    request: protos.google.cloud.compute.v1beta.IGetVmExtensionStateInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IVmExtensionState,
+      | protos.google.cloud.compute.v1beta.IGetVmExtensionStateInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getVmExtensionState(
+    request: protos.google.cloud.compute.v1beta.IGetVmExtensionStateInstanceRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.IVmExtensionState,
+      | protos.google.cloud.compute.v1beta.IGetVmExtensionStateInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getVmExtensionState(
+    request?: protos.google.cloud.compute.v1beta.IGetVmExtensionStateInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1beta.IVmExtensionState,
+          | protos.google.cloud.compute.v1beta.IGetVmExtensionStateInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.IVmExtensionState,
+      | protos.google.cloud.compute.v1beta.IGetVmExtensionStateInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IVmExtensionState,
+      (
+        | protos.google.cloud.compute.v1beta.IGetVmExtensionStateInstanceRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
+        extension_name: request.extensionName ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getVmExtensionState request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.IVmExtensionState,
+          | protos.google.cloud.compute.v1beta.IGetVmExtensionStateInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getVmExtensionState response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getVmExtensionState(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1beta.IVmExtensionState,
+          (
+            | protos.google.cloud.compute.v1beta.IGetVmExtensionStateInstanceRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getVmExtensionState response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -3484,7 +3644,7 @@ export class InstancesClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('insert request %j', request);
@@ -3654,7 +3814,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('patchPartnerMetadata request %j', request);
@@ -3822,7 +3982,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('performMaintenance request %j', request);
@@ -3992,7 +4152,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('removeResourcePolicies request %j', request);
@@ -4162,7 +4322,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('reportHostAsFaulty request %j', request);
@@ -4332,7 +4492,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('reset request %j', request);
@@ -4503,7 +4663,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('resume request %j', request);
@@ -4658,7 +4818,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('sendDiagnosticInterrupt request %j', request);
@@ -4822,7 +4982,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setDeletionProtection request %j', request);
@@ -4995,7 +5155,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setDiskAutoDelete request %j', request);
@@ -5153,7 +5313,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setIamPolicy request %j', request);
@@ -5318,7 +5478,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setLabels request %j', request);
@@ -5489,7 +5649,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setMachineResources request %j', request);
@@ -5660,7 +5820,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setMachineType request %j', request);
@@ -5831,7 +5991,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setMetadata request %j', request);
@@ -6004,7 +6164,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setMinCpuPlatform request %j', request);
@@ -6174,7 +6334,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setName request %j', request);
@@ -6348,7 +6508,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setScheduling request %j', request);
@@ -6521,7 +6681,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setSecurityPolicy request %j', request);
@@ -6693,7 +6853,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setServiceAccount request %j', request);
@@ -6866,7 +7026,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setShieldedInstanceIntegrityPolicy request %j', request);
@@ -7042,7 +7202,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setShieldedVmIntegrityPolicy request %j', request);
@@ -7216,7 +7376,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setTags request %j', request);
@@ -7388,7 +7548,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('simulateMaintenanceEvent request %j', request);
@@ -7558,7 +7718,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('start request %j', request);
@@ -7730,7 +7890,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('startWithEncryptionKey request %j', request);
@@ -7909,7 +8069,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('stop request %j', request);
@@ -8088,7 +8248,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('suspend request %j', request);
@@ -8245,7 +8405,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testIamPermissions request %j', request);
@@ -8428,7 +8588,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('update request %j', request);
@@ -8603,7 +8763,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAccessConfig request %j', request);
@@ -8776,7 +8936,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateDisplayDevice request %j', request);
@@ -8953,7 +9113,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateNetworkInterface request %j', request);
@@ -9126,7 +9286,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateShieldedInstanceConfig request %j', request);
@@ -9302,7 +9462,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateShieldedVmConfig request %j', request);
@@ -9501,7 +9661,7 @@ export class InstancesClient {
       });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('aggregatedList iterate %j', request);
@@ -9690,7 +9850,7 @@ export class InstancesClient {
         project: request.project ?? '',
         zone: request.zone ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9845,7 +10005,7 @@ export class InstancesClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list stream %j', request);
@@ -9984,7 +10144,7 @@ export class InstancesClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list iterate %j', request);
@@ -10183,7 +10343,7 @@ export class InstancesClient {
         zone: request.zone ?? '',
         instance: request.instance ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10341,7 +10501,7 @@ export class InstancesClient {
       });
     const defaultCallSettings = this._defaults['listReferrers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReferrers stream %j', request);
@@ -10481,7 +10641,7 @@ export class InstancesClient {
       });
     const defaultCallSettings = this._defaults['listReferrers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listReferrers iterate %j', request);
@@ -10490,6 +10650,497 @@ export class InstancesClient {
       request as {},
       callSettings,
     ) as AsyncIterable<protos.google.cloud.compute.v1beta.IReference>;
+  }
+  /**
+   * Lists all VM extensions states for a specific instance.
+   * This is a read-only API.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {string} request.instance
+   *   Name of the target instance scoping this request.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.zone
+   *   Required. Name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1beta.VmExtensionState|VmExtensionState}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listVmExtensionStatesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listVmExtensionStates(
+    request?: protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IVmExtensionState[],
+      protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest | null,
+      protos.google.cloud.compute.v1beta.IListVmExtensionStatesResponse,
+    ]
+  >;
+  listVmExtensionStates(
+    request: protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest,
+      | protos.google.cloud.compute.v1beta.IListVmExtensionStatesResponse
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.IVmExtensionState
+    >,
+  ): void;
+  listVmExtensionStates(
+    request: protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest,
+      | protos.google.cloud.compute.v1beta.IListVmExtensionStatesResponse
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.IVmExtensionState
+    >,
+  ): void;
+  listVmExtensionStates(
+    request?: protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest,
+          | protos.google.cloud.compute.v1beta.IListVmExtensionStatesResponse
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1beta.IVmExtensionState
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest,
+      | protos.google.cloud.compute.v1beta.IListVmExtensionStatesResponse
+      | null
+      | undefined,
+      protos.google.cloud.compute.v1beta.IVmExtensionState
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.IVmExtensionState[],
+      protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest | null,
+      protos.google.cloud.compute.v1beta.IListVmExtensionStatesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest,
+          | protos.google.cloud.compute.v1beta.IListVmExtensionStatesResponse
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1beta.IVmExtensionState
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listVmExtensionStates values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listVmExtensionStates request %j', request);
+    return this.innerApiCalls
+      .listVmExtensionStates(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1beta.IVmExtensionState[],
+          protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest | null,
+          protos.google.cloud.compute.v1beta.IListVmExtensionStatesResponse,
+        ]) => {
+          this._log.info('listVmExtensionStates values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listVmExtensionStates`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {string} request.instance
+   *   Name of the target instance scoping this request.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.zone
+   *   Required. Name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1beta.VmExtensionState|VmExtensionState} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listVmExtensionStatesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listVmExtensionStatesStream(
+    request?: protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
+      });
+    const defaultCallSettings = this._defaults['listVmExtensionStates'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listVmExtensionStates stream %j', request);
+    return this.descriptors.page.listVmExtensionStates.createStream(
+      this.innerApiCalls.listVmExtensionStates as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listVmExtensionStates`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {string} request.instance
+   *   Name of the target instance scoping this request.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case
+   *   of failure. The default value is false.
+   *
+   *   For example, when partial success behavior is enabled, aggregatedList for a
+   *   single zone scope either returns all resources in the zone or no resources,
+   *   with an error code.
+   * @param {string} request.zone
+   *   Required. Name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.compute.v1beta.VmExtensionState|VmExtensionState}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/instances.list_vm_extension_states.js</caption>
+   * region_tag:compute_v1beta_generated_Instances_ListVmExtensionStates_async
+   */
+  listVmExtensionStatesAsync(
+    request?: protos.google.cloud.compute.v1beta.IListVmExtensionStatesInstancesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.compute.v1beta.IVmExtensionState> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
+      });
+    const defaultCallSettings = this._defaults['listVmExtensionStates'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listVmExtensionStates iterate %j', request);
+    return this.descriptors.page.listVmExtensionStates.asyncIterate(
+      this.innerApiCalls['listVmExtensionStates'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.compute.v1beta.IVmExtensionState>;
   }
 
   /**
@@ -10500,7 +11151,7 @@ export class InstancesClient {
    */
   close(): Promise<void> {
     if (this.instancesStub && !this._terminated) {
-      return this.instancesStub.then((stub) => {
+      return this.instancesStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

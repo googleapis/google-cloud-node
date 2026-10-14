@@ -5,6 +5,63 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigtable?activeTab=versions
 
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.4.0...bigtable-v7.5.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.3.0...bigtable-v7.4.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.2.0...bigtable-v7.3.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.1.0...bigtable-v7.2.0) (2026-08-12)
+
+
+### Features
+
+* **ci:** Implement sharding for unit test performance ([#9021](https://github.com/googleapis/google-cloud-node/issues/9021)) ([1d977b5](https://github.com/googleapis/google-cloud-node/commit/1d977b5fab9c7d7ee25487bbbe95ae296a12e7b0))
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.0.0...bigtable-v7.1.0) (2026-08-05)
+
+
+### Features
+
+* **bigtable:** Split gapic and proto usage from the handwritten library into bigtable-api ([#8934](https://github.com/googleapis/google-cloud-node/issues/8934)) ([f63f914](https://github.com/googleapis/google-cloud-node/commit/f63f914e69106f581448837f5ee212ab71f85775))
+
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v6.5.1...bigtable-v7.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update bigtable to minimum Node version of 22. ([#9042](https://github.com/googleapis/google-cloud-node/issues/9042))
+
+### Features
+
+* Update bigtable to minimum Node version of 22. ([#9042](https://github.com/googleapis/google-cloud-node/issues/9042)) ([86406b7](https://github.com/googleapis/google-cloud-node/commit/86406b733caaf63439d0007996898920302c7aad)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+
+### Bug Fixes
+
+* **bigtable:** Test resource leaks, timestamp clamping ([#9059](https://github.com/googleapis/google-cloud-node/issues/9059)) ([0712c05](https://github.com/googleapis/google-cloud-node/commit/0712c05113745b0512bf78097c0eb416cac38488))
+* Remove kokoro bigtable system tests ([#8319](https://github.com/googleapis/google-cloud-node/issues/8319)) ([66f5c91](https://github.com/googleapis/google-cloud-node/commit/66f5c91d832a90e50401eaf4cac0dfe3069c1b66))
+
 ## [6.5.1](https://github.com/googleapis/google-cloud-node/compare/bigtable-v6.5.0...bigtable-v6.5.1) (2026-05-11)
 
 

@@ -28,10 +28,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform, PassThrough } from 'stream';
+import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class DataChatServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('geminidataanalytics');
@@ -68,10 +68,10 @@ export class DataChatServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  dataChatServiceStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  dataChatServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DataChatServiceClient.
@@ -147,7 +147,7 @@ export class DataChatServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -256,7 +256,7 @@ export class DataChatServiceClient {
       'google.cloud.geminidataanalytics.v1alpha.DataChatService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -297,7 +297,7 @@ export class DataChatServiceClient {
             .DataChatService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -305,6 +305,7 @@ export class DataChatServiceClient {
       'chat',
       'createConversation',
       'deleteConversation',
+      'updateConversation',
       'getConversation',
       'listConversations',
       'listMessages',
@@ -312,11 +313,11 @@ export class DataChatServiceClient {
     ];
     for (const methodName of dataChatServiceStubMethods) {
       const callPromise = this.dataChatServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -545,7 +546,7 @@ export class DataChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createConversation request %j', request);
@@ -690,7 +691,7 @@ export class DataChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteConversation request %j', request);
@@ -720,6 +721,162 @@ export class DataChatServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('deleteConversation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates a conversation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.geminidataanalytics.v1alpha.Conversation} request.conversation
+   *   Required. The resource being updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten in the
+   *   Conversation resource by the update.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask. If the
+   *   user does not provide a mask then all fields with non-default values
+   *   present in the request will be overwritten. If a wildcard mask is provided,
+   *   all fields will be overwritten.
+   * @param {string} [request.requestId]
+   *   Optional. An optional request ID to identify requests. Specify a unique
+   *   request ID so that if you must retry your request, the server will know to
+   *   ignore the request if it has already been completed. The server will
+   *   guarantee that for at least 60 minutes since the first request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1alpha.Conversation|Conversation}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1alpha/data_chat_service.update_conversation.js</caption>
+   * region_tag:geminidataanalytics_v1alpha_generated_DataChatService_UpdateConversation_async
+   */
+  updateConversation(
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1alpha.IConversation,
+      (
+        | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  updateConversation(
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IConversation,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateConversation(
+    request: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IConversation,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateConversation(
+    request?: protos.google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IConversation,
+          | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.geminidataanalytics.v1alpha.IConversation,
+      | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1alpha.IConversation,
+      (
+        | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'conversation.name': request.conversation!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateConversation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.geminidataanalytics.v1alpha.IConversation,
+          | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateConversation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.geminidataanalytics.v1alpha.IConversation,
+          (
+            | protos.google.cloud.geminidataanalytics.v1alpha.IUpdateConversationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateConversation response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -835,7 +992,7 @@ export class DataChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getConversation request %j', request);
@@ -987,7 +1144,7 @@ export class DataChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('queryData request %j', request);
@@ -1040,7 +1197,7 @@ export class DataChatServiceClient {
 
   /**
    * Answers a data question by generating a stream of
-   * {@link protos.google.cloud.geminidataanalytics.v1alpha.Message|Message} objects.
+   * {@link protos.google.cloud.geminidataanalytics.v1.Message|Message} objects.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1059,16 +1216,31 @@ export class DataChatServiceClient {
    *   Some clients may not use GDA managed resources including
    *   conversations and agents, instead they create and manage their own
    *   conversations and agents resources.
+   * @param {google.cloud.geminidataanalytics.v1alpha.LookerSettings} [request.lookerSettings]
+   *   Optional. Looker specific settings.
    * @param {string} [request.project]
-   *   Optional. The Google Cloud project to be used for quota and billing.
+   *   Optional. Deprecated: Use `parent` field instead.
+   *   The Google Cloud project to be used for quota and billing.
    * @param {string} request.parent
    *   Required. The parent value for chat request.
    *   Pattern: `projects/{project}/locations/{location}`
    * @param {number[]} request.messages
    *   Required. Content of current conversation.
+   * @param {google.cloud.geminidataanalytics.v1alpha.Credentials} [request.credentials]
+   *   Optional. The credentials to use when calling the data source(s) specified
+   *   in the context.
+   *
+   *   This field can be used to provide credentials for various data sources.
+   *   For example, when connecting to Looker, it currently supports both OAuth
+   *   token and API key-based credentials, as described in
+   *   [Authentication with an
+   *   SDK](https://cloud.google.com/looker/docs/api-auth#authentication_with_an_sdk).
    * @param {google.cloud.geminidataanalytics.v1alpha.ChatRequest.ThinkingMode} [request.thinkingMode]
    *   Optional. The thinking mode to use for the agent loop.
    *   Defaults to THINKING_MODE_UNSPECIFIED if not specified.
+   * @param {google.cloud.geminidataanalytics.v1alpha.ChatRequest.Model} [request.model]
+   *   Optional. The model to use for the agent loop when processing the request.
+   *   This setting only has an effect when context.options.model is not set.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1090,7 +1262,7 @@ export class DataChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('chat stream %j', options);
@@ -1107,8 +1279,9 @@ export class DataChatServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. The max page size is 100. All larger page sizes will be coerced
-   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   *   requested. The max page size is `100`. All larger page sizes will be
+   *   coerced to `100`. If unspecified, server will pick `50` as an appropriate
+   *   default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
@@ -1199,7 +1372,7 @@ export class DataChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1240,8 +1413,9 @@ export class DataChatServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. The max page size is 100. All larger page sizes will be coerced
-   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   *   requested. The max page size is `100`. All larger page sizes will be
+   *   coerced to `100`. If unspecified, server will pick `50` as an appropriate
+   *   default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
@@ -1274,7 +1448,7 @@ export class DataChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listConversations stream %j', request);
@@ -1296,8 +1470,9 @@ export class DataChatServiceClient {
    *   Format: `projects/{project}/locations/{location}`
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. The max page size is 100. All larger page sizes will be coerced
-   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   *   requested. The max page size is `100`. All larger page sizes will be
+   *   coerced to `100`. If unspecified, server will pick `50` as an appropriate
+   *   default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
@@ -1331,7 +1506,7 @@ export class DataChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listConversations iterate %j', request);
@@ -1352,8 +1527,9 @@ export class DataChatServiceClient {
    *   `projects/{project}/locations/{location}/conversations/{conversation_id}`
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. The max page size is 100. All larger page sizes will be coerced
-   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   *   requested. The max page size is `100`. All larger page sizes will be
+   *   coerced to `100`. If unspecified, server will pick `50` as an appropriate
+   *   default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
@@ -1446,7 +1622,7 @@ export class DataChatServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1488,8 +1664,9 @@ export class DataChatServiceClient {
    *   `projects/{project}/locations/{location}/conversations/{conversation_id}`
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. The max page size is 100. All larger page sizes will be coerced
-   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   *   requested. The max page size is `100`. All larger page sizes will be
+   *   coerced to `100`. If unspecified, server will pick `50` as an appropriate
+   *   default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
@@ -1524,7 +1701,7 @@ export class DataChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMessages stream %j', request);
@@ -1547,8 +1724,9 @@ export class DataChatServiceClient {
    *   `projects/{project}/locations/{location}/conversations/{conversation_id}`
    * @param {number} [request.pageSize]
    *   Optional. Requested page size. Server may return fewer items than
-   *   requested. The max page size is 100. All larger page sizes will be coerced
-   *   to 100. If unspecified, server will pick 50 as an approperiate default.
+   *   requested. The max page size is `100`. All larger page sizes will be
+   *   coerced to `100`. If unspecified, server will pick `50` as an appropriate
+   *   default.
    * @param {string} [request.pageToken]
    *   Optional. A token identifying a page of results the server should return.
    * @param {string} [request.filter]
@@ -1584,7 +1762,7 @@ export class DataChatServiceClient {
       });
     const defaultCallSettings = this._defaults['listMessages'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listMessages iterate %j', request);
@@ -1847,11 +2025,11 @@ export class DataChatServiceClient {
    */
   close(): Promise<void> {
     if (this.dataChatServiceStub && !this._terminated) {
-      return this.dataChatServiceStub.then((stub) => {
+      return this.dataChatServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
       });

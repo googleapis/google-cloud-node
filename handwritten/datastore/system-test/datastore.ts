@@ -17,7 +17,7 @@ import * as path from 'path';
 import {after, before, describe, it} from 'mocha';
 import * as yaml from 'js-yaml';
 import {Datastore, DatastoreOptions, Index, Transaction} from '../src';
-import {google} from '../protos/protos';
+import {google} from '../src/protos';
 import {Storage} from '@google-cloud/storage';
 import {AggregateField, AggregateQuery} from '../src/aggregate';
 import {and, or, PropertyFilter} from '../src/filter';

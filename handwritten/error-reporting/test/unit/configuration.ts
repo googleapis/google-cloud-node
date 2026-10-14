@@ -33,18 +33,30 @@ const configEnv = {
   GCLOUD_PROJECT: process.env.GCLOUD_PROJECT,
   GAE_MODULE_NAME: process.env.GAE_MODULE_NAME,
   GAE_MODULE_VERSION: process.env.GAE_MODULE_VERSION,
+  GAE_SERVICE: process.env.GAE_SERVICE,
+  GAE_VERSION: process.env.GAE_VERSION,
+  FUNCTION_NAME: process.env.FUNCTION_NAME,
+  K_SERVICE: process.env.K_SERVICE,
+  K_REVISION: process.env.K_REVISION,
 };
 function sterilizeConfigEnv() {
   delete process.env.NODE_ENV;
   delete process.env.GCLOUD_PROJECT;
   delete process.env.GAE_MODULE_NAME;
   delete process.env.GAE_MODULE_VERSION;
+  delete process.env.GAE_SERVICE;
+  delete process.env.GAE_VERSION;
+  delete process.env.FUNCTION_NAME;
+  delete process.env.K_SERVICE;
+  delete process.env.K_REVISION;
 }
 function restoreConfigEnv() {
-  process.env.NODE_ENV = configEnv.NODE_ENV;
-  process.env.GCLOUD_PROJECT = configEnv.GCLOUD_PROJECT;
-  process.env.GAE_MODULE_NAME = configEnv.GAE_MODULE_NAME;
-  process.env.GAE_MODULE_VERSION = configEnv.GAE_MODULE_VERSION;
+  sterilizeConfigEnv();
+  for (const [key, value] of Object.entries(configEnv)) {
+    if (value !== undefined) {
+      process.env[key] = value;
+    }
+  }
 }
 function createDeadMetadataService() {
   return nock(METADATA_URL).get('/project-id').times(1).reply(500);

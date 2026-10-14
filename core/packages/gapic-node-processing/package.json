@@ -1,6 +1,6 @@
 {
   "name": "gapic-node-processing",
-  "version": "0.1.8",
+  "version": "0.3.0",
   "description": "Does various processing functions for Nodejs gapic libraries",
   "bin": "./build/src/cli.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "samples-test": "echo 'FIXME: no sample tests'",
     "system-test": "echo 'FIXME: no system tests'",
     "test:snap": "SNAPSHOT_UPDATE=1 npm test",
-    "test": "cross-env c8 mocha --exit build/test",
+    "test": "cross-env node ../../../bin/run-test.cjs --exit build/test",
     "prelint": "npm install",
     "precompile": "gts clean",
     "docs": "echo 'no docs to publish'"
@@ -33,15 +33,14 @@
     "@types/yargs": "^17.0.33",
     "c8": "^10.1.3",
     "cross-env": "^7.0.3",
-    "gapic-tools": "^1.0.0",
+    "gapic-tools": "^2.0.0",
     "gts": "^6.0.2",
     "mocha": "^11.1.0",
     "sinon": "21.0.3",
-    "snap-shot-it": "^7.9.10",
-    "typescript": "^5.8.2"
+    "snap-shot-it": "^7.9.10"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "repository": {
     "type": "git",
@@ -53,14 +52,10 @@
     "@octokit/rest": "^20.0.0",
     "js-yaml": "^4.1.0",
     "nunjucks": "^3.2.4",
+    "typescript": "^5.8.2",
     "yargs": "^17.7.2"
   },
   "overrides": {
     "@sinonjs/fake-timers": "15.2.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "@sinonjs/fake-timers": "15.2.1"
-    }
   }
 }

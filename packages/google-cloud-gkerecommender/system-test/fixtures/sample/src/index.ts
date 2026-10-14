@@ -19,7 +19,9 @@
 import {GkeInferenceQuickstartClient} from '@google-cloud/gkerecommender';
 
 // check that the client class type name can be used
-function doStuffWithGkeInferenceQuickstartClient(client: GkeInferenceQuickstartClient) {
+function doStuffWithGkeInferenceQuickstartClient(
+  client: GkeInferenceQuickstartClient,
+) {
   client.close();
 }
 

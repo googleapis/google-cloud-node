@@ -88,7 +88,7 @@ try {
   const clientContent = fs.readFileSync(containerAnalysisClientFile, 'utf8');
   if (!clientContent.includes('getGrafeasClient()')) {
     replaceInFile(containerAnalysisClientFile, /import type \* as gax from 'google-gax';/g, "import type * as gax from 'google-gax';\nimport {GrafeasClient} from '@google-cloud/grafeas';");
-    replaceInFile(containerAnalysisClientFile, /^}/m, grafeasClientMethod);
+    replaceInFile(containerAnalysisClientFile, /}\s*$/, grafeasClientMethod);
     console.log('Successfully added getGrafeasClient method.');
   } else {
     console.log('getGrafeasClient method already exists, skipping.');
@@ -123,14 +123,34 @@ filesToDelete.forEach(file => {
   }
 });
 
-// Add beta version GrafeasClient to export
+const v1SamplesDir = path.resolve('packages/google-devtools-containeranalysis/samples/generated/v1');
+if (fs.existsSync(v1SamplesDir)) {
+  const v1SamplesToDelete = findFilesByExtension(v1SamplesDir, '.js', /^grafeas\./);
+  v1SamplesToDelete.forEach(file => {
+    try {
+      fs.unlinkSync(file);
+      console.log(`Successfully deleted sample: ${file}`);
+    } catch (err) {
+      console.error(`Error deleting sample ${file}:`, err);
+    }
+  });
+}
+
+// Remove GrafeasClient from top-level export
 const indexFile = path.resolve('packages/google-devtools-containeranalysis/src/index.ts');
-const searchPattern1 = /const GrafeasClient = v1\.GrafeasClient;\ntype GrafeasClient = v1\.GrafeasClient;/g;
-const replacement1 = '\nconst GrafeasClient = v1beta1.GrafeasV1Beta1Client;\n' +
-        'type GrafeasClient = v1beta1.GrafeasV1Beta1Client;';
-replaceInFile(indexFile, searchPattern1, replacement1);
+replaceInFile(indexFile, /const GrafeasClient = v1\.GrafeasClient;\s*type GrafeasClient = v1\.GrafeasClient;/g, '');
+replaceInFile(indexFile, /,\s*GrafeasClient/g, '');
+
+// Fix system-test fixture samples to remove GrafeasClient references
+const sampleTsFile = path.resolve('packages/google-devtools-containeranalysis/system-test/fixtures/sample/src/index.ts');
+replaceInFile(sampleTsFile, /\n\s*GrafeasClient,/g, '');
+replaceInFile(sampleTsFile, /\nfunction doStuffWithGrafeasClient\([\s\S]*?\}\n/g, '\n');
+replaceInFile(sampleTsFile, /\n\s*\/\/ check that the client instance can be created\n\s*const grafeasClient = new GrafeasClient\(\);\n\s*doStuffWithGrafeasClient\(grafeasClient\);/g, '');
+
+const sampleJsFile = path.resolve('packages/google-devtools-containeranalysis/system-test/fixtures/sample/src/index.js');
+replaceInFile(sampleJsFile, /\n\s*const grafeasClient = new containeranalysis\.GrafeasClient\(\);/g, '');
 
 const v1IndexFile = path.resolve('packages/google-devtools-containeranalysis/src/v1/index.ts');
-const searchPattern2 = /export {GrafeasClient} from '\.\/grafeas_client';/g;
+const searchPattern2 = /export\s+{\s*GrafeasClient\s*}\s*from\s*'\.\/grafeas_client';/g;
 const replacement2 = '\n';
 replaceInFile(v1IndexFile, searchPattern2, replacement2);

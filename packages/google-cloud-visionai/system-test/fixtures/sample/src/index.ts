@@ -16,7 +16,14 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AppPlatformClient, HealthCheckServiceClient, LiveVideoAnalyticsClient, StreamingServiceClient, StreamsServiceClient, WarehouseClient} from '@google-cloud/visionai';
+import {
+  AppPlatformClient,
+  HealthCheckServiceClient,
+  LiveVideoAnalyticsClient,
+  StreamingServiceClient,
+  StreamsServiceClient,
+  WarehouseClient,
+} from '@google-cloud/visionai';
 
 // check that the client class type name can be used
 function doStuffWithAppPlatformClient(client: AppPlatformClient) {

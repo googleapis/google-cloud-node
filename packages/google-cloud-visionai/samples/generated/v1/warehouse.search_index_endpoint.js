@@ -39,7 +39,7 @@ function main(indexEndpoint) {
   /**
    *  Required. The index endpoint to search.
    *  Format:
-   *  `projects/{project_id}/locations/{location_id}/indexEndpoints/{index_endpoint_id}'
+   *  `projects/{project_id}/locations/{location_id}/indexEndpoints/{index_endpoint_id}`
    */
   // const indexEndpoint = 'abc123'
   /**

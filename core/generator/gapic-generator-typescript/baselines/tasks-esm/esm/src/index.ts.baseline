@@ -19,8 +19,8 @@
 import * as v2 from './v2/index.js';
 const CloudTasksClient = v2.CloudTasksClient;
 type CloudTasksClient = v2.CloudTasksClient;
-export { v2, CloudTasksClient };
-export default { v2, CloudTasksClient };
+export {v2, CloudTasksClient};
+export default {v2, CloudTasksClient};
 // @ts-ignore
 import * as protos from '../../protos/protos.js';
-export { protos };
+export {protos};

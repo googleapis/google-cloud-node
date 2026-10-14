@@ -17,7 +17,7 @@
 
 module.exports = {
   opts: {
-    readme: '../README.md',
+    readme: './README.md',
     package: './package.json',
     template: './node_modules/jsdoc-fresh',
     recurse: true,

@@ -29,6 +29,9 @@ export class Span {
   }
 
   addEvent(name: string, attributes?: Attributes): this {
+    if (this.span?.isRecording?.() === false) {
+      return this;
+    }
     this.span = this.span?.addEvent(name, attributes);
     return this;
   }

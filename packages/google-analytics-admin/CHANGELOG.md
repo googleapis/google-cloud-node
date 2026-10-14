@@ -1,5 +1,49 @@
 # Changelog
 
+## [10.2.0](https://github.com/googleapis/google-cloud-node/compare/admin-v10.1.1...admin-v10.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [10.1.1](https://github.com/googleapis/google-cloud-node/compare/admin-v10.1.0...admin-v10.1.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [10.1.0](https://github.com/googleapis/google-cloud-node/compare/admin-v10.0.0...admin-v10.1.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [10.0.0](https://github.com/googleapis/google-cloud-node/compare/admin-v9.2.0...admin-v10.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+
+### Bug Fixes
+
+* Upgrade node auth dependencies in most generated packages to node 22 supported version ([#9053](https://github.com/googleapis/google-cloud-node/issues/9053)) ([128976a](https://github.com/googleapis/google-cloud-node/commit/128976a93ff1d68fb33df730fa3fe7b4dd8de9e0))
+
+## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/admin-v9.1.0...admin-v9.2.0) (2026-06-25)
+
+
+### Features
+
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
 ## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/admin-v9.0.1...admin-v9.1.0) (2026-05-01)
 
 

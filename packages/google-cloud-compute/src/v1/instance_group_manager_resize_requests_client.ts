@@ -27,10 +27,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -42,6 +42,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  The InstanceGroupManagerResizeRequests API.
+ *
+ *  This client uses InstanceGroupManagerResizeRequests version 2026-09-01.
  * @class
  * @memberof v1
  */
@@ -52,7 +54,7 @@ export class InstanceGroupManagerResizeRequestsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('compute');
@@ -65,10 +67,8 @@ export class InstanceGroupManagerResizeRequestsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  instanceGroupManagerResizeRequestsStub?: Promise<{
-    [name: string]: Function;
-  }>;
+  innerApiCalls: {[name: string]: Function};
+  instanceGroupManagerResizeRequestsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of InstanceGroupManagerResizeRequestsClient.
@@ -144,14 +144,14 @@ export class InstanceGroupManagerResizeRequestsClient {
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = { fallback: true };
+      opts = {fallback: true};
     } else {
       opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -217,7 +217,10 @@ export class InstanceGroupManagerResizeRequestsClient {
       'google.cloud.compute.v1.InstanceGroupManagerResizeRequests',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {
+        'x-goog-api-client': clientHeader.join(' '),
+        'x-goog-api-version': '2026-09-01',
+      },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -258,7 +261,7 @@ export class InstanceGroupManagerResizeRequestsClient {
             .InstanceGroupManagerResizeRequests,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -271,7 +274,7 @@ export class InstanceGroupManagerResizeRequestsClient {
     ];
     for (const methodName of instanceGroupManagerResizeRequestsStubMethods) {
       const callPromise = this.instanceGroupManagerResizeRequestsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -506,7 +509,7 @@ export class InstanceGroupManagerResizeRequestsClient {
         instance_group_manager: request.instanceGroupManager ?? '',
         resize_request: request.resizeRequest ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('cancel request %j', request);
@@ -682,7 +685,7 @@ export class InstanceGroupManagerResizeRequestsClient {
         instance_group_manager: request.instanceGroupManager ?? '',
         resize_request: request.resizeRequest ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('delete request %j', request);
@@ -843,7 +846,7 @@ export class InstanceGroupManagerResizeRequestsClient {
         instance_group_manager: request.instanceGroupManager ?? '',
         resize_request: request.resizeRequest ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('get request %j', request);
@@ -1012,7 +1015,7 @@ export class InstanceGroupManagerResizeRequestsClient {
         zone: request.zone ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('insert request %j', request);
@@ -1160,13 +1163,6 @@ export class InstanceGroupManagerResizeRequestsClient {
    *   the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.zone
    *   The name of thezone where the managed
    *   instance group is located. The name should conform to RFC1035.
@@ -1255,7 +1251,7 @@ export class InstanceGroupManagerResizeRequestsClient {
         zone: request.zone ?? '',
         instance_group_manager: request.instanceGroupManager ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1376,13 +1372,6 @@ export class InstanceGroupManagerResizeRequestsClient {
    *   the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.zone
    *   The name of thezone where the managed
    *   instance group is located. The name should conform to RFC1035.
@@ -1413,7 +1402,7 @@ export class InstanceGroupManagerResizeRequestsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list stream %j', request);
@@ -1515,13 +1504,6 @@ export class InstanceGroupManagerResizeRequestsClient {
    *   the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.zone
    *   The name of thezone where the managed
    *   instance group is located. The name should conform to RFC1035.
@@ -1553,7 +1535,7 @@ export class InstanceGroupManagerResizeRequestsClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list iterate %j', request);
@@ -1572,7 +1554,7 @@ export class InstanceGroupManagerResizeRequestsClient {
    */
   close(): Promise<void> {
     if (this.instanceGroupManagerResizeRequestsStub && !this._terminated) {
-      return this.instanceGroupManagerResizeRequestsStub.then((stub) => {
+      return this.instanceGroupManagerResizeRequestsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datascanserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -276,7 +276,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataScanServiceStub, undefined);
@@ -284,12 +284,12 @@ describe('v1.DataScanServiceClient', () => {
       assert(client.dataScanServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataScanServiceStub);
@@ -298,14 +298,14 @@ describe('v1.DataScanServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataScanServiceStub, undefined);
@@ -314,7 +314,7 @@ describe('v1.DataScanServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -322,7 +322,7 @@ describe('v1.DataScanServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -334,7 +334,7 @@ describe('v1.DataScanServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -357,7 +357,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('getDataScan', () => {
     it('invokes getDataScan without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes getDataScan without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes getDataScan with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes getDataScan with closed client', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1.DataScanServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataScan(request), expectedError);
@@ -489,7 +489,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('runDataScan', () => {
     it('invokes runDataScan without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -520,7 +520,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes runDataScan without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -567,7 +567,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes runDataScan with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -598,7 +598,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes runDataScan with closed client', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -611,7 +611,7 @@ describe('v1.DataScanServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.runDataScan(request), expectedError);
@@ -621,7 +621,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('getDataScanJob', () => {
     it('invokes getDataScanJob without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -652,7 +652,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes getDataScanJob without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -699,7 +699,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes getDataScanJob with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -730,7 +730,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes getDataScanJob with closed client', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -743,7 +743,7 @@ describe('v1.DataScanServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataScanJob(request), expectedError);
@@ -753,7 +753,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('cancelDataScanJob', () => {
     it('invokes cancelDataScanJob without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes cancelDataScanJob without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes cancelDataScanJob with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -862,7 +862,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes cancelDataScanJob with closed client', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -875,7 +875,7 @@ describe('v1.DataScanServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelDataScanJob(request), expectedError);
@@ -885,7 +885,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('generateDataQualityRules', () => {
     it('invokes generateDataQualityRules without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -917,7 +917,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes generateDataQualityRules without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -964,7 +964,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes generateDataQualityRules with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -998,7 +998,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes generateDataQualityRules with closed client', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1011,7 +1011,7 @@ describe('v1.DataScanServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1024,7 +1024,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('createDataScan', () => {
     it('invokes createDataScan without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1057,7 +1057,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes createDataScan without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1111,7 +1111,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes createDataScan with call error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1142,7 +1142,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes createDataScan with LRO error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1175,7 +1175,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes checkCreateDataScanProgress without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1183,8 +1183,8 @@ describe('v1.DataScanServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDataScanProgress(
@@ -1197,7 +1197,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes checkCreateDataScanProgress with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1218,7 +1218,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('updateDataScan', () => {
     it('invokes updateDataScan without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1252,7 +1252,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes updateDataScan without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1307,7 +1307,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes updateDataScan with call error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1339,7 +1339,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes updateDataScan with LRO error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1373,7 +1373,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes checkUpdateDataScanProgress without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1381,8 +1381,8 @@ describe('v1.DataScanServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDataScanProgress(
@@ -1395,7 +1395,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes checkUpdateDataScanProgress with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1416,7 +1416,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('deleteDataScan', () => {
     it('invokes deleteDataScan without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1449,7 +1449,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes deleteDataScan without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1503,7 +1503,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes deleteDataScan with call error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1534,7 +1534,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes deleteDataScan with LRO error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1567,7 +1567,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes checkDeleteDataScanProgress without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1575,8 +1575,8 @@ describe('v1.DataScanServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDataScanProgress(
@@ -1589,7 +1589,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes checkDeleteDataScanProgress with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1610,7 +1610,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('listDataScans', () => {
     it('invokes listDataScans without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1643,7 +1643,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes listDataScans without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1692,7 +1692,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes listDataScans with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1723,7 +1723,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes listDataScansStream without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1769,15 +1769,15 @@ describe('v1.DataScanServiceClient', () => {
       assert(
         (client.descriptors.page.listDataScans.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataScansStream with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1818,15 +1818,15 @@ describe('v1.DataScanServiceClient', () => {
       assert(
         (client.descriptors.page.listDataScans.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataScans without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1861,15 +1861,15 @@ describe('v1.DataScanServiceClient', () => {
       assert(
         (client.descriptors.page.listDataScans.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataScans with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1901,9 +1901,9 @@ describe('v1.DataScanServiceClient', () => {
       assert(
         (client.descriptors.page.listDataScans.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1911,7 +1911,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('listDataScanJobs', () => {
     it('invokes listDataScanJobs without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1950,7 +1950,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes listDataScanJobs without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2005,7 +2005,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes listDataScanJobs with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2036,7 +2036,7 @@ describe('v1.DataScanServiceClient', () => {
 
     it('invokes listDataScanJobsStream without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2088,15 +2088,15 @@ describe('v1.DataScanServiceClient', () => {
       assert(
         (client.descriptors.page.listDataScanJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataScanJobsStream with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2137,15 +2137,15 @@ describe('v1.DataScanServiceClient', () => {
       assert(
         (client.descriptors.page.listDataScanJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataScanJobs without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2186,15 +2186,15 @@ describe('v1.DataScanServiceClient', () => {
       assert(
         (client.descriptors.page.listDataScanJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataScanJobs with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2226,16 +2226,16 @@ describe('v1.DataScanServiceClient', () => {
       assert(
         (client.descriptors.page.listDataScanJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2265,7 +2265,7 @@ describe('v1.DataScanServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2309,7 +2309,7 @@ describe('v1.DataScanServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2344,7 +2344,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2392,7 +2392,7 @@ describe('v1.DataScanServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2433,7 +2433,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2454,7 +2454,7 @@ describe('v1.DataScanServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2482,7 +2482,7 @@ describe('v1.DataScanServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2492,7 +2492,7 @@ describe('v1.DataScanServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2516,7 +2516,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2538,7 +2538,7 @@ describe('v1.DataScanServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2566,7 +2566,7 @@ describe('v1.DataScanServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2576,7 +2576,7 @@ describe('v1.DataScanServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2600,7 +2600,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2622,7 +2622,7 @@ describe('v1.DataScanServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2650,7 +2650,7 @@ describe('v1.DataScanServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2660,7 +2660,7 @@ describe('v1.DataScanServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2684,7 +2684,7 @@ describe('v1.DataScanServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2719,7 +2719,7 @@ describe('v1.DataScanServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2755,7 +2755,7 @@ describe('v1.DataScanServiceClient', () => {
         aspect_type: 'aspectTypeValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2821,7 +2821,7 @@ describe('v1.DataScanServiceClient', () => {
         asset: 'assetValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2907,7 +2907,7 @@ describe('v1.DataScanServiceClient', () => {
         change_request: 'changeRequestValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2972,7 +2972,7 @@ describe('v1.DataScanServiceClient', () => {
         content: 'contentValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3048,7 +3048,7 @@ describe('v1.DataScanServiceClient', () => {
         data_asset: 'dataAssetValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3124,7 +3124,7 @@ describe('v1.DataScanServiceClient', () => {
         data_attribute_id: 'dataAttributeIdValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3200,7 +3200,7 @@ describe('v1.DataScanServiceClient', () => {
         data_attribute_binding_id: 'dataAttributeBindingIdValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3281,7 +3281,7 @@ describe('v1.DataScanServiceClient', () => {
         data_product: 'dataProductValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3345,7 +3345,7 @@ describe('v1.DataScanServiceClient', () => {
         dataScan: 'dataScanValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3410,7 +3410,7 @@ describe('v1.DataScanServiceClient', () => {
         job: 'jobValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3485,7 +3485,7 @@ describe('v1.DataScanServiceClient', () => {
         data_taxonomy_id: 'dataTaxonomyIdValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3549,7 +3549,7 @@ describe('v1.DataScanServiceClient', () => {
         encryption_config: 'encryptionConfigValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3620,7 +3620,7 @@ describe('v1.DataScanServiceClient', () => {
         entity: 'entityValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3707,7 +3707,7 @@ describe('v1.DataScanServiceClient', () => {
         entry: 'entryValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3782,7 +3782,7 @@ describe('v1.DataScanServiceClient', () => {
         entry_group: 'entryGroupValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3847,7 +3847,7 @@ describe('v1.DataScanServiceClient', () => {
         entry_link: 'entryLinkValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3922,7 +3922,7 @@ describe('v1.DataScanServiceClient', () => {
         entry_type: 'entryTypeValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3987,7 +3987,7 @@ describe('v1.DataScanServiceClient', () => {
         environment: 'environmentValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4062,7 +4062,7 @@ describe('v1.DataScanServiceClient', () => {
         glossary: 'glossaryValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4127,7 +4127,7 @@ describe('v1.DataScanServiceClient', () => {
         glossary_category: 'glossaryCategoryValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4207,7 +4207,7 @@ describe('v1.DataScanServiceClient', () => {
         glossary_term: 'glossaryTermValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4284,7 +4284,7 @@ describe('v1.DataScanServiceClient', () => {
         job: 'jobValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4370,7 +4370,7 @@ describe('v1.DataScanServiceClient', () => {
         lake: 'lakeValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4433,7 +4433,7 @@ describe('v1.DataScanServiceClient', () => {
         location: 'locationValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4483,7 +4483,7 @@ describe('v1.DataScanServiceClient', () => {
         metadata_feed: 'metadataFeedValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4547,7 +4547,7 @@ describe('v1.DataScanServiceClient', () => {
         metadataJob: 'metadataJobValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4614,7 +4614,7 @@ describe('v1.DataScanServiceClient', () => {
         partition: 'partitionValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4712,7 +4712,7 @@ describe('v1.DataScanServiceClient', () => {
         action: 'actionValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4808,7 +4808,7 @@ describe('v1.DataScanServiceClient', () => {
         action: 'actionValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4918,7 +4918,7 @@ describe('v1.DataScanServiceClient', () => {
         action: 'actionValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5048,7 +5048,7 @@ describe('v1.DataScanServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5135,7 +5135,7 @@ describe('v1.DataScanServiceClient', () => {
         task: 'taskValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5211,7 +5211,7 @@ describe('v1.DataScanServiceClient', () => {
         zone: 'zoneValue',
       };
       const client = new datascanserviceModule.v1.DataScanServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -29,6 +29,16 @@ function main(parent, dataStore, dataStoreId) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
+   *  Resource name of the CmekConfig to use for protecting this DataStore.
+   */
+  // const cmekConfigName = 'abc123'
+  /**
+   *  DataStore without CMEK protections. If a default CmekConfig is set for
+   *  the project, setting this field will override the default CmekConfig as
+   *  well.
+   */
+  // const disableCmek = true
+  /**
    *  Required. The parent resource name, such as
    *  `projects/{project}/locations/{location}/collections/{collection}`.
    */

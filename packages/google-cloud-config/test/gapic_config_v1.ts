@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as configModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -275,7 +275,7 @@ describe('v1.ConfigClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.configStub, undefined);
@@ -283,12 +283,12 @@ describe('v1.ConfigClient', () => {
       assert(client.configStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.configStub);
@@ -297,14 +297,14 @@ describe('v1.ConfigClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.configStub, undefined);
@@ -313,7 +313,7 @@ describe('v1.ConfigClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -321,7 +321,7 @@ describe('v1.ConfigClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -333,7 +333,7 @@ describe('v1.ConfigClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -356,7 +356,7 @@ describe('v1.ConfigClient', () => {
   describe('getDeployment', () => {
     it('invokes getDeployment without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -387,7 +387,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getDeployment without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -434,7 +434,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getDeployment with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getDeployment with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -478,7 +478,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDeployment(request), expectedError);
@@ -488,7 +488,7 @@ describe('v1.ConfigClient', () => {
   describe('getRevision', () => {
     it('invokes getRevision without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -519,7 +519,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getRevision without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getRevision with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -597,7 +597,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getRevision with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -610,7 +610,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRevision(request), expectedError);
@@ -620,7 +620,7 @@ describe('v1.ConfigClient', () => {
   describe('getResource', () => {
     it('invokes getResource without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getResource without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getResource with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getResource with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getResource(request), expectedError);
@@ -752,7 +752,7 @@ describe('v1.ConfigClient', () => {
   describe('exportDeploymentStatefile', () => {
     it('invokes exportDeploymentStatefile without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes exportDeploymentStatefile without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes exportDeploymentStatefile with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -865,7 +865,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes exportDeploymentStatefile with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -878,7 +878,7 @@ describe('v1.ConfigClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -891,7 +891,7 @@ describe('v1.ConfigClient', () => {
   describe('exportRevisionStatefile', () => {
     it('invokes exportRevisionStatefile without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -923,7 +923,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes exportRevisionStatefile without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -970,7 +970,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes exportRevisionStatefile with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1004,7 +1004,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes exportRevisionStatefile with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1017,7 +1017,7 @@ describe('v1.ConfigClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1030,7 +1030,7 @@ describe('v1.ConfigClient', () => {
   describe('importStatefile', () => {
     it('invokes importStatefile without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1061,7 +1061,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes importStatefile without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1108,7 +1108,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes importStatefile with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1139,7 +1139,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes importStatefile with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1152,7 +1152,7 @@ describe('v1.ConfigClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.importStatefile(request), expectedError);
@@ -1162,7 +1162,7 @@ describe('v1.ConfigClient', () => {
   describe('deleteStatefile', () => {
     it('invokes deleteStatefile without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1193,7 +1193,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteStatefile without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1240,7 +1240,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteStatefile with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1271,7 +1271,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteStatefile with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1284,7 +1284,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteStatefile(request), expectedError);
@@ -1294,7 +1294,7 @@ describe('v1.ConfigClient', () => {
   describe('exportLockInfo', () => {
     it('invokes exportLockInfo without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1325,7 +1325,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes exportLockInfo without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1372,7 +1372,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes exportLockInfo with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1403,7 +1403,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes exportLockInfo with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1416,7 +1416,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.exportLockInfo(request), expectedError);
@@ -1426,7 +1426,7 @@ describe('v1.ConfigClient', () => {
   describe('getPreview', () => {
     it('invokes getPreview without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1457,7 +1457,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getPreview without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1504,7 +1504,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getPreview with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1535,7 +1535,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getPreview with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1548,7 +1548,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getPreview(request), expectedError);
@@ -1558,7 +1558,7 @@ describe('v1.ConfigClient', () => {
   describe('exportPreviewResult', () => {
     it('invokes exportPreviewResult without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1590,7 +1590,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes exportPreviewResult without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1637,7 +1637,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes exportPreviewResult with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1668,7 +1668,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes exportPreviewResult with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1681,7 +1681,7 @@ describe('v1.ConfigClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.exportPreviewResult(request), expectedError);
@@ -1691,7 +1691,7 @@ describe('v1.ConfigClient', () => {
   describe('getTerraformVersion', () => {
     it('invokes getTerraformVersion without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1723,7 +1723,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getTerraformVersion without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1770,7 +1770,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getTerraformVersion with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1801,7 +1801,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getTerraformVersion with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1814,7 +1814,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTerraformVersion(request), expectedError);
@@ -1824,7 +1824,7 @@ describe('v1.ConfigClient', () => {
   describe('getResourceChange', () => {
     it('invokes getResourceChange without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1855,7 +1855,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getResourceChange without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1902,7 +1902,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getResourceChange with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1933,7 +1933,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getResourceChange with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1946,7 +1946,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getResourceChange(request), expectedError);
@@ -1956,7 +1956,7 @@ describe('v1.ConfigClient', () => {
   describe('getResourceDrift', () => {
     it('invokes getResourceDrift without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1987,7 +1987,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getResourceDrift without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2034,7 +2034,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getResourceDrift with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2065,7 +2065,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getResourceDrift with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2078,7 +2078,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getResourceDrift(request), expectedError);
@@ -2088,7 +2088,7 @@ describe('v1.ConfigClient', () => {
   describe('getAutoMigrationConfig', () => {
     it('invokes getAutoMigrationConfig without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2120,7 +2120,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getAutoMigrationConfig without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2167,7 +2167,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getAutoMigrationConfig with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2201,7 +2201,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getAutoMigrationConfig with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2214,7 +2214,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2227,7 +2227,7 @@ describe('v1.ConfigClient', () => {
   describe('getDeploymentGroup', () => {
     it('invokes getDeploymentGroup without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2259,7 +2259,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getDeploymentGroup without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2306,7 +2306,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getDeploymentGroup with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2337,7 +2337,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getDeploymentGroup with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2350,7 +2350,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDeploymentGroup(request), expectedError);
@@ -2360,7 +2360,7 @@ describe('v1.ConfigClient', () => {
   describe('getDeploymentGroupRevision', () => {
     it('invokes getDeploymentGroupRevision without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2392,7 +2392,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getDeploymentGroupRevision without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2439,7 +2439,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getDeploymentGroupRevision with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2473,7 +2473,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes getDeploymentGroupRevision with closed client', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2486,7 +2486,7 @@ describe('v1.ConfigClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -2499,7 +2499,7 @@ describe('v1.ConfigClient', () => {
   describe('createDeployment', () => {
     it('invokes createDeployment without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2532,7 +2532,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createDeployment without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2586,7 +2586,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createDeployment with call error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2617,7 +2617,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createDeployment with LRO error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2650,7 +2650,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkCreateDeploymentProgress without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2658,8 +2658,8 @@ describe('v1.ConfigClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDeploymentProgress(
@@ -2672,7 +2672,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkCreateDeploymentProgress with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2693,7 +2693,7 @@ describe('v1.ConfigClient', () => {
   describe('updateDeployment', () => {
     it('invokes updateDeployment without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2727,7 +2727,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateDeployment without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2782,7 +2782,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateDeployment with call error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2814,7 +2814,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateDeployment with LRO error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2848,7 +2848,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkUpdateDeploymentProgress without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2856,8 +2856,8 @@ describe('v1.ConfigClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDeploymentProgress(
@@ -2870,7 +2870,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkUpdateDeploymentProgress with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2891,7 +2891,7 @@ describe('v1.ConfigClient', () => {
   describe('deleteDeployment', () => {
     it('invokes deleteDeployment without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2924,7 +2924,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteDeployment without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2978,7 +2978,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteDeployment with call error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3009,7 +3009,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteDeployment with LRO error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3042,7 +3042,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkDeleteDeploymentProgress without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3050,8 +3050,8 @@ describe('v1.ConfigClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDeploymentProgress(
@@ -3064,7 +3064,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkDeleteDeploymentProgress with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3085,7 +3085,7 @@ describe('v1.ConfigClient', () => {
   describe('lockDeployment', () => {
     it('invokes lockDeployment without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3118,7 +3118,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes lockDeployment without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3172,7 +3172,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes lockDeployment with call error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3203,7 +3203,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes lockDeployment with LRO error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3236,7 +3236,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkLockDeploymentProgress without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3244,8 +3244,8 @@ describe('v1.ConfigClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkLockDeploymentProgress(
@@ -3258,7 +3258,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkLockDeploymentProgress with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3279,7 +3279,7 @@ describe('v1.ConfigClient', () => {
   describe('unlockDeployment', () => {
     it('invokes unlockDeployment without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3312,7 +3312,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes unlockDeployment without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3366,7 +3366,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes unlockDeployment with call error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3397,7 +3397,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes unlockDeployment with LRO error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3430,7 +3430,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkUnlockDeploymentProgress without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3438,8 +3438,8 @@ describe('v1.ConfigClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUnlockDeploymentProgress(
@@ -3452,7 +3452,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkUnlockDeploymentProgress with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3473,7 +3473,7 @@ describe('v1.ConfigClient', () => {
   describe('createPreview', () => {
     it('invokes createPreview without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3506,7 +3506,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createPreview without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3560,7 +3560,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createPreview with call error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3591,7 +3591,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createPreview with LRO error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3624,7 +3624,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkCreatePreviewProgress without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3632,8 +3632,8 @@ describe('v1.ConfigClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreatePreviewProgress(
@@ -3646,7 +3646,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkCreatePreviewProgress with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3667,7 +3667,7 @@ describe('v1.ConfigClient', () => {
   describe('deletePreview', () => {
     it('invokes deletePreview without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3700,7 +3700,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deletePreview without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3754,7 +3754,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deletePreview with call error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3785,7 +3785,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deletePreview with LRO error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3818,7 +3818,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkDeletePreviewProgress without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3826,8 +3826,8 @@ describe('v1.ConfigClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeletePreviewProgress(
@@ -3840,7 +3840,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkDeletePreviewProgress with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3861,7 +3861,7 @@ describe('v1.ConfigClient', () => {
   describe('updateAutoMigrationConfig', () => {
     it('invokes updateAutoMigrationConfig without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3895,7 +3895,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateAutoMigrationConfig without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3950,7 +3950,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateAutoMigrationConfig with call error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3985,7 +3985,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateAutoMigrationConfig with LRO error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4019,7 +4019,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkUpdateAutoMigrationConfigProgress without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4027,8 +4027,8 @@ describe('v1.ConfigClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4042,7 +4042,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkUpdateAutoMigrationConfigProgress with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4063,7 +4063,7 @@ describe('v1.ConfigClient', () => {
   describe('createDeploymentGroup', () => {
     it('invokes createDeploymentGroup without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4096,7 +4096,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createDeploymentGroup without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4150,7 +4150,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createDeploymentGroup with call error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4184,7 +4184,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes createDeploymentGroup with LRO error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4217,7 +4217,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkCreateDeploymentGroupProgress without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4225,8 +4225,8 @@ describe('v1.ConfigClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDeploymentGroupProgress(
@@ -4239,7 +4239,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkCreateDeploymentGroupProgress with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4260,7 +4260,7 @@ describe('v1.ConfigClient', () => {
   describe('updateDeploymentGroup', () => {
     it('invokes updateDeploymentGroup without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4294,7 +4294,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateDeploymentGroup without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4349,7 +4349,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateDeploymentGroup with call error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4384,7 +4384,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes updateDeploymentGroup with LRO error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4418,7 +4418,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkUpdateDeploymentGroupProgress without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4426,8 +4426,8 @@ describe('v1.ConfigClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDeploymentGroupProgress(
@@ -4440,7 +4440,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkUpdateDeploymentGroupProgress with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4461,7 +4461,7 @@ describe('v1.ConfigClient', () => {
   describe('deleteDeploymentGroup', () => {
     it('invokes deleteDeploymentGroup without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4494,7 +4494,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteDeploymentGroup without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4548,7 +4548,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteDeploymentGroup with call error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4582,7 +4582,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deleteDeploymentGroup with LRO error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4615,7 +4615,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkDeleteDeploymentGroupProgress without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4623,8 +4623,8 @@ describe('v1.ConfigClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDeploymentGroupProgress(
@@ -4637,7 +4637,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkDeleteDeploymentGroupProgress with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4658,7 +4658,7 @@ describe('v1.ConfigClient', () => {
   describe('provisionDeploymentGroup', () => {
     it('invokes provisionDeploymentGroup without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4691,7 +4691,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes provisionDeploymentGroup without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4745,7 +4745,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes provisionDeploymentGroup with call error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4779,7 +4779,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes provisionDeploymentGroup with LRO error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4812,7 +4812,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkProvisionDeploymentGroupProgress without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4820,8 +4820,8 @@ describe('v1.ConfigClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -4835,7 +4835,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkProvisionDeploymentGroupProgress with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4856,7 +4856,7 @@ describe('v1.ConfigClient', () => {
   describe('deprovisionDeploymentGroup', () => {
     it('invokes deprovisionDeploymentGroup without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4889,7 +4889,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deprovisionDeploymentGroup without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4943,7 +4943,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deprovisionDeploymentGroup with call error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4977,7 +4977,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes deprovisionDeploymentGroup with LRO error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5010,7 +5010,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkDeprovisionDeploymentGroupProgress without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5018,8 +5018,8 @@ describe('v1.ConfigClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5033,7 +5033,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes checkDeprovisionDeploymentGroupProgress with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5054,7 +5054,7 @@ describe('v1.ConfigClient', () => {
   describe('listDeployments', () => {
     it('invokes listDeployments without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5087,7 +5087,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listDeployments without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5136,7 +5136,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listDeployments with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5167,7 +5167,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listDeploymentsStream without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5213,15 +5213,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDeploymentsStream with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5262,15 +5262,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeployments without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5305,15 +5305,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeployments with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5345,9 +5345,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5355,7 +5355,7 @@ describe('v1.ConfigClient', () => {
   describe('listRevisions', () => {
     it('invokes listRevisions without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5388,7 +5388,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listRevisions without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5437,7 +5437,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listRevisions with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5468,7 +5468,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listRevisionsStream without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5514,15 +5514,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listRevisions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRevisionsStream with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5563,15 +5563,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listRevisions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRevisions without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5606,15 +5606,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listRevisions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRevisions with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5646,9 +5646,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listRevisions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5656,7 +5656,7 @@ describe('v1.ConfigClient', () => {
   describe('listResources', () => {
     it('invokes listResources without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5689,7 +5689,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listResources without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5738,7 +5738,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listResources with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5769,7 +5769,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listResourcesStream without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5815,15 +5815,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listResourcesStream with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5864,15 +5864,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listResources without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5907,15 +5907,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listResources with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5947,9 +5947,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5957,7 +5957,7 @@ describe('v1.ConfigClient', () => {
   describe('listPreviews', () => {
     it('invokes listPreviews without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5990,7 +5990,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listPreviews without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6039,7 +6039,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listPreviews with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6070,7 +6070,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listPreviewsStream without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6113,15 +6113,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listPreviews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listPreviewsStream with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6161,15 +6161,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listPreviews.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPreviews without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6204,15 +6204,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listPreviews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listPreviews with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6244,9 +6244,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listPreviews.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6254,7 +6254,7 @@ describe('v1.ConfigClient', () => {
   describe('listTerraformVersions', () => {
     it('invokes listTerraformVersions without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6294,7 +6294,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listTerraformVersions without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6349,7 +6349,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listTerraformVersions with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6383,7 +6383,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listTerraformVersionsStream without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6449,7 +6449,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listTerraformVersionsStream with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6504,7 +6504,7 @@ describe('v1.ConfigClient', () => {
 
     it('uses async iteration with listTerraformVersions without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6557,7 +6557,7 @@ describe('v1.ConfigClient', () => {
 
     it('uses async iteration with listTerraformVersions with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6603,7 +6603,7 @@ describe('v1.ConfigClient', () => {
   describe('listResourceChanges', () => {
     it('invokes listResourceChanges without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6643,7 +6643,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listResourceChanges without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6698,7 +6698,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listResourceChanges with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6729,7 +6729,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listResourceChangesStream without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6781,15 +6781,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResourceChanges.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listResourceChangesStream with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6830,15 +6830,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResourceChanges.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listResourceChanges without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6879,15 +6879,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResourceChanges.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listResourceChanges with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6919,9 +6919,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResourceChanges.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6929,7 +6929,7 @@ describe('v1.ConfigClient', () => {
   describe('listResourceDrifts', () => {
     it('invokes listResourceDrifts without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6969,7 +6969,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listResourceDrifts without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7024,7 +7024,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listResourceDrifts with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7055,7 +7055,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listResourceDriftsStream without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7107,15 +7107,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResourceDrifts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listResourceDriftsStream with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7156,15 +7156,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResourceDrifts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listResourceDrifts without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7205,15 +7205,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResourceDrifts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listResourceDrifts with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7245,9 +7245,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listResourceDrifts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7255,7 +7255,7 @@ describe('v1.ConfigClient', () => {
   describe('listDeploymentGroups', () => {
     it('invokes listDeploymentGroups without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7295,7 +7295,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listDeploymentGroups without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7350,7 +7350,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listDeploymentGroups with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7381,7 +7381,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listDeploymentGroupsStream without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7433,15 +7433,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listDeploymentGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDeploymentGroupsStream with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7482,15 +7482,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listDeploymentGroups.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeploymentGroups without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7531,15 +7531,15 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listDeploymentGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeploymentGroups with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7571,9 +7571,9 @@ describe('v1.ConfigClient', () => {
       assert(
         (client.descriptors.page.listDeploymentGroups.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7581,7 +7581,7 @@ describe('v1.ConfigClient', () => {
   describe('listDeploymentGroupRevisions', () => {
     it('invokes listDeploymentGroupRevisions without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7621,7 +7621,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listDeploymentGroupRevisions without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7653,8 +7653,7 @@ describe('v1.ConfigClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.config.v1.IDeploymentGroupRevision[]
-              | null,
+              protos.google.cloud.config.v1.IDeploymentGroupRevision[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -7678,7 +7677,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listDeploymentGroupRevisions with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7712,7 +7711,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listDeploymentGroupRevisionsStream without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7782,7 +7781,7 @@ describe('v1.ConfigClient', () => {
 
     it('invokes listDeploymentGroupRevisionsStream with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7841,7 +7840,7 @@ describe('v1.ConfigClient', () => {
 
     it('uses async iteration with listDeploymentGroupRevisions without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7895,7 +7894,7 @@ describe('v1.ConfigClient', () => {
 
     it('uses async iteration with listDeploymentGroupRevisions with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7941,7 +7940,7 @@ describe('v1.ConfigClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7971,7 +7970,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8009,7 +8008,7 @@ describe('v1.ConfigClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8019,7 +8018,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8051,7 +8050,7 @@ describe('v1.ConfigClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8081,7 +8080,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8119,7 +8118,7 @@ describe('v1.ConfigClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8129,7 +8128,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8161,7 +8160,7 @@ describe('v1.ConfigClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8194,7 +8193,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8232,7 +8231,7 @@ describe('v1.ConfigClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8242,7 +8241,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8277,7 +8276,7 @@ describe('v1.ConfigClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8307,7 +8306,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8351,7 +8350,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8386,7 +8385,7 @@ describe('v1.ConfigClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8434,7 +8433,7 @@ describe('v1.ConfigClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8475,7 +8474,7 @@ describe('v1.ConfigClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8496,7 +8495,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8524,7 +8523,7 @@ describe('v1.ConfigClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8534,7 +8533,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8558,7 +8557,7 @@ describe('v1.ConfigClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8580,7 +8579,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8608,7 +8607,7 @@ describe('v1.ConfigClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8618,7 +8617,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8642,7 +8641,7 @@ describe('v1.ConfigClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8664,7 +8663,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8692,7 +8691,7 @@ describe('v1.ConfigClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -8702,7 +8701,7 @@ describe('v1.ConfigClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8726,7 +8725,7 @@ describe('v1.ConfigClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -8761,7 +8760,7 @@ describe('v1.ConfigClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8796,7 +8795,7 @@ describe('v1.ConfigClient', () => {
         location: 'locationValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8859,7 +8858,7 @@ describe('v1.ConfigClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8923,7 +8922,7 @@ describe('v1.ConfigClient', () => {
         deployment_group: 'deploymentGroupValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8989,7 +8988,7 @@ describe('v1.ConfigClient', () => {
         revision: 'revisionValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9082,7 +9081,7 @@ describe('v1.ConfigClient', () => {
         location: 'locationValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9132,7 +9131,7 @@ describe('v1.ConfigClient', () => {
         preview: 'previewValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9198,7 +9197,7 @@ describe('v1.ConfigClient', () => {
         resource: 'resourceValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9285,7 +9284,7 @@ describe('v1.ConfigClient', () => {
         resource_change: 'resourceChangeValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9362,7 +9361,7 @@ describe('v1.ConfigClient', () => {
         resource_drift: 'resourceDriftValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9438,7 +9437,7 @@ describe('v1.ConfigClient', () => {
         revision: 'revisionValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9512,7 +9511,7 @@ describe('v1.ConfigClient', () => {
         service_account: 'serviceAccountValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9566,7 +9565,7 @@ describe('v1.ConfigClient', () => {
         terraform_version: 'terraformVersionValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9634,7 +9633,7 @@ describe('v1.ConfigClient', () => {
         worker_pool: 'workerPoolValue',
       };
       const client = new configModule.v1.ConfigClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

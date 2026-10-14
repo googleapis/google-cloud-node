@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The project and location from which the HttpRoutes should be
-   *  listed, specified in the format `projects/* /locations/global`.
+   *  listed, specified in the format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**
@@ -49,6 +49,10 @@ function main(parent) {
    *  the Aggregated List request will fail.
    */
   // const returnPartialSuccess = true
+  /**
+   *  Optional. Filter expression to restrict the list.
+   */
+  // const filter = 'abc123'
 
   // Imports the Networkservices library
   const {NetworkServicesClient} = require('@google-cloud/networkservices').v1;

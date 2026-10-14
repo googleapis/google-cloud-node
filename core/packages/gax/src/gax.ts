@@ -19,10 +19,13 @@
  */
 
 import type {Message} from 'protobufjs';
+import type {ResumableUploadContext} from './resumableUpload';
 import {warn} from './warnings';
 import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
 import {toLowerCamelCase} from './util';
+import {checkTelemetryEnabled} from './observability/util';
+import {StaticTraceContext} from './observability/contextUtil';
 import {Status} from './status';
 import {RequestType} from './apitypes';
 
@@ -170,6 +173,12 @@ export interface CallOptions {
   longrunning?: BackoffSettings;
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
+  enableTelemetryTracing?: boolean;
+  /**
+   * Internal context used by resumable upload methods. Populated by
+   * GAPIC-generated client libraries; do not set manually.
+   */
+  resumableUpload?: ResumableUploadContext;
 }
 
 export class CallSettings {
@@ -186,6 +195,8 @@ export class CallSettings {
   longrunning?: BackoffSettings;
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
+  enableTelemetryTracing?: boolean;
+  resumableUpload?: ResumableUploadContext;
 
   /**
    * @param {Object} settings - An object containing parameters of this settings.
@@ -219,6 +230,9 @@ export class CallSettings {
       'longrunning' in settings ? settings.longrunning : undefined;
     this.apiName = settings.apiName ?? undefined;
     this.retryRequestOptions = settings.retryRequestOptions;
+    this.enableTelemetryTracing = settings.enableTelemetryTracing;
+    this.resumableUpload =
+      'resumableUpload' in settings ? settings.resumableUpload : undefined;
   }
 
   /**
@@ -242,6 +256,8 @@ export class CallSettings {
     let longrunning = this.longrunning;
     let apiName = this.apiName;
     let retryRequestOptions = this.retryRequestOptions;
+    let enableTelemetryTracing = this.enableTelemetryTracing;
+    let resumableUpload = this.resumableUpload;
 
     // If the user provides a timeout to the method, that timeout value will be used
     // to override the backoff settings.
@@ -297,6 +313,12 @@ export class CallSettings {
     if ('retryRequestOptions' in options) {
       retryRequestOptions = options.retryRequestOptions;
     }
+    if ('enableTelemetryTracing' in options) {
+      enableTelemetryTracing = options.enableTelemetryTracing;
+    }
+    if ('resumableUpload' in options) {
+      resumableUpload = options.resumableUpload;
+    }
 
     return new CallSettings({
       timeout,
@@ -309,6 +331,8 @@ export class CallSettings {
       isBundling,
       apiName,
       retryRequestOptions,
+      enableTelemetryTracing,
+      resumableUpload,
     });
   }
 }
@@ -780,8 +804,10 @@ export interface ClientConfig {
  * @param {Object.<string, string[]>} retryNames - A dictionary mapping the strings
  *   referring to response status codes to objects representing
  *   those codes.
- * @param {Object} otherArgs - the non-request arguments to be passed to the API
+ * @param {Object} [otherArgs] - the non-request arguments to be passed to the API
  *   calls.
+ * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
+ * @param {StaticTraceContext} [internalTelemetryInfo] - Static trace context for telemetry.
  * @return {Object} A mapping from method name to CallSettings, or null if the
  *   service is not found in the config.
  */
@@ -791,8 +817,27 @@ export function constructSettings(
   configOverrides: ClientConfig,
   retryNames: {},
   otherArgs?: {},
+  enableTelemetryTracing?: boolean,
+  internalTelemetryInfo?: StaticTraceContext,
 ) {
-  otherArgs = otherArgs || {};
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+  const envTracing = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
+  const isEnvSet = envTracing !== undefined && envTracing !== '';
+
+  const isEnvEnabled = checkTelemetryEnabled();
+
+  // If GOOGLE_SDK_NODE_ENABLE_TRACING is explicitly set, then the client option doesn't matter.
+  // The extra protoc param only matters if the environmental variable isn't set.
+  const tracingRequested = isEnvSet
+    ? isEnvEnabled
+    : Boolean(internalTelemetryInfo || enableTelemetryTracing);
+
+  otherArgs = internalTelemetryInfo
+    ? {...otherArgs, internalTelemetryInfo}
+    : otherArgs || {};
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaults: any = {};
 
@@ -849,8 +894,11 @@ export function constructSettings(
       bundleOptions: bundlingConfig
         ? createBundleOptions(bundlingConfig)
         : null,
-      otherArgs,
+      otherArgs: tracingRequested
+        ? {...otherArgs, internalMethodName: methodName}
+        : otherArgs,
       apiName,
+      enableTelemetryTracing: isEnvSet ? isEnvEnabled : enableTelemetryTracing,
     });
   }
 

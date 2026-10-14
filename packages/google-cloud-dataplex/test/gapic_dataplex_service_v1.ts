@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as dataplexserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -276,7 +276,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataplexServiceStub, undefined);
@@ -284,12 +284,12 @@ describe('v1.DataplexServiceClient', () => {
       assert(client.dataplexServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataplexServiceStub);
@@ -298,14 +298,14 @@ describe('v1.DataplexServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataplexServiceStub, undefined);
@@ -314,7 +314,7 @@ describe('v1.DataplexServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -322,7 +322,7 @@ describe('v1.DataplexServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -334,7 +334,7 @@ describe('v1.DataplexServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -357,7 +357,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('getLake', () => {
     it('invokes getLake without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getLake without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getLake with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -463,7 +463,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getLake with closed client', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -476,7 +476,7 @@ describe('v1.DataplexServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLake(request), expectedError);
@@ -486,7 +486,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('getZone', () => {
     it('invokes getZone without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -517,7 +517,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getZone without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -564,7 +564,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getZone with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -592,7 +592,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getZone with closed client', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v1.DataplexServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getZone(request), expectedError);
@@ -615,7 +615,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('getAsset', () => {
     it('invokes getAsset without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getAsset without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getAsset with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -721,7 +721,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getAsset with closed client', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -734,7 +734,7 @@ describe('v1.DataplexServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAsset(request), expectedError);
@@ -744,7 +744,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('getTask', () => {
     it('invokes getTask without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -775,7 +775,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getTask without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -822,7 +822,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getTask with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -850,7 +850,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getTask with closed client', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -863,7 +863,7 @@ describe('v1.DataplexServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTask(request), expectedError);
@@ -873,7 +873,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('runTask', () => {
     it('invokes runTask without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -904,7 +904,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes runTask without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -951,7 +951,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes runTask with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -979,7 +979,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes runTask with closed client', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -992,7 +992,7 @@ describe('v1.DataplexServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.runTask(request), expectedError);
@@ -1002,7 +1002,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('getJob', () => {
     it('invokes getJob without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1033,7 +1033,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getJob without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1080,7 +1080,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getJob with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1108,7 +1108,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes getJob with closed client', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1121,7 +1121,7 @@ describe('v1.DataplexServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getJob(request), expectedError);
@@ -1131,7 +1131,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('cancelJob', () => {
     it('invokes cancelJob without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1162,7 +1162,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes cancelJob without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1209,7 +1209,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes cancelJob with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1237,7 +1237,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes cancelJob with closed client', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1250,7 +1250,7 @@ describe('v1.DataplexServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelJob(request), expectedError);
@@ -1260,7 +1260,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('createLake', () => {
     it('invokes createLake without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1292,7 +1292,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes createLake without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1346,7 +1346,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes createLake with call error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1377,7 +1377,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes createLake with LRO error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1410,7 +1410,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkCreateLakeProgress without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1418,8 +1418,8 @@ describe('v1.DataplexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateLakeProgress(
@@ -1432,7 +1432,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkCreateLakeProgress with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1450,7 +1450,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('updateLake', () => {
     it('invokes updateLake without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1483,7 +1483,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes updateLake without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1538,7 +1538,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes updateLake with call error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1570,7 +1570,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes updateLake with LRO error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1604,7 +1604,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkUpdateLakeProgress without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1612,8 +1612,8 @@ describe('v1.DataplexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateLakeProgress(
@@ -1626,7 +1626,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkUpdateLakeProgress with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1644,7 +1644,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('deleteLake', () => {
     it('invokes deleteLake without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1676,7 +1676,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes deleteLake without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1730,7 +1730,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes deleteLake with call error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1761,7 +1761,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes deleteLake with LRO error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1794,7 +1794,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkDeleteLakeProgress without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1802,8 +1802,8 @@ describe('v1.DataplexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteLakeProgress(
@@ -1816,7 +1816,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkDeleteLakeProgress with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1834,7 +1834,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('createZone', () => {
     it('invokes createZone without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1866,7 +1866,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes createZone without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1920,7 +1920,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes createZone with call error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1951,7 +1951,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes createZone with LRO error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1984,7 +1984,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkCreateZoneProgress without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1992,8 +1992,8 @@ describe('v1.DataplexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateZoneProgress(
@@ -2006,7 +2006,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkCreateZoneProgress with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2024,7 +2024,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('updateZone', () => {
     it('invokes updateZone without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2057,7 +2057,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes updateZone without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2112,7 +2112,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes updateZone with call error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2144,7 +2144,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes updateZone with LRO error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2178,7 +2178,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkUpdateZoneProgress without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2186,8 +2186,8 @@ describe('v1.DataplexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateZoneProgress(
@@ -2200,7 +2200,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkUpdateZoneProgress with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2218,7 +2218,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('deleteZone', () => {
     it('invokes deleteZone without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2250,7 +2250,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes deleteZone without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2304,7 +2304,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes deleteZone with call error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2335,7 +2335,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes deleteZone with LRO error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2368,7 +2368,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkDeleteZoneProgress without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2376,8 +2376,8 @@ describe('v1.DataplexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteZoneProgress(
@@ -2390,7 +2390,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkDeleteZoneProgress with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2408,7 +2408,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('createAsset', () => {
     it('invokes createAsset without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2440,7 +2440,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes createAsset without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2494,7 +2494,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes createAsset with call error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2525,7 +2525,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes createAsset with LRO error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2558,7 +2558,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkCreateAssetProgress without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2566,8 +2566,8 @@ describe('v1.DataplexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAssetProgress(
@@ -2580,7 +2580,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkCreateAssetProgress with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2598,7 +2598,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('updateAsset', () => {
     it('invokes updateAsset without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2631,7 +2631,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes updateAsset without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2686,7 +2686,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes updateAsset with call error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2718,7 +2718,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes updateAsset with LRO error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2752,7 +2752,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkUpdateAssetProgress without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2760,8 +2760,8 @@ describe('v1.DataplexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateAssetProgress(
@@ -2774,7 +2774,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkUpdateAssetProgress with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2792,7 +2792,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('deleteAsset', () => {
     it('invokes deleteAsset without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2824,7 +2824,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes deleteAsset without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2878,7 +2878,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes deleteAsset with call error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2909,7 +2909,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes deleteAsset with LRO error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2942,7 +2942,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkDeleteAssetProgress without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2950,8 +2950,8 @@ describe('v1.DataplexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAssetProgress(
@@ -2964,7 +2964,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkDeleteAssetProgress with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2982,7 +2982,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('createTask', () => {
     it('invokes createTask without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3014,7 +3014,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes createTask without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3068,7 +3068,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes createTask with call error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3099,7 +3099,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes createTask with LRO error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3132,7 +3132,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkCreateTaskProgress without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3140,8 +3140,8 @@ describe('v1.DataplexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateTaskProgress(
@@ -3154,7 +3154,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkCreateTaskProgress with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3172,7 +3172,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('updateTask', () => {
     it('invokes updateTask without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3205,7 +3205,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes updateTask without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3260,7 +3260,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes updateTask with call error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3292,7 +3292,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes updateTask with LRO error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3326,7 +3326,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkUpdateTaskProgress without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3334,8 +3334,8 @@ describe('v1.DataplexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateTaskProgress(
@@ -3348,7 +3348,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkUpdateTaskProgress with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3366,7 +3366,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('deleteTask', () => {
     it('invokes deleteTask without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3398,7 +3398,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes deleteTask without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3452,7 +3452,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes deleteTask with call error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3483,7 +3483,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes deleteTask with LRO error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3516,7 +3516,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkDeleteTaskProgress without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3524,8 +3524,8 @@ describe('v1.DataplexServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteTaskProgress(
@@ -3538,7 +3538,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes checkDeleteTaskProgress with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3556,7 +3556,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('listLakes', () => {
     it('invokes listLakes without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3589,7 +3589,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listLakes without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3638,7 +3638,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listLakes with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3666,7 +3666,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listLakesStream without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3709,15 +3709,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listLakes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLakesStream with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3757,15 +3757,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listLakes.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLakes without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3799,15 +3799,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listLakes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLakes with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3840,9 +3840,9 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listLakes.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -3850,7 +3850,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('listLakeActions', () => {
     it('invokes listLakeActions without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3883,7 +3883,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listLakeActions without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3932,7 +3932,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listLakeActions with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3963,7 +3963,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listLakeActionsStream without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4009,15 +4009,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listLakeActions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLakeActionsStream with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4058,15 +4058,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listLakeActions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLakeActions without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4101,15 +4101,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listLakeActions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLakeActions with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4141,9 +4141,9 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listLakeActions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4151,7 +4151,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('listZones', () => {
     it('invokes listZones without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4184,7 +4184,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listZones without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4233,7 +4233,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listZones with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4261,7 +4261,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listZonesStream without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4304,15 +4304,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listZones.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listZonesStream with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4352,15 +4352,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listZones.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listZones without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4394,15 +4394,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listZones.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listZones with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4435,9 +4435,9 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listZones.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4445,7 +4445,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('listZoneActions', () => {
     it('invokes listZoneActions without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4478,7 +4478,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listZoneActions without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4527,7 +4527,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listZoneActions with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4558,7 +4558,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listZoneActionsStream without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4604,15 +4604,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listZoneActions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listZoneActionsStream with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4653,15 +4653,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listZoneActions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listZoneActions without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4696,15 +4696,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listZoneActions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listZoneActions with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4736,9 +4736,9 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listZoneActions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4746,7 +4746,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('listAssets', () => {
     it('invokes listAssets without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4779,7 +4779,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listAssets without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4828,7 +4828,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listAssets with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4859,7 +4859,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listAssetsStream without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4902,15 +4902,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAssetsStream with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4950,15 +4950,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listAssets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssets without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4993,15 +4993,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssets with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5035,9 +5035,9 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listAssets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5045,7 +5045,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('listAssetActions', () => {
     it('invokes listAssetActions without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5078,7 +5078,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listAssetActions without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5127,7 +5127,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listAssetActions with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5158,7 +5158,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listAssetActionsStream without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5204,15 +5204,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listAssetActions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAssetActionsStream with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5253,15 +5253,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listAssetActions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssetActions without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5296,15 +5296,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listAssetActions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAssetActions with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5336,9 +5336,9 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listAssetActions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5346,7 +5346,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('listTasks', () => {
     it('invokes listTasks without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5379,7 +5379,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listTasks without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5428,7 +5428,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listTasks with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5456,7 +5456,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listTasksStream without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5499,15 +5499,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTasksStream with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5547,15 +5547,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTasks without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5589,15 +5589,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTasks with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5630,9 +5630,9 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listTasks.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5640,7 +5640,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('listJobs', () => {
     it('invokes listJobs without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5673,7 +5673,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listJobs without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5722,7 +5722,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listJobs with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5750,7 +5750,7 @@ describe('v1.DataplexServiceClient', () => {
 
     it('invokes listJobsStream without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5793,15 +5793,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listJobsStream with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5841,15 +5841,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listJobs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listJobs without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5883,15 +5883,15 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listJobs with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5924,16 +5924,16 @@ describe('v1.DataplexServiceClient', () => {
       assert(
         (client.descriptors.page.listJobs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5963,7 +5963,7 @@ describe('v1.DataplexServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6007,7 +6007,7 @@ describe('v1.DataplexServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6042,7 +6042,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6090,7 +6090,7 @@ describe('v1.DataplexServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6131,7 +6131,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6152,7 +6152,7 @@ describe('v1.DataplexServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6180,7 +6180,7 @@ describe('v1.DataplexServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6190,7 +6190,7 @@ describe('v1.DataplexServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6214,7 +6214,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6236,7 +6236,7 @@ describe('v1.DataplexServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6264,7 +6264,7 @@ describe('v1.DataplexServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6274,7 +6274,7 @@ describe('v1.DataplexServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6298,7 +6298,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6320,7 +6320,7 @@ describe('v1.DataplexServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6348,7 +6348,7 @@ describe('v1.DataplexServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6358,7 +6358,7 @@ describe('v1.DataplexServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6382,7 +6382,7 @@ describe('v1.DataplexServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6417,7 +6417,7 @@ describe('v1.DataplexServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6453,7 +6453,7 @@ describe('v1.DataplexServiceClient', () => {
         aspect_type: 'aspectTypeValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6519,7 +6519,7 @@ describe('v1.DataplexServiceClient', () => {
         asset: 'assetValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6605,7 +6605,7 @@ describe('v1.DataplexServiceClient', () => {
         change_request: 'changeRequestValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6670,7 +6670,7 @@ describe('v1.DataplexServiceClient', () => {
         content: 'contentValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6746,7 +6746,7 @@ describe('v1.DataplexServiceClient', () => {
         data_asset: 'dataAssetValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6822,7 +6822,7 @@ describe('v1.DataplexServiceClient', () => {
         data_attribute_id: 'dataAttributeIdValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6898,7 +6898,7 @@ describe('v1.DataplexServiceClient', () => {
         data_attribute_binding_id: 'dataAttributeBindingIdValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6979,7 +6979,7 @@ describe('v1.DataplexServiceClient', () => {
         data_product: 'dataProductValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7043,7 +7043,7 @@ describe('v1.DataplexServiceClient', () => {
         dataScan: 'dataScanValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7108,7 +7108,7 @@ describe('v1.DataplexServiceClient', () => {
         job: 'jobValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7183,7 +7183,7 @@ describe('v1.DataplexServiceClient', () => {
         data_taxonomy_id: 'dataTaxonomyIdValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7247,7 +7247,7 @@ describe('v1.DataplexServiceClient', () => {
         encryption_config: 'encryptionConfigValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7318,7 +7318,7 @@ describe('v1.DataplexServiceClient', () => {
         entity: 'entityValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7405,7 +7405,7 @@ describe('v1.DataplexServiceClient', () => {
         entry: 'entryValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7480,7 +7480,7 @@ describe('v1.DataplexServiceClient', () => {
         entry_group: 'entryGroupValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7545,7 +7545,7 @@ describe('v1.DataplexServiceClient', () => {
         entry_link: 'entryLinkValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7620,7 +7620,7 @@ describe('v1.DataplexServiceClient', () => {
         entry_type: 'entryTypeValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7685,7 +7685,7 @@ describe('v1.DataplexServiceClient', () => {
         environment: 'environmentValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7760,7 +7760,7 @@ describe('v1.DataplexServiceClient', () => {
         glossary: 'glossaryValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7825,7 +7825,7 @@ describe('v1.DataplexServiceClient', () => {
         glossary_category: 'glossaryCategoryValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7905,7 +7905,7 @@ describe('v1.DataplexServiceClient', () => {
         glossary_term: 'glossaryTermValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7982,7 +7982,7 @@ describe('v1.DataplexServiceClient', () => {
         job: 'jobValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8068,7 +8068,7 @@ describe('v1.DataplexServiceClient', () => {
         lake: 'lakeValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8131,7 +8131,7 @@ describe('v1.DataplexServiceClient', () => {
         location: 'locationValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8181,7 +8181,7 @@ describe('v1.DataplexServiceClient', () => {
         metadata_feed: 'metadataFeedValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8245,7 +8245,7 @@ describe('v1.DataplexServiceClient', () => {
         metadataJob: 'metadataJobValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8312,7 +8312,7 @@ describe('v1.DataplexServiceClient', () => {
         partition: 'partitionValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8410,7 +8410,7 @@ describe('v1.DataplexServiceClient', () => {
         action: 'actionValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8506,7 +8506,7 @@ describe('v1.DataplexServiceClient', () => {
         action: 'actionValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8616,7 +8616,7 @@ describe('v1.DataplexServiceClient', () => {
         action: 'actionValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8746,7 +8746,7 @@ describe('v1.DataplexServiceClient', () => {
         session: 'sessionValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8833,7 +8833,7 @@ describe('v1.DataplexServiceClient', () => {
         task: 'taskValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8909,7 +8909,7 @@ describe('v1.DataplexServiceClient', () => {
         zone: 'zoneValue',
       };
       const client = new dataplexserviceModule.v1.DataplexServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

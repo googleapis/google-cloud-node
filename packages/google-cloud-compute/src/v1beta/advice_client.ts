@@ -27,7 +27,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -49,7 +49,7 @@ export class AdviceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('compute');
@@ -62,8 +62,8 @@ export class AdviceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  adviceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  adviceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of AdviceClient.
@@ -138,14 +138,14 @@ export class AdviceClient {
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = { fallback: true };
+      opts = {fallback: true};
     } else {
       opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -200,7 +200,7 @@ export class AdviceClient {
       'google.cloud.compute.v1beta.Advice',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -240,14 +240,19 @@ export class AdviceClient {
           (this._protos as any).google.cloud.compute.v1beta.Advice,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const adviceStubMethods = ['calendarMode', 'capacity', 'capacityHistory'];
+    const adviceStubMethods = [
+      'calendarMode',
+      'calendarModeExtension',
+      'capacity',
+      'capacityHistory',
+    ];
     for (const methodName of adviceStubMethods) {
       const callPromise = this.adviceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -462,7 +467,7 @@ export class AdviceClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('calendarMode request %j', request);
@@ -492,6 +497,157 @@ export class AdviceClient {
           {} | undefined,
         ]) => {
           this._log.info('calendarMode response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Advises on whether extending an existing future reservation is possible
+   * based on the desired extension end time. If capacity isn't available for
+   * the entire requested duration, the method recommends the longest possible
+   * extension.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1beta.CalendarModeExtensionAdviceRequest} request.calendarModeExtensionAdviceRequestResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1beta.CalendarModeExtensionAdviceResponse|CalendarModeExtensionAdviceResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/advice.calendar_mode_extension.js</caption>
+   * region_tag:compute_v1beta_generated_Advice_CalendarModeExtension_async
+   */
+  calendarModeExtension(
+    request?: protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+      (
+        | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  calendarModeExtension(
+    request: protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+      | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  calendarModeExtension(
+    request: protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+      | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  calendarModeExtension(
+    request?: protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+          | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+      | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+      (
+        | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('calendarModeExtension request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+          | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('calendarModeExtension response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .calendarModeExtension(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceResponse,
+          (
+            | protos.google.cloud.compute.v1beta.ICalendarModeExtensionAdviceRpcRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('calendarModeExtension response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -606,7 +762,7 @@ export class AdviceClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('capacity request %j', request);
@@ -754,7 +910,7 @@ export class AdviceClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('capacityHistory request %j', request);
@@ -813,7 +969,7 @@ export class AdviceClient {
    */
   close(): Promise<void> {
     if (this.adviceStub && !this._terminated) {
-      return this.adviceStub.then((stub) => {
+      return this.adviceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

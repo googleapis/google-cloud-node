@@ -15,7 +15,8 @@
  */
 
 import * as path from 'path';
-import {google} from '../../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import {grpc, ServiceError} from 'google-gax';
 import * as protoLoader from '@grpc/proto-loader';
 // eslint-disable-next-line n/no-extraneous-import
@@ -23,7 +24,6 @@ import {Metadata} from '@grpc/grpc-js';
 import {Transaction} from '../../src';
 import protobuf = google.spanner.v1;
 import Timestamp = google.protobuf.Timestamp;
-import RetryInfo = google.rpc.RetryInfo;
 import ExecuteBatchDmlResponse = google.spanner.v1.ExecuteBatchDmlResponse;
 import ResultSet = google.spanner.v1.ResultSet;
 import Status = google.rpc.Status;
@@ -31,11 +31,13 @@ import Any = google.protobuf.Any;
 import QueryMode = google.spanner.v1.ExecuteSqlRequest.QueryMode;
 import NullValue = google.protobuf.NullValue;
 import {ExecuteSqlRequest, ReadRequest} from '../../src/transaction';
-import {randomInt} from 'crypto';
+import {getProtoPath, getRetryInfo} from '../../src/protos';
+
+const RetryInfo = getRetryInfo();
 
 const PROTO_PATH = 'spanner.proto';
-const IMPORT_PATH = __dirname + '/../../../protos';
-const PROTO_DIR = __dirname + '/../../../protos/google/spanner/v1';
+const IMPORT_PATH = getProtoPath();
+const PROTO_DIR = getProtoPath('google/spanner/v1');
 const GAX_PROTO_DIR = path.join(
   path.dirname(require.resolve('google-gax')),
   '..',
@@ -106,9 +108,7 @@ export class ReadRequestResult {
   }
 
   private readonly _resultSet:
-    | protobuf.ResultSet
-    | protobuf.PartialResultSet[]
-    | null;
+    protobuf.ResultSet | protobuf.PartialResultSet[] | null;
 
   /**
    * The result set associated with the result, if any.
@@ -175,9 +175,7 @@ export class StatementResult {
     throw new Error('The StatementResult does not contain an Error');
   }
   private readonly _resultSet:
-    | protobuf.ResultSet
-    | protobuf.PartialResultSet[]
-    | null;
+    protobuf.ResultSet | protobuf.PartialResultSet[] | null;
   get resultSet(): protobuf.ResultSet | protobuf.PartialResultSet[] {
     if (this._resultSet) {
       return this._resultSet;
@@ -857,9 +855,7 @@ export class MockSpanner {
 
   private static emptyPartialResultSet(
     precommitToken:
-      | protobuf.IMultiplexedSessionPrecommitToken
-      | null
-      | undefined,
+      protobuf.IMultiplexedSessionPrecommitToken | null | undefined,
     resumeToken: Uint8Array,
   ): protobuf.PartialResultSet {
     return protobuf.PartialResultSet.create({
@@ -870,9 +866,7 @@ export class MockSpanner {
 
   private static toPartialResultSet(
     precommitToken:
-      | protobuf.IMultiplexedSessionPrecommitToken
-      | null
-      | undefined,
+      protobuf.IMultiplexedSessionPrecommitToken | null | undefined,
     rowCount: number,
   ): protobuf.PartialResultSet {
     const stats = {

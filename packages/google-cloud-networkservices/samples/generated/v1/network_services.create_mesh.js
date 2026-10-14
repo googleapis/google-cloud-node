@@ -30,7 +30,7 @@ function main(parent, meshId, mesh) {
    */
   /**
    *  Required. The parent resource of the Mesh. Must be in the
-   *  format `projects/* /locations/global`.
+   *  format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**

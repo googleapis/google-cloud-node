@@ -1024,5 +1024,152 @@ class ProgressStream extends Transform {
   }
 }
 
+/**
+ * Validates a single path segment matched by a single wildcard (*).
+ * Checks that the segment is not exactly '.' or '..' (directory traversal indicators).
+ *
+ * This method is a replica of the method found in Google GAX (google-gax).
+ *
+ * @param {string} propertyName - The name of the property being validated.
+ * @param {string} value - The segment value to validate.
+ */
+export function validateUriPathSegment(
+  propertyName: string,
+  value: string,
+): void {
+  if (value === '.' || value === '..') {
+    throw new Error(`Invalid value ${value} for ${propertyName}`);
+  }
+}
+
+/**
+ * Validates a multi-segment path matched by a double wildcard (**).
+ * Splitting by slash, it checks that no individual segment is exactly '.' or '..'.
+ * This segment-by-segment check prevents directory traversal while allowing
+ * legitimate resource names containing dots (e.g., domain-scoped project IDs).
+ *
+ * This method is a replica of the method found in Google GAX (google-gax).
+ *
+ * @param {string} propertyName - The name of the property being validated.
+ * @param {string} value - The path value to validate.
+ */
+export function validateUriPath(propertyName: string, value: string): void {
+  if (value) {
+    // Split by slash and check for exact segment matches of '.' or '..' rather
+    // than using a simple string.includes('.') check. This avoids rejecting
+    // valid domain-scoped resource segments (e.g. projects/example.com:project-id).
+    const segments = value.split('/');
+    if (segments.some(segment => segment === '.' || segment === '..')) {
+      throw new Error(
+        `Value for ${propertyName} must not contain segments that are exactly . or ..`,
+      );
+    }
+  }
+}
+
+/**
+ * Percent-encodes a string according to RFC 3986, preserving only unreserved
+ * characters (alpha-numeric, '-', '_', '.', and '~'). All other characters,
+ * including slashes ('/'), are percent-encoded.
+ *
+ * This is necessary because encodeURIComponent natively encodes URL-unsafe
+ * characters like ?, #, $, &, +, etc., but preserves !, ', (, ), and *.
+ * To ensure strict compliance, we manually encode those preserved characters.
+ *
+ * This method is a replica of the method found in Google GAX (google-gax).
+ *
+ * @param {string} str - The input string to encode.
+ * @returns {string} The percent-encoded string.
+ */
+export function encodeWithSlashes(str: string): string {
+  return encodeURIComponent(str).replace(
+    /[!'()*]/g, // Characters preserved by encodeURIComponent
+    character => '%' + character.charCodeAt(0).toString(16).toUpperCase(),
+  );
+}
+
+/**
+ * Percent-encodes a string according to RFC 3986, preserving unreserved
+ * characters (alpha-numeric, '-', '_', '.', and '~') and slashes ('/'). All other
+ * characters are percent-encoded.
+ *
+ * This method is a replica of the method found in Google GAX (google-gax).
+ *
+ * @param {string} str - The input string to encode.
+ * @returns {string} The percent-encoded string with slashes preserved.
+ */
+export function encodeWithoutSlashes(str: string): string {
+  return str.split('/').map(encodeWithSlashes).join('/');
+}
+
+/**
+ * Encodes each path segment in a URI string while preserving slash (`/`) and
+ * colon (`:`) delimiters, and validates that no path segment is `.` or `..` to
+ * prevent path traversal.
+ *
+ * @param {string} uri - The URI path to encode.
+ * @return {string} The encoded URI path.
+ */
+export function encodeURIPath(uri: string): string {
+  const processSegment = (segment: string): string => {
+    if (segment === '') {
+      return '';
+    }
+    let decoded = segment;
+    try {
+      decoded = decodeURIComponent(segment);
+    } catch {
+      // Fallback to raw segment if decoding fails (e.g. malformed '%')
+    }
+    validateUriPathSegment('path segment', decoded);
+    return encodeWithSlashes(decoded);
+  };
+
+  const parts = uri.split('/');
+  return parts
+    .map(part => {
+      if (part.includes(':')) {
+        return part.split(':').map(processSegment).join(':');
+      }
+      return processSegment(part);
+    })
+    .join('/');
+}
+
+/**
+ * Encodes the pathname of an absolute URI string using `encodeURIPath`,
+ * preserving any query parameters, hash, or trailing slash formatting.
+ *
+ * @param {string} uri - The absolute URI string to encode.
+ * @return {string} The formatted and encoded absolute URI string.
+ */
+export function encodeAbsoluteURI(uri: string): string {
+  const url = new URL(uri); // Isolate pathname from protocol, host, and query.
+  const encodedPath = encodeURIPath(url.pathname);
+  url.pathname = encodedPath;
+  let res = url.toString();
+  if (!uri.endsWith('/') && res.endsWith('/')) {
+    res = res.slice(0, -1);
+  }
+  return res;
+}
+
+/**
+ * Trims slashes, encodes path segments to prevent path traversal, and joins
+ * URI components into a single relative path.
+ *
+ * @param {string[]} components - URI components to encode and join.
+ * @return {string} The formatted and joined URI path.
+ */
+export function joinURIComponents(components: string[]): string {
+  return components
+    .map(uriComponent => {
+      const trimSlashesRegex = /^\/*|\/*$/g;
+      const trimmed = uriComponent.replace(trimSlashesRegex, '');
+      return encodeURIPath(trimmed); // Encode and prevent path traversal.
+    })
+    .join('/');
+}
+
 const util = new Util();
 export {util};

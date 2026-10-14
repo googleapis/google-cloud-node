@@ -4,6 +4,50 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/dns-v6.2.0...dns-v6.3.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/dns-v6.1.0...dns-v6.2.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/dns-v6.0.1...dns-v6.1.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/dns-v6.0.0...dns-v6.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/dns-v5.3.2...dns-v6.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update google-cloud-dns to minimum Node version of 22. ([#9047](https://github.com/googleapis/google-cloud-node/issues/9047))
+
+### Features
+
+* Update google-cloud-dns to minimum Node version of 22. ([#9047](https://github.com/googleapis/google-cloud-node/issues/9047)) ([99a46a1](https://github.com/googleapis/google-cloud-node/commit/99a46a1f949e556e861f567ae5f645ecc00fd0db)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [5.3.2](https://github.com/googleapis/google-cloud-node/compare/dns-v5.3.1...dns-v5.3.2) (2026-05-01)
 
 

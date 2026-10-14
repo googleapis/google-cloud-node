@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as regionsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.regionsServiceStub, undefined);
@@ -247,12 +247,12 @@ describe('v1beta.RegionsServiceClient', () => {
       assert(client.regionsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.regionsServiceStub);
@@ -261,14 +261,14 @@ describe('v1beta.RegionsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.regionsServiceStub, undefined);
@@ -277,7 +277,7 @@ describe('v1beta.RegionsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v1beta.RegionsServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v1beta.RegionsServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v1beta.RegionsServiceClient', () => {
   describe('getRegion', () => {
     it('invokes getRegion without error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes getRegion without error using callback', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes getRegion with error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -426,7 +426,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes getRegion with closed client', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -439,7 +439,7 @@ describe('v1beta.RegionsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getRegion(request), expectedError);
@@ -449,7 +449,7 @@ describe('v1beta.RegionsServiceClient', () => {
   describe('createRegion', () => {
     it('invokes createRegion without error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -480,7 +480,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes createRegion without error using callback', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -527,7 +527,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes createRegion with error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -558,7 +558,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes createRegion with closed client', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -571,7 +571,7 @@ describe('v1beta.RegionsServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createRegion(request), expectedError);
@@ -581,7 +581,7 @@ describe('v1beta.RegionsServiceClient', () => {
   describe('updateRegion', () => {
     it('invokes updateRegion without error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes updateRegion without error using callback', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -661,7 +661,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes updateRegion with error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes updateRegion with closed client', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -707,7 +707,7 @@ describe('v1beta.RegionsServiceClient', () => {
       );
       request.region.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateRegion(request), expectedError);
@@ -717,7 +717,7 @@ describe('v1beta.RegionsServiceClient', () => {
   describe('deleteRegion', () => {
     it('invokes deleteRegion without error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes deleteRegion without error using callback', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -795,7 +795,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes deleteRegion with error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -826,7 +826,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes deleteRegion with closed client', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -839,7 +839,7 @@ describe('v1beta.RegionsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteRegion(request), expectedError);
@@ -849,7 +849,7 @@ describe('v1beta.RegionsServiceClient', () => {
   describe('listRegions', () => {
     it('invokes listRegions without error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -888,7 +888,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes listRegions without error using callback', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -920,8 +920,7 @@ describe('v1beta.RegionsServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.shopping.merchant.accounts.v1beta.IRegion[]
-              | null,
+              protos.google.shopping.merchant.accounts.v1beta.IRegion[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -945,7 +944,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes listRegions with error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -976,7 +975,7 @@ describe('v1beta.RegionsServiceClient', () => {
 
     it('invokes listRegionsStream without error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1031,15 +1030,15 @@ describe('v1beta.RegionsServiceClient', () => {
       assert(
         (client.descriptors.page.listRegions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listRegionsStream with error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1085,15 +1084,15 @@ describe('v1beta.RegionsServiceClient', () => {
       assert(
         (client.descriptors.page.listRegions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRegions without error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1135,15 +1134,15 @@ describe('v1beta.RegionsServiceClient', () => {
       assert(
         (client.descriptors.page.listRegions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listRegions with error', async () => {
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1178,9 +1177,9 @@ describe('v1beta.RegionsServiceClient', () => {
       assert(
         (client.descriptors.page.listRegions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1192,7 +1191,7 @@ describe('v1beta.RegionsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1231,7 +1230,7 @@ describe('v1beta.RegionsServiceClient', () => {
         issue: 'issueValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1280,7 +1279,7 @@ describe('v1beta.RegionsServiceClient', () => {
         tax: 'taxValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1328,7 +1327,7 @@ describe('v1beta.RegionsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1369,7 +1368,7 @@ describe('v1beta.RegionsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1414,7 +1413,7 @@ describe('v1beta.RegionsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1455,7 +1454,7 @@ describe('v1beta.RegionsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1494,7 +1493,7 @@ describe('v1beta.RegionsServiceClient', () => {
         program: 'programValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1549,7 +1548,7 @@ describe('v1beta.RegionsServiceClient', () => {
         email: 'emailValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1604,7 +1603,7 @@ describe('v1beta.RegionsServiceClient', () => {
         gbp_account: 'gbpAccountValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1652,7 +1651,7 @@ describe('v1beta.RegionsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1692,7 +1691,7 @@ describe('v1beta.RegionsServiceClient', () => {
         lfp_provider: 'lfpProviderValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1756,7 +1755,7 @@ describe('v1beta.RegionsServiceClient', () => {
         omnichannel_setting: 'omnichannelSettingValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1818,7 +1817,7 @@ describe('v1beta.RegionsServiceClient', () => {
         return_policy: 'returnPolicyValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1880,7 +1879,7 @@ describe('v1beta.RegionsServiceClient', () => {
         program: 'programValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1929,7 +1928,7 @@ describe('v1beta.RegionsServiceClient', () => {
         region: 'regionValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1977,7 +1976,7 @@ describe('v1beta.RegionsServiceClient', () => {
         account: 'accountValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2018,7 +2017,7 @@ describe('v1beta.RegionsServiceClient', () => {
         version: 'versionValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2057,7 +2056,7 @@ describe('v1beta.RegionsServiceClient', () => {
         identifier: 'identifierValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2118,7 +2117,7 @@ describe('v1beta.RegionsServiceClient', () => {
         email: 'emailValue',
       };
       const client = new regionsserviceModule.v1beta.RegionsServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

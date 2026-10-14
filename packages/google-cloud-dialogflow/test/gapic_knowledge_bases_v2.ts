@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as knowledgebasesModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.knowledgeBasesStub, undefined);
@@ -247,12 +247,12 @@ describe('v2.KnowledgeBasesClient', () => {
       assert(client.knowledgeBasesStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.knowledgeBasesStub);
@@ -261,14 +261,14 @@ describe('v2.KnowledgeBasesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.knowledgeBasesStub, undefined);
@@ -277,7 +277,7 @@ describe('v2.KnowledgeBasesClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v2.KnowledgeBasesClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v2.KnowledgeBasesClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v2.KnowledgeBasesClient', () => {
   describe('getKnowledgeBase', () => {
     it('invokes getKnowledgeBase without error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes getKnowledgeBase without error using callback', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes getKnowledgeBase with error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes getKnowledgeBase with closed client', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v2.KnowledgeBasesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getKnowledgeBase(request), expectedError);
@@ -452,7 +452,7 @@ describe('v2.KnowledgeBasesClient', () => {
   describe('createKnowledgeBase', () => {
     it('invokes createKnowledgeBase without error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes createKnowledgeBase without error using callback', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -531,7 +531,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes createKnowledgeBase with error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes createKnowledgeBase with closed client', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -575,7 +575,7 @@ describe('v2.KnowledgeBasesClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createKnowledgeBase(request), expectedError);
@@ -585,7 +585,7 @@ describe('v2.KnowledgeBasesClient', () => {
   describe('deleteKnowledgeBase', () => {
     it('invokes deleteKnowledgeBase without error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -617,7 +617,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes deleteKnowledgeBase without error using callback', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes deleteKnowledgeBase with error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -695,7 +695,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes deleteKnowledgeBase with closed client', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -708,7 +708,7 @@ describe('v2.KnowledgeBasesClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteKnowledgeBase(request), expectedError);
@@ -718,7 +718,7 @@ describe('v2.KnowledgeBasesClient', () => {
   describe('updateKnowledgeBase', () => {
     it('invokes updateKnowledgeBase without error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes updateKnowledgeBase without error using callback', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -799,7 +799,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes updateKnowledgeBase with error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes updateKnowledgeBase with closed client', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -845,7 +845,7 @@ describe('v2.KnowledgeBasesClient', () => {
       );
       request.knowledgeBase.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateKnowledgeBase(request), expectedError);
@@ -855,7 +855,7 @@ describe('v2.KnowledgeBasesClient', () => {
   describe('listKnowledgeBases', () => {
     it('invokes listKnowledgeBases without error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -895,7 +895,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes listKnowledgeBases without error using callback', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -950,7 +950,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes listKnowledgeBases with error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -981,7 +981,7 @@ describe('v2.KnowledgeBasesClient', () => {
 
     it('invokes listKnowledgeBasesStream without error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1033,15 +1033,15 @@ describe('v2.KnowledgeBasesClient', () => {
       assert(
         (client.descriptors.page.listKnowledgeBases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listKnowledgeBasesStream with error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1082,15 +1082,15 @@ describe('v2.KnowledgeBasesClient', () => {
       assert(
         (client.descriptors.page.listKnowledgeBases.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listKnowledgeBases without error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1131,15 +1131,15 @@ describe('v2.KnowledgeBasesClient', () => {
       assert(
         (client.descriptors.page.listKnowledgeBases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listKnowledgeBases with error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1172,16 +1172,16 @@ describe('v2.KnowledgeBasesClient', () => {
       assert(
         (client.descriptors.page.listKnowledgeBases.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1211,7 +1211,7 @@ describe('v2.KnowledgeBasesClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1255,7 +1255,7 @@ describe('v2.KnowledgeBasesClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1290,7 +1290,7 @@ describe('v2.KnowledgeBasesClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1338,7 +1338,7 @@ describe('v2.KnowledgeBasesClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1378,6 +1378,71 @@ describe('v2.KnowledgeBasesClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('companionAgent', async () => {
+      const fakePath = '/rendered/path/companionAgent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        companion_agent: 'companionAgentValue',
+      };
+      const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.companionAgentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.companionAgentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('companionAgentPath', () => {
+        const result = client.companionAgentPath(
+          'projectValue',
+          'locationValue',
+          'companionAgentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromCompanionAgentName', () => {
+        const result = client.matchProjectFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromCompanionAgentName', () => {
+        const result = client.matchLocationFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCompanionAgentFromCompanionAgentName', () => {
+        const result =
+          client.matchCompanionAgentFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'companionAgentValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('conversationDataset', async () => {
       const fakePath = '/rendered/path/conversationDataset';
       const expectedParameters = {
@@ -1386,7 +1451,7 @@ describe('v2.KnowledgeBasesClient', () => {
         conversation_dataset: 'conversationDatasetValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1463,7 +1528,7 @@ describe('v2.KnowledgeBasesClient', () => {
         location: 'locationValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1516,7 +1581,7 @@ describe('v2.KnowledgeBasesClient', () => {
         generator: 'generatorValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1581,7 +1646,7 @@ describe('v2.KnowledgeBasesClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1672,7 +1737,7 @@ describe('v2.KnowledgeBasesClient', () => {
         project: 'projectValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1710,7 +1775,7 @@ describe('v2.KnowledgeBasesClient', () => {
         project: 'projectValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1749,7 +1814,7 @@ describe('v2.KnowledgeBasesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1812,7 +1877,7 @@ describe('v2.KnowledgeBasesClient', () => {
         environment: 'environmentValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1879,7 +1944,7 @@ describe('v2.KnowledgeBasesClient', () => {
         context: 'contextValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2005,7 +2070,7 @@ describe('v2.KnowledgeBasesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2126,7 +2191,7 @@ describe('v2.KnowledgeBasesClient', () => {
         project: 'projectValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2172,7 +2237,7 @@ describe('v2.KnowledgeBasesClient', () => {
         intent: 'intentValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2234,7 +2299,7 @@ describe('v2.KnowledgeBasesClient', () => {
         context: 'contextValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2313,7 +2378,7 @@ describe('v2.KnowledgeBasesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2389,7 +2454,7 @@ describe('v2.KnowledgeBasesClient', () => {
         version: 'versionValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2450,7 +2515,7 @@ describe('v2.KnowledgeBasesClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2513,7 +2578,7 @@ describe('v2.KnowledgeBasesClient', () => {
         message: 'messageValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2591,7 +2656,7 @@ describe('v2.KnowledgeBasesClient', () => {
         conversation_model: 'conversationModelValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2657,7 +2722,7 @@ describe('v2.KnowledgeBasesClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2740,7 +2805,7 @@ describe('v2.KnowledgeBasesClient', () => {
         participant: 'participantValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2820,7 +2885,7 @@ describe('v2.KnowledgeBasesClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2885,7 +2950,7 @@ describe('v2.KnowledgeBasesClient', () => {
         conversation: 'conversationValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2948,7 +3013,7 @@ describe('v2.KnowledgeBasesClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3012,7 +3077,7 @@ describe('v2.KnowledgeBasesClient', () => {
         document: 'documentValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3090,7 +3155,7 @@ describe('v2.KnowledgeBasesClient', () => {
         location: 'locationValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3154,7 +3219,7 @@ describe('v2.KnowledgeBasesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3233,7 +3298,7 @@ describe('v2.KnowledgeBasesClient', () => {
         environment: 'environmentValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3316,7 +3381,7 @@ describe('v2.KnowledgeBasesClient', () => {
         context: 'contextValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3462,7 +3527,7 @@ describe('v2.KnowledgeBasesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3603,7 +3668,7 @@ describe('v2.KnowledgeBasesClient', () => {
         location: 'locationValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3665,7 +3730,7 @@ describe('v2.KnowledgeBasesClient', () => {
         intent: 'intentValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3745,7 +3810,7 @@ describe('v2.KnowledgeBasesClient', () => {
         context: 'contextValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3846,7 +3911,7 @@ describe('v2.KnowledgeBasesClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3951,7 +4016,7 @@ describe('v2.KnowledgeBasesClient', () => {
         version: 'versionValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4029,7 +4094,7 @@ describe('v2.KnowledgeBasesClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4108,7 +4173,7 @@ describe('v2.KnowledgeBasesClient', () => {
         message: 'messageValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4208,7 +4273,7 @@ describe('v2.KnowledgeBasesClient', () => {
         conversation_model: 'conversationModelValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4291,7 +4356,7 @@ describe('v2.KnowledgeBasesClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4397,7 +4462,7 @@ describe('v2.KnowledgeBasesClient', () => {
         participant: 'participantValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4502,7 +4567,7 @@ describe('v2.KnowledgeBasesClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4585,7 +4650,7 @@ describe('v2.KnowledgeBasesClient', () => {
         conversation: 'conversationValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4664,7 +4729,7 @@ describe('v2.KnowledgeBasesClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4744,7 +4809,7 @@ describe('v2.KnowledgeBasesClient', () => {
         document: 'documentValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4849,7 +4914,7 @@ describe('v2.KnowledgeBasesClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4913,7 +4978,7 @@ describe('v2.KnowledgeBasesClient', () => {
         tool: 'toolValue',
       };
       const client = new knowledgebasesModule.v2.KnowledgeBasesClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

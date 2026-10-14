@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { DatastreamClient } from '@google-cloud/datastream';
+import {DatastreamClient} from '@google-cloud/datastream';
 
 // check that the client class type name can be used
 function doStuffWithDatastreamClient(client: DatastreamClient) {

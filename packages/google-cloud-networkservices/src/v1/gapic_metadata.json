@@ -305,6 +305,11 @@
                 "getMeshRouteView"
               ]
             },
+            "GetAgentGateway": {
+              "methods": [
+                "getAgentGateway"
+              ]
+            },
             "CreateEndpointPolicy": {
               "methods": [
                 "createEndpointPolicy"
@@ -465,6 +470,21 @@
                 "deleteServiceLbPolicy"
               ]
             },
+            "CreateAgentGateway": {
+              "methods": [
+                "createAgentGateway"
+              ]
+            },
+            "UpdateAgentGateway": {
+              "methods": [
+                "updateAgentGateway"
+              ]
+            },
+            "DeleteAgentGateway": {
+              "methods": [
+                "deleteAgentGateway"
+              ]
+            },
             "ListEndpointPolicies": {
               "methods": [
                 "listEndpointPolicies",
@@ -554,6 +574,13 @@
                 "listMeshRouteViews",
                 "listMeshRouteViewsStream",
                 "listMeshRouteViewsAsync"
+              ]
+            },
+            "ListAgentGateways": {
+              "methods": [
+                "listAgentGateways",
+                "listAgentGatewaysStream",
+                "listAgentGatewaysAsync"
               ]
             }
           }
@@ -626,6 +653,11 @@
                 "getMeshRouteView"
               ]
             },
+            "GetAgentGateway": {
+              "methods": [
+                "getAgentGateway"
+              ]
+            },
             "CreateEndpointPolicy": {
               "methods": [
                 "createEndpointPolicy"
@@ -786,6 +818,21 @@
                 "deleteServiceLbPolicy"
               ]
             },
+            "CreateAgentGateway": {
+              "methods": [
+                "createAgentGateway"
+              ]
+            },
+            "UpdateAgentGateway": {
+              "methods": [
+                "updateAgentGateway"
+              ]
+            },
+            "DeleteAgentGateway": {
+              "methods": [
+                "deleteAgentGateway"
+              ]
+            },
             "ListEndpointPolicies": {
               "methods": [
                 "listEndpointPolicies",
@@ -875,6 +922,13 @@
                 "listMeshRouteViews",
                 "listMeshRouteViewsStream",
                 "listMeshRouteViewsAsync"
+              ]
+            },
+            "ListAgentGateways": {
+              "methods": [
+                "listAgentGateways",
+                "listAgentGatewaysStream",
+                "listAgentGatewaysAsync"
               ]
             }
           }

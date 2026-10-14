@@ -20,7 +20,7 @@ import {Query, QueryProto, IntegerTypeCastOptions} from './query';
 import {PathType} from '.';
 import * as Protobuf from 'protobufjs';
 import * as path from 'path';
-import {google} from '../protos/protos';
+import {google} from './protos';
 import {and, PropertyFilter} from './filter';
 
 // eslint-disable-next-line @typescript-eslint/no-namespace

@@ -15,7 +15,8 @@ import {Bigtable} from '..';
 import * as SqlTypes from './types';
 import {PreciseDate} from '@google-cloud/precise-date';
 
-import {google} from '../../protos/protos';
+import {protos} from '..';
+import google = protos.google;
 import {MetadataConsumer} from './metadataconsumer';
 import {EventEmitter} from 'events';
 import {ServiceError, CallOptions} from 'google-gax';

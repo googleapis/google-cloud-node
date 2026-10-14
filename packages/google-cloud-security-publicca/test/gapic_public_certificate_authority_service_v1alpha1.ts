@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as publiccertificateauthorityserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -107,7 +107,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'publicca.example.com');
@@ -116,7 +116,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'publicca.example.com');
@@ -143,7 +143,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'publicca.configured.example.com');
@@ -158,7 +158,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -191,7 +191,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -203,15 +203,15 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
       assert(client.publicCertificateAuthorityServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.publicCertificateAuthorityServiceStub);
@@ -220,16 +220,16 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -242,7 +242,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -252,7 +252,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -267,7 +267,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -293,7 +293,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -328,7 +328,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -378,7 +378,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -415,7 +415,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -429,7 +429,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -450,7 +450,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -529,7 +529,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -580,7 +580,7 @@ describe('v1alpha1.PublicCertificateAuthorityServiceClient', () => {
       const client =
         new publiccertificateauthorityserviceModule.v1alpha1.PublicCertificateAuthorityServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

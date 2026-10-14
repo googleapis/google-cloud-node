@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as termsofserviceagreementstateserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -107,7 +107,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'merchantapi.example.com');
@@ -116,7 +116,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'merchantapi.example.com');
@@ -143,7 +143,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
@@ -158,7 +158,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -191,7 +191,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -203,15 +203,15 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       assert(client.termsOfServiceAgreementStateServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.termsOfServiceAgreementStateServiceStub);
@@ -220,16 +220,16 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -242,7 +242,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -252,7 +252,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -267,7 +267,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -293,7 +293,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -328,7 +328,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -378,7 +378,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -415,7 +415,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -429,7 +429,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -444,7 +444,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -484,7 +484,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -536,7 +536,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -573,7 +573,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -587,7 +587,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -606,7 +606,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -648,7 +648,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -700,7 +700,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -751,7 +751,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -795,7 +795,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -843,7 +843,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -887,7 +887,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -929,7 +929,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -987,7 +987,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1045,7 +1045,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1096,7 +1096,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1139,7 +1139,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1206,7 +1206,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1271,7 +1271,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1336,7 +1336,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1388,7 +1388,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1439,7 +1439,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1483,7 +1483,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1525,7 +1525,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1589,7 +1589,7 @@ describe('v1beta.TermsOfServiceAgreementStateServiceClient', () => {
       const client =
         new termsofserviceagreementstateserviceModule.v1beta.TermsOfServiceAgreementStateServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

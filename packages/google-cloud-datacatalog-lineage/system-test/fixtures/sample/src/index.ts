@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { LineageClient } from '@google-cloud/lineage';
+import {LineageClient} from '@google-cloud/lineage';
 
 // check that the client class type name can be used
 function doStuffWithLineageClient(client: LineageClient) {

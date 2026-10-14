@@ -102,7 +102,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update analysis | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/live_video_analytics.update_analysis.js) |
 | update operator | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/live_video_analytics.update_operator.js) |
 | update process | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/live_video_analytics.update_process.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/snippet_metadata_google.cloud.visionai.v1.json) |
 | acquire lease | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/streaming_service.acquire_lease.js) |
 | receive events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/streaming_service.receive_events.js) |
 | receive packets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/samples/generated/v1/streaming_service.receive_packets.js) |
@@ -228,7 +227,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -238,7 +237,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-visionai/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

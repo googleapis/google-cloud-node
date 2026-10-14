@@ -108,6 +108,34 @@ export class ClientPool<T extends object> {
   }
 
   /**
+   * Transitions the pool to gRPC and eagerly garbage-collects idle REST clients.
+   * REST clients with in-flight requests will be garbage collected upon request completion.
+   */
+  private transitionToGrpc(requestTag: string): void {
+    this.grpcEnabled = true;
+    logger(
+      `ClientPool[${this.instanceId}].acquire`,
+      requestTag,
+      'Transitioning pool to gRPC (requiresGrpc: true)',
+    );
+
+    for (const [client, metadata] of this.activeClients) {
+      if (!metadata.grpcEnabled && metadata.activeRequestCount === 0) {
+        this.activeClients.delete(client);
+        this.failedClients.delete(client);
+        void Promise.resolve(this.clientDestructor(client)).catch(err => {
+          logger(
+            `ClientPool[${this.instanceId}].transitionToGrpc`,
+            requestTag,
+            'Failed to destroy client: %s',
+            err,
+          );
+        });
+      }
+    }
+  }
+
+  /**
    * Returns an already existing client if it has less than the maximum number
    * of concurrent operations or initializes and returns a new client.
    *
@@ -118,21 +146,25 @@ export class ClientPool<T extends object> {
     let selectedClient: T | null = null;
     let selectedClientRequestCount = -1;
 
-    // Transition to grpc when we see the first operation that requires grpc.
-    this.grpcEnabled = this.grpcEnabled || requiresGrpc;
+    if (!this.grpcEnabled && requiresGrpc) {
+      this.transitionToGrpc(requestTag);
+    }
 
     // Require a grpc client for this operation if we have transitioned to grpc.
     requiresGrpc = requiresGrpc || this.grpcEnabled;
 
     for (const [client, metadata] of this.activeClients) {
+      const isEligible = metadata.grpcEnabled || !requiresGrpc;
+      if (!isEligible || this.failedClients.has(client)) {
+        continue;
+      }
+
       // Use the "most-full" client that can still accommodate the request
       // in order to maximize the number of idle clients as operations start to
       // complete.
       if (
-        !this.failedClients.has(client) &&
         metadata.activeRequestCount > selectedClientRequestCount &&
-        metadata.activeRequestCount < this.concurrentOperationLimit &&
-        (metadata.grpcEnabled || !requiresGrpc)
+        metadata.activeRequestCount < this.concurrentOperationLimit
       ) {
         selectedClient = client;
         selectedClientRequestCount = metadata.activeRequestCount;
@@ -270,8 +302,10 @@ export class ClientPool<T extends object> {
     // more than 100 idle capacity with default settings).
     let idleCapacityCount = 0;
     for (const [, metadata] of this.activeClients) {
-      idleCapacityCount +=
-        this.concurrentOperationLimit - metadata.activeRequestCount;
+      if (metadata.grpcEnabled === this.grpcEnabled) {
+        idleCapacityCount +=
+          this.concurrentOperationLimit - metadata.activeRequestCount;
+      }
     }
 
     const maxIdleCapacityCount =

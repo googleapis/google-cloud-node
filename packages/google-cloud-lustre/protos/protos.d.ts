@@ -26,6 +26,653 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Properties of a DirectoryPolicy. */
+                interface IDirectoryPolicy {
+
+                    /** DirectoryPolicy name */
+                    name?: (string|null);
+
+                    /** DirectoryPolicy directoryPath */
+                    directoryPath?: (string|null);
+
+                    /** DirectoryPolicy lustreProjectId */
+                    lustreProjectId?: (number|Long|string|null);
+
+                    /** DirectoryPolicy uid */
+                    uid?: (string|null);
+
+                    /** DirectoryPolicy state */
+                    state?: (google.cloud.lustre.v1.DirectoryPolicy.State|keyof typeof google.cloud.lustre.v1.DirectoryPolicy.State|null);
+                }
+
+                /** Represents a DirectoryPolicy. */
+                class DirectoryPolicy implements IDirectoryPolicy {
+
+                    /**
+                     * Constructs a new DirectoryPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IDirectoryPolicy);
+
+                    /** DirectoryPolicy name. */
+                    public name: string;
+
+                    /** DirectoryPolicy directoryPath. */
+                    public directoryPath: string;
+
+                    /** DirectoryPolicy lustreProjectId. */
+                    public lustreProjectId: (number|Long|string);
+
+                    /** DirectoryPolicy uid. */
+                    public uid: string;
+
+                    /** DirectoryPolicy state. */
+                    public state: (google.cloud.lustre.v1.DirectoryPolicy.State|keyof typeof google.cloud.lustre.v1.DirectoryPolicy.State);
+
+                    /**
+                     * Creates a new DirectoryPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DirectoryPolicy instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IDirectoryPolicy): google.cloud.lustre.v1.DirectoryPolicy;
+
+                    /**
+                     * Encodes the specified DirectoryPolicy message. Does not implicitly {@link google.cloud.lustre.v1.DirectoryPolicy.verify|verify} messages.
+                     * @param message DirectoryPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IDirectoryPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DirectoryPolicy message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.DirectoryPolicy.verify|verify} messages.
+                     * @param message DirectoryPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IDirectoryPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DirectoryPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DirectoryPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.DirectoryPolicy;
+
+                    /**
+                     * Decodes a DirectoryPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DirectoryPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.DirectoryPolicy;
+
+                    /**
+                     * Verifies a DirectoryPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DirectoryPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DirectoryPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.DirectoryPolicy;
+
+                    /**
+                     * Creates a plain object from a DirectoryPolicy message. Also converts values to other types if specified.
+                     * @param message DirectoryPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.DirectoryPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DirectoryPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DirectoryPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DirectoryPolicy {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        ACTIVE = 2,
+                        DELETING = 3
+                    }
+                }
+
+                /** Properties of a CreateDirectoryPolicyRequest. */
+                interface ICreateDirectoryPolicyRequest {
+
+                    /** CreateDirectoryPolicyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDirectoryPolicyRequest directoryPolicyId */
+                    directoryPolicyId?: (string|null);
+
+                    /** CreateDirectoryPolicyRequest directoryPolicy */
+                    directoryPolicy?: (google.cloud.lustre.v1.IDirectoryPolicy|null);
+                }
+
+                /** Represents a CreateDirectoryPolicyRequest. */
+                class CreateDirectoryPolicyRequest implements ICreateDirectoryPolicyRequest {
+
+                    /**
+                     * Constructs a new CreateDirectoryPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.ICreateDirectoryPolicyRequest);
+
+                    /** CreateDirectoryPolicyRequest parent. */
+                    public parent: string;
+
+                    /** CreateDirectoryPolicyRequest directoryPolicyId. */
+                    public directoryPolicyId: string;
+
+                    /** CreateDirectoryPolicyRequest directoryPolicy. */
+                    public directoryPolicy?: (google.cloud.lustre.v1.IDirectoryPolicy|null);
+
+                    /**
+                     * Creates a new CreateDirectoryPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDirectoryPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.ICreateDirectoryPolicyRequest): google.cloud.lustre.v1.CreateDirectoryPolicyRequest;
+
+                    /**
+                     * Encodes the specified CreateDirectoryPolicyRequest message. Does not implicitly {@link google.cloud.lustre.v1.CreateDirectoryPolicyRequest.verify|verify} messages.
+                     * @param message CreateDirectoryPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.ICreateDirectoryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDirectoryPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.CreateDirectoryPolicyRequest.verify|verify} messages.
+                     * @param message CreateDirectoryPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.ICreateDirectoryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDirectoryPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDirectoryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.CreateDirectoryPolicyRequest;
+
+                    /**
+                     * Decodes a CreateDirectoryPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDirectoryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.CreateDirectoryPolicyRequest;
+
+                    /**
+                     * Verifies a CreateDirectoryPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDirectoryPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDirectoryPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.CreateDirectoryPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDirectoryPolicyRequest message. Also converts values to other types if specified.
+                     * @param message CreateDirectoryPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.CreateDirectoryPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDirectoryPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDirectoryPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDirectoryPolicyRequest. */
+                interface IDeleteDirectoryPolicyRequest {
+
+                    /** DeleteDirectoryPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteDirectoryPolicyRequest. */
+                class DeleteDirectoryPolicyRequest implements IDeleteDirectoryPolicyRequest {
+
+                    /**
+                     * Constructs a new DeleteDirectoryPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IDeleteDirectoryPolicyRequest);
+
+                    /** DeleteDirectoryPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteDirectoryPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDirectoryPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IDeleteDirectoryPolicyRequest): google.cloud.lustre.v1.DeleteDirectoryPolicyRequest;
+
+                    /**
+                     * Encodes the specified DeleteDirectoryPolicyRequest message. Does not implicitly {@link google.cloud.lustre.v1.DeleteDirectoryPolicyRequest.verify|verify} messages.
+                     * @param message DeleteDirectoryPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IDeleteDirectoryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDirectoryPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.DeleteDirectoryPolicyRequest.verify|verify} messages.
+                     * @param message DeleteDirectoryPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IDeleteDirectoryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDirectoryPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDirectoryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.DeleteDirectoryPolicyRequest;
+
+                    /**
+                     * Decodes a DeleteDirectoryPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDirectoryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.DeleteDirectoryPolicyRequest;
+
+                    /**
+                     * Verifies a DeleteDirectoryPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDirectoryPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDirectoryPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.DeleteDirectoryPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDirectoryPolicyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDirectoryPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.DeleteDirectoryPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDirectoryPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDirectoryPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDirectoryPolicyRequest. */
+                interface IGetDirectoryPolicyRequest {
+
+                    /** GetDirectoryPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDirectoryPolicyRequest. */
+                class GetDirectoryPolicyRequest implements IGetDirectoryPolicyRequest {
+
+                    /**
+                     * Constructs a new GetDirectoryPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IGetDirectoryPolicyRequest);
+
+                    /** GetDirectoryPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDirectoryPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDirectoryPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IGetDirectoryPolicyRequest): google.cloud.lustre.v1.GetDirectoryPolicyRequest;
+
+                    /**
+                     * Encodes the specified GetDirectoryPolicyRequest message. Does not implicitly {@link google.cloud.lustre.v1.GetDirectoryPolicyRequest.verify|verify} messages.
+                     * @param message GetDirectoryPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IGetDirectoryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDirectoryPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.GetDirectoryPolicyRequest.verify|verify} messages.
+                     * @param message GetDirectoryPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IGetDirectoryPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDirectoryPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDirectoryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.GetDirectoryPolicyRequest;
+
+                    /**
+                     * Decodes a GetDirectoryPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDirectoryPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.GetDirectoryPolicyRequest;
+
+                    /**
+                     * Verifies a GetDirectoryPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDirectoryPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDirectoryPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.GetDirectoryPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetDirectoryPolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetDirectoryPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.GetDirectoryPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDirectoryPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDirectoryPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDirectoryPoliciesRequest. */
+                interface IListDirectoryPoliciesRequest {
+
+                    /** ListDirectoryPoliciesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDirectoryPoliciesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDirectoryPoliciesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListDirectoryPoliciesRequest. */
+                class ListDirectoryPoliciesRequest implements IListDirectoryPoliciesRequest {
+
+                    /**
+                     * Constructs a new ListDirectoryPoliciesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IListDirectoryPoliciesRequest);
+
+                    /** ListDirectoryPoliciesRequest parent. */
+                    public parent: string;
+
+                    /** ListDirectoryPoliciesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDirectoryPoliciesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListDirectoryPoliciesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDirectoryPoliciesRequest instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IListDirectoryPoliciesRequest): google.cloud.lustre.v1.ListDirectoryPoliciesRequest;
+
+                    /**
+                     * Encodes the specified ListDirectoryPoliciesRequest message. Does not implicitly {@link google.cloud.lustre.v1.ListDirectoryPoliciesRequest.verify|verify} messages.
+                     * @param message ListDirectoryPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IListDirectoryPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDirectoryPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.ListDirectoryPoliciesRequest.verify|verify} messages.
+                     * @param message ListDirectoryPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IListDirectoryPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDirectoryPoliciesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDirectoryPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.ListDirectoryPoliciesRequest;
+
+                    /**
+                     * Decodes a ListDirectoryPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDirectoryPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.ListDirectoryPoliciesRequest;
+
+                    /**
+                     * Verifies a ListDirectoryPoliciesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDirectoryPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDirectoryPoliciesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.ListDirectoryPoliciesRequest;
+
+                    /**
+                     * Creates a plain object from a ListDirectoryPoliciesRequest message. Also converts values to other types if specified.
+                     * @param message ListDirectoryPoliciesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.ListDirectoryPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDirectoryPoliciesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDirectoryPoliciesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDirectoryPoliciesResponse. */
+                interface IListDirectoryPoliciesResponse {
+
+                    /** ListDirectoryPoliciesResponse directoryPolicies */
+                    directoryPolicies?: (google.cloud.lustre.v1.IDirectoryPolicy[]|null);
+
+                    /** ListDirectoryPoliciesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDirectoryPoliciesResponse. */
+                class ListDirectoryPoliciesResponse implements IListDirectoryPoliciesResponse {
+
+                    /**
+                     * Constructs a new ListDirectoryPoliciesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IListDirectoryPoliciesResponse);
+
+                    /** ListDirectoryPoliciesResponse directoryPolicies. */
+                    public directoryPolicies: google.cloud.lustre.v1.IDirectoryPolicy[];
+
+                    /** ListDirectoryPoliciesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDirectoryPoliciesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDirectoryPoliciesResponse instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IListDirectoryPoliciesResponse): google.cloud.lustre.v1.ListDirectoryPoliciesResponse;
+
+                    /**
+                     * Encodes the specified ListDirectoryPoliciesResponse message. Does not implicitly {@link google.cloud.lustre.v1.ListDirectoryPoliciesResponse.verify|verify} messages.
+                     * @param message ListDirectoryPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IListDirectoryPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDirectoryPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.ListDirectoryPoliciesResponse.verify|verify} messages.
+                     * @param message ListDirectoryPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IListDirectoryPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDirectoryPoliciesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDirectoryPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.ListDirectoryPoliciesResponse;
+
+                    /**
+                     * Decodes a ListDirectoryPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDirectoryPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.ListDirectoryPoliciesResponse;
+
+                    /**
+                     * Verifies a ListDirectoryPoliciesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDirectoryPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDirectoryPoliciesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.ListDirectoryPoliciesResponse;
+
+                    /**
+                     * Creates a plain object from a ListDirectoryPoliciesResponse message. Also converts values to other types if specified.
+                     * @param message ListDirectoryPoliciesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.ListDirectoryPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDirectoryPoliciesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDirectoryPoliciesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an Instance. */
                 interface IInstance {
 
@@ -64,6 +711,39 @@ export namespace google {
 
                     /** Instance gkeSupportEnabled */
                     gkeSupportEnabled?: (boolean|null);
+
+                    /** Instance kmsKey */
+                    kmsKey?: (string|null);
+
+                    /** Instance stateReason */
+                    stateReason?: (string|null);
+
+                    /** Instance placementPolicy */
+                    placementPolicy?: (string|null);
+
+                    /** Instance accessRulesOptions */
+                    accessRulesOptions?: (google.cloud.lustre.v1.IAccessRulesOptions|null);
+
+                    /** Instance uid */
+                    uid?: (string|null);
+
+                    /** Instance maintenancePolicy */
+                    maintenancePolicy?: (google.cloud.lustre.v1.IMaintenancePolicy|null);
+
+                    /** Instance upcomingMaintenanceSchedule */
+                    upcomingMaintenanceSchedule?: (google.cloud.lustre.v1.IMaintenanceSchedule|null);
+
+                    /** Instance dynamicTierOptions */
+                    dynamicTierOptions?: (google.cloud.lustre.v1.IDynamicTierOptions|null);
+
+                    /** Instance availableVersion */
+                    availableVersion?: (string|null);
+
+                    /** Instance targetVersion */
+                    targetVersion?: (string|null);
+
+                    /** Instance effectiveVersion */
+                    effectiveVersion?: (string|null);
                 }
 
                 /** Represents an Instance. */
@@ -110,6 +790,39 @@ export namespace google {
 
                     /** Instance gkeSupportEnabled. */
                     public gkeSupportEnabled: boolean;
+
+                    /** Instance kmsKey. */
+                    public kmsKey: string;
+
+                    /** Instance stateReason. */
+                    public stateReason: string;
+
+                    /** Instance placementPolicy. */
+                    public placementPolicy: string;
+
+                    /** Instance accessRulesOptions. */
+                    public accessRulesOptions?: (google.cloud.lustre.v1.IAccessRulesOptions|null);
+
+                    /** Instance uid. */
+                    public uid: string;
+
+                    /** Instance maintenancePolicy. */
+                    public maintenancePolicy?: (google.cloud.lustre.v1.IMaintenancePolicy|null);
+
+                    /** Instance upcomingMaintenanceSchedule. */
+                    public upcomingMaintenanceSchedule?: (google.cloud.lustre.v1.IMaintenanceSchedule|null);
+
+                    /** Instance dynamicTierOptions. */
+                    public dynamicTierOptions?: (google.cloud.lustre.v1.IDynamicTierOptions|null);
+
+                    /** Instance availableVersion. */
+                    public availableVersion?: (string|null);
+
+                    /** Instance targetVersion. */
+                    public targetVersion?: (string|null);
+
+                    /** Instance effectiveVersion. */
+                    public effectiveVersion?: (string|null);
 
                     /**
                      * Creates a new Instance instance using the specified properties.
@@ -200,7 +913,349 @@ export namespace google {
                         UPGRADING = 4,
                         REPAIRING = 5,
                         STOPPED = 6,
-                        UPDATING = 7
+                        UPDATING = 7,
+                        SUSPENDED = 8
+                    }
+                }
+
+                /** Properties of a DynamicTierOptions. */
+                interface IDynamicTierOptions {
+
+                    /** DynamicTierOptions mode */
+                    mode?: (google.cloud.lustre.v1.DynamicTierOptions.Mode|keyof typeof google.cloud.lustre.v1.DynamicTierOptions.Mode|null);
+                }
+
+                /** Represents a DynamicTierOptions. */
+                class DynamicTierOptions implements IDynamicTierOptions {
+
+                    /**
+                     * Constructs a new DynamicTierOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IDynamicTierOptions);
+
+                    /** DynamicTierOptions mode. */
+                    public mode: (google.cloud.lustre.v1.DynamicTierOptions.Mode|keyof typeof google.cloud.lustre.v1.DynamicTierOptions.Mode);
+
+                    /**
+                     * Creates a new DynamicTierOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DynamicTierOptions instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IDynamicTierOptions): google.cloud.lustre.v1.DynamicTierOptions;
+
+                    /**
+                     * Encodes the specified DynamicTierOptions message. Does not implicitly {@link google.cloud.lustre.v1.DynamicTierOptions.verify|verify} messages.
+                     * @param message DynamicTierOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IDynamicTierOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DynamicTierOptions message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.DynamicTierOptions.verify|verify} messages.
+                     * @param message DynamicTierOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IDynamicTierOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DynamicTierOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DynamicTierOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.DynamicTierOptions;
+
+                    /**
+                     * Decodes a DynamicTierOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DynamicTierOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.DynamicTierOptions;
+
+                    /**
+                     * Verifies a DynamicTierOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DynamicTierOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DynamicTierOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.DynamicTierOptions;
+
+                    /**
+                     * Creates a plain object from a DynamicTierOptions message. Also converts values to other types if specified.
+                     * @param message DynamicTierOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.DynamicTierOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DynamicTierOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DynamicTierOptions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DynamicTierOptions {
+
+                    /** Mode enum. */
+                    enum Mode {
+                        MODE_UNSPECIFIED = 0,
+                        DISABLED = 1,
+                        DEFAULT_CACHE = 2
+                    }
+                }
+
+                /** Properties of an AccessRulesOptions. */
+                interface IAccessRulesOptions {
+
+                    /** AccessRulesOptions accessRules */
+                    accessRules?: (google.cloud.lustre.v1.AccessRulesOptions.IAccessRule[]|null);
+
+                    /** AccessRulesOptions defaultSquashMode */
+                    defaultSquashMode?: (google.cloud.lustre.v1.AccessRulesOptions.SquashMode|keyof typeof google.cloud.lustre.v1.AccessRulesOptions.SquashMode|null);
+
+                    /** AccessRulesOptions defaultSquashUid */
+                    defaultSquashUid?: (number|null);
+
+                    /** AccessRulesOptions defaultSquashGid */
+                    defaultSquashGid?: (number|null);
+                }
+
+                /** Represents an AccessRulesOptions. */
+                class AccessRulesOptions implements IAccessRulesOptions {
+
+                    /**
+                     * Constructs a new AccessRulesOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IAccessRulesOptions);
+
+                    /** AccessRulesOptions accessRules. */
+                    public accessRules: google.cloud.lustre.v1.AccessRulesOptions.IAccessRule[];
+
+                    /** AccessRulesOptions defaultSquashMode. */
+                    public defaultSquashMode: (google.cloud.lustre.v1.AccessRulesOptions.SquashMode|keyof typeof google.cloud.lustre.v1.AccessRulesOptions.SquashMode);
+
+                    /** AccessRulesOptions defaultSquashUid. */
+                    public defaultSquashUid: number;
+
+                    /** AccessRulesOptions defaultSquashGid. */
+                    public defaultSquashGid: number;
+
+                    /**
+                     * Creates a new AccessRulesOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AccessRulesOptions instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IAccessRulesOptions): google.cloud.lustre.v1.AccessRulesOptions;
+
+                    /**
+                     * Encodes the specified AccessRulesOptions message. Does not implicitly {@link google.cloud.lustre.v1.AccessRulesOptions.verify|verify} messages.
+                     * @param message AccessRulesOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IAccessRulesOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AccessRulesOptions message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.AccessRulesOptions.verify|verify} messages.
+                     * @param message AccessRulesOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IAccessRulesOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AccessRulesOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AccessRulesOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.AccessRulesOptions;
+
+                    /**
+                     * Decodes an AccessRulesOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AccessRulesOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.AccessRulesOptions;
+
+                    /**
+                     * Verifies an AccessRulesOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AccessRulesOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AccessRulesOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.AccessRulesOptions;
+
+                    /**
+                     * Creates a plain object from an AccessRulesOptions message. Also converts values to other types if specified.
+                     * @param message AccessRulesOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.AccessRulesOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AccessRulesOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AccessRulesOptions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AccessRulesOptions {
+
+                    /** Properties of an AccessRule. */
+                    interface IAccessRule {
+
+                        /** AccessRule name */
+                        name?: (string|null);
+
+                        /** AccessRule ipAddressRanges */
+                        ipAddressRanges?: (string[]|null);
+
+                        /** AccessRule squashMode */
+                        squashMode?: (google.cloud.lustre.v1.AccessRulesOptions.SquashMode|keyof typeof google.cloud.lustre.v1.AccessRulesOptions.SquashMode|null);
+                    }
+
+                    /** Represents an AccessRule. */
+                    class AccessRule implements IAccessRule {
+
+                        /**
+                         * Constructs a new AccessRule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.lustre.v1.AccessRulesOptions.IAccessRule);
+
+                        /** AccessRule name. */
+                        public name: string;
+
+                        /** AccessRule ipAddressRanges. */
+                        public ipAddressRanges: string[];
+
+                        /** AccessRule squashMode. */
+                        public squashMode: (google.cloud.lustre.v1.AccessRulesOptions.SquashMode|keyof typeof google.cloud.lustre.v1.AccessRulesOptions.SquashMode);
+
+                        /**
+                         * Creates a new AccessRule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AccessRule instance
+                         */
+                        public static create(properties?: google.cloud.lustre.v1.AccessRulesOptions.IAccessRule): google.cloud.lustre.v1.AccessRulesOptions.AccessRule;
+
+                        /**
+                         * Encodes the specified AccessRule message. Does not implicitly {@link google.cloud.lustre.v1.AccessRulesOptions.AccessRule.verify|verify} messages.
+                         * @param message AccessRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.lustre.v1.AccessRulesOptions.IAccessRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AccessRule message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.AccessRulesOptions.AccessRule.verify|verify} messages.
+                         * @param message AccessRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.lustre.v1.AccessRulesOptions.IAccessRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AccessRule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AccessRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.AccessRulesOptions.AccessRule;
+
+                        /**
+                         * Decodes an AccessRule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AccessRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.AccessRulesOptions.AccessRule;
+
+                        /**
+                         * Verifies an AccessRule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AccessRule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AccessRule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.AccessRulesOptions.AccessRule;
+
+                        /**
+                         * Creates a plain object from an AccessRule message. Also converts values to other types if specified.
+                         * @param message AccessRule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.lustre.v1.AccessRulesOptions.AccessRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AccessRule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AccessRule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** SquashMode enum. */
+                    enum SquashMode {
+                        SQUASH_MODE_UNSPECIFIED = 0,
+                        NO_SQUASH = 1,
+                        ROOT_SQUASH = 2
                     }
                 }
 
@@ -763,6 +1818,9 @@ export namespace google {
 
                     /** DeleteInstanceRequest requestId */
                     requestId?: (string|null);
+
+                    /** DeleteInstanceRequest force */
+                    force?: (boolean|null);
                 }
 
                 /** Represents a DeleteInstanceRequest. */
@@ -779,6 +1837,9 @@ export namespace google {
 
                     /** DeleteInstanceRequest requestId. */
                     public requestId: string;
+
+                    /** DeleteInstanceRequest force. */
+                    public force: boolean;
 
                     /**
                      * Creates a new DeleteInstanceRequest instance using the specified properties.
@@ -991,6 +2052,650 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a MaintenancePolicy. */
+                interface IMaintenancePolicy {
+
+                    /** MaintenancePolicy weeklyMaintenanceWindows */
+                    weeklyMaintenanceWindows?: (google.cloud.lustre.v1.MaintenancePolicy.IWeeklyMaintenanceWindow[]|null);
+
+                    /** MaintenancePolicy maintenanceExclusionWindow */
+                    maintenanceExclusionWindow?: (google.cloud.lustre.v1.MaintenancePolicy.IMaintenanceExclusionWindow[]|null);
+                }
+
+                /** Represents a MaintenancePolicy. */
+                class MaintenancePolicy implements IMaintenancePolicy {
+
+                    /**
+                     * Constructs a new MaintenancePolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IMaintenancePolicy);
+
+                    /** MaintenancePolicy weeklyMaintenanceWindows. */
+                    public weeklyMaintenanceWindows: google.cloud.lustre.v1.MaintenancePolicy.IWeeklyMaintenanceWindow[];
+
+                    /** MaintenancePolicy maintenanceExclusionWindow. */
+                    public maintenanceExclusionWindow: google.cloud.lustre.v1.MaintenancePolicy.IMaintenanceExclusionWindow[];
+
+                    /**
+                     * Creates a new MaintenancePolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaintenancePolicy instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IMaintenancePolicy): google.cloud.lustre.v1.MaintenancePolicy;
+
+                    /**
+                     * Encodes the specified MaintenancePolicy message. Does not implicitly {@link google.cloud.lustre.v1.MaintenancePolicy.verify|verify} messages.
+                     * @param message MaintenancePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaintenancePolicy message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.MaintenancePolicy.verify|verify} messages.
+                     * @param message MaintenancePolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IMaintenancePolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaintenancePolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaintenancePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.MaintenancePolicy;
+
+                    /**
+                     * Decodes a MaintenancePolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaintenancePolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.MaintenancePolicy;
+
+                    /**
+                     * Verifies a MaintenancePolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaintenancePolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaintenancePolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.MaintenancePolicy;
+
+                    /**
+                     * Creates a plain object from a MaintenancePolicy message. Also converts values to other types if specified.
+                     * @param message MaintenancePolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.MaintenancePolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaintenancePolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaintenancePolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MaintenancePolicy {
+
+                    /** Properties of a WeeklyMaintenanceWindow. */
+                    interface IWeeklyMaintenanceWindow {
+
+                        /** WeeklyMaintenanceWindow dayOfWeek */
+                        dayOfWeek?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
+
+                        /** WeeklyMaintenanceWindow startTime */
+                        startTime?: (google.type.ITimeOfDay|null);
+                    }
+
+                    /** Represents a WeeklyMaintenanceWindow. */
+                    class WeeklyMaintenanceWindow implements IWeeklyMaintenanceWindow {
+
+                        /**
+                         * Constructs a new WeeklyMaintenanceWindow.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.lustre.v1.MaintenancePolicy.IWeeklyMaintenanceWindow);
+
+                        /** WeeklyMaintenanceWindow dayOfWeek. */
+                        public dayOfWeek: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
+
+                        /** WeeklyMaintenanceWindow startTime. */
+                        public startTime?: (google.type.ITimeOfDay|null);
+
+                        /**
+                         * Creates a new WeeklyMaintenanceWindow instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WeeklyMaintenanceWindow instance
+                         */
+                        public static create(properties?: google.cloud.lustre.v1.MaintenancePolicy.IWeeklyMaintenanceWindow): google.cloud.lustre.v1.MaintenancePolicy.WeeklyMaintenanceWindow;
+
+                        /**
+                         * Encodes the specified WeeklyMaintenanceWindow message. Does not implicitly {@link google.cloud.lustre.v1.MaintenancePolicy.WeeklyMaintenanceWindow.verify|verify} messages.
+                         * @param message WeeklyMaintenanceWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.lustre.v1.MaintenancePolicy.IWeeklyMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WeeklyMaintenanceWindow message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.MaintenancePolicy.WeeklyMaintenanceWindow.verify|verify} messages.
+                         * @param message WeeklyMaintenanceWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.lustre.v1.MaintenancePolicy.IWeeklyMaintenanceWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.MaintenancePolicy.WeeklyMaintenanceWindow;
+
+                        /**
+                         * Decodes a WeeklyMaintenanceWindow message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WeeklyMaintenanceWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.MaintenancePolicy.WeeklyMaintenanceWindow;
+
+                        /**
+                         * Verifies a WeeklyMaintenanceWindow message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WeeklyMaintenanceWindow message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WeeklyMaintenanceWindow
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.MaintenancePolicy.WeeklyMaintenanceWindow;
+
+                        /**
+                         * Creates a plain object from a WeeklyMaintenanceWindow message. Also converts values to other types if specified.
+                         * @param message WeeklyMaintenanceWindow
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.lustre.v1.MaintenancePolicy.WeeklyMaintenanceWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WeeklyMaintenanceWindow to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for WeeklyMaintenanceWindow
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a MaintenanceExclusionWindow. */
+                    interface IMaintenanceExclusionWindow {
+
+                        /** MaintenanceExclusionWindow startDate */
+                        startDate?: (google.type.IDate|null);
+
+                        /** MaintenanceExclusionWindow endDate */
+                        endDate?: (google.type.IDate|null);
+
+                        /** MaintenanceExclusionWindow time */
+                        time?: (google.type.ITimeOfDay|null);
+                    }
+
+                    /** Represents a MaintenanceExclusionWindow. */
+                    class MaintenanceExclusionWindow implements IMaintenanceExclusionWindow {
+
+                        /**
+                         * Constructs a new MaintenanceExclusionWindow.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.lustre.v1.MaintenancePolicy.IMaintenanceExclusionWindow);
+
+                        /** MaintenanceExclusionWindow startDate. */
+                        public startDate?: (google.type.IDate|null);
+
+                        /** MaintenanceExclusionWindow endDate. */
+                        public endDate?: (google.type.IDate|null);
+
+                        /** MaintenanceExclusionWindow time. */
+                        public time?: (google.type.ITimeOfDay|null);
+
+                        /**
+                         * Creates a new MaintenanceExclusionWindow instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns MaintenanceExclusionWindow instance
+                         */
+                        public static create(properties?: google.cloud.lustre.v1.MaintenancePolicy.IMaintenanceExclusionWindow): google.cloud.lustre.v1.MaintenancePolicy.MaintenanceExclusionWindow;
+
+                        /**
+                         * Encodes the specified MaintenanceExclusionWindow message. Does not implicitly {@link google.cloud.lustre.v1.MaintenancePolicy.MaintenanceExclusionWindow.verify|verify} messages.
+                         * @param message MaintenanceExclusionWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.lustre.v1.MaintenancePolicy.IMaintenanceExclusionWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified MaintenanceExclusionWindow message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.MaintenancePolicy.MaintenanceExclusionWindow.verify|verify} messages.
+                         * @param message MaintenanceExclusionWindow message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.lustre.v1.MaintenancePolicy.IMaintenanceExclusionWindow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a MaintenanceExclusionWindow message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns MaintenanceExclusionWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.MaintenancePolicy.MaintenanceExclusionWindow;
+
+                        /**
+                         * Decodes a MaintenanceExclusionWindow message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns MaintenanceExclusionWindow
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.MaintenancePolicy.MaintenanceExclusionWindow;
+
+                        /**
+                         * Verifies a MaintenanceExclusionWindow message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a MaintenanceExclusionWindow message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns MaintenanceExclusionWindow
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.MaintenancePolicy.MaintenanceExclusionWindow;
+
+                        /**
+                         * Creates a plain object from a MaintenanceExclusionWindow message. Also converts values to other types if specified.
+                         * @param message MaintenanceExclusionWindow
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.lustre.v1.MaintenancePolicy.MaintenanceExclusionWindow, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this MaintenanceExclusionWindow to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for MaintenanceExclusionWindow
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a MaintenanceSchedule. */
+                interface IMaintenanceSchedule {
+
+                    /** MaintenanceSchedule startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenanceSchedule endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a MaintenanceSchedule. */
+                class MaintenanceSchedule implements IMaintenanceSchedule {
+
+                    /**
+                     * Constructs a new MaintenanceSchedule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IMaintenanceSchedule);
+
+                    /** MaintenanceSchedule startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MaintenanceSchedule endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new MaintenanceSchedule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MaintenanceSchedule instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IMaintenanceSchedule): google.cloud.lustre.v1.MaintenanceSchedule;
+
+                    /**
+                     * Encodes the specified MaintenanceSchedule message. Does not implicitly {@link google.cloud.lustre.v1.MaintenanceSchedule.verify|verify} messages.
+                     * @param message MaintenanceSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MaintenanceSchedule message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.MaintenanceSchedule.verify|verify} messages.
+                     * @param message MaintenanceSchedule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IMaintenanceSchedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MaintenanceSchedule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MaintenanceSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.MaintenanceSchedule;
+
+                    /**
+                     * Decodes a MaintenanceSchedule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MaintenanceSchedule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.MaintenanceSchedule;
+
+                    /**
+                     * Verifies a MaintenanceSchedule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MaintenanceSchedule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MaintenanceSchedule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.MaintenanceSchedule;
+
+                    /**
+                     * Creates a plain object from a MaintenanceSchedule message. Also converts values to other types if specified.
+                     * @param message MaintenanceSchedule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.MaintenanceSchedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MaintenanceSchedule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MaintenanceSchedule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RescheduleMaintenanceRequest. */
+                interface IRescheduleMaintenanceRequest {
+
+                    /** RescheduleMaintenanceRequest name */
+                    name?: (string|null);
+
+                    /** RescheduleMaintenanceRequest reschedule */
+                    reschedule?: (google.cloud.lustre.v1.RescheduleMaintenanceRequest.IReschedule|null);
+
+                    /** RescheduleMaintenanceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a RescheduleMaintenanceRequest. */
+                class RescheduleMaintenanceRequest implements IRescheduleMaintenanceRequest {
+
+                    /**
+                     * Constructs a new RescheduleMaintenanceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IRescheduleMaintenanceRequest);
+
+                    /** RescheduleMaintenanceRequest name. */
+                    public name: string;
+
+                    /** RescheduleMaintenanceRequest reschedule. */
+                    public reschedule?: (google.cloud.lustre.v1.RescheduleMaintenanceRequest.IReschedule|null);
+
+                    /** RescheduleMaintenanceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new RescheduleMaintenanceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RescheduleMaintenanceRequest instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IRescheduleMaintenanceRequest): google.cloud.lustre.v1.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Encodes the specified RescheduleMaintenanceRequest message. Does not implicitly {@link google.cloud.lustre.v1.RescheduleMaintenanceRequest.verify|verify} messages.
+                     * @param message RescheduleMaintenanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IRescheduleMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RescheduleMaintenanceRequest message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.RescheduleMaintenanceRequest.verify|verify} messages.
+                     * @param message RescheduleMaintenanceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IRescheduleMaintenanceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RescheduleMaintenanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Decodes a RescheduleMaintenanceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RescheduleMaintenanceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Verifies a RescheduleMaintenanceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RescheduleMaintenanceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RescheduleMaintenanceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.RescheduleMaintenanceRequest;
+
+                    /**
+                     * Creates a plain object from a RescheduleMaintenanceRequest message. Also converts values to other types if specified.
+                     * @param message RescheduleMaintenanceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.RescheduleMaintenanceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RescheduleMaintenanceRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RescheduleMaintenanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RescheduleMaintenanceRequest {
+
+                    /** Properties of a Reschedule. */
+                    interface IReschedule {
+
+                        /** Reschedule rescheduleType */
+                        rescheduleType?: (google.cloud.lustre.v1.RescheduleMaintenanceRequest.RescheduleType|keyof typeof google.cloud.lustre.v1.RescheduleMaintenanceRequest.RescheduleType|null);
+
+                        /** Reschedule scheduleTime */
+                        scheduleTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a Reschedule. */
+                    class Reschedule implements IReschedule {
+
+                        /**
+                         * Constructs a new Reschedule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.lustre.v1.RescheduleMaintenanceRequest.IReschedule);
+
+                        /** Reschedule rescheduleType. */
+                        public rescheduleType: (google.cloud.lustre.v1.RescheduleMaintenanceRequest.RescheduleType|keyof typeof google.cloud.lustre.v1.RescheduleMaintenanceRequest.RescheduleType);
+
+                        /** Reschedule scheduleTime. */
+                        public scheduleTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new Reschedule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Reschedule instance
+                         */
+                        public static create(properties?: google.cloud.lustre.v1.RescheduleMaintenanceRequest.IReschedule): google.cloud.lustre.v1.RescheduleMaintenanceRequest.Reschedule;
+
+                        /**
+                         * Encodes the specified Reschedule message. Does not implicitly {@link google.cloud.lustre.v1.RescheduleMaintenanceRequest.Reschedule.verify|verify} messages.
+                         * @param message Reschedule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.lustre.v1.RescheduleMaintenanceRequest.IReschedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Reschedule message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.RescheduleMaintenanceRequest.Reschedule.verify|verify} messages.
+                         * @param message Reschedule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.lustre.v1.RescheduleMaintenanceRequest.IReschedule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Reschedule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Reschedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.RescheduleMaintenanceRequest.Reschedule;
+
+                        /**
+                         * Decodes a Reschedule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Reschedule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.RescheduleMaintenanceRequest.Reschedule;
+
+                        /**
+                         * Verifies a Reschedule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Reschedule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Reschedule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.RescheduleMaintenanceRequest.Reschedule;
+
+                        /**
+                         * Creates a plain object from a Reschedule message. Also converts values to other types if specified.
+                         * @param message Reschedule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.lustre.v1.RescheduleMaintenanceRequest.Reschedule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Reschedule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Reschedule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** RescheduleType enum. */
+                    enum RescheduleType {
+                        RESCHEDULE_TYPE_UNSPECIFIED = 0,
+                        IMMEDIATE = 1,
+                        NEXT_AVAILABLE_WINDOW = 2,
+                        BY_TIME = 3
+                    }
+                }
+
                 /** Represents a Lustre */
                 class Lustre extends $protobuf.rpc.Service {
 
@@ -1082,6 +2787,20 @@ export namespace google {
                     public deleteInstance(request: google.cloud.lustre.v1.IDeleteInstanceRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls RescheduleMaintenance.
+                     * @param request RescheduleMaintenanceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public rescheduleMaintenance(request: google.cloud.lustre.v1.IRescheduleMaintenanceRequest, callback: google.cloud.lustre.v1.Lustre.RescheduleMaintenanceCallback): void;
+
+                    /**
+                     * Calls RescheduleMaintenance.
+                     * @param request RescheduleMaintenanceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public rescheduleMaintenance(request: google.cloud.lustre.v1.IRescheduleMaintenanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ImportData.
                      * @param request ImportDataRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -1108,6 +2827,132 @@ export namespace google {
                      * @returns Promise
                      */
                     public exportData(request: google.cloud.lustre.v1.IExportDataRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls CreateMirror.
+                     * @param request CreateMirrorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createMirror(request: google.cloud.lustre.v1.ICreateMirrorRequest, callback: google.cloud.lustre.v1.Lustre.CreateMirrorCallback): void;
+
+                    /**
+                     * Calls CreateMirror.
+                     * @param request CreateMirrorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createMirror(request: google.cloud.lustre.v1.ICreateMirrorRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateMirror.
+                     * @param request UpdateMirrorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateMirror(request: google.cloud.lustre.v1.IUpdateMirrorRequest, callback: google.cloud.lustre.v1.Lustre.UpdateMirrorCallback): void;
+
+                    /**
+                     * Calls UpdateMirror.
+                     * @param request UpdateMirrorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateMirror(request: google.cloud.lustre.v1.IUpdateMirrorRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteMirror.
+                     * @param request DeleteMirrorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteMirror(request: google.cloud.lustre.v1.IDeleteMirrorRequest, callback: google.cloud.lustre.v1.Lustre.DeleteMirrorCallback): void;
+
+                    /**
+                     * Calls DeleteMirror.
+                     * @param request DeleteMirrorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteMirror(request: google.cloud.lustre.v1.IDeleteMirrorRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetMirror.
+                     * @param request GetMirrorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Mirror
+                     */
+                    public getMirror(request: google.cloud.lustre.v1.IGetMirrorRequest, callback: google.cloud.lustre.v1.Lustre.GetMirrorCallback): void;
+
+                    /**
+                     * Calls GetMirror.
+                     * @param request GetMirrorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getMirror(request: google.cloud.lustre.v1.IGetMirrorRequest): Promise<google.cloud.lustre.v1.Mirror>;
+
+                    /**
+                     * Calls ListMirrors.
+                     * @param request ListMirrorsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMirrorsResponse
+                     */
+                    public listMirrors(request: google.cloud.lustre.v1.IListMirrorsRequest, callback: google.cloud.lustre.v1.Lustre.ListMirrorsCallback): void;
+
+                    /**
+                     * Calls ListMirrors.
+                     * @param request ListMirrorsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMirrors(request: google.cloud.lustre.v1.IListMirrorsRequest): Promise<google.cloud.lustre.v1.ListMirrorsResponse>;
+
+                    /**
+                     * Calls CreateDirectoryPolicy.
+                     * @param request CreateDirectoryPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createDirectoryPolicy(request: google.cloud.lustre.v1.ICreateDirectoryPolicyRequest, callback: google.cloud.lustre.v1.Lustre.CreateDirectoryPolicyCallback): void;
+
+                    /**
+                     * Calls CreateDirectoryPolicy.
+                     * @param request CreateDirectoryPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDirectoryPolicy(request: google.cloud.lustre.v1.ICreateDirectoryPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteDirectoryPolicy.
+                     * @param request DeleteDirectoryPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteDirectoryPolicy(request: google.cloud.lustre.v1.IDeleteDirectoryPolicyRequest, callback: google.cloud.lustre.v1.Lustre.DeleteDirectoryPolicyCallback): void;
+
+                    /**
+                     * Calls DeleteDirectoryPolicy.
+                     * @param request DeleteDirectoryPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDirectoryPolicy(request: google.cloud.lustre.v1.IDeleteDirectoryPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetDirectoryPolicy.
+                     * @param request GetDirectoryPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DirectoryPolicy
+                     */
+                    public getDirectoryPolicy(request: google.cloud.lustre.v1.IGetDirectoryPolicyRequest, callback: google.cloud.lustre.v1.Lustre.GetDirectoryPolicyCallback): void;
+
+                    /**
+                     * Calls GetDirectoryPolicy.
+                     * @param request GetDirectoryPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDirectoryPolicy(request: google.cloud.lustre.v1.IGetDirectoryPolicyRequest): Promise<google.cloud.lustre.v1.DirectoryPolicy>;
+
+                    /**
+                     * Calls ListDirectoryPolicies.
+                     * @param request ListDirectoryPoliciesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDirectoryPoliciesResponse
+                     */
+                    public listDirectoryPolicies(request: google.cloud.lustre.v1.IListDirectoryPoliciesRequest, callback: google.cloud.lustre.v1.Lustre.ListDirectoryPoliciesCallback): void;
+
+                    /**
+                     * Calls ListDirectoryPolicies.
+                     * @param request ListDirectoryPoliciesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDirectoryPolicies(request: google.cloud.lustre.v1.IListDirectoryPoliciesRequest): Promise<google.cloud.lustre.v1.ListDirectoryPoliciesResponse>;
                 }
 
                 namespace Lustre {
@@ -1148,6 +2993,13 @@ export namespace google {
                     type DeleteInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.lustre.v1.Lustre|rescheduleMaintenance}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RescheduleMaintenanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.lustre.v1.Lustre|importData}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -1160,6 +3012,1038 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ExportDataCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.lustre.v1.Lustre|createMirror}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateMirrorCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.lustre.v1.Lustre|updateMirror}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateMirrorCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.lustre.v1.Lustre|deleteMirror}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteMirrorCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.lustre.v1.Lustre|getMirror}.
+                     * @param error Error, if any
+                     * @param [response] Mirror
+                     */
+                    type GetMirrorCallback = (error: (Error|null), response?: google.cloud.lustre.v1.Mirror) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.lustre.v1.Lustre|listMirrors}.
+                     * @param error Error, if any
+                     * @param [response] ListMirrorsResponse
+                     */
+                    type ListMirrorsCallback = (error: (Error|null), response?: google.cloud.lustre.v1.ListMirrorsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.lustre.v1.Lustre|createDirectoryPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateDirectoryPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.lustre.v1.Lustre|deleteDirectoryPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteDirectoryPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.lustre.v1.Lustre|getDirectoryPolicy}.
+                     * @param error Error, if any
+                     * @param [response] DirectoryPolicy
+                     */
+                    type GetDirectoryPolicyCallback = (error: (Error|null), response?: google.cloud.lustre.v1.DirectoryPolicy) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.lustre.v1.Lustre|listDirectoryPolicies}.
+                     * @param error Error, if any
+                     * @param [response] ListDirectoryPoliciesResponse
+                     */
+                    type ListDirectoryPoliciesCallback = (error: (Error|null), response?: google.cloud.lustre.v1.ListDirectoryPoliciesResponse) => void;
+                }
+
+                /** Properties of a Mirror. */
+                interface IMirror {
+
+                    /** Mirror name */
+                    name?: (string|null);
+
+                    /** Mirror gcsPath */
+                    gcsPath?: (google.cloud.lustre.v1.IGcsPath|null);
+
+                    /** Mirror lustrePath */
+                    lustrePath?: (google.cloud.lustre.v1.ILustrePath|null);
+
+                    /** Mirror direction */
+                    direction?: (google.cloud.lustre.v1.Mirror.Direction|keyof typeof google.cloud.lustre.v1.Mirror.Direction|null);
+
+                    /** Mirror deletedFilesRetained */
+                    deletedFilesRetained?: (boolean|null);
+
+                    /** Mirror description */
+                    description?: (string|null);
+
+                    /** Mirror labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Mirror createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Mirror updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Mirror uid */
+                    uid?: (string|null);
+
+                    /** Mirror state */
+                    state?: (google.cloud.lustre.v1.Mirror.State|keyof typeof google.cloud.lustre.v1.Mirror.State|null);
+                }
+
+                /** Represents a Mirror. */
+                class Mirror implements IMirror {
+
+                    /**
+                     * Constructs a new Mirror.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IMirror);
+
+                    /** Mirror name. */
+                    public name: string;
+
+                    /** Mirror gcsPath. */
+                    public gcsPath?: (google.cloud.lustre.v1.IGcsPath|null);
+
+                    /** Mirror lustrePath. */
+                    public lustrePath?: (google.cloud.lustre.v1.ILustrePath|null);
+
+                    /** Mirror direction. */
+                    public direction: (google.cloud.lustre.v1.Mirror.Direction|keyof typeof google.cloud.lustre.v1.Mirror.Direction);
+
+                    /** Mirror deletedFilesRetained. */
+                    public deletedFilesRetained: boolean;
+
+                    /** Mirror description. */
+                    public description: string;
+
+                    /** Mirror labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Mirror createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Mirror updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Mirror uid. */
+                    public uid: string;
+
+                    /** Mirror state. */
+                    public state: (google.cloud.lustre.v1.Mirror.State|keyof typeof google.cloud.lustre.v1.Mirror.State);
+
+                    /**
+                     * Creates a new Mirror instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Mirror instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IMirror): google.cloud.lustre.v1.Mirror;
+
+                    /**
+                     * Encodes the specified Mirror message. Does not implicitly {@link google.cloud.lustre.v1.Mirror.verify|verify} messages.
+                     * @param message Mirror message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IMirror, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Mirror message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.Mirror.verify|verify} messages.
+                     * @param message Mirror message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IMirror, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Mirror message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Mirror
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.Mirror;
+
+                    /**
+                     * Decodes a Mirror message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Mirror
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.Mirror;
+
+                    /**
+                     * Verifies a Mirror message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Mirror message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Mirror
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.Mirror;
+
+                    /**
+                     * Creates a plain object from a Mirror message. Also converts values to other types if specified.
+                     * @param message Mirror
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.Mirror, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Mirror to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Mirror
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Mirror {
+
+                    /** Direction enum. */
+                    enum Direction {
+                        DIRECTION_UNSPECIFIED = 0,
+                        FROM_CLOUD_STORAGE = 1
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        INITIAL_SYNC = 2,
+                        DELETING = 3,
+                        ACTIVE = 4,
+                        SUSPENDED = 5
+                    }
+                }
+
+                /** Properties of a CreateMirrorRequest. */
+                interface ICreateMirrorRequest {
+
+                    /** CreateMirrorRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateMirrorRequest mirrorId */
+                    mirrorId?: (string|null);
+
+                    /** CreateMirrorRequest mirror */
+                    mirror?: (google.cloud.lustre.v1.IMirror|null);
+
+                    /** CreateMirrorRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateMirrorRequest. */
+                class CreateMirrorRequest implements ICreateMirrorRequest {
+
+                    /**
+                     * Constructs a new CreateMirrorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.ICreateMirrorRequest);
+
+                    /** CreateMirrorRequest parent. */
+                    public parent: string;
+
+                    /** CreateMirrorRequest mirrorId. */
+                    public mirrorId: string;
+
+                    /** CreateMirrorRequest mirror. */
+                    public mirror?: (google.cloud.lustre.v1.IMirror|null);
+
+                    /** CreateMirrorRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateMirrorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMirrorRequest instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.ICreateMirrorRequest): google.cloud.lustre.v1.CreateMirrorRequest;
+
+                    /**
+                     * Encodes the specified CreateMirrorRequest message. Does not implicitly {@link google.cloud.lustre.v1.CreateMirrorRequest.verify|verify} messages.
+                     * @param message CreateMirrorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.ICreateMirrorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMirrorRequest message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.CreateMirrorRequest.verify|verify} messages.
+                     * @param message CreateMirrorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.ICreateMirrorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMirrorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMirrorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.CreateMirrorRequest;
+
+                    /**
+                     * Decodes a CreateMirrorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMirrorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.CreateMirrorRequest;
+
+                    /**
+                     * Verifies a CreateMirrorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMirrorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMirrorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.CreateMirrorRequest;
+
+                    /**
+                     * Creates a plain object from a CreateMirrorRequest message. Also converts values to other types if specified.
+                     * @param message CreateMirrorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.CreateMirrorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMirrorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateMirrorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateMirrorRequest. */
+                interface IUpdateMirrorRequest {
+
+                    /** UpdateMirrorRequest mirror */
+                    mirror?: (google.cloud.lustre.v1.IMirror|null);
+
+                    /** UpdateMirrorRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateMirrorRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateMirrorRequest. */
+                class UpdateMirrorRequest implements IUpdateMirrorRequest {
+
+                    /**
+                     * Constructs a new UpdateMirrorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IUpdateMirrorRequest);
+
+                    /** UpdateMirrorRequest mirror. */
+                    public mirror?: (google.cloud.lustre.v1.IMirror|null);
+
+                    /** UpdateMirrorRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateMirrorRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateMirrorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateMirrorRequest instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IUpdateMirrorRequest): google.cloud.lustre.v1.UpdateMirrorRequest;
+
+                    /**
+                     * Encodes the specified UpdateMirrorRequest message. Does not implicitly {@link google.cloud.lustre.v1.UpdateMirrorRequest.verify|verify} messages.
+                     * @param message UpdateMirrorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IUpdateMirrorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateMirrorRequest message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.UpdateMirrorRequest.verify|verify} messages.
+                     * @param message UpdateMirrorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IUpdateMirrorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateMirrorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateMirrorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.UpdateMirrorRequest;
+
+                    /**
+                     * Decodes an UpdateMirrorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateMirrorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.UpdateMirrorRequest;
+
+                    /**
+                     * Verifies an UpdateMirrorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateMirrorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateMirrorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.UpdateMirrorRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateMirrorRequest message. Also converts values to other types if specified.
+                     * @param message UpdateMirrorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.UpdateMirrorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateMirrorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateMirrorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteMirrorRequest. */
+                interface IDeleteMirrorRequest {
+
+                    /** DeleteMirrorRequest name */
+                    name?: (string|null);
+
+                    /** DeleteMirrorRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteMirrorRequest. */
+                class DeleteMirrorRequest implements IDeleteMirrorRequest {
+
+                    /**
+                     * Constructs a new DeleteMirrorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IDeleteMirrorRequest);
+
+                    /** DeleteMirrorRequest name. */
+                    public name: string;
+
+                    /** DeleteMirrorRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteMirrorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteMirrorRequest instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IDeleteMirrorRequest): google.cloud.lustre.v1.DeleteMirrorRequest;
+
+                    /**
+                     * Encodes the specified DeleteMirrorRequest message. Does not implicitly {@link google.cloud.lustre.v1.DeleteMirrorRequest.verify|verify} messages.
+                     * @param message DeleteMirrorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IDeleteMirrorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteMirrorRequest message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.DeleteMirrorRequest.verify|verify} messages.
+                     * @param message DeleteMirrorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IDeleteMirrorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteMirrorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteMirrorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.DeleteMirrorRequest;
+
+                    /**
+                     * Decodes a DeleteMirrorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteMirrorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.DeleteMirrorRequest;
+
+                    /**
+                     * Verifies a DeleteMirrorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteMirrorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteMirrorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.DeleteMirrorRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteMirrorRequest message. Also converts values to other types if specified.
+                     * @param message DeleteMirrorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.DeleteMirrorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteMirrorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteMirrorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetMirrorRequest. */
+                interface IGetMirrorRequest {
+
+                    /** GetMirrorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetMirrorRequest. */
+                class GetMirrorRequest implements IGetMirrorRequest {
+
+                    /**
+                     * Constructs a new GetMirrorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IGetMirrorRequest);
+
+                    /** GetMirrorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetMirrorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetMirrorRequest instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IGetMirrorRequest): google.cloud.lustre.v1.GetMirrorRequest;
+
+                    /**
+                     * Encodes the specified GetMirrorRequest message. Does not implicitly {@link google.cloud.lustre.v1.GetMirrorRequest.verify|verify} messages.
+                     * @param message GetMirrorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IGetMirrorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetMirrorRequest message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.GetMirrorRequest.verify|verify} messages.
+                     * @param message GetMirrorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IGetMirrorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetMirrorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetMirrorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.GetMirrorRequest;
+
+                    /**
+                     * Decodes a GetMirrorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetMirrorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.GetMirrorRequest;
+
+                    /**
+                     * Verifies a GetMirrorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetMirrorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetMirrorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.GetMirrorRequest;
+
+                    /**
+                     * Creates a plain object from a GetMirrorRequest message. Also converts values to other types if specified.
+                     * @param message GetMirrorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.GetMirrorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetMirrorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetMirrorRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMirrorsRequest. */
+                interface IListMirrorsRequest {
+
+                    /** ListMirrorsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMirrorsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMirrorsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListMirrorsRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** ListMirrorsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListMirrorsRequest. */
+                class ListMirrorsRequest implements IListMirrorsRequest {
+
+                    /**
+                     * Constructs a new ListMirrorsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IListMirrorsRequest);
+
+                    /** ListMirrorsRequest parent. */
+                    public parent: string;
+
+                    /** ListMirrorsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMirrorsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListMirrorsRequest orderBy. */
+                    public orderBy: string;
+
+                    /** ListMirrorsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListMirrorsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMirrorsRequest instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IListMirrorsRequest): google.cloud.lustre.v1.ListMirrorsRequest;
+
+                    /**
+                     * Encodes the specified ListMirrorsRequest message. Does not implicitly {@link google.cloud.lustre.v1.ListMirrorsRequest.verify|verify} messages.
+                     * @param message ListMirrorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IListMirrorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMirrorsRequest message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.ListMirrorsRequest.verify|verify} messages.
+                     * @param message ListMirrorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IListMirrorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMirrorsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMirrorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.ListMirrorsRequest;
+
+                    /**
+                     * Decodes a ListMirrorsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMirrorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.ListMirrorsRequest;
+
+                    /**
+                     * Verifies a ListMirrorsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMirrorsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMirrorsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.ListMirrorsRequest;
+
+                    /**
+                     * Creates a plain object from a ListMirrorsRequest message. Also converts values to other types if specified.
+                     * @param message ListMirrorsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.ListMirrorsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMirrorsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMirrorsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMirrorsResponse. */
+                interface IListMirrorsResponse {
+
+                    /** ListMirrorsResponse mirrors */
+                    mirrors?: (google.cloud.lustre.v1.IMirror[]|null);
+
+                    /** ListMirrorsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListMirrorsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListMirrorsResponse. */
+                class ListMirrorsResponse implements IListMirrorsResponse {
+
+                    /**
+                     * Constructs a new ListMirrorsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.IListMirrorsResponse);
+
+                    /** ListMirrorsResponse mirrors. */
+                    public mirrors: google.cloud.lustre.v1.IMirror[];
+
+                    /** ListMirrorsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListMirrorsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListMirrorsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMirrorsResponse instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.IListMirrorsResponse): google.cloud.lustre.v1.ListMirrorsResponse;
+
+                    /**
+                     * Encodes the specified ListMirrorsResponse message. Does not implicitly {@link google.cloud.lustre.v1.ListMirrorsResponse.verify|verify} messages.
+                     * @param message ListMirrorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.IListMirrorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMirrorsResponse message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.ListMirrorsResponse.verify|verify} messages.
+                     * @param message ListMirrorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.IListMirrorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMirrorsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMirrorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.ListMirrorsResponse;
+
+                    /**
+                     * Decodes a ListMirrorsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMirrorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.ListMirrorsResponse;
+
+                    /**
+                     * Verifies a ListMirrorsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMirrorsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMirrorsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.ListMirrorsResponse;
+
+                    /**
+                     * Creates a plain object from a ListMirrorsResponse message. Also converts values to other types if specified.
+                     * @param message ListMirrorsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.ListMirrorsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMirrorsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMirrorsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateMirrorMetadata. */
+                interface ICreateMirrorMetadata {
+
+                    /** CreateMirrorMetadata operationMetadata */
+                    operationMetadata?: (google.cloud.lustre.v1.ITransferOperationMetadata|null);
+
+                    /** CreateMirrorMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateMirrorMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateMirrorMetadata target */
+                    target?: (string|null);
+
+                    /** CreateMirrorMetadata verb */
+                    verb?: (string|null);
+
+                    /** CreateMirrorMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** CreateMirrorMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** CreateMirrorMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents a CreateMirrorMetadata. */
+                class CreateMirrorMetadata implements ICreateMirrorMetadata {
+
+                    /**
+                     * Constructs a new CreateMirrorMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.lustre.v1.ICreateMirrorMetadata);
+
+                    /** CreateMirrorMetadata operationMetadata. */
+                    public operationMetadata?: (google.cloud.lustre.v1.ITransferOperationMetadata|null);
+
+                    /** CreateMirrorMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateMirrorMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** CreateMirrorMetadata target. */
+                    public target: string;
+
+                    /** CreateMirrorMetadata verb. */
+                    public verb: string;
+
+                    /** CreateMirrorMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** CreateMirrorMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** CreateMirrorMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new CreateMirrorMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateMirrorMetadata instance
+                     */
+                    public static create(properties?: google.cloud.lustre.v1.ICreateMirrorMetadata): google.cloud.lustre.v1.CreateMirrorMetadata;
+
+                    /**
+                     * Encodes the specified CreateMirrorMetadata message. Does not implicitly {@link google.cloud.lustre.v1.CreateMirrorMetadata.verify|verify} messages.
+                     * @param message CreateMirrorMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.lustre.v1.ICreateMirrorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateMirrorMetadata message, length delimited. Does not implicitly {@link google.cloud.lustre.v1.CreateMirrorMetadata.verify|verify} messages.
+                     * @param message CreateMirrorMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.lustre.v1.ICreateMirrorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateMirrorMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateMirrorMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.lustre.v1.CreateMirrorMetadata;
+
+                    /**
+                     * Decodes a CreateMirrorMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateMirrorMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.lustre.v1.CreateMirrorMetadata;
+
+                    /**
+                     * Verifies a CreateMirrorMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateMirrorMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateMirrorMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.lustre.v1.CreateMirrorMetadata;
+
+                    /**
+                     * Creates a plain object from a CreateMirrorMetadata message. Also converts values to other types if specified.
+                     * @param message CreateMirrorMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.lustre.v1.CreateMirrorMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateMirrorMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateMirrorMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** TransferType enum. */
@@ -2585,6 +5469,9 @@ export namespace google {
 
             /** FieldInfo format */
             format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
         }
 
         /** Represents a FieldInfo. */
@@ -2598,6 +5485,9 @@ export namespace google {
 
             /** FieldInfo format. */
             public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
 
             /**
              * Creates a new FieldInfo instance using the specified properties.
@@ -2687,6 +5577,103 @@ export namespace google {
                 IPV6 = 3,
                 IPV4_OR_IPV6 = 4
             }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -3309,6 +6296,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -3325,6 +6315,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -3929,6 +6922,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -3942,6 +6938,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -4026,6 +7025,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -4039,6 +7041,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -4116,6 +7121,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -4444,6 +7561,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -4457,6 +7577,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -4547,6 +7670,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -4566,6 +7692,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -4782,6 +7911,468 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -4898,10 +8489,13 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -4927,6 +8521,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -4976,6 +8573,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -5111,6 +8711,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -5151,6 +8754,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -5999,6 +9605,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -6024,6 +9633,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -6959,6 +10571,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -7016,6 +10631,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -7232,6 +10850,127 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -7475,6 +11214,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -7496,6 +11238,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -8089,6 +11834,15 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -8117,6 +11871,15 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -8240,6 +12003,218 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -8359,8 +12334,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -8375,8 +12353,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -8909,6 +12890,13 @@ export namespace google {
             }
         }
 
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
+        }
+
         /** Properties of a FieldMask. */
         interface IFieldMask {
 
@@ -9400,6 +13388,246 @@ export namespace google {
 
             /**
              * Gets the default type url for Empty
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of a Date. */
+        interface IDate {
+
+            /** Date year */
+            year?: (number|null);
+
+            /** Date month */
+            month?: (number|null);
+
+            /** Date day */
+            day?: (number|null);
+        }
+
+        /** Represents a Date. */
+        class Date implements IDate {
+
+            /**
+             * Constructs a new Date.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDate);
+
+            /** Date year. */
+            public year: number;
+
+            /** Date month. */
+            public month: number;
+
+            /** Date day. */
+            public day: number;
+
+            /**
+             * Creates a new Date instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Date instance
+             */
+            public static create(properties?: google.type.IDate): google.type.Date;
+
+            /**
+             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+
+            /**
+             * Verifies a Date message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Date
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Date;
+
+            /**
+             * Creates a plain object from a Date message. Also converts values to other types if specified.
+             * @param message Date
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Date to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Date
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** DayOfWeek enum. */
+        enum DayOfWeek {
+            DAY_OF_WEEK_UNSPECIFIED = 0,
+            MONDAY = 1,
+            TUESDAY = 2,
+            WEDNESDAY = 3,
+            THURSDAY = 4,
+            FRIDAY = 5,
+            SATURDAY = 6,
+            SUNDAY = 7
+        }
+
+        /** Properties of a TimeOfDay. */
+        interface ITimeOfDay {
+
+            /** TimeOfDay hours */
+            hours?: (number|null);
+
+            /** TimeOfDay minutes */
+            minutes?: (number|null);
+
+            /** TimeOfDay seconds */
+            seconds?: (number|null);
+
+            /** TimeOfDay nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a TimeOfDay. */
+        class TimeOfDay implements ITimeOfDay {
+
+            /**
+             * Constructs a new TimeOfDay.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ITimeOfDay);
+
+            /** TimeOfDay hours. */
+            public hours: number;
+
+            /** TimeOfDay minutes. */
+            public minutes: number;
+
+            /** TimeOfDay seconds. */
+            public seconds: number;
+
+            /** TimeOfDay nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new TimeOfDay instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TimeOfDay instance
+             */
+            public static create(properties?: google.type.ITimeOfDay): google.type.TimeOfDay;
+
+            /**
+             * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.TimeOfDay;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.TimeOfDay;
+
+            /**
+             * Verifies a TimeOfDay message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TimeOfDay
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.TimeOfDay;
+
+            /**
+             * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
+             * @param message TimeOfDay
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.TimeOfDay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TimeOfDay to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TimeOfDay
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -9908,6 +14136,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListOperationsRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListOperationsRequest. */
@@ -9930,6 +14161,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken. */
             public pageToken: string;
+
+            /** ListOperationsRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListOperationsRequest instance using the specified properties.
@@ -10017,6 +14251,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListOperationsResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListOperationsResponse. */
@@ -10033,6 +14270,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListOperationsResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListOperationsResponse instance using the specified properties.

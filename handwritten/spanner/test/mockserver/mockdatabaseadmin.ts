@@ -15,7 +15,8 @@
  */
 
 import * as path from 'path';
-import {google} from '../../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import {grpc} from 'google-gax';
 import * as protoLoader from '@grpc/proto-loader';
 import {createUnimplementedError} from './mockspanner';
@@ -23,11 +24,11 @@ import v1 = google.spanner.admin.database.v1;
 import iam = google.iam.v1;
 import longrunning = google.longrunning;
 import Any = google.protobuf.Any;
+import {getProtoPath} from '../../src/protos';
 
 const PROTO_PATH = 'spanner_database_admin.proto';
-const IMPORT_PATH = __dirname + '/../../../protos';
-const PROTO_DIR =
-  __dirname + '/../../../protos/google/spanner/admin/database/v1';
+const IMPORT_PATH = getProtoPath();
+const PROTO_DIR = getProtoPath('google/spanner/admin/database/v1');
 const GAX_PROTO_DIR = path.join(
   path.dirname(require.resolve('google-gax')),
   '..',

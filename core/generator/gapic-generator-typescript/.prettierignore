@@ -4,3 +4,7 @@ test/fixtures
 build/
 docs/
 protos/
+baselines/
+baselines-esm/
+.test-out*
+library/

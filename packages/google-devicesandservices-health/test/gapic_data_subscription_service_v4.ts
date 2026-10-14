@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datasubscriptionserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -283,7 +283,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataSubscriptionServiceStub, undefined);
@@ -291,13 +291,13 @@ describe('v4.DataSubscriptionServiceClient', () => {
       assert(client.dataSubscriptionServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataSubscriptionServiceStub);
@@ -306,15 +306,15 @@ describe('v4.DataSubscriptionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.dataSubscriptionServiceStub, undefined);
@@ -323,7 +323,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -332,7 +332,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -345,7 +345,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -369,7 +369,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes createSubscription without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -402,7 +402,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes createSubscription without error using callback', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -450,7 +450,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes createSubscription with error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -482,7 +482,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes createSubscription with closed client', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -495,7 +495,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createSubscription(request), expectedError);
@@ -506,7 +506,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes updateSubscription without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -540,7 +540,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes updateSubscription without error using callback', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -589,7 +589,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes updateSubscription with error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -622,7 +622,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes updateSubscription with closed client', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -636,7 +636,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       );
       request.subscription.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateSubscription(request), expectedError);
@@ -647,7 +647,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes deleteSubscription without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -680,7 +680,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes deleteSubscription without error using callback', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes deleteSubscription with error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -760,7 +760,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes deleteSubscription with closed client', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -773,7 +773,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteSubscription(request), expectedError);
@@ -784,7 +784,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes createSubscriber without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -818,7 +818,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes createSubscriber without error using callback', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -873,7 +873,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes createSubscriber with call error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -905,7 +905,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes createSubscriber with LRO error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -939,7 +939,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes checkCreateSubscriberProgress without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -947,8 +947,8 @@ describe('v4.DataSubscriptionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateSubscriberProgress(
@@ -962,7 +962,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes checkCreateSubscriberProgress with error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -984,7 +984,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes updateSubscriber without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1019,7 +1019,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes updateSubscriber without error using callback', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1075,7 +1075,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes updateSubscriber with call error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1108,7 +1108,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes updateSubscriber with LRO error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1143,7 +1143,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes checkUpdateSubscriberProgress without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1151,8 +1151,8 @@ describe('v4.DataSubscriptionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateSubscriberProgress(
@@ -1166,7 +1166,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes checkUpdateSubscriberProgress with error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1188,7 +1188,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes deleteSubscriber without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1222,7 +1222,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes deleteSubscriber without error using callback', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1277,7 +1277,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes deleteSubscriber with call error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1309,7 +1309,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes deleteSubscriber with LRO error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1343,7 +1343,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes checkDeleteSubscriberProgress without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1351,8 +1351,8 @@ describe('v4.DataSubscriptionServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteSubscriberProgress(
@@ -1366,7 +1366,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes checkDeleteSubscriberProgress with error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1388,7 +1388,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes listSubscribers without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1428,7 +1428,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes listSubscribers without error using callback', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1460,8 +1460,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.devicesandservices.health.v4.ISubscriber[]
-              | null,
+              protos.google.devicesandservices.health.v4.ISubscriber[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1486,7 +1485,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes listSubscribers with error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1518,7 +1517,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes listSubscribersStream without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1571,16 +1570,16 @@ describe('v4.DataSubscriptionServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscribers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSubscribersStream with error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1622,16 +1621,16 @@ describe('v4.DataSubscriptionServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscribers.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSubscribers without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1673,16 +1672,16 @@ describe('v4.DataSubscriptionServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscribers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSubscribers with error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1715,9 +1714,9 @@ describe('v4.DataSubscriptionServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscribers.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1726,7 +1725,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes listSubscriptions without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1766,7 +1765,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes listSubscriptions without error using callback', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1798,8 +1797,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.devicesandservices.health.v4.ISubscription[]
-              | null,
+              protos.google.devicesandservices.health.v4.ISubscription[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1824,7 +1822,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes listSubscriptions with error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1856,7 +1854,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
     it('invokes listSubscriptionsStream without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1911,16 +1909,16 @@ describe('v4.DataSubscriptionServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscriptions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listSubscriptionsStream with error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1964,16 +1962,16 @@ describe('v4.DataSubscriptionServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscriptions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSubscriptions without error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2015,16 +2013,16 @@ describe('v4.DataSubscriptionServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscriptions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listSubscriptions with error', async () => {
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2057,9 +2055,9 @@ describe('v4.DataSubscriptionServiceClient', () => {
       assert(
         (client.descriptors.page.listSubscriptions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -2074,7 +2072,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       };
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2138,7 +2136,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       };
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2187,7 +2185,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       };
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2226,7 +2224,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       };
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2266,7 +2264,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       };
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2318,7 +2316,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       };
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2357,7 +2355,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       };
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2396,7 +2394,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       };
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2436,7 +2434,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       };
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2487,7 +2485,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       };
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -2550,7 +2548,7 @@ describe('v4.DataSubscriptionServiceClient', () => {
       };
       const client =
         new datasubscriptionserviceModule.v4.DataSubscriptionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

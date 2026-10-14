@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as clustercontrollerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LROperation, operationsProtos, IamProtos } from 'google-gax';
+import {protobuf, LROperation, operationsProtos, IamProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -149,9 +149,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -231,7 +231,7 @@ describe('v1.ClusterControllerClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new clustercontrollerModule.v1.ClusterControllerClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'dataproc.configured.example.com');
@@ -272,7 +272,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.clusterControllerStub, undefined);
@@ -280,12 +280,12 @@ describe('v1.ClusterControllerClient', () => {
       assert(client.clusterControllerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.clusterControllerStub);
@@ -294,14 +294,14 @@ describe('v1.ClusterControllerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.clusterControllerStub, undefined);
@@ -310,7 +310,7 @@ describe('v1.ClusterControllerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -318,7 +318,7 @@ describe('v1.ClusterControllerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -330,7 +330,7 @@ describe('v1.ClusterControllerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -353,7 +353,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('getCluster', () => {
     it('invokes getCluster without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -394,7 +394,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes getCluster without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -451,7 +451,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes getCluster with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -492,7 +492,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes getCluster with closed client', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -515,7 +515,7 @@ describe('v1.ClusterControllerClient', () => {
       );
       request.clusterName = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCluster(request), expectedError);
@@ -525,7 +525,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('createCluster', () => {
     it('invokes createCluster without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes createCluster without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -622,7 +622,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes createCluster with call error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -658,7 +658,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes createCluster with LRO error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes checkCreateClusterProgress without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,8 +704,8 @@ describe('v1.ClusterControllerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateClusterProgress(
@@ -718,7 +718,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes checkCreateClusterProgress with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('updateCluster', () => {
     it('invokes updateCluster without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -782,7 +782,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes updateCluster without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -846,7 +846,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes updateCluster with call error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -887,7 +887,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes updateCluster with LRO error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -930,7 +930,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes checkUpdateClusterProgress without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -938,8 +938,8 @@ describe('v1.ClusterControllerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateClusterProgress(
@@ -952,7 +952,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes checkUpdateClusterProgress with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('stopCluster', () => {
     it('invokes stopCluster without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1015,7 +1015,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes stopCluster without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1079,7 +1079,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes stopCluster with call error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1120,7 +1120,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes stopCluster with LRO error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1163,7 +1163,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes checkStopClusterProgress without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1171,8 +1171,8 @@ describe('v1.ClusterControllerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStopClusterProgress(
@@ -1185,7 +1185,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes checkStopClusterProgress with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1203,7 +1203,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('startCluster', () => {
     it('invokes startCluster without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1245,7 +1245,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes startCluster without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1309,7 +1309,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes startCluster with call error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1350,7 +1350,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes startCluster with LRO error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1393,7 +1393,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes checkStartClusterProgress without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1401,8 +1401,8 @@ describe('v1.ClusterControllerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkStartClusterProgress(
@@ -1415,7 +1415,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes checkStartClusterProgress with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1433,7 +1433,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('deleteCluster', () => {
     it('invokes deleteCluster without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1476,7 +1476,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes deleteCluster without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1540,7 +1540,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes deleteCluster with call error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1581,7 +1581,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes deleteCluster with LRO error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1624,7 +1624,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes checkDeleteClusterProgress without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1632,8 +1632,8 @@ describe('v1.ClusterControllerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteClusterProgress(
@@ -1646,7 +1646,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes checkDeleteClusterProgress with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1667,7 +1667,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('diagnoseCluster', () => {
     it('invokes diagnoseCluster without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1710,7 +1710,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes diagnoseCluster without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1774,7 +1774,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes diagnoseCluster with call error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1815,7 +1815,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes diagnoseCluster with LRO error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1858,7 +1858,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes checkDiagnoseClusterProgress without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1866,8 +1866,8 @@ describe('v1.ClusterControllerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDiagnoseClusterProgress(
@@ -1880,7 +1880,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes checkDiagnoseClusterProgress with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1901,7 +1901,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('listClusters', () => {
     it('invokes listClusters without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1939,7 +1939,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes listClusters without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1993,7 +1993,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes listClusters with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2029,7 +2029,7 @@ describe('v1.ClusterControllerClient', () => {
 
     it('invokes listClustersStream without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2080,15 +2080,15 @@ describe('v1.ClusterControllerClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listClustersStream with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2136,15 +2136,15 @@ describe('v1.ClusterControllerClient', () => {
       assert(
         (client.descriptors.page.listClusters.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClusters without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2184,15 +2184,15 @@ describe('v1.ClusterControllerClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listClusters with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2229,16 +2229,16 @@ describe('v1.ClusterControllerClient', () => {
       assert(
         (client.descriptors.page.listClusters.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2268,7 +2268,7 @@ describe('v1.ClusterControllerClient', () => {
     });
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2306,7 +2306,7 @@ describe('v1.ClusterControllerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2316,7 +2316,7 @@ describe('v1.ClusterControllerClient', () => {
     });
     it('invokes getIamPolicy with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2348,7 +2348,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2378,7 +2378,7 @@ describe('v1.ClusterControllerClient', () => {
     });
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2416,7 +2416,7 @@ describe('v1.ClusterControllerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2426,7 +2426,7 @@ describe('v1.ClusterControllerClient', () => {
     });
     it('invokes setIamPolicy with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2458,7 +2458,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2491,7 +2491,7 @@ describe('v1.ClusterControllerClient', () => {
     });
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2529,7 +2529,7 @@ describe('v1.ClusterControllerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2539,7 +2539,7 @@ describe('v1.ClusterControllerClient', () => {
     });
     it('invokes testIamPermissions with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2574,7 +2574,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2595,7 +2595,7 @@ describe('v1.ClusterControllerClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2623,7 +2623,7 @@ describe('v1.ClusterControllerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2633,7 +2633,7 @@ describe('v1.ClusterControllerClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2657,7 +2657,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2679,7 +2679,7 @@ describe('v1.ClusterControllerClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2707,7 +2707,7 @@ describe('v1.ClusterControllerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2717,7 +2717,7 @@ describe('v1.ClusterControllerClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2741,7 +2741,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2763,7 +2763,7 @@ describe('v1.ClusterControllerClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2791,7 +2791,7 @@ describe('v1.ClusterControllerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2801,7 +2801,7 @@ describe('v1.ClusterControllerClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2825,7 +2825,7 @@ describe('v1.ClusterControllerClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2860,7 +2860,7 @@ describe('v1.ClusterControllerClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2896,7 +2896,7 @@ describe('v1.ClusterControllerClient', () => {
         batch: 'batchValue',
       };
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2961,7 +2961,7 @@ describe('v1.ClusterControllerClient', () => {
         crypto_key: 'cryptoKeyValue',
       };
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3037,7 +3037,7 @@ describe('v1.ClusterControllerClient', () => {
         node_group: 'nodeGroupValue',
       };
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3112,7 +3112,7 @@ describe('v1.ClusterControllerClient', () => {
         autoscaling_policy: 'autoscalingPolicyValue',
       };
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3193,7 +3193,7 @@ describe('v1.ClusterControllerClient', () => {
         workflow_template: 'workflowTemplateValue',
       };
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3272,7 +3272,7 @@ describe('v1.ClusterControllerClient', () => {
         autoscaling_policy: 'autoscalingPolicyValue',
       };
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3351,7 +3351,7 @@ describe('v1.ClusterControllerClient', () => {
         workflow_template: 'workflowTemplateValue',
       };
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3430,7 +3430,7 @@ describe('v1.ClusterControllerClient', () => {
         service: 'serviceValue',
       };
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3494,7 +3494,7 @@ describe('v1.ClusterControllerClient', () => {
         session: 'sessionValue',
       };
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3558,7 +3558,7 @@ describe('v1.ClusterControllerClient', () => {
         template: 'templateValue',
       };
       const client = new clustercontrollerModule.v1.ClusterControllerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

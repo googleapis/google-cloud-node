@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as agentserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -276,7 +276,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.agentServiceStub, undefined);
@@ -284,12 +284,12 @@ describe('v1beta.AgentServiceClient', () => {
       assert(client.agentServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.agentServiceStub);
@@ -298,14 +298,14 @@ describe('v1beta.AgentServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.agentServiceStub, undefined);
@@ -314,7 +314,7 @@ describe('v1beta.AgentServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -322,7 +322,7 @@ describe('v1beta.AgentServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -334,7 +334,7 @@ describe('v1beta.AgentServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -357,7 +357,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('getApp', () => {
     it('invokes getApp without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -388,7 +388,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getApp without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -435,7 +435,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getApp with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -463,7 +463,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getApp with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -476,7 +476,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getApp(request), expectedError);
@@ -486,7 +486,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('updateApp', () => {
     it('invokes updateApp without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -518,7 +518,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateApp without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -566,7 +566,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateApp with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -595,7 +595,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateApp with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.app.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateApp(request), expectedError);
@@ -619,7 +619,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('getSecuritySettings', () => {
     it('invokes getSecuritySettings without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -651,7 +651,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getSecuritySettings without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getSecuritySettings with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -729,7 +729,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getSecuritySettings with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getSecuritySettings(request), expectedError);
@@ -752,7 +752,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('updateSecuritySettings', () => {
     it('invokes updateSecuritySettings without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -785,7 +785,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateSecuritySettings without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -833,7 +833,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateSecuritySettings with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -868,7 +868,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateSecuritySettings with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -882,7 +882,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.securitySettings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -895,7 +895,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('getAgent', () => {
     it('invokes getAgent without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -926,7 +926,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getAgent without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -973,7 +973,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getAgent with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1001,7 +1001,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getAgent with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1014,7 +1014,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAgent(request), expectedError);
@@ -1024,7 +1024,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('createAgent', () => {
     it('invokes createAgent without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1055,7 +1055,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createAgent without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1102,7 +1102,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createAgent with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1133,7 +1133,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createAgent with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1146,7 +1146,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAgent(request), expectedError);
@@ -1156,7 +1156,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('updateAgent', () => {
     it('invokes updateAgent without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1188,7 +1188,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateAgent without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1236,7 +1236,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateAgent with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1268,7 +1268,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateAgent with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1282,7 +1282,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.agent.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateAgent(request), expectedError);
@@ -1292,7 +1292,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('deleteAgent', () => {
     it('invokes deleteAgent without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1323,7 +1323,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteAgent without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1370,7 +1370,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteAgent with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1401,7 +1401,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteAgent with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1414,7 +1414,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAgent(request), expectedError);
@@ -1424,7 +1424,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('getExample', () => {
     it('invokes getExample without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1455,7 +1455,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getExample without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1502,7 +1502,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getExample with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1533,7 +1533,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getExample with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1546,7 +1546,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getExample(request), expectedError);
@@ -1556,7 +1556,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('createExample', () => {
     it('invokes createExample without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1587,7 +1587,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createExample without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1634,7 +1634,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createExample with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1665,7 +1665,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createExample with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1678,7 +1678,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createExample(request), expectedError);
@@ -1688,7 +1688,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('updateExample', () => {
     it('invokes updateExample without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1720,7 +1720,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateExample without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1768,7 +1768,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateExample with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1800,7 +1800,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateExample with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1814,7 +1814,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.example.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateExample(request), expectedError);
@@ -1824,7 +1824,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('deleteExample', () => {
     it('invokes deleteExample without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1855,7 +1855,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteExample without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1902,7 +1902,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteExample with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1933,7 +1933,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteExample with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1946,7 +1946,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteExample(request), expectedError);
@@ -1956,7 +1956,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('getTool', () => {
     it('invokes getTool without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1987,7 +1987,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getTool without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2034,7 +2034,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getTool with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2062,7 +2062,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getTool with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2075,7 +2075,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTool(request), expectedError);
@@ -2085,7 +2085,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('getConversation', () => {
     it('invokes getConversation without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2116,7 +2116,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getConversation without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2163,7 +2163,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getConversation with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2194,7 +2194,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getConversation with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2207,7 +2207,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConversation(request), expectedError);
@@ -2217,7 +2217,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('deleteConversation', () => {
     it('invokes deleteConversation without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2249,7 +2249,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteConversation without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2296,7 +2296,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteConversation with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2327,7 +2327,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteConversation with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2340,7 +2340,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteConversation(request), expectedError);
@@ -2350,7 +2350,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('createTool', () => {
     it('invokes createTool without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2381,7 +2381,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createTool without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2428,7 +2428,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createTool with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2459,7 +2459,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createTool with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2472,7 +2472,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createTool(request), expectedError);
@@ -2482,7 +2482,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('updateTool', () => {
     it('invokes updateTool without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2514,7 +2514,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateTool without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2562,7 +2562,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateTool with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2594,7 +2594,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateTool with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2608,7 +2608,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.tool.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateTool(request), expectedError);
@@ -2618,7 +2618,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('deleteTool', () => {
     it('invokes deleteTool without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2649,7 +2649,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteTool without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2696,7 +2696,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteTool with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2727,7 +2727,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteTool with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2740,7 +2740,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteTool(request), expectedError);
@@ -2750,7 +2750,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('getGuardrail', () => {
     it('invokes getGuardrail without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2781,7 +2781,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getGuardrail without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2828,7 +2828,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getGuardrail with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2859,7 +2859,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getGuardrail with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2872,7 +2872,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGuardrail(request), expectedError);
@@ -2882,7 +2882,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('createGuardrail', () => {
     it('invokes createGuardrail without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2913,7 +2913,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createGuardrail without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2960,7 +2960,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createGuardrail with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2991,7 +2991,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createGuardrail with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3004,7 +3004,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createGuardrail(request), expectedError);
@@ -3014,7 +3014,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('updateGuardrail', () => {
     it('invokes updateGuardrail without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3046,7 +3046,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateGuardrail without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3094,7 +3094,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateGuardrail with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3126,7 +3126,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateGuardrail with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3140,7 +3140,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.guardrail.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateGuardrail(request), expectedError);
@@ -3150,7 +3150,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('deleteGuardrail', () => {
     it('invokes deleteGuardrail without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3181,7 +3181,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteGuardrail without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3228,7 +3228,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteGuardrail with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3259,7 +3259,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteGuardrail with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3272,7 +3272,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteGuardrail(request), expectedError);
@@ -3282,7 +3282,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('getDeployment', () => {
     it('invokes getDeployment without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3313,7 +3313,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getDeployment without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3360,7 +3360,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getDeployment with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3391,7 +3391,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getDeployment with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3404,7 +3404,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDeployment(request), expectedError);
@@ -3414,7 +3414,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('createDeployment', () => {
     it('invokes createDeployment without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3445,7 +3445,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createDeployment without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3492,7 +3492,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createDeployment with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3523,7 +3523,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createDeployment with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3536,7 +3536,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDeployment(request), expectedError);
@@ -3546,7 +3546,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('updateDeployment', () => {
     it('invokes updateDeployment without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3578,7 +3578,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateDeployment without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3626,7 +3626,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateDeployment with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3658,7 +3658,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateDeployment with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3672,7 +3672,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.deployment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDeployment(request), expectedError);
@@ -3682,7 +3682,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('deleteDeployment', () => {
     it('invokes deleteDeployment without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3713,7 +3713,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteDeployment without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3760,7 +3760,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteDeployment with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3791,7 +3791,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteDeployment with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3804,7 +3804,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDeployment(request), expectedError);
@@ -3814,7 +3814,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('getToolset', () => {
     it('invokes getToolset without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3845,7 +3845,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getToolset without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3892,7 +3892,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getToolset with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3923,7 +3923,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getToolset with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3936,7 +3936,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getToolset(request), expectedError);
@@ -3946,7 +3946,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('createToolset', () => {
     it('invokes createToolset without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3977,7 +3977,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createToolset without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4024,7 +4024,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createToolset with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4055,7 +4055,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createToolset with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4068,7 +4068,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createToolset(request), expectedError);
@@ -4078,7 +4078,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('updateToolset', () => {
     it('invokes updateToolset without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4110,7 +4110,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateToolset without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4158,7 +4158,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateToolset with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4190,7 +4190,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes updateToolset with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4204,7 +4204,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.toolset.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateToolset(request), expectedError);
@@ -4214,7 +4214,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('deleteToolset', () => {
     it('invokes deleteToolset without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4245,7 +4245,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteToolset without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4292,7 +4292,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteToolset with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4323,7 +4323,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteToolset with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4336,7 +4336,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteToolset(request), expectedError);
@@ -4346,7 +4346,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('getAppVersion', () => {
     it('invokes getAppVersion without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4377,7 +4377,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getAppVersion without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4424,7 +4424,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getAppVersion with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4455,7 +4455,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getAppVersion with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4468,7 +4468,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getAppVersion(request), expectedError);
@@ -4478,7 +4478,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('createAppVersion', () => {
     it('invokes createAppVersion without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4509,7 +4509,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createAppVersion without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4556,7 +4556,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createAppVersion with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4587,7 +4587,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createAppVersion with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4600,7 +4600,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createAppVersion(request), expectedError);
@@ -4610,7 +4610,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('deleteAppVersion', () => {
     it('invokes deleteAppVersion without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4641,7 +4641,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteAppVersion without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4688,7 +4688,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteAppVersion with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4719,7 +4719,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteAppVersion with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4732,7 +4732,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteAppVersion(request), expectedError);
@@ -4742,7 +4742,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('getChangelog', () => {
     it('invokes getChangelog without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4773,7 +4773,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getChangelog without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4820,7 +4820,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getChangelog with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4851,7 +4851,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes getChangelog with closed client', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4864,7 +4864,7 @@ describe('v1beta.AgentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getChangelog(request), expectedError);
@@ -4874,7 +4874,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('createApp', () => {
     it('invokes createApp without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4906,7 +4906,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createApp without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4960,7 +4960,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createApp with call error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4991,7 +4991,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes createApp with LRO error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5024,7 +5024,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkCreateAppProgress without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5032,8 +5032,8 @@ describe('v1beta.AgentServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateAppProgress(
@@ -5046,7 +5046,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkCreateAppProgress with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5064,7 +5064,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('deleteApp', () => {
     it('invokes deleteApp without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5096,7 +5096,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteApp without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5150,7 +5150,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteApp with call error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5181,7 +5181,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes deleteApp with LRO error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5214,7 +5214,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkDeleteAppProgress without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5222,8 +5222,8 @@ describe('v1beta.AgentServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteAppProgress(
@@ -5236,7 +5236,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkDeleteAppProgress with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5254,7 +5254,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('exportApp', () => {
     it('invokes exportApp without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5286,7 +5286,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes exportApp without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5340,7 +5340,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes exportApp with call error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5371,7 +5371,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes exportApp with LRO error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5404,7 +5404,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkExportAppProgress without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5412,8 +5412,8 @@ describe('v1beta.AgentServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportAppProgress(
@@ -5426,7 +5426,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkExportAppProgress with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5444,7 +5444,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('importApp', () => {
     it('invokes importApp without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5476,7 +5476,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes importApp without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5530,7 +5530,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes importApp with call error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5561,7 +5561,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes importApp with LRO error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5594,7 +5594,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkImportAppProgress without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5602,8 +5602,8 @@ describe('v1beta.AgentServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportAppProgress(
@@ -5616,7 +5616,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkImportAppProgress with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5634,7 +5634,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('batchDeleteConversations', () => {
     it('invokes batchDeleteConversations without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5667,7 +5667,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes batchDeleteConversations without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5721,7 +5721,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes batchDeleteConversations with call error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5755,7 +5755,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes batchDeleteConversations with LRO error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5788,7 +5788,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkBatchDeleteConversationsProgress without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5796,8 +5796,8 @@ describe('v1beta.AgentServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -5811,7 +5811,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkBatchDeleteConversationsProgress with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5832,7 +5832,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('restoreAppVersion', () => {
     it('invokes restoreAppVersion without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5865,7 +5865,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes restoreAppVersion without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5919,7 +5919,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes restoreAppVersion with call error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5950,7 +5950,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes restoreAppVersion with LRO error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5983,7 +5983,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkRestoreAppVersionProgress without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5991,8 +5991,8 @@ describe('v1beta.AgentServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRestoreAppVersionProgress(
@@ -6005,7 +6005,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkRestoreAppVersionProgress with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6026,7 +6026,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('generateAppResource', () => {
     it('invokes generateAppResource without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6059,7 +6059,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes generateAppResource without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6113,7 +6113,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes generateAppResource with call error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6144,7 +6144,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes generateAppResource with LRO error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6177,7 +6177,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkGenerateAppResourceProgress without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6185,8 +6185,8 @@ describe('v1beta.AgentServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkGenerateAppResourceProgress(
@@ -6199,7 +6199,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes checkGenerateAppResourceProgress with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6220,7 +6220,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('listApps', () => {
     it('invokes listApps without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6253,7 +6253,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listApps without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6302,7 +6302,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listApps with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6330,7 +6330,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listAppsStream without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6373,15 +6373,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listApps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAppsStream with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6421,15 +6421,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listApps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApps without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6463,15 +6463,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listApps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listApps with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6504,9 +6504,9 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listApps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6514,7 +6514,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('listAgents', () => {
     it('invokes listAgents without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6547,7 +6547,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listAgents without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6596,7 +6596,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listAgents with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6627,7 +6627,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listAgentsStream without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6670,15 +6670,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAgentsStream with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6718,15 +6718,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listAgents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAgents without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6761,15 +6761,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAgents with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6803,9 +6803,9 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listAgents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -6813,7 +6813,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('listExamples', () => {
     it('invokes listExamples without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6846,7 +6846,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listExamples without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6895,7 +6895,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listExamples with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6926,7 +6926,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listExamplesStream without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6972,15 +6972,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listExamples.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listExamplesStream with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7023,15 +7023,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listExamples.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExamples without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7066,15 +7066,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listExamples.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listExamples with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7106,9 +7106,9 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listExamples.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7116,7 +7116,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('listTools', () => {
     it('invokes listTools without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7149,7 +7149,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listTools without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7198,7 +7198,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listTools with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7226,7 +7226,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listToolsStream without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7269,15 +7269,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listTools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listToolsStream with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7317,15 +7317,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listTools.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTools without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7359,15 +7359,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listTools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTools with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7400,9 +7400,9 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listTools.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7410,7 +7410,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('listConversations', () => {
     it('invokes listConversations without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7449,7 +7449,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listConversations without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7504,7 +7504,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listConversations with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7535,7 +7535,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listConversationsStream without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7587,15 +7587,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listConversationsStream with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7636,15 +7636,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listConversations.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConversations without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7685,15 +7685,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listConversations with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7725,9 +7725,9 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listConversations.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -7735,7 +7735,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('listGuardrails', () => {
     it('invokes listGuardrails without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7768,7 +7768,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listGuardrails without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7817,7 +7817,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listGuardrails with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7848,7 +7848,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listGuardrailsStream without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7894,15 +7894,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listGuardrails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listGuardrailsStream with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7943,15 +7943,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listGuardrails.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGuardrails without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7986,15 +7986,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listGuardrails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGuardrails with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8026,9 +8026,9 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listGuardrails.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8036,7 +8036,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('listDeployments', () => {
     it('invokes listDeployments without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8069,7 +8069,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listDeployments without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8118,7 +8118,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listDeployments with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8149,7 +8149,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listDeploymentsStream without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8195,15 +8195,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDeploymentsStream with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8244,15 +8244,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listDeployments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeployments without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8287,15 +8287,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeployments with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8327,9 +8327,9 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listDeployments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8337,7 +8337,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('listToolsets', () => {
     it('invokes listToolsets without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8370,7 +8370,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listToolsets without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8419,7 +8419,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listToolsets with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8450,7 +8450,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listToolsetsStream without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8496,15 +8496,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listToolsets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listToolsetsStream with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8547,15 +8547,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listToolsets.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listToolsets without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8590,15 +8590,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listToolsets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listToolsets with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8630,9 +8630,9 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listToolsets.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8640,7 +8640,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('listAppVersions', () => {
     it('invokes listAppVersions without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8673,7 +8673,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listAppVersions without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8722,7 +8722,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listAppVersions with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8753,7 +8753,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listAppVersionsStream without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8799,15 +8799,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listAppVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listAppVersionsStream with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8848,15 +8848,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listAppVersions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAppVersions without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8891,15 +8891,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listAppVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listAppVersions with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8931,9 +8931,9 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listAppVersions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -8941,7 +8941,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('listChangelogs', () => {
     it('invokes listChangelogs without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -8974,7 +8974,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listChangelogs without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9023,7 +9023,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listChangelogs with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9054,7 +9054,7 @@ describe('v1beta.AgentServiceClient', () => {
 
     it('invokes listChangelogsStream without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9100,15 +9100,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listChangelogs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listChangelogsStream with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9149,15 +9149,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listChangelogs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChangelogs without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9192,15 +9192,15 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listChangelogs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listChangelogs with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9232,16 +9232,16 @@ describe('v1beta.AgentServiceClient', () => {
       assert(
         (client.descriptors.page.listChangelogs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9271,7 +9271,7 @@ describe('v1beta.AgentServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9315,7 +9315,7 @@ describe('v1beta.AgentServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9350,7 +9350,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9398,7 +9398,7 @@ describe('v1beta.AgentServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9439,7 +9439,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9460,7 +9460,7 @@ describe('v1beta.AgentServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9488,7 +9488,7 @@ describe('v1beta.AgentServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9498,7 +9498,7 @@ describe('v1beta.AgentServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9522,7 +9522,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9544,7 +9544,7 @@ describe('v1beta.AgentServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9572,7 +9572,7 @@ describe('v1beta.AgentServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9582,7 +9582,7 @@ describe('v1beta.AgentServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9606,7 +9606,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9628,7 +9628,7 @@ describe('v1beta.AgentServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9656,7 +9656,7 @@ describe('v1beta.AgentServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -9666,7 +9666,7 @@ describe('v1beta.AgentServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9690,7 +9690,7 @@ describe('v1beta.AgentServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -9725,7 +9725,7 @@ describe('v1beta.AgentServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9762,7 +9762,7 @@ describe('v1beta.AgentServiceClient', () => {
         agent: 'agentValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9837,7 +9837,7 @@ describe('v1beta.AgentServiceClient', () => {
         app: 'appValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9902,7 +9902,7 @@ describe('v1beta.AgentServiceClient', () => {
         version: 'versionValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -9978,7 +9978,7 @@ describe('v1beta.AgentServiceClient', () => {
         changelog: 'changelogValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10054,7 +10054,7 @@ describe('v1beta.AgentServiceClient', () => {
         conversation: 'conversationValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10130,7 +10130,7 @@ describe('v1beta.AgentServiceClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10206,7 +10206,7 @@ describe('v1beta.AgentServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10282,7 +10282,7 @@ describe('v1beta.AgentServiceClient', () => {
         evaluation_dataset: 'evaluationDatasetValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10374,7 +10374,7 @@ describe('v1beta.AgentServiceClient', () => {
         evaluation_expectation: 'evaluationExpectationValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10471,7 +10471,7 @@ describe('v1beta.AgentServiceClient', () => {
         evaluation_result: 'evaluationResultValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10562,7 +10562,7 @@ describe('v1beta.AgentServiceClient', () => {
         evaluation_run: 'evaluationRunValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10638,7 +10638,7 @@ describe('v1beta.AgentServiceClient', () => {
         example: 'exampleValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10714,7 +10714,7 @@ describe('v1beta.AgentServiceClient', () => {
         guardrail: 'guardrailValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10788,7 +10788,7 @@ describe('v1beta.AgentServiceClient', () => {
         location: 'locationValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10838,7 +10838,7 @@ describe('v1beta.AgentServiceClient', () => {
         omnichannel: 'omnichannelValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10900,7 +10900,7 @@ describe('v1beta.AgentServiceClient', () => {
         project: 'projectValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -10941,7 +10941,7 @@ describe('v1beta.AgentServiceClient', () => {
         scheduled_evaluation_run: 'scheduledEvaluationRunValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11035,7 +11035,7 @@ describe('v1beta.AgentServiceClient', () => {
         location: 'locationValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11092,7 +11092,7 @@ describe('v1beta.AgentServiceClient', () => {
         tool: 'toolValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -11168,7 +11168,7 @@ describe('v1beta.AgentServiceClient', () => {
         toolset: 'toolsetValue',
       };
       const client = new agentserviceModule.v1beta.AgentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

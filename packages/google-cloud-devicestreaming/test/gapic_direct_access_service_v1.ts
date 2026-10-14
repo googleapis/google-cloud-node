@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as directaccessserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -131,9 +131,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -181,7 +181,7 @@ describe('v1.DirectAccessServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'devicestreaming.example.com');
@@ -189,7 +189,7 @@ describe('v1.DirectAccessServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'devicestreaming.example.com');
@@ -264,7 +264,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -273,14 +273,14 @@ describe('v1.DirectAccessServiceClient', () => {
       assert(client.directAccessServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.directAccessServiceStub);
@@ -289,15 +289,15 @@ describe('v1.DirectAccessServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -307,7 +307,7 @@ describe('v1.DirectAccessServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -316,7 +316,7 @@ describe('v1.DirectAccessServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -330,7 +330,7 @@ describe('v1.DirectAccessServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -355,7 +355,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes createDeviceSession without error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -389,7 +389,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes createDeviceSession without error using callback', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -438,7 +438,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes createDeviceSession with error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -471,7 +471,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes createDeviceSession with closed client', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -485,7 +485,7 @@ describe('v1.DirectAccessServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDeviceSession(request), expectedError);
@@ -496,7 +496,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes getDeviceSession without error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -529,7 +529,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes getDeviceSession without error using callback', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -578,7 +578,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes getDeviceSession with error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -611,7 +611,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes getDeviceSession with closed client', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -625,7 +625,7 @@ describe('v1.DirectAccessServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDeviceSession(request), expectedError);
@@ -636,7 +636,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes cancelDeviceSession without error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -670,7 +670,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes cancelDeviceSession without error using callback', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -719,7 +719,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes cancelDeviceSession with error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -752,7 +752,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes cancelDeviceSession with closed client', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -766,7 +766,7 @@ describe('v1.DirectAccessServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.cancelDeviceSession(request), expectedError);
@@ -777,7 +777,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes updateDeviceSession without error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -812,7 +812,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes updateDeviceSession without error using callback', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -862,7 +862,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes updateDeviceSession with error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -896,7 +896,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes updateDeviceSession with closed client', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -911,7 +911,7 @@ describe('v1.DirectAccessServiceClient', () => {
       );
       request.deviceSession.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDeviceSession(request), expectedError);
@@ -922,7 +922,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes adbConnect without error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -966,7 +966,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes adbConnect with error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1011,7 +1011,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes listDeviceSessions without error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1053,7 +1053,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes listDeviceSessions without error using callback', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1086,8 +1086,7 @@ describe('v1.DirectAccessServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.devicestreaming.v1.IDeviceSession[]
-              | null,
+              protos.google.cloud.devicestreaming.v1.IDeviceSession[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1112,7 +1111,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes listDeviceSessions with error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1145,7 +1144,7 @@ describe('v1.DirectAccessServiceClient', () => {
     it('invokes listDeviceSessionsStream without error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1199,16 +1198,16 @@ describe('v1.DirectAccessServiceClient', () => {
       assert(
         (client.descriptors.page.listDeviceSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDeviceSessionsStream with error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1251,16 +1250,16 @@ describe('v1.DirectAccessServiceClient', () => {
       assert(
         (client.descriptors.page.listDeviceSessions.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeviceSessions without error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1303,16 +1302,16 @@ describe('v1.DirectAccessServiceClient', () => {
       assert(
         (client.descriptors.page.listDeviceSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDeviceSessions with error', async () => {
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1346,9 +1345,9 @@ describe('v1.DirectAccessServiceClient', () => {
       assert(
         (client.descriptors.page.listDeviceSessions.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1362,7 +1361,7 @@ describe('v1.DirectAccessServiceClient', () => {
       };
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1415,7 +1414,7 @@ describe('v1.DirectAccessServiceClient', () => {
       };
       const client = new directaccessserviceModule.v1.DirectAccessServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

@@ -37,11 +37,6 @@ function main(parent, teamFolder) {
    *  Required. The TeamFolder to create.
    */
   // const teamFolder = {}
-  /**
-   *  The ID to use for the TeamFolder, which will become the final component of
-   *  the TeamFolder's resource name.
-   */
-  // const teamFolderId = 'abc123'
 
   // Imports the Dataform library
   const {DataformClient} = require('@google-cloud/dataform').v1beta1;

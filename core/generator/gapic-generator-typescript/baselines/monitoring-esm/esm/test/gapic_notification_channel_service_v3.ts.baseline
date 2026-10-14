@@ -20,16 +20,16 @@
 import * as protos from '../../protos/protos.js';
 import assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as notificationchannelserviceModule from '../src/index.js';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -56,7 +56,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -128,9 +128,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -181,7 +181,7 @@ describe('v3.NotificationChannelServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'monitoring.example.com');
@@ -190,7 +190,7 @@ describe('v3.NotificationChannelServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'monitoring.example.com');
@@ -217,7 +217,7 @@ describe('v3.NotificationChannelServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'monitoring.configured.example.com');
@@ -232,7 +232,7 @@ describe('v3.NotificationChannelServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -265,7 +265,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -274,15 +274,15 @@ describe('v3.NotificationChannelServiceClient', () => {
       assert(client.notificationChannelServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.notificationChannelServiceStub);
@@ -291,16 +291,16 @@ describe('v3.NotificationChannelServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -310,7 +310,7 @@ describe('v3.NotificationChannelServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -335,7 +335,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -361,7 +361,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -396,7 +396,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -446,7 +446,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -483,7 +483,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -497,7 +497,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -512,7 +512,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -547,7 +547,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -597,7 +597,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -634,7 +634,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -648,7 +648,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -663,7 +663,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -698,7 +698,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -748,7 +748,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -785,7 +785,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -799,7 +799,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -814,7 +814,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -850,7 +850,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -901,7 +901,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -939,7 +939,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -954,7 +954,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       );
       request.notificationChannel.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -969,7 +969,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1004,7 +1004,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1054,7 +1054,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1091,7 +1091,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1105,7 +1105,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1120,7 +1120,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1158,7 +1158,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1210,7 +1210,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1247,7 +1247,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1261,7 +1261,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1276,7 +1276,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1312,7 +1312,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1362,7 +1362,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1397,7 +1397,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1411,7 +1411,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1426,7 +1426,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1461,7 +1461,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1511,7 +1511,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1548,7 +1548,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1562,7 +1562,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1577,7 +1577,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1621,7 +1621,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1681,7 +1681,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1718,7 +1718,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1793,7 +1793,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1857,7 +1857,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1914,7 +1914,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1964,7 +1964,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2007,7 +2007,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2065,7 +2065,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2102,7 +2102,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2171,7 +2171,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2229,7 +2229,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2285,7 +2285,7 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2340,11 +2340,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.folderAlertPolicyPathTemplate.render = sinon
@@ -2408,11 +2408,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.folderAlertPolicyConditionPathTemplate.render = sinon
@@ -2491,11 +2491,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.folderChannelDescriptorPathTemplate.render = sinon
@@ -2561,11 +2561,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.folderGroupPathTemplate.render = sinon
@@ -2615,11 +2615,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.folderNotificationChannelPathTemplate.render = sinon
@@ -2685,11 +2685,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.folderServicePathTemplate.render = sinon
@@ -2740,11 +2740,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.folderServiceServiceLevelObjectivePathTemplate.render =
@@ -2827,11 +2827,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.folderUptimeCheckConfigPathTemplate.render = sinon
@@ -2897,11 +2897,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.organizationAlertPolicyPathTemplate.render = sinon
@@ -2966,11 +2966,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.organizationAlertPolicyConditionPathTemplate.render =
@@ -3053,11 +3053,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.organizationChannelDescriptorPathTemplate.render =
@@ -3123,11 +3123,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.organizationGroupPathTemplate.render = sinon
@@ -3190,11 +3190,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.organizationNotificationChannelPathTemplate.render =
@@ -3260,11 +3260,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.organizationServicePathTemplate.render = sinon
@@ -3329,11 +3329,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.organizationServiceServiceLevelObjectivePathTemplate.render =
@@ -3420,11 +3420,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.organizationUptimeCheckConfigPathTemplate.render =
@@ -3490,11 +3490,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.projectAlertPolicyPathTemplate.render = sinon
@@ -3558,11 +3558,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.projectAlertPolicyConditionPathTemplate.render =
@@ -3640,11 +3640,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.projectChannelDescriptorPathTemplate.render = sinon
@@ -3710,11 +3710,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.projectGroupPathTemplate.render = sinon
@@ -3764,11 +3764,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.projectNotificationChannelPathTemplate.render = sinon
@@ -3834,11 +3834,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.projectServicePathTemplate.render = sinon
@@ -3892,11 +3892,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.projectServiceServiceLevelObjectivePathTemplate.render =
@@ -3979,11 +3979,11 @@ describe('v3.NotificationChannelServiceClient', () => {
       const client =
         new notificationchannelserviceModule.v3.NotificationChannelServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       client.pathTemplates.projectUptimeCheckConfigPathTemplate.render = sinon

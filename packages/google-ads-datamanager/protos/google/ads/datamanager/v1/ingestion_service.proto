@@ -16,16 +16,21 @@ syntax = "proto3";
 
 package google.ads.datamanager.v1;
 
+import "google/ads/datamanager/v1/ad_event.proto";
 import "google/ads/datamanager/v1/audience.proto";
 import "google/ads/datamanager/v1/consent.proto";
 import "google/ads/datamanager/v1/destination.proto";
 import "google/ads/datamanager/v1/encryption_info.proto";
 import "google/ads/datamanager/v1/event.proto";
+import "google/ads/datamanager/v1/processing_errors.proto";
 import "google/ads/datamanager/v1/request_status_per_destination.proto";
 import "google/ads/datamanager/v1/terms_of_service.proto";
+import "google/ads/datamanager/v1/user.proto";
+import "google/ads/datamanager/v1/user_data.proto";
 import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "Google.Ads.DataManager.V1";
 option go_package = "cloud.google.com/go/datamanager/apiv1/datamanagerpb;datamanagerpb";
@@ -63,12 +68,58 @@ service IngestionService {
     };
   }
 
+  // Removes all audience members from the provided destinations.
+  rpc RemoveAllAudienceMembers(RemoveAllAudienceMembersRequest)
+      returns (RemoveAllAudienceMembersResponse) {
+    option (google.api.http) = {
+      post: "/v1/audienceMembers:removeAll"
+      body: "*"
+    };
+  }
+
   // Uploads a list of
   // [Event][google.ads.datamanager.v1.Event] resources from
   // the provided [Destination][google.ads.datamanager.v1.Destination].
   rpc IngestEvents(IngestEventsRequest) returns (IngestEventsResponse) {
     option (google.api.http) = {
       post: "/v1/events:ingest"
+      body: "*"
+    };
+  }
+
+  // Uploads a list of users to the provided destinations. Unlike
+  // [IngestAudienceMembers][google.ads.datamanager.v1.IngestionService.IngestAudienceMembers]
+  // (which adds users to specific advertiser audience lists for targeting),
+  // `IngestUsers` ingests account level identity linkage data (for example,
+  // user identifiers linked to mobile IDs) independent of specific audience
+  // segments.
+  //
+  // This feature is only available to accounts on an allowlist.
+  rpc IngestUsers(IngestUsersRequest) returns (IngestUsersResponse) {
+    option (google.api.http) = {
+      post: "/v1/users:ingest"
+      body: "*"
+    };
+  }
+
+  // Removes a list of users from the provided destinations.
+  //
+  // This feature is only available to accounts on an allowlist.
+  rpc RemoveUsers(RemoveUsersRequest) returns (RemoveUsersResponse) {
+    option (google.api.http) = {
+      post: "/v1/users:remove"
+      body: "*"
+    };
+  }
+
+  // Uploads a list of
+  // [AdEvent][google.ads.datamanager.v1.AdEvent] resources to Google
+  // Analytics.
+  //
+  // This feature is only available to accounts on an allowlist.
+  rpc IngestAdEvents(IngestAdEventsRequest) returns (IngestAdEventsResponse) {
+    option (google.api.http) = {
+      post: "/v1/adEvents:ingest"
       body: "*"
     };
   }
@@ -104,13 +155,14 @@ message IngestAudienceMembersRequest {
   // executed. Only errors are returned, not results.
   bool validate_only = 4 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. Required for [UserData][google.ads.datamanager.v1.UserData]
-  // uploads. The encoding type of the user identifiers. For hashed user
-  // identifiers, this is the encoding type of the hashed string. For encrypted
-  // hashed user identifiers, this is the encoding type of the outer encrypted
-  // string, but not necessarily the inner hashed string, meaning the inner
-  // hashed string could be encoded in a different way than the outer encrypted
-  // string. For non `UserData` uploads, this field is ignored.
+  // Optional. Must be provided for
+  // [UserData][google.ads.datamanager.v1.UserData] uploads. The encoding type
+  // of the user identifiers. For hashed user identifiers, this is the encoding
+  // type of the hashed string. For encrypted hashed user identifiers, this is
+  // the encoding type of the outer encrypted string, but not necessarily the
+  // inner hashed string, meaning the inner hashed string could be encoded in a
+  // different way than the outer encrypted string. For non `UserData` uploads,
+  // this field is ignored.
   Encoding encoding = 5 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Encryption information for
@@ -128,6 +180,9 @@ message IngestAudienceMembersRequest {
 message IngestAudienceMembersResponse {
   // The auto-generated ID of the request.
   string request_id = 1;
+
+  // Detailed row-level warnings with field paths.
+  repeated FieldWarning field_warnings = 2;
 }
 
 // Request to remove users from an audience in the provided destinations.
@@ -146,10 +201,10 @@ message RemoveAudienceMembersRequest {
   // executed. Only errors are returned, not results.
   bool validate_only = 3 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. Required for [UserData][google.ads.datamanager.v1.UserData]
-  // uploads. The encoding type of the user identifiers. Applies to only the
-  // outer encoding for encrypted user identifiers. For non `UserData` uploads,
-  // this field is ignored.
+  // Optional. Must be provided for
+  // [UserData][google.ads.datamanager.v1.UserData] uploads. The encoding type
+  // of the user identifiers. Applies to only the outer encoding for encrypted
+  // user identifiers. For non `UserData` uploads, this field is ignored.
   Encoding encoding = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Encryption information for
@@ -162,6 +217,32 @@ message RemoveAudienceMembersRequest {
 // Response from the
 // [RemoveAudienceMembersRequest][google.ads.datamanager.v1.RemoveAudienceMembersRequest].
 message RemoveAudienceMembersResponse {
+  // The auto-generated ID of the request.
+  string request_id = 1;
+}
+
+// Request to remove all users from an audience in the provided destinations.
+// Returns a
+// [RemoveAllAudienceMembersResponse][google.ads.datamanager.v1.RemoveAllAudienceMembersResponse].
+message RemoveAllAudienceMembersRequest {
+  // Required. The list of destinations to remove the users from.
+  repeated Destination destinations = 1
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The remove as of time. If set, only audience members last added
+  // before this time will be removed. If not set, it defaults to current time.
+  // The remove as of time must not be in the future.
+  google.protobuf.Timestamp remove_as_of_time = 2
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. For testing purposes. If `true`, the request is validated but not
+  // executed. Only errors are returned, not results.
+  bool validate_only = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Response from the
+// [RemoveAllAudienceMembersRequest][google.ads.datamanager.v1.RemoveAllAudienceMembersRequest].
+message RemoveAllAudienceMembersResponse {
   // The auto-generated ID of the request.
   string request_id = 1;
 }
@@ -187,13 +268,14 @@ message IngestEventsRequest {
   // executed. Only errors are returned, not results.
   bool validate_only = 4 [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. Required for [UserData][google.ads.datamanager.v1.UserData]
-  // uploads. The encoding type of the user identifiers. For hashed user
-  // identifiers, this is the encoding type of the hashed string. For encrypted
-  // hashed user identifiers, this is the encoding type of the outer encrypted
-  // string, but not necessarily the inner hashed string, meaning the inner
-  // hashed string could be encoded in a different way than the outer encrypted
-  // string. For non `UserData` uploads, this field is ignored.
+  // Optional. Must be provided for
+  // [UserData][google.ads.datamanager.v1.UserData] uploads. The encoding type
+  // of the user identifiers. For hashed user identifiers, this is the encoding
+  // type of the hashed string. For encrypted hashed user identifiers, this is
+  // the encoding type of the outer encrypted string, but not necessarily the
+  // inner hashed string, meaning the inner hashed string could be encoded in a
+  // different way than the outer encrypted string. For non `UserData` uploads,
+  // this field is ignored.
   Encoding encoding = 5 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Encryption information for
@@ -208,7 +290,83 @@ message IngestEventsRequest {
 message IngestEventsResponse {
   // The auto-generated ID of the request.
   string request_id = 1;
+
+  // Detailed row-level warnings with field paths.
+  repeated FieldWarning field_warnings = 2;
 }
+
+// Request to upload users to the provided destinations.
+message IngestUsersRequest {
+  // Required. The list of possible ingestion destinations.
+  repeated Destination destinations = 1
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The list of users to ingest.
+  repeated User users = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Encryption information about encryption keys which are used to
+  // encrypt the data.
+  EncryptionInfo encryption_info = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If `true`, the request is validated but not executed.
+  bool validate_only = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Required. The encoding type of the user identifiers. For encrypted user
+  // identifiers, this only applies to the outer encoding.
+  Encoding encoding = 5 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Response from the IngestUsersRequest.
+message IngestUsersResponse {
+  // The generated request id of the Ingestion Request.
+  string request_id = 1;
+}
+
+// Request to remove users from the provided destinations.
+message RemoveUsersRequest {
+  // Required. The list of possible ingestion destinations.
+  repeated Destination destinations = 1
+      [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The individual bits of UserData that act as keys for the users to
+  // remove.
+  repeated UserData user_data = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Encryption information about encryption keys which are used to
+  // encrypt the data.
+  EncryptionInfo encryption_info = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If `true`, the request is validated but not executed.
+  bool validate_only = 4 [(google.api.field_behavior) = OPTIONAL];
+
+  // Required. The encoding type of the user identifiers. For encrypted user
+  // identifiers, this only applies to the outer encoding.
+  Encoding encoding = 5 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Response from the RemoveUsersRequest.
+message RemoveUsersResponse {
+  // The generated request id of the Ingestion Request.
+  string request_id = 1;
+}
+
+// Request to upload ad events.
+message IngestAdEventsRequest {
+  // Required. Required (at least 1). A list of ad events.
+  repeated AdEvent ad_events = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Information about encryption keys which are used to encrypt the
+  // data. This field must be provided when ad events contain
+  // [UserData][google.ads.datamanager.v1.UserData].
+  EncryptionInfo encryption_info = 2 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If true, the request is validated, but not executed.
+  bool validate_only = 3
+      [deprecated = true, (google.api.field_behavior) = OPTIONAL];
+}
+
+// Response from an ad event ingestion operation.
+message IngestAdEventsResponse {}
 
 // Request to get the status of request made to the DM API for a given request
 // ID. Returns a

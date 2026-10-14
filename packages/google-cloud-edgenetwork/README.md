@@ -84,7 +84,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list zones | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.list_zones.js) |
 | update router | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.update_router.js) |
 | update subnet | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/edge_network.update_subnet.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgenetwork/samples/generated/v1/snippet_metadata_google.cloud.edgenetwork.v1.json) |
 
 
 ## Supported Node.js Versions

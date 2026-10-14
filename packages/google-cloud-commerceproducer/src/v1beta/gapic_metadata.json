@@ -1,0 +1,257 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.commerceproducer.v1beta",
+  "libraryPackage": "@google-cloud/commerceproducer",
+  "services": {
+    "CommerceTransaction": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CommerceTransactionClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetPrivateOffer": {
+              "methods": [
+                "getPrivateOffer"
+              ]
+            },
+            "ResolveAmendmentTarget": {
+              "methods": [
+                "resolveAmendmentTarget"
+              ]
+            },
+            "CreatePrivateOffer": {
+              "methods": [
+                "createPrivateOffer"
+              ]
+            },
+            "UpdatePrivateOffer": {
+              "methods": [
+                "updatePrivateOffer"
+              ]
+            },
+            "PublishPrivateOffer": {
+              "methods": [
+                "publishPrivateOffer"
+              ]
+            },
+            "CancelPrivateOffer": {
+              "methods": [
+                "cancelPrivateOffer"
+              ]
+            },
+            "DeletePrivateOffer": {
+              "methods": [
+                "deletePrivateOffer"
+              ]
+            },
+            "GetPrivateOfferDocument": {
+              "methods": [
+                "getPrivateOfferDocument"
+              ]
+            },
+            "CreatePrivateOfferDocument": {
+              "methods": [
+                "createPrivateOfferDocument"
+              ]
+            },
+            "UpdatePrivateOfferDocument": {
+              "methods": [
+                "updatePrivateOfferDocument"
+              ]
+            },
+            "DeletePrivateOfferDocument": {
+              "methods": [
+                "deletePrivateOfferDocument"
+              ]
+            },
+            "GetStandardOffer": {
+              "methods": [
+                "getStandardOffer"
+              ]
+            },
+            "GetSku": {
+              "methods": [
+                "getSku"
+              ]
+            },
+            "GetSkuGroup": {
+              "methods": [
+                "getSkuGroup"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            },
+            "ListPrivateOffers": {
+              "methods": [
+                "listPrivateOffers",
+                "listPrivateOffersStream",
+                "listPrivateOffersAsync"
+              ]
+            },
+            "ListPrivateOfferDocuments": {
+              "methods": [
+                "listPrivateOfferDocuments",
+                "listPrivateOfferDocumentsStream",
+                "listPrivateOfferDocumentsAsync"
+              ]
+            },
+            "ListStandardOffers": {
+              "methods": [
+                "listStandardOffers",
+                "listStandardOffersStream",
+                "listStandardOffersAsync"
+              ]
+            },
+            "ListSkus": {
+              "methods": [
+                "listSkus",
+                "listSkusStream",
+                "listSkusAsync"
+              ]
+            },
+            "ListSkuGroups": {
+              "methods": [
+                "listSkuGroups",
+                "listSkuGroupsStream",
+                "listSkuGroupsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CommerceTransactionClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetPrivateOffer": {
+              "methods": [
+                "getPrivateOffer"
+              ]
+            },
+            "ResolveAmendmentTarget": {
+              "methods": [
+                "resolveAmendmentTarget"
+              ]
+            },
+            "CreatePrivateOffer": {
+              "methods": [
+                "createPrivateOffer"
+              ]
+            },
+            "UpdatePrivateOffer": {
+              "methods": [
+                "updatePrivateOffer"
+              ]
+            },
+            "PublishPrivateOffer": {
+              "methods": [
+                "publishPrivateOffer"
+              ]
+            },
+            "CancelPrivateOffer": {
+              "methods": [
+                "cancelPrivateOffer"
+              ]
+            },
+            "DeletePrivateOffer": {
+              "methods": [
+                "deletePrivateOffer"
+              ]
+            },
+            "GetPrivateOfferDocument": {
+              "methods": [
+                "getPrivateOfferDocument"
+              ]
+            },
+            "CreatePrivateOfferDocument": {
+              "methods": [
+                "createPrivateOfferDocument"
+              ]
+            },
+            "UpdatePrivateOfferDocument": {
+              "methods": [
+                "updatePrivateOfferDocument"
+              ]
+            },
+            "DeletePrivateOfferDocument": {
+              "methods": [
+                "deletePrivateOfferDocument"
+              ]
+            },
+            "GetStandardOffer": {
+              "methods": [
+                "getStandardOffer"
+              ]
+            },
+            "GetSku": {
+              "methods": [
+                "getSku"
+              ]
+            },
+            "GetSkuGroup": {
+              "methods": [
+                "getSkuGroup"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            },
+            "ListPrivateOffers": {
+              "methods": [
+                "listPrivateOffers",
+                "listPrivateOffersStream",
+                "listPrivateOffersAsync"
+              ]
+            },
+            "ListPrivateOfferDocuments": {
+              "methods": [
+                "listPrivateOfferDocuments",
+                "listPrivateOfferDocumentsStream",
+                "listPrivateOfferDocumentsAsync"
+              ]
+            },
+            "ListStandardOffers": {
+              "methods": [
+                "listStandardOffers",
+                "listStandardOffersStream",
+                "listStandardOffersAsync"
+              ]
+            },
+            "ListSkus": {
+              "methods": [
+                "listSkus",
+                "listSkusStream",
+                "listSkusAsync"
+              ]
+            },
+            "ListSkuGroups": {
+              "methods": [
+                "listSkuGroups",
+                "listSkuGroupsStream",
+                "listSkuGroupsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

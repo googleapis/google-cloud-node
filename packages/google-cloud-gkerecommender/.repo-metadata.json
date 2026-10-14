@@ -1,17 +1,16 @@
 {
-  "name": "gkerecommender",
-  "name_pretty": "GKE Recommender API",
-  "product_documentation": "https://cloud.google.com/kubernetes-engine/docs/how-to/machine-learning/inference-quickstart",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gkerecommender/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/gkerecommender",
-  "api_id": "gkerecommender.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "gkerecommender"
+    "api_description": "GKE Recommender API",
+    "api_id": "gkerecommender.googleapis.com",
+    "api_shortname": "gkerecommender",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gkerecommender/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/gkerecommender",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1790908",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "gkerecommender",
+    "name_pretty": "GKE Recommender",
+    "product_documentation": "https://cloud.google.com/kubernetes-engine/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

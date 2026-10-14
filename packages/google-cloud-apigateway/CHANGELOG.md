@@ -1,5 +1,65 @@
 # Changelog
 
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v5.4.0...api-gateway-v5.5.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v5.3.1...api-gateway-v5.4.0) (2026-09-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#9472](https://github.com/googleapis/google-cloud-node/issues/9472)) ([514e2f6](https://github.com/googleapis/google-cloud-node/commit/514e2f64ba67ad3ab956fbe3eeafa507d44ca597))
+
+## [5.3.1](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v5.3.0...api-gateway-v5.3.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v5.2.0...api-gateway-v5.3.0) (2026-09-22)
+
+
+### Features
+
+* Update API sources and regenerate ([#9368](https://github.com/googleapis/google-cloud-node/issues/9368)) ([57d0cfd](https://github.com/googleapis/google-cloud-node/commit/57d0cfd84827933a5da83c370b38942d0c2eadd8))
+
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v5.1.0...api-gateway-v5.2.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v5.0.0...api-gateway-v5.1.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v4.3.0...api-gateway-v5.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v4.2.2...api-gateway-v4.3.0) (2026-06-16)
+
+
+### Features
+
+* Migrate google-cloud-apigateway to librarian ([#8492](https://github.com/googleapis/google-cloud-node/issues/8492)) ([29e4147](https://github.com/googleapis/google-cloud-node/commit/29e4147e202ac786d7a943e0156be4160bba459f))
+
 ## [4.2.2](https://github.com/googleapis/google-cloud-node/compare/api-gateway-v4.2.1...api-gateway-v4.2.2) (2026-05-01)
 
 

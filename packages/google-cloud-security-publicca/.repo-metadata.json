@@ -1,17 +1,16 @@
 {
-  "name": "publicca",
-  "name_pretty": "Public Certificate Authority",
-  "product_documentation": "cloud.google.com/certificate-manager/docs/public-ca/",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/publicca/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/publicca",
-  "api_id": "publicca.googleapis.com",
-  "default_version": "v1beta1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "publicca"
+    "api_description": "The Public Certificate Authority API may be used to create and manage ACME\nexternal account binding keys associated with Google Trust Services'\npublicly trusted certificate authority.",
+    "api_id": "publicca.googleapis.com",
+    "api_shortname": "publicca",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/publicca/latest",
+    "default_version": "v1beta1",
+    "distribution_name": "@google-cloud/publicca",
+    "issue_tracker": "https://cloud.google.com/certificate-manager/docs/getting-support",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "publicca",
+    "name_pretty": "Public Certificate Authority",
+    "product_documentation": "https://cloud.google.com/certificate-manager/docs",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-node"
 }
-

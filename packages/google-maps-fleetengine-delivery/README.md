@@ -89,7 +89,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list tasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.list_tasks.js) |
 | update delivery vehicle | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.update_delivery_vehicle.js) |
 | update task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/delivery_service.update_task.js) |
-| fleetengine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine-delivery/samples/generated/v1/snippet_metadata_maps.fleetengine.delivery.v1.json) |
 
 
 ## Supported Node.js Versions

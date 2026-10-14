@@ -1,0 +1,8 @@
+[
+  "../../protos/google/cloud/commerceproducer/v1beta/commerce_transaction.proto",
+  "../../protos/google/cloud/commerceproducer/v1beta/private_offer.proto",
+  "../../protos/google/cloud/commerceproducer/v1beta/service.proto",
+  "../../protos/google/cloud/commerceproducer/v1beta/sku.proto",
+  "../../protos/google/cloud/commerceproducer/v1beta/sku_group.proto",
+  "../../protos/google/cloud/commerceproducer/v1beta/standard_offer.proto"
+]

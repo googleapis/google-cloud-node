@@ -37,7 +37,7 @@ service DeviceManufacturerService {
       "https://www.googleapis.com/auth/admanager,"
       "https://www.googleapis.com/auth/admanager.readonly";
 
-  // API to retrieve a `DeviceManufacturer` object.
+  // Retrieves a `DeviceManufacturer` object.
   rpc GetDeviceManufacturer(GetDeviceManufacturerRequest)
       returns (DeviceManufacturer) {
     option (google.api.http) = {
@@ -46,7 +46,7 @@ service DeviceManufacturerService {
     option (google.api.method_signature) = "name";
   }
 
-  // API to retrieve a list of `DeviceManufacturer` objects.
+  // Lists `DeviceManufacturer` objects.
   rpc ListDeviceManufacturers(ListDeviceManufacturersRequest)
       returns (ListDeviceManufacturersResponse) {
     option (google.api.http) = {
@@ -97,11 +97,10 @@ message ListDeviceManufacturersRequest {
   //  See syntax details at
   //  https://developers.google.com/ad-manager/api/beta/filters
   //
-  // <b>Filterable fields:</b>
-  // <ul style="list-style-type:none">
-  //   <li><code>displayName</code></li>
-  //   <li><code>name</code></li>
-  // </ul>
+  // **Filterable fields:**
+  //
+  // * `displayName`
+  // * `name`
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.

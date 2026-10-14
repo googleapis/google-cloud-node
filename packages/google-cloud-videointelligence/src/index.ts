@@ -17,15 +17,15 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1beta2 from './v1beta2';
-import * as v1p1beta1 from './v1p1beta1';
-import * as v1p2beta1 from './v1p2beta1';
 import * as v1p3beta1 from './v1p3beta1';
+import * as v1p2beta1 from './v1p2beta1';
+import * as v1p1beta1 from './v1p1beta1';
+import * as v1beta2 from './v1beta2';
 
 const VideoIntelligenceServiceClient = v1.VideoIntelligenceServiceClient;
 type VideoIntelligenceServiceClient = v1.VideoIntelligenceServiceClient;
 
-export {v1, v1beta2, v1p1beta1, v1p2beta1, v1p3beta1, VideoIntelligenceServiceClient};
-export default {v1, v1beta2, v1p1beta1, v1p2beta1, v1p3beta1, VideoIntelligenceServiceClient};
+export {v1, v1p3beta1, v1p2beta1, v1p1beta1, v1beta2, VideoIntelligenceServiceClient};
+export default {v1, v1p3beta1, v1p2beta1, v1p1beta1, v1beta2, VideoIntelligenceServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

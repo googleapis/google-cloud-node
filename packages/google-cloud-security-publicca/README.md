@@ -59,11 +59,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
 | create external account key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-publicca/samples/generated/v1/public_certificate_authority_service.create_external_account_key.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-publicca/samples/generated/v1/snippet_metadata_google.cloud.security.publicca.v1.json) |
 | create external account key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-publicca/samples/generated/v1alpha1/public_certificate_authority_service.create_external_account_key.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-publicca/samples/generated/v1alpha1/snippet_metadata_google.cloud.security.publicca.v1alpha1.json) |
 | create external account key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-publicca/samples/generated/v1beta1/public_certificate_authority_service.create_external_account_key.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-security-publicca/samples/generated/v1beta1/snippet_metadata_google.cloud.security.publicca.v1beta1.json) |
 
 
 ## Supported Node.js Versions

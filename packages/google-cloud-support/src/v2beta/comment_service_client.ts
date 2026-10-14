@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class CommentServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('support');
@@ -64,9 +64,9 @@ export class CommentServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  commentServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  commentServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CommentServiceClient.
@@ -142,7 +142,7 @@ export class CommentServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -228,6 +228,9 @@ export class CommentServiceClient {
       projectCaseEmailMessagesPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/cases/{case}/emailMessages/{email_message}',
       ),
+      supportEventSubscriptionPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/supportEventSubscriptions/{support_event_subscription}',
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -246,7 +249,7 @@ export class CommentServiceClient {
       'google.cloud.support.v2beta.CommentService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -286,7 +289,7 @@ export class CommentServiceClient {
           (this._protos as any).google.cloud.support.v2beta.CommentService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -297,7 +300,7 @@ export class CommentServiceClient {
     ];
     for (const methodName of commentServiceStubMethods) {
       const callPromise = this.commentServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -499,7 +502,7 @@ export class CommentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createComment request %j', request);
@@ -627,7 +630,7 @@ export class CommentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getComment request %j', request);
@@ -770,7 +773,7 @@ export class CommentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -838,7 +841,7 @@ export class CommentServiceClient {
       });
     const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listComments stream %j', request);
@@ -888,7 +891,7 @@ export class CommentServiceClient {
       });
     const defaultCallSettings = this._defaults['listComments'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listComments iterate %j', request);
@@ -1361,6 +1364,53 @@ export class CommentServiceClient {
   }
 
   /**
+   * Return a fully-qualified supportEventSubscription resource name string.
+   *
+   * @param {string} organization
+   * @param {string} support_event_subscription
+   * @returns {string} Resource name string.
+   */
+  supportEventSubscriptionPath(
+    organization: string,
+    supportEventSubscription: string,
+  ) {
+    return this.pathTemplates.supportEventSubscriptionPathTemplate.render({
+      organization: organization,
+      support_event_subscription: supportEventSubscription,
+    });
+  }
+
+  /**
+   * Parse the organization from SupportEventSubscription resource.
+   *
+   * @param {string} supportEventSubscriptionName
+   *   A fully-qualified path representing SupportEventSubscription resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromSupportEventSubscriptionName(
+    supportEventSubscriptionName: string,
+  ) {
+    return this.pathTemplates.supportEventSubscriptionPathTemplate.match(
+      supportEventSubscriptionName,
+    ).organization;
+  }
+
+  /**
+   * Parse the support_event_subscription from SupportEventSubscription resource.
+   *
+   * @param {string} supportEventSubscriptionName
+   *   A fully-qualified path representing SupportEventSubscription resource.
+   * @returns {string} A string representing the support_event_subscription.
+   */
+  matchSupportEventSubscriptionFromSupportEventSubscriptionName(
+    supportEventSubscriptionName: string,
+  ) {
+    return this.pathTemplates.supportEventSubscriptionPathTemplate.match(
+      supportEventSubscriptionName,
+    ).support_event_subscription;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
@@ -1368,7 +1418,7 @@ export class CommentServiceClient {
    */
   close(): Promise<void> {
     if (this.commentServiceStub && !this._terminated) {
-      return this.commentServiceStub.then((stub) => {
+      return this.commentServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

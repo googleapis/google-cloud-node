@@ -39,6 +39,11 @@ function main(conversation) {
    *  will be searched.
    */
   // const source = {}
+  /**
+   *  Optional. The type of evaluation to generate. Defaults to GOLDEN if
+   *  unspecified.
+   */
+  // const evaluationType = {}
 
   // Imports the Ces library
   const {EvaluationServiceClient} = require('@google-cloud/ces').v1beta;

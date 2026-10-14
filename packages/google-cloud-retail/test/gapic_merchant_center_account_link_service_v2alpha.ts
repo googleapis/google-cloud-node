@@ -19,8 +19,8 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as merchantcenteraccountlinkserviceModule from '../src';
 
 import {
@@ -48,7 +48,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -114,9 +114,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -167,7 +167,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'retail.example.com');
@@ -176,7 +176,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'retail.example.com');
@@ -203,7 +203,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'retail.configured.example.com');
@@ -218,7 +218,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -251,7 +251,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -263,15 +263,15 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       assert(client.merchantCenterAccountLinkServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.merchantCenterAccountLinkServiceStub);
@@ -280,16 +280,16 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -302,7 +302,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -312,7 +312,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -327,7 +327,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -353,7 +353,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -388,7 +388,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -438,7 +438,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -475,7 +475,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -489,7 +489,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -504,7 +504,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -539,7 +539,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -589,7 +589,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -626,7 +626,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -640,7 +640,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -655,7 +655,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -691,7 +691,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -748,7 +748,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -783,7 +783,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -816,7 +816,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -825,8 +825,8 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -842,7 +842,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -865,7 +865,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -898,7 +898,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -945,7 +945,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -983,7 +983,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1034,7 +1034,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1078,7 +1078,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1102,7 +1102,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1131,7 +1131,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1143,7 +1143,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1170,7 +1170,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1195,7 +1195,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1224,7 +1224,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1236,7 +1236,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1263,7 +1263,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1288,7 +1288,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1317,7 +1317,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1329,7 +1329,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1356,7 +1356,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1394,7 +1394,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1431,7 +1431,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1474,7 +1474,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1545,7 +1545,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1623,7 +1623,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1690,7 +1690,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1761,7 +1761,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1837,7 +1837,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1881,7 +1881,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1981,7 +1981,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2061,7 +2061,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2148,7 +2148,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2192,7 +2192,7 @@ describe('v2alpha.MerchantCenterAccountLinkServiceClient', () => {
       const client =
         new merchantcenteraccountlinkserviceModule.v2alpha.MerchantCenterAccountLinkServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

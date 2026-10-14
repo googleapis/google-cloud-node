@@ -1,0 +1,60 @@
+# Changelog
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-api-v0.6.0...pubsub-api-v0.7.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-pubsub-api-v0.5.0...google-cloud-pubsub-api-v0.6.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-pubsub-api-v0.4.0...google-cloud-pubsub-api-v0.5.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-pubsub-api-v0.3.0...google-cloud-pubsub-api-v0.4.0) (2026-09-02)
+
+
+### Features
+
+* Update API sources and regenerate ([#9219](https://github.com/googleapis/google-cloud-node/issues/9219)) ([09ff86e](https://github.com/googleapis/google-cloud-node/commit/09ff86ef811de9215c587496ece57ff8b5fb2b77))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-pubsub-api-v0.2.1...google-cloud-pubsub-api-v0.3.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/google-cloud-pubsub-api-v0.2.0...google-cloud-pubsub-api-v0.2.1) (2026-07-15)
+
+
+### Bug Fixes
+
+* Use the release version of gax ([#8877](https://github.com/googleapis/google-cloud-node/issues/8877)) ([ad24c26](https://github.com/googleapis/google-cloud-node/commit/ad24c26a64e8fa874313049ab73596d977696535))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-pubsub-api-v0.1.0...google-cloud-pubsub-api-v0.2.0) (2026-07-13)
+
+
+### Features
+
+* **google/pubsub/v1:** Onboard a new library ([#8839](https://github.com/googleapis/google-cloud-node/issues/8839)) ([8281e1c](https://github.com/googleapis/google-cloud-node/commit/8281e1c958fece90ff1657534c9cebcff523364b))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))
+* **pubsub:** Update package.json repository and homepage to monorepo schema ([#8841](https://github.com/googleapis/google-cloud-node/issues/8841)) ([7ffe6c2](https://github.com/googleapis/google-cloud-node/commit/7ffe6c254ce89f2914bfa22f745b8fe46d26a965))

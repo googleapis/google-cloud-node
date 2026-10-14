@@ -59,7 +59,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | --------------------------- | --------------------------------- |
 | create trip | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-navconnect/samples/generated/v1/nav_connect_service.create_trip.js) |
 | get trip | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-navconnect/samples/generated/v1/nav_connect_service.get_trip.js) |
-| maps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-navconnect/samples/generated/v1/snippet_metadata_google.maps.navconnect.v1.json) |
 
 
 ## Supported Node.js Versions

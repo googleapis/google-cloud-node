@@ -17,13 +17,12 @@
 import {paginator} from '@google-cloud/paginator';
 import {replaceProjectIdToken} from '@google-cloud/projectify';
 import * as extend from 'extend';
-import {GoogleAuth} from 'google-auth-library';
+import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
 import * as gax from 'google-gax';
+import {v1} from './';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const PKG = require('../../package.json');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const v1 = require('./v1');
 
 import {promisifySome} from './util';
 import {
@@ -57,8 +56,9 @@ import {PublishOptions} from './publisher';
 import {CallOptions} from 'google-gax';
 import {Transform} from 'stream';
 import {google} from '../protos/protos';
-import {SchemaServiceClient} from './v1';
 import * as tracing from './telemetry-tracing';
+
+type SchemaServiceClient = v1.SchemaServiceClient;
 
 /**
  * Project ID placeholder.
@@ -67,9 +67,9 @@ import * as tracing from './telemetry-tracing';
  */
 const PROJECT_ID_PLACEHOLDER = '{{projectId}}';
 
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+export type Omit<T, K extends PropertyKey> = Pick<T, Exclude<keyof T, K>>;
 
-export interface ClientConfig extends gax.GrpcClientOptions {
+export interface ClientConfig extends Omit<gax.GrpcClientOptions, 'port'> {
   apiEndpoint?: string;
 
   /**
@@ -127,12 +127,10 @@ type GetAllSubscriptionsResponse = PagedResponse<
 >;
 
 export type GetSubscriptionsCallback =
-  | GetAllSubscriptionsCallback
-  | GetTopicSubscriptionsCallback;
+  GetAllSubscriptionsCallback | GetTopicSubscriptionsCallback;
 
 export type GetSubscriptionsResponse =
-  | GetAllSubscriptionsResponse
-  | GetTopicSubscriptionsResponse;
+  GetAllSubscriptionsResponse | GetTopicSubscriptionsResponse;
 
 export type GetTopicsCallback = RequestCallback<
   Topic,
@@ -189,8 +187,7 @@ export interface PagedCallback<Item, Response> {
 }
 
 export type PagedResponse<Item, Response> =
-  | [Item[]]
-  | [Item[], {} | null, Response];
+  [Item[]] | [Item[], {} | null, Response];
 
 export type ObjectStream<O> = {
   addListener(event: 'data', listener: (data: O) => void): ObjectStream<O>;
@@ -335,7 +332,7 @@ export class PubSub {
     this.isEmulator = false;
     this.determineBaseUrl_();
     this.api = {};
-    this.auth = new GoogleAuth(this.options);
+    this.auth = new GoogleAuth(this.options as GoogleAuthOptions<AuthClient>);
     this.projectId = this.options.projectId || PROJECT_ID_PLACEHOLDER;
     if (this.projectId !== PROJECT_ID_PLACEHOLDER) {
       this.name = PubSub.formatName_(this.projectId);
@@ -389,9 +386,7 @@ export class PubSub {
       this.isOpen = false;
       this.closeAllClients_()
         .then(() => this.schemaClient?.close())
-        .then(() => {
-          definedCallback(null);
-        })
+        .then(() => definedCallback(null))
         .catch(definedCallback);
     } else {
       definedCallback(null);
@@ -1262,7 +1257,7 @@ export class PubSub {
    */
   async getSchemaClient(): Promise<SchemaServiceClient> {
     if (!this.schemaClient) {
-      const options = await this.getClientConfig();
+      const options = (await this.getClientConfig()) as gax.ClientOptions;
       this.schemaClient = new v1.SchemaServiceClient(options);
     }
 
@@ -1289,10 +1284,9 @@ export class PubSub {
    * @param {function} [callback] The callback function.
    */
   getClient_(config: GetClientConfig, callback: GetClientCallback) {
-    this.getClientAsync_(config).then(
-      client => callback(null, client),
-      callback,
-    );
+    this.getClientAsync_(config)
+      .then(client => process.nextTick(callback, null, client))
+      .catch(err => process.nextTick(callback, err));
   }
   /**
    * Get the PubSub client object.
@@ -1307,13 +1301,13 @@ export class PubSub {
    */
   async getClientAsync_(config: GetClientConfig): Promise<gax.ClientStub> {
     // Make sure we've got a fully created config with projectId and such.
-    const options = await this.getClientConfig();
+    const options = (await this.getClientConfig()) as gax.ClientOptions;
 
     let gaxClient = this.api[config.client];
 
     if (!gaxClient) {
       // Lazily instantiate client.
-      gaxClient = new v1[config.client](options) as gax.ClientStub;
+      gaxClient = new v1[config.client](options) as unknown as gax.ClientStub;
       this.api[config.client] = gaxClient;
     }
 

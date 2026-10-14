@@ -1,5 +1,72 @@
 # Changelog
 
+## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/google-ads-datamanager-v1.2.0...google-ads-datamanager-v1.3.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [1.2.0](https://github.com/googleapis/google-cloud-node/compare/google-ads-datamanager-v1.1.0...google-ads-datamanager-v1.2.0) (2026-10-05)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+* Update API sources and regenerate ([#9472](https://github.com/googleapis/google-cloud-node/issues/9472)) ([514e2f6](https://github.com/googleapis/google-cloud-node/commit/514e2f64ba67ad3ab956fbe3eeafa507d44ca597))
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/google-ads-datamanager-v1.0.0...google-ads-datamanager-v1.1.0) (2026-09-09)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [1.0.0](https://github.com/googleapis/google-cloud-node/compare/google-ads-datamanager-v0.6.0...google-ads-datamanager-v1.0.0) (2026-08-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* [datamanager] add encrypted_user_id.proto and the EncryptedUserId resource ([#8378](https://github.com/googleapis/google-cloud-node/issues/8378)) ([f5b12cf](https://github.com/googleapis/google-cloud-node/commit/f5b12cf10d9974c87e651e1182a5804030af8cdc))
+* [datamanager] add the coupon_codes field to CartData to track coupon redemptions for Google Ads and Google Analytics ([#8300](https://github.com/googleapis/google-cloud-node/issues/8300)) ([ecec52d](https://github.com/googleapis/google-cloud-node/commit/ecec52d9fa7e5a8557596f42407412b714c8bd3d))
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+* Update API sources and regenerate ([#9104](https://github.com/googleapis/google-cloud-node/issues/9104)) ([61ea9c8](https://github.com/googleapis/google-cloud-node/commit/61ea9c807dfb3eda4ddd377da9a496d17ba48389))
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/datamanager-v0.5.0...datamanager-v0.6.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/datamanager-v0.4.0...datamanager-v0.5.0) (2026-06-25)
+
+
+### Features
+
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/datamanager-v0.3.0...datamanager-v0.4.0) (2026-06-16)
+
+
+### Features
+
+* [datamanager] add encrypted_user_id.proto and the EncryptedUserId resource ([#8378](https://github.com/googleapis/google-cloud-node/issues/8378)) ([f5b12cf](https://github.com/googleapis/google-cloud-node/commit/f5b12cf10d9974c87e651e1182a5804030af8cdc))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/datamanager-v0.2.1...datamanager-v0.3.0) (2026-06-01)
 
 

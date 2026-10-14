@@ -53,4 +53,4 @@ export default {
 };
 // @ts-ignore
 import * as protos from '../../protos/protos.js';
-export { protos };
+export {protos};

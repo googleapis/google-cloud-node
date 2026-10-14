@@ -10,5 +10,4 @@ system-test/*key.json
 *-lock.js*
 build/
 .vscode
-package-lock.json
 __pycache__

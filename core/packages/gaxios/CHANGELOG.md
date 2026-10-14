@@ -1,6 +1,77 @@
 # Changelog
 
 
+## [8.3.1](https://github.com/googleapis/google-cloud-node/compare/gaxios-v8.3.0...gaxios-v8.3.1) (2026-10-14)
+
+
+### Bug Fixes
+
+* **gaxios:** Exclude compiled tests and .tsbuildinfo from published tarball ([#9612](https://github.com/googleapis/google-cloud-node/issues/9612)) ([7394a38](https://github.com/googleapis/google-cloud-node/commit/7394a3817c0dc8cc1a93a64a61c7ef06766d70b4))
+* **gaxios:** Normalize TimeoutError in _request and propagate retry timeout ([#9582](https://github.com/googleapis/google-cloud-node/issues/9582)) ([1b10df0](https://github.com/googleapis/google-cloud-node/commit/1b10df061581851f05bdd4f9162711b68726297c))
+* **gaxios:** Remove --abort-signal-timeout-shim ([#9555](https://github.com/googleapis/google-cloud-node/issues/9555)) ([29d8a5e](https://github.com/googleapis/google-cloud-node/commit/29d8a5e19b4498b63caa7de97bda6c1474ba19b1))
+* **gaxios:** Remove --bun-plugin-shim and support Bun fetch natively ([#9561](https://github.com/googleapis/google-cloud-node/issues/9561)) ([93b426d](https://github.com/googleapis/google-cloud-node/commit/93b426d1b94e6c42e3f4b0ef8f1be213f3bc1187))
+
+## [8.3.0](https://github.com/googleapis/google-cloud-node/compare/gaxios-v8.2.0...gaxios-v8.3.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/gaxios-v8.1.0...gaxios-v8.2.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
+## [8.1.0](https://github.com/googleapis/google-cloud-node/compare/gaxios-v8.0.0...gaxios-v8.1.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.3.1...gaxios-v8.0.0) (2026-08-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update gaxios to minimum Node version of 22. ([#9172](https://github.com/googleapis/google-cloud-node/issues/9172))
+
+### Features
+
+* Update gaxios to minimum Node version of 22. ([#9172](https://github.com/googleapis/google-cloud-node/issues/9172)) ([20f9fbd](https://github.com/googleapis/google-cloud-node/commit/20f9fbdc27104dce8e22e09ccd941a8f8f1443b5))
+
+## [7.3.1](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.3.0...gaxios-v7.3.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.2.0...gaxios-v7.3.0) (2026-07-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.1.6...gaxios-v7.2.0) (2026-07-07)
+
+
+### Features
+
+* Consolidate prettierignore and prettierrc files: handwritten ([#8081](https://github.com/googleapis/google-cloud-node/issues/8081)) ([a241532](https://github.com/googleapis/google-cloud-node/commit/a2415320b9c840f6ae27894451abb561a080ff82))
+
+## [7.1.6](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.1.5...gaxios-v7.1.6) (2026-06-30)
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+* **gaxios:** Prevent comma corruption when draining stream error responses ([#8779](https://github.com/googleapis/google-cloud-node/issues/8779)) ([07b13a1](https://github.com/googleapis/google-cloud-node/commit/07b13a17e6533184c708dc388c3fa3dc6581f7a9))
+
 ## [7.1.5](https://github.com/googleapis/google-cloud-node/compare/gaxios-v7.1.4...gaxios-v7.1.5) (2026-05-11)
 
 

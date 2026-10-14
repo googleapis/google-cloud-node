@@ -7,14 +7,17 @@
     "doc": "docs"
   },
   "type": "module",
+  "packageManager": "pnpm@10.0.0",
   "scripts": {
+    "preinstall": "npx --yes only-allow pnpm",
     "fix": "echo nothing to fix",
     "test": "echo nothing to test",
     "test-generate": "SMOKE_TEST=true node ./bin/generate-readme.mjs",
     "generate": "./bin/generate-readme.mjs",
-    "lint": "echo nothing to lint",
+    "lint": "node ./bin/linter.mjs",
     "clean": "echo nothing to clean",
     "precompile": "echo nothing to precompile",
+    "compile": "turbo run compile --concurrency=4 --filter=\"...[HEAD^1]\"",
     "system-test": "echo nothing to system test",
     "samples-test": "echo nothing to sample test"
   },
@@ -36,13 +39,31 @@
   "dependencies": {
     "chalk": "^5.0.0",
     "figures": "^6.0.0",
-    "gaxios": "^7.0.0-rc",
+    "gaxios": "^8.3.0",
     "parse-link-header": "^2.0.0"
   },
   "devDependencies": {
-    "gts": "^6.0.2"
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "gts": "^6.0.2",
+    "prettier": "^3.3.3",
+    "turbo": "^2.0.14",
+    "typescript": "^5.8.3"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
+  },
+  "pnpm": {
+    "overrides": {
+      "gcp-metadata>gaxios": "^8.3.0",
+      "google-auth-library>gaxios": "^8.3.0",
+      "yargs": "^17.7.2"
+    }
   }
 }

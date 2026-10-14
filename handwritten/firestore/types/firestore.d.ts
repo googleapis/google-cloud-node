@@ -16,6 +16,17 @@
 // We deliberately use `any` in the external API to not impose type-checking
 // on end users.
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+// Declare ambient Temporal namespace for ECMAScript Temporal API
+declare namespace Temporal {
+  interface Instant {
+    readonly [Symbol.toStringTag]?: string;
+    readonly epochMilliseconds: number;
+    readonly epochNanoseconds: bigint;
+    toString(): string;
+  }
+}
+
 // Declare a global (ambient) namespace
 // (used when not using import statement, but just script include).
 declare namespace FirebaseFirestore {
@@ -2707,6 +2718,156 @@ declare namespace FirebaseFirestore {
      */
     isEqual(other: VectorValue): boolean;
   }
+
+  /** Represent a "Min Key" type in Firestore documents. */
+  export class MinKey {
+    private constructor();
+
+    /** A type string to uniquely identify instances of this class. */
+    readonly type = 'MinKey';
+
+    /**
+     * @return The singleton `MinKey` instance.
+     */
+    static instance(): MinKey;
+  }
+
+  /** Represent a "Max Key" type in Firestore documents. */
+  export class MaxKey {
+    private constructor();
+
+    /** A type string to uniquely identify instances of this class. */
+    readonly type = 'MaxKey';
+
+    /**
+     * @return The singleton `MaxKey` instance.
+     */
+    static instance(): MaxKey;
+  }
+
+  /** Represents a regular expression type in Firestore documents. */
+  export class RegexValue {
+    constructor(pattern: string, options: string);
+
+    /** The regular expression pattern */
+    readonly pattern: string;
+
+    /** The regular expression options */
+    readonly options: string;
+
+    /**
+     * Returns true if this `RegexValue` is equal to the provided one.
+     *
+     * @param other The `RegexValue` to compare against.
+     * @return 'true' if this `RegexValue` is equal to the provided one.
+     */
+    isEqual(other: RegexValue): boolean;
+  }
+
+  /** Represents an ObjectId type in Firestore documents. */
+  export class BsonObjectId {
+    constructor(value: string);
+
+    /** The 24-character hex string representation of the ObjectId. */
+    readonly value: string;
+
+    /**
+     * Returns true if this `BsonObjectId` is equal to the provided one.
+     *
+     * @param other The `BsonObjectId` to compare against.
+     * @return 'true' if this `BsonObjectId` is equal to the provided one.
+     */
+    isEqual(other: BsonObjectId): boolean;
+  }
+
+  /** Represents a 32-bit integer type in Firestore documents. */
+  export class Int32Value {
+    /**
+     * Note: values larger than the largest 32-bit signed integer,
+     * or smaller than the smallest 32-bit signed integer are invalid
+     * and will get rejected.
+     */
+    constructor(value: number);
+
+    /** The underlying 32-bit number */
+    readonly value: number;
+
+    /**
+     * Returns true if this `Int32Value` is equal to the provided one.
+     *
+     * @param other The `Int32Value` to compare against.
+     * @return 'true' if this `Int32Value` is equal to the provided one.
+     */
+    isEqual(other: Int32Value): boolean;
+  }
+
+  /** Represents a 128-bit decimal type in Firestore documents. */
+  export class Decimal128Value {
+    constructor(value: string);
+
+    /** The underlying 128-bit decimal number */
+    readonly value: string;
+
+    /**
+     * Returns true if this `Decimal128Value` is equal to the provided one.
+     *
+     * @param other The `Decimal128Value` to compare against.
+     * @return 'true' if this `Decimal128Value` is equal to the provided one.
+     */
+    isEqual(other: Decimal128Value): boolean;
+  }
+
+  /** Represents a BSON Timestamp type in Firestore documents. */
+  export class BsonTimestamp {
+    /**
+     *  Note: negative values and values larger than the largest 32-bit
+     *  unsigned integer are invalid and will get rejected.
+     */
+    constructor(seconds: number, increment: number);
+
+    /** The underlying unsigned 32-bit integer for seconds */
+    readonly seconds: number;
+
+    /** The underlying unsigned 32-bit integer for increment */
+    readonly increment: number;
+
+    /**
+     * Returns true if this `BsonTimestamp` is equal to the provided one.
+     *
+     * @param other The `BsonTimestamp` to compare against.
+     * @return 'true' if this `BsonTimestamp` is equal to the provided one.
+     */
+    isEqual(other: BsonTimestamp): boolean;
+  }
+
+  /** An immutable object representing an array of bytes. */
+  export class Bytes {
+    private constructor();
+
+    /** The subtype for the data */
+    readonly subtype: number;
+
+    /** Returns the underlying bytes as a Uint8Array. */
+    get data(): Uint8Array;
+
+    /** Creates a new Bytes object from the given Base64 string. */
+    static fromBase64String(base64: string, subtype?: number): Bytes;
+
+    /** Creates a new Bytes object from the given Uint8Array. */
+    static fromUint8Array(array: Uint8Array, subtype?: number): Bytes;
+
+    /** Returns the underlying bytes as a Base64-encoded string. */
+    toBase64(): string;
+
+    /** Returns the underlying bytes in a new Uint8Array. */
+    toUint8Array(): Uint8Array;
+
+    /** Returns a string representation of the Bytes object. */
+    toString(): string;
+
+    /** Returns true if this Bytes object is equal to the provided one. */
+    isEqual(other: Bytes | Uint8Array): boolean;
+  }
   /**
    * Sentinel values that can be used when writing document fields with set(),
    * create() or update().
@@ -2907,6 +3068,14 @@ declare namespace FirebaseFirestore {
      */
     static fromMillis(milliseconds: number): Timestamp;
     /**
+     * Creates a new timestamp from the given `Temporal.Instant`.
+     *
+     * @param instant The `Temporal.Instant` to initialize the `Timestamp` from.
+     * @returns A new `Timestamp` representing the same point in time as the
+     * given instant.
+     */
+    static fromInstant(instant: Temporal.Instant): Timestamp;
+    /**
      * Creates a new timestamp.
      *
      * @param seconds The number of seconds of UTC time since Unix epoch
@@ -2924,6 +3093,13 @@ declare namespace FirebaseFirestore {
     readonly seconds: number;
     /** The non-negative fractions of a second at nanosecond resolution. */
     readonly nanoseconds: number;
+    /**
+     * Converts a `Timestamp` to a `Temporal.Instant` object.
+     *
+     * @returns `Temporal.Instant` object representing the same point in time as
+     * this `Timestamp`, with nanosecond precision.
+     */
+    toInstant(): Temporal.Instant;
     /**
      * Returns a new `Date` corresponding to this timestamp. This may lose
      * precision.
@@ -2988,21 +3164,17 @@ declare namespace FirebaseFirestore {
     build(): Buffer;
   }
   /**
-   * The v1beta1 Veneer client. This client provides access to to the underlying
+   * The v1beta1 Veneer client. This client provides access to the underlying
    * Firestore v1beta1 RPCs.
-   * @deprecated Use v1 instead.
+   * @deprecated Prefer the v1 client instead of the v1beta1 client. If your use case requires the v1beta1 client, it is published as part of the standalone @google-cloud/firestore-api package.
    */
-  export const v1beta1: {
-    FirestoreClient: typeof import('./v1beta1/firestore_client').FirestoreClient;
-  };
+  export const v1beta1: typeof import('@google-cloud/firestore-api').v1beta1;
   /**
    * The v1 Veneer clients. These clients provide access to the Firestore Admin
    * API and the underlying Firestore v1 RPCs.
+   * @deprecated Prefer the top-level Firestore client instead of the Firestore.v1 client. If your use case requires the Firestore.v1 client, this is now being published as a separate package at @google-cloud/firestore-api.
    */
-  export const v1: {
-    FirestoreClient: typeof import('./v1/firestore_client').FirestoreClient;
-    FirestoreAdminClient: typeof import('./v1/firestore_admin_client').FirestoreAdminClient;
-  };
+  export const v1: typeof import('@google-cloud/firestore-api').v1;
   /**
    * Status codes returned by Firestore's gRPC calls.
    */

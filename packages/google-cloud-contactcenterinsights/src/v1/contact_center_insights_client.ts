@@ -30,10 +30,10 @@ import type {
   IamClient,
   IamProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class ContactCenterInsightsClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('contact-center-insights');
@@ -68,11 +68,11 @@ export class ContactCenterInsightsClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  contactCenterInsightsStub?: Promise<{ [name: string]: Function }>;
+  contactCenterInsightsStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of ContactCenterInsightsClient.
@@ -149,7 +149,7 @@ export class ContactCenterInsightsClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -576,7 +576,7 @@ export class ContactCenterInsightsClient {
       'google.cloud.contactcenterinsights.v1.ContactCenterInsights',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -617,7 +617,7 @@ export class ContactCenterInsightsClient {
             .ContactCenterInsights,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -699,7 +699,7 @@ export class ContactCenterInsightsClient {
     ];
     for (const methodName of contactCenterInsightsStubMethods) {
       const callPromise = this.contactCenterInsightsStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -917,7 +917,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createConversation request %j', request);
@@ -1075,7 +1075,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         'conversation.name': request.conversation!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateConversation request %j', request);
@@ -1220,7 +1220,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getConversation request %j', request);
@@ -1367,7 +1367,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteConversation request %j', request);
@@ -1510,7 +1510,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAnalysis request %j', request);
@@ -1653,7 +1653,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAnalysis request %j', request);
@@ -1798,7 +1798,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         'issue_model.name': request.issueModel!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateIssueModel request %j', request);
@@ -1941,7 +1941,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIssueModel request %j', request);
@@ -2084,7 +2084,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listIssueModels request %j', request);
@@ -2221,7 +2221,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIssue request %j', request);
@@ -2364,7 +2364,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listIssues request %j', request);
@@ -2509,7 +2509,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         'issue.name': request.issue!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateIssue request %j', request);
@@ -2652,7 +2652,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteIssue request %j', request);
@@ -2795,7 +2795,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         issue_model: request.issueModel ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('calculateIssueModelStats request %j', request);
@@ -2943,7 +2943,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createPhraseMatcher request %j', request);
@@ -3086,7 +3086,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPhraseMatcher request %j', request);
@@ -3229,7 +3229,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deletePhraseMatcher request %j', request);
@@ -3374,7 +3374,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         'phrase_matcher.name': request.phraseMatcher!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updatePhraseMatcher request %j', request);
@@ -3520,7 +3520,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('calculateStats request %j', request);
@@ -3663,7 +3663,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSettings request %j', request);
@@ -3808,7 +3808,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         'settings.name': request.settings!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSettings request %j', request);
@@ -3956,7 +3956,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createAnalysisRule request %j', request);
@@ -4099,7 +4099,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAnalysisRule request %j', request);
@@ -4246,7 +4246,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         'analysis_rule.name': request.analysisRule!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateAnalysisRule request %j', request);
@@ -4389,7 +4389,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteAnalysisRule request %j', request);
@@ -4532,7 +4532,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getEncryptionSpec request %j', request);
@@ -4680,7 +4680,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createView request %j', request);
@@ -4817,7 +4817,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getView request %j', request);
@@ -4962,7 +4962,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         'view.name': request.view!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateView request %j', request);
@@ -5105,7 +5105,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteView request %j', request);
@@ -5257,7 +5257,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createQaQuestion request %j', request);
@@ -5400,7 +5400,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getQaQuestion request %j', request);
@@ -5554,7 +5554,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         'qa_question.name': request.qaQuestion!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateQaQuestion request %j', request);
@@ -5697,7 +5697,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteQaQuestion request %j', request);
@@ -5849,7 +5849,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createQaScorecard request %j', request);
@@ -5992,7 +5992,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getQaScorecard request %j', request);
@@ -6142,7 +6142,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         'qa_scorecard.name': request.qaScorecard!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateQaScorecard request %j', request);
@@ -6288,7 +6288,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteQaScorecard request %j', request);
@@ -6440,7 +6440,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createQaScorecardRevision request %j', request);
@@ -6583,7 +6583,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getQaScorecardRevision request %j', request);
@@ -6726,7 +6726,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deployQaScorecardRevision request %j', request);
@@ -6869,7 +6869,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('undeployQaScorecardRevision request %j', request);
@@ -7016,7 +7016,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteQaScorecardRevision request %j', request);
@@ -7164,7 +7164,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createFeedbackLabel request %j', request);
@@ -7307,7 +7307,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getFeedbackLabel request %j', request);
@@ -7452,7 +7452,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         'feedback_label.name': request.feedbackLabel!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateFeedbackLabel request %j', request);
@@ -7595,7 +7595,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteFeedbackLabel request %j', request);
@@ -7762,7 +7762,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7819,7 +7819,7 @@ export class ContactCenterInsightsClient {
     this._log.info('uploadConversation long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -7934,7 +7934,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -7991,7 +7991,7 @@ export class ContactCenterInsightsClient {
     this._log.info('createAnalysis long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8111,7 +8111,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8168,7 +8168,7 @@ export class ContactCenterInsightsClient {
     this._log.info('bulkAnalyzeConversations long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8290,7 +8290,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8347,7 +8347,7 @@ export class ContactCenterInsightsClient {
     this._log.info('bulkDeleteConversations long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8478,7 +8478,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8535,7 +8535,7 @@ export class ContactCenterInsightsClient {
     this._log.info('ingestConversations long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8658,7 +8658,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8715,7 +8715,7 @@ export class ContactCenterInsightsClient {
     this._log.info('exportInsightsData long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8829,7 +8829,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -8886,7 +8886,7 @@ export class ContactCenterInsightsClient {
     this._log.info('createIssueModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -8998,7 +8998,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9055,7 +9055,7 @@ export class ContactCenterInsightsClient {
     this._log.info('deleteIssueModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9168,7 +9168,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9225,7 +9225,7 @@ export class ContactCenterInsightsClient {
     this._log.info('deployIssueModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9338,7 +9338,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9395,7 +9395,7 @@ export class ContactCenterInsightsClient {
     this._log.info('undeployIssueModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9509,7 +9509,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9566,7 +9566,7 @@ export class ContactCenterInsightsClient {
     this._log.info('exportIssueModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9684,7 +9684,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9741,7 +9741,7 @@ export class ContactCenterInsightsClient {
     this._log.info('importIssueModel long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -9860,7 +9860,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         'encryption_spec.name': request.encryptionSpec!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -9917,7 +9917,7 @@ export class ContactCenterInsightsClient {
     this._log.info('initializeEncryptionSpec long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -10053,7 +10053,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         location: request.location ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10110,7 +10110,7 @@ export class ContactCenterInsightsClient {
     this._log.info('queryMetrics long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -10233,7 +10233,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10290,7 +10290,7 @@ export class ContactCenterInsightsClient {
     this._log.info('tuneQaScorecardRevision long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -10408,7 +10408,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10465,7 +10465,7 @@ export class ContactCenterInsightsClient {
     this._log.info('bulkUploadFeedbackLabels long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -10608,7 +10608,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10665,7 +10665,7 @@ export class ContactCenterInsightsClient {
     this._log.info('bulkDownloadFeedbackLabels long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -10798,7 +10798,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -10891,7 +10891,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listConversations stream %j', request);
@@ -10966,7 +10966,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listConversations'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listConversations iterate %j', request);
@@ -11078,7 +11078,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11153,7 +11153,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listAnalyses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAnalyses stream %j', request);
@@ -11210,7 +11210,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listAnalyses'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAnalyses iterate %j', request);
@@ -11322,7 +11322,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11397,7 +11397,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listPhraseMatchers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPhraseMatchers stream %j', request);
@@ -11454,7 +11454,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listPhraseMatchers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPhraseMatchers iterate %j', request);
@@ -11563,7 +11563,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11635,7 +11635,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listAnalysisRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAnalysisRules stream %j', request);
@@ -11689,7 +11689,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listAnalysisRules'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAnalysisRules iterate %j', request);
@@ -11798,7 +11798,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -11870,7 +11870,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listViews stream %j', request);
@@ -11924,7 +11924,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listViews'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listViews iterate %j', request);
@@ -12033,7 +12033,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12105,7 +12105,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listQaQuestions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listQaQuestions stream %j', request);
@@ -12159,7 +12159,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listQaQuestions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listQaQuestions iterate %j', request);
@@ -12268,7 +12268,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12340,7 +12340,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listQaScorecards'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listQaScorecards stream %j', request);
@@ -12394,7 +12394,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listQaScorecards'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listQaScorecards iterate %j', request);
@@ -12509,7 +12509,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12587,7 +12587,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listQaScorecardRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listQaScorecardRevisions stream %j', request);
@@ -12647,7 +12647,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listQaScorecardRevisions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listQaScorecardRevisions iterate %j', request);
@@ -12772,7 +12772,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -12860,7 +12860,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listFeedbackLabels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFeedbackLabels stream %j', request);
@@ -12930,7 +12930,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listFeedbackLabels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listFeedbackLabels iterate %j', request);
@@ -13053,7 +13053,7 @@ export class ContactCenterInsightsClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -13139,7 +13139,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listAllFeedbackLabels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAllFeedbackLabels stream %j', request);
@@ -13207,7 +13207,7 @@ export class ContactCenterInsightsClient {
       });
     const defaultCallSettings = this._defaults['listAllFeedbackLabels'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAllFeedbackLabels iterate %j', request);
@@ -14828,11 +14828,11 @@ export class ContactCenterInsightsClient {
    */
   close(): Promise<void> {
     if (this.contactCenterInsightsStub && !this._terminated) {
-      return this.contactCenterInsightsStub.then((stub) => {
+      return this.contactCenterInsightsStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

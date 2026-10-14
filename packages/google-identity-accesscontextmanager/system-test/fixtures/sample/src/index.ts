@@ -19,7 +19,9 @@
 import {AccessContextManagerClient} from '@google-cloud/access-context-manager';
 
 // check that the client class type name can be used
-function doStuffWithAccessContextManagerClient(client: AccessContextManagerClient) {
+function doStuffWithAccessContextManagerClient(
+  client: AccessContextManagerClient,
+) {
   client.close();
 }
 

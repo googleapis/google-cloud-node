@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as policytagmanagerserializationModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -107,7 +107,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'datacatalog.example.com');
@@ -116,7 +116,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'datacatalog.example.com');
@@ -143,7 +143,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'datacatalog.configured.example.com');
@@ -158,7 +158,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -191,7 +191,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -200,15 +200,15 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       assert(client.policyTagManagerSerializationStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.policyTagManagerSerializationStub);
@@ -217,16 +217,16 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -236,7 +236,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -246,7 +246,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -261,7 +261,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -287,7 +287,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -321,7 +321,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -371,7 +371,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -405,7 +405,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -419,7 +419,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.replaceTaxonomy(request), expectedError);
@@ -431,7 +431,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -465,7 +465,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -515,7 +515,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -549,7 +549,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -563,7 +563,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.importTaxonomies(request), expectedError);
@@ -575,7 +575,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -609,7 +609,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -659,7 +659,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -693,7 +693,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -707,7 +707,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.exportTaxonomies(request), expectedError);
@@ -726,7 +726,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -804,7 +804,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -870,7 +870,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -924,7 +924,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1000,7 +1000,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1045,7 +1045,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1134,7 +1134,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1202,7 +1202,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1284,7 +1284,7 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
       const client =
         new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );

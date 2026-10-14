@@ -1,5 +1,58 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.8.0...health-v0.9.0) (2026-10-08)
+
+
+### Features
+
+* **google-devicesandservices-health:** Add v4beta ([#9579](https://github.com/googleapis/google-cloud-node/issues/9579)) ([5856881](https://github.com/googleapis/google-cloud-node/commit/5856881c06846fa7f9d2b26182ecf7e4a2e487d9))
+
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.7.0...health-v0.8.0) (2026-09-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#9472](https://github.com/googleapis/google-cloud-node/issues/9472)) ([514e2f6](https://github.com/googleapis/google-cloud-node/commit/514e2f64ba67ad3ab956fbe3eeafa507d44ca597))
+
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.6.1...health-v0.7.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/health-v0.6.0...health-v0.6.1) (2026-08-26)
+
+
+### Bug Fixes
+
+* Upgrade sinon types for health package ([#9202](https://github.com/googleapis/google-cloud-node/issues/9202)) ([b312515](https://github.com/googleapis/google-cloud-node/commit/b312515bcd60c767532ebd0dabf23d95014e0a86))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.5.0...health-v0.6.0) (2026-08-21)
+
+
+### Features
+
+* Update sources and regenerate ([#9170](https://github.com/googleapis/google-cloud-node/issues/9170)) ([827fab0](https://github.com/googleapis/google-cloud-node/commit/827fab0ba7fc2067c800ae2cdd92fd21527380bf))
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.4.0...health-v0.5.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.3.0...health-v0.4.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/health-v0.2.0...health-v0.3.0) (2026-06-01)
 
 

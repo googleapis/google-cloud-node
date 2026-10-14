@@ -30,7 +30,7 @@ function main(parent) {
    */
   /**
    *  Required. The project and location from which the EndpointPolicies should
-   *  be listed, specified in the format `projects/* /locations/global`.
+   *  be listed, specified in the format `projects/* /locations/*`.
    */
   // const parent = 'abc123'
   /**

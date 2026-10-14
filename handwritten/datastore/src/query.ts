@@ -23,7 +23,7 @@ import {Transaction} from './transaction';
 import {CallOptions} from 'google-gax';
 import {RunQueryStreamOptions} from '../src/request';
 import * as gaxInstance from 'google-gax';
-import {google} from '../protos/protos';
+import {google} from './protos';
 
 export type Operator =
   | '='

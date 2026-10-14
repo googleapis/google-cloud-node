@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.securitycenter.v2",
-  "libraryPackage": "@google-cloud/securitycenter",
+  "libraryPackage": "@google-cloud/security-center",
   "services": {
     "SecurityCenter": {
       "clients": {

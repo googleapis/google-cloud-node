@@ -1,5 +1,6 @@
 [
   "../../protos/google/cloud/ces/v1/agent.proto",
+  "../../protos/google/cloud/ces/v1/agent_card.proto",
   "../../protos/google/cloud/ces/v1/agent_service.proto",
   "../../protos/google/cloud/ces/v1/agent_tool.proto",
   "../../protos/google/cloud/ces/v1/agent_transfers.proto",
@@ -23,6 +24,7 @@
   "../../protos/google/cloud/ces/v1/guardrail.proto",
   "../../protos/google/cloud/ces/v1/mcp_tool.proto",
   "../../protos/google/cloud/ces/v1/mcp_toolset.proto",
+  "../../protos/google/cloud/ces/v1/mocks.proto",
   "../../protos/google/cloud/ces/v1/omnichannel.proto",
   "../../protos/google/cloud/ces/v1/omnichannel_service.proto",
   "../../protos/google/cloud/ces/v1/open_api_tool.proto",

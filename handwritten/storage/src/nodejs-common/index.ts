@@ -25,6 +25,7 @@ export {
 export {
   BaseMetadata,
   DeleteCallback,
+  DeleteOptions,
   ExistsCallback,
   GetConfig,
   InstanceResponseCallback,
@@ -44,7 +45,11 @@ export {
   AbortableDuplex,
   ApiError,
   BodyResponseCallback,
+  DecorateHeadersOptions,
+  DecorateHeadersResult,
   DecorateRequestOptions,
+  decorateHeaders,
+  Headers,
   ResponseBody,
   util,
 } from './util.js';

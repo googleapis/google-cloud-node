@@ -1,5 +1,37 @@
 # Changelog
 
+## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.14.1...inventories-v0.15.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [0.14.1](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.14.0...inventories-v0.14.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [0.14.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.13.0...inventories-v0.14.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.13.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.12.1...inventories-v0.13.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
 ## [0.12.1](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.12.0...inventories-v0.12.1) (2026-05-01)
 
 

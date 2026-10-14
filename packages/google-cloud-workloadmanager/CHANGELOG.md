@@ -1,5 +1,52 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/workloadmanager-v0.4.1...workloadmanager-v0.5.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/workloadmanager-v0.4.0...workloadmanager-v0.4.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/workloadmanager-v0.3.0...workloadmanager-v0.4.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/workloadmanager-v0.2.1...workloadmanager-v0.3.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.2.1](https://github.com/googleapis/google-cloud-node/compare/workloadmanager-v0.2.0...workloadmanager-v0.2.1) (2026-07-15)
+
+
+### Bug Fixes
+
+* Documentation url ([#8881](https://github.com/googleapis/google-cloud-node/issues/8881)) ([a3d1773](https://github.com/googleapis/google-cloud-node/commit/a3d17735e97c3757f278e240b144835e0cc8aa26))
+* Update documentation URL ([#8884](https://github.com/googleapis/google-cloud-node/issues/8884)) ([c6a2b2e](https://github.com/googleapis/google-cloud-node/commit/c6a2b2e2d19febd9ed52562c28bb8b14c0c9b33a))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/workloadmanager-v0.1.1...workloadmanager-v0.2.0) (2026-07-13)
+
+
+### Features
+
+* **google/cloud/workloadmanager/v1:** Onboard a new library ([#8836](https://github.com/googleapis/google-cloud-node/issues/8836)) ([7c89205](https://github.com/googleapis/google-cloud-node/commit/7c89205e12fcb3e77fa1d395e5ee69d70820fa10))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/workloadmanager-v0.1.0...workloadmanager-v0.1.1) (2026-05-01)
 
 

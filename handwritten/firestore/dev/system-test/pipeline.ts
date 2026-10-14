@@ -173,6 +173,7 @@ import {
   CollectionReference,
   FieldPath,
   Firestore,
+  Bytes,
 } from '../src';
 
 import {expect, use} from 'chai';
@@ -384,7 +385,7 @@ describe.skipClassic('Pipeline class', () => {
       });
 
       it('can execute delete stage within a transaction', async () => {
-        const promise = firestore.runTransaction(async transaction => {
+        await firestore.runTransaction(async transaction => {
           const deletePpl = firestore
             .pipeline()
             .collection(dmlCol.path)
@@ -395,9 +396,8 @@ describe.skipClassic('Pipeline class', () => {
           expectResults(deleteRes, {documents_modified: 1});
         });
 
-        await expect(promise).to.be.rejectedWith(
-          /Transactional DML operations are not yet supported/,
-        );
+        const docSnap = await dmlCol.doc('book2').get();
+        expect(docSnap.exists).to.be.false;
       });
 
       it('can execute update stage with addFields', async () => {
@@ -802,6 +802,100 @@ describe.skipClassic('Pipeline class', () => {
       await db2.terminate();
     });
 
+    it('supports CollectionReference on uninitialized Firestore instance', async () => {
+      const uninitializedDb = getTestDb();
+      expect((uninitializedDb as unknown as {_projectId?: string})._projectId)
+        .to.be.undefined;
+
+      const snapshot = await uninitializedDb
+        .pipeline()
+        .collection(uninitializedDb.collection(randomCol.path))
+        .execute();
+      expect(snapshot.results.length).to.equal(10);
+      await uninitializedDb.terminate();
+    });
+
+    it('supports CollectionReference options object on uninitialized Firestore instance', async () => {
+      const uninitializedDb = getTestDb();
+      expect((uninitializedDb as unknown as {_projectId?: string})._projectId)
+        .to.be.undefined;
+
+      const snapshot = await uninitializedDb
+        .pipeline()
+        .collection({
+          collection: uninitializedDb.collection(randomCol.path),
+        })
+        .execute();
+      expect(snapshot.results.length).to.equal(10);
+      await uninitializedDb.terminate();
+    });
+
+    it('supports list of DocumentReferences on uninitialized Firestore instance', async () => {
+      const uninitializedDb = getTestDb();
+      expect((uninitializedDb as unknown as {_projectId?: string})._projectId)
+        .to.be.undefined;
+
+      const snapshot = await uninitializedDb
+        .pipeline()
+        .documents([
+          uninitializedDb.doc(`${randomCol.path}/book1`),
+          uninitializedDb.doc(`${randomCol.path}/book2`),
+        ])
+        .execute();
+      expect(snapshot.results.length).to.equal(2);
+      await uninitializedDb.terminate();
+    });
+
+    it('supports DocumentReference options object on uninitialized Firestore instance', async () => {
+      const uninitializedDb = getTestDb();
+      expect((uninitializedDb as unknown as {_projectId?: string})._projectId)
+        .to.be.undefined;
+
+      const snapshot = await uninitializedDb
+        .pipeline()
+        .documents({
+          docs: [
+            uninitializedDb.doc(`${randomCol.path}/book1`),
+            uninitializedDb.doc(`${randomCol.path}/book2`),
+          ],
+        })
+        .execute();
+      expect(snapshot.results.length).to.equal(2);
+      await uninitializedDb.terminate();
+    });
+
+    it('supports mixed strings and DocumentReferences on uninitialized Firestore instance', async () => {
+      const uninitializedDb = getTestDb();
+      expect((uninitializedDb as unknown as {_projectId?: string})._projectId)
+        .to.be.undefined;
+
+      const snapshot = await uninitializedDb
+        .pipeline()
+        .documents([
+          `${randomCol.path}/book1`,
+          uninitializedDb.doc(`${randomCol.path}/book2`),
+        ])
+        .execute();
+      expect(snapshot.results.length).to.equal(2);
+      await uninitializedDb.terminate();
+    });
+
+    it('rejects references for another DB on uninitialized Firestore instance', async () => {
+      const uninitializedDb = getTestDb();
+      const db2 = getTestDb({databaseId: 'notDefault', projectId: 'random'});
+
+      expect(() => {
+        uninitializedDb.pipeline().collection(db2.collection('foo'));
+      }).to.throw(/Invalid CollectionReference/);
+
+      expect(() => {
+        uninitializedDb.pipeline().documents([db2.doc('foo/bar')]);
+      }).to.throw(/Invalid DocumentReference/);
+
+      await uninitializedDb.terminate();
+      await db2.terminate();
+    });
+
     it('supports collection group as source', async () => {
       const randomSubCollectionId = Math.random().toString(16).slice(2);
       const doc1 = await randomCol
@@ -941,6 +1035,32 @@ describe.skipClassic('Pipeline class', () => {
             string: 'b string',
           },
         ],
+      });
+    });
+
+    describe.skipClassic('extended BSON types', () => {
+      it('accepts and returns Bytes in pipelines', async () => {
+        const bsonSubtype0 = Bytes.fromUint8Array(new Uint8Array([7, 8, 9]), 0);
+        const bsonSubtype1 = Bytes.fromUint8Array(
+          new Uint8Array([7, 8, 9]),
+          128,
+        );
+
+        const ppl = firestore
+          .pipeline()
+          .collection(randomCol.path)
+          .limit(1)
+          .select(
+            constant(bsonSubtype0).as('bsonSubtype0'),
+            constant(bsonSubtype1).as('bsonSubtype1'),
+          );
+
+        const snapshot = await ppl.execute();
+
+        expectResults(snapshot, {
+          bsonSubtype0: new Uint8Array([7, 8, 9]),
+          bsonSubtype1: bsonSubtype1,
+        });
       });
     });
 
@@ -7406,7 +7526,9 @@ describe.skipClassic('Pipeline search', () => {
             });
 
           const isRestTest = isRest(firestore);
-          const expectedErrorPattern = isRestTest ? /"code": 400/ : /3 INVALID_ARGUMENT.*/;
+          const expectedErrorPattern = isRestTest
+            ? /"code": 400/
+            : /3 INVALID_ARGUMENT.*/;
           await expect(ppl.execute()).to.be.rejectedWith(expectedErrorPattern);
         });
       });
@@ -7459,7 +7581,9 @@ describe.skipClassic('Pipeline search', () => {
 
           snapshot = await ppl.execute();
           expect(snapshot.results.length).to.equal(1);
-          expect(['solTacos', 'eastsideTacos']).to.include(snapshot.results[0].id);
+          expect(['solTacos', 'eastsideTacos']).to.include(
+            snapshot.results[0].id,
+          );
         });
       });
 

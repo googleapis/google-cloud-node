@@ -71,7 +71,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.list_services.js) |
 | submit config source | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.submit_config_source.js) |
 | undelete service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/service_manager.undelete_service.js) |
-| api | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/samples/generated/v1/snippet_metadata_google.api.servicemanagement.v1.json) |
 
 
 ## Supported Node.js Versions
@@ -105,7 +104,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -115,7 +114,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-api-servicemanagement/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

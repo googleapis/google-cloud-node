@@ -35,7 +35,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Generativelanguage library
-  const {FileServiceClient} = require('@google-cloud/generativelanguage').v1alpha;
+  const {FileServiceClient} = require('@google-ai/generativelanguage').v1alpha;
 
   // Instantiates a client
   const generativelanguageClient = new FileServiceClient();

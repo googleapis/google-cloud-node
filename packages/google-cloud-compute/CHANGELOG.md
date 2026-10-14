@@ -4,6 +4,101 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [7.8.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.7.0...compute-v7.8.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [7.7.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.6.0...compute-v7.7.0) (2026-10-03)
+
+
+### Features
+
+* Update API sources and regenerate ([#9481](https://github.com/googleapis/google-cloud-node/issues/9481)) ([35a2b9a](https://github.com/googleapis/google-cloud-node/commit/35a2b9a4ff3b075124f6905c423acd8d11bdfa68))
+* Update Compute v1 API to version 2026-09-01 ([#9503](https://github.com/googleapis/google-cloud-node/issues/9503)) ([02e3361](https://github.com/googleapis/google-cloud-node/commit/02e3361248bed2d4993fd737ac753311391e9203))
+
+
+### Bug Fixes
+
+* All AggregatedList RPCs behavior is now return_partial_success=true ([02e3361](https://github.com/googleapis/google-cloud-node/commit/02e3361248bed2d4993fd737ac753311391e9203))
+* All AggregatedList RPCs return_partial_success fields removed ([02e3361](https://github.com/googleapis/google-cloud-node/commit/02e3361248bed2d4993fd737ac753311391e9203))
+
+## [7.6.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.5.1...compute-v7.6.0) (2026-09-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#9472](https://github.com/googleapis/google-cloud-node/issues/9472)) ([514e2f6](https://github.com/googleapis/google-cloud-node/commit/514e2f64ba67ad3ab956fbe3eeafa507d44ca597))
+
+## [7.5.1](https://github.com/googleapis/google-cloud-node/compare/compute-v7.5.0...compute-v7.5.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.4.0...compute-v7.5.0) (2026-09-22)
+
+
+### Features
+
+* Update API sources and regenerate ([#9368](https://github.com/googleapis/google-cloud-node/issues/9368)) ([57d0cfd](https://github.com/googleapis/google-cloud-node/commit/57d0cfd84827933a5da83c370b38942d0c2eadd8))
+
+## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.3.0...compute-v7.4.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.2.0...compute-v7.3.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.1.0...compute-v7.2.0) (2026-09-02)
+
+
+### Features
+
+* Update API sources and regenerate ([#9219](https://github.com/googleapis/google-cloud-node/issues/9219)) ([09ff86e](https://github.com/googleapis/google-cloud-node/commit/09ff86ef811de9215c587496ece57ff8b5fb2b77))
+
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.0.0...compute-v7.1.0) (2026-08-10)
+
+
+### Features
+
+* Update API sources and regenerate ([#9104](https://github.com/googleapis/google-cloud-node/issues/9104)) ([61ea9c8](https://github.com/googleapis/google-cloud-node/commit/61ea9c807dfb3eda4ddd377da9a496d17ba48389))
+
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.15.0...compute-v7.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [6.15.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.14.0...compute-v6.15.0) (2026-07-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#8999](https://github.com/googleapis/google-cloud-node/issues/8999)) ([5c36365](https://github.com/googleapis/google-cloud-node/commit/5c363650ee4de08a81b1856e16693bdd8ad99ca9))
+
+## [6.14.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.13.0...compute-v6.14.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
 ## [6.13.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.12.0...compute-v6.13.0) (2026-06-01)
 
 

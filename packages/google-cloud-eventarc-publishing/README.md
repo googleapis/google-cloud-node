@@ -61,7 +61,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | publish | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish.js) |
 | publish channel connection events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_channel_connection_events.js) |
 | publish events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/publisher.publish_events.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-eventarc-publishing/samples/generated/v1/snippet_metadata_google.cloud.eventarc.publishing.v1.json) |
 
 
 ## Supported Node.js Versions

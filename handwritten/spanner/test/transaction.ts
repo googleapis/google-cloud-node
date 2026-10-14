@@ -22,9 +22,9 @@ import {common as p} from 'protobufjs';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 
-import {protos} from '../src';
 import {codec} from '../src/codec';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import {
   CLOUD_RESOURCE_HEADER,
   LEADER_AWARE_ROUTING_HEADER,
@@ -42,7 +42,12 @@ import {
   ExecuteSqlRequest,
   ReadRequest,
 } from '../src/transaction';
+import {Session} from '../src/session';
+import {Row} from '../src/partial-result-stream';
 import {grpc} from 'google-gax';
+import * as through from 'through2';
+
+import {convertToIValue} from './partial-result-stream';
 
 describe('Transaction', () => {
   const sandbox = sinon.createSandbox();
@@ -74,7 +79,26 @@ describe('Transaction', () => {
     formattedName_: SESSION_NAME,
     request: REQUEST,
     requestStream: REQUEST_STREAM,
+    commonHeaders_: {
+      [CLOUD_RESOURCE_HEADER]: 'formatted-database-name',
+      [AFE_SERVER_TIMING_HEADER]: 'true',
+    },
   };
+
+  function createSession(options?: {routeToLeaderEnabled?: boolean}): Session {
+    return Object.assign({}, SESSION, {
+      parent: {
+        ...DATABASE,
+        parent: {
+          ...INSTANCE,
+          parent: {
+            ...SPANNER,
+            routeToLeaderEnabled: options?.routeToLeaderEnabled,
+          },
+        },
+      },
+    }) as unknown as Session;
+  }
 
   const PARTIAL_RESULT_STREAM = sandbox.stub();
   const PROMISIFY_ALL = sandbox.stub();
@@ -105,7 +129,10 @@ describe('Transaction', () => {
     const txns = proxyquire('../src/transaction', {
       '@google-cloud/promisify': {promisifyAll: PROMISIFY_ALL},
       './codec': {codec},
-      './partial-result-stream': {partialResultStream: PARTIAL_RESULT_STREAM},
+      './partial-result-stream': {
+        ...require('../src/partial-result-stream'),
+        partialResultStream: PARTIAL_RESULT_STREAM,
+      },
     });
 
     Snapshot = txns.Snapshot;
@@ -159,11 +186,116 @@ describe('Transaction', () => {
         assert.strictEqual(REQUEST_STREAM.callCount, 1);
       });
 
+      it('should keep `request` and `requestStream` usable when detached', () => {
+        REQUEST.resetHistory();
+        REQUEST_STREAM.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const txn = new Snapshot(multiplexedSession);
+
+        // `TransactionRunner#_interceptErrors` and user code hold on to these
+        // methods without their receiver, so they must be pre-bound.
+        const {request, requestStream} = txn;
+
+        request({client: 'SpannerClient'}, () => {});
+        requestStream({client: 'SpannerClient'});
+
+        assert.strictEqual(REQUEST.callCount, 1);
+        assert.strictEqual(REQUEST_STREAM.callCount, 1);
+      });
+
+      it('should generate _affinityKey for multiplexed sessions', () => {
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const txn = new Snapshot(multiplexedSession);
+        assert.ok(txn._affinityKey);
+        assert.ok(txn._affinityKey.startsWith('mux-affinity-'));
+        assert.ok(txn._bindGaxOpts.otherArgs.options.affinityKey);
+        assert.strictEqual(
+          txn._bindGaxOpts.otherArgs.options.affinityKey,
+          txn._affinityKey,
+        );
+        assert.strictEqual(
+          txn._unbindGaxOpts.otherArgs.options.affinityKey,
+          txn._affinityKey,
+        );
+        assert.strictEqual(txn._unbindGaxOpts.otherArgs.options.unbind, true);
+      });
+
+      it('should inject affinity key in `Session#request` if multiplexed', () => {
+        REQUEST.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const txn = new Snapshot(multiplexedSession);
+        txn.request({client: 'SpannerClient'}, () => {});
+        assert.strictEqual(REQUEST.callCount, 1);
+        const arg = REQUEST.lastCall.args[0];
+        assert.deepStrictEqual(arg.gaxOpts, txn._bindGaxOpts);
+      });
+
+      it('should inject affinity key in `Session#requestStream` if multiplexed', () => {
+        REQUEST_STREAM.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const txn = new Snapshot(multiplexedSession);
+        txn.requestStream({client: 'SpannerClient'});
+        assert.strictEqual(REQUEST_STREAM.callCount, 1);
+        const arg = REQUEST_STREAM.lastCall.args[0];
+        assert.deepStrictEqual(arg.gaxOpts, txn._bindGaxOpts);
+      });
+
+      it('should merge the affinity key into caller supplied gaxOpts', () => {
+        REQUEST.resetHistory();
+        const multiplexedSession = Object.assign({}, SESSION, {
+          metadata: {multiplexed: true},
+        });
+        const txn = new Snapshot(multiplexedSession);
+        const gaxOpts = {
+          timeout: 1000,
+          otherArgs: {options: {unbind: true}},
+        };
+
+        txn.request({client: 'SpannerClient', gaxOpts}, () => {});
+
+        const arg = REQUEST.lastCall.args[0];
+        assert.deepStrictEqual(arg.gaxOpts, {
+          timeout: 1000,
+          otherArgs: {
+            options: {unbind: true, affinityKey: txn._affinityKey},
+          },
+        });
+        // The caller supplied gax options must not be modified.
+        assert.deepStrictEqual(gaxOpts, {
+          timeout: 1000,
+          otherArgs: {options: {unbind: true}},
+        });
+      });
+
       it('should set the commonHeaders_', () => {
         assert.deepStrictEqual(snapshot.commonHeaders_, {
           [CLOUD_RESOURCE_HEADER]: snapshot.session.parent.formattedName_,
           [AFE_SERVER_TIMING_HEADER]: 'true',
         });
+      });
+
+      it('should not include leader-aware routing header in commonHeaders_ even when routeToLeaderEnabled is true', () => {
+        const s = new Snapshot(SESSION);
+        assert.strictEqual(
+          s.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should not include leader-aware routing header in commonHeaders_ when routeToLeaderEnabled is false', () => {
+        const s = new Snapshot(createSession({routeToLeaderEnabled: false}));
+        assert.strictEqual(
+          s.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
       });
     });
 
@@ -183,6 +315,13 @@ describe('Transaction', () => {
         assert.strictEqual(reqOpts.session, SESSION_NAME);
         assert.deepStrictEqual(gaxOpts, {});
         assert.deepStrictEqual(headers, snapshot.commonHeaders_);
+      });
+
+      it('should not include leader-aware routing header in beginTransaction request', () => {
+        snapshot.begin();
+
+        const {headers} = REQUEST.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
 
       it('should accept gaxOptions', done => {
@@ -292,6 +431,7 @@ describe('Transaction', () => {
 
       beforeEach(() => {
         PARTIAL_RESULT_STREAM.callsFake(makeRequest => makeRequest());
+        REQUEST_STREAM.callsFake(() => new EventEmitter());
       });
 
       it('should send the correct request', () => {
@@ -305,6 +445,21 @@ describe('Transaction', () => {
           ...snapshot.commonHeaders_,
           [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
         });
+      });
+
+      it('should not include leader-aware routing header in single-use read', () => {
+        snapshot.createReadStream(TABLE);
+
+        const {headers} = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
+      });
+
+      it('should not include leader-aware routing header in multi-use read', () => {
+        snapshot.id = 'transaction-id-123';
+        snapshot.createReadStream(TABLE);
+
+        const {headers} = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
 
       it('should use the transaction id if present', () => {
@@ -340,6 +495,26 @@ describe('Transaction', () => {
         const {reqOpts} = REQUEST_STREAM.lastCall.args[0];
 
         assert.deepStrictEqual(reqOpts.requestOptions, {requestTag});
+      });
+
+      it('should not mutate the original request object', () => {
+        const request = {
+          keys: ['1'],
+          ranges: [{}, {}],
+          columns: ['SingerId'],
+          json: true,
+          jsonOptions: {},
+          gaxOptions: {},
+          maxResumeRetries: 5,
+          requestOptions: {requestTag: 'tag'},
+          directedReadOptions: {},
+          columnsMetadata: {},
+        };
+        const requestCopy = Object.assign({}, request);
+
+        snapshot.createReadStream(TABLE, request);
+
+        assert.deepStrictEqual(request, requestCopy);
       });
 
       it('should send the correct `reqOpts`', () => {
@@ -531,10 +706,40 @@ describe('Transaction', () => {
         snapshot.end();
       });
 
+      it('should emit an "end" event when listener is attached after end in same tick', done => {
+        snapshot.end();
+        snapshot.on('end', done);
+      });
+
       it('should noop if already ended', done => {
         snapshot.on('end', done);
         snapshot.end();
         snapshot.end();
+      });
+
+      it('should unbind affinity key on end if multiplexed', done => {
+        const fakeUnbind = sandbox.stub();
+        const fakeStub = {getChannel: () => ({unbind: fakeUnbind})};
+        const fakeClient = {spannerStub: Promise.resolve(fakeStub)};
+        const fakeSpanner = {
+          clients_: new Map([['SpannerClient', fakeClient]]),
+        };
+        const fakeDatabase = {parent: {parent: fakeSpanner}};
+
+        const multiplexedSession = Object.assign({}, SESSION, {
+          parent: fakeDatabase,
+          metadata: {multiplexed: true},
+        });
+        const txn = new Snapshot(multiplexedSession);
+
+        txn.on('end', () => {
+          setTimeout(() => {
+            assert.strictEqual(fakeUnbind.callCount, 1);
+            assert.strictEqual(fakeUnbind.lastCall.args[0], txn._affinityKey);
+            done();
+          }, 10);
+        });
+        txn.end();
       });
     });
 
@@ -647,6 +852,805 @@ describe('Transaction', () => {
       });
     });
 
+    describe('run fast-path', () => {
+      const QUERY = {sql: 'SELECT * FROM `MyTable`'};
+
+      beforeEach(() => {
+        REQUEST_STREAM.resetHistory();
+        PARTIAL_RESULT_STREAM.resetHistory();
+      });
+
+      it('should execute single-chunk query via fast-path without partialResultStream', done => {
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 1);
+            const row = rows[0] as Row;
+            assert.strictEqual(row[0].name, 'col1');
+            assert.strictEqual(row[0].value, 'val1');
+            assert.deepStrictEqual(row.toJSON(), {col1: 'val1'});
+            assert.strictEqual(PARTIAL_RESULT_STREAM.called, false);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('val1')],
+          last: true,
+        });
+      });
+
+      it('should accept plain SQL string input on fast-path', done => {
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run('SELECT 1', (error, rows) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rows!.length, 1);
+            const row = rows![0] as Row;
+            assert.strictEqual(row[0].name, 'col1');
+            assert.strictEqual(row[0].value, 'val1');
+            assert.strictEqual(PARTIAL_RESULT_STREAM.called, false);
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('val1')],
+          last: true,
+        });
+      });
+
+      it('should seamlessly fall back to streaming for multi-chunk query', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const {
+          partialResultStream: realPartialResultStream,
+        } = require('../src/partial-result-stream');
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest: any, options: any) =>
+          realPartialResultStream(makeRequest, options),
+        );
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 2);
+            assert.strictEqual(PARTIAL_RESULT_STREAM.called, true);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        // Chunk 1: last = false
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('val1')],
+          last: false,
+          resumeToken: 'token1',
+        });
+
+        // Chunk 2: last = true
+        fakeRequestStream.push({
+          values: [convertToIValue('val2')],
+          last: true,
+        });
+        fakeRequestStream.push(null);
+      });
+
+      it('should fall back to streaming when first chunk has chunkedValue=true', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const {
+          partialResultStream: realPartialResultStream,
+        } = require('../src/partial-result-stream');
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest: any, options: any) =>
+          realPartialResultStream(makeRequest, options),
+        );
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(QUERY, (error, rows) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(PARTIAL_RESULT_STREAM.called, true);
+            assert.strictEqual(rows!.length, 1);
+            assert.strictEqual((rows![0] as Row)[0].value, 'hello world');
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('hello ')],
+          chunkedValue: true,
+          last: false,
+        });
+
+        setImmediate(() => {
+          fakeRequestStream.push({
+            values: [convertToIValue('world')],
+            last: true,
+          });
+          fakeRequestStream.push(null);
+        });
+      });
+
+      it('should update inline transaction ID and precommitToken on fast-path', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+        const fakeTxId = Buffer.from('tx-id-123');
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(snapshot.id, fakeTxId);
+            assert.strictEqual(PARTIAL_RESULT_STREAM.called, false);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            transaction: {id: fakeTxId},
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          precommitToken: {precommitToken: 'token-abc'},
+          values: [convertToIValue('val1')],
+          last: true,
+        });
+      });
+
+      it('should drain trailers in background without canceling request stream on chunk.last', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        const resumeSpy = sandbox.spy(fakeRequestStream, 'resume');
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 1);
+            assert.strictEqual(resumeSpy.called, true);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('val1')],
+          last: true,
+        });
+      });
+
+      it('should return decorated error with UNKNOWN code if decoding throws', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(
+          {sql: 'SELECT * FROM `MyTable`', json: true},
+          (err, rows) => {
+            try {
+              assert(err);
+              assert.strictEqual((err as any).code, grpc.status.UNKNOWN);
+              assert.strictEqual(rows.length, 0);
+              done();
+            } catch (error) {
+              done(error);
+            }
+          },
+        );
+
+        // Push chunk that causes integer overflow decoding error
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'INT64'}}],
+            },
+          },
+          values: [{stringValue: '9223372036854775807', kind: 'stringValue'}],
+          last: true,
+        });
+      });
+
+      it('should return error for invalid parameters', done => {
+        const fakeQuery = {
+          sql: 'SELECT * FROM `MyTable`',
+          params: {a: undefined},
+        };
+
+        snapshot.run(fakeQuery, (error, rows) => {
+          try {
+            assert(error);
+            assert.strictEqual(
+              error!.message,
+              'Value of type undefined not recognized.',
+            );
+            assert.strictEqual(rows!.length, 0);
+            assert.strictEqual(REQUEST_STREAM.called, false);
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+      });
+
+      it('should return error on non-retryable gRPC error', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        const testError = Object.assign(new Error('Invalid SQL syntax'), {
+          code: grpc.status.INVALID_ARGUMENT,
+        });
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.strictEqual(err, testError);
+            assert.strictEqual(rows.length, 0);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.emit('error', testError);
+      });
+
+      it('should trigger begin when non-aborted error occurs without transaction id in runner', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.id = undefined;
+        snapshot._useInRunner = true;
+        const beginStub = sandbox.stub(snapshot, 'begin').resolves();
+
+        const testError = Object.assign(new Error('Internal server error'), {
+          code: grpc.status.INTERNAL,
+        });
+
+        snapshot.run(QUERY, (error, rows) => {
+          try {
+            assert.strictEqual(error, testError);
+            assert.strictEqual(rows!.length, 0);
+            assert.strictEqual(beginStub.calledOnce, true);
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream.emit('error', testError);
+      });
+
+      it('should retry retryable error up to maxResumeRetries', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        let attempt = 0;
+        REQUEST_STREAM.callsFake(() => {
+          attempt++;
+          const stream = through.obj();
+          setImmediate(() => {
+            if (attempt === 1) {
+              stream.emit(
+                'error',
+                Object.assign(new Error('Unavailable'), {
+                  code: grpc.status.UNAVAILABLE,
+                }),
+              );
+            } else {
+              stream.push({
+                metadata: {
+                  rowType: {
+                    fields: [{name: 'col1', type: {code: 'STRING'}}],
+                  },
+                },
+                values: [convertToIValue('success')],
+                last: true,
+              });
+            }
+          });
+          return stream;
+        });
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(attempt, 2);
+            assert.strictEqual(rows.length, 1);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+      });
+
+      it('should handle empty result set when stream ends without chunks', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 0);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.end();
+      });
+
+      it('should preserve the same seqno across retries', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        let attempt = 0;
+        REQUEST_STREAM.callsFake(() => {
+          attempt++;
+          const stream = through.obj();
+          setImmediate(() => {
+            if (attempt === 1) {
+              stream.emit(
+                'error',
+                Object.assign(new Error('Unavailable'), {
+                  code: grpc.status.UNAVAILABLE,
+                }),
+              );
+            } else {
+              stream.push({
+                metadata: {
+                  rowType: {
+                    fields: [{name: 'col1', type: {code: 'STRING'}}],
+                  },
+                },
+                values: [convertToIValue('success')],
+                last: true,
+              });
+            }
+          });
+          return stream;
+        });
+
+        const initialSeqno = snapshot._seqno;
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(attempt, 2);
+            assert.strictEqual(rows.length, 1);
+            const firstSeqno = REQUEST_STREAM.firstCall.args[0].reqOpts.seqno;
+            const secondSeqno = REQUEST_STREAM.secondCall.args[0].reqOpts.seqno;
+            assert.strictEqual(firstSeqno, secondSeqno);
+            assert.strictEqual(firstSeqno, initialSeqno);
+            assert.strictEqual(snapshot._seqno, initialSeqno + 1);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+      });
+
+      it('should fall back to multi-chunk partialResultStream when result spans multiple chunks', done => {
+        const {
+          partialResultStream: realPartialResultStream,
+        } = require('../src/partial-result-stream');
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest: any, options: any) =>
+          realPartialResultStream(makeRequest, options),
+        );
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(rows.length, 2);
+            assert.strictEqual(rows[0][0].value, 'first');
+            assert.strictEqual(rows[1][0].value, 'second');
+            assert.strictEqual(PARTIAL_RESULT_STREAM.callCount, 1);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('first')],
+          last: false,
+          resumeToken: 'tok1',
+        });
+        fakeRequestStream.push({
+          values: [convertToIValue('second')],
+          last: true,
+        });
+        fakeRequestStream.push(null);
+      });
+
+      it('should propagate error from multi-chunk fallback stream', done => {
+        const {
+          partialResultStream: realPartialResultStream,
+        } = require('../src/partial-result-stream');
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest: any, options: any) =>
+          realPartialResultStream(makeRequest, options),
+        );
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        const testError = Object.assign(new Error('Mid-stream error'), {
+          code: grpc.status.CANCELLED,
+        });
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert(err);
+            assert.strictEqual((err as any).code, grpc.status.CANCELLED);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('first')],
+          last: false,
+        });
+        fakeRequestStream.destroy(testError);
+      });
+
+      it('should retry multi-chunk fallback stream with resumeToken on retryable error', done => {
+        const {
+          partialResultStream: realPartialResultStream,
+        } = require('../src/partial-result-stream');
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest: any, options: any) =>
+          realPartialResultStream(makeRequest, options),
+        );
+        const fakeRequestStream1 = through.obj();
+        const fakeRequestStream2 = through.obj();
+        let requestAttempt = 0;
+
+        REQUEST_STREAM.callsFake(() => {
+          requestAttempt++;
+          if (requestAttempt === 1) {
+            return fakeRequestStream1;
+          }
+          return fakeRequestStream2;
+        });
+
+        snapshot.run(QUERY, (error, rows) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(requestAttempt, 2);
+            assert.strictEqual(rows!.length, 2);
+            assert.strictEqual((rows![0] as Row)[0].value, 'first');
+            assert.strictEqual((rows![1] as Row)[0].value, 'second');
+            const secondCallReqOpts = REQUEST_STREAM.secondCall.args[0].reqOpts;
+            assert.strictEqual(secondCallReqOpts.resumeToken, 'resume-token-1');
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream1.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('first')],
+          last: false,
+          resumeToken: 'resume-token-1',
+        });
+
+        setImmediate(() => {
+          fakeRequestStream1.emit(
+            'error',
+            Object.assign(new Error('Unavailable'), {
+              code: grpc.status.UNAVAILABLE,
+            }),
+          );
+
+          setImmediate(() => {
+            fakeRequestStream2.push({
+              values: [convertToIValue('second')],
+              last: true,
+            });
+            fakeRequestStream2.push(null);
+          });
+        });
+      });
+
+      it('should retry when isRetryableInternalError occurs', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        let attempt = 0;
+        REQUEST_STREAM.callsFake(() => {
+          attempt++;
+          const stream = through.obj();
+          setImmediate(() => {
+            if (attempt === 1) {
+              stream.emit(
+                'error',
+                Object.assign(
+                  new Error(
+                    'Received unexpected EOS on DATA frame from server',
+                  ),
+                  {code: grpc.status.INTERNAL},
+                ),
+              );
+            } else {
+              stream.push({
+                metadata: {
+                  rowType: {
+                    fields: [{name: 'col1', type: {code: 'STRING'}}],
+                  },
+                },
+                values: [convertToIValue('recovered')],
+                last: true,
+              });
+            }
+          });
+          return stream;
+        });
+
+        snapshot.run(QUERY, (err, rows) => {
+          try {
+            assert.ifError(err);
+            assert.strictEqual(attempt, 2);
+            assert.strictEqual(rows.length, 1);
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+      });
+
+      it('should stop retrying when attempts exceed maxResumeRetries', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        let attempts = 0;
+        REQUEST_STREAM.callsFake(() => {
+          attempts++;
+          const stream = through.obj();
+          setImmediate(() => {
+            stream.emit(
+              'error',
+              Object.assign(new Error('Unavailable'), {
+                code: grpc.status.UNAVAILABLE,
+              }),
+            );
+          });
+          return stream;
+        });
+
+        snapshot.run({sql: 'SELECT 1', maxResumeRetries: 1}, (err, rows) => {
+          try {
+            assert(err);
+            assert.strictEqual((err as any).code, grpc.status.UNAVAILABLE);
+            assert.strictEqual(attempts, 2); // attempt 1 + 1 retry
+            done();
+          } catch (error) {
+            done(error);
+          }
+        });
+      });
+
+      it('should not retry when elapsed time exceeds timeout', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        let attempts = 0;
+        REQUEST_STREAM.callsFake(() => {
+          attempts++;
+          const stream = through.obj();
+          setImmediate(() => {
+            stream.emit(
+              'error',
+              Object.assign(new Error('Unavailable'), {
+                code: grpc.status.UNAVAILABLE,
+              }),
+            );
+          });
+          return stream;
+        });
+
+        snapshot.run(
+          {sql: 'SELECT 1', gaxOptions: {timeout: -1}},
+          (error, rows) => {
+            try {
+              assert(error);
+              assert.strictEqual(
+                (error as any).code,
+                grpc.status.DEADLINE_EXCEEDED,
+              );
+              assert.strictEqual(attempts, 1); // no retries allowed because elapsed > timeout
+              done();
+            } catch (assertionError) {
+              done(assertionError);
+            }
+          },
+        );
+      });
+
+      it('should fall back to _runLegacy when runStream is overridden on Snapshot', done => {
+        snapshot.runStream = () => through.obj() as any;
+        const runLegacyStub = sandbox
+          .stub(snapshot as any, '_runLegacy')
+          .callsFake((query, callback: any) => {
+            assert.strictEqual(query, QUERY);
+            callback(null, [{id: 'from_stream'}]);
+          });
+
+        snapshot.run(QUERY, (err, rows) => {
+          assert.ifError(err);
+          assert.deepStrictEqual(rows, [{id: 'from_stream'}]);
+          assert.strictEqual(runLegacyStub.callCount, 1);
+          done();
+        });
+      });
+
+      it('should support options.startRunSpan = false', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        snapshot._run(
+          QUERY,
+          (err, rows) => {
+            try {
+              assert.ifError(err);
+              assert.strictEqual(rows.length, 1);
+              done();
+            } catch (error) {
+              done(error);
+            }
+          },
+          {startRunSpan: false},
+        );
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('ok')],
+          last: true,
+        });
+      });
+
+      it('should ensure complete is idempotent in fallbackStream path', done => {
+        let callbackCalls = 0;
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        const fakeFallbackStream = through.obj();
+        PARTIAL_RESULT_STREAM.returns(fakeFallbackStream);
+
+        snapshot.run(QUERY, (err, rows) => {
+          callbackCalls++;
+          try {
+            assert(err);
+            assert.strictEqual((err as any).message, 'Stream failure');
+            assert.strictEqual(callbackCalls, 1);
+          } catch (e) {
+            done(e);
+          }
+        });
+
+        // First chunk triggers fallback path
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'id', type: {code: 'INT64'}}],
+            },
+          },
+          values: [convertToIValue(1)],
+          last: false,
+        });
+
+        setImmediate(() => {
+          // Emit error, then end
+          fakeFallbackStream.emit('error', new Error('Stream failure'));
+          fakeFallbackStream.emit('end');
+
+          setImmediate(() => {
+            assert.strictEqual(callbackCalls, 1);
+            done();
+          });
+        });
+      });
+
+      it('should allow retries beyond 10 attempts as long as elapsed time is within timeout', done => {
+        PARTIAL_RESULT_STREAM.resetHistory();
+        let attempts = 0;
+        REQUEST_STREAM.callsFake(() => {
+          attempts++;
+          const stream = through.obj();
+          setImmediate(() => {
+            if (attempts < 15) {
+              stream.emit(
+                'error',
+                Object.assign(new Error('Unavailable'), {
+                  code: grpc.status.UNAVAILABLE,
+                }),
+              );
+            } else {
+              stream.push({
+                metadata: {
+                  rowType: {
+                    fields: [{name: 'id', type: {code: 'INT64'}}],
+                  },
+                },
+                values: [convertToIValue(42)],
+                last: true,
+              });
+            }
+          });
+          return stream;
+        });
+
+        snapshot.run(
+          {sql: 'SELECT 1', gaxOptions: {timeout: 5000}},
+          (err, rows) => {
+            try {
+              assert.ifError(err);
+              assert.strictEqual(attempts, 15);
+              assert.strictEqual(rows!.length, 1);
+              done();
+            } catch (error) {
+              done(error);
+            }
+          },
+        );
+      });
+    });
+
     describe('runStream', () => {
       const QUERY = {
         sql: 'SELECT * FROM `MyTable`',
@@ -654,6 +1658,7 @@ describe('Transaction', () => {
 
       beforeEach(() => {
         PARTIAL_RESULT_STREAM.callsFake(makeRequest => makeRequest());
+        REQUEST_STREAM.callsFake(() => new EventEmitter());
       });
 
       it('should send the correct request', () => {
@@ -667,6 +1672,21 @@ describe('Transaction', () => {
           ...snapshot.commonHeaders_,
           [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
         });
+      });
+
+      it('should not include leader-aware routing header in single-use read-only query', () => {
+        snapshot.runStream(QUERY);
+
+        const {headers} = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
+      });
+
+      it('should not include leader-aware routing header in multi-use read-only query', () => {
+        snapshot.id = 'transaction-id-123';
+        snapshot.runStream(QUERY);
+
+        const {headers} = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
 
       it('should use the transaction id if present', () => {
@@ -691,6 +1711,68 @@ describe('Transaction', () => {
         const {reqOpts} = REQUEST_STREAM.lastCall.args[0];
 
         assert.deepStrictEqual(reqOpts.transaction, expectedTransaction);
+      });
+
+      it('should not mutate the original query object', () => {
+        const query = {
+          sql: 'SELECT * FROM `MyTable` WHERE id = @id',
+          json: true,
+          jsonOptions: {},
+          gaxOptions: {},
+          maxResumeRetries: 5,
+          params: {id: '1'},
+          types: {},
+          requestOptions: {requestTag: 'foo'},
+          columnsMetadata: {},
+        };
+        const queryCopy = {
+          sql: query.sql,
+          json: true,
+          jsonOptions: {},
+          gaxOptions: {},
+          maxResumeRetries: 5,
+          params: Object.assign({}, query.params),
+          types: Object.assign({}, query.types),
+          requestOptions: Object.assign({}, query.requestOptions),
+          columnsMetadata: {},
+        };
+
+        snapshot.requestOptions = {transactionTag: 'tx-tag'};
+        snapshot.runStream(query);
+
+        assert.deepStrictEqual(query, queryCopy);
+      });
+
+      it('should preserve parameters and metadata on multiple makeRequest calls', () => {
+        const encodeParamsSpy = sandbox.spy(Snapshot, 'encodeParams');
+        const query = {
+          sql: 'SELECT * FROM `MyTable` WHERE id = @id',
+          params: {id: '1'},
+          types: {id: 'string'},
+          requestOptions: {requestTag: 'custom-tag'},
+        };
+        snapshot.runStream(query);
+
+        const makeRequest = PARTIAL_RESULT_STREAM.lastCall.args[0];
+        makeRequest();
+        const firstCallReqOpts = REQUEST_STREAM.lastCall.args[0].reqOpts;
+
+        makeRequest('resume-token');
+        const secondCallReqOpts = REQUEST_STREAM.lastCall.args[0].reqOpts;
+
+        assert.strictEqual(encodeParamsSpy.callCount, 1);
+        assert.deepStrictEqual(
+          firstCallReqOpts.params,
+          secondCallReqOpts.params,
+        );
+        assert.deepStrictEqual(
+          firstCallReqOpts.paramTypes,
+          secondCallReqOpts.paramTypes,
+        );
+        assert.deepStrictEqual(
+          firstCallReqOpts.requestOptions,
+          secondCallReqOpts.requestOptions,
+        );
       });
 
       it('should set request tag', () => {
@@ -773,6 +1855,22 @@ describe('Transaction', () => {
 
         assert.strictEqual(call1.reqOpts.seqno, 1);
         assert.strictEqual(call2.reqOpts.seqno, 2);
+      });
+
+      it('should preserve the same `seqno` across makeRequest retries and resumptions', () => {
+        snapshot.runStream(QUERY);
+
+        const makeRequest = PARTIAL_RESULT_STREAM.lastCall.args[0];
+        makeRequest();
+        const call1 = REQUEST_STREAM.lastCall.args[0];
+
+        // Simulate transaction ID arrival and stream resumption
+        snapshot.id = 'tx-123';
+        makeRequest('resume-token');
+        const call2 = REQUEST_STREAM.lastCall.args[0];
+
+        assert.strictEqual(call1.reqOpts.seqno, 1);
+        assert.strictEqual(call2.reqOpts.seqno, 1);
       });
 
       it('should pass a stream to `PartialResultStream`', () => {
@@ -1037,6 +2135,14 @@ describe('Transaction', () => {
 
         assert.deepStrictEqual(keySet, fakeKeySet);
       });
+
+      it('should not mutate the original keySet object', () => {
+        const fakeKeySet = {keys: []};
+        const fakeKeySetCopy = Object.assign({}, fakeKeySet);
+        Snapshot.encodeKeySet({keySet: fakeKeySet, keys: ['a']});
+
+        assert.deepStrictEqual(fakeKeySet, fakeKeySetCopy);
+      });
     });
 
     describe('encodeTimestampBounds', () => {
@@ -1202,6 +2308,81 @@ describe('Transaction', () => {
 
         assert.strictEqual(paramTypes.a, expectedTypes.a);
       });
+
+      it('should not mutate the original types or paramTypes objects', () => {
+        const fakeParams = {a: 'foo', b: 3};
+        const fakeTypes = {b: 'number'};
+        const fakeParamTypes = {};
+
+        Snapshot.encodeParams({
+          params: fakeParams,
+          types: fakeTypes,
+          paramTypes: fakeParamTypes,
+        });
+
+        assert.deepStrictEqual(fakeTypes, {b: 'number'});
+        assert.deepStrictEqual(fakeParamTypes, {});
+      });
+
+      it('should return empty params and paramTypes for parameterless queries', () => {
+        const result = Snapshot.encodeParams({});
+        assert.deepStrictEqual(result, {
+          params: {fields: {}},
+          paramTypes: {},
+        });
+      });
+
+      it('should omit TYPE_CODE_UNSPECIFIED when SPANNER_ENABLE_UUID_AS_UNTYPED is true', () => {
+        const savedEnv = process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'];
+        sandbox.stub(process, 'emitWarning');
+        try {
+          process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] = 'true';
+          const fakeParams = {a: 'some-uuid'};
+          sandbox.stub(codec, 'getType').returns({type: 'unspecified'});
+          sandbox.stub(codec, 'createTypeObject').returns({
+            code: 'TYPE_CODE_UNSPECIFIED',
+          } as any);
+
+          const {paramTypes} = Snapshot.encodeParams({params: fakeParams});
+          assert.strictEqual(paramTypes.a, undefined);
+        } finally {
+          if (savedEnv === undefined) {
+            delete process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'];
+          } else {
+            process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] = savedEnv;
+          }
+        }
+      });
+    });
+
+    describe('configureTagOptions', () => {
+      it('should not mutate the original requestOptions object', () => {
+        const originalRequestOptions = {requestTag: 'tag-1'};
+        const copy = Object.assign({}, originalRequestOptions);
+        const configured = snapshot.configureTagOptions(
+          false,
+          'tx-tag',
+          originalRequestOptions,
+        );
+
+        assert.deepStrictEqual(originalRequestOptions, copy);
+        assert.deepStrictEqual(configured, {
+          requestTag: 'tag-1',
+          transactionTag: 'tx-tag',
+        });
+      });
+
+      it('should return a new object when singleUse is true', () => {
+        const originalRequestOptions = {requestTag: 'tag-1'};
+        const configured = snapshot.configureTagOptions(
+          true,
+          'tx-tag',
+          originalRequestOptions,
+        );
+
+        assert.notStrictEqual(configured, originalRequestOptions);
+        assert.deepStrictEqual(configured, originalRequestOptions);
+      });
     });
   });
 
@@ -1293,6 +2474,32 @@ describe('Transaction', () => {
         assert.strictEqual(callback.callCount, 1);
         assert.strictEqual(callback.args[0][1], Math.floor(fakeRowCount));
       });
+
+      it('should execute end-to-end via fast-path and return rowCountExact', done => {
+        const fakeRequestStream = through.obj();
+        REQUEST_STREAM.returns(fakeRequestStream);
+
+        dml.runUpdate(SQL, (error, rowCount) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rowCount, 42);
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream.push({
+          metadata: {
+            rowType: {fields: []},
+          },
+          stats: {
+            rowCount: 'rowCountExact',
+            rowCountExact: 42,
+          },
+          last: true,
+        });
+      });
     });
   });
 
@@ -1316,6 +2523,63 @@ describe('Transaction', () => {
 
       it('should inherit from Dml', () => {
         assert(transaction instanceof Dml);
+      });
+
+      it('should precompute leader-aware routing header in commonHeaders_ when routeToLeaderEnabled is true', () => {
+        const txn = new Transaction(SESSION);
+        assert.strictEqual(
+          txn.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          'true',
+        );
+      });
+
+      it('should not mutate session.commonHeaders_ when routeToLeaderEnabled is true', () => {
+        const session = createSession({routeToLeaderEnabled: true});
+        const originalHeaders = {...session.commonHeaders_};
+        const txn = new Transaction(session);
+        assert.strictEqual(
+          txn.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          'true',
+        );
+        assert.deepStrictEqual(session.commonHeaders_, originalHeaders);
+        assert.strictEqual(
+          session.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should not include leader-aware routing header in commonHeaders_ when routeToLeaderEnabled is false', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        assert.strictEqual(
+          txn.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is undefined', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: undefined}),
+        );
+        assert.strictEqual(
+          txn.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should safely initialize when session lacks parent hierarchy', () => {
+        const mockSession = {
+          request: sandbox.stub(),
+          requestStream: sandbox.stub(),
+          parent: {formattedName_: 'database-name'},
+          commonHeaders_: {},
+        };
+        const txn = new Transaction(mockSession as unknown as Session);
+        assert.strictEqual(
+          txn.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
       });
     });
 
@@ -1473,6 +2737,17 @@ describe('Transaction', () => {
             transaction.commonHeaders_,
           ),
         );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const stub = sandbox.stub(txn, 'request');
+        txn.batchUpdate(STRING_STATEMENTS, assert.ifError);
+
+        const {headers} = stub.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
 
       it('should encode sql string statements', () => {
@@ -1637,6 +2912,17 @@ describe('Transaction', () => {
             transaction.commonHeaders_,
           ),
         );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const stub = sandbox.stub(txn, 'request');
+        txn.begin();
+
+        const {headers} = stub.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
 
       it('should accept gaxOptions', done => {
@@ -1854,6 +3140,29 @@ describe('Transaction', () => {
             transaction.commonHeaders_,
           ),
         );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const stub = sandbox.stub(txn, 'request');
+        txn.commit();
+
+        const {headers} = stub.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
+      });
+
+      it('should inject _unbindGaxOpts for commit if _affinityKey is present', () => {
+        const stub = sandbox.stub(transaction, 'request');
+        (transaction as any)._affinityKey = 'mux-affinity-1';
+        const unbindOpts = {otherArgs: {options: {unbind: true}}};
+        (transaction as any)._unbindGaxOpts = unbindOpts;
+
+        transaction.commit();
+
+        const {gaxOpts} = stub.lastCall.args[0];
+        assert.deepStrictEqual(gaxOpts, unbindOpts);
       });
 
       it('should accept gaxOptions as CallOptions', done => {
@@ -2312,6 +3621,98 @@ describe('Transaction', () => {
       });
     });
 
+    describe('queueSend', () => {
+      it('should queue a "send" mutation', () => {
+        const fakeQueue = 'my-queue';
+        const fakeKey = 'message-123';
+        const fakePayload = {foo: 'bar'};
+        const fakeDeliverTime = new Date('2023-01-01T00:00:00Z');
+
+        const stub = sandbox.stub(transaction, 'request');
+
+        transaction.queueSend(fakeQueue, fakeKey, {
+          payload: fakePayload,
+          deliverTime: fakeDeliverTime,
+        });
+        transaction.commit();
+
+        const {reqOpts} = stub.lastCall.args[0];
+        const {queue, key, payload, deliverTime} = reqOpts.mutations[0].send;
+
+        assert.strictEqual(queue, fakeQueue);
+        assert.deepStrictEqual(key, {
+          values: [{stringValue: fakeKey}],
+        });
+        assert.deepStrictEqual(payload, {
+          stringValue: '{"foo":"bar"}',
+        });
+        assert.deepStrictEqual(deliverTime, {
+          seconds: 1672531200,
+          nanos: 0,
+        });
+      });
+
+      it('should queue a "send" mutation without optional parameters', () => {
+        const fakeQueue = 'my-queue';
+        const fakeKey = 'message-123';
+
+        const stub = sandbox.stub(transaction, 'request');
+
+        transaction.queueSend(fakeQueue, fakeKey);
+        transaction.commit();
+
+        const {reqOpts} = stub.lastCall.args[0];
+        const {queue, key, payload, deliverTime} = reqOpts.mutations[0].send;
+
+        assert.strictEqual(queue, fakeQueue);
+        assert.deepStrictEqual(key, {
+          values: [{stringValue: fakeKey}],
+        });
+        assert.strictEqual(payload, undefined);
+        assert.strictEqual(deliverTime, undefined);
+      });
+    });
+
+    describe('queueAck', () => {
+      it('should queue an "ack" mutation', () => {
+        const fakeQueue = 'my-queue';
+        const fakeKey = 'message-123';
+
+        const stub = sandbox.stub(transaction, 'request');
+
+        transaction.queueAck(fakeQueue, fakeKey, {ignoreNotFound: true});
+        transaction.commit();
+
+        const {reqOpts} = stub.lastCall.args[0];
+        const {queue, key, ignoreNotFound} = reqOpts.mutations[0].ack;
+
+        assert.strictEqual(queue, fakeQueue);
+        assert.deepStrictEqual(key, {
+          values: [{stringValue: fakeKey}],
+        });
+        assert.strictEqual(ignoreNotFound, true);
+      });
+
+      it('should queue an "ack" mutation without optional parameters', () => {
+        const fakeQueue = 'my-queue';
+        const fakeKey = 'message-123';
+
+        const stub = sandbox.stub(transaction, 'request');
+
+        transaction.queueAck(fakeQueue, fakeKey);
+        transaction.commit();
+
+        const {reqOpts} = stub.lastCall.args[0];
+        const {queue, key, ignoreNotFound} = reqOpts.mutations[0].ack;
+
+        assert.strictEqual(queue, fakeQueue);
+        assert.deepStrictEqual(key, {
+          values: [{stringValue: fakeKey}],
+        });
+        assert.strictEqual(ignoreNotFound, undefined);
+      });
+    });
+
     describe('replace', () => {
       it('should queue a "replace" mutation', () => {
         const fakeTable = 'my-table-123';
@@ -2375,10 +3776,35 @@ describe('Transaction', () => {
         assert.deepStrictEqual(
           headers,
           Object.assign(
-            {[LEADER_AWARE_ROUTING_HEADER]: true},
+            {[LEADER_AWARE_ROUTING_HEADER]: 'true'},
             transaction.commonHeaders_,
           ),
         );
+        assert.notStrictEqual(headers, transaction.commonHeaders_);
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const stub = sandbox.stub(txn, 'request');
+        txn.id = 'transaction-id-123';
+        txn.rollback();
+
+        const {headers} = stub.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
+      });
+
+      it('should inject _unbindGaxOpts for rollback if _affinityKey is present', () => {
+        const stub = sandbox.stub(transaction, 'request');
+        (transaction as any)._affinityKey = 'mux-affinity-1';
+        const unbindOpts = {otherArgs: {options: {unbind: true}}};
+        (transaction as any)._unbindGaxOpts = unbindOpts;
+
+        transaction.rollback();
+
+        const {gaxOpts} = stub.lastCall.args[0];
+        assert.deepStrictEqual(gaxOpts, unbindOpts);
       });
 
       it('should accept gaxOptions', done => {
@@ -2702,6 +4128,332 @@ describe('Transaction', () => {
       });
     });
 
+    describe('run', () => {
+      beforeEach(() => {
+        REQUEST_STREAM.reset();
+        REQUEST_STREAM.resetHistory();
+        PARTIAL_RESULT_STREAM.reset();
+        PARTIAL_RESULT_STREAM.resetHistory();
+      });
+
+      it('should handle parallel queries on an un-begun read-write transaction', done => {
+        const fakeRequestStream1 = through.obj();
+        const fakeRequestStream2 = through.obj();
+        let requestCount = 0;
+
+        REQUEST_STREAM.callsFake(() => {
+          requestCount++;
+          if (requestCount === 1) {
+            return fakeRequestStream1;
+          }
+          return fakeRequestStream2;
+        });
+
+        const fakeTransactionId = Buffer.from('tx-id-parallel');
+        let query1Done = false;
+        let query2Done = false;
+
+        const checkBothDone = () => {
+          if (query1Done && query2Done) {
+            try {
+              assert.strictEqual(transaction.id, fakeTransactionId);
+              assert.strictEqual(PARTIAL_RESULT_STREAM.called, false);
+              assert.strictEqual(requestCount, 2);
+              const firstCallReqOpts = REQUEST_STREAM.firstCall.args[0].reqOpts;
+              const secondCallReqOpts =
+                REQUEST_STREAM.secondCall.args[0].reqOpts;
+              assert.deepStrictEqual(firstCallReqOpts.transaction, {
+                begin: {
+                  readWrite: {
+                    multiplexedSessionPreviousTransactionId: undefined,
+                  },
+                  isolationLevel: IsolationLevel.ISOLATION_LEVEL_UNSPECIFIED,
+                },
+              });
+              assert.deepStrictEqual(secondCallReqOpts.transaction, {
+                id: fakeTransactionId,
+              });
+              done();
+            } catch (error) {
+              done(error);
+            }
+          }
+        };
+
+        transaction.run({sql: 'SELECT 1'}, (error: any, rows: any) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rows!.length, 1);
+            assert.strictEqual((rows![0] as Row)[0].value, 'first');
+            query1Done = true;
+            checkBothDone();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        transaction.run({sql: 'SELECT 2'}, (error: any, rows: any) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rows!.length, 1);
+            assert.strictEqual((rows![0] as Row)[0].value, 'second');
+            query2Done = true;
+            checkBothDone();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream1.push({
+          metadata: {
+            transaction: {id: fakeTransactionId},
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('first')],
+          last: true,
+        });
+
+        fakeRequestStream2.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('second')],
+          last: true,
+        });
+      });
+
+      it('should fall back to stream for queued parallel request returning multiple chunks', done => {
+        const {
+          partialResultStream: realPartialResultStream,
+        } = require('../src/partial-result-stream');
+        PARTIAL_RESULT_STREAM.callsFake((makeRequest: any, options: any) =>
+          realPartialResultStream(makeRequest, options),
+        );
+        const fakeRequestStream1 = through.obj();
+        const fakeRequestStream2 = through.obj();
+        let requestCount = 0;
+
+        REQUEST_STREAM.callsFake(() => {
+          requestCount++;
+          if (requestCount === 1) {
+            return fakeRequestStream1;
+          }
+          return fakeRequestStream2;
+        });
+
+        const fakeTransactionId = Buffer.from('tx-id-queued-multi-chunk');
+        let query1Done = false;
+        let query2Done = false;
+
+        const checkBothDone = () => {
+          if (query1Done && query2Done) {
+            try {
+              assert.strictEqual(transaction.id, fakeTransactionId);
+              assert.strictEqual(requestCount, 2);
+              done();
+            } catch (assertionError) {
+              done(assertionError);
+            }
+          }
+        };
+
+        transaction.run({sql: 'SELECT 1'}, (error: any, rows: any) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rows!.length, 1);
+            assert.strictEqual((rows![0] as Row)[0].value, 'first');
+            query1Done = true;
+            checkBothDone();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        transaction.run({sql: 'SELECT 2'}, (error: any, rows: any) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rows!.length, 2);
+            assert.strictEqual((rows![0] as Row)[0].value, 'chunk1-val');
+            assert.strictEqual((rows![1] as Row)[0].value, 'chunk2-val');
+            query2Done = true;
+            checkBothDone();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        // Query 1 completes via fast-path with inline transaction id
+        fakeRequestStream1.push({
+          metadata: {
+            transaction: {id: fakeTransactionId},
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('first')],
+          last: true,
+        });
+
+        // Query 2 is released from queue and returns multiple chunks, falling back to stream
+        setImmediate(() => {
+          fakeRequestStream2.push({
+            metadata: {
+              rowType: {
+                fields: [{name: 'col2', type: {code: 'STRING'}}],
+              },
+            },
+            values: [convertToIValue('chunk1-val')],
+            last: false,
+            resumeToken: 'resume-token-query2',
+          });
+          setImmediate(() => {
+            fakeRequestStream2.push({
+              values: [convertToIValue('chunk2-val')],
+              last: true,
+            });
+            fakeRequestStream2.push(null);
+          });
+        });
+      });
+
+      it('should update inline transaction ID and release waiting queries even if row decoding throws', done => {
+        const fakeRequestStream1 = through.obj();
+        const fakeRequestStream2 = through.obj();
+        let requestCount = 0;
+
+        REQUEST_STREAM.callsFake(() => {
+          requestCount++;
+          if (requestCount === 1) {
+            return fakeRequestStream1;
+          }
+          return fakeRequestStream2;
+        });
+
+        const fakeTransactionId = Buffer.from('tx-id-decode-error');
+        let query1Done = false;
+        let query2Done = false;
+
+        const checkBothDone = () => {
+          if (query1Done && query2Done) {
+            try {
+              assert.strictEqual(transaction.id, fakeTransactionId);
+              assert.strictEqual(requestCount, 2);
+              done();
+            } catch (assertionError) {
+              done(assertionError);
+            }
+          }
+        };
+
+        transaction.run(
+          {sql: 'SELECT 1', json: true},
+          (error: any, rows: any) => {
+            try {
+              assert(error);
+              assert.strictEqual((error as any).code, grpc.status.UNKNOWN);
+              assert.strictEqual(rows!.length, 0);
+              query1Done = true;
+              checkBothDone();
+            } catch (assertionError) {
+              done(assertionError);
+            }
+          },
+        );
+
+        transaction.run({sql: 'SELECT 2'}, (error: any, rows: any) => {
+          try {
+            assert.ifError(error);
+            assert.strictEqual(rows!.length, 1);
+            assert.strictEqual((rows![0] as Row)[0].value, 'second');
+            query2Done = true;
+            checkBothDone();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        fakeRequestStream1.push({
+          metadata: {
+            transaction: {id: fakeTransactionId},
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'INT64'}}],
+            },
+          },
+          values: [{stringValue: '9223372036854775807', kind: 'stringValue'}],
+          last: true,
+        });
+
+        fakeRequestStream2.push({
+          metadata: {
+            rowType: {
+              fields: [{name: 'col1', type: {code: 'STRING'}}],
+            },
+          },
+          values: [convertToIValue('second')],
+          last: true,
+        });
+      });
+
+      it('should fail waiting queries with an error if transaction ends before inline begin finishes', done => {
+        const fakeRequestStream1 = through.obj();
+        let requestCount = 0;
+
+        REQUEST_STREAM.callsFake(() => {
+          requestCount++;
+          return fakeRequestStream1;
+        });
+
+        transaction.run({sql: 'SELECT 1'}, () => {});
+        transaction.run({sql: 'SELECT 2'}, err => {
+          try {
+            assert(err);
+            assert.strictEqual(err!.message, 'Transaction has ended.');
+            assert.strictEqual(requestCount, 1);
+            fakeRequestStream1.end();
+            done();
+          } catch (assertionError) {
+            done(assertionError);
+          }
+        });
+
+        assert.strictEqual(requestCount, 1);
+        transaction.end();
+      });
+
+      it('should reject promise-based waiting query when transaction ends before inline begin finishes', async () => {
+        const fakeRequestStream1 = through.obj();
+        let requestCount = 0;
+
+        REQUEST_STREAM.callsFake(() => {
+          requestCount++;
+          return fakeRequestStream1;
+        });
+
+        transaction.run({sql: 'SELECT 1'}, () => {});
+        const waitingPromise = new Promise((resolve, reject) => {
+          transaction.run({sql: 'SELECT 2'}, (err, rows) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(rows);
+            }
+          });
+        });
+
+        transaction.end();
+
+        await assert.rejects(waitingPromise, {
+          message: 'Transaction has ended.',
+        });
+        assert.strictEqual(requestCount, 1);
+        fakeRequestStream1.end();
+      });
+    });
+
     describe('runStream', () => {
       before(() => {
         PARTIAL_RESULT_STREAM.callsFake(makeRequest => makeRequest());
@@ -2729,6 +4481,25 @@ describe('Transaction', () => {
         };
 
         transaction.runStream(QUERY);
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', done => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const QUERY: ExecuteSqlRequest = {
+          sql: 'SELET * FROM `MyTable`',
+        };
+
+        txn.requestStream = config => {
+          assert.strictEqual(
+            config.headers[LEADER_AWARE_ROUTING_HEADER],
+            undefined,
+          );
+          done();
+        };
+
+        txn.runStream(QUERY);
       });
 
       it('should set transaction tag when not `singleUse`', done => {
@@ -2801,6 +4572,17 @@ describe('Transaction', () => {
             transaction.commonHeaders_,
           ),
         );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+        const txn = new Transaction(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const TABLE = 'my-table-123';
+        txn.createReadStream(TABLE);
+
+        const {headers} = REQUEST_STREAM.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
 
       it('should set transaction tag if not `singleUse`', () => {
@@ -2939,6 +4721,65 @@ describe('Transaction', () => {
       it('should inherit from Dml', () => {
         assert(pdml instanceof Dml);
       });
+
+      it('should precompute leader-aware routing header in commonHeaders_ when routeToLeaderEnabled is true', () => {
+        const partitionedDml = new PartitionedDml(SESSION);
+        assert.strictEqual(
+          partitionedDml.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          'true',
+        );
+      });
+
+      it('should not mutate session.commonHeaders_ when routeToLeaderEnabled is true', () => {
+        const session = createSession({routeToLeaderEnabled: true});
+        const originalHeaders = {...session.commonHeaders_};
+        const partitionedDml = new PartitionedDml(session);
+        assert.strictEqual(
+          partitionedDml.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          'true',
+        );
+        assert.deepStrictEqual(session.commonHeaders_, originalHeaders);
+        assert.strictEqual(
+          session.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should not include leader-aware routing header in commonHeaders_ when routeToLeaderEnabled is false', () => {
+        const partitionedDml = new PartitionedDml(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        assert.strictEqual(
+          partitionedDml.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is undefined', () => {
+        const partitionedDml = new PartitionedDml(
+          createSession({routeToLeaderEnabled: undefined}),
+        );
+        assert.strictEqual(
+          partitionedDml.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
+
+      it('should safely initialize when session lacks parent hierarchy', () => {
+        const mockSession = {
+          request: sandbox.stub(),
+          requestStream: sandbox.stub(),
+          parent: {formattedName_: 'database-name'},
+          commonHeaders_: {},
+        };
+        const partitionedDml = new PartitionedDml(
+          mockSession as unknown as Session,
+        );
+        assert.strictEqual(
+          partitionedDml.commonHeaders_[LEADER_AWARE_ROUTING_HEADER],
+          undefined,
+        );
+      });
     });
 
     describe('begin', () => {
@@ -2958,6 +4799,17 @@ describe('Transaction', () => {
             pdml.commonHeaders_,
           ),
         );
+      });
+
+      it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+        const partitionedDml = new PartitionedDml(
+          createSession({routeToLeaderEnabled: false}),
+        );
+        const stub = sandbox.stub(partitionedDml, 'request');
+        partitionedDml.begin();
+
+        const {headers} = stub.lastCall.args[0];
+        assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       });
     });
 

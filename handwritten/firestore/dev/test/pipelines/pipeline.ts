@@ -19,7 +19,7 @@ import {expect} from 'chai';
 import * as sinon from 'sinon';
 import {createInstance, stream} from '../util/helpers';
 import {google} from '../../protos/firestore_v1_proto_api';
-import {Timestamp} from '../../src';
+import {Firestore, Timestamp} from '../../src';
 import IExecutePipelineRequest = google.firestore.v1.IExecutePipelineRequest;
 import IExecutePipelineResponse = google.firestore.v1.IExecutePipelineResponse;
 
@@ -178,5 +178,68 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
     expect(spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]).to.deep.equal(
       executePipelineRequest,
     );
+  });
+
+  describe('PipelineSource reference validation with uninitialized client', () => {
+    it('accepts DocumentReference when Firestore projectId is uninitialized', () => {
+      const firestore = new Firestore();
+      const docRef = firestore.doc('users/alice');
+
+      expect(() => {
+        firestore.pipeline().documents([docRef]);
+      }).not.to.throw();
+
+      expect(() => {
+        firestore.pipeline().documents({docs: [docRef]});
+      }).not.to.throw();
+    });
+
+    it('accepts mixed string paths and DocumentReferences on uninitialized client', () => {
+      const firestore = new Firestore();
+      const docRef = firestore.doc('users/alice');
+
+      expect(() => {
+        firestore.pipeline().documents(['users/bob', docRef]);
+      }).not.to.throw();
+    });
+
+    it('accepts CollectionReference when Firestore projectId is uninitialized', () => {
+      const firestore = new Firestore();
+      const colRef = firestore.collection('users');
+
+      expect(() => {
+        firestore.pipeline().collection(colRef);
+      }).not.to.throw();
+
+      expect(() => {
+        firestore.pipeline().collection({collection: colRef});
+      }).not.to.throw();
+    });
+
+    it('rejects DocumentReference from another database when target is uninitialized', () => {
+      const firestore = new Firestore();
+      const otherDb = new Firestore({
+        databaseId: 'other-db',
+        projectId: 'other-proj',
+      });
+      const otherDocRef = otherDb.doc('users/alice');
+
+      expect(() => {
+        firestore.pipeline().documents([otherDocRef]);
+      }).to.throw(/Invalid DocumentReference.*database name/);
+    });
+
+    it('rejects CollectionReference from another database when target is uninitialized', () => {
+      const firestore = new Firestore();
+      const otherDb = new Firestore({
+        databaseId: 'other-db',
+        projectId: 'other-proj',
+      });
+      const otherColRef = otherDb.collection('users');
+
+      expect(() => {
+        firestore.pipeline().collection(otherColRef);
+      }).to.throw(/Invalid CollectionReference.*database name/);
+    });
   });
 });

@@ -16,7 +16,7 @@ import {
   getRMWRRequest,
   getRMWRRequestInverse,
 } from '../../testproxy/services/utils/request/readModifyWriteRow';
-import * as protos from '../../protos/protos';
+import {protos} from '../../src';
 import * as assert from 'assert';
 
 describe('Check getRMWRRequest and getRMWRRequestInverse are inverses', () => {

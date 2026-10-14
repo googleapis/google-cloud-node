@@ -5515,6 +5515,15 @@ export namespace google {
 
                     /** ClusterConfig auxiliaryNodeGroups */
                     auxiliaryNodeGroups?: (google.cloud.dataproc.v1.IAuxiliaryNodeGroup[]|null);
+
+                    /** ClusterConfig masterFlexibleConfig */
+                    masterFlexibleConfig?: (google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig|null);
+
+                    /** ClusterConfig workerFlexibleConfig */
+                    workerFlexibleConfig?: (google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig|null);
+
+                    /** ClusterConfig secondaryWorkerFlexibleConfig */
+                    secondaryWorkerFlexibleConfig?: (google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig|null);
                 }
 
                 /** Represents a ClusterConfig. */
@@ -5582,6 +5591,15 @@ export namespace google {
 
                     /** ClusterConfig auxiliaryNodeGroups. */
                     public auxiliaryNodeGroups: google.cloud.dataproc.v1.IAuxiliaryNodeGroup[];
+
+                    /** ClusterConfig masterFlexibleConfig. */
+                    public masterFlexibleConfig?: (google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig|null);
+
+                    /** ClusterConfig workerFlexibleConfig. */
+                    public workerFlexibleConfig?: (google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig|null);
+
+                    /** ClusterConfig secondaryWorkerFlexibleConfig. */
+                    public secondaryWorkerFlexibleConfig?: (google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig|null);
 
                     /**
                      * Creates a new ClusterConfig instance using the specified properties.
@@ -6210,6 +6228,9 @@ export namespace google {
                     /** GceClusterConfig zoneUri */
                     zoneUri?: (string|null);
 
+                    /** GceClusterConfig multiZoneConfig */
+                    multiZoneConfig?: (google.cloud.dataproc.v1.IMultiZoneConfig|null);
+
                     /** GceClusterConfig networkUri */
                     networkUri?: (string|null);
 
@@ -6245,6 +6266,9 @@ export namespace google {
 
                     /** GceClusterConfig confidentialInstanceConfig */
                     confidentialInstanceConfig?: (google.cloud.dataproc.v1.IConfidentialInstanceConfig|null);
+
+                    /** GceClusterConfig resourceManagerTags */
+                    resourceManagerTags?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a GceClusterConfig. */
@@ -6258,6 +6282,9 @@ export namespace google {
 
                     /** GceClusterConfig zoneUri. */
                     public zoneUri: string;
+
+                    /** GceClusterConfig multiZoneConfig. */
+                    public multiZoneConfig?: (google.cloud.dataproc.v1.IMultiZoneConfig|null);
 
                     /** GceClusterConfig networkUri. */
                     public networkUri: string;
@@ -6294,6 +6321,9 @@ export namespace google {
 
                     /** GceClusterConfig confidentialInstanceConfig. */
                     public confidentialInstanceConfig?: (google.cloud.dataproc.v1.IConfidentialInstanceConfig|null);
+
+                    /** GceClusterConfig resourceManagerTags. */
+                    public resourceManagerTags: { [k: string]: string };
 
                     /**
                      * Creates a new GceClusterConfig instance using the specified properties.
@@ -6381,6 +6411,112 @@ export namespace google {
                         INHERIT_FROM_SUBNETWORK = 1,
                         OUTBOUND = 2,
                         BIDIRECTIONAL = 3
+                    }
+                }
+
+                /** Properties of a MultiZoneConfig. */
+                interface IMultiZoneConfig {
+
+                    /** MultiZoneConfig targetShape */
+                    targetShape?: (google.cloud.dataproc.v1.MultiZoneConfig.TargetShape|keyof typeof google.cloud.dataproc.v1.MultiZoneConfig.TargetShape|null);
+                }
+
+                /** Represents a MultiZoneConfig. */
+                class MultiZoneConfig implements IMultiZoneConfig {
+
+                    /**
+                     * Constructs a new MultiZoneConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IMultiZoneConfig);
+
+                    /** MultiZoneConfig targetShape. */
+                    public targetShape: (google.cloud.dataproc.v1.MultiZoneConfig.TargetShape|keyof typeof google.cloud.dataproc.v1.MultiZoneConfig.TargetShape);
+
+                    /**
+                     * Creates a new MultiZoneConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MultiZoneConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IMultiZoneConfig): google.cloud.dataproc.v1.MultiZoneConfig;
+
+                    /**
+                     * Encodes the specified MultiZoneConfig message. Does not implicitly {@link google.cloud.dataproc.v1.MultiZoneConfig.verify|verify} messages.
+                     * @param message MultiZoneConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IMultiZoneConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MultiZoneConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.MultiZoneConfig.verify|verify} messages.
+                     * @param message MultiZoneConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IMultiZoneConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MultiZoneConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MultiZoneConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.MultiZoneConfig;
+
+                    /**
+                     * Decodes a MultiZoneConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MultiZoneConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.MultiZoneConfig;
+
+                    /**
+                     * Verifies a MultiZoneConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MultiZoneConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MultiZoneConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.MultiZoneConfig;
+
+                    /**
+                     * Creates a plain object from a MultiZoneConfig message. Also converts values to other types if specified.
+                     * @param message MultiZoneConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.MultiZoneConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MultiZoneConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MultiZoneConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MultiZoneConfig {
+
+                    /** TargetShape enum. */
+                    enum TargetShape {
+                        TARGET_SHAPE_UNSPECIFIED = 0,
+                        ANY = 1
                     }
                 }
 
@@ -6595,6 +6731,9 @@ export namespace google {
 
                     /** ConfidentialInstanceConfig enableConfidentialCompute */
                     enableConfidentialCompute?: (boolean|null);
+
+                    /** ConfidentialInstanceConfig confidentialInstanceType */
+                    confidentialInstanceType?: (google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType|keyof typeof google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType|null);
                 }
 
                 /** Represents a ConfidentialInstanceConfig. */
@@ -6608,6 +6747,9 @@ export namespace google {
 
                     /** ConfidentialInstanceConfig enableConfidentialCompute. */
                     public enableConfidentialCompute: boolean;
+
+                    /** ConfidentialInstanceConfig confidentialInstanceType. */
+                    public confidentialInstanceType: (google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType|keyof typeof google.cloud.dataproc.v1.ConfidentialInstanceConfig.ConfidentialInstanceType);
 
                     /**
                      * Creates a new ConfidentialInstanceConfig instance using the specified properties.
@@ -6685,6 +6827,17 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ConfidentialInstanceConfig {
+
+                    /** ConfidentialInstanceType enum. */
+                    enum ConfidentialInstanceType {
+                        CONFIDENTIAL_INSTANCE_TYPE_UNSPECIFIED = 0,
+                        SEV = 1,
+                        SEV_SNP = 2,
+                        TDX = 3
+                    }
                 }
 
                 /** Properties of an InstanceGroupConfig. */
@@ -7416,6 +7569,9 @@ export namespace google {
 
                         /** InstanceSelection rank */
                         rank?: (number|null);
+
+                        /** InstanceSelection diskConfig */
+                        diskConfig?: (google.cloud.dataproc.v1.IDiskConfig|null);
                     }
 
                     /** Represents an InstanceSelection. */
@@ -7432,6 +7588,9 @@ export namespace google {
 
                         /** InstanceSelection rank. */
                         public rank: number;
+
+                        /** InstanceSelection diskConfig. */
+                        public diskConfig?: (google.cloud.dataproc.v1.IDiskConfig|null);
 
                         /**
                          * Creates a new InstanceSelection instance using the specified properties.
@@ -7615,6 +7774,131 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a FlexibleInstanceGroupConfig. */
+                interface IFlexibleInstanceGroupConfig {
+
+                    /** FlexibleInstanceGroupConfig numInstances */
+                    numInstances?: (number|null);
+
+                    /** FlexibleInstanceGroupConfig coreCount */
+                    coreCount?: (number|null);
+
+                    /** FlexibleInstanceGroupConfig bootDiskSizeGb */
+                    bootDiskSizeGb?: (number|null);
+
+                    /** FlexibleInstanceGroupConfig hardwareClass */
+                    hardwareClass?: (google.cloud.dataproc.v1.FlexibleInstanceGroupConfig.HardwareClass|keyof typeof google.cloud.dataproc.v1.FlexibleInstanceGroupConfig.HardwareClass|null);
+                }
+
+                /** Represents a FlexibleInstanceGroupConfig. */
+                class FlexibleInstanceGroupConfig implements IFlexibleInstanceGroupConfig {
+
+                    /**
+                     * Constructs a new FlexibleInstanceGroupConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig);
+
+                    /** FlexibleInstanceGroupConfig numInstances. */
+                    public numInstances: number;
+
+                    /** FlexibleInstanceGroupConfig coreCount. */
+                    public coreCount: number;
+
+                    /** FlexibleInstanceGroupConfig bootDiskSizeGb. */
+                    public bootDiskSizeGb: number;
+
+                    /** FlexibleInstanceGroupConfig hardwareClass. */
+                    public hardwareClass: (google.cloud.dataproc.v1.FlexibleInstanceGroupConfig.HardwareClass|keyof typeof google.cloud.dataproc.v1.FlexibleInstanceGroupConfig.HardwareClass);
+
+                    /**
+                     * Creates a new FlexibleInstanceGroupConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FlexibleInstanceGroupConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig): google.cloud.dataproc.v1.FlexibleInstanceGroupConfig;
+
+                    /**
+                     * Encodes the specified FlexibleInstanceGroupConfig message. Does not implicitly {@link google.cloud.dataproc.v1.FlexibleInstanceGroupConfig.verify|verify} messages.
+                     * @param message FlexibleInstanceGroupConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FlexibleInstanceGroupConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.FlexibleInstanceGroupConfig.verify|verify} messages.
+                     * @param message FlexibleInstanceGroupConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FlexibleInstanceGroupConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FlexibleInstanceGroupConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.FlexibleInstanceGroupConfig;
+
+                    /**
+                     * Decodes a FlexibleInstanceGroupConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FlexibleInstanceGroupConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.FlexibleInstanceGroupConfig;
+
+                    /**
+                     * Verifies a FlexibleInstanceGroupConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FlexibleInstanceGroupConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FlexibleInstanceGroupConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.FlexibleInstanceGroupConfig;
+
+                    /**
+                     * Creates a plain object from a FlexibleInstanceGroupConfig message. Also converts values to other types if specified.
+                     * @param message FlexibleInstanceGroupConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.FlexibleInstanceGroupConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FlexibleInstanceGroupConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FlexibleInstanceGroupConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FlexibleInstanceGroupConfig {
+
+                    /** HardwareClass enum. */
+                    enum HardwareClass {
+                        HARDWARE_CLASS_UNSPECIFIED = 0,
+                        STANDARD = 1,
+                        PERFORMANCE = 2
+                    }
+                }
+
                 /** Properties of an AcceleratorConfig. */
                 interface IAcceleratorConfig {
 
@@ -7738,6 +8022,9 @@ export namespace google {
 
                     /** DiskConfig bootDiskProvisionedThroughput */
                     bootDiskProvisionedThroughput?: (number|Long|string|null);
+
+                    /** DiskConfig attachedDiskConfigs */
+                    attachedDiskConfigs?: (google.cloud.dataproc.v1.IAttachedDiskConfig[]|null);
                 }
 
                 /** Represents a DiskConfig. */
@@ -7766,6 +8053,9 @@ export namespace google {
 
                     /** DiskConfig bootDiskProvisionedThroughput. */
                     public bootDiskProvisionedThroughput?: (number|Long|string|null);
+
+                    /** DiskConfig attachedDiskConfigs. */
+                    public attachedDiskConfigs: google.cloud.dataproc.v1.IAttachedDiskConfig[];
 
                     /**
                      * Creates a new DiskConfig instance using the specified properties.
@@ -7843,6 +8133,133 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AttachedDiskConfig. */
+                interface IAttachedDiskConfig {
+
+                    /** AttachedDiskConfig diskType */
+                    diskType?: (google.cloud.dataproc.v1.AttachedDiskConfig.DiskType|keyof typeof google.cloud.dataproc.v1.AttachedDiskConfig.DiskType|null);
+
+                    /** AttachedDiskConfig diskSizeGb */
+                    diskSizeGb?: (number|null);
+
+                    /** AttachedDiskConfig provisionedIops */
+                    provisionedIops?: (number|Long|string|null);
+
+                    /** AttachedDiskConfig provisionedThroughput */
+                    provisionedThroughput?: (number|Long|string|null);
+                }
+
+                /** Represents an AttachedDiskConfig. */
+                class AttachedDiskConfig implements IAttachedDiskConfig {
+
+                    /**
+                     * Constructs a new AttachedDiskConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IAttachedDiskConfig);
+
+                    /** AttachedDiskConfig diskType. */
+                    public diskType: (google.cloud.dataproc.v1.AttachedDiskConfig.DiskType|keyof typeof google.cloud.dataproc.v1.AttachedDiskConfig.DiskType);
+
+                    /** AttachedDiskConfig diskSizeGb. */
+                    public diskSizeGb: number;
+
+                    /** AttachedDiskConfig provisionedIops. */
+                    public provisionedIops?: (number|Long|string|null);
+
+                    /** AttachedDiskConfig provisionedThroughput. */
+                    public provisionedThroughput?: (number|Long|string|null);
+
+                    /**
+                     * Creates a new AttachedDiskConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AttachedDiskConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IAttachedDiskConfig): google.cloud.dataproc.v1.AttachedDiskConfig;
+
+                    /**
+                     * Encodes the specified AttachedDiskConfig message. Does not implicitly {@link google.cloud.dataproc.v1.AttachedDiskConfig.verify|verify} messages.
+                     * @param message AttachedDiskConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IAttachedDiskConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AttachedDiskConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.AttachedDiskConfig.verify|verify} messages.
+                     * @param message AttachedDiskConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IAttachedDiskConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AttachedDiskConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AttachedDiskConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.AttachedDiskConfig;
+
+                    /**
+                     * Decodes an AttachedDiskConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AttachedDiskConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.AttachedDiskConfig;
+
+                    /**
+                     * Verifies an AttachedDiskConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AttachedDiskConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AttachedDiskConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.AttachedDiskConfig;
+
+                    /**
+                     * Creates a plain object from an AttachedDiskConfig message. Also converts values to other types if specified.
+                     * @param message AttachedDiskConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.AttachedDiskConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AttachedDiskConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AttachedDiskConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AttachedDiskConfig {
+
+                    /** DiskType enum. */
+                    enum DiskType {
+                        DISK_TYPE_UNSPECIFIED = 0,
+                        HYPERDISK_BALANCED = 1,
+                        HYPERDISK_EXTREME = 2,
+                        HYPERDISK_ML = 3,
+                        HYPERDISK_THROUGHPUT = 4
+                    }
                 }
 
                 /** Properties of an AuxiliaryNodeGroup. */
@@ -13497,6 +13914,12 @@ export namespace google {
 
                     /** YarnApplication trackingUrl */
                     trackingUrl?: (string|null);
+
+                    /** YarnApplication vcoreSeconds */
+                    vcoreSeconds?: (number|Long|string|null);
+
+                    /** YarnApplication memoryMbSeconds */
+                    memoryMbSeconds?: (number|Long|string|null);
                 }
 
                 /** Represents a YarnApplication. */
@@ -13519,6 +13942,12 @@ export namespace google {
 
                     /** YarnApplication trackingUrl. */
                     public trackingUrl: string;
+
+                    /** YarnApplication vcoreSeconds. */
+                    public vcoreSeconds: (number|Long|string);
+
+                    /** YarnApplication memoryMbSeconds. */
+                    public memoryMbSeconds: (number|Long|string);
 
                     /**
                      * Creates a new YarnApplication instance using the specified properties.
@@ -21285,6 +21714,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -21298,6 +21730,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -22027,6 +22462,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -22046,6 +22484,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -22359,6 +22800,365 @@ export namespace google {
 
             /**
              * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -22751,6 +23551,8 @@ export namespace google {
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -25122,6 +25924,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved */
                 editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
             }
 
             /** Represents a FeatureSupport. */
@@ -25144,6 +25949,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved. */
                 public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
 
                 /**
                  * Creates a new FeatureSupport instance using the specified properties.
@@ -26086,6 +26894,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility */
             defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -26120,6 +26931,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility. */
             public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -26248,7 +27062,8 @@ export namespace google {
             enum EnforceNamingStyle {
                 ENFORCE_NAMING_STYLE_UNKNOWN = 0,
                 STYLE2024 = 1,
-                STYLE_LEGACY = 2
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
             }
 
             /** Properties of a VisibilityFeature. */
@@ -26351,6 +27166,107 @@ export namespace google {
                     EXPORT_TOP_LEVEL = 2,
                     LOCAL_ALL = 3,
                     STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
                 }
             }
         }
@@ -28773,6 +29689,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListOperationsRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListOperationsRequest. */
@@ -28795,6 +29714,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken. */
             public pageToken: string;
+
+            /** ListOperationsRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListOperationsRequest instance using the specified properties.
@@ -28882,6 +29804,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListOperationsResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListOperationsResponse. */
@@ -28898,6 +29823,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListOperationsResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListOperationsResponse instance using the specified properties.

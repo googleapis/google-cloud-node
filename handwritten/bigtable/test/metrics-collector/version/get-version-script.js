@@ -60,7 +60,10 @@ async function main() {
   const packageJSON = fs.readFileSync(packagePath);
   const expectedVersion = JSON.parse(packageJSON.toString()).version;
 
-  const fakeBigtable = new Bigtable();
+  const fakeBigtable = new Bigtable({
+    projectId: 'projectId',
+    credentials: {client_email: 'bogus', private_key: 'bogus'},
+  });
   const testMetricsHandler = new TestMetricsHandlerKeepName();
   fakeBigtable._metricsConfigManager = new ClientSideMetricsConfigManager([
     testMetricsHandler,

@@ -59,7 +59,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
 | troubleshoot iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter/samples/generated/v1/iam_checker.troubleshoot_iam_policy.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-policytroubleshooter/samples/generated/v1/snippet_metadata_google.cloud.policytroubleshooter.v1.json) |
 
 
 ## Supported Node.js Versions

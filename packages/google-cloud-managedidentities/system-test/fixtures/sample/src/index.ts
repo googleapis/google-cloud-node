@@ -19,7 +19,9 @@
 import {ManagedIdentitiesServiceClient} from '@google-cloud/managed-identities';
 
 // check that the client class type name can be used
-function doStuffWithManagedIdentitiesServiceClient(client: ManagedIdentitiesServiceClient) {
+function doStuffWithManagedIdentitiesServiceClient(
+  client: ManagedIdentitiesServiceClient,
+) {
   client.close();
 }
 

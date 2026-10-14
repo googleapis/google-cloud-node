@@ -56,8 +56,24 @@ function main() {
    */
   // const revokeExistingRoles = true
   /**
+   *  Optional. The server roles to grant to the SQL Server login. Existing
+   *  server roles will not be revoked if revoke_existing_roles is false.
+   *  body.server_roles will be ignored for update request.
+   */
+  // const serverRoles = ['abc','def']
+  /**
+   *  Optional. Specifies whether to revoke existing roles that are not present
+   *  in the `server_roles` field. If `false` or unset, the server roles
+   *  specified in `server_roles` are added to the user's existing server roles.
+   */
+  // const revokeExistingServerRoles = true
+  /**
    */
   // const body = {}
+  /**
+   *  Optional. Region of the Cloud SQL instance.
+   */
+  // const location = 'abc123'
 
   // Imports the Sql library
   const {SqlUsersServiceClient} = require('@google-cloud/sql').v1beta4;

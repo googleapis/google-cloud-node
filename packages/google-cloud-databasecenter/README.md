@@ -63,7 +63,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | query database resource groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.query_database_resource_groups.js) |
 | query issues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.query_issues.js) |
 | query products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/database_center.query_products.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-databasecenter/samples/generated/v1beta/snippet_metadata_google.cloud.databasecenter.v1beta.json) |
 
 
 ## Supported Node.js Versions

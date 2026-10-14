@@ -5,6 +5,64 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery?activeTab=versions
 
+## [9.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.2.0...bigquery-v9.3.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.1.0...bigquery-v9.2.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
+## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.0.3...bigquery-v9.1.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+## [9.0.3](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.0.2...bigquery-v9.0.3) (2026-08-26)
+
+
+### Bug Fixes
+
+* Patch the vulnerability for Bigquery and other REST based clients ([#9188](https://github.com/googleapis/google-cloud-node/issues/9188)) ([94aac1e](https://github.com/googleapis/google-cloud-node/commit/94aac1eb121d6bbfbd92007befe8b8f159b4d379))
+
+## [9.0.2](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.0.1...bigquery-v9.0.2) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [9.0.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.0.0...bigquery-v9.0.1) (2026-08-05)
+
+
+### Bug Fixes
+
+* **bigquery:** Remove owlbot configs ([#8936](https://github.com/googleapis/google-cloud-node/issues/8936)) ([7f8e23c](https://github.com/googleapis/google-cloud-node/commit/7f8e23c9652e34869c2fafe54f63cc63ac9acaa8))
+
+## [9.0.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v8.3.1...bigquery-v9.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update bigquery to minimum Node version of 22. ([#9040](https://github.com/googleapis/google-cloud-node/issues/9040))
+
+### Features
+
+* Update bigquery to minimum Node version of 22. ([#9040](https://github.com/googleapis/google-cloud-node/issues/9040)) ([a4f28d7](https://github.com/googleapis/google-cloud-node/commit/a4f28d79b9c2ad17504ace417c3bb8300bab6505)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+
+### Bug Fixes
+
+* **ci:** Fix discovery.yaml by installing root dependencies ([#8955](https://github.com/googleapis/google-cloud-node/issues/8955)) ([305459a](https://github.com/googleapis/google-cloud-node/commit/305459ad78f6bf9e981d41a98468a586d15841d5))
+
 ## [8.3.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-v8.3.0...bigquery-v8.3.1) (2026-05-11)
 
 

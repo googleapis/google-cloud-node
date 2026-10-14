@@ -83,7 +83,7 @@ describe('Entry', () => {
         objToStruct,
         structToObj,
       },
-      eventid: FakeEventId,
+      './utils/event-id': {EventId: FakeEventId},
     }).Entry;
   });
 

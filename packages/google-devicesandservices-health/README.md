@@ -82,7 +82,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list paired devices | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/health_profile_service.list_paired_devices.js) |
 | update profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/health_profile_service.update_profile.js) |
 | update settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/health_profile_service.update_settings.js) |
-| devicesandservices | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-devicesandservices-health/samples/generated/v4/snippet_metadata_google.devicesandservices.health.v4.json) |
 
 
 ## Supported Node.js Versions

@@ -19,6 +19,7 @@ import {EchoClient, SequenceServiceClient, protos} from 'showcase-echo-client';
 import {ShowcaseServer} from 'showcase-server';
 import * as assert from 'assert';
 import {promises as fsp} from 'fs';
+import {runPqcComplianceTests} from './pqc-test';
 import * as path from 'path';
 import {
   protobuf,
@@ -2910,6 +2911,8 @@ async function main() {
   } finally {
     showcaseServer.stop();
   }
+  // Run PQC tests with a different showcase server because setup with a certificate is required.
+  await runPqcComplianceTests()
 }
 
 main();

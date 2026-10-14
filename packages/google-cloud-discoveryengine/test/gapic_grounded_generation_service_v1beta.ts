@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as groundedgenerationserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -93,9 +93,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -146,7 +146,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          { universeDomain: 'example.com' },
+          {universeDomain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
@@ -155,7 +155,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          { universe_domain: 'example.com' },
+          {universe_domain: 'example.com'},
         );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'discoveryengine.example.com');
@@ -182,7 +182,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -200,7 +200,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
     it('does not allow setting both universeDomain and universe_domain', () => {
       assert.throws(() => {
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
-          { universe_domain: 'example.com', universeDomain: 'example.net' },
+          {universe_domain: 'example.com', universeDomain: 'example.net'},
         );
       });
     });
@@ -233,7 +233,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -242,15 +242,15 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       assert(client.groundedGenerationServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.groundedGenerationServiceStub);
@@ -259,16 +259,16 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -278,7 +278,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -288,7 +288,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -303,7 +303,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -329,7 +329,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -364,7 +364,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -414,7 +414,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -451,7 +451,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -465,7 +465,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -480,7 +480,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -514,7 +514,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -564,7 +564,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -598,7 +598,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -612,7 +612,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       );
       request.groundingConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.checkGrounding(request), expectedError);
@@ -624,7 +624,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -672,7 +672,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -717,7 +717,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -750,7 +750,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -797,7 +797,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -835,7 +835,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -886,7 +886,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -927,6 +927,252 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('aclConfig', async () => {
+      const fakePath = '/rendered/path/aclConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.aclConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.aclConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('aclConfigPath', () => {
+        const result = client.aclConfigPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.aclConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAclConfigName', () => {
+        const result = client.matchProjectFromAclConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.aclConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAclConfigName', () => {
+        const result = client.matchLocationFromAclConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.aclConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('assistAnswer', async () => {
+      const fakePath = '/rendered/path/assistAnswer';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+        session: 'sessionValue',
+        assist_answer: 'assistAnswerValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.assistAnswerPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.assistAnswerPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('assistAnswerPath', () => {
+        const result = client.assistAnswerPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'engineValue',
+          'sessionValue',
+          'assistAnswerValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAssistAnswerName', () => {
+        const result = client.matchProjectFromAssistAnswerName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAssistAnswerName', () => {
+        const result = client.matchLocationFromAssistAnswerName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollectionFromAssistAnswerName', () => {
+        const result = client.matchCollectionFromAssistAnswerName(fakePath);
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchEngineFromAssistAnswerName', () => {
+        const result = client.matchEngineFromAssistAnswerName(fakePath);
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSessionFromAssistAnswerName', () => {
+        const result = client.matchSessionFromAssistAnswerName(fakePath);
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAssistAnswerFromAssistAnswerName', () => {
+        const result = client.matchAssistAnswerFromAssistAnswerName(fakePath);
+        assert.strictEqual(result, 'assistAnswerValue');
+        assert(
+          (client.pathTemplates.assistAnswerPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('assistant', async () => {
+      const fakePath = '/rendered/path/assistant';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+        assistant: 'assistantValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.assistantPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.assistantPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('assistantPath', () => {
+        const result = client.assistantPath(
+          'projectValue',
+          'locationValue',
+          'collectionValue',
+          'engineValue',
+          'assistantValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.assistantPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAssistantName', () => {
+        const result = client.matchProjectFromAssistantName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.assistantPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAssistantName', () => {
+        const result = client.matchLocationFromAssistantName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.assistantPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollectionFromAssistantName', () => {
+        const result = client.matchCollectionFromAssistantName(fakePath);
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (client.pathTemplates.assistantPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchEngineFromAssistantName', () => {
+        const result = client.matchEngineFromAssistantName(fakePath);
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (client.pathTemplates.assistantPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAssistantFromAssistantName', () => {
+        const result = client.matchAssistantFromAssistantName(fakePath);
+        assert.strictEqual(result, 'assistantValue');
+        assert(
+          (client.pathTemplates.assistantPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('engine', async () => {
       const fakePath = '/rendered/path/engine';
       const expectedParameters = {
@@ -938,7 +1184,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1016,7 +1262,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1083,7 +1329,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1141,6 +1387,157 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       });
     });
 
+    describe('identityMappingStore', async () => {
+      const fakePath = '/rendered/path/identityMappingStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        identity_mapping_store: 'identityMappingStoreValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.identityMappingStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.identityMappingStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('identityMappingStorePath', () => {
+        const result = client.identityMappingStorePath(
+          'projectValue',
+          'locationValue',
+          'identityMappingStoreValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.identityMappingStorePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromIdentityMappingStoreName', () => {
+        const result =
+          client.matchProjectFromIdentityMappingStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.identityMappingStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromIdentityMappingStoreName', () => {
+        const result =
+          client.matchLocationFromIdentityMappingStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.identityMappingStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchIdentityMappingStoreFromIdentityMappingStoreName', () => {
+        const result =
+          client.matchIdentityMappingStoreFromIdentityMappingStoreName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'identityMappingStoreValue');
+        assert(
+          (
+            client.pathTemplates.identityMappingStorePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('licenseConfig', async () => {
+      const fakePath = '/rendered/path/licenseConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        license_config: 'licenseConfigValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.licenseConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.licenseConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('licenseConfigPath', () => {
+        const result = client.licenseConfigPath(
+          'projectValue',
+          'locationValue',
+          'licenseConfigValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.licenseConfigPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromLicenseConfigName', () => {
+        const result = client.matchProjectFromLicenseConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.licenseConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromLicenseConfigName', () => {
+        const result = client.matchLocationFromLicenseConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.licenseConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLicenseConfigFromLicenseConfigName', () => {
+        const result = client.matchLicenseConfigFromLicenseConfigName(fakePath);
+        assert.strictEqual(result, 'licenseConfigValue');
+        assert(
+          (client.pathTemplates.licenseConfigPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('location', async () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
@@ -1150,7 +1547,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1201,7 +1598,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1234,6 +1631,154 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       });
     });
 
+    describe('projectLocationCmekConfig', async () => {
+      const fakePath = '/rendered/path/projectLocationCmekConfig';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationCmekConfigPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationCmekConfigPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationCmekConfigPath', () => {
+        const result = client.projectLocationCmekConfigPath(
+          'projectValue',
+          'locationValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationCmekConfigName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCmekConfigName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationCmekConfigName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCmekConfigName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('projectLocationCmekConfigs', async () => {
+      const fakePath = '/rendered/path/projectLocationCmekConfigs';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        cmek_config: 'cmekConfigValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationCmekConfigsPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectLocationCmekConfigsPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectLocationCmekConfigsPath', () => {
+        const result = client.projectLocationCmekConfigsPath(
+          'projectValue',
+          'locationValue',
+          'cmekConfigValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationCmekConfigsName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCmekConfigsName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationCmekConfigsName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCmekConfigsName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCmekConfigFromProjectLocationCmekConfigsName', () => {
+        const result =
+          client.matchCmekConfigFromProjectLocationCmekConfigsName(fakePath);
+        assert.strictEqual(result, 'cmekConfigValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationCmekConfigsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('projectLocationCollectionDataStore', async () => {
       const fakePath = '/rendered/path/projectLocationCollectionDataStore';
       const expectedParameters = {
@@ -1245,7 +1790,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1352,7 +1897,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1502,7 +2047,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1668,7 +2213,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1797,7 +2342,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -1927,7 +2472,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2056,7 +2601,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2168,7 +2713,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2297,7 +2842,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2428,7 +2973,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2576,7 +3121,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2704,7 +3249,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2816,7 +3361,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -2946,7 +3491,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3063,6 +3608,155 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       });
     });
 
+    describe('projectLocationCollectionEngineCollaborativeProjectSessions', async () => {
+      const fakePath =
+        '/rendered/path/projectLocationCollectionEngineCollaborativeProjectSessions';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        collection: 'collectionValue',
+        engine: 'engineValue',
+        collaborative_project: 'collaborativeProjectValue',
+        session: 'sessionValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationCollectionEngineCollaborativeProjectSessionsPath', () => {
+        const result =
+          client.projectLocationCollectionEngineCollaborativeProjectSessionsPath(
+            'projectValue',
+            'locationValue',
+            'collectionValue',
+            'engineValue',
+            'collaborativeProjectValue',
+            'sessionValue',
+          );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchLocationFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollectionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchCollectionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'collectionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchEngineFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchEngineFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'engineValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCollaborativeProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchCollaborativeProjectFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'collaborativeProjectValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchSessionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName', () => {
+        const result =
+          client.matchSessionFromProjectLocationCollectionEngineCollaborativeProjectSessionsName(
+            fakePath,
+          );
+        assert.strictEqual(result, 'sessionValue');
+        assert(
+          (
+            client.pathTemplates
+              .projectLocationCollectionEngineCollaborativeProjectSessionsPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('projectLocationCollectionEngineControl', async () => {
       const fakePath = '/rendered/path/projectLocationCollectionEngineControl';
       const expectedParameters = {
@@ -3075,7 +3769,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3204,7 +3898,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3333,7 +4027,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3463,7 +4157,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3609,7 +4303,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3735,7 +4429,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3819,7 +4513,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -3949,7 +4643,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4094,7 +4788,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4192,7 +4886,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4302,7 +4996,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4411,7 +5105,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4503,7 +5197,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4599,7 +5293,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4709,7 +5403,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4836,7 +5530,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -4936,7 +5630,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5028,7 +5722,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5139,7 +5833,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5249,7 +5943,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5327,7 +6021,7 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
       const client =
         new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
           {
-            credentials: { client_email: 'bogus', private_key: 'bogus' },
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           },
         );
@@ -5379,6 +6073,73 @@ describe('v1beta.GroundedGenerationServiceClient', () => {
         assert.strictEqual(result, 'sampleQuerySetValue');
         assert(
           (client.pathTemplates.sampleQuerySetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('userStore', async () => {
+      const fakePath = '/rendered/path/userStore';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        user_store: 'userStoreValue',
+      };
+      const client =
+        new groundedgenerationserviceModule.v1beta.GroundedGenerationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.userStorePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.userStorePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('userStorePath', () => {
+        const result = client.userStorePath(
+          'projectValue',
+          'locationValue',
+          'userStoreValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.userStorePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromUserStoreName', () => {
+        const result = client.matchProjectFromUserStoreName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.userStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromUserStoreName', () => {
+        const result = client.matchLocationFromUserStoreName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.userStorePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchUserStoreFromUserStoreName', () => {
+        const result = client.matchUserStoreFromUserStoreName(fakePath);
+        assert.strictEqual(result, 'userStoreValue');
+        assert(
+          (client.pathTemplates.userStorePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

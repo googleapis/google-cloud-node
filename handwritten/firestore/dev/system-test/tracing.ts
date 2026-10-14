@@ -158,7 +158,8 @@ class SpanData {
   }
 }
 
-describe.skipEnterprise('Tracing Tests', () => {
+describe.skip('Tracing Tests', () => {
+  // Tests skipped due to kokoro to gcb migration.
   let firestore: Firestore;
   let randomCol: CollectionReference;
   let tracerProvider: NodeTracerProvider;
@@ -293,6 +294,9 @@ describe.skipEnterprise('Tracing Tests', () => {
     // it's been specified using an environment variable.
     if (!settings.databaseId && process.env.DATABASE_ID) {
       settings.databaseId = process.env.DATABASE_ID;
+    }
+    if (!settings.databaseId && !process.env.FIRESTORE_EMULATOR_HOST) {
+      settings.databaseId = 'firestore-standard';
     }
     // If a Project ID has not been specified in the settings, check whether
     // it's been specified using an environment variable.

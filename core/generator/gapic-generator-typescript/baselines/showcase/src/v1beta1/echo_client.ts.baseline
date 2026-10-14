@@ -28,10 +28,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform, PassThrough } from 'stream';
+import {Transform, PassThrough} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -61,7 +61,7 @@ export class EchoClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('showcase');
@@ -74,10 +74,10 @@ export class EchoClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  echoStub?: Promise<{ [name: string]: Function }>;
+  echoStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of EchoClient.
@@ -153,7 +153,7 @@ export class EchoClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -299,21 +299,21 @@ export class EchoClient {
           post: '/v1beta1/{resource=users/*}:setIamPolicy',
           body: '*',
           additional_bindings: [
-            { post: '/v1beta1/{resource=rooms/*}:setIamPolicy', body: '*' },
+            {post: '/v1beta1/{resource=rooms/*}:setIamPolicy', body: '*'},
             {
               post: '/v1beta1/{resource=rooms/*/blurbs/*}:setIamPolicy',
               body: '*',
             },
-            { post: '/v1beta1/{resource=sequences/*}:setIamPolicy', body: '*' },
+            {post: '/v1beta1/{resource=sequences/*}:setIamPolicy', body: '*'},
           ],
         },
         {
           selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
           get: '/v1beta1/{resource=users/*}:getIamPolicy',
           additional_bindings: [
-            { get: '/v1beta1/{resource=rooms/*}:getIamPolicy' },
-            { get: '/v1beta1/{resource=rooms/*/blurbs/*}:getIamPolicy' },
-            { get: '/v1beta1/{resource=sequences/*}:getIamPolicy' },
+            {get: '/v1beta1/{resource=rooms/*}:getIamPolicy'},
+            {get: '/v1beta1/{resource=rooms/*/blurbs/*}:getIamPolicy'},
+            {get: '/v1beta1/{resource=sequences/*}:getIamPolicy'},
           ],
         },
         {
@@ -321,10 +321,7 @@ export class EchoClient {
           post: '/v1beta1/{resource=users/*}:testIamPermissions',
           body: '*',
           additional_bindings: [
-            {
-              post: '/v1beta1/{resource=rooms/*}:testIamPermissions',
-              body: '*',
-            },
+            {post: '/v1beta1/{resource=rooms/*}:testIamPermissions', body: '*'},
             {
               post: '/v1beta1/{resource=rooms/*/blurbs/*}:testIamPermissions',
               body: '*',
@@ -419,7 +416,7 @@ export class EchoClient {
           (this._protos as any).google.showcase.v1beta1.Echo,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -436,11 +433,11 @@ export class EchoClient {
     ];
     for (const methodName of echoStubMethods) {
       const callPromise = this.echoStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               if (methodName in this.descriptors.stream) {
-                const stream = new PassThrough({ objectMode: true });
+                const stream = new PassThrough({objectMode: true});
                 setImmediate(() => {
                   stream.emit(
                     'error',
@@ -658,7 +655,7 @@ export class EchoClient {
         const match = fieldValue.toString().match(RegExp('(?<header>.*)'));
         if (match) {
           const parameterValue = match.groups?.['header'] ?? fieldValue;
-          Object.assign(routingParameter, { header: parameterValue });
+          Object.assign(routingParameter, {header: parameterValue});
         }
       }
     }
@@ -670,7 +667,7 @@ export class EchoClient {
           .match(RegExp('(?<routing_id>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['routing_id'] ?? fieldValue;
-          Object.assign(routingParameter, { routing_id: parameterValue });
+          Object.assign(routingParameter, {routing_id: parameterValue});
         }
       }
     }
@@ -682,7 +679,7 @@ export class EchoClient {
           .match(RegExp('(?<table_name>regions/[^/]+/zones/[^/]+(?:/.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
@@ -694,7 +691,7 @@ export class EchoClient {
           .match(RegExp('(?<super_id>projects/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['super_id'] ?? fieldValue;
-          Object.assign(routingParameter, { super_id: parameterValue });
+          Object.assign(routingParameter, {super_id: parameterValue});
         }
       }
     }
@@ -708,7 +705,7 @@ export class EchoClient {
           );
         if (match) {
           const parameterValue = match.groups?.['table_name'] ?? fieldValue;
-          Object.assign(routingParameter, { table_name: parameterValue });
+          Object.assign(routingParameter, {table_name: parameterValue});
         }
       }
     }
@@ -722,7 +719,7 @@ export class EchoClient {
           );
         if (match) {
           const parameterValue = match.groups?.['instance_id'] ?? fieldValue;
-          Object.assign(routingParameter, { instance_id: parameterValue });
+          Object.assign(routingParameter, {instance_id: parameterValue});
         }
       }
     }
@@ -732,7 +729,7 @@ export class EchoClient {
         const match = fieldValue.toString().match(RegExp('(?<baz>(?:.*)?)'));
         if (match) {
           const parameterValue = match.groups?.['baz'] ?? fieldValue;
-          Object.assign(routingParameter, { baz: parameterValue });
+          Object.assign(routingParameter, {baz: parameterValue});
         }
       }
     }
@@ -744,13 +741,13 @@ export class EchoClient {
           .match(RegExp('(?<qux>projects/[^/]+)(?:/.*)?'));
         if (match) {
           const parameterValue = match.groups?.['qux'] ?? fieldValue;
-          Object.assign(routingParameter, { qux: parameterValue });
+          Object.assign(routingParameter, {qux: parameterValue});
         }
       }
     }
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams(routingParameter);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('echo request %j', request);
@@ -887,7 +884,7 @@ export class EchoClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('echoErrorDetails request %j', request);
@@ -1025,7 +1022,7 @@ export class EchoClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('pagedExpandLegacy request %j', request);
@@ -1154,7 +1151,7 @@ export class EchoClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('block request %j', request);
@@ -1229,7 +1226,7 @@ export class EchoClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('expand stream %j', options);
@@ -1284,7 +1281,7 @@ export class EchoClient {
       optionsOrCallback = {};
     }
     const options = optionsOrCallback as CallOptions;
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('collect stream %j', options);
@@ -1308,7 +1305,7 @@ export class EchoClient {
    * region_tag:localhost_v1beta1_generated_Echo_Chat_async
    */
   chat(options?: CallOptions): gax.CancellableStream {
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('chat stream %j', options);
@@ -1418,7 +1415,7 @@ export class EchoClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1475,7 +1472,7 @@ export class EchoClient {
     this._log.info('wait long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1573,7 +1570,7 @@ export class EchoClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1636,7 +1633,7 @@ export class EchoClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['pagedExpand'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('pagedExpand stream %j', request);
@@ -1681,7 +1678,7 @@ export class EchoClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     const defaultCallSettings = this._defaults['pagedExpand'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('pagedExpand iterate %j', request);
@@ -2115,7 +2112,7 @@ export class EchoClient {
    */
   close(): Promise<void> {
     if (this.echoStub && !this._terminated) {
-      return this.echoStub.then((stub) => {
+      return this.echoStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as lfpstoreserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -199,7 +199,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
           const saved = process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'];
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient(
-            { universeDomain: 'configured.example.com' },
+            {universeDomain: 'configured.example.com'},
           );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(servicePath, 'merchantapi.configured.example.com');
@@ -240,7 +240,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.lfpStoreServiceStub, undefined);
@@ -248,12 +248,12 @@ describe('v1beta.LfpStoreServiceClient', () => {
       assert(client.lfpStoreServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.lfpStoreServiceStub);
@@ -262,14 +262,14 @@ describe('v1beta.LfpStoreServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.lfpStoreServiceStub, undefined);
@@ -278,7 +278,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -286,7 +286,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -298,7 +298,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -321,7 +321,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
   describe('getLfpStore', () => {
     it('invokes getLfpStore without error', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -352,7 +352,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
 
     it('invokes getLfpStore without error using callback', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -399,7 +399,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
 
     it('invokes getLfpStore with error', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -430,7 +430,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
 
     it('invokes getLfpStore with closed client', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -443,7 +443,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getLfpStore(request), expectedError);
@@ -453,7 +453,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
   describe('insertLfpStore', () => {
     it('invokes insertLfpStore without error', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
 
     it('invokes insertLfpStore without error using callback', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -531,7 +531,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
 
     it('invokes insertLfpStore with error', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
 
     it('invokes insertLfpStore with closed client', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -575,7 +575,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.insertLfpStore(request), expectedError);
@@ -585,7 +585,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
   describe('deleteLfpStore', () => {
     it('invokes deleteLfpStore without error', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
 
     it('invokes deleteLfpStore without error using callback', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -663,7 +663,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
 
     it('invokes deleteLfpStore with error', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
 
     it('invokes deleteLfpStore with closed client', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -707,7 +707,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteLfpStore(request), expectedError);
@@ -717,7 +717,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
   describe('listLfpStores', () => {
     it('invokes listLfpStores without error', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -756,7 +756,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
 
     it('invokes listLfpStores without error using callback', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -788,8 +788,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.shopping.merchant.lfp.v1beta.ILfpStore[]
-              | null,
+              protos.google.shopping.merchant.lfp.v1beta.ILfpStore[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -813,7 +812,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
 
     it('invokes listLfpStores with error', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -844,7 +843,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
 
     it('invokes listLfpStoresStream without error', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -897,15 +896,15 @@ describe('v1beta.LfpStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listLfpStores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listLfpStoresStream with error', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -947,15 +946,15 @@ describe('v1beta.LfpStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listLfpStores.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLfpStores without error', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -997,15 +996,15 @@ describe('v1beta.LfpStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listLfpStores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listLfpStores with error', async () => {
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1038,9 +1037,9 @@ describe('v1beta.LfpStoreServiceClient', () => {
       assert(
         (client.descriptors.page.listLfpStores.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1052,7 +1051,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         account: 'accountValue',
       };
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1093,7 +1092,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         offer: 'offerValue',
       };
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1167,7 +1166,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         lfp_merchant_state: 'lfpMerchantStateValue',
       };
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1223,7 +1222,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         sale: 'saleValue',
       };
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1273,7 +1272,7 @@ describe('v1beta.LfpStoreServiceClient', () => {
         store_code: 'storeCodeValue',
       };
       const client = new lfpstoreserviceModule.v1beta.LfpStoreServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

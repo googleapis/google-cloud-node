@@ -112,7 +112,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list serving configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/serving_config_service.list_serving_configs.js) |
 | remove control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/serving_config_service.remove_control.js) |
 | update serving config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/serving_config_service.update_serving_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/snippet_metadata_google.cloud.retail.v2.json) |
 | collect user event | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/user_event_service.collect_user_event.js) |
 | import user events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/user_event_service.import_user_events.js) |
 | purge user events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2/user_event_service.purge_user_events.js) |
@@ -187,7 +186,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list serving configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/serving_config_service.list_serving_configs.js) |
 | remove control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/serving_config_service.remove_control.js) |
 | update serving config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/serving_config_service.update_serving_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/snippet_metadata_google.cloud.retail.v2alpha.json) |
 | collect user event | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/user_event_service.collect_user_event.js) |
 | export user events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/user_event_service.export_user_events.js) |
 | import user events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2alpha/user_event_service.import_user_events.js) |
@@ -252,7 +250,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list serving configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/serving_config_service.list_serving_configs.js) |
 | remove control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/serving_config_service.remove_control.js) |
 | update serving config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/serving_config_service.update_serving_config.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/snippet_metadata_google.cloud.retail.v2beta.json) |
 | collect user event | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/user_event_service.collect_user_event.js) |
 | export user events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/user_event_service.export_user_events.js) |
 | import user events | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-retail/samples/generated/v2beta/user_event_service.import_user_events.js) |

@@ -5,6 +5,94 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [8.4.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.3.0...storage-v8.4.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [8.3.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.2.1...storage-v8.3.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
+## [8.2.1](https://github.com/googleapis/google-cloud-node/compare/storage-v8.2.0...storage-v8.2.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* **storage:** Re-enable docs check and update linkinator ([#9257](https://github.com/googleapis/google-cloud-node/issues/9257)) ([6f9d967](https://github.com/googleapis/google-cloud-node/commit/6f9d967049cb80ac201964258a6d3fd016ad0963))
+* **storage:** Upgrade google-auth-library to v11, gaxios to v7 and align auth client types ([#9289](https://github.com/googleapis/google-cloud-node/issues/9289)) ([c6c946d](https://github.com/googleapis/google-cloud-node/commit/c6c946d25ffd2cba6a703f7e2c910d866a5d9694))
+
+## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.1.0...storage-v8.2.0) (2026-09-17)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+## [8.1.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.0.1...storage-v8.1.0) (2026-09-08)
+
+
+### Features
+
+* **storage:** Add IpFilter support to bucket metadata ([#8623](https://github.com/googleapis/google-cloud-node/issues/8623)) ([30c91c8](https://github.com/googleapis/google-cloud-node/commit/30c91c80701dd65da44fc29402b5463f7849c42d))
+* **storage:** Add x-goog-gcs-idempotency-token header ([#8837](https://github.com/googleapis/google-cloud-node/issues/8837)) ([0df2e55](https://github.com/googleapis/google-cloud-node/commit/0df2e55ff8c6f2b6f5d73459af079e8d77f5958d))
+* **storage:** Support copying CSEK-encrypted files to non-CSEK destinations ([#8771](https://github.com/googleapis/google-cloud-node/issues/8771)) ([953328f](https://github.com/googleapis/google-cloud-node/commit/953328f5bd42302785f55c15f1feed857a71e6a7))
+
+
+### Bug Fixes
+
+* **storage:** Resolve strict linter and TypeScript errors ([#9198](https://github.com/googleapis/google-cloud-node/issues/9198)) ([cee5338](https://github.com/googleapis/google-cloud-node/commit/cee5338a16e6c7063bc8fe9f6a853e39811df947))
+
+## [8.0.1](https://github.com/googleapis/google-cloud-node/compare/storage-v8.0.0...storage-v8.0.1) (2026-08-18)
+
+
+### Bug Fixes
+
+* Upgrade storage dependencies to corresponding Node 22 versions for core, handwritten and generated libraries ([#9135](https://github.com/googleapis/google-cloud-node/issues/9135)) ([a3d9092](https://github.com/googleapis/google-cloud-node/commit/a3d9092b3be2cc04fbe7838aba34d5f5235d56b5))
+
+## [8.0.0](https://github.com/googleapis/google-cloud-node/compare/storage-v7.22.0...storage-v8.0.0) (2026-08-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update storage to minimum Node version of 22. ([#9079](https://github.com/googleapis/google-cloud-node/issues/9079))
+
+### Features
+
+* Update storage to minimum Node version of 22. ([#9079](https://github.com/googleapis/google-cloud-node/issues/9079)) ([5830779](https://github.com/googleapis/google-cloud-node/commit/58307799cfd9fe1ece7982479a0219f35d7128a6)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [7.22.0](https://github.com/googleapis/google-cloud-node/compare/storage-v7.21.0...storage-v7.22.0) (2026-08-11)
+
+
+### Features
+
+* **storage:** Add deleteSourceObjects option to combine/compose method ([#8444](https://github.com/googleapis/google-cloud-node/issues/8444)) ([43abc45](https://github.com/googleapis/google-cloud-node/commit/43abc45c45fe8538694e9794a12ca700e0ae2d90))
+
+
+### Bug Fixes
+
+* **storage:** Destroy local read stream on upload write failure to prevent resource leaks ([#8752](https://github.com/googleapis/google-cloud-node/issues/8752)) ([77dab53](https://github.com/googleapis/google-cloud-node/commit/77dab53bf6d8a4b911f04e49eef444057d817619)), refs [#7325](https://github.com/googleapis/google-cloud-node/issues/7325)
+* **storage:** Pass signingEndpoint to URLSigner in file.getSignedUrl ([#8982](https://github.com/googleapis/google-cloud-node/issues/8982)) ([b001807](https://github.com/googleapis/google-cloud-node/commit/b001807a82616521680baf5429fec6af639aeb58))
+* **storage:** Resolve Node compatibility crashes, security vulnerability, and stream hangs ([#8622](https://github.com/googleapis/google-cloud-node/issues/8622)) ([512ba79](https://github.com/googleapis/google-cloud-node/commit/512ba79126605b416868db7c5f607d3083934eca))
+* **storage:** Set application/json Content-Type for impersonated ADC requests ([#8419](https://github.com/googleapis/google-cloud-node/issues/8419)) ([292c688](https://github.com/googleapis/google-cloud-node/commit/292c68864ddc46f5a89319a9b756599749275e91))
+
+## [7.21.0](https://github.com/googleapis/google-cloud-node/compare/storage-v7.20.0...storage-v7.21.0) (2026-06-03)
+
+
+### Features
+
+* **storage:** Enable CRC32C validation by default in transfer manager ([#8350](https://github.com/googleapis/google-cloud-node/issues/8350)) ([86086a6](https://github.com/googleapis/google-cloud-node/commit/86086a62cb6b583af71ef1ba6d42abe894b66323))
+
+
+### Bug Fixes
+
+* **deps:** Remove vulnerable dependency `uuid` ([#8120](https://github.com/googleapis/google-cloud-node/issues/8120)) ([3ec901e](https://github.com/googleapis/google-cloud-node/commit/3ec901e2cb45859adfbe914bc0385e6cdf2f2e9a))
+
 ## [7.20.0](https://github.com/googleapis/google-cloud-node/compare/storage-v7.19.0...storage-v7.20.0) (2026-05-11)
 
 

@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,7 +60,7 @@ export class OrganizationVpcFlowLogsServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('network-management');
@@ -73,12 +73,12 @@ export class OrganizationVpcFlowLogsServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  organizationVpcFlowLogsServiceStub?: Promise<{ [name: string]: Function }>;
+  organizationVpcFlowLogsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of OrganizationVpcFlowLogsServiceClient.
@@ -155,7 +155,7 @@ export class OrganizationVpcFlowLogsServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -266,14 +266,14 @@ export class OrganizationVpcFlowLogsServiceClient {
           selector: 'google.cloud.location.Locations.GetLocation',
           get: '/v1beta1/{name=projects/*/locations/*}',
           additional_bindings: [
-            { get: '/v1beta1/{name=organizations/*/locations/*}' },
+            {get: '/v1beta1/{name=organizations/*/locations/*}'},
           ],
         },
         {
           selector: 'google.cloud.location.Locations.ListLocations',
           get: '/v1beta1/{name=projects/*}/locations',
           additional_bindings: [
-            { get: '/v1beta1/{name=organizations/*}/locations' },
+            {get: '/v1beta1/{name=organizations/*}/locations'},
           ],
         },
         {
@@ -388,7 +388,7 @@ export class OrganizationVpcFlowLogsServiceClient {
       'google.cloud.networkmanagement.v1beta1.OrganizationVpcFlowLogsService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -429,7 +429,7 @@ export class OrganizationVpcFlowLogsServiceClient {
             .OrganizationVpcFlowLogsService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -442,7 +442,7 @@ export class OrganizationVpcFlowLogsServiceClient {
     ];
     for (const methodName of organizationVpcFlowLogsServiceStubMethods) {
       const callPromise = this.organizationVpcFlowLogsServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -656,7 +656,7 @@ export class OrganizationVpcFlowLogsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getVpcFlowLogsConfig request %j', request);
@@ -830,7 +830,7 @@ export class OrganizationVpcFlowLogsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -887,7 +887,7 @@ export class OrganizationVpcFlowLogsServiceClient {
     this._log.info('createVpcFlowLogsConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1022,7 +1022,7 @@ export class OrganizationVpcFlowLogsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'vpc_flow_logs_config.name': request.vpcFlowLogsConfig!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1079,7 +1079,7 @@ export class OrganizationVpcFlowLogsServiceClient {
     this._log.info('updateVpcFlowLogsConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1198,7 +1198,7 @@ export class OrganizationVpcFlowLogsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1255,7 +1255,7 @@ export class OrganizationVpcFlowLogsServiceClient {
     this._log.info('deleteVpcFlowLogsConfig long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1375,7 +1375,7 @@ export class OrganizationVpcFlowLogsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1455,7 +1455,7 @@ export class OrganizationVpcFlowLogsServiceClient {
       });
     const defaultCallSettings = this._defaults['listVpcFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVpcFlowLogsConfigs stream %j', request);
@@ -1517,7 +1517,7 @@ export class OrganizationVpcFlowLogsServiceClient {
       });
     const defaultCallSettings = this._defaults['listVpcFlowLogsConfigs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listVpcFlowLogsConfigs iterate %j', request);
@@ -2210,14 +2210,14 @@ export class OrganizationVpcFlowLogsServiceClient {
    */
   close(): Promise<void> {
     if (this.organizationVpcFlowLogsServiceStub && !this._terminated) {
-      return this.organizationVpcFlowLogsServiceStub.then((stub) => {
+      return this.organizationVpcFlowLogsServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

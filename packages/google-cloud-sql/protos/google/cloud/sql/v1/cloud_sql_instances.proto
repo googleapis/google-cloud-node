@@ -20,6 +20,7 @@ import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
+import "google/api/routing.proto";
 import "google/cloud/sql/v1/cloud_sql_resources.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
@@ -37,6 +38,15 @@ option (google.api.resource_definition) = {
 option (google.api.resource_definition) = {
   type: "compute.googleapis.com/Network"
   pattern: "projects/{project}/global/networks/{network}"
+};
+option (google.api.resource_definition) = {
+  type: "compute.googleapis.com/ServiceConnectionPolicy"
+  pattern: "projects/{project}/regions/{region}/serviceConnectionPolicies/{service_connection_policy}"
+};
+option (google.api.resource_definition) = {
+  type: "secretmanager.googleapis.com/SecretVersion"
+  pattern: "projects/{project}/secrets/{secret}/versions/{secret_version}"
+  pattern: "projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}"
 };
 
 service SqlInstancesService {
@@ -169,6 +179,10 @@ service SqlInstancesService {
     option (google.api.http) = {
       post: "/v1/projects/{project}/instances"
       body: "body"
+    };
+    option (google.api.routing) = {
+      routing_parameters { field: "project" }
+      routing_parameters { field: "body.region" path_template: "{region=**}" }
     };
   }
 
@@ -455,6 +469,9 @@ message SqlInstancesAddServerCaRequest {
 
   // Project ID of the project that contains the instance.
   string project = 2;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance add server certificate request.
@@ -464,6 +481,9 @@ message SqlInstancesAddServerCertificateRequest {
 
   // Project ID of the project that contains the instance.
   string project = 2;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance add Entra ID certificate request.
@@ -473,6 +493,9 @@ message SqlInstancesAddEntraIdCertificateRequest {
 
   // Required. Project ID of the project that contains the instance.
   string project = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance clone request.
@@ -481,10 +504,13 @@ message SqlInstancesCloneRequest {
   // not include the project ID.
   string instance = 1 [(google.api.field_behavior) = REQUIRED];
 
-  // Required. Project ID of the source as well as the clone Cloud SQL instance.
+  // Required. Project ID of the source Cloud SQL instance.
   string project = 2 [(google.api.field_behavior) = REQUIRED];
 
   InstancesCloneRequest body = 100 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance delete request.
@@ -510,6 +536,9 @@ message SqlInstancesDeleteRequest {
 
   // Optional. The description of the final backup.
   string final_backup_description = 5 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 11 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance demote master request.
@@ -521,6 +550,9 @@ message SqlInstancesDemoteMasterRequest {
   string project = 2;
 
   InstancesDemoteMasterRequest body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance demote request.
@@ -533,6 +565,9 @@ message SqlInstancesDemoteRequest {
 
   // Required. The request body.
   InstancesDemoteRequest body = 100 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance export request.
@@ -544,6 +579,9 @@ message SqlInstancesExportRequest {
   string project = 2;
 
   InstancesExportRequest body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance failover request.
@@ -555,6 +593,9 @@ message SqlInstancesFailoverRequest {
   string project = 2;
 
   InstancesFailoverRequest body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance get request.
@@ -564,6 +605,9 @@ message SqlInstancesGetRequest {
 
   // Required. Project ID of the project that contains the instance.
   string project = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance import request.
@@ -575,6 +619,9 @@ message SqlInstancesImportRequest {
   string project = 2;
 
   InstancesImportRequest body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance insert request.
@@ -584,6 +631,9 @@ message SqlInstancesInsertRequest {
   string project = 1;
 
   DatabaseInstance body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance list request.
@@ -611,6 +661,9 @@ message SqlInstancesListRequest {
 
   // Project ID of the project for which to list Cloud SQL instances.
   string project = 4;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance list server CAs request.
@@ -620,6 +673,9 @@ message SqlInstancesListServerCasRequest {
 
   // Project ID of the project that contains the instance.
   string project = 2;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance list server certificates request.
@@ -629,6 +685,9 @@ message SqlInstancesListServerCertificatesRequest {
 
   // Required. Project ID of the project that contains the instance.
   string project = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance list Entra ID certificates request.
@@ -638,6 +697,9 @@ message SqlInstancesListEntraIdCertificatesRequest {
 
   // Required. Project ID of the project that contains the instance.
   string project = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance patch request.
@@ -648,7 +710,20 @@ message SqlInstancesPatchRequest {
   // Project ID of the project that contains the instance.
   string project = 2;
 
+  // Optional. Set PSC config to the same value as the existing config to
+  // reconcile the PSC networking.
+  optional bool reconcile_psc_networking = 4
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Set PSC config to the same value as the existing config and force
+  // reconcile the PSC networking.
+  optional bool reconcile_psc_networking_force = 5
+      [(google.api.field_behavior) = OPTIONAL];
+
   DatabaseInstance body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 6 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance promote replica request.
@@ -666,6 +741,9 @@ message SqlInstancesPromoteReplicaRequest {
   // If set to false or not specified, then the original primary
   // instance becomes an independent Cloud SQL primary instance.
   bool failover = 3;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance switchover request.
@@ -681,6 +759,9 @@ message SqlInstancesSwitchoverRequest {
   // minutes and can be modified to a maximum value of 24 hours.
   google.protobuf.Duration db_timeout = 3
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance reset SSL config request.
@@ -707,6 +788,9 @@ message SqlInstancesResetSslConfigRequest {
 
   // Optional. Reset SSL mode to use.
   ResetSslMode mode = 3 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance restart request.
@@ -716,6 +800,9 @@ message SqlInstancesRestartRequest {
 
   // Project ID of the project that contains the instance to be restarted.
   string project = 2;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance restore backup request.
@@ -727,6 +814,9 @@ message SqlInstancesRestoreBackupRequest {
   string project = 2;
 
   InstancesRestoreBackupRequest body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance rotate server CA request.
@@ -738,6 +828,9 @@ message SqlInstancesRotateServerCaRequest {
   string project = 2;
 
   InstancesRotateServerCaRequest body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance rotate server certificate request.
@@ -751,6 +844,9 @@ message SqlInstancesRotateServerCertificateRequest {
   // Optional. Rotate server certificate request body.
   InstancesRotateServerCertificateRequest body = 100
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance rotate server certificate request.
@@ -764,6 +860,9 @@ message SqlInstancesRotateEntraIdCertificateRequest {
   // Optional. Rotate Entra ID certificate request body.
   InstancesRotateEntraIdCertificateRequest body = 100
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance start replica request.
@@ -773,6 +872,9 @@ message SqlInstancesStartReplicaRequest {
 
   // ID of the project that contains the read replica.
   string project = 2;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance stop replica request.
@@ -782,6 +884,9 @@ message SqlInstancesStopReplicaRequest {
 
   // ID of the project that contains the read replica.
   string project = 2;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance truncate log request.
@@ -793,6 +898,9 @@ message SqlInstancesTruncateLogRequest {
   string project = 2;
 
   InstancesTruncateLogRequest body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance perform disk shrink request.
@@ -805,6 +913,9 @@ message SqlInstancesPerformDiskShrinkRequest {
 
   // Perform disk shrink context.
   PerformDiskShrinkContext body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance update request.
@@ -816,6 +927,9 @@ message SqlInstancesUpdateRequest {
   string project = 2;
 
   DatabaseInstance body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance reschedule maintenance request.
@@ -827,6 +941,9 @@ message SqlInstancesRescheduleMaintenanceRequest {
   string project = 2;
 
   SqlInstancesRescheduleMaintenanceRequestBody body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance reencrypt request.
@@ -839,6 +956,9 @@ message SqlInstancesReencryptRequest {
 
   // Reencrypt body that users request
   InstancesReencryptRequest body = 3;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Database Instance reencrypt request.
@@ -896,6 +1016,9 @@ message SqlInstancesGetDiskShrinkConfigRequest {
 
   // Project ID of the project that contains the instance.
   string project = 2;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance verify external sync settings request.
@@ -961,6 +1084,9 @@ message SqlInstancesVerifyExternalSyncSettingsRequest {
   // this field is empty, then migrate all objects.
   repeated ExternalSyncSelectedObject selected_objects = 9
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 10 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance start external sync request.
@@ -998,6 +1124,9 @@ message SqlInstancesStartExternalSyncRequest {
   // If this field is not set and there are both overlapping and additional
   // databases proposed, an error will be returned.
   bool replica_overwrite_enabled = 9 [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 10 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance reset replica size request.
@@ -1007,6 +1136,9 @@ message SqlInstancesResetReplicaSizeRequest {
 
   // ID of the project that contains the read replica.
   string project = 2;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance create ephemeral certificate request.
@@ -1018,6 +1150,9 @@ message SqlInstancesCreateEphemeralCertRequest {
   string project = 2;
 
   SslCertsCreateEphemeralRequest body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Database instance clone request.
@@ -1163,6 +1298,11 @@ message InstancesRestoreBackupRequest {
   // With the difference that these fields are cleared in the settings.
   repeated string restore_instance_clear_overrides_field_names = 5
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. If true, the restore operation proceeds even if the target
+  // instance's maintenance version is older than the source instance's
+  // maintenance version.
+  bool ignore_maintenance_version = 6 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Rotate server CA request.
@@ -1209,6 +1349,9 @@ message SqlInstancesPreCheckMajorVersionUpgradeRequest {
   // upgrade operation.
   InstancesPreCheckMajorVersionUpgradeRequest body = 3
       [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 4 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance verify external sync settings response.
@@ -1246,6 +1389,9 @@ message SqlInstancesGetLatestRecoveryTimeRequest {
   // The timestamp used to identify the time when the source instance is
   // deleted. If this instance is deleted, then you must set the timestamp.
   optional google.protobuf.Timestamp source_instance_deletion_time = 3;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 5 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Instance get latest recovery time response.
@@ -1317,7 +1463,7 @@ message CloneContext {
       [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The fully qualified URI of the VPC network to which the cloned
-  // instance will be connected via Private Services Access for private IP. For
+  // instance will be connected via private services access for private IP. For
   // example:`projects/my-network-project/global/networks/my-network`. This
   // field is only required for cross-project cloning.
   optional string destination_network = 14 [
@@ -1344,7 +1490,10 @@ message PointInTimeRestoreContext {
   // Optional. The resource link for the VPC network from which the Cloud SQL
   // instance is accessible for private IP. For example,
   // `/projects/myProject/global/networks/default`.
-  optional string private_network = 4 [(google.api.field_behavior) = OPTIONAL];
+  optional string private_network = 4 [
+    (google.api.field_behavior) = OPTIONAL,
+    (google.api.resource_reference) = { type: "compute.googleapis.com/Network" }
+  ];
 
   // Optional. The name of the allocated IP range for the internal IP Cloud SQL
   // instance. For example: "google-managed-services-default". If you set this,
@@ -1366,6 +1515,20 @@ message PointInTimeRestoreContext {
   // instance. This value cannot be the same as the preferred_zone field.
   optional string preferred_secondary_zone = 9
       [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Specifies the instance settings that will be overridden from the
+  // source instance. This field is only applicable for cross project PITRs.
+  DatabaseInstance target_instance_settings = 11
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. Specifies the instance settings that will be cleared from the
+  // source instance. This field is only applicable for cross project PITRs.
+  repeated string target_instance_clear_settings_field_names = 12
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. The region of the target instance where the datasource will be
+  // restored. For example: "us-central1".
+  optional string region = 13 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Binary log coordinates.
@@ -1517,6 +1680,19 @@ message DatabaseInstance {
     // connect to this read pool node.
     repeated PscAutoConnectionConfig psc_auto_connections = 8
         [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+
+  // State of the integration with Database Center.
+  enum DatabaseCenterIntegration {
+    // Default value. The integration state is unspecified. When unspecified,
+    // Database Center integration is enabled by default.
+    DATABASE_CENTER_INTEGRATION_UNSPECIFIED = 0;
+
+    // Database Center integration is enabled.
+    ENABLED = 1;
+
+    // Database Center integration is disabled.
+    DISABLED = 2;
   }
 
   // This is always `sql#instance`.
@@ -1722,6 +1898,13 @@ message DatabaseInstance {
       include_replicas_for_major_version_upgrade = 59
       [(google.api.field_behavior) = INPUT_ONLY];
 
+  // Optional. Input only. Determines whether the precheck step is skipped
+  // during a major version upgrade.
+  optional google.protobuf.BoolValue skip_precheck = 77 [
+    (google.api.field_behavior) = INPUT_ONLY,
+    (google.api.field_behavior) = OPTIONAL
+  ];
+
   // Optional. Input only. Immutable. Tag keys and tag values that are bound to
   // this instance. You must represent each item in the map as:
   // `"<tag-key-namespaced-name>" : "<tag-value-short-name>"`.
@@ -1751,6 +1934,69 @@ message DatabaseInstance {
   // Output only. The list of DNS names used by this instance.
   repeated DnsNameMapping dns_names = 67
       [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Output only. Deployment info for the instance. This is set if the instance
+  // is currently part of any blue-green setup.
+  optional BlueGreenDeploymentInfo deployment_info = 73
+      [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // Optional. If true, instance metadata is sent to the Database Center. If
+  // false, instance metadata is not sent to the Database Center.
+  google.protobuf.BoolValue database_center_integration_enabled = 72
+      [(google.api.field_behavior) = OPTIONAL];
+
+  // Optional. State of the Database Center integration for this instance.
+  // When unspecified, Database Center integration is enabled by default.
+  optional DatabaseCenterIntegration database_center_integration = 76
+      [(google.api.field_behavior) = OPTIONAL];
+}
+
+// Blue-green deployment metadata for a database instance. In a blue-green
+// deployment, we maintain two environments, one of which is live.
+// This message contains details about the blue-green deployment.
+message BlueGreenDeploymentInfo {
+  // The source instance for the Blue-Green deployment.
+  message SourceRole {
+    // Output only. The target instance paired with this source instance in a
+    // blue-green deployment.
+    optional InstanceReference target_id = 1
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+
+  // The target instance for the Blue-Green deployment.
+  message TargetRole {
+    // Output only. The source instance paired with this target instance in a
+    // blue-green deployment.
+    optional InstanceReference source_id = 1
+        [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+
+  // The state of blue-green-deployment for UI tags
+  enum State {
+    // The state of the deployment is unknown.
+    STATE_UNSPECIFIED = 0;
+
+    // The deployment is pre-switchover.
+    PRE_SWITCHOVER = 1;
+
+    // The deployment is post-switchover.
+    POST_SWITCHOVER = 2;
+  }
+
+  // Output only. The resource ID of the blue-green deployment.
+  optional string deployment_id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+  // The role of the instance in the blue-green deployment.
+  oneof role_details {
+    // Output only. The source instance for the Blue-Green deployment.
+    SourceRole source = 2 [(google.api.field_behavior) = OUTPUT_ONLY];
+
+    // Output only. The target instance for the Blue-Green deployment.
+    TargetRole target = 3 [(google.api.field_behavior) = OUTPUT_ONLY];
+  }
+
+  // Output only. The current state of blue-green-deployment for UI tags
+  optional State state = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Gemini instance configuration.
@@ -2167,6 +2413,15 @@ message SqlExternalSyncSettingError {
     // The replication user is missing specific privileges to setup DDL
     // replication. (e.g. CREATE EVENT TRIGGER, CREATE SCHEMA) for PostgreSQL.
     PG_DDL_REPLICATION_INSUFFICIENT_PRIVILEGE = 58;
+
+    // Read replicas of the Writable Destination instance will be recreated
+    // after external synchronization is complete, causing downtime on read
+    // replicas.
+    WRITABLE_DESTINATION_REPLICA_RECREATION_DOWNTIME = 59;
+
+    // A warning that disk storage auto increase is disabled on the destination
+    // instance for a Writable Destination migration.
+    WRITABLE_DESTINATION_STORAGE_AUTO_INCREASE_DISABLED = 60;
   }
 
   // Can be `sql#externalSyncSettingError` or
@@ -2240,6 +2495,10 @@ message OnPremisesConfiguration {
 
   // Optional. SSL option for replica connection to the on-premises source.
   SslOption ssl_option = 18 [(google.api.field_behavior) = OPTIONAL];
+
+  // Output only. Indicates whether the resource is managed by Database
+  // Migration Service.
+  bool dms_managed = 20 [(google.api.field_behavior) = OUTPUT_ONLY];
 }
 
 // Read-replica configuration for connecting to the primary instance.
@@ -2269,7 +2528,6 @@ message ReplicaConfiguration {
       [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Execute SQL statements request.
 message SqlInstancesExecuteSqlRequest {
   // Required. Database instance ID. This does not include the project ID.
   string instance = 1 [(google.api.field_behavior) = REQUIRED];
@@ -2279,6 +2537,9 @@ message SqlInstancesExecuteSqlRequest {
 
   // The request body.
   ExecuteSqlPayload body = 100;
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // The request payload used to execute SQL statements.
@@ -2309,11 +2570,27 @@ message ExecuteSqlPayload {
   string sql_statement = 2 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. Name of the database on which the statement will be executed.
+  // For Postgres and SQL Server it's required, for MySQL it's optional.
   string database = 3 [(google.api.field_behavior) = OPTIONAL];
 
   // Credentials for the database connection.
   oneof user_password {
-    // Optional. When set to true, the API caller identity associated with the
+    // Optional. The resource name of the Secret Manager secret holding the
+    // password for the user to log into the database. The secret should be
+    // created using the regional endpoint (for API) or from the Regional
+    // Secrets page (for UI), and stored in the same region as the Cloud SQL
+    // instance. The expected resource name format is
+    // `projects/{project}/locations/{location}/secrets/{secret}/versions/{secret_version}`.
+    // Used together with the `user` field.
+    // The secret resource name will not be stored.
+    string password_secret_version = 5 [
+      (google.api.field_behavior) = OPTIONAL,
+      (google.api.resource_reference) = {
+        type: "secretmanager.googleapis.com/SecretVersion"
+      }
+    ];
+
+    // Optional. When set to `true`, the API caller identity associated with the
     // request is used for database authentication. The API caller must be an
     // IAM user in the database.
     bool auto_iam_authn = 11 [(google.api.field_behavior) = OPTIONAL];
@@ -2334,7 +2611,6 @@ message ExecuteSqlPayload {
   string application = 16 [(google.api.field_behavior) = OPTIONAL];
 }
 
-// Execute SQL statements response.
 message SqlInstancesExecuteSqlResponse {
   // Represents a notice or warning message from the database.
   message Message {
@@ -2433,6 +2709,9 @@ message SqlInstancesAcquireSsrsLeaseRequest {
   // Required. The request body.
   InstancesAcquireSsrsLeaseRequest body = 100
       [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response for the acquire SSRS lease request.
@@ -2451,6 +2730,9 @@ message SqlInstancesReleaseSsrsLeaseRequest {
 
   // Required. The project ID that contains the instance.
   string project = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. Region of the Cloud SQL instance.
+  string location = 3 [(google.api.field_behavior) = OPTIONAL];
 }
 
 // Response for the release SSRS lease request.
@@ -2489,6 +2771,10 @@ enum SqlInstanceType {
 
   // A Cloud SQL read pool.
   READ_POOL_INSTANCE = 5;
+
+  // A Cloud SQL instance acting as a Blue-Green deployment target primary.
+  // (MySQL only)
+  GREEN_INSTANCE = 7;
 }
 
 // The suspension reason of the database instance if the state is SUSPENDED.
@@ -2510,4 +2796,7 @@ enum SqlSuspensionReason {
 
   // The KMS key used by the instance is either revoked or denied access to
   KMS_KEY_ISSUE = 5;
+
+  // The project is suspended due to abuse detected by Ares.
+  PROJECT_ABUSE = 8;
 }

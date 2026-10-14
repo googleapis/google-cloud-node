@@ -67,7 +67,7 @@ function main(name) {
   // const view = {}
 
   // Imports the Networkconnectivity library
-  const {HubServiceClient} = require('@google-cloud/networkconnectivity').v1beta;
+  const {HubServiceClient} = require('@google-cloud/network-connectivity').v1beta;
 
   // Instantiates a client
   const networkconnectivityClient = new HubServiceClient();

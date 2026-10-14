@@ -1,5 +1,56 @@
 # Changelog
 
+## [7.2.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v7.1.1...secret-manager-v7.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [7.1.1](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v7.1.0...secret-manager-v7.1.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [7.1.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v7.0.0...secret-manager-v7.1.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [7.0.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v6.3.0...secret-manager-v7.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v6.2.0...secret-manager-v6.3.0) (2026-07-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v6.1.3...secret-manager-v6.2.0) (2026-06-16)
+
+
+### Features
+
+* Local OwlBot generation batch 2 ([#8613](https://github.com/googleapis/google-cloud-node/issues/8613)) ([243fb1a](https://github.com/googleapis/google-cloud-node/commit/243fb1a66876934bd68ca96e420937ae8adeb77d))
+
+
+### Bug Fixes
+
+* **google-cloud-secretmanager:** Improve librarian.js script an re-add missing functions ([#8424](https://github.com/googleapis/google-cloud-node/issues/8424)) ([13d03c1](https://github.com/googleapis/google-cloud-node/commit/13d03c1f0f07f92770d44490050ab65498b4a8ff))
+
 ## [6.1.3](https://github.com/googleapis/google-cloud-node/compare/secret-manager-v6.1.2...secret-manager-v6.1.3) (2026-06-01)
 
 

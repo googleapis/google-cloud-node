@@ -37,7 +37,7 @@ service MobileDeviceService {
       "https://www.googleapis.com/auth/admanager,"
       "https://www.googleapis.com/auth/admanager.readonly";
 
-  // API to retrieve a `MobileDevice` object.
+  // Retrieves a `MobileDevice` object.
   rpc GetMobileDevice(GetMobileDeviceRequest) returns (MobileDevice) {
     option (google.api.http) = {
       get: "/v1/{name=networks/*/mobileDevices/*}"
@@ -45,7 +45,7 @@ service MobileDeviceService {
     option (google.api.method_signature) = "name";
   }
 
-  // API to retrieve a list of `MobileDevice` objects.
+  // Lists `MobileDevice` objects.
   rpc ListMobileDevices(ListMobileDevicesRequest)
       returns (ListMobileDevicesResponse) {
     option (google.api.http) = {
@@ -95,12 +95,11 @@ message ListMobileDevicesRequest {
   //  See syntax details at
   //  https://developers.google.com/ad-manager/api/beta/filters
   //
-  // <b>Filterable fields:</b>
-  // <ul style="list-style-type:none">
-  //   <li><code>displayName</code></li>
-  //   <li><code>manufacturer</code></li>
-  //   <li><code>name</code></li>
-  // </ul>
+  // **Filterable fields:**
+  //
+  // * `displayName`
+  // * `manufacturer`
+  // * `name`
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.

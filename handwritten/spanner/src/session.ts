@@ -21,7 +21,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const common = require('./common-grpc/service-object');
 import {promisifyAll} from '@google-cloud/promisify';
-import * as extend from 'extend';
+// eslint-disable-next-line import/namespace
 import * as r from 'teeny-request';
 import {
   Snapshot,
@@ -29,18 +29,15 @@ import {
   PartitionedDml,
   TimestampBounds,
 } from './transaction';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import {
   Database,
   CreateSessionCallback,
   CreateSessionOptions,
 } from './database';
 import {ServiceObjectConfig} from '@google-cloud/common';
-import {
-  NormalCallback,
-  addLeaderAwareRoutingHeader,
-  getCommonHeaders,
-} from './common';
+import {NormalCallback, addLeaderAwareRoutingHeader} from './common';
 import {ObservabilityOptions} from './instrument';
 import {grpc, CallOptions} from 'google-gax';
 import IRequestOptions = google.spanner.v1.IRequestOptions;
@@ -254,17 +251,14 @@ export class Session extends common.GrpcServiceObject {
             return;
           }
 
-          extend(this, session);
+          Object.assign(this, session);
           callback(null, this, apiResponse);
         });
       },
     } as {} as ServiceObjectConfig);
 
     this._observabilityOptions = database._observabilityOptions;
-    this.commonHeaders_ = getCommonHeaders(
-      (this.parent as Database).formattedName_,
-      this._observabilityOptions?.enableEndToEndTracing,
-    );
+    this.commonHeaders_ = {...database.commonHeaders_};
     this.request = database.request;
     this.requestStream = database.requestStream;
 
@@ -393,7 +387,7 @@ export class Session extends common.GrpcServiceObject {
       name: this.formattedName_,
     };
 
-    const headers = this.commonHeaders_;
+    const headers = {...this.commonHeaders_};
     if (this._getSpanner().routeToLeaderEnabled) {
       addLeaderAwareRoutingHeader(headers);
     }

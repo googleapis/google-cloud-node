@@ -33,6 +33,18 @@ function main(name) {
    *  ImportJob google.cloud.kms.v1.ImportJob  to get.
    */
   // const name = 'abc123'
+  /**
+   *  Optional. Specifies the WrappingPublicKey   format.
+   *  If not specified:
+   *    * For RSA-based import methods, the wrapping key will be returned in PEM
+   *    format
+   *    * For pure ML-KEM-based import methods, the wrapping key will be returned
+   *    in the raw bytes format specified in FIPS-203
+   *    * For X-Wing-based import methods, the wrapping key will be returned in
+   *    the raw bytes format specified in
+   *    https://datatracker.ietf.org/doc/draft-connolly-cfrg-xwing-kem.
+   */
+  // const publicKeyFormat = {}
 
   // Imports the Kms library
   const {KeyManagementServiceClient} = require('@google-cloud/kms').v1;

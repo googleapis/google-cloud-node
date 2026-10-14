@@ -75,6 +75,16 @@
                 "testIamPermissions"
               ]
             },
+            "EnableManagedRotation": {
+              "methods": [
+                "enableManagedRotation"
+              ]
+            },
+            "RotateSecret": {
+              "methods": [
+                "rotateSecret"
+              ]
+            },
             "ListSecrets": {
               "methods": [
                 "listSecrets",
@@ -157,6 +167,16 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "EnableManagedRotation": {
+              "methods": [
+                "enableManagedRotation"
+              ]
+            },
+            "RotateSecret": {
+              "methods": [
+                "rotateSecret"
               ]
             },
             "ListSecrets": {

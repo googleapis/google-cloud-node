@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import { DataTransferServiceClient } from '@google-cloud/bigquery-data-transfer';
+import {DataTransferServiceClient} from '@google-cloud/bigquery-data-transfer';
 
 // check that the client class type name can be used
 function doStuffWithDataTransferServiceClient(

@@ -16,12 +16,13 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
+import * as v2 from './v2';
 import * as v2beta from './v2beta';
 
 const MapManagementClient = v2beta.MapManagementClient;
 type MapManagementClient = v2beta.MapManagementClient;
 
-export {v2beta, MapManagementClient};
-export default {v2beta, MapManagementClient};
+export {v2, v2beta, MapManagementClient};
+export default {v2, v2beta, MapManagementClient};
 import * as protos from '../protos/protos';
 export {protos};

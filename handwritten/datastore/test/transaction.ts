@@ -17,8 +17,6 @@ import arrify = require('arrify');
 import * as assert from 'assert';
 import {afterEach, beforeEach, before, describe, it} from 'mocha';
 import * as proxyquire from 'proxyquire';
-import {getTransactionRequest} from '../src/request';
-
 import {
   Datastore,
   DatastoreOptions,
@@ -38,11 +36,11 @@ import {
   GetCallback,
   RequestCallback,
   RequestConfig,
+  getTransactionRequest,
 } from '../src/request';
 import {SECOND_DATABASE_ID} from './index';
-import {google} from '../protos/protos';
+import {protos, google} from '../src/protos';
 import {RunCallback} from '../src/transaction';
-import * as protos from '../protos/protos';
 import {AggregateQuery} from '../src/aggregate';
 import {RunQueryCallback, RunQueryInfo, RunQueryOptions} from '../src/query';
 import * as mocha from 'mocha';

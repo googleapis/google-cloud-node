@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as reachabilityserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -51,7 +51,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -155,9 +155,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -205,7 +205,7 @@ describe('v1.ReachabilityServiceClient', () => {
     }
     it('sets apiEndpoint according to universe domain camelCase', () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        { universeDomain: 'example.com' },
+        {universeDomain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'networkmanagement.example.com');
@@ -213,7 +213,7 @@ describe('v1.ReachabilityServiceClient', () => {
 
     it('sets apiEndpoint according to universe domain snakeCase', () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
-        { universe_domain: 'example.com' },
+        {universe_domain: 'example.com'},
       );
       const servicePath = client.apiEndpoint;
       assert.strictEqual(servicePath, 'networkmanagement.example.com');
@@ -288,7 +288,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -297,14 +297,14 @@ describe('v1.ReachabilityServiceClient', () => {
       assert(client.reachabilityServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.reachabilityServiceStub);
@@ -313,15 +313,15 @@ describe('v1.ReachabilityServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -331,7 +331,7 @@ describe('v1.ReachabilityServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -340,7 +340,7 @@ describe('v1.ReachabilityServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -354,7 +354,7 @@ describe('v1.ReachabilityServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -379,7 +379,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes getConnectivityTest without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -413,7 +413,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes getConnectivityTest without error using callback', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -462,7 +462,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes getConnectivityTest with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -495,7 +495,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes getConnectivityTest with closed client', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -509,7 +509,7 @@ describe('v1.ReachabilityServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getConnectivityTest(request), expectedError);
@@ -520,7 +520,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes createConnectivityTest without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -555,7 +555,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes createConnectivityTest without error using callback', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -611,7 +611,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes createConnectivityTest with call error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -647,7 +647,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes createConnectivityTest with LRO error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -682,7 +682,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes checkCreateConnectivityTestProgress without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -691,8 +691,8 @@ describe('v1.ReachabilityServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateConnectivityTestProgress(
@@ -706,7 +706,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes checkCreateConnectivityTestProgress with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -729,7 +729,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes updateConnectivityTest without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -765,7 +765,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes updateConnectivityTest without error using callback', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -822,7 +822,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes updateConnectivityTest with call error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -859,7 +859,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes updateConnectivityTest with LRO error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -895,7 +895,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes checkUpdateConnectivityTestProgress without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -904,8 +904,8 @@ describe('v1.ReachabilityServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateConnectivityTestProgress(
@@ -919,7 +919,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes checkUpdateConnectivityTestProgress with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -942,7 +942,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes rerunConnectivityTest without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -977,7 +977,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes rerunConnectivityTest without error using callback', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1033,7 +1033,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes rerunConnectivityTest with call error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1069,7 +1069,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes rerunConnectivityTest with LRO error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1104,7 +1104,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes checkRerunConnectivityTestProgress without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1113,8 +1113,8 @@ describe('v1.ReachabilityServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkRerunConnectivityTestProgress(
@@ -1128,7 +1128,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes checkRerunConnectivityTestProgress with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1151,7 +1151,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes deleteConnectivityTest without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1186,7 +1186,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes deleteConnectivityTest without error using callback', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1242,7 +1242,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes deleteConnectivityTest with call error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1278,7 +1278,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes deleteConnectivityTest with LRO error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1313,7 +1313,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes checkDeleteConnectivityTestProgress without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1322,8 +1322,8 @@ describe('v1.ReachabilityServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteConnectivityTestProgress(
@@ -1337,7 +1337,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes checkDeleteConnectivityTestProgress with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1360,7 +1360,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes listConnectivityTests without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1402,7 +1402,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes listConnectivityTests without error using callback', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1461,7 +1461,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes listConnectivityTests with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1497,7 +1497,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes listConnectivityTestsStream without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1568,7 +1568,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes listConnectivityTestsStream with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1628,7 +1628,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('uses async iteration with listConnectivityTests without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1684,7 +1684,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('uses async iteration with listConnectivityTests with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1732,7 +1732,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1764,7 +1764,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1803,7 +1803,7 @@ describe('v1.ReachabilityServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1814,7 +1814,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes getIamPolicy with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1848,7 +1848,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1880,7 +1880,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1919,7 +1919,7 @@ describe('v1.ReachabilityServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1930,7 +1930,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes setIamPolicy with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1964,7 +1964,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -1999,7 +1999,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2038,7 +2038,7 @@ describe('v1.ReachabilityServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2049,7 +2049,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes testIamPermissions with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2086,7 +2086,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes getLocation without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2118,7 +2118,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes getLocation without error using callback', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2164,7 +2164,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes getLocation with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2201,7 +2201,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2251,7 +2251,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('uses async iteration with listLocations with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2294,7 +2294,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes getOperation without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2317,7 +2317,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes getOperation without error using callback', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2346,7 +2346,7 @@ describe('v1.ReachabilityServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2357,7 +2357,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes getOperation with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2383,7 +2383,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2407,7 +2407,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes cancelOperation without error using callback', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2436,7 +2436,7 @@ describe('v1.ReachabilityServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2447,7 +2447,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes cancelOperation with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2473,7 +2473,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2497,7 +2497,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes deleteOperation without error using callback', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2526,7 +2526,7 @@ describe('v1.ReachabilityServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2537,7 +2537,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('invokes deleteOperation with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2563,7 +2563,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2600,7 +2600,7 @@ describe('v1.ReachabilityServiceClient', () => {
     it('uses async iteration with listOperations with error', async () => {
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2637,7 +2637,7 @@ describe('v1.ReachabilityServiceClient', () => {
       };
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2692,7 +2692,7 @@ describe('v1.ReachabilityServiceClient', () => {
       };
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2779,7 +2779,7 @@ describe('v1.ReachabilityServiceClient', () => {
       };
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );
@@ -2821,7 +2821,7 @@ describe('v1.ReachabilityServiceClient', () => {
       };
       const client = new reachabilityserviceModule.v1.ReachabilityServiceClient(
         {
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         },
       );

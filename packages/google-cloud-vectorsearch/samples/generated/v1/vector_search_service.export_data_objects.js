@@ -38,6 +38,15 @@ function main(name) {
    *  `projects/{project}/locations/{location}/collections/{collection}`.
    */
   // const name = 'abc123'
+  /**
+   *  Optional. Restricts which top-level Data Object fields appear in each
+   *  exported JSONL record. If unset, every field is exported (the existing
+   *  behavior). The primary use case is excluding the per-object `etag` so
+   *  that the exported records can be imported into a Collection in a
+   *  different region without optimistic-concurrency conflicts.
+   *  Allowed field names are `id`, `data`, `vectors`, `etag`.
+   */
+  // const fieldFilter = {}
 
   // Imports the Vectorsearch library
   const {VectorSearchServiceClient} = require('@google-cloud/vectorsearch').v1;

@@ -80,6 +80,26 @@
                 "runTask"
               ]
             },
+            "UpdateCmekConfig": {
+              "methods": [
+                "updateCmekConfig"
+              ]
+            },
+            "GetCmekConfig": {
+              "methods": [
+                "getCmekConfig"
+              ]
+            },
+            "BatchCreateTasks": {
+              "methods": [
+                "batchCreateTasks"
+              ]
+            },
+            "BatchDeleteTasks": {
+              "methods": [
+                "batchDeleteTasks"
+              ]
+            },
             "ListQueues": {
               "methods": [
                 "listQueues",
@@ -167,6 +187,26 @@
             "RunTask": {
               "methods": [
                 "runTask"
+              ]
+            },
+            "UpdateCmekConfig": {
+              "methods": [
+                "updateCmekConfig"
+              ]
+            },
+            "GetCmekConfig": {
+              "methods": [
+                "getCmekConfig"
+              ]
+            },
+            "BatchCreateTasks": {
+              "methods": [
+                "batchCreateTasks"
+              ]
+            },
+            "BatchDeleteTasks": {
+              "methods": [
+                "batchDeleteTasks"
               ]
             },
             "ListQueues": {

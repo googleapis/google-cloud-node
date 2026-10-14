@@ -1,0 +1,400 @@
+name: Auto Assign Reviewers
+
+on:
+  # pull_request_target is required to grant write permissions for reviewer assignment on fork PRs.
+  # The workflow only runs github-script and does not check out or execute untrusted code.
+  # zizmor: ignore[dangerous-triggers]
+  pull_request_target:
+    types: [opened, ready_for_review, reopened, synchronize]
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  assign-reviewers:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - name: Assign Reviewers
+        continue-on-error: true
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const author = context.payload.pull_request.user.login;
+
+            // Fetch all files modified in the PR across all pages
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              per_page: 100,
+            });
+
+            const PATH_ROUTING = [
+              { prefix: 'handwritten/bigquery/', team: 'bigquery-team', allowSharedFiles: true },
+              { prefix: 'handwritten/bigquery-storage/', team: 'bigquery-team', allowSharedFiles: true },
+              { prefix: 'handwritten/cloud-profiler/', team: 'cloud-profiler-team', allowSharedFiles: true },
+              { prefix: 'handwritten/storage/', team: 'gcs-team', allowSharedFiles: true },
+              { prefix: 'handwritten/firestore/', team: 'firestore-team', allowSharedFiles: true },
+              { prefix: 'handwritten/spanner/', team: 'spanner-team', allowSharedFiles: true },
+              { prefix: 'handwritten/spanner-driver/', team: 'spanner-team', allowSharedFiles: true },
+              { prefix: 'core/packages/google-auth-library-nodejs/', team: 'aion-team', allowSharedFiles: false },
+              { prefix: '.github/workflows/storage-conformance.yaml', team: 'gcs-team', allowSharedFiles: true },
+              { prefix: '.github/workflows/system-tests-against-emulator.yaml', team: 'spanner-team', allowSharedFiles: true },
+              { prefix: '.github/workflows/discovery.yaml', team: 'bigquery-team', allowSharedFiles: true },
+            ];
+
+            const SHARED_PARTNER_FILES = new Set([
+              'pnpm-lock.yaml',
+              '.release-please-manifest.json',
+              'release-please-config.json',
+              'release-please-submodules.json',
+              'changelog.json',
+            ]);
+
+            const ALL_PARTNER_TEAMS = new Set([
+              ...PATH_ROUTING.map(r => r.team),
+              'bigtable-team',
+              'pubsub-team',
+              'cloud-sdk-librarian-team',
+            ]);
+
+            const assignedTeams = new Set();
+            let allowSharedPartnerFiles = false;
+            for (const route of PATH_ROUTING) {
+              if (files.some(file => file.filename.startsWith(route.prefix))) {
+                assignedTeams.add(route.team);
+                if (route.allowSharedFiles) {
+                  allowSharedPartnerFiles = true;
+                }
+              }
+            }
+
+            const hasNonPartnerFiles = files.some(
+              file =>
+                !PATH_ROUTING.some(route => file.filename.startsWith(route.prefix)) &&
+                !(allowSharedPartnerFiles && SHARED_PARTNER_FILES.has(file.filename))
+            );
+            const hasOnlyPartnerAndSharedFiles = files.every(
+              file =>
+                PATH_ROUTING.some(route => file.filename.startsWith(route.prefix)) ||
+                SHARED_PARTNER_FILES.has(file.filename)
+            );
+            const requiresDefaultTeamReview = assignedTeams.size === 0 || hasNonPartnerFiles;
+
+            // Fetch live requested reviewers and teams in case CODEOWNERS updated them after webhook event creation
+            let requestedReviewers = context.payload.pull_request.requested_reviewers || [];
+            let requestedTeams = context.payload.pull_request.requested_teams || [];
+            try {
+              const { data: liveReviewers } = await github.rest.pulls.listRequestedReviewers({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+              });
+              if (liveReviewers.teams) {
+                requestedTeams = liveReviewers.teams;
+              }
+              if (liveReviewers.users) {
+                requestedReviewers = liveReviewers.users;
+              }
+            } catch (err) {
+              console.warn("Failed to fetch live requested reviewers:", err.message || err);
+            }
+
+            // Release PRs should remain the responsibility of the oncall (and any matched partner team),
+            // so we route them to the default team (plus partner team if applicable) rather than individual team members.
+            if (author === 'release-please[bot]' || author === 'release-please') {
+              const targetTeams = new Set(['cloud-sdk-nodejs-team']);
+              if (hasOnlyPartnerAndSharedFiles) {
+                for (const team of assignedTeams) {
+                  targetTeams.add(team);
+                }
+              }
+
+              const missingTeams = Array.from(targetTeams).filter(
+                slug => !requestedTeams.some(team => team.slug === slug)
+              );
+              if (missingTeams.length > 0) {
+                console.log(`PR opened by ${author}. Requesting review from teams: ${missingTeams.join(', ')}.`);
+                try {
+                  await github.rest.pulls.requestReviewers({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: context.payload.pull_request.number,
+                    team_reviewers: missingTeams,
+                  });
+                } catch (err) {
+                  console.error("Failed to assign release team reviewers:", err.message || err);
+                }
+              }
+
+              const unneededTeams = requestedTeams
+                .filter(team => ALL_PARTNER_TEAMS.has(team.slug) && !targetTeams.has(team.slug))
+                .map(team => team.slug);
+              if (unneededTeams.length > 0) {
+                console.log(`Removing unneeded partner teams from release PR: ${unneededTeams.join(', ')}`);
+                try {
+                  await github.rest.pulls.removeRequestedReviewers({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: context.payload.pull_request.number,
+                    reviewers: [],
+                    team_reviewers: unneededTeams,
+                  });
+                } catch (err) {
+                  console.warn("Failed to remove unneeded partner teams from release PR:", err.message || err);
+                }
+              }
+              return;
+            }
+
+            const KNOWN_BOTS = new Set([
+              'gcf-owl-bot[bot]',
+              'gcf-owl-bot',
+              'release-please[bot]',
+              'release-please',
+              'dependabot[bot]',
+              'dependabot',
+              'renovate-bot',
+              'renovate',
+              'yoshi-code-bot',
+              'gemini-code-assist[bot]',
+              'gemini-code-assist',
+              'google-cla[bot]',
+              'google-cla',
+              'github-actions[bot]',
+              'github-actions',
+            ]);
+
+            const isBot = (user) => {
+              if (!user) return false;
+              if (user.type === 'Bot') return true;
+              if (user.login && user.login.endsWith('[bot]')) return true;
+              if (user.login && KNOWN_BOTS.has(user.login)) return true;
+              return false;
+            };
+            const humanRequestedReviewers = requestedReviewers.filter(r => !isBot(r));
+            const hasDefaultTeam = requestedTeams.some(team => team.slug === 'cloud-sdk-nodejs-team');
+            const hasAllAssignedTeams =
+              assignedTeams.size > 0 &&
+              Array.from(assignedTeams).every(slug => requestedTeams.some(team => team.slug === slug));
+
+            // Remove any requested partner teams that do not match modified routes in the PR
+            const unneededPartnerTeams = requestedTeams
+              .filter(team => ALL_PARTNER_TEAMS.has(team.slug) && !assignedTeams.has(team.slug))
+              .map(team => team.slug);
+            if (unneededPartnerTeams.length > 0) {
+              console.log(`Removing unneeded partner teams: ${unneededPartnerTeams.join(', ')}`);
+              try {
+                await github.rest.pulls.removeRequestedReviewers({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.payload.pull_request.number,
+                  reviewers: [],
+                  team_reviewers: unneededPartnerTeams,
+                });
+              } catch (err) {
+                console.warn("Failed to remove unneeded partner teams:", err.message || err);
+              }
+            }
+
+            // Check if PR has already been reviewed by human reviewers (excluding bots and author)
+            let hasReviews = false;
+            let humanReviews = [];
+            try {
+              const { data: reviews } = await github.rest.pulls.listReviews({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+              });
+              humanReviews = reviews.filter(review => {
+                if (!review.user) return false;
+                if (isBot(review.user)) return false;
+                if (review.user.login === author) return false;
+                return true;
+              });
+              if (humanReviews.length > 0) {
+                console.log(`PR already has reviews from: ${humanReviews.map(r => r.user.login).join(', ')}.`);
+                hasReviews = true;
+              }
+            } catch (err) {
+              console.warn("Failed to check PR reviews:", err.message || err);
+            }
+
+            let defaultReviewers = [];
+            try {
+              const { data: codeownersData } = await github.rest.repos.getContent({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                path: '.github/CODEOWNERS',
+                ref: context.payload.pull_request.head.sha,
+              });
+              const content = Buffer.from(codeownersData.content, 'base64').toString('utf-8');
+              const lines = content.split('\n');
+              for (const line of lines) {
+                const trimmed = line.trim();
+                if (trimmed.startsWith('#')) {
+                  const commentContent = trimmed.substring(1).trim();
+                  if (commentContent.startsWith('team_members:')) {
+                    const listPart = commentContent.substring('team_members:'.length).trim();
+                    const parts = listPart.split(/\s+/);
+                    defaultReviewers = parts
+                      .filter(p => p.startsWith('@'))
+                      .map(p => p.substring(1))
+                      .filter(login => login !== author);
+                    break;
+                  }
+                }
+              }
+            } catch (err) {
+              console.error("Failed to read or parse CODEOWNERS:", err);
+            }
+
+            const defaultReviewerSet = new Set(defaultReviewers);
+            const hasDefaultTeamMemberReviewer = humanRequestedReviewers.some(r => defaultReviewerSet.has(r.login));
+            const hasDefaultTeamMemberReview = humanReviews.some(r => defaultReviewerSet.has(r.user.login));
+
+            const partnerReviewSatisfied =
+              assignedTeams.size === 0 ||
+              hasAllAssignedTeams ||
+              humanRequestedReviewers.length > 0 ||
+              hasReviews;
+            const defaultTeamReviewSatisfied =
+              !requiresDefaultTeamReview ||
+              hasDefaultTeamMemberReviewer ||
+              hasDefaultTeamMemberReview ||
+              (defaultReviewers.length === 0 && (humanRequestedReviewers.length > 0 || hasReviews));
+
+            const shouldExit =
+              partnerReviewSatisfied &&
+              defaultTeamReviewSatisfied &&
+              (humanRequestedReviewers.length > 0 || hasAllAssignedTeams || hasReviews);
+
+            if (shouldExit) {
+              if (hasDefaultTeam) {
+                console.log("PR already has sufficient reviewers/reviews, but default cloud-sdk-nodejs-team is still requested. Removing it...");
+                try {
+                  await github.rest.pulls.removeRequestedReviewers({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: context.payload.pull_request.number,
+                    reviewers: [],
+                    team_reviewers: ['cloud-sdk-nodejs-team'],
+                  });
+                } catch (err) {
+                  console.warn("Failed to remove default cloud-sdk-nodejs-team reviewer:", err.message || err);
+                }
+              }
+              console.log("Skipping auto-assignment.");
+              return;
+            }
+
+            let assignedPartnerTeam = hasAllAssignedTeams;
+            if (assignedTeams.size > 0 && !hasAllAssignedTeams) {
+              const teamReviewers = Array.from(assignedTeams).filter(
+                slug => !requestedTeams.some(team => team.slug === slug)
+              );
+              console.log(`PR contains changes matching specific routes. Requesting review from: ${teamReviewers.join(', ')}`);
+              try {
+                await github.rest.pulls.requestReviewers({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.payload.pull_request.number,
+                  team_reviewers: teamReviewers,
+                });
+                assignedPartnerTeam = true;
+              } catch (err) {
+                console.error(`Failed to assign route-specific team reviewers (${teamReviewers.join(', ')}):`, err.message || err);
+                console.log("Falling back to default team members.");
+              }
+            }
+
+            let assigned =
+              (assignedPartnerTeam && !requiresDefaultTeamReview) ||
+              (requiresDefaultTeamReview && (hasDefaultTeamMemberReviewer || hasDefaultTeamMemberReview));
+            if (!assigned) {
+
+              if (defaultReviewers.length > 0) {
+                console.log(`Found default reviewers: ${defaultReviewers.join(', ')}. Load balancing among them.`);
+                try {
+                  // Retrieve active open PRs to calculate load
+                  const { data: openPRs } = await github.rest.pulls.list({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    state: 'open',
+                    per_page: 100,
+                  });
+
+                  const loadMap = {};
+                  for (const member of defaultReviewers) {
+                    loadMap[member] = 0;
+                  }
+
+                  for (const pr of openPRs) {
+                    // Count pending review requests
+                    if (pr.requested_reviewers) {
+                      for (const reviewer of pr.requested_reviewers) {
+                        if (loadMap[reviewer.login] !== undefined) {
+                          loadMap[reviewer.login]++;
+                        }
+                      }
+                    }
+                    // Count assignees
+                    if (pr.assignees) {
+                      for (const assignee of pr.assignees) {
+                        if (loadMap[assignee.login] !== undefined) {
+                          loadMap[assignee.login]++;
+                        }
+                      }
+                    }
+                  }
+
+                  console.log("Current team workload:", loadMap);
+
+                  // Find members with the minimum load
+                  let minLoad = Infinity;
+                  let selectedReviewers = [];
+                  for (const member of defaultReviewers) {
+                    const load = loadMap[member];
+                    if (load < minLoad) {
+                      minLoad = load;
+                      selectedReviewers = [member];
+                    } else if (load === minLoad) {
+                      selectedReviewers.push(member);
+                    }
+                  }
+
+                  const leastLoadedReviewer = selectedReviewers[Math.floor(Math.random() * selectedReviewers.length)];
+                  console.log(`Selected reviewer with least load (load: ${minLoad}): ${leastLoadedReviewer}`);
+
+                  await github.rest.pulls.requestReviewers({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: context.payload.pull_request.number,
+                    reviewers: [leastLoadedReviewer],
+                  });
+                  assigned = true;
+                } catch (err) {
+                  console.error("Failed to assign reviewers using load balancing:", err);
+                }
+              } else {
+                console.warn("No default reviewers found in CODEOWNERS (or they only contained teams/author).");
+              }
+            }
+
+            if (assigned) {
+              console.log("Removing default cloud-sdk-nodejs-team reviewer...");
+              try {
+                await github.rest.pulls.removeRequestedReviewers({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.payload.pull_request.number,
+                  reviewers: [],
+                  team_reviewers: ['cloud-sdk-nodejs-team'],
+                });
+              } catch (err) {
+                console.warn("Failed to remove default cloud-sdk-nodejs-team reviewer:", err.message || err);
+              }
+            }

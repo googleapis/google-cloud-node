@@ -101,6 +101,22 @@ message OutputFields {
 message SearchHint {
   // Message to specify the index to use for the search.
   message IndexHint {
+    // Parameters for dense ScaNN.
+    message DenseScannParams {
+      // Optional. The target recall for the search. Must be a double in the
+      // range [0, 1]. While the search aims to achieve this level of recall, it
+      // is not guaranteed.
+      optional double target_recall = 3
+          [(google.api.field_behavior) = OPTIONAL];
+    }
+
+    // The parameters for the index.
+    oneof params {
+      // Optional. Dense ScaNN parameters.
+      DenseScannParams dense_scann_params = 2
+          [(google.api.field_behavior) = OPTIONAL];
+    }
+
     // Required. The resource name of the index to use for the search.
     // The index must be in the same project, location, and collection.
     // Format:
@@ -179,15 +195,21 @@ message VectorSearch {
 
 // Defines a semantic search operation.
 message SemanticSearch {
-  // Required. The query text, which is used to generate an embedding according
+  // Optional. The query text, which is used to generate an embedding according
   // to the embedding model specified in the collection config.
-  string search_text = 1 [(google.api.field_behavior) = REQUIRED];
+  //
+  // Required when using the text search mode.
+  string search_text = 1 [(google.api.field_behavior) = OPTIONAL];
 
   // Required. The vector field to search.
   string search_field = 2 [(google.api.field_behavior) = REQUIRED];
 
-  // Required. The task type of the query embedding.
-  EmbeddingTaskType task_type = 5 [(google.api.field_behavior) = REQUIRED];
+  // Optional. The task type of the query embedding. Must be specified for
+  // text-only embedding models, see
+  // <https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/embeddings/task-types>
+  // Not needed for multi modal embedding models, see
+  // <https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/embeddings/get-multimodal-embeddings#specify-task-instructions>
+  EmbeddingTaskType task_type = 5 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The fields to return in the search results.
   OutputFields output_fields = 3 [(google.api.field_behavior) = OPTIONAL];
@@ -207,11 +229,12 @@ message SemanticSearch {
 
 // Defines a text search operation.
 message TextSearch {
-  // Required. The query text.
-  string search_text = 1 [(google.api.field_behavior) = REQUIRED];
+  // Optional. The query text. Required when using the default text search mode.
+  string search_text = 1 [(google.api.field_behavior) = OPTIONAL];
 
-  // Required. The data field names to search.
-  repeated string data_field_names = 2 [(google.api.field_behavior) = REQUIRED];
+  // Optional. The data field names to search. Required when using the default
+  // text search mode.
+  repeated string data_field_names = 2 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The fields to return in the search results.
   OutputFields output_fields = 3 [(google.api.field_behavior) = OPTIONAL];
@@ -393,12 +416,52 @@ message Ranker {
     // Reciprocal Rank Fusion ranking.
     ReciprocalRankFusion rrf = 1;
   }
+
+  // The reranker to use for final ranking of the results combined by the
+  // ranker.
+  oneof reranker {
+    // Optional. Vertex AI ranking.
+    VertexRanker vertex_ranker = 2 [(google.api.field_behavior) = OPTIONAL];
+  }
 }
 
 // Defines the Reciprocal Rank Fusion (RRF) algorithm for result ranking.
 message ReciprocalRankFusion {
   // Required. The weights to apply to each search result set during fusion.
   repeated double weights = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Defines a ranker using the Vertex AI ranking service.
+// See <https://cloud.google.com/generative-ai-app-builder/docs/ranking> for
+// details.
+message VertexRanker {
+  // The record spec for text search.
+  message TextRecordSpec {
+    // Required. The query against which the records are ranked and scored.
+    string query = 1 [(google.api.field_behavior) = REQUIRED];
+
+    // Optional. The template used to generate the record's title.
+    string title_template = 2 [(google.api.field_behavior) = OPTIONAL];
+
+    // Optional. The template used to generate the record's content.
+    string content_template = 3 [(google.api.field_behavior) = OPTIONAL];
+  }
+
+  // The record specification for ranking. At least one record spec must be
+  // set.
+  oneof record_spec {
+    // The record spec for text search.
+    TextRecordSpec text_record_spec = 6;
+  }
+
+  // Required. The model used for ranking documents. The list of available
+  // models is described in
+  // <https://docs.cloud.google.com/generative-ai-app-builder/docs/ranking#models>.
+  // Currently, only `semantic-ranker-fast@latest` is supported.
+  string model = 4 [(google.api.field_behavior) = REQUIRED];
+
+  // Required. The number of documents to be processed for ranking.
+  int32 top_n = 5 [(google.api.field_behavior) = REQUIRED];
 }
 
 // A response from a batch search operation.

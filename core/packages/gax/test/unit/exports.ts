@@ -62,6 +62,15 @@ describe('exports', () => {
     it('exports protobufMinimal', () => {
       assert(typeof index.protobufMinimal === 'object');
     });
+    it('exports checkTelemetryEnabled', () => {
+      assert(typeof index.checkTelemetryEnabled === 'function');
+    });
+    it('exports resolveStaticTraceContext', () => {
+      assert(typeof index.resolveStaticTraceContext === 'function');
+    });
+    it('exports clearMetadataCache', () => {
+      assert(typeof index.clearMetadataCache === 'function');
+    });
   });
 
   describe('fallback', () => {

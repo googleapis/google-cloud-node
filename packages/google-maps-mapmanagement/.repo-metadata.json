@@ -1,17 +1,16 @@
 {
-  "name": "mapmanagement",
-  "name_pretty": "Map Management API",
-  "product_documentation": "https://developers.google.com/maps/documentation/mapmanagement/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/mapmanagement/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/mapmanagement",
-  "api_id": "mapmanagement.googleapis.com",
-  "default_version": "v2beta",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "mapmanagement"
+    "api_description": "The Map Management API is a RESTful service that accepts HTTP requests for\nmap styling data through a variety of methods. It returns formatted\nconfiguration data about map styling resources so that you can\nprogrammatically manage your Cloud-based map styles.",
+    "api_id": "mapmanagement.googleapis.com",
+    "api_shortname": "mapmanagement",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/mapmanagement/latest",
+    "default_version": "v2beta",
+    "distribution_name": "@google-cloud/mapmanagement",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=188871&template=788907",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "mapmanagement",
+    "name_pretty": "Map Management",
+    "product_documentation": "https://developers.google.com/maps/documentation/mapmanagement/overview",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

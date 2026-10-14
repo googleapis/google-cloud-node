@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as environmentsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.environmentsStub, undefined);
@@ -247,12 +247,12 @@ describe('v2beta1.EnvironmentsClient', () => {
       assert(client.environmentsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.environmentsStub);
@@ -261,14 +261,14 @@ describe('v2beta1.EnvironmentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.environmentsStub, undefined);
@@ -277,7 +277,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v2beta1.EnvironmentsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v2beta1.EnvironmentsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v2beta1.EnvironmentsClient', () => {
   describe('getEnvironment', () => {
     it('invokes getEnvironment without error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes getEnvironment without error using callback', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes getEnvironment with error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes getEnvironment with closed client', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v2beta1.EnvironmentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getEnvironment(request), expectedError);
@@ -452,7 +452,7 @@ describe('v2beta1.EnvironmentsClient', () => {
   describe('createEnvironment', () => {
     it('invokes createEnvironment without error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes createEnvironment without error using callback', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes createEnvironment with error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes createEnvironment with closed client', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v2beta1.EnvironmentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createEnvironment(request), expectedError);
@@ -584,7 +584,7 @@ describe('v2beta1.EnvironmentsClient', () => {
   describe('updateEnvironment', () => {
     it('invokes updateEnvironment without error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes updateEnvironment without error using callback', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -664,7 +664,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes updateEnvironment with error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes updateEnvironment with closed client', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -710,7 +710,7 @@ describe('v2beta1.EnvironmentsClient', () => {
       );
       request.environment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateEnvironment(request), expectedError);
@@ -720,7 +720,7 @@ describe('v2beta1.EnvironmentsClient', () => {
   describe('deleteEnvironment', () => {
     it('invokes deleteEnvironment without error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -751,7 +751,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes deleteEnvironment without error using callback', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -798,7 +798,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes deleteEnvironment with error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -829,7 +829,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes deleteEnvironment with closed client', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,7 +842,7 @@ describe('v2beta1.EnvironmentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteEnvironment(request), expectedError);
@@ -852,7 +852,7 @@ describe('v2beta1.EnvironmentsClient', () => {
   describe('listEnvironments', () => {
     it('invokes listEnvironments without error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -891,7 +891,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes listEnvironments without error using callback', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -923,8 +923,7 @@ describe('v2beta1.EnvironmentsClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.dialogflow.v2beta1.IEnvironment[]
-              | null,
+              protos.google.cloud.dialogflow.v2beta1.IEnvironment[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -948,7 +947,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes listEnvironments with error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -979,7 +978,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes listEnvironmentsStream without error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1032,15 +1031,15 @@ describe('v2beta1.EnvironmentsClient', () => {
       assert(
         (client.descriptors.page.listEnvironments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listEnvironmentsStream with error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1082,15 +1081,15 @@ describe('v2beta1.EnvironmentsClient', () => {
       assert(
         (client.descriptors.page.listEnvironments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEnvironments without error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1132,15 +1131,15 @@ describe('v2beta1.EnvironmentsClient', () => {
       assert(
         (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listEnvironments with error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1173,9 +1172,9 @@ describe('v2beta1.EnvironmentsClient', () => {
       assert(
         (client.descriptors.page.listEnvironments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1183,7 +1182,7 @@ describe('v2beta1.EnvironmentsClient', () => {
   describe('getEnvironmentHistory', () => {
     it('invokes getEnvironmentHistory without error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1223,7 +1222,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes getEnvironmentHistory without error using callback', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1280,7 +1279,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes getEnvironmentHistory with error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1314,7 +1313,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes getEnvironmentHistoryStream without error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1383,7 +1382,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('invokes getEnvironmentHistoryStream with error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1441,7 +1440,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('uses async iteration with getEnvironmentHistory without error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1494,7 @@ describe('v2beta1.EnvironmentsClient', () => {
 
     it('uses async iteration with getEnvironmentHistory with error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1541,7 +1540,7 @@ describe('v2beta1.EnvironmentsClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1571,7 +1570,7 @@ describe('v2beta1.EnvironmentsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1615,7 +1614,7 @@ describe('v2beta1.EnvironmentsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1650,7 +1649,7 @@ describe('v2beta1.EnvironmentsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1698,7 +1697,7 @@ describe('v2beta1.EnvironmentsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1738,6 +1737,71 @@ describe('v2beta1.EnvironmentsClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('companionAgent', async () => {
+      const fakePath = '/rendered/path/companionAgent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        companion_agent: 'companionAgentValue',
+      };
+      const client = new environmentsModule.v2beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.companionAgentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.companionAgentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('companionAgentPath', () => {
+        const result = client.companionAgentPath(
+          'projectValue',
+          'locationValue',
+          'companionAgentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromCompanionAgentName', () => {
+        const result = client.matchProjectFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromCompanionAgentName', () => {
+        const result = client.matchLocationFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCompanionAgentFromCompanionAgentName', () => {
+        const result =
+          client.matchCompanionAgentFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'companionAgentValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('encryptionSpec', async () => {
       const fakePath = '/rendered/path/encryptionSpec';
       const expectedParameters = {
@@ -1745,7 +1809,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         location: 'locationValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1798,7 +1862,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         generator: 'generatorValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1863,7 +1927,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1954,7 +2018,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         project: 'projectValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1992,7 +2056,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         project: 'projectValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2031,7 +2095,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2094,7 +2158,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         environment: 'environmentValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2161,7 +2225,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         context: 'contextValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2287,7 +2351,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2408,7 +2472,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         project: 'projectValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2454,7 +2518,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         intent: 'intentValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2516,7 +2580,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         context: 'contextValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2595,7 +2659,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2671,7 +2735,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         version: 'versionValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2732,7 +2796,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2795,7 +2859,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         message: 'messageValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2874,7 +2938,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         participant: 'participantValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2954,7 +3018,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3019,7 +3083,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3082,7 +3146,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3146,7 +3210,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         document: 'documentValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3224,7 +3288,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         location: 'locationValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3288,7 +3352,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3367,7 +3431,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         environment: 'environmentValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3450,7 +3514,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         context: 'contextValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3596,7 +3660,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3737,7 +3801,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         location: 'locationValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3799,7 +3863,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         intent: 'intentValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3879,7 +3943,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         context: 'contextValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3980,7 +4044,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4085,7 +4149,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         version: 'versionValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4163,7 +4227,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4242,7 +4306,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         message: 'messageValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4343,7 +4407,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         participant: 'participantValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4448,7 +4512,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4531,7 +4595,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4610,7 +4674,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4690,7 +4754,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         document: 'documentValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4795,7 +4859,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4873,7 +4937,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4936,7 +5000,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5000,7 +5064,7 @@ describe('v2beta1.EnvironmentsClient', () => {
         tool: 'toolValue',
       };
       const client = new environmentsModule.v2beta1.EnvironmentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

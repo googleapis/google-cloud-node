@@ -22,6 +22,7 @@ const cloudquotas = require('@google-cloud/cloudquotas');
 
 function main() {
   const cloudQuotasClient = new cloudquotas.CloudQuotasClient();
+  const quotaAdjusterSettingsManagerClient = new cloudquotas.QuotaAdjusterSettingsManagerClient();
 }
 
 main();

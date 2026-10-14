@@ -19,7 +19,7 @@
 import * as v1 from './v1';
 const DeprecatedServiceClient = v1.DeprecatedServiceClient;
 type DeprecatedServiceClient = v1.DeprecatedServiceClient;
-export { v1, DeprecatedServiceClient };
-export default { v1, DeprecatedServiceClient };
+export {v1, DeprecatedServiceClient};
+export default {v1, DeprecatedServiceClient};
 import * as protos from '../protos/protos';
-export { protos };
+export {protos};

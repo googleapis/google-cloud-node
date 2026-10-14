@@ -29,7 +29,7 @@ import type {
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -68,7 +68,7 @@ export class RouteOptimizationClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('routeoptimization');
@@ -81,9 +81,9 @@ export class RouteOptimizationClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   operationsClient: gax.OperationsClient;
-  routeOptimizationStub?: Promise<{ [name: string]: Function }>;
+  routeOptimizationStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of RouteOptimizationClient.
@@ -159,7 +159,7 @@ export class RouteOptimizationClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -281,7 +281,7 @@ export class RouteOptimizationClient {
       'google.maps.routeoptimization.v1.RouteOptimization',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -322,7 +322,7 @@ export class RouteOptimizationClient {
             .RouteOptimization,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -334,7 +334,7 @@ export class RouteOptimizationClient {
     ];
     for (const methodName of routeOptimizationStubMethods) {
       const callPromise = this.routeOptimizationStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -725,7 +725,7 @@ export class RouteOptimizationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('optimizeTours request %j', request);
@@ -905,7 +905,7 @@ export class RouteOptimizationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -962,7 +962,7 @@ export class RouteOptimizationClient {
     this._log.info('batchOptimizeTours long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1274,7 +1274,7 @@ export class RouteOptimizationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1331,7 +1331,7 @@ export class RouteOptimizationClient {
     this._log.info('optimizeToursLongRunning long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1481,7 +1481,7 @@ export class RouteOptimizationClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1538,7 +1538,7 @@ export class RouteOptimizationClient {
     this._log.info('optimizeToursUri long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1782,7 +1782,7 @@ export class RouteOptimizationClient {
    */
   close(): Promise<void> {
     if (this.routeOptimizationStub && !this._terminated) {
-      return this.routeOptimizationStub.then((stub) => {
+      return this.routeOptimizationStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

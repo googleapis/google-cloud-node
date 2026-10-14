@@ -20,7 +20,7 @@ options:
 substitutions:
   _BUILD_TYPE: "presubmit"
   _TEST_TYPE: "system"
-  _NODE_VERSION: "18"
+  _NODE_VERSION: "22"
   _REPO_OWNER: "googleapis"
   _REPO_NAME: "google-cloud-node"
 
@@ -73,7 +73,7 @@ steps:
 
   - name: gcr.io/${PROJECT_ID}/google-cloud-node-${_NODE_VERSION}
     id: "run-tests"
-    timeout: 32400s    
+    timeout: 32400s
     entrypoint: "bash"
     args:
       - '-c'

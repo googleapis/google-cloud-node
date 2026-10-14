@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import {execSync} from 'child_process';
 import {mkdirSync, mkdtempSync, unlinkSync} from 'fs';
 import * as path from 'path';
 import * as yargs from 'yargs';
 import {Bucket, Storage, TransferManager} from '../src/index.js';
 import {getDirName} from '../src/util.js';
+import * as crypto from 'crypto';
+import * as fs from 'fs';
 
 export const NODE_DEFAULT_HIGHWATER_MARK_BYTES = 16384;
 export const DEFAULT_DIRECTORY_PROBABILITY = 0.1;
@@ -156,7 +157,7 @@ export interface PerformanceTestSetupResults {
 }
 
 /**
- * Create a uniformly distributed random integer beween the inclusive min and max provided.
+ * Create a uniformly distributed random integer between the inclusive min and max provided.
  *
  * @param {number} minInclusive lower bound (inclusive) of the range of random integer to return.
  * @param {number} maxInclusive upper bound (inclusive) of the range of random integer to return.
@@ -172,12 +173,12 @@ export function randomInteger(minInclusive: number, maxInclusive: number) {
 /**
  * Returns a boolean value with the provided probability
  *
- * @param {number} trueProbablity the probability the value will be true
+ * @param {number} trueProbability the probability the value will be true
  *
- * @returns {boolean} a boolean value with the probablity provided.
+ * @returns {boolean} a boolean value with the probability provided.
  */
-export function weightedRandomBoolean(trueProbablity: number): boolean {
-  return Math.random() <= trueProbablity ? true : false;
+export function weightedRandomBoolean(trueProbability: number): boolean {
+  return Math.random() <= trueProbability ? true : false;
 }
 
 /**
@@ -214,21 +215,21 @@ export function generateRandomFileName(baseName: string): string {
 export function generateRandomFile(
   fileName: string,
   fileSizeLowerBoundBytes: number = getLowHighFileSize(
-    DEFAULT_OBJECT_RANGE_SIZE_BYTES,
+    DEFAULT_OBJECT_RANGE_SIZE_BYTES
   ).low,
   fileSizeUpperBoundBytes: number = getLowHighFileSize(
-    DEFAULT_OBJECT_RANGE_SIZE_BYTES,
+    DEFAULT_OBJECT_RANGE_SIZE_BYTES
   ).high,
-  currentDirectory: string = mkdtempSync(randomString()),
+  currentDirectory: string = mkdtempSync(randomString())
 ): number {
   const fileSizeBytes = randomInteger(
     fileSizeLowerBoundBytes,
-    fileSizeUpperBoundBytes,
+    fileSizeUpperBoundBytes
   );
 
-  execSync(
-    `head --bytes=${fileSizeBytes} /dev/urandom > ${currentDirectory}/${fileName}`,
-  );
+  const filePath = path.join(currentDirectory, fileName);
+  const randomBuffer = crypto.randomBytes(fileSizeBytes);
+  fs.writeFileSync(filePath, randomBuffer);
 
   return fileSizeBytes;
 }
@@ -247,12 +248,12 @@ export function generateRandomDirectoryStructure(
   maxObjects: number,
   baseName: string,
   fileSizeLowerBoundBytes: number = getLowHighFileSize(
-    DEFAULT_OBJECT_RANGE_SIZE_BYTES,
+    DEFAULT_OBJECT_RANGE_SIZE_BYTES
   ).low,
   fileSizeUpperBoundBytes: number = getLowHighFileSize(
-    DEFAULT_OBJECT_RANGE_SIZE_BYTES,
+    DEFAULT_OBJECT_RANGE_SIZE_BYTES
   ).high,
-  directoryProbability: number = DEFAULT_DIRECTORY_PROBABILITY,
+  directoryProbability: number = DEFAULT_DIRECTORY_PROBABILITY
 ): RandomDirectoryCreationInformation {
   let curPath = baseName;
   const creationInfo: RandomDirectoryCreationInformation = {
@@ -272,7 +273,7 @@ export function generateRandomDirectoryStructure(
         randomName,
         fileSizeLowerBoundBytes,
         fileSizeUpperBoundBytes,
-        curPath,
+        curPath
       );
       creationInfo.paths.push(path.join(curPath, randomName));
     }
@@ -288,7 +289,7 @@ export function generateRandomDirectoryStructure(
  */
 export function cleanupFile(
   fileName: string,
-  directoryName: string = getDirName(),
+  directoryName: string = getDirName()
 ): void {
   unlinkSync(`${directoryName}/${fileName}`);
 }
@@ -302,7 +303,7 @@ export function cleanupFile(
  */
 export async function performanceTestSetup(
   projectId: string,
-  bucketName: string,
+  bucketName: string
 ): Promise<PerformanceTestSetupResults> {
   const storage = new Storage({projectId});
   const bucket = storage.bucket(bucketName, {
@@ -346,7 +347,7 @@ export function getValidationType(): 'md5' | 'crc32c' | boolean | undefined {
  * @returns {AsyncGenerator<string>} A string containing the results of the conversion to cloud monitoring format.
  */
 export async function* convertToCloudMonitoringFormat(
-  results: TestResult[],
+  results: TestResult[]
 ): AsyncGenerator<string> {
   for (const curResult of results) {
     const throughput =
@@ -384,7 +385,7 @@ export async function* convertToCloudMonitoringFormat(
 export function log(
   messageOrError: string | Error,
   shouldLog: boolean,
-  isError = false,
+  isError = false
 ): void {
   if (shouldLog) {
     isError ? console.error(messageOrError) : console.log(messageOrError);

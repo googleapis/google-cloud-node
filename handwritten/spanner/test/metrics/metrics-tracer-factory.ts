@@ -14,13 +14,19 @@
 
 import {
   MeterProvider,
+  MetricReader,
   PeriodicExportingMetricReader,
+  ResourceMetrics,
 } from '@opentelemetry/sdk-metrics';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
+import {status as Status} from '@grpc/grpc-js';
+import {gcpDetector} from '@opentelemetry/resource-detector-gcp';
 import * as Constants from '../../src/metrics/constants';
 import {MetricsTracerFactory} from '../../src/metrics/metrics-tracer-factory';
+import {transformResourceMetricToTimeSeriesArray} from '../../src/metrics/transform';
 import {CloudMonitoringMetricsExporter} from '../../src/metrics/spanner-metrics-exporter';
+import {Spanner} from '../../src';
 
 describe('MetricsTracerFactory', () => {
   let sandbox: sinon.SinonSandbox;
@@ -65,6 +71,9 @@ describe('MetricsTracerFactory', () => {
       .returns({add: addGfeConnectivityErrorCountStub});
 
     sandbox.stub(MeterProvider.prototype, 'getMeter').returns(meterStub as any);
+    sandbox
+      .stub(MetricsTracerFactory as any, '_detectClientLocation')
+      .resolves('global');
 
     // metrics provider and related objects
     mockExporter = sandbox.createStubInstance(CloudMonitoringMetricsExporter);
@@ -79,13 +88,11 @@ describe('MetricsTracerFactory', () => {
     MetricsTracerFactory.enabled = true;
     sandbox.resetHistory();
     await MetricsTracerFactory.resetInstance();
-    const provider =
-      MetricsTracerFactory.getInstance('project-id')!.getMeterProvider();
     const reader = new PeriodicExportingMetricReader({
       exporter: mockExporter,
       exportIntervalMillis: 60000,
     });
-    provider.addMetricReader(reader);
+    MetricsTracerFactory.getInstance('project-id')!.getMeterProvider([reader]);
   });
 
   afterEach(async () => {
@@ -158,20 +165,32 @@ describe('MetricsTracerFactory', () => {
     assert.ok(tracer);
   });
 
-  it('should clear a MetricsTracer using an extracted operation request id', () => {
+  it('should create independent MetricsTracer instances directly', () => {
     const factory = MetricsTracerFactory.getInstance('project-id');
-    factory!.createMetricsTracer(
+    const tracer1 = factory!.createMetricsTracer(
+      'some-method',
+      'method-name',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    const tracer2 = factory!.createMetricsTracer(
       'some-method',
       'method-name',
       '1.1a2bc3d4.1.1.1.1',
     );
 
-    assert.strictEqual((factory as any)._currentOperationTracers.size, 1);
+    assert.ok(tracer1);
+    assert.ok(tracer2);
+    assert.notStrictEqual(tracer1, tracer2);
+    assert.strictEqual(factory!.getCurrentTracer('1.1a2bc3d4.1.1.1.1'), null);
+    assert.doesNotThrow(() => {
+      factory!.clearCurrentTracer('1.1a2bc3d4.1.1.1.1');
+    });
+  });
 
-    factory!.clearCurrentTracer('1.1a2bc3d4.1.1.1');
-
-    assert.strictEqual((factory as any)._currentOperationTracers.size, 0);
-    assert.strictEqual((factory as any)._currentOperationLastUpdatedMs.size, 0);
+  it('should not schedule background cleanup interval', () => {
+    const setIntervalSpy = sandbox.spy(global, 'setInterval');
+    MetricsTracerFactory.getInstance('project-id');
+    assert.strictEqual(setIntervalSpy.called, false);
   });
 
   it('should correctly set default attributes', () => {
@@ -194,23 +213,200 @@ describe('MetricsTracerFactory', () => {
       'instance',
     );
   });
+
+  it('should return null when createMetricsTracer is called and factory is disabled', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id');
+    MetricsTracerFactory.enabled = false;
+    assert.strictEqual(MetricsTracerFactory.getInstance('project-id'), null);
+    const tracer = factory!.createMetricsTracer(
+      'some-method',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    assert.strictEqual(tracer, null);
+    MetricsTracerFactory.enabled = true;
+  });
+
+  it('should create tracer successfully when requestId is omitted', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id');
+    const tracer = factory!.createMetricsTracer(
+      'some-method',
+      'projects/project/instances/instance/databases/database',
+    );
+    assert.ok(tracer);
+  });
+
+  it('should create tracer with fallback attributes when formattedName is malformed', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id');
+    const tracer = factory!.createMetricsTracer('some-method', '');
+    assert.ok(tracer);
+    assert.strictEqual(
+      tracer!.clientAttributes[Constants.METRIC_LABEL_KEY_DATABASE],
+      'unknown',
+    );
+    assert.strictEqual(
+      tracer!.clientAttributes[Constants.MONITORED_RES_LABEL_KEY_INSTANCE],
+      'unknown',
+    );
+  });
+
+  it('should update singleton _projectId if initially created without one', async () => {
+    await MetricsTracerFactory.resetInstance();
+    const initialFactory = MetricsTracerFactory.getInstance();
+    assert.ok(initialFactory);
+    assert.strictEqual((initialFactory as any)._projectId, '');
+
+    const updatedFactory = MetricsTracerFactory.getInstance(
+      'resolved-project-id',
+    );
+    assert.strictEqual(updatedFactory, initialFactory);
+    assert.strictEqual(
+      (updatedFactory as any)._projectId,
+      'resolved-project-id',
+    );
+
+    // Subsequent call with different project ID should not overwrite already set project ID
+    const thirdFactory = MetricsTracerFactory.getInstance(
+      'different-project-id',
+    );
+    assert.strictEqual(thirdFactory, initialFactory);
+    assert.strictEqual((thirdFactory as any)._projectId, 'resolved-project-id');
+  });
+
+  it('should share attributes cache across tracers for the same method and resource', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id')!;
+    const tracer1 = factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    const tracer2 = factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.2.1',
+    );
+
+    const attributes1 = (tracer1 as any)._getAttributesForStatus(Status.OK);
+    const attributes2 = (tracer2 as any)._getAttributesForStatus(Status.OK);
+
+    assert.strictEqual(attributes1, attributes2);
+    assert.deepStrictEqual(attributes1, {
+      [Constants.METRIC_LABEL_KEY_DATABASE]: 'database',
+      [Constants.METRIC_LABEL_KEY_METHOD]: 'ExecuteSql',
+      [Constants.MONITORED_RES_LABEL_KEY_INSTANCE]: 'instance',
+      [Constants.METRIC_LABEL_KEY_STATUS]: 'OK',
+    });
+  });
+
+  it('should use distinct attributes caches for different methods or resources', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id')!;
+    const sqlTracer = factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    const commitTracer = factory.createMetricsTracer(
+      'Commit',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.2.1',
+    );
+
+    const sqlAttributes = (sqlTracer as any)._getAttributesForStatus(Status.OK);
+    const commitAttributes = (commitTracer as any)._getAttributesForStatus(
+      Status.OK,
+    );
+
+    assert.notStrictEqual(sqlAttributes, commitAttributes);
+    assert.strictEqual(
+      sqlAttributes[Constants.METRIC_LABEL_KEY_METHOD],
+      'ExecuteSql',
+    );
+    assert.strictEqual(
+      commitAttributes[Constants.METRIC_LABEL_KEY_METHOD],
+      'Commit',
+    );
+  });
+
+  it('should use distinct attributes caches for different databases', () => {
+    const factory = MetricsTracerFactory.getInstance('project-id')!;
+    const databaseOneTracer = factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database-1',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    const databaseTwoTracer = factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database-2',
+      '1.1a2bc3d4.1.1.2.1',
+    );
+
+    const databaseOneAttributes = (
+      databaseOneTracer as any
+    )._getAttributesForStatus(Status.OK);
+    const databaseTwoAttributes = (
+      databaseTwoTracer as any
+    )._getAttributesForStatus(Status.OK);
+
+    assert.notStrictEqual(databaseOneAttributes, databaseTwoAttributes);
+    assert.strictEqual(
+      databaseOneAttributes[Constants.METRIC_LABEL_KEY_DATABASE],
+      'database-1',
+    );
+    assert.strictEqual(
+      databaseTwoAttributes[Constants.METRIC_LABEL_KEY_DATABASE],
+      'database-2',
+    );
+  });
+
+  it('should reset attributes cache when resetMeterProvider is called', async () => {
+    const factory = MetricsTracerFactory.getInstance('project-id')!;
+    factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    assert.strictEqual(factory['_attributesCache'].size, 1);
+
+    await factory.resetMeterProvider();
+    assert.strictEqual(factory['_attributesCache'].size, 0);
+  });
+
+  it('should reset attributes cache when resetInstance is called', async () => {
+    const factory = MetricsTracerFactory.getInstance('project-id')!;
+    factory.createMetricsTracer(
+      'ExecuteSql',
+      'projects/project/instances/instance/databases/database',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    assert.strictEqual(factory['_attributesCache'].size, 1);
+
+    await MetricsTracerFactory.resetInstance();
+    const newFactory = MetricsTracerFactory.getInstance('project-id')!;
+    assert.strictEqual(newFactory['_attributesCache'].size, 0);
+  });
 });
 
 describe('getInstanceAttributes', () => {
   let factory: MetricsTracerFactory;
+  let sandbox: sinon.SinonSandbox;
+
   beforeEach(() => {
+    sandbox = sinon.createSandbox();
+    sandbox
+      .stub(MetricsTracerFactory as any, '_detectClientLocation')
+      .resolves('global');
     factory = new (MetricsTracerFactory as any)();
   });
 
   afterEach(async () => {
     await factory.resetMeterProvider();
-    clearInterval(factory['_intervalTracerCleanup']);
+    sandbox.restore();
   });
 
   it('should extract project, instance, and database from full resource path', () => {
     const formattedName = 'projects/proj1/instances/inst1/databases/db1';
-    const attrs = factory.getInstanceAttributes(formattedName);
-    assert.deepStrictEqual(attrs, {
+    const attributes = factory.getInstanceAttributes(formattedName);
+    assert.deepStrictEqual(attributes, {
       project: 'proj1',
       instance: 'inst1',
       database: 'db1',
@@ -219,8 +415,8 @@ describe('getInstanceAttributes', () => {
 
   it('should extract project and instance, and unknown database if database is missing', () => {
     const formattedName = 'projects/proj2/instances/inst2';
-    const attrs = factory.getInstanceAttributes(formattedName);
-    assert.deepStrictEqual(attrs, {
+    const attributes = factory.getInstanceAttributes(formattedName);
+    assert.deepStrictEqual(attributes, {
       project: 'proj2',
       instance: 'inst2',
       database: 'unknown',
@@ -228,8 +424,8 @@ describe('getInstanceAttributes', () => {
   });
 
   it('should return unknown strings for all if input is empty', () => {
-    const attrs = factory.getInstanceAttributes('');
-    assert.deepStrictEqual(attrs, {
+    const attributes = factory.getInstanceAttributes('');
+    assert.deepStrictEqual(attributes, {
       project: 'unknown',
       instance: 'unknown',
       database: 'unknown',
@@ -237,79 +433,519 @@ describe('getInstanceAttributes', () => {
   });
 
   it('should return unknown strings for all if input is malformed', () => {
-    const attrs = factory.getInstanceAttributes('foo/bar/baz');
-    assert.deepStrictEqual(attrs, {
+    const attributes = factory.getInstanceAttributes('foo/bar/baz');
+    assert.deepStrictEqual(attributes, {
       project: 'unknown',
       instance: 'unknown',
       database: 'unknown',
     });
   });
+
+  it('should extract attributes from path with leading slash', () => {
+    const attributes = factory.getInstanceAttributes(
+      '/projects/proj1/instances/inst1/databases/db1',
+    );
+    assert.deepStrictEqual(attributes, {
+      project: 'proj1',
+      instance: 'inst1',
+      database: 'db1',
+    });
+  });
+
+  it('should extract attributes from path with extra sub-resources', () => {
+    const attributes = factory.getInstanceAttributes(
+      'projects/proj1/instances/inst1/databases/db1/sessions/session-xyz',
+    );
+    assert.deepStrictEqual(attributes, {
+      project: 'proj1',
+      instance: 'inst1',
+      database: 'db1',
+    });
+  });
+
+  it('should return unknown strings for non-string input', () => {
+    assert.deepStrictEqual(factory.getInstanceAttributes(null as any), {
+      project: 'unknown',
+      instance: 'unknown',
+      database: 'unknown',
+    });
+    assert.deepStrictEqual(factory.getInstanceAttributes(undefined as any), {
+      project: 'unknown',
+      instance: 'unknown',
+      database: 'unknown',
+    });
+    assert.deepStrictEqual(factory.getInstanceAttributes(123 as any), {
+      project: 'unknown',
+      instance: 'unknown',
+      database: 'unknown',
+    });
+  });
+
+  it('should return unknown strings if second segment is not instances', () => {
+    const attributes = factory.getInstanceAttributes(
+      'projects/proj1/locations/us-central1',
+    );
+    assert.deepStrictEqual(attributes, {
+      project: 'unknown',
+      instance: 'unknown',
+      database: 'unknown',
+    });
+  });
+
+  it('should return unknown strings if project or instance segment is empty', () => {
+    assert.deepStrictEqual(
+      factory.getInstanceAttributes('projects//instances/inst1'),
+      {
+        project: 'unknown',
+        instance: 'unknown',
+        database: 'unknown',
+      },
+    );
+    assert.deepStrictEqual(
+      factory.getInstanceAttributes('projects/proj1/instances/'),
+      {
+        project: 'unknown',
+        instance: 'unknown',
+        database: 'unknown',
+      },
+    );
+  });
+
+  it('should return unknown database if segment after instance is not databases or database ID is empty', () => {
+    assert.deepStrictEqual(
+      factory.getInstanceAttributes(
+        'projects/proj1/instances/inst1/operations/op1',
+      ),
+      {
+        project: 'proj1',
+        instance: 'inst1',
+        database: 'unknown',
+      },
+    );
+    assert.deepStrictEqual(
+      factory.getInstanceAttributes(
+        'projects/proj1/instances/inst1/databases/',
+      ),
+      {
+        project: 'proj1',
+        instance: 'inst1',
+        database: 'unknown',
+      },
+    );
+  });
 });
 
-describe('MetricsTracerFactory with set clock', () => {
-  let clock: sinon.SinonFakeTimers;
+describe('_extractOperationRequest', () => {
+  let factory: MetricsTracerFactory;
+  beforeEach(() => {
+    factory = new (MetricsTracerFactory as any)();
+  });
+
+  it('should extract the operation prefix from a valid request ID', () => {
+    const operationRequest =
+      factory['_extractOperationRequest']('1.1a2bc3d4.1.1.1.1');
+    assert.strictEqual(operationRequest, '1.1a2bc3d4.1.1.1');
+  });
+
+  it('should handle multi-digit attempt numbers', () => {
+    const operationRequest = factory['_extractOperationRequest'](
+      '1.1a2bc3d4.1.1.1.42',
+    );
+    assert.strictEqual(operationRequest, '1.1a2bc3d4.1.1.1');
+  });
+
+  it('should return empty string when attempt is not numeric', () => {
+    assert.strictEqual(
+      factory['_extractOperationRequest']('1.1a2bc3d4.1.1.1.attempt'),
+      '',
+    );
+  });
+
+  it('should return empty string when input has fewer than 5 dots', () => {
+    assert.strictEqual(
+      factory['_extractOperationRequest']('1.1a2bc3d4.1.1.1'),
+      '',
+    );
+    assert.strictEqual(factory['_extractOperationRequest']('foo.bar'), '');
+  });
+
+  it('should return empty string when input has more than 5 dots', () => {
+    assert.strictEqual(
+      factory['_extractOperationRequest']('1.1.1.1.1.1.1'),
+      '',
+    );
+  });
+
+  it('should return empty string for trailing dot or invalid input', () => {
+    assert.strictEqual(
+      factory['_extractOperationRequest']('1.1a2bc3d4.1.1.1.'),
+      '',
+    );
+    assert.strictEqual(factory['_extractOperationRequest'](''), '');
+    assert.strictEqual(
+      factory['_extractOperationRequest'](undefined as any),
+      '',
+    );
+    assert.strictEqual(factory['_extractOperationRequest'](123 as any), '');
+  });
+});
+
+describe('MetricsTracerFactory location detection failures', () => {
+  let sandbox: sinon.SinonSandbox;
+  let warnStub: sinon.SinonStub;
 
   beforeEach(async () => {
+    sandbox = sinon.createSandbox();
+    warnStub = sandbox.stub(console, 'warn');
     MetricsTracerFactory.enabled = true;
     await MetricsTracerFactory.resetInstance();
-    // Use fake timers to control the clock
-    clock = sinon.useFakeTimers();
+  });
+
+  afterEach(async () => {
+    sandbox.restore();
+    await MetricsTracerFactory.resetInstance();
+  });
+
+  it('should not trigger an UnhandledPromiseRejection if _detectClientLocation rejects', async () => {
+    let rejectLocation!: (err: Error) => void;
+    const locationPromise = new Promise<string>((_resolve, reject) => {
+      rejectLocation = reject;
+    });
+
+    let unhandledError: Error | null = null;
+    const onUnhandledRejection = (err: Error) => {
+      unhandledError = err;
+    };
+    process.once('unhandledRejection', onUnhandledRejection);
+
+    try {
+      sandbox
+        .stub(MetricsTracerFactory as any, '_detectClientLocation')
+        .returns(locationPromise);
+
+      const factory = MetricsTracerFactory.getInstance('test-project');
+
+      rejectLocation(new Error('Unexpected detector failure'));
+      await locationPromise.catch(() => {});
+      await new Promise<void>(resolve => setImmediate(resolve));
+
+      assert.strictEqual(unhandledError, null);
+      assert.ok(warnStub.calledWith('Unable to detect location.'));
+      assert.strictEqual(factory!['_location'], 'global');
+    } finally {
+      process.removeListener('unhandledRejection', onUnhandledRejection);
+    }
+  });
+});
+
+describe('MetricsTracerFactory._detectClientLocation', () => {
+  let sandbox: sinon.SinonSandbox;
+
+  beforeEach(() => {
+    sandbox = sinon.createSandbox();
   });
 
   afterEach(() => {
-    // Restore the real timers
-    clock.restore();
+    sandbox.restore();
   });
 
-  describe('_cleanMetricTracers', () => {
-    it('should prune stale tracers', () => {
-      const factory = MetricsTracerFactory.getInstance('test-project');
-      assert(factory);
+  const stubDetectedAttributes = (attributes: Record<string, string>) => {
+    sandbox.stub(gcpDetector, 'detect').returns({
+      attributes: Object.fromEntries(
+        Object.entries(attributes).map(([key, value]) => [
+          key,
+          Promise.resolve(value),
+        ]),
+      ),
+    } as any);
+  };
 
-      factory.createMetricsTracer(
-        'method1',
-        'projects/p/instances/i/databases/d',
-        '1.1a2b3c.1.1.1.1',
-      );
-
-      // Advance the clock to make the tracer stale
-      clock.tick(Constants.TRACER_CLEANUP_THRESHOLD_MS);
-
-      // Add another tracer to trigger pruning
-      factory.createMetricsTracer(
-        'method2',
-        'projects/p/instances/i/databases/d',
-        '2.1a2b3c.1.1.1.1',
-      );
-      // Only most recent tracer should remain
-      assert.strictEqual(factory['_currentOperationTracers'].size, 1);
-      assert.ok(factory['_currentOperationTracers'].has('2.1a2b3c.1.1.1'));
+  it('should detect client location on a zonal GKE cluster where cloud.availability_zone is set', async () => {
+    stubDetectedAttributes({
+      'cloud.platform': 'gcp_kubernetes_engine',
+      'cloud.availability_zone': 'us-central1-a',
     });
 
-    it('should not prune recent tracers', () => {
-      const factory = MetricsTracerFactory.getInstance('test-project');
-      assert(factory);
+    const detectedLocation = await (
+      MetricsTracerFactory as any
+    )._detectClientLocation();
 
-      factory.createMetricsTracer(
-        'method1',
-        'projects/p/instances/i/databases/d',
-        '1.1a2b3c.1.1.1.1',
-      );
+    assert.strictEqual(detectedLocation, 'us-central1-a');
+  });
 
-      // Advance the clock, but not enough to hit the threshold
-      clock.tick(Constants.TRACER_CLEANUP_INTERVAL_MS);
-
-      // Add another tracer to trigger pruning
-      factory.createMetricsTracer(
-        'method2',
-        'projects/p/instances/i/databases/d',
-        '2.1a2b3c.1.1.1.1',
-      );
-
-      // Both tracers should be available
-      assert.strictEqual(factory['_currentOperationTracers'].size, 2);
-      assert.ok(factory['_currentOperationTracers'].has('1.1a2b3c.1.1.1'));
-      assert.ok(factory['_currentOperationTracers'].has('2.1a2b3c.1.1.1'));
+  it('should detect client location on a regional GKE cluster where cloud.region is set', async () => {
+    stubDetectedAttributes({
+      'cloud.platform': 'gcp_kubernetes_engine',
+      'cloud.region': 'us-central1',
     });
+
+    const detectedLocation = await (
+      MetricsTracerFactory as any
+    )._detectClientLocation();
+
+    assert.strictEqual(detectedLocation, 'us-central1');
+  });
+
+  it('should prefer cloud.region over cloud.availability_zone when both are set', async () => {
+    stubDetectedAttributes({
+      'cloud.platform': 'gcp_compute_engine',
+      'cloud.availability_zone': 'us-central1-a',
+      'cloud.region': 'us-central1',
+    });
+
+    const detectedLocation = await (
+      MetricsTracerFactory as any
+    )._detectClientLocation();
+
+    assert.strictEqual(detectedLocation, 'us-central1');
+  });
+
+  it('should fall back to global when neither attribute is set', async () => {
+    stubDetectedAttributes({});
+
+    const detectedLocation = await (
+      MetricsTracerFactory as any
+    )._detectClientLocation();
+
+    assert.strictEqual(detectedLocation, 'global');
+  });
+});
+
+describe('MetricsTracerFactory exported location', () => {
+  let sandbox: sinon.SinonSandbox;
+
+  beforeEach(async () => {
+    sandbox = sinon.createSandbox();
+    MetricsTracerFactory.enabled = true;
+    await MetricsTracerFactory.resetInstance();
+  });
+
+  afterEach(async () => {
+    sandbox.restore();
+    await MetricsTracerFactory.resetInstance();
+  });
+
+  it('should export the detected GCP location rather than global when _detectClientLocation resolves asynchronously', async () => {
+    let resolveLocation!: (location: string) => void;
+    const locationPromise = new Promise<string>(resolve => {
+      resolveLocation = resolve;
+    });
+    sandbox
+      .stub(MetricsTracerFactory as any, '_detectClientLocation')
+      .returns(locationPromise);
+
+    const exported: ResourceMetrics[] = [];
+    const capturingExporter = {
+      export: (
+        resourceMetrics: ResourceMetrics,
+        resultCallback: (result: {code: number}) => void,
+      ) => {
+        exported.push(resourceMetrics);
+        resultCallback({code: 0});
+      },
+      forceFlush: async () => {},
+      shutdown: async () => {},
+    };
+    const reader = new PeriodicExportingMetricReader({
+      exporter: capturingExporter as any,
+      exportIntervalMillis: 60000,
+    });
+
+    const factory = MetricsTracerFactory.getInstance('test-project')!;
+    factory.getMeterProvider([reader]);
+    assert.strictEqual(factory['_location'], 'global');
+
+    const tracer = factory.createMetricsTracer(
+      'some-method',
+      'projects/test-project/instances/inst/databases/db',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    tracer!.recordOperationStart();
+    tracer!.recordOperationCompletion();
+
+    resolveLocation('us-central1');
+    await locationPromise;
+
+    await reader.forceFlush();
+
+    assert.strictEqual(exported.length, 1);
+    const timeSeries = transformResourceMetricToTimeSeriesArray(
+      exported[0],
+      'test-project',
+    );
+    assert.ok(timeSeries.length > 0);
+    assert.strictEqual(timeSeries[0].resource!.labels!.location, 'us-central1');
+
+    await reader.shutdown();
+  });
+
+  it('should export the detected GCP location via reader.collect() without requiring waitForAsyncAttributes', async () => {
+    let resolveLocation!: (location: string) => void;
+    const locationPromise = new Promise<string>(resolve => {
+      resolveLocation = resolve;
+    });
+    sandbox
+      .stub(MetricsTracerFactory as any, '_detectClientLocation')
+      .returns(locationPromise);
+
+    class DirectCollectReader extends MetricReader {
+      protected async onForceFlush(): Promise<void> {}
+      protected async onShutdown(): Promise<void> {}
+    }
+
+    const reader = new DirectCollectReader();
+    const factory = MetricsTracerFactory.getInstance('test-project')!;
+    factory.getMeterProvider([reader]);
+    assert.strictEqual(factory.location, 'global');
+
+    const tracer = factory.createMetricsTracer(
+      'some-method',
+      'projects/test-project/instances/inst/databases/db',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    tracer!.recordOperationStart();
+    tracer!.recordOperationCompletion();
+
+    resolveLocation('us-central1');
+    await locationPromise;
+    await Promise.resolve();
+    await Promise.resolve();
+    assert.strictEqual(factory.location, 'us-central1');
+    assert.strictEqual(factory['_locationPromise'], null);
+
+    // Collect directly via MetricReader.collect() (which does NOT invoke waitForAsyncAttributes)
+    const {resourceMetrics} = await reader.collect();
+    assert.strictEqual(resourceMetrics.resource.asyncAttributesPending, false);
+    assert.strictEqual(
+      resourceMetrics.resource.attributes[
+        Constants.MONITORED_RES_LABEL_KEY_LOCATION
+      ],
+      'us-central1',
+    );
+    const timeSeries = transformResourceMetricToTimeSeriesArray(
+      resourceMetrics,
+      'test-project',
+    );
+    assert.ok(timeSeries.length > 0);
+    assert.strictEqual(timeSeries[0].resource!.labels!.location, 'us-central1');
+
+    await reader.shutdown();
+  });
+});
+
+describe('MetricsTracerFactory getMeterProvider readers', () => {
+  let sandbox: sinon.SinonSandbox;
+  let warnStub: sinon.SinonStub;
+
+  class InMemoryMetricReader extends MetricReader {
+    protected async onForceFlush(): Promise<void> {}
+    protected async onShutdown(): Promise<void> {}
+  }
+
+  const recordOperation = (factory: MetricsTracerFactory) => {
+    const tracer = factory.createMetricsTracer(
+      'some-method',
+      'projects/test-project/instances/inst/databases/db',
+      '1.1a2bc3d4.1.1.1.1',
+    );
+    tracer!.recordOperationStart();
+    tracer!.recordOperationCompletion();
+  };
+
+  beforeEach(async () => {
+    sandbox = sinon.createSandbox();
+    warnStub = sandbox.stub(console, 'warn');
+    MetricsTracerFactory.enabled = true;
+    if (
+      Object.prototype.hasOwnProperty.call(
+        process.env,
+        'SPANNER_DISABLE_BUILTIN_METRICS',
+      )
+    ) {
+      sandbox.replace(process.env, 'SPANNER_DISABLE_BUILTIN_METRICS', 'false');
+    } else {
+      sandbox.define(process.env, 'SPANNER_DISABLE_BUILTIN_METRICS', 'false');
+    }
+    await MetricsTracerFactory.resetInstance();
+    sandbox
+      .stub(MetricsTracerFactory as any, '_detectClientLocation')
+      .resolves('us-central1');
+  });
+
+  afterEach(async () => {
+    sandbox.restore();
+    await MetricsTracerFactory.resetInstance();
+  });
+
+  it('should bind MetricReader passed to getMeterProvider([reader]) even if getMeterProvider() was called earlier', async () => {
+    const factory = MetricsTracerFactory.getInstance('test-project')!;
+
+    assert.strictEqual(factory.hasMetricReaders(), false);
+    const initialMeterProvider = factory.getMeterProvider();
+    assert.strictEqual(factory.hasMetricReaders(), false);
+
+    const reader = new InMemoryMetricReader();
+    const rebuiltMeterProvider = factory.getMeterProvider([reader]);
+    assert.strictEqual(factory.hasMetricReaders(), true);
+
+    assert.notStrictEqual(rebuiltMeterProvider, initialMeterProvider);
+
+    recordOperation(factory);
+
+    const {resourceMetrics} = await reader.collect();
+    assert.ok(resourceMetrics.scopeMetrics.length > 0);
+
+    await reader.shutdown();
+  });
+
+  it('should keep returning the same MeterProvider for calls without readers', () => {
+    const factory = MetricsTracerFactory.getInstance('test-project')!;
+    const reader = new InMemoryMetricReader();
+
+    const meterProvider = factory.getMeterProvider([reader]);
+
+    assert.strictEqual(factory.getMeterProvider(), meterProvider);
+    assert.ok(warnStub.notCalled);
+  });
+
+  it('should warn instead of silently ignoring readers once readers are bound', async () => {
+    const factory = MetricsTracerFactory.getInstance('test-project')!;
+    const boundReader = new InMemoryMetricReader();
+    const meterProvider = factory.getMeterProvider([boundReader]);
+
+    const ignoredReader = new InMemoryMetricReader();
+    const sameMeterProvider = factory.getMeterProvider([ignoredReader]);
+
+    assert.strictEqual(sameMeterProvider, meterProvider);
+    assert.ok(
+      warnStub.calledWithMatch(
+        'MeterProvider is already initialized with metric readers.',
+      ),
+    );
+
+    recordOperation(factory);
+    const {resourceMetrics} = await boundReader.collect();
+    assert.ok(resourceMetrics.scopeMetrics.length > 0);
+
+    await boundReader.shutdown();
+  });
+
+  it('should initialize metrics synchronously when projectId is known and avoid duplicate warnings for multiple instances', () => {
+    const spanner1 = new Spanner({
+      projectId: 'test-project',
+    });
+    assert.ok(spanner1);
+
+    const factory = MetricsTracerFactory.getInstance('test-project')!;
+    assert.ok(factory);
+    assert.strictEqual(factory.hasMetricReaders(), true);
+
+    const spanner2 = new Spanner({
+      projectId: 'test-project',
+    });
+    assert.ok(spanner2);
+
+    // Must not log a warning because hasMetricReaders() prevented re-registering
+    assert.ok(warnStub.notCalled);
   });
 });

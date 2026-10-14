@@ -26,14 +26,14 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 // @ts-ignore
 import type * as protos from '../../../protos/protos.js';
 import * as search_service_client_config from './search_service_client_config.json';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
-import { getJSON } from '../json-helper.cjs';
+import {fileURLToPath} from 'url';
+import {getJSON} from '../json-helper.cjs';
 // @ts-ignore
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -49,7 +49,7 @@ const gapicConfig = getJSON(
 const jsonProtos = getJSON(
   path.join(dirname, '..', '..', '..', 'protos/protos.json'),
 );
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 const version = getJSON(
   path.join(dirname, '..', '..', '..', '..', 'package.json'),
 ).version;
@@ -69,7 +69,7 @@ export class SearchServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('retail');
@@ -81,9 +81,9 @@ export class SearchServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  searchServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  searchServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SearchServiceClient.
@@ -160,7 +160,7 @@ export class SearchServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -280,7 +280,7 @@ export class SearchServiceClient {
       'google.cloud.retail.v2alpha.SearchService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -320,14 +320,14 @@ export class SearchServiceClient {
           (this._protos as any).google.cloud.retail.v2alpha.SearchService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const searchServiceStubMethods = ['search'];
     for (const methodName of searchServiceStubMethods) {
       const callPromise = this.searchServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -823,7 +823,7 @@ export class SearchServiceClient {
       this._gaxModule.routingHeader.fromParams({
         placement: request.placement ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1182,7 +1182,7 @@ export class SearchServiceClient {
       });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('search stream %j', request);
@@ -1525,7 +1525,7 @@ export class SearchServiceClient {
       });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('search iterate %j', request);
@@ -2280,7 +2280,7 @@ export class SearchServiceClient {
    */
   close(): Promise<void> {
     if (this.searchServiceStub && !this._terminated) {
-      return this.searchServiceStub.then((stub) => {
+      return this.searchServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

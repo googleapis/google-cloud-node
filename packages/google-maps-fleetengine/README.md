@@ -77,7 +77,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| fleetengine | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/snippet_metadata_maps.fleetengine.v1.json) |
 | create trip | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/trip_service.create_trip.js) |
 | delete trip | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/trip_service.delete_trip.js) |
 | get trip | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-fleetengine/samples/generated/v1/trip_service.get_trip.js) |

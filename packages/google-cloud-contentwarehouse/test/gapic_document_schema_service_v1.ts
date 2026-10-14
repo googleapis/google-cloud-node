@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as documentschemaserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -254,7 +254,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.documentSchemaServiceStub, undefined);
@@ -262,13 +262,13 @@ describe('v1.DocumentSchemaServiceClient', () => {
       assert(client.documentSchemaServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.documentSchemaServiceStub);
@@ -277,15 +277,15 @@ describe('v1.DocumentSchemaServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.documentSchemaServiceStub, undefined);
@@ -294,7 +294,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -303,7 +303,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -316,7 +316,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -340,7 +340,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes createDocumentSchema without error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -373,7 +373,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes createDocumentSchema without error using callback', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -421,7 +421,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes createDocumentSchema with error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -453,7 +453,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes createDocumentSchema with closed client', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -466,7 +466,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDocumentSchema(request), expectedError);
@@ -477,7 +477,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes updateDocumentSchema without error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -510,7 +510,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes updateDocumentSchema without error using callback', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -558,7 +558,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes updateDocumentSchema with error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -590,7 +590,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes updateDocumentSchema with closed client', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -603,7 +603,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDocumentSchema(request), expectedError);
@@ -614,7 +614,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes getDocumentSchema without error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -646,7 +646,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes getDocumentSchema without error using callback', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -694,7 +694,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes getDocumentSchema with error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -726,7 +726,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes getDocumentSchema with closed client', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDocumentSchema(request), expectedError);
@@ -750,7 +750,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes deleteDocumentSchema without error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -783,7 +783,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes deleteDocumentSchema without error using callback', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes deleteDocumentSchema with error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -863,7 +863,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes deleteDocumentSchema with closed client', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -876,7 +876,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDocumentSchema(request), expectedError);
@@ -887,7 +887,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes listDocumentSchemas without error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -928,7 +928,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes listDocumentSchemas without error using callback', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -960,8 +960,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.contentwarehouse.v1.IDocumentSchema[]
-              | null,
+              protos.google.cloud.contentwarehouse.v1.IDocumentSchema[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -986,7 +985,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes listDocumentSchemas with error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1018,7 +1017,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
     it('invokes listDocumentSchemasStream without error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1073,16 +1072,16 @@ describe('v1.DocumentSchemaServiceClient', () => {
       assert(
         (client.descriptors.page.listDocumentSchemas.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDocumentSchemasStream with error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1126,16 +1125,16 @@ describe('v1.DocumentSchemaServiceClient', () => {
       assert(
         (client.descriptors.page.listDocumentSchemas.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDocumentSchemas without error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1177,16 +1176,16 @@ describe('v1.DocumentSchemaServiceClient', () => {
       assert(
         (client.descriptors.page.listDocumentSchemas.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDocumentSchemas with error', async () => {
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1219,9 +1218,9 @@ describe('v1.DocumentSchemaServiceClient', () => {
       assert(
         (client.descriptors.page.listDocumentSchemas.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1237,7 +1236,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       };
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1313,7 +1312,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       };
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1378,7 +1377,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       };
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1429,7 +1428,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       };
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1509,7 +1508,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       };
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1593,7 +1592,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       };
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1658,7 +1657,7 @@ describe('v1.DocumentSchemaServiceClient', () => {
       };
       const client =
         new documentschemaserviceModule.v1.DocumentSchemaServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

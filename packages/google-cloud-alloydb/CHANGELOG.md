@@ -1,5 +1,65 @@
 # Changelog
 
+## [3.4.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v3.3.1...alloydb-v3.4.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [3.3.1](https://github.com/googleapis/google-cloud-node/compare/alloydb-v3.3.0...alloydb-v3.3.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [3.3.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v3.2.0...alloydb-v3.3.0) (2026-09-15)
+
+
+### Features
+
+* Update API sources and regenerate ([#9293](https://github.com/googleapis/google-cloud-node/issues/9293)) ([07ae774](https://github.com/googleapis/google-cloud-node/commit/07ae774a8e52185a3598c878513377e7a019f127))
+
+## [3.2.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v3.1.0...alloydb-v3.2.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [3.1.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v3.0.0...alloydb-v3.1.0) (2026-08-21)
+
+
+### Features
+
+* Update sources and regenerate ([#9170](https://github.com/googleapis/google-cloud-node/issues/9170)) ([827fab0](https://github.com/googleapis/google-cloud-node/commit/827fab0ba7fc2067c800ae2cdd92fd21527380bf))
+
+## [3.0.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.7.0...alloydb-v3.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [2.7.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.6.0...alloydb-v2.7.0) (2026-06-25)
+
+
+### Features
+
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+
+## [2.6.0](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.5.1...alloydb-v2.6.0) (2026-06-16)
+
+
+### Features
+
+* Migrate google-cloud-alloydb to librarian ([#8491](https://github.com/googleapis/google-cloud-node/issues/8491)) ([2a7f823](https://github.com/googleapis/google-cloud-node/commit/2a7f82336695397220cae1ee249f8ff5e1871b60))
+
 ## [2.5.1](https://github.com/googleapis/google-cloud-node/compare/alloydb-v2.5.0...alloydb-v2.5.1) (2026-05-01)
 
 

@@ -27,10 +27,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -42,6 +42,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  The CrossSiteNetworks API.
+ *
+ *  This client uses CrossSiteNetworks version 2026-09-01.
  * @class
  * @memberof v1
  */
@@ -52,7 +54,7 @@ export class CrossSiteNetworksClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('compute');
@@ -65,8 +67,8 @@ export class CrossSiteNetworksClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  crossSiteNetworksStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  crossSiteNetworksStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of CrossSiteNetworksClient.
@@ -141,14 +143,14 @@ export class CrossSiteNetworksClient {
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = { fallback: true };
+      opts = {fallback: true};
     } else {
       opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -214,7 +216,10 @@ export class CrossSiteNetworksClient {
       'google.cloud.compute.v1.CrossSiteNetworks',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {
+        'x-goog-api-client': clientHeader.join(' '),
+        'x-goog-api-version': '2026-09-01',
+      },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -254,7 +259,7 @@ export class CrossSiteNetworksClient {
           (this._protos as any).google.cloud.compute.v1.CrossSiteNetworks,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -267,7 +272,7 @@ export class CrossSiteNetworksClient {
     ];
     for (const methodName of crossSiteNetworksStubMethods) {
       const callPromise = this.crossSiteNetworksStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -491,7 +496,7 @@ export class CrossSiteNetworksClient {
         project: request.project ?? '',
         cross_site_network: request.crossSiteNetwork ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('delete request %j', request);
@@ -637,7 +642,7 @@ export class CrossSiteNetworksClient {
         project: request.project ?? '',
         cross_site_network: request.crossSiteNetwork ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('get request %j', request);
@@ -799,7 +804,7 @@ export class CrossSiteNetworksClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('insert request %j', request);
@@ -974,7 +979,7 @@ export class CrossSiteNetworksClient {
         project: request.project ?? '',
         cross_site_network: request.crossSiteNetwork ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('patch request %j', request);
@@ -1119,13 +1124,6 @@ export class CrossSiteNetworksClient {
    *   the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1203,7 +1201,7 @@ export class CrossSiteNetworksClient {
       this._gaxModule.routingHeader.fromParams({
         project: request.project ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1322,13 +1320,6 @@ export class CrossSiteNetworksClient {
    *   the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1354,7 +1345,7 @@ export class CrossSiteNetworksClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list stream %j', request);
@@ -1454,13 +1445,6 @@ export class CrossSiteNetworksClient {
    *   the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1487,7 +1471,7 @@ export class CrossSiteNetworksClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list iterate %j', request);
@@ -1506,7 +1490,7 @@ export class CrossSiteNetworksClient {
    */
   close(): Promise<void> {
     if (this.crossSiteNetworksStub && !this._terminated) {
-      return this.crossSiteNetworksStub.then((stub) => {
+      return this.crossSiteNetworksStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

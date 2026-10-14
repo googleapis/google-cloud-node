@@ -27,10 +27,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -42,6 +42,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  The Routers API.
+ *
+ *  This client uses Routers version 2026-09-01.
  * @class
  * @memberof v1
  */
@@ -52,7 +54,7 @@ export class RoutersClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('compute');
@@ -65,8 +67,8 @@ export class RoutersClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  routersStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  routersStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of RoutersClient.
@@ -141,14 +143,14 @@ export class RoutersClient {
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = { fallback: true };
+      opts = {fallback: true};
     } else {
       opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== this._servicePath && !('scopes' in opts)) {
@@ -222,6 +224,11 @@ export class RoutersClient {
         'nextPageToken',
         'result',
       ),
+      listNamedSets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'result',
+      ),
       listRoutePolicies: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -234,7 +241,10 @@ export class RoutersClient {
       'google.cloud.compute.v1.Routers',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {
+        'x-goog-api-client': clientHeader.join(' '),
+        'x-goog-api-version': '2026-09-01',
+      },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -274,15 +284,17 @@ export class RoutersClient {
           (this._protos as any).google.cloud.compute.v1.Routers,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const routersStubMethods = [
       'aggregatedList',
       'delete',
+      'deleteNamedSet',
       'deleteRoutePolicy',
       'get',
+      'getNamedSet',
       'getNatIpInfo',
       'getNatMappingInfo',
       'getRoutePolicy',
@@ -290,16 +302,19 @@ export class RoutersClient {
       'insert',
       'list',
       'listBgpRoutes',
+      'listNamedSets',
       'listRoutePolicies',
       'patch',
+      'patchNamedSet',
       'patchRoutePolicy',
       'preview',
       'update',
+      'updateNamedSet',
       'updateRoutePolicy',
     ];
     for (const methodName of routersStubMethods) {
       const callPromise = this.routersStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -519,7 +534,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('delete request %j', request);
@@ -539,6 +554,176 @@ export class RoutersClient {
       : undefined;
     return this.innerApiCalls
       .delete(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deletes Named Set
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.namedSet
+   *   The Named Set name for this request. Name must conform to RFC1035
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.router
+   *   Name of the Router resource where Named Set is defined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/routers.delete_named_set.js</caption>
+   * region_tag:compute_v1_generated_Routers_DeleteNamedSet_async
+   */
+  deleteNamedSet(
+    request?: protos.google.cloud.compute.v1.IDeleteNamedSetRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteNamedSet(
+    request: protos.google.cloud.compute.v1.IDeleteNamedSetRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteNamedSet(
+    request: protos.google.cloud.compute.v1.IDeleteNamedSetRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteNamedSet(
+    request?: protos.google.cloud.compute.v1.IDeleteNamedSetRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IDeleteNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteNamedSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IDeleteNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('deleteNamedSet response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteNamedSet(request, options, wrappedCallback)
       ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
@@ -689,7 +874,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteRoutePolicy request %j', request);
@@ -830,7 +1015,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('get request %j', request);
@@ -855,6 +1040,149 @@ export class RoutersClient {
           {} | undefined,
         ]) => {
           this._log.info('get response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Returns specified Named Set
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.namedSet
+   *   The Named Set name for this request. Name must conform to RFC1035
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.router
+   *   Name of the Router resource to query for the named set. The name should
+   *   conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.compute.v1.RoutersGetNamedSetResponse|RoutersGetNamedSetResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/routers.get_named_set.js</caption>
+   * region_tag:compute_v1_generated_Routers_GetNamedSet_async
+   */
+  getNamedSet(
+    request?: protos.google.cloud.compute.v1.IGetNamedSetRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IRoutersGetNamedSetResponse,
+      protos.google.cloud.compute.v1.IGetNamedSetRouterRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getNamedSet(
+    request: protos.google.cloud.compute.v1.IGetNamedSetRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IRoutersGetNamedSetResponse,
+      | protos.google.cloud.compute.v1.IGetNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getNamedSet(
+    request: protos.google.cloud.compute.v1.IGetNamedSetRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IRoutersGetNamedSetResponse,
+      | protos.google.cloud.compute.v1.IGetNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getNamedSet(
+    request?: protos.google.cloud.compute.v1.IGetNamedSetRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IRoutersGetNamedSetResponse,
+          | protos.google.cloud.compute.v1.IGetNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IRoutersGetNamedSetResponse,
+      | protos.google.cloud.compute.v1.IGetNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IRoutersGetNamedSetResponse,
+      protos.google.cloud.compute.v1.IGetNamedSetRouterRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getNamedSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IRoutersGetNamedSetResponse,
+          | protos.google.cloud.compute.v1.IGetNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getNamedSet response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getNamedSet(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.compute.v1.IRoutersGetNamedSetResponse,
+          protos.google.cloud.compute.v1.IGetNamedSetRouterRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getNamedSet response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -973,7 +1301,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNatIpInfo request %j', request);
@@ -1116,7 +1444,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRoutePolicy request %j', request);
@@ -1259,7 +1587,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getRouterStatus request %j', request);
@@ -1415,7 +1743,7 @@ export class RoutersClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('insert request %j', request);
@@ -1580,7 +1908,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('patch request %j', request);
@@ -1598,6 +1926,176 @@ export class RoutersClient {
       : undefined;
     return this.innerApiCalls
       .patch(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Patches Named Set
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.NamedSet} request.namedSetResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.router
+   *   Name of the Router resource where Named Set is defined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/routers.patch_named_set.js</caption>
+   * region_tag:compute_v1_generated_Routers_PatchNamedSet_async
+   */
+  patchNamedSet(
+    request?: protos.google.cloud.compute.v1.IPatchNamedSetRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  patchNamedSet(
+    request: protos.google.cloud.compute.v1.IPatchNamedSetRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  patchNamedSet(
+    request: protos.google.cloud.compute.v1.IPatchNamedSetRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  patchNamedSet(
+    request?: protos.google.cloud.compute.v1.IPatchNamedSetRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IPatchNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('patchNamedSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IPatchNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('patchNamedSet response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .patchNamedSet(request, options, wrappedCallback)
       ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
@@ -1748,7 +2246,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('patchRoutePolicy request %j', request);
@@ -1894,7 +2392,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('preview request %j', request);
@@ -2052,7 +2550,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('update request %j', request);
@@ -2072,6 +2570,176 @@ export class RoutersClient {
       : undefined;
     return this.innerApiCalls
       .update(request, options, wrappedCallback)
+      ?.then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates or creates new Named Set
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.NamedSet} request.namedSetResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so
+   *   that if you must retry your request, the server will know to ignore the
+   *   request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same
+   *   request ID, the server can check if original operation with the same
+   *   request ID was received, and if so, will ignore the second request. This
+   *   prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be
+   *   a valid UUID with the exception that zero UUID is not supported
+   *   (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.router
+   *   Name of the Router resource where Named Set is defined.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/routers.update_named_set.js</caption>
+   * region_tag:compute_v1_generated_Routers_UpdateNamedSet_async
+   */
+  updateNamedSet(
+    request?: protos.google.cloud.compute.v1.IUpdateNamedSetRouterRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateNamedSet(
+    request: protos.google.cloud.compute.v1.IUpdateNamedSetRouterRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdateNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateNamedSet(
+    request: protos.google.cloud.compute.v1.IUpdateNamedSetRouterRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdateNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateNamedSet(
+    request?: protos.google.cloud.compute.v1.IUpdateNamedSetRouterRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IUpdateNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdateNamedSetRouterRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateNamedSet request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IUpdateNamedSetRouterRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('updateNamedSet response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateNamedSet(request, options, wrappedCallback)
       ?.then(
         ([response, operation, rawResponse]: [
           protos.google.cloud.compute.v1.IOperation,
@@ -2222,7 +2890,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateRoutePolicy request %j', request);
@@ -2379,13 +3047,6 @@ export class RoutersClient {
    *   the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {number} request.serviceProjectNumber
    *   The Shared VPC service project id or service project number for which
    *   aggregated list request is invoked for subnetworks list-usable api.
@@ -2417,7 +3078,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('aggregatedList iterate %j', request);
@@ -2523,13 +3184,6 @@ export class RoutersClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.router
    *   Name of the Router resource to query for Nat Mapping information of
    *   VM endpoints.
@@ -2618,7 +3272,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2743,13 +3397,6 @@ export class RoutersClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.router
    *   Name of the Router resource to query for Nat Mapping information of
    *   VM endpoints.
@@ -2780,7 +3427,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['getNatMappingInfo'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNatMappingInfo stream %j', request);
@@ -2886,13 +3533,6 @@ export class RoutersClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.router
    *   Name of the Router resource to query for Nat Mapping information of
    *   VM endpoints.
@@ -2924,7 +3564,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['getNatMappingInfo'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getNatMappingInfo iterate %j', request);
@@ -3024,13 +3664,6 @@ export class RoutersClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3107,7 +3740,7 @@ export class RoutersClient {
         project: request.project ?? '',
         region: request.region ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3226,13 +3859,6 @@ export class RoutersClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3259,7 +3885,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list stream %j', request);
@@ -3361,13 +3987,6 @@ export class RoutersClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3395,7 +4014,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('list iterate %j', request);
@@ -3506,13 +4125,6 @@ export class RoutersClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.routeType
    *   (Required) limit results to this type of route (either LEARNED or
    *   ADVERTISED)
@@ -3599,7 +4211,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3731,13 +4343,6 @@ export class RoutersClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.routeType
    *   (Required) limit results to this type of route (either LEARNED or
    *   ADVERTISED)
@@ -3772,7 +4377,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listBgpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBgpRoutes stream %j', request);
@@ -3885,13 +4490,6 @@ export class RoutersClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.routeType
    *   (Required) limit results to this type of route (either LEARNED or
    *   ADVERTISED)
@@ -3927,7 +4525,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listBgpRoutes'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listBgpRoutes iterate %j', request);
@@ -3936,6 +4534,473 @@ export class RoutersClient {
       request as {},
       callSettings,
     ) as AsyncIterable<protos.google.cloud.compute.v1.IBgpRoute>;
+  }
+  /**
+   * Retrieves a list of router named set subresources available to the
+   * specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.router
+   *   Name or id of the resource for this request.
+   *   Name should conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.compute.v1.NamedSet|NamedSet}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listNamedSetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listNamedSets(
+    request?: protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.INamedSet[],
+      protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest | null,
+      protos.google.cloud.compute.v1.IRoutersListNamedSets,
+    ]
+  >;
+  listNamedSets(
+    request: protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest,
+      protos.google.cloud.compute.v1.IRoutersListNamedSets | null | undefined,
+      protos.google.cloud.compute.v1.INamedSet
+    >,
+  ): void;
+  listNamedSets(
+    request: protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest,
+      protos.google.cloud.compute.v1.IRoutersListNamedSets | null | undefined,
+      protos.google.cloud.compute.v1.INamedSet
+    >,
+  ): void;
+  listNamedSets(
+    request?: protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest,
+          | protos.google.cloud.compute.v1.IRoutersListNamedSets
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1.INamedSet
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest,
+      protos.google.cloud.compute.v1.IRoutersListNamedSets | null | undefined,
+      protos.google.cloud.compute.v1.INamedSet
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.INamedSet[],
+      protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest | null,
+      protos.google.cloud.compute.v1.IRoutersListNamedSets,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest,
+          | protos.google.cloud.compute.v1.IRoutersListNamedSets
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1.INamedSet
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listNamedSets values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listNamedSets request %j', request);
+    return this.innerApiCalls
+      .listNamedSets(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.compute.v1.INamedSet[],
+          protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest | null,
+          protos.google.cloud.compute.v1.IRoutersListNamedSets,
+        ]) => {
+          this._log.info('listNamedSets values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listNamedSets`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.router
+   *   Name or id of the resource for this request.
+   *   Name should conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.compute.v1.NamedSet|NamedSet} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listNamedSetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listNamedSetsStream(
+    request?: protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNamedSets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listNamedSets stream %j', request);
+    return this.descriptors.page.listNamedSets.createStream(
+      this.innerApiCalls.listNamedSets as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listNamedSets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. Most
+   *   Compute resources support two types of filter expressions:
+   *   expressions that support regular expressions and expressions that follow
+   *   API improvement proposal AIP-160.
+   *   These two types of filter expressions cannot be mixed in one request.
+   *
+   *   If you want to use AIP-160, your expression must specify the field name, an
+   *   operator, and the value that you want to use for filtering. The value
+   *   must be a string, a number, or a boolean. The operator
+   *   must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can
+   *   exclude instances named `example-instance` by specifying
+   *   `name != example-instance`.
+   *
+   *   The `:*` comparison can be used to test whether a key has been defined.
+   *   For example, to find all objects with `owner` label use:
+   *   ```
+   *   labels.owner:*
+   *   ```
+   *
+   *   You can also filter nested fields. For example, you could specify
+   *   `scheduling.automaticRestart = false` to include instances only
+   *   if they are not scheduled for automatic restarts. You can use filtering
+   *   on nested fields to filter based onresource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within
+   *   parentheses. For example:
+   *   ```
+   *   (scheduling.automaticRestart = true)
+   *   (cpuPlatform = "Intel Skylake")
+   *   ```
+   *   By default, each expression is an `AND` expression. However, you
+   *   can include `AND` and `OR` expressions explicitly.
+   *   For example:
+   *   ```
+   *   (cpuPlatform = "Intel Skylake") OR
+   *   (cpuPlatform = "Intel Broadwell") AND
+   *   (scheduling.automaticRestart = true)
+   *   ```
+   *
+   *   If you want to use a regular expression, use the `eq` (equal) or `ne`
+   *   (not equal) operator against a single un-parenthesized expression with or
+   *   without quotes or against multiple parenthesized expressions. Examples:
+   *
+   *   `fieldname eq unquoted literal`
+   *   `fieldname eq 'single quoted literal'`
+   *   `fieldname eq "double quoted literal"`
+   *   `(fieldname1 eq literal) (fieldname2 ne "literal")`
+   *
+   *   The literal value is interpreted as a regular expression using GoogleRE2 library syntax.
+   *   The literal value must match the entire field.
+   *
+   *   For example, to filter for instances that do not end with name "instance",
+   *   you would use `name ne .*instance`.
+   *
+   *   You cannot combine constraints on multiple fields using regular
+   *   expressions.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned.
+   *   If the number of available results is larger than `maxResults`,
+   *   Compute Engine returns a `nextPageToken` that can be used to get
+   *   the next page of results in subsequent list requests. Acceptable values are
+   *   `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results
+   *   are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation
+   *   timestamp using `orderBy="creationTimestamp desc"`. This sorts
+   *   results based on the `creationTimestamp` field in
+   *   reverse chronological order (newest result first). Use this to sort
+   *   resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or
+   *   `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the
+   *   `nextPageToken` returned by a previous list request to get
+   *   the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.router
+   *   Name or id of the resource for this request.
+   *   Name should conform to RFC1035.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.compute.v1.NamedSet|NamedSet}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/routers.list_named_sets.js</caption>
+   * region_tag:compute_v1_generated_Routers_ListNamedSets_async
+   */
+  listNamedSetsAsync(
+    request?: protos.google.cloud.compute.v1.IListNamedSetsRoutersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.compute.v1.INamedSet> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project ?? '',
+        region: request.region ?? '',
+        router: request.router ?? '',
+      });
+    const defaultCallSettings = this._defaults['listNamedSets'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listNamedSets iterate %j', request);
+    return this.descriptors.page.listNamedSets.asyncIterate(
+      this.innerApiCalls['listNamedSets'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.compute.v1.INamedSet>;
   }
   /**
    * Retrieves a list of router route policy subresources available to the
@@ -4028,13 +5093,6 @@ export class RoutersClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.router
    *   Name or id of the resource for this request.
    *   Name should conform to RFC1035.
@@ -4123,7 +5181,7 @@ export class RoutersClient {
         region: request.region ?? '',
         router: request.router ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4244,13 +5302,6 @@ export class RoutersClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.router
    *   Name or id of the resource for this request.
    *   Name should conform to RFC1035.
@@ -4281,7 +5332,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listRoutePolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRoutePolicies stream %j', request);
@@ -4383,13 +5434,6 @@ export class RoutersClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {string} request.router
    *   Name or id of the resource for this request.
    *   Name should conform to RFC1035.
@@ -4421,7 +5465,7 @@ export class RoutersClient {
       });
     const defaultCallSettings = this._defaults['listRoutePolicies'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listRoutePolicies iterate %j', request);
@@ -4440,7 +5484,7 @@ export class RoutersClient {
    */
   close(): Promise<void> {
     if (this.routersStub && !this._terminated) {
-      return this.routersStub.then((stub) => {
+      return this.routersStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

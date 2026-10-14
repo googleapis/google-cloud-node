@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as documentserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -278,7 +278,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.documentServiceStub, undefined);
@@ -286,12 +286,12 @@ describe('v1beta3.DocumentServiceClient', () => {
       assert(client.documentServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.documentServiceStub);
@@ -300,14 +300,14 @@ describe('v1beta3.DocumentServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.documentServiceStub, undefined);
@@ -316,7 +316,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -324,7 +324,7 @@ describe('v1beta3.DocumentServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -336,7 +336,7 @@ describe('v1beta3.DocumentServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -359,7 +359,7 @@ describe('v1beta3.DocumentServiceClient', () => {
   describe('getDocument', () => {
     it('invokes getDocument without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -390,7 +390,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes getDocument without error using callback', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -437,7 +437,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes getDocument with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -468,7 +468,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes getDocument with closed client', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -481,7 +481,7 @@ describe('v1beta3.DocumentServiceClient', () => {
       );
       request.dataset = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDocument(request), expectedError);
@@ -491,7 +491,7 @@ describe('v1beta3.DocumentServiceClient', () => {
   describe('getDatasetSchema', () => {
     it('invokes getDatasetSchema without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -522,7 +522,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes getDatasetSchema without error using callback', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -569,7 +569,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes getDatasetSchema with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -600,7 +600,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes getDatasetSchema with closed client', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -613,7 +613,7 @@ describe('v1beta3.DocumentServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDatasetSchema(request), expectedError);
@@ -623,7 +623,7 @@ describe('v1beta3.DocumentServiceClient', () => {
   describe('updateDatasetSchema', () => {
     it('invokes updateDatasetSchema without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -656,7 +656,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes updateDatasetSchema without error using callback', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -704,7 +704,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes updateDatasetSchema with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -736,7 +736,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes updateDatasetSchema with closed client', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -750,7 +750,7 @@ describe('v1beta3.DocumentServiceClient', () => {
       );
       request.datasetSchema.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDatasetSchema(request), expectedError);
@@ -760,7 +760,7 @@ describe('v1beta3.DocumentServiceClient', () => {
   describe('updateDataset', () => {
     it('invokes updateDataset without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -794,7 +794,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes updateDataset without error using callback', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -849,7 +849,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes updateDataset with call error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -881,7 +881,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes updateDataset with LRO error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -915,7 +915,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes checkUpdateDatasetProgress without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -923,8 +923,8 @@ describe('v1beta3.DocumentServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDatasetProgress(
@@ -937,7 +937,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes checkUpdateDatasetProgress with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -958,7 +958,7 @@ describe('v1beta3.DocumentServiceClient', () => {
   describe('importDocuments', () => {
     it('invokes importDocuments without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -991,7 +991,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes importDocuments without error using callback', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1045,7 +1045,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes importDocuments with call error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1076,7 +1076,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes importDocuments with LRO error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1109,7 +1109,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes checkImportDocumentsProgress without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1117,8 +1117,8 @@ describe('v1beta3.DocumentServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportDocumentsProgress(
@@ -1131,7 +1131,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes checkImportDocumentsProgress with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1152,7 +1152,7 @@ describe('v1beta3.DocumentServiceClient', () => {
   describe('batchDeleteDocuments', () => {
     it('invokes batchDeleteDocuments without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1185,7 +1185,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes batchDeleteDocuments without error using callback', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1239,7 +1239,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes batchDeleteDocuments with call error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1270,7 +1270,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes batchDeleteDocuments with LRO error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1303,7 +1303,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes checkBatchDeleteDocumentsProgress without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1311,8 +1311,8 @@ describe('v1beta3.DocumentServiceClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchDeleteDocumentsProgress(
@@ -1325,7 +1325,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes checkBatchDeleteDocumentsProgress with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1346,7 +1346,7 @@ describe('v1beta3.DocumentServiceClient', () => {
   describe('listDocuments', () => {
     it('invokes listDocuments without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1385,7 +1385,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes listDocuments without error using callback', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1417,8 +1417,7 @@ describe('v1beta3.DocumentServiceClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.documentai.v1beta3.IDocumentMetadata[]
-              | null,
+              protos.google.cloud.documentai.v1beta3.IDocumentMetadata[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -1442,7 +1441,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes listDocuments with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1473,7 +1472,7 @@ describe('v1beta3.DocumentServiceClient', () => {
 
     it('invokes listDocumentsStream without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1528,15 +1527,15 @@ describe('v1beta3.DocumentServiceClient', () => {
       assert(
         (client.descriptors.page.listDocuments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDocumentsStream with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1580,15 +1579,15 @@ describe('v1beta3.DocumentServiceClient', () => {
       assert(
         (client.descriptors.page.listDocuments.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDocuments without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1630,15 +1629,15 @@ describe('v1beta3.DocumentServiceClient', () => {
       assert(
         (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDocuments with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1671,16 +1670,16 @@ describe('v1beta3.DocumentServiceClient', () => {
       assert(
         (client.descriptors.page.listDocuments.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1710,7 +1709,7 @@ describe('v1beta3.DocumentServiceClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1754,7 +1753,7 @@ describe('v1beta3.DocumentServiceClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1789,7 +1788,7 @@ describe('v1beta3.DocumentServiceClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1837,7 +1836,7 @@ describe('v1beta3.DocumentServiceClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1878,7 +1877,7 @@ describe('v1beta3.DocumentServiceClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1899,7 +1898,7 @@ describe('v1beta3.DocumentServiceClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1927,7 +1926,7 @@ describe('v1beta3.DocumentServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1937,7 +1936,7 @@ describe('v1beta3.DocumentServiceClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1961,7 +1960,7 @@ describe('v1beta3.DocumentServiceClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1983,7 +1982,7 @@ describe('v1beta3.DocumentServiceClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2011,7 +2010,7 @@ describe('v1beta3.DocumentServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2021,7 +2020,7 @@ describe('v1beta3.DocumentServiceClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2045,7 +2044,7 @@ describe('v1beta3.DocumentServiceClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2067,7 +2066,7 @@ describe('v1beta3.DocumentServiceClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2095,7 +2094,7 @@ describe('v1beta3.DocumentServiceClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2105,7 +2104,7 @@ describe('v1beta3.DocumentServiceClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2129,7 +2128,7 @@ describe('v1beta3.DocumentServiceClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2164,7 +2163,7 @@ describe('v1beta3.DocumentServiceClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2200,7 +2199,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         processor: 'processorValue',
       };
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2264,7 +2263,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         processor: 'processorValue',
       };
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2330,7 +2329,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2416,7 +2415,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         processor: 'processorValue',
       };
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2480,7 +2479,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         processor_type: 'processorTypeValue',
       };
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2545,7 +2544,7 @@ describe('v1beta3.DocumentServiceClient', () => {
         processor_version: 'processorVersionValue',
       };
       const client = new documentserviceModule.v1beta3.DocumentServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

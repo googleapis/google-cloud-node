@@ -76,7 +76,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_backup.js) |
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_instance.js) |
 | update snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_snapshot.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/snippet_metadata_google.cloud.filestore.v1.json) |
 | create backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_backup.js) |
 | create instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_instance.js) |
 | create share | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_share.js) |
@@ -100,7 +99,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_instance.js) |
 | update share | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_share.js) |
 | update snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_snapshot.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/snippet_metadata_google.cloud.filestore.v1beta1.json) |
 
 
 ## Supported Node.js Versions

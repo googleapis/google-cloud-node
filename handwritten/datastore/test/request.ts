@@ -22,7 +22,7 @@ import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {PassThrough, Transform} from 'stream';
 
-import {google} from '../protos/protos';
+import {google} from '../src/protos';
 import * as ds from '../src';
 import {entity, Entity, KeyProto} from '../src/entity.js';
 import {IntegerTypeCastOptions, Query, QueryProto} from '../src/query.js';

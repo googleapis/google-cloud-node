@@ -32,10 +32,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -60,8 +60,13 @@ const version = require('../../../package.json').version;
  *
  *  The AppConnectionsService service provides methods to manage
  *  (create/read/update/delete) BeyondCorp AppConnections.
+ *
+ *
+ *  Deprecated: App Connector is deprecated and creation of new App Connector
+ *  resources is no longer permitted. Use Security Gateway instead.
  * @class
  * @memberof v1
+ * @deprecated AppConnectionsService is deprecated and may be removed in a future version.
  */
 export class AppConnectionsServiceClient {
   private _terminated = false;
@@ -70,7 +75,7 @@ export class AppConnectionsServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('appconnections');
@@ -83,12 +88,12 @@ export class AppConnectionsServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   iamClient: IamClient;
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  appConnectionsServiceStub?: Promise<{ [name: string]: Function }>;
+  appConnectionsServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of AppConnectionsServiceClient.
@@ -165,7 +170,7 @@ export class AppConnectionsServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -291,10 +296,10 @@ export class AppConnectionsServiceClient {
               get: '/v1/{resource=projects/*/locations/*/appGateways/*}:getIamPolicy',
             },
             {
-              get: '/v1/{resource=projects/*/locations/*/clientConnectorServices/*}:getIamPolicy',
+              get: '/v1/{resource=projects/*/locations/*/securityGateways/*}:getIamPolicy',
             },
             {
-              get: '/v1/{resource=projects/*/locations/*/clientGateways/*}:getIamPolicy',
+              get: '/v1/{resource=projects/*/locations/*/securityGateways/*/applications/*}:getIamPolicy',
             },
           ],
         },
@@ -312,11 +317,11 @@ export class AppConnectionsServiceClient {
               body: '*',
             },
             {
-              post: '/v1/{resource=projects/*/locations/*/clientConnectorServices/*}:setIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/securityGateways/*}:setIamPolicy',
               body: '*',
             },
             {
-              post: '/v1/{resource=projects/*/locations/*/clientGateways/*}:setIamPolicy',
+              post: '/v1/{resource=projects/*/locations/*/securityGateways/*/applications/*}:setIamPolicy',
               body: '*',
             },
           ],
@@ -335,11 +340,11 @@ export class AppConnectionsServiceClient {
               body: '*',
             },
             {
-              post: '/v1/{resource=projects/*/locations/*/clientConnectorServices/*}:testIamPermissions',
+              post: '/v1/{resource=projects/*/locations/*/securityGateways/*}:testIamPermissions',
               body: '*',
             },
             {
-              post: '/v1/{resource=projects/*/locations/*/clientGateways/*}:testIamPermissions',
+              post: '/v1/{resource=projects/*/locations/*/securityGateways/*/applications/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -348,18 +353,33 @@ export class AppConnectionsServiceClient {
           selector: 'google.longrunning.Operations.CancelOperation',
           post: '/v1/{name=projects/*/locations/*/operations/*}:cancel',
           body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{name=organizations/*/locations/*/operations/*}:cancel',
+              body: '*',
+            },
+          ],
         },
         {
           selector: 'google.longrunning.Operations.DeleteOperation',
           delete: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {delete: '/v1/{name=organizations/*/locations/*/operations/*}'},
+          ],
         },
         {
           selector: 'google.longrunning.Operations.GetOperation',
           get: '/v1/{name=projects/*/locations/*/operations/*}',
+          additional_bindings: [
+            {get: '/v1/{name=organizations/*/locations/*/operations/*}'},
+          ],
         },
         {
           selector: 'google.longrunning.Operations.ListOperations',
           get: '/v1/{name=projects/*/locations/*}/operations',
+          additional_bindings: [
+            {get: '/v1/{name=organizations/*/locations/*}/operations'},
+          ],
         },
       ];
     }
@@ -408,7 +428,7 @@ export class AppConnectionsServiceClient {
       'google.cloud.beyondcorp.appconnections.v1.AppConnectionsService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -434,6 +454,11 @@ export class AppConnectionsServiceClient {
   initialize() {
     // If the client stub promise is already initialized, return immediately.
     if (this.appConnectionsServiceStub) {
+      this.warn(
+        'DEP$AppConnectionsService',
+        'AppConnectionsService is deprecated and may be removed in a future version.',
+        'DeprecationWarning',
+      );
       return this.appConnectionsServiceStub;
     }
 
@@ -449,7 +474,7 @@ export class AppConnectionsServiceClient {
             .AppConnectionsService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -463,7 +488,7 @@ export class AppConnectionsServiceClient {
     ];
     for (const methodName of appConnectionsServiceStubMethods) {
       const callPromise = this.appConnectionsServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -489,6 +514,11 @@ export class AppConnectionsServiceClient {
 
       this.innerApiCalls[methodName] = apiCall;
     }
+    this.warn(
+      'DEP$AppConnectionsService',
+      'AppConnectionsService is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
 
     return this.appConnectionsServiceStub;
   }
@@ -593,6 +623,7 @@ export class AppConnectionsServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_connections_service.get_app_connection.js</caption>
    * region_tag:beyondcorp_v1_generated_AppConnectionsService_GetAppConnection_async
+   * @deprecated GetAppConnection is deprecated and may be removed in a future version.
    */
   getAppConnection(
     request?: protos.google.cloud.beyondcorp.appconnections.v1.IGetAppConnectionRequest,
@@ -671,9 +702,14 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppConnectionsService-$GetAppConnection',
+      'GetAppConnection is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('getAppConnection request %j', request);
     const wrappedCallback:
       | Callback<
@@ -743,9 +779,9 @@ export class AppConnectionsServiceClient {
    *   ignore the request if it has already been completed. The server will
    *   guarantee that for at least 60 minutes since the first request.
    *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if the original operation with the same request ID
    *   was received, and if so, will ignore the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
@@ -764,6 +800,7 @@ export class AppConnectionsServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_connections_service.create_app_connection.js</caption>
    * region_tag:beyondcorp_v1_generated_AppConnectionsService_CreateAppConnection_async
+   * @deprecated CreateAppConnection is deprecated and may be removed in a future version.
    */
   createAppConnection(
     request?: protos.google.cloud.beyondcorp.appconnections.v1.ICreateAppConnectionRequest,
@@ -846,9 +883,14 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppConnectionsService-$CreateAppConnection',
+      'CreateAppConnection is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -891,6 +933,7 @@ export class AppConnectionsServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_connections_service.create_app_connection.js</caption>
    * region_tag:beyondcorp_v1_generated_AppConnectionsService_CreateAppConnection_async
+   * @deprecated CreateAppConnection is deprecated and may be removed in a future version.
    */
   async checkCreateAppConnectionProgress(
     name: string,
@@ -900,10 +943,15 @@ export class AppConnectionsServiceClient {
       protos.google.cloud.beyondcorp.appconnections.v1.AppConnectionOperationMetadata
     >
   > {
+    this.warn(
+      'DEP$AppConnectionsService-$checkCreateAppConnectionProgress',
+      'checkCreateAppConnectionProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('createAppConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -938,9 +986,9 @@ export class AppConnectionsServiceClient {
    *   ignore the request if it has already been completed. The server will
    *   guarantee that for at least 60 minutes since the first request.
    *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if the original operation with the same request ID
    *   was received, and if so, will ignore the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
@@ -961,6 +1009,7 @@ export class AppConnectionsServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_connections_service.update_app_connection.js</caption>
    * region_tag:beyondcorp_v1_generated_AppConnectionsService_UpdateAppConnection_async
+   * @deprecated UpdateAppConnection is deprecated and may be removed in a future version.
    */
   updateAppConnection(
     request?: protos.google.cloud.beyondcorp.appconnections.v1.IUpdateAppConnectionRequest,
@@ -1043,9 +1092,14 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'app_connection.name': request.appConnection!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppConnectionsService-$UpdateAppConnection',
+      'UpdateAppConnection is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1088,6 +1142,7 @@ export class AppConnectionsServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_connections_service.update_app_connection.js</caption>
    * region_tag:beyondcorp_v1_generated_AppConnectionsService_UpdateAppConnection_async
+   * @deprecated UpdateAppConnection is deprecated and may be removed in a future version.
    */
   async checkUpdateAppConnectionProgress(
     name: string,
@@ -1097,10 +1152,15 @@ export class AppConnectionsServiceClient {
       protos.google.cloud.beyondcorp.appconnections.v1.AppConnectionOperationMetadata
     >
   > {
+    this.warn(
+      'DEP$AppConnectionsService-$checkUpdateAppConnectionProgress',
+      'checkUpdateAppConnectionProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('updateAppConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1127,9 +1187,9 @@ export class AppConnectionsServiceClient {
    *   ignore the request if it has already been completed. The server will
    *   guarantee that for at least 60 minutes after the first request.
    *
-   *   For example, consider a situation where you make an initial request and t
-   *   he request times out. If you make the request again with the same request
-   *   ID, the server can check if original operation with the same request ID
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if the original operation with the same request ID
    *   was received, and if so, will ignore the second request. This prevents
    *   clients from accidentally creating duplicate commitments.
    *
@@ -1148,6 +1208,7 @@ export class AppConnectionsServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_connections_service.delete_app_connection.js</caption>
    * region_tag:beyondcorp_v1_generated_AppConnectionsService_DeleteAppConnection_async
+   * @deprecated DeleteAppConnection is deprecated and may be removed in a future version.
    */
   deleteAppConnection(
     request?: protos.google.cloud.beyondcorp.appconnections.v1.IDeleteAppConnectionRequest,
@@ -1230,9 +1291,14 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppConnectionsService-$DeleteAppConnection',
+      'DeleteAppConnection is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     const wrappedCallback:
       | Callback<
           LROperation<
@@ -1275,6 +1341,7 @@ export class AppConnectionsServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_connections_service.delete_app_connection.js</caption>
    * region_tag:beyondcorp_v1_generated_AppConnectionsService_DeleteAppConnection_async
+   * @deprecated DeleteAppConnection is deprecated and may be removed in a future version.
    */
   async checkDeleteAppConnectionProgress(
     name: string,
@@ -1284,10 +1351,15 @@ export class AppConnectionsServiceClient {
       protos.google.cloud.beyondcorp.appconnections.v1.AppConnectionOperationMetadata
     >
   > {
+    this.warn(
+      'DEP$AppConnectionsService-$checkDeleteAppConnectionProgress',
+      'checkDeleteAppConnectionProgress is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('deleteAppConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1313,8 +1385,8 @@ export class AppConnectionsServiceClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the page_size value, the response may include a partial list
    *   and a caller should only rely on response's
-   *   {@link protos.BeyondCorp.ListAppConnectionsResponse.next_page_token|next_page_token} to
-   *   determine if there are more instances left to be queried.
+   *   {@link protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsResponse.next_page_token|next_page_token}
+   *   to determine if there are more instances left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous
    *   ListAppConnectionsRequest, if any.
@@ -1336,6 +1408,7 @@ export class AppConnectionsServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListAppConnections is deprecated and may be removed in a future version.
    */
   listAppConnections(
     request?: protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
@@ -1408,9 +1481,14 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppConnectionsService-$ListAppConnections',
+      'ListAppConnections is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
@@ -1452,8 +1530,8 @@ export class AppConnectionsServiceClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the page_size value, the response may include a partial list
    *   and a caller should only rely on response's
-   *   {@link protos.BeyondCorp.ListAppConnectionsResponse.next_page_token|next_page_token} to
-   *   determine if there are more instances left to be queried.
+   *   {@link protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsResponse.next_page_token|next_page_token}
+   *   to determine if there are more instances left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous
    *   ListAppConnectionsRequest, if any.
@@ -1474,6 +1552,7 @@ export class AppConnectionsServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ListAppConnections is deprecated and may be removed in a future version.
    */
   listAppConnectionsStream(
     request?: protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
@@ -1489,9 +1568,14 @@ export class AppConnectionsServiceClient {
       });
     const defaultCallSettings = this._defaults['listAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppConnectionsService-$ListAppConnections',
+      'ListAppConnections is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('listAppConnections stream %j', request);
     return this.descriptors.page.listAppConnections.createStream(
       this.innerApiCalls.listAppConnections as GaxCall,
@@ -1514,8 +1598,8 @@ export class AppConnectionsServiceClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the page_size value, the response may include a partial list
    *   and a caller should only rely on response's
-   *   {@link protos.BeyondCorp.ListAppConnectionsResponse.next_page_token|next_page_token} to
-   *   determine if there are more instances left to be queried.
+   *   {@link protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsResponse.next_page_token|next_page_token}
+   *   to determine if there are more instances left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous
    *   ListAppConnectionsRequest, if any.
@@ -1537,6 +1621,7 @@ export class AppConnectionsServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_connections_service.list_app_connections.js</caption>
    * region_tag:beyondcorp_v1_generated_AppConnectionsService_ListAppConnections_async
+   * @deprecated ListAppConnections is deprecated and may be removed in a future version.
    */
   listAppConnectionsAsync(
     request?: protos.google.cloud.beyondcorp.appconnections.v1.IListAppConnectionsRequest,
@@ -1552,9 +1637,14 @@ export class AppConnectionsServiceClient {
       });
     const defaultCallSettings = this._defaults['listAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppConnectionsService-$ListAppConnections',
+      'ListAppConnections is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('listAppConnections iterate %j', request);
     return this.descriptors.page.listAppConnections.asyncIterate(
       this.innerApiCalls['listAppConnections'] as GaxCall,
@@ -1581,7 +1671,7 @@ export class AppConnectionsServiceClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the page_size value, the response may include a partial list
    *   and a caller should only rely on response's
-   *   {@link protos.BeyondCorp.ResolveAppConnectionsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous
@@ -1597,6 +1687,7 @@ export class AppConnectionsServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ResolveAppConnections is deprecated and may be removed in a future version.
    */
   resolveAppConnections(
     request?: protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
@@ -1669,9 +1760,14 @@ export class AppConnectionsServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppConnectionsService-$ResolveAppConnections',
+      'ResolveAppConnections is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     const wrappedCallback:
       | PaginationCallback<
           protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
@@ -1717,7 +1813,7 @@ export class AppConnectionsServiceClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the page_size value, the response may include a partial list
    *   and a caller should only rely on response's
-   *   {@link protos.BeyondCorp.ResolveAppConnectionsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous
@@ -1732,6 +1828,7 @@ export class AppConnectionsServiceClient {
    *   method described below for async iteration which you can stop as needed.
    *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
    *   for more details and examples.
+   * @deprecated ResolveAppConnections is deprecated and may be removed in a future version.
    */
   resolveAppConnectionsStream(
     request?: protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
@@ -1747,9 +1844,14 @@ export class AppConnectionsServiceClient {
       });
     const defaultCallSettings = this._defaults['resolveAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppConnectionsService-$ResolveAppConnections',
+      'ResolveAppConnections is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('resolveAppConnections stream %j', request);
     return this.descriptors.page.resolveAppConnections.createStream(
       this.innerApiCalls.resolveAppConnections as GaxCall,
@@ -1776,7 +1878,7 @@ export class AppConnectionsServiceClient {
    *   If not specified, a default value of 50 will be used by the service.
    *   Regardless of the page_size value, the response may include a partial list
    *   and a caller should only rely on response's
-   *   {@link protos.BeyondCorp.ResolveAppConnectionsResponse.next_page_token|next_page_token}
+   *   {@link protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.next_page_token|next_page_token}
    *   to determine if there are more instances left to be queried.
    * @param {string} [request.pageToken]
    *   Optional. The next_page_token value returned from a previous
@@ -1792,6 +1894,7 @@ export class AppConnectionsServiceClient {
    *   for more details and examples.
    * @example <caption>include:samples/generated/v1/app_connections_service.resolve_app_connections.js</caption>
    * region_tag:beyondcorp_v1_generated_AppConnectionsService_ResolveAppConnections_async
+   * @deprecated ResolveAppConnections is deprecated and may be removed in a future version.
    */
   resolveAppConnectionsAsync(
     request?: protos.google.cloud.beyondcorp.appconnections.v1.IResolveAppConnectionsRequest,
@@ -1807,9 +1910,14 @@ export class AppConnectionsServiceClient {
       });
     const defaultCallSettings = this._defaults['resolveAppConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
+    this.warn(
+      'DEP$AppConnectionsService-$ResolveAppConnections',
+      'ResolveAppConnections is deprecated and may be removed in a future version.',
+      'DeprecationWarning',
+    );
     this._log.info('resolveAppConnections iterate %j', request);
     return this.descriptors.page.resolveAppConnections.asyncIterate(
       this.innerApiCalls['resolveAppConnections'] as GaxCall,
@@ -2430,14 +2538,14 @@ export class AppConnectionsServiceClient {
    */
   close(): Promise<void> {
     if (this.appConnectionsServiceStub && !this._terminated) {
-      return this.appConnectionsServiceStub.then((stub) => {
+      return this.appConnectionsServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.iamClient.close().catch((err) => {
+        this.iamClient.close().catch(err => {
           throw err;
         });
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

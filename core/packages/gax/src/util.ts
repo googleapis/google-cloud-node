@@ -161,3 +161,18 @@ export const decodeAnyProtosInArray = (
   }
   return protoListDecoded;
 };
+
+/**
+ * Standard or infrastructure tokens in the x-goog-api-client header that should
+ * be ignored when resolving the client artifact/package name.
+ */
+export const ignoredClientHeaderTokens = [
+  'gl-node',
+  'gl-web',
+  'grpc',
+  'rest',
+  'gax',
+  'auth',
+  'gapic',
+  'gccl',
+];

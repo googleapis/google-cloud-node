@@ -6,5 +6,7 @@
   "../../protos/google/cloud/support/v2/case_service.proto",
   "../../protos/google/cloud/support/v2/comment.proto",
   "../../protos/google/cloud/support/v2/comment_service.proto",
-  "../../protos/google/cloud/support/v2/escalation.proto"
+  "../../protos/google/cloud/support/v2/escalation.proto",
+  "../../protos/google/cloud/support/v2/support_event_subscription.proto",
+  "../../protos/google/cloud/support/v2/support_event_subscription_service.proto"
 ]

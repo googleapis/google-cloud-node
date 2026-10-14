@@ -199,6 +199,160 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteParameterVersion(request: google.cloud.parametermanager.v1.IDeleteParameterVersionRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListTemplates.
+                     * @param request ListTemplatesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListTemplatesResponse
+                     */
+                    public listTemplates(request: google.cloud.parametermanager.v1.IListTemplatesRequest, callback: google.cloud.parametermanager.v1.ParameterManager.ListTemplatesCallback): void;
+
+                    /**
+                     * Calls ListTemplates.
+                     * @param request ListTemplatesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listTemplates(request: google.cloud.parametermanager.v1.IListTemplatesRequest): Promise<google.cloud.parametermanager.v1.ListTemplatesResponse>;
+
+                    /**
+                     * Calls GetTemplate.
+                     * @param request GetTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Template
+                     */
+                    public getTemplate(request: google.cloud.parametermanager.v1.IGetTemplateRequest, callback: google.cloud.parametermanager.v1.ParameterManager.GetTemplateCallback): void;
+
+                    /**
+                     * Calls GetTemplate.
+                     * @param request GetTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getTemplate(request: google.cloud.parametermanager.v1.IGetTemplateRequest): Promise<google.cloud.parametermanager.v1.Template>;
+
+                    /**
+                     * Calls CreateTemplate.
+                     * @param request CreateTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Template
+                     */
+                    public createTemplate(request: google.cloud.parametermanager.v1.ICreateTemplateRequest, callback: google.cloud.parametermanager.v1.ParameterManager.CreateTemplateCallback): void;
+
+                    /**
+                     * Calls CreateTemplate.
+                     * @param request CreateTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createTemplate(request: google.cloud.parametermanager.v1.ICreateTemplateRequest): Promise<google.cloud.parametermanager.v1.Template>;
+
+                    /**
+                     * Calls UpdateTemplate.
+                     * @param request UpdateTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Template
+                     */
+                    public updateTemplate(request: google.cloud.parametermanager.v1.IUpdateTemplateRequest, callback: google.cloud.parametermanager.v1.ParameterManager.UpdateTemplateCallback): void;
+
+                    /**
+                     * Calls UpdateTemplate.
+                     * @param request UpdateTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateTemplate(request: google.cloud.parametermanager.v1.IUpdateTemplateRequest): Promise<google.cloud.parametermanager.v1.Template>;
+
+                    /**
+                     * Calls DeleteTemplate.
+                     * @param request DeleteTemplateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteTemplate(request: google.cloud.parametermanager.v1.IDeleteTemplateRequest, callback: google.cloud.parametermanager.v1.ParameterManager.DeleteTemplateCallback): void;
+
+                    /**
+                     * Calls DeleteTemplate.
+                     * @param request DeleteTemplateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteTemplate(request: google.cloud.parametermanager.v1.IDeleteTemplateRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls ListTemplateVersions.
+                     * @param request ListTemplateVersionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListTemplateVersionsResponse
+                     */
+                    public listTemplateVersions(request: google.cloud.parametermanager.v1.IListTemplateVersionsRequest, callback: google.cloud.parametermanager.v1.ParameterManager.ListTemplateVersionsCallback): void;
+
+                    /**
+                     * Calls ListTemplateVersions.
+                     * @param request ListTemplateVersionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listTemplateVersions(request: google.cloud.parametermanager.v1.IListTemplateVersionsRequest): Promise<google.cloud.parametermanager.v1.ListTemplateVersionsResponse>;
+
+                    /**
+                     * Calls GetTemplateVersion.
+                     * @param request GetTemplateVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TemplateVersion
+                     */
+                    public getTemplateVersion(request: google.cloud.parametermanager.v1.IGetTemplateVersionRequest, callback: google.cloud.parametermanager.v1.ParameterManager.GetTemplateVersionCallback): void;
+
+                    /**
+                     * Calls GetTemplateVersion.
+                     * @param request GetTemplateVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getTemplateVersion(request: google.cloud.parametermanager.v1.IGetTemplateVersionRequest): Promise<google.cloud.parametermanager.v1.TemplateVersion>;
+
+                    /**
+                     * Calls CreateTemplateVersion.
+                     * @param request CreateTemplateVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TemplateVersion
+                     */
+                    public createTemplateVersion(request: google.cloud.parametermanager.v1.ICreateTemplateVersionRequest, callback: google.cloud.parametermanager.v1.ParameterManager.CreateTemplateVersionCallback): void;
+
+                    /**
+                     * Calls CreateTemplateVersion.
+                     * @param request CreateTemplateVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createTemplateVersion(request: google.cloud.parametermanager.v1.ICreateTemplateVersionRequest): Promise<google.cloud.parametermanager.v1.TemplateVersion>;
+
+                    /**
+                     * Calls UpdateTemplateVersion.
+                     * @param request UpdateTemplateVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TemplateVersion
+                     */
+                    public updateTemplateVersion(request: google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest, callback: google.cloud.parametermanager.v1.ParameterManager.UpdateTemplateVersionCallback): void;
+
+                    /**
+                     * Calls UpdateTemplateVersion.
+                     * @param request UpdateTemplateVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateTemplateVersion(request: google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest): Promise<google.cloud.parametermanager.v1.TemplateVersion>;
+
+                    /**
+                     * Calls DeleteTemplateVersion.
+                     * @param request DeleteTemplateVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteTemplateVersion(request: google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest, callback: google.cloud.parametermanager.v1.ParameterManager.DeleteTemplateVersionCallback): void;
+
+                    /**
+                     * Calls DeleteTemplateVersion.
+                     * @param request DeleteTemplateVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteTemplateVersion(request: google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls RenderTemplateVersion.
+                     * @param request RenderTemplateVersionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RenderTemplateVersionResponse
+                     */
+                    public renderTemplateVersion(request: google.cloud.parametermanager.v1.IRenderTemplateVersionRequest, callback: google.cloud.parametermanager.v1.ParameterManager.RenderTemplateVersionCallback): void;
+
+                    /**
+                     * Calls RenderTemplateVersion.
+                     * @param request RenderTemplateVersionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public renderTemplateVersion(request: google.cloud.parametermanager.v1.IRenderTemplateVersionRequest): Promise<google.cloud.parametermanager.v1.RenderTemplateVersionResponse>;
                 }
 
                 namespace ParameterManager {
@@ -279,6 +433,83 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteParameterVersionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parametermanager.v1.ParameterManager|listTemplates}.
+                     * @param error Error, if any
+                     * @param [response] ListTemplatesResponse
+                     */
+                    type ListTemplatesCallback = (error: (Error|null), response?: google.cloud.parametermanager.v1.ListTemplatesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parametermanager.v1.ParameterManager|getTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Template
+                     */
+                    type GetTemplateCallback = (error: (Error|null), response?: google.cloud.parametermanager.v1.Template) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parametermanager.v1.ParameterManager|createTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Template
+                     */
+                    type CreateTemplateCallback = (error: (Error|null), response?: google.cloud.parametermanager.v1.Template) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parametermanager.v1.ParameterManager|updateTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Template
+                     */
+                    type UpdateTemplateCallback = (error: (Error|null), response?: google.cloud.parametermanager.v1.Template) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parametermanager.v1.ParameterManager|deleteTemplate}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteTemplateCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parametermanager.v1.ParameterManager|listTemplateVersions}.
+                     * @param error Error, if any
+                     * @param [response] ListTemplateVersionsResponse
+                     */
+                    type ListTemplateVersionsCallback = (error: (Error|null), response?: google.cloud.parametermanager.v1.ListTemplateVersionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parametermanager.v1.ParameterManager|getTemplateVersion}.
+                     * @param error Error, if any
+                     * @param [response] TemplateVersion
+                     */
+                    type GetTemplateVersionCallback = (error: (Error|null), response?: google.cloud.parametermanager.v1.TemplateVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parametermanager.v1.ParameterManager|createTemplateVersion}.
+                     * @param error Error, if any
+                     * @param [response] TemplateVersion
+                     */
+                    type CreateTemplateVersionCallback = (error: (Error|null), response?: google.cloud.parametermanager.v1.TemplateVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parametermanager.v1.ParameterManager|updateTemplateVersion}.
+                     * @param error Error, if any
+                     * @param [response] TemplateVersion
+                     */
+                    type UpdateTemplateVersionCallback = (error: (Error|null), response?: google.cloud.parametermanager.v1.TemplateVersion) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parametermanager.v1.ParameterManager|deleteTemplateVersion}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteTemplateVersionCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.parametermanager.v1.ParameterManager|renderTemplateVersion}.
+                     * @param error Error, if any
+                     * @param [response] RenderTemplateVersionResponse
+                     */
+                    type RenderTemplateVersionCallback = (error: (Error|null), response?: google.cloud.parametermanager.v1.RenderTemplateVersionResponse) => void;
                 }
 
                 /** ParameterFormat enum. */
@@ -287,6 +518,13 @@ export namespace google {
                     UNFORMATTED = 1,
                     YAML = 2,
                     JSON = 3
+                }
+
+                /** TemplateFormat enum. */
+                enum TemplateFormat {
+                    TEMPLATE_FORMAT_UNSPECIFIED = 0,
+                    TEMPLATE_FORMAT_YAML = 1,
+                    TEMPLATE_FORMAT_JSON = 2
                 }
 
                 /** View enum. */
@@ -319,6 +557,9 @@ export namespace google {
 
                     /** Parameter kmsKey */
                     kmsKey?: (string|null);
+
+                    /** Parameter tags */
+                    tags?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a Parameter. */
@@ -350,6 +591,9 @@ export namespace google {
 
                     /** Parameter kmsKey. */
                     public kmsKey?: (string|null);
+
+                    /** Parameter tags. */
+                    public tags: { [k: string]: string };
 
                     /**
                      * Creates a new Parameter instance using the specified properties.
@@ -1103,6 +1347,9 @@ export namespace google {
 
                     /** ParameterVersion kmsKeyVersion */
                     kmsKeyVersion?: (string|null);
+
+                    /** ParameterVersion checksumSource */
+                    checksumSource?: (google.cloud.parametermanager.v1.ParameterVersion.ChecksumSource|keyof typeof google.cloud.parametermanager.v1.ParameterVersion.ChecksumSource|null);
                 }
 
                 /** Represents a ParameterVersion. */
@@ -1131,6 +1378,9 @@ export namespace google {
 
                     /** ParameterVersion kmsKeyVersion. */
                     public kmsKeyVersion?: (string|null);
+
+                    /** ParameterVersion checksumSource. */
+                    public checksumSource?: (google.cloud.parametermanager.v1.ParameterVersion.ChecksumSource|keyof typeof google.cloud.parametermanager.v1.ParameterVersion.ChecksumSource|null);
 
                     /**
                      * Creates a new ParameterVersion instance using the specified properties.
@@ -1210,11 +1460,24 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                namespace ParameterVersion {
+
+                    /** ChecksumSource enum. */
+                    enum ChecksumSource {
+                        CHECKSUM_SOURCE_UNSPECIFIED = 0,
+                        SERVER_GENERATED = 1,
+                        USER_SPECIFIED = 2
+                    }
+                }
+
                 /** Properties of a ParameterVersionPayload. */
                 interface IParameterVersionPayload {
 
                     /** ParameterVersionPayload data */
                     data?: (Uint8Array|Buffer|string|null);
+
+                    /** ParameterVersionPayload dataCrc32c */
+                    dataCrc32c?: (number|Long|string|null);
                 }
 
                 /** Represents a ParameterVersionPayload. */
@@ -1228,6 +1491,9 @@ export namespace google {
 
                     /** ParameterVersionPayload data. */
                     public data: (Uint8Array|Buffer|string);
+
+                    /** ParameterVersionPayload dataCrc32c. */
+                    public dataCrc32c?: (number|Long|string|null);
 
                     /**
                      * Creates a new ParameterVersionPayload instance using the specified properties.
@@ -2172,6 +2438,1883 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Properties of a Template. */
+                interface ITemplate {
+
+                    /** Template name */
+                    name?: (string|null);
+
+                    /** Template createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Template updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Template labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Template format */
+                    format?: (google.cloud.parametermanager.v1.TemplateFormat|keyof typeof google.cloud.parametermanager.v1.TemplateFormat|null);
+                }
+
+                /** Represents a Template. */
+                class Template implements ITemplate {
+
+                    /**
+                     * Constructs a new Template.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.ITemplate);
+
+                    /** Template name. */
+                    public name: string;
+
+                    /** Template createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Template updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Template labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Template format. */
+                    public format: (google.cloud.parametermanager.v1.TemplateFormat|keyof typeof google.cloud.parametermanager.v1.TemplateFormat);
+
+                    /**
+                     * Creates a new Template instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Template instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.ITemplate): google.cloud.parametermanager.v1.Template;
+
+                    /**
+                     * Encodes the specified Template message. Does not implicitly {@link google.cloud.parametermanager.v1.Template.verify|verify} messages.
+                     * @param message Template message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.ITemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Template message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.Template.verify|verify} messages.
+                     * @param message Template message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.ITemplate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Template message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Template
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.Template;
+
+                    /**
+                     * Decodes a Template message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Template
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.Template;
+
+                    /**
+                     * Verifies a Template message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Template message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Template
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.Template;
+
+                    /**
+                     * Creates a plain object from a Template message. Also converts values to other types if specified.
+                     * @param message Template
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.Template, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Template to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Template
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListTemplatesRequest. */
+                interface IListTemplatesRequest {
+
+                    /** ListTemplatesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListTemplatesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListTemplatesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListTemplatesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListTemplatesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListTemplatesRequest. */
+                class ListTemplatesRequest implements IListTemplatesRequest {
+
+                    /**
+                     * Constructs a new ListTemplatesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.IListTemplatesRequest);
+
+                    /** ListTemplatesRequest parent. */
+                    public parent: string;
+
+                    /** ListTemplatesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListTemplatesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListTemplatesRequest filter. */
+                    public filter: string;
+
+                    /** ListTemplatesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListTemplatesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTemplatesRequest instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.IListTemplatesRequest): google.cloud.parametermanager.v1.ListTemplatesRequest;
+
+                    /**
+                     * Encodes the specified ListTemplatesRequest message. Does not implicitly {@link google.cloud.parametermanager.v1.ListTemplatesRequest.verify|verify} messages.
+                     * @param message ListTemplatesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.IListTemplatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTemplatesRequest message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.ListTemplatesRequest.verify|verify} messages.
+                     * @param message ListTemplatesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.IListTemplatesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTemplatesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTemplatesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.ListTemplatesRequest;
+
+                    /**
+                     * Decodes a ListTemplatesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTemplatesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.ListTemplatesRequest;
+
+                    /**
+                     * Verifies a ListTemplatesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTemplatesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTemplatesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.ListTemplatesRequest;
+
+                    /**
+                     * Creates a plain object from a ListTemplatesRequest message. Also converts values to other types if specified.
+                     * @param message ListTemplatesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.ListTemplatesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTemplatesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTemplatesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListTemplatesResponse. */
+                interface IListTemplatesResponse {
+
+                    /** ListTemplatesResponse templates */
+                    templates?: (google.cloud.parametermanager.v1.ITemplate[]|null);
+
+                    /** ListTemplatesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListTemplatesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListTemplatesResponse. */
+                class ListTemplatesResponse implements IListTemplatesResponse {
+
+                    /**
+                     * Constructs a new ListTemplatesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.IListTemplatesResponse);
+
+                    /** ListTemplatesResponse templates. */
+                    public templates: google.cloud.parametermanager.v1.ITemplate[];
+
+                    /** ListTemplatesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListTemplatesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListTemplatesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTemplatesResponse instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.IListTemplatesResponse): google.cloud.parametermanager.v1.ListTemplatesResponse;
+
+                    /**
+                     * Encodes the specified ListTemplatesResponse message. Does not implicitly {@link google.cloud.parametermanager.v1.ListTemplatesResponse.verify|verify} messages.
+                     * @param message ListTemplatesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.IListTemplatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTemplatesResponse message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.ListTemplatesResponse.verify|verify} messages.
+                     * @param message ListTemplatesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.IListTemplatesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTemplatesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTemplatesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.ListTemplatesResponse;
+
+                    /**
+                     * Decodes a ListTemplatesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTemplatesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.ListTemplatesResponse;
+
+                    /**
+                     * Verifies a ListTemplatesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTemplatesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTemplatesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.ListTemplatesResponse;
+
+                    /**
+                     * Creates a plain object from a ListTemplatesResponse message. Also converts values to other types if specified.
+                     * @param message ListTemplatesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.ListTemplatesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTemplatesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTemplatesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetTemplateRequest. */
+                interface IGetTemplateRequest {
+
+                    /** GetTemplateRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetTemplateRequest. */
+                class GetTemplateRequest implements IGetTemplateRequest {
+
+                    /**
+                     * Constructs a new GetTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.IGetTemplateRequest);
+
+                    /** GetTemplateRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.IGetTemplateRequest): google.cloud.parametermanager.v1.GetTemplateRequest;
+
+                    /**
+                     * Encodes the specified GetTemplateRequest message. Does not implicitly {@link google.cloud.parametermanager.v1.GetTemplateRequest.verify|verify} messages.
+                     * @param message GetTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.IGetTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.GetTemplateRequest.verify|verify} messages.
+                     * @param message GetTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.IGetTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.GetTemplateRequest;
+
+                    /**
+                     * Decodes a GetTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.GetTemplateRequest;
+
+                    /**
+                     * Verifies a GetTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.GetTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a GetTemplateRequest message. Also converts values to other types if specified.
+                     * @param message GetTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.GetTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateTemplateRequest. */
+                interface ICreateTemplateRequest {
+
+                    /** CreateTemplateRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateTemplateRequest templateId */
+                    templateId?: (string|null);
+
+                    /** CreateTemplateRequest template */
+                    template?: (google.cloud.parametermanager.v1.ITemplate|null);
+
+                    /** CreateTemplateRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateTemplateRequest. */
+                class CreateTemplateRequest implements ICreateTemplateRequest {
+
+                    /**
+                     * Constructs a new CreateTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.ICreateTemplateRequest);
+
+                    /** CreateTemplateRequest parent. */
+                    public parent: string;
+
+                    /** CreateTemplateRequest templateId. */
+                    public templateId: string;
+
+                    /** CreateTemplateRequest template. */
+                    public template?: (google.cloud.parametermanager.v1.ITemplate|null);
+
+                    /** CreateTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.ICreateTemplateRequest): google.cloud.parametermanager.v1.CreateTemplateRequest;
+
+                    /**
+                     * Encodes the specified CreateTemplateRequest message. Does not implicitly {@link google.cloud.parametermanager.v1.CreateTemplateRequest.verify|verify} messages.
+                     * @param message CreateTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.ICreateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.CreateTemplateRequest.verify|verify} messages.
+                     * @param message CreateTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.ICreateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.CreateTemplateRequest;
+
+                    /**
+                     * Decodes a CreateTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.CreateTemplateRequest;
+
+                    /**
+                     * Verifies a CreateTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.CreateTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a CreateTemplateRequest message. Also converts values to other types if specified.
+                     * @param message CreateTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.CreateTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateTemplateRequest. */
+                interface IUpdateTemplateRequest {
+
+                    /** UpdateTemplateRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateTemplateRequest template */
+                    template?: (google.cloud.parametermanager.v1.ITemplate|null);
+
+                    /** UpdateTemplateRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateTemplateRequest. */
+                class UpdateTemplateRequest implements IUpdateTemplateRequest {
+
+                    /**
+                     * Constructs a new UpdateTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.IUpdateTemplateRequest);
+
+                    /** UpdateTemplateRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateTemplateRequest template. */
+                    public template?: (google.cloud.parametermanager.v1.ITemplate|null);
+
+                    /** UpdateTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.IUpdateTemplateRequest): google.cloud.parametermanager.v1.UpdateTemplateRequest;
+
+                    /**
+                     * Encodes the specified UpdateTemplateRequest message. Does not implicitly {@link google.cloud.parametermanager.v1.UpdateTemplateRequest.verify|verify} messages.
+                     * @param message UpdateTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.IUpdateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.UpdateTemplateRequest.verify|verify} messages.
+                     * @param message UpdateTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.IUpdateTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.UpdateTemplateRequest;
+
+                    /**
+                     * Decodes an UpdateTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.UpdateTemplateRequest;
+
+                    /**
+                     * Verifies an UpdateTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.UpdateTemplateRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateTemplateRequest message. Also converts values to other types if specified.
+                     * @param message UpdateTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.UpdateTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteTemplateRequest. */
+                interface IDeleteTemplateRequest {
+
+                    /** DeleteTemplateRequest name */
+                    name?: (string|null);
+
+                    /** DeleteTemplateRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteTemplateRequest. */
+                class DeleteTemplateRequest implements IDeleteTemplateRequest {
+
+                    /**
+                     * Constructs a new DeleteTemplateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.IDeleteTemplateRequest);
+
+                    /** DeleteTemplateRequest name. */
+                    public name: string;
+
+                    /** DeleteTemplateRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteTemplateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteTemplateRequest instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.IDeleteTemplateRequest): google.cloud.parametermanager.v1.DeleteTemplateRequest;
+
+                    /**
+                     * Encodes the specified DeleteTemplateRequest message. Does not implicitly {@link google.cloud.parametermanager.v1.DeleteTemplateRequest.verify|verify} messages.
+                     * @param message DeleteTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.IDeleteTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteTemplateRequest message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.DeleteTemplateRequest.verify|verify} messages.
+                     * @param message DeleteTemplateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.IDeleteTemplateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteTemplateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.DeleteTemplateRequest;
+
+                    /**
+                     * Decodes a DeleteTemplateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteTemplateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.DeleteTemplateRequest;
+
+                    /**
+                     * Verifies a DeleteTemplateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteTemplateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteTemplateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.DeleteTemplateRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteTemplateRequest message. Also converts values to other types if specified.
+                     * @param message DeleteTemplateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.DeleteTemplateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteTemplateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteTemplateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TemplateVersion. */
+                interface ITemplateVersion {
+
+                    /** TemplateVersion name */
+                    name?: (string|null);
+
+                    /** TemplateVersion createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TemplateVersion updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TemplateVersion disabled */
+                    disabled?: (boolean|null);
+
+                    /** TemplateVersion payload */
+                    payload?: (google.cloud.parametermanager.v1.ITemplateVersionPayload|null);
+                }
+
+                /** Represents a TemplateVersion. */
+                class TemplateVersion implements ITemplateVersion {
+
+                    /**
+                     * Constructs a new TemplateVersion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.ITemplateVersion);
+
+                    /** TemplateVersion name. */
+                    public name: string;
+
+                    /** TemplateVersion createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TemplateVersion updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TemplateVersion disabled. */
+                    public disabled: boolean;
+
+                    /** TemplateVersion payload. */
+                    public payload?: (google.cloud.parametermanager.v1.ITemplateVersionPayload|null);
+
+                    /**
+                     * Creates a new TemplateVersion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TemplateVersion instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.ITemplateVersion): google.cloud.parametermanager.v1.TemplateVersion;
+
+                    /**
+                     * Encodes the specified TemplateVersion message. Does not implicitly {@link google.cloud.parametermanager.v1.TemplateVersion.verify|verify} messages.
+                     * @param message TemplateVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.ITemplateVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TemplateVersion message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.TemplateVersion.verify|verify} messages.
+                     * @param message TemplateVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.ITemplateVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TemplateVersion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TemplateVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.TemplateVersion;
+
+                    /**
+                     * Decodes a TemplateVersion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TemplateVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.TemplateVersion;
+
+                    /**
+                     * Verifies a TemplateVersion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TemplateVersion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TemplateVersion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.TemplateVersion;
+
+                    /**
+                     * Creates a plain object from a TemplateVersion message. Also converts values to other types if specified.
+                     * @param message TemplateVersion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.TemplateVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TemplateVersion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TemplateVersion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TemplateVersionPayload. */
+                interface ITemplateVersionPayload {
+
+                    /** TemplateVersionPayload data */
+                    data?: (Uint8Array|Buffer|string|null);
+                }
+
+                /** Represents a TemplateVersionPayload. */
+                class TemplateVersionPayload implements ITemplateVersionPayload {
+
+                    /**
+                     * Constructs a new TemplateVersionPayload.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.ITemplateVersionPayload);
+
+                    /** TemplateVersionPayload data. */
+                    public data: (Uint8Array|Buffer|string);
+
+                    /**
+                     * Creates a new TemplateVersionPayload instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TemplateVersionPayload instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.ITemplateVersionPayload): google.cloud.parametermanager.v1.TemplateVersionPayload;
+
+                    /**
+                     * Encodes the specified TemplateVersionPayload message. Does not implicitly {@link google.cloud.parametermanager.v1.TemplateVersionPayload.verify|verify} messages.
+                     * @param message TemplateVersionPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.ITemplateVersionPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TemplateVersionPayload message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.TemplateVersionPayload.verify|verify} messages.
+                     * @param message TemplateVersionPayload message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.ITemplateVersionPayload, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TemplateVersionPayload message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TemplateVersionPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.TemplateVersionPayload;
+
+                    /**
+                     * Decodes a TemplateVersionPayload message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TemplateVersionPayload
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.TemplateVersionPayload;
+
+                    /**
+                     * Verifies a TemplateVersionPayload message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TemplateVersionPayload message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TemplateVersionPayload
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.TemplateVersionPayload;
+
+                    /**
+                     * Creates a plain object from a TemplateVersionPayload message. Also converts values to other types if specified.
+                     * @param message TemplateVersionPayload
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.TemplateVersionPayload, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TemplateVersionPayload to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TemplateVersionPayload
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListTemplateVersionsRequest. */
+                interface IListTemplateVersionsRequest {
+
+                    /** ListTemplateVersionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListTemplateVersionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListTemplateVersionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListTemplateVersionsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListTemplateVersionsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListTemplateVersionsRequest. */
+                class ListTemplateVersionsRequest implements IListTemplateVersionsRequest {
+
+                    /**
+                     * Constructs a new ListTemplateVersionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.IListTemplateVersionsRequest);
+
+                    /** ListTemplateVersionsRequest parent. */
+                    public parent: string;
+
+                    /** ListTemplateVersionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListTemplateVersionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListTemplateVersionsRequest filter. */
+                    public filter: string;
+
+                    /** ListTemplateVersionsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListTemplateVersionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTemplateVersionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.IListTemplateVersionsRequest): google.cloud.parametermanager.v1.ListTemplateVersionsRequest;
+
+                    /**
+                     * Encodes the specified ListTemplateVersionsRequest message. Does not implicitly {@link google.cloud.parametermanager.v1.ListTemplateVersionsRequest.verify|verify} messages.
+                     * @param message ListTemplateVersionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.IListTemplateVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTemplateVersionsRequest message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.ListTemplateVersionsRequest.verify|verify} messages.
+                     * @param message ListTemplateVersionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.IListTemplateVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTemplateVersionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTemplateVersionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.ListTemplateVersionsRequest;
+
+                    /**
+                     * Decodes a ListTemplateVersionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTemplateVersionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.ListTemplateVersionsRequest;
+
+                    /**
+                     * Verifies a ListTemplateVersionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTemplateVersionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTemplateVersionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.ListTemplateVersionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListTemplateVersionsRequest message. Also converts values to other types if specified.
+                     * @param message ListTemplateVersionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.ListTemplateVersionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTemplateVersionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTemplateVersionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListTemplateVersionsResponse. */
+                interface IListTemplateVersionsResponse {
+
+                    /** ListTemplateVersionsResponse templateVersions */
+                    templateVersions?: (google.cloud.parametermanager.v1.ITemplateVersion[]|null);
+
+                    /** ListTemplateVersionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListTemplateVersionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListTemplateVersionsResponse. */
+                class ListTemplateVersionsResponse implements IListTemplateVersionsResponse {
+
+                    /**
+                     * Constructs a new ListTemplateVersionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.IListTemplateVersionsResponse);
+
+                    /** ListTemplateVersionsResponse templateVersions. */
+                    public templateVersions: google.cloud.parametermanager.v1.ITemplateVersion[];
+
+                    /** ListTemplateVersionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListTemplateVersionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListTemplateVersionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListTemplateVersionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.IListTemplateVersionsResponse): google.cloud.parametermanager.v1.ListTemplateVersionsResponse;
+
+                    /**
+                     * Encodes the specified ListTemplateVersionsResponse message. Does not implicitly {@link google.cloud.parametermanager.v1.ListTemplateVersionsResponse.verify|verify} messages.
+                     * @param message ListTemplateVersionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.IListTemplateVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListTemplateVersionsResponse message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.ListTemplateVersionsResponse.verify|verify} messages.
+                     * @param message ListTemplateVersionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.IListTemplateVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListTemplateVersionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListTemplateVersionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.ListTemplateVersionsResponse;
+
+                    /**
+                     * Decodes a ListTemplateVersionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListTemplateVersionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.ListTemplateVersionsResponse;
+
+                    /**
+                     * Verifies a ListTemplateVersionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListTemplateVersionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListTemplateVersionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.ListTemplateVersionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListTemplateVersionsResponse message. Also converts values to other types if specified.
+                     * @param message ListTemplateVersionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.ListTemplateVersionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListTemplateVersionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListTemplateVersionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetTemplateVersionRequest. */
+                interface IGetTemplateVersionRequest {
+
+                    /** GetTemplateVersionRequest name */
+                    name?: (string|null);
+
+                    /** GetTemplateVersionRequest view */
+                    view?: (google.cloud.parametermanager.v1.View|keyof typeof google.cloud.parametermanager.v1.View|null);
+                }
+
+                /** Represents a GetTemplateVersionRequest. */
+                class GetTemplateVersionRequest implements IGetTemplateVersionRequest {
+
+                    /**
+                     * Constructs a new GetTemplateVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.IGetTemplateVersionRequest);
+
+                    /** GetTemplateVersionRequest name. */
+                    public name: string;
+
+                    /** GetTemplateVersionRequest view. */
+                    public view: (google.cloud.parametermanager.v1.View|keyof typeof google.cloud.parametermanager.v1.View);
+
+                    /**
+                     * Creates a new GetTemplateVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetTemplateVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.IGetTemplateVersionRequest): google.cloud.parametermanager.v1.GetTemplateVersionRequest;
+
+                    /**
+                     * Encodes the specified GetTemplateVersionRequest message. Does not implicitly {@link google.cloud.parametermanager.v1.GetTemplateVersionRequest.verify|verify} messages.
+                     * @param message GetTemplateVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.IGetTemplateVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetTemplateVersionRequest message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.GetTemplateVersionRequest.verify|verify} messages.
+                     * @param message GetTemplateVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.IGetTemplateVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetTemplateVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetTemplateVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.GetTemplateVersionRequest;
+
+                    /**
+                     * Decodes a GetTemplateVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetTemplateVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.GetTemplateVersionRequest;
+
+                    /**
+                     * Verifies a GetTemplateVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetTemplateVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetTemplateVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.GetTemplateVersionRequest;
+
+                    /**
+                     * Creates a plain object from a GetTemplateVersionRequest message. Also converts values to other types if specified.
+                     * @param message GetTemplateVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.GetTemplateVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetTemplateVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetTemplateVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateTemplateVersionRequest. */
+                interface ICreateTemplateVersionRequest {
+
+                    /** CreateTemplateVersionRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateTemplateVersionRequest templateVersionId */
+                    templateVersionId?: (string|null);
+
+                    /** CreateTemplateVersionRequest templateVersion */
+                    templateVersion?: (google.cloud.parametermanager.v1.ITemplateVersion|null);
+
+                    /** CreateTemplateVersionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateTemplateVersionRequest. */
+                class CreateTemplateVersionRequest implements ICreateTemplateVersionRequest {
+
+                    /**
+                     * Constructs a new CreateTemplateVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.ICreateTemplateVersionRequest);
+
+                    /** CreateTemplateVersionRequest parent. */
+                    public parent: string;
+
+                    /** CreateTemplateVersionRequest templateVersionId. */
+                    public templateVersionId: string;
+
+                    /** CreateTemplateVersionRequest templateVersion. */
+                    public templateVersion?: (google.cloud.parametermanager.v1.ITemplateVersion|null);
+
+                    /** CreateTemplateVersionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateTemplateVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateTemplateVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.ICreateTemplateVersionRequest): google.cloud.parametermanager.v1.CreateTemplateVersionRequest;
+
+                    /**
+                     * Encodes the specified CreateTemplateVersionRequest message. Does not implicitly {@link google.cloud.parametermanager.v1.CreateTemplateVersionRequest.verify|verify} messages.
+                     * @param message CreateTemplateVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.ICreateTemplateVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateTemplateVersionRequest message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.CreateTemplateVersionRequest.verify|verify} messages.
+                     * @param message CreateTemplateVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.ICreateTemplateVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateTemplateVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateTemplateVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.CreateTemplateVersionRequest;
+
+                    /**
+                     * Decodes a CreateTemplateVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateTemplateVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.CreateTemplateVersionRequest;
+
+                    /**
+                     * Verifies a CreateTemplateVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateTemplateVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateTemplateVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.CreateTemplateVersionRequest;
+
+                    /**
+                     * Creates a plain object from a CreateTemplateVersionRequest message. Also converts values to other types if specified.
+                     * @param message CreateTemplateVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.CreateTemplateVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateTemplateVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateTemplateVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateTemplateVersionRequest. */
+                interface IUpdateTemplateVersionRequest {
+
+                    /** UpdateTemplateVersionRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateTemplateVersionRequest templateVersion */
+                    templateVersion?: (google.cloud.parametermanager.v1.ITemplateVersion|null);
+
+                    /** UpdateTemplateVersionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateTemplateVersionRequest. */
+                class UpdateTemplateVersionRequest implements IUpdateTemplateVersionRequest {
+
+                    /**
+                     * Constructs a new UpdateTemplateVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest);
+
+                    /** UpdateTemplateVersionRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateTemplateVersionRequest templateVersion. */
+                    public templateVersion?: (google.cloud.parametermanager.v1.ITemplateVersion|null);
+
+                    /** UpdateTemplateVersionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateTemplateVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateTemplateVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest): google.cloud.parametermanager.v1.UpdateTemplateVersionRequest;
+
+                    /**
+                     * Encodes the specified UpdateTemplateVersionRequest message. Does not implicitly {@link google.cloud.parametermanager.v1.UpdateTemplateVersionRequest.verify|verify} messages.
+                     * @param message UpdateTemplateVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateTemplateVersionRequest message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.UpdateTemplateVersionRequest.verify|verify} messages.
+                     * @param message UpdateTemplateVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.IUpdateTemplateVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateTemplateVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateTemplateVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.UpdateTemplateVersionRequest;
+
+                    /**
+                     * Decodes an UpdateTemplateVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateTemplateVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.UpdateTemplateVersionRequest;
+
+                    /**
+                     * Verifies an UpdateTemplateVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateTemplateVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateTemplateVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.UpdateTemplateVersionRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateTemplateVersionRequest message. Also converts values to other types if specified.
+                     * @param message UpdateTemplateVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.UpdateTemplateVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateTemplateVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateTemplateVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteTemplateVersionRequest. */
+                interface IDeleteTemplateVersionRequest {
+
+                    /** DeleteTemplateVersionRequest name */
+                    name?: (string|null);
+
+                    /** DeleteTemplateVersionRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteTemplateVersionRequest. */
+                class DeleteTemplateVersionRequest implements IDeleteTemplateVersionRequest {
+
+                    /**
+                     * Constructs a new DeleteTemplateVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest);
+
+                    /** DeleteTemplateVersionRequest name. */
+                    public name: string;
+
+                    /** DeleteTemplateVersionRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteTemplateVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteTemplateVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest): google.cloud.parametermanager.v1.DeleteTemplateVersionRequest;
+
+                    /**
+                     * Encodes the specified DeleteTemplateVersionRequest message. Does not implicitly {@link google.cloud.parametermanager.v1.DeleteTemplateVersionRequest.verify|verify} messages.
+                     * @param message DeleteTemplateVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteTemplateVersionRequest message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.DeleteTemplateVersionRequest.verify|verify} messages.
+                     * @param message DeleteTemplateVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.IDeleteTemplateVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteTemplateVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteTemplateVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.DeleteTemplateVersionRequest;
+
+                    /**
+                     * Decodes a DeleteTemplateVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteTemplateVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.DeleteTemplateVersionRequest;
+
+                    /**
+                     * Verifies a DeleteTemplateVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteTemplateVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteTemplateVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.DeleteTemplateVersionRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteTemplateVersionRequest message. Also converts values to other types if specified.
+                     * @param message DeleteTemplateVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.DeleteTemplateVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteTemplateVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteTemplateVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RenderTemplateVersionRequest. */
+                interface IRenderTemplateVersionRequest {
+
+                    /** RenderTemplateVersionRequest name */
+                    name?: (string|null);
+
+                    /** RenderTemplateVersionRequest parameterVersion */
+                    parameterVersion?: (string|null);
+                }
+
+                /** Represents a RenderTemplateVersionRequest. */
+                class RenderTemplateVersionRequest implements IRenderTemplateVersionRequest {
+
+                    /**
+                     * Constructs a new RenderTemplateVersionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.IRenderTemplateVersionRequest);
+
+                    /** RenderTemplateVersionRequest name. */
+                    public name: string;
+
+                    /** RenderTemplateVersionRequest parameterVersion. */
+                    public parameterVersion: string;
+
+                    /**
+                     * Creates a new RenderTemplateVersionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RenderTemplateVersionRequest instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.IRenderTemplateVersionRequest): google.cloud.parametermanager.v1.RenderTemplateVersionRequest;
+
+                    /**
+                     * Encodes the specified RenderTemplateVersionRequest message. Does not implicitly {@link google.cloud.parametermanager.v1.RenderTemplateVersionRequest.verify|verify} messages.
+                     * @param message RenderTemplateVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.IRenderTemplateVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RenderTemplateVersionRequest message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.RenderTemplateVersionRequest.verify|verify} messages.
+                     * @param message RenderTemplateVersionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.IRenderTemplateVersionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RenderTemplateVersionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RenderTemplateVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.RenderTemplateVersionRequest;
+
+                    /**
+                     * Decodes a RenderTemplateVersionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RenderTemplateVersionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.RenderTemplateVersionRequest;
+
+                    /**
+                     * Verifies a RenderTemplateVersionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RenderTemplateVersionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RenderTemplateVersionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.RenderTemplateVersionRequest;
+
+                    /**
+                     * Creates a plain object from a RenderTemplateVersionRequest message. Also converts values to other types if specified.
+                     * @param message RenderTemplateVersionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.RenderTemplateVersionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RenderTemplateVersionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RenderTemplateVersionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RenderTemplateVersionResponse. */
+                interface IRenderTemplateVersionResponse {
+
+                    /** RenderTemplateVersionResponse templateVersion */
+                    templateVersion?: (string|null);
+
+                    /** RenderTemplateVersionResponse payload */
+                    payload?: (google.cloud.parametermanager.v1.ITemplateVersionPayload|null);
+
+                    /** RenderTemplateVersionResponse renderedPayload */
+                    renderedPayload?: (Uint8Array|Buffer|string|null);
+
+                    /** RenderTemplateVersionResponse templateFormat */
+                    templateFormat?: (google.cloud.parametermanager.v1.TemplateFormat|keyof typeof google.cloud.parametermanager.v1.TemplateFormat|null);
+
+                    /** RenderTemplateVersionResponse parameterVersion */
+                    parameterVersion?: (string|null);
+                }
+
+                /** Represents a RenderTemplateVersionResponse. */
+                class RenderTemplateVersionResponse implements IRenderTemplateVersionResponse {
+
+                    /**
+                     * Constructs a new RenderTemplateVersionResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.parametermanager.v1.IRenderTemplateVersionResponse);
+
+                    /** RenderTemplateVersionResponse templateVersion. */
+                    public templateVersion: string;
+
+                    /** RenderTemplateVersionResponse payload. */
+                    public payload?: (google.cloud.parametermanager.v1.ITemplateVersionPayload|null);
+
+                    /** RenderTemplateVersionResponse renderedPayload. */
+                    public renderedPayload: (Uint8Array|Buffer|string);
+
+                    /** RenderTemplateVersionResponse templateFormat. */
+                    public templateFormat: (google.cloud.parametermanager.v1.TemplateFormat|keyof typeof google.cloud.parametermanager.v1.TemplateFormat);
+
+                    /** RenderTemplateVersionResponse parameterVersion. */
+                    public parameterVersion: string;
+
+                    /**
+                     * Creates a new RenderTemplateVersionResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RenderTemplateVersionResponse instance
+                     */
+                    public static create(properties?: google.cloud.parametermanager.v1.IRenderTemplateVersionResponse): google.cloud.parametermanager.v1.RenderTemplateVersionResponse;
+
+                    /**
+                     * Encodes the specified RenderTemplateVersionResponse message. Does not implicitly {@link google.cloud.parametermanager.v1.RenderTemplateVersionResponse.verify|verify} messages.
+                     * @param message RenderTemplateVersionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.parametermanager.v1.IRenderTemplateVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RenderTemplateVersionResponse message, length delimited. Does not implicitly {@link google.cloud.parametermanager.v1.RenderTemplateVersionResponse.verify|verify} messages.
+                     * @param message RenderTemplateVersionResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.parametermanager.v1.IRenderTemplateVersionResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RenderTemplateVersionResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RenderTemplateVersionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.parametermanager.v1.RenderTemplateVersionResponse;
+
+                    /**
+                     * Decodes a RenderTemplateVersionResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RenderTemplateVersionResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.parametermanager.v1.RenderTemplateVersionResponse;
+
+                    /**
+                     * Verifies a RenderTemplateVersionResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RenderTemplateVersionResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RenderTemplateVersionResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.parametermanager.v1.RenderTemplateVersionResponse;
+
+                    /**
+                     * Creates a plain object from a RenderTemplateVersionResponse message. Also converts values to other types if specified.
+                     * @param message RenderTemplateVersionResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.parametermanager.v1.RenderTemplateVersionResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RenderTemplateVersionResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RenderTemplateVersionResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
         }
     }
@@ -2547,6 +4690,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -2563,6 +4709,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -3167,6 +5316,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -3180,6 +5332,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -3264,6 +5419,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -3277,6 +5435,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -3354,6 +5515,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -3682,6 +5955,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -3695,6 +5971,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -3785,6 +6064,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -3804,6 +6086,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -4020,6 +6305,468 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -4050,6 +6797,9 @@ export namespace google {
 
             /** FieldInfo format */
             format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
         }
 
         /** Represents a FieldInfo. */
@@ -4063,6 +6813,9 @@ export namespace google {
 
             /** FieldInfo format. */
             public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
 
             /**
              * Creates a new FieldInfo instance using the specified properties.
@@ -4152,6 +6905,103 @@ export namespace google {
                 IPV6 = 3,
                 IPV4_OR_IPV6 = 4
             }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -4510,10 +7360,13 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -4539,6 +7392,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -4588,6 +7444,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -4723,6 +7582,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -4763,6 +7625,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -5611,6 +8476,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -5636,6 +8504,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -6571,6 +9442,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -6628,6 +9502,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -6844,6 +9721,127 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -7087,6 +10085,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -7108,6 +10109,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -7698,6 +10702,15 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -7726,6 +10739,15 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -7849,6 +10871,218 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -7968,8 +11202,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -7984,8 +11221,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -8516,6 +11756,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */

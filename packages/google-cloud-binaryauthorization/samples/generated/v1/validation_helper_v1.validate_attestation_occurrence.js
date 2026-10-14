@@ -29,16 +29,17 @@ function main(attestor, attestation, occurrenceNote, occurrenceResourceUri) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Attestor google.cloud.binaryauthorization.v1.Attestor  of the
+   *  Required. The resource name of the
+   *  Attestor google.cloud.binaryauthorization.v1.Attestor  of the
    *  occurrence grafeas.v1.Occurrence, in the format
    *  `projects/* /attestors/*`.
    */
   // const attestor = 'abc123'
   /**
    *  Required. An AttestationOccurrence grafeas.v1.AttestationOccurrence  to
-   *  be checked that it can be verified by the Attestor. It does not have to be
-   *  an existing entity in Container Analysis. It must otherwise be a valid
-   *  AttestationOccurrence.
+   *  be checked that it can be verified by the `Attestor`. It does not have to
+   *  be an existing entity in Container Analysis. It must otherwise be a valid
+   *  `AttestationOccurrence`.
    */
   // const attestation = {}
   /**

@@ -18,8 +18,15 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
-
+import type {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
@@ -100,20 +107,41 @@ export class SpacesServiceClient {
    *     const client = new SpacesServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback,
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SpacesServiceClient;
-    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
-      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    if (
+      opts?.universe_domain &&
+      opts?.universeDomain &&
+      opts?.universe_domain !== opts?.universeDomain
+    ) {
+      throw new Error(
+        'Please set either universe_domain or universeDomain, but not both.',
+      );
     }
-    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
-    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    const universeDomainEnvVar =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
+        : undefined;
+    this._universeDomain =
+      opts?.universeDomain ??
+      opts?.universe_domain ??
+      universeDomainEnvVar ??
+      'googleapis.com';
     this._servicePath = 'meet.' + this._universeDomain;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -139,7 +167,7 @@ export class SpacesServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -153,10 +181,7 @@ export class SpacesServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -178,32 +203,50 @@ export class SpacesServiceClient {
     // Create useful helper objects for these.
     this.pathTemplates = {
       conferenceRecordPathTemplate: new this._gaxModule.PathTemplate(
-        'conferenceRecords/{conference_record}'
+        'conferenceRecords/{conference_record}',
+      ),
+      memberPathTemplate: new this._gaxModule.PathTemplate(
+        'spaces/{space}/members/{member}',
       ),
       participantPathTemplate: new this._gaxModule.PathTemplate(
-        'conferenceRecords/{conference_record}/participants/{participant}'
+        'conferenceRecords/{conference_record}/participants/{participant}',
       ),
       participantSessionPathTemplate: new this._gaxModule.PathTemplate(
-        'conferenceRecords/{conference_record}/participants/{participant}/participantSessions/{participant_session}'
+        'conferenceRecords/{conference_record}/participants/{participant}/participantSessions/{participant_session}',
       ),
       recordingPathTemplate: new this._gaxModule.PathTemplate(
-        'conferenceRecords/{conference_record}/recordings/{recording}'
+        'conferenceRecords/{conference_record}/recordings/{recording}',
       ),
-      spacePathTemplate: new this._gaxModule.PathTemplate(
-        'spaces/{space}'
+      smartNotePathTemplate: new this._gaxModule.PathTemplate(
+        'conferenceRecords/{conference_record}/smartNotes/{smart_note}',
       ),
+      spacePathTemplate: new this._gaxModule.PathTemplate('spaces/{space}'),
       transcriptPathTemplate: new this._gaxModule.PathTemplate(
-        'conferenceRecords/{conference_record}/transcripts/{transcript}'
+        'conferenceRecords/{conference_record}/transcripts/{transcript}',
       ),
       transcriptEntryPathTemplate: new this._gaxModule.PathTemplate(
-        'conferenceRecords/{conference_record}/transcripts/{transcript}/entries/{entry}'
+        'conferenceRecords/{conference_record}/transcripts/{transcript}/entries/{entry}',
+      ),
+    };
+
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listMembers: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'members',
       ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.apps.meet.v2.SpacesService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.apps.meet.v2.SpacesService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')},
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -234,36 +277,51 @@ export class SpacesServiceClient {
     // Put together the "service stub" for
     // google.apps.meet.v2.SpacesService.
     this.spacesServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.apps.meet.v2.SpacesService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.apps.meet.v2.SpacesService',
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.apps.meet.v2.SpacesService,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath,
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const spacesServiceStubMethods =
-        ['createSpace', 'getSpace', 'updateSpace', 'endActiveConference'];
+    const spacesServiceStubMethods = [
+      'createSpace',
+      'getSpace',
+      'updateSpace',
+      'endActiveConference',
+      'createMember',
+      'getMember',
+      'listMembers',
+      'deleteMember',
+      'updateMember',
+      'batchUpdateMembers',
+    ];
     for (const methodName of spacesServiceStubMethods) {
       const callPromise = this.spacesServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        },
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
         descriptor,
-        this._opts.fallback
+        this._opts.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -278,8 +336,14 @@ export class SpacesServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static servicePath is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'meet.googleapis.com';
   }
@@ -290,8 +354,14 @@ export class SpacesServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
-      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    if (
+      typeof process === 'object' &&
+      typeof process.emitWarning === 'function'
+    ) {
+      process.emitWarning(
+        'Static apiEndpoint is deprecated, please use the instance method instead.',
+        'DeprecationWarning',
+      );
     }
     return 'meet.googleapis.com';
   }
@@ -325,7 +395,7 @@ export class SpacesServiceClient {
     return [
       'https://www.googleapis.com/auth/meetings.space.created',
       'https://www.googleapis.com/auth/meetings.space.readonly',
-      'https://www.googleapis.com/auth/meetings.space.settings'
+      'https://www.googleapis.com/auth/meetings.space.settings',
     ];
   }
 
@@ -335,8 +405,9 @@ export class SpacesServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>,
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -347,421 +418,1433 @@ export class SpacesServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-/**
- * Creates a space.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.apps.meet.v2.Space} request.space
- *   Space to be created. As of May 2023, the input space can be empty. Later on
- *   the input space can be non-empty when space configuration is introduced.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.apps.meet.v2.Space|Space}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/spaces_service.create_space.js</caption>
- * region_tag:meet_v2_generated_SpacesService_CreateSpace_async
- */
+  /**
+   * Creates a space.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.apps.meet.v2.Space} request.space
+   *   Space to be created. As of May 2023, the input space can be empty. Later on
+   *   the input space can be non-empty when space configuration is introduced.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2.Space|Space}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/spaces_service.create_space.js</caption>
+   * region_tag:meet_v2_generated_SpacesService_CreateSpace_async
+   */
   createSpace(
-      request?: protos.google.apps.meet.v2.ICreateSpaceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.apps.meet.v2.ISpace,
-        protos.google.apps.meet.v2.ICreateSpaceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.apps.meet.v2.ICreateSpaceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.ICreateSpaceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   createSpace(
-      request: protos.google.apps.meet.v2.ICreateSpaceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.apps.meet.v2.ISpace,
-          protos.google.apps.meet.v2.ICreateSpaceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.apps.meet.v2.ICreateSpaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.ICreateSpaceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSpace(
-      request: protos.google.apps.meet.v2.ICreateSpaceRequest,
-      callback: Callback<
-          protos.google.apps.meet.v2.ISpace,
-          protos.google.apps.meet.v2.ICreateSpaceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.apps.meet.v2.ICreateSpaceRequest,
+    callback: Callback<
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.ICreateSpaceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   createSpace(
-      request?: protos.google.apps.meet.v2.ICreateSpaceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.apps.meet.v2.ICreateSpaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.apps.meet.v2.ISpace,
-          protos.google.apps.meet.v2.ICreateSpaceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.apps.meet.v2.ISpace,
-          protos.google.apps.meet.v2.ICreateSpaceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.apps.meet.v2.ISpace,
-        protos.google.apps.meet.v2.ICreateSpaceRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.apps.meet.v2.ICreateSpaceRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.ICreateSpaceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.ICreateSpaceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    this.initialize().catch(err => {throw err});
+    this.initialize().catch(err => {
+      throw err;
+    });
     this._log.info('createSpace request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.apps.meet.v2.ISpace,
-        protos.google.apps.meet.v2.ICreateSpaceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.ISpace,
+          protos.google.apps.meet.v2.ICreateSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('createSpace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.createSpace(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.apps.meet.v2.ISpace,
-        protos.google.apps.meet.v2.ICreateSpaceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('createSpace response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .createSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.ISpace,
+          protos.google.apps.meet.v2.ICreateSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createSpace response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Gets details about a meeting space.
- *
- * For an example, see [Get a meeting
- * space](https://developers.google.com/meet/api/guides/meeting-spaces#get-meeting-space).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Resource name of the space.
- *
- *   Format: `spaces/{space}` or `spaces/{meetingCode}`.
- *
- *   `{space}` is the resource identifier for the space. It's a unique,
- *   server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
- *
- *   `{meetingCode}` is an alias for the space. It's a typeable, unique
- *   character string and is non-case sensitive. For example, `abc-mnop-xyz`.
- *   The maximum length is 128 characters.
- *
- *   A `meetingCode` shouldn't be stored long term as it can become
- *   dissociated from a meeting space and can be reused for different meeting
- *   spaces in the future. Generally, a `meetingCode` expires 365 days after
- *   last use. For more information, see [Learn about meeting codes in Google
- *   Meet](https://support.google.com/meet/answer/10710509).
- *
- *   For more information, see [How Meet identifies a meeting
- *   space](https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.apps.meet.v2.Space|Space}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/spaces_service.get_space.js</caption>
- * region_tag:meet_v2_generated_SpacesService_GetSpace_async
- */
+  /**
+   * Gets details about a meeting space.
+   *
+   * For an example, see [Get a meeting
+   * space](https://developers.google.com/workspace/meet/api/guides/meeting-spaces#get-meeting-space).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the space.
+   *
+   *   Format: `spaces/{space}` or `spaces/{meetingCode}`.
+   *
+   *   `{space}` is the resource identifier for the space. It's a unique,
+   *   server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
+   *
+   *   `{meetingCode}` is an alias for the space. It's a typeable, unique
+   *   character string and is non-case sensitive. For example, `abc-mnop-xyz`.
+   *   The maximum length is 128 characters.
+   *
+   *   A `meetingCode` shouldn't be stored long term as it can become
+   *   dissociated from a meeting space and can be reused for different meeting
+   *   spaces in the future. Generally, a `meetingCode` expires 365 days after
+   *   last use. For more information, see [Learn about meeting codes in Google
+   *   Meet](https://support.google.com/meet/answer/10710509).
+   *
+   *   For more information, see [How Meet identifies a meeting
+   *   space](https://developers.google.com/workspace/meet/api/guides/meeting-spaces#identify-meeting-space).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2.Space|Space}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/spaces_service.get_space.js</caption>
+   * region_tag:meet_v2_generated_SpacesService_GetSpace_async
+   */
   getSpace(
-      request?: protos.google.apps.meet.v2.IGetSpaceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.apps.meet.v2.ISpace,
-        protos.google.apps.meet.v2.IGetSpaceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.apps.meet.v2.IGetSpaceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.IGetSpaceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   getSpace(
-      request: protos.google.apps.meet.v2.IGetSpaceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.apps.meet.v2.ISpace,
-          protos.google.apps.meet.v2.IGetSpaceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.apps.meet.v2.IGetSpaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.IGetSpaceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSpace(
-      request: protos.google.apps.meet.v2.IGetSpaceRequest,
-      callback: Callback<
-          protos.google.apps.meet.v2.ISpace,
-          protos.google.apps.meet.v2.IGetSpaceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.apps.meet.v2.IGetSpaceRequest,
+    callback: Callback<
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.IGetSpaceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   getSpace(
-      request?: protos.google.apps.meet.v2.IGetSpaceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.apps.meet.v2.IGetSpaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.apps.meet.v2.ISpace,
-          protos.google.apps.meet.v2.IGetSpaceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.apps.meet.v2.ISpace,
-          protos.google.apps.meet.v2.IGetSpaceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.apps.meet.v2.ISpace,
-        protos.google.apps.meet.v2.IGetSpaceRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.apps.meet.v2.IGetSpaceRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.IGetSpaceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.IGetSpaceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('getSpace request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.apps.meet.v2.ISpace,
-        protos.google.apps.meet.v2.IGetSpaceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.ISpace,
+          protos.google.apps.meet.v2.IGetSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getSpace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.getSpace(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.apps.meet.v2.ISpace,
-        protos.google.apps.meet.v2.IGetSpaceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('getSpace response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .getSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.ISpace,
+          protos.google.apps.meet.v2.IGetSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSpace response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Updates details about a meeting space.
- *
- * For an example, see [Update a meeting
- * space](https://developers.google.com/meet/api/guides/meeting-spaces#update-meeting-space).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.apps.meet.v2.Space} request.space
- *   Required. Space to be updated.
- * @param {google.protobuf.FieldMask} [request.updateMask]
- *   Optional. Field mask used to specify the fields to be updated in the space.
- *   If update_mask isn't provided(not set, set with empty paths, or only has ""
- *   as paths), it defaults to update all fields provided with values in the
- *   request.
- *   Using "*" as update_mask will update all fields, including deleting fields
- *   not set in the request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.apps.meet.v2.Space|Space}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/spaces_service.update_space.js</caption>
- * region_tag:meet_v2_generated_SpacesService_UpdateSpace_async
- */
+  /**
+   * Updates details about a meeting space.
+   *
+   * For an example, see [Update a meeting
+   * space](https://developers.google.com/workspace/meet/api/guides/meeting-spaces#update-meeting-space).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.apps.meet.v2.Space} request.space
+   *   Required. Space to be updated.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask used to specify the fields to be updated in the space.
+   *   If update_mask isn't provided(not set, set with empty paths, or only has ""
+   *   as paths), it defaults to update all fields provided with values in the
+   *   request.
+   *   Using "*" as update_mask will update all fields, including deleting fields
+   *   not set in the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2.Space|Space}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/spaces_service.update_space.js</caption>
+   * region_tag:meet_v2_generated_SpacesService_UpdateSpace_async
+   */
   updateSpace(
-      request?: protos.google.apps.meet.v2.IUpdateSpaceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.apps.meet.v2.ISpace,
-        protos.google.apps.meet.v2.IUpdateSpaceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.apps.meet.v2.IUpdateSpaceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.IUpdateSpaceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   updateSpace(
-      request: protos.google.apps.meet.v2.IUpdateSpaceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.apps.meet.v2.ISpace,
-          protos.google.apps.meet.v2.IUpdateSpaceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.apps.meet.v2.IUpdateSpaceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.IUpdateSpaceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSpace(
-      request: protos.google.apps.meet.v2.IUpdateSpaceRequest,
-      callback: Callback<
-          protos.google.apps.meet.v2.ISpace,
-          protos.google.apps.meet.v2.IUpdateSpaceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.apps.meet.v2.IUpdateSpaceRequest,
+    callback: Callback<
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.IUpdateSpaceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   updateSpace(
-      request?: protos.google.apps.meet.v2.IUpdateSpaceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.apps.meet.v2.IUpdateSpaceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.apps.meet.v2.ISpace,
-          protos.google.apps.meet.v2.IUpdateSpaceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.apps.meet.v2.ISpace,
-          protos.google.apps.meet.v2.IUpdateSpaceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.apps.meet.v2.ISpace,
-        protos.google.apps.meet.v2.IUpdateSpaceRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.apps.meet.v2.IUpdateSpaceRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.IUpdateSpaceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.ISpace,
+      protos.google.apps.meet.v2.IUpdateSpaceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'space.name': request.space!.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'space.name': request.space!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('updateSpace request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.apps.meet.v2.ISpace,
-        protos.google.apps.meet.v2.IUpdateSpaceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.ISpace,
+          protos.google.apps.meet.v2.IUpdateSpaceRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('updateSpace response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.updateSpace(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.apps.meet.v2.ISpace,
-        protos.google.apps.meet.v2.IUpdateSpaceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('updateSpace response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .updateSpace(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.ISpace,
+          protos.google.apps.meet.v2.IUpdateSpaceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateSpace response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
-/**
- * Ends an active conference (if there's one).
- *
- * For an example, see [End active
- * conference](https://developers.google.com/meet/api/guides/meeting-spaces#end-active-conference).
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Resource name of the space.
- *
- *   Format: `spaces/{space}`.
- *
- *   `{space}` is the resource identifier for the space. It's a unique,
- *   server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
- *
- *   For more information, see [How Meet identifies a meeting
- *   space](https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
- *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
- *   for more details and examples.
- * @example <caption>include:samples/generated/v2/spaces_service.end_active_conference.js</caption>
- * region_tag:meet_v2_generated_SpacesService_EndActiveConference_async
- */
+  /**
+   * Ends an active conference (if there's one).
+   *
+   * For an example, see [End active
+   * conference](https://developers.google.com/workspace/meet/api/guides/meeting-spaces#end-active-conference).
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the space.
+   *
+   *   Format: `spaces/{space}`.
+   *
+   *   `{space}` is the resource identifier for the space. It's a unique,
+   *   server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
+   *
+   *   For more information, see [How Meet identifies a meeting
+   *   space](https://developers.google.com/workspace/meet/api/guides/meeting-spaces#identify-meeting-space).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/spaces_service.end_active_conference.js</caption>
+   * region_tag:meet_v2_generated_SpacesService_EndActiveConference_async
+   */
   endActiveConference(
-      request?: protos.google.apps.meet.v2.IEndActiveConferenceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.apps.meet.v2.IEndActiveConferenceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.apps.meet.v2.IEndActiveConferenceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.apps.meet.v2.IEndActiveConferenceRequest | undefined,
+      {} | undefined,
+    ]
+  >;
   endActiveConference(
-      request: protos.google.apps.meet.v2.IEndActiveConferenceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.apps.meet.v2.IEndActiveConferenceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.apps.meet.v2.IEndActiveConferenceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.apps.meet.v2.IEndActiveConferenceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   endActiveConference(
-      request: protos.google.apps.meet.v2.IEndActiveConferenceRequest,
-      callback: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.apps.meet.v2.IEndActiveConferenceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.apps.meet.v2.IEndActiveConferenceRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.apps.meet.v2.IEndActiveConferenceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
   endActiveConference(
-      request?: protos.google.apps.meet.v2.IEndActiveConferenceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.apps.meet.v2.IEndActiveConferenceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.protobuf.IEmpty,
-          protos.google.apps.meet.v2.IEndActiveConferenceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.protobuf.IEmpty,
-          protos.google.apps.meet.v2.IEndActiveConferenceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.protobuf.IEmpty,
-        protos.google.apps.meet.v2.IEndActiveConferenceRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.apps.meet.v2.IEndActiveConferenceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.apps.meet.v2.IEndActiveConferenceRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.apps.meet.v2.IEndActiveConferenceRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = this._gaxModule.routingHeader.fromParams({
-      'name': request.name ?? '',
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
     });
-    this.initialize().catch(err => {throw err});
     this._log.info('endActiveConference request %j', request);
-    const wrappedCallback: Callback<
-        protos.google.protobuf.IEmpty,
-        protos.google.apps.meet.v2.IEndActiveConferenceRequest|null|undefined,
-        {}|null|undefined>|undefined = callback
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.apps.meet.v2.IEndActiveConferenceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('endActiveConference response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls.endActiveConference(request, options, wrappedCallback)
-      ?.then(([response, options, rawResponse]: [
-        protos.google.protobuf.IEmpty,
-        protos.google.apps.meet.v2.IEndActiveConferenceRequest|undefined,
-        {}|undefined
-      ]) => {
-        this._log.info('endActiveConference response %j', response);
-        return [response, options, rawResponse];
-      }).catch((error: any) => {
-        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+    return this.innerApiCalls
+      .endActiveConference(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.apps.meet.v2.IEndActiveConferenceRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('endActiveConference response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Creates a member.
+   *
+   * This API supports the `fields` parameter in
+   * [SystemParameterContext](https://cloud.google.com/apis/docs/system-parameters).
+   * When the `fields` parameter is omitted, this API response will default to
+   * "name,email,role".
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: spaces/{space}
+   * @param {google.apps.meet.v2.Member} request.member
+   *   Required. The member to be created.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2.Member|Member}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/spaces_service.create_member.js</caption>
+   * region_tag:meet_v2_generated_SpacesService_CreateMember_async
+   */
+  createMember(
+    request?: protos.google.apps.meet.v2.ICreateMemberRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.ICreateMemberRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createMember(
+    request: protos.google.apps.meet.v2.ICreateMemberRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.ICreateMemberRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createMember(
+    request: protos.google.apps.meet.v2.ICreateMemberRequest,
+    callback: Callback<
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.ICreateMemberRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createMember(
+    request?: protos.google.apps.meet.v2.ICreateMemberRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.apps.meet.v2.IMember,
+          protos.google.apps.meet.v2.ICreateMemberRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.ICreateMemberRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.ICreateMemberRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createMember request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.IMember,
+          protos.google.apps.meet.v2.ICreateMemberRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createMember response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createMember(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.IMember,
+          protos.google.apps.meet.v2.ICreateMemberRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMember response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets a member.
+   *
+   * This API supports the `fields` parameter in
+   * [SystemParameterContext](https://cloud.google.com/apis/docs/system-parameters).
+   * When the `fields` parameter is omitted, this API response will default to
+   * "name,email,role".
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Format: “spaces/{space}/members/{member}”
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2.Member|Member}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/spaces_service.get_member.js</caption>
+   * region_tag:meet_v2_generated_SpacesService_GetMember_async
+   */
+  getMember(
+    request?: protos.google.apps.meet.v2.IGetMemberRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.IGetMemberRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getMember(
+    request: protos.google.apps.meet.v2.IGetMemberRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.IGetMemberRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getMember(
+    request: protos.google.apps.meet.v2.IGetMemberRequest,
+    callback: Callback<
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.IGetMemberRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getMember(
+    request?: protos.google.apps.meet.v2.IGetMemberRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.apps.meet.v2.IMember,
+          protos.google.apps.meet.v2.IGetMemberRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.IGetMemberRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.IGetMemberRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMember request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.IMember,
+          protos.google.apps.meet.v2.IGetMemberRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMember response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMember(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.IMember,
+          protos.google.apps.meet.v2.IGetMemberRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMember response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deletes the member who was previously assigned roles in the space.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Format: “spaces/{space}/members/{member}”
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/spaces_service.delete_member.js</caption>
+   * region_tag:meet_v2_generated_SpacesService_DeleteMember_async
+   */
+  deleteMember(
+    request?: protos.google.apps.meet.v2.IDeleteMemberRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.apps.meet.v2.IDeleteMemberRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteMember(
+    request: protos.google.apps.meet.v2.IDeleteMemberRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.apps.meet.v2.IDeleteMemberRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteMember(
+    request: protos.google.apps.meet.v2.IDeleteMemberRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.apps.meet.v2.IDeleteMemberRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteMember(
+    request?: protos.google.apps.meet.v2.IDeleteMemberRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.apps.meet.v2.IDeleteMemberRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      protos.google.apps.meet.v2.IDeleteMemberRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.apps.meet.v2.IDeleteMemberRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('deleteMember request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.apps.meet.v2.IDeleteMemberRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteMember response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .deleteMember(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.protobuf.IEmpty,
+          protos.google.apps.meet.v2.IDeleteMemberRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMember response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates a member.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.apps.meet.v2.Member} request.member
+   *   Required. The Member to update.
+   *   Format: spaces/{space}/members/{member}
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask used to specify the fields to be updated in the
+   *   member. If update_mask isn't provided(not set, set with empty paths, or
+   *   only has "" as paths), it defaults to update all fields provided with
+   *   values in the request. Using "*" as update_mask will update all fields,
+   *   including deleting fields not set in the request. In case of BatchUpdate,
+   *   it must be absent or the same as the update_mask in
+   *   BatchUpdateMembersRequest when UpdateMemberRequest is built as a child
+   *   request of BatchUpdateMembersRequest.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2.Member|Member}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/spaces_service.update_member.js</caption>
+   * region_tag:meet_v2_generated_SpacesService_UpdateMember_async
+   */
+  updateMember(
+    request?: protos.google.apps.meet.v2.IUpdateMemberRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.IUpdateMemberRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateMember(
+    request: protos.google.apps.meet.v2.IUpdateMemberRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.IUpdateMemberRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateMember(
+    request: protos.google.apps.meet.v2.IUpdateMemberRequest,
+    callback: Callback<
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.IUpdateMemberRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateMember(
+    request?: protos.google.apps.meet.v2.IUpdateMemberRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.apps.meet.v2.IMember,
+          protos.google.apps.meet.v2.IUpdateMemberRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.IUpdateMemberRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.IMember,
+      protos.google.apps.meet.v2.IUpdateMemberRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'member.name': request.member!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateMember request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.IMember,
+          protos.google.apps.meet.v2.IUpdateMemberRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateMember response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateMember(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.IMember,
+          protos.google.apps.meet.v2.IUpdateMemberRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMember response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates members of one space within a batch.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource shared by all Members being updated.
+   *   Format: spaces/{space}
+   * @param {number[]} request.requests
+   *   Required. The request message specifying the resources to update.
+   *   A maximum of 500 members can be modified in a batch.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Top-level field mask used to specify the fields to be updated in
+   *   the member for all UpdateMemberRequests. There are 4 possible scenarios for
+   *   top-level and child field mask:
+   *   1. top-level and child field mask is absent:
+   *      All fields provided in the requests are updated, including deleting
+   *      fields not set in the requests.
+   *   2. top-level field mask is present but child field mask is absent:
+   *      The fields specified in the top-level field mask are updated.
+   *   3. top-level and child field mask is present:
+   *      The child field mask must be the same as the top-level field mask.
+   *   4. top-level field mask is absent but child field mask is present:
+   *      It isn't supported and will return an error.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.apps.meet.v2.BatchUpdateMembersResponse|BatchUpdateMembersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/spaces_service.batch_update_members.js</caption>
+   * region_tag:meet_v2_generated_SpacesService_BatchUpdateMembers_async
+   */
+  batchUpdateMembers(
+    request?: protos.google.apps.meet.v2.IBatchUpdateMembersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.IBatchUpdateMembersResponse,
+      protos.google.apps.meet.v2.IBatchUpdateMembersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchUpdateMembers(
+    request: protos.google.apps.meet.v2.IBatchUpdateMembersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.apps.meet.v2.IBatchUpdateMembersResponse,
+      protos.google.apps.meet.v2.IBatchUpdateMembersRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateMembers(
+    request: protos.google.apps.meet.v2.IBatchUpdateMembersRequest,
+    callback: Callback<
+      protos.google.apps.meet.v2.IBatchUpdateMembersResponse,
+      protos.google.apps.meet.v2.IBatchUpdateMembersRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateMembers(
+    request?: protos.google.apps.meet.v2.IBatchUpdateMembersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.apps.meet.v2.IBatchUpdateMembersResponse,
+          | protos.google.apps.meet.v2.IBatchUpdateMembersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.apps.meet.v2.IBatchUpdateMembersResponse,
+      protos.google.apps.meet.v2.IBatchUpdateMembersRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.IBatchUpdateMembersResponse,
+      protos.google.apps.meet.v2.IBatchUpdateMembersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchUpdateMembers request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.apps.meet.v2.IBatchUpdateMembersResponse,
+          | protos.google.apps.meet.v2.IBatchUpdateMembersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateMembers response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateMembers(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.apps.meet.v2.IBatchUpdateMembersResponse,
+          protos.google.apps.meet.v2.IBatchUpdateMembersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateMembers response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
         }
         throw error;
       });
   }
 
+  /**
+   * Lists members.
+   *
+   * This API supports the `fields` parameter in
+   * [SystemParameterContext](https://cloud.google.com/apis/docs/system-parameters).
+   * When the `fields` parameter is omitted this API response will default to
+   * "name,email,role".
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: spaces/{space}
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of members to return. The service might return
+   *   fewer than this value. If unspecified or set to 0, at most 250 members are
+   *   returned. The maximum value is 500; values above 500 are coerced to 500.
+   *   Maximum might change in the future.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token returned from previous List Call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.apps.meet.v2.Member|Member}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMembersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMembers(
+    request?: protos.google.apps.meet.v2.IListMembersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.IMember[],
+      protos.google.apps.meet.v2.IListMembersRequest | null,
+      protos.google.apps.meet.v2.IListMembersResponse,
+    ]
+  >;
+  listMembers(
+    request: protos.google.apps.meet.v2.IListMembersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.apps.meet.v2.IListMembersRequest,
+      protos.google.apps.meet.v2.IListMembersResponse | null | undefined,
+      protos.google.apps.meet.v2.IMember
+    >,
+  ): void;
+  listMembers(
+    request: protos.google.apps.meet.v2.IListMembersRequest,
+    callback: PaginationCallback<
+      protos.google.apps.meet.v2.IListMembersRequest,
+      protos.google.apps.meet.v2.IListMembersResponse | null | undefined,
+      protos.google.apps.meet.v2.IMember
+    >,
+  ): void;
+  listMembers(
+    request?: protos.google.apps.meet.v2.IListMembersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.apps.meet.v2.IListMembersRequest,
+          protos.google.apps.meet.v2.IListMembersResponse | null | undefined,
+          protos.google.apps.meet.v2.IMember
+        >,
+    callback?: PaginationCallback<
+      protos.google.apps.meet.v2.IListMembersRequest,
+      protos.google.apps.meet.v2.IListMembersResponse | null | undefined,
+      protos.google.apps.meet.v2.IMember
+    >,
+  ): Promise<
+    [
+      protos.google.apps.meet.v2.IMember[],
+      protos.google.apps.meet.v2.IListMembersRequest | null,
+      protos.google.apps.meet.v2.IListMembersResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.apps.meet.v2.IListMembersRequest,
+          protos.google.apps.meet.v2.IListMembersResponse | null | undefined,
+          protos.google.apps.meet.v2.IMember
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMembers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMembers request %j', request);
+    return this.innerApiCalls
+      .listMembers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.apps.meet.v2.IMember[],
+          protos.google.apps.meet.v2.IListMembersRequest | null,
+          protos.google.apps.meet.v2.IListMembersResponse,
+        ]) => {
+          this._log.info('listMembers values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listMembers`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: spaces/{space}
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of members to return. The service might return
+   *   fewer than this value. If unspecified or set to 0, at most 250 members are
+   *   returned. The maximum value is 500; values above 500 are coerced to 500.
+   *   Maximum might change in the future.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token returned from previous List Call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.apps.meet.v2.Member|Member} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMembersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMembersStream(
+    request?: protos.google.apps.meet.v2.IListMembersRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMembers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMembers stream %j', request);
+    return this.descriptors.page.listMembers.createStream(
+      this.innerApiCalls.listMembers as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listMembers`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: spaces/{space}
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of members to return. The service might return
+   *   fewer than this value. If unspecified or set to 0, at most 250 members are
+   *   returned. The maximum value is 500; values above 500 are coerced to 500.
+   *   Maximum might change in the future.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token returned from previous List Call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.apps.meet.v2.Member|Member}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v2/spaces_service.list_members.js</caption>
+   * region_tag:meet_v2_generated_SpacesService_ListMembers_async
+   */
+  listMembersAsync(
+    request?: protos.google.apps.meet.v2.IListMembersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.apps.meet.v2.IMember> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMembers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMembers iterate %j', request);
+    return this.descriptors.page.listMembers.asyncIterate(
+      this.innerApiCalls['listMembers'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.apps.meet.v2.IMember>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -772,7 +1855,7 @@ export class SpacesServiceClient {
    * @param {string} conference_record
    * @returns {string} Resource name string.
    */
-  conferenceRecordPath(conferenceRecord:string) {
+  conferenceRecordPath(conferenceRecord: string) {
     return this.pathTemplates.conferenceRecordPathTemplate.render({
       conference_record: conferenceRecord,
     });
@@ -786,7 +1869,45 @@ export class SpacesServiceClient {
    * @returns {string} A string representing the conference_record.
    */
   matchConferenceRecordFromConferenceRecordName(conferenceRecordName: string) {
-    return this.pathTemplates.conferenceRecordPathTemplate.match(conferenceRecordName).conference_record;
+    return this.pathTemplates.conferenceRecordPathTemplate.match(
+      conferenceRecordName,
+    ).conference_record;
+  }
+
+  /**
+   * Return a fully-qualified member resource name string.
+   *
+   * @param {string} space
+   * @param {string} member
+   * @returns {string} Resource name string.
+   */
+  memberPath(space: string, member: string) {
+    return this.pathTemplates.memberPathTemplate.render({
+      space: space,
+      member: member,
+    });
+  }
+
+  /**
+   * Parse the space from Member resource.
+   *
+   * @param {string} memberName
+   *   A fully-qualified path representing Member resource.
+   * @returns {string} A string representing the space.
+   */
+  matchSpaceFromMemberName(memberName: string) {
+    return this.pathTemplates.memberPathTemplate.match(memberName).space;
+  }
+
+  /**
+   * Parse the member from Member resource.
+   *
+   * @param {string} memberName
+   *   A fully-qualified path representing Member resource.
+   * @returns {string} A string representing the member.
+   */
+  matchMemberFromMemberName(memberName: string) {
+    return this.pathTemplates.memberPathTemplate.match(memberName).member;
   }
 
   /**
@@ -796,7 +1917,7 @@ export class SpacesServiceClient {
    * @param {string} participant
    * @returns {string} Resource name string.
    */
-  participantPath(conferenceRecord:string,participant:string) {
+  participantPath(conferenceRecord: string, participant: string) {
     return this.pathTemplates.participantPathTemplate.render({
       conference_record: conferenceRecord,
       participant: participant,
@@ -811,7 +1932,8 @@ export class SpacesServiceClient {
    * @returns {string} A string representing the conference_record.
    */
   matchConferenceRecordFromParticipantName(participantName: string) {
-    return this.pathTemplates.participantPathTemplate.match(participantName).conference_record;
+    return this.pathTemplates.participantPathTemplate.match(participantName)
+      .conference_record;
   }
 
   /**
@@ -822,7 +1944,8 @@ export class SpacesServiceClient {
    * @returns {string} A string representing the participant.
    */
   matchParticipantFromParticipantName(participantName: string) {
-    return this.pathTemplates.participantPathTemplate.match(participantName).participant;
+    return this.pathTemplates.participantPathTemplate.match(participantName)
+      .participant;
   }
 
   /**
@@ -833,7 +1956,11 @@ export class SpacesServiceClient {
    * @param {string} participant_session
    * @returns {string} Resource name string.
    */
-  participantSessionPath(conferenceRecord:string,participant:string,participantSession:string) {
+  participantSessionPath(
+    conferenceRecord: string,
+    participant: string,
+    participantSession: string,
+  ) {
     return this.pathTemplates.participantSessionPathTemplate.render({
       conference_record: conferenceRecord,
       participant: participant,
@@ -848,8 +1975,12 @@ export class SpacesServiceClient {
    *   A fully-qualified path representing ParticipantSession resource.
    * @returns {string} A string representing the conference_record.
    */
-  matchConferenceRecordFromParticipantSessionName(participantSessionName: string) {
-    return this.pathTemplates.participantSessionPathTemplate.match(participantSessionName).conference_record;
+  matchConferenceRecordFromParticipantSessionName(
+    participantSessionName: string,
+  ) {
+    return this.pathTemplates.participantSessionPathTemplate.match(
+      participantSessionName,
+    ).conference_record;
   }
 
   /**
@@ -860,7 +1991,9 @@ export class SpacesServiceClient {
    * @returns {string} A string representing the participant.
    */
   matchParticipantFromParticipantSessionName(participantSessionName: string) {
-    return this.pathTemplates.participantSessionPathTemplate.match(participantSessionName).participant;
+    return this.pathTemplates.participantSessionPathTemplate.match(
+      participantSessionName,
+    ).participant;
   }
 
   /**
@@ -870,8 +2003,12 @@ export class SpacesServiceClient {
    *   A fully-qualified path representing ParticipantSession resource.
    * @returns {string} A string representing the participant_session.
    */
-  matchParticipantSessionFromParticipantSessionName(participantSessionName: string) {
-    return this.pathTemplates.participantSessionPathTemplate.match(participantSessionName).participant_session;
+  matchParticipantSessionFromParticipantSessionName(
+    participantSessionName: string,
+  ) {
+    return this.pathTemplates.participantSessionPathTemplate.match(
+      participantSessionName,
+    ).participant_session;
   }
 
   /**
@@ -881,7 +2018,7 @@ export class SpacesServiceClient {
    * @param {string} recording
    * @returns {string} Resource name string.
    */
-  recordingPath(conferenceRecord:string,recording:string) {
+  recordingPath(conferenceRecord: string, recording: string) {
     return this.pathTemplates.recordingPathTemplate.render({
       conference_record: conferenceRecord,
       recording: recording,
@@ -896,7 +2033,8 @@ export class SpacesServiceClient {
    * @returns {string} A string representing the conference_record.
    */
   matchConferenceRecordFromRecordingName(recordingName: string) {
-    return this.pathTemplates.recordingPathTemplate.match(recordingName).conference_record;
+    return this.pathTemplates.recordingPathTemplate.match(recordingName)
+      .conference_record;
   }
 
   /**
@@ -907,7 +2045,46 @@ export class SpacesServiceClient {
    * @returns {string} A string representing the recording.
    */
   matchRecordingFromRecordingName(recordingName: string) {
-    return this.pathTemplates.recordingPathTemplate.match(recordingName).recording;
+    return this.pathTemplates.recordingPathTemplate.match(recordingName)
+      .recording;
+  }
+
+  /**
+   * Return a fully-qualified smartNote resource name string.
+   *
+   * @param {string} conference_record
+   * @param {string} smart_note
+   * @returns {string} Resource name string.
+   */
+  smartNotePath(conferenceRecord: string, smartNote: string) {
+    return this.pathTemplates.smartNotePathTemplate.render({
+      conference_record: conferenceRecord,
+      smart_note: smartNote,
+    });
+  }
+
+  /**
+   * Parse the conference_record from SmartNote resource.
+   *
+   * @param {string} smartNoteName
+   *   A fully-qualified path representing SmartNote resource.
+   * @returns {string} A string representing the conference_record.
+   */
+  matchConferenceRecordFromSmartNoteName(smartNoteName: string) {
+    return this.pathTemplates.smartNotePathTemplate.match(smartNoteName)
+      .conference_record;
+  }
+
+  /**
+   * Parse the smart_note from SmartNote resource.
+   *
+   * @param {string} smartNoteName
+   *   A fully-qualified path representing SmartNote resource.
+   * @returns {string} A string representing the smart_note.
+   */
+  matchSmartNoteFromSmartNoteName(smartNoteName: string) {
+    return this.pathTemplates.smartNotePathTemplate.match(smartNoteName)
+      .smart_note;
   }
 
   /**
@@ -916,7 +2093,7 @@ export class SpacesServiceClient {
    * @param {string} space
    * @returns {string} Resource name string.
    */
-  spacePath(space:string) {
+  spacePath(space: string) {
     return this.pathTemplates.spacePathTemplate.render({
       space: space,
     });
@@ -940,7 +2117,7 @@ export class SpacesServiceClient {
    * @param {string} transcript
    * @returns {string} Resource name string.
    */
-  transcriptPath(conferenceRecord:string,transcript:string) {
+  transcriptPath(conferenceRecord: string, transcript: string) {
     return this.pathTemplates.transcriptPathTemplate.render({
       conference_record: conferenceRecord,
       transcript: transcript,
@@ -955,7 +2132,8 @@ export class SpacesServiceClient {
    * @returns {string} A string representing the conference_record.
    */
   matchConferenceRecordFromTranscriptName(transcriptName: string) {
-    return this.pathTemplates.transcriptPathTemplate.match(transcriptName).conference_record;
+    return this.pathTemplates.transcriptPathTemplate.match(transcriptName)
+      .conference_record;
   }
 
   /**
@@ -966,7 +2144,8 @@ export class SpacesServiceClient {
    * @returns {string} A string representing the transcript.
    */
   matchTranscriptFromTranscriptName(transcriptName: string) {
-    return this.pathTemplates.transcriptPathTemplate.match(transcriptName).transcript;
+    return this.pathTemplates.transcriptPathTemplate.match(transcriptName)
+      .transcript;
   }
 
   /**
@@ -977,7 +2156,11 @@ export class SpacesServiceClient {
    * @param {string} entry
    * @returns {string} Resource name string.
    */
-  transcriptEntryPath(conferenceRecord:string,transcript:string,entry:string) {
+  transcriptEntryPath(
+    conferenceRecord: string,
+    transcript: string,
+    entry: string,
+  ) {
     return this.pathTemplates.transcriptEntryPathTemplate.render({
       conference_record: conferenceRecord,
       transcript: transcript,
@@ -993,7 +2176,9 @@ export class SpacesServiceClient {
    * @returns {string} A string representing the conference_record.
    */
   matchConferenceRecordFromTranscriptEntryName(transcriptEntryName: string) {
-    return this.pathTemplates.transcriptEntryPathTemplate.match(transcriptEntryName).conference_record;
+    return this.pathTemplates.transcriptEntryPathTemplate.match(
+      transcriptEntryName,
+    ).conference_record;
   }
 
   /**
@@ -1004,7 +2189,9 @@ export class SpacesServiceClient {
    * @returns {string} A string representing the transcript.
    */
   matchTranscriptFromTranscriptEntryName(transcriptEntryName: string) {
-    return this.pathTemplates.transcriptEntryPathTemplate.match(transcriptEntryName).transcript;
+    return this.pathTemplates.transcriptEntryPathTemplate.match(
+      transcriptEntryName,
+    ).transcript;
   }
 
   /**
@@ -1015,7 +2202,9 @@ export class SpacesServiceClient {
    * @returns {string} A string representing the entry.
    */
   matchEntryFromTranscriptEntryName(transcriptEntryName: string) {
-    return this.pathTemplates.transcriptEntryPathTemplate.match(transcriptEntryName).entry;
+    return this.pathTemplates.transcriptEntryPathTemplate.match(
+      transcriptEntryName,
+    ).entry;
   }
 
   /**

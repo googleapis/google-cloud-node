@@ -84,7 +84,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list control compliance summaries | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/monitoring.list_control_compliance_summaries.js) |
 | list finding summaries | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/monitoring.list_finding_summaries.js) |
 | list framework compliance summaries | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/monitoring.list_framework_compliance_summaries.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/snippet_metadata_google.cloud.cloudsecuritycompliance.v1.json) |
 
 
 ## Supported Node.js Versions

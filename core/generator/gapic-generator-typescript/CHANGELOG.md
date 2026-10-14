@@ -1,6 +1,124 @@
 # Changelog
 
 
+## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.6.0...gapic-generator-v5.7.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.5.0...gapic-generator-v5.6.0) (2026-09-28)
+
+
+### Features
+
+* **generator:** Generate resumable upload client methods ([#9285](https://github.com/googleapis/google-cloud-node/issues/9285)) ([7333216](https://github.com/googleapis/google-cloud-node/commit/733321662eb9b832df1b80227292465814ace10e))
+* **generator:** Select resumable upload methods ([#9284](https://github.com/googleapis/google-cloud-node/issues/9284)) ([a9d7cab](https://github.com/googleapis/google-cloud-node/commit/a9d7cab354d75107296197310fc0cd50c965a148))
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [5.5.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.4.0...gapic-generator-v5.5.0) (2026-09-23)
+
+
+### Features
+
+* **generator:** Use runtime-agnostic test runner in GAPIC package templates ([0722a34](https://github.com/googleapis/google-cloud-node/commit/0722a3415190ce725537091d67b49dbaccb5cd2a))
+
+
+### Bug Fixes
+
+* **gax:** Move gapic-generator-typescript into the root pnpm workspace ([#9418](https://github.com/googleapis/google-cloud-node/issues/9418)) ([d2c4b08](https://github.com/googleapis/google-cloud-node/commit/d2c4b08ae8f3a18c252a09a09e1ae1e49d4cd822))
+
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.3.0...gapic-generator-v5.4.0) (2026-09-22)
+
+
+### Features
+
+* **o11y:** Wire enable_telemetry_tracing through the generator CLI ([#9373](https://github.com/googleapis/google-cloud-node/issues/9373)) ([3533155](https://github.com/googleapis/google-cloud-node/commit/353315572a16fb6bf34bfec4b96acea5917e1bf8))
+
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.2.0...gapic-generator-v5.3.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.1.1...gapic-generator-v5.2.0) (2026-09-03)
+
+
+### Features
+
+* **generator:** Add internalTelemetryInfo configuration to nunjucks templates ([#9174](https://github.com/googleapis/google-cloud-node/issues/9174)) ([9320305](https://github.com/googleapis/google-cloud-node/commit/932030548323f0181bb175b0519a6e77cbe64cad))
+
+## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.1.0...gapic-generator-v5.1.1) (2026-09-03)
+
+
+### Bug Fixes
+
+* **gapic-generator-typescript:** Update prettier formatting guidelines ([#9239](https://github.com/googleapis/google-cloud-node/issues/9239)) ([0725ed9](https://github.com/googleapis/google-cloud-node/commit/0725ed96195258b45de6b77f36a07d187f677fe3))
+
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.0.1...gapic-generator-v5.1.0) (2026-08-21)
+
+
+### Features
+
+* **o11y:** Introduce observability flags needed within the generator ([#9052](https://github.com/googleapis/google-cloud-node/issues/9052)) ([849708b](https://github.com/googleapis/google-cloud-node/commit/849708b7f2b54b4fbfbcccd03de1fa808226d249))
+
+## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.0.0...gapic-generator-v5.0.1) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.13.0...gapic-generator-v5.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 for the gapic-generator-typescript ([#9029](https://github.com/googleapis/google-cloud-node/issues/9029))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 for the gapic-generator-typescript ([#9029](https://github.com/googleapis/google-cloud-node/issues/9029)) ([863c3cc](https://github.com/googleapis/google-cloud-node/commit/863c3cc4b1c2e1d58f57bbaee1ade8fe96c19bc0))
+
+## [4.13.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.12.2...gapic-generator-v4.13.0) (2026-07-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#8914](https://github.com/googleapis/google-cloud-node/issues/8914)) ([e9d308b](https://github.com/googleapis/google-cloud-node/commit/e9d308b814c3d6d97bb39873a398ba0aea807718))
+
+## [4.12.2](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.12.1...gapic-generator-v4.12.2) (2026-07-13)
+
+
+### Bug Fixes
+
+* **generator:** Add long dependency to CJS template and update baselines ([#8685](https://github.com/googleapis/google-cloud-node/issues/8685)) ([8e51888](https://github.com/googleapis/google-cloud-node/commit/8e5188877da05a226e9976b2e5057eaec5054d1f))
+* **generator:** Update package.json template to monorepo repository/homepage schema and &gt;=18 engines range ([#8840](https://github.com/googleapis/google-cloud-node/issues/8840)) ([f120e17](https://github.com/googleapis/google-cloud-node/commit/f120e17e588d0a0d7fbf037aa17ab1c869dda90e))
+
+## [4.12.1](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.12.0...gapic-generator-v4.12.1) (2026-06-26)
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+* **generator:** Filter out empty services from api.services ([#8686](https://github.com/googleapis/google-cloud-node/issues/8686)) ([aae55b3](https://github.com/googleapis/google-cloud-node/commit/aae55b30b22c27d004d2eaa0fc25b61cbd742832))
+
+## [4.12.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.11.14...gapic-generator-v4.12.0) (2026-06-08)
+
+
+### Features
+
+* Clean up per-package eslintrc configurations ([b053d0e](https://github.com/googleapis/google-cloud-node/commit/b053d0edfa1ade74ce069279af86f058c77a589b))
+* Consolidate package manager to pnpm on gapic-generator-typescript ([#8365](https://github.com/googleapis/google-cloud-node/issues/8365)) ([5c16c62](https://github.com/googleapis/google-cloud-node/commit/5c16c6218730d4835fae3c2c6abe78f21d856bcb))
+* **doc:** Add space to readme ([#8448](https://github.com/googleapis/google-cloud-node/issues/8448)) ([d56eb08](https://github.com/googleapis/google-cloud-node/commit/d56eb080b89bf58bd8235f4843f3801ecd1ae8be))
+* **gapic-generator-typescript:** Disable snippet metadata generation ([#8403](https://github.com/googleapis/google-cloud-node/issues/8403)) ([1c44d96](https://github.com/googleapis/google-cloud-node/commit/1c44d96461b5e8729352001ec9027c20e074470b))
+
 ## [4.11.14](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v4.11.13...gapic-generator-v4.11.14) (2026-05-11)
 
 

@@ -1,17 +1,16 @@
 {
-  "name": "databasecenter",
-  "name_pretty": "Database Center API",
-  "product_documentation": "https://cloud.google.com/database-center/docs/overview",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/databasecenter/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/databasecenter",
-  "api_id": "databasecenter.googleapis.com",
-  "default_version": "v1beta",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "databasecenter"
+    "api_description": "Database Center offers a comprehensive, organization-wide platform for\nmonitoring database fleet health across various products. It simplifies\nmanagement and reduces risk by automatically aggregating and summarizing\nkey health signals, removing the need for custom dashboards. The platform\nprovides a unified view through its dashboard and API, enabling teams\nfocused on reliability, compliance, security, cost, and administration to\nquickly identify and address relevant issues within their database fleets.",
+    "api_id": "databasecenter.googleapis.com",
+    "api_shortname": "databasecenter",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/databasecenter/latest",
+    "default_version": "v1beta",
+    "distribution_name": "@google-cloud/databasecenter",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1476470",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "databasecenter",
+    "name_pretty": "Database Center",
+    "product_documentation": "https://cloud.google.com/database-center/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

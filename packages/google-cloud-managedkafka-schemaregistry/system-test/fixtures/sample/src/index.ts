@@ -19,7 +19,9 @@
 import {ManagedSchemaRegistryClient} from '@google-cloud/managedkafka-schemaregistry';
 
 // check that the client class type name can be used
-function doStuffWithManagedSchemaRegistryClient(client: ManagedSchemaRegistryClient) {
+function doStuffWithManagedSchemaRegistryClient(
+  client: ManagedSchemaRegistryClient,
+) {
   client.close();
 }
 

@@ -28,10 +28,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -59,7 +59,7 @@ export class SecretManagerServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('secret-manager');
@@ -72,10 +72,10 @@ export class SecretManagerServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  secretManagerServiceStub?: Promise<{ [name: string]: Function }>;
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  secretManagerServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of SecretManagerServiceClient.
@@ -151,7 +151,7 @@ export class SecretManagerServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -232,13 +232,13 @@ export class SecretManagerServiceClient {
         'projects/{project}/secrets/{secret}',
       ),
       topicPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/topics/{topic}'
+        'projects/{project}/topics/{topic}',
       ),
       secretPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/secrets/{secret}'
+        'projects/{project}/secrets/{secret}',
       ),
       secretVersionPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/secrets/{secret}/versions/{secret_version}'
+        'projects/{project}/secrets/{secret}/versions/{secret_version}',
       ),
     };
 
@@ -258,12 +258,21 @@ export class SecretManagerServiceClient {
       ),
     };
 
+    const internalTelemetryInfo = {
+      gcpClientService: 'secret-manager',
+      gcpVersion: 'v1',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: '@google-cloud/secret-manager',
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.secretmanager.v1.SecretManagerService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
+      opts.enableTelemetryTracing,
+      internalTelemetryInfo,
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -304,7 +313,7 @@ export class SecretManagerServiceClient {
             .SecretManagerService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -324,10 +333,12 @@ export class SecretManagerServiceClient {
       'setIamPolicy',
       'getIamPolicy',
       'testIamPermissions',
+      'enableManagedRotation',
+      'rotateSecret',
     ];
     for (const methodName of secretManagerServiceStubMethods) {
       const callPromise = this.secretManagerServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -537,7 +548,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createSecret request %j', request);
@@ -679,7 +690,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('addSecretVersion request %j', request);
@@ -812,7 +823,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSecret request %j', request);
@@ -950,7 +961,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'secret.name': request.secret!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateSecret request %j', request);
@@ -1090,7 +1101,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteSecret request %j', request);
@@ -1236,7 +1247,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getSecretVersion request %j', request);
@@ -1391,7 +1402,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('accessSecretVersion request %j', request);
@@ -1546,7 +1557,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('disableSecretVersion request %j', request);
@@ -1701,7 +1712,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('enableSecretVersion request %j', request);
@@ -1857,7 +1868,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('destroySecretVersion request %j', request);
@@ -2004,7 +2015,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setIamPolicy request %j', request);
@@ -2133,7 +2144,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIamPolicy request %j', request);
@@ -2269,7 +2280,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('testIamPermissions request %j', request);
@@ -2294,6 +2305,297 @@ export class SecretManagerServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('testIamPermissions response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Enables the managed rotation feature for a
+   * {@link protos.google.cloud.secretmanager.v1.Secret|Secret}. This method can only be
+   * triggered once for a secret. In order to do further rotations, RotateSecret
+   * should be used. This method will add a secret version and update the
+   * password in Cloud SQL.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to associate with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
+   *   `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
+   * @param {google.cloud.secretmanager.v1.EnableManagedRotationRequest.CloudSQLSingleUserCredentials} request.cloudSqlSingleUserCredentials
+   *   Credentials required for Cloud SQL DB for Single user Managed Rotation.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secret_manager_service.enable_managed_rotation.js</caption>
+   * region_tag:secretmanager_v1_generated_SecretManagerService_EnableManagedRotation_async
+   */
+  enableManagedRotation(
+    request?: protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      (
+        | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  enableManagedRotation(
+    request: protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  enableManagedRotation(
+    request: protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest,
+    callback: Callback<
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  enableManagedRotation(
+    request?: protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      (
+        | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('enableManagedRotation request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('enableManagedRotation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .enableManagedRotation(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          (
+            | protos.google.cloud.secretmanager.v1.IEnableManagedRotationRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('enableManagedRotation response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Do a managed rotation for a {@link protos.google.cloud.secretmanager.v1.Secret|Secret}.
+   * This can only be triggered after Managed rotation has been enabled.
+   * This method will add a secret version and update the password in Cloud SQL.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the
+   *   {@link protos.google.cloud.secretmanager.v1.Secret|Secret} to associate with the
+   *   {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
+   *   `projects/* /secrets/*` or `projects/* /locations/* /secrets/*`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/secret_manager_service.rotate_secret.js</caption>
+   * region_tag:secretmanager_v1_generated_SecretManagerService_RotateSecret_async
+   */
+  rotateSecret(
+    request?: protos.google.cloud.secretmanager.v1.IRotateSecretRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      protos.google.cloud.secretmanager.v1.IRotateSecretRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  rotateSecret(
+    request: protos.google.cloud.secretmanager.v1.IRotateSecretRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      | protos.google.cloud.secretmanager.v1.IRotateSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  rotateSecret(
+    request: protos.google.cloud.secretmanager.v1.IRotateSecretRequest,
+    callback: Callback<
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      | protos.google.cloud.secretmanager.v1.IRotateSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  rotateSecret(
+    request?: protos.google.cloud.secretmanager.v1.IRotateSecretRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          | protos.google.cloud.secretmanager.v1.IRotateSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      | protos.google.cloud.secretmanager.v1.IRotateSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.secretmanager.v1.ISecretVersion,
+      protos.google.cloud.secretmanager.v1.IRotateSecretRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('rotateSecret request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          | protos.google.cloud.secretmanager.v1.IRotateSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('rotateSecret response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .rotateSecret(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.secretmanager.v1.ISecretVersion,
+          protos.google.cloud.secretmanager.v1.IRotateSecretRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('rotateSecret response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2420,7 +2722,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2498,7 +2800,7 @@ export class SecretManagerServiceClient {
       });
     const defaultCallSettings = this._defaults['listSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSecrets stream %j', request);
@@ -2558,7 +2860,7 @@ export class SecretManagerServiceClient {
       });
     const defaultCallSettings = this._defaults['listSecrets'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSecrets iterate %j', request);
@@ -2675,7 +2977,7 @@ export class SecretManagerServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2754,7 +3056,7 @@ export class SecretManagerServiceClient {
       });
     const defaultCallSettings = this._defaults['listSecretVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSecretVersions stream %j', request);
@@ -2815,7 +3117,7 @@ export class SecretManagerServiceClient {
       });
     const defaultCallSettings = this._defaults['listSecretVersions'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listSecretVersions iterate %j', request);
@@ -3229,11 +3531,12 @@ export class SecretManagerServiceClient {
    */
   close(): Promise<void> {
     if (this.secretManagerServiceStub && !this._terminated) {
-      return this.secretManagerServiceStub.then((stub) => {
+      // eslint-disable-next-line promise/always-return
+      return this.secretManagerServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
       });

@@ -27,6 +27,14 @@
         "ListContentBundles": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "BatchActivateContentBundles": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchDeactivateContentBundles": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

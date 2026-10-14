@@ -16,7 +16,7 @@ import {ResourceStream} from '@google-cloud/paginator';
 import {Readable} from 'stream';
 
 import {ReadStream} from './read_stream';
-import * as protos from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 import {TableReference, ReadClient} from './read_client';
 import {DataFormat} from './data_format';
 import {logger} from '../util/logger';

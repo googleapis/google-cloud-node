@@ -1,0 +1,7 @@
+[
+  "../../protos/google/cloud/productregistry/v1/cloud_product_registry_read_service.proto",
+  "../../protos/google/cloud/productregistry/v1/lifecycle_state.proto",
+  "../../protos/google/cloud/productregistry/v1/logical_product.proto",
+  "../../protos/google/cloud/productregistry/v1/logical_product_variant.proto",
+  "../../protos/google/cloud/productregistry/v1/product_suite.proto"
+]

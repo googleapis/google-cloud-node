@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as issueresolutionserviceModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -188,7 +188,7 @@ describe('v1.IssueResolutionServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.issueResolutionServiceStub, undefined);
@@ -196,13 +196,13 @@ describe('v1.IssueResolutionServiceClient', () => {
       assert(client.issueResolutionServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.issueResolutionServiceStub);
@@ -211,15 +211,15 @@ describe('v1.IssueResolutionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.issueResolutionServiceStub, undefined);
@@ -228,7 +228,7 @@ describe('v1.IssueResolutionServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -237,7 +237,7 @@ describe('v1.IssueResolutionServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -250,7 +250,7 @@ describe('v1.IssueResolutionServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -274,7 +274,7 @@ describe('v1.IssueResolutionServiceClient', () => {
     it('invokes renderAccountIssues without error', async () => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -307,7 +307,7 @@ describe('v1.IssueResolutionServiceClient', () => {
     it('invokes renderAccountIssues without error using callback', async () => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -355,7 +355,7 @@ describe('v1.IssueResolutionServiceClient', () => {
     it('invokes renderAccountIssues with error', async () => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -387,7 +387,7 @@ describe('v1.IssueResolutionServiceClient', () => {
     it('invokes renderAccountIssues with closed client', async () => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -400,7 +400,7 @@ describe('v1.IssueResolutionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.renderAccountIssues(request), expectedError);
@@ -411,7 +411,7 @@ describe('v1.IssueResolutionServiceClient', () => {
     it('invokes renderProductIssues without error', async () => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -444,7 +444,7 @@ describe('v1.IssueResolutionServiceClient', () => {
     it('invokes renderProductIssues without error using callback', async () => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -492,7 +492,7 @@ describe('v1.IssueResolutionServiceClient', () => {
     it('invokes renderProductIssues with error', async () => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -524,7 +524,7 @@ describe('v1.IssueResolutionServiceClient', () => {
     it('invokes renderProductIssues with closed client', async () => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -537,7 +537,7 @@ describe('v1.IssueResolutionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.renderProductIssues(request), expectedError);
@@ -548,7 +548,7 @@ describe('v1.IssueResolutionServiceClient', () => {
     it('invokes triggerAction without error', async () => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -580,7 +580,7 @@ describe('v1.IssueResolutionServiceClient', () => {
     it('invokes triggerAction without error using callback', async () => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -628,7 +628,7 @@ describe('v1.IssueResolutionServiceClient', () => {
     it('invokes triggerAction with error', async () => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -660,7 +660,7 @@ describe('v1.IssueResolutionServiceClient', () => {
     it('invokes triggerAction with closed client', async () => {
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -673,7 +673,7 @@ describe('v1.IssueResolutionServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.triggerAction(request), expectedError);
@@ -688,7 +688,7 @@ describe('v1.IssueResolutionServiceClient', () => {
       };
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v1.IssueResolutionServiceClient', () => {
       };
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -794,7 +794,7 @@ describe('v1.IssueResolutionServiceClient', () => {
       };
       const client =
         new issueresolutionserviceModule.v1.IssueResolutionServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

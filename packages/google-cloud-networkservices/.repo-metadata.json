@@ -1,17 +1,15 @@
 {
-  "name": "networkservices",
-  "name_pretty": "Network Services API",
-  "product_documentation": "cloud.google.com/media-cdn/",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/networkservices/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/networkservices",
-  "api_id": "networkservices.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "networkservices"
+    "api_id": "networkservices.googleapis.com",
+    "api_shortname": "networkservices",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/networkservices/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/networkservices",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=1132189&template=1639113",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "networkservices",
+    "name_pretty": "Network Services",
+    "product_documentation": "https://cloud.google.com/products/networking/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

@@ -66,7 +66,8 @@ import {
 import {CallOptions, Operation} from 'google-gax';
 import {ServiceError} from 'google-gax';
 import {Bigtable} from '.';
-import {google} from '../protos/protos';
+import {protos} from '.';
+import google = protos.google;
 import {Backup, RestoreTableCallback, RestoreTableResponse} from './backup';
 import {ClusterUtils} from './utils/cluster';
 import {AuthorizedView} from './authorized-view';

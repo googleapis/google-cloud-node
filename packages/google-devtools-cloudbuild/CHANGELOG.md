@@ -1,5 +1,44 @@
 # Changelog
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v6.1.1...cloudbuild-v6.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [6.1.1](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v6.1.0...cloudbuild-v6.1.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v6.0.0...cloudbuild-v6.1.0) (2026-08-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#9140](https://github.com/googleapis/google-cloud-node/issues/9140)) ([863bc96](https://github.com/googleapis/google-cloud-node/commit/863bc964abda34bc82b58409af164ff9c7346c55))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v5.6.0...cloudbuild-v6.0.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [5.6.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v5.5.1...cloudbuild-v5.6.0) (2026-06-25)
+
+
+### Features
+
+* Update sources and regenerate ([#8714](https://github.com/googleapis/google-cloud-node/issues/8714)) ([65e2f6d](https://github.com/googleapis/google-cloud-node/commit/65e2f6d327834f4e8e1e39b7b7cbaa1fc29e6cfa))
+
 ## [5.5.1](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v5.5.0...cloudbuild-v5.5.1) (2026-05-01)
 
 

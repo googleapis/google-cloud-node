@@ -1,0 +1,38 @@
+# Changelog
+
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/logging-api-v0.4.0...logging-api-v0.5.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-logging-api-v0.3.0...google-cloud-logging-api-v0.4.0) (2026-09-08)
+
+
+### Features
+
+* Upgrade librarian gapic-generator-typescript to v5.2.0 ([c249594](https://github.com/googleapis/google-cloud-node/commit/c249594c6ef41e4b36f1ef8869341a4c98c092b0))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-logging-api-v0.2.0...google-cloud-logging-api-v0.3.0) (2026-08-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026))
+
+### Features
+
+* Upgrade minimum Node.js version to 22 ([#9026](https://github.com/googleapis/google-cloud-node/issues/9026)) ([1ed703f](https://github.com/googleapis/google-cloud-node/commit/1ed703f36743d61fb302b42a6cee53c07034b2fe))
+
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/google-cloud-logging-api-v0.1.0...google-cloud-logging-api-v0.2.0) (2026-07-20)
+
+
+### Features
+
+* **google/logging/v2:** Onboard a new library ([#8863](https://github.com/googleapis/google-cloud-node/issues/8863)) ([2ac07e4](https://github.com/googleapis/google-cloud-node/commit/2ac07e4a497ed1550ad8696e8549537fec4c6e6e))
+
+
+### Bug Fixes
+
+* Change the copyright year for files in the packages folder ([#8109](https://github.com/googleapis/google-cloud-node/issues/8109)) ([c1a03fe](https://github.com/googleapis/google-cloud-node/commit/c1a03fe604662091be283055c7d34052c64d6334))

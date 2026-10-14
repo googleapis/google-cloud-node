@@ -40,7 +40,7 @@ module.exports = {
     includePattern: '\\.js$'
   },
   templates: {
-    copyright: 'Copyright 2025 Google LLC',
+    copyright: 'Copyright 2026 Google LLC',
     includeDate: false,
     sourceFiles: false,
     systemName: '@google-cloud/capacityplanner',

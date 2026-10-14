@@ -58,7 +58,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/snippet_metadata_google.cloud.video.stitcher.v1.json) |
 | create cdn key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_cdn_key.js) |
 | create live config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_live_config.js) |
 | create live session | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/samples/generated/v1/video_stitcher_service.create_live_session.js) |
@@ -122,7 +121,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -132,7 +131,7 @@ are generated from a central template.
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-video-stitcher/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project

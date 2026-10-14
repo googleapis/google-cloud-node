@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as intentsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v2.IntentsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.intentsStub, undefined);
@@ -282,12 +282,12 @@ describe('v2.IntentsClient', () => {
       assert(client.intentsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.intentsStub);
@@ -296,14 +296,14 @@ describe('v2.IntentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.intentsStub, undefined);
@@ -312,7 +312,7 @@ describe('v2.IntentsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v2.IntentsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v2.IntentsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v2.IntentsClient', () => {
   describe('getIntent', () => {
     it('invokes getIntent without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes getIntent without error using callback', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes getIntent with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -461,7 +461,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes getIntent with closed client', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -474,7 +474,7 @@ describe('v2.IntentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getIntent(request), expectedError);
@@ -484,7 +484,7 @@ describe('v2.IntentsClient', () => {
   describe('createIntent', () => {
     it('invokes createIntent without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -515,7 +515,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes createIntent without error using callback', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -562,7 +562,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes createIntent with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -593,7 +593,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes createIntent with closed client', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -606,7 +606,7 @@ describe('v2.IntentsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createIntent(request), expectedError);
@@ -616,7 +616,7 @@ describe('v2.IntentsClient', () => {
   describe('updateIntent', () => {
     it('invokes updateIntent without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -648,7 +648,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes updateIntent without error using callback', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes updateIntent with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes updateIntent with closed client', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -742,7 +742,7 @@ describe('v2.IntentsClient', () => {
       );
       request.intent.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateIntent(request), expectedError);
@@ -752,7 +752,7 @@ describe('v2.IntentsClient', () => {
   describe('deleteIntent', () => {
     it('invokes deleteIntent without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -783,7 +783,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes deleteIntent without error using callback', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -830,7 +830,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes deleteIntent with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -861,7 +861,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes deleteIntent with closed client', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -874,7 +874,7 @@ describe('v2.IntentsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteIntent(request), expectedError);
@@ -884,7 +884,7 @@ describe('v2.IntentsClient', () => {
   describe('batchUpdateIntents', () => {
     it('invokes batchUpdateIntents without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -917,7 +917,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes batchUpdateIntents without error using callback', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -971,7 +971,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes batchUpdateIntents with call error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1002,7 +1002,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes batchUpdateIntents with LRO error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1035,7 +1035,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes checkBatchUpdateIntentsProgress without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1043,8 +1043,8 @@ describe('v2.IntentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchUpdateIntentsProgress(
@@ -1057,7 +1057,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes checkBatchUpdateIntentsProgress with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1078,7 +1078,7 @@ describe('v2.IntentsClient', () => {
   describe('batchDeleteIntents', () => {
     it('invokes batchDeleteIntents without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1111,7 +1111,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes batchDeleteIntents without error using callback', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1165,7 +1165,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes batchDeleteIntents with call error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1196,7 +1196,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes batchDeleteIntents with LRO error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1229,7 +1229,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes checkBatchDeleteIntentsProgress without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1237,8 +1237,8 @@ describe('v2.IntentsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkBatchDeleteIntentsProgress(
@@ -1251,7 +1251,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes checkBatchDeleteIntentsProgress with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1272,7 +1272,7 @@ describe('v2.IntentsClient', () => {
   describe('listIntents', () => {
     it('invokes listIntents without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1305,7 +1305,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes listIntents without error using callback', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1354,7 +1354,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes listIntents with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1385,7 +1385,7 @@ describe('v2.IntentsClient', () => {
 
     it('invokes listIntentsStream without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1431,15 +1431,15 @@ describe('v2.IntentsClient', () => {
       assert(
         (client.descriptors.page.listIntents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listIntentsStream with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1482,15 +1482,15 @@ describe('v2.IntentsClient', () => {
       assert(
         (client.descriptors.page.listIntents.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIntents without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1525,15 +1525,15 @@ describe('v2.IntentsClient', () => {
       assert(
         (client.descriptors.page.listIntents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listIntents with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1567,16 +1567,16 @@ describe('v2.IntentsClient', () => {
       assert(
         (client.descriptors.page.listIntents.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1606,7 +1606,7 @@ describe('v2.IntentsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1650,7 +1650,7 @@ describe('v2.IntentsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1685,7 +1685,7 @@ describe('v2.IntentsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1733,7 +1733,7 @@ describe('v2.IntentsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1774,7 +1774,7 @@ describe('v2.IntentsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1795,7 +1795,7 @@ describe('v2.IntentsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1823,7 +1823,7 @@ describe('v2.IntentsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1833,7 +1833,7 @@ describe('v2.IntentsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1857,7 +1857,7 @@ describe('v2.IntentsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1879,7 +1879,7 @@ describe('v2.IntentsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1907,7 +1907,7 @@ describe('v2.IntentsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -1917,7 +1917,7 @@ describe('v2.IntentsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1941,7 +1941,7 @@ describe('v2.IntentsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1963,7 +1963,7 @@ describe('v2.IntentsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -1991,7 +1991,7 @@ describe('v2.IntentsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2001,7 +2001,7 @@ describe('v2.IntentsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2025,7 +2025,7 @@ describe('v2.IntentsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2060,7 +2060,7 @@ describe('v2.IntentsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2088,6 +2088,71 @@ describe('v2.IntentsClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('companionAgent', async () => {
+      const fakePath = '/rendered/path/companionAgent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        companion_agent: 'companionAgentValue',
+      };
+      const client = new intentsModule.v2.IntentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.companionAgentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.companionAgentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('companionAgentPath', () => {
+        const result = client.companionAgentPath(
+          'projectValue',
+          'locationValue',
+          'companionAgentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromCompanionAgentName', () => {
+        const result = client.matchProjectFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromCompanionAgentName', () => {
+        const result = client.matchLocationFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCompanionAgentFromCompanionAgentName', () => {
+        const result =
+          client.matchCompanionAgentFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'companionAgentValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('conversationDataset', async () => {
       const fakePath = '/rendered/path/conversationDataset';
       const expectedParameters = {
@@ -2096,7 +2161,7 @@ describe('v2.IntentsClient', () => {
         conversation_dataset: 'conversationDatasetValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2173,7 +2238,7 @@ describe('v2.IntentsClient', () => {
         location: 'locationValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2226,7 +2291,7 @@ describe('v2.IntentsClient', () => {
         generator: 'generatorValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2291,7 +2356,7 @@ describe('v2.IntentsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2382,7 +2447,7 @@ describe('v2.IntentsClient', () => {
         project: 'projectValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2420,7 +2485,7 @@ describe('v2.IntentsClient', () => {
         project: 'projectValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2459,7 +2524,7 @@ describe('v2.IntentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2522,7 +2587,7 @@ describe('v2.IntentsClient', () => {
         environment: 'environmentValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2589,7 +2654,7 @@ describe('v2.IntentsClient', () => {
         context: 'contextValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2715,7 +2780,7 @@ describe('v2.IntentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2836,7 +2901,7 @@ describe('v2.IntentsClient', () => {
         project: 'projectValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2882,7 +2947,7 @@ describe('v2.IntentsClient', () => {
         intent: 'intentValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2944,7 +3009,7 @@ describe('v2.IntentsClient', () => {
         context: 'contextValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3023,7 +3088,7 @@ describe('v2.IntentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3099,7 +3164,7 @@ describe('v2.IntentsClient', () => {
         version: 'versionValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3160,7 +3225,7 @@ describe('v2.IntentsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3223,7 +3288,7 @@ describe('v2.IntentsClient', () => {
         message: 'messageValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3301,7 +3366,7 @@ describe('v2.IntentsClient', () => {
         conversation_model: 'conversationModelValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3367,7 +3432,7 @@ describe('v2.IntentsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3450,7 +3515,7 @@ describe('v2.IntentsClient', () => {
         participant: 'participantValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3530,7 +3595,7 @@ describe('v2.IntentsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3595,7 +3660,7 @@ describe('v2.IntentsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3658,7 +3723,7 @@ describe('v2.IntentsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3722,7 +3787,7 @@ describe('v2.IntentsClient', () => {
         document: 'documentValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3800,7 +3865,7 @@ describe('v2.IntentsClient', () => {
         location: 'locationValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3864,7 +3929,7 @@ describe('v2.IntentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3943,7 +4008,7 @@ describe('v2.IntentsClient', () => {
         environment: 'environmentValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4026,7 +4091,7 @@ describe('v2.IntentsClient', () => {
         context: 'contextValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4172,7 +4237,7 @@ describe('v2.IntentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4313,7 +4378,7 @@ describe('v2.IntentsClient', () => {
         location: 'locationValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4375,7 +4440,7 @@ describe('v2.IntentsClient', () => {
         intent: 'intentValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4455,7 +4520,7 @@ describe('v2.IntentsClient', () => {
         context: 'contextValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4556,7 +4621,7 @@ describe('v2.IntentsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4661,7 +4726,7 @@ describe('v2.IntentsClient', () => {
         version: 'versionValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4739,7 +4804,7 @@ describe('v2.IntentsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4818,7 +4883,7 @@ describe('v2.IntentsClient', () => {
         message: 'messageValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4918,7 +4983,7 @@ describe('v2.IntentsClient', () => {
         conversation_model: 'conversationModelValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5001,7 +5066,7 @@ describe('v2.IntentsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5107,7 +5172,7 @@ describe('v2.IntentsClient', () => {
         participant: 'participantValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5212,7 +5277,7 @@ describe('v2.IntentsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5295,7 +5360,7 @@ describe('v2.IntentsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5374,7 +5439,7 @@ describe('v2.IntentsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5454,7 +5519,7 @@ describe('v2.IntentsClient', () => {
         document: 'documentValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5559,7 +5624,7 @@ describe('v2.IntentsClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5623,7 +5688,7 @@ describe('v2.IntentsClient', () => {
         tool: 'toolValue',
       };
       const client = new intentsModule.v2.IntentsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

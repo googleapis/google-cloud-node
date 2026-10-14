@@ -1,3 +1,6 @@
+permissions:
+  contents: read
+
 on:
   push:
     branches:
@@ -8,12 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [18, 20, 22]
+        node: [22, 24, 26]
     steps:
-      - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
-          version: ^7.0.0
+          persist-credentials: false
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: ./.github/actions/pnpm-lockfile-check
       - run: node --version
       - run: ci/run_conditional_tests.sh
         name: Run unit tests

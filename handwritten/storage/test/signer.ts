@@ -207,15 +207,20 @@ describe('signer', () => {
           const accessibleAt = accessibleAtNumber;
           const expires = accessibleAt - 86400000;
 
-          assert.throws(() => {
-            signer.getSignedUrl({
-              version: 'v4',
-              method: 'GET',
-              accessibleAt,
-              expires,
-            }),
-              SignerExceptionMessages.EXPIRATION_BEFORE_ACCESSIBLE_DATE;
-          });
+          assert.throws(
+            () => {
+              void signer.getSignedUrl({
+                version: 'v4',
+                method: 'GET',
+                accessibleAt,
+                expires,
+              });
+            },
+            {
+              message:
+                SignerExceptionMessages.EXPIRATION_BEFORE_ACCESSIBLE_DATE,
+            }
+          );
         });
 
         describe('checkInputTypes', () => {
@@ -260,14 +265,13 @@ describe('signer', () => {
             const accessibleAt = new Date('31-12-2019');
 
             assert.throws(() => {
-              signer.getSignedUrl({
+              void signer.getSignedUrl({
                 version: 'v4',
                 method: 'GET',
                 accessibleAt,
                 expires: expiresNumber,
-              }),
-                SignerExceptionMessages.ACCESSIBLE_DATE_INVALID;
-            });
+              });
+            }, new RegExp(SignerExceptionMessages.ACCESSIBLE_DATE_INVALID));
           });
         });
       });
@@ -561,12 +565,12 @@ describe('signer', () => {
         });
       });
 
-      it('rejects with SigningError on signing Error', () => {
+      it('rejects with SigningError on signing Error', async () => {
         const err = new Error('my-err');
         err.stack = 'some-stack-trace';
         sandbox.stub(authClient, 'sign').rejects(err);
 
-        assert.rejects(() => signer['getSignedUrlV2'](CONFIG), {
+        await assert.rejects(() => signer['getSignedUrlV2'](CONFIG), {
           name: 'SigningError',
           message: 'my-err',
           stack: 'some-stack-trace',
@@ -593,7 +597,7 @@ describe('signer', () => {
 
         assert.throws(
           () => {
-            signer['getSignedUrlV4'](CONFIG);
+            void signer['getSignedUrlV4'](CONFIG);
           },
           {
             message: `Max allowed expiration is seven days (${SEVEN_DAYS} seconds).`,
@@ -719,9 +723,8 @@ describe('signer', () => {
           };
 
           assert.throws(() => {
-            signer['getSignedUrlV4'](CONFIG),
-              SignerExceptionMessages.X_GOOG_CONTENT_SHA256;
-          });
+            void signer['getSignedUrlV4'](CONFIG);
+          }, new RegExp(SignerExceptionMessages.X_GOOG_CONTENT_SHA256));
         });
       });
 
@@ -881,12 +884,12 @@ describe('signer', () => {
         );
       });
 
-      it('rejects with SigningError on signing Error', () => {
+      it('rejects with SigningError on signing Error', async () => {
         const err = new Error('my-err');
         err.stack = 'some-stack-trace';
         sinon.stub(authClient, 'sign').rejects(err);
 
-        assert.rejects(() => signer['getSignedUrlV4'](CONFIG), {
+        await assert.rejects(() => signer['getSignedUrlV4'](CONFIG), {
           name: 'SigningError',
           message: 'my-err',
           stack: 'some-stack-trace',

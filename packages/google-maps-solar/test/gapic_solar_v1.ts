@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as solarModule from '../src';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -43,7 +43,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -174,7 +174,7 @@ describe('v1.SolarClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.solarStub, undefined);
@@ -182,12 +182,12 @@ describe('v1.SolarClient', () => {
       assert(client.solarStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.solarStub);
@@ -196,14 +196,14 @@ describe('v1.SolarClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.solarStub, undefined);
@@ -212,7 +212,7 @@ describe('v1.SolarClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -220,7 +220,7 @@ describe('v1.SolarClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -232,7 +232,7 @@ describe('v1.SolarClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -255,7 +255,7 @@ describe('v1.SolarClient', () => {
   describe('findClosestBuildingInsights', () => {
     it('invokes findClosestBuildingInsights without error', async () => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -273,7 +273,7 @@ describe('v1.SolarClient', () => {
 
     it('invokes findClosestBuildingInsights without error using callback', async () => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -306,7 +306,7 @@ describe('v1.SolarClient', () => {
 
     it('invokes findClosestBuildingInsights with error', async () => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -326,7 +326,7 @@ describe('v1.SolarClient', () => {
 
     it('invokes findClosestBuildingInsights with closed client', async () => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -334,7 +334,7 @@ describe('v1.SolarClient', () => {
         new protos.google.maps.solar.v1.FindClosestBuildingInsightsRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -347,7 +347,7 @@ describe('v1.SolarClient', () => {
   describe('getDataLayers', () => {
     it('invokes getDataLayers without error', async () => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -364,7 +364,7 @@ describe('v1.SolarClient', () => {
 
     it('invokes getDataLayers without error using callback', async () => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -397,7 +397,7 @@ describe('v1.SolarClient', () => {
 
     it('invokes getDataLayers with error', async () => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -414,7 +414,7 @@ describe('v1.SolarClient', () => {
 
     it('invokes getDataLayers with closed client', async () => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -422,7 +422,7 @@ describe('v1.SolarClient', () => {
         new protos.google.maps.solar.v1.GetDataLayersRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataLayers(request), expectedError);
@@ -432,7 +432,7 @@ describe('v1.SolarClient', () => {
   describe('getGeoTiff', () => {
     it('invokes getGeoTiff without error', async () => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -449,7 +449,7 @@ describe('v1.SolarClient', () => {
 
     it('invokes getGeoTiff without error using callback', async () => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -479,7 +479,7 @@ describe('v1.SolarClient', () => {
 
     it('invokes getGeoTiff with error', async () => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -496,7 +496,7 @@ describe('v1.SolarClient', () => {
 
     it('invokes getGeoTiff with closed client', async () => {
       const client = new solarModule.v1.SolarClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -504,7 +504,7 @@ describe('v1.SolarClient', () => {
         new protos.google.maps.solar.v1.GetGeoTiffRequest(),
       );
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGeoTiff(request), expectedError);

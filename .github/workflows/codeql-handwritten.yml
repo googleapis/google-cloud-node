@@ -1,3 +1,6 @@
+permissions:
+  contents: read
+
 name: "CodeQL Advanced - handwritten"
 
 # The CodeQL jobs are kept separately so that their run time doesn't
@@ -15,7 +18,7 @@ jobs:
     #   - https://gh.io/supported-runners-and-hardware-resources
     #   - https://gh.io/using-larger-runners (GitHub.com only)
     # Consider using larger runners or machines with greater resources for possible analysis time improvements.
-    runs-on: ${{ 'ubuntu-latest' }}
+    runs-on: ubuntu-latest
     permissions:
       # required for all workflows
       security-events: write
@@ -26,6 +29,7 @@ jobs:
       # only required for workflows in private repositories
       actions: read
       contents: read
+      issues: write # Added for creating issues on failure
 
     strategy:
       fail-fast: false
@@ -47,7 +51,9 @@ jobs:
         # your codebase is analyzed, see https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/codeql-code-scanning-for-compiled-languages
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      with:
+        persist-credentials: false
 
     # Add any setup steps before running the `github/codeql-action/init` action.
     # This includes steps like installing compilers or runtimes (`actions/setup-node`
@@ -57,10 +63,18 @@ jobs:
 
     # Initializes the CodeQL tools for scanning - handwritten flavour.
     - name: Initialize CodeQL for handwritten
-      uses: github/codeql-action/init@v4
+      uses: github/codeql-action/init@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4.36.2
       with:
         config-file: .github/codeql/codeql-handwritten.yml
         languages: ${{ matrix.language }}
         build-mode: ${{ matrix.build-mode }}
     - name: Perform CodeQL Analysis for handwritten
-      uses: github/codeql-action/analyze@v4
+      uses: github/codeql-action/analyze@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4.36.2
+
+    - name: Create issue on failure
+      if: ${{ failure() }}
+      uses: googleapis/librarian/.github/actions/create-issue-on-failure@baf9b8078c5e98cb90b53088f284fb7b060e195b # main
+      with:
+        title: "CodeQL Advanced - handwritten failed"
+        body: "The daily scheduled task CodeQL Advanced - handwritten failed."
+        mention: "@googleapis/cloud-sdk-nodejs-team"

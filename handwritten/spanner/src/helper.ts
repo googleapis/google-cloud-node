@@ -15,8 +15,10 @@
 
 import {grpc} from 'google-gax';
 import {Stream} from 'stream';
+
 /**
  * Checks whether the given error is a 'Database not found' error.
+ * @deprecated Session pool is deprecated and will be removed in a future release.
  * @param {Error} error The error to check.
  * @return {boolean} True if the error is a 'Database not found' error, and otherwise false.
  */
@@ -32,6 +34,7 @@ export function isDatabaseNotFoundError(
 
 /**
  * Checks whether the given error is an 'Instance not found' error.
+ * @deprecated Session pool is deprecated and will be removed in a future release.
  * @param {Error} error The error to check.
  * @return {boolean} True if the error is an 'Instance not found' error, and otherwise false.
  */
@@ -47,6 +50,7 @@ export function isInstanceNotFoundError(
 
 /**
  * Checks whether the given error is a 'Could not load the default credentials' error.
+ * @deprecated Session pool is deprecated and will be removed in a future release.
  * @param {Error} error The error to check.
  * @return {boolean} True if the error is a 'Could not load the default credentials' error, and otherwise false.
  */
@@ -61,6 +65,7 @@ export function isDefaultCredentialsNotSetError(
 
 /**
  * Checks whether the given error is an 'Unable to detect a Project Id in the current environment' error.
+ * @deprecated Session pool is deprecated and will be removed in a future release.
  * @param {Error} error The error to check.
  * @return {boolean} True if the error is an 'Unable to detect a Project Id in the current environment' error, and otherwise false.
  */
@@ -77,6 +82,7 @@ export function isProjectIdNotSetInEnvironmentError(
 
 /**
  * Checks whether the given error is a 'Create session permission' error.
+ * @deprecated Session pool is deprecated and will be removed in a future release.
  * @param {Error} error The error to check.
  * @return {boolean} True if the error is a 'Create session permission' error, and otherwise false.
  */
@@ -278,18 +284,16 @@ export function isError(value: any): boolean {
   );
 }
 
+const UUID_REGEX =
+  /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/i;
+
 /**
  * Checks if a value is a UUID.
  * @param {*} value The value to check.
  * @returns {Boolean} `true` if the value is a UUID, otherwise `false`.
  */
 export function isUuid(value: any): boolean {
-  return (
-    typeof value === 'string' &&
-    /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$/i.test(
-      value,
-    )
-  );
+  return typeof value === 'string' && UUID_REGEX.test(value);
 }
 
 const PROJECT_ID_TOKEN = '{{projectId}}';
@@ -365,6 +369,51 @@ export function replaceProjectIdToken(value: any, projectId: string): any {
   }
 
   return value;
+}
+
+/**
+ * Checks whether an input value contains the `{{projectId}}` placeholder.
+ *
+ * @param {*} value - The value to inspect.
+ * @return {boolean} - `true` if any placeholder is found, otherwise `false`.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function hasProjectIdToken(value: any): boolean {
+  if (typeof value === 'string') {
+    return value.includes(PROJECT_ID_TOKEN);
+  }
+
+  if (
+    value === null ||
+    typeof value !== 'object' ||
+    value instanceof Buffer ||
+    value instanceof Stream ||
+    isDate(value)
+  ) {
+    return false;
+  }
+
+  if (Array.isArray(value)) {
+    for (let i = 0; i < value.length; i++) {
+      if (hasProjectIdToken(value[i])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  for (const key in value) {
+    if (Object.prototype.hasOwnProperty.call(value, key)) {
+      if (!KEYS_TO_SCAN.has(key)) {
+        continue;
+      }
+      if (hasProjectIdToken(value[key])) {
+        return true;
+      }
+    }
+  }
+
+  return false;
 }
 
 /**

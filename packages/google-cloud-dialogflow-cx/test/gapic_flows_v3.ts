@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as flowsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -274,7 +274,7 @@ describe('v3.FlowsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.flowsStub, undefined);
@@ -282,12 +282,12 @@ describe('v3.FlowsClient', () => {
       assert(client.flowsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.flowsStub);
@@ -296,14 +296,14 @@ describe('v3.FlowsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.flowsStub, undefined);
@@ -312,7 +312,7 @@ describe('v3.FlowsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -320,7 +320,7 @@ describe('v3.FlowsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -332,7 +332,7 @@ describe('v3.FlowsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -355,7 +355,7 @@ describe('v3.FlowsClient', () => {
   describe('createFlow', () => {
     it('invokes createFlow without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -386,7 +386,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes createFlow without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -433,7 +433,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes createFlow with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -464,7 +464,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes createFlow with closed client', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -477,7 +477,7 @@ describe('v3.FlowsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createFlow(request), expectedError);
@@ -487,7 +487,7 @@ describe('v3.FlowsClient', () => {
   describe('deleteFlow', () => {
     it('invokes deleteFlow without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -518,7 +518,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes deleteFlow without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -565,7 +565,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes deleteFlow with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -596,7 +596,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes deleteFlow with closed client', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -609,7 +609,7 @@ describe('v3.FlowsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteFlow(request), expectedError);
@@ -619,7 +619,7 @@ describe('v3.FlowsClient', () => {
   describe('getFlow', () => {
     it('invokes getFlow without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -650,7 +650,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes getFlow without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -697,7 +697,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes getFlow with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -725,7 +725,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes getFlow with closed client', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -738,7 +738,7 @@ describe('v3.FlowsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getFlow(request), expectedError);
@@ -748,7 +748,7 @@ describe('v3.FlowsClient', () => {
   describe('updateFlow', () => {
     it('invokes updateFlow without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -780,7 +780,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes updateFlow without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -828,7 +828,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes updateFlow with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -860,7 +860,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes updateFlow with closed client', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -874,7 +874,7 @@ describe('v3.FlowsClient', () => {
       );
       request.flow.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateFlow(request), expectedError);
@@ -884,7 +884,7 @@ describe('v3.FlowsClient', () => {
   describe('validateFlow', () => {
     it('invokes validateFlow without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -915,7 +915,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes validateFlow without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -962,7 +962,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes validateFlow with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -993,7 +993,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes validateFlow with closed client', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1006,7 +1006,7 @@ describe('v3.FlowsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.validateFlow(request), expectedError);
@@ -1016,7 +1016,7 @@ describe('v3.FlowsClient', () => {
   describe('getFlowValidationResult', () => {
     it('invokes getFlowValidationResult without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1048,7 +1048,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes getFlowValidationResult without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1095,7 +1095,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes getFlowValidationResult with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1129,7 +1129,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes getFlowValidationResult with closed client', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1142,7 +1142,7 @@ describe('v3.FlowsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1155,7 +1155,7 @@ describe('v3.FlowsClient', () => {
   describe('trainFlow', () => {
     it('invokes trainFlow without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1187,7 +1187,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes trainFlow without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1241,7 +1241,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes trainFlow with call error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1272,7 +1272,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes trainFlow with LRO error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1305,7 +1305,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes checkTrainFlowProgress without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1313,8 +1313,8 @@ describe('v3.FlowsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkTrainFlowProgress(
@@ -1327,7 +1327,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes checkTrainFlowProgress with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1345,7 +1345,7 @@ describe('v3.FlowsClient', () => {
   describe('importFlow', () => {
     it('invokes importFlow without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1377,7 +1377,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes importFlow without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1431,7 +1431,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes importFlow with call error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1462,7 +1462,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes importFlow with LRO error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1495,7 +1495,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes checkImportFlowProgress without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1503,8 +1503,8 @@ describe('v3.FlowsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkImportFlowProgress(
@@ -1517,7 +1517,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes checkImportFlowProgress with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1535,7 +1535,7 @@ describe('v3.FlowsClient', () => {
   describe('exportFlow', () => {
     it('invokes exportFlow without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1567,7 +1567,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes exportFlow without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1621,7 +1621,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes exportFlow with call error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1652,7 +1652,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes exportFlow with LRO error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1685,7 +1685,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes checkExportFlowProgress without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1693,8 +1693,8 @@ describe('v3.FlowsClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkExportFlowProgress(
@@ -1707,7 +1707,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes checkExportFlowProgress with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1725,7 +1725,7 @@ describe('v3.FlowsClient', () => {
   describe('listFlows', () => {
     it('invokes listFlows without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1758,7 +1758,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes listFlows without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1807,7 +1807,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes listFlows with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1835,7 +1835,7 @@ describe('v3.FlowsClient', () => {
 
     it('invokes listFlowsStream without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1881,15 +1881,15 @@ describe('v3.FlowsClient', () => {
       assert(
         (client.descriptors.page.listFlows.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listFlowsStream with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1932,15 +1932,15 @@ describe('v3.FlowsClient', () => {
       assert(
         (client.descriptors.page.listFlows.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFlows without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1974,15 +1974,15 @@ describe('v3.FlowsClient', () => {
       assert(
         (client.descriptors.page.listFlows.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listFlows with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2015,16 +2015,16 @@ describe('v3.FlowsClient', () => {
       assert(
         (client.descriptors.page.listFlows.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2054,7 +2054,7 @@ describe('v3.FlowsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2098,7 +2098,7 @@ describe('v3.FlowsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2133,7 +2133,7 @@ describe('v3.FlowsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2181,7 +2181,7 @@ describe('v3.FlowsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2222,7 +2222,7 @@ describe('v3.FlowsClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2243,7 +2243,7 @@ describe('v3.FlowsClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2271,7 +2271,7 @@ describe('v3.FlowsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2281,7 +2281,7 @@ describe('v3.FlowsClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2305,7 +2305,7 @@ describe('v3.FlowsClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2327,7 +2327,7 @@ describe('v3.FlowsClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2355,7 +2355,7 @@ describe('v3.FlowsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2365,7 +2365,7 @@ describe('v3.FlowsClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2389,7 +2389,7 @@ describe('v3.FlowsClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2411,7 +2411,7 @@ describe('v3.FlowsClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2439,7 +2439,7 @@ describe('v3.FlowsClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -2449,7 +2449,7 @@ describe('v3.FlowsClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2473,7 +2473,7 @@ describe('v3.FlowsClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -2508,7 +2508,7 @@ describe('v3.FlowsClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2544,7 +2544,7 @@ describe('v3.FlowsClient', () => {
         agent: 'agentValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2608,7 +2608,7 @@ describe('v3.FlowsClient', () => {
         agent: 'agentValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2687,7 +2687,7 @@ describe('v3.FlowsClient', () => {
         agent: 'agentValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2766,7 +2766,7 @@ describe('v3.FlowsClient', () => {
         changelog: 'changelogValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2843,7 +2843,7 @@ describe('v3.FlowsClient', () => {
         continuous_test_result: 'continuousTestResultValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2955,7 +2955,7 @@ describe('v3.FlowsClient', () => {
         deployment: 'deploymentValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3042,7 +3042,7 @@ describe('v3.FlowsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3118,7 +3118,7 @@ describe('v3.FlowsClient', () => {
         environment: 'environmentValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3195,7 +3195,7 @@ describe('v3.FlowsClient', () => {
         example: 'exampleValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3283,7 +3283,7 @@ describe('v3.FlowsClient', () => {
         experiment: 'experimentValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3370,7 +3370,7 @@ describe('v3.FlowsClient', () => {
         flow: 'flowValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3446,7 +3446,7 @@ describe('v3.FlowsClient', () => {
         flow: 'flowValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3539,7 +3539,7 @@ describe('v3.FlowsClient', () => {
         generator: 'generatorValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3615,7 +3615,7 @@ describe('v3.FlowsClient', () => {
         intent: 'intentValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3689,7 +3689,7 @@ describe('v3.FlowsClient', () => {
         location: 'locationValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3741,7 +3741,7 @@ describe('v3.FlowsClient', () => {
         page: 'pageValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3828,7 +3828,7 @@ describe('v3.FlowsClient', () => {
         playbook: 'playbookValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3905,7 +3905,7 @@ describe('v3.FlowsClient', () => {
         version: 'versionValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3989,7 +3989,7 @@ describe('v3.FlowsClient', () => {
         project: 'projectValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4033,7 +4033,7 @@ describe('v3.FlowsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4178,7 +4178,7 @@ describe('v3.FlowsClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4303,7 +4303,7 @@ describe('v3.FlowsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4428,7 +4428,7 @@ describe('v3.FlowsClient', () => {
         transition_route_group: 'transitionRouteGroupValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4533,7 +4533,7 @@ describe('v3.FlowsClient', () => {
         security_settings: 'securitySettingsValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4602,7 +4602,7 @@ describe('v3.FlowsClient', () => {
         test_case: 'testCaseValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4679,7 +4679,7 @@ describe('v3.FlowsClient', () => {
         result: 'resultValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4766,7 +4766,7 @@ describe('v3.FlowsClient', () => {
         tool: 'toolValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4843,7 +4843,7 @@ describe('v3.FlowsClient', () => {
         version: 'versionValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4931,7 +4931,7 @@ describe('v3.FlowsClient', () => {
         version: 'versionValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5018,7 +5018,7 @@ describe('v3.FlowsClient', () => {
         webhook: 'webhookValue',
       };
       const client = new flowsModule.v3.FlowsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

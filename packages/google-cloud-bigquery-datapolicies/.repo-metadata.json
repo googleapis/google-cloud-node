@@ -1,17 +1,16 @@
 {
-  "name": "datapolicies",
-  "name_pretty": "",
-  "product_documentation": "",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datapolicies/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "preview",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/bigquery-datapolicies",
-  "api_id": "google.cloud.bigquery.datapolicies.v1beta1",
-  "default_version": "v1beta1",
-  "requires_billing": true,
-  "api_shortname": "bigquerydatapolicy",
-  "library_type": "GAPIC_AUTO"
+    "api_description": "Allows users to manage BigQuery data policies.",
+    "api_id": "bigquerydatapolicy.googleapis.com",
+    "api_shortname": "bigquerydatapolicy",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-datapolicies/latest",
+    "default_version": "v1beta1",
+    "distribution_name": "@google-cloud/bigquery-datapolicies",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=187149&template=1162659",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "bigquerydatapolicy",
+    "name_pretty": "BigQuery Data Policy",
+    "product_documentation": "https://cloud.google.com/bigquery/docs",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-node"
 }
-

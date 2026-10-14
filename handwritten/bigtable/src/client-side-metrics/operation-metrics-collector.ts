@@ -13,23 +13,19 @@
 // limitations under the License.
 
 const {status} = require('@grpc/grpc-js');
-import * as fs from 'fs';
 import {MethodName, StreamingState} from './client-side-metrics-attributes';
 import {grpc, ServiceError} from 'google-gax';
 import * as gax from 'google-gax';
 import {AbortableDuplex, BigtableOptions} from '../index';
-import * as path from 'path';
 import {IMetricsHandler} from './metrics-handler';
 import {TimedStream} from '../timed-stream';
+import {getProtoPath} from '../utils/protos';
 
 // When this environment variable is set then print any errors associated
 // with failures in the metrics collector.
 const METRICS_DEBUG = process.env.METRICS_DEBUG;
 
-const protoPath = path.join(
-  __dirname,
-  '../../protos/google/bigtable/v2/response_params.proto',
-);
+const protoPath = getProtoPath('google/bigtable/v2/response_params.proto');
 const root = gax.protobuf.loadSync(protoPath);
 const ResponseParams = root.lookupType('ResponseParams');
 const {hrtime} = require('node:process');

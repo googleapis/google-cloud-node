@@ -22,7 +22,8 @@ import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import * as through from 'through2';
 import {RunTransactionOptions} from '../src/transaction-runner';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import IsolationLevel = google.spanner.v1.TransactionOptions.IsolationLevel;
 import ReadLockMode = google.spanner.v1.TransactionOptions.ReadWrite.ReadLockMode;
 import {randomUUID} from 'crypto';
@@ -49,9 +50,6 @@ describe('TransactionRunner', () => {
     decode: DECODE,
   };
 
-  const LOOKUP = sandbox.stub().withArgs(RETRY_KEY).returns(RETRY_INFO);
-  const FROM_JSON = sandbox.stub().returns({lookup: LOOKUP});
-
   const SESSION = {
     parent: {},
     transaction: () => fakeTransaction,
@@ -68,7 +66,9 @@ describe('TransactionRunner', () => {
 
   before(() => {
     const runners = proxyquire('../src/transaction-runner', {
-      protobufjs: {Root: {fromJSON: FROM_JSON}},
+      './protos': {
+        getRetryInfo: () => RETRY_INFO,
+      },
     });
 
     Runner = runners.Runner;

@@ -26,10 +26,10 @@ import type {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -51,7 +51,7 @@ export class PrivateAuctionDealServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('admanager');
@@ -64,9 +64,9 @@ export class PrivateAuctionDealServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
-  pathTemplates: { [name: string]: gax.PathTemplate };
-  privateAuctionDealServiceStub?: Promise<{ [name: string]: Function }>;
+  innerApiCalls: {[name: string]: Function};
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  privateAuctionDealServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of PrivateAuctionDealServiceClient.
@@ -142,14 +142,14 @@ export class PrivateAuctionDealServiceClient {
     const clientConfig = opts?.clientConfig ?? {};
     // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
     if (!opts) {
-      opts = { fallback: true };
+      opts = {fallback: true};
     } else {
       opts.fallback = opts.fallback ?? true;
     }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -215,11 +215,20 @@ export class PrivateAuctionDealServiceClient {
       adReviewCenterAdPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property_code}/adReviewCenterAds/{ad_review_center_ad}',
       ),
+      adRulePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/adRules/{ad_rule}',
+      ),
+      adSpotPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/adSpots/{ad_spot}',
+      ),
       adUnitPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/adUnits/{ad_unit}',
       ),
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/applications/{application}',
+      ),
+      assetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/assets/{asset}',
       ),
       audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/audienceSegments/{audience_segment}',
@@ -227,11 +236,17 @@ export class PrivateAuctionDealServiceClient {
       bandwidthGroupPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/bandwidthGroups/{bandwidth_group}',
       ),
+      breakTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/breakTemplates/{break_template}',
+      ),
       browserPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/browsers/{browser}',
       ),
       browserLanguagePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/browserLanguages/{browser_language}',
+      ),
+      cdnConfigPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/cdnConfigs/{cdn_config}',
       ),
       childPublisherPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/childPublishers/{child_publisher}',
@@ -257,8 +272,17 @@ export class PrivateAuctionDealServiceClient {
       contentLabelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/contentLabels/{content_label}',
       ),
+      creativePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creatives/{creative}',
+      ),
+      creativeSetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeSets/{creative_set}',
+      ),
       creativeTemplatePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/creativeTemplates/{creative_template}',
+      ),
+      creativeWrapperPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/creativeWrappers/{creative_wrapper}',
       ),
       customFieldPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customFields/{custom_field}',
@@ -269,6 +293,19 @@ export class PrivateAuctionDealServiceClient {
       customTargetingValuePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/customTargetingValues/{custom_targeting_value}',
       ),
+      daiAuthenticationKeyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiAuthenticationKeys/{dai_authentication_key}',
+      ),
+      daiEncodingProfilePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiEncodingProfiles/{dai_encoding_profile}',
+      ),
+      daiSessionPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/daiSessions/{dai_session}',
+      ),
+      defaultThirdPartyDataDeclarationPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'networks/{network_code}/defaultThirdPartyDataDeclaration',
+        ),
       deviceCapabilityPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/deviceCapabilities/{device_capability}',
       ),
@@ -290,8 +327,17 @@ export class PrivateAuctionDealServiceClient {
       lineItemPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/lineItems/{line_item}',
       ),
+      lineItemCreativeAssociationPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItems/{line_item}/creatives/{creative}',
+      ),
+      lineItemTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItemTemplates/{line_item_template}',
+      ),
       linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/linkedDevices/{linked_device}',
+      ),
+      liveStreamPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/liveStreams/{live_stream}',
       ),
       liveStreamEventPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/liveStreamEvents/{live_stream_event}',
@@ -305,6 +351,9 @@ export class PrivateAuctionDealServiceClient {
       mobileDeviceSubmodelPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/mobileDeviceSubmodels/{mobile_device_submodel}',
       ),
+      nativeStylePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/nativeStyles/{native_style}',
+      ),
       networkPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}',
       ),
@@ -316,6 +365,9 @@ export class PrivateAuctionDealServiceClient {
       ),
       orderPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/orders/{order}',
+      ),
+      partnerPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/partners/{partner}',
       ),
       placementPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/placements/{placement}',
@@ -341,14 +393,29 @@ export class PrivateAuctionDealServiceClient {
       sitePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/sites/{site}',
       ),
+      slatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/slates/{slate}',
+      ),
+      suggestedAdUnitPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/suggestedAdUnits/{suggested_ad_unit}',
+      ),
+      targetingPresetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/targetingPresets/{targeting_preset}',
+      ),
       taxonomyCategoryPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/taxonomyCategories/{taxonomy_category}',
       ),
       teamPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/teams/{team}',
       ),
+      thirdPartyCompanyPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/thirdPartyCompanies/{third_party_company}',
+      ),
       userPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/users/{user}',
+      ),
+      viewabilityProviderPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/viewabilityProviders/{viewability_provider}',
       ),
       webPropertyPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/webProperties/{web_property}',
@@ -371,7 +438,7 @@ export class PrivateAuctionDealServiceClient {
       'google.ads.admanager.v1.PrivateAuctionDealService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -412,7 +479,7 @@ export class PrivateAuctionDealServiceClient {
             .PrivateAuctionDealService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -424,7 +491,7 @@ export class PrivateAuctionDealServiceClient {
     ];
     for (const methodName of privateAuctionDealServiceStubMethods) {
       const callPromise = this.privateAuctionDealServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -539,7 +606,7 @@ export class PrivateAuctionDealServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * API to retrieve a `PrivateAuctionDeal` object.
+   * Retrieves a `PrivateAuctionDeal` object.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -627,7 +694,7 @@ export class PrivateAuctionDealServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getPrivateAuctionDeal request %j', request);
@@ -678,7 +745,7 @@ export class PrivateAuctionDealServiceClient {
       });
   }
   /**
-   * API to create a `PrivateAuctionDeal` object.
+   * Creates a `PrivateAuctionDeal` object.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -773,7 +840,7 @@ export class PrivateAuctionDealServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createPrivateAuctionDeal request %j', request);
@@ -824,7 +891,7 @@ export class PrivateAuctionDealServiceClient {
       });
   }
   /**
-   * API to update a `PrivateAuctionDeal` object.
+   * Updates a `PrivateAuctionDeal` object.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -921,7 +988,7 @@ export class PrivateAuctionDealServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'private_auction_deal.name': request.privateAuctionDeal!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updatePrivateAuctionDeal request %j', request);
@@ -973,7 +1040,7 @@ export class PrivateAuctionDealServiceClient {
   }
 
   /**
-   * API to retrieve a list of `PrivateAuctionDeal` objects.
+   * Lists `PrivateAuctionDeal` objects.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -998,22 +1065,23 @@ export class PrivateAuctionDealServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>auctionPriorityEnabled</code></li>
-   *     <li><code>blockOverrideEnabled</code></li>
-   *     <li><code>buyerAccountId</code></li>
-   *     <li><code>buyerPermissionType</code></li>
-   *     <li><code>endTime</code></li>
-   *     <li><code>externalDealId</code></li>
-   *     <li><code>floorPrice</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>privateAuctionDealId</code></li>
-   *     <li><code>privateAuctionDisplayName</code></li>
-   *     <li><code>privateAuctionId</code></li>
-   *     <li><code>status</code></li>
-   *     <li><code>updateTime</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `archived`
+   *   * `auctionPriorityEnabled`
+   *   * `blockOverrideEnabled`
+   *   * `buyerAccountId`
+   *   * `buyerPermissionType`
+   *   * `endTime`
+   *   * `externalDealId`
+   *   * `floorPrice`
+   *   * `name`
+   *   * `privateAuctionDealId`
+   *   * `privateAuctionDisplayName`
+   *   * `privateAuctionId`
+   *   * `publisherFloorExempt`
+   *   * `status`
+   *   * `updateTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -1103,7 +1171,7 @@ export class PrivateAuctionDealServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1160,22 +1228,23 @@ export class PrivateAuctionDealServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>auctionPriorityEnabled</code></li>
-   *     <li><code>blockOverrideEnabled</code></li>
-   *     <li><code>buyerAccountId</code></li>
-   *     <li><code>buyerPermissionType</code></li>
-   *     <li><code>endTime</code></li>
-   *     <li><code>externalDealId</code></li>
-   *     <li><code>floorPrice</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>privateAuctionDealId</code></li>
-   *     <li><code>privateAuctionDisplayName</code></li>
-   *     <li><code>privateAuctionId</code></li>
-   *     <li><code>status</code></li>
-   *     <li><code>updateTime</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `archived`
+   *   * `auctionPriorityEnabled`
+   *   * `blockOverrideEnabled`
+   *   * `buyerAccountId`
+   *   * `buyerPermissionType`
+   *   * `endTime`
+   *   * `externalDealId`
+   *   * `floorPrice`
+   *   * `name`
+   *   * `privateAuctionDealId`
+   *   * `privateAuctionDisplayName`
+   *   * `privateAuctionId`
+   *   * `publisherFloorExempt`
+   *   * `status`
+   *   * `updateTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -1207,7 +1276,7 @@ export class PrivateAuctionDealServiceClient {
       });
     const defaultCallSettings = this._defaults['listPrivateAuctionDeals'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPrivateAuctionDeals stream %j', request);
@@ -1245,22 +1314,23 @@ export class PrivateAuctionDealServiceClient {
    *    See syntax details at
    *    https://developers.google.com/ad-manager/api/beta/filters
    *
-   *   <b>Filterable fields:</b>
-   *   <ul style="list-style-type:none">
-   *     <li><code>auctionPriorityEnabled</code></li>
-   *     <li><code>blockOverrideEnabled</code></li>
-   *     <li><code>buyerAccountId</code></li>
-   *     <li><code>buyerPermissionType</code></li>
-   *     <li><code>endTime</code></li>
-   *     <li><code>externalDealId</code></li>
-   *     <li><code>floorPrice</code></li>
-   *     <li><code>name</code></li>
-   *     <li><code>privateAuctionDealId</code></li>
-   *     <li><code>privateAuctionDisplayName</code></li>
-   *     <li><code>privateAuctionId</code></li>
-   *     <li><code>status</code></li>
-   *     <li><code>updateTime</code></li>
-   *   </ul>
+   *   **Filterable fields:**
+   *
+   *   * `archived`
+   *   * `auctionPriorityEnabled`
+   *   * `blockOverrideEnabled`
+   *   * `buyerAccountId`
+   *   * `buyerPermissionType`
+   *   * `endTime`
+   *   * `externalDealId`
+   *   * `floorPrice`
+   *   * `name`
+   *   * `privateAuctionDealId`
+   *   * `privateAuctionDisplayName`
+   *   * `privateAuctionId`
+   *   * `publisherFloorExempt`
+   *   * `status`
+   *   * `updateTime`
    * @param {string} [request.orderBy]
    *   Optional. Expression to specify sorting order.
    *   See syntax details at
@@ -1293,7 +1363,7 @@ export class PrivateAuctionDealServiceClient {
       });
     const defaultCallSettings = this._defaults['listPrivateAuctionDeals'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listPrivateAuctionDeals iterate %j', request);
@@ -1417,6 +1487,78 @@ export class PrivateAuctionDealServiceClient {
   }
 
   /**
+   * Return a fully-qualified adRule resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} ad_rule
+   * @returns {string} Resource name string.
+   */
+  adRulePath(networkCode: string, adRule: string) {
+    return this.pathTemplates.adRulePathTemplate.render({
+      network_code: networkCode,
+      ad_rule: adRule,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdRule resource.
+   *
+   * @param {string} adRuleName
+   *   A fully-qualified path representing AdRule resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdRuleName(adRuleName: string) {
+    return this.pathTemplates.adRulePathTemplate.match(adRuleName).network_code;
+  }
+
+  /**
+   * Parse the ad_rule from AdRule resource.
+   *
+   * @param {string} adRuleName
+   *   A fully-qualified path representing AdRule resource.
+   * @returns {string} A string representing the ad_rule.
+   */
+  matchAdRuleFromAdRuleName(adRuleName: string) {
+    return this.pathTemplates.adRulePathTemplate.match(adRuleName).ad_rule;
+  }
+
+  /**
+   * Return a fully-qualified adSpot resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} ad_spot
+   * @returns {string} Resource name string.
+   */
+  adSpotPath(networkCode: string, adSpot: string) {
+    return this.pathTemplates.adSpotPathTemplate.render({
+      network_code: networkCode,
+      ad_spot: adSpot,
+    });
+  }
+
+  /**
+   * Parse the network_code from AdSpot resource.
+   *
+   * @param {string} adSpotName
+   *   A fully-qualified path representing AdSpot resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAdSpotName(adSpotName: string) {
+    return this.pathTemplates.adSpotPathTemplate.match(adSpotName).network_code;
+  }
+
+  /**
+   * Parse the ad_spot from AdSpot resource.
+   *
+   * @param {string} adSpotName
+   *   A fully-qualified path representing AdSpot resource.
+   * @returns {string} A string representing the ad_spot.
+   */
+  matchAdSpotFromAdSpotName(adSpotName: string) {
+    return this.pathTemplates.adSpotPathTemplate.match(adSpotName).ad_spot;
+  }
+
+  /**
    * Return a fully-qualified adUnit resource name string.
    *
    * @param {string} network_code
@@ -1488,6 +1630,42 @@ export class PrivateAuctionDealServiceClient {
   matchApplicationFromApplicationName(applicationName: string) {
     return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .application;
+  }
+
+  /**
+   * Return a fully-qualified asset resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} asset
+   * @returns {string} Resource name string.
+   */
+  assetPath(networkCode: string, asset: string) {
+    return this.pathTemplates.assetPathTemplate.render({
+      network_code: networkCode,
+      asset: asset,
+    });
+  }
+
+  /**
+   * Parse the network_code from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).network_code;
+  }
+
+  /**
+   * Parse the asset from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the asset.
+   */
+  matchAssetFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).asset;
   }
 
   /**
@@ -1571,6 +1749,44 @@ export class PrivateAuctionDealServiceClient {
   }
 
   /**
+   * Return a fully-qualified breakTemplate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} break_template
+   * @returns {string} Resource name string.
+   */
+  breakTemplatePath(networkCode: string, breakTemplate: string) {
+    return this.pathTemplates.breakTemplatePathTemplate.render({
+      network_code: networkCode,
+      break_template: breakTemplate,
+    });
+  }
+
+  /**
+   * Parse the network_code from BreakTemplate resource.
+   *
+   * @param {string} breakTemplateName
+   *   A fully-qualified path representing BreakTemplate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromBreakTemplateName(breakTemplateName: string) {
+    return this.pathTemplates.breakTemplatePathTemplate.match(breakTemplateName)
+      .network_code;
+  }
+
+  /**
+   * Parse the break_template from BreakTemplate resource.
+   *
+   * @param {string} breakTemplateName
+   *   A fully-qualified path representing BreakTemplate resource.
+   * @returns {string} A string representing the break_template.
+   */
+  matchBreakTemplateFromBreakTemplateName(breakTemplateName: string) {
+    return this.pathTemplates.breakTemplatePathTemplate.match(breakTemplateName)
+      .break_template;
+  }
+
+  /**
    * Return a fully-qualified browser resource name string.
    *
    * @param {string} network_code
@@ -1645,6 +1861,44 @@ export class PrivateAuctionDealServiceClient {
     return this.pathTemplates.browserLanguagePathTemplate.match(
       browserLanguageName,
     ).browser_language;
+  }
+
+  /**
+   * Return a fully-qualified cdnConfig resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} cdn_config
+   * @returns {string} Resource name string.
+   */
+  cdnConfigPath(networkCode: string, cdnConfig: string) {
+    return this.pathTemplates.cdnConfigPathTemplate.render({
+      network_code: networkCode,
+      cdn_config: cdnConfig,
+    });
+  }
+
+  /**
+   * Parse the network_code from CdnConfig resource.
+   *
+   * @param {string} cdnConfigName
+   *   A fully-qualified path representing CdnConfig resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCdnConfigName(cdnConfigName: string) {
+    return this.pathTemplates.cdnConfigPathTemplate.match(cdnConfigName)
+      .network_code;
+  }
+
+  /**
+   * Parse the cdn_config from CdnConfig resource.
+   *
+   * @param {string} cdnConfigName
+   *   A fully-qualified path representing CdnConfig resource.
+   * @returns {string} A string representing the cdn_config.
+   */
+  matchCdnConfigFromCdnConfigName(cdnConfigName: string) {
+    return this.pathTemplates.cdnConfigPathTemplate.match(cdnConfigName)
+      .cdn_config;
   }
 
   /**
@@ -1955,6 +2209,81 @@ export class PrivateAuctionDealServiceClient {
   }
 
   /**
+   * Return a fully-qualified creative resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  creativePath(networkCode: string, creative: string) {
+    return this.pathTemplates.creativePathTemplate.render({
+      network_code: networkCode,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative from Creative resource.
+   *
+   * @param {string} creativeName
+   *   A fully-qualified path representing Creative resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromCreativeName(creativeName: string) {
+    return this.pathTemplates.creativePathTemplate.match(creativeName).creative;
+  }
+
+  /**
+   * Return a fully-qualified creativeSet resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_set
+   * @returns {string} Resource name string.
+   */
+  creativeSetPath(networkCode: string, creativeSet: string) {
+    return this.pathTemplates.creativeSetPathTemplate.render({
+      network_code: networkCode,
+      creative_set: creativeSet,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .network_code;
+  }
+
+  /**
+   * Parse the creative_set from CreativeSet resource.
+   *
+   * @param {string} creativeSetName
+   *   A fully-qualified path representing CreativeSet resource.
+   * @returns {string} A string representing the creative_set.
+   */
+  matchCreativeSetFromCreativeSetName(creativeSetName: string) {
+    return this.pathTemplates.creativeSetPathTemplate.match(creativeSetName)
+      .creative_set;
+  }
+
+  /**
    * Return a fully-qualified creativeTemplate resource name string.
    *
    * @param {string} network_code
@@ -1992,6 +2321,46 @@ export class PrivateAuctionDealServiceClient {
     return this.pathTemplates.creativeTemplatePathTemplate.match(
       creativeTemplateName,
     ).creative_template;
+  }
+
+  /**
+   * Return a fully-qualified creativeWrapper resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} creative_wrapper
+   * @returns {string} Resource name string.
+   */
+  creativeWrapperPath(networkCode: string, creativeWrapper: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.render({
+      network_code: networkCode,
+      creative_wrapper: creativeWrapper,
+    });
+  }
+
+  /**
+   * Parse the network_code from CreativeWrapper resource.
+   *
+   * @param {string} creativeWrapperName
+   *   A fully-qualified path representing CreativeWrapper resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromCreativeWrapperName(creativeWrapperName: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.match(
+      creativeWrapperName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the creative_wrapper from CreativeWrapper resource.
+   *
+   * @param {string} creativeWrapperName
+   *   A fully-qualified path representing CreativeWrapper resource.
+   * @returns {string} A string representing the creative_wrapper.
+   */
+  matchCreativeWrapperFromCreativeWrapperName(creativeWrapperName: string) {
+    return this.pathTemplates.creativeWrapperPathTemplate.match(
+      creativeWrapperName,
+    ).creative_wrapper;
   }
 
   /**
@@ -2116,6 +2485,159 @@ export class PrivateAuctionDealServiceClient {
     return this.pathTemplates.customTargetingValuePathTemplate.match(
       customTargetingValueName,
     ).custom_targeting_value;
+  }
+
+  /**
+   * Return a fully-qualified daiAuthenticationKey resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_authentication_key
+   * @returns {string} Resource name string.
+   */
+  daiAuthenticationKeyPath(networkCode: string, daiAuthenticationKey: string) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.render({
+      network_code: networkCode,
+      dai_authentication_key: daiAuthenticationKey,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiAuthenticationKey resource.
+   *
+   * @param {string} daiAuthenticationKeyName
+   *   A fully-qualified path representing DaiAuthenticationKey resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiAuthenticationKeyName(
+    daiAuthenticationKeyName: string,
+  ) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.match(
+      daiAuthenticationKeyName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the dai_authentication_key from DaiAuthenticationKey resource.
+   *
+   * @param {string} daiAuthenticationKeyName
+   *   A fully-qualified path representing DaiAuthenticationKey resource.
+   * @returns {string} A string representing the dai_authentication_key.
+   */
+  matchDaiAuthenticationKeyFromDaiAuthenticationKeyName(
+    daiAuthenticationKeyName: string,
+  ) {
+    return this.pathTemplates.daiAuthenticationKeyPathTemplate.match(
+      daiAuthenticationKeyName,
+    ).dai_authentication_key;
+  }
+
+  /**
+   * Return a fully-qualified daiEncodingProfile resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_encoding_profile
+   * @returns {string} Resource name string.
+   */
+  daiEncodingProfilePath(networkCode: string, daiEncodingProfile: string) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.render({
+      network_code: networkCode,
+      dai_encoding_profile: daiEncodingProfile,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiEncodingProfile resource.
+   *
+   * @param {string} daiEncodingProfileName
+   *   A fully-qualified path representing DaiEncodingProfile resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiEncodingProfileName(daiEncodingProfileName: string) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.match(
+      daiEncodingProfileName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the dai_encoding_profile from DaiEncodingProfile resource.
+   *
+   * @param {string} daiEncodingProfileName
+   *   A fully-qualified path representing DaiEncodingProfile resource.
+   * @returns {string} A string representing the dai_encoding_profile.
+   */
+  matchDaiEncodingProfileFromDaiEncodingProfileName(
+    daiEncodingProfileName: string,
+  ) {
+    return this.pathTemplates.daiEncodingProfilePathTemplate.match(
+      daiEncodingProfileName,
+    ).dai_encoding_profile;
+  }
+
+  /**
+   * Return a fully-qualified daiSession resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} dai_session
+   * @returns {string} Resource name string.
+   */
+  daiSessionPath(networkCode: string, daiSession: string) {
+    return this.pathTemplates.daiSessionPathTemplate.render({
+      network_code: networkCode,
+      dai_session: daiSession,
+    });
+  }
+
+  /**
+   * Parse the network_code from DaiSession resource.
+   *
+   * @param {string} daiSessionName
+   *   A fully-qualified path representing DaiSession resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDaiSessionName(daiSessionName: string) {
+    return this.pathTemplates.daiSessionPathTemplate.match(daiSessionName)
+      .network_code;
+  }
+
+  /**
+   * Parse the dai_session from DaiSession resource.
+   *
+   * @param {string} daiSessionName
+   *   A fully-qualified path representing DaiSession resource.
+   * @returns {string} A string representing the dai_session.
+   */
+  matchDaiSessionFromDaiSessionName(daiSessionName: string) {
+    return this.pathTemplates.daiSessionPathTemplate.match(daiSessionName)
+      .dai_session;
+  }
+
+  /**
+   * Return a fully-qualified defaultThirdPartyDataDeclaration resource name string.
+   *
+   * @param {string} network_code
+   * @returns {string} Resource name string.
+   */
+  defaultThirdPartyDataDeclarationPath(networkCode: string) {
+    return this.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.render(
+      {
+        network_code: networkCode,
+      },
+    );
+  }
+
+  /**
+   * Parse the network_code from DefaultThirdPartyDataDeclaration resource.
+   *
+   * @param {string} defaultThirdPartyDataDeclarationName
+   *   A fully-qualified path representing DefaultThirdPartyDataDeclaration resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromDefaultThirdPartyDataDeclarationName(
+    defaultThirdPartyDataDeclarationName: string,
+  ) {
+    return this.pathTemplates.defaultThirdPartyDataDeclarationPathTemplate.match(
+      defaultThirdPartyDataDeclarationName,
+    ).network_code;
   }
 
   /**
@@ -2397,6 +2919,111 @@ export class PrivateAuctionDealServiceClient {
   }
 
   /**
+   * Return a fully-qualified lineItemCreativeAssociation resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  lineItemCreativeAssociationPath(
+    networkCode: string,
+    lineItem: string,
+    creative: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.render({
+      network_code: networkCode,
+      line_item: lineItem,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the line_item.
+   */
+  matchLineItemFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).line_item;
+  }
+
+  /**
+   * Parse the creative from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).creative;
+  }
+
+  /**
+   * Return a fully-qualified lineItemTemplate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item_template
+   * @returns {string} Resource name string.
+   */
+  lineItemTemplatePath(networkCode: string, lineItemTemplate: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.render({
+      network_code: networkCode,
+      line_item_template: lineItemTemplate,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item_template from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the line_item_template.
+   */
+  matchLineItemTemplateFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).line_item_template;
+  }
+
+  /**
    * Return a fully-qualified linkedDevice resource name string.
    *
    * @param {string} network_code
@@ -2432,6 +3059,44 @@ export class PrivateAuctionDealServiceClient {
   matchLinkedDeviceFromLinkedDeviceName(linkedDeviceName: string) {
     return this.pathTemplates.linkedDevicePathTemplate.match(linkedDeviceName)
       .linked_device;
+  }
+
+  /**
+   * Return a fully-qualified liveStream resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} live_stream
+   * @returns {string} Resource name string.
+   */
+  liveStreamPath(networkCode: string, liveStream: string) {
+    return this.pathTemplates.liveStreamPathTemplate.render({
+      network_code: networkCode,
+      live_stream: liveStream,
+    });
+  }
+
+  /**
+   * Parse the network_code from LiveStream resource.
+   *
+   * @param {string} liveStreamName
+   *   A fully-qualified path representing LiveStream resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLiveStreamName(liveStreamName: string) {
+    return this.pathTemplates.liveStreamPathTemplate.match(liveStreamName)
+      .network_code;
+  }
+
+  /**
+   * Parse the live_stream from LiveStream resource.
+   *
+   * @param {string} liveStreamName
+   *   A fully-qualified path representing LiveStream resource.
+   * @returns {string} A string representing the live_stream.
+   */
+  matchLiveStreamFromLiveStreamName(liveStreamName: string) {
+    return this.pathTemplates.liveStreamPathTemplate.match(liveStreamName)
+      .live_stream;
   }
 
   /**
@@ -2595,6 +3260,44 @@ export class PrivateAuctionDealServiceClient {
   }
 
   /**
+   * Return a fully-qualified nativeStyle resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} native_style
+   * @returns {string} Resource name string.
+   */
+  nativeStylePath(networkCode: string, nativeStyle: string) {
+    return this.pathTemplates.nativeStylePathTemplate.render({
+      network_code: networkCode,
+      native_style: nativeStyle,
+    });
+  }
+
+  /**
+   * Parse the network_code from NativeStyle resource.
+   *
+   * @param {string} nativeStyleName
+   *   A fully-qualified path representing NativeStyle resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromNativeStyleName(nativeStyleName: string) {
+    return this.pathTemplates.nativeStylePathTemplate.match(nativeStyleName)
+      .network_code;
+  }
+
+  /**
+   * Parse the native_style from NativeStyle resource.
+   *
+   * @param {string} nativeStyleName
+   *   A fully-qualified path representing NativeStyle resource.
+   * @returns {string} A string representing the native_style.
+   */
+  matchNativeStyleFromNativeStyleName(nativeStyleName: string) {
+    return this.pathTemplates.nativeStylePathTemplate.match(nativeStyleName)
+      .native_style;
+  }
+
+  /**
    * Return a fully-qualified network resource name string.
    *
    * @param {string} network_code
@@ -2739,6 +3442,43 @@ export class PrivateAuctionDealServiceClient {
    */
   matchOrderFromOrderName(orderName: string) {
     return this.pathTemplates.orderPathTemplate.match(orderName).order;
+  }
+
+  /**
+   * Return a fully-qualified partner resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} partner
+   * @returns {string} Resource name string.
+   */
+  partnerPath(networkCode: string, partner: string) {
+    return this.pathTemplates.partnerPathTemplate.render({
+      network_code: networkCode,
+      partner: partner,
+    });
+  }
+
+  /**
+   * Parse the network_code from Partner resource.
+   *
+   * @param {string} partnerName
+   *   A fully-qualified path representing Partner resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromPartnerName(partnerName: string) {
+    return this.pathTemplates.partnerPathTemplate.match(partnerName)
+      .network_code;
+  }
+
+  /**
+   * Parse the partner from Partner resource.
+   *
+   * @param {string} partnerName
+   *   A fully-qualified path representing Partner resource.
+   * @returns {string} A string representing the partner.
+   */
+  matchPartnerFromPartnerName(partnerName: string) {
+    return this.pathTemplates.partnerPathTemplate.match(partnerName).partner;
   }
 
   /**
@@ -3054,6 +3794,122 @@ export class PrivateAuctionDealServiceClient {
   }
 
   /**
+   * Return a fully-qualified slate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} slate
+   * @returns {string} Resource name string.
+   */
+  slatePath(networkCode: string, slate: string) {
+    return this.pathTemplates.slatePathTemplate.render({
+      network_code: networkCode,
+      slate: slate,
+    });
+  }
+
+  /**
+   * Parse the network_code from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).network_code;
+  }
+
+  /**
+   * Parse the slate from Slate resource.
+   *
+   * @param {string} slateName
+   *   A fully-qualified path representing Slate resource.
+   * @returns {string} A string representing the slate.
+   */
+  matchSlateFromSlateName(slateName: string) {
+    return this.pathTemplates.slatePathTemplate.match(slateName).slate;
+  }
+
+  /**
+   * Return a fully-qualified suggestedAdUnit resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} suggested_ad_unit
+   * @returns {string} Resource name string.
+   */
+  suggestedAdUnitPath(networkCode: string, suggestedAdUnit: string) {
+    return this.pathTemplates.suggestedAdUnitPathTemplate.render({
+      network_code: networkCode,
+      suggested_ad_unit: suggestedAdUnit,
+    });
+  }
+
+  /**
+   * Parse the network_code from SuggestedAdUnit resource.
+   *
+   * @param {string} suggestedAdUnitName
+   *   A fully-qualified path representing SuggestedAdUnit resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromSuggestedAdUnitName(suggestedAdUnitName: string) {
+    return this.pathTemplates.suggestedAdUnitPathTemplate.match(
+      suggestedAdUnitName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the suggested_ad_unit from SuggestedAdUnit resource.
+   *
+   * @param {string} suggestedAdUnitName
+   *   A fully-qualified path representing SuggestedAdUnit resource.
+   * @returns {string} A string representing the suggested_ad_unit.
+   */
+  matchSuggestedAdUnitFromSuggestedAdUnitName(suggestedAdUnitName: string) {
+    return this.pathTemplates.suggestedAdUnitPathTemplate.match(
+      suggestedAdUnitName,
+    ).suggested_ad_unit;
+  }
+
+  /**
+   * Return a fully-qualified targetingPreset resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} targeting_preset
+   * @returns {string} Resource name string.
+   */
+  targetingPresetPath(networkCode: string, targetingPreset: string) {
+    return this.pathTemplates.targetingPresetPathTemplate.render({
+      network_code: networkCode,
+      targeting_preset: targetingPreset,
+    });
+  }
+
+  /**
+   * Parse the network_code from TargetingPreset resource.
+   *
+   * @param {string} targetingPresetName
+   *   A fully-qualified path representing TargetingPreset resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromTargetingPresetName(targetingPresetName: string) {
+    return this.pathTemplates.targetingPresetPathTemplate.match(
+      targetingPresetName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the targeting_preset from TargetingPreset resource.
+   *
+   * @param {string} targetingPresetName
+   *   A fully-qualified path representing TargetingPreset resource.
+   * @returns {string} A string representing the targeting_preset.
+   */
+  matchTargetingPresetFromTargetingPresetName(targetingPresetName: string) {
+    return this.pathTemplates.targetingPresetPathTemplate.match(
+      targetingPresetName,
+    ).targeting_preset;
+  }
+
+  /**
    * Return a fully-qualified taxonomyCategory resource name string.
    *
    * @param {string} network_code
@@ -3130,6 +3986,48 @@ export class PrivateAuctionDealServiceClient {
   }
 
   /**
+   * Return a fully-qualified thirdPartyCompany resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} third_party_company
+   * @returns {string} Resource name string.
+   */
+  thirdPartyCompanyPath(networkCode: string, thirdPartyCompany: string) {
+    return this.pathTemplates.thirdPartyCompanyPathTemplate.render({
+      network_code: networkCode,
+      third_party_company: thirdPartyCompany,
+    });
+  }
+
+  /**
+   * Parse the network_code from ThirdPartyCompany resource.
+   *
+   * @param {string} thirdPartyCompanyName
+   *   A fully-qualified path representing ThirdPartyCompany resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromThirdPartyCompanyName(thirdPartyCompanyName: string) {
+    return this.pathTemplates.thirdPartyCompanyPathTemplate.match(
+      thirdPartyCompanyName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the third_party_company from ThirdPartyCompany resource.
+   *
+   * @param {string} thirdPartyCompanyName
+   *   A fully-qualified path representing ThirdPartyCompany resource.
+   * @returns {string} A string representing the third_party_company.
+   */
+  matchThirdPartyCompanyFromThirdPartyCompanyName(
+    thirdPartyCompanyName: string,
+  ) {
+    return this.pathTemplates.thirdPartyCompanyPathTemplate.match(
+      thirdPartyCompanyName,
+    ).third_party_company;
+  }
+
+  /**
    * Return a fully-qualified user resource name string.
    *
    * @param {string} network_code
@@ -3163,6 +4061,48 @@ export class PrivateAuctionDealServiceClient {
    */
   matchUserFromUserName(userName: string) {
     return this.pathTemplates.userPathTemplate.match(userName).user;
+  }
+
+  /**
+   * Return a fully-qualified viewabilityProvider resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} viewability_provider
+   * @returns {string} Resource name string.
+   */
+  viewabilityProviderPath(networkCode: string, viewabilityProvider: string) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.render({
+      network_code: networkCode,
+      viewability_provider: viewabilityProvider,
+    });
+  }
+
+  /**
+   * Parse the network_code from ViewabilityProvider resource.
+   *
+   * @param {string} viewabilityProviderName
+   *   A fully-qualified path representing ViewabilityProvider resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromViewabilityProviderName(viewabilityProviderName: string) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.match(
+      viewabilityProviderName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the viewability_provider from ViewabilityProvider resource.
+   *
+   * @param {string} viewabilityProviderName
+   *   A fully-qualified path representing ViewabilityProvider resource.
+   * @returns {string} A string representing the viewability_provider.
+   */
+  matchViewabilityProviderFromViewabilityProviderName(
+    viewabilityProviderName: string,
+  ) {
+    return this.pathTemplates.viewabilityProviderPathTemplate.match(
+      viewabilityProviderName,
+    ).viewability_provider;
   }
 
   /**
@@ -3211,7 +4151,7 @@ export class PrivateAuctionDealServiceClient {
    */
   close(): Promise<void> {
     if (this.privateAuctionDealServiceStub && !this._terminated) {
-      return this.privateAuctionDealServiceStub.then((stub) => {
+      return this.privateAuctionDealServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();

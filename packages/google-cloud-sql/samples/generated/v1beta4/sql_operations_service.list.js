@@ -45,6 +45,10 @@ function main() {
    *  Project ID of the project that contains the instance.
    */
   // const project = 'my-project'
+  /**
+   *  Optional. Region of the Cloud SQL instance.
+   */
+  // const location = 'abc123'
 
   // Imports the Sql library
   const {SqlOperationsServiceClient} = require('@google-cloud/sql').v1beta4;

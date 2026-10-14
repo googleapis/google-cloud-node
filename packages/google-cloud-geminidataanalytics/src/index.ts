@@ -17,15 +17,15 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v1 from './v1';
-import * as v1alpha from './v1alpha';
 import * as v1beta from './v1beta';
+import * as v1alpha from './v1alpha';
 
 const DataAgentServiceClient = v1.DataAgentServiceClient;
 type DataAgentServiceClient = v1.DataAgentServiceClient;
 const DataChatServiceClient = v1.DataChatServiceClient;
 type DataChatServiceClient = v1.DataChatServiceClient;
 
-export {v1, v1alpha, v1beta, DataAgentServiceClient, DataChatServiceClient};
-export default {v1, v1alpha, v1beta, DataAgentServiceClient, DataChatServiceClient};
+export {v1, v1beta, v1alpha, DataAgentServiceClient, DataChatServiceClient};
+export default {v1, v1beta, v1alpha, DataAgentServiceClient, DataChatServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

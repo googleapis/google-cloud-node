@@ -19,11 +19,11 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as certificatemanagerModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
 import {
   protobuf,
@@ -50,7 +50,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -154,9 +154,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -281,7 +281,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.certificateManagerStub, undefined);
@@ -289,12 +289,12 @@ describe('v1.CertificateManagerClient', () => {
       assert(client.certificateManagerStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.certificateManagerStub);
@@ -303,14 +303,14 @@ describe('v1.CertificateManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.certificateManagerStub, undefined);
@@ -319,7 +319,7 @@ describe('v1.CertificateManagerClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -327,7 +327,7 @@ describe('v1.CertificateManagerClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -339,7 +339,7 @@ describe('v1.CertificateManagerClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -362,7 +362,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('getCertificate', () => {
     it('invokes getCertificate without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -393,7 +393,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getCertificate without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -440,7 +440,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getCertificate with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getCertificate with closed client', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -484,7 +484,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCertificate(request), expectedError);
@@ -494,7 +494,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('getCertificateMap', () => {
     it('invokes getCertificateMap without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -525,7 +525,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getCertificateMap without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -572,7 +572,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getCertificateMap with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -603,7 +603,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getCertificateMap with closed client', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -616,7 +616,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getCertificateMap(request), expectedError);
@@ -626,7 +626,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('getCertificateMapEntry', () => {
     it('invokes getCertificateMapEntry without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -658,7 +658,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getCertificateMapEntry without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -705,7 +705,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getCertificateMapEntry with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -739,7 +739,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getCertificateMapEntry with closed client', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -752,7 +752,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -765,7 +765,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('getDnsAuthorization', () => {
     it('invokes getDnsAuthorization without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -797,7 +797,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getDnsAuthorization without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -844,7 +844,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getDnsAuthorization with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -875,7 +875,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getDnsAuthorization with closed client', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -888,7 +888,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDnsAuthorization(request), expectedError);
@@ -898,7 +898,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('getCertificateIssuanceConfig', () => {
     it('invokes getCertificateIssuanceConfig without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -930,7 +930,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getCertificateIssuanceConfig without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +977,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getCertificateIssuanceConfig with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1011,7 +1011,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getCertificateIssuanceConfig with closed client', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1024,7 +1024,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(
@@ -1037,7 +1037,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('getTrustConfig', () => {
     it('invokes getTrustConfig without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1068,7 +1068,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getTrustConfig without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1115,7 +1115,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getTrustConfig with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1146,7 +1146,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes getTrustConfig with closed client', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1159,7 +1159,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getTrustConfig(request), expectedError);
@@ -1169,7 +1169,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('createCertificate', () => {
     it('invokes createCertificate without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1202,7 +1202,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createCertificate without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1256,7 +1256,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createCertificate with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1287,7 +1287,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createCertificate with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1320,7 +1320,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkCreateCertificateProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1328,8 +1328,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateCertificateProgress(
@@ -1342,7 +1342,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkCreateCertificateProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1363,7 +1363,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('updateCertificate', () => {
     it('invokes updateCertificate without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1397,7 +1397,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateCertificate without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1452,7 +1452,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateCertificate with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1484,7 +1484,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateCertificate with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1518,7 +1518,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkUpdateCertificateProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1526,8 +1526,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateCertificateProgress(
@@ -1540,7 +1540,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkUpdateCertificateProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1561,7 +1561,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('deleteCertificate', () => {
     it('invokes deleteCertificate without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1594,7 +1594,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteCertificate without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1648,7 +1648,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteCertificate with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1679,7 +1679,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteCertificate with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1712,7 +1712,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkDeleteCertificateProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1720,8 +1720,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteCertificateProgress(
@@ -1734,7 +1734,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkDeleteCertificateProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1755,7 +1755,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('createCertificateMap', () => {
     it('invokes createCertificateMap without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1788,7 +1788,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createCertificateMap without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1842,7 +1842,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createCertificateMap with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1873,7 +1873,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createCertificateMap with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1906,7 +1906,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkCreateCertificateMapProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1914,8 +1914,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateCertificateMapProgress(
@@ -1928,7 +1928,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkCreateCertificateMapProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1949,7 +1949,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('updateCertificateMap', () => {
     it('invokes updateCertificateMap without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1983,7 +1983,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateCertificateMap without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2038,7 +2038,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateCertificateMap with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2070,7 +2070,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateCertificateMap with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2104,7 +2104,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkUpdateCertificateMapProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2112,8 +2112,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateCertificateMapProgress(
@@ -2126,7 +2126,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkUpdateCertificateMapProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2147,7 +2147,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('deleteCertificateMap', () => {
     it('invokes deleteCertificateMap without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2180,7 +2180,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteCertificateMap without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2234,7 +2234,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteCertificateMap with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2265,7 +2265,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteCertificateMap with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2298,7 +2298,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkDeleteCertificateMapProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2306,8 +2306,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteCertificateMapProgress(
@@ -2320,7 +2320,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkDeleteCertificateMapProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2341,7 +2341,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('createCertificateMapEntry', () => {
     it('invokes createCertificateMapEntry without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2374,7 +2374,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createCertificateMapEntry without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2428,7 +2428,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createCertificateMapEntry with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2462,7 +2462,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createCertificateMapEntry with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2495,7 +2495,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkCreateCertificateMapEntryProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2503,8 +2503,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2518,7 +2518,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkCreateCertificateMapEntryProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2539,7 +2539,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('updateCertificateMapEntry', () => {
     it('invokes updateCertificateMapEntry without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2573,7 +2573,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateCertificateMapEntry without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2628,7 +2628,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateCertificateMapEntry with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2663,7 +2663,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateCertificateMapEntry with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2697,7 +2697,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkUpdateCertificateMapEntryProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2705,8 +2705,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2720,7 +2720,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkUpdateCertificateMapEntryProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2741,7 +2741,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('deleteCertificateMapEntry', () => {
     it('invokes deleteCertificateMapEntry without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2774,7 +2774,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteCertificateMapEntry without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2828,7 +2828,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteCertificateMapEntry with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2862,7 +2862,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteCertificateMapEntry with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2895,7 +2895,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkDeleteCertificateMapEntryProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2903,8 +2903,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -2918,7 +2918,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkDeleteCertificateMapEntryProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2939,7 +2939,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('createDnsAuthorization', () => {
     it('invokes createDnsAuthorization without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2972,7 +2972,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createDnsAuthorization without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3026,7 +3026,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createDnsAuthorization with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3060,7 +3060,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createDnsAuthorization with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3093,7 +3093,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkCreateDnsAuthorizationProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3101,8 +3101,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateDnsAuthorizationProgress(
@@ -3115,7 +3115,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkCreateDnsAuthorizationProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3136,7 +3136,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('updateDnsAuthorization', () => {
     it('invokes updateDnsAuthorization without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3170,7 +3170,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateDnsAuthorization without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3225,7 +3225,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateDnsAuthorization with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3260,7 +3260,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateDnsAuthorization with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3294,7 +3294,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkUpdateDnsAuthorizationProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3302,8 +3302,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateDnsAuthorizationProgress(
@@ -3316,7 +3316,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkUpdateDnsAuthorizationProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3337,7 +3337,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('deleteDnsAuthorization', () => {
     it('invokes deleteDnsAuthorization without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3370,7 +3370,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteDnsAuthorization without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3424,7 +3424,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteDnsAuthorization with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3458,7 +3458,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteDnsAuthorization with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3491,7 +3491,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkDeleteDnsAuthorizationProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3499,8 +3499,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteDnsAuthorizationProgress(
@@ -3513,7 +3513,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkDeleteDnsAuthorizationProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3534,7 +3534,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('createCertificateIssuanceConfig', () => {
     it('invokes createCertificateIssuanceConfig without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3567,7 +3567,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createCertificateIssuanceConfig without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3621,7 +3621,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createCertificateIssuanceConfig with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3653,7 +3653,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createCertificateIssuanceConfig with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3683,7 +3683,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkCreateCertificateIssuanceConfigProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3691,8 +3691,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3706,7 +3706,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkCreateCertificateIssuanceConfigProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3727,7 +3727,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('deleteCertificateIssuanceConfig', () => {
     it('invokes deleteCertificateIssuanceConfig without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3760,7 +3760,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteCertificateIssuanceConfig without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3814,7 +3814,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteCertificateIssuanceConfig with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3846,7 +3846,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteCertificateIssuanceConfig with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3876,7 +3876,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkDeleteCertificateIssuanceConfigProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3884,8 +3884,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation =
@@ -3899,7 +3899,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkDeleteCertificateIssuanceConfigProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3920,7 +3920,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('createTrustConfig', () => {
     it('invokes createTrustConfig without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3953,7 +3953,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createTrustConfig without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4007,7 +4007,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createTrustConfig with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4038,7 +4038,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes createTrustConfig with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4071,7 +4071,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkCreateTrustConfigProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4079,8 +4079,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkCreateTrustConfigProgress(
@@ -4093,7 +4093,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkCreateTrustConfigProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4114,7 +4114,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('updateTrustConfig', () => {
     it('invokes updateTrustConfig without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4148,7 +4148,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateTrustConfig without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4203,7 +4203,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateTrustConfig with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4235,7 +4235,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes updateTrustConfig with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4269,7 +4269,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkUpdateTrustConfigProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4277,8 +4277,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkUpdateTrustConfigProgress(
@@ -4291,7 +4291,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkUpdateTrustConfigProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4312,7 +4312,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('deleteTrustConfig', () => {
     it('invokes deleteTrustConfig without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4345,7 +4345,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteTrustConfig without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4399,7 +4399,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteTrustConfig with call error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4430,7 +4430,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes deleteTrustConfig with LRO error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4463,7 +4463,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkDeleteTrustConfigProgress without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4471,8 +4471,8 @@ describe('v1.CertificateManagerClient', () => {
         new operationsProtos.google.longrunning.Operation(),
       );
       expectedResponse.name = 'test';
-      expectedResponse.response = { type_url: 'url', value: Buffer.from('') };
-      expectedResponse.metadata = { type_url: 'url', value: Buffer.from('') };
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
       const decodedOperation = await client.checkDeleteTrustConfigProgress(
@@ -4485,7 +4485,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes checkDeleteTrustConfigProgress with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4506,7 +4506,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('listCertificates', () => {
     it('invokes listCertificates without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4545,7 +4545,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificates without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4577,8 +4577,7 @@ describe('v1.CertificateManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.certificatemanager.v1.ICertificate[]
-              | null,
+              protos.google.cloud.certificatemanager.v1.ICertificate[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -4602,7 +4601,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificates with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4633,7 +4632,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificatesStream without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4686,15 +4685,15 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCertificatesStream with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4736,15 +4735,15 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificates.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCertificates without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4786,15 +4785,15 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCertificates with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4827,9 +4826,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificates.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -4837,7 +4836,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('listCertificateMaps', () => {
     it('invokes listCertificateMaps without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4877,7 +4876,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificateMaps without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4934,7 +4933,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificateMaps with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4965,7 +4964,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificateMapsStream without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5020,15 +5019,15 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificateMaps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listCertificateMapsStream with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5072,15 +5071,15 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificateMaps.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCertificateMaps without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5122,15 +5121,15 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificateMaps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listCertificateMaps with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5163,9 +5162,9 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listCertificateMaps.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -5173,7 +5172,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('listCertificateMapEntries', () => {
     it('invokes listCertificateMapEntries without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5213,7 +5212,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificateMapEntries without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5270,7 +5269,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificateMapEntries with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5304,7 +5303,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificateMapEntriesStream without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5373,7 +5372,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificateMapEntriesStream with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5431,7 +5430,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('uses async iteration with listCertificateMapEntries without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5485,7 +5484,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('uses async iteration with listCertificateMapEntries with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5532,7 +5531,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('listDnsAuthorizations', () => {
     it('invokes listDnsAuthorizations without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5572,7 +5571,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listDnsAuthorizations without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5629,7 +5628,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listDnsAuthorizations with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5663,7 +5662,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listDnsAuthorizationsStream without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5732,7 +5731,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listDnsAuthorizationsStream with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5790,7 +5789,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('uses async iteration with listDnsAuthorizations without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5844,7 +5843,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('uses async iteration with listDnsAuthorizations with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5891,7 +5890,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('listCertificateIssuanceConfigs', () => {
     it('invokes listCertificateIssuanceConfigs without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5931,7 +5930,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificateIssuanceConfigs without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -5988,7 +5987,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificateIssuanceConfigs with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6022,7 +6021,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificateIssuanceConfigsStream without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6094,7 +6093,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listCertificateIssuanceConfigsStream with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6155,7 +6154,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('uses async iteration with listCertificateIssuanceConfigs without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6209,7 +6208,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('uses async iteration with listCertificateIssuanceConfigs with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6256,7 +6255,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('listTrustConfigs', () => {
     it('invokes listTrustConfigs without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6295,7 +6294,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listTrustConfigs without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6327,8 +6326,7 @@ describe('v1.CertificateManagerClient', () => {
           (
             err?: Error | null,
             result?:
-              | protos.google.cloud.certificatemanager.v1.ITrustConfig[]
-              | null,
+              protos.google.cloud.certificatemanager.v1.ITrustConfig[] | null,
           ) => {
             if (err) {
               reject(err);
@@ -6352,7 +6350,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listTrustConfigs with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6383,7 +6381,7 @@ describe('v1.CertificateManagerClient', () => {
 
     it('invokes listTrustConfigsStream without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6436,15 +6434,15 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listTrustConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listTrustConfigsStream with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6486,15 +6484,15 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listTrustConfigs.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTrustConfigs without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6536,15 +6534,15 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listTrustConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listTrustConfigs with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6577,16 +6575,16 @@ describe('v1.CertificateManagerClient', () => {
       assert(
         (client.descriptors.page.listTrustConfigs.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6616,7 +6614,7 @@ describe('v1.CertificateManagerClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6660,7 +6658,7 @@ describe('v1.CertificateManagerClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6695,7 +6693,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6743,7 +6741,7 @@ describe('v1.CertificateManagerClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6784,7 +6782,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('getOperation', () => {
     it('invokes getOperation without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6805,7 +6803,7 @@ describe('v1.CertificateManagerClient', () => {
     });
     it('invokes getOperation without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6833,7 +6831,7 @@ describe('v1.CertificateManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6843,7 +6841,7 @@ describe('v1.CertificateManagerClient', () => {
     });
     it('invokes getOperation with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6867,7 +6865,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('cancelOperation', () => {
     it('invokes cancelOperation without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6889,7 +6887,7 @@ describe('v1.CertificateManagerClient', () => {
     });
     it('invokes cancelOperation without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6917,7 +6915,7 @@ describe('v1.CertificateManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -6927,7 +6925,7 @@ describe('v1.CertificateManagerClient', () => {
     });
     it('invokes cancelOperation with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -6951,7 +6949,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('deleteOperation', () => {
     it('invokes deleteOperation without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -6973,7 +6971,7 @@ describe('v1.CertificateManagerClient', () => {
     });
     it('invokes deleteOperation without error using callback', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7001,7 +6999,7 @@ describe('v1.CertificateManagerClient', () => {
               }
             },
           )
-          .catch((err) => {
+          .catch(err => {
             throw err;
           });
       });
@@ -7011,7 +7009,7 @@ describe('v1.CertificateManagerClient', () => {
     });
     it('invokes deleteOperation with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7035,7 +7033,7 @@ describe('v1.CertificateManagerClient', () => {
   describe('listOperationsAsync', () => {
     it('uses async iteration with listOperations without error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       const request = generateSampleMessage(
@@ -7070,7 +7068,7 @@ describe('v1.CertificateManagerClient', () => {
     });
     it('uses async iteration with listOperations with error', async () => {
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7106,7 +7104,7 @@ describe('v1.CertificateManagerClient', () => {
         certificate: 'certificateValue',
       };
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7170,7 +7168,7 @@ describe('v1.CertificateManagerClient', () => {
         certificate_issuance_config: 'certificateIssuanceConfigValue',
       };
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7251,7 +7249,7 @@ describe('v1.CertificateManagerClient', () => {
         certificate_map: 'certificateMapValue',
       };
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7317,7 +7315,7 @@ describe('v1.CertificateManagerClient', () => {
         certificate_map_entry: 'certificateMapEntryValue',
       };
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7410,7 +7408,7 @@ describe('v1.CertificateManagerClient', () => {
         dns_authorization: 'dnsAuthorizationValue',
       };
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7477,7 +7475,7 @@ describe('v1.CertificateManagerClient', () => {
         location: 'locationValue',
       };
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -7527,7 +7525,7 @@ describe('v1.CertificateManagerClient', () => {
         trust_config: 'trustConfigValue',
       };
       const client = new certificatemanagerModule.v1.CertificateManagerClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

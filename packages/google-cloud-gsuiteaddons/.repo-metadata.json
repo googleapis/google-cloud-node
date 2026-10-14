@@ -1,17 +1,15 @@
 {
-  "name": "gsuiteaddons",
-  "name_pretty": "Google Workspace Add-ons API",
-  "product_documentation": "developers.google.com/workspace/add-ons/",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gsuiteaddons/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/gsuiteaddons",
-  "api_id": "gsuiteaddons.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "gsuiteaddons"
+    "api_description": "Add-ons are customized applications that extend Google Workspace applications.",
+    "api_id": "gsuiteaddons.googleapis.com",
+    "api_shortname": "gsuiteaddons",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gsuiteaddons/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/gsuiteaddons",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "gsuiteaddons",
+    "name_pretty": "Google Workspace add-ons",
+    "product_documentation": "https://developers.google.com/workspace/add-ons/overview",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-node"
 }
-

@@ -37,6 +37,11 @@ function main(instanceGroupManager, instanceGroupManagersStopInstancesRequestRes
    */
   // const instanceGroupManagersStopInstancesRequestResource = {}
   /**
+   *  When set, graceful shutdown is skipped for instance stopping even if it's
+   *  configured for the instances.
+   */
+  // const noGracefulShutdown = true
+  /**
    *  Project ID for this request.
    */
   // const project = 'my-project'

@@ -5,6 +5,173 @@
 
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
+## [6.12.1](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.12.0...google-gax-v6.12.1) (2026-10-08)
+
+
+### Bug Fixes
+
+* **gax:** Resolve low level network attributes ([#9564](https://github.com/googleapis/google-cloud-node/issues/9564)) ([4bab312](https://github.com/googleapis/google-cloud-node/commit/4bab3123317218621cf627a31235cecb9e4ab1dc))
+
+## [6.12.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.11.1...google-gax-v6.12.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
+## [6.11.1](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.11.0...google-gax-v6.11.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* **gax:** Only set resend_count on T4 attempt spans ([#9540](https://github.com/googleapis/google-cloud-node/issues/9540)) ([3b3f600](https://github.com/googleapis/google-cloud-node/commit/3b3f600a7adeb27b77df12c556e54b5f08b61325))
+* **gax:** Widen port to number | string in GrpcClientOptions ([#9542](https://github.com/googleapis/google-cloud-node/issues/9542)) ([17978e7](https://github.com/googleapis/google-cloud-node/commit/17978e7f9ef7773111c6472194f20679f6e2bd6d))
+
+## [6.11.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.10.0...google-gax-v6.11.0) (2026-10-03)
+
+
+### Features
+
+* **gax:** Emit T4 attempt spans ([#9496](https://github.com/googleapis/google-cloud-node/issues/9496)) ([51aedce](https://github.com/googleapis/google-cloud-node/commit/51aedceb77684ff6a14825c5916836c6e71060b4))
+
+
+### Bug Fixes
+
+* **gax:** Propagate chunk granularity on resume and preserve retry error details ([#9480](https://github.com/googleapis/google-cloud-node/issues/9480)) ([02b9478](https://github.com/googleapis/google-cloud-node/commit/02b94781828d50b91a255187f89a168f8b1e3b84))
+
+## [6.10.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.9.0...google-gax-v6.10.0) (2026-09-29)
+
+
+### Features
+
+* **docs:** Add o11y sample ([#9456](https://github.com/googleapis/google-cloud-node/issues/9456)) ([c0e0540](https://github.com/googleapis/google-cloud-node/commit/c0e0540ebaca4c934d3439156bef2e437a2c5e32))
+
+## [6.9.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.8.0...google-gax-v6.9.0) (2026-09-28)
+
+
+### Features
+
+* **gax:** Allow customers to enable tracing with environmental variables ([#9438](https://github.com/googleapis/google-cloud-node/issues/9438)) ([11d6a6f](https://github.com/googleapis/google-cloud-node/commit/11d6a6fe0cec995da9f85db7a072f552873096f2))
+* **gax:** Differentiate between server side and client side errors ([#9451](https://github.com/googleapis/google-cloud-node/issues/9451)) ([c477918](https://github.com/googleapis/google-cloud-node/commit/c4779187403c213716b199690e293942c09b1bac))
+* **gax:** Propagate span context to child spans in TracerHelper ([#9455](https://github.com/googleapis/google-cloud-node/issues/9455)) ([a6c20e9](https://github.com/googleapis/google-cloud-node/commit/a6c20e9864a75b43701bd4c6d1f2bcf58ae019b9))
+* **gax:** Support resumable uploads ([#9287](https://github.com/googleapis/google-cloud-node/issues/9287)) ([8116709](https://github.com/googleapis/google-cloud-node/commit/8116709bc39e5e0ea525cd6937ce079c25a0971b))
+* **o11y:** Remove experimental flag requirement for tracing ([#9423](https://github.com/googleapis/google-cloud-node/issues/9423)) ([feb2851](https://github.com/googleapis/google-cloud-node/commit/feb2851a5d65cbea797148dce70b89fe4dc68b69))
+
+## [6.8.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.7.0...google-gax-v6.8.0) (2026-09-25)
+
+
+### Features
+
+* **gax:** Differentiate between server side and client side errors ([#9451](https://github.com/googleapis/google-cloud-node/issues/9451)) ([c477918](https://github.com/googleapis/google-cloud-node/commit/c4779187403c213716b199690e293942c09b1bac))
+
+## [6.7.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.6.0...google-gax-v6.7.0) (2026-09-23)
+
+
+### Features
+
+* **gax:** Allow customers to enable tracing with environmental variables ([#9438](https://github.com/googleapis/google-cloud-node/issues/9438)) ([11d6a6f](https://github.com/googleapis/google-cloud-node/commit/11d6a6fe0cec995da9f85db7a072f552873096f2))
+* **o11y:** Remove experimental flag requirement for tracing ([#9423](https://github.com/googleapis/google-cloud-node/issues/9423)) ([feb2851](https://github.com/googleapis/google-cloud-node/commit/feb2851a5d65cbea797148dce70b89fe4dc68b69))
+
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.5.0...google-gax-v6.6.0) (2026-09-23)
+
+
+### Features
+
+* **gax:** Support resumable uploads ([#9287](https://github.com/googleapis/google-cloud-node/issues/9287)) ([8116709](https://github.com/googleapis/google-cloud-node/commit/8116709bc39e5e0ea525cd6937ce079c25a0971b))
+
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.4.0...google-gax-v6.5.0) (2026-09-22)
+
+
+### Features
+
+* Add o11y gRPC tracing ([#9267](https://github.com/googleapis/google-cloud-node/issues/9267)) ([ff39233](https://github.com/googleapis/google-cloud-node/commit/ff39233da87eca175d3104467fc756010e9af0a3))
+* **gax:** Report response status codes on traced calls ([#9344](https://github.com/googleapis/google-cloud-node/issues/9344)) ([800322d](https://github.com/googleapis/google-cloud-node/commit/800322d5d1d116b93c9a5365fc8dd591037d2836))
+* **o11y:** Let callers enable tracing with env var ([#9377](https://github.com/googleapis/google-cloud-node/issues/9377)) ([ed9d279](https://github.com/googleapis/google-cloud-node/commit/ed9d27902e3ec71f99aa86a22135f30555c72dcd))
+* Pass through fallback parameter for HTTP calls ([#9277](https://github.com/googleapis/google-cloud-node/issues/9277)) ([653de60](https://github.com/googleapis/google-cloud-node/commit/653de605e5954a0e378962e3f859f99f607dc6cd))
+
+
+### Bug Fixes
+
+* **gax:** Detect aborts and timeouts by error name ([6ce394b](https://github.com/googleapis/google-cloud-node/commit/6ce394b9c15301f12150af1123905f8918688c16))
+* **gax:** Enforce the call deadline on the REST transport ([#9334](https://github.com/googleapis/google-cloud-node/issues/9334)) ([ddafe50](https://github.com/googleapis/google-cloud-node/commit/ddafe50c2487a7527eb57f7194dc63028fa22975))
+* **gax:** Map REST fallback transport errors to gRPC status codes ([be36fd9](https://github.com/googleapis/google-cloud-node/commit/be36fd984f07656c83902e46869db605a3ec259a))
+* **gax:** Report transport failures as UNAVAILABLE, as gRPC does ([db76247](https://github.com/googleapis/google-cloud-node/commit/db76247673d12026348ab3ddd9a1e487a9e6468a))
+
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.3.0...google-gax-v6.4.0) (2026-09-15)
+
+
+### Features
+
+* **gax:** O11y tracer helper updates ([#9269](https://github.com/googleapis/google-cloud-node/issues/9269)) ([ee3b95b](https://github.com/googleapis/google-cloud-node/commit/ee3b95b4dc5c4128adf22656f50675cdd2845597))
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.2.0...google-gax-v6.3.0) (2026-09-09)
+
+
+### Features
+
+* **gax:** Attach internalMethodName to otherArgs in constructSettings ([#9266](https://github.com/googleapis/google-cloud-node/issues/9266)) ([65450ab](https://github.com/googleapis/google-cloud-node/commit/65450ab4e7f9f1f17e1566ac30b8846bc38e0dd9))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.1.0...google-gax-v6.2.0) (2026-09-03)
+
+
+### Features
+
+* **generator:** Add internalTelemetryInfo configuration to nunjucks templates ([#9174](https://github.com/googleapis/google-cloud-node/issues/9174)) ([9320305](https://github.com/googleapis/google-cloud-node/commit/932030548323f0181bb175b0519a6e77cbe64cad))
+
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.3...google-gax-v6.1.0) (2026-08-26)
+
+
+### Features
+
+* Add Otel Tracing helpers and tests ([#9070](https://github.com/googleapis/google-cloud-node/issues/9070)) ([5111d52](https://github.com/googleapis/google-cloud-node/commit/5111d528f91c07da232a181d5636bcaeccd765a7))
+* **gax:** Accept clientOptions in createApiCall for telemetry tracing ([#9176](https://github.com/googleapis/google-cloud-node/issues/9176)) ([257a895](https://github.com/googleapis/google-cloud-node/commit/257a895e361472f0b04cb87bcb20798530a08aed))
+
+
+### Bug Fixes
+
+* **gax:** Fix several missing files from the monorepo merge ([#9209](https://github.com/googleapis/google-cloud-node/issues/9209)) ([6fcd94d](https://github.com/googleapis/google-cloud-node/commit/6fcd94d507befa4805a2d257b3f312458ac2c48c))
+* Turn on the gax vulnerability tests again ([#9204](https://github.com/googleapis/google-cloud-node/issues/9204)) ([09609c8](https://github.com/googleapis/google-cloud-node/commit/09609c8796f975740f8eb3fae95fbdfec2e05209))
+
+## [6.0.3](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.2...google-gax-v6.0.3) (2026-08-21)
+
+
+### Bug Fixes
+
+* Validate path parameters and prevent traversal/injection in REST transcoder - tests relocated ([#9166](https://github.com/googleapis/google-cloud-node/issues/9166)) ([8a2b491](https://github.com/googleapis/google-cloud-node/commit/8a2b4911fafba437c436b86e7282d37f60de9374))
+* Validate path parameters and prevent traversal/injection in REST transcoder ([#9151](https://github.com/googleapis/google-cloud-node/issues/9151)) ([0152a8e](https://github.com/googleapis/google-cloud-node/commit/0152a8ee36592d90f435336fda95993c9cbd227a))
+
+## [6.0.2](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.1...google-gax-v6.0.2) (2026-08-12)
+
+
+### Bug Fixes
+
+* Ensure node 22 dependencies are up to date so they get the latest patches for core and handwritten libraries ([#9116](https://github.com/googleapis/google-cloud-node/issues/9116)) ([fad57ff](https://github.com/googleapis/google-cloud-node/commit/fad57ff4b9164712426a041fc61db035859f9043))
+
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.0.0...google-gax-v6.0.1) (2026-08-10)
+
+
+### Bug Fixes
+
+* Upgrade all node core library dependencies to their latest node 22 version ([#9084](https://github.com/googleapis/google-cloud-node/issues/9084)) ([af8074c](https://github.com/googleapis/google-cloud-node/commit/af8074c0281f4f8dc40570f580f4cdebf1d72cde))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v5.0.8...google-gax-v6.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update gax to minimum Node version of 22. ([#8989](https://github.com/googleapis/google-cloud-node/issues/8989))
+
+### Features
+
+* Update gax to minimum Node version of 22. ([#8989](https://github.com/googleapis/google-cloud-node/issues/8989)) ([792ffaf](https://github.com/googleapis/google-cloud-node/commit/792ffaf7389e601b906ad9870707f89326af4257)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [5.0.8](https://github.com/googleapis/google-cloud-node/compare/google-gax-v5.0.7...google-gax-v5.0.8) (2026-07-23)
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
 
 ## [5.0.7](https://github.com/googleapis/google-cloud-node/compare/google-gax-v5.0.6...google-gax-v5.0.7) (2026-05-11)
 

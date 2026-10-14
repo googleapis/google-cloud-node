@@ -5,6 +5,45 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/promisify-v6.1.0...promisify-v6.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/promisify-v6.0.1...promisify-v6.1.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+## [6.0.1](https://github.com/googleapis/google-cloud-node/compare/promisify-v6.0.0...promisify-v6.0.1) (2026-08-10)
+
+
+### Bug Fixes
+
+* Upgrade all node core library dependencies to their latest node 22 version ([#9084](https://github.com/googleapis/google-cloud-node/issues/9084)) ([af8074c](https://github.com/googleapis/google-cloud-node/commit/af8074c0281f4f8dc40570f580f4cdebf1d72cde))
+
+## [6.0.0](https://github.com/googleapis/google-cloud-node/compare/promisify-v5.1.0...promisify-v6.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update promisify to minimum Node version of 22. ([#9009](https://github.com/googleapis/google-cloud-node/issues/9009))
+
+### Features
+
+* Update promisify to minimum Node version of 22. ([#9009](https://github.com/googleapis/google-cloud-node/issues/9009)) ([212868e](https://github.com/googleapis/google-cloud-node/commit/212868e75ebddbdb07ff4d478acb1a858130fd1d)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/promisify-v5.0.1...promisify-v5.1.0) (2026-06-24)
+
+
+### Features
+
+* Update API sources and regenerate ([#8672](https://github.com/googleapis/google-cloud-node/issues/8672)) ([3391fd2](https://github.com/googleapis/google-cloud-node/commit/3391fd27d1c15e051293207a07c6db00e760d370))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node/compare/promisify-v5.0.0...promisify-v5.0.1) (2026-05-11)
 
 

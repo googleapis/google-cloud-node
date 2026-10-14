@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as datasourcesserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -241,7 +241,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataSourcesServiceStub, undefined);
@@ -249,12 +249,12 @@ describe('v1.DataSourcesServiceClient', () => {
       assert(client.dataSourcesServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.dataSourcesServiceStub);
@@ -263,14 +263,14 @@ describe('v1.DataSourcesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.dataSourcesServiceStub, undefined);
@@ -279,7 +279,7 @@ describe('v1.DataSourcesServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -287,7 +287,7 @@ describe('v1.DataSourcesServiceClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -299,7 +299,7 @@ describe('v1.DataSourcesServiceClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -322,7 +322,7 @@ describe('v1.DataSourcesServiceClient', () => {
   describe('getDataSource', () => {
     it('invokes getDataSource without error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -353,7 +353,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes getDataSource without error using callback', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -400,7 +400,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes getDataSource with error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -431,7 +431,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes getDataSource with closed client', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -444,7 +444,7 @@ describe('v1.DataSourcesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getDataSource(request), expectedError);
@@ -454,7 +454,7 @@ describe('v1.DataSourcesServiceClient', () => {
   describe('createDataSource', () => {
     it('invokes createDataSource without error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -485,7 +485,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes createDataSource without error using callback', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -532,7 +532,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes createDataSource with error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -563,7 +563,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes createDataSource with closed client', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -576,7 +576,7 @@ describe('v1.DataSourcesServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createDataSource(request), expectedError);
@@ -586,7 +586,7 @@ describe('v1.DataSourcesServiceClient', () => {
   describe('updateDataSource', () => {
     it('invokes updateDataSource without error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -618,7 +618,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes updateDataSource without error using callback', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -666,7 +666,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes updateDataSource with error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -698,7 +698,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes updateDataSource with closed client', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -712,7 +712,7 @@ describe('v1.DataSourcesServiceClient', () => {
       );
       request.dataSource.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateDataSource(request), expectedError);
@@ -722,7 +722,7 @@ describe('v1.DataSourcesServiceClient', () => {
   describe('deleteDataSource', () => {
     it('invokes deleteDataSource without error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -753,7 +753,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes deleteDataSource without error using callback', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -800,7 +800,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes deleteDataSource with error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -831,7 +831,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes deleteDataSource with closed client', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -844,7 +844,7 @@ describe('v1.DataSourcesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteDataSource(request), expectedError);
@@ -854,7 +854,7 @@ describe('v1.DataSourcesServiceClient', () => {
   describe('fetchDataSource', () => {
     it('invokes fetchDataSource without error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -885,7 +885,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes fetchDataSource without error using callback', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -932,7 +932,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes fetchDataSource with error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -963,7 +963,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes fetchDataSource with closed client', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -976,7 +976,7 @@ describe('v1.DataSourcesServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.fetchDataSource(request), expectedError);
@@ -986,7 +986,7 @@ describe('v1.DataSourcesServiceClient', () => {
   describe('listDataSources', () => {
     it('invokes listDataSources without error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1025,7 +1025,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes listDataSources without error using callback', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1082,7 +1082,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes listDataSources with error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1113,7 +1113,7 @@ describe('v1.DataSourcesServiceClient', () => {
 
     it('invokes listDataSourcesStream without error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1168,15 +1168,15 @@ describe('v1.DataSourcesServiceClient', () => {
       assert(
         (client.descriptors.page.listDataSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listDataSourcesStream with error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1220,15 +1220,15 @@ describe('v1.DataSourcesServiceClient', () => {
       assert(
         (client.descriptors.page.listDataSources.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataSources without error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1270,15 +1270,15 @@ describe('v1.DataSourcesServiceClient', () => {
       assert(
         (client.descriptors.page.listDataSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listDataSources with error', async () => {
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1311,9 +1311,9 @@ describe('v1.DataSourcesServiceClient', () => {
       assert(
         (client.descriptors.page.listDataSources.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1325,7 +1325,7 @@ describe('v1.DataSourcesServiceClient', () => {
         account: 'accountValue',
       };
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1364,7 +1364,7 @@ describe('v1.DataSourcesServiceClient', () => {
         datasource: 'datasourceValue',
       };
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1414,7 +1414,7 @@ describe('v1.DataSourcesServiceClient', () => {
         fileupload: 'fileuploadValue',
       };
       const client = new datasourcesserviceModule.v1.DataSourcesServiceClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as generatorsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -239,7 +239,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.generatorsStub, undefined);
@@ -247,12 +247,12 @@ describe('v2beta1.GeneratorsClient', () => {
       assert(client.generatorsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.generatorsStub);
@@ -261,14 +261,14 @@ describe('v2beta1.GeneratorsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.generatorsStub, undefined);
@@ -277,7 +277,7 @@ describe('v2beta1.GeneratorsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -285,7 +285,7 @@ describe('v2beta1.GeneratorsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -297,7 +297,7 @@ describe('v2beta1.GeneratorsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -320,7 +320,7 @@ describe('v2beta1.GeneratorsClient', () => {
   describe('createGenerator', () => {
     it('invokes createGenerator without error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -351,7 +351,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes createGenerator without error using callback', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -398,7 +398,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes createGenerator with error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -429,7 +429,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes createGenerator with closed client', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -442,7 +442,7 @@ describe('v2beta1.GeneratorsClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createGenerator(request), expectedError);
@@ -452,7 +452,7 @@ describe('v2beta1.GeneratorsClient', () => {
   describe('getGenerator', () => {
     it('invokes getGenerator without error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -483,7 +483,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes getGenerator without error using callback', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -530,7 +530,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes getGenerator with error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -561,7 +561,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes getGenerator with closed client', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -574,7 +574,7 @@ describe('v2beta1.GeneratorsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getGenerator(request), expectedError);
@@ -584,7 +584,7 @@ describe('v2beta1.GeneratorsClient', () => {
   describe('deleteGenerator', () => {
     it('invokes deleteGenerator without error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -615,7 +615,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes deleteGenerator without error using callback', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -662,7 +662,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes deleteGenerator with error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -693,7 +693,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes deleteGenerator with closed client', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -706,7 +706,7 @@ describe('v2beta1.GeneratorsClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteGenerator(request), expectedError);
@@ -716,7 +716,7 @@ describe('v2beta1.GeneratorsClient', () => {
   describe('updateGenerator', () => {
     it('invokes updateGenerator without error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -748,7 +748,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes updateGenerator without error using callback', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -796,7 +796,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes updateGenerator with error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -828,7 +828,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes updateGenerator with closed client', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -842,7 +842,7 @@ describe('v2beta1.GeneratorsClient', () => {
       );
       request.generator.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateGenerator(request), expectedError);
@@ -852,7 +852,7 @@ describe('v2beta1.GeneratorsClient', () => {
   describe('listGenerators', () => {
     it('invokes listGenerators without error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -891,7 +891,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes listGenerators without error using callback', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -946,7 +946,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes listGenerators with error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -977,7 +977,7 @@ describe('v2beta1.GeneratorsClient', () => {
 
     it('invokes listGeneratorsStream without error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1030,15 +1030,15 @@ describe('v2beta1.GeneratorsClient', () => {
       assert(
         (client.descriptors.page.listGenerators.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listGeneratorsStream with error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1080,15 +1080,15 @@ describe('v2beta1.GeneratorsClient', () => {
       assert(
         (client.descriptors.page.listGenerators.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGenerators without error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1129,15 +1129,15 @@ describe('v2beta1.GeneratorsClient', () => {
       assert(
         (client.descriptors.page.listGenerators.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listGenerators with error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1170,16 +1170,16 @@ describe('v2beta1.GeneratorsClient', () => {
       assert(
         (client.descriptors.page.listGenerators.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1209,7 +1209,7 @@ describe('v2beta1.GeneratorsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1253,7 +1253,7 @@ describe('v2beta1.GeneratorsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1288,7 +1288,7 @@ describe('v2beta1.GeneratorsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1336,7 +1336,7 @@ describe('v2beta1.GeneratorsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1376,6 +1376,71 @@ describe('v2beta1.GeneratorsClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('companionAgent', async () => {
+      const fakePath = '/rendered/path/companionAgent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        companion_agent: 'companionAgentValue',
+      };
+      const client = new generatorsModule.v2beta1.GeneratorsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.companionAgentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.companionAgentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('companionAgentPath', () => {
+        const result = client.companionAgentPath(
+          'projectValue',
+          'locationValue',
+          'companionAgentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromCompanionAgentName', () => {
+        const result = client.matchProjectFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromCompanionAgentName', () => {
+        const result = client.matchLocationFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCompanionAgentFromCompanionAgentName', () => {
+        const result =
+          client.matchCompanionAgentFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'companionAgentValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('encryptionSpec', async () => {
       const fakePath = '/rendered/path/encryptionSpec';
       const expectedParameters = {
@@ -1383,7 +1448,7 @@ describe('v2beta1.GeneratorsClient', () => {
         location: 'locationValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1436,7 +1501,7 @@ describe('v2beta1.GeneratorsClient', () => {
         generator: 'generatorValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1501,7 +1566,7 @@ describe('v2beta1.GeneratorsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1592,7 +1657,7 @@ describe('v2beta1.GeneratorsClient', () => {
         project: 'projectValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1630,7 +1695,7 @@ describe('v2beta1.GeneratorsClient', () => {
         project: 'projectValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1669,7 +1734,7 @@ describe('v2beta1.GeneratorsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1732,7 +1797,7 @@ describe('v2beta1.GeneratorsClient', () => {
         environment: 'environmentValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1799,7 +1864,7 @@ describe('v2beta1.GeneratorsClient', () => {
         context: 'contextValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1925,7 +1990,7 @@ describe('v2beta1.GeneratorsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2046,7 +2111,7 @@ describe('v2beta1.GeneratorsClient', () => {
         project: 'projectValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2092,7 +2157,7 @@ describe('v2beta1.GeneratorsClient', () => {
         intent: 'intentValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2154,7 +2219,7 @@ describe('v2beta1.GeneratorsClient', () => {
         context: 'contextValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2233,7 +2298,7 @@ describe('v2beta1.GeneratorsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2309,7 +2374,7 @@ describe('v2beta1.GeneratorsClient', () => {
         version: 'versionValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2370,7 +2435,7 @@ describe('v2beta1.GeneratorsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2433,7 +2498,7 @@ describe('v2beta1.GeneratorsClient', () => {
         message: 'messageValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2512,7 +2577,7 @@ describe('v2beta1.GeneratorsClient', () => {
         participant: 'participantValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2592,7 +2657,7 @@ describe('v2beta1.GeneratorsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2657,7 +2722,7 @@ describe('v2beta1.GeneratorsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2720,7 +2785,7 @@ describe('v2beta1.GeneratorsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2784,7 +2849,7 @@ describe('v2beta1.GeneratorsClient', () => {
         document: 'documentValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2862,7 +2927,7 @@ describe('v2beta1.GeneratorsClient', () => {
         location: 'locationValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2926,7 +2991,7 @@ describe('v2beta1.GeneratorsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3005,7 +3070,7 @@ describe('v2beta1.GeneratorsClient', () => {
         environment: 'environmentValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3088,7 +3153,7 @@ describe('v2beta1.GeneratorsClient', () => {
         context: 'contextValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3234,7 +3299,7 @@ describe('v2beta1.GeneratorsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3375,7 +3440,7 @@ describe('v2beta1.GeneratorsClient', () => {
         location: 'locationValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3437,7 +3502,7 @@ describe('v2beta1.GeneratorsClient', () => {
         intent: 'intentValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3517,7 +3582,7 @@ describe('v2beta1.GeneratorsClient', () => {
         context: 'contextValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3618,7 +3683,7 @@ describe('v2beta1.GeneratorsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3723,7 +3788,7 @@ describe('v2beta1.GeneratorsClient', () => {
         version: 'versionValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3801,7 +3866,7 @@ describe('v2beta1.GeneratorsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3880,7 +3945,7 @@ describe('v2beta1.GeneratorsClient', () => {
         message: 'messageValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3981,7 +4046,7 @@ describe('v2beta1.GeneratorsClient', () => {
         participant: 'participantValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4086,7 +4151,7 @@ describe('v2beta1.GeneratorsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4169,7 +4234,7 @@ describe('v2beta1.GeneratorsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4248,7 +4313,7 @@ describe('v2beta1.GeneratorsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4328,7 +4393,7 @@ describe('v2beta1.GeneratorsClient', () => {
         document: 'documentValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4433,7 +4498,7 @@ describe('v2beta1.GeneratorsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4511,7 +4576,7 @@ describe('v2beta1.GeneratorsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4574,7 +4639,7 @@ describe('v2beta1.GeneratorsClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4638,7 +4703,7 @@ describe('v2beta1.GeneratorsClient', () => {
         tool: 'toolValue',
       };
       const client = new generatorsModule.v2beta1.GeneratorsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

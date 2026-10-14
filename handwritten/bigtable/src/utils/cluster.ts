@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as protos from '../../protos/protos';
 import {
   BasicClusterConfig,
   Cluster,
   ICluster,
   SetClusterMetadataOptions,
 } from '../cluster';
-import {google} from '../../protos/protos';
+import {protos} from '..';
+import google = protos.google;
 import {ModifiableBackupFields} from '../backup';
 import {PreciseDate} from '@google-cloud/precise-date';
 

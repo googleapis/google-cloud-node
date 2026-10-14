@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class DataAgentServiceClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('geminidataanalytics');
@@ -68,11 +68,11 @@ export class DataAgentServiceClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  dataAgentServiceStub?: Promise<{ [name: string]: Function }>;
+  dataAgentServiceStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DataAgentServiceClient.
@@ -148,7 +148,7 @@ export class DataAgentServiceClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -301,6 +301,12 @@ export class DataAgentServiceClient {
     const deleteDataAgentMetadata = protoFilesRoot.lookup(
       '.google.cloud.geminidataanalytics.v1beta.OperationMetadata',
     ) as gax.protobuf.Type;
+    const setAgentOpsObservabilityResponse = protoFilesRoot.lookup(
+      '.google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityResponse',
+    ) as gax.protobuf.Type;
+    const setAgentOpsObservabilityMetadata = protoFilesRoot.lookup(
+      '.google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createDataAgent: new this._gaxModule.LongrunningDescriptor(
@@ -318,6 +324,15 @@ export class DataAgentServiceClient {
         deleteDataAgentResponse.decode.bind(deleteDataAgentResponse),
         deleteDataAgentMetadata.decode.bind(deleteDataAgentMetadata),
       ),
+      setAgentOpsObservability: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        setAgentOpsObservabilityResponse.decode.bind(
+          setAgentOpsObservabilityResponse,
+        ),
+        setAgentOpsObservabilityMetadata.decode.bind(
+          setAgentOpsObservabilityMetadata,
+        ),
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -325,7 +340,7 @@ export class DataAgentServiceClient {
       'google.cloud.geminidataanalytics.v1beta.DataAgentService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -366,7 +381,7 @@ export class DataAgentServiceClient {
             .DataAgentService,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -382,10 +397,12 @@ export class DataAgentServiceClient {
       'deleteDataAgentSync',
       'getIamPolicy',
       'setIamPolicy',
+      'setAgentOpsObservability',
+      'retrieveAgentOpsObservability',
     ];
     for (const methodName of dataAgentServiceStubMethods) {
       const callPromise = this.dataAgentServiceStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -592,7 +609,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getDataAgent request %j', request);
@@ -755,7 +772,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('createDataAgentSync request %j', request);
@@ -920,7 +937,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_agent.name': request.dataAgent!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('updateDataAgentSync request %j', request);
@@ -1077,7 +1094,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('deleteDataAgentSync request %j', request);
@@ -1210,7 +1227,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getIamPolicy request %j', request);
@@ -1346,7 +1363,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         resource: request.resource ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('setIamPolicy request %j', request);
@@ -1371,6 +1388,153 @@ export class DataAgentServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('setIamPolicy response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets AgentOps observability settings and status of required services.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for RetrieveAgentOpsObservabilityRequest.
+   *   Format: projects/{project}/locations/{location}
+   * @param {string} request.dataSourceType
+   *   Required. The data source type for which to retrieve observability
+   *   settings. Examples: "bigquery", "looker"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.geminidataanalytics.v1beta.RetrieveAgentOpsObservabilityResponse|RetrieveAgentOpsObservabilityResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_agent_service.retrieve_agent_ops_observability.js</caption>
+   * region_tag:geminidataanalytics_v1beta_generated_DataAgentService_RetrieveAgentOpsObservability_async
+   */
+  retrieveAgentOpsObservability(
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityResponse,
+      (
+        | protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  retrieveAgentOpsObservability(
+    request: protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityResponse,
+      | protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  retrieveAgentOpsObservability(
+    request: protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest,
+    callback: Callback<
+      protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityResponse,
+      | protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  retrieveAgentOpsObservability(
+    request?: protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityResponse,
+          | protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityResponse,
+      | protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityResponse,
+      (
+        | protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('retrieveAgentOpsObservability request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityResponse,
+          | protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('retrieveAgentOpsObservability response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .retrieveAgentOpsObservability(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityResponse,
+          (
+            | protos.google.cloud.geminidataanalytics.v1beta.IRetrieveAgentOpsObservabilityRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('retrieveAgentOpsObservability response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1511,7 +1675,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1568,7 +1732,7 @@ export class DataAgentServiceClient {
     this._log.info('createDataAgent long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1702,7 +1866,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         'data_agent.name': request.dataAgent!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1759,7 +1923,7 @@ export class DataAgentServiceClient {
     this._log.info('updateDataAgent long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1885,7 +2049,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -1942,7 +2106,7 @@ export class DataAgentServiceClient {
     this._log.info('deleteDataAgent long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -1953,6 +2117,211 @@ export class DataAgentServiceClient {
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
       protos.google.cloud.geminidataanalytics.v1beta.OperationMetadata
+    >;
+  }
+  /**
+   * Enables/Disables required GCP services and configures AgentOps
+   * observability settings calling the Admin Settings executable node to
+   * update the AgentOps Observability feature.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent value for SetAgentOpsObservabilityRequest.
+   *   Format: projects/{project}/locations/{location}
+   * @param {boolean} [request.telemetryEnabled]
+   *   Optional. Whether to enable or disable AgentOps observability.
+   *   When update_mask is provided, this field is ignored unless specified in the
+   *   mask.
+   * @param {string} request.dataSourceType
+   *   Required. The data source type for which to set observability settings.
+   *   Examples: "bigquery", "looker"
+   * @param {boolean} [request.bqaaEnabled]
+   *   Optional. Whether BigQuery Agent Analytics is enabled.
+   *   Note: An explicit `update_mask` containing "bqaa_enabled" is required to
+   *   modify this field. If `update_mask` is omitted, this field is ignored and
+   *   an existing enabled setting cannot be disabled.
+   *
+   *   This is a project-level setting and does not by itself enable trace
+   *   logging for any individual agent. Per-agent trace logging is controlled
+   *   by `DataAgent.bigquery_agent_analytics_enabled` together with
+   *   `DataAgent.bigquery_agent_analytics_table`; an agent does not inherit
+   *   this setting.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Field mask is used to specify the fields to be overwritten by the
+   *   update. The fields specified in the update_mask are relative to the
+   *   resource. A field will be overwritten if it is in the mask.
+   *
+   *   If the user does not provide a mask, only `telemetry_enabled` will be
+   *   updated (for backward compatibility with legacy callers). Note that
+   *   disabling BigQuery Agent Analytics (`bqaa_enabled = false`) requires
+   *   providing an explicit `update_mask` containing "bqaa_enabled".
+   *
+   *   Per AIP-161:
+   *   - The special wildcard value '*' is supported to update all fields.
+   *   - Field paths should use snake_case, though camelCase equivalents
+   *     (`telemetryEnabled`, `bqaaEnabled`) are accepted for REST/JSON
+   *     transcoding compatibility.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_agent_service.set_agent_ops_observability.js</caption>
+   * region_tag:geminidataanalytics_v1beta_generated_DataAgentService_SetAgentOpsObservability_async
+   */
+  setAgentOpsObservability(
+    request?: protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityResponse,
+        protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  setAgentOpsObservability(
+    request: protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityResponse,
+        protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setAgentOpsObservability(
+    request: protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityResponse,
+        protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  setAgentOpsObservability(
+    request?: protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityResponse,
+            protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityResponse,
+        protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityResponse,
+        protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityResponse,
+            protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('setAgentOpsObservability response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('setAgentOpsObservability request %j', request);
+    return this.innerApiCalls
+      .setAgentOpsObservability(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityResponse,
+            protos.google.cloud.geminidataanalytics.v1beta.ISetAgentOpsObservabilityMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('setAgentOpsObservability response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `setAgentOpsObservability()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1beta/data_agent_service.set_agent_ops_observability.js</caption>
+   * region_tag:geminidataanalytics_v1beta_generated_DataAgentService_SetAgentOpsObservability_async
+   */
+  async checkSetAgentOpsObservabilityProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityResponse,
+      protos.google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityMetadata
+    >
+  > {
+    this._log.info('setAgentOpsObservability long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.setAgentOpsObservability,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityResponse,
+      protos.google.cloud.geminidataanalytics.v1beta.SetAgentOpsObservabilityMetadata
     >;
   }
   /**
@@ -1980,6 +2349,8 @@ export class DataAgentServiceClient {
    * @param {boolean} [request.showDeleted]
    *   Optional. If true, the list results will include soft-deleted DataAgents.
    *   Defaults to false.
+   * @param {google.cloud.geminidataanalytics.v1beta.ListAccessibleDataAgentsRequest.CreatorFilter} [request.creatorFilter]
+   *   Optional. Filter for the creator of the agent.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2063,7 +2434,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2119,6 +2490,8 @@ export class DataAgentServiceClient {
    * @param {boolean} [request.showDeleted]
    *   Optional. If true, the list results will include soft-deleted DataAgents.
    *   Defaults to false.
+   * @param {google.cloud.geminidataanalytics.v1beta.ListAccessibleDataAgentsRequest.CreatorFilter} [request.creatorFilter]
+   *   Optional. Filter for the creator of the agent.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2144,7 +2517,7 @@ export class DataAgentServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataAgents stream %j', request);
@@ -2181,6 +2554,8 @@ export class DataAgentServiceClient {
    * @param {boolean} [request.showDeleted]
    *   Optional. If true, the list results will include soft-deleted DataAgents.
    *   Defaults to false.
+   * @param {google.cloud.geminidataanalytics.v1beta.ListAccessibleDataAgentsRequest.CreatorFilter} [request.creatorFilter]
+   *   Optional. Filter for the creator of the agent.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2207,7 +2582,7 @@ export class DataAgentServiceClient {
       });
     const defaultCallSettings = this._defaults['listDataAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listDataAgents iterate %j', request);
@@ -2328,7 +2703,7 @@ export class DataAgentServiceClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2411,7 +2786,7 @@ export class DataAgentServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccessibleDataAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccessibleDataAgents stream %j', request);
@@ -2476,7 +2851,7 @@ export class DataAgentServiceClient {
       });
     const defaultCallSettings = this._defaults['listAccessibleDataAgents'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccessibleDataAgents iterate %j', request);
@@ -2962,11 +3337,11 @@ export class DataAgentServiceClient {
    */
   close(): Promise<void> {
     if (this.dataAgentServiceStub && !this._terminated) {
-      return this.dataAgentServiceStub.then((stub) => {
+      return this.dataAgentServiceStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as essentialcontactsserviceModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf } from 'google-gax';
+import {protobuf} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -117,9 +117,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -206,7 +206,7 @@ describe('v1.EssentialContactsServiceClient', () => {
           process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] = 'example.com';
           const client =
             new essentialcontactsserviceModule.v1.EssentialContactsServiceClient(
-              { universeDomain: 'configured.example.com' },
+              {universeDomain: 'configured.example.com'},
             );
           const servicePath = client.apiEndpoint;
           assert.strictEqual(
@@ -254,7 +254,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('has initialize method and supports deferred initialization', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.essentialContactsServiceStub, undefined);
@@ -262,13 +262,13 @@ describe('v1.EssentialContactsServiceClient', () => {
       assert(client.essentialContactsServiceStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.essentialContactsServiceStub);
@@ -277,15 +277,15 @@ describe('v1.EssentialContactsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       assert.strictEqual(client.essentialContactsServiceStub, undefined);
@@ -294,7 +294,7 @@ describe('v1.EssentialContactsServiceClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -303,7 +303,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -316,7 +316,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       const fakeProjectId = 'fake-project-id';
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.auth.getProjectId = sinon
@@ -340,7 +340,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes createContact without error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -372,7 +372,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes createContact without error using callback', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -420,7 +420,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes createContact with error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -452,7 +452,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes createContact with closed client', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -465,7 +465,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.createContact(request), expectedError);
@@ -476,7 +476,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes updateContact without error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -509,7 +509,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes updateContact without error using callback', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -558,7 +558,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes updateContact with error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -591,7 +591,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes updateContact with closed client', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -605,7 +605,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       );
       request.contact.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.updateContact(request), expectedError);
@@ -616,7 +616,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes getContact without error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -648,7 +648,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes getContact without error using callback', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -696,7 +696,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes getContact with error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -728,7 +728,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes getContact with closed client', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -741,7 +741,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.getContact(request), expectedError);
@@ -752,7 +752,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes deleteContact without error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -784,7 +784,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes deleteContact without error using callback', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -832,7 +832,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes deleteContact with error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -864,7 +864,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes deleteContact with closed client', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -877,7 +877,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.deleteContact(request), expectedError);
@@ -888,7 +888,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes sendTestMessage without error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -920,7 +920,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes sendTestMessage without error using callback', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -968,7 +968,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes sendTestMessage with error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1000,7 +1000,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes sendTestMessage with closed client', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1013,7 +1013,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.sendTestMessage(request), expectedError);
@@ -1024,7 +1024,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes listContacts without error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1064,7 +1064,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes listContacts without error using callback', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1120,7 +1120,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes listContacts with error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1152,7 +1152,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes listContactsStream without error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1205,16 +1205,16 @@ describe('v1.EssentialContactsServiceClient', () => {
       assert(
         (client.descriptors.page.listContacts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes listContactsStream with error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1258,16 +1258,16 @@ describe('v1.EssentialContactsServiceClient', () => {
       assert(
         (client.descriptors.page.listContacts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listContacts without error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1308,16 +1308,16 @@ describe('v1.EssentialContactsServiceClient', () => {
       assert(
         (client.descriptors.page.listContacts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with listContacts with error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1350,9 +1350,9 @@ describe('v1.EssentialContactsServiceClient', () => {
       assert(
         (client.descriptors.page.listContacts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1361,7 +1361,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes computeContacts without error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1401,7 +1401,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes computeContacts without error using callback', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1457,7 +1457,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes computeContacts with error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1489,7 +1489,7 @@ describe('v1.EssentialContactsServiceClient', () => {
     it('invokes computeContactsStream without error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1542,16 +1542,16 @@ describe('v1.EssentialContactsServiceClient', () => {
       assert(
         (client.descriptors.page.computeContacts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('invokes computeContactsStream with error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1593,16 +1593,16 @@ describe('v1.EssentialContactsServiceClient', () => {
       assert(
         (client.descriptors.page.computeContacts.createStream as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with computeContacts without error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1643,16 +1643,16 @@ describe('v1.EssentialContactsServiceClient', () => {
       assert(
         (client.descriptors.page.computeContacts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
 
     it('uses async iteration with computeContacts with error', async () => {
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1685,9 +1685,9 @@ describe('v1.EssentialContactsServiceClient', () => {
       assert(
         (client.descriptors.page.computeContacts.asyncIterate as SinonStub)
           .getCall(0)
-          .args[2].otherArgs.headers[
-            'x-goog-request-params'
-          ].includes(expectedHeaderRequestParams),
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
       );
     });
   });
@@ -1701,7 +1701,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       };
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1751,7 +1751,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       };
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1813,7 +1813,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       };
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();
@@ -1853,7 +1853,7 @@ describe('v1.EssentialContactsServiceClient', () => {
       };
       const client =
         new essentialcontactsserviceModule.v1.EssentialContactsServiceClient({
-          credentials: { client_email: 'bogus', private_key: 'bogus' },
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       await client.initialize();

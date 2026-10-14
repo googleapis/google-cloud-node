@@ -1,17 +1,16 @@
 {
-  "name": "backupdr",
-  "name_pretty": "Backup and DR Service API",
-  "product_documentation": "https://cloud.google.com/backup-disaster-recovery/docs/concepts/backup-dr",
-  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/backupdr/latest",
-  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
-  "release_level": "stable",
-  "language": "nodejs",
-  "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/backupdr",
-  "api_id": "backupdr.googleapis.com",
-  "default_version": "v1",
-  "requires_billing": true,
-  "library_type": "GAPIC_AUTO",
-  "api_shortname": "backupdr"
+    "api_description": "Backup and DR Service is a managed service that provides backup and recovery of workloads running in Google Cloud.",
+    "api_id": "backupdr.googleapis.com",
+    "api_shortname": "backupdr",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/backupdr/latest",
+    "default_version": "v1",
+    "distribution_name": "@google-cloud/backupdr",
+    "issue_tracker": "https://issuetracker.google.com/issues/new?component=966572",
+    "language": "nodejs",
+    "library_type": "GAPIC_AUTO",
+    "name": "backupdr",
+    "name_pretty": "Backup and DR Service",
+    "product_documentation": "https://cloud.google.com/backup-disaster-recovery/docs",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-node"
 }
-

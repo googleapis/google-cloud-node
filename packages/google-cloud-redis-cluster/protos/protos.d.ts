@@ -64,6 +64,20 @@ export namespace google {
                         public listClusters(request: google.cloud.redis.cluster.v1.IListClustersRequest): Promise<google.cloud.redis.cluster.v1.ListClustersResponse>;
 
                         /**
+                         * Calls ListAclPolicies.
+                         * @param request ListAclPoliciesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListAclPoliciesResponse
+                         */
+                        public listAclPolicies(request: google.cloud.redis.cluster.v1.IListAclPoliciesRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.ListAclPoliciesCallback): void;
+
+                        /**
+                         * Calls ListAclPolicies.
+                         * @param request ListAclPoliciesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listAclPolicies(request: google.cloud.redis.cluster.v1.IListAclPoliciesRequest): Promise<google.cloud.redis.cluster.v1.ListAclPoliciesResponse>;
+
+                        /**
                          * Calls GetCluster.
                          * @param request GetClusterRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Cluster
@@ -76,6 +90,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public getCluster(request: google.cloud.redis.cluster.v1.IGetClusterRequest): Promise<google.cloud.redis.cluster.v1.Cluster>;
+
+                        /**
+                         * Calls GetAclPolicy.
+                         * @param request GetAclPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and AclPolicy
+                         */
+                        public getAclPolicy(request: google.cloud.redis.cluster.v1.IGetAclPolicyRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.GetAclPolicyCallback): void;
+
+                        /**
+                         * Calls GetAclPolicy.
+                         * @param request GetAclPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getAclPolicy(request: google.cloud.redis.cluster.v1.IGetAclPolicyRequest): Promise<google.cloud.redis.cluster.v1.AclPolicy>;
 
                         /**
                          * Calls UpdateCluster.
@@ -92,6 +120,20 @@ export namespace google {
                         public updateCluster(request: google.cloud.redis.cluster.v1.IUpdateClusterRequest): Promise<google.longrunning.Operation>;
 
                         /**
+                         * Calls UpdateAclPolicy.
+                         * @param request UpdateAclPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public updateAclPolicy(request: google.cloud.redis.cluster.v1.IUpdateAclPolicyRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.UpdateAclPolicyCallback): void;
+
+                        /**
+                         * Calls UpdateAclPolicy.
+                         * @param request UpdateAclPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateAclPolicy(request: google.cloud.redis.cluster.v1.IUpdateAclPolicyRequest): Promise<google.longrunning.Operation>;
+
+                        /**
                          * Calls DeleteCluster.
                          * @param request DeleteClusterRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Operation
@@ -106,6 +148,48 @@ export namespace google {
                         public deleteCluster(request: google.cloud.redis.cluster.v1.IDeleteClusterRequest): Promise<google.longrunning.Operation>;
 
                         /**
+                         * Calls DeleteAclPolicy.
+                         * @param request DeleteAclPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteAclPolicy(request: google.cloud.redis.cluster.v1.IDeleteAclPolicyRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.DeleteAclPolicyCallback): void;
+
+                        /**
+                         * Calls DeleteAclPolicy.
+                         * @param request DeleteAclPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteAclPolicy(request: google.cloud.redis.cluster.v1.IDeleteAclPolicyRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls GetAclPolicyRevision.
+                         * @param request GetAclPolicyRevisionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and AclPolicyRevision
+                         */
+                        public getAclPolicyRevision(request: google.cloud.redis.cluster.v1.IGetAclPolicyRevisionRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.GetAclPolicyRevisionCallback): void;
+
+                        /**
+                         * Calls GetAclPolicyRevision.
+                         * @param request GetAclPolicyRevisionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getAclPolicyRevision(request: google.cloud.redis.cluster.v1.IGetAclPolicyRevisionRequest): Promise<google.cloud.redis.cluster.v1.AclPolicyRevision>;
+
+                        /**
+                         * Calls ListAclPolicyRevisions.
+                         * @param request ListAclPolicyRevisionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListAclPolicyRevisionsResponse
+                         */
+                        public listAclPolicyRevisions(request: google.cloud.redis.cluster.v1.IListAclPolicyRevisionsRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.ListAclPolicyRevisionsCallback): void;
+
+                        /**
+                         * Calls ListAclPolicyRevisions.
+                         * @param request ListAclPolicyRevisionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listAclPolicyRevisions(request: google.cloud.redis.cluster.v1.IListAclPolicyRevisionsRequest): Promise<google.cloud.redis.cluster.v1.ListAclPolicyRevisionsResponse>;
+
+                        /**
                          * Calls CreateCluster.
                          * @param request CreateClusterRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Operation
@@ -118,6 +202,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public createCluster(request: google.cloud.redis.cluster.v1.ICreateClusterRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls CreateAclPolicy.
+                         * @param request CreateAclPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and AclPolicy
+                         */
+                        public createAclPolicy(request: google.cloud.redis.cluster.v1.ICreateAclPolicyRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.CreateAclPolicyCallback): void;
+
+                        /**
+                         * Calls CreateAclPolicy.
+                         * @param request CreateAclPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createAclPolicy(request: google.cloud.redis.cluster.v1.ICreateAclPolicyRequest): Promise<google.cloud.redis.cluster.v1.AclPolicy>;
 
                         /**
                          * Calls GetClusterCertificateAuthority.
@@ -258,6 +356,118 @@ export namespace google {
                          * @returns Promise
                          */
                         public backupCluster(request: google.cloud.redis.cluster.v1.IBackupClusterRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls ListTokenAuthUsers.
+                         * @param request ListTokenAuthUsersRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListTokenAuthUsersResponse
+                         */
+                        public listTokenAuthUsers(request: google.cloud.redis.cluster.v1.IListTokenAuthUsersRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.ListTokenAuthUsersCallback): void;
+
+                        /**
+                         * Calls ListTokenAuthUsers.
+                         * @param request ListTokenAuthUsersRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listTokenAuthUsers(request: google.cloud.redis.cluster.v1.IListTokenAuthUsersRequest): Promise<google.cloud.redis.cluster.v1.ListTokenAuthUsersResponse>;
+
+                        /**
+                         * Calls GetTokenAuthUser.
+                         * @param request GetTokenAuthUserRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and TokenAuthUser
+                         */
+                        public getTokenAuthUser(request: google.cloud.redis.cluster.v1.IGetTokenAuthUserRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.GetTokenAuthUserCallback): void;
+
+                        /**
+                         * Calls GetTokenAuthUser.
+                         * @param request GetTokenAuthUserRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getTokenAuthUser(request: google.cloud.redis.cluster.v1.IGetTokenAuthUserRequest): Promise<google.cloud.redis.cluster.v1.TokenAuthUser>;
+
+                        /**
+                         * Calls ListAuthTokens.
+                         * @param request ListAuthTokensRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListAuthTokensResponse
+                         */
+                        public listAuthTokens(request: google.cloud.redis.cluster.v1.IListAuthTokensRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.ListAuthTokensCallback): void;
+
+                        /**
+                         * Calls ListAuthTokens.
+                         * @param request ListAuthTokensRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listAuthTokens(request: google.cloud.redis.cluster.v1.IListAuthTokensRequest): Promise<google.cloud.redis.cluster.v1.ListAuthTokensResponse>;
+
+                        /**
+                         * Calls GetAuthToken.
+                         * @param request GetAuthTokenRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and AuthToken
+                         */
+                        public getAuthToken(request: google.cloud.redis.cluster.v1.IGetAuthTokenRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.GetAuthTokenCallback): void;
+
+                        /**
+                         * Calls GetAuthToken.
+                         * @param request GetAuthTokenRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getAuthToken(request: google.cloud.redis.cluster.v1.IGetAuthTokenRequest): Promise<google.cloud.redis.cluster.v1.AuthToken>;
+
+                        /**
+                         * Calls AddTokenAuthUser.
+                         * @param request AddTokenAuthUserRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public addTokenAuthUser(request: google.cloud.redis.cluster.v1.IAddTokenAuthUserRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.AddTokenAuthUserCallback): void;
+
+                        /**
+                         * Calls AddTokenAuthUser.
+                         * @param request AddTokenAuthUserRequest message or plain object
+                         * @returns Promise
+                         */
+                        public addTokenAuthUser(request: google.cloud.redis.cluster.v1.IAddTokenAuthUserRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls DeleteTokenAuthUser.
+                         * @param request DeleteTokenAuthUserRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteTokenAuthUser(request: google.cloud.redis.cluster.v1.IDeleteTokenAuthUserRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.DeleteTokenAuthUserCallback): void;
+
+                        /**
+                         * Calls DeleteTokenAuthUser.
+                         * @param request DeleteTokenAuthUserRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteTokenAuthUser(request: google.cloud.redis.cluster.v1.IDeleteTokenAuthUserRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls AddAuthToken.
+                         * @param request AddAuthTokenRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public addAuthToken(request: google.cloud.redis.cluster.v1.IAddAuthTokenRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.AddAuthTokenCallback): void;
+
+                        /**
+                         * Calls AddAuthToken.
+                         * @param request AddAuthTokenRequest message or plain object
+                         * @returns Promise
+                         */
+                        public addAuthToken(request: google.cloud.redis.cluster.v1.IAddAuthTokenRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls DeleteAuthToken.
+                         * @param request DeleteAuthTokenRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteAuthToken(request: google.cloud.redis.cluster.v1.IDeleteAuthTokenRequest, callback: google.cloud.redis.cluster.v1.CloudRedisCluster.DeleteAuthTokenCallback): void;
+
+                        /**
+                         * Calls DeleteAuthToken.
+                         * @param request DeleteAuthTokenRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteAuthToken(request: google.cloud.redis.cluster.v1.IDeleteAuthTokenRequest): Promise<google.longrunning.Operation>;
                     }
 
                     namespace CloudRedisCluster {
@@ -270,11 +480,25 @@ export namespace google {
                         type ListClustersCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.ListClustersResponse) => void;
 
                         /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|listAclPolicies}.
+                         * @param error Error, if any
+                         * @param [response] ListAclPoliciesResponse
+                         */
+                        type ListAclPoliciesCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.ListAclPoliciesResponse) => void;
+
+                        /**
                          * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|getCluster}.
                          * @param error Error, if any
                          * @param [response] Cluster
                          */
                         type GetClusterCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.Cluster) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|getAclPolicy}.
+                         * @param error Error, if any
+                         * @param [response] AclPolicy
+                         */
+                        type GetAclPolicyCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.AclPolicy) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|updateCluster}.
@@ -284,6 +508,13 @@ export namespace google {
                         type UpdateClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|updateAclPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type UpdateAclPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
                          * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|deleteCluster}.
                          * @param error Error, if any
                          * @param [response] Operation
@@ -291,11 +522,39 @@ export namespace google {
                         type DeleteClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|deleteAclPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteAclPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|getAclPolicyRevision}.
+                         * @param error Error, if any
+                         * @param [response] AclPolicyRevision
+                         */
+                        type GetAclPolicyRevisionCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.AclPolicyRevision) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|listAclPolicyRevisions}.
+                         * @param error Error, if any
+                         * @param [response] ListAclPolicyRevisionsResponse
+                         */
+                        type ListAclPolicyRevisionsCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.ListAclPolicyRevisionsResponse) => void;
+
+                        /**
                          * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|createCluster}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type CreateClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|createAclPolicy}.
+                         * @param error Error, if any
+                         * @param [response] AclPolicy
+                         */
+                        type CreateAclPolicyCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.AclPolicy) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|getClusterCertificateAuthority}.
@@ -366,6 +625,62 @@ export namespace google {
                          * @param [response] Operation
                          */
                         type BackupClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|listTokenAuthUsers}.
+                         * @param error Error, if any
+                         * @param [response] ListTokenAuthUsersResponse
+                         */
+                        type ListTokenAuthUsersCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.ListTokenAuthUsersResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|getTokenAuthUser}.
+                         * @param error Error, if any
+                         * @param [response] TokenAuthUser
+                         */
+                        type GetTokenAuthUserCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.TokenAuthUser) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|listAuthTokens}.
+                         * @param error Error, if any
+                         * @param [response] ListAuthTokensResponse
+                         */
+                        type ListAuthTokensCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.ListAuthTokensResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|getAuthToken}.
+                         * @param error Error, if any
+                         * @param [response] AuthToken
+                         */
+                        type GetAuthTokenCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1.AuthToken) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|addTokenAuthUser}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type AddTokenAuthUserCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|deleteTokenAuthUser}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteTokenAuthUserCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|addAuthToken}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type AddAuthTokenCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1.CloudRedisCluster|deleteAuthToken}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteAuthTokenCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                     }
 
                     /** PscConnectionStatus enum. */
@@ -379,7 +694,8 @@ export namespace google {
                     enum AuthorizationMode {
                         AUTH_MODE_UNSPECIFIED = 0,
                         AUTH_MODE_IAM_AUTH = 1,
-                        AUTH_MODE_DISABLED = 2
+                        AUTH_MODE_DISABLED = 2,
+                        AUTH_MODE_TOKEN_AUTH = 3
                     }
 
                     /** NodeType enum. */
@@ -526,6 +842,121 @@ export namespace google {
 
                         /**
                          * Gets the default type url for CreateClusterRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a CreateAclPolicyRequest. */
+                    interface ICreateAclPolicyRequest {
+
+                        /** CreateAclPolicyRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateAclPolicyRequest aclPolicyId */
+                        aclPolicyId?: (string|null);
+
+                        /** CreateAclPolicyRequest aclPolicy */
+                        aclPolicy?: (google.cloud.redis.cluster.v1.IAclPolicy|null);
+
+                        /** CreateAclPolicyRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a CreateAclPolicyRequest. */
+                    class CreateAclPolicyRequest implements ICreateAclPolicyRequest {
+
+                        /**
+                         * Constructs a new CreateAclPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.ICreateAclPolicyRequest);
+
+                        /** CreateAclPolicyRequest parent. */
+                        public parent: string;
+
+                        /** CreateAclPolicyRequest aclPolicyId. */
+                        public aclPolicyId: string;
+
+                        /** CreateAclPolicyRequest aclPolicy. */
+                        public aclPolicy?: (google.cloud.redis.cluster.v1.IAclPolicy|null);
+
+                        /** CreateAclPolicyRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new CreateAclPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateAclPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.ICreateAclPolicyRequest): google.cloud.redis.cluster.v1.CreateAclPolicyRequest;
+
+                        /**
+                         * Encodes the specified CreateAclPolicyRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.CreateAclPolicyRequest.verify|verify} messages.
+                         * @param message CreateAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.ICreateAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateAclPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.CreateAclPolicyRequest.verify|verify} messages.
+                         * @param message CreateAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.ICreateAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateAclPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.CreateAclPolicyRequest;
+
+                        /**
+                         * Decodes a CreateAclPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.CreateAclPolicyRequest;
+
+                        /**
+                         * Verifies a CreateAclPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateAclPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateAclPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.CreateAclPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a CreateAclPolicyRequest message. Also converts values to other types if specified.
+                         * @param message CreateAclPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.CreateAclPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateAclPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateAclPolicyRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -750,6 +1181,442 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a ListAclPoliciesRequest. */
+                    interface IListAclPoliciesRequest {
+
+                        /** ListAclPoliciesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListAclPoliciesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListAclPoliciesRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListAclPoliciesRequest. */
+                    class ListAclPoliciesRequest implements IListAclPoliciesRequest {
+
+                        /**
+                         * Constructs a new ListAclPoliciesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IListAclPoliciesRequest);
+
+                        /** ListAclPoliciesRequest parent. */
+                        public parent: string;
+
+                        /** ListAclPoliciesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListAclPoliciesRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListAclPoliciesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAclPoliciesRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IListAclPoliciesRequest): google.cloud.redis.cluster.v1.ListAclPoliciesRequest;
+
+                        /**
+                         * Encodes the specified ListAclPoliciesRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.ListAclPoliciesRequest.verify|verify} messages.
+                         * @param message ListAclPoliciesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IListAclPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAclPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ListAclPoliciesRequest.verify|verify} messages.
+                         * @param message ListAclPoliciesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IListAclPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAclPoliciesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAclPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ListAclPoliciesRequest;
+
+                        /**
+                         * Decodes a ListAclPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAclPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ListAclPoliciesRequest;
+
+                        /**
+                         * Verifies a ListAclPoliciesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAclPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAclPoliciesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ListAclPoliciesRequest;
+
+                        /**
+                         * Creates a plain object from a ListAclPoliciesRequest message. Also converts values to other types if specified.
+                         * @param message ListAclPoliciesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ListAclPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAclPoliciesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAclPoliciesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAclPoliciesResponse. */
+                    interface IListAclPoliciesResponse {
+
+                        /** ListAclPoliciesResponse aclPolicies */
+                        aclPolicies?: (google.cloud.redis.cluster.v1.IAclPolicy[]|null);
+
+                        /** ListAclPoliciesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListAclPoliciesResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListAclPoliciesResponse. */
+                    class ListAclPoliciesResponse implements IListAclPoliciesResponse {
+
+                        /**
+                         * Constructs a new ListAclPoliciesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IListAclPoliciesResponse);
+
+                        /** ListAclPoliciesResponse aclPolicies. */
+                        public aclPolicies: google.cloud.redis.cluster.v1.IAclPolicy[];
+
+                        /** ListAclPoliciesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListAclPoliciesResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListAclPoliciesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAclPoliciesResponse instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IListAclPoliciesResponse): google.cloud.redis.cluster.v1.ListAclPoliciesResponse;
+
+                        /**
+                         * Encodes the specified ListAclPoliciesResponse message. Does not implicitly {@link google.cloud.redis.cluster.v1.ListAclPoliciesResponse.verify|verify} messages.
+                         * @param message ListAclPoliciesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IListAclPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAclPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ListAclPoliciesResponse.verify|verify} messages.
+                         * @param message ListAclPoliciesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IListAclPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAclPoliciesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAclPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ListAclPoliciesResponse;
+
+                        /**
+                         * Decodes a ListAclPoliciesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAclPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ListAclPoliciesResponse;
+
+                        /**
+                         * Verifies a ListAclPoliciesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAclPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAclPoliciesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ListAclPoliciesResponse;
+
+                        /**
+                         * Creates a plain object from a ListAclPoliciesResponse message. Also converts values to other types if specified.
+                         * @param message ListAclPoliciesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ListAclPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAclPoliciesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAclPoliciesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAclPolicyRevisionsRequest. */
+                    interface IListAclPolicyRevisionsRequest {
+
+                        /** ListAclPolicyRevisionsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListAclPolicyRevisionsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListAclPolicyRevisionsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListAclPolicyRevisionsRequest. */
+                    class ListAclPolicyRevisionsRequest implements IListAclPolicyRevisionsRequest {
+
+                        /**
+                         * Constructs a new ListAclPolicyRevisionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IListAclPolicyRevisionsRequest);
+
+                        /** ListAclPolicyRevisionsRequest parent. */
+                        public parent: string;
+
+                        /** ListAclPolicyRevisionsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListAclPolicyRevisionsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListAclPolicyRevisionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAclPolicyRevisionsRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IListAclPolicyRevisionsRequest): google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest;
+
+                        /**
+                         * Encodes the specified ListAclPolicyRevisionsRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest.verify|verify} messages.
+                         * @param message ListAclPolicyRevisionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IListAclPolicyRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAclPolicyRevisionsRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest.verify|verify} messages.
+                         * @param message ListAclPolicyRevisionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IListAclPolicyRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAclPolicyRevisionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAclPolicyRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest;
+
+                        /**
+                         * Decodes a ListAclPolicyRevisionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAclPolicyRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest;
+
+                        /**
+                         * Verifies a ListAclPolicyRevisionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAclPolicyRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAclPolicyRevisionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest;
+
+                        /**
+                         * Creates a plain object from a ListAclPolicyRevisionsRequest message. Also converts values to other types if specified.
+                         * @param message ListAclPolicyRevisionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ListAclPolicyRevisionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAclPolicyRevisionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAclPolicyRevisionsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAclPolicyRevisionsResponse. */
+                    interface IListAclPolicyRevisionsResponse {
+
+                        /** ListAclPolicyRevisionsResponse aclPolicyRevisions */
+                        aclPolicyRevisions?: (google.cloud.redis.cluster.v1.IAclPolicyRevision[]|null);
+
+                        /** ListAclPolicyRevisionsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListAclPolicyRevisionsResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListAclPolicyRevisionsResponse. */
+                    class ListAclPolicyRevisionsResponse implements IListAclPolicyRevisionsResponse {
+
+                        /**
+                         * Constructs a new ListAclPolicyRevisionsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IListAclPolicyRevisionsResponse);
+
+                        /** ListAclPolicyRevisionsResponse aclPolicyRevisions. */
+                        public aclPolicyRevisions: google.cloud.redis.cluster.v1.IAclPolicyRevision[];
+
+                        /** ListAclPolicyRevisionsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListAclPolicyRevisionsResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListAclPolicyRevisionsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAclPolicyRevisionsResponse instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IListAclPolicyRevisionsResponse): google.cloud.redis.cluster.v1.ListAclPolicyRevisionsResponse;
+
+                        /**
+                         * Encodes the specified ListAclPolicyRevisionsResponse message. Does not implicitly {@link google.cloud.redis.cluster.v1.ListAclPolicyRevisionsResponse.verify|verify} messages.
+                         * @param message ListAclPolicyRevisionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IListAclPolicyRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAclPolicyRevisionsResponse message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ListAclPolicyRevisionsResponse.verify|verify} messages.
+                         * @param message ListAclPolicyRevisionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IListAclPolicyRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAclPolicyRevisionsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAclPolicyRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ListAclPolicyRevisionsResponse;
+
+                        /**
+                         * Decodes a ListAclPolicyRevisionsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAclPolicyRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ListAclPolicyRevisionsResponse;
+
+                        /**
+                         * Verifies a ListAclPolicyRevisionsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAclPolicyRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAclPolicyRevisionsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ListAclPolicyRevisionsResponse;
+
+                        /**
+                         * Creates a plain object from a ListAclPolicyRevisionsResponse message. Also converts values to other types if specified.
+                         * @param message ListAclPolicyRevisionsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ListAclPolicyRevisionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAclPolicyRevisionsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAclPolicyRevisionsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of an UpdateClusterRequest. */
                     interface IUpdateClusterRequest {
 
@@ -859,6 +1726,115 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of an UpdateAclPolicyRequest. */
+                    interface IUpdateAclPolicyRequest {
+
+                        /** UpdateAclPolicyRequest aclPolicy */
+                        aclPolicy?: (google.cloud.redis.cluster.v1.IAclPolicy|null);
+
+                        /** UpdateAclPolicyRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateAclPolicyRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents an UpdateAclPolicyRequest. */
+                    class UpdateAclPolicyRequest implements IUpdateAclPolicyRequest {
+
+                        /**
+                         * Constructs a new UpdateAclPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IUpdateAclPolicyRequest);
+
+                        /** UpdateAclPolicyRequest aclPolicy. */
+                        public aclPolicy?: (google.cloud.redis.cluster.v1.IAclPolicy|null);
+
+                        /** UpdateAclPolicyRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateAclPolicyRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new UpdateAclPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateAclPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IUpdateAclPolicyRequest): google.cloud.redis.cluster.v1.UpdateAclPolicyRequest;
+
+                        /**
+                         * Encodes the specified UpdateAclPolicyRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.UpdateAclPolicyRequest.verify|verify} messages.
+                         * @param message UpdateAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IUpdateAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateAclPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.UpdateAclPolicyRequest.verify|verify} messages.
+                         * @param message UpdateAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IUpdateAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateAclPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.UpdateAclPolicyRequest;
+
+                        /**
+                         * Decodes an UpdateAclPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.UpdateAclPolicyRequest;
+
+                        /**
+                         * Verifies an UpdateAclPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateAclPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateAclPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.UpdateAclPolicyRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateAclPolicyRequest message. Also converts values to other types if specified.
+                         * @param message UpdateAclPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.UpdateAclPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateAclPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateAclPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a GetClusterRequest. */
                     interface IGetClusterRequest {
 
@@ -950,6 +1926,200 @@ export namespace google {
 
                         /**
                          * Gets the default type url for GetClusterRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetAclPolicyRequest. */
+                    interface IGetAclPolicyRequest {
+
+                        /** GetAclPolicyRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetAclPolicyRequest. */
+                    class GetAclPolicyRequest implements IGetAclPolicyRequest {
+
+                        /**
+                         * Constructs a new GetAclPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IGetAclPolicyRequest);
+
+                        /** GetAclPolicyRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetAclPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetAclPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IGetAclPolicyRequest): google.cloud.redis.cluster.v1.GetAclPolicyRequest;
+
+                        /**
+                         * Encodes the specified GetAclPolicyRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.GetAclPolicyRequest.verify|verify} messages.
+                         * @param message GetAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IGetAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetAclPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.GetAclPolicyRequest.verify|verify} messages.
+                         * @param message GetAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IGetAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetAclPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.GetAclPolicyRequest;
+
+                        /**
+                         * Decodes a GetAclPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.GetAclPolicyRequest;
+
+                        /**
+                         * Verifies a GetAclPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetAclPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetAclPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.GetAclPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a GetAclPolicyRequest message. Also converts values to other types if specified.
+                         * @param message GetAclPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.GetAclPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetAclPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetAclPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetAclPolicyRevisionRequest. */
+                    interface IGetAclPolicyRevisionRequest {
+
+                        /** GetAclPolicyRevisionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetAclPolicyRevisionRequest. */
+                    class GetAclPolicyRevisionRequest implements IGetAclPolicyRevisionRequest {
+
+                        /**
+                         * Constructs a new GetAclPolicyRevisionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IGetAclPolicyRevisionRequest);
+
+                        /** GetAclPolicyRevisionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetAclPolicyRevisionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetAclPolicyRevisionRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IGetAclPolicyRevisionRequest): google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest;
+
+                        /**
+                         * Encodes the specified GetAclPolicyRevisionRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest.verify|verify} messages.
+                         * @param message GetAclPolicyRevisionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IGetAclPolicyRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetAclPolicyRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest.verify|verify} messages.
+                         * @param message GetAclPolicyRevisionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IGetAclPolicyRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetAclPolicyRevisionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetAclPolicyRevisionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest;
+
+                        /**
+                         * Decodes a GetAclPolicyRevisionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetAclPolicyRevisionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest;
+
+                        /**
+                         * Verifies a GetAclPolicyRevisionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetAclPolicyRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetAclPolicyRevisionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest;
+
+                        /**
+                         * Creates a plain object from a GetAclPolicyRevisionRequest message. Also converts values to other types if specified.
+                         * @param message GetAclPolicyRevisionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.GetAclPolicyRevisionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetAclPolicyRevisionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetAclPolicyRevisionRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -1053,6 +2223,115 @@ export namespace google {
 
                         /**
                          * Gets the default type url for DeleteClusterRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteAclPolicyRequest. */
+                    interface IDeleteAclPolicyRequest {
+
+                        /** DeleteAclPolicyRequest name */
+                        name?: (string|null);
+
+                        /** DeleteAclPolicyRequest requestId */
+                        requestId?: (string|null);
+
+                        /** DeleteAclPolicyRequest etag */
+                        etag?: (string|null);
+                    }
+
+                    /** Represents a DeleteAclPolicyRequest. */
+                    class DeleteAclPolicyRequest implements IDeleteAclPolicyRequest {
+
+                        /**
+                         * Constructs a new DeleteAclPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IDeleteAclPolicyRequest);
+
+                        /** DeleteAclPolicyRequest name. */
+                        public name: string;
+
+                        /** DeleteAclPolicyRequest requestId. */
+                        public requestId: string;
+
+                        /** DeleteAclPolicyRequest etag. */
+                        public etag: string;
+
+                        /**
+                         * Creates a new DeleteAclPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteAclPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IDeleteAclPolicyRequest): google.cloud.redis.cluster.v1.DeleteAclPolicyRequest;
+
+                        /**
+                         * Encodes the specified DeleteAclPolicyRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.DeleteAclPolicyRequest.verify|verify} messages.
+                         * @param message DeleteAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IDeleteAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteAclPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.DeleteAclPolicyRequest.verify|verify} messages.
+                         * @param message DeleteAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IDeleteAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteAclPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.DeleteAclPolicyRequest;
+
+                        /**
+                         * Decodes a DeleteAclPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.DeleteAclPolicyRequest;
+
+                        /**
+                         * Verifies a DeleteAclPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteAclPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteAclPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.DeleteAclPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteAclPolicyRequest message. Also converts values to other types if specified.
+                         * @param message DeleteAclPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.DeleteAclPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteAclPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteAclPolicyRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -2104,6 +3383,1072 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a ListTokenAuthUsersRequest. */
+                    interface IListTokenAuthUsersRequest {
+
+                        /** ListTokenAuthUsersRequest parent */
+                        parent?: (string|null);
+
+                        /** ListTokenAuthUsersRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListTokenAuthUsersRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListTokenAuthUsersRequest filter */
+                        filter?: (string|null);
+
+                        /** ListTokenAuthUsersRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListTokenAuthUsersRequest. */
+                    class ListTokenAuthUsersRequest implements IListTokenAuthUsersRequest {
+
+                        /**
+                         * Constructs a new ListTokenAuthUsersRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IListTokenAuthUsersRequest);
+
+                        /** ListTokenAuthUsersRequest parent. */
+                        public parent: string;
+
+                        /** ListTokenAuthUsersRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListTokenAuthUsersRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListTokenAuthUsersRequest filter. */
+                        public filter: string;
+
+                        /** ListTokenAuthUsersRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListTokenAuthUsersRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListTokenAuthUsersRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IListTokenAuthUsersRequest): google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest;
+
+                        /**
+                         * Encodes the specified ListTokenAuthUsersRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest.verify|verify} messages.
+                         * @param message ListTokenAuthUsersRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IListTokenAuthUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListTokenAuthUsersRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest.verify|verify} messages.
+                         * @param message ListTokenAuthUsersRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IListTokenAuthUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListTokenAuthUsersRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListTokenAuthUsersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest;
+
+                        /**
+                         * Decodes a ListTokenAuthUsersRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListTokenAuthUsersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest;
+
+                        /**
+                         * Verifies a ListTokenAuthUsersRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListTokenAuthUsersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListTokenAuthUsersRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest;
+
+                        /**
+                         * Creates a plain object from a ListTokenAuthUsersRequest message. Also converts values to other types if specified.
+                         * @param message ListTokenAuthUsersRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ListTokenAuthUsersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListTokenAuthUsersRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListTokenAuthUsersRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListTokenAuthUsersResponse. */
+                    interface IListTokenAuthUsersResponse {
+
+                        /** ListTokenAuthUsersResponse tokenAuthUsers */
+                        tokenAuthUsers?: (google.cloud.redis.cluster.v1.ITokenAuthUser[]|null);
+
+                        /** ListTokenAuthUsersResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListTokenAuthUsersResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListTokenAuthUsersResponse. */
+                    class ListTokenAuthUsersResponse implements IListTokenAuthUsersResponse {
+
+                        /**
+                         * Constructs a new ListTokenAuthUsersResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IListTokenAuthUsersResponse);
+
+                        /** ListTokenAuthUsersResponse tokenAuthUsers. */
+                        public tokenAuthUsers: google.cloud.redis.cluster.v1.ITokenAuthUser[];
+
+                        /** ListTokenAuthUsersResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListTokenAuthUsersResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListTokenAuthUsersResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListTokenAuthUsersResponse instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IListTokenAuthUsersResponse): google.cloud.redis.cluster.v1.ListTokenAuthUsersResponse;
+
+                        /**
+                         * Encodes the specified ListTokenAuthUsersResponse message. Does not implicitly {@link google.cloud.redis.cluster.v1.ListTokenAuthUsersResponse.verify|verify} messages.
+                         * @param message ListTokenAuthUsersResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IListTokenAuthUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListTokenAuthUsersResponse message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ListTokenAuthUsersResponse.verify|verify} messages.
+                         * @param message ListTokenAuthUsersResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IListTokenAuthUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListTokenAuthUsersResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListTokenAuthUsersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ListTokenAuthUsersResponse;
+
+                        /**
+                         * Decodes a ListTokenAuthUsersResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListTokenAuthUsersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ListTokenAuthUsersResponse;
+
+                        /**
+                         * Verifies a ListTokenAuthUsersResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListTokenAuthUsersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListTokenAuthUsersResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ListTokenAuthUsersResponse;
+
+                        /**
+                         * Creates a plain object from a ListTokenAuthUsersResponse message. Also converts values to other types if specified.
+                         * @param message ListTokenAuthUsersResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ListTokenAuthUsersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListTokenAuthUsersResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListTokenAuthUsersResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetTokenAuthUserRequest. */
+                    interface IGetTokenAuthUserRequest {
+
+                        /** GetTokenAuthUserRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetTokenAuthUserRequest. */
+                    class GetTokenAuthUserRequest implements IGetTokenAuthUserRequest {
+
+                        /**
+                         * Constructs a new GetTokenAuthUserRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IGetTokenAuthUserRequest);
+
+                        /** GetTokenAuthUserRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetTokenAuthUserRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetTokenAuthUserRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IGetTokenAuthUserRequest): google.cloud.redis.cluster.v1.GetTokenAuthUserRequest;
+
+                        /**
+                         * Encodes the specified GetTokenAuthUserRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.GetTokenAuthUserRequest.verify|verify} messages.
+                         * @param message GetTokenAuthUserRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IGetTokenAuthUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetTokenAuthUserRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.GetTokenAuthUserRequest.verify|verify} messages.
+                         * @param message GetTokenAuthUserRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IGetTokenAuthUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetTokenAuthUserRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetTokenAuthUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.GetTokenAuthUserRequest;
+
+                        /**
+                         * Decodes a GetTokenAuthUserRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetTokenAuthUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.GetTokenAuthUserRequest;
+
+                        /**
+                         * Verifies a GetTokenAuthUserRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetTokenAuthUserRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetTokenAuthUserRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.GetTokenAuthUserRequest;
+
+                        /**
+                         * Creates a plain object from a GetTokenAuthUserRequest message. Also converts values to other types if specified.
+                         * @param message GetTokenAuthUserRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.GetTokenAuthUserRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetTokenAuthUserRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetTokenAuthUserRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAuthTokensRequest. */
+                    interface IListAuthTokensRequest {
+
+                        /** ListAuthTokensRequest parent */
+                        parent?: (string|null);
+
+                        /** ListAuthTokensRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListAuthTokensRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListAuthTokensRequest filter */
+                        filter?: (string|null);
+
+                        /** ListAuthTokensRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListAuthTokensRequest. */
+                    class ListAuthTokensRequest implements IListAuthTokensRequest {
+
+                        /**
+                         * Constructs a new ListAuthTokensRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IListAuthTokensRequest);
+
+                        /** ListAuthTokensRequest parent. */
+                        public parent: string;
+
+                        /** ListAuthTokensRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListAuthTokensRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListAuthTokensRequest filter. */
+                        public filter: string;
+
+                        /** ListAuthTokensRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListAuthTokensRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAuthTokensRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IListAuthTokensRequest): google.cloud.redis.cluster.v1.ListAuthTokensRequest;
+
+                        /**
+                         * Encodes the specified ListAuthTokensRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.ListAuthTokensRequest.verify|verify} messages.
+                         * @param message ListAuthTokensRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IListAuthTokensRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAuthTokensRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ListAuthTokensRequest.verify|verify} messages.
+                         * @param message ListAuthTokensRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IListAuthTokensRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAuthTokensRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAuthTokensRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ListAuthTokensRequest;
+
+                        /**
+                         * Decodes a ListAuthTokensRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAuthTokensRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ListAuthTokensRequest;
+
+                        /**
+                         * Verifies a ListAuthTokensRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAuthTokensRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAuthTokensRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ListAuthTokensRequest;
+
+                        /**
+                         * Creates a plain object from a ListAuthTokensRequest message. Also converts values to other types if specified.
+                         * @param message ListAuthTokensRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ListAuthTokensRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAuthTokensRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAuthTokensRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAuthTokensResponse. */
+                    interface IListAuthTokensResponse {
+
+                        /** ListAuthTokensResponse authTokens */
+                        authTokens?: (google.cloud.redis.cluster.v1.IAuthToken[]|null);
+
+                        /** ListAuthTokensResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListAuthTokensResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListAuthTokensResponse. */
+                    class ListAuthTokensResponse implements IListAuthTokensResponse {
+
+                        /**
+                         * Constructs a new ListAuthTokensResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IListAuthTokensResponse);
+
+                        /** ListAuthTokensResponse authTokens. */
+                        public authTokens: google.cloud.redis.cluster.v1.IAuthToken[];
+
+                        /** ListAuthTokensResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListAuthTokensResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListAuthTokensResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAuthTokensResponse instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IListAuthTokensResponse): google.cloud.redis.cluster.v1.ListAuthTokensResponse;
+
+                        /**
+                         * Encodes the specified ListAuthTokensResponse message. Does not implicitly {@link google.cloud.redis.cluster.v1.ListAuthTokensResponse.verify|verify} messages.
+                         * @param message ListAuthTokensResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IListAuthTokensResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAuthTokensResponse message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ListAuthTokensResponse.verify|verify} messages.
+                         * @param message ListAuthTokensResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IListAuthTokensResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAuthTokensResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAuthTokensResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ListAuthTokensResponse;
+
+                        /**
+                         * Decodes a ListAuthTokensResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAuthTokensResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ListAuthTokensResponse;
+
+                        /**
+                         * Verifies a ListAuthTokensResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAuthTokensResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAuthTokensResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ListAuthTokensResponse;
+
+                        /**
+                         * Creates a plain object from a ListAuthTokensResponse message. Also converts values to other types if specified.
+                         * @param message ListAuthTokensResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ListAuthTokensResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAuthTokensResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAuthTokensResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetAuthTokenRequest. */
+                    interface IGetAuthTokenRequest {
+
+                        /** GetAuthTokenRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetAuthTokenRequest. */
+                    class GetAuthTokenRequest implements IGetAuthTokenRequest {
+
+                        /**
+                         * Constructs a new GetAuthTokenRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IGetAuthTokenRequest);
+
+                        /** GetAuthTokenRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetAuthTokenRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetAuthTokenRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IGetAuthTokenRequest): google.cloud.redis.cluster.v1.GetAuthTokenRequest;
+
+                        /**
+                         * Encodes the specified GetAuthTokenRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.GetAuthTokenRequest.verify|verify} messages.
+                         * @param message GetAuthTokenRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IGetAuthTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetAuthTokenRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.GetAuthTokenRequest.verify|verify} messages.
+                         * @param message GetAuthTokenRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IGetAuthTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetAuthTokenRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetAuthTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.GetAuthTokenRequest;
+
+                        /**
+                         * Decodes a GetAuthTokenRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetAuthTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.GetAuthTokenRequest;
+
+                        /**
+                         * Verifies a GetAuthTokenRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetAuthTokenRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetAuthTokenRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.GetAuthTokenRequest;
+
+                        /**
+                         * Creates a plain object from a GetAuthTokenRequest message. Also converts values to other types if specified.
+                         * @param message GetAuthTokenRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.GetAuthTokenRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetAuthTokenRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetAuthTokenRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AddTokenAuthUserRequest. */
+                    interface IAddTokenAuthUserRequest {
+
+                        /** AddTokenAuthUserRequest cluster */
+                        cluster?: (string|null);
+
+                        /** AddTokenAuthUserRequest tokenAuthUser */
+                        tokenAuthUser?: (string|null);
+                    }
+
+                    /** Represents an AddTokenAuthUserRequest. */
+                    class AddTokenAuthUserRequest implements IAddTokenAuthUserRequest {
+
+                        /**
+                         * Constructs a new AddTokenAuthUserRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IAddTokenAuthUserRequest);
+
+                        /** AddTokenAuthUserRequest cluster. */
+                        public cluster: string;
+
+                        /** AddTokenAuthUserRequest tokenAuthUser. */
+                        public tokenAuthUser: string;
+
+                        /**
+                         * Creates a new AddTokenAuthUserRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AddTokenAuthUserRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IAddTokenAuthUserRequest): google.cloud.redis.cluster.v1.AddTokenAuthUserRequest;
+
+                        /**
+                         * Encodes the specified AddTokenAuthUserRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.AddTokenAuthUserRequest.verify|verify} messages.
+                         * @param message AddTokenAuthUserRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IAddTokenAuthUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AddTokenAuthUserRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.AddTokenAuthUserRequest.verify|verify} messages.
+                         * @param message AddTokenAuthUserRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IAddTokenAuthUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AddTokenAuthUserRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AddTokenAuthUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.AddTokenAuthUserRequest;
+
+                        /**
+                         * Decodes an AddTokenAuthUserRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AddTokenAuthUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.AddTokenAuthUserRequest;
+
+                        /**
+                         * Verifies an AddTokenAuthUserRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AddTokenAuthUserRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AddTokenAuthUserRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.AddTokenAuthUserRequest;
+
+                        /**
+                         * Creates a plain object from an AddTokenAuthUserRequest message. Also converts values to other types if specified.
+                         * @param message AddTokenAuthUserRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.AddTokenAuthUserRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AddTokenAuthUserRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AddTokenAuthUserRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteTokenAuthUserRequest. */
+                    interface IDeleteTokenAuthUserRequest {
+
+                        /** DeleteTokenAuthUserRequest name */
+                        name?: (string|null);
+
+                        /** DeleteTokenAuthUserRequest requestId */
+                        requestId?: (string|null);
+
+                        /** DeleteTokenAuthUserRequest force */
+                        force?: (boolean|null);
+                    }
+
+                    /** Represents a DeleteTokenAuthUserRequest. */
+                    class DeleteTokenAuthUserRequest implements IDeleteTokenAuthUserRequest {
+
+                        /**
+                         * Constructs a new DeleteTokenAuthUserRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IDeleteTokenAuthUserRequest);
+
+                        /** DeleteTokenAuthUserRequest name. */
+                        public name: string;
+
+                        /** DeleteTokenAuthUserRequest requestId. */
+                        public requestId: string;
+
+                        /** DeleteTokenAuthUserRequest force. */
+                        public force: boolean;
+
+                        /**
+                         * Creates a new DeleteTokenAuthUserRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteTokenAuthUserRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IDeleteTokenAuthUserRequest): google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest;
+
+                        /**
+                         * Encodes the specified DeleteTokenAuthUserRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest.verify|verify} messages.
+                         * @param message DeleteTokenAuthUserRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IDeleteTokenAuthUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteTokenAuthUserRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest.verify|verify} messages.
+                         * @param message DeleteTokenAuthUserRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IDeleteTokenAuthUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteTokenAuthUserRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteTokenAuthUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest;
+
+                        /**
+                         * Decodes a DeleteTokenAuthUserRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteTokenAuthUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest;
+
+                        /**
+                         * Verifies a DeleteTokenAuthUserRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteTokenAuthUserRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteTokenAuthUserRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteTokenAuthUserRequest message. Also converts values to other types if specified.
+                         * @param message DeleteTokenAuthUserRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.DeleteTokenAuthUserRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteTokenAuthUserRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteTokenAuthUserRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AddAuthTokenRequest. */
+                    interface IAddAuthTokenRequest {
+
+                        /** AddAuthTokenRequest tokenAuthUser */
+                        tokenAuthUser?: (string|null);
+
+                        /** AddAuthTokenRequest authToken */
+                        authToken?: (google.cloud.redis.cluster.v1.IAuthToken|null);
+                    }
+
+                    /** Represents an AddAuthTokenRequest. */
+                    class AddAuthTokenRequest implements IAddAuthTokenRequest {
+
+                        /**
+                         * Constructs a new AddAuthTokenRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IAddAuthTokenRequest);
+
+                        /** AddAuthTokenRequest tokenAuthUser. */
+                        public tokenAuthUser: string;
+
+                        /** AddAuthTokenRequest authToken. */
+                        public authToken?: (google.cloud.redis.cluster.v1.IAuthToken|null);
+
+                        /**
+                         * Creates a new AddAuthTokenRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AddAuthTokenRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IAddAuthTokenRequest): google.cloud.redis.cluster.v1.AddAuthTokenRequest;
+
+                        /**
+                         * Encodes the specified AddAuthTokenRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.AddAuthTokenRequest.verify|verify} messages.
+                         * @param message AddAuthTokenRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IAddAuthTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AddAuthTokenRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.AddAuthTokenRequest.verify|verify} messages.
+                         * @param message AddAuthTokenRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IAddAuthTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AddAuthTokenRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AddAuthTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.AddAuthTokenRequest;
+
+                        /**
+                         * Decodes an AddAuthTokenRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AddAuthTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.AddAuthTokenRequest;
+
+                        /**
+                         * Verifies an AddAuthTokenRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AddAuthTokenRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AddAuthTokenRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.AddAuthTokenRequest;
+
+                        /**
+                         * Creates a plain object from an AddAuthTokenRequest message. Also converts values to other types if specified.
+                         * @param message AddAuthTokenRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.AddAuthTokenRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AddAuthTokenRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AddAuthTokenRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteAuthTokenRequest. */
+                    interface IDeleteAuthTokenRequest {
+
+                        /** DeleteAuthTokenRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteAuthTokenRequest. */
+                    class DeleteAuthTokenRequest implements IDeleteAuthTokenRequest {
+
+                        /**
+                         * Constructs a new DeleteAuthTokenRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IDeleteAuthTokenRequest);
+
+                        /** DeleteAuthTokenRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteAuthTokenRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteAuthTokenRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IDeleteAuthTokenRequest): google.cloud.redis.cluster.v1.DeleteAuthTokenRequest;
+
+                        /**
+                         * Encodes the specified DeleteAuthTokenRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1.DeleteAuthTokenRequest.verify|verify} messages.
+                         * @param message DeleteAuthTokenRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IDeleteAuthTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteAuthTokenRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.DeleteAuthTokenRequest.verify|verify} messages.
+                         * @param message DeleteAuthTokenRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IDeleteAuthTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteAuthTokenRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteAuthTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.DeleteAuthTokenRequest;
+
+                        /**
+                         * Decodes a DeleteAuthTokenRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteAuthTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.DeleteAuthTokenRequest;
+
+                        /**
+                         * Verifies a DeleteAuthTokenRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteAuthTokenRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteAuthTokenRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.DeleteAuthTokenRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteAuthTokenRequest message. Also converts values to other types if specified.
+                         * @param message DeleteAuthTokenRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.DeleteAuthTokenRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteAuthTokenRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteAuthTokenRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a Cluster. */
                     interface ICluster {
 
@@ -2197,6 +4542,9 @@ export namespace google {
                         /** Cluster encryptionInfo */
                         encryptionInfo?: (google.cloud.redis.cluster.v1.IEncryptionInfo|null);
 
+                        /** Cluster asyncClusterEndpointsDeletionEnabled */
+                        asyncClusterEndpointsDeletionEnabled?: (boolean|null);
+
                         /** Cluster serverCaMode */
                         serverCaMode?: (google.cloud.redis.cluster.v1.ServerCaMode|keyof typeof google.cloud.redis.cluster.v1.ServerCaMode|null);
 
@@ -2205,6 +4553,12 @@ export namespace google {
 
                         /** Cluster rotateServerCertificate */
                         rotateServerCertificate?: (boolean|null);
+
+                        /** Cluster aclPolicy */
+                        aclPolicy?: (string|null);
+
+                        /** Cluster aclPolicyInfo */
+                        aclPolicyInfo?: (google.cloud.redis.cluster.v1.IAclPolicyInfo|null);
                     }
 
                     /** Represents a Cluster. */
@@ -2306,6 +4660,9 @@ export namespace google {
                         /** Cluster encryptionInfo. */
                         public encryptionInfo?: (google.cloud.redis.cluster.v1.IEncryptionInfo|null);
 
+                        /** Cluster asyncClusterEndpointsDeletionEnabled. */
+                        public asyncClusterEndpointsDeletionEnabled?: (boolean|null);
+
                         /** Cluster serverCaMode. */
                         public serverCaMode?: (google.cloud.redis.cluster.v1.ServerCaMode|keyof typeof google.cloud.redis.cluster.v1.ServerCaMode|null);
 
@@ -2314,6 +4671,12 @@ export namespace google {
 
                         /** Cluster rotateServerCertificate. */
                         public rotateServerCertificate?: (boolean|null);
+
+                        /** Cluster aclPolicy. */
+                        public aclPolicy: string;
+
+                        /** Cluster aclPolicyInfo. */
+                        public aclPolicyInfo?: (google.cloud.redis.cluster.v1.IAclPolicyInfo|null);
 
                         /** Cluster importSources. */
                         public importSources?: ("gcsSource"|"managedBackupSource");
@@ -2806,6 +5169,718 @@ export namespace google {
                             UPDATING = 3,
                             DELETING = 4
                         }
+                    }
+
+                    /** Properties of an AclPolicyInfo. */
+                    interface IAclPolicyInfo {
+
+                        /** AclPolicyInfo appliedAclPolicy */
+                        appliedAclPolicy?: (string|null);
+
+                        /** AclPolicyInfo appliedAclPolicyRevision */
+                        appliedAclPolicyRevision?: (string|null);
+
+                        /** AclPolicyInfo appliedAclPolicyRevisionNumber */
+                        appliedAclPolicyRevisionNumber?: (number|Long|string|null);
+
+                        /** AclPolicyInfo aclPolicyRevisionStatuses */
+                        aclPolicyRevisionStatuses?: (google.cloud.redis.cluster.v1.IAclPolicyRevisionStatus[]|null);
+                    }
+
+                    /** Represents an AclPolicyInfo. */
+                    class AclPolicyInfo implements IAclPolicyInfo {
+
+                        /**
+                         * Constructs a new AclPolicyInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IAclPolicyInfo);
+
+                        /** AclPolicyInfo appliedAclPolicy. */
+                        public appliedAclPolicy: string;
+
+                        /** AclPolicyInfo appliedAclPolicyRevision. */
+                        public appliedAclPolicyRevision: string;
+
+                        /** AclPolicyInfo appliedAclPolicyRevisionNumber. */
+                        public appliedAclPolicyRevisionNumber: (number|Long|string);
+
+                        /** AclPolicyInfo aclPolicyRevisionStatuses. */
+                        public aclPolicyRevisionStatuses: google.cloud.redis.cluster.v1.IAclPolicyRevisionStatus[];
+
+                        /**
+                         * Creates a new AclPolicyInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AclPolicyInfo instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IAclPolicyInfo): google.cloud.redis.cluster.v1.AclPolicyInfo;
+
+                        /**
+                         * Encodes the specified AclPolicyInfo message. Does not implicitly {@link google.cloud.redis.cluster.v1.AclPolicyInfo.verify|verify} messages.
+                         * @param message AclPolicyInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IAclPolicyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AclPolicyInfo message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.AclPolicyInfo.verify|verify} messages.
+                         * @param message AclPolicyInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IAclPolicyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AclPolicyInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AclPolicyInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.AclPolicyInfo;
+
+                        /**
+                         * Decodes an AclPolicyInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AclPolicyInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.AclPolicyInfo;
+
+                        /**
+                         * Verifies an AclPolicyInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AclPolicyInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AclPolicyInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.AclPolicyInfo;
+
+                        /**
+                         * Creates a plain object from an AclPolicyInfo message. Also converts values to other types if specified.
+                         * @param message AclPolicyInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.AclPolicyInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AclPolicyInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AclPolicyInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AclPolicy. */
+                    interface IAclPolicy {
+
+                        /** AclPolicy name */
+                        name?: (string|null);
+
+                        /** AclPolicy rules */
+                        rules?: (google.cloud.redis.cluster.v1.IAclRule[]|null);
+
+                        /** AclPolicy state */
+                        state?: (google.cloud.redis.cluster.v1.AclPolicy.State|keyof typeof google.cloud.redis.cluster.v1.AclPolicy.State|null);
+
+                        /** AclPolicy etag */
+                        etag?: (string|null);
+
+                        /** AclPolicy clusterAclPolicyAttachments */
+                        clusterAclPolicyAttachments?: (google.cloud.redis.cluster.v1.IClusterAclPolicyAttachment[]|null);
+
+                        /** AclPolicy createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AclPolicy updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents an AclPolicy. */
+                    class AclPolicy implements IAclPolicy {
+
+                        /**
+                         * Constructs a new AclPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IAclPolicy);
+
+                        /** AclPolicy name. */
+                        public name: string;
+
+                        /** AclPolicy rules. */
+                        public rules: google.cloud.redis.cluster.v1.IAclRule[];
+
+                        /** AclPolicy state. */
+                        public state: (google.cloud.redis.cluster.v1.AclPolicy.State|keyof typeof google.cloud.redis.cluster.v1.AclPolicy.State);
+
+                        /** AclPolicy etag. */
+                        public etag?: (string|null);
+
+                        /** AclPolicy clusterAclPolicyAttachments. */
+                        public clusterAclPolicyAttachments: google.cloud.redis.cluster.v1.IClusterAclPolicyAttachment[];
+
+                        /** AclPolicy createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AclPolicy updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new AclPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AclPolicy instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IAclPolicy): google.cloud.redis.cluster.v1.AclPolicy;
+
+                        /**
+                         * Encodes the specified AclPolicy message. Does not implicitly {@link google.cloud.redis.cluster.v1.AclPolicy.verify|verify} messages.
+                         * @param message AclPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IAclPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AclPolicy message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.AclPolicy.verify|verify} messages.
+                         * @param message AclPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IAclPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AclPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AclPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.AclPolicy;
+
+                        /**
+                         * Decodes an AclPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AclPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.AclPolicy;
+
+                        /**
+                         * Verifies an AclPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AclPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AclPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.AclPolicy;
+
+                        /**
+                         * Creates a plain object from an AclPolicy message. Also converts values to other types if specified.
+                         * @param message AclPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.AclPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AclPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AclPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AclPolicy {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ACTIVE = 1,
+                            UPDATING = 2,
+                            DELETING = 3
+                        }
+                    }
+
+                    /** Properties of an AclPolicyRevisionStatus. */
+                    interface IAclPolicyRevisionStatus {
+
+                        /** AclPolicyRevisionStatus aclPolicyRevision */
+                        aclPolicyRevision?: (string|null);
+
+                        /** AclPolicyRevisionStatus aclPolicyRevisionNumber */
+                        aclPolicyRevisionNumber?: (number|Long|string|null);
+
+                        /** AclPolicyRevisionStatus state */
+                        state?: (google.cloud.redis.cluster.v1.AclPolicyRevisionStatus.State|keyof typeof google.cloud.redis.cluster.v1.AclPolicyRevisionStatus.State|null);
+
+                        /** AclPolicyRevisionStatus errorMessage */
+                        errorMessage?: (string|null);
+                    }
+
+                    /** Represents an AclPolicyRevisionStatus. */
+                    class AclPolicyRevisionStatus implements IAclPolicyRevisionStatus {
+
+                        /**
+                         * Constructs a new AclPolicyRevisionStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IAclPolicyRevisionStatus);
+
+                        /** AclPolicyRevisionStatus aclPolicyRevision. */
+                        public aclPolicyRevision: string;
+
+                        /** AclPolicyRevisionStatus aclPolicyRevisionNumber. */
+                        public aclPolicyRevisionNumber: (number|Long|string);
+
+                        /** AclPolicyRevisionStatus state. */
+                        public state: (google.cloud.redis.cluster.v1.AclPolicyRevisionStatus.State|keyof typeof google.cloud.redis.cluster.v1.AclPolicyRevisionStatus.State);
+
+                        /** AclPolicyRevisionStatus errorMessage. */
+                        public errorMessage: string;
+
+                        /**
+                         * Creates a new AclPolicyRevisionStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AclPolicyRevisionStatus instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IAclPolicyRevisionStatus): google.cloud.redis.cluster.v1.AclPolicyRevisionStatus;
+
+                        /**
+                         * Encodes the specified AclPolicyRevisionStatus message. Does not implicitly {@link google.cloud.redis.cluster.v1.AclPolicyRevisionStatus.verify|verify} messages.
+                         * @param message AclPolicyRevisionStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IAclPolicyRevisionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AclPolicyRevisionStatus message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.AclPolicyRevisionStatus.verify|verify} messages.
+                         * @param message AclPolicyRevisionStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IAclPolicyRevisionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AclPolicyRevisionStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AclPolicyRevisionStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.AclPolicyRevisionStatus;
+
+                        /**
+                         * Decodes an AclPolicyRevisionStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AclPolicyRevisionStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.AclPolicyRevisionStatus;
+
+                        /**
+                         * Verifies an AclPolicyRevisionStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AclPolicyRevisionStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AclPolicyRevisionStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.AclPolicyRevisionStatus;
+
+                        /**
+                         * Creates a plain object from an AclPolicyRevisionStatus message. Also converts values to other types if specified.
+                         * @param message AclPolicyRevisionStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.AclPolicyRevisionStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AclPolicyRevisionStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AclPolicyRevisionStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AclPolicyRevisionStatus {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            APPLYING = 1,
+                            APPLIED = 2,
+                            FAILED = 3
+                        }
+                    }
+
+                    /** Properties of a ClusterAclPolicyAttachment. */
+                    interface IClusterAclPolicyAttachment {
+
+                        /** ClusterAclPolicyAttachment cluster */
+                        cluster?: (string|null);
+
+                        /** ClusterAclPolicyAttachment aclPolicyRevisionStatuses */
+                        aclPolicyRevisionStatuses?: (google.cloud.redis.cluster.v1.IAclPolicyRevisionStatus[]|null);
+                    }
+
+                    /** Represents a ClusterAclPolicyAttachment. */
+                    class ClusterAclPolicyAttachment implements IClusterAclPolicyAttachment {
+
+                        /**
+                         * Constructs a new ClusterAclPolicyAttachment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IClusterAclPolicyAttachment);
+
+                        /** ClusterAclPolicyAttachment cluster. */
+                        public cluster: string;
+
+                        /** ClusterAclPolicyAttachment aclPolicyRevisionStatuses. */
+                        public aclPolicyRevisionStatuses: google.cloud.redis.cluster.v1.IAclPolicyRevisionStatus[];
+
+                        /**
+                         * Creates a new ClusterAclPolicyAttachment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClusterAclPolicyAttachment instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IClusterAclPolicyAttachment): google.cloud.redis.cluster.v1.ClusterAclPolicyAttachment;
+
+                        /**
+                         * Encodes the specified ClusterAclPolicyAttachment message. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterAclPolicyAttachment.verify|verify} messages.
+                         * @param message ClusterAclPolicyAttachment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IClusterAclPolicyAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClusterAclPolicyAttachment message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.ClusterAclPolicyAttachment.verify|verify} messages.
+                         * @param message ClusterAclPolicyAttachment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IClusterAclPolicyAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClusterAclPolicyAttachment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClusterAclPolicyAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.ClusterAclPolicyAttachment;
+
+                        /**
+                         * Decodes a ClusterAclPolicyAttachment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClusterAclPolicyAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.ClusterAclPolicyAttachment;
+
+                        /**
+                         * Verifies a ClusterAclPolicyAttachment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClusterAclPolicyAttachment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClusterAclPolicyAttachment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.ClusterAclPolicyAttachment;
+
+                        /**
+                         * Creates a plain object from a ClusterAclPolicyAttachment message. Also converts values to other types if specified.
+                         * @param message ClusterAclPolicyAttachment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.ClusterAclPolicyAttachment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClusterAclPolicyAttachment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClusterAclPolicyAttachment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AclPolicyRevision. */
+                    interface IAclPolicyRevision {
+
+                        /** AclPolicyRevision name */
+                        name?: (string|null);
+
+                        /** AclPolicyRevision revisionNumber */
+                        revisionNumber?: (number|Long|string|null);
+
+                        /** AclPolicyRevision snapshot */
+                        snapshot?: (google.cloud.redis.cluster.v1.IAclPolicy|null);
+
+                        /** AclPolicyRevision createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AclPolicyRevision attachedClusters */
+                        attachedClusters?: (string[]|null);
+                    }
+
+                    /** Represents an AclPolicyRevision. */
+                    class AclPolicyRevision implements IAclPolicyRevision {
+
+                        /**
+                         * Constructs a new AclPolicyRevision.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IAclPolicyRevision);
+
+                        /** AclPolicyRevision name. */
+                        public name: string;
+
+                        /** AclPolicyRevision revisionNumber. */
+                        public revisionNumber: (number|Long|string);
+
+                        /** AclPolicyRevision snapshot. */
+                        public snapshot?: (google.cloud.redis.cluster.v1.IAclPolicy|null);
+
+                        /** AclPolicyRevision createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AclPolicyRevision attachedClusters. */
+                        public attachedClusters: string[];
+
+                        /**
+                         * Creates a new AclPolicyRevision instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AclPolicyRevision instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IAclPolicyRevision): google.cloud.redis.cluster.v1.AclPolicyRevision;
+
+                        /**
+                         * Encodes the specified AclPolicyRevision message. Does not implicitly {@link google.cloud.redis.cluster.v1.AclPolicyRevision.verify|verify} messages.
+                         * @param message AclPolicyRevision message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IAclPolicyRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AclPolicyRevision message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.AclPolicyRevision.verify|verify} messages.
+                         * @param message AclPolicyRevision message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IAclPolicyRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AclPolicyRevision message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AclPolicyRevision
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.AclPolicyRevision;
+
+                        /**
+                         * Decodes an AclPolicyRevision message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AclPolicyRevision
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.AclPolicyRevision;
+
+                        /**
+                         * Verifies an AclPolicyRevision message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AclPolicyRevision message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AclPolicyRevision
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.AclPolicyRevision;
+
+                        /**
+                         * Creates a plain object from an AclPolicyRevision message. Also converts values to other types if specified.
+                         * @param message AclPolicyRevision
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.AclPolicyRevision, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AclPolicyRevision to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AclPolicyRevision
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AclRule. */
+                    interface IAclRule {
+
+                        /** AclRule username */
+                        username?: (string|null);
+
+                        /** AclRule rule */
+                        rule?: (string|null);
+                    }
+
+                    /** Represents an AclRule. */
+                    class AclRule implements IAclRule {
+
+                        /**
+                         * Constructs a new AclRule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IAclRule);
+
+                        /** AclRule username. */
+                        public username: string;
+
+                        /** AclRule rule. */
+                        public rule: string;
+
+                        /**
+                         * Creates a new AclRule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AclRule instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IAclRule): google.cloud.redis.cluster.v1.AclRule;
+
+                        /**
+                         * Encodes the specified AclRule message. Does not implicitly {@link google.cloud.redis.cluster.v1.AclRule.verify|verify} messages.
+                         * @param message AclRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IAclRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AclRule message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.AclRule.verify|verify} messages.
+                         * @param message AclRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IAclRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AclRule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AclRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.AclRule;
+
+                        /**
+                         * Decodes an AclRule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AclRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.AclRule;
+
+                        /**
+                         * Verifies an AclRule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AclRule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AclRule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.AclRule;
+
+                        /**
+                         * Creates a plain object from an AclRule message. Also converts values to other types if specified.
+                         * @param message AclRule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.AclRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AclRule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AclRule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an AutomatedBackupConfig. */
@@ -5436,6 +8511,247 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a TokenAuthUser. */
+                    interface ITokenAuthUser {
+
+                        /** TokenAuthUser name */
+                        name?: (string|null);
+
+                        /** TokenAuthUser state */
+                        state?: (google.cloud.redis.cluster.v1.TokenAuthUser.State|keyof typeof google.cloud.redis.cluster.v1.TokenAuthUser.State|null);
+                    }
+
+                    /** Represents a TokenAuthUser. */
+                    class TokenAuthUser implements ITokenAuthUser {
+
+                        /**
+                         * Constructs a new TokenAuthUser.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.ITokenAuthUser);
+
+                        /** TokenAuthUser name. */
+                        public name: string;
+
+                        /** TokenAuthUser state. */
+                        public state: (google.cloud.redis.cluster.v1.TokenAuthUser.State|keyof typeof google.cloud.redis.cluster.v1.TokenAuthUser.State);
+
+                        /**
+                         * Creates a new TokenAuthUser instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TokenAuthUser instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.ITokenAuthUser): google.cloud.redis.cluster.v1.TokenAuthUser;
+
+                        /**
+                         * Encodes the specified TokenAuthUser message. Does not implicitly {@link google.cloud.redis.cluster.v1.TokenAuthUser.verify|verify} messages.
+                         * @param message TokenAuthUser message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.ITokenAuthUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TokenAuthUser message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.TokenAuthUser.verify|verify} messages.
+                         * @param message TokenAuthUser message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.ITokenAuthUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TokenAuthUser message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TokenAuthUser
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.TokenAuthUser;
+
+                        /**
+                         * Decodes a TokenAuthUser message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TokenAuthUser
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.TokenAuthUser;
+
+                        /**
+                         * Verifies a TokenAuthUser message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TokenAuthUser message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TokenAuthUser
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.TokenAuthUser;
+
+                        /**
+                         * Creates a plain object from a TokenAuthUser message. Also converts values to other types if specified.
+                         * @param message TokenAuthUser
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.TokenAuthUser, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TokenAuthUser to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TokenAuthUser
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TokenAuthUser {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ACTIVE = 1,
+                            CREATING = 2,
+                            UPDATING = 3,
+                            DELETING = 4
+                        }
+                    }
+
+                    /** Properties of an AuthToken. */
+                    interface IAuthToken {
+
+                        /** AuthToken name */
+                        name?: (string|null);
+
+                        /** AuthToken token */
+                        token?: (string|null);
+
+                        /** AuthToken createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AuthToken state */
+                        state?: (google.cloud.redis.cluster.v1.AuthToken.State|keyof typeof google.cloud.redis.cluster.v1.AuthToken.State|null);
+                    }
+
+                    /** Represents an AuthToken. */
+                    class AuthToken implements IAuthToken {
+
+                        /**
+                         * Constructs a new AuthToken.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1.IAuthToken);
+
+                        /** AuthToken name. */
+                        public name: string;
+
+                        /** AuthToken token. */
+                        public token: string;
+
+                        /** AuthToken createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AuthToken state. */
+                        public state: (google.cloud.redis.cluster.v1.AuthToken.State|keyof typeof google.cloud.redis.cluster.v1.AuthToken.State);
+
+                        /**
+                         * Creates a new AuthToken instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AuthToken instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1.IAuthToken): google.cloud.redis.cluster.v1.AuthToken;
+
+                        /**
+                         * Encodes the specified AuthToken message. Does not implicitly {@link google.cloud.redis.cluster.v1.AuthToken.verify|verify} messages.
+                         * @param message AuthToken message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1.IAuthToken, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AuthToken message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1.AuthToken.verify|verify} messages.
+                         * @param message AuthToken message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1.IAuthToken, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AuthToken message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AuthToken
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1.AuthToken;
+
+                        /**
+                         * Decodes an AuthToken message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AuthToken
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1.AuthToken;
+
+                        /**
+                         * Verifies an AuthToken message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AuthToken message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AuthToken
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1.AuthToken;
+
+                        /**
+                         * Creates a plain object from an AuthToken message. Also converts values to other types if specified.
+                         * @param message AuthToken
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1.AuthToken, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AuthToken to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AuthToken
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AuthToken {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ACTIVE = 1,
+                            CREATING = 2,
+                            DELETING = 3
+                        }
+                    }
+
                     /** Properties of a CertificateAuthority. */
                     interface ICertificateAuthority {
 
@@ -6494,6 +9810,20 @@ export namespace google {
                         public listClusters(request: google.cloud.redis.cluster.v1beta1.IListClustersRequest): Promise<google.cloud.redis.cluster.v1beta1.ListClustersResponse>;
 
                         /**
+                         * Calls ListAclPolicies.
+                         * @param request ListAclPoliciesRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListAclPoliciesResponse
+                         */
+                        public listAclPolicies(request: google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.ListAclPoliciesCallback): void;
+
+                        /**
+                         * Calls ListAclPolicies.
+                         * @param request ListAclPoliciesRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listAclPolicies(request: google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest): Promise<google.cloud.redis.cluster.v1beta1.ListAclPoliciesResponse>;
+
+                        /**
                          * Calls GetCluster.
                          * @param request GetClusterRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Cluster
@@ -6506,6 +9836,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public getCluster(request: google.cloud.redis.cluster.v1beta1.IGetClusterRequest): Promise<google.cloud.redis.cluster.v1beta1.Cluster>;
+
+                        /**
+                         * Calls GetAclPolicy.
+                         * @param request GetAclPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and AclPolicy
+                         */
+                        public getAclPolicy(request: google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.GetAclPolicyCallback): void;
+
+                        /**
+                         * Calls GetAclPolicy.
+                         * @param request GetAclPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getAclPolicy(request: google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest): Promise<google.cloud.redis.cluster.v1beta1.AclPolicy>;
 
                         /**
                          * Calls UpdateCluster.
@@ -6522,6 +9866,20 @@ export namespace google {
                         public updateCluster(request: google.cloud.redis.cluster.v1beta1.IUpdateClusterRequest): Promise<google.longrunning.Operation>;
 
                         /**
+                         * Calls UpdateAclPolicy.
+                         * @param request UpdateAclPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public updateAclPolicy(request: google.cloud.redis.cluster.v1beta1.IUpdateAclPolicyRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.UpdateAclPolicyCallback): void;
+
+                        /**
+                         * Calls UpdateAclPolicy.
+                         * @param request UpdateAclPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public updateAclPolicy(request: google.cloud.redis.cluster.v1beta1.IUpdateAclPolicyRequest): Promise<google.longrunning.Operation>;
+
+                        /**
                          * Calls DeleteCluster.
                          * @param request DeleteClusterRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Operation
@@ -6536,6 +9894,48 @@ export namespace google {
                         public deleteCluster(request: google.cloud.redis.cluster.v1beta1.IDeleteClusterRequest): Promise<google.longrunning.Operation>;
 
                         /**
+                         * Calls DeleteAclPolicy.
+                         * @param request DeleteAclPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteAclPolicy(request: google.cloud.redis.cluster.v1beta1.IDeleteAclPolicyRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.DeleteAclPolicyCallback): void;
+
+                        /**
+                         * Calls DeleteAclPolicy.
+                         * @param request DeleteAclPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteAclPolicy(request: google.cloud.redis.cluster.v1beta1.IDeleteAclPolicyRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls GetAclPolicyRevision.
+                         * @param request GetAclPolicyRevisionRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and AclPolicyRevision
+                         */
+                        public getAclPolicyRevision(request: google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.GetAclPolicyRevisionCallback): void;
+
+                        /**
+                         * Calls GetAclPolicyRevision.
+                         * @param request GetAclPolicyRevisionRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getAclPolicyRevision(request: google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest): Promise<google.cloud.redis.cluster.v1beta1.AclPolicyRevision>;
+
+                        /**
+                         * Calls ListAclPolicyRevisions.
+                         * @param request ListAclPolicyRevisionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListAclPolicyRevisionsResponse
+                         */
+                        public listAclPolicyRevisions(request: google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.ListAclPolicyRevisionsCallback): void;
+
+                        /**
+                         * Calls ListAclPolicyRevisions.
+                         * @param request ListAclPolicyRevisionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listAclPolicyRevisions(request: google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest): Promise<google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsResponse>;
+
+                        /**
                          * Calls CreateCluster.
                          * @param request CreateClusterRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Operation
@@ -6548,6 +9948,20 @@ export namespace google {
                          * @returns Promise
                          */
                         public createCluster(request: google.cloud.redis.cluster.v1beta1.ICreateClusterRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls CreateAclPolicy.
+                         * @param request CreateAclPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and AclPolicy
+                         */
+                        public createAclPolicy(request: google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.CreateAclPolicyCallback): void;
+
+                        /**
+                         * Calls CreateAclPolicy.
+                         * @param request CreateAclPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createAclPolicy(request: google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest): Promise<google.cloud.redis.cluster.v1beta1.AclPolicy>;
 
                         /**
                          * Calls GetClusterCertificateAuthority.
@@ -6700,11 +10114,25 @@ export namespace google {
                         type ListClustersCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.ListClustersResponse) => void;
 
                         /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|listAclPolicies}.
+                         * @param error Error, if any
+                         * @param [response] ListAclPoliciesResponse
+                         */
+                        type ListAclPoliciesCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.ListAclPoliciesResponse) => void;
+
+                        /**
                          * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|getCluster}.
                          * @param error Error, if any
                          * @param [response] Cluster
                          */
                         type GetClusterCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.Cluster) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|getAclPolicy}.
+                         * @param error Error, if any
+                         * @param [response] AclPolicy
+                         */
+                        type GetAclPolicyCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.AclPolicy) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|updateCluster}.
@@ -6714,6 +10142,13 @@ export namespace google {
                         type UpdateClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|updateAclPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type UpdateAclPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
                          * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|deleteCluster}.
                          * @param error Error, if any
                          * @param [response] Operation
@@ -6721,11 +10156,39 @@ export namespace google {
                         type DeleteClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                         /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|deleteAclPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteAclPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|getAclPolicyRevision}.
+                         * @param error Error, if any
+                         * @param [response] AclPolicyRevision
+                         */
+                        type GetAclPolicyRevisionCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.AclPolicyRevision) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|listAclPolicyRevisions}.
+                         * @param error Error, if any
+                         * @param [response] ListAclPolicyRevisionsResponse
+                         */
+                        type ListAclPolicyRevisionsCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsResponse) => void;
+
+                        /**
                          * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|createCluster}.
                          * @param error Error, if any
                          * @param [response] Operation
                          */
                         type CreateClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|createAclPolicy}.
+                         * @param error Error, if any
+                         * @param [response] AclPolicy
+                         */
+                        type CreateAclPolicyCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.AclPolicy) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|getClusterCertificateAuthority}.
@@ -6962,6 +10425,121 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a CreateAclPolicyRequest. */
+                    interface ICreateAclPolicyRequest {
+
+                        /** CreateAclPolicyRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateAclPolicyRequest aclPolicyId */
+                        aclPolicyId?: (string|null);
+
+                        /** CreateAclPolicyRequest aclPolicy */
+                        aclPolicy?: (google.cloud.redis.cluster.v1beta1.IAclPolicy|null);
+
+                        /** CreateAclPolicyRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents a CreateAclPolicyRequest. */
+                    class CreateAclPolicyRequest implements ICreateAclPolicyRequest {
+
+                        /**
+                         * Constructs a new CreateAclPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest);
+
+                        /** CreateAclPolicyRequest parent. */
+                        public parent: string;
+
+                        /** CreateAclPolicyRequest aclPolicyId. */
+                        public aclPolicyId: string;
+
+                        /** CreateAclPolicyRequest aclPolicy. */
+                        public aclPolicy?: (google.cloud.redis.cluster.v1beta1.IAclPolicy|null);
+
+                        /** CreateAclPolicyRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new CreateAclPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateAclPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest): google.cloud.redis.cluster.v1beta1.CreateAclPolicyRequest;
+
+                        /**
+                         * Encodes the specified CreateAclPolicyRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CreateAclPolicyRequest.verify|verify} messages.
+                         * @param message CreateAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateAclPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.CreateAclPolicyRequest.verify|verify} messages.
+                         * @param message CreateAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.ICreateAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateAclPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.CreateAclPolicyRequest;
+
+                        /**
+                         * Decodes a CreateAclPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.CreateAclPolicyRequest;
+
+                        /**
+                         * Verifies a CreateAclPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateAclPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateAclPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.CreateAclPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a CreateAclPolicyRequest message. Also converts values to other types if specified.
+                         * @param message CreateAclPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.CreateAclPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateAclPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateAclPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a ListClustersRequest. */
                     interface IListClustersRequest {
 
@@ -7180,6 +10758,442 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a ListAclPoliciesRequest. */
+                    interface IListAclPoliciesRequest {
+
+                        /** ListAclPoliciesRequest parent */
+                        parent?: (string|null);
+
+                        /** ListAclPoliciesRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListAclPoliciesRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListAclPoliciesRequest. */
+                    class ListAclPoliciesRequest implements IListAclPoliciesRequest {
+
+                        /**
+                         * Constructs a new ListAclPoliciesRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest);
+
+                        /** ListAclPoliciesRequest parent. */
+                        public parent: string;
+
+                        /** ListAclPoliciesRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListAclPoliciesRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListAclPoliciesRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAclPoliciesRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest): google.cloud.redis.cluster.v1beta1.ListAclPoliciesRequest;
+
+                        /**
+                         * Encodes the specified ListAclPoliciesRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListAclPoliciesRequest.verify|verify} messages.
+                         * @param message ListAclPoliciesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAclPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListAclPoliciesRequest.verify|verify} messages.
+                         * @param message ListAclPoliciesRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IListAclPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAclPoliciesRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAclPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ListAclPoliciesRequest;
+
+                        /**
+                         * Decodes a ListAclPoliciesRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAclPoliciesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ListAclPoliciesRequest;
+
+                        /**
+                         * Verifies a ListAclPoliciesRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAclPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAclPoliciesRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ListAclPoliciesRequest;
+
+                        /**
+                         * Creates a plain object from a ListAclPoliciesRequest message. Also converts values to other types if specified.
+                         * @param message ListAclPoliciesRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ListAclPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAclPoliciesRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAclPoliciesRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAclPoliciesResponse. */
+                    interface IListAclPoliciesResponse {
+
+                        /** ListAclPoliciesResponse aclPolicies */
+                        aclPolicies?: (google.cloud.redis.cluster.v1beta1.IAclPolicy[]|null);
+
+                        /** ListAclPoliciesResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListAclPoliciesResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListAclPoliciesResponse. */
+                    class ListAclPoliciesResponse implements IListAclPoliciesResponse {
+
+                        /**
+                         * Constructs a new ListAclPoliciesResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IListAclPoliciesResponse);
+
+                        /** ListAclPoliciesResponse aclPolicies. */
+                        public aclPolicies: google.cloud.redis.cluster.v1beta1.IAclPolicy[];
+
+                        /** ListAclPoliciesResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListAclPoliciesResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListAclPoliciesResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAclPoliciesResponse instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IListAclPoliciesResponse): google.cloud.redis.cluster.v1beta1.ListAclPoliciesResponse;
+
+                        /**
+                         * Encodes the specified ListAclPoliciesResponse message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListAclPoliciesResponse.verify|verify} messages.
+                         * @param message ListAclPoliciesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IListAclPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAclPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListAclPoliciesResponse.verify|verify} messages.
+                         * @param message ListAclPoliciesResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IListAclPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAclPoliciesResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAclPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ListAclPoliciesResponse;
+
+                        /**
+                         * Decodes a ListAclPoliciesResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAclPoliciesResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ListAclPoliciesResponse;
+
+                        /**
+                         * Verifies a ListAclPoliciesResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAclPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAclPoliciesResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ListAclPoliciesResponse;
+
+                        /**
+                         * Creates a plain object from a ListAclPoliciesResponse message. Also converts values to other types if specified.
+                         * @param message ListAclPoliciesResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ListAclPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAclPoliciesResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAclPoliciesResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAclPolicyRevisionsRequest. */
+                    interface IListAclPolicyRevisionsRequest {
+
+                        /** ListAclPolicyRevisionsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListAclPolicyRevisionsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListAclPolicyRevisionsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListAclPolicyRevisionsRequest. */
+                    class ListAclPolicyRevisionsRequest implements IListAclPolicyRevisionsRequest {
+
+                        /**
+                         * Constructs a new ListAclPolicyRevisionsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest);
+
+                        /** ListAclPolicyRevisionsRequest parent. */
+                        public parent: string;
+
+                        /** ListAclPolicyRevisionsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListAclPolicyRevisionsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListAclPolicyRevisionsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAclPolicyRevisionsRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest): google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsRequest;
+
+                        /**
+                         * Encodes the specified ListAclPolicyRevisionsRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsRequest.verify|verify} messages.
+                         * @param message ListAclPolicyRevisionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAclPolicyRevisionsRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsRequest.verify|verify} messages.
+                         * @param message ListAclPolicyRevisionsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAclPolicyRevisionsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAclPolicyRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsRequest;
+
+                        /**
+                         * Decodes a ListAclPolicyRevisionsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAclPolicyRevisionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsRequest;
+
+                        /**
+                         * Verifies a ListAclPolicyRevisionsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAclPolicyRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAclPolicyRevisionsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsRequest;
+
+                        /**
+                         * Creates a plain object from a ListAclPolicyRevisionsRequest message. Also converts values to other types if specified.
+                         * @param message ListAclPolicyRevisionsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAclPolicyRevisionsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAclPolicyRevisionsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAclPolicyRevisionsResponse. */
+                    interface IListAclPolicyRevisionsResponse {
+
+                        /** ListAclPolicyRevisionsResponse aclPolicyRevisions */
+                        aclPolicyRevisions?: (google.cloud.redis.cluster.v1beta1.IAclPolicyRevision[]|null);
+
+                        /** ListAclPolicyRevisionsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListAclPolicyRevisionsResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListAclPolicyRevisionsResponse. */
+                    class ListAclPolicyRevisionsResponse implements IListAclPolicyRevisionsResponse {
+
+                        /**
+                         * Constructs a new ListAclPolicyRevisionsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsResponse);
+
+                        /** ListAclPolicyRevisionsResponse aclPolicyRevisions. */
+                        public aclPolicyRevisions: google.cloud.redis.cluster.v1beta1.IAclPolicyRevision[];
+
+                        /** ListAclPolicyRevisionsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListAclPolicyRevisionsResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListAclPolicyRevisionsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAclPolicyRevisionsResponse instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsResponse): google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsResponse;
+
+                        /**
+                         * Encodes the specified ListAclPolicyRevisionsResponse message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsResponse.verify|verify} messages.
+                         * @param message ListAclPolicyRevisionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAclPolicyRevisionsResponse message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsResponse.verify|verify} messages.
+                         * @param message ListAclPolicyRevisionsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IListAclPolicyRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAclPolicyRevisionsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAclPolicyRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsResponse;
+
+                        /**
+                         * Decodes a ListAclPolicyRevisionsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAclPolicyRevisionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsResponse;
+
+                        /**
+                         * Verifies a ListAclPolicyRevisionsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAclPolicyRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAclPolicyRevisionsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsResponse;
+
+                        /**
+                         * Creates a plain object from a ListAclPolicyRevisionsResponse message. Also converts values to other types if specified.
+                         * @param message ListAclPolicyRevisionsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ListAclPolicyRevisionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAclPolicyRevisionsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAclPolicyRevisionsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of an UpdateClusterRequest. */
                     interface IUpdateClusterRequest {
 
@@ -7289,6 +11303,115 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of an UpdateAclPolicyRequest. */
+                    interface IUpdateAclPolicyRequest {
+
+                        /** UpdateAclPolicyRequest aclPolicy */
+                        aclPolicy?: (google.cloud.redis.cluster.v1beta1.IAclPolicy|null);
+
+                        /** UpdateAclPolicyRequest updateMask */
+                        updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateAclPolicyRequest requestId */
+                        requestId?: (string|null);
+                    }
+
+                    /** Represents an UpdateAclPolicyRequest. */
+                    class UpdateAclPolicyRequest implements IUpdateAclPolicyRequest {
+
+                        /**
+                         * Constructs a new UpdateAclPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IUpdateAclPolicyRequest);
+
+                        /** UpdateAclPolicyRequest aclPolicy. */
+                        public aclPolicy?: (google.cloud.redis.cluster.v1beta1.IAclPolicy|null);
+
+                        /** UpdateAclPolicyRequest updateMask. */
+                        public updateMask?: (google.protobuf.IFieldMask|null);
+
+                        /** UpdateAclPolicyRequest requestId. */
+                        public requestId: string;
+
+                        /**
+                         * Creates a new UpdateAclPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns UpdateAclPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IUpdateAclPolicyRequest): google.cloud.redis.cluster.v1beta1.UpdateAclPolicyRequest;
+
+                        /**
+                         * Encodes the specified UpdateAclPolicyRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.UpdateAclPolicyRequest.verify|verify} messages.
+                         * @param message UpdateAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IUpdateAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified UpdateAclPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.UpdateAclPolicyRequest.verify|verify} messages.
+                         * @param message UpdateAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IUpdateAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an UpdateAclPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns UpdateAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.UpdateAclPolicyRequest;
+
+                        /**
+                         * Decodes an UpdateAclPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns UpdateAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.UpdateAclPolicyRequest;
+
+                        /**
+                         * Verifies an UpdateAclPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an UpdateAclPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns UpdateAclPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.UpdateAclPolicyRequest;
+
+                        /**
+                         * Creates a plain object from an UpdateAclPolicyRequest message. Also converts values to other types if specified.
+                         * @param message UpdateAclPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.UpdateAclPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this UpdateAclPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for UpdateAclPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a GetClusterRequest. */
                     interface IGetClusterRequest {
 
@@ -7380,6 +11503,200 @@ export namespace google {
 
                         /**
                          * Gets the default type url for GetClusterRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetAclPolicyRequest. */
+                    interface IGetAclPolicyRequest {
+
+                        /** GetAclPolicyRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetAclPolicyRequest. */
+                    class GetAclPolicyRequest implements IGetAclPolicyRequest {
+
+                        /**
+                         * Constructs a new GetAclPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest);
+
+                        /** GetAclPolicyRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetAclPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetAclPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest): google.cloud.redis.cluster.v1beta1.GetAclPolicyRequest;
+
+                        /**
+                         * Encodes the specified GetAclPolicyRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetAclPolicyRequest.verify|verify} messages.
+                         * @param message GetAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetAclPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetAclPolicyRequest.verify|verify} messages.
+                         * @param message GetAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IGetAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetAclPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.GetAclPolicyRequest;
+
+                        /**
+                         * Decodes a GetAclPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.GetAclPolicyRequest;
+
+                        /**
+                         * Verifies a GetAclPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetAclPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetAclPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.GetAclPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a GetAclPolicyRequest message. Also converts values to other types if specified.
+                         * @param message GetAclPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.GetAclPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetAclPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetAclPolicyRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetAclPolicyRevisionRequest. */
+                    interface IGetAclPolicyRevisionRequest {
+
+                        /** GetAclPolicyRevisionRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetAclPolicyRevisionRequest. */
+                    class GetAclPolicyRevisionRequest implements IGetAclPolicyRevisionRequest {
+
+                        /**
+                         * Constructs a new GetAclPolicyRevisionRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest);
+
+                        /** GetAclPolicyRevisionRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetAclPolicyRevisionRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetAclPolicyRevisionRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest): google.cloud.redis.cluster.v1beta1.GetAclPolicyRevisionRequest;
+
+                        /**
+                         * Encodes the specified GetAclPolicyRevisionRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetAclPolicyRevisionRequest.verify|verify} messages.
+                         * @param message GetAclPolicyRevisionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetAclPolicyRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetAclPolicyRevisionRequest.verify|verify} messages.
+                         * @param message GetAclPolicyRevisionRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IGetAclPolicyRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetAclPolicyRevisionRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetAclPolicyRevisionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.GetAclPolicyRevisionRequest;
+
+                        /**
+                         * Decodes a GetAclPolicyRevisionRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetAclPolicyRevisionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.GetAclPolicyRevisionRequest;
+
+                        /**
+                         * Verifies a GetAclPolicyRevisionRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetAclPolicyRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetAclPolicyRevisionRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.GetAclPolicyRevisionRequest;
+
+                        /**
+                         * Creates a plain object from a GetAclPolicyRevisionRequest message. Also converts values to other types if specified.
+                         * @param message GetAclPolicyRevisionRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.GetAclPolicyRevisionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetAclPolicyRevisionRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetAclPolicyRevisionRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -7483,6 +11800,115 @@ export namespace google {
 
                         /**
                          * Gets the default type url for DeleteClusterRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteAclPolicyRequest. */
+                    interface IDeleteAclPolicyRequest {
+
+                        /** DeleteAclPolicyRequest name */
+                        name?: (string|null);
+
+                        /** DeleteAclPolicyRequest requestId */
+                        requestId?: (string|null);
+
+                        /** DeleteAclPolicyRequest etag */
+                        etag?: (string|null);
+                    }
+
+                    /** Represents a DeleteAclPolicyRequest. */
+                    class DeleteAclPolicyRequest implements IDeleteAclPolicyRequest {
+
+                        /**
+                         * Constructs a new DeleteAclPolicyRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IDeleteAclPolicyRequest);
+
+                        /** DeleteAclPolicyRequest name. */
+                        public name: string;
+
+                        /** DeleteAclPolicyRequest requestId. */
+                        public requestId: string;
+
+                        /** DeleteAclPolicyRequest etag. */
+                        public etag: string;
+
+                        /**
+                         * Creates a new DeleteAclPolicyRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteAclPolicyRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IDeleteAclPolicyRequest): google.cloud.redis.cluster.v1beta1.DeleteAclPolicyRequest;
+
+                        /**
+                         * Encodes the specified DeleteAclPolicyRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.DeleteAclPolicyRequest.verify|verify} messages.
+                         * @param message DeleteAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IDeleteAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteAclPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.DeleteAclPolicyRequest.verify|verify} messages.
+                         * @param message DeleteAclPolicyRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IDeleteAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteAclPolicyRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.DeleteAclPolicyRequest;
+
+                        /**
+                         * Decodes a DeleteAclPolicyRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteAclPolicyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.DeleteAclPolicyRequest;
+
+                        /**
+                         * Verifies a DeleteAclPolicyRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteAclPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteAclPolicyRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.DeleteAclPolicyRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteAclPolicyRequest message. Also converts values to other types if specified.
+                         * @param message DeleteAclPolicyRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.DeleteAclPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteAclPolicyRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteAclPolicyRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -8627,6 +13053,9 @@ export namespace google {
                         /** Cluster encryptionInfo */
                         encryptionInfo?: (google.cloud.redis.cluster.v1beta1.IEncryptionInfo|null);
 
+                        /** Cluster asyncClusterEndpointsDeletionEnabled */
+                        asyncClusterEndpointsDeletionEnabled?: (boolean|null);
+
                         /** Cluster serverCaMode */
                         serverCaMode?: (google.cloud.redis.cluster.v1beta1.ServerCaMode|keyof typeof google.cloud.redis.cluster.v1beta1.ServerCaMode|null);
 
@@ -8635,6 +13064,12 @@ export namespace google {
 
                         /** Cluster rotateServerCertificate */
                         rotateServerCertificate?: (boolean|null);
+
+                        /** Cluster aclPolicy */
+                        aclPolicy?: (string|null);
+
+                        /** Cluster aclPolicyInfo */
+                        aclPolicyInfo?: (google.cloud.redis.cluster.v1beta1.IAclPolicyInfo|null);
                     }
 
                     /** Represents a Cluster. */
@@ -8736,6 +13171,9 @@ export namespace google {
                         /** Cluster encryptionInfo. */
                         public encryptionInfo?: (google.cloud.redis.cluster.v1beta1.IEncryptionInfo|null);
 
+                        /** Cluster asyncClusterEndpointsDeletionEnabled. */
+                        public asyncClusterEndpointsDeletionEnabled?: (boolean|null);
+
                         /** Cluster serverCaMode. */
                         public serverCaMode?: (google.cloud.redis.cluster.v1beta1.ServerCaMode|keyof typeof google.cloud.redis.cluster.v1beta1.ServerCaMode|null);
 
@@ -8744,6 +13182,12 @@ export namespace google {
 
                         /** Cluster rotateServerCertificate. */
                         public rotateServerCertificate?: (boolean|null);
+
+                        /** Cluster aclPolicy. */
+                        public aclPolicy: string;
+
+                        /** Cluster aclPolicyInfo. */
+                        public aclPolicyInfo?: (google.cloud.redis.cluster.v1beta1.IAclPolicyInfo|null);
 
                         /** Cluster importSources. */
                         public importSources?: ("gcsSource"|"managedBackupSource");
@@ -9236,6 +13680,718 @@ export namespace google {
                             UPDATING = 3,
                             DELETING = 4
                         }
+                    }
+
+                    /** Properties of an AclPolicyInfo. */
+                    interface IAclPolicyInfo {
+
+                        /** AclPolicyInfo appliedAclPolicy */
+                        appliedAclPolicy?: (string|null);
+
+                        /** AclPolicyInfo appliedAclPolicyRevision */
+                        appliedAclPolicyRevision?: (string|null);
+
+                        /** AclPolicyInfo appliedAclPolicyRevisionNumber */
+                        appliedAclPolicyRevisionNumber?: (number|Long|string|null);
+
+                        /** AclPolicyInfo aclPolicyRevisionStatuses */
+                        aclPolicyRevisionStatuses?: (google.cloud.redis.cluster.v1beta1.IAclPolicyRevisionStatus[]|null);
+                    }
+
+                    /** Represents an AclPolicyInfo. */
+                    class AclPolicyInfo implements IAclPolicyInfo {
+
+                        /**
+                         * Constructs a new AclPolicyInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IAclPolicyInfo);
+
+                        /** AclPolicyInfo appliedAclPolicy. */
+                        public appliedAclPolicy: string;
+
+                        /** AclPolicyInfo appliedAclPolicyRevision. */
+                        public appliedAclPolicyRevision: string;
+
+                        /** AclPolicyInfo appliedAclPolicyRevisionNumber. */
+                        public appliedAclPolicyRevisionNumber: (number|Long|string);
+
+                        /** AclPolicyInfo aclPolicyRevisionStatuses. */
+                        public aclPolicyRevisionStatuses: google.cloud.redis.cluster.v1beta1.IAclPolicyRevisionStatus[];
+
+                        /**
+                         * Creates a new AclPolicyInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AclPolicyInfo instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IAclPolicyInfo): google.cloud.redis.cluster.v1beta1.AclPolicyInfo;
+
+                        /**
+                         * Encodes the specified AclPolicyInfo message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AclPolicyInfo.verify|verify} messages.
+                         * @param message AclPolicyInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IAclPolicyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AclPolicyInfo message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AclPolicyInfo.verify|verify} messages.
+                         * @param message AclPolicyInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IAclPolicyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AclPolicyInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AclPolicyInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.AclPolicyInfo;
+
+                        /**
+                         * Decodes an AclPolicyInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AclPolicyInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.AclPolicyInfo;
+
+                        /**
+                         * Verifies an AclPolicyInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AclPolicyInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AclPolicyInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.AclPolicyInfo;
+
+                        /**
+                         * Creates a plain object from an AclPolicyInfo message. Also converts values to other types if specified.
+                         * @param message AclPolicyInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.AclPolicyInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AclPolicyInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AclPolicyInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AclPolicy. */
+                    interface IAclPolicy {
+
+                        /** AclPolicy name */
+                        name?: (string|null);
+
+                        /** AclPolicy rules */
+                        rules?: (google.cloud.redis.cluster.v1beta1.IAclRule[]|null);
+
+                        /** AclPolicy state */
+                        state?: (google.cloud.redis.cluster.v1beta1.AclPolicy.State|keyof typeof google.cloud.redis.cluster.v1beta1.AclPolicy.State|null);
+
+                        /** AclPolicy etag */
+                        etag?: (string|null);
+
+                        /** AclPolicy clusterAclPolicyAttachments */
+                        clusterAclPolicyAttachments?: (google.cloud.redis.cluster.v1beta1.IClusterAclPolicyAttachment[]|null);
+
+                        /** AclPolicy createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AclPolicy updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents an AclPolicy. */
+                    class AclPolicy implements IAclPolicy {
+
+                        /**
+                         * Constructs a new AclPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IAclPolicy);
+
+                        /** AclPolicy name. */
+                        public name: string;
+
+                        /** AclPolicy rules. */
+                        public rules: google.cloud.redis.cluster.v1beta1.IAclRule[];
+
+                        /** AclPolicy state. */
+                        public state: (google.cloud.redis.cluster.v1beta1.AclPolicy.State|keyof typeof google.cloud.redis.cluster.v1beta1.AclPolicy.State);
+
+                        /** AclPolicy etag. */
+                        public etag?: (string|null);
+
+                        /** AclPolicy clusterAclPolicyAttachments. */
+                        public clusterAclPolicyAttachments: google.cloud.redis.cluster.v1beta1.IClusterAclPolicyAttachment[];
+
+                        /** AclPolicy createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AclPolicy updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new AclPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AclPolicy instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IAclPolicy): google.cloud.redis.cluster.v1beta1.AclPolicy;
+
+                        /**
+                         * Encodes the specified AclPolicy message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AclPolicy.verify|verify} messages.
+                         * @param message AclPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IAclPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AclPolicy message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AclPolicy.verify|verify} messages.
+                         * @param message AclPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IAclPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AclPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AclPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.AclPolicy;
+
+                        /**
+                         * Decodes an AclPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AclPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.AclPolicy;
+
+                        /**
+                         * Verifies an AclPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AclPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AclPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.AclPolicy;
+
+                        /**
+                         * Creates a plain object from an AclPolicy message. Also converts values to other types if specified.
+                         * @param message AclPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.AclPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AclPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AclPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AclPolicy {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ACTIVE = 1,
+                            UPDATING = 2,
+                            DELETING = 3
+                        }
+                    }
+
+                    /** Properties of an AclPolicyRevisionStatus. */
+                    interface IAclPolicyRevisionStatus {
+
+                        /** AclPolicyRevisionStatus aclPolicyRevision */
+                        aclPolicyRevision?: (string|null);
+
+                        /** AclPolicyRevisionStatus aclPolicyRevisionNumber */
+                        aclPolicyRevisionNumber?: (number|Long|string|null);
+
+                        /** AclPolicyRevisionStatus state */
+                        state?: (google.cloud.redis.cluster.v1beta1.AclPolicyRevisionStatus.State|keyof typeof google.cloud.redis.cluster.v1beta1.AclPolicyRevisionStatus.State|null);
+
+                        /** AclPolicyRevisionStatus errorMessage */
+                        errorMessage?: (string|null);
+                    }
+
+                    /** Represents an AclPolicyRevisionStatus. */
+                    class AclPolicyRevisionStatus implements IAclPolicyRevisionStatus {
+
+                        /**
+                         * Constructs a new AclPolicyRevisionStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IAclPolicyRevisionStatus);
+
+                        /** AclPolicyRevisionStatus aclPolicyRevision. */
+                        public aclPolicyRevision: string;
+
+                        /** AclPolicyRevisionStatus aclPolicyRevisionNumber. */
+                        public aclPolicyRevisionNumber: (number|Long|string);
+
+                        /** AclPolicyRevisionStatus state. */
+                        public state: (google.cloud.redis.cluster.v1beta1.AclPolicyRevisionStatus.State|keyof typeof google.cloud.redis.cluster.v1beta1.AclPolicyRevisionStatus.State);
+
+                        /** AclPolicyRevisionStatus errorMessage. */
+                        public errorMessage: string;
+
+                        /**
+                         * Creates a new AclPolicyRevisionStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AclPolicyRevisionStatus instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IAclPolicyRevisionStatus): google.cloud.redis.cluster.v1beta1.AclPolicyRevisionStatus;
+
+                        /**
+                         * Encodes the specified AclPolicyRevisionStatus message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AclPolicyRevisionStatus.verify|verify} messages.
+                         * @param message AclPolicyRevisionStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IAclPolicyRevisionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AclPolicyRevisionStatus message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AclPolicyRevisionStatus.verify|verify} messages.
+                         * @param message AclPolicyRevisionStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IAclPolicyRevisionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AclPolicyRevisionStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AclPolicyRevisionStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.AclPolicyRevisionStatus;
+
+                        /**
+                         * Decodes an AclPolicyRevisionStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AclPolicyRevisionStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.AclPolicyRevisionStatus;
+
+                        /**
+                         * Verifies an AclPolicyRevisionStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AclPolicyRevisionStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AclPolicyRevisionStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.AclPolicyRevisionStatus;
+
+                        /**
+                         * Creates a plain object from an AclPolicyRevisionStatus message. Also converts values to other types if specified.
+                         * @param message AclPolicyRevisionStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.AclPolicyRevisionStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AclPolicyRevisionStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AclPolicyRevisionStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AclPolicyRevisionStatus {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            APPLYING = 1,
+                            APPLIED = 2,
+                            FAILED = 3
+                        }
+                    }
+
+                    /** Properties of a ClusterAclPolicyAttachment. */
+                    interface IClusterAclPolicyAttachment {
+
+                        /** ClusterAclPolicyAttachment cluster */
+                        cluster?: (string|null);
+
+                        /** ClusterAclPolicyAttachment aclPolicyRevisionStatuses */
+                        aclPolicyRevisionStatuses?: (google.cloud.redis.cluster.v1beta1.IAclPolicyRevisionStatus[]|null);
+                    }
+
+                    /** Represents a ClusterAclPolicyAttachment. */
+                    class ClusterAclPolicyAttachment implements IClusterAclPolicyAttachment {
+
+                        /**
+                         * Constructs a new ClusterAclPolicyAttachment.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IClusterAclPolicyAttachment);
+
+                        /** ClusterAclPolicyAttachment cluster. */
+                        public cluster: string;
+
+                        /** ClusterAclPolicyAttachment aclPolicyRevisionStatuses. */
+                        public aclPolicyRevisionStatuses: google.cloud.redis.cluster.v1beta1.IAclPolicyRevisionStatus[];
+
+                        /**
+                         * Creates a new ClusterAclPolicyAttachment instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ClusterAclPolicyAttachment instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IClusterAclPolicyAttachment): google.cloud.redis.cluster.v1beta1.ClusterAclPolicyAttachment;
+
+                        /**
+                         * Encodes the specified ClusterAclPolicyAttachment message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterAclPolicyAttachment.verify|verify} messages.
+                         * @param message ClusterAclPolicyAttachment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IClusterAclPolicyAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ClusterAclPolicyAttachment message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ClusterAclPolicyAttachment.verify|verify} messages.
+                         * @param message ClusterAclPolicyAttachment message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IClusterAclPolicyAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ClusterAclPolicyAttachment message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ClusterAclPolicyAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ClusterAclPolicyAttachment;
+
+                        /**
+                         * Decodes a ClusterAclPolicyAttachment message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ClusterAclPolicyAttachment
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ClusterAclPolicyAttachment;
+
+                        /**
+                         * Verifies a ClusterAclPolicyAttachment message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ClusterAclPolicyAttachment message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ClusterAclPolicyAttachment
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ClusterAclPolicyAttachment;
+
+                        /**
+                         * Creates a plain object from a ClusterAclPolicyAttachment message. Also converts values to other types if specified.
+                         * @param message ClusterAclPolicyAttachment
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ClusterAclPolicyAttachment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ClusterAclPolicyAttachment to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ClusterAclPolicyAttachment
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AclPolicyRevision. */
+                    interface IAclPolicyRevision {
+
+                        /** AclPolicyRevision name */
+                        name?: (string|null);
+
+                        /** AclPolicyRevision revisionNumber */
+                        revisionNumber?: (number|Long|string|null);
+
+                        /** AclPolicyRevision snapshot */
+                        snapshot?: (google.cloud.redis.cluster.v1beta1.IAclPolicy|null);
+
+                        /** AclPolicyRevision createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AclPolicyRevision attachedClusters */
+                        attachedClusters?: (string[]|null);
+                    }
+
+                    /** Represents an AclPolicyRevision. */
+                    class AclPolicyRevision implements IAclPolicyRevision {
+
+                        /**
+                         * Constructs a new AclPolicyRevision.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IAclPolicyRevision);
+
+                        /** AclPolicyRevision name. */
+                        public name: string;
+
+                        /** AclPolicyRevision revisionNumber. */
+                        public revisionNumber: (number|Long|string);
+
+                        /** AclPolicyRevision snapshot. */
+                        public snapshot?: (google.cloud.redis.cluster.v1beta1.IAclPolicy|null);
+
+                        /** AclPolicyRevision createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AclPolicyRevision attachedClusters. */
+                        public attachedClusters: string[];
+
+                        /**
+                         * Creates a new AclPolicyRevision instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AclPolicyRevision instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IAclPolicyRevision): google.cloud.redis.cluster.v1beta1.AclPolicyRevision;
+
+                        /**
+                         * Encodes the specified AclPolicyRevision message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AclPolicyRevision.verify|verify} messages.
+                         * @param message AclPolicyRevision message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IAclPolicyRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AclPolicyRevision message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AclPolicyRevision.verify|verify} messages.
+                         * @param message AclPolicyRevision message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IAclPolicyRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AclPolicyRevision message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AclPolicyRevision
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.AclPolicyRevision;
+
+                        /**
+                         * Decodes an AclPolicyRevision message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AclPolicyRevision
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.AclPolicyRevision;
+
+                        /**
+                         * Verifies an AclPolicyRevision message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AclPolicyRevision message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AclPolicyRevision
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.AclPolicyRevision;
+
+                        /**
+                         * Creates a plain object from an AclPolicyRevision message. Also converts values to other types if specified.
+                         * @param message AclPolicyRevision
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.AclPolicyRevision, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AclPolicyRevision to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AclPolicyRevision
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AclRule. */
+                    interface IAclRule {
+
+                        /** AclRule username */
+                        username?: (string|null);
+
+                        /** AclRule rule */
+                        rule?: (string|null);
+                    }
+
+                    /** Represents an AclRule. */
+                    class AclRule implements IAclRule {
+
+                        /**
+                         * Constructs a new AclRule.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IAclRule);
+
+                        /** AclRule username. */
+                        public username: string;
+
+                        /** AclRule rule. */
+                        public rule: string;
+
+                        /**
+                         * Creates a new AclRule instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AclRule instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IAclRule): google.cloud.redis.cluster.v1beta1.AclRule;
+
+                        /**
+                         * Encodes the specified AclRule message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AclRule.verify|verify} messages.
+                         * @param message AclRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IAclRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AclRule message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AclRule.verify|verify} messages.
+                         * @param message AclRule message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IAclRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AclRule message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AclRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.AclRule;
+
+                        /**
+                         * Decodes an AclRule message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AclRule
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.AclRule;
+
+                        /**
+                         * Verifies an AclRule message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AclRule message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AclRule
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.AclRule;
+
+                        /**
+                         * Creates a plain object from an AclRule message. Also converts values to other types if specified.
+                         * @param message AclRule
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.AclRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AclRule to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AclRule
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of an AutomatedBackupConfig. */
@@ -13886,6 +19042,9 @@ export namespace google {
 
             /** PhpSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage */
+            libraryPackage?: (string|null);
         }
 
         /** Represents a PhpSettings. */
@@ -13899,6 +19058,9 @@ export namespace google {
 
             /** PhpSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PhpSettings libraryPackage. */
+            public libraryPackage: string;
 
             /**
              * Creates a new PhpSettings instance using the specified properties.
@@ -14628,6 +19790,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields */
             autoPopulatedFields?: (string[]|null);
+
+            /** MethodSettings batching */
+            batching?: (google.api.IBatchingConfigProto|null);
         }
 
         /** Represents a MethodSettings. */
@@ -14647,6 +19812,9 @@ export namespace google {
 
             /** MethodSettings autoPopulatedFields. */
             public autoPopulatedFields: string[];
+
+            /** MethodSettings batching. */
+            public batching?: (google.api.IBatchingConfigProto|null);
 
             /**
              * Creates a new MethodSettings instance using the specified properties.
@@ -14960,6 +20128,365 @@ export namespace google {
 
             /**
              * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingConfigProto. */
+        interface IBatchingConfigProto {
+
+            /** BatchingConfigProto thresholds */
+            thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor */
+            batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+        }
+
+        /** Represents a BatchingConfigProto. */
+        class BatchingConfigProto implements IBatchingConfigProto {
+
+            /**
+             * Constructs a new BatchingConfigProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingConfigProto);
+
+            /** BatchingConfigProto thresholds. */
+            public thresholds?: (google.api.IBatchingSettingsProto|null);
+
+            /** BatchingConfigProto batchDescriptor. */
+            public batchDescriptor?: (google.api.IBatchingDescriptorProto|null);
+
+            /**
+             * Creates a new BatchingConfigProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingConfigProto instance
+             */
+            public static create(properties?: google.api.IBatchingConfigProto): google.api.BatchingConfigProto;
+
+            /**
+             * Encodes the specified BatchingConfigProto message. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingConfigProto message, length delimited. Does not implicitly {@link google.api.BatchingConfigProto.verify|verify} messages.
+             * @param message BatchingConfigProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingConfigProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingConfigProto;
+
+            /**
+             * Decodes a BatchingConfigProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingConfigProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingConfigProto;
+
+            /**
+             * Verifies a BatchingConfigProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingConfigProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingConfigProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingConfigProto;
+
+            /**
+             * Creates a plain object from a BatchingConfigProto message. Also converts values to other types if specified.
+             * @param message BatchingConfigProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingConfigProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingConfigProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingConfigProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a BatchingSettingsProto. */
+        interface IBatchingSettingsProto {
+
+            /** BatchingSettingsProto elementCountThreshold */
+            elementCountThreshold?: (number|null);
+
+            /** BatchingSettingsProto requestByteThreshold */
+            requestByteThreshold?: (number|Long|string|null);
+
+            /** BatchingSettingsProto delayThreshold */
+            delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit */
+            elementCountLimit?: (number|null);
+
+            /** BatchingSettingsProto requestByteLimit */
+            requestByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlElementLimit */
+            flowControlElementLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlByteLimit */
+            flowControlByteLimit?: (number|null);
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior */
+            flowControlLimitExceededBehavior?: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto|null);
+        }
+
+        /** Represents a BatchingSettingsProto. */
+        class BatchingSettingsProto implements IBatchingSettingsProto {
+
+            /**
+             * Constructs a new BatchingSettingsProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingSettingsProto);
+
+            /** BatchingSettingsProto elementCountThreshold. */
+            public elementCountThreshold: number;
+
+            /** BatchingSettingsProto requestByteThreshold. */
+            public requestByteThreshold: (number|Long|string);
+
+            /** BatchingSettingsProto delayThreshold. */
+            public delayThreshold?: (google.protobuf.IDuration|null);
+
+            /** BatchingSettingsProto elementCountLimit. */
+            public elementCountLimit: number;
+
+            /** BatchingSettingsProto requestByteLimit. */
+            public requestByteLimit: number;
+
+            /** BatchingSettingsProto flowControlElementLimit. */
+            public flowControlElementLimit: number;
+
+            /** BatchingSettingsProto flowControlByteLimit. */
+            public flowControlByteLimit: number;
+
+            /** BatchingSettingsProto flowControlLimitExceededBehavior. */
+            public flowControlLimitExceededBehavior: (google.api.FlowControlLimitExceededBehaviorProto|keyof typeof google.api.FlowControlLimitExceededBehaviorProto);
+
+            /**
+             * Creates a new BatchingSettingsProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingSettingsProto instance
+             */
+            public static create(properties?: google.api.IBatchingSettingsProto): google.api.BatchingSettingsProto;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingSettingsProto message, length delimited. Does not implicitly {@link google.api.BatchingSettingsProto.verify|verify} messages.
+             * @param message BatchingSettingsProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingSettingsProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingSettingsProto;
+
+            /**
+             * Decodes a BatchingSettingsProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingSettingsProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingSettingsProto;
+
+            /**
+             * Verifies a BatchingSettingsProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingSettingsProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingSettingsProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingSettingsProto;
+
+            /**
+             * Creates a plain object from a BatchingSettingsProto message. Also converts values to other types if specified.
+             * @param message BatchingSettingsProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingSettingsProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingSettingsProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingSettingsProto
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** FlowControlLimitExceededBehaviorProto enum. */
+        enum FlowControlLimitExceededBehaviorProto {
+            UNSET_BEHAVIOR = 0,
+            THROW_EXCEPTION = 1,
+            BLOCK = 2,
+            IGNORE = 3
+        }
+
+        /** Properties of a BatchingDescriptorProto. */
+        interface IBatchingDescriptorProto {
+
+            /** BatchingDescriptorProto batchedField */
+            batchedField?: (string|null);
+
+            /** BatchingDescriptorProto discriminatorFields */
+            discriminatorFields?: (string[]|null);
+
+            /** BatchingDescriptorProto subresponseField */
+            subresponseField?: (string|null);
+        }
+
+        /** Represents a BatchingDescriptorProto. */
+        class BatchingDescriptorProto implements IBatchingDescriptorProto {
+
+            /**
+             * Constructs a new BatchingDescriptorProto.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IBatchingDescriptorProto);
+
+            /** BatchingDescriptorProto batchedField. */
+            public batchedField: string;
+
+            /** BatchingDescriptorProto discriminatorFields. */
+            public discriminatorFields: string[];
+
+            /** BatchingDescriptorProto subresponseField. */
+            public subresponseField: string;
+
+            /**
+             * Creates a new BatchingDescriptorProto instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns BatchingDescriptorProto instance
+             */
+            public static create(properties?: google.api.IBatchingDescriptorProto): google.api.BatchingDescriptorProto;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified BatchingDescriptorProto message, length delimited. Does not implicitly {@link google.api.BatchingDescriptorProto.verify|verify} messages.
+             * @param message BatchingDescriptorProto message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IBatchingDescriptorProto, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.BatchingDescriptorProto;
+
+            /**
+             * Decodes a BatchingDescriptorProto message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns BatchingDescriptorProto
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.BatchingDescriptorProto;
+
+            /**
+             * Verifies a BatchingDescriptorProto message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a BatchingDescriptorProto message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns BatchingDescriptorProto
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.BatchingDescriptorProto;
+
+            /**
+             * Creates a plain object from a BatchingDescriptorProto message. Also converts values to other types if specified.
+             * @param message BatchingDescriptorProto
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.BatchingDescriptorProto, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this BatchingDescriptorProto to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for BatchingDescriptorProto
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -15564,6 +21091,8 @@ export namespace google {
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
             EDITION_2024 = 1001,
+            EDITION_2026 = 1002,
+            EDITION_UNSTABLE = 9999,
             EDITION_1_TEST_ONLY = 1,
             EDITION_2_TEST_ONLY = 2,
             EDITION_99997_TEST_ONLY = 99997,
@@ -17938,6 +23467,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved */
                 editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport removalError */
+                removalError?: (string|null);
             }
 
             /** Represents a FeatureSupport. */
@@ -17960,6 +23492,9 @@ export namespace google {
 
                 /** FeatureSupport editionRemoved. */
                 public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport removalError. */
+                public removalError: string;
 
                 /**
                  * Creates a new FeatureSupport instance using the specified properties.
@@ -18902,6 +24437,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility */
             defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
+
+            /** FeatureSet enforceProtoLimits */
+            enforceProtoLimits?: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|null);
         }
 
         /** Represents a FeatureSet. */
@@ -18936,6 +24474,9 @@ export namespace google {
 
             /** FeatureSet defaultSymbolVisibility. */
             public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
+
+            /** FeatureSet enforceProtoLimits. */
+            public enforceProtoLimits: (google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits|keyof typeof google.protobuf.FeatureSet.ProtoLimitsFeature.EnforceProtoLimits);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -19064,7 +24605,8 @@ export namespace google {
             enum EnforceNamingStyle {
                 ENFORCE_NAMING_STYLE_UNKNOWN = 0,
                 STYLE2024 = 1,
-                STYLE_LEGACY = 2
+                STYLE_LEGACY = 2,
+                STYLE2026 = 3
             }
 
             /** Properties of a VisibilityFeature. */
@@ -19167,6 +24709,107 @@ export namespace google {
                     EXPORT_TOP_LEVEL = 2,
                     LOCAL_ALL = 3,
                     STRICT = 4
+                }
+            }
+
+            /** Properties of a ProtoLimitsFeature. */
+            interface IProtoLimitsFeature {
+            }
+
+            /** Represents a ProtoLimitsFeature. */
+            class ProtoLimitsFeature implements IProtoLimitsFeature {
+
+                /**
+                 * Constructs a new ProtoLimitsFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature);
+
+                /**
+                 * Creates a new ProtoLimitsFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ProtoLimitsFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IProtoLimitsFeature): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ProtoLimitsFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.ProtoLimitsFeature.verify|verify} messages.
+                 * @param message ProtoLimitsFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IProtoLimitsFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Decodes a ProtoLimitsFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ProtoLimitsFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Verifies a ProtoLimitsFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a ProtoLimitsFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ProtoLimitsFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.ProtoLimitsFeature;
+
+                /**
+                 * Creates a plain object from a ProtoLimitsFeature message. Also converts values to other types if specified.
+                 * @param message ProtoLimitsFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.ProtoLimitsFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ProtoLimitsFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ProtoLimitsFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace ProtoLimitsFeature {
+
+                /** EnforceProtoLimits enum. */
+                enum EnforceProtoLimits {
+                    PROTO_LIMITS_UNKNOWN = 0,
+                    LEGACY_NO_EXPLICIT_LIMITS = 1,
+                    PROTO_LIMITS2026 = 2
                 }
             }
         }
@@ -20716,6 +26359,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken */
             pageToken?: (string|null);
+
+            /** ListOperationsRequest returnPartialSuccess */
+            returnPartialSuccess?: (boolean|null);
         }
 
         /** Represents a ListOperationsRequest. */
@@ -20738,6 +26384,9 @@ export namespace google {
 
             /** ListOperationsRequest pageToken. */
             public pageToken: string;
+
+            /** ListOperationsRequest returnPartialSuccess. */
+            public returnPartialSuccess: boolean;
 
             /**
              * Creates a new ListOperationsRequest instance using the specified properties.
@@ -20825,6 +26474,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken */
             nextPageToken?: (string|null);
+
+            /** ListOperationsResponse unreachable */
+            unreachable?: (string[]|null);
         }
 
         /** Represents a ListOperationsResponse. */
@@ -20841,6 +26493,9 @@ export namespace google {
 
             /** ListOperationsResponse nextPageToken. */
             public nextPageToken: string;
+
+            /** ListOperationsResponse unreachable. */
+            public unreachable: string[];
 
             /**
              * Creates a new ListOperationsResponse instance using the specified properties.

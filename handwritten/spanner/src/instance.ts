@@ -22,7 +22,7 @@ import {promisifyAll} from '@google-cloud/promisify';
 import * as extend from 'extend';
 import snakeCase = require('lodash.snakecase');
 import {Database, SessionPoolConstructor} from './database';
-import {Spanner, RequestConfig} from '.';
+import {Spanner, RequestConfig, CreateInstanceRequest} from '.';
 import {
   RequestCallback,
   PagedOptions,
@@ -31,7 +31,7 @@ import {
   NormalCallback,
   ResourceCallback,
   PagedOptionsWithFilter,
-  getCommonHeaders,
+  CLOUD_RESOURCE_HEADER,
 } from './common';
 import {Duplex} from 'stream';
 import {SessionPoolOptions, SessionPool} from './session-pool';
@@ -47,10 +47,10 @@ import {
   CopyBackupResponse,
   CopyBackupOptions,
 } from './backup';
-import {google as instanceAdmin} from '../protos/protos';
-import {google as databaseAdmin} from '../protos/protos';
-import {google as spannerClient} from '../protos/protos';
-import {CreateInstanceRequest} from './index';
+import {protos} from '@google-cloud/spanner-api';
+import databaseAdmin = protos.google;
+import instanceAdmin = protos.google;
+import spannerClient = protos.google;
 import {ObservabilityOptions} from './instrument';
 
 export type IBackup = databaseAdmin.spanner.admin.database.v1.IBackup;
@@ -87,7 +87,15 @@ export type GetDatabaseOperationsResponse = PagedResponse<
 
 export interface CreateDatabaseOptions
   extends databaseAdmin.spanner.admin.database.v1.ICreateDatabaseRequest {
+  /**
+   * @deprecated Session pool options are deprecated and will be removed in a future release.
+   * Multiplexed sessions are now used for all operations by default.
+   */
   poolOptions?: SessionPoolOptions;
+  /**
+   * @deprecated Custom session pool constructors are deprecated and will be removed in a future release.
+   * Multiplexed sessions are now used for all operations by default.
+   */
   poolCtor?: SessionPool;
   schema?: string | string[];
   gaxOptions?: CallOptions;
@@ -128,9 +136,7 @@ export type GetDatabaseOperationsCallback = RequestCallback<
   databaseAdmin.spanner.admin.database.v1.IListDatabaseOperationsResponse
 >;
 export interface GetInstanceConfig
-  extends GetConfig,
-    CreateInstanceRequest,
-    GetInstanceMetadataOptions {}
+  extends GetConfig, CreateInstanceRequest, GetInstanceMetadataOptions {}
 
 interface InstanceRequest {
   (
@@ -239,10 +245,10 @@ class Instance extends common.GrpcServiceObject {
     this.requestStream = spanner.requestStream.bind(spanner);
     this.databases_ = new Map<string, Database>();
     this._observabilityOptions = spanner._observabilityOptions;
-    this.commonHeaders_ = getCommonHeaders(
-      this.formattedName_,
-      this._observabilityOptions?.enableEndToEndTracing,
-    );
+    this.commonHeaders_ = {
+      ...spanner.commonHeaders_,
+      [CLOUD_RESOURCE_HEADER]: this.formattedName_,
+    };
   }
 
   /**
@@ -404,7 +410,7 @@ class Instance extends common.GrpcServiceObject {
         ? optionsOrCallback
         : ({} as GetBackupsOptions);
     const gaxOpts = extend(true, {}, options.gaxOptions);
-    let reqOpts = extend({}, options, {
+    const reqOpts = Object.assign({}, options, {
       parent: this.formattedName_,
     });
     delete reqOpts.gaxOptions;
@@ -412,16 +418,15 @@ class Instance extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetBackupsOptions).pageSize,
-          pageToken: (gaxOpts as GetBackupsOptions).pageToken,
-        },
-        reqOpts,
-      );
-      delete (gaxOpts as GetBackupsOptions).pageSize;
-      delete (gaxOpts as GetBackupsOptions).pageToken;
+      const gax = gaxOpts as GetBackupsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
+      }
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
+      }
     }
 
     this.request<
@@ -445,7 +450,7 @@ class Instance extends common.GrpcServiceObject {
           });
         }
         const nextQuery = nextPageRequest!
-          ? extend({}, options, nextPageRequest!)
+          ? Object.assign({}, options, nextPageRequest!)
           : null;
 
         callback(err, backupInstances, nextQuery, ...args);
@@ -495,7 +500,7 @@ class Instance extends common.GrpcServiceObject {
   getBackupsStream(options: GetBackupsOptions = {}): NodeJS.ReadableStream {
     const gaxOpts = extend(true, {}, options.gaxOptions);
 
-    let reqOpts = extend({}, options, {
+    const reqOpts = Object.assign({}, options, {
       parent: this.formattedName_,
     });
     delete reqOpts.gaxOptions;
@@ -503,16 +508,15 @@ class Instance extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetBackupsOptions).pageSize,
-          pageToken: (gaxOpts as GetBackupsOptions).pageToken,
-        },
-        reqOpts,
-      );
-      delete (gaxOpts as GetBackupsOptions).pageSize;
-      delete (gaxOpts as GetBackupsOptions).pageToken;
+      const gax = gaxOpts as GetBackupsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
+      }
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
+      }
     }
 
     return this.requestStream({
@@ -599,8 +603,7 @@ class Instance extends common.GrpcServiceObject {
    */
   getBackupOperations(
     optionsOrCallback?:
-      | GetBackupOperationsOptions
-      | GetBackupOperationsCallback,
+      GetBackupOperationsOptions | GetBackupOperationsCallback,
     cb?: GetBackupOperationsCallback,
   ): void | Promise<GetBackupOperationsResponse> {
     const callback =
@@ -610,7 +613,7 @@ class Instance extends common.GrpcServiceObject {
         ? optionsOrCallback
         : ({} as GetBackupOperationsOptions);
     const gaxOpts = extend(true, {}, options.gaxOptions);
-    let reqOpts = extend({}, options, {
+    const reqOpts = Object.assign({}, options, {
       parent: this.formattedName_,
     });
     delete reqOpts.gaxOptions;
@@ -618,16 +621,15 @@ class Instance extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetBackupsOptions).pageSize,
-          pageToken: (gaxOpts as GetBackupsOptions).pageToken,
-        },
-        reqOpts,
-      );
-      delete (gaxOpts as GetBackupsOptions).pageSize;
-      delete (gaxOpts as GetBackupsOptions).pageToken;
+      const gax = gaxOpts as GetBackupsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
+      }
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
+      }
     }
 
     this.request<
@@ -643,7 +645,7 @@ class Instance extends common.GrpcServiceObject {
       },
       (err, operations, nextPageRequest, ...args) => {
         const nextQuery = nextPageRequest!
-          ? extend({}, options, nextPageRequest!)
+          ? Object.assign({}, options, nextPageRequest!)
           : null;
 
         callback!(err, operations, nextQuery, ...args);
@@ -727,8 +729,7 @@ class Instance extends common.GrpcServiceObject {
    */
   getDatabaseOperations(
     optionsOrCallback?:
-      | GetDatabaseOperationsOptions
-      | GetDatabaseOperationsCallback,
+      GetDatabaseOperationsOptions | GetDatabaseOperationsCallback,
     cb?: GetDatabaseOperationsCallback,
   ): void | Promise<GetDatabaseOperationsResponse> {
     const callback =
@@ -738,7 +739,7 @@ class Instance extends common.GrpcServiceObject {
         ? optionsOrCallback
         : ({} as GetDatabaseOperationsOptions);
     const gaxOpts = extend(true, {}, options.gaxOptions);
-    let reqOpts = extend({}, options, {
+    const reqOpts = Object.assign({}, options, {
       parent: this.formattedName_,
     });
     delete reqOpts.gaxOptions;
@@ -746,16 +747,15 @@ class Instance extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetBackupsOptions).pageSize,
-          pageToken: (gaxOpts as GetBackupsOptions).pageToken,
-        },
-        reqOpts,
-      );
-      delete (gaxOpts as GetBackupsOptions).pageSize;
-      delete (gaxOpts as GetBackupsOptions).pageToken;
+      const gax = gaxOpts as GetBackupsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
+      }
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
+      }
     }
 
     this.request<
@@ -771,7 +771,7 @@ class Instance extends common.GrpcServiceObject {
       },
       (err, operations, nextPageRequest, ...args) => {
         const nextQuery = nextPageRequest!
-          ? extend({}, options, nextPageRequest!)
+          ? Object.assign({}, options, nextPageRequest!)
           : null;
 
         callback!(err, operations, nextQuery, ...args);
@@ -783,8 +783,8 @@ class Instance extends common.GrpcServiceObject {
    * Config for the new database.
    *
    * @typedef {object} CreateDatabaseRequest
-   * @property {SessionPoolOptions} [poolOptions]
-   * @property {SessionPoolCtor} [poolCtor]
+   * @property {SessionPoolOptions} [poolOptions] **Deprecated**. Session pool options are deprecated and will be removed in a future release.
+   * @property {SessionPoolCtor} [poolCtor] **Deprecated**. Custom session pool constructors are deprecated and will be removed in a future release.
    */
   /**
    * @typedef {array} CreateDatabaseResponse
@@ -899,7 +899,7 @@ class Instance extends common.GrpcServiceObject {
     ) {
       createStatement = 'CREATE DATABASE "' + name.split('/').pop() + '"';
     }
-    const reqOpts = extend(
+    const reqOpts = Object.assign(
       {
         parent: this.formattedName_,
         createStatement: createStatement,
@@ -943,10 +943,15 @@ class Instance extends common.GrpcServiceObject {
    * @param {string} name The name of the instance.
    * @param {SessionPoolOptions|SessionPoolCtor} [poolOptions] Session pool
    *     configuration options.
+   *     **Deprecated**. Session pool options is deprecated and will be removed in a future release.
+   *     Multiplexed sessions are now used for all operations by default, eliminating
+   *     the need for session pooling.
    * @param {spannerClient.spanner.v1.ExecuteSqlRequest.IQueryOptions} [queryOptions]
    *     Default query options to use with the database. These options will be
    *     overridden by any query options set in environment variables or that
    *     are specified on a per-query basis.
+   * @param {string} [databaseRole] The database role to use for sessions on
+   *     the database.
    * @return {Database} A Database object.
    *
    * @example
@@ -967,8 +972,8 @@ class Instance extends common.GrpcServiceObject {
     if (!name) {
       throw new GoogleError('A name is required to access a Database object.');
     }
-    // Only add an additional key for SessionPoolOptions and QueryOptions if an
-    // options object with at least one value was passed in.
+    // Only add an additional key for SessionPoolOptions, QueryOptions, and databaseRole
+    // if provided.
     let optionsKey =
       poolOptions && Object.keys(poolOptions).length > 0
         ? '/' + JSON.stringify(Object.entries(poolOptions).sort())
@@ -976,6 +981,9 @@ class Instance extends common.GrpcServiceObject {
     if (queryOptions && Object.keys(queryOptions).length > 0) {
       optionsKey =
         optionsKey + '/' + JSON.stringify(Object.entries(queryOptions!).sort());
+    }
+    if (databaseRole) {
+      optionsKey = optionsKey + '/' + databaseRole;
     }
     const key = name.split('/').pop() + optionsKey;
     if (!this.databases_.has(key!)) {
@@ -1080,6 +1088,7 @@ class Instance extends common.GrpcServiceObject {
             callback!(err, resp!);
           },
         );
+        return null;
       });
   }
 
@@ -1338,7 +1347,7 @@ class Instance extends common.GrpcServiceObject {
         : ({} as GetDatabasesOptions);
 
     const gaxOpts = extend(true, {}, options.gaxOptions);
-    let reqOpts = extend({}, options, {
+    const reqOpts = Object.assign({}, options, {
       parent: this.formattedName_,
     });
     delete reqOpts.gaxOptions;
@@ -1346,16 +1355,15 @@ class Instance extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetBackupsOptions).pageSize,
-          pageToken: (gaxOpts as GetBackupsOptions).pageToken,
-        },
-        reqOpts,
-      );
-      delete (gaxOpts as GetBackupsOptions).pageSize;
-      delete (gaxOpts as GetBackupsOptions).pageToken;
+      const gax = gaxOpts as GetBackupsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
+      }
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
+      }
     }
 
     this.request<
@@ -1380,7 +1388,7 @@ class Instance extends common.GrpcServiceObject {
           });
         }
         const nextQuery = nextPageRequest!
-          ? extend({}, options, nextPageRequest!)
+          ? Object.assign({}, options, nextPageRequest!)
           : null;
 
         callback(err, databases, nextQuery, ...args);
@@ -1430,7 +1438,7 @@ class Instance extends common.GrpcServiceObject {
   getDatabasesStream(options: GetDatabasesOptions = {}): NodeJS.ReadableStream {
     const gaxOpts = extend(true, {}, options.gaxOptions);
 
-    let reqOpts = extend({}, options, {
+    const reqOpts = Object.assign({}, options, {
       parent: this.formattedName_,
     });
     delete reqOpts.gaxOptions;
@@ -1438,16 +1446,15 @@ class Instance extends common.GrpcServiceObject {
     // Copy over pageSize and pageToken values from gaxOptions.
     // However values set on options take precedence.
     if (gaxOpts) {
-      reqOpts = extend(
-        {},
-        {
-          pageSize: (gaxOpts as GetBackupsOptions).pageSize,
-          pageToken: (gaxOpts as GetBackupsOptions).pageToken,
-        },
-        reqOpts,
-      );
-      delete (gaxOpts as GetBackupsOptions).pageSize;
-      delete (gaxOpts as GetBackupsOptions).pageToken;
+      const gax = gaxOpts as GetBackupsOptions;
+      if (gax.pageSize !== undefined) {
+        reqOpts.pageSize ??= gax.pageSize;
+        delete gax.pageSize;
+      }
+      if (gax.pageToken !== undefined) {
+        reqOpts.pageToken ??= gax.pageToken;
+        delete gax.pageToken;
+      }
     }
 
     return this.requestStream({
@@ -1530,8 +1537,7 @@ class Instance extends common.GrpcServiceObject {
   ): void;
   getMetadata(
     optionsOrCallback?:
-      | GetInstanceMetadataOptions
-      | GetInstanceMetadataCallback,
+      GetInstanceMetadataOptions | GetInstanceMetadataCallback,
     cb?: GetInstanceMetadataCallback,
   ): Promise<GetInstanceMetadataResponse> | void {
     const callback =
@@ -1632,7 +1638,7 @@ class Instance extends common.GrpcServiceObject {
       typeof optionsOrCallback === 'function' ? optionsOrCallback : cb!;
 
     const reqOpts = {
-      instance: extend(
+      instance: Object.assign(
         {
           name: this.formattedName_,
         },

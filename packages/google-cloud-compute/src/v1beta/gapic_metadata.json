@@ -169,6 +169,11 @@
                 "calendarMode"
               ]
             },
+            "CalendarModeExtension": {
+              "methods": [
+                "calendarModeExtension"
+              ]
+            },
             "Capacity": {
               "methods": [
                 "capacity"
@@ -187,6 +192,11 @@
             "CalendarMode": {
               "methods": [
                 "calendarMode"
+              ]
+            },
+            "CalendarModeExtension": {
+              "methods": [
+                "calendarModeExtension"
               ]
             },
             "Capacity": {
@@ -722,6 +732,84 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DhcpOptionsConfigs": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DhcpOptionsConfigsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DhcpOptionsConfigsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
               ]
             },
             "List": {
@@ -1837,6 +1925,40 @@
         }
       }
     },
+    "GlobalFrontendSettingsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GlobalFrontendSettingsServiceClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GlobalFrontendSettingsServiceClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
     "GlobalNetworkEndpointGroups": {
       "clients": {
         "grpc": {
@@ -2301,6 +2423,54 @@
         }
       }
     },
+    "Hosts": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "HostsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "getVersion"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "HostsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "getVersion"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ImageFamilyViews": {
       "clients": {
         "grpc": {
@@ -2440,6 +2610,44 @@
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ImageViews": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ImageViewsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ImageViewsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
               ]
             },
             "List": {
@@ -3076,6 +3284,11 @@
                 "getShieldedVmIdentity"
               ]
             },
+            "GetVmExtensionState": {
+              "methods": [
+                "getVmExtensionState"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -3270,6 +3483,13 @@
                 "listReferrers",
                 "listReferrersStream",
                 "listReferrersAsync"
+              ]
+            },
+            "ListVmExtensionStates": {
+              "methods": [
+                "listVmExtensionStates",
+                "listVmExtensionStatesStream",
+                "listVmExtensionStatesAsync"
               ]
             }
           }
@@ -3367,6 +3587,11 @@
                 "getShieldedVmIdentity"
               ]
             },
+            "GetVmExtensionState": {
+              "methods": [
+                "getVmExtensionState"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -3561,6 +3786,13 @@
                 "listReferrers",
                 "listReferrersStream",
                 "listReferrersAsync"
+              ]
+            },
+            "ListVmExtensionStates": {
+              "methods": [
+                "listVmExtensionStates",
+                "listVmExtensionStatesStream",
+                "listVmExtensionStatesAsync"
               ]
             }
           }
@@ -4347,6 +4579,11 @@
                 "setLabels"
               ]
             },
+            "SetName": {
+              "methods": [
+                "setName"
+              ]
+            },
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
@@ -4397,6 +4634,11 @@
             "SetLabels": {
               "methods": [
                 "setLabels"
+              ]
+            },
+            "SetName": {
+              "methods": [
+                "setName"
               ]
             },
             "TestIamPermissions": {
@@ -4704,6 +4946,44 @@
                 "aggregatedList",
                 "aggregatedListStream",
                 "aggregatedListAsync"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ManagedRulesets": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ManagedRulesetsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ManagedRulesetsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
               ]
             },
             "List": {
@@ -5775,6 +6055,152 @@
         }
       }
     },
+    "OrganizationRolloutPlans": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OrganizationRolloutPlansClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OrganizationRolloutPlansClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "OrganizationRollouts": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OrganizationRolloutsClient",
+          "rpcs": {
+            "Advance": {
+              "methods": [
+                "advance"
+              ]
+            },
+            "Cancel": {
+              "methods": [
+                "cancel"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Pause": {
+              "methods": [
+                "pause"
+              ]
+            },
+            "Resume": {
+              "methods": [
+                "resume"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OrganizationRolloutsClient",
+          "rpcs": {
+            "Advance": {
+              "methods": [
+                "advance"
+              ]
+            },
+            "Cancel": {
+              "methods": [
+                "cancel"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Pause": {
+              "methods": [
+                "pause"
+              ]
+            },
+            "Resume": {
+              "methods": [
+                "resume"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "OrganizationSecurityPolicies": {
       "clients": {
         "grpc": {
@@ -5947,6 +6373,40 @@
                 "list",
                 "listStream",
                 "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "OrganizationSnapshotRecycleBinPolicy": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OrganizationSnapshotRecycleBinPolicyClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OrganizationSnapshotRecycleBinPolicyClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
               ]
             }
           }
@@ -6265,6 +6725,30 @@
         }
       }
     },
+    "ProjectViews": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProjectViewsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProjectViewsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PublicAdvertisedPrefixes": {
       "clients": {
         "grpc": {
@@ -6442,6 +6926,94 @@
                 "aggregatedList",
                 "aggregatedListStream",
                 "aggregatedListAsync"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RecoverableSnapshots": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RecoverableSnapshotsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Recover": {
+              "methods": [
+                "recover"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RecoverableSnapshotsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Recover": {
+              "methods": [
+                "recover"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
               ]
             },
             "List": {
@@ -9412,6 +9984,11 @@
                 "get"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -9425,6 +10002,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "TestIamPermissions": {
@@ -9454,6 +10036,11 @@
                 "get"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -9467,6 +10054,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "TestIamPermissions": {
@@ -9865,6 +10457,44 @@
         }
       }
     },
+    "ReliabilityRisks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReliabilityRisksClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReliabilityRisksClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ReservationBlocks": {
       "clients": {
         "grpc": {
@@ -10085,6 +10715,11 @@
                 "get"
               ]
             },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
+              ]
+            },
             "GetVersion": {
               "methods": [
                 "getVersion"
@@ -10110,6 +10745,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
               ]
             },
             "GetVersion": {
@@ -10406,6 +11046,11 @@
         "grpc": {
           "libraryClient": "RolloutsClient",
           "rpcs": {
+            "Advance": {
+              "methods": [
+                "advance"
+              ]
+            },
             "Cancel": {
               "methods": [
                 "cancel"
@@ -10419,6 +11064,16 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "Pause": {
+              "methods": [
+                "pause"
+              ]
+            },
+            "Resume": {
+              "methods": [
+                "resume"
               ]
             },
             "List": {
@@ -10433,6 +11088,11 @@
         "grpc-fallback": {
           "libraryClient": "RolloutsClient",
           "rpcs": {
+            "Advance": {
+              "methods": [
+                "advance"
+              ]
+            },
             "Cancel": {
               "methods": [
                 "cancel"
@@ -10446,6 +11106,16 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "Pause": {
+              "methods": [
+                "pause"
+              ]
+            },
+            "Resume": {
+              "methods": [
+                "resume"
               ]
             },
             "List": {
@@ -11147,6 +11817,40 @@
         }
       }
     },
+    "SnapshotRecycleBinPolicyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SnapshotRecycleBinPolicyServiceClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SnapshotRecycleBinPolicyServiceClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Snapshots": {
       "clients": {
         "grpc": {
@@ -11160,6 +11864,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetEffectiveRecycleBinRule": {
+              "methods": [
+                "getEffectiveRecycleBinRule"
               ]
             },
             "GetIamPolicy": {
@@ -11219,6 +11928,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetEffectiveRecycleBinRule": {
+              "methods": [
+                "getEffectiveRecycleBinRule"
               ]
             },
             "GetIamPolicy": {
@@ -11400,6 +12114,11 @@
                 "get"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -11413,6 +12132,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "TestIamPermissions": {
@@ -11449,6 +12173,11 @@
                 "get"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -11462,6 +12191,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "TestIamPermissions": {

@@ -580,7 +580,7 @@ export class WriteBatch implements firestore.WriteBatch {
       SPAN_NAME_BATCH_COMMIT,
       async () => {
         // Capture the error stack to preserve stack tracing across async calls.
-        const stack = Error().stack!;
+        const callsiteError = Error();
 
         // Commits should also be retried when they fail with status code ABORTED.
         const retryCodes = [StatusCode.ABORTED, ...getRetryCodes('commit')];
@@ -597,7 +597,7 @@ export class WriteBatch implements firestore.WriteBatch {
             );
           })
           .catch(err => {
-            throw wrapError(err, stack);
+            throw wrapError(err, callsiteError.stack!);
           });
       },
       {

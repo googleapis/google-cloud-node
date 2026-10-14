@@ -17,7 +17,6 @@
 
 import * as assert from 'assert';
 import {EventEmitter} from 'events';
-import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {util} from '@google-cloud/common';
@@ -28,12 +27,13 @@ import * as bu from '../src/backup';
 import {GetMetadataResponse} from '../src/backup';
 import {grpc} from 'google-gax';
 import {CLOUD_RESOURCE_HEADER} from '../src/common';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import EncryptionType = google.spanner.admin.database.v1.CreateBackupEncryptionConfig.EncryptionType;
 
 let promisified = false;
 // let callbackified = false;
-const fakePfy = extend({}, pfy, {
+const fakePfy = Object.assign({}, pfy, {
   promisifyAll(klass, options) {
     if (klass.name !== 'Backup') {
       return;
@@ -157,8 +157,8 @@ describe('Backup', () => {
 
     it('should make the correct request', done => {
       const QUERY = {};
-      const ORIGINAL_QUERY = extend({}, QUERY);
-      const expectedReqOpts = extend({}, QUERY, {
+      const ORIGINAL_QUERY = Object.assign({}, QUERY);
+      const expectedReqOpts = Object.assign({}, QUERY, {
         parent: INSTANCE_NAME,
         backupId: BACKUP_NAME,
         backup: {
@@ -351,8 +351,8 @@ describe('Backup', () => {
 
     it('should make the correct request', done => {
       const QUERY = {};
-      const ORIGINAL_QUERY = extend({}, QUERY);
-      const expectedReqOpts = extend({}, QUERY, {
+      const ORIGINAL_QUERY = Object.assign({}, QUERY);
+      const expectedReqOpts = Object.assign({}, QUERY, {
         name: BACKUP_FORMATTED_NAME,
       });
 
@@ -623,8 +623,8 @@ describe('Backup', () => {
 
     it('should make the correct request', done => {
       const QUERY = {};
-      const ORIGINAL_QUERY = extend({}, QUERY);
-      const expectedReqOpts = extend({}, QUERY, {
+      const ORIGINAL_QUERY = Object.assign({}, QUERY);
+      const expectedReqOpts = Object.assign({}, QUERY, {
         backup: {
           name: BACKUP_FORMATTED_NAME,
           expireTime: EXP_NEW_EXPIRE_TIME.toStruct(),
@@ -683,8 +683,8 @@ describe('Backup', () => {
   describe('delete', () => {
     it('should make the correct request', done => {
       const QUERY = {};
-      const ORIGINAL_QUERY = extend({}, QUERY);
-      const expectedReqOpts = extend({}, QUERY, {
+      const ORIGINAL_QUERY = Object.assign({}, QUERY);
+      const expectedReqOpts = Object.assign({}, QUERY, {
         name: BACKUP_FORMATTED_NAME,
       });
 

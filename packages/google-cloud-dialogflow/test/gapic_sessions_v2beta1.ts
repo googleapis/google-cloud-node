@@ -19,13 +19,13 @@
 import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import { SinonStub } from 'sinon';
-import { describe, it } from 'mocha';
+import {SinonStub} from 'sinon';
+import {describe, it} from 'mocha';
 import * as sessionsModule from '../src';
 
-import { PassThrough } from 'stream';
+import {PassThrough} from 'stream';
 
-import { protobuf, LocationProtos } from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
 
 // Dynamically loaded proto JSON is needed to get the type information
 // to fill in default values for request objects
@@ -45,7 +45,7 @@ function getTypeDefaultValue(typeName: string, fields: string[]) {
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, { defaults: true });
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject,
   ) as T;
@@ -93,9 +93,9 @@ function stubAsyncIterationCall<ResponseType>(
             return Promise.reject(error);
           }
           if (counter >= responses!.length) {
-            return Promise.resolve({ done: true, value: undefined });
+            return Promise.resolve({done: true, value: undefined});
           }
-          return Promise.resolve({ done: false, value: responses![counter++] });
+          return Promise.resolve({done: false, value: responses![counter++]});
         },
       };
     },
@@ -213,7 +213,7 @@ describe('v2beta1.SessionsClient', () => {
 
     it('has initialize method and supports deferred initialization', async () => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sessionsStub, undefined);
@@ -221,12 +221,12 @@ describe('v2beta1.SessionsClient', () => {
       assert(client.sessionsStub);
     });
 
-    it('has close method for the initialized client', (done) => {
+    it('has close method for the initialized client', done => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
-      client.initialize().catch((err) => {
+      client.initialize().catch(err => {
         throw err;
       });
       assert(client.sessionsStub);
@@ -235,14 +235,14 @@ describe('v2beta1.SessionsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
 
-    it('has close method for the non-initialized client', (done) => {
+    it('has close method for the non-initialized client', done => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       assert.strictEqual(client.sessionsStub, undefined);
@@ -251,7 +251,7 @@ describe('v2beta1.SessionsClient', () => {
         .then(() => {
           done();
         })
-        .catch((err) => {
+        .catch(err => {
           throw err;
         });
     });
@@ -259,7 +259,7 @@ describe('v2beta1.SessionsClient', () => {
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -271,7 +271,7 @@ describe('v2beta1.SessionsClient', () => {
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.auth.getProjectId = sinon
@@ -294,7 +294,7 @@ describe('v2beta1.SessionsClient', () => {
   describe('detectIntent', () => {
     it('invokes detectIntent without error', async () => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -325,7 +325,7 @@ describe('v2beta1.SessionsClient', () => {
 
     it('invokes detectIntent without error using callback', async () => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -372,7 +372,7 @@ describe('v2beta1.SessionsClient', () => {
 
     it('invokes detectIntent with error', async () => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -403,7 +403,7 @@ describe('v2beta1.SessionsClient', () => {
 
     it('invokes detectIntent with closed client', async () => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -416,7 +416,7 @@ describe('v2beta1.SessionsClient', () => {
       );
       request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
-      client.close().catch((err) => {
+      client.close().catch(err => {
         throw err;
       });
       await assert.rejects(client.detectIntent(request), expectedError);
@@ -426,7 +426,7 @@ describe('v2beta1.SessionsClient', () => {
   describe('streamingDetectIntent', () => {
     it('invokes streamingDetectIntent without error', async () => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -471,7 +471,7 @@ describe('v2beta1.SessionsClient', () => {
 
     it('invokes streamingDetectIntent with error', async () => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -515,7 +515,7 @@ describe('v2beta1.SessionsClient', () => {
   describe('getLocation', () => {
     it('invokes getLocation without error', async () => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -545,7 +545,7 @@ describe('v2beta1.SessionsClient', () => {
     });
     it('invokes getLocation without error using callback', async () => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -589,7 +589,7 @@ describe('v2beta1.SessionsClient', () => {
     });
     it('invokes getLocation with error', async () => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -624,7 +624,7 @@ describe('v2beta1.SessionsClient', () => {
   describe('listLocationsAsync', () => {
     it('uses async iteration with listLocations without error', async () => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -672,7 +672,7 @@ describe('v2beta1.SessionsClient', () => {
     });
     it('uses async iteration with listLocations with error', async () => {
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -712,6 +712,71 @@ describe('v2beta1.SessionsClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('companionAgent', async () => {
+      const fakePath = '/rendered/path/companionAgent';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        companion_agent: 'companionAgentValue',
+      };
+      const client = new sessionsModule.v2beta1.SessionsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.companionAgentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.companionAgentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('companionAgentPath', () => {
+        const result = client.companionAgentPath(
+          'projectValue',
+          'locationValue',
+          'companionAgentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromCompanionAgentName', () => {
+        const result = client.matchProjectFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromCompanionAgentName', () => {
+        const result = client.matchLocationFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCompanionAgentFromCompanionAgentName', () => {
+        const result =
+          client.matchCompanionAgentFromCompanionAgentName(fakePath);
+        assert.strictEqual(result, 'companionAgentValue');
+        assert(
+          (client.pathTemplates.companionAgentPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('encryptionSpec', async () => {
       const fakePath = '/rendered/path/encryptionSpec';
       const expectedParameters = {
@@ -719,7 +784,7 @@ describe('v2beta1.SessionsClient', () => {
         location: 'locationValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -772,7 +837,7 @@ describe('v2beta1.SessionsClient', () => {
         generator: 'generatorValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -837,7 +902,7 @@ describe('v2beta1.SessionsClient', () => {
         evaluation: 'evaluationValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -928,7 +993,7 @@ describe('v2beta1.SessionsClient', () => {
         project: 'projectValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -967,7 +1032,7 @@ describe('v2beta1.SessionsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1030,7 +1095,7 @@ describe('v2beta1.SessionsClient', () => {
         environment: 'environmentValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1095,7 +1160,7 @@ describe('v2beta1.SessionsClient', () => {
         session: 'sessionValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1196,7 +1261,7 @@ describe('v2beta1.SessionsClient', () => {
         context: 'contextValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1322,7 +1387,7 @@ describe('v2beta1.SessionsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1443,7 +1508,7 @@ describe('v2beta1.SessionsClient', () => {
         project: 'projectValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1489,7 +1554,7 @@ describe('v2beta1.SessionsClient', () => {
         intent: 'intentValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1550,7 +1615,7 @@ describe('v2beta1.SessionsClient', () => {
         session: 'sessionValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1612,7 +1677,7 @@ describe('v2beta1.SessionsClient', () => {
         context: 'contextValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1691,7 +1756,7 @@ describe('v2beta1.SessionsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1767,7 +1832,7 @@ describe('v2beta1.SessionsClient', () => {
         version: 'versionValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1828,7 +1893,7 @@ describe('v2beta1.SessionsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1891,7 +1956,7 @@ describe('v2beta1.SessionsClient', () => {
         message: 'messageValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -1970,7 +2035,7 @@ describe('v2beta1.SessionsClient', () => {
         participant: 'participantValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2050,7 +2115,7 @@ describe('v2beta1.SessionsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2115,7 +2180,7 @@ describe('v2beta1.SessionsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2178,7 +2243,7 @@ describe('v2beta1.SessionsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2242,7 +2307,7 @@ describe('v2beta1.SessionsClient', () => {
         document: 'documentValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2320,7 +2385,7 @@ describe('v2beta1.SessionsClient', () => {
         location: 'locationValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2384,7 +2449,7 @@ describe('v2beta1.SessionsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2463,7 +2528,7 @@ describe('v2beta1.SessionsClient', () => {
         environment: 'environmentValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2545,7 +2610,7 @@ describe('v2beta1.SessionsClient', () => {
         session: 'sessionValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2672,7 +2737,7 @@ describe('v2beta1.SessionsClient', () => {
         context: 'contextValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2818,7 +2883,7 @@ describe('v2beta1.SessionsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -2959,7 +3024,7 @@ describe('v2beta1.SessionsClient', () => {
         location: 'locationValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3021,7 +3086,7 @@ describe('v2beta1.SessionsClient', () => {
         intent: 'intentValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3100,7 +3165,7 @@ describe('v2beta1.SessionsClient', () => {
         session: 'sessionValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3179,7 +3244,7 @@ describe('v2beta1.SessionsClient', () => {
         context: 'contextValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3280,7 +3345,7 @@ describe('v2beta1.SessionsClient', () => {
         entity_type: 'entityTypeValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3385,7 +3450,7 @@ describe('v2beta1.SessionsClient', () => {
         version: 'versionValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3463,7 +3528,7 @@ describe('v2beta1.SessionsClient', () => {
         answer_record: 'answerRecordValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3542,7 +3607,7 @@ describe('v2beta1.SessionsClient', () => {
         message: 'messageValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3643,7 +3708,7 @@ describe('v2beta1.SessionsClient', () => {
         participant: 'participantValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3748,7 +3813,7 @@ describe('v2beta1.SessionsClient', () => {
         conversation_profile: 'conversationProfileValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3831,7 +3896,7 @@ describe('v2beta1.SessionsClient', () => {
         conversation: 'conversationValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3910,7 +3975,7 @@ describe('v2beta1.SessionsClient', () => {
         knowledge_base: 'knowledgeBaseValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -3990,7 +4055,7 @@ describe('v2beta1.SessionsClient', () => {
         document: 'documentValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4095,7 +4160,7 @@ describe('v2beta1.SessionsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4173,7 +4238,7 @@ describe('v2beta1.SessionsClient', () => {
         phone_number: 'phoneNumberValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4236,7 +4301,7 @@ describe('v2beta1.SessionsClient', () => {
         siptrunk: 'siptrunkValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();
@@ -4300,7 +4365,7 @@ describe('v2beta1.SessionsClient', () => {
         tool: 'toolValue',
       };
       const client = new sessionsModule.v2beta1.SessionsClient({
-        credentials: { client_email: 'bogus', private_key: 'bogus' },
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       await client.initialize();

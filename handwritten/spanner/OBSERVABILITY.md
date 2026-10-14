@@ -20,17 +20,24 @@ enable OpenTelemetry with appropriate exporters at the startup of your applicati
 #### OpenTelemetry Dependencies
 
 Add the following dependencies in your `package.json` or install them directly.
+
+> **Note:** `@google-cloud/spanner` uses the OpenTelemetry **v2** SDK. The versions
+> below are the v2-compatible releases. If you are upgrading from an older version
+> of this client, see the [OpenTelemetry JS 2.x migration guide](https://github.com/open-telemetry/opentelemetry-js/blob/main/doc/upgrade-to-2.x.md).
+
 ```javascript
 // Required packages for OpenTelemetry SDKs
-"@opentelemetry/sdk-trace-base": "^1.26.0",
-"@opentelemetry/sdk-trace-node": "^1.26.0",
+"@opentelemetry/sdk-trace-base": "^2.11.0",
+"@opentelemetry/sdk-trace-node": "^2.0.0",
+"@opentelemetry/resources": "^2.11.0",
+"@opentelemetry/semantic-conventions": "^1.30.0",
 
 // Package to use Google Cloud Trace exporter
-"@google-cloud/opentelemetry-cloud-trace-exporter": "^2.4.1",
+"@google-cloud/opentelemetry-cloud-trace-exporter": "^3.0.0",
 
 // Packages to enable gRPC instrumentation
-"@opentelemetry/instrumentation": "^0.53.0",
-"@opentelemetry/instrumentation-grpc": "^0.53.0",
+"@opentelemetry/instrumentation": "^0.222.0",
+"@opentelemetry/instrumentation-grpc": "^0.222.0",
 ```
 
 #### OpenTelemetry Configuration
@@ -40,17 +47,25 @@ const {
   NodeTracerProvider,
   TraceIdRatioBasedSampler,
 } = require('@opentelemetry/sdk-trace-node');
-const {
-  BatchSpanProcessor,
-} = require('@opentelemetry/sdk-trace-base');
+const {BatchSpanProcessor} = require('@opentelemetry/sdk-trace-base');
 const {
   TraceExporter,
 } = require('@google-cloud/opentelemetry-cloud-trace-exporter');
+const {resourceFromAttributes} = require('@opentelemetry/resources');
+const {ATTR_SERVICE_NAME} = require('@opentelemetry/semantic-conventions');
 const exporter = new TraceExporter();
+
+// Describe the service that is emitting the traces.
+// Note: in OpenTelemetry v2 the `Resource` class was replaced by the
+// `resourceFromAttributes` factory function.
+const resource = resourceFromAttributes({
+  [ATTR_SERVICE_NAME]: 'my-service-name',
+});
 
 // Create the tracerProvider that the exporter shall be attached to.
 const provider = new NodeTracerProvider({
   resource: resource,
+  sampler: new TraceIdRatioBasedSampler(0.1),   // sample 10%
   spanProcessors: [new BatchSpanProcessor(exporter)]
 });
 

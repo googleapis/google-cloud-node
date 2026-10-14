@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {isDeepStrictEqual} from 'util';
-import * as protos from '../../protos/protos';
+import {protos} from '@google-cloud/bigquery-storage-api';
 import {PendingWrite} from './pending_write';
 import {StreamConnection} from './stream_connection';
 const version = require('../../../package.json').version;

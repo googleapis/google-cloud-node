@@ -138,5 +138,26 @@ describe('hapiRequestInformationExtractor behaviour', () => {
         EXPECTED,
       );
     });
+    it('Should handle array headers correctly', () => {
+      const REQUEST = {
+        ...FULL_REQ_DERIVATION_VALUE,
+        headers: {
+          'x-forwarded-for': ['0.0.0.1', '0.0.0.2'],
+          'user-agent': ['Mozilla/5.0', 'Chrome/90'],
+          referrer: ['www.ANOTHER-TEST.com'],
+        },
+      };
+      const EXPECTED = {
+        ...FULL_REQ_EXPECTED_VALUE,
+        userAgent: 'Mozilla/5.0',
+        referrer: 'www.ANOTHER-TEST.com',
+        remoteAddress: '0.0.0.1',
+      };
+      
+      deepStrictEqual(
+        hapiRequestInformationExtractor(REQUEST as {} as hapi.Request),
+        EXPECTED,
+      );
+    });
   });
 });

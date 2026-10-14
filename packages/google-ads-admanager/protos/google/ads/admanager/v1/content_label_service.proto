@@ -37,7 +37,7 @@ service ContentLabelService {
       "https://www.googleapis.com/auth/admanager,"
       "https://www.googleapis.com/auth/admanager.readonly";
 
-  // API to retrieve a `ContentLabel` object.
+  // Retrieves a `ContentLabel` object.
   rpc GetContentLabel(GetContentLabelRequest) returns (ContentLabel) {
     option (google.api.http) = {
       get: "/v1/{name=networks/*/contentLabels/*}"
@@ -45,7 +45,7 @@ service ContentLabelService {
     option (google.api.method_signature) = "name";
   }
 
-  // API to retrieve a list of `ContentLabel` objects.
+  // Lists `ContentLabel` objects.
   rpc ListContentLabels(ListContentLabelsRequest)
       returns (ListContentLabelsResponse) {
     option (google.api.http) = {
@@ -95,11 +95,10 @@ message ListContentLabelsRequest {
   //  See syntax details at
   //  https://developers.google.com/ad-manager/api/beta/filters
   //
-  // <b>Filterable fields:</b>
-  // <ul style="list-style-type:none">
-  //   <li><code>displayName</code></li>
-  //   <li><code>name</code></li>
-  // </ul>
+  // **Filterable fields:**
+  //
+  // * `displayName`
+  // * `name`
   string filter = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. Expression to specify sorting order.

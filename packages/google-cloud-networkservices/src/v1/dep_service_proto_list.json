@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/networkservices/v1/agent_gateway.proto",
   "../../protos/google/cloud/networkservices/v1/common.proto",
   "../../protos/google/cloud/networkservices/v1/dep.proto",
   "../../protos/google/cloud/networkservices/v1/endpoint_policy.proto",

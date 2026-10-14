@@ -157,7 +157,7 @@ describe('Logging', () => {
       './log-sync': {LogSync: FakeLog},
       './entry': {Entry: FakeEntry},
       './sink': {Sink: FakeSink},
-      './v2': fakeV2,
+      '@google-cloud/logging-api': fakeV2,
     }).Logging;
   });
 

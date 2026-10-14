@@ -18,7 +18,14 @@ set -e
 
 export REGION_ID='uc'
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
-export NODE_OPTIONS=--max_old_space_size=6144
+# Cap the V8 heap at 2 GB on Windows (instead of 6 GB) so parallel Mocha worker
+# processes do not exhaust the 14 GB Windows runner VM pagefile and crash with OOM.
+if [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* || "$OS" == "Windows_NT" ]]; then
+    MAX_OLD_SPACE_SIZE=2048
+else
+    MAX_OLD_SPACE_SIZE=6144
+fi
+export NODE_OPTIONS="${NODE_OPTIONS} --max_old_space_size=${MAX_OLD_SPACE_SIZE} --no-deprecation"
 
 if [ -z "${BUILD_TYPE}" ]; then
     echo "missing BUILD_TYPE env var"
@@ -29,6 +36,8 @@ if [ -z "${TEST_TYPE}" ]; then
     TEST_TYPE="units"
 fi
 
+TEST_CMD=${TEST_CMD:-pnpm}
+
 d=$(pwd)
 PROJECT=$(basename ${d})
 
@@ -37,12 +46,16 @@ if [ ${BUILD_TYPE} != "presubmit" ]; then
     export MOCHA_REPORTER_OUTPUT=${PROJECT}_sponge_log.xml
     export MOCHA_REPORTER_SUITENAME=${PROJECT}
     export MOCHA_REPORTER=xunit
+else
+    export MOCHA_REPORTER=dot
 fi
 
-# Install dependencies
-echo "pnpm install --ignore-scripts --engine-strict --prod; pnpm install"
-pnpm install --ignore-scripts --engine-strict --prod; pnpm install
-
+# Install workspace dependencies only if not already installed at the monorepo root.
+# In CI, .github/actions/pnpm-lockfile-check already installs the workspace once per job;
+# skipping redundant per-package installs avoids re-linking all 280+ workspace packages on every test.
+if [ ! -d "${PROJECT_ROOT}/node_modules/.pnpm" ]; then
+    pnpm --dir "${PROJECT_ROOT}" install --frozen-lockfile --ignore-scripts
+fi
 
 retval=0
 
@@ -69,20 +82,23 @@ fi
 set +e
 case ${TEST_TYPE} in
 lint)
-    pnpm prelint
-    pnpm lint
+    ${TEST_CMD} prelint
+    ${TEST_CMD} lint
     retval=$?
     ;;
 samples)
-    pnpm samples-test
+    ${TEST_CMD} samples-test
     retval=$?
     ;;
 system)
-    pnpm system-test
+    ${TEST_CMD} system-test
     retval=$?
     ;;
 units)
-    pnpm test
+    if [ ! -d "build" ] && grep -q '"compile":' package.json; then
+        ${TEST_CMD} compile || exit $?
+    fi
+    ${TEST_CMD} test
     retval=$?
     ;;
 *)

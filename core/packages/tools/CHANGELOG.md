@@ -1,6 +1,50 @@
 # Changelog
 
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v2.1.0...gapic-tools-v2.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v2.0.1...gapic-tools-v2.1.0) (2026-09-15)
+
+
+### Features
+
+* PNPM workspace ([#8973](https://github.com/googleapis/google-cloud-node/issues/8973)) ([1ea27c9](https://github.com/googleapis/google-cloud-node/commit/1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f))
+
+## [2.0.1](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v2.0.0...gapic-tools-v2.0.1) (2026-08-10)
+
+
+### Bug Fixes
+
+* Upgrade all node core library dependencies to their latest node 22 version ([#9084](https://github.com/googleapis/google-cloud-node/issues/9084)) ([af8074c](https://github.com/googleapis/google-cloud-node/commit/af8074c0281f4f8dc40570f580f4cdebf1d72cde))
+
+## [2.0.0](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v1.1.0...gapic-tools-v2.0.0) (2026-07-29)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update gapic-tools to minimum Node version of 22. ([#9004](https://github.com/googleapis/google-cloud-node/issues/9004))
+
+### Features
+
+* Update gapic-tools to minimum Node version of 22. ([#9004](https://github.com/googleapis/google-cloud-node/issues/9004)) ([858ecbd](https://github.com/googleapis/google-cloud-node/commit/858ecbd6ef2516c078e4d719fc273126f0c32914)), refs [#8985](https://github.com/googleapis/google-cloud-node/issues/8985)
+
+## [1.1.0](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v1.0.6...gapic-tools-v1.1.0) (2026-07-16)
+
+
+### Features
+
+* **tools:** Add --no-comments support to compileProtos to reduce proto file size ([#8890](https://github.com/googleapis/google-cloud-node/issues/8890)) ([685b428](https://github.com/googleapis/google-cloud-node/commit/685b4280ea28a961d6d051fb38d68bed1b73f222))
+
+
+### Bug Fixes
+
+* Correct repository URLs in core package.json files ([#8722](https://github.com/googleapis/google-cloud-node/issues/8722)) ([368f18e](https://github.com/googleapis/google-cloud-node/commit/368f18ecc361310e7bfb323ba0e7836186ea08d1))
+
 ## [1.0.6](https://github.com/googleapis/google-cloud-node/compare/gapic-tools-v1.0.5...gapic-tools-v1.0.6) (2026-05-11)
 
 

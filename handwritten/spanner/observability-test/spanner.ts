@@ -16,7 +16,8 @@
 
 import * as assert from 'assert';
 import {grpc} from 'google-gax';
-import {google} from '../protos/protos';
+import {protos} from '@google-cloud/spanner-api';
+import google = protos.google;
 import {Database, Instance, Spanner} from '../src';
 import {MutationSet} from '../src/transaction';
 import protobuf = google.spanner.v1;
@@ -46,6 +47,7 @@ const {
   cacheSessionEvents,
 } = require('./helper');
 const {
+  AsyncLocalStorageContextManager,
   AsyncHooksContextManager,
 } = require('@opentelemetry/context-async-hooks');
 
@@ -145,12 +147,10 @@ async function setup(
 
 describe('EndToEnd', async () => {
   const sandbox = sinon.createSandbox();
-  const contextManager = new AsyncHooksContextManager();
+  const contextManager = new (
+    AsyncLocalStorageContextManager || AsyncHooksContextManager
+  )();
   setGlobalContextManager(contextManager);
-  afterEach(() => {
-    disableContextAndManager(contextManager);
-  });
-
   const traceExporter = new InMemorySpanExporter();
   const sampler = new AlwaysOnSampler();
   const tracerProvider = new NodeTracerProvider({
@@ -173,9 +173,10 @@ describe('EndToEnd', async () => {
   const instance = spanner.instance('instance');
 
   after(async () => {
-    spanner.close();
+    await spanner.close();
     await server.tryShutdown(() => {});
     sandbox.restore();
+    disableContextAndManager(contextManager);
   });
 
   afterEach(async () => {
@@ -226,6 +227,7 @@ describe('EndToEnd', async () => {
             'Begin Transaction',
             'Transaction Creation Done',
             ...cacheSessionEvents,
+            'Using Session',
             'Starting stream',
           ];
           await verifySpansAndEvents(
@@ -318,6 +320,7 @@ describe('EndToEnd', async () => {
           'Starting Commit',
           'Commit Done',
           ...cacheSessionEvents,
+          'Using Session',
         ];
 
         await verifySpansAndEvents(
@@ -415,6 +418,44 @@ describe('EndToEnd', async () => {
             expectedEventNames,
           );
         });
+
+        it('runPartitionedUpdate with string query', async () => {
+          await database.runPartitionedUpdate(updateSql);
+
+          const expectedSpanNames = [
+            'CloudSpanner.Snapshot.begin',
+            'CloudSpanner.Snapshot.runStream',
+            'CloudSpanner.Snapshot.run',
+            'CloudSpanner.Dml.runUpdate',
+            'CloudSpanner.PartitionedDml.runUpdate',
+            'CloudSpanner.Database.runPartitionedUpdate',
+          ];
+          const expectedEventNames = [
+            'Begin Transaction',
+            'Transaction Creation Done',
+            'Starting stream',
+            'Acquiring session',
+            'Cache hit: has usable session',
+            'Acquired session',
+          ];
+          verifySpansAndEvents(
+            traceExporter,
+            expectedSpanNames,
+            expectedEventNames,
+          );
+
+          const finishedSpans = traceExporter.getFinishedSpans();
+          for (const span of finishedSpans) {
+            const hasNumericAttributeKeys = Object.keys(span.attributes).some(
+              key => /^\d+$/.test(key),
+            );
+            assert.strictEqual(
+              hasNumericAttributeKeys,
+              false,
+              `Span ${span.name} should not contain numeric attributes from string spreading`,
+            );
+          }
+        });
       });
     });
   });
@@ -427,7 +468,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
     sandbox = sinon.createSandbox();
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     sandbox.restore();
   });
 
@@ -453,7 +494,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
       traceExporter.reset();
       await tracerProvider.shutdown();
       spannerMock.resetRequests();
-      spanner.close();
+      await spanner.close();
       server.tryShutdown(() => {});
       sandbox.restore();
     });
@@ -514,7 +555,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
       traceExporter.reset();
       await tracerProvider.shutdown();
       spannerMock.resetRequests();
-      spanner.close();
+      await spanner.close();
       server.tryShutdown(() => {});
     });
 
@@ -532,7 +573,7 @@ describe('ObservabilityOptions injection and propagation', async () => {
       traceExporter.reset();
     });
 
-    afterEach(() => {
+    afterEach(async () => {
       spannerMock.resetRequests();
     });
 
@@ -842,13 +883,35 @@ describe('ObservabilityOptions injection and propagation', async () => {
         expectedEventNames,
         `Unexpected events:\n\tGot:  ${actualEventNames}\n\tWant: ${expectedEventNames}`,
       );
+
+      for (const span of spansFromInjected) {
+        if (
+          span.name === 'CloudSpanner.Database.run' ||
+          span.name === 'CloudSpanner.Database.runStream' ||
+          span.name === 'CloudSpanner.Snapshot.runStream'
+        ) {
+          assert.strictEqual(
+            span.attributes['db.statement'],
+            'SELECT 1',
+            `Span ${span.name} should have db.statement set to 'SELECT 1'`,
+          );
+          const hasNumericAttributeKeys = Object.keys(span.attributes).some(
+            key => /^\d+$/.test(key),
+          );
+          assert.strictEqual(
+            hasNumericAttributeKeys,
+            false,
+            `Span ${span.name} should not contain numeric attributes from string spreading`,
+          );
+        }
+      }
     } catch (err) {
       assert.ifError(err);
     } finally {
       injectedTraceExporter.reset();
       await injectedTracerProvider.shutdown();
       spannerMock.resetRequests();
-      spanner.close();
+      await spanner.close();
       server.tryShutdown(() => {});
     }
   });
@@ -886,7 +949,7 @@ describe('E2E traces with async/await', async () => {
     traceExporter.reset();
     provider.shutdown();
     spannerMock.resetRequests();
-    spanner.close();
+    await spanner.close();
     server.tryShutdown(() => {});
     sandbox.restore();
   });
@@ -1105,7 +1168,7 @@ SELECT 1p
     traceExporter.reset();
     provider.shutdown();
     spannerMock.resetRequests();
-    spanner.close();
+    await spanner.close();
     server.tryShutdown(() => {});
     sandbox.restore();
   });
@@ -1113,9 +1176,6 @@ SELECT 1p
   function assertRunBadSyntaxExpectations() {
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
-    spans.sort((spanA, spanB) => {
-      return spanA.startTime < spanB.startTime;
-    });
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
@@ -1263,9 +1323,6 @@ SELECT 1p
   function assertDatabaseRunPlusAwaitTransactionForAlreadyExistentData() {
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
-    spans.sort((spanA, spanB) => {
-      return spanA.startTime < spanB.startTime;
-    });
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
@@ -1513,8 +1570,8 @@ describe('Traces for ExecuteStream broken stream retries', () => {
     instance = spanner.instance('instance');
   });
 
-  after(() => {
-    spanner.close();
+  after(async () => {
+    await spanner.close();
     server.tryShutdown(() => {});
     sandbox.restore();
   });
@@ -1738,9 +1795,6 @@ describe('Traces for ExecuteStream broken stream retries', () => {
               .then(() => {
                 traceExporter.forceFlush();
                 const spans = traceExporter.getFinishedSpans();
-                spans.sort((spanA, spanB) => {
-                  return spanA.startTime < spanB.startTime;
-                });
 
                 const actualSpanNames: string[] = [];
                 const actualEventNames: string[] = [];
@@ -1777,6 +1831,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
                 );
 
                 done();
+                return null;
               })
               .catch(err => done(err));
           });
@@ -1804,9 +1859,6 @@ describe('Traces for ExecuteStream broken stream retries', () => {
 
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
-    spans.sort((spanA, spanB) => {
-      return spanA.startTime < spanB.startTime;
-    });
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
@@ -1937,9 +1989,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
         assert.strictEqual(attempts, 1);
         tx!
           .commit()
-          .then(() => {
-            database.close().catch(assert.ifError);
-          })
+          .then(() => database.close())
           .catch(assert.ifError);
       });
     });
@@ -1973,9 +2023,25 @@ describe('End to end tracing headers', () => {
   let spannerMock: mock.MockSpanner;
   let observabilityOptions: typeof ObservabilityOptions;
 
+  let provider: InstanceType<typeof NodeTracerProvider>;
+
+  before(() => {
+    const traceExporter = new InMemorySpanExporter();
+    provider = new NodeTracerProvider({
+      sampler: new AlwaysOnSampler(),
+      exporter: traceExporter,
+      spanProcessors: [new SimpleSpanProcessor(traceExporter)],
+    });
+  });
+
+  after(async () => {
+    await provider.shutdown();
+  });
+
   beforeEach(async () => {
     sandbox = sinon.createSandbox();
     observabilityOptions = {
+      tracerProvider: provider,
       enableEndToEndTracing: true,
     };
 
@@ -1987,7 +2053,7 @@ describe('End to end tracing headers', () => {
 
   afterEach(async () => {
     spannerMock.resetRequests();
-    spanner.close();
+    await spanner.close();
     server.tryShutdown(() => {});
     sandbox.restore();
   });

@@ -168,6 +168,270 @@
                               "(google.api.method_signature)": "organization"
                             }
                           ]
+                        },
+                        "GetUserGroup": {
+                          "requestType": "GetUserGroupRequest",
+                          "responseType": "UserGroup",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=organizations/*/userGroups/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=organizations/*/userGroups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListUserGroups": {
+                          "requestType": "ListUserGroupsRequest",
+                          "responseType": "ListUserGroupsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=organizations/*}/userGroups",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=organizations/*}/userGroups"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateUserGroup": {
+                          "requestType": "CreateUserGroupRequest",
+                          "responseType": "UserGroup",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=organizations/*}/userGroups",
+                            "(google.api.http).body": "user_group",
+                            "(google.api.method_signature)": "parent,user_group"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=organizations/*}/userGroups",
+                                "body": "user_group"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,user_group"
+                            }
+                          ]
+                        },
+                        "UpdateUserGroup": {
+                          "requestType": "UpdateUserGroupRequest",
+                          "responseType": "UserGroup",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{user_group.name=organizations/*/userGroups/*}",
+                            "(google.api.http).body": "user_group",
+                            "(google.api.method_signature)": "user_group,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{user_group.name=organizations/*/userGroups/*}",
+                                "body": "user_group"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "user_group,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteUserGroup": {
+                          "requestType": "DeleteUserGroupRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=organizations/*/userGroups/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=organizations/*/userGroups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetUserGroupMember": {
+                          "requestType": "GetUserGroupMemberRequest",
+                          "responseType": "UserGroupMember",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=organizations/*/userGroups/*/members/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=organizations/*/userGroups/*/members/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListUserGroupMembers": {
+                          "requestType": "ListUserGroupMembersRequest",
+                          "responseType": "ListUserGroupMembersResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=organizations/*/userGroups/*}/members",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=organizations/*/userGroups/*}/members"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateUserGroupMember": {
+                          "requestType": "CreateUserGroupMemberRequest",
+                          "responseType": "UserGroupMember",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=organizations/*/userGroups/*}/members",
+                            "(google.api.http).body": "user_group_member",
+                            "(google.api.method_signature)": "parent,user_group_member"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=organizations/*/userGroups/*}/members",
+                                "body": "user_group_member"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,user_group_member"
+                            }
+                          ]
+                        },
+                        "UpdateUserGroupMember": {
+                          "requestType": "UpdateUserGroupMemberRequest",
+                          "responseType": "UserGroupMember",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{user_group_member.name=organizations/*/userGroups/*/members/*}",
+                            "(google.api.http).body": "user_group_member",
+                            "(google.api.method_signature)": "user_group_member,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{user_group_member.name=organizations/*/userGroups/*/members/*}",
+                                "body": "user_group_member"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "user_group_member,update_mask"
+                            }
+                          ]
+                        },
+                        "DeleteUserGroupMember": {
+                          "requestType": "DeleteUserGroupMemberRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=organizations/*/userGroups/*/members/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=organizations/*/userGroups/*/members/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetAdminAccessBinding": {
+                          "requestType": "GetAdminAccessBindingRequest",
+                          "responseType": "AdminAccessBinding",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=organizations/*/adminAccessBindings/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=organizations/*/adminAccessBindings/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListAdminAccessBindings": {
+                          "requestType": "ListAdminAccessBindingsRequest",
+                          "responseType": "ListAdminAccessBindingsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=organizations/*}/adminAccessBindings",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=organizations/*}/adminAccessBindings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateAdminAccessBinding": {
+                          "requestType": "CreateAdminAccessBindingRequest",
+                          "responseType": "AdminAccessBinding",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=organizations/*}/adminAccessBindings",
+                            "(google.api.http).body": "admin_access_binding",
+                            "(google.api.method_signature)": "parent,admin_access_binding"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=organizations/*}/adminAccessBindings",
+                                "body": "admin_access_binding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,admin_access_binding"
+                            }
+                          ]
+                        },
+                        "UpdateAdminAccessBinding": {
+                          "requestType": "UpdateAdminAccessBindingRequest",
+                          "responseType": "AdminAccessBinding",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{admin_access_binding.name=organizations/*/adminAccessBindings/*}",
+                            "(google.api.http).body": "admin_access_binding",
+                            "(google.api.method_signature)": "admin_access_binding,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{admin_access_binding.name=organizations/*/adminAccessBindings/*}",
+                                "body": "admin_access_binding"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "admin_access_binding,update_mask"
+                            }
+                          ]
                         }
                       }
                     },
@@ -444,6 +708,294 @@
                         }
                       }
                     },
+                    "GetUserGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "marketingplatformadmin.googleapis.com/UserGroup"
+                          }
+                        }
+                      }
+                    },
+                    "ListUserGroupsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "marketingplatformadmin.googleapis.com/UserGroup"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListUserGroupsResponse": {
+                      "fields": {
+                        "userGroups": {
+                          "rule": "repeated",
+                          "type": "UserGroup",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateUserGroupRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "marketingplatformadmin.googleapis.com/UserGroup"
+                          }
+                        },
+                        "userGroup": {
+                          "type": "UserGroup",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateUserGroupRequest": {
+                      "fields": {
+                        "userGroup": {
+                          "type": "UserGroup",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteUserGroupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "marketingplatformadmin.googleapis.com/UserGroup"
+                          }
+                        }
+                      }
+                    },
+                    "GetUserGroupMemberRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "marketingplatformadmin.googleapis.com/UserGroupMember"
+                          }
+                        }
+                      }
+                    },
+                    "ListUserGroupMembersRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "marketingplatformadmin.googleapis.com/UserGroupMember"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListUserGroupMembersResponse": {
+                      "fields": {
+                        "userGroupMembers": {
+                          "rule": "repeated",
+                          "type": "UserGroupMember",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateUserGroupMemberRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "marketingplatformadmin.googleapis.com/UserGroupMember"
+                          }
+                        },
+                        "userGroupMember": {
+                          "type": "UserGroupMember",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateUserGroupMemberRequest": {
+                      "fields": {
+                        "userGroupMember": {
+                          "type": "UserGroupMember",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteUserGroupMemberRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "marketingplatformadmin.googleapis.com/UserGroupMember"
+                          }
+                        }
+                      }
+                    },
+                    "GetAdminAccessBindingRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "marketingplatformadmin.googleapis.com/AdminAccessBinding"
+                          }
+                        }
+                      }
+                    },
+                    "ListAdminAccessBindingsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "marketingplatformadmin.googleapis.com/AdminAccessBinding"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListAdminAccessBindingsResponse": {
+                      "fields": {
+                        "adminAccessBindings": {
+                          "rule": "repeated",
+                          "type": "AdminAccessBinding",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateAdminAccessBindingRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "marketingplatformadmin.googleapis.com/AdminAccessBinding"
+                          }
+                        },
+                        "adminAccessBinding": {
+                          "type": "AdminAccessBinding",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateAdminAccessBindingRequest": {
+                      "fields": {
+                        "adminAccessBinding": {
+                          "type": "AdminAccessBinding",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "LinkVerificationState": {
                       "values": {
                         "LINK_VERIFICATION_STATE_UNSPECIFIED": 0,
@@ -464,6 +1016,14 @@
                         "ANALYTICS_PROPERTY_TYPE_ORDINARY": 1,
                         "ANALYTICS_PROPERTY_TYPE_SUBPROPERTY": 2,
                         "ANALYTICS_PROPERTY_TYPE_ROLLUP": 3
+                      }
+                    },
+                    "OrganizationRole": {
+                      "values": {
+                        "ORGANIZATION_ROLE_UNSPECIFIED": 0,
+                        "ORG_ADMIN_ROLE": 1,
+                        "USER_ADMIN_ROLE": 2,
+                        "BILLING_ADMIN_ROLE": 3
                       }
                     },
                     "Organization": {
@@ -522,6 +1082,127 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "UserGroup": {
+                      "options": {
+                        "(google.api.resource).type": "marketingplatformadmin.googleapis.com/UserGroup",
+                        "(google.api.resource).pattern": "organizations/{organization}/userGroups/{user_group}",
+                        "(google.api.resource).plural": "userGroups",
+                        "(google.api.resource).singular": "userGroup"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UserGroupMember": {
+                      "options": {
+                        "(google.api.resource).type": "marketingplatformadmin.googleapis.com/UserGroupMember",
+                        "(google.api.resource).pattern": "organizations/{organization}/userGroups/{user_group}/members/{member}",
+                        "(google.api.resource).plural": "userGroupMembers",
+                        "(google.api.resource).singular": "userGroupMember"
+                      },
+                      "oneofs": {
+                        "member": {
+                          "oneof": [
+                            "userEmail",
+                            "userGroup"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "userEmail": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "userGroup": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "membershipRole": {
+                          "type": "MembershipRole",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MembershipRole": {
+                          "values": {
+                            "MEMBERSHIP_ROLE_UNSPECIFIED": 0,
+                            "MEMBERSHIP_ROLE_OWNER": 1,
+                            "MEMBERSHIP_ROLE_MEMBER": 2
+                          }
+                        }
+                      }
+                    },
+                    "AdminAccessBinding": {
+                      "options": {
+                        "(google.api.resource).type": "marketingplatformadmin.googleapis.com/AdminAccessBinding",
+                        "(google.api.resource).pattern": "organizations/{organization}/adminAccessBindings/{admin_access_binding}",
+                        "(google.api.resource).plural": "adminAccessBindings",
+                        "(google.api.resource).singular": "adminAccessBinding"
+                      },
+                      "oneofs": {
+                        "accessTarget": {
+                          "oneof": [
+                            "userEmail",
+                            "userGroup"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "userEmail": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "userGroup": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "organizationRoles": {
+                          "rule": "repeated",
+                          "type": "OrganizationRole",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -798,6 +1479,10 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
+                },
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 2
                 }
               }
             },
@@ -907,6 +1592,10 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 3
+                },
+                "batching": {
+                  "type": "BatchingConfigProto",
+                  "id": 4
                 }
               },
               "nested": {
@@ -961,6 +1650,79 @@
                 "generateOmittedAsInternal": {
                   "type": "bool",
                   "id": 2
+                }
+              }
+            },
+            "BatchingConfigProto": {
+              "fields": {
+                "thresholds": {
+                  "type": "BatchingSettingsProto",
+                  "id": 1
+                },
+                "batchDescriptor": {
+                  "type": "BatchingDescriptorProto",
+                  "id": 2
+                }
+              }
+            },
+            "BatchingSettingsProto": {
+              "fields": {
+                "elementCountThreshold": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "requestByteThreshold": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "delayThreshold": {
+                  "type": "google.protobuf.Duration",
+                  "id": 3
+                },
+                "elementCountLimit": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "requestByteLimit": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "flowControlElementLimit": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "flowControlByteLimit": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "flowControlLimitExceededBehavior": {
+                  "type": "FlowControlLimitExceededBehaviorProto",
+                  "id": 8
+                }
+              }
+            },
+            "FlowControlLimitExceededBehaviorProto": {
+              "values": {
+                "UNSET_BEHAVIOR": 0,
+                "THROW_EXCEPTION": 1,
+                "BLOCK": 2,
+                "IGNORE": 3
+              }
+            },
+            "BatchingDescriptorProto": {
+              "fields": {
+                "batchedField": {
+                  "type": "string",
+                  "id": 1
+                },
+                "discriminatorFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "subresponseField": {
+                  "type": "string",
+                  "id": 3
                 }
               }
             },
@@ -1113,6 +1875,8 @@
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
                 "EDITION_2024": 1001,
+                "EDITION_2026": 1002,
+                "EDITION_UNSTABLE": 9999,
                 "EDITION_1_TEST_ONLY": 1,
                 "EDITION_2_TEST_ONLY": 2,
                 "EDITION_99997_TEST_ONLY": 99997,
@@ -1307,6 +2071,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -1582,7 +2350,10 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false
+                    "default": false,
+                    "feature_support.edition_introduced": "EDITION_PROTO2",
+                    "feature_support.edition_removed": "EDITION_2024",
+                    "feature_support.removal_error": "This behavior is enabled by default in editions 2024 and above. To disable it, you can set `features.(pb.java).nest_in_file_class = YES` on individual messages, enums, or services."
                   }
                 },
                 "javaGenerateEqualsAndHash": {
@@ -1642,7 +2413,9 @@
                   "type": "bool",
                   "id": 31,
                   "options": {
-                    "default": true
+                    "default": true,
+                    "feature_support.edition_removed": "EDITION_2026",
+                    "feature_support.removal_error": "cc_enable_arenas is enabled by default in every edition and overrides are ignored.This option is removed in editions 2026 and above."
                   }
                 },
                 "objcClassPrefix": {
@@ -1684,6 +2457,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -1756,6 +2533,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -1871,6 +2652,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -1950,6 +2735,10 @@
                     "editionRemoved": {
                       "type": "Edition",
                       "id": 4
+                    },
+                    "removalError": {
+                      "type": "string",
+                      "id": 5
                     }
                   }
                 }
@@ -1969,6 +2758,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -2007,6 +2800,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -2052,6 +2849,10 @@
               },
               "extensions": [
                 [
+                  990,
+                  998
+                ],
+                [
                   1000,
                   536870911
                 ]
@@ -2078,6 +2879,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -2112,6 +2917,10 @@
                 }
               },
               "extensions": [
+                [
+                  990,
+                  998
+                ],
                 [
                   1000,
                   536870911
@@ -2253,8 +3062,8 @@
                     "retention": "RETENTION_SOURCE",
                     "targets": "TARGET_TYPE_METHOD",
                     "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "STYLE2026"
                   }
                 },
                 "defaultSymbolVisibility": {
@@ -2266,6 +3075,17 @@
                     "feature_support.edition_introduced": "EDITION_2024",
                     "edition_defaults.edition": "EDITION_2024",
                     "edition_defaults.value": "EXPORT_TOP_LEVEL"
+                  }
+                },
+                "enforceProtoLimits": {
+                  "type": "ProtoLimitsFeature.EnforceProtoLimits",
+                  "id": 9,
+                  "options": {
+                    "retention": "RETENTION_SOURCE",
+                    "targets": "TARGET_TYPE_ONEOF",
+                    "feature_support.edition_introduced": "EDITION_2026",
+                    "edition_defaults.edition": "EDITION_2026",
+                    "edition_defaults.value": "PROTO_LIMITS2026"
                   }
                 }
               },
@@ -2343,7 +3163,8 @@
                   "values": {
                     "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
                     "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
+                    "STYLE_LEGACY": 2,
+                    "STYLE2026": 3
                   }
                 },
                 "VisibilityFeature": {
@@ -2362,6 +3183,18 @@
                         "EXPORT_TOP_LEVEL": 2,
                         "LOCAL_ALL": 3,
                         "STRICT": 4
+                      }
+                    }
+                  }
+                },
+                "ProtoLimitsFeature": {
+                  "fields": {},
+                  "nested": {
+                    "EnforceProtoLimits": {
+                      "values": {
+                        "PROTO_LIMITS_UNKNOWN": 0,
+                        "LEGACY_NO_EXPLICIT_LIMITS": 1,
+                        "PROTO_LIMITS2026": 2
                       }
                     }
                   }
@@ -2537,12 +3370,20 @@
             },
             "Empty": {
               "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
             }
           }
         },
         "type": {
           "options": {
-            "cc_enable_arenas": true,
             "go_package": "google.golang.org/genproto/googleapis/type/money;money",
             "java_multiple_files": true,
             "java_outer_classname": "MoneyProto",

@@ -30,10 +30,10 @@ import type {
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
-import { Transform } from 'stream';
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
-import { loggingUtils as logging, decodeAnyProtosInArray } from 'google-gax';
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
 
 /**
  * Client JSON configuration object, loaded from
@@ -55,7 +55,7 @@ export class DeveloperConnectClient {
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
-  private _defaults: { [method: string]: gax.CallSettings };
+  private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
   private _log = logging.log('developerconnect');
@@ -68,11 +68,11 @@ export class DeveloperConnectClient {
     batching: {},
   };
   warn: (code: string, message: string, warnType?: string) => void;
-  innerApiCalls: { [name: string]: Function };
+  innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
-  pathTemplates: { [name: string]: gax.PathTemplate };
+  pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
-  developerConnectStub?: Promise<{ [name: string]: Function }>;
+  developerConnectStub?: Promise<{[name: string]: Function}>;
 
   /**
    * Construct an instance of DeveloperConnectClient.
@@ -148,7 +148,7 @@ export class DeveloperConnectClient {
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({ servicePath, port, clientConfig, fallback }, opts);
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
     opts.numericEnums = true;
@@ -470,7 +470,7 @@ export class DeveloperConnectClient {
       'google.cloud.developerconnect.v1.DeveloperConnect',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      { 'x-goog-api-client': clientHeader.join(' ') },
+      {'x-goog-api-client': clientHeader.join(' ')},
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -511,7 +511,7 @@ export class DeveloperConnectClient {
             .DeveloperConnect,
       this._opts,
       this._providedCustomServicePath,
-    ) as Promise<{ [method: string]: Function }>;
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
@@ -545,7 +545,7 @@ export class DeveloperConnectClient {
     ];
     for (const methodName of developerConnectStubMethods) {
       const callPromise = this.developerConnectStub.then(
-        (stub) =>
+        stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
               return Promise.reject('The client has already been closed.');
@@ -746,7 +746,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getConnection request %j', request);
@@ -889,7 +889,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getGitRepositoryLink request %j', request);
@@ -1033,7 +1033,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         git_repository_link: request.gitRepositoryLink ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchReadWriteToken request %j', request);
@@ -1177,7 +1177,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         git_repository_link: request.gitRepositoryLink ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchReadToken request %j', request);
@@ -1324,7 +1324,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         connection: request.connection ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchGitHubInstallations request %j', request);
@@ -1467,7 +1467,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('getAccountConnector request %j', request);
@@ -1611,7 +1611,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         account_connector: request.accountConnector ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchAccessToken request %j', request);
@@ -1748,7 +1748,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchSelf request %j', request);
@@ -1883,7 +1883,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         account_connector: request.accountConnector ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('startOAuth request %j', request);
@@ -2025,7 +2025,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         account_connector: request.accountConnector ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('finishOAuth request %j', request);
@@ -2197,7 +2197,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2254,7 +2254,7 @@ export class DeveloperConnectClient {
     this._log.info('createConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2394,7 +2394,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         'connection.name': request.connection!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2451,7 +2451,7 @@ export class DeveloperConnectClient {
     this._log.info('updateConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2583,7 +2583,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2640,7 +2640,7 @@ export class DeveloperConnectClient {
     this._log.info('deleteConnection long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2780,7 +2780,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -2837,7 +2837,7 @@ export class DeveloperConnectClient {
     this._log.info('createGitRepositoryLink long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -2969,7 +2969,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3026,7 +3026,7 @@ export class DeveloperConnectClient {
     this._log.info('deleteGitRepositoryLink long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3161,7 +3161,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3218,7 +3218,7 @@ export class DeveloperConnectClient {
     this._log.info('createAccountConnector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3353,7 +3353,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         'account_connector.name': request.accountConnector!.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3410,7 +3410,7 @@ export class DeveloperConnectClient {
     this._log.info('updateAccountConnector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3547,7 +3547,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3604,7 +3604,7 @@ export class DeveloperConnectClient {
     this._log.info('deleteAccountConnector long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3736,7 +3736,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3793,7 +3793,7 @@ export class DeveloperConnectClient {
     this._log.info('deleteUser long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -3905,7 +3905,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         name: request.name ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -3962,7 +3962,7 @@ export class DeveloperConnectClient {
     this._log.info('deleteSelf long-running');
     const request =
       new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
-        { name },
+        {name},
       );
     const [operation] = await this.operationsClient.getOperation(request);
     const decodeOperation = new this._gaxModule.Operation(
@@ -4074,7 +4074,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4146,7 +4146,7 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listConnections stream %j', request);
@@ -4200,7 +4200,7 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listConnections'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listConnections iterate %j', request);
@@ -4309,7 +4309,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4381,7 +4381,7 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listGitRepositoryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGitRepositoryLinks stream %j', request);
@@ -4435,7 +4435,7 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listGitRepositoryLinks'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listGitRepositoryLinks iterate %j', request);
@@ -4541,7 +4541,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         connection: request.connection ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4609,7 +4609,7 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['fetchLinkableGitRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchLinkableGitRepositories stream %j', request);
@@ -4659,7 +4659,7 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['fetchLinkableGitRepositories'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchLinkableGitRepositories iterate %j', request);
@@ -4766,7 +4766,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         git_repository_link: request.gitRepositoryLink ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -4836,7 +4836,7 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['fetchGitRefs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchGitRefs stream %j', request);
@@ -4888,7 +4888,7 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['fetchGitRefs'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('fetchGitRefs iterate %j', request);
@@ -4997,7 +4997,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5069,7 +5069,7 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listAccountConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccountConnectors stream %j', request);
@@ -5123,7 +5123,7 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listAccountConnectors'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listAccountConnectors iterate %j', request);
@@ -5232,7 +5232,7 @@ export class DeveloperConnectClient {
       this._gaxModule.routingHeader.fromParams({
         parent: request.parent ?? '',
       });
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     const wrappedCallback:
@@ -5304,7 +5304,7 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listUsers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUsers stream %j', request);
@@ -5358,7 +5358,7 @@ export class DeveloperConnectClient {
       });
     const defaultCallSettings = this._defaults['listUsers'];
     const callSettings = defaultCallSettings.merge(options);
-    this.initialize().catch((err) => {
+    this.initialize().catch(err => {
       throw err;
     });
     this._log.info('listUsers iterate %j', request);
@@ -6467,11 +6467,11 @@ export class DeveloperConnectClient {
    */
   close(): Promise<void> {
     if (this.developerConnectStub && !this._terminated) {
-      return this.developerConnectStub.then((stub) => {
+      return this.developerConnectStub.then(stub => {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch((err) => {
+        this.locationsClient.close().catch(err => {
           throw err;
         });
         void this.operationsClient.close();

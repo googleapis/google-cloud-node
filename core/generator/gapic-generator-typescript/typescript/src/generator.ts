@@ -30,6 +30,18 @@ import {commonPrefix} from './util.js';
 // https://blog.logrocket.com/alternatives-dirname-node-js-es-modules/#help-im-missing-dirname
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
+// `proto3-json-serializer@4` depends on protobufjs v7 while this package uses
+// v8, so the two protobufjs type trees are structurally incompatible even
+// though they interoperate at runtime. This alias centralizes the casts that
+// bridge them.
+//
+// Do NOT try to fix this with a root-level `pnpm.overrides` for protobufjs:
+// that forces v8 onto google-gax, which needs v7, and breaks every `units`
+// shard (attempted in 2cc19a6, reverted in 05c2a62). The real fix is for
+// `proto3-json-serializer` (core/packages/proto3-json-serializer-nodejs) to
+// accept protobufjs v8, at which point these casts can be deleted.
+type SerializerType = Parameters<typeof serializer.fromProto3JSON>[0];
+
 function getStdin() {
   return new Promise<Buffer>(resolve => {
     const buffers: Buffer[] = [];
@@ -85,7 +97,9 @@ export class Generator {
   legacyProtoLoad?: boolean;
   restNumericEnums?: boolean;
   mixinsOverride?: string[];
+  resumableUploadMethods?: string[];
   format?: string | string[];
+  enableTelemetryTracing?: boolean;
 
   private root: protobuf.Root;
 
@@ -128,14 +142,17 @@ export class Generator {
           'INTERNAL ERROR: Cannot find ServiceConfig type in proto JSON',
         );
       }
-      const deserialized = serializer.fromProto3JSON(ServiceConfig, json);
+      const deserialized = serializer.fromProto3JSON(
+        ServiceConfig as unknown as SerializerType,
+        json,
+      );
       if (!deserialized) {
         throw new Error(
           'ERROR: Cannot parse the content of gRPC service config',
         );
       }
       this.grpcServiceConfig = ServiceConfig.toObject(
-        deserialized,
+        deserialized as unknown as protobuf.Message,
       ) as protos.grpc.service_config.ServiceConfig;
     }
   }
@@ -227,6 +244,12 @@ export class Generator {
     }
   }
 
+  private readEnableTelemetryTracing() {
+    if (this.paramMap['enable-telemetry-tracing'] === 'true') {
+      this.enableTelemetryTracing = true;
+    }
+  }
+
   private readLegacyProtoLoad() {
     if (this.paramMap['legacy-proto-load'] === 'true') {
       this.legacyProtoLoad = true;
@@ -242,6 +265,15 @@ export class Generator {
   private readMixins() {
     if (this.paramMap['mixins']) {
       this.mixinsOverride = this.paramMap['mixins'].split(';');
+    }
+  }
+
+  private readResumableUploadMethods() {
+    if (typeof this.paramMap['resumable-upload-methods'] === 'string') {
+      this.resumableUploadMethods = this.paramMap['resumable-upload-methods']
+        .split(';')
+        .map(name => name.trim())
+        .filter(name => name.length > 0);
     }
   }
 
@@ -274,6 +306,8 @@ export class Generator {
       this.readLegacyProtoLoad();
       this.readRestNumericEnums();
       this.readFormat();
+      this.readEnableTelemetryTracing();
+      this.readResumableUploadMethods();
     }
   }
 
@@ -334,6 +368,8 @@ export class Generator {
       legacyProtoLoad: this.legacyProtoLoad,
       restNumericEnums: this.restNumericEnums,
       mixinsOverridden: this.mixinsOverride !== undefined,
+      enableTelemetryTracing: this.enableTelemetryTracing,
+      resumableUploadMethods: this.resumableUploadMethods,
     });
     return api;
   }

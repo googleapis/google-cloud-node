@@ -71,7 +71,6 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | search entitlements | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.search_entitlements.js) |
 | search grants | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.search_grants.js) |
 | update entitlement | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/privileged_access_manager.update_entitlement.js) |
-| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-privilegedaccessmanager/samples/generated/v1/snippet_metadata_google.cloud.privilegedaccessmanager.v1.json) |
 
 
 ## Supported Node.js Versions

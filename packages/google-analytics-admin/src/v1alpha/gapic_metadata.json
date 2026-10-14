@@ -635,6 +635,11 @@
                 "getReportingIdentitySettings"
               ]
             },
+            "UpdateReportingIdentitySettings": {
+              "methods": [
+                "updateReportingIdentitySettings"
+              ]
+            },
             "GetUserProvidedDataSettings": {
               "methods": [
                 "getUserProvidedDataSettings"
@@ -1471,6 +1476,11 @@
             "GetReportingIdentitySettings": {
               "methods": [
                 "getReportingIdentitySettings"
+              ]
+            },
+            "UpdateReportingIdentitySettings": {
+              "methods": [
+                "updateReportingIdentitySettings"
               ]
             },
             "GetUserProvidedDataSettings": {
