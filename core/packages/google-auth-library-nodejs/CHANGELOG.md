@@ -5,6 +5,14 @@
 
 [1]: https://www.npmjs.com/package/google-auth-library?activeTab=versions
 
+## [11.3.1](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.3.0...google-auth-library-v11.3.1) (2026-10-14)
+
+
+### Bug Fixes
+
+* **core:** Remove --fetch-shim and handle Bun fetch natively ([#9573](https://github.com/googleapis/google-cloud-node/issues/9573)) ([62559f1](https://github.com/googleapis/google-cloud-node/commit/62559f18d902330c546c787233dcaa7578774463))
+* **core:** Remove --gaxios-shim and configure Bun Gaxios fetch ([#9569](https://github.com/googleapis/google-cloud-node/issues/9569)) ([640bf51](https://github.com/googleapis/google-cloud-node/commit/640bf5136c7e9002d65cb257af976c336110d33f))
+
 ## [11.3.0](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.2.0...google-auth-library-v11.3.0) (2026-10-08)
 
 
