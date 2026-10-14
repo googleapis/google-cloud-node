@@ -53,15 +53,23 @@ describe('marshallGaxiosResponse', () => {
   });
 
   it('should accept response objects from distinct gaxios type instances', () => {
+    const foreignGaxiosSymbol: unique symbol = Symbol('foreign-gaxios-error');
     const headers = new Headers({'x-test': 'value'});
     const crossVersionRes = {
       headers,
       status: 200,
       data: {ok: true},
+      config: {
+        retryConfig: {
+          onRetryAttempt: (err: {[foreignGaxiosSymbol]: string}) => void err,
+        },
+      },
+      [foreignGaxiosSymbol]: '7.0.0',
     };
 
     const newRes = marshallGaxiosResponse(crossVersionRes);
     assert.deepEqual(newRes.headers, {'x-test': 'value'});
     assert.equal(newRes.status, 200);
+    assert.deepEqual(newRes.data, {ok: true});
   });
 });

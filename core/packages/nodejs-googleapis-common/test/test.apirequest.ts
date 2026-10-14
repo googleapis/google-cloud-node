@@ -504,6 +504,49 @@ describe('createAPIRequest', () => {
       });
       assert.ok(stub.calledOnce);
     });
+
+    it('should marshall headers when auth client resolves a response from a distinct gaxios instance', async () => {
+      const foreignGaxiosSymbol: unique symbol = Symbol('foreign-gaxios-error');
+      const auth = new GoogleAuth();
+      const foreignResponse = Object.assign(
+        new Response(null, {
+          headers: new Headers({'x-custom-header': 'custom-value'}),
+          status: 200,
+        }),
+        {
+          config: {
+            headers: new Headers({'x-custom-header': 'custom-value'}),
+            url: new URL(url),
+            retryConfig: {
+              onRetryAttempt: (err: {[foreignGaxiosSymbol]: string}) =>
+                void err,
+            },
+          },
+          data: {hello: 'world'},
+          [foreignGaxiosSymbol]: '7.0.0',
+        },
+      );
+      const stub = sandbox
+        .stub(auth, 'request')
+        .resolves(foreignResponse as unknown as AuthRequestResponse);
+
+      const res = await createAPIRequest<{hello: string}>({
+        options: {url},
+        params: {},
+        requiredParams: [],
+        pathParams: [],
+        context: {
+          _options: {
+            auth,
+          },
+        },
+      });
+
+      assert.ok(stub.calledOnce);
+      assert.deepStrictEqual(res.headers, {'x-custom-header': 'custom-value'});
+      assert.deepStrictEqual(res.data, {hello: 'world'});
+      assert.strictEqual(res.status, 200);
+    });
   });
 
   describe('TPC', () => {
