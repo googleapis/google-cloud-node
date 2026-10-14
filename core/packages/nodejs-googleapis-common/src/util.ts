@@ -47,7 +47,7 @@ export function headersToClassicHeaders<T extends Record<string, string>>(
  * marshall a GaxiosResponse into a library-friendly type.
  *
  * @param res the Gaxios Response
- * @returns the GaxiosResponse with HTTP2-ready/compatible headers
+ * @returns the GaxiosResponse with HTTP2-ready/compatible headers, or `undefined` if `res` is falsy
  */
 export function marshallGaxiosResponse<
   T extends {headers?: HeadersInit} = GaxiosResponse,
