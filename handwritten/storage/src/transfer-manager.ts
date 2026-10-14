@@ -214,7 +214,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     this.bucket = bucket;
     this.fileName = fileName;
     this.baseUrl = `https://${bucket.name}.${
-      new URL(this.bucket.storage.apiEndpoint).hostname
+      new URL(this.bucket.storage['apiEndpoint']).hostname
     }/${fileName}`;
     this.xmlBuilder = new XMLBuilder({arrayNodeName: 'Part'});
     this.xmlParser = new XMLParser();

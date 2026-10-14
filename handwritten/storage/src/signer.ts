@@ -208,7 +208,7 @@ export class URLSigner {
       query = Object.assign(query, cfg.queryParams);
 
       const signedUrl = new url.URL(
-        cfg.host?.toString() || config.cname || this.storage.apiEndpoint
+        cfg.host?.toString() || config.cname || this.storage['apiEndpoint']
       );
 
       signedUrl.pathname = this.getResourcePath(
@@ -285,7 +285,7 @@ export class URLSigner {
 
     const extensionHeaders = Object.assign({}, config.extensionHeaders);
     const fqdn = new url.URL(
-      config.host?.toString() || config.cname || this.storage.apiEndpoint
+      config.host?.toString() || config.cname || this.storage['apiEndpoint']
     );
     extensionHeaders.host = fqdn.hostname;
     if (config.contentMd5) {
