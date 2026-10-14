@@ -2278,10 +2278,117 @@ describe('Spanner with mock server', () => {
           .on('data', response => {
             // ensure that response is coming
             assert.notEqual(response.commitTimestamp, null);
+            assert.deepStrictEqual(response.indexes, [0]);
             // multiplexed session will get created by default
             assert.notEqual(multiplexedSession._multiplexedSession, null);
           })
           .on('end', done);
+      });
+
+      it('should retry mid-stream UNAVAILABLE and resume with only unacknowledged mutation groups', done => {
+        const mg0 = new MutationGroup();
+        mg0.upsert('FOO', {Id: '1', Name: 'One'});
+        const mg1 = new MutationGroup();
+        mg1.upsert('FOO', {Id: '2', Name: 'Two'});
+        const mg2 = new MutationGroup();
+        mg2.upsert('FOO', {Id: '3', Name: 'Three'});
+
+        const unavailableErr = {
+          message: 'Stream broken mid-flight',
+          code: grpc.status.UNAVAILABLE,
+          streamIndex: 1,
+          metadata: mock.MockSpanner.createMinimalRetryDelayMetadata(),
+        } as mock.MockError;
+
+        spannerMock.setExecutionTime(
+          spannerMock.batchWrite,
+          mock.SimulatedExecutionTime.ofError(unavailableErr),
+        );
+
+        const database = newTestDatabase({min: 1, max: 1});
+        const responses: protos.google.spanner.v1.IBatchWriteResponse[] = [];
+
+        database
+          .batchWriteAtLeastOnce([mg0, mg1, mg2], {
+            gaxOptions: {
+              retry: {
+                backoffSettings: {
+                  initialRetryDelayMillis: 1,
+                  retryDelayMultiplier: 1.3,
+                  maxRetryDelayMillis: 10,
+                  maxRetries: 3,
+                },
+              },
+            },
+          })
+          .on('error', done)
+          .on('data', (response: protos.google.spanner.v1.IBatchWriteResponse) => {
+            responses.push(response);
+          })
+          .on('end', () => {
+            assert.strictEqual(responses.length, 3);
+            assert.deepStrictEqual(responses[0].indexes, [0]);
+            assert.deepStrictEqual(responses[1].indexes, [1]);
+            assert.deepStrictEqual(responses[2].indexes, [2]);
+
+            const batchWriteRequests = spannerMock
+              .getRequests()
+              .filter(
+                req =>
+                  (req as protos.google.spanner.v1.BatchWriteRequest)
+                    .mutationGroups !== undefined,
+              ) as protos.google.spanner.v1.BatchWriteRequest[];
+
+            assert.strictEqual(batchWriteRequests.length, 2);
+            assert.strictEqual(
+              batchWriteRequests[0].mutationGroups.length,
+              3,
+            );
+            assert.strictEqual(
+              batchWriteRequests[1].mutationGroups.length,
+              2,
+            );
+            done();
+          });
+      });
+
+      it('should not retry immediate non-retryable error in google-gax retry-request', done => {
+        const mg0 = new MutationGroup();
+        mg0.upsert('FOO', {Id: '1', Name: 'One'});
+
+        const invalidArgErr = {
+          message: 'Invalid mutation group',
+          code: grpc.status.INVALID_ARGUMENT,
+        } as mock.MockError;
+
+        spannerMock.setExecutionTime(
+          spannerMock.batchWrite,
+          mock.SimulatedExecutionTime.ofErrors([
+            invalidArgErr,
+            invalidArgErr,
+            invalidArgErr,
+          ]),
+        );
+
+        const database = newTestDatabase({min: 1, max: 1});
+
+        database
+          .batchWriteAtLeastOnce([mg0])
+          .on('data', () => {
+            done(new Error('Should not emit data'));
+          })
+          .on('error', (err: ServiceError) => {
+            assert.strictEqual(err.code, grpc.status.INVALID_ARGUMENT);
+            const batchWriteRequests = spannerMock
+              .getRequests()
+              .filter(
+                req =>
+                  (req as protos.google.spanner.v1.BatchWriteRequest)
+                    .mutationGroups !== undefined,
+              ) as protos.google.spanner.v1.BatchWriteRequest[];
+            assert.strictEqual(batchWriteRequests.length, 1);
+            done();
+          });
       });
     });
   });

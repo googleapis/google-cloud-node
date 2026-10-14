@@ -1285,6 +1285,45 @@ describe('Database', () => {
       fakeDataStream.emit('data', 'response');
       fakeDataStream.end('end');
     });
+
+    it('ends span and does not start RPC when stream is destroyed before getSession resolves', done => {
+      let sessionCallback: ((err: Error | null, session?: FakeSession) => void) | null =
+        null;
+      getSessionStub.callsFake(callback => {
+        sessionCallback = callback;
+      });
+
+      const stream = database.batchWriteAtLeastOnce(mutationGroups, options);
+      stream.destroy();
+
+      setImmediate(() => {
+        sessionCallback!(null, fakeSession);
+        const spans = traceExporter.getFinishedSpans();
+        assert.strictEqual(spans.length, 1, 'Exactly 1 span expected');
+        withAllSpansHaveDBName(spans);
+        assert.strictEqual(
+          spans[0].name,
+          'CloudSpanner.Database.batchWriteAtLeastOnce',
+        );
+        assert.strictEqual(spans[0].events.length, 0);
+        done();
+      });
+    });
+
+    it('records error on span when stream is destroyed with an error', done => {
+      const abortErr = new Error('abort');
+      const stream = database.batchWriteAtLeastOnce(mutationGroups, options);
+      stream.on('error', err => {
+        assert.strictEqual(err, abortErr);
+        const spans = traceExporter.getFinishedSpans();
+        assert.strictEqual(spans.length, 1, 'Exactly 1 span expected');
+        withAllSpansHaveDBName(spans);
+        assert.strictEqual(spans[0].status.code, SpanStatusCode.ERROR);
+        assert.strictEqual(spans[0].status.message, 'abort');
+        done();
+      });
+      stream.destroy(abortErr);
+    });
   });
 
   describe('runTransaction', () => {

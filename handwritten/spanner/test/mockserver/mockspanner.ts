@@ -1284,13 +1284,36 @@ export class MockSpanner {
     this.pushRequest(call.request, call.metadata);
     this.simulateExecutionTime(this.batchWrite.name)
       .then(() => {
-        const response = protobuf.BatchWriteResponse.create({
-          commitTimestamp: now(),
-        });
-        call.write(response);
+        const groupCount = call.request?.mutationGroups?.length ?? 0;
+        let metadataSent = false;
+        const ensureMetadataSent = () => {
+          if (!metadataSent) {
+            call.sendMetadata(new Metadata());
+            metadataSent = true;
+          }
+        };
+        for (let index = 0; index < groupCount; index++) {
+          const streamErr = this.shiftStreamError(this.batchWrite.name, index);
+          if (streamErr) {
+            ensureMetadataSent();
+            call.emit('error', streamErr);
+            break;
+          }
+          ensureMetadataSent();
+          const response = protobuf.BatchWriteResponse.create({
+            indexes: [index],
+            status: Status.create({code: grpc.status.OK}),
+            commitTimestamp: now(),
+          });
+          call.write(response);
+        }
         call.end();
       })
-      .catch(err => call.destroy(err));
+      .catch(err => {
+        call.sendMetadata(new Metadata());
+        call.emit('error', err);
+        call.end();
+      });
   }
 
   private _updateTransaction(
