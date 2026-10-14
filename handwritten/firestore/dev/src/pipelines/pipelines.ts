@@ -1791,11 +1791,17 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   /**
    * Performs an update operation using documents from previous stages.
    *
+   * Each input document is updated at the path in its `__name__` field.
+   * See `UpdateStageOptions` for details.
+   *
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
   update(): Pipeline;
   /**
    * Performs an update operation using documents from previous stages.
+   *
+   * Each input document is updated at the path in its `__name__` field.
+   * See `UpdateStageOptions` for details.
    *
    * @param transformedField - The first field transformation to apply.
    * @param additionalFields - Additional field transformations to apply.
@@ -1808,12 +1814,18 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   /**
    * Performs an update operation using documents from previous stages.
    *
+   * Each input document is updated at the path in its `__name__` field.
+   * See `UpdateStageOptions` for details.
+   *
    * @param transformedFields - The list of transformations to apply.
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
   update(transformedFields: AliasedExpression[]): Pipeline;
   /**
    * Performs an update operation using documents from previous stages.
+   *
+   * Each input document is updated at the path in its `__name__` field.
+   * See `UpdateStageOptions` for details.
    *
    * @param options - Options defining how this Update stage is evaluated.
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
@@ -1854,11 +1866,17 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   /**
    * Performs an insert operation on documents from previous stages.
    *
+   * The operation fails if a target document already exists. See
+   * `InsertStageOptions` for how the target document is determined.
+   *
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
   insert(): Pipeline;
   /**
    * Performs an insert operation on documents from previous stages.
+   *
+   * The operation fails if a target document already exists. See
+   * `InsertStageOptions` for how the target document is determined.
    *
    * @param options - Options defining how this Insert stage is evaluated.
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
@@ -1873,11 +1891,17 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   /**
    * Performs an upsert operation on documents from previous stages.
    *
+   * See `UpsertStageOptions` for how the target document is
+   * determined.
+   *
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
   upsert(): Pipeline;
   /**
    * Performs an upsert operation on documents from previous stages.
+   *
+   * See `UpsertStageOptions` for how the target document is
+   * determined.
    *
    * @param additionalField - The first additional field to apply on upsert.
    * @param additionalFields - Additional fields to apply on upsert.
@@ -1889,6 +1913,9 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   ): Pipeline;
   /**
    * Performs an upsert operation on documents from previous stages.
+   *
+   * See `UpsertStageOptions` for how the target document is
+   * determined.
    *
    * @param options - Options defining how this Upsert stage is evaluated.
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
