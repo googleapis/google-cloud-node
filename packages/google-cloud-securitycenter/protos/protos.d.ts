@@ -2525,6 +2525,9 @@ export namespace google {
 
                     /** BigQueryExport principal */
                     principal?: (string|null);
+
+                    /** BigQueryExport deletionNotificationsEnabled */
+                    deletionNotificationsEnabled?: (boolean|null);
                 }
 
                 /** Represents a BigQueryExport. */
@@ -2559,6 +2562,9 @@ export namespace google {
 
                     /** BigQueryExport principal. */
                     public principal: string;
+
+                    /** BigQueryExport deletionNotificationsEnabled. */
+                    public deletionNotificationsEnabled: boolean;
 
                     /**
                      * Creates a new BigQueryExport instance using the specified properties.
@@ -11681,6 +11687,9 @@ export namespace google {
 
                     /** NotificationConfig streamingConfig */
                     streamingConfig?: (google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig|null);
+
+                    /** NotificationConfig deletionNotificationsEnabled */
+                    deletionNotificationsEnabled?: (boolean|null);
                 }
 
                 /** Represents a NotificationConfig. */
@@ -11706,6 +11715,9 @@ export namespace google {
 
                     /** NotificationConfig streamingConfig. */
                     public streamingConfig?: (google.cloud.securitycenter.v1.NotificationConfig.IStreamingConfig|null);
+
+                    /** NotificationConfig deletionNotificationsEnabled. */
+                    public deletionNotificationsEnabled: boolean;
 
                     /** NotificationConfig notifyConfig. */
                     public notifyConfig?: "streamingConfig";
@@ -11899,6 +11911,9 @@ export namespace google {
 
                     /** NotificationMessage resource */
                     resource?: (google.cloud.securitycenter.v1.IResource|null);
+
+                    /** NotificationMessage deletedFinding */
+                    deletedFinding?: (boolean|null);
                 }
 
                 /** Represents a NotificationMessage. */
@@ -11918,6 +11933,9 @@ export namespace google {
 
                     /** NotificationMessage resource. */
                     public resource?: (google.cloud.securitycenter.v1.IResource|null);
+
+                    /** NotificationMessage deletedFinding. */
+                    public deletedFinding: boolean;
 
                     /** NotificationMessage event. */
                     public event?: "finding";
@@ -36765,6 +36783,9 @@ export namespace google {
 
                     /** BigQueryExport principal */
                     principal?: (string|null);
+
+                    /** BigQueryExport deletionNotificationsEnabled */
+                    deletionNotificationsEnabled?: (boolean|null);
                 }
 
                 /** Represents a BigQueryExport. */
@@ -36799,6 +36820,9 @@ export namespace google {
 
                     /** BigQueryExport principal. */
                     public principal: string;
+
+                    /** BigQueryExport deletionNotificationsEnabled. */
+                    public deletionNotificationsEnabled: boolean;
 
                     /**
                      * Creates a new BigQueryExport instance using the specified properties.
@@ -46519,6 +46543,9 @@ export namespace google {
 
                     /** NotificationConfig updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** NotificationConfig deletionNotificationsEnabled */
+                    deletionNotificationsEnabled?: (boolean|null);
                 }
 
                 /** Represents a NotificationConfig. */
@@ -46547,6 +46574,9 @@ export namespace google {
 
                     /** NotificationConfig updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** NotificationConfig deletionNotificationsEnabled. */
+                    public deletionNotificationsEnabled: boolean;
 
                     /** NotificationConfig notifyConfig. */
                     public notifyConfig?: "streamingConfig";
@@ -46740,6 +46770,9 @@ export namespace google {
 
                     /** NotificationMessage resource */
                     resource?: (google.cloud.securitycenter.v2.IResource|null);
+
+                    /** NotificationMessage deletedFinding */
+                    deletedFinding?: (boolean|null);
                 }
 
                 /** Represents a NotificationMessage. */
@@ -46759,6 +46792,9 @@ export namespace google {
 
                     /** NotificationMessage resource. */
                     public resource?: (google.cloud.securitycenter.v2.IResource|null);
+
+                    /** NotificationMessage deletedFinding. */
+                    public deletedFinding: boolean;
 
                     /** NotificationMessage event. */
                     public event?: "finding";
