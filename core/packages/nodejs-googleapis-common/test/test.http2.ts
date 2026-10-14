@@ -152,7 +152,7 @@ describe('http2', () => {
     requestStream.push(Buffer.from('{}'));
     requestStream.push(null);
     await resPromise;
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(resolve => setTimeout(resolve, 500));
     assert.strictEqual(Object.keys(http2.sessions).length, 0);
   });
 
