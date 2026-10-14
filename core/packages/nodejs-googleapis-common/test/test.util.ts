@@ -68,8 +68,8 @@ describe('marshallGaxiosResponse', () => {
     };
 
     const newRes = marshallGaxiosResponse(crossVersionRes);
-    assert.deepEqual(newRes.headers, {'x-test': 'value'});
-    assert.equal(newRes.status, 200);
-    assert.deepEqual(newRes.data, {ok: true});
+    assert.deepStrictEqual(newRes.headers, {'x-test': 'value'});
+    assert.strictEqual(newRes.status, 200);
+    assert.deepStrictEqual(newRes.data, {ok: true});
   });
 });
