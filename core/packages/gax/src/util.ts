@@ -14,11 +14,55 @@
  * limitations under the License.
  */
 
+import {CallSettings} from './gax';
+
 const PROTO_TYPE_PREFIX = 'type.googleapis.com/';
 const NUM_OF_PARTS_IN_PROTO_TYPE_NAME = 2;
 
 const randomUUID = () =>
   globalThis.crypto?.randomUUID() || require('crypto').randomUUID();
+
+/**
+ * Checks if telemetry tracing is enabled.
+ *
+ * If `GOOGLE_SDK_NODE_ENABLE_TRACING` is explicitly set, then the client option
+ * doesn't matter (only the environment variable determines whether tracing is enabled).
+ * The client option is only checked if the environment variable isn't set.
+ *
+ * Tracing can be enabled purely through environment variables without
+ * requiring client libraries to pass generator parameters, as metadata
+ * is resolved dynamically at runtime.
+ *
+ * If the environment variable is not set, tracing requires the client option
+ * and the client must have supplied `internalTelemetryInfo` (the extra protoc param).
+ *
+ * @param settings
+ * @returns true if telemetry tracing is enabled, false otherwise
+ */
+export function checkTelemetryEnabled(settings?: CallSettings): boolean {
+  // `process` is undeclared in browsers and some edge runtimes, where reading
+  // it would throw a ReferenceError rather than yield undefined, so it is
+  // reached through a `typeof` guard and stands in as an empty environment.
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+  const envOptIn = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
+
+  if (envOptIn !== undefined && envOptIn !== '') {
+    const lower = envOptIn.toLowerCase();
+    return lower === 'true' || lower === '1';
+  }
+
+  const clientOptIn = Boolean(
+    settings?.enableTelemetryTracing ||
+    settings?.otherArgs?.enableTelemetryTracing,
+  );
+
+  return (
+    clientOptIn && settings?.otherArgs?.internalTelemetryInfo !== undefined
+  );
+}
 
 function words(str: string, normalize = false) {
   if (normalize) {
@@ -161,18 +205,3 @@ export const decodeAnyProtosInArray = (
   }
   return protoListDecoded;
 };
-
-/**
- * Standard or infrastructure tokens in the x-goog-api-client header that should
- * be ignored when resolving the client artifact/package name.
- */
-export const ignoredClientHeaderTokens = [
-  'gl-node',
-  'gl-web',
-  'grpc',
-  'rest',
-  'gax',
-  'auth',
-  'gapic',
-  'gccl',
-];

@@ -13,13 +13,14 @@
 // limitations under the License.
 
 import * as assert from 'assert';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as fs from 'fs';
 import * as jws from 'jws';
-import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as sinon from 'sinon';
 
 import {JWTAccess} from '../src';
-import {keypair} from './utils';
+
+const keypair = require('keypair');
 
 describe('jwtaccess', () => {
   // Creates a standard JSON credentials object for testing.

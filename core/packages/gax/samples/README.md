@@ -12,14 +12,13 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Quickstart](#quickstart)
   * [Pagination](#pagination)
-  * [Observability](#observability)
+  * [Quickstart](#quickstart)
 
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/google-cloud-node#using-the-client-library).
+[Using the client library](https://github.com/googleapis/gax-nodejs#using-the-client-library).
 
 `cd samples`
 
@@ -31,29 +30,11 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-
-### Quickstart
-
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/quickstart.js)
-
-__Usage:__
-
-
-`node samples/quickstart.js`
-
-
------
-
-
-
-
 ### Pagination
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/pagination.js).
+View the [source code](https://github.com/googleapis/gax-nodejs/blob/main/samples/pagination.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/pagination.js)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/gax-nodejs&page=editor&open_in_editor=samples/pagination.js,samples/README.md)
 
 __Usage:__
 
@@ -61,20 +42,21 @@ __Usage:__
 `node samples/pagination.js`
 
 
-
-
 -----
 
-### Observability
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/observability.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node/blob/main/core/packages/gax/samples/observability.js)
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/gax-nodejs/blob/main/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/gax-nodejs&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/observability.js`
+`node samples/quickstart.js`
 
 
 

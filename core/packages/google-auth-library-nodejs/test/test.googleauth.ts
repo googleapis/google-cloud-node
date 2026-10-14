@@ -340,7 +340,7 @@ describe('googleauth', () => {
         }
 
         async getRequestHeaders() {
-          return Gaxios.mergeHeaders(new Headers(), customRequestHeaders);
+          return Gaxios.mergeHeaders({...customRequestHeaders});
         }
 
         request = OAuth2Client.prototype.request.bind(this);
@@ -563,10 +563,7 @@ describe('googleauth', () => {
       const result = auth.fromJSON(json);
       assert.ok(result instanceof GdchClient);
       assert.strictEqual((result as GdchClient).projectId, 'test-project');
-      assert.strictEqual(
-        (result as GdchClient).privateKey,
-        'private-key-pem-content',
-      );
+      assert.strictEqual((result as GdchClient).privateKey, 'private-key-pem-content');
     });
 
     it('fromStream should error on null stream', done => {
@@ -3061,7 +3058,7 @@ describe('googleauth', () => {
       assert.ok(client instanceof GdchClient);
       assert.strictEqual(
         (client as GdchClient).apiAudience,
-        'https://hardwaremanagement.us-west1.gdch.google.com',
+        'https://hardwaremanagement.us-west1.gdch.google.com'
       );
     });
 
@@ -3077,7 +3074,7 @@ describe('googleauth', () => {
       assert.ok(client instanceof GdchClient);
       assert.strictEqual(
         (client as GdchClient).apiAudience,
-        'https://hardwaremanagement.us-west1.gdch.google.com',
+        'https://hardwaremanagement.us-west1.gdch.google.com'
       );
     });
 
@@ -3093,7 +3090,7 @@ describe('googleauth', () => {
       assert.ok(client instanceof GdchClient);
       assert.strictEqual(
         (client as GdchClient).apiAudience,
-        'http://hardwaremanagement.us-west1.gdch.google.com',
+        'http://hardwaremanagement.us-west1.gdch.google.com'
       );
     });
 
@@ -3110,7 +3107,7 @@ describe('googleauth', () => {
       assert.ok(client instanceof GdchClient);
       assert.strictEqual(
         (client as GdchClient).apiAudience,
-        'https://explicit-audience.local/',
+        'https://explicit-audience.local/'
       );
     });
   });

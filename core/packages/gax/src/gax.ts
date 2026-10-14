@@ -23,9 +23,8 @@ import type {ResumableUploadContext} from './resumableUpload';
 import {warn} from './warnings';
 import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
-import {toLowerCamelCase} from './util';
-import {checkTelemetryEnabled} from './observability/util';
-import {StaticTraceContext} from './observability/contextUtil';
+import {toLowerCamelCase, checkTelemetryEnabled} from './util';
+import {StaticTraceContext} from './observability/TracerHelper';
 import {Status} from './status';
 import {RequestType} from './apitypes';
 

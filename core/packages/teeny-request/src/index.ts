@@ -16,12 +16,9 @@
  */
 
 import {Agent, AgentOptions as HttpsAgentOptions} from 'https';
-import * as https from 'https';
 import {AgentOptions as HttpAgentOptions} from 'http';
-import * as http from 'http';
 import type * as f from 'node-fetch' with {'resolution-mode': 'import'};
 import {PassThrough, Readable, pipeline} from 'stream';
-import * as zlib from 'zlib';
 import {getAgent} from './agents';
 import {TeenyStatistics} from './TeenyStatistics';
 import {randomUUID} from 'crypto';
@@ -30,288 +27,8 @@ const streamEvents = require('stream-events');
 
 import type nodeFetch from 'node-fetch' with {'resolution-mode': 'import'};
 
-const MAX_REDIRECTS = 20;
-const REDIRECT_STATUS_CODES = new Set([301, 302, 303, 307, 308]);
-
-function bunFetch(
-  url: URL | f.RequestInfo,
-  init: f.RequestInit & {timeout?: number} = {},
-  redirectCount = 0,
-): Promise<f.Response> {
-  const urlStr = String(url);
-  const parsedUrl = new URL(urlStr);
-  const isHttps = parsedUrl.protocol === 'https:';
-  const transport = isHttps ? https : http;
-
-  const headers: Record<string, string> = {};
-  if (init.headers) {
-    if (
-      typeof globalThis.Headers !== 'undefined' &&
-      init.headers instanceof globalThis.Headers
-    ) {
-      for (const [k, v] of init.headers.entries()) {
-        headers[k] = v;
-      }
-    } else if (Array.isArray(init.headers)) {
-      for (const [k, v] of init.headers) {
-        headers[k] = v;
-      }
-    } else if (
-      typeof (init.headers as {entries?: () => Iterable<[string, string]>})
-        .entries === 'function'
-    ) {
-      for (const [k, v] of (
-        init.headers as {entries: () => Iterable<[string, string]>}
-      ).entries()) {
-        headers[k] = v;
-      }
-    } else {
-      for (const [k, v] of Object.entries(init.headers)) {
-        if (v !== undefined) {
-          headers[k] = String(v);
-        }
-      }
-    }
-  }
-
-  if (init.compress !== false) {
-    const hasAcceptEncoding = Object.keys(headers).some(
-      k => k.toLowerCase() === 'accept-encoding',
-    );
-    if (!hasAcceptEncoding) {
-      headers['Accept-Encoding'] = 'gzip,deflate';
-    }
-  }
-
-  const reqOptions: https.RequestOptions & {proto?: string} = {
-    protocol: parsedUrl.protocol,
-    proto: isHttps ? 'https' : 'http',
-    method: init.method || 'GET',
-    hostname: parsedUrl.hostname.replace(/^\[|\]$/g, ''),
-    port: parsedUrl.port || (isHttps ? 443 : 80),
-    path: (parsedUrl.pathname || '/') + parsedUrl.search,
-    headers,
-    agent: init.agent as Agent | http.Agent | boolean | undefined,
-  };
-
-  return new Promise<f.Response>((resolve, reject) => {
-    let timedOut = false;
-    let activeIncoming: http.IncomingMessage | undefined;
-    let activeResponseStream: PassThrough | undefined;
-    let timeoutId: ReturnType<typeof setTimeout> | undefined;
-    const clearReqTimeout = () => {
-      if (timeoutId !== undefined) {
-        clearTimeout(timeoutId);
-        timeoutId = undefined;
-      }
-    };
-    const onTimeout = () => {
-      if (timedOut) {
-        return;
-      }
-      timedOut = true;
-      clearReqTimeout();
-      const timeoutErr = Object.assign(
-        new Error(`network timeout at: ${urlStr}`),
-        {
-          name: 'AbortError',
-          type: 'request-timeout',
-          code: 'ETIMEDOUT',
-        },
-      );
-      activeIncoming?.destroy(timeoutErr);
-      activeResponseStream?.destroy(timeoutErr);
-      req.destroy();
-      reject(timeoutErr);
-    };
-    const resetReqTimeout = () => {
-      if (init.timeout) {
-        clearReqTimeout();
-        timeoutId = setTimeout(onTimeout, init.timeout);
-      }
-    };
-
-    const req = transport.request(reqOptions, incoming => {
-      const status = incoming.statusCode || 200;
-      const location = incoming.headers.location;
-      if (
-        init.redirect !== 'manual' &&
-        REDIRECT_STATUS_CODES.has(status) &&
-        location
-      ) {
-        clearReqTimeout();
-        incoming.resume();
-        if (init.redirect === 'error') {
-          reject(
-            Object.assign(
-              new Error(`uri requested responds with a redirect: ${urlStr}`),
-              {type: 'no-redirect'},
-            ),
-          );
-          return;
-        }
-        const maxFollow =
-          typeof init.follow === 'number' ? init.follow : MAX_REDIRECTS;
-        if (redirectCount >= maxFollow) {
-          reject(
-            Object.assign(new Error(`maximum redirect reached at: ${urlStr}`), {
-              type: 'max-redirect',
-            }),
-          );
-          return;
-        }
-        const redirectUrl = new URL(String(location), parsedUrl);
-        const currentMethod = (init.method || 'GET').toUpperCase();
-        const switchToGet =
-          status === 303 ||
-          ((status === 301 || status === 302) && currentMethod === 'POST');
-        const nextHeaders: Record<string, string> = {...headers};
-        for (const k of Object.keys(nextHeaders)) {
-          const lower = k.toLowerCase();
-          if (
-            lower === 'host' ||
-            (switchToGet &&
-              (lower === 'content-length' ||
-                lower === 'content-type' ||
-                lower === 'transfer-encoding')) ||
-            (redirectUrl.origin !== parsedUrl.origin &&
-              (lower === 'authorization' ||
-                lower === 'proxy-authorization' ||
-                lower === 'cookie'))
-          ) {
-            delete nextHeaders[k];
-          }
-        }
-        const nextInit: f.RequestInit & {timeout?: number} = {
-          ...init,
-          method: switchToGet ? 'GET' : init.method,
-          body: switchToGet ? undefined : init.body,
-          headers: nextHeaders,
-        };
-        bunFetch(redirectUrl.toString(), nextInit, redirectCount + 1)
-          .then(resolve)
-          .catch(reject);
-        return;
-      }
-
-      resetReqTimeout();
-      incoming.on('data', resetReqTimeout);
-      incoming.on('end', clearReqTimeout);
-      incoming.on('close', clearReqTimeout);
-
-      const responseStream = new PassThrough();
-      activeIncoming = incoming;
-      activeResponseStream = responseStream;
-      const encoding = (
-        incoming.headers['content-encoding'] || ''
-      ).toLowerCase();
-      if (
-        init.compress !== false &&
-        status !== 204 &&
-        status !== 304 &&
-        (reqOptions.method || 'GET').toUpperCase() !== 'HEAD' &&
-        (encoding === 'gzip' ||
-          encoding === 'x-gzip' ||
-          encoding === 'deflate' ||
-          encoding === 'br')
-      ) {
-        const decompressor =
-          encoding === 'br'
-            ? zlib.createBrotliDecompress()
-            : zlib.createUnzip();
-        incoming.on('error', err => decompressor.destroy(err));
-        decompressor.on('error', err => responseStream.destroy(err));
-        incoming.pipe(decompressor).pipe(responseStream);
-      } else {
-        incoming.on('error', err => responseStream.destroy(err));
-        incoming.pipe(responseStream);
-      }
-
-      const fetchHeaders = new globalThis.Headers();
-      for (const [k, v] of Object.entries(incoming.headers)) {
-        if (Array.isArray(v)) {
-          v.forEach(val => fetchHeaders.append(k, val));
-        } else if (v !== undefined) {
-          fetchHeaders.set(k, v);
-        }
-      }
-
-      const readText = async () => {
-        const chunks: Buffer[] = [];
-        for await (const chunk of responseStream) {
-          chunks.push(
-            Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as Uint8Array),
-          );
-        }
-        return Buffer.concat(chunks).toString('utf8');
-      };
-
-      const res = {
-        url: urlStr,
-        status,
-        statusText: incoming.statusMessage || '',
-        headers: fetchHeaders,
-        body: responseStream,
-        text: readText,
-        json: async () => {
-          const text = await readText();
-          try {
-            return JSON.parse(text);
-          } catch (err) {
-            throw new Error(
-              `invalid json response body at ${urlStr} reason: ${(err as Error).message}`,
-            );
-          }
-        },
-      } as unknown as f.Response;
-
-      resolve(res);
-    });
-
-    if (init.timeout) {
-      req.setTimeout(init.timeout, onTimeout);
-      resetReqTimeout();
-    }
-
-    req.on('error', err => {
-      clearReqTimeout();
-      activeIncoming?.destroy(err);
-      activeResponseStream?.destroy(err);
-      reject(err);
-    });
-
-    if (init.body) {
-      if (
-        typeof init.body === 'object' &&
-        typeof (init.body as Readable).pipe === 'function'
-      ) {
-        (init.body as Readable).on('error', err => {
-          clearReqTimeout();
-          activeResponseStream?.destroy(err);
-          req.destroy();
-          reject(err);
-        });
-        (init.body as Readable).pipe(req);
-      } else if (
-        typeof init.body === 'string' ||
-        Buffer.isBuffer(init.body) ||
-        init.body instanceof Uint8Array
-      ) {
-        req.write(init.body);
-        req.end();
-      } else {
-        req.end();
-      }
-    } else {
-      req.end();
-    }
-  });
-}
-
 const fetch = (...args: Parameters<typeof nodeFetch>) =>
-  'Bun' in globalThis
-    ? bunFetch(args[0], args[1])
-    : import('node-fetch').then(({default: fetch}) => fetch(...args));
+  import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 export interface CoreOptions {
   method?: string;
@@ -493,7 +210,6 @@ function createMultipartStream(boundary: string, multipart: RequestPart[]) {
   return stream;
 }
 
-/* eslint-disable promise/always-return, promise/catch-or-return, promise/no-callback-in-promise */
 function teenyRequest(reqOpts: Options): Request;
 function teenyRequest(reqOpts: Options, callback: RequestCallback): void;
 function teenyRequest(
@@ -521,7 +237,10 @@ function teenyRequest(
         const header = res.headers.get('content-type');
         const response = fetchToRequestResponse(options, res);
         const body = response.body;
-        if (/^application\/json(?:\s*;|$)/i.test(header || '')) {
+        if (
+          header === 'application/json' ||
+          header === 'application/json; charset=utf-8'
+        ) {
           res.json().then(
             json => {
               response.body = json;
@@ -601,7 +320,10 @@ function teenyRequest(
       const header = res.headers.get('content-type');
       const response = fetchToRequestResponse(options, res);
       const body = response.body;
-      if (/^application\/json(?:\s*;|$)/i.test(header || '')) {
+      if (
+        header === 'application/json' ||
+        header === 'application/json; charset=utf-8'
+      ) {
         if (response.statusCode === 204) {
           // Probably a DELETE
           callback(null, response, body);
@@ -637,7 +359,6 @@ function teenyRequest(
   );
   return;
 }
-/* eslint-enable promise/always-return, promise/catch-or-return, promise/no-callback-in-promise */
 
 teenyRequest.defaults = (defaults: CoreOptions) => {
   return (reqOpts: Options, callback?: RequestCallback): Request | void => {

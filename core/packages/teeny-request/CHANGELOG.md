@@ -1,20 +1,6 @@
 # Changelog
 
 
-## [11.1.1](https://github.com/googleapis/google-cloud-node/compare/teeny-request-v11.1.0...teeny-request-v11.1.1) (2026-10-13)
-
-
-### Bug Fixes
-
-* **core:** Remove --fetch-shim and handle Bun fetch natively ([#9573](https://github.com/googleapis/google-cloud-node/issues/9573)) ([62559f1](https://github.com/googleapis/google-cloud-node/commit/62559f18d902330c546c787233dcaa7578774463))
-
-## [11.1.0](https://github.com/googleapis/google-cloud-node/compare/teeny-request-v11.0.1...teeny-request-v11.1.0) (2026-10-08)
-
-
-### Features
-
-* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
-
 ## [11.0.1](https://github.com/googleapis/google-cloud-node/compare/teeny-request-v11.0.0...teeny-request-v11.0.1) (2026-08-10)
 
 

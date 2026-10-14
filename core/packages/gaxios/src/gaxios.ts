@@ -26,7 +26,7 @@ import {
   defaultErrorRedactor,
 } from './common.js';
 import {getRetryConfig} from './retry.js';
-import {PassThrough, Readable, pipeline} from 'stream';
+import {Readable} from 'stream';
 import {GaxiosInterceptorManager} from './interceptor.js';
 
 const randomUUID = async () =>
@@ -227,43 +227,8 @@ export class Gaxios implements FetchCompliance {
         err = e;
       } else if (e instanceof Error) {
         err = new GaxiosError(e.message, opts, undefined, e);
-      } else if (opts.signal?.aborted) {
-        err = new GaxiosError(
-          `The operation was aborted: ${e}`,
-          opts,
-          undefined,
-          e,
-        );
-        err.code = 'AbortError';
       } else {
         err = new GaxiosError('Unexpected Gaxios Error', opts, undefined, e);
-      }
-
-      // When `opts.timeout` is configured, `#appendTimeoutToSignal` attaches
-      // `AbortSignal.timeout(opts.timeout)` to `opts.signal`, which sets
-      // `opts.signal.reason` to a `TimeoutError` `DOMException` when it fires.
-      // However, `node-fetch` rejects an aborted signal with a generic
-      // `AbortError` ('The user aborted a request.') rather than
-      // `opts.signal.reason`, and Bun's native `AbortSignal.timeout` uses the
-      // message 'The operation timed out.' instead of V8's 'The operation was
-      // aborted due to timeout'. Normalizing `err.code = 'TimeoutError'` and
-      // ensuring `err.message` describes the timeout allows `getRetryConfig` /
-      // `shouldRetryRequest` to recognize the error as a retriable timeout.
-      if (
-        !err.response &&
-        opts.signal?.aborted &&
-        opts.signal.reason?.name === 'TimeoutError'
-      ) {
-        err.code = 'TimeoutError';
-        if (!/timeout|timed out/i.test(err.message)) {
-          err.message = 'The operation was aborted due to timeout';
-        }
-      } else if (
-        !err.response &&
-        opts.signal?.aborted &&
-        err.code !== 'TimeoutError'
-      ) {
-        err.code ||= 'AbortError';
       }
 
       const {shouldRetry, config} = await getRetryConfig(err);
@@ -274,9 +239,6 @@ export class Gaxios implements FetchCompliance {
         // The error's config could be redacted - therefore we only want to
         // copy the retry state over to the existing config
         opts.retryConfig = err.config?.retryConfig;
-        if (typeof err.config?.timeout === 'number') {
-          opts.timeout = err.config.timeout;
-        }
 
         // re-prepare timeout for the next request
         this.#appendTimeoutToSignal(opts);
@@ -602,18 +564,12 @@ export class Gaxios implements FetchCompliance {
     });
   }
 
-  #callerSignals = new WeakMap<GaxiosOptions, AbortSignal | undefined>();
-
   #appendTimeoutToSignal(opts: GaxiosOptions) {
     if (opts.timeout) {
-      if (!this.#callerSignals.has(opts)) {
-        this.#callerSignals.set(opts, opts.signal ?? undefined);
-      }
-      const callerSignal = this.#callerSignals.get(opts);
       const timeoutSignal = AbortSignal.timeout(opts.timeout);
 
-      if (callerSignal) {
-        opts.signal = AbortSignal.any([callerSignal, timeoutSignal]);
+      if (opts.signal && !opts.signal.aborted) {
+        opts.signal = AbortSignal.any([opts.signal, timeoutSignal]);
       } else {
         opts.signal = timeoutSignal;
       }
@@ -702,8 +658,6 @@ export class Gaxios implements FetchCompliance {
   //
   static #fetch?: typeof nodeFetch | typeof fetch;
 
-  static #bunFetch?: typeof fetch;
-
   /**
    * Imports, caches, and returns a proxy agent - if not already imported
    *
@@ -715,164 +669,13 @@ export class Gaxios implements FetchCompliance {
     return this.#proxyAgent;
   }
 
-  static #createBunFetch(): typeof fetch {
-    return async (input, init) => {
-      const rawInit = init
-        ? ({...init} as Omit<RequestInit, 'body'> & {
-            body?: unknown;
-            agent?: {
-              proxy?: URL;
-              connectOpts?: {cert?: string; key?: string};
-            };
-            proxy?: string;
-            cert?: string;
-            key?: string;
-            tls?: {cert?: string; key?: string};
-          })
-        : undefined;
-      if (rawInit) {
-        const proxyAgent = rawInit.agent;
-        if (proxyAgent?.proxy) {
-          rawInit.proxy = proxyAgent.proxy.toString();
-        } else {
-          delete rawInit.proxy;
-        }
-        const cert = rawInit.cert ?? proxyAgent?.connectOpts?.cert;
-        const key = rawInit.key ?? proxyAgent?.connectOpts?.key;
-        if (cert && key) {
-          rawInit.tls = {
-            ...rawInit.tls,
-            cert,
-            key,
-          };
-        }
-      }
-      let fetchInit = rawInit;
-      if (
-        fetchInit?.body &&
-        typeof fetchInit.body === 'object' &&
-        typeof (fetchInit.body as Readable).pipe === 'function' &&
-        typeof Readable.toWeb === 'function' &&
-        (typeof ReadableStream === 'undefined' ||
-          !(fetchInit.body instanceof ReadableStream))
-      ) {
-        let stream: Readable;
-        if (
-          fetchInit.body instanceof Readable &&
-          !fetchInit.body.readableObjectMode
-        ) {
-          stream = fetchInit.body;
-        } else {
-          const passThrough = new PassThrough();
-          const src = fetchInit.body as Readable;
-          pipeline(src, passThrough, () => {});
-          stream = passThrough;
-        }
-        fetchInit = {
-          ...fetchInit,
-          body: Readable.toWeb(stream) as unknown as RequestInit['body'],
-        };
-      }
-
-      let res: Response;
-      try {
-        res = await globalThis.fetch(
-          input,
-          fetchInit as RequestInit | undefined,
-        );
-      } catch (err) {
-        const errorObj = err as {message?: string; code?: string};
-        if (
-          errorObj?.code === 'ConnectionRefused' ||
-          errorObj?.code === 'FailedToOpenSocket'
-        ) {
-          errorObj.code = 'ECONNREFUSED';
-        } else if (
-          errorObj?.code === 'ConnectionReset' ||
-          errorObj?.code === 'ConnectionClosed'
-        ) {
-          errorObj.code = 'ECONNRESET';
-        }
-        if (
-          !(err instanceof Error) &&
-          err &&
-          typeof err === 'object' &&
-          !init?.signal?.aborted
-        ) {
-          throw Object.assign(
-            new Error(errorObj.message || errorObj.code || 'Error'),
-            err,
-          );
-        }
-        throw err;
-      }
-      if (
-        res?.body &&
-        typeof Readable.fromWeb === 'function' &&
-        !(res.body instanceof Readable)
-      ) {
-        let nodeStream: Readable | undefined;
-        const rawBody =
-          res.body as unknown as import('stream/web').ReadableStream;
-        const origText = res.text.bind(res);
-        const origJson = res.json.bind(res);
-        const origArrayBuffer = res.arrayBuffer.bind(res);
-        const origBlob = res.blob.bind(res);
-        const readBuffer = async () => {
-          const chunks: Buffer[] = [];
-          for await (const chunk of nodeStream!) {
-            chunks.push(
-              Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as Uint8Array),
-            );
-          }
-          return Buffer.concat(chunks);
-        };
-        Object.defineProperty(res, 'body', {
-          get() {
-            nodeStream ||= Readable.fromWeb(rawBody);
-            return nodeStream;
-          },
-          configurable: true,
-          enumerable: true,
-        });
-        res.text = async () => {
-          if (!nodeStream) return origText();
-          return (await readBuffer()).toString('utf8');
-        };
-        res.json = async () => {
-          if (!nodeStream) return origJson();
-          return JSON.parse(await res.text());
-        };
-        res.arrayBuffer = async () => {
-          if (!nodeStream) return origArrayBuffer();
-          const buf = await readBuffer();
-          return buf.buffer.slice(
-            buf.byteOffset,
-            buf.byteOffset + buf.byteLength,
-          );
-        };
-        res.blob = async () => {
-          if (!nodeStream) return origBlob();
-          const buf = await readBuffer();
-          const contentType = res.headers?.get?.('content-type') ?? '';
-          return new Blob([buf], contentType ? {type: contentType} : undefined);
-        };
-      }
-      return res;
-    };
-  }
-
   static async #getFetch() {
     const hasWindow = typeof window !== 'undefined' && !!window;
-    if (hasWindow) {
-      this.#fetch ||= window.fetch;
-      return this.#fetch;
-    }
-    if ('Bun' in globalThis && typeof globalThis.fetch === 'function') {
-      this.#bunFetch ||= this.#createBunFetch();
-      return this.#bunFetch;
-    }
-    this.#fetch ||= (await import('node-fetch')).default;
+
+    this.#fetch ||= hasWindow
+      ? window.fetch
+      : (await import('node-fetch')).default;
+
     return this.#fetch;
   }
 

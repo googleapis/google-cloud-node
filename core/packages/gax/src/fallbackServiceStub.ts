@@ -25,7 +25,6 @@ import {isNodeJS} from './featureDetection';
 import {StreamArrayParser} from './streamArrayParser';
 import {defaultToObjectOptions} from './fallback';
 import {GoogleError} from './googleError';
-import {setAttemptHttpMethod} from './observability/TracerHelper';
 import {rpcCodeFromHttpStatusCode, Status} from './status';
 import {pipeline, PipelineSource} from 'stream';
 import type {Agent as HttpAgent} from 'http';
@@ -69,7 +68,6 @@ export interface FetchParameters {
   body: Buffer | Uint8Array | string;
   method: FetchParametersMethod;
   url: string;
-  urlTemplate?: string;
 }
 
 // helper function used to properly format empty responses
@@ -303,8 +301,6 @@ export function generateServiceStub(
           cancel() {},
         };
       }
-
-      setAttemptHttpMethod(fetchParameters.method, fetchParameters.urlTemplate);
 
       const cancelController = new AbortController();
       const cancelSignal = cancelController.signal as AbortSignal;

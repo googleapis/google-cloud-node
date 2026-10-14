@@ -24,10 +24,9 @@ import {
   getProtoNameFromFullName,
   decodeProtobufAny,
   decodeAnyProtosInArray,
-  ignoredClientHeaderTokens,
+  checkTelemetryEnabled,
 } from '../../src/util';
-import {checkTelemetryEnabled} from '../../src/observability/util';
-import {StaticTraceContext} from '../../src/observability/contextUtil';
+import {StaticTraceContext} from '../../src/observability/TracerHelper';
 import {CallSettings} from '../../src/gax';
 import * as protobuf from 'protobufjs';
 import protosJson from '../../protos/status.json';
@@ -356,15 +355,6 @@ describe('util.ts', () => {
       }
       assert.strictEqual(thrown, undefined);
       assert.strictEqual(result, true);
-    });
-  });
-
-  describe('ignoredClientHeaderTokens', () => {
-    it('defines ignoredClientHeaderTokens containing ignored client header tokens', () => {
-      assert(Array.isArray(ignoredClientHeaderTokens));
-      assert(ignoredClientHeaderTokens.includes('gl-node'));
-      assert(ignoredClientHeaderTokens.includes('gax'));
-      assert(ignoredClientHeaderTokens.includes('gapic'));
     });
   });
 });

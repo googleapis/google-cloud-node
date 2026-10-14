@@ -29,17 +29,6 @@ export interface TranscodedRequest {
   data: string | {};
 }
 
-const matchedUrlTemplates = new WeakMap<TranscodedRequest, string>();
-
-/**
- * Returns the matched `(google.api.http)` URL path template for a transcoded request, if available.
- */
-export function getMatchedUrlTemplate(
-  transcoded: TranscodedRequest,
-): string | undefined {
-  return matchedUrlTemplates.get(transcoded);
-}
-
 const httpOptionName = '(google.api.http)';
 const proto3OptionalName = 'proto3_optional';
 
@@ -148,9 +137,7 @@ function validateUriPath(propertyName: string, value: string): void {
     // valid domain-scoped resource segments (e.g. projects/example.com:project-id).
     const segments = value.split('/');
     if (segments.some(segment => segment === '.' || segment === '..')) {
-      throw new Error(
-        `Value for ${propertyName} must not contain segments that are exactly . or ..`,
-      );
+      throw new Error(`Value for ${propertyName} must not contain segments that are exactly . or ..`);
     }
   }
 }
@@ -177,9 +164,7 @@ export function buildQueryStringComponents(
     } else {
       resultList.push(
         `${prefix}${encodeWithoutSlashes(key)}=${encodeWithoutSlashes(
-          requestValue === null || requestValue === undefined
-            ? 'null'
-            : requestValue.toString(),
+          requestValue === null || requestValue === undefined ? 'null' : requestValue.toString(),
         )}`,
       );
     }
@@ -202,7 +187,7 @@ export function buildQueryStringComponents(
 export function encodeWithSlashes(str: string): string {
   return encodeURIComponent(str).replace(
     /[!'()*]/g, // Characters preserved by encodeURIComponent
-    character => '%' + character.charCodeAt(0).toString(16).toUpperCase(),
+    character => '%' + character.charCodeAt(0).toString(16).toUpperCase()
   );
 }
 
@@ -381,14 +366,7 @@ export function transcode(
       let data: JSONObject | JSONValue | undefined =
         deepCopyWithoutMatchedFields(request, new Set(matchedFields));
       if (httpRule.body === '*') {
-        const result: TranscodedRequest = {
-          httpMethod,
-          url,
-          queryString: '',
-          data,
-        };
-        matchedUrlTemplates.set(result, pathTemplate);
-        return result;
+        return {httpMethod, url, queryString: '', data};
       }
 
       // one field possibly goes to request data, others go to query string
@@ -412,9 +390,7 @@ export function transcode(
       ) {
         data = '';
       }
-      const result: TranscodedRequest = {httpMethod, url, queryString, data};
-      matchedUrlTemplates.set(result, pathTemplate);
-      return result;
+      return {httpMethod, url, queryString, data};
     }
   }
   return undefined;
