@@ -72,4 +72,9 @@ describe('marshallGaxiosResponse', () => {
     assert.equal(newRes.status, 200);
     assert.deepEqual(newRes.data, {ok: true});
   });
+
+  it('should return undefined when response is undefined', () => {
+    const newRes = marshallGaxiosResponse(undefined);
+    assert.strictEqual(newRes, undefined);
+  });
 });

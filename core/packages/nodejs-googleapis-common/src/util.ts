@@ -51,13 +51,22 @@ export function headersToClassicHeaders<T extends Record<string, string>>(
  */
 export function marshallGaxiosResponse<
   T extends {headers?: HeadersInit} = GaxiosResponse,
->(res?: T) {
-  return Object.defineProperties(res || {}, {
+>(res: T): GaxiosResponseWithHTTP2;
+export function marshallGaxiosResponse<
+  T extends {headers?: HeadersInit} = GaxiosResponse,
+>(res?: T): GaxiosResponseWithHTTP2 | undefined;
+export function marshallGaxiosResponse<
+  T extends {headers?: HeadersInit} = GaxiosResponse,
+>(res?: T): GaxiosResponseWithHTTP2 | undefined {
+  if (!res) {
+    return res;
+  }
+  return Object.defineProperties(res, {
     headers: {
       configurable: true,
       writable: true,
       enumerable: true,
-      value: headersToClassicHeaders(res?.headers),
+      value: headersToClassicHeaders(res.headers),
     },
   }) as unknown as GaxiosResponseWithHTTP2;
 }
