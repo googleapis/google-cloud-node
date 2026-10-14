@@ -80,7 +80,6 @@ export function createAPIRequest<T>(
   callback?: BodyResponseCallback<T>,
 ): void | Promise<GaxiosResponseWithHTTP2<T>> {
   if (callback) {
-    // eslint-disable-next-line promise/catch-or-return, promise/no-callback-in-promise
     createAPIRequestAsync<T>(parameters).then(r => callback(null, r), callback);
   } else {
     return createAPIRequestAsync<T>(parameters);
