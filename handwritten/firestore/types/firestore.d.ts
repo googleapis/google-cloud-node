@@ -12894,11 +12894,17 @@ declare namespace FirebaseFirestore {
       /**
        * Performs an update operation using documents from previous stages.
        *
+       * Each input document is updated at the path in its `__name__` field.
+       * See {@link UpdateStageOptions} for details.
+       *
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
       update(): Pipeline;
       /**
        * Performs an update operation using documents from previous stages.
+       *
+       * Each input document is updated at the path in its `__name__` field.
+       * See {@link UpdateStageOptions} for details.
        *
        * @param transformedField - The first field transformation to apply.
        * @param additionalFields - Additional field transformations to apply.
@@ -12911,12 +12917,18 @@ declare namespace FirebaseFirestore {
       /**
        * Performs an update operation using documents from previous stages.
        *
+       * Each input document is updated at the path in its `__name__` field.
+       * See {@link UpdateStageOptions} for details.
+       *
        * @param transformedFields - The list of transformations to apply.
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
       update(transformedFields: AliasedExpression[]): Pipeline;
       /**
        * Performs an update operation using documents from previous stages.
+       *
+       * Each input document is updated at the path in its `__name__` field.
+       * See {@link UpdateStageOptions} for details.
        *
        * @param options - Options defining how this Update stage is evaluated.
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
@@ -12925,11 +12937,17 @@ declare namespace FirebaseFirestore {
       /**
        * Performs an insert operation on documents from previous stages.
        *
+       * The operation fails if a target document already exists. See
+       * {@link InsertStageOptions} for how the target document is determined.
+       *
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
       insert(): Pipeline;
       /**
        * Performs an insert operation on documents from previous stages.
+       *
+       * The operation fails if a target document already exists. See
+       * {@link InsertStageOptions} for how the target document is determined.
        *
        * @param options - Options defining how this Insert stage is evaluated.
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
@@ -12938,11 +12956,17 @@ declare namespace FirebaseFirestore {
       /**
        * Performs an upsert operation on documents from previous stages.
        *
+       * See {@link UpsertStageOptions} for how the target document is
+       * determined.
+       *
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
       upsert(): Pipeline;
       /**
        * Performs an upsert operation on documents from previous stages.
+       *
+       * See {@link UpsertStageOptions} for how the target document is
+       * determined.
        *
        * @param additionalField - The first additional field to apply on upsert.
        * @param additionalFields - Additional fields to apply on upsert.
@@ -12954,6 +12978,9 @@ declare namespace FirebaseFirestore {
       ): Pipeline;
       /**
        * Performs an upsert operation on documents from previous stages.
+       *
+       * See {@link UpsertStageOptions} for how the target document is
+       * determined.
        *
        * @param options - Options defining how this Upsert stage is evaluated.
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
@@ -14181,7 +14208,8 @@ declare namespace FirebaseFirestore {
      *
      * If neither is set, each document is written back to its input document's
      * path, which fails for documents read from the database because they
-     * already exist.
+     * already exist. It also fails for input documents that have no ID (e.g.
+     * documents from `literals()`, or after `removeFields('__name__')`).
      */
     export type InsertStageOptions = StageOptions & {
       /**
@@ -14210,8 +14238,11 @@ declare namespace FirebaseFirestore {
      * and `documentIdExpression`:
      *
      * - Neither set: each document is written back to its input document's path.
+     *   This fails for input documents that have no ID (e.g. documents from
+     *   `literals()`, or after `removeFields('__name__')`).
      * - Only `collection` set: the input document's ID is reused under
-     *   `collection`.
+     *   `collection`. If the input document has no ID, an ID is generated
+     *   automatically.
      * - Both set: the evaluated ID is used under `collection`.
      */
     export type UpsertStageOptions = StageOptions & {
