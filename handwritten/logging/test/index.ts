@@ -18,7 +18,7 @@ import arrify = require('arrify');
 import * as assert from 'assert';
 import {describe, it, beforeEach, before} from 'mocha';
 import * as extend from 'extend';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import {
   Logging as LOGGING,
   LoggingOptions,
@@ -215,8 +215,8 @@ describe('Logging', () => {
               libVersion: version,
               scopes: EXPECTED_SCOPES,
             },
-            options,
-          ),
+            options
+          )
         );
         return fakeGoogleAuthInstance;
       };
@@ -245,8 +245,8 @@ describe('Logging', () => {
             libVersion: version,
             scopes: EXPECTED_SCOPES,
           },
-          options,
-        ),
+          options
+        )
       );
     });
 
@@ -270,7 +270,7 @@ describe('Logging', () => {
     it('should throw if a name is not provided', () => {
       const error = new Error('A sink name must be provided.');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (logging as any).createSink().then(noop, (err: Error) => {
+      return (logging as any).createSink().then(noop, (err: Error) => {
         assert.deepStrictEqual(err, error);
       });
     });
@@ -278,7 +278,7 @@ describe('Logging', () => {
     it('should throw if a config object is not provided', () => {
       const error = new Error('A sink configuration object must be provided.');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (logging as any).createSink(SINK_NAME).then(noop, (err: Error) => {
+      return (logging as any).createSink(SINK_NAME).then(noop, (err: Error) => {
         assert.deepStrictEqual(err, error);
       });
     });
@@ -354,7 +354,7 @@ describe('Logging', () => {
         logging.configService.createSink = async (
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           reqOpts: any,
-          gaxOpts: {},
+          gaxOpts: {}
         ) => {
           const expectedParent = 'projects/' + logging.projectId;
           assert.strictEqual(reqOpts.parent, expectedParent);
@@ -376,11 +376,11 @@ describe('Logging', () => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           reqOpts: any,
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          gaxOpts: {},
+          gaxOpts: {}
         ) => {
           assert.strictEqual(
             reqOpts.uniqueWriterIdentity,
-            config.uniqueWriterIdentity,
+            config.uniqueWriterIdentity
           );
           assert.strictEqual(reqOpts.sink.uniqueWriterIdentity, undefined);
           return [{}];
@@ -399,7 +399,7 @@ describe('Logging', () => {
         logging.configService.createSink = async (
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           reqOpts: any,
-          gaxOpts: {},
+          gaxOpts: {}
         ) => {
           assert.strictEqual(reqOpts.sink.gaxOptions, undefined);
           assert.strictEqual(gaxOpts, config.gaxOptions);
@@ -424,7 +424,7 @@ describe('Logging', () => {
             throw error;
           };
 
-          logging
+          return logging
             .createSink(SINK_NAME, {} as CreateSinkRequest)
             .then(noop, (err: Error) => assert.deepStrictEqual(err, error));
         });
@@ -455,7 +455,7 @@ describe('Logging', () => {
 
           const [sink_, apiResponse_] = await logging.createSink(
             SINK_NAME,
-            {} as CreateSinkRequest,
+            {} as CreateSinkRequest
           );
           assert.strictEqual(sink_, sink);
           assert.strictEqual(sink_.metadata, apiResponse);
@@ -487,7 +487,7 @@ describe('Logging', () => {
       logging.loggingService.listLogEntries = async (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         reqOpts: any,
-        gaxOpts: {},
+        gaxOpts: {}
       ) => {
         assert.deepStrictEqual(reqOpts, {
           filter: reqOpts?.filter,
@@ -512,7 +512,7 @@ describe('Logging', () => {
 
       logging.loggingService.listLogEntries = async (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        reqOpts: any,
+        reqOpts: any
       ) => {
         assert.deepStrictEqual(reqOpts.resourceNames, resourceNames);
         return [[]];
@@ -526,7 +526,7 @@ describe('Logging', () => {
 
       logging.loggingService.listLogEntries = async (
         reqOpts: {},
-        gaxOpts: {},
+        gaxOpts: {}
       ) => {
         assert.deepStrictEqual(
           reqOpts,
@@ -534,7 +534,7 @@ describe('Logging', () => {
             filter: 'timestamp > "2020-11-11T15:01:23.045123456Z"',
             orderBy: 'timestamp desc',
             resourceNames: ['projects/' + logging.projectId],
-          }),
+          })
         );
 
         assert.deepStrictEqual(gaxOpts, {
@@ -552,7 +552,7 @@ describe('Logging', () => {
       logging.loggingService.listLogEntries = async (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         reqOpts: any,
-        gaxOpts: {},
+        gaxOpts: {}
       ) => {
         assert.deepStrictEqual(
           reqOpts,
@@ -560,7 +560,7 @@ describe('Logging', () => {
             filter: reqOpts?.filter,
             orderBy: 'timestamp desc',
             resourceNames: ['projects/' + logging.projectId],
-          }),
+          })
         );
         assert.deepStrictEqual(gaxOpts, {
           autoPaginate: undefined,
@@ -614,7 +614,7 @@ describe('Logging', () => {
       logging.loggingService.listLogEntries = async (
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         reqOpts: any,
-        gaxOpts: {},
+        gaxOpts: {}
       ) => {
         assert.deepStrictEqual(reqOpts, {
           a: 'b',
@@ -643,7 +643,9 @@ describe('Logging', () => {
       });
 
       it('should reject promise with error', () => {
-        logging.getEntries().then(noop, err => assert.strictEqual(err, error));
+        return logging
+          .getEntries()
+          .then(noop, err => assert.strictEqual(err, error));
       });
     });
 
@@ -692,7 +694,7 @@ describe('Logging', () => {
     it('should make request once reading', done => {
       logging.loggingService.listLogEntriesStream = (
         reqOpts: {},
-        gaxOpts: {},
+        gaxOpts: {}
       ) => {
         assert.deepStrictEqual(reqOpts, {
           resourceNames: ['projects/' + logging.projectId],
@@ -721,7 +723,7 @@ describe('Logging', () => {
       logging = new LOGGING({projectId: PROJECT_ID});
       logging.loggingService.listLogEntriesStream = (
         reqOpts: {},
-        gaxOpts: {},
+        gaxOpts: {}
       ) => {
         assert.deepStrictEqual(reqOpts, {
           resourceNames: ['projects/' + logging.projectId],
@@ -758,12 +760,12 @@ describe('Logging', () => {
         {
           filter: 'custom filter',
         },
-        OPTIONS,
+        OPTIONS
       );
       logging = new LOGGING({projectId: PROJECT_ID});
       logging.loggingService.listLogEntriesStream = (
         reqOpts: {},
-        gaxOpts: {},
+        gaxOpts: {}
       ) => {
         assert.deepStrictEqual(reqOpts, {
           resourceNames: ['projects/' + logging.projectId],
@@ -908,7 +910,7 @@ describe('Logging', () => {
         logging.loggingService.listLogs = async () => {
           throw error;
         };
-        logging
+        return logging
           .getLogs(OPTIONS)
           .then(noop, err => assert.strictEqual(err, error));
       });
@@ -1079,7 +1081,7 @@ describe('Logging', () => {
         logging.configService.listSinks = async () => {
           throw error;
         };
-        logging
+        return logging
           .getSinks(OPTIONS)
           .then(noop, err => assert.strictEqual(err, error));
       });
@@ -1561,7 +1563,7 @@ describe('Logging', () => {
       });
 
       it('should return error', () => {
-        logging
+        return logging
           .setAclForBucket_(CONFIG)
           .then(noop, err => assert.deepStrictEqual(err, error));
       });
@@ -1610,7 +1612,7 @@ describe('Logging', () => {
         });
 
         it('should reject with error', () => {
-          logging
+          return logging
             .setAclForDataset_(CONFIG)
             .then(noop, err => assert.deepStrictEqual(err, error));
         });
@@ -1658,7 +1660,7 @@ describe('Logging', () => {
           });
 
           it('should reject with error', () => {
-            logging
+            return logging
               .setAclForDataset_(CONFIG)
               .then(noop, err => assert.deepStrictEqual(err, error));
           });
@@ -1717,7 +1719,7 @@ describe('Logging', () => {
         });
 
         it('should throw error', () => {
-          logging
+          return logging
             .setAclForTopic_(CONFIG)
             .then(noop, err => assert.deepStrictEqual(err, error));
         });
@@ -1764,7 +1766,7 @@ describe('Logging', () => {
           });
 
           it('should throw error', () => {
-            logging
+            return logging
               .setAclForTopic_(CONFIG)
               .then(noop, err => assert.deepStrictEqual(err, error));
           });
