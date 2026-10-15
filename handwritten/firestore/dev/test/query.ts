@@ -311,10 +311,11 @@ describe('query interface', () => {
           .on('data', () => {
             reject(Error('Unexpected document'));
           })
+          .on('error', reject)
           .on('end', () => {
             resolve();
           });
-      });
+      }, reject);
     });
   });
 
@@ -633,21 +634,31 @@ describe('query interface', () => {
       runQuery: () => responses.shift()!(),
     };
 
-    return new Promise<void>(resolve => {
+    return new Promise<void>((resolve, reject) => {
       void createInstance(overrides).then(firestoreInstance => {
         firestore = firestoreInstance;
         const result = firestore.collection('collectionId').stream();
 
         let resultCount = 0;
-        result.on('data', doc => {
-          expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
-          ++resultCount;
-        });
-        result.on('end', () => {
-          expect(resultCount).toBe(2);
-          resolve();
-        });
-      });
+        result
+          .on('data', doc => {
+            try {
+              expect(doc).toBeInstanceOf(QueryDocumentSnapshot);
+              ++resultCount;
+            } catch (e) {
+              reject(e);
+            }
+          })
+          .on('error', reject)
+          .on('end', () => {
+            try {
+              expect(resultCount).toBe(2);
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          });
+      }, reject);
     });
   });
 
@@ -659,7 +670,7 @@ describe('query interface', () => {
       },
     };
 
-    return new Promise<void>(resolve => {
+    return new Promise<void>((resolve, reject) => {
       void createInstance(overrides).then(firestoreInstance => {
         firestore = firestoreInstance;
         const query = firestore.collection('collectionId');
@@ -668,14 +679,23 @@ describe('query interface', () => {
         query
           .stream()
           .on('data', doc => {
-            expect(doc).toBeInstanceOf(DocumentSnapshot);
-            ++received;
+            try {
+              expect(doc).toBeInstanceOf(DocumentSnapshot);
+              ++received;
+            } catch (e) {
+              reject(e);
+            }
           })
+          .on('error', reject)
           .on('end', () => {
-            expect(received).toBe(2);
-            resolve();
+            try {
+              expect(received).toBe(2);
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
           });
-      });
+      }, reject);
     });
   });
 
@@ -689,7 +709,7 @@ describe('query interface', () => {
     };
 
     let endCounter = 0;
-    return new Promise<void>(resolve => {
+    return new Promise<void>((resolve, reject) => {
       void createInstance(overrides).then(firestore => {
         const query = firestore.collection('collectionId');
         let received = 0;
@@ -697,18 +717,31 @@ describe('query interface', () => {
         query
           .stream()
           .on('data', doc => {
-            expect(doc).toBeInstanceOf(DocumentSnapshot);
-            ++received;
+            try {
+              expect(doc).toBeInstanceOf(DocumentSnapshot);
+              ++received;
+            } catch (e) {
+              reject(e);
+            }
           })
+          .on('error', reject)
           .on('end', () => {
-            expect(received).toBe(2);
-            ++endCounter;
-            setImmediate(() => {
-              expect(endCounter).toBe(1);
-              resolve();
-            });
+            try {
+              expect(received).toBe(2);
+              ++endCounter;
+              setImmediate(() => {
+                try {
+                  expect(endCounter).toBe(1);
+                  resolve();
+                } catch (e) {
+                  reject(e);
+                }
+              });
+            } catch (e) {
+              reject(e);
+            }
           });
-      });
+      }, reject);
     });
   });
 

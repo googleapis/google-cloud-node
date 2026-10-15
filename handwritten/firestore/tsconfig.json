@@ -15,6 +15,7 @@
     "declarationDir": "build/types",
     "stripInternal": false,
     "baseUrl": ".",
+    "types": ["node"],
     "paths": {
       "vitest": ["./dev/test/util/vitest_globals.d.ts"]
     }

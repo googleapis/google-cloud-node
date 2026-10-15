@@ -1131,7 +1131,7 @@ describe('get document', () => {
     expect(result.get('foo')).toBeUndefined();
   });
 
-  it('throws error', () => {
+  it('throws error', async () => {
     const overrides: ApiOverride = {
       batchGetDocuments: () => {
         const error = new GoogleError('RPC Error');
@@ -1140,17 +1140,10 @@ describe('get document', () => {
       },
     };
 
-    return new Promise<void>(resolve => {
-      void createInstance(overrides).then(firestore => {
-        firestore
-          .doc('collectionId/documentId')
-          .get()
-          .catch(err => {
-            expect(err.message).toBe('RPC Error');
-            resolve();
-          });
-      });
-    });
+    const firestore = await createInstance(overrides);
+    await expect(
+      firestore.doc('collectionId/documentId').get(),
+    ).rejects.toThrow('RPC Error');
   });
 
   it('cannot obtain field value without field path', async () => {

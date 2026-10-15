@@ -15,6 +15,10 @@
 import './mocha_extensions';
 import * as watchModule from '../../src/watch';
 
+if (process.env.MOCHA_THROW_DEPRECATION !== 'false') {
+  process.throwDeprecation = true;
+}
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 (globalThis as any).__firestoreWatchModule = watchModule;
 
