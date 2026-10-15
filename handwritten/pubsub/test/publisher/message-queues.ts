@@ -1142,6 +1142,38 @@ describe('Message Queues', () => {
       assert.strictEqual(calls[0].config.gaxOpts?.signal?.aborted, true);
       assert.strictEqual(calls[1].config.gaxOpts?.signal?.aborted, true);
       assert.strictEqual(calls[2].config.gaxOpts?.signal?.aborted, false);
+
+      // Verify x-goog-pubsub-client-telemetry header on all attempts
+      const decodedTelemetry = calls.map(call => {
+        const headers = call.config.gaxOpts?.otherArgs?.headers as
+          | Record<string, string>
+          | undefined;
+        const b64 = headers?.['x-goog-pubsub-client-telemetry'];
+        assert.ok(b64, 'Expected x-goog-pubsub-client-telemetry header');
+        return google.pubsub.v1.PubsubClientTelemetry.decode(
+          Buffer.from(b64, 'base64'),
+        );
+      });
+      assert.strictEqual(
+        decodedTelemetry[0].publishOperation?.hedgedAttemptCount,
+        0,
+      );
+      assert.strictEqual(
+        decodedTelemetry[1].publishOperation?.hedgedAttemptCount,
+        1,
+      );
+      assert.strictEqual(
+        decodedTelemetry[2].publishOperation?.hedgedAttemptCount,
+        2,
+      );
+      assert.deepStrictEqual(
+        decodedTelemetry[0].publishOperation?.publishStartTime,
+        decodedTelemetry[1].publishOperation?.publishStartTime,
+      );
+      assert.deepStrictEqual(
+        decodedTelemetry[0].publishOperation?.publishStartTime,
+        decodedTelemetry[2].publishOperation?.publishStartTime,
+      );
     });
 
     it('logs rate limiting when token bucket is empty and resumes hedging after refill', async () => {
@@ -1203,41 +1235,33 @@ describe('Message Queues', () => {
       await slowPromise;
     });
 
-    it('never hedges on OrderedQueue even if hedgingScheduler is present on publisher', async () => {
+    it('rejects OrderedQueue.add and OrderedQueue._publish when hedging is enabled on publisher', async () => {
       fakePub.enableHedging({
         hedgeDelay: Duration.from({milliseconds: 200}),
         maxTokens: 10,
         refillRatio: 0.2,
       });
-      for (let i = 0; i < 5; i++) {
-        fakePub.refillTokenBucket();
-      }
 
       const orderedQueue = new OrderedQueue(publisher, 'order-key');
-      const calls: CapturedPublishCall[] = [];
-      sandbox
-        .stub(topic, 'request')
-        .callsFake(
-          (
-            config: RequestConfig,
-            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
-          ) => {
-            calls.push({config, callback});
-          },
-        );
-
-      const publishPromise = orderedQueue._publish(
-        [{orderingKey: 'order-key'}],
-        [sandbox.spy()],
-        0,
-        'test',
+      const addCbSpy = sandbox.spy();
+      orderedQueue.add({orderingKey: 'order-key'}, addCbSpy);
+      assert.strictEqual(addCbSpy.calledOnce, true);
+      assert.match(
+        (addCbSpy.firstCall.args[0] as Error).message,
+        /Publish hedging and message ordering cannot be enabled at the same time\./,
       );
 
-      clock.tick(500);
-      assert.strictEqual(calls.length, 1);
-
-      calls[0].callback(null, {messageIds: ['ordered-1']});
-      await publishPromise;
+      const publishCbSpy = sandbox.spy();
+      await assert.rejects(
+        orderedQueue._publish(
+          [{orderingKey: 'order-key'}],
+          [publishCbSpy],
+          0,
+          'test',
+        ),
+        /Publish hedging and message ordering cannot be enabled at the same time\./,
+      );
+      assert.strictEqual(publishCbSpy.calledOnce, true);
     });
   });
 });
