@@ -85,11 +85,11 @@ Structure the pull request body using the following template:
 ```markdown
 ## Description
 
-<1 sentence (never more than 12 words) describing what the pull request does>
+<1 complete sentence (never more than 12 words) describing what the pull request does>
 
 ## Impact
 
-<1 sentence (never more than 12 words) describing what the impact of the PR is and what problem it solves>
+<1 complete sentence (never more than 12 words) describing what the impact of the PR is and what problem it solves>
 
 ## Changes
 
