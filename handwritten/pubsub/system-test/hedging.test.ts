@@ -219,17 +219,15 @@ describe('Publish Hedging System Tests', () => {
       if (config.method === 'publish' && !stalledPrimaryIntercepted) {
         stalledPrimaryIntercepted = true;
         primarySignal = config.gaxOpts?.signal;
+        const abortHandler = () => {
+          clearTimeout(stallTimer);
+          callback(createCancelledError());
+        };
         const stallTimer = setTimeout(() => {
+          primarySignal?.removeEventListener('abort', abortHandler);
           originalRequest(config, callback);
         }, 2500);
-        primarySignal?.addEventListener(
-          'abort',
-          () => {
-            clearTimeout(stallTimer);
-            callback(createCancelledError());
-          },
-          {once: true},
-        );
+        primarySignal?.addEventListener('abort', abortHandler, {once: true});
         return;
       }
 
@@ -300,17 +298,15 @@ describe('Publish Hedging System Tests', () => {
 
       if (config.method === 'publish' && config.gaxOpts?.retry === null) {
         hedgedSignal = config.gaxOpts?.signal;
+        const abortHandler = () => {
+          clearTimeout(hedgedTimer);
+          callback(createCancelledError());
+        };
         const hedgedTimer = setTimeout(() => {
+          hedgedSignal?.removeEventListener('abort', abortHandler);
           originalRequest(config, callback);
         }, 2500);
-        hedgedSignal?.addEventListener(
-          'abort',
-          () => {
-            clearTimeout(hedgedTimer);
-            callback(createCancelledError());
-          },
-          {once: true},
-        );
+        hedgedSignal?.addEventListener('abort', abortHandler, {once: true});
         return;
       }
 
@@ -438,17 +434,15 @@ describe('Publish Hedging System Tests', () => {
         if (config.method === 'publish' && !stalledPrimaryIntercepted) {
           stalledPrimaryIntercepted = true;
           const signal = config.gaxOpts?.signal;
+          const abortHandler = () => {
+            clearTimeout(stallTimer);
+            callback(createCancelledError());
+          };
           const stallTimer = setTimeout(() => {
+            signal?.removeEventListener('abort', abortHandler);
             originalRequest(config, callback);
           }, 2500);
-          signal?.addEventListener(
-            'abort',
-            () => {
-              clearTimeout(stallTimer);
-              callback(createCancelledError());
-            },
-            {once: true},
-          );
+          signal?.addEventListener('abort', abortHandler, {once: true});
           return;
         }
         originalRequest(config, callback);
@@ -489,7 +483,7 @@ describe('Publish Hedging System Tests', () => {
     }
   });
 
-  it('should disallow messageOrdering with hedging and bypass hedging for messages with orderingKey', async () => {
+  it('should disallow messageOrdering with hedging and reject messages with orderingKey when hedging is enabled', async () => {
     const topicName = resources.generateName('top-order-excl');
     assert.throws(() => {
       pubsub.topic(topicName, {
@@ -498,32 +492,22 @@ describe('Publish Hedging System Tests', () => {
       });
     }, /Publish hedging and message ordering cannot be enabled at the same time/);
 
-    const {topic, subscription} = await createTopicAndSubscription(
-      'order-key',
-      {
-        batching: {maxMessages: 1},
-        hedging: {
-          hedgeDelay: Duration.from({milliseconds: 150}),
-          maxTokens: 5,
-          refillRatio: 0.2,
-        },
+    const {topic} = await createTopicAndSubscription('order-key', {
+      batching: {maxMessages: 1},
+      hedging: {
+        hedgeDelay: Duration.from({milliseconds: 150}),
+        maxTokens: 5,
+        refillRatio: 0.2,
       },
+    });
+
+    await assert.rejects(
+      topic.publishMessage({
+        data: Buffer.from('ordered-key-message'),
+        orderingKey: 'key-1',
+      }),
+      /Publish hedging and message ordering cannot be enabled at the same time/,
     );
-
-    const messageId = await topic.publishMessage({
-      data: Buffer.from('ordered-key-message'),
-      orderingKey: 'key-1',
-    });
-    assert.ok(messageId);
-
-    // OrderedQueue bypasses hedging and does not refill the unordered hedging token bucket
     assert.strictEqual(topic.publisher.tokenBucket?.getTokenBalance(), 0);
-
-    const msg = await waitForMessage(subscription, {
-      timeoutMs: 20000,
-      timeoutErrorMessage: 'Timeout waiting for orderingKey message',
-      closeWhenDone: true,
-    });
-    assert.strictEqual(msg.data.toString(), 'ordered-key-message');
   });
 });
