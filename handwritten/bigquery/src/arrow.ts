@@ -115,6 +115,17 @@ interface ArrowStreamContext {
 
 const readClients = new WeakMap<BigQuery, BigQueryReadClient>();
 
+// gRPC status codes safe to resume from a row offset on ReadRows.
+const GRPC_STATUS_DEADLINE_EXCEEDED = 4;
+const GRPC_STATUS_INTERNAL = 13;
+const GRPC_STATUS_UNAVAILABLE = 14;
+
+// How many times in a row a failed ReadRows call is reopened before the
+// error is passed to the caller. Any received batch resets the count.
+const MAX_STREAM_RETRIES = 3;
+// Delay before the first reopen, doubled for each consecutive retry.
+const RETRY_BASE_DELAY_MS = 100;
+
 /**
  * Returns the first project ID from `candidates`, falling back to the
  * `BigQuery` client's project and ignoring the uninitialized `'{{projectId}}'`
@@ -426,8 +437,30 @@ function readDestinationSchema(
 }
 
 /**
+ * Returns `true` if a `ReadRows` gRPC stream error is transient and safe to
+ * resume from the next unread row offset.
+ *
+ * @private
+ */
+function isRetryableStreamError(err: Error & {code?: number}): boolean {
+  if (
+    err.code === GRPC_STATUS_DEADLINE_EXCEEDED ||
+    err.code === GRPC_STATUS_UNAVAILABLE
+  ) {
+    return true;
+  }
+  // Long-lived HTTP/2 streams closed by the server with RST_STREAM surface as
+  // INTERNAL (code 13) in gRPC and are safe to reconnect at the next offset.
+  if (err.code === GRPC_STATUS_INTERNAL && err.message.includes('RST_STREAM')) {
+    return true;
+  }
+  return false;
+}
+
+/**
  * Streams Arrow `RecordBatch`es from a Storage Read API stream starting at
- * `offset`, pausing `ReadRows` while the consumer is behind.
+ * `offset`, pausing `ReadRows` while the consumer is behind and resuming at
+ * `offset + rowsReceived` if the gRPC stream fails with a retryable error.
  *
  * @private
  */
@@ -452,10 +485,9 @@ function streamReadRows(
     return;
   }
 
-  const grpcStream = readClient.readRows({
-    readStream,
-    offset,
-  });
+  let activeGrpcStream: ReadRowsStream | undefined;
+  let detachActiveGrpcStream: (() => void) | undefined;
+  let retryTimer: NodeJS.Timeout | undefined;
 
   // Cancel only the active ReadRows gRPC stream if the caller ends iteration
   // early, keeping the shared BigQueryReadClient open for subsequent queries.
@@ -463,93 +495,145 @@ function streamReadRows(
   const cancelGrpcStream = () => {
     if (!finished) {
       finished = true;
-      grpcStream.cancel();
+      clearTimeout(retryTimer);
+      detachActiveGrpcStream?.();
+      activeGrpcStream?.cancel();
     }
   };
   stream.once('close', cancelGrpcStream);
 
+  const fail = (err: Error) => {
+    stream.removeListener('close', cancelGrpcStream);
+    finished = true;
+    stream.destroy(err);
+  };
+
   // ReadRows is paused when push() reports a full buffer; resume it when the
   // consumer asks for more so slow consumers don't buffer the whole result.
-  ctx.onRead = () => grpcStream.resume();
+  ctx.onRead = () => activeGrpcStream?.resume();
 
   let serializedSchema: Uint8Array | undefined = initialSchema
     ? toUint8Array(initialSchema)
     : undefined;
   let emittedBatch = false;
+  let currentOffset = offset;
+  let retries = 0;
 
-  grpcStream.on('data', (resp: IReadRowsResponse) => {
-    if (stream._ended || stream.destroyed) {
-      cancelGrpcStream();
-      return;
-    }
-    // The Storage Read API sends arrowSchema on the first ReadRowsResponse and
-    // may also emit responses without record batch bytes (e.g., heartbeats).
-    if (resp.arrowSchema?.serializedSchema) {
-      serializedSchema = toUint8Array(resp.arrowSchema.serializedSchema);
-    }
-    const rawBatch = resp.arrowRecordBatch?.serializedRecordBatch;
-    const hasBatchBytes =
-      rawBatch &&
-      (typeof rawBatch === 'string'
-        ? rawBatch.length > 0
-        : rawBatch.byteLength > 0);
-    if (!hasBatchBytes) {
-      return;
-    }
+  const openGrpcStream = () => {
+    let grpcStream: ReadRowsStream;
     try {
-      const batches = decodeArrowPayload(arrow, serializedSchema, rawBatch);
-      for (const batch of batches) {
-        if (stream._ended || stream.destroyed) {
-          cancelGrpcStream();
-          return;
-        }
-        emittedBatch = true;
-        if (!stream.push(batch)) {
-          grpcStream.pause();
-        }
-      }
-    } catch (parseErr) {
-      cancelGrpcStream();
-      stream.destroy(parseErr as Error);
-    }
-  });
-
-  grpcStream.on('error', (err: Error) => {
-    stream.removeListener('close', cancelGrpcStream);
-    if (finished || stream._ended || stream.destroyed) {
+      grpcStream = readClient.readRows({readStream, offset: currentOffset});
+    } catch (err) {
+      fail(err as Error);
       return;
     }
-    finished = true;
-    stream.destroy(err);
-  });
+    activeGrpcStream = grpcStream;
 
-  grpcStream.on('end', () => {
-    stream.removeListener('close', cancelGrpcStream);
-    finished = true;
-    if (stream._ended || stream.destroyed) {
-      return;
-    }
-    // When reading from offset = 0 (e.g., after waiting for an unfinished job)
-    // and the stream finishes with 0 rows, still emit a 0-row RecordBatch.
-    if (offset === 0 && !emittedBatch) {
-      if (serializedSchema || !job) {
-        emitZeroRowBatchAndEnd(arrow, stream, serializedSchema);
+    const onData = (resp: IReadRowsResponse) => {
+      if (stream._ended || stream.destroyed) {
+        cancelGrpcStream();
         return;
       }
-      readDestinationSchema(ctx, job, (err, schema) => {
-        if (stream._ended || stream.destroyed) {
+      // The Storage Read API sends arrowSchema on the first ReadRowsResponse and
+      // may also emit responses without record batch bytes (e.g., heartbeats).
+      if (resp.arrowSchema?.serializedSchema) {
+        serializedSchema = toUint8Array(resp.arrowSchema.serializedSchema);
+      }
+      const rawBatch = resp.arrowRecordBatch?.serializedRecordBatch;
+      const hasBatchBytes =
+        rawBatch &&
+        (typeof rawBatch === 'string'
+          ? rawBatch.length > 0
+          : rawBatch.byteLength > 0);
+      if (!hasBatchBytes) {
+        return;
+      }
+      try {
+        const batches = decodeArrowPayload(arrow, serializedSchema, rawBatch);
+        for (const batch of batches) {
+          if (stream._ended || stream.destroyed) {
+            cancelGrpcStream();
+            return;
+          }
+          // A reconnect resumes at the next unread row, and any progress
+          // resets the count of consecutive retries.
+          retries = 0;
+          currentOffset += batch.numRows;
+          emittedBatch = true;
+          if (!stream.push(batch)) {
+            grpcStream.pause();
+          }
+        }
+      } catch (parseErr) {
+        cancelGrpcStream();
+        stream.destroy(parseErr as Error);
+      }
+    };
+
+    const onError = (err: Error & {code?: number}) => {
+      if (finished || stream._ended || stream.destroyed) {
+        return;
+      }
+      if (isRetryableStreamError(err) && retries < MAX_STREAM_RETRIES) {
+        // Abandon the failed stream and reopen ReadRows from currentOffset.
+        retries++;
+        detach();
+        // Wait before reopening so a brief network blip doesn't use up every
+        // retry at once.
+        retryTimer = setTimeout(
+          openGrpcStream,
+          RETRY_BASE_DELAY_MS * 2 ** (retries - 1),
+        );
+        return;
+      }
+      fail(err);
+    };
+
+    const onEnd = () => {
+      stream.removeListener('close', cancelGrpcStream);
+      finished = true;
+      if (stream._ended || stream.destroyed) {
+        return;
+      }
+      // When reading from offset = 0 (e.g., after waiting for an unfinished job)
+      // and the stream finishes with 0 rows, still emit a 0-row RecordBatch.
+      if (offset === 0 && !emittedBatch) {
+        if (serializedSchema || !job) {
+          emitZeroRowBatchAndEnd(arrow, stream, serializedSchema);
           return;
         }
-        if (err) {
-          stream.destroy(err);
-          return;
-        }
-        emitZeroRowBatchAndEnd(arrow, stream, schema);
-      });
-      return;
-    }
-    stream.end();
-  });
+        readDestinationSchema(ctx, job, (err, schema) => {
+          if (stream._ended || stream.destroyed) {
+            return;
+          }
+          if (err) {
+            stream.destroy(err);
+            return;
+          }
+          emitZeroRowBatchAndEnd(arrow, stream, schema);
+        });
+        return;
+      }
+      stream.end();
+    };
+
+    // Removes only our listeners from an abandoned stream. A cancelled
+    // google-gax stream emits a gRPC CANCELLED (code 1) 'error' later, and an
+    // 'error' event with no listener would crash the process.
+    const detach = () => {
+      grpcStream.removeListener('data', onData);
+      grpcStream.removeListener('error', onError);
+      grpcStream.removeListener('end', onEnd);
+      grpcStream.on('error', () => {});
+    };
+    detachActiveGrpcStream = detach;
+
+    grpcStream.on('data', onData);
+    grpcStream.on('error', onError);
+    grpcStream.on('end', onEnd);
+  };
+
+  openGrpcStream();
 }
 
 /**
