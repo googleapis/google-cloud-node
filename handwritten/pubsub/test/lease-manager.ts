@@ -17,7 +17,7 @@
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import {EventEmitter} from 'events';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import * as sinon from 'sinon';
 import * as defer from 'p-defer';
 
@@ -208,10 +208,7 @@ describe('LeaseManager', () => {
 
       subscriber.on('message', () => {
         assert.strictEqual(fakeLog!.called, true);
-        assert.strictEqual(
-          fakeLog!.fields!.severity,
-          'INFO',
-        );
+        assert.strictEqual(fakeLog!.fields!.severity, 'INFO');
         assert.strictEqual(fakeLog!.args![1] as string, 'a');
         assert.strictEqual(fakeLog!.args![2] as string, 'b');
         done();
@@ -241,10 +238,7 @@ describe('LeaseManager', () => {
       await deferred.promise;
 
       assert.strictEqual(fakeLog.called, true);
-      assert.strictEqual(
-        fakeLog.fields!.severity,
-        'ERROR',
-      );
+      assert.strictEqual(fakeLog.fields!.severity, 'ERROR');
       assert.strictEqual(
         (fakeLog.args![0] as string).includes('exception'),
         true,
@@ -402,10 +396,7 @@ describe('LeaseManager', () => {
 
         // make sure the expired messages were forgotten
         assert.strictEqual(removeStub.callCount, badMessages.length);
-        assert.strictEqual(
-          fakeLog.fields!.severity,
-          'WARNING',
-        );
+        assert.strictEqual(fakeLog.fields!.severity, 'WARNING');
         assert.strictEqual(fakeLog.called, true);
 
         badMessages.forEach((fakeMessage, i) => {

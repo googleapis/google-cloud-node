@@ -15,7 +15,7 @@
 import * as assert from 'assert';
 import {describe, it, beforeEach} from 'mocha';
 import * as nodeutil from 'util';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import {Options} from '../src';
 import {Entry, Logging, LogSync, Log} from '@google-cloud/logging';
 import * as instrumentation from '@google-cloud/logging/build/src/utils/instrumentation';
