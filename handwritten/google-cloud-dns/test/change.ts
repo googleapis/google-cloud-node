@@ -20,7 +20,7 @@ import {
 import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import {Change} from '../src/change';
 
 let promisified = false;
@@ -119,7 +119,7 @@ describe('Change', () => {
             assert.strictEqual(change, null);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          }
+          },
         );
       });
     });
@@ -145,7 +145,7 @@ describe('Change', () => {
             assert.strictEqual(change_, change);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          }
+          },
         );
       });
 

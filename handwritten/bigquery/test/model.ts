@@ -15,7 +15,7 @@
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import * as sinon from 'sinon';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import * as pfy from '@google-cloud/promisify';
 import {EventEmitter} from 'events';
 import {JobOptions} from '../src/job';
