@@ -188,10 +188,35 @@ export function extractFromSettings(
   }
 
   // Extract artifact and version from x-goog-api-client header.
-  const headers = (
-    settings.otherArgs as {headers?: Record<string, string>} | undefined
-  )?.headers;
-  const clientHeader = headers?.['x-goog-api-client'];
+  const otherArgsWithMeta = settings.otherArgs as
+    | {
+        headers?: Record<string, string | string[]>;
+        metadataBuilder?: () => {
+          get?: (key: string) => unknown[];
+          [key: string]: unknown;
+        };
+      }
+    | undefined;
+  let rawClientHeader: unknown =
+    otherArgsWithMeta?.headers?.['x-goog-api-client'];
+  if (
+    !rawClientHeader &&
+    typeof otherArgsWithMeta?.metadataBuilder === 'function'
+  ) {
+    try {
+      const built = otherArgsWithMeta.metadataBuilder();
+      if (built && typeof built.get === 'function') {
+        rawClientHeader = built.get('x-goog-api-client');
+      } else if (built && typeof built === 'object') {
+        rawClientHeader = built['x-goog-api-client'];
+      }
+    } catch {
+      // Ignore metadataBuilder errors
+    }
+  }
+  const clientHeader = Array.isArray(rawClientHeader)
+    ? rawClientHeader.join(' ')
+    : rawClientHeader;
   if (typeof clientHeader === 'string') {
     const tokens = clientHeader.trim().split(/\s+/);
     for (const token of tokens) {

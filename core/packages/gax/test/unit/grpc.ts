@@ -194,6 +194,33 @@ describe('grpc', () => {
         'method',
       );
     });
+
+    it('accepts legacy 6-argument constructSettings calls while ignoring internalTelemetryInfo', () => {
+      const legacyTelemetryInfo = {
+        gcpClientService: 'fake',
+        gcpVersion: 'v1',
+        gcpRepo: 'googleapis/google-cloud-node',
+        gcpArtifact: '@google-cloud/fake',
+      };
+      const settings = grpcClient.constructSettings(
+        'google.fake.service',
+        serviceConfig as unknown as ClientConfig,
+        {} as unknown as ClientConfig,
+        {},
+        true,
+        legacyTelemetryInfo,
+      );
+      assert.strictEqual(settings.method.timeout, 10);
+      assert.strictEqual(settings.method.enableTelemetryTracing, true);
+      assert.strictEqual(
+        settings.method.otherArgs.internalTelemetryInfo,
+        undefined,
+      );
+      assert.strictEqual(
+        settings.method.otherArgs.internalMethodName,
+        'method',
+      );
+    });
   });
 
   describe('createStub', () => {

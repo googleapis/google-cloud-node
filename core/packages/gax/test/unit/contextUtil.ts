@@ -209,6 +209,39 @@ describe('contextUtil', () => {
       assert.strictEqual(metadata.gcpArtifact, '@google-cloud/redis');
     });
 
+    it('extracts version from metadataBuilder when headers is not set directly on otherArgs', () => {
+      const grpcSettings = new CallSettings({
+        apiName: 'google.cloud.redis.v1.CloudRedis',
+        otherArgs: {
+          metadataBuilder: () => ({
+            get: (key: string) =>
+              key === 'x-goog-api-client'
+                ? ['gax/5.0.6 gapic/6.1.0 gl-node/22.0.0 grpc/1.10.0']
+                : [],
+          }),
+        },
+      });
+      const grpcMeta = extractFromSettings(grpcSettings);
+      assert.strictEqual(grpcMeta.gcpVersion, '6.1.0');
+      assert.strictEqual(grpcMeta.gcpClientService, 'redis');
+      assert.strictEqual(grpcMeta.gcpArtifact, '@google-cloud/redis');
+
+      const fallbackSettings = new CallSettings({
+        apiName: 'google.cloud.redis.v1.CloudRedis',
+        otherArgs: {
+          metadataBuilder: () => ({
+            'x-goog-api-client': [
+              'gax/5.0.6 gapic/6.1.0 gl-node/22.0.0 rest/5.0.6 grpc-web/5.0.6',
+            ],
+          }),
+        },
+      });
+      const fallbackMeta = extractFromSettings(fallbackSettings);
+      assert.strictEqual(fallbackMeta.gcpVersion, '6.1.0');
+      assert.strictEqual(fallbackMeta.gcpClientService, 'redis');
+      assert.strictEqual(fallbackMeta.gcpArtifact, '@google-cloud/redis');
+    });
+
     it('handles undefined settings', () => {
       const metadata = extractFromSettings(undefined);
       assert.deepStrictEqual(metadata, {});

@@ -227,6 +227,9 @@ export class GrpcClient {
     clientConfig: gax.ClientConfig,
     configOverrides: gax.ClientConfig,
     headers: OutgoingHttpHeaders,
+    enableTelemetryTracing?: boolean,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _legacyTelemetryInfo?: unknown,
   ) {
     function buildMetadata(abTests: {}, moreHeaders: OutgoingHttpHeaders) {
       const metadata: OutgoingHttpHeaders = {};
@@ -300,7 +303,7 @@ export class GrpcClient {
       configOverrides,
       Status,
       otherArgs,
-      this._enableTelemetryTracing,
+      enableTelemetryTracing ?? this._enableTelemetryTracing,
     );
   }
 

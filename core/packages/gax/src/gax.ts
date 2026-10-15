@@ -817,6 +817,8 @@ export function constructSettings(
   retryNames: {},
   otherArgs?: {},
   enableTelemetryTracing?: boolean,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _legacyTelemetryInfo?: unknown,
 ) {
   const env: Record<string, string | undefined> =
     typeof process === 'object' && typeof process.env === 'object'
