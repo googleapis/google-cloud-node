@@ -19,7 +19,6 @@ import {
   Attributes,
   context,
   Context,
-  createContextKey,
   Span,
   SpanKind,
   SpanStatusCode,
@@ -29,9 +28,12 @@ import {
 import {APICallback, GaxCallResult} from '../apitypes';
 import {Status} from '../status';
 import {
+  ATTEMPT_SPAN_KEY,
   AttemptTraceContext,
   buildInitialAttributes,
+  CLIENT_REQUEST_SPAN_KEY,
   DynamicTraceContext,
+  getActiveTraceContext,
   StaticTraceContext,
 } from './contextUtil';
 import {
@@ -43,10 +45,6 @@ import {
   resolveRpcStatusName,
 } from './errorUtil';
 
-const CLIENT_REQUEST_SPAN_KEY = createContextKey(
-  'google-gax-client-request-span',
-);
-const ATTEMPT_SPAN_KEY = createContextKey('google-gax-attempt-span');
 const attemptUrlTemplates = new WeakMap<Span, string>();
 const clientRequestFirstAttempt = new WeakMap<Span, Span>();
 
@@ -104,11 +102,9 @@ export function setAttemptHttpMethod(
   httpMethod: string,
   urlTemplate?: string,
 ): void {
-  const activeContext = context.active();
-  const attemptSpan = activeContext.getValue(ATTEMPT_SPAN_KEY) as
-    Span | undefined;
-  const clientRequestSpan = activeContext.getValue(CLIENT_REQUEST_SPAN_KEY) as
-    Span | undefined;
+  const activeTrace = getActiveTraceContext();
+  const attemptSpan = activeTrace?.attemptSpan;
+  const clientRequestSpan = activeTrace?.clientRequestSpan;
   if (attemptSpan) {
     attemptSpan.setAttribute('http.request.method', httpMethod);
     if (urlTemplate) {
@@ -689,8 +685,8 @@ export function traceAttempt<T = GaxCallResult>(
       ? formatHttpAttemptSpanName(httpMethod, urlTemplate)
       : rpcMethod;
   const baseContext = parentContext ?? context.active();
-  const clientRequestSpan = baseContext.getValue(CLIENT_REQUEST_SPAN_KEY) as
-    Span | undefined;
+  const clientRequestSpan =
+    getActiveTraceContext(baseContext)?.clientRequestSpan;
   return getGaxTracer().startActiveSpan(
     spanName,
     {kind: SpanKind.CLIENT},
