@@ -991,6 +991,27 @@ export class UpdateStage implements Stage {
 }
 
 /**
+ * Converts the `collection` option of an insert or upsert stage to a
+ * collection path with a leading slash. Throws if the path is empty.
+ */
+function normalizeDmlCollectionPath(
+  methodName: string,
+  collection: string | CollectionReference | firestore.CollectionReference,
+): string {
+  const path =
+    typeof collection === 'string'
+      ? collection
+      : (collection as CollectionReference).path;
+  if (!path) {
+    // The error matches the Web SDK.
+    throw new Error(
+      `Function ${methodName}() cannot be called with an empty collection path.`,
+    );
+  }
+  return path.startsWith('/') ? path : '/' + path;
+}
+
+/**
  * Internal options for Insert stage.
  */
 export type InternalInsertStageOptions = Omit<
@@ -1011,14 +1032,11 @@ export class InsertStage implements Stage {
   private readonly documentIdExpr?: Expression;
 
   constructor(private options: InternalInsertStageOptions = {}) {
-    if (options.collection) {
-      this.collectionPath =
-        typeof options.collection === 'string'
-          ? options.collection
-          : (options.collection as CollectionReference).path;
-      if (!this.collectionPath.startsWith('/')) {
-        this.collectionPath = '/' + this.collectionPath;
-      }
+    if (options.collection !== undefined) {
+      this.collectionPath = normalizeDmlCollectionPath(
+        'insert',
+        options.collection,
+      );
     }
     if (options.documentIdExpression) {
       this.documentIdExpr =
@@ -1086,14 +1104,11 @@ export class UpsertStage implements Stage {
     this.additionalFields = selectablesToMap(
       (opts.additionalFields ?? []) as AliasedExpression[],
     );
-    if (opts.collection) {
-      this.collectionPath =
-        typeof opts.collection === 'string'
-          ? opts.collection
-          : (opts.collection as CollectionReference).path;
-      if (!this.collectionPath.startsWith('/')) {
-        this.collectionPath = '/' + this.collectionPath;
-      }
+    if (opts.collection !== undefined) {
+      this.collectionPath = normalizeDmlCollectionPath(
+        'upsert',
+        opts.collection,
+      );
     }
     if (opts.documentIdExpression) {
       this.documentIdExpr =
