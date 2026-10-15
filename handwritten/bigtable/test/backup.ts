@@ -16,7 +16,7 @@ import {PreciseDate} from '@google-cloud/precise-date';
 import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {before, beforeEach, describe, it, afterEach} from 'mocha';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import * as pumpify from 'pumpify';
 import {ServiceError} from 'google-gax';
 

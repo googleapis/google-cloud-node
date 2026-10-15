@@ -22,7 +22,7 @@ import {
 import {PromisifyAllOptions} from '@google-cloud/promisify';
 import assert from 'assert';
 import {describe, it, before, beforeEach, after, afterEach} from 'mocha';
-import proxyquire from 'proxyquire';
+import proxyquire from './proxyquire.js';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import {Bucket, CRC32C_DEFAULT_VALIDATOR_GENERATOR} from '../src/index.js';
 import {GetFilesOptions} from '../src/bucket.js';

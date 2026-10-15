@@ -19,7 +19,7 @@
 import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {before, beforeEach, describe, it} from 'mocha';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import {
   CLOUD_RESOURCE_HEADER,
   LEADER_AWARE_ROUTING_HEADER,

@@ -16,7 +16,7 @@ import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
 import * as sinon from 'sinon';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import {ServiceError} from 'google-gax';
 import * as snapshot from 'snap-shot-it';
 import {Readable} from 'stream';

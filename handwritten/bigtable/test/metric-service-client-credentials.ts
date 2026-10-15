@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import {ClientOptions, grpc} from 'google-gax';
 import * as assert from 'assert';
 import {MetricServiceClient} from '@google-cloud/monitoring';
