@@ -734,7 +734,12 @@ export class Storage extends Service {
     if (typeof EMULATOR_HOST === 'string') {
       apiEndpoint = Storage.sanitizeEndpoint(EMULATOR_HOST);
       hasCustomEndpoint = true;
-      if (!options.authClient) {
+      if (
+        !options.authClient &&
+        !options.keyFilename &&
+        !options.keyFile &&
+        !options.credentials
+      ) {
         options = Object.assign({}, options, {
           authClient: new PassThroughClient(),
         });

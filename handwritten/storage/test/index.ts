@@ -500,6 +500,26 @@ describe('Storage', () => {
         const calledWith = storage.calledWith_[1];
         assert(calledWith.authClient instanceof PassThroughClient);
       });
+
+      it('should not use PassThroughClient when keyFilename or credentials are provided', () => {
+        const storageWithKeyFile = new Storage({
+          projectId: PROJECT_ID,
+          keyFilename: '/path/to/keyfile.json',
+        });
+        assert.strictEqual(
+          storageWithKeyFile.calledWith_[1].authClient,
+          undefined
+        );
+
+        const storageWithCreds = new Storage({
+          projectId: PROJECT_ID,
+          credentials: {client_email: 'a@b.com', private_key: 'key'},
+        });
+        assert.strictEqual(
+          storageWithCreds.calledWith_[1].authClient,
+          undefined
+        );
+      });
     });
   });
 
