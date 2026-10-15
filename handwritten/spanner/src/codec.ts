@@ -937,14 +937,14 @@ export function getDecoder(
   switch (type.code) {
     case spannerClient.spanner.v1.TypeCode.BYTES:
     case 'BYTES':
-      decoder = val => Buffer.from(val, 'base64');
+      decoder = val => (Buffer.isBuffer(val) ? val : Buffer.from(val, 'base64'));
       break;
 
     case spannerClient.spanner.v1.TypeCode.PROTO:
     case 'PROTO':
       if (jsonMode) {
         decoder = val => {
-          const decoded = Buffer.from(val, 'base64');
+          const decoded = Buffer.isBuffer(val) ? val : Buffer.from(val, 'base64');
           if (columnMetadata) {
             return (columnMetadata as any)['toObject'](
               (columnMetadata as any)['decode'](decoded),
@@ -954,7 +954,7 @@ export function getDecoder(
         };
       } else {
         decoder = val => {
-          const decoded = Buffer.from(val, 'base64');
+          const decoded = Buffer.isBuffer(val) ? val : Buffer.from(val, 'base64');
           return new ProtoMessage({
             value: decoded,
             fullName: type.protoTypeFqn!,
@@ -1210,7 +1210,37 @@ function decode(
  * @param {string} isoString The Zulu timestamp string (e.g. "2021-05-11T16:46:04.872345678Z").
  * @returns {PreciseDate} The parsed PreciseDate instance.
  */
-function parsePreciseDate(isoString: string): PreciseDate {
+function parsePreciseDate(
+  isoString: string | {seconds: number; nanos: number},
+): PreciseDate {
+  if (typeof isoString === 'object' && isoString !== null) {
+    const {seconds, nanos} = isoString;
+    if (nanos >= 0 && nanos < 1_000_000_000) {
+      const milliseconds = (nanos / 1_000_000) | 0;
+      const rem = nanos - milliseconds * 1_000_000;
+      const microseconds = (rem / 1_000) | 0;
+      const nanoseconds = rem - microseconds * 1_000;
+      const utcMillis = seconds * 1000 + milliseconds;
+      if (Number.isSafeInteger(utcMillis)) {
+        const preciseDate = Reflect.construct(
+          Date,
+          [utcMillis],
+          PreciseDate,
+        ) as PreciseDate;
+        const internal = preciseDate as unknown as {
+          _micros: number;
+          _nanos: number;
+          _picos: number;
+        };
+        internal._micros = microseconds;
+        internal._nanos = nanoseconds;
+        internal._picos = 0;
+        return preciseDate;
+      }
+    }
+    return new PreciseDate({seconds, nanos});
+  }
+
   if (
     typeof isoString === 'string' &&
     isoString.length >= 20 &&

@@ -31,6 +31,7 @@ import {
   Row,
   decodeRowsDirect,
 } from './partial-result-stream';
+import * as nativeCore from './native-core';
 import {Session} from './session';
 import {Key} from './table';
 import {
@@ -1580,6 +1581,53 @@ export class Snapshot extends EventEmitter {
         );
       };
 
+      if (nativeCore.canUseNativeCore(this)) {
+        streamSpan.addEvent('Starting stream');
+        const injectedHeaders = injectRequestIDIntoHeaders(
+          this.commonHeaders_,
+          this.session,
+          nthRequest,
+          1,
+        );
+        const requestId = injectedHeaders[X_GOOG_SPANNER_REQUEST_ID_HEADER];
+        if (runSpan && requestId) {
+          runSpan.setAttribute(X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR, requestId);
+        }
+        nativeCore.executeNativeTransactionRun({
+          snapshot: this,
+          sanitizeRequest: () => {
+            sanitizeRequest();
+            return formattedRequest!;
+          },
+          headers: injectedHeaders,
+          rowOptions: {
+            json,
+            jsonOptions,
+            maxResumeRetries,
+            columnsMetadata,
+            gaxOptions,
+          },
+          timeoutMs: gaxOptions?.timeout ?? 0,
+          streamSpan,
+          onError: (err, rows, stats, metadata) => {
+            const wasAborted = isErrorAborted(err);
+            if (!this.id && this._useInRunner && !wasAborted) {
+              streamSpan.addEvent('Stream broken. Safe to retry');
+              void this.begin();
+            } else if (wasAborted) {
+              streamSpan.addEvent('Stream broken. Not safe to retry', {
+                'transaction.id': this.id?.toString(),
+              });
+            }
+            complete(err, rows, stats, metadata);
+          },
+          onSuccess: (rows, stats, metadata) => {
+            complete(null, rows, stats, metadata);
+          },
+        });
+        return;
+      }
+
       const makeRequest = (resumeToken?: ResumeToken): Readable => {
         attempt++;
         if (!resumeToken) {
@@ -2027,15 +2075,41 @@ export class Snapshot extends EventEmitter {
         });
       };
 
-      const resultStream = partialResultStream(
-        this._wrapWithIdWaiter(makeRequest),
-        {
-          json,
-          jsonOptions,
-          maxResumeRetries,
-          columnsMetadata,
-          gaxOptions,
-        },
+      const resultStream = (
+        nativeCore.canUseNativeCore(this)
+          ? nativeCore.runStreamNative({
+              snapshot: this,
+              sanitizeRequest: () => {
+                attempt++;
+                span.addEvent('Starting stream');
+                if (!reqOpts || (this.id && !reqOpts.transaction.id)) {
+                  sanitizeRequest();
+                }
+                return reqOpts!;
+              },
+              getHeaders: () =>
+                injectRequestIDIntoHeaders(
+                  this.commonHeaders_,
+                  this.session,
+                  nthRequest,
+                  attempt || 1,
+                ),
+              rowOptions: {
+                json,
+                jsonOptions,
+                maxResumeRetries,
+                columnsMetadata,
+                gaxOptions,
+              },
+              timeoutMs: gaxOptions?.timeout ?? 0,
+            })
+          : partialResultStream(this._wrapWithIdWaiter(makeRequest), {
+              json,
+              jsonOptions,
+              maxResumeRetries,
+              columnsMetadata,
+              gaxOptions,
+            })
       )
         .on('response', response => {
           this._updatePrecommitToken(response);

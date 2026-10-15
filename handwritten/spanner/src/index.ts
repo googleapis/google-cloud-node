@@ -152,6 +152,28 @@ export type GetInstanceConfigOperationsCallback = PagedCallback<
 >;
 
 /**
+ * Configuration options for opt-in dynamic gRPC channel pooling when the Go Shared Core is enabled,
+ * mirroring the Go Spanner client library's `DynamicChannelPoolConfig`.
+ * Zero values use the Go Spanner client's `DefaultDynamicChannelPoolConfig` when `enabled` is `true`.
+ */
+export interface DynamicChannelPoolConfig {
+  /** Opts the client into dynamic channel pooling. Defaults to `false`. */
+  enabled?: boolean;
+  /** Number of channels created at client startup (defaults to 4). */
+  initialChannels?: number;
+  /** Lower bound of channels retained during scale-down (defaults to 2). */
+  minChannels?: number;
+  /** Upper bound of channels created during scale-up (defaults to 10). */
+  maxChannels?: number;
+  /** Triggers event-driven scale-up when per-channel load or average load exceeds this value (defaults to 25). */
+  maxRpcPerChannel?: number;
+  /** Low-load threshold used by scale-down checks (defaults to 15). */
+  minRpcPerChannel?: number;
+  /** Strategy for choosing an active channel: `'POWER_OF_TWO_LEAST_BUSY'` (0, default) or `'ROUND_ROBIN'` (1). */
+  selectionStrategy?: 'POWER_OF_TWO_LEAST_BUSY' | 'ROUND_ROBIN' | number;
+}
+
+/**
  * Session pool configuration options.
  * @property {boolean} [routeToLeaderEnabled=True] If set to false leader aware routing will be disabled.
  * Disabling leader aware routing would route all requests in RW/PDML transactions to any region.
@@ -162,6 +184,7 @@ export type GetInstanceConfigOperationsCallback = PagedCallback<
  * @property {boolean} [disableBuiltInMetrics=True] If set to true, built-in metrics will be disabled.
  * @property {number} ['grpc.enable_channelz'=0] Whether to enable gRPC Channelz service tracking.
  * Defaults to 0 (disabled) to eliminate per-RPC tracking and allocation overhead. Set to 1 to enable.
+ * @property {DynamicChannelPoolConfig} [dynamicChannelPoolConfig] Opt-in configuration for dynamic gRPC channel pooling when Go Shared Core is enabled.
  */
 export interface SpannerOptions extends GrpcClientOptions {
   apiEndpoint?: string;
@@ -178,6 +201,7 @@ export interface SpannerOptions extends GrpcClientOptions {
   disableBuiltInMetrics?: boolean;
   interceptors?: any[];
   sessionLabels?: {[key: string]: string};
+  dynamicChannelPoolConfig?: DynamicChannelPoolConfig;
   /**
    * The Trusted Cloud Domain (TPC) DNS of the service used to make requests.
    * Defaults to `googleapis.com`.

@@ -126,7 +126,7 @@ export interface Row extends Array<Field> {
  * Row implementation extending Array to provide a shared, non-enumerable
  * toJSON method without per-row closures or Object.setPrototypeOf overhead.
  */
-class RowImpl extends Array<Field> implements Row {
+export class RowImpl extends Array<Field> implements Row {
   toJSON(options?: JSONOptions): Json {
     return codec.convertFieldsToJson(this, options);
   }

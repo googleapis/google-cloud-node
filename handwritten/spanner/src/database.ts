@@ -121,6 +121,11 @@ import {
   getQueryTraceConfig,
 } from './instrument';
 import {
+  isNativeCoreEnabled,
+  executeNativeDatabaseRun,
+  prewarmNativeCore,
+} from './native-core';
+import {
   AtomicCounter,
   X_GOOG_SPANNER_REQUEST_ID_HEADER,
   getRequestIdPrefix,
@@ -540,6 +545,11 @@ class Database extends common.GrpcServiceObject {
       Object.assign({}, queryOptions),
       Database.getEnvironmentQueryOptions(),
     );
+    try {
+      prewarmNativeCore(this.parent?.parent);
+    } catch (_) {
+      // Ignore prewarm initialization errors; query execution will handle fallback/errors.
+    }
   }
 
   _nextNthRequest(): number {
@@ -3000,6 +3010,13 @@ class Database extends common.GrpcServiceObject {
     options: TimestampBounds,
     callback: RunCallback,
   ): void {
+    if (
+      isNativeCoreEnabled() &&
+      executeNativeDatabaseRun(this, query, options, callback)
+    ) {
+      return;
+    }
+
     const traceConfig: traceConfig = {
       ...this._traceConfig,
       ...getQueryTraceConfig(query),
