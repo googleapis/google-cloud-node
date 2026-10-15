@@ -1710,9 +1710,9 @@ describe('PubSub', () => {
         },
       };
 
-      pubsub.getClient_ = (_config, callback: Function) => {
+      pubsub.getClient_ = (_config, callback) => {
         abortController.abort();
-        callback(null, fakeClient);
+        callback(null, fakeClient as unknown as gax.ClientStub);
       };
 
       const configWithSignal: pubsubTypes.RequestConfig = {
