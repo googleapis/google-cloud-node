@@ -51,6 +51,9 @@ export interface CreateReadSessionRequest {
   readSession: {
     table: string;
     dataFormat: 'ARROW';
+    readOptions?: {
+      arrowSerializationOptions?: bigquery.IArrowSerializationOptions;
+    };
   };
   maxStreamCount: number;
 }
@@ -60,13 +63,26 @@ export interface BigQueryReadClient {
     request: CreateReadSessionRequest,
     callback: (err: Error | null, session?: IReadSession | null) => void,
   ): void;
-  readRows(request: {readStream: string; offset?: number}): ReadRowsStream;
+  readRows(request: {
+    readStream: string;
+    offset?: number;
+    arrowSerializationOptions?: bigquery.IArrowSerializationOptions;
+  }): ReadRowsStream;
 }
 
 export interface StorageModule {
   BigQueryReadClient: new (
     options?: Record<string, unknown>,
   ) => BigQueryReadClient;
+  protos?: {
+    google: {
+      cloud: {
+        bigquery: {
+          storage: {v1: {ReadRowsRequest: {prototype: object}}};
+        };
+      };
+    };
+  };
 }
 
 /**
@@ -98,7 +114,21 @@ export type ArrowQuery = Query & {
    * the job completes.
    */
   timeoutMs?: number;
+  /**
+   * [Beta] Arrow serialization options sent on `jobs.query`, `ReadRows`, and
+   * `CreateReadSession`, such as `picosTimestampPrecision`. Buffer compression
+   * isn't supported.
+   */
+  arrowSerializationOptions?: ArrowSerializationOptions;
 };
+
+/**
+ * [Beta] Arrow serialization options for
+ * {@link BigQuery#createQueryArrowStream}.
+ *
+ * @beta
+ */
+export type ArrowSerializationOptions = bigquery.IArrowSerializationOptions;
 
 /**
  * State shared by the helpers that stream rows for one
@@ -109,6 +139,7 @@ interface ArrowStreamContext {
   arrow: ArrowModule;
   storage: StorageModule;
   stream: ArrowRecordBatchStream;
+  arrowSerializationOptions: ArrowSerializationOptions;
   /** Called when the consumer wants more batches. */
   onRead?: () => void;
 }
@@ -125,6 +156,71 @@ const GRPC_STATUS_UNAVAILABLE = 14;
 const MAX_STREAM_RETRIES = 3;
 // Delay before the first reopen, doubled for each consecutive retry.
 const RETRY_BASE_DELAY_MS = 100;
+
+/**
+ * Validates and normalizes `arrowSerializationOptions`, rejecting compressed
+ * Arrow buffers (`apache-arrow` doesn't bundle LZ4 or ZSTD codecs) and
+ * defaulting `picosTimestampPrecision` to
+ * `'TIMESTAMP_PRECISION_MICROS'`.
+ *
+ * @private
+ */
+function resolveArrowSerializationOptions(
+  options?: ArrowSerializationOptions,
+): ArrowSerializationOptions {
+  if (
+    options?.bufferCompression &&
+    options.bufferCompression !== 'COMPRESSION_UNSPECIFIED'
+  ) {
+    throw new Error(
+      `Unsupported arrowSerializationOptions.bufferCompression "${options.bufferCompression}": ` +
+        'apache-arrow does not bundle LZ4 or ZSTD decompression codecs.',
+    );
+  }
+  const precision = options?.picosTimestampPrecision;
+  return {
+    picosTimestampPrecision:
+      precision && precision !== 'PICOS_TIMESTAMP_PRECISION_UNSPECIFIED'
+        ? precision
+        : 'TIMESTAMP_PRECISION_MICROS',
+  };
+}
+
+/**
+ * Throws if `options` request a non-default timestamp precision that the
+ * installed `@google-cloud/bigquery-storage` can't send on `ReadRows`.
+ * Releases whose `ReadRowsRequest` lacks `arrowSerializationOptions` (from
+ * `@google-cloud/bigquery-storage-api` < 0.5.0) silently drop it, so rows read
+ * after the first page would come back at microsecond precision. Remove this
+ * check with the minimum version bump in {@link checkArrowDependencies}.
+ *
+ * @private
+ */
+function assertReadRowsSupportsOptions(
+  storage: StorageModule,
+  options: ArrowSerializationOptions,
+): void {
+  if (options.picosTimestampPrecision === 'TIMESTAMP_PRECISION_MICROS') {
+    return;
+  }
+  const readRowsRequest =
+    storage.protos?.google.cloud.bigquery.storage.v1.ReadRowsRequest;
+  if (
+    readRowsRequest &&
+    Object.prototype.hasOwnProperty.call(
+      readRowsRequest.prototype,
+      'arrowSerializationOptions',
+    )
+  ) {
+    return;
+  }
+  throw new Error(
+    `arrowSerializationOptions.picosTimestampPrecision "${options.picosTimestampPrecision}" ` +
+      'requires an @google-cloud/bigquery-storage release that sends ' +
+      'arrowSerializationOptions on ReadRows (@google-cloud/bigquery-storage-api >= 0.5.0). ' +
+      'Please upgrade using: npm install @google-cloud/bigquery-storage@latest',
+  );
+}
 
 /**
  * Returns the first project ID from `candidates`, falling back to the
@@ -358,7 +454,13 @@ function streamDefaultJobStream(
   }
 
   const readStream = `projects/${projectId}/locations/${location}/jobs/${jobId}/streams/_default`;
-  streamReadRows(ctx, {readStream, offset, initialSchema, job});
+  streamReadRows(ctx, {
+    readStream,
+    offset,
+    initialSchema,
+    includeSerializationOptions: true,
+    job,
+  });
 }
 
 /**
@@ -386,6 +488,9 @@ function createArrowReadSession(
       readSession: {
         table: `projects/${table.projectId}/datasets/${table.datasetId}/tables/${table.tableId}`,
         dataFormat: 'ARROW',
+        readOptions: {
+          arrowSerializationOptions: ctx.arrowSerializationOptions,
+        },
       },
       // One stream keeps rows in the query's order (e.g., ORDER BY).
       maxStreamCount: 1,
@@ -470,12 +575,14 @@ function streamReadRows(
     readStream: string;
     offset: number;
     initialSchema?: Uint8Array | string;
+    includeSerializationOptions?: boolean;
     /** The finished job, to read the schema of a result without rows. */
     job?: Job;
   },
 ): void {
-  const {bq, arrow, storage, stream} = ctx;
-  const {readStream, offset, initialSchema, job} = options;
+  const {bq, arrow, storage, stream, arrowSerializationOptions} = ctx;
+  const {readStream, offset, initialSchema, includeSerializationOptions, job} =
+    options;
 
   let readClient: BigQueryReadClient;
   try {
@@ -522,7 +629,11 @@ function streamReadRows(
   const openGrpcStream = () => {
     let grpcStream: ReadRowsStream;
     try {
-      grpcStream = readClient.readRows({readStream, offset: currentOffset});
+      grpcStream = readClient.readRows({
+        readStream,
+        offset: currentOffset,
+        ...(includeSerializationOptions ? {arrowSerializationOptions} : {}),
+      });
     } catch (err) {
       fail(err as Error);
       return;
@@ -671,6 +782,8 @@ function streamDestinationTable(
         return;
       }
 
+      // Session streams inherit arrowSerializationOptions from CreateReadSession;
+      // ReadRowsRequest.arrowSerializationOptions is only supported on streams/_default.
       streamReadRows(ctx, {
         readStream,
         offset: 0,
@@ -765,8 +878,12 @@ export function createQueryArrowStream_(
       return;
     }
 
-    const queryObj: ArrowQuery =
-      typeof query === 'string' ? {query} : {...query};
+    // Keep arrowSerializationOptions out of queryObj so it never reaches the
+    // jobs.insert configuration; it's sent explicitly where supported.
+    const {
+      arrowSerializationOptions: requestedSerializationOptions,
+      ...queryObj
+    }: ArrowQuery = typeof query === 'string' ? {query} : query;
 
     if (queryObj.writeDisposition === 'WRITE_APPEND') {
       stream.destroy(
@@ -778,7 +895,28 @@ export function createQueryArrowStream_(
       return;
     }
 
-    const ctx: ArrowStreamContext = {bq, arrow, storage, stream};
+    let arrowSerializationOptions: ArrowSerializationOptions;
+    try {
+      arrowSerializationOptions = resolveArrowSerializationOptions(
+        requestedSerializationOptions,
+      );
+      // Destination tables read through a read session, which takes the
+      // options on CreateReadSession instead of ReadRows.
+      if (!queryObj.destination) {
+        assertReadRowsSupportsOptions(storage, arrowSerializationOptions);
+      }
+    } catch (err) {
+      stream.destroy(err as Error);
+      return;
+    }
+
+    const ctx: ArrowStreamContext = {
+      bq,
+      arrow,
+      storage,
+      stream,
+      arrowSerializationOptions,
+    };
     readCtx = ctx;
 
     let queryReq: bigquery.IQueryRequest | undefined;
@@ -857,6 +995,7 @@ export function createQueryArrowStream_(
       queryReq.jobCreationMode = 'JOB_CREATION_OPTIONAL';
     }
     queryReq.queryResultsFormat = 'ARROW';
+    queryReq.arrowSerializationOptions = arrowSerializationOptions;
 
     void bq.runJobsQuery(queryReq, (err, job, res) => {
       if (err) {

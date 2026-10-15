@@ -681,4 +681,113 @@ describe('Arrow Query Results', () => {
       ['id', 'label'],
     );
   });
+
+  it('should apply arrowSerializationOptions.picosTimestampPrecision across inline jobs.query and streams/_default, or reject non-default precisions when bigquery-storage cannot send them on ReadRows', async () => {
+    const totalRows = 15000;
+    const sql = `SELECT id, TIMESTAMP '2026-01-15 12:34:56.123456Z' AS ts, REPEAT('z', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`;
+
+    // Releases of @google-cloud/bigquery-storage whose ReadRowsRequest lacks
+    // arrowSerializationOptions (bigquery-storage-api < 0.5.0) can't keep
+    // non-default precisions on rows after the first page, so
+    // createQueryArrowStream rejects them before sending the query. Until the
+    // devDependency includes the field, verify that rejection instead.
+    const readRowsSendsSerializationOptions =
+      Object.prototype.hasOwnProperty.call(
+        checkArrowDependencies().storage.protos!.google.cloud.bigquery.storage
+          .v1.ReadRowsRequest.prototype,
+        'arrowSerializationOptions',
+      );
+    // apache-arrow returns timestamps as epoch milliseconds with fractional
+    // microseconds: 2026-01-15T12:34:56.123456Z.
+    const expectedMillis = Date.UTC(2026, 0, 15, 12, 34, 56, 123) + 0.456;
+    const unsupportedPrecisionError =
+      /requires an @google-cloud\/bigquery-storage release that sends arrowSerializationOptions on ReadRows/;
+
+    for (const picosTimestampPrecision of [
+      'TIMESTAMP_PRECISION_MICROS',
+      'TIMESTAMP_PRECISION_NANOS',
+      'TIMESTAMP_PRECISION_PICOS',
+    ] as const) {
+      if (
+        picosTimestampPrecision !== 'TIMESTAMP_PRECISION_MICROS' &&
+        !readRowsSendsSerializationOptions
+      ) {
+        await assert.rejects(
+          bigquery
+            .createQueryArrowStream({
+              query: sql,
+              arrowSerializationOptions: {picosTimestampPrecision},
+            })
+            .toArray(),
+          unsupportedPrecisionError,
+        );
+        continue;
+      }
+      const batches: arrow.RecordBatch[] = await bigquery
+        .createQueryArrowStream({
+          query: sql,
+          useQueryCache: false,
+          arrowSerializationOptions: {picosTimestampPrecision},
+        })
+        .toArray();
+
+      // Verify the result spanned both inline jobs.query and streams/_default with consistent Timestamp values.
+      assert.ok(
+        batches.length >= 2,
+        `Expected >= 2 batches for ${picosTimestampPrecision}, got ${batches.length}`,
+      );
+      const table = new arrow.Table(batches);
+      assert.strictEqual(table.numRows, totalRows);
+      const tsField = table.schema.fields.find(f => f.name === 'ts');
+      assert.ok(arrow.DataType.isTimestamp(tsField?.type));
+      assert.strictEqual(table.getChild('ts')!.get(0), expectedMillis);
+      assert.strictEqual(
+        table.getChild('ts')!.get(totalRows - 1),
+        expectedMillis,
+      );
+    }
+
+    // The default precision truncates a TIMESTAMP(12) column to microseconds
+    // on every batch, including rows read from streams/_default.
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+      const defaultBatches: arrow.RecordBatch[] = await bigquery
+        .createQueryArrowStream({
+          query: `SELECT id, CAST('2026-01-15 12:34:56.123456789123+00' AS TIMESTAMP(12)) AS ts, REPEAT('z', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`,
+          useQueryCache: false,
+        })
+        .toArray();
+      assert.ok(
+        defaultBatches.length >= 2,
+        `Expected >= 2 batches, got ${defaultBatches.length}`,
+      );
+      const defaultTable = new arrow.Table(defaultBatches);
+      assert.strictEqual(defaultTable.getChild('ts')!.get(0), expectedMillis);
+      assert.strictEqual(
+        defaultTable.getChild('ts')!.get(totalRows - 1),
+        expectedMillis,
+      );
+    }
+
+    // When picosecond TIMESTAMP(12) support is enabled on the test project, also verify 12-digit string encoding.
+    if (
+      process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true' &&
+      readRowsSendsSerializationOptions
+    ) {
+      const picosBatches: arrow.RecordBatch[] = await bigquery
+        .createQueryArrowStream({
+          query:
+            "SELECT CAST('2026-01-15 12:34:56.123456789123+00' AS TIMESTAMP(12)) AS ts_picos",
+          useQueryCache: false,
+          arrowSerializationOptions: {
+            picosTimestampPrecision: 'TIMESTAMP_PRECISION_PICOS',
+          },
+        })
+        .toArray();
+      const picosTable = new arrow.Table(picosBatches);
+      assert.strictEqual(
+        picosTable.getChild('ts_picos')!.get(0),
+        '2026-01-15T12:34:56.123456789123Z',
+      );
+    }
+  });
 });
