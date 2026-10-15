@@ -124,21 +124,6 @@ export interface AttemptTraceContext extends DynamicTraceContext {
 }
 
 /**
- * Derives the GCP client service name from an NPM package name.
- */
-export function extractClientServiceFromPackageName(name: string): string {
-  const scopedMatch = name.match(/^@[^/]+\/(?:google-cloud-)?(.*)$/);
-  if (scopedMatch && scopedMatch[1]) {
-    return scopedMatch[1];
-  }
-  const unscopedMatch = name.match(/^google-cloud-(.*)$/);
-  if (unscopedMatch && unscopedMatch[1]) {
-    return unscopedMatch[1];
-  }
-  return name;
-}
-
-/**
  * Derives the GCP service name from a protobuf apiName (e.g. google.cloud.redis.v1.CloudRedis).
  */
 export function extractServiceFromApiName(apiName: string): string | undefined {
@@ -161,19 +146,6 @@ export function extractServiceFromApiName(apiName: string): string | undefined {
     }
   }
   return undefined;
-}
-
-let fallbackVersion: string | undefined;
-try {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  fallbackVersion = require('../../package.json').version;
-} catch {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    fallbackVersion = require('../../../package.json').version;
-  } catch {
-    // Ignore fallback failure
-  }
 }
 
 /**
@@ -254,11 +226,6 @@ export function extractFromSettings(
             : `@google-cloud/${serviceFromApi}`;
       }
     }
-  }
-
-  // Fall back to package.json version if missing.
-  if (!result.gcpVersion && fallbackVersion) {
-    result.gcpVersion = fallbackVersion;
   }
 
   // Extract server address and port from endpoint settings.
@@ -357,13 +324,10 @@ export function clearMetadataCache(): void {
  * Precedence: environment variables > dynamic resolution from settings.
  *
  * @param {CallSettings} [settings] - Call settings for the RPC invocation.
- * @param {string} [_callerFilePath] - Optional explicit path to the caller source file (deprecated).
  * @returns {StaticTraceContext} The resolved static trace context.
  */
 export function resolveStaticTraceContext(
   settings?: CallSettings,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _callerFilePath?: string,
 ): StaticTraceContext {
   const envMeta = extractFromEnvironment();
 

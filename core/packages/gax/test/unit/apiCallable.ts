@@ -559,6 +559,7 @@ describe('createApiCall', () => {
         attemptSpan.attributes['http.request.method'],
         undefined,
       );
+      assert.strictEqual(attemptSpan.attributes['gcp.client.version'], '1.2.3');
       harness.assertResponseStatus({rpcStatus: 'OK'}, {span: attemptSpan});
       assert.strictEqual(span.name, 'EchoClient.Echo');
       assert.strictEqual(span.kind, SpanKind.INTERNAL);
@@ -591,6 +592,9 @@ describe('createApiCall', () => {
         apiName: 'google.cloud.redis.v1.CloudRedis',
         otherArgs: {
           internalMethodName: 'GetInstance',
+          headers: {
+            'x-goog-api-client': 'gapic/1.2.3',
+          },
         },
       });
 
@@ -623,10 +627,11 @@ describe('createApiCall', () => {
         'google.cloud.redis.v1.CloudRedis/GetInstance',
       );
       assert.strictEqual(attemptSpan.kind, SpanKind.CLIENT);
+      assert.strictEqual(attemptSpan.attributes['gcp.client.version'], '1.2.3');
       assert.strictEqual(span.name, 'CloudRedisClient.GetInstance');
       assert.strictEqual(span.ended, true);
       assert.strictEqual(span.attributes['gcp.client.service'], 'redis');
-      assert.ok(span.attributes['gcp.client.version']);
+      assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
       assert.ok(span.attributes['gcp.client.repo']);
       assert.ok(span.attributes['gcp.client.artifact']);
       assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');

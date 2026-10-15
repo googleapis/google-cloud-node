@@ -20,7 +20,6 @@ import {
   buildInitialAttributes,
   clearMetadataCache,
   DynamicTraceContext,
-  extractClientServiceFromPackageName,
   extractFromEnvironment,
   extractFromSettings,
   extractServiceFromApiName,
@@ -59,48 +58,6 @@ describe('contextUtil', () => {
     delete process.env.GCP_CLIENT_SERVICE;
     delete process.env.GCP_CLIENT_VERSION;
     delete process.env.GCP_ARTIFACT;
-  });
-
-  describe('extractClientServiceFromPackageName', () => {
-    it('extracts service from @google-cloud scoped packages', () => {
-      assert.strictEqual(
-        extractClientServiceFromPackageName('@google-cloud/redis'),
-        'redis',
-      );
-      assert.strictEqual(
-        extractClientServiceFromPackageName('@google-cloud/storage'),
-        'storage',
-      );
-      assert.strictEqual(
-        extractClientServiceFromPackageName('@google-cloud/secret-manager'),
-        'secret-manager',
-      );
-    });
-
-    it('extracts service from other scoped packages', () => {
-      assert.strictEqual(
-        extractClientServiceFromPackageName('@googlemaps/places'),
-        'places',
-      );
-      assert.strictEqual(
-        extractClientServiceFromPackageName('@google-shopping/accounts'),
-        'accounts',
-      );
-    });
-
-    it('extracts service from unscoped google-cloud- packages', () => {
-      assert.strictEqual(
-        extractClientServiceFromPackageName('google-cloud-redis'),
-        'redis',
-      );
-    });
-
-    it('falls back to unchanged name for standard packages', () => {
-      assert.strictEqual(
-        extractClientServiceFromPackageName('google-gax'),
-        'google-gax',
-      );
-    });
   });
 
   describe('extractServiceFromApiName', () => {
