@@ -466,6 +466,40 @@ describe.skipClassic('Pipeline class', () => {
         expectResults(res, {documents_modified: 0});
       });
 
+      it('update skips input documents whose target does not exist', async () => {
+        const res = await firestore
+          .pipeline()
+          .literals([
+            {__name__: dmlCol.doc('book1'), status: 'Updated'},
+            {__name__: dmlCol.doc('missing_update_target'), status: 'Updated'},
+          ])
+          .update()
+          .execute();
+
+        expectResults(res, {documents_modified: 1});
+        const existing = await dmlCol.doc('book1').get();
+        expect(existing.get('status')).to.equal('Updated');
+        const missing = await dmlCol.doc('missing_update_target').get();
+        expect(missing.exists).to.be.false;
+      });
+
+      it('atomic update fails when a target document does not exist', async () => {
+        const promise = firestore
+          .pipeline()
+          .literals([
+            {__name__: dmlCol.doc('book1'), status: 'Updated'},
+            {__name__: dmlCol.doc('missing_update_target'), status: 'Updated'},
+          ])
+          .update()
+          .execute({atomic: true});
+
+        await expect(promise).to.be.rejectedWith(/No document to update/);
+        const existing = await dmlCol.doc('book1').get();
+        expect(existing.get('status')).to.be.undefined;
+        const missing = await dmlCol.doc('missing_update_target').get();
+        expect(missing.exists).to.be.false;
+      });
+
       it('can execute insert stage', async () => {
         const newDocId = 'newBook_insert_1';
         const res = await firestore

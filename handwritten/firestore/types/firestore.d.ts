@@ -14184,6 +14184,13 @@ declare namespace FirebaseFirestore {
 
     /**
      * Options defining how an Update stage is evaluated.
+     *
+     * Each input document is written to the existing document at the path in
+     * its `__name__` field. The update stage never creates documents. If the
+     * document at that path does not exist, the input document is skipped and
+     * is not counted in `documents_modified`. When the pipeline is executed
+     * with `atomic: true`, the pipeline instead fails with a `NOT_FOUND` error
+     * and no documents are updated.
      */
     export type UpdateStageOptions = StageOptions & {
       /**
