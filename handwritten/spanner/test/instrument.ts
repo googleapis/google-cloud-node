@@ -121,9 +121,8 @@ describe('instrument', () => {
               isRecording: () => true,
               recordException: () => {},
             };
-            return context.with(
-              traceSetSpan(context.active(), fakeSpan),
-              () => fn(fakeSpan),
+            return context.with(traceSetSpan(context.active(), fakeSpan), () =>
+              fn(fakeSpan),
             );
           },
         }),
