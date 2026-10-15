@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
-    "test": "c8 mocha build/test",
+    "test": "node ../../bin/run-test.cjs --proxyquire-shim build/test",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "compile": "tsc -p .",
