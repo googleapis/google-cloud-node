@@ -145,11 +145,12 @@ async function setup(
   });
 }
 
-describe('EndToEnd', () => {
+describe('EndToEnd', async () => {
   const sandbox = sinon.createSandbox();
   const contextManager = new (
     AsyncLocalStorageContextManager || AsyncHooksContextManager
   )();
+  setGlobalContextManager(contextManager);
   const traceExporter = new InMemorySpanExporter();
   const sampler = new AlwaysOnSampler();
   const tracerProvider = new NodeTracerProvider({
@@ -158,27 +159,18 @@ describe('EndToEnd', () => {
     spanProcessors: [new SimpleSpanProcessor(traceExporter)],
   });
 
-  let server: grpc.Server;
-  let spannerMock: mock.MockSpanner;
-  let spanner: Spanner;
-  let instance: Instance;
-  let database: Database;
+  const setupResult = await setup(
+    {
+      tracerProvider: tracerProvider,
+      enableExtendedTracing: false,
+    },
+    sandbox,
+  );
 
-  before(async () => {
-    setGlobalContextManager(contextManager);
-    const setupResult = await setup(
-      {
-        tracerProvider: tracerProvider,
-        enableExtendedTracing: false,
-      },
-      sandbox,
-    );
-    server = setupResult.server;
-    spannerMock = setupResult.spannerMock;
-    spanner = setupResult.spanner;
-    instance = spanner.instance('instance');
-    database = instance.database('database');
-  });
+  const server = setupResult.server;
+  const spannerMock = setupResult.spannerMock;
+  const spanner = setupResult.spanner;
+  const instance = spanner.instance('instance');
 
   after(async () => {
     await spanner.close();
@@ -192,6 +184,8 @@ describe('EndToEnd', () => {
     await traceExporter.reset();
     spannerMock.resetRequests();
   });
+
+  const database = instance.database('database');
 
   beforeEach(async () => {
     // To deflake expectations of session creation, let's
@@ -467,7 +461,7 @@ describe('EndToEnd', () => {
   });
 });
 
-describe('ObservabilityOptions injection and propagation', () => {
+describe('ObservabilityOptions injection and propagation', async () => {
   let sandbox;
 
   beforeEach(() => {
@@ -540,7 +534,7 @@ describe('ObservabilityOptions injection and propagation', () => {
     );
   });
 
-  describe('Transaction', () => {
+  describe('Transaction', async () => {
     const traceExporter = new InMemorySpanExporter();
     const tracerProvider = new NodeTracerProvider({
       sampler: new AlwaysOnSampler(),
@@ -552,22 +546,10 @@ describe('ObservabilityOptions injection and propagation', () => {
       tracerProvider: tracerProvider,
       enableExtendedTracing: true,
     };
-    let spanner: Spanner;
-    let server: grpc.Server;
-    let spannerMock: mock.MockSpanner;
-    let database: Database;
-    let withAllSpansHaveDBName: Function;
-
-    before(async () => {
-      const setupResult = await setup(observabilityOptions);
-      spanner = setupResult.spanner;
-      server = setupResult.server;
-      spannerMock = setupResult.spannerMock;
-      const db = spanner.instance('instance').database('database');
-      withAllSpansHaveDBName = generateWithAllSpansHaveDBName(
-        db.formattedName_,
-      );
-    });
+    const setupResult = await setup(observabilityOptions, sandbox);
+    const spanner = setupResult.spanner;
+    const server = setupResult.server;
+    const spannerMock = setupResult.spannerMock;
 
     after(async () => {
       traceExporter.reset();
@@ -577,6 +559,7 @@ describe('ObservabilityOptions injection and propagation', () => {
       server.tryShutdown(() => {});
     });
 
+    let database: Database;
     beforeEach(async () => {
       const instance = spanner.instance('instance');
       database = instance.database('database');
@@ -593,6 +576,11 @@ describe('ObservabilityOptions injection and propagation', () => {
     afterEach(async () => {
       spannerMock.resetRequests();
     });
+
+    const db = spanner.instance('instance').database('database');
+    const withAllSpansHaveDBName = generateWithAllSpansHaveDBName(
+      db.formattedName_,
+    );
 
     it('run', async () => {
       let txn;

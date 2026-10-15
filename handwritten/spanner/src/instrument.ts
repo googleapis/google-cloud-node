@@ -20,6 +20,7 @@ import {
 } from '@opentelemetry/semantic-conventions';
 
 import {
+  ContextManager,
   Span,
   SpanStatusCode,
   context,
@@ -127,7 +128,7 @@ const {
   AsyncHooksContextManager,
 } = require('@opentelemetry/context-async-hooks');
 
-let contextManagerInstallAttempted = false;
+let defaultContextManager: ContextManager | undefined;
 
 /*
  * If no global ContextManager is registered, install an AsyncLocalStorageContextManager
@@ -138,18 +139,19 @@ let contextManagerInstallAttempted = false;
  * on the next gRPC call.
  *
  * setGlobalContextManager() returns false when a manager is already registered,
- * which is the documented signal that we shouldn't replace it. The
- * `contextManagerInstallAttempted` latch makes the call idempotent so we don't
- * allocate a new ContextManager on each Spanner client construction.
+ * which is the documented signal that we shouldn't replace it. Reusing the
+ * singleton `defaultContextManager` avoids allocating a new instance on each
+ * Spanner client construction while allowing re-registration if `context.disable()`
+ * was called.
  */
 function ensureInitialContextManagerSet() {
-  if (contextManagerInstallAttempted) return;
-  contextManagerInstallAttempted = true;
-  const ContextManagerClass =
-    AsyncLocalStorageContextManager || AsyncHooksContextManager;
-  const contextManager = new ContextManagerClass();
-  if (context.setGlobalContextManager(contextManager)) {
-    contextManager.enable();
+  if (!defaultContextManager) {
+    const ContextManagerClass =
+      AsyncLocalStorageContextManager || AsyncHooksContextManager;
+    defaultContextManager = new ContextManagerClass();
+  }
+  if (context.setGlobalContextManager(defaultContextManager!)) {
+    defaultContextManager!.enable();
   }
 }
 
@@ -218,7 +220,6 @@ export function isTracingEnabled(opts?: ObservabilityOptions): boolean {
 export function _resetTracingEnabledForTest(): void {
   globalTracingEnabled = undefined;
   lastCheckTime = 0;
-  contextManagerInstallAttempted = false;
 }
 
 /**

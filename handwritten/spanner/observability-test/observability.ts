@@ -46,7 +46,6 @@ const {
 const {disableContextAndManager, setGlobalContextManager} = require('./helper');
 
 const {
-  AsyncLocalStorageContextManager,
   AsyncHooksContextManager,
 } = require('@opentelemetry/context-async-hooks');
 
@@ -59,15 +58,10 @@ describe('startTrace', () => {
     exporter: globalExporter,
     spanProcessors: [new SimpleSpanProcessor(globalExporter)],
   });
+  globalProvider.register();
 
-  const contextManager = new (
-    AsyncLocalStorageContextManager || AsyncHooksContextManager
-  )();
-
-  before(() => {
-    globalProvider.register();
-    setGlobalContextManager(contextManager);
-  });
+  const contextManager = new AsyncHooksContextManager();
+  setGlobalContextManager(contextManager);
 
   afterEach(() => {
     globalExporter.forceFlush();
@@ -91,7 +85,7 @@ describe('startTrace', () => {
     });
   });
 
-  it('with TracerProvider in options, skips using global TracerProvider', async () => {
+  it('with TracerProvider in options, skips using global TracerProvider', () => {
     const overridingExporter = new InMemorySpanExporter();
     const overridingProvider = new NodeTracerProvider({
       sampler: sampler,
@@ -99,7 +93,7 @@ describe('startTrace', () => {
       spanProcessors: [new SimpleSpanProcessor(overridingExporter)],
     });
 
-    await startTrace(
+    startTrace(
       'aSpan',
       {opts: {tracerProvider: overridingProvider}},
       async span => {
@@ -260,15 +254,16 @@ describe('startTrace', () => {
     });
   });
 
-  it('alwaysOffSampler used, no spans exported', async () => {
+  it('alwaysOffSampler used, no spans exported', () => {
     const overridingExporter = new InMemorySpanExporter();
     const overridingProvider = new NodeTracerProvider({
       sampler: new AlwaysOffSampler(),
       exporter: overridingExporter,
       spanProcessors: [new SimpleSpanProcessor(overridingExporter)],
     });
+    overridingProvider.register();
 
-    await startTrace(
+    startTrace(
       'aSpan',
       {opts: {tracerProvider: overridingProvider}},
       async span => {
@@ -375,15 +370,10 @@ describe('setError', () => {
     exporter: exporter,
     spanProcessors: [new SimpleSpanProcessor(exporter)],
   });
+  provider.register();
 
-  const contextManager = new (
-    AsyncLocalStorageContextManager || AsyncHooksContextManager
-  )();
-
-  before(() => {
-    provider.register();
-    setGlobalContextManager(contextManager);
-  });
+  const contextManager = new AsyncHooksContextManager();
+  setGlobalContextManager(contextManager);
 
   afterEach(() => {
     exporter.forceFlush();
@@ -436,15 +426,10 @@ describe('setErrorAndException', () => {
     exporter: exporter,
     spanProcessors: [new SimpleSpanProcessor(exporter)],
   });
+  provider.register();
 
-  const contextManager = new (
-    AsyncLocalStorageContextManager || AsyncHooksContextManager
-  )();
-
-  before(() => {
-    provider.register();
-    setGlobalContextManager(contextManager);
-  });
+  const contextManager = new AsyncHooksContextManager();
+  setGlobalContextManager(contextManager);
 
   afterEach(() => {
     exporter.forceFlush();

@@ -106,6 +106,15 @@ describe('BatchTransaction', () => {
   let BatchTransaction: typeof bt.BatchTransaction;
   let batchTransaction: bt.BatchTransaction;
 
+  before(() => {
+    BatchTransaction = proxyquire('../src/batch-transaction.js', {
+      '@google-cloud/precise-date': {PreciseDate: FakeTimestamp},
+      '@google-cloud/promisify': fakePfy,
+      './codec.js': {codec: fakeCodec},
+      './transaction.js': {Snapshot: FakeTransaction},
+    }).BatchTransaction;
+  });
+
   const traceExporter = new InMemorySpanExporter();
   const sampler = new AlwaysOnSampler();
 
@@ -114,21 +123,12 @@ describe('BatchTransaction', () => {
     exporter: traceExporter,
     spanProcessors: [new SimpleSpanProcessor(traceExporter)],
   });
+  provider.register();
 
   const contextManager = new (
     AsyncLocalStorageContextManager || AsyncHooksContextManager
   )();
-
-  before(() => {
-    BatchTransaction = proxyquire('../src/batch-transaction.js', {
-      '@google-cloud/precise-date': {PreciseDate: FakeTimestamp},
-      '@google-cloud/promisify': fakePfy,
-      './codec.js': {codec: fakeCodec},
-      './transaction.js': {Snapshot: FakeTransaction},
-    }).BatchTransaction;
-    provider.register();
-    setGlobalContextManager(contextManager);
-  });
+  setGlobalContextManager(contextManager);
 
   after(async () => {
     await provider.shutdown();
