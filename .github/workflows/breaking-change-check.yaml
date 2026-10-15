@@ -71,19 +71,36 @@ jobs:
             {encoding: 'utf8'},
           );
 
+          const findCompiledDts = file => {
+            let dir = path.dirname(path.resolve(file));
+            while (dir !== path.dirname(dir) && !fs.existsSync(path.join(dir, 'package.json'))) {
+              dir = path.dirname(dir);
+            }
+            const relInPkg = path.relative(dir, path.resolve(file));
+            const candidates = [
+              path.join(dir, 'build', relInPkg.replace(/\.ts$/, '.d.ts')),
+              path.join(dir, 'build', relInPkg.replace(/^src[\\/]/, '').replace(/\.ts$/, '.d.ts')),
+            ];
+            return candidates.find(c => fs.existsSync(c));
+          };
+
           const breaking = [];
           for (const line of diff.split('\n').map(l => l.trim()).filter(Boolean)) {
             const [status, oldPath, newPath] = line.split(/\t+/);
-            const file = status.startsWith('R') ? newPath : oldPath;
+            const file = status?.startsWith('R') ? newPath : oldPath;
+            if (!status || !file || !oldPath || !file.endsWith('.ts') || /\.(test|spec)\.ts$/.test(file)) continue;
             if (status.startsWith('A')) continue;
             if (status.startsWith('D')) {
               breaking.push({file: oldPath, explanation: 'Public source file was deleted.'});
               continue;
             }
             const baseSrc = execFileSync('git', ['show', `HEAD^1:${oldPath}`], {encoding: 'utf8'});
-            const headSrc = fs.readFileSync(file, 'utf8');
             fs.writeFileSync('/tmp/base.d.ts', ts.transpileDeclaration(baseSrc, {fileName: oldPath}).outputText);
-            fs.writeFileSync('/tmp/head.d.ts', ts.transpileDeclaration(headSrc, {fileName: file}).outputText);
+            const compiledDts = findCompiledDts(file);
+            const headDts = compiledDts
+              ? fs.readFileSync(compiledDts, 'utf8')
+              : ts.transpileDeclaration(fs.readFileSync(file, 'utf8'), {fileName: file}).outputText;
+            fs.writeFileSync('/tmp/head.d.ts', headDts);
 
             const out = execFileSync(
               'pnpm',
