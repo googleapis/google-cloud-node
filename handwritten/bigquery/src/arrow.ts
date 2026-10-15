@@ -172,9 +172,11 @@ export function decodeArrowPayload(
     : [toUint8Array(serializedSchema)];
   const reader = arrow.RecordBatchReader.from(chunks);
   reader.open();
-  const schema = reader.schema;
-  const batches = [...reader];
-  return batches.length > 0 ? batches : [createEmptyRecordBatch(arrow, schema)];
+  // With no record batch, the reader yields its own 0-row placeholder batch,
+  // which leaves nested Struct children empty and List children undefined.
+  return serializedRecordBatch
+    ? [...reader]
+    : [createEmptyRecordBatch(arrow, reader.schema)];
 }
 
 /**

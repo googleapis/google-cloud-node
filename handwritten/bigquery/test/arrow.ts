@@ -320,6 +320,12 @@ describe('Arrow Support', () => {
       );
       assert.strictEqual(batches[0].getChild('id')?.toArray().length, 0);
       assert.strictEqual(batches[0].getChild('nested')?.toArray().length, 0);
+      // Verify nested Struct children are readable; apache-arrow's own 0-row
+      // placeholder batch has none, so this throws if it is returned.
+      assert.strictEqual(
+        batches[0].getChild('nested')?.getChild('sub')?.toArray().length,
+        0,
+      );
       assert.strictEqual(batches[0].getChild('tags')?.toArray().length, 0);
     });
 
