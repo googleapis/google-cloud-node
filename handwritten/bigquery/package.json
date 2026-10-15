@@ -62,6 +62,14 @@
     "extend": "^3.0.2",
     "stream-events": "^1.0.5"
   },
+  "peerDependencies": {
+    "@google-cloud/bigquery-storage": "^6.1.0"
+  },
+  "peerDependenciesMeta": {
+    "@google-cloud/bigquery-storage": {
+      "optional": true
+    }
+  },
   "overrides": {
     "@sinonjs/fake-timers": "15.1.1",
     "@google-cloud/common": {
