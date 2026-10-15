@@ -30,7 +30,7 @@ import {
 } from '../src/transaction';
 import {util} from '@google-cloud/common';
 import {Transform} from 'stream';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from '../test/proxyquire';
 import * as sinon from 'sinon';
 const {SpanStatusCode} = require('@opentelemetry/api');
 const {

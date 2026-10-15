@@ -21,7 +21,7 @@ import {
 } from '../src/nodejs-common/index.js';
 import assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
-import proxyquire from 'proxyquire';
+import proxyquire from './proxyquire.js';
 
 import {Bucket} from '../src/index.js';
 

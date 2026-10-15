@@ -19,7 +19,7 @@ import {before, beforeEach, afterEach, describe, it} from 'mocha';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const concat = require('concat-stream');
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import * as sinon from 'sinon';
 import {Transform, finished} from 'stream';
 import * as through from 'through2';

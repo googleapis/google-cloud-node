@@ -17,7 +17,7 @@
 
 import * as assert from 'assert';
 import {EventEmitter} from 'events';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import * as sinon from 'sinon';
 import {util} from '@google-cloud/common';
 import * as pfy from '@google-cloud/promisify';
