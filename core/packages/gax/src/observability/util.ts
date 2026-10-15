@@ -44,6 +44,6 @@ export function checkTelemetryEnabled(settings?: CallSettings): boolean {
 
   return Boolean(
     settings?.enableTelemetryTracing ||
-      settings?.otherArgs?.enableTelemetryTracing,
+    settings?.otherArgs?.enableTelemetryTracing,
   );
 }

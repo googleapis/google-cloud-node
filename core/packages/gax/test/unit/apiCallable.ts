@@ -563,10 +563,7 @@ describe('createApiCall', () => {
       assert.strictEqual(span.name, 'EchoClient.Echo');
       assert.strictEqual(span.kind, SpanKind.INTERNAL);
       assert.strictEqual(span.ended, true);
-      assert.strictEqual(
-        span.attributes['gcp.client.service'],
-        'example',
-      );
+      assert.strictEqual(span.attributes['gcp.client.service'], 'example');
       assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
       assert.strictEqual(
         span.attributes['gcp.client.repo'],
