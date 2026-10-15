@@ -152,36 +152,39 @@ describe('grpc', () => {
       assert.strictEqual(settings.method.timeout, 10);
       assert.strictEqual(settings.method.enableTelemetryTracing, undefined);
       assert.strictEqual(
-        settings.method.otherArgs.internalTelemetryInfo,
-        undefined,
-      );
-      assert.strictEqual(
         settings.method.otherArgs.internalMethodName,
         undefined,
       );
     });
 
-    it('constructs settings with enableTelemetryTracing and internalTelemetryInfo', () => {
-      const telemetryInfo = {
-        gcpClientService: 'fake',
-        gcpVersion: 'v1',
-        gcpRepo: 'googleapis/google-cloud-node',
-        gcpArtifact: '@google-cloud/fake',
-      };
+    it('constructs settings with enableTelemetryTracing argument', () => {
       const settings = grpcClient.constructSettings(
         'google.fake.service',
         serviceConfig as unknown as ClientConfig,
         {} as unknown as ClientConfig,
         {},
         true,
-        telemetryInfo,
       );
       assert.strictEqual(settings.method.timeout, 10);
       assert.strictEqual(settings.method.enableTelemetryTracing, true);
-      assert.deepStrictEqual(
-        settings.method.otherArgs.internalTelemetryInfo,
-        telemetryInfo,
+      assert.strictEqual(
+        settings.method.otherArgs.internalMethodName,
+        'method',
       );
+    });
+
+    it('constructs settings with enableTelemetryTracing from GrpcClientOptions', () => {
+      const clientWithTracing = gaxGrpc({
+        enableTelemetryTracing: true,
+      });
+      const settings = clientWithTracing.constructSettings(
+        'google.fake.service',
+        serviceConfig as unknown as ClientConfig,
+        {} as unknown as ClientConfig,
+        {},
+      );
+      assert.strictEqual(settings.method.timeout, 10);
+      assert.strictEqual(settings.method.enableTelemetryTracing, true);
       assert.strictEqual(
         settings.method.otherArgs.internalMethodName,
         'method',

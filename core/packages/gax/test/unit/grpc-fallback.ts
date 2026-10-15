@@ -270,7 +270,7 @@ describe('grpc-fallback', () => {
     assert.strictEqual(settings.echo.otherArgs.internalMethodName, undefined);
   });
 
-  it('constructSettings should accept enableTelemetryTracing and internalTelemetryInfo', () => {
+  it('constructSettings should accept enableTelemetryTracing', () => {
     const gapicConfig = {
       interfaces: {
         'google.showcase.v1beta1.Echo': {
@@ -284,25 +284,42 @@ describe('grpc-fallback', () => {
         },
       },
     };
-    const telemetryInfo = {
-      gcpClientService: 'fake',
-      gcpVersion: 'v1',
-      gcpRepo: 'googleapis/google-cloud-node',
-      gcpArtifact: '@google-cloud/fake',
-    };
     const settings = gaxGrpc.constructSettings(
       'google.showcase.v1beta1.Echo',
       gapicConfig,
       {},
       {},
       true,
-      telemetryInfo,
     );
     assert.strictEqual(settings.echo.enableTelemetryTracing, true);
-    assert.deepStrictEqual(
-      settings.echo.otherArgs.internalTelemetryInfo,
-      telemetryInfo,
+    assert.strictEqual(settings.echo.otherArgs.internalMethodName, 'Echo');
+  });
+
+  it('constructSettings should use enableTelemetryTracing from GrpcClientOptions', () => {
+    const gapicConfig = {
+      interfaces: {
+        'google.showcase.v1beta1.Echo': {
+          retry_codes: {},
+          retry_params: {},
+          methods: {
+            Echo: {
+              timeout_millis: 60000,
+            },
+          },
+        },
+      },
+    };
+    const clientWithTracing = new GrpcClient({
+      ...opts,
+      enableTelemetryTracing: true,
+    });
+    const settings = clientWithTracing.constructSettings(
+      'google.showcase.v1beta1.Echo',
+      gapicConfig,
+      {},
+      {},
     );
+    assert.strictEqual(settings.echo.enableTelemetryTracing, true);
     assert.strictEqual(settings.echo.otherArgs.internalMethodName, 'Echo');
   });
 

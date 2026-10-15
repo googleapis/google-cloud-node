@@ -32,7 +32,6 @@ import {isNodeJS} from './featureDetection';
 import {generateServiceStub} from './fallbackServiceStub';
 import {StreamType} from './streamingCalls/streaming';
 import {toLowerCamelCase} from './util';
-import {StaticTraceContext} from './observability/contextUtil';
 import {google} from '../protos/http';
 import * as IamProtos from '../protos/iam_service';
 import * as LocationProtos from '../protos/locations';
@@ -110,6 +109,7 @@ export class GrpcClient {
   minifyJson: boolean;
   private _servicePath?: string;
   private _port?: number;
+  private _enableTelemetryTracing?: boolean;
 
   /**
    * In rare cases users might need to deallocate all memory consumed by loaded protos.
@@ -163,6 +163,9 @@ export class GrpcClient {
       (options as GrpcClientOptions).apiEndpoint;
     const rawPort = (options as GrpcClientOptions).port;
     this._port = typeof rawPort === 'string' ? parseInt(rawPort, 10) : rawPort;
+    this._enableTelemetryTracing = (
+      options as GrpcClientOptions
+    ).enableTelemetryTracing;
   }
 
   /**
@@ -217,8 +220,8 @@ export class GrpcClient {
    * @param {Object} configOverrides - A dictionary of overriding configs.
    * @param {Object} headers - A dictionary of additional HTTP header name to
    *   its value.
-   * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
-   * @param {StaticTraceContext} [internalTelemetryInfo] - Static trace context for telemetry.
+   * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing
+   *   when passed in client options (or overridden by `GOOGLE_SDK_NODE_ENABLE_TRACING`).
    * @return {Object} A mapping of method names to CallSettings.
    */
   constructSettings(
@@ -227,7 +230,6 @@ export class GrpcClient {
     configOverrides: gax.ClientConfig,
     headers: OutgoingHttpHeaders,
     enableTelemetryTracing?: boolean,
-    internalTelemetryInfo?: StaticTraceContext,
   ) {
     function buildMetadata(abTests: {}, moreHeaders: OutgoingHttpHeaders) {
       const metadata: OutgoingHttpHeaders = {};
@@ -301,8 +303,7 @@ export class GrpcClient {
       configOverrides,
       Status,
       otherArgs,
-      enableTelemetryTracing,
-      internalTelemetryInfo,
+      enableTelemetryTracing ?? this._enableTelemetryTracing,
     );
   }
 

@@ -27,7 +27,6 @@ import {
   ignoredClientHeaderTokens,
 } from '../../src/util';
 import {checkTelemetryEnabled} from '../../src/observability/util';
-import {StaticTraceContext} from '../../src/observability/contextUtil';
 import {CallSettings} from '../../src/gax';
 import * as protobuf from 'protobufjs';
 import protosJson from '../../protos/status.json';
@@ -207,18 +206,8 @@ describe('util.ts', () => {
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_O11Y_ENABLED;
     });
 
-    const mockTelemetryInfo: StaticTraceContext = {
-      gcpClientService: 'test.googleapis.com',
-      gcpVersion: '1.0.0',
-      gcpRepo: 'googleapis/google-cloud-node',
-      gcpArtifact: 'google-cloud-test',
-    };
-
     const mockSettings = new CallSettings({
       enableTelemetryTracing: true,
-      otherArgs: {
-        internalTelemetryInfo: mockTelemetryInfo,
-      },
     });
 
     it('returns true when settings are configured with enableTelemetryTracing', () => {
@@ -233,29 +222,13 @@ describe('util.ts', () => {
     it('returns false when enableTelemetryTracing is false on settings', () => {
       const disabledSettings = new CallSettings({
         enableTelemetryTracing: false,
-        otherArgs: {
-          internalTelemetryInfo: mockTelemetryInfo,
-        },
       });
       assert.strictEqual(checkTelemetryEnabled(disabledSettings), false);
     });
 
     it('returns false when enableTelemetryTracing is not set on settings', () => {
-      const noTracingSettings = new CallSettings({
-        otherArgs: {
-          internalTelemetryInfo: {
-            gcpClientService: 'test.googleapis.com',
-          },
-        },
-      });
+      const noTracingSettings = new CallSettings({});
       assert.strictEqual(checkTelemetryEnabled(noTracingSettings), false);
-    });
-
-    it('returns false when internalTelemetryInfo is not set on settings', () => {
-      const noInfoSettings = new CallSettings({
-        enableTelemetryTracing: true,
-      });
-      assert.strictEqual(checkTelemetryEnabled(noInfoSettings), false);
     });
 
     it('returns false when settings is undefined', () => {
@@ -263,16 +236,6 @@ describe('util.ts', () => {
     });
 
     it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true and the client option is not set', () => {
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
-      const noOptInSettings = new CallSettings({
-        otherArgs: {
-          internalTelemetryInfo: mockTelemetryInfo,
-        },
-      });
-      assert.strictEqual(checkTelemetryEnabled(noOptInSettings), true);
-    });
-
-    it('returns true when GOOGLE_SDK_NODE_ENABLE_TRACING=true even if internalTelemetryInfo is not set', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
       assert.strictEqual(checkTelemetryEnabled(new CallSettings({})), true);
     });
@@ -289,12 +252,7 @@ describe('util.ts', () => {
 
     it('accepts GOOGLE_SDK_NODE_ENABLE_TRACING case-insensitively', () => {
       process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'TRUE';
-      const noOptInSettings = new CallSettings({
-        otherArgs: {
-          internalTelemetryInfo: mockTelemetryInfo,
-        },
-      });
-      assert.strictEqual(checkTelemetryEnabled(noOptInSettings), true);
+      assert.strictEqual(checkTelemetryEnabled(new CallSettings({})), true);
     });
 
     it('returns false when GOOGLE_SDK_NODE_ENABLE_TRACING=false overrides the client option', () => {

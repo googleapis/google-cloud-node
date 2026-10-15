@@ -14,10 +14,34 @@
  * limitations under the License.
  */
 
-import {Attributes} from '@opentelemetry/api';
+import {
+  Attributes,
+  context,
+  Context,
+  createContextKey,
+  isSpanContextValid,
+  Span,
+  trace,
+} from '@opentelemetry/api';
 import {CallSettings} from '../gax';
 import {ignoredClientHeaderTokens} from '../util';
 export const DEFAULT_GCP_REPO = 'googleapis/google-cloud-node';
+
+export const CLIENT_REQUEST_SPAN_KEY = createContextKey(
+  'google-gax-client-request-span',
+);
+export const ATTEMPT_SPAN_KEY = createContextKey('google-gax-attempt-span');
+
+/**
+ * Active OpenTelemetry trace/span identifiers and span references for the current context.
+ */
+export interface ActiveTraceContext {
+  traceId: string;
+  spanId: string;
+  span: Span;
+  attemptSpan?: Span;
+  clientRequestSpan?: Span;
+}
 
 /**
  * Static metadata about the Google Cloud client library used to populate
@@ -326,7 +350,7 @@ export function clearMetadataCache(): void {
  * Resolves static trace context dynamically at runtime by inspecting CallSettings,
  * environment variables, and standard defaults.
  *
- * Precedence: environment variables > compile-time internalTelemetryInfo > dynamic resolution from settings.
+ * Precedence: environment variables > dynamic resolution from settings.
  *
  * @param {CallSettings} [settings] - Call settings for the RPC invocation.
  * @param {string} [_callerFilePath] - Optional explicit path to the caller source file (deprecated).
@@ -338,8 +362,6 @@ export function resolveStaticTraceContext(
   _callerFilePath?: string,
 ): StaticTraceContext {
   const envMeta = extractFromEnvironment();
-  const explicit = settings?.otherArgs?.internalTelemetryInfo as
-    StaticTraceContext | undefined;
 
   let dynamic: StaticTraceContext;
   if (settings?.apiName) {
@@ -354,25 +376,18 @@ export function resolveStaticTraceContext(
   }
 
   const context: StaticTraceContext = {
-    gcpClientService:
-      envMeta.gcpClientService ??
-      explicit?.gcpClientService ??
-      dynamic.gcpClientService,
-    gcpVersion:
-      envMeta.gcpVersion ?? explicit?.gcpVersion ?? dynamic.gcpVersion,
+    gcpClientService: envMeta.gcpClientService ?? dynamic.gcpClientService,
+    gcpVersion: envMeta.gcpVersion ?? dynamic.gcpVersion,
     gcpRepo: DEFAULT_GCP_REPO,
-    gcpArtifact:
-      envMeta.gcpArtifact ?? explicit?.gcpArtifact ?? dynamic.gcpArtifact,
+    gcpArtifact: envMeta.gcpArtifact ?? dynamic.gcpArtifact,
   };
 
-  const serverAddress =
-    envMeta.serverAddress ?? explicit?.serverAddress ?? dynamic.serverAddress;
+  const serverAddress = envMeta.serverAddress ?? dynamic.serverAddress;
   if (serverAddress !== undefined) {
     context.serverAddress = serverAddress;
   }
 
-  const serverPort =
-    envMeta.serverPort ?? explicit?.serverPort ?? dynamic.serverPort;
+  const serverPort = envMeta.serverPort ?? dynamic.serverPort;
   if (serverPort !== undefined) {
     context.serverPort = serverPort;
   }
@@ -405,4 +420,40 @@ export function buildInitialAttributes(
     attributes['url.domain'] = urlDomain;
   }
   return attributes;
+}
+
+/**
+ * Returns the active trace and span IDs (`traceId` and `spanId`) along with
+ * the active span references (`span`, `attemptSpan`, `clientRequestSpan`) if a
+ * GAX attempt span, GAX client request span, or outer OpenTelemetry span is
+ * active and has a valid span context, or `undefined` otherwise.
+ *
+ * @param {Context} [activeContext=context.active()] - The OpenTelemetry context to inspect.
+ * @returns {ActiveTraceContext | undefined} The active trace context, or undefined.
+ */
+export function getActiveTraceContext(
+  activeContext: Context = context.active(),
+): ActiveTraceContext | undefined {
+  const attemptSpan = activeContext.getValue(ATTEMPT_SPAN_KEY) as
+    | Span
+    | undefined;
+  const clientRequestSpan = activeContext.getValue(CLIENT_REQUEST_SPAN_KEY) as
+    | Span
+    | undefined;
+  const activeSpan =
+    attemptSpan ?? clientRequestSpan ?? trace.getSpan(activeContext);
+  if (!activeSpan) {
+    return undefined;
+  }
+  const spanContext = activeSpan.spanContext();
+  if (!isSpanContextValid(spanContext)) {
+    return undefined;
+  }
+  return {
+    traceId: spanContext.traceId,
+    spanId: spanContext.spanId,
+    span: activeSpan,
+    attemptSpan,
+    clientRequestSpan,
+  };
 }

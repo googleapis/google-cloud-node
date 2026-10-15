@@ -19,8 +19,6 @@ import {
   Attributes,
   context,
   Context,
-  createContextKey,
-  isSpanContextValid,
   Span,
   SpanKind,
   SpanStatusCode,
@@ -30,9 +28,12 @@ import {
 import {APICallback, GaxCallResult} from '../apitypes';
 import {Status} from '../status';
 import {
+  ATTEMPT_SPAN_KEY,
   AttemptTraceContext,
   buildInitialAttributes,
+  CLIENT_REQUEST_SPAN_KEY,
   DynamicTraceContext,
+  getActiveTraceContext,
   StaticTraceContext,
 } from './contextUtil';
 import {
@@ -44,59 +45,8 @@ import {
   resolveRpcStatusName,
 } from './errorUtil';
 
-const CLIENT_REQUEST_SPAN_KEY = createContextKey(
-  'google-gax-client-request-span',
-);
-const ATTEMPT_SPAN_KEY = createContextKey('google-gax-attempt-span');
 const attemptUrlTemplates = new WeakMap<Span, string>();
 const clientRequestFirstAttempt = new WeakMap<Span, Span>();
-
-/**
- * Active OpenTelemetry trace/span identifiers and span references for the current context.
- */
-export interface ActiveTraceContext {
-  traceId: string;
-  spanId: string;
-  span: Span;
-  attemptSpan?: Span;
-  clientRequestSpan?: Span;
-}
-
-/**
- * Returns the active trace and span IDs (`traceId` and `spanId`) along with
- * the active span references (`span`, `attemptSpan`, `clientRequestSpan`) if a
- * GAX attempt span, GAX client request span, or outer OpenTelemetry span is
- * active and has a valid span context, or `undefined` otherwise.
- *
- * @param {Context} [activeContext=context.active()] - The OpenTelemetry context to inspect.
- * @returns {ActiveTraceContext | undefined} The active trace context, or undefined.
- */
-export function getActiveTraceContext(
-  activeContext: Context = context.active(),
-): ActiveTraceContext | undefined {
-  const attemptSpan = activeContext.getValue(ATTEMPT_SPAN_KEY) as
-    | Span
-    | undefined;
-  const clientRequestSpan = activeContext.getValue(CLIENT_REQUEST_SPAN_KEY) as
-    | Span
-    | undefined;
-  const activeSpan =
-    attemptSpan ?? clientRequestSpan ?? trace.getSpan(activeContext);
-  if (!activeSpan) {
-    return undefined;
-  }
-  const spanContext = activeSpan.spanContext();
-  if (!isSpanContextValid(spanContext)) {
-    return undefined;
-  }
-  return {
-    traceId: spanContext.traceId,
-    spanId: spanContext.spanId,
-    span: activeSpan,
-    attemptSpan,
-    clientRequestSpan,
-  };
-}
 
 /**
  * Formats the span name for an HTTP low level network attempt span as
