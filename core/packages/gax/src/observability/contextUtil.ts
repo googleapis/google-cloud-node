@@ -419,6 +419,10 @@ export function buildInitialAttributes(
   return attributes;
 }
 
+function getValidSpan(span: Span | undefined): Span | undefined {
+  return span && isSpanContextValid(span.spanContext()) ? span : undefined;
+}
+
 /**
  * Returns the active trace and span IDs (`traceId` and `spanId`) along with
  * the active span references (`span`, `attemptSpan`, `clientRequestSpan`) if a
@@ -431,19 +435,20 @@ export function buildInitialAttributes(
 export function getActiveTraceContext(
   activeContext: Context = context.active(),
 ): ActiveTraceContext | undefined {
-  const attemptSpan = activeContext.getValue(ATTEMPT_SPAN_KEY) as
-    Span | undefined;
-  const clientRequestSpan = activeContext.getValue(CLIENT_REQUEST_SPAN_KEY) as
-    Span | undefined;
+  const attemptSpan = getValidSpan(
+    activeContext.getValue(ATTEMPT_SPAN_KEY) as Span | undefined,
+  );
+  const clientRequestSpan = getValidSpan(
+    activeContext.getValue(CLIENT_REQUEST_SPAN_KEY) as Span | undefined,
+  );
   const activeSpan =
-    attemptSpan ?? clientRequestSpan ?? trace.getSpan(activeContext);
+    attemptSpan ??
+    clientRequestSpan ??
+    getValidSpan(trace.getSpan(activeContext));
   if (!activeSpan) {
     return undefined;
   }
   const spanContext = activeSpan.spanContext();
-  if (!isSpanContextValid(spanContext)) {
-    return undefined;
-  }
   return {
     traceId: spanContext.traceId,
     spanId: spanContext.spanId,

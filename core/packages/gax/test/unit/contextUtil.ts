@@ -15,11 +15,13 @@
  */
 
 import * as assert from 'assert';
-import {trace} from '@opentelemetry/api';
+import {context, INVALID_SPAN_CONTEXT, trace} from '@opentelemetry/api';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {
+  ATTEMPT_SPAN_KEY,
   buildInitialAttributes,
   clearMetadataCache,
+  CLIENT_REQUEST_SPAN_KEY,
   DynamicTraceContext,
   extractClientServiceFromPackageName,
   extractFromEnvironment,
@@ -515,6 +517,30 @@ describe('contextUtil', () => {
         return 'ok';
       });
       assert.strictEqual(captured, undefined);
+    });
+
+    it('falls back to a valid outer span when attemptSpan and clientRequestSpan are NoopSpans', () => {
+      const noopSpan = trace.wrapSpanContext(INVALID_SPAN_CONTEXT);
+      trace.getTracer('user-app').startActiveSpan('user-span', userSpan => {
+        const ctxWithNoopGaxSpans = context
+          .active()
+          .setValue(CLIENT_REQUEST_SPAN_KEY, noopSpan)
+          .setValue(ATTEMPT_SPAN_KEY, noopSpan);
+
+        context.with(ctxWithNoopGaxSpans, () => {
+          const activeTrace = getActiveTraceContext();
+          assert.ok(activeTrace);
+          assert.strictEqual(
+            activeTrace.traceId,
+            userSpan.spanContext().traceId,
+          );
+          assert.strictEqual(activeTrace.spanId, userSpan.spanContext().spanId);
+          assert.strictEqual(activeTrace.span, userSpan);
+          assert.strictEqual(activeTrace.attemptSpan, undefined);
+          assert.strictEqual(activeTrace.clientRequestSpan, undefined);
+        });
+        userSpan.end();
+      });
     });
   });
 });
