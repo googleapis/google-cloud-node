@@ -350,6 +350,8 @@ const EXPECTED_NETWORK_ERROR_CODES: ReadonlySet<string> = new Set([
   'ENOENT',
   'ENOTFOUND',
   'ECONNREFUSED',
+  'ConnectionRefused',
+  'FailedToOpenSocket',
 ]);
 
 const TIMEOUT_NAMES_AND_CODES: ReadonlySet<string | number> = new Set([
