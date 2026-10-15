@@ -237,7 +237,14 @@ export function createQueryArrowStream_(
       return;
     }
 
-    const queryReq = bq.buildQueryRequest_(queryObj, {});
+    let queryReq: bigquery.IQueryRequest | undefined;
+    try {
+      queryReq = bq.buildQueryRequest_(queryObj, {});
+    } catch (err) {
+      // For example, invalid query parameters.
+      stream.destroy(err as Error);
+      return;
+    }
     if (!queryReq) {
       // TODO: Route queries that cannot use jobs.query through jobs.insert (createQueryJob).
       stream.destroy(

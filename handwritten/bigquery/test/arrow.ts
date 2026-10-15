@@ -395,6 +395,16 @@ describe('Arrow Support', () => {
       );
     });
 
+    it('should forward errors thrown while building the jobs.query request', async () => {
+      // A null parameter without an explicit type makes buildQueryRequest_ throw.
+      await assert.rejects(
+        bq
+          .createQueryArrowStream({query: 'SELECT ?', params: [null]})
+          .toArray(),
+        /Parameter types must be provided for null values/,
+      );
+    });
+
     it('should fail when jobs.query returns jobComplete = false', async () => {
       stubJobsQuery(bq, {res: {jobComplete: false}});
 
