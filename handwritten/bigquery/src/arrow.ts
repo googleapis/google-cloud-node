@@ -120,19 +120,15 @@ export function checkArrowDependencies(
 }
 
 /**
- * Converts a serialized Arrow IPC payload (base64 string or Uint8Array) to a Buffer.
+ * Converts a serialized Arrow IPC payload (base64 string or Uint8Array) to a
+ * Uint8Array.
  *
  * @private
  */
-function toBuffer(serialized: Uint8Array | string): Buffer {
-  if (typeof serialized === 'string') {
-    return Buffer.from(serialized, 'base64');
-  }
-  return Buffer.from(
-    serialized.buffer,
-    serialized.byteOffset,
-    serialized.byteLength,
-  );
+function toUint8Array(serialized: Uint8Array | string): Uint8Array {
+  return typeof serialized === 'string'
+    ? Buffer.from(serialized, 'base64')
+    : serialized;
 }
 
 /**
@@ -166,15 +162,15 @@ export function decodeArrowPayload(
   serializedRecordBatch?: Uint8Array | string,
 ): RecordBatch[] {
   if (!serializedSchema) {
-    return [createEmptyRecordBatch(arrow, new arrow.Schema([]))];
+    return [new arrow.RecordBatch({})];
   }
   // BigQuery returns the Arrow IPC Schema message and RecordBatch message as
-  // separate fields; concatenate them into a single IPC stream for the reader.
-  const schemaBuf = toBuffer(serializedSchema);
-  const ipcBuf = serializedRecordBatch
-    ? Buffer.concat([schemaBuf, toBuffer(serializedRecordBatch)])
-    : schemaBuf;
-  const reader = arrow.RecordBatchReader.from(ipcBuf);
+  // separate fields; the reader accepts them as consecutive chunks of one IPC
+  // stream, which avoids copying them into a single buffer.
+  const chunks = serializedRecordBatch
+    ? [toUint8Array(serializedSchema), toUint8Array(serializedRecordBatch)]
+    : [toUint8Array(serializedSchema)];
+  const reader = arrow.RecordBatchReader.from(chunks);
   reader.open();
   const schema = reader.schema;
   const batches = [...reader];
