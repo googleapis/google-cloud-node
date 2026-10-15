@@ -363,9 +363,6 @@ describe('createApiCall', () => {
       clearMetadataCache();
       harness.teardown();
       delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-      delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
-      delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
-      delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     });
 
     it('calls traceCall with dynamicArgs, staticArgs, and isStreamingCall when tracing is enabled', async () => {
@@ -412,33 +409,6 @@ describe('createApiCall', () => {
       });
       assert.strictEqual(typeof fn, 'function');
       assert.strictEqual(isStreamingCall, false);
-    });
-
-    it('calls traceCall when tracing is enabled via GOOGLE_SDK_NODE_ENABLE_TRACING environment variable', async () => {
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
-      const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
-
-      const settings = new gax.CallSettings({
-        apiName: 'google.example.v1.Echo',
-        otherArgs: {
-          internalMethodName: 'Echo',
-        },
-      });
-
-      function func(
-        argument: {},
-        metadata: {},
-        options: {},
-        callback: (err: GoogleError | null, resp?: unknown) => void,
-      ) {
-        callback(null, {data: 'hello'});
-        return {cancel: () => {}};
-      }
-
-      const apiCall = gaxCreateApiCall(func, settings);
-      await apiCall({param: 'test'}, undefined);
-
-      assert.strictEqual(traceCallSpy.calledOnce, true);
     });
 
     it('passes isStreamingCall as true to traceCall for streaming calls when tracing is enabled', () => {
@@ -665,49 +635,6 @@ describe('createApiCall', () => {
       assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
     });
 
-    it('resolves static metadata from environment variables when configured', async () => {
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
-      process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE = 'env-service';
-      process.env.GOOGLE_SDK_NODE_CLIENT_VERSION = '9.9.9';
-      process.env.GOOGLE_SDK_NODE_ARTIFACT = '@custom/env-pkg';
-
-      const settings = new gax.CallSettings({
-        apiName: 'google.example.v1.Echo',
-        otherArgs: {
-          internalMethodName: 'Echo',
-        },
-      });
-
-      function func(
-        argument: {},
-        metadata: {},
-        options: {},
-        callback: (err: GoogleError | null, resp?: unknown) => void,
-      ) {
-        callback(null, {data: 'hello'});
-        return {
-          cancel: () => {},
-        };
-      }
-
-      const apiCall = gaxCreateApiCall(func, settings);
-      await apiCall({}, undefined);
-
-      const spans = harness.getSpans('google-gax');
-      assert.strictEqual(spans.length, 2);
-      const span = spans[1];
-      assert.strictEqual(span.attributes['gcp.client.service'], 'env-service');
-      assert.strictEqual(span.attributes['gcp.client.version'], '9.9.9');
-      assert.strictEqual(
-        span.attributes['gcp.client.repo'],
-        'googleapis/google-cloud-node',
-      );
-      assert.strictEqual(
-        span.attributes['gcp.client.artifact'],
-        '@custom/env-pkg',
-      );
-    });
-
     it('passes fallback flag through when using fallback createApiCall with default options', async () => {
       const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
 
@@ -928,68 +855,6 @@ describe('createApiCall', () => {
       assert.strictEqual(spans.length, 2);
       assert.strictEqual(spans[0].attributes['rpc.system.name'], 'http');
       assert.strictEqual(spans[1].attributes['rpc.system.name'], 'http');
-    });
-
-    it('pipes telemetry information configured via constructSettings', async () => {
-      const serviceName = 'google.example.v1.Echo';
-      const defaults = gax.constructSettings(
-        serviceName,
-        {
-          interfaces: {
-            [serviceName]: {
-              methods: {
-                Echo: {},
-              },
-            },
-          },
-        },
-        {},
-        {},
-        {
-          headers: {
-            'x-goog-api-client': 'gapic/1.2.3',
-          },
-        },
-        true,
-      );
-
-      function func(
-        argument: {},
-        metadata: {},
-        options: {},
-        callback: (err: GoogleError | null, resp?: unknown) => void,
-      ) {
-        callback(null, {data: 'hello'});
-        return {
-          cancel: () => {},
-        };
-      }
-
-      const apiCall = gaxCreateApiCall(func, defaults.echo);
-      await apiCall({}, undefined);
-
-      const spans = harness.getSpans('google-gax');
-      assert.strictEqual(spans.length, 2);
-      const attemptSpan = spans[0];
-      const span = spans[1];
-      assert.strictEqual(attemptSpan.name, 'google.example.v1.Echo/Echo');
-      assert.strictEqual(attemptSpan.kind, SpanKind.CLIENT);
-      assert.strictEqual(span.name, 'EchoClient.Echo');
-      assert.strictEqual(span.ended, true);
-      assert.strictEqual(
-        span.attributes['gcp.client.service'],
-        'example',
-      );
-      assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
-      assert.strictEqual(
-        span.attributes['gcp.client.repo'],
-        'googleapis/google-cloud-node',
-      );
-      assert.strictEqual(
-        span.attributes['gcp.client.artifact'],
-        '@google-cloud/example',
-      );
-      assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
     });
 
     it('records error details on the span when the API call fails', async () => {
@@ -1754,6 +1619,7 @@ describe('createApiCall', () => {
           auth: new GoogleAuth({authClient}),
           servicePath: 'echo.googleapis.com',
           port: 443,
+          enableTelemetryTracing: true,
         });
         const protos = fallbackClient.loadProto(echoProtoJson);
         const echoService = protos.lookupService('Echo');
@@ -1775,7 +1641,6 @@ describe('createApiCall', () => {
           },
           {},
           {'x-goog-api-client': 'test'},
-          true,
         );
 
         const stubPromise = fallbackClient

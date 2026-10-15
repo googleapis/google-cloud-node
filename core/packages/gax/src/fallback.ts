@@ -220,8 +220,6 @@ export class GrpcClient {
    * @param {Object} configOverrides - A dictionary of overriding configs.
    * @param {Object} headers - A dictionary of additional HTTP header name to
    *   its value.
-   * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing
-   *   when passed in client options (or overridden by `GOOGLE_SDK_NODE_ENABLE_TRACING`).
    * @return {Object} A mapping of method names to CallSettings.
    */
   constructSettings(
@@ -229,7 +227,6 @@ export class GrpcClient {
     clientConfig: gax.ClientConfig,
     configOverrides: gax.ClientConfig,
     headers: OutgoingHttpHeaders,
-    enableTelemetryTracing?: boolean,
   ) {
     function buildMetadata(abTests: {}, moreHeaders: OutgoingHttpHeaders) {
       const metadata: OutgoingHttpHeaders = {};
@@ -303,7 +300,7 @@ export class GrpcClient {
       configOverrides,
       Status,
       otherArgs,
-      enableTelemetryTracing ?? this._enableTelemetryTracing,
+      this._enableTelemetryTracing,
     );
   }
 

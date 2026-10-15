@@ -230,20 +230,6 @@ describe('gax construct settings', () => {
     );
   });
 
-  it('creates settings with enableTelemetryTracing when otherArgs is undefined', () => {
-    const defaults = gax.constructSettings(
-      SERVICE_NAME,
-      A_CONFIG,
-      {},
-      RETRY_DICT,
-      undefined,
-      true,
-    );
-    const settings = defaults.bundlingMethod;
-    assert.strictEqual(settings.enableTelemetryTracing, true);
-    assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
-  });
-
   it('creates settings with enableTelemetryTracing set to false', () => {
     const defaults = gax.constructSettings(
       SERVICE_NAME,

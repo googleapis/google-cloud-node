@@ -142,6 +142,10 @@ describe('grpc', () => {
       },
     };
 
+    afterEach(() => {
+      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    });
+
     it('constructs settings without telemetry options', () => {
       const settings = grpcClient.constructSettings(
         'google.fake.service',
@@ -157,13 +161,15 @@ describe('grpc', () => {
       );
     });
 
-    it('constructs settings with enableTelemetryTracing argument', () => {
-      const settings = grpcClient.constructSettings(
+    it('constructs settings when enableTelemetryTracing: true is passed in client options', () => {
+      const clientWithTracing = gaxGrpc({
+        enableTelemetryTracing: true,
+      });
+      const settings = clientWithTracing.constructSettings(
         'google.fake.service',
         serviceConfig as unknown as ClientConfig,
         {} as unknown as ClientConfig,
         {},
-        true,
       );
       assert.strictEqual(settings.method.timeout, 10);
       assert.strictEqual(settings.method.enableTelemetryTracing, true);
@@ -173,11 +179,9 @@ describe('grpc', () => {
       );
     });
 
-    it('constructs settings with enableTelemetryTracing from GrpcClientOptions', () => {
-      const clientWithTracing = gaxGrpc({
-        enableTelemetryTracing: true,
-      });
-      const settings = clientWithTracing.constructSettings(
+    it('constructs settings when GOOGLE_SDK_NODE_ENABLE_TRACING=true environment variable is set', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      const settings = grpcClient.constructSettings(
         'google.fake.service',
         serviceConfig as unknown as ClientConfig,
         {} as unknown as ClientConfig,
