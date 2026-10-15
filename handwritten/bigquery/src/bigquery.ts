@@ -2351,8 +2351,10 @@ export class BigQuery extends Service {
    * @param query string | Query
    * @param options QueryOptions
    * @returns bigquery.IQueryRequest | undefined
+   *
+   * @private
    */
-  private buildQueryRequest_(
+  buildQueryRequest_(
     query: string | Query,
     options: QueryOptions,
   ): bigquery.IQueryRequest | undefined {
@@ -2454,7 +2456,12 @@ export class BigQuery extends Service {
     return req;
   }
 
-  private runJobsQuery(
+  /**
+   * Runs a `jobs.query` request.
+   *
+   * @private
+   */
+  runJobsQuery(
     req: bigquery.IQueryRequest,
     callback?: JobsQueryCallback,
   ): void | Promise<JobsQueryResponse> {

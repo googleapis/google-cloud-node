@@ -17,29 +17,10 @@
 import {ResourceStream} from '@google-cloud/paginator';
 import * as path from 'path';
 import type {RecordBatch, Schema} from 'apache-arrow';
-import type {
-  BigQuery,
-  JobsQueryCallback,
-  Query,
-  QueryOptions,
-} from './bigquery';
+import type {BigQuery, Query} from './bigquery';
 import type bigquery from './types';
 
 type ArrowModule = typeof import('apache-arrow');
-
-/**
- * Internal BigQuery members accessed by the Arrow execution pipeline.
- */
-interface BigQueryInternal {
-  buildQueryRequest_(
-    query: string | Query,
-    options: QueryOptions,
-  ): bigquery.IQueryRequest | undefined;
-  runJobsQuery(
-    req: bigquery.IQueryRequest,
-    callback?: JobsQueryCallback,
-  ): void | Promise<unknown>;
-}
 
 /**
  * A stream of Apache Arrow `RecordBatch` objects returned by
@@ -209,7 +190,6 @@ export function createQueryArrowStream_(
   bq: BigQuery,
   query?: Query | string,
 ): ArrowRecordBatchStream {
-  const bqInternal = bq as unknown as BigQueryInternal;
   const stream = new ResourceStream<RecordBatch>(
     {},
     () => {},
@@ -257,7 +237,7 @@ export function createQueryArrowStream_(
       return;
     }
 
-    const queryReq = bqInternal.buildQueryRequest_(queryObj, {});
+    const queryReq = bq.buildQueryRequest_(queryObj, {});
     if (!queryReq) {
       // TODO: Route queries that cannot use jobs.query through jobs.insert (createQueryJob).
       stream.destroy(
@@ -272,7 +252,7 @@ export function createQueryArrowStream_(
     }
     queryReq.queryResultsFormat = 'ARROW';
 
-    void bqInternal.runJobsQuery(queryReq, (err, job, res) => {
+    void bq.runJobsQuery(queryReq, (err, job, res) => {
       if (err) {
         stream.destroy(err);
         return;
