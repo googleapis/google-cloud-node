@@ -351,6 +351,39 @@ function streamDefaultJobStream(
 }
 
 /**
+ * Creates an Arrow read session with a single stream on `table`, billed to
+ * `parentProjectId`.
+ *
+ * @private
+ */
+function createArrowReadSession(
+  ctx: ArrowStreamContext,
+  parentProjectId: string | undefined,
+  table: bigquery.ITableReference,
+  callback: (err: Error | null, session?: IReadSession) => void,
+): void {
+  let readClient: BigQueryReadClient;
+  try {
+    readClient = getStorageReadClient(ctx.bq, ctx.storage);
+  } catch (err) {
+    callback(err as Error);
+    return;
+  }
+  readClient.createReadSession(
+    {
+      parent: `projects/${parentProjectId}`,
+      readSession: {
+        table: `projects/${table.projectId}/datasets/${table.datasetId}/tables/${table.tableId}`,
+        dataFormat: 'ARROW',
+      },
+      // One stream keeps rows in the query's order (e.g., ORDER BY).
+      maxStreamCount: 1,
+    },
+    (err, session) => callback(err, session ?? undefined),
+  );
+}
+
+/**
  * Reads the Arrow schema of a finished query job's results from its
  * destination table. The default job stream sends no `ReadRowsResponse`, and
  * so no schema, for a result without rows, but a read session on the
@@ -364,7 +397,7 @@ function readDestinationSchema(
   job: Job,
   callback: (err: Error | null, schema?: Uint8Array | string) => void,
 ): void {
-  const {bq, storage} = ctx;
+  const {bq} = ctx;
   // A script's destination table is only set once the job finishes, so read
   // the job's current metadata instead of the response that created it.
   void job.getMetadata((err: Error | null, metadata?: bigquery.IJob) => {
@@ -377,26 +410,14 @@ function readDestinationSchema(
       callback(null);
       return;
     }
-    let readClient: BigQueryReadClient;
-    try {
-      readClient = getStorageReadClient(bq, storage);
-    } catch (err) {
-      callback(err as Error);
-      return;
-    }
-    readClient.createReadSession(
-      {
-        parent: `projects/${resolveProjectId(
-          bq,
-          metadata?.jobReference?.projectId,
-          destRef.projectId,
-        )}`,
-        readSession: {
-          table: `projects/${destRef.projectId}/datasets/${destRef.datasetId}/tables/${destRef.tableId}`,
-          dataFormat: 'ARROW',
-        },
-        maxStreamCount: 1,
-      },
+    createArrowReadSession(
+      ctx,
+      resolveProjectId(
+        bq,
+        metadata?.jobReference?.projectId,
+        destRef.projectId,
+      ),
+      destRef,
       (err, session) => {
         callback(err, session?.arrowSchema?.serializedSchema || undefined);
       },
@@ -532,6 +553,50 @@ function streamReadRows(
 }
 
 /**
+ * Creates a Storage Read API session for an explicit destination table and
+ * streams Arrow `RecordBatch`es from its single stream.
+ *
+ * @private
+ */
+function streamDestinationTable(
+  ctx: ArrowStreamContext,
+  jobRef: bigquery.IJobReference | undefined,
+  table: bigquery.ITableReference,
+): void {
+  const {bq, arrow, stream} = ctx;
+  // The session is billed to the job's project; the table can be in another.
+  createArrowReadSession(
+    ctx,
+    resolveProjectId(bq, jobRef?.projectId),
+    table,
+    (err, session) => {
+      if (err) {
+        stream.destroy(err);
+        return;
+      }
+      if (stream._ended || stream.destroyed) {
+        return;
+      }
+
+      const sessionSchema = session?.arrowSchema?.serializedSchema || undefined;
+      const readStream = session?.streams?.[0]?.name;
+      if (!readStream) {
+        // An empty destination table returns 0 streams; emit a single 0-row
+        // RecordBatch carrying the session's Arrow schema.
+        emitZeroRowBatchAndEnd(arrow, stream, sessionSchema);
+        return;
+      }
+
+      streamReadRows(ctx, {
+        readStream,
+        offset: 0,
+        initialSchema: sessionSchema,
+      });
+    },
+  );
+}
+
+/**
  * Waits for an unfinished BigQuery job to complete using `job.getQueryResults`
  * without fetching any `STRUCT_ENCODING` rows (`maxResults: 0`). If `timeoutMs`
  * is set, fails like {@link BigQuery#query} when the job doesn't complete in
@@ -629,16 +694,6 @@ export function createQueryArrowStream_(
       return;
     }
 
-    if (queryObj.destination) {
-      // TODO: Support explicit destination tables via CreateReadSession.
-      stream.destroy(
-        new Error(
-          'Explicit destination tables are not yet supported in createQueryArrowStream.',
-        ),
-      );
-      return;
-    }
-
     const ctx: ArrowStreamContext = {bq, arrow, storage, stream};
     readCtx = ctx;
 
@@ -654,10 +709,10 @@ export function createQueryArrowStream_(
     }
     if (!queryReq) {
       // buildQueryRequest_ returns undefined when the query sets an option
-      // that only jobs.insert accepts (e.g., jobId, dryRun, or jobTimeoutMs),
-      // or when FAST_QUERY_PATH=DISABLED. timeoutMs only bounds the wait
-      // below, and jobCreationMode only applies to jobs.query, so keep both
-      // out of the job configuration.
+      // that only jobs.insert accepts (e.g., destination, jobId, dryRun, or
+      // jobTimeoutMs), or when FAST_QUERY_PATH=DISABLED. timeoutMs only bounds
+      // the wait below, and jobCreationMode only applies to jobs.query, so
+      // keep both out of the job configuration.
       const {timeoutMs, ...jobQuery} = queryObj;
       delete jobQuery.jobCreationMode;
       try {
@@ -677,11 +732,24 @@ export function createQueryArrowStream_(
             return;
           }
 
-          // Wait for the job to finish, then read all rows from streams/_default at offset = 0.
+          // Wait for the job to finish, then read the explicit destination
+          // table through a read session, or streams/_default at offset = 0.
           waitForJobCompletion(
             job,
             stream,
             () => {
+              // BigQuery echoes the caller's destination table, with its
+              // resolved project, in the job's configuration.
+              const destinationTable =
+                resp?.configuration?.query?.destinationTable;
+              if (queryObj.destination && destinationTable) {
+                streamDestinationTable(
+                  ctx,
+                  resp?.jobReference,
+                  destinationTable,
+                );
+                return;
+              }
               streamDefaultJobStream(
                 ctx,
                 resp?.jobReference,

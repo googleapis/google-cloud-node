@@ -470,16 +470,6 @@ describe('Arrow Support', () => {
       );
     });
 
-    it('should fail when an explicit destination table is specified', async () => {
-      const destination = bq.dataset('ds').table('tbl');
-
-      // TODO: Replace with explicit destination table (CreateReadSession) tests once added.
-      await assert.rejects(
-        bq.createQueryArrowStream({query: 'SELECT 1', destination}).toArray(),
-        /Explicit destination tables are not yet supported in createQueryArrowStream\./,
-      );
-    });
-
     it('should forward errors thrown while building the jobs.query request', async () => {
       // A null parameter without an explicit type makes buildQueryRequest_ throw.
       await assert.rejects(
@@ -1606,6 +1596,225 @@ describe('Arrow Support', () => {
           .createQueryArrowStream({query: 'SELECT 1', jobId: 'custom-err-1'})
           .toArray(),
         /Permission denied creating job/,
+      );
+    });
+  });
+
+  describe('BigQuery#createQueryArrowStream (destination table)', () => {
+    let bq: BigQuery;
+
+    beforeEach(() => {
+      bq = new BigQuery({projectId: 'test-project'});
+    });
+
+    function stubDestinationJob(
+      tableId: string,
+      jobId: string,
+      opts?: {
+        destinationTable?: bigquery.ITableReference;
+        onGetQueryResults?: (reqOpts: QueryResultsOptions) => void;
+      },
+    ) {
+      const destination = bq.dataset('dest_ds').table(tableId);
+      let capturedJobOpts: JobOptions | undefined;
+
+      const fakeJob = bq.job(jobId, {location: 'US'});
+      fakeJob.metadata = {
+        jobReference: {
+          projectId: 'test-project',
+          jobId,
+          location: 'US',
+        },
+        // jobs.insert echoes the destination table in the job configuration.
+        configuration: {
+          query: {
+            destinationTable: opts?.destinationTable ?? {
+              projectId: 'test-project',
+              datasetId: 'dest_ds',
+              tableId,
+            },
+          },
+        },
+      };
+      stubJobGetQueryResults(fakeJob, (reqOpts, cb) => {
+        opts?.onGetQueryResults?.(reqOpts);
+        process.nextTick(() => {
+          cb(null, [], null, {jobComplete: true});
+        });
+      });
+      stubCreateJob(bq, (reqOpts, cb) => {
+        capturedJobOpts = reqOpts;
+        process.nextTick(() => {
+          cb(null, fakeJob, fakeJob.metadata);
+        });
+      });
+
+      return {
+        destination,
+        getCapturedJobOpts: () => capturedJobOpts,
+      };
+    }
+
+    it('should preserve the Table instance through createQueryJob, call createReadSession with maxStreamCount = 1 and dataFormat = ARROW, and stream from streams[0].name', async () => {
+      const capturedSessionReqs: CreateReadSessionRequest[] = [];
+      const capturedReadRowsReqs: Array<{
+        readStream?: string;
+        offset?: number;
+      }> = [];
+
+      const {destination, getCapturedJobOpts} = stubDestinationJob(
+        'dest_tbl',
+        'dest-job-1',
+        {
+          destinationTable: {
+            projectId: 'dest-project',
+            datasetId: 'dest_ds',
+            tableId: 'dest_tbl',
+          },
+          onGetQueryResults: opts => {
+            // Verify createReadSession has not been called before the destination job completes.
+            assert.strictEqual(capturedSessionReqs.length, 0);
+            assert.strictEqual(opts.maxResults, 0);
+          },
+        },
+      );
+
+      stubStorageReadClient(bq, {
+        createReadSession: (req, cb) => {
+          capturedSessionReqs.push(req);
+          process.nextTick(() => {
+            cb(null, {
+              arrowSchema: {
+                serializedSchema: Buffer.from(
+                  SAMPLE_PAYLOAD.serializedSchema,
+                  'base64',
+                ),
+              },
+              streams: [
+                {
+                  name: 'projects/test-project/locations/US/sessions/sess-1/streams/stream-0',
+                },
+              ],
+            });
+          });
+        },
+        readRows: (req: {readStream?: string; offset?: number}) => {
+          capturedReadRowsReqs.push(req);
+          const grpcStream = new EventEmitter();
+          process.nextTick(() => {
+            // Omit arrowSchema on the ReadRows message to verify session.arrowSchema is used as initialSchema.
+            grpcStream.emit('data', {
+              arrowRecordBatch: {
+                serializedRecordBatch: Buffer.from(
+                  SAMPLE_PAYLOAD.serializedRecordBatch,
+                  'base64',
+                ),
+              },
+            });
+            grpcStream.emit('end');
+          });
+          return grpcStream;
+        },
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream({
+          query: 'SELECT id, name FROM tbl',
+          destination,
+          writeDisposition: 'WRITE_TRUNCATE',
+        })
+        .toArray();
+
+      // Verify createQueryJob translated destination into configuration.query.destinationTable.
+      const queryConfig = getCapturedJobOpts()?.configuration?.query;
+      assert.deepStrictEqual(queryConfig?.destinationTable, {
+        datasetId: 'dest_ds',
+        projectId: 'test-project',
+        tableId: 'dest_tbl',
+      });
+      assert.strictEqual(queryConfig?.writeDisposition, 'WRITE_TRUNCATE');
+
+      // Verify createReadSession was called with maxStreamCount: 1 and dataFormat: 'ARROW'.
+      assert.deepStrictEqual(capturedSessionReqs, [
+        {
+          parent: 'projects/test-project',
+          readSession: {
+            table: 'projects/dest-project/datasets/dest_ds/tables/dest_tbl',
+            dataFormat: 'ARROW',
+          },
+          maxStreamCount: 1,
+        },
+      ]);
+
+      // Verify readRows was called on session.streams[0].name at offset = 0.
+      assert.deepStrictEqual(capturedReadRowsReqs, [
+        {
+          readStream:
+            'projects/test-project/locations/US/sessions/sess-1/streams/stream-0',
+          offset: 0,
+        },
+      ]);
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 2);
+    });
+
+    it('should emit a 0-row RecordBatch preserving session.arrowSchema when createReadSession returns no streams', async () => {
+      const {destination} = stubDestinationJob('empty_tbl', 'dest-empty-1');
+
+      let readRowsCalled = false;
+      stubStorageReadClient(bq, {
+        createReadSession: (_req, cb) => {
+          process.nextTick(() => {
+            cb(null, {
+              arrowSchema: {
+                serializedSchema: Buffer.from(
+                  SAMPLE_PAYLOAD.serializedSchema,
+                  'base64',
+                ),
+              },
+              streams: [],
+            });
+          });
+        },
+        readRows: () => {
+          readRowsCalled = true;
+          return new EventEmitter();
+        },
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream({
+          query: 'SELECT id, name FROM tbl WHERE FALSE',
+          destination,
+        })
+        .toArray();
+
+      // Verify an empty destination table emits a single 0-row RecordBatch with the session's schema without calling readRows.
+      assert.strictEqual(readRowsCalled, false);
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 0);
+      assert.deepStrictEqual(
+        batches[0].schema.fields.map(f => f.name),
+        ['id', 'name'],
+      );
+    });
+
+    it('should forward createReadSession errors to the stream', async () => {
+      const {destination} = stubDestinationJob('err_tbl', 'dest-err-1');
+
+      stubStorageReadClient(bq, {
+        createReadSession: (_req, cb) => {
+          process.nextTick(() => {
+            cb(new Error('bigquery.readsessions.create denied'));
+          });
+        },
+        readRows: () => new EventEmitter(),
+      });
+
+      // Verify errors from createReadSession reject stream consumption.
+      await assert.rejects(
+        bq.createQueryArrowStream({query: 'SELECT 1', destination}).toArray(),
+        /bigquery\.readsessions\.create denied/,
       );
     });
   });
