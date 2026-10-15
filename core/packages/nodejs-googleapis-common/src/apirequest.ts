@@ -80,7 +80,11 @@ export function createAPIRequest<T>(
   callback?: BodyResponseCallback<T>,
 ): void | Promise<GaxiosResponseWithHTTP2<T>> {
   if (callback) {
-    createAPIRequestAsync<T>(parameters).then(r => callback(null, r), callback);
+    createAPIRequestAsync<T>(parameters)
+      .then(r => callback(null, r), callback)
+      .catch(err => {
+        throw err;
+      });
   } else {
     return createAPIRequestAsync<T>(parameters);
   }
