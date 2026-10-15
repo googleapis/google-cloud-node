@@ -344,6 +344,15 @@ describe('🛸 retry & exponential backoff', () => {
     scope.done();
   });
 
+  it('should not retry once totalTimeout has elapsed', async () => {
+    const scope = nock(url).get('/').delay(200).reply(500);
+    await assert.rejects(
+      request({url, retryConfig: {totalTimeout: 100}}),
+      (err: GaxiosError) => err.status === 500,
+    );
+    scope.done();
+  });
+
   it('should respect maxRetryDelay if configured', async () => {
     const scope = nock(url)
       .get('/')
