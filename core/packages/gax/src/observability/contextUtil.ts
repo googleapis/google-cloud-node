@@ -27,6 +27,7 @@ import {CallSettings} from '../gax';
 import {ignoredClientHeaderTokens} from '../util';
 export const DEFAULT_GCP_REPO = 'googleapis/google-cloud-node';
 
+// Context keys for GAX client request and per-attempt spans.
 export const CLIENT_REQUEST_SPAN_KEY = createContextKey(
   'google-gax-client-request-span',
 );
@@ -419,6 +420,9 @@ export function buildInitialAttributes(
   return attributes;
 }
 
+/**
+ * Returns the span if defined and its span context is valid.
+ */
 function getValidSpan(span: Span | undefined): Span | undefined {
   return span && isSpanContextValid(span.spanContext()) ? span : undefined;
 }
@@ -435,12 +439,14 @@ function getValidSpan(span: Span | undefined): Span | undefined {
 export function getActiveTraceContext(
   activeContext: Context = context.active(),
 ): ActiveTraceContext | undefined {
+  // Retrieve GAX-managed spans from the context if valid.
   const attemptSpan = getValidSpan(
     activeContext.getValue(ATTEMPT_SPAN_KEY) as Span | undefined,
   );
   const clientRequestSpan = getValidSpan(
     activeContext.getValue(CLIENT_REQUEST_SPAN_KEY) as Span | undefined,
   );
+  // Prefer attempt span > client request span > outer OpenTelemetry span.
   const activeSpan =
     attemptSpan ??
     clientRequestSpan ??
