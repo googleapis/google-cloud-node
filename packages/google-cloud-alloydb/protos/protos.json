@@ -994,9 +994,23 @@
                           "type": "QueryInsightsInstanceConfig",
                           "id": 21
                         },
+                        "queryInsightsInfo": {
+                          "type": "QueryInsightsInstanceInfo",
+                          "id": 47,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "observabilityConfig": {
                           "type": "ObservabilityInstanceConfig",
                           "id": 26
+                        },
+                        "observabilityInstanceInfo": {
+                          "type": "ObservabilityInstanceInfo",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "readPoolConfig": {
                           "type": "ReadPoolConfig",
@@ -1176,6 +1190,45 @@
                             }
                           }
                         },
+                        "QueryInsightsInstanceInfo": {
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "recordApplicationTags": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "recordClientAddress": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "queryStringLength": {
+                              "type": "uint32",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "queryPlansPerMinute": {
+                              "type": "uint32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "ObservabilityInstanceConfig": {
                           "oneofs": {
                             "_enabled": {
@@ -1275,6 +1328,66 @@
                               "id": 8,
                               "options": {
                                 "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ObservabilityInstanceInfo": {
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "preserveComments": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackWaitEvents": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackWaitEventTypes": {
+                              "type": "bool",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "maxQueryStringLength": {
+                              "type": "int32",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "recordApplicationTags": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "queryPlansPerMinute": {
+                              "type": "int32",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackActiveQueries": {
+                              "type": "bool",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           }
@@ -5896,9 +6009,23 @@
                           "type": "QueryInsightsInstanceConfig",
                           "id": 21
                         },
+                        "queryInsightsInfo": {
+                          "type": "QueryInsightsInstanceInfo",
+                          "id": 47,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "observabilityConfig": {
                           "type": "ObservabilityInstanceConfig",
                           "id": 26
+                        },
+                        "observabilityInstanceInfo": {
+                          "type": "ObservabilityInstanceInfo",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "readPoolConfig": {
                           "type": "ReadPoolConfig",
@@ -6111,6 +6238,45 @@
                             }
                           }
                         },
+                        "QueryInsightsInstanceInfo": {
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "recordApplicationTags": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "recordClientAddress": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "queryStringLength": {
+                              "type": "uint32",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "queryPlansPerMinute": {
+                              "type": "uint32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "ObservabilityInstanceConfig": {
                           "oneofs": {
                             "_enabled": {
@@ -6234,6 +6400,88 @@
                               "id": 10,
                               "options": {
                                 "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ObservabilityInstanceInfo": {
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "preserveComments": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackWaitEvents": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackWaitEventTypes": {
+                              "type": "bool",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "maxQueryStringLength": {
+                              "type": "int32",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "recordApplicationTags": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "queryPlansPerMinute": {
+                              "type": "int32",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackActiveQueries": {
+                              "type": "bool",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackClientAddress": {
+                              "type": "bool",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "assistiveExperiencesEnabled": {
+                              "type": "bool",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackActiveQueryPlan": {
+                              "type": "bool",
+                              "id": 13,
+                              "options": {
+                                "deprecated": true,
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           }
@@ -11098,9 +11346,23 @@
                           "type": "QueryInsightsInstanceConfig",
                           "id": 21
                         },
+                        "queryInsightsInfo": {
+                          "type": "QueryInsightsInstanceInfo",
+                          "id": 47,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "observabilityConfig": {
                           "type": "ObservabilityInstanceConfig",
                           "id": 26
+                        },
+                        "observabilityInstanceInfo": {
+                          "type": "ObservabilityInstanceInfo",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "readPoolConfig": {
                           "type": "ReadPoolConfig",
@@ -11306,6 +11568,45 @@
                             }
                           }
                         },
+                        "QueryInsightsInstanceInfo": {
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "recordApplicationTags": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "recordClientAddress": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "queryStringLength": {
+                              "type": "uint32",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "queryPlansPerMinute": {
+                              "type": "uint32",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "ObservabilityInstanceConfig": {
                           "oneofs": {
                             "_enabled": {
@@ -11429,6 +11730,88 @@
                               "id": 10,
                               "options": {
                                 "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ObservabilityInstanceInfo": {
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "preserveComments": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackWaitEvents": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackWaitEventTypes": {
+                              "type": "bool",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "maxQueryStringLength": {
+                              "type": "int32",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "recordApplicationTags": {
+                              "type": "bool",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "queryPlansPerMinute": {
+                              "type": "int32",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackActiveQueries": {
+                              "type": "bool",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackClientAddress": {
+                              "type": "bool",
+                              "id": 10,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "assistiveExperiencesEnabled": {
+                              "type": "bool",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "trackActiveQueryPlan": {
+                              "type": "bool",
+                              "id": 13,
+                              "options": {
+                                "deprecated": true,
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           }
