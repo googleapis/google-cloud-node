@@ -377,8 +377,12 @@ export class BigQuery extends Service {
   }
 
   /**
-   * Run a query scoped to your project and stream results as Apache Arrow
-   * `RecordBatch` objects.
+   * [Beta] Run a query scoped to your project and stream results as Apache
+   * Arrow `RecordBatch` objects.
+   *
+   * This method uses the `ARROW` query results format of the BigQuery API,
+   * which isn't generally available yet, so it may change in ways that aren't
+   * backward compatible.
    *
    * Requires the optional `@google-cloud/bigquery-storage` (>= 6.1.0) package
    * to be installed.
@@ -411,6 +415,8 @@ export class BigQuery extends Service {
    * //-
    * const batches = await bigquery.createQueryArrowStream(query).toArray();
    * ```
+   *
+   * @beta
    */
   createQueryArrowStream(options?: Query | string): ArrowRecordBatchStream {
     return createQueryArrowStream_(this, options);

@@ -22,11 +22,13 @@ import type bigquery from './types';
 type ArrowModule = typeof import('apache-arrow');
 
 /**
- * A stream of Apache Arrow `RecordBatch` objects returned by
+ * [Beta] A stream of Apache Arrow `RecordBatch` objects returned by
  * {@link BigQuery#createQueryArrowStream}.
  *
  * `queryId` and `jobReference` are set once BigQuery responds to the query,
  * before the first batch is emitted.
+ *
+ * @beta
  */
 export type ArrowRecordBatchStream = ResourceStream<RecordBatch> & {
   /** The query ID, when the query runs through `jobs.query`. */
