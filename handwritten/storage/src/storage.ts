@@ -816,7 +816,10 @@ export class Storage extends Service {
 
   async getEndpoint(): Promise<string> {
     if (!this.#hasCustomEndpoint) {
-      const universe = await this.authClient.getUniverseDomain();
+      const universe =
+        typeof this.authClient.getUniverseDomain === 'function'
+          ? await this.authClient.getUniverseDomain()
+          : this.universeDomain;
       this.apiEndpoint = Storage.sanitizeEndpoint(`storage.${universe}`);
     }
     return this.apiEndpoint;

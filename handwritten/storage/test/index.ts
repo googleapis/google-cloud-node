@@ -432,13 +432,16 @@ describe('Storage', () => {
         .stub(GoogleAuth.prototype, 'getUniverseDomain')
         .resolves(universeDomain);
 
-      const storage = new Storage({universeDomain});
+      try {
+        const storage = new Storage({universeDomain});
 
-      assert.equal(
-        await storage.getEndpoint(),
-        `https://storage.${universeDomain}`
-      );
-      stub.restore();
+        assert.equal(
+          await storage.getEndpoint(),
+          `https://storage.${universeDomain}`
+        );
+      } finally {
+        stub.restore();
+      }
     });
 
     describe('STORAGE_EMULATOR_HOST', () => {
