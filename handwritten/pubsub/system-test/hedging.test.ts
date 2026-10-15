@@ -219,17 +219,15 @@ describe('Publish Hedging System Tests', () => {
       if (config.method === 'publish' && !stalledPrimaryIntercepted) {
         stalledPrimaryIntercepted = true;
         primarySignal = config.gaxOpts?.signal;
+        const abortHandler = () => {
+          clearTimeout(stallTimer);
+          callback(createCancelledError());
+        };
         const stallTimer = setTimeout(() => {
+          primarySignal?.removeEventListener('abort', abortHandler);
           originalRequest(config, callback);
         }, 2500);
-        primarySignal?.addEventListener(
-          'abort',
-          () => {
-            clearTimeout(stallTimer);
-            callback(createCancelledError());
-          },
-          {once: true},
-        );
+        primarySignal?.addEventListener('abort', abortHandler, {once: true});
         return;
       }
 
@@ -300,17 +298,15 @@ describe('Publish Hedging System Tests', () => {
 
       if (config.method === 'publish' && config.gaxOpts?.retry === null) {
         hedgedSignal = config.gaxOpts?.signal;
+        const abortHandler = () => {
+          clearTimeout(hedgedTimer);
+          callback(createCancelledError());
+        };
         const hedgedTimer = setTimeout(() => {
+          hedgedSignal?.removeEventListener('abort', abortHandler);
           originalRequest(config, callback);
         }, 2500);
-        hedgedSignal?.addEventListener(
-          'abort',
-          () => {
-            clearTimeout(hedgedTimer);
-            callback(createCancelledError());
-          },
-          {once: true},
-        );
+        hedgedSignal?.addEventListener('abort', abortHandler, {once: true});
         return;
       }
 
@@ -438,17 +434,15 @@ describe('Publish Hedging System Tests', () => {
         if (config.method === 'publish' && !stalledPrimaryIntercepted) {
           stalledPrimaryIntercepted = true;
           const signal = config.gaxOpts?.signal;
+          const abortHandler = () => {
+            clearTimeout(stallTimer);
+            callback(createCancelledError());
+          };
           const stallTimer = setTimeout(() => {
+            signal?.removeEventListener('abort', abortHandler);
             originalRequest(config, callback);
           }, 2500);
-          signal?.addEventListener(
-            'abort',
-            () => {
-              clearTimeout(stallTimer);
-              callback(createCancelledError());
-            },
-            {once: true},
-          );
+          signal?.addEventListener('abort', abortHandler, {once: true});
           return;
         }
         originalRequest(config, callback);
