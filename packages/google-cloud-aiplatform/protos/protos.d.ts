@@ -318031,7 +318031,7 @@ export namespace google {
                     enum State {
                         STATE_UNSPECIFIED = 0,
                         ACTIVE = 1,
-                        DEPRECATED = 2
+                        ARCHIVED = 3
                     }
                 }
 
