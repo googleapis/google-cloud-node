@@ -15,7 +15,6 @@
  */
 
 import {ResourceStream} from '@google-cloud/paginator';
-import * as path from 'path';
 import type {RecordBatch, Schema} from 'apache-arrow';
 import type {BigQuery, Query} from './bigquery';
 import type bigquery from './types';
@@ -37,24 +36,6 @@ export type ArrowRecordBatchStream = ResourceStream<RecordBatch> & {
 };
 
 /**
- * Loads `package.json` for an installed module, falling back to resolving the
- * package root directory when package `exports` block `./package.json`.
- *
- * @private
- */
-function loadPackageJson(
-  requireFn: NodeRequire,
-  pkgName: string,
-): {version?: string} {
-  try {
-    return requireFn(`${pkgName}/package.json`);
-  } catch {
-    const entryPath = (requireFn.resolve || require.resolve)(pkgName);
-    return requireFn(path.join(path.dirname(entryPath), 'package.json'));
-  }
-}
-
-/**
  * Requires a dependency and verifies its minimum major.minor version.
  *
  * @private
@@ -70,7 +51,7 @@ function requireWithMinVersion<T = unknown>(
   let pkg: {version?: string};
   try {
     mod = requireFn(pkgName);
-    pkg = loadPackageJson(requireFn, pkgName);
+    pkg = requireFn(`${pkgName}/package.json`);
   } catch (err) {
     throw new Error(
       `Arrow support requires the "${pkgName}" package (>= ${minVersion}), ` +
@@ -98,20 +79,21 @@ function requireWithMinVersion<T = unknown>(
 }
 
 /**
- * Verifies that `apache-arrow` (>= 21.0.0) and the optional
- * `@google-cloud/bigquery-storage` (>= 6.1.0) package are installed and meet
- * minimum version requirements.
+ * Loads `apache-arrow` and verifies that the optional
+ * `@google-cloud/bigquery-storage` (>= 6.1.0) package is installed.
+ *
+ * `apache-arrow` is a regular dependency, so its version is guaranteed by
+ * `package.json`. It is loaded lazily so that only Arrow callers pay for it.
  *
  * @private
  */
 export function checkArrowDependencies(
   requireFn: NodeRequire = require,
 ): ArrowModule {
-  const arrow = requireWithMinVersion<ArrowModule>(
-    requireFn,
-    'apache-arrow',
-    21,
-  );
+  const arrow: ArrowModule = requireFn('apache-arrow');
+  // Package managers only warn when an installed version is outside an
+  // optional peer range, and an older version's protos silently drop newer
+  // request fields, so check the version here.
   // TODO: Bump minimum version (here and in package.json) once
   // @google-cloud/bigquery-storage is released with
   // @google-cloud/bigquery-storage-api >= 0.5.0.

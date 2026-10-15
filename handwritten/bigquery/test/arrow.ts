@@ -106,55 +106,41 @@ describe('Arrow Support', () => {
   });
 
   describe('checkArrowDependencies', () => {
-    it('should succeed when apache-arrow >= 21.0.0 and @google-cloud/bigquery-storage >= 6.1.0 are installed', () => {
+    it('should succeed when @google-cloud/bigquery-storage >= 6.1.0 is installed', () => {
       const arrowMod = checkArrowDependencies();
       // Verify the returned module exposes the Arrow RecordBatchReader API.
       assert.strictEqual(typeof arrowMod.RecordBatchReader.from, 'function');
     });
 
-    it('should throw an actionable error when a required package is missing', () => {
-      for (const pkg of ['apache-arrow', '@google-cloud/bigquery-storage']) {
-        const fakeRequire = ((id: string) => {
-          if (id.startsWith(pkg)) {
-            throw new Error(`Cannot find module '${id}'`);
-          }
-          return require(id);
-        }) as NodeRequire;
+    it('should throw an actionable error when @google-cloud/bigquery-storage is missing', () => {
+      const pkg = '@google-cloud/bigquery-storage';
+      const fakeRequire = ((id: string) => {
+        if (id.startsWith(pkg)) {
+          throw new Error(`Cannot find module '${id}'`);
+        }
+        return require(id);
+      }) as NodeRequire;
 
-        // Verify the error tells the user how to install the missing package.
-        assert.throws(
-          () => checkArrowDependencies(fakeRequire),
-          new RegExp(`npm install ${pkg.replace('/', '\\/')}`),
-        );
-      }
+      // Verify the error tells the user how to install the missing package.
+      assert.throws(
+        () => checkArrowDependencies(fakeRequire),
+        /npm install @google-cloud\/bigquery-storage/,
+      );
     });
 
-    it('should throw an actionable error when a required package is below the minimum version', () => {
-      const cases = [
-        {
-          pkgJson: 'apache-arrow/package.json',
-          oldVersion: '20.0.0',
-          expected: /requires "apache-arrow" >= 21\.0\.0 \(found 20\.0\.0\)/,
-        },
-        {
-          pkgJson: '@google-cloud/bigquery-storage/package.json',
-          oldVersion: '6.0.0',
-          expected:
-            /requires "@google-cloud\/bigquery-storage" >= 6\.1\.0 \(found 6\.0\.0\)/,
-        },
-      ];
+    it('should throw an actionable error when @google-cloud/bigquery-storage is below the minimum version', () => {
+      const fakeRequire = ((id: string) => {
+        if (id === '@google-cloud/bigquery-storage/package.json') {
+          return {version: '6.0.0'};
+        }
+        return require(id);
+      }) as NodeRequire;
 
-      for (const {pkgJson, oldVersion, expected} of cases) {
-        const fakeRequire = ((id: string) => {
-          if (id === pkgJson) {
-            return {version: oldVersion};
-          }
-          return require(id);
-        }) as NodeRequire;
-
-        // Verify outdated package versions are rejected with upgrade instructions.
-        assert.throws(() => checkArrowDependencies(fakeRequire), expected);
-      }
+      // Verify outdated package versions are rejected with upgrade instructions.
+      assert.throws(
+        () => checkArrowDependencies(fakeRequire),
+        /requires "@google-cloud\/bigquery-storage" >= 6\.1\.0 \(found 6\.0\.0\)/,
+      );
     });
 
     it('should include the underlying error when an installed package fails to load', () => {
