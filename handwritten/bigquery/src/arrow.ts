@@ -295,7 +295,12 @@ export function createQueryArrowStream_(
       }
 
       // pageRowCount and totalRows are returned as uint64 strings in REST JSON.
-      if (BigInt(res?.pageRowCount ?? 0) < BigInt(res?.totalRows ?? 0)) {
+      // Also check pageToken: on cached multi-page results, jobs.query can
+      // return totalRows "0" and omit pageRowCount while setting pageToken.
+      if (
+        Boolean(res?.pageToken) ||
+        BigInt(res?.pageRowCount ?? 0) < BigInt(res?.totalRows ?? 0)
+      ) {
         // TODO: Stream remaining rows via @google-cloud/bigquery-storage (streams/_default).
         stream.destroy(
           new Error(

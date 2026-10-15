@@ -416,5 +416,18 @@ describe('Arrow Support', () => {
         /Query results were not returned inline in the jobs\.query response\./,
       );
     });
+
+    it('should fail when jobs.query returns a pageToken with totalRows = 0', async () => {
+      // Cached multi-page results can report totalRows "0" and omit pageRowCount.
+      stubJobsQuery(bq, {
+        res: {jobComplete: true, totalRows: '0', pageToken: 'token-1'},
+      });
+
+      // TODO: Replace with default job stream (pageToken) tests once added.
+      await assert.rejects(
+        bq.createQueryArrowStream('SELECT 1').toArray(),
+        /Query results were not returned inline in the jobs\.query response\./,
+      );
+    });
   });
 });
