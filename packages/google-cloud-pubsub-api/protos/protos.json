@@ -2250,6 +2250,13 @@
                   }
                 },
                 "BigtableConfig": {
+                  "oneofs": {
+                    "messageMapping": {
+                      "oneof": [
+                        "columnFamilyMapping"
+                      ]
+                    }
+                  },
                   "fields": {
                     "table": {
                       "type": "string",
@@ -2279,6 +2286,13 @@
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
                     },
+                    "columnFamilyMapping": {
+                      "type": "ColumnFamilyMapping",
+                      "id": 6,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
                     "state": {
                       "type": "State",
                       "id": 4,
@@ -2288,6 +2302,56 @@
                     }
                   },
                   "nested": {
+                    "ColumnFamilyMapping": {
+                      "oneofs": {
+                        "keyDefinition": {
+                          "oneof": [
+                            "rowKeySchema",
+                            "delimitedKey"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "rowKeySchema": {
+                          "type": "RowKeySchema",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "delimitedKey": {
+                          "type": "DelimitedKey",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RowKeySchema": {
+                          "fields": {}
+                        },
+                        "DelimitedKey": {
+                          "fields": {
+                            "keyFields": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "delimiter": {
+                              "type": "bytes",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "State": {
                       "values": {
                         "STATE_UNSPECIFIED": 0,

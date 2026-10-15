@@ -6619,6 +6619,9 @@ export namespace google {
                 /** BigtableConfig writeMetadata */
                 writeMetadata?: (boolean|null);
 
+                /** BigtableConfig columnFamilyMapping */
+                columnFamilyMapping?: (google.pubsub.v1.BigtableConfig.IColumnFamilyMapping|null);
+
                 /** BigtableConfig state */
                 state?: (google.pubsub.v1.BigtableConfig.State|keyof typeof google.pubsub.v1.BigtableConfig.State|null);
             }
@@ -6644,8 +6647,14 @@ export namespace google {
                 /** BigtableConfig writeMetadata. */
                 public writeMetadata: boolean;
 
+                /** BigtableConfig columnFamilyMapping. */
+                public columnFamilyMapping?: (google.pubsub.v1.BigtableConfig.IColumnFamilyMapping|null);
+
                 /** BigtableConfig state. */
                 public state: (google.pubsub.v1.BigtableConfig.State|keyof typeof google.pubsub.v1.BigtableConfig.State);
+
+                /** BigtableConfig messageMapping. */
+                public messageMapping?: "columnFamilyMapping";
 
                 /**
                  * Creates a new BigtableConfig instance using the specified properties.
@@ -6726,6 +6735,309 @@ export namespace google {
             }
 
             namespace BigtableConfig {
+
+                /** Properties of a ColumnFamilyMapping. */
+                interface IColumnFamilyMapping {
+
+                    /** ColumnFamilyMapping rowKeySchema */
+                    rowKeySchema?: (google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.IRowKeySchema|null);
+
+                    /** ColumnFamilyMapping delimitedKey */
+                    delimitedKey?: (google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.IDelimitedKey|null);
+                }
+
+                /** Represents a ColumnFamilyMapping. */
+                class ColumnFamilyMapping implements IColumnFamilyMapping {
+
+                    /**
+                     * Constructs a new ColumnFamilyMapping.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.pubsub.v1.BigtableConfig.IColumnFamilyMapping);
+
+                    /** ColumnFamilyMapping rowKeySchema. */
+                    public rowKeySchema?: (google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.IRowKeySchema|null);
+
+                    /** ColumnFamilyMapping delimitedKey. */
+                    public delimitedKey?: (google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.IDelimitedKey|null);
+
+                    /** ColumnFamilyMapping keyDefinition. */
+                    public keyDefinition?: ("rowKeySchema"|"delimitedKey");
+
+                    /**
+                     * Creates a new ColumnFamilyMapping instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ColumnFamilyMapping instance
+                     */
+                    public static create(properties?: google.pubsub.v1.BigtableConfig.IColumnFamilyMapping): google.pubsub.v1.BigtableConfig.ColumnFamilyMapping;
+
+                    /**
+                     * Encodes the specified ColumnFamilyMapping message. Does not implicitly {@link google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.verify|verify} messages.
+                     * @param message ColumnFamilyMapping message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.pubsub.v1.BigtableConfig.IColumnFamilyMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ColumnFamilyMapping message, length delimited. Does not implicitly {@link google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.verify|verify} messages.
+                     * @param message ColumnFamilyMapping message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.pubsub.v1.BigtableConfig.IColumnFamilyMapping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ColumnFamilyMapping message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ColumnFamilyMapping
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.pubsub.v1.BigtableConfig.ColumnFamilyMapping;
+
+                    /**
+                     * Decodes a ColumnFamilyMapping message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ColumnFamilyMapping
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.pubsub.v1.BigtableConfig.ColumnFamilyMapping;
+
+                    /**
+                     * Verifies a ColumnFamilyMapping message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ColumnFamilyMapping message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ColumnFamilyMapping
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.pubsub.v1.BigtableConfig.ColumnFamilyMapping;
+
+                    /**
+                     * Creates a plain object from a ColumnFamilyMapping message. Also converts values to other types if specified.
+                     * @param message ColumnFamilyMapping
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.pubsub.v1.BigtableConfig.ColumnFamilyMapping, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ColumnFamilyMapping to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ColumnFamilyMapping
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ColumnFamilyMapping {
+
+                    /** Properties of a RowKeySchema. */
+                    interface IRowKeySchema {
+                    }
+
+                    /** Represents a RowKeySchema. */
+                    class RowKeySchema implements IRowKeySchema {
+
+                        /**
+                         * Constructs a new RowKeySchema.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.IRowKeySchema);
+
+                        /**
+                         * Creates a new RowKeySchema instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RowKeySchema instance
+                         */
+                        public static create(properties?: google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.IRowKeySchema): google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.RowKeySchema;
+
+                        /**
+                         * Encodes the specified RowKeySchema message. Does not implicitly {@link google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.RowKeySchema.verify|verify} messages.
+                         * @param message RowKeySchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.IRowKeySchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RowKeySchema message, length delimited. Does not implicitly {@link google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.RowKeySchema.verify|verify} messages.
+                         * @param message RowKeySchema message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.IRowKeySchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RowKeySchema message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RowKeySchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.RowKeySchema;
+
+                        /**
+                         * Decodes a RowKeySchema message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RowKeySchema
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.RowKeySchema;
+
+                        /**
+                         * Verifies a RowKeySchema message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RowKeySchema message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RowKeySchema
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.RowKeySchema;
+
+                        /**
+                         * Creates a plain object from a RowKeySchema message. Also converts values to other types if specified.
+                         * @param message RowKeySchema
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.RowKeySchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RowKeySchema to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RowKeySchema
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DelimitedKey. */
+                    interface IDelimitedKey {
+
+                        /** DelimitedKey keyFields */
+                        keyFields?: (string[]|null);
+
+                        /** DelimitedKey delimiter */
+                        delimiter?: (Uint8Array|Buffer|string|null);
+                    }
+
+                    /** Represents a DelimitedKey. */
+                    class DelimitedKey implements IDelimitedKey {
+
+                        /**
+                         * Constructs a new DelimitedKey.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.IDelimitedKey);
+
+                        /** DelimitedKey keyFields. */
+                        public keyFields: string[];
+
+                        /** DelimitedKey delimiter. */
+                        public delimiter: (Uint8Array|Buffer|string);
+
+                        /**
+                         * Creates a new DelimitedKey instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DelimitedKey instance
+                         */
+                        public static create(properties?: google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.IDelimitedKey): google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.DelimitedKey;
+
+                        /**
+                         * Encodes the specified DelimitedKey message. Does not implicitly {@link google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.DelimitedKey.verify|verify} messages.
+                         * @param message DelimitedKey message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.IDelimitedKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DelimitedKey message, length delimited. Does not implicitly {@link google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.DelimitedKey.verify|verify} messages.
+                         * @param message DelimitedKey message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.IDelimitedKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DelimitedKey message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DelimitedKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.DelimitedKey;
+
+                        /**
+                         * Decodes a DelimitedKey message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DelimitedKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.DelimitedKey;
+
+                        /**
+                         * Verifies a DelimitedKey message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DelimitedKey message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DelimitedKey
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.DelimitedKey;
+
+                        /**
+                         * Creates a plain object from a DelimitedKey message. Also converts values to other types if specified.
+                         * @param message DelimitedKey
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.pubsub.v1.BigtableConfig.ColumnFamilyMapping.DelimitedKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DelimitedKey to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DelimitedKey
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
 
                 /** State enum. */
                 enum State {

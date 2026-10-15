@@ -33,6 +33,12 @@ function main(object) {
    *  for.
    */
   // const object = 'abc123'
+  /**
+   *  Optional. Optional event filter. If not set, or empty, the backfill will be
+   *  performed on the entire object. This is currently used for partial backfill
+   *  and only supported for SQL sources.
+   */
+  // const eventFilter = {}
 
   // Imports the Datastream library
   const {DatastreamClient} = require('@google-cloud/datastream').v1;

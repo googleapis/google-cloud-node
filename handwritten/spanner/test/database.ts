@@ -703,13 +703,13 @@ describe('Database', () => {
     let getSessionStub: sinon.SinonStub;
     let requestStreamStub: sinon.SinonStub;
 
-    const options = {
+    const options: BatchWriteOptions = {
       requestOptions: {
         transactionTag: 'batch-write-tag',
       },
-      excludeTxnFromChangeStream: true,
+      excludeTxnFromChangeStreams: true,
       gaxOptions: {autoPaginate: false},
-    } as BatchWriteOptions;
+    };
 
     beforeEach(() => {
       fakeSessionFactory = database.sessionFactory_;
@@ -746,15 +746,12 @@ describe('Database', () => {
 
     it('should call `requestStream` with correct arguments', () => {
       const expectedGaxOpts = extend(true, {}, options?.gaxOptions);
-      const expectedReqOpts = Object.assign(
-        {} as google.spanner.v1.BatchWriteRequest,
-        {
-          session: fakeSession!.formattedName_!,
-          mutationGroups: mutationGroups.map(mg => mg.proto()),
-          requestOptions: options?.requestOptions,
-          excludeTxnFromChangeStream: options?.excludeTxnFromChangeStreams,
-        },
-      );
+      const expectedReqOpts: google.spanner.v1.IBatchWriteRequest = {
+        session: fakeSession!.formattedName_!,
+        mutationGroups: mutationGroups.map(mg => mg.proto()),
+        requestOptions: options?.requestOptions,
+        excludeTxnFromChangeStreams: options?.excludeTxnFromChangeStreams,
+      };
 
       database.batchWriteAtLeastOnce(mutationGroups, options);
 
@@ -764,7 +761,53 @@ describe('Database', () => {
       assert.strictEqual(args.method, 'batchWrite');
       assert.deepStrictEqual(args.reqOpts, expectedReqOpts);
       assert.deepStrictEqual(args.gaxOpts, expectedGaxOpts);
-      assert.deepStrictEqual(args.headers, database.commonHeaders_);
+      assert.deepStrictEqual(
+        args.headers,
+        Object.assign(
+          {
+            [LEADER_AWARE_ROUTING_HEADER]: 'true',
+            [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+          },
+          database.commonHeaders_,
+        ),
+      );
+    });
+
+    it('should call `requestStream` without setting `excludeTxnFromChangeStreams` when options are not provided', () => {
+      const expectedReqOpts: google.spanner.v1.IBatchWriteRequest = {
+        session: fakeSession!.formattedName_!,
+        mutationGroups: mutationGroups.map(mg => mg.proto()),
+        requestOptions: undefined,
+        excludeTxnFromChangeStreams: undefined,
+      };
+
+      database.batchWriteAtLeastOnce(mutationGroups);
+
+      assert.strictEqual(requestStreamStub.callCount, 1);
+      const args = requestStreamStub.firstCall.args[0];
+      assert.strictEqual(args.client, 'SpannerClient');
+      assert.strictEqual(args.method, 'batchWrite');
+      assert.deepStrictEqual(args.reqOpts, expectedReqOpts);
+      assert.strictEqual(args.reqOpts.excludeTxnFromChangeStreams, undefined);
+      assert.deepStrictEqual(args.gaxOpts, {});
+    });
+
+    it('should not include leader-aware routing header when routeToLeaderEnabled is false', () => {
+      database.instance = {
+        parent: {
+          routeToLeaderEnabled: false,
+        },
+      } as {} as Instance;
+
+      database.batchWriteAtLeastOnce(mutationGroups, options);
+
+      assert.strictEqual(requestStreamStub.callCount, 1);
+      const {headers} = requestStreamStub.firstCall.args[0];
+      assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
+      assert.strictEqual(
+        headers[X_GOOG_SPANNER_REQUEST_ID_HEADER],
+        craftRequestId(1, 1, 1, 1),
+      );
     });
 
     it('should return error when passing an empty list of mutationGroups', done => {

@@ -120,6 +120,7 @@ fi
 
 if [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]]; then
     subdirs=(
+        core
         packages
         handwritten
         core/packages
@@ -208,10 +209,11 @@ for subdir in "${subdirs[@]}"; do
         fi
 
         # Internal codegen/JSDoc CLI tools in core/packages rely on Node-internal
-        # Module.prototype.load (via jsdoc/requizzle) and are not runtime SDKs.
+        # Module.prototype.load (via jsdoc/requizzle) and are not runtime SDKs;
+        # handwritten/cloud-profiler requires a V8 native C++ addon (pprof).
         if [[ "${JS_RUNTIME}" == "bun" || "${TEST_CMD}" == *bun* ]]; then
-            if [[ "${d%/}" == "core/packages/gapic-node-processing" || "${d%/}" == "core/packages/tools" ]]; then
-                echo "Skipping internal CLI tool ${d} on Bun runtime"
+            if [[ "${d%/}" == "core/packages/gapic-node-processing" || "${d%/}" == "core/packages/tools" || "${d%/}" == "handwritten/cloud-profiler" ]]; then
+                echo "Skipping incompatible package ${d} on Bun runtime"
                 continue
             fi
         fi
