@@ -396,6 +396,21 @@ describe('execute(Pipeline|PipelineExecuteOptions)', () => {
     expect(stages[1].args).to.deep.equal([]);
   });
 
+  it('throws on empty collection path in insert and upsert stages', async () => {
+    const firestore = await createInstance();
+
+    expect(() =>
+      firestore.pipeline().collection('foo').insert({collection: ''}),
+    ).to.throw(
+      'Function insert() cannot be called with an empty collection path.',
+    );
+    expect(() =>
+      firestore.pipeline().collection('foo').upsert({collection: ''}),
+    ).to.throw(
+      'Function upsert() cannot be called with an empty collection path.',
+    );
+  });
+
   it('serializes literals stage containing expressions and nested maps', async () => {
     const spy = sinon.fake.returns(stream());
     const firestore = await createInstance({
