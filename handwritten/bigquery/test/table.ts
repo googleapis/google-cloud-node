@@ -26,7 +26,7 @@ import {describe, it, afterEach, beforeEach, before, after} from 'mocha';
 import * as Big from 'big.js';
 import {EventEmitter} from 'events';
 import * as extend from 'extend';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import * as sinon from 'sinon';
 import * as stream from 'stream';
 import * as crypto from 'crypto';

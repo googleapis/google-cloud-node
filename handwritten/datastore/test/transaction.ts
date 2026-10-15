@@ -16,7 +16,7 @@ import * as pfy from '@google-cloud/promisify';
 import arrify = require('arrify');
 import * as assert from 'assert';
 import {afterEach, beforeEach, before, describe, it} from 'mocha';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import {
   Datastore,
   DatastoreOptions,
