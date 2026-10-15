@@ -3659,21 +3659,26 @@ class Database extends common.GrpcServiceObject {
 
           span.addEvent('Using Session', {'session.id': session?.id});
           const gaxOpts = extend(true, {}, options?.gaxOptions);
-          const reqOpts = Object.assign(
-            {} as spannerClient.spanner.v1.BatchWriteRequest,
-            {
-              session: session!.formattedName_!,
-              mutationGroups: mutationGroups.map(mg => mg.proto()),
-              requestOptions: options?.requestOptions,
-              excludeTxnFromChangeStream: options?.excludeTxnFromChangeStreams,
-            },
+          const reqOpts: spannerClient.spanner.v1.IBatchWriteRequest = {
+            session: session!.formattedName_!,
+            mutationGroups: mutationGroups.map(mg => mg.proto()),
+            requestOptions: options?.requestOptions,
+            excludeTxnFromChangeStreams: options?.excludeTxnFromChangeStreams,
+          };
+          const headers = this._metadataWithRequestId(
+            this._nextNthRequest(),
+            1,
+            this.commonHeaders_,
           );
+          if (this._getSpanner().routeToLeaderEnabled) {
+            addLeaderAwareRoutingHeader(headers);
+          }
           const dataStream = this.requestStream({
             client: 'SpannerClient',
             method: 'batchWrite',
             reqOpts,
             gaxOpts,
-            headers: this.commonHeaders_,
+            headers,
           });
           dataStream
             .once('error', err => {

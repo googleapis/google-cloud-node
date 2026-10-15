@@ -480,6 +480,8 @@ describe('unit test', () => {
     'ENOENT',
     'ENOTFOUND',
     'ECONNREFUSED',
+    'ConnectionRefused',
+    'FailedToOpenSocket',
   ].forEach(errorCode => {
     it(`should fail on isAvailable if ${errorCode} is returned for primary and secondary requests`, async () => {
       const secondary = secondaryHostRequest(500, errorCode);
@@ -490,6 +492,24 @@ describe('unit test', () => {
       await secondary;
       primary.done();
       assert.strictEqual(false, isGCE);
+    });
+  });
+
+  ['ConnectionRefused', 'FailedToOpenSocket'].forEach(errorCode => {
+    it(`should not emit MetadataLookupWarning when Bun socket error ${errorCode} is returned`, async () => {
+      const primary = nock(HOST)
+        .get(`${PATH}/${TYPE}`)
+        .replyWithError(Object.assign(new Error(errorCode), {code: errorCode}));
+      const secondary = nock(SECONDARY_HOST)
+        .get(`${PATH}/${TYPE}`)
+        .replyWithError(Object.assign(new Error(errorCode), {code: errorCode}));
+
+      const emitWarningStub = sandbox.stub(process, 'emitWarning');
+      const isGCE = await gcp.isAvailable();
+      assert.strictEqual(isGCE, false);
+      assert.strictEqual(emitWarningStub.called, false);
+      primary.done();
+      secondary.done();
     });
   });
 
