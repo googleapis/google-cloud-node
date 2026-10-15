@@ -199,12 +199,14 @@ export function extractFromSettings(
     | undefined;
   let rawClientHeader: unknown =
     otherArgsWithMeta?.headers?.['x-goog-api-client'];
+  // Fall back to metadataBuilder if header is not in otherArgs.headers.
   if (
     !rawClientHeader &&
     typeof otherArgsWithMeta?.metadataBuilder === 'function'
   ) {
     try {
       const built = otherArgsWithMeta.metadataBuilder();
+      // Support both gRPC Metadata instances (.get) and plain objects.
       if (built && typeof built.get === 'function') {
         rawClientHeader = built.get('x-goog-api-client');
       } else if (built && typeof built === 'object') {
@@ -214,6 +216,7 @@ export function extractFromSettings(
       // Ignore metadataBuilder errors
     }
   }
+  // Normalize array values into a single space-delimited string.
   const clientHeader = Array.isArray(rawClientHeader)
     ? rawClientHeader.join(' ')
     : rawClientHeader;
