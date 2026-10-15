@@ -432,11 +432,9 @@ export function getActiveTraceContext(
   activeContext: Context = context.active(),
 ): ActiveTraceContext | undefined {
   const attemptSpan = activeContext.getValue(ATTEMPT_SPAN_KEY) as
-    | Span
-    | undefined;
+    Span | undefined;
   const clientRequestSpan = activeContext.getValue(CLIENT_REQUEST_SPAN_KEY) as
-    | Span
-    | undefined;
+    Span | undefined;
   const activeSpan =
     attemptSpan ?? clientRequestSpan ?? trace.getSpan(activeContext);
   if (!activeSpan) {
