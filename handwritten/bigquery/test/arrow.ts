@@ -705,6 +705,16 @@ describe('Arrow Support', () => {
           };
           grpcStream.cancel = () => {
             cancelCount++;
+            // Like google-gax, a cancelled stream asynchronously emits a gRPC
+            // CANCELLED (code 1) error, which must not crash the process.
+            process.nextTick(() => {
+              grpcStream.emit(
+                'error',
+                Object.assign(new Error('1 CANCELLED: Cancelled on client'), {
+                  code: 1,
+                }),
+              );
+            });
           };
           process.nextTick(() => {
             grpcStream.emit('data', {
@@ -1816,6 +1826,371 @@ describe('Arrow Support', () => {
         bq.createQueryArrowStream({query: 'SELECT 1', destination}).toArray(),
         /bigquery\.readsessions\.create denied/,
       );
+    });
+  });
+
+  describe('BigQuery#createQueryArrowStream (stream resumption)', () => {
+    let bq: BigQuery;
+
+    beforeEach(() => {
+      bq = new BigQuery({projectId: 'test-project'});
+    });
+
+    it('should resume ReadRows at offset + rowsReceived on UNAVAILABLE, DEADLINE_EXCEEDED, and RST_STREAM errors without gaps or duplicates', async () => {
+      const page1Payload = serializeArrowTable(makeSampleTable([1], ['alice']));
+      const page2Payload = serializeArrowTable(
+        makeSampleTable([2, 3], ['bob', 'carol']),
+      );
+      const page3Payload = serializeArrowTable(makeSampleTable([4], ['dave']));
+
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-resume-1',
+            location: 'US',
+          },
+          pageRowCount: '1',
+          totalRows: '4',
+          arrowSchema: {serializedSchema: page1Payload.serializedSchema},
+          arrowRecordBatch: {
+            serializedRecordBatch: page1Payload.serializedRecordBatch,
+          },
+        },
+      });
+
+      const capturedReadRowsReqs: Array<{
+        readStream?: string;
+        offset?: number;
+      }> = [];
+      let attempt = 0;
+
+      stubStorageReadClient(bq, {
+        readRows: (req: {readStream?: string; offset?: number}) => {
+          capturedReadRowsReqs.push(req);
+          attempt++;
+          const currentAttempt = attempt;
+          const grpcStream = new EventEmitter();
+          process.nextTick(() => {
+            if (currentAttempt === 1) {
+              // Emit 2 rows (offset advances from 1 to 3), then fail with UNAVAILABLE (14).
+              grpcStream.emit('data', {
+                arrowSchema: {
+                  serializedSchema: Buffer.from(
+                    page2Payload.serializedSchema,
+                    'base64',
+                  ),
+                },
+                arrowRecordBatch: {
+                  serializedRecordBatch: Buffer.from(
+                    page2Payload.serializedRecordBatch,
+                    'base64',
+                  ),
+                },
+              });
+              grpcStream.emit(
+                'error',
+                Object.assign(new Error('Service unavailable'), {code: 14}),
+              );
+            } else if (currentAttempt === 2) {
+              // Fail immediately with DEADLINE_EXCEEDED (4) before any rows are emitted on this attempt.
+              grpcStream.emit(
+                'error',
+                Object.assign(new Error('Deadline exceeded'), {code: 4}),
+              );
+            } else if (currentAttempt === 3) {
+              // Fail with INTERNAL (13) carrying RST_STREAM.
+              grpcStream.emit(
+                'error',
+                Object.assign(new Error('Received RST_STREAM with code 2'), {
+                  code: 13,
+                }),
+              );
+            } else {
+              // Succeed on the resumed stream from offset = 3.
+              grpcStream.emit('data', {
+                arrowRecordBatch: {
+                  serializedRecordBatch: Buffer.from(
+                    page3Payload.serializedRecordBatch,
+                    'base64',
+                  ),
+                },
+              });
+              grpcStream.emit('end');
+            }
+          });
+          return grpcStream;
+        },
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream('SELECT id, name FROM tbl')
+        .toArray();
+
+      // Verify ReadRows started at offset = 1 (after inline row) and resumed at offset = 3 after receiving 2 streamed rows.
+      const expectedStream =
+        'projects/test-project/locations/US/jobs/job-resume-1/streams/_default';
+      assert.deepStrictEqual(capturedReadRowsReqs, [
+        {readStream: expectedStream, offset: 1},
+        {readStream: expectedStream, offset: 3},
+        {readStream: expectedStream, offset: 3},
+        {readStream: expectedStream, offset: 3},
+      ]);
+
+      // Verify all 4 rows were received in order without gaps or duplicates.
+      const table = new arrow.Table(batches);
+      assert.strictEqual(table.numRows, 4);
+      assert.deepStrictEqual(
+        Array.from(table.getChild('id')!.toArray()),
+        [1, 2, 3, 4],
+      );
+      assert.deepStrictEqual(table.getChild('name')!.toArray(), [
+        'alice',
+        'bob',
+        'carol',
+        'dave',
+      ]);
+    });
+
+    it('should surface non-retryable ReadRows errors after yielding earlier batches', async () => {
+      const page1Payload = serializeArrowTable(makeSampleTable([1], ['alice']));
+      const page2Payload = serializeArrowTable(makeSampleTable([2], ['bob']));
+
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-nonretry-1',
+            location: 'US',
+          },
+          pageRowCount: '1',
+          totalRows: '3',
+          arrowSchema: {serializedSchema: page1Payload.serializedSchema},
+          arrowRecordBatch: {
+            serializedRecordBatch: page1Payload.serializedRecordBatch,
+          },
+        },
+      });
+
+      let readRowsCalls = 0;
+      stubStorageReadClient(bq, {
+        readRows: () => {
+          readRowsCalls++;
+          const grpcStream = new EventEmitter();
+          process.nextTick(() => {
+            grpcStream.emit('data', {
+              arrowSchema: {
+                serializedSchema: Buffer.from(
+                  page2Payload.serializedSchema,
+                  'base64',
+                ),
+              },
+              arrowRecordBatch: {
+                serializedRecordBatch: Buffer.from(
+                  page2Payload.serializedRecordBatch,
+                  'base64',
+                ),
+              },
+            });
+            // Emit non-retryable INTERNAL error (without RST_STREAM) after the batch is consumed.
+            setImmediate(() => {
+              grpcStream.emit(
+                'error',
+                Object.assign(new Error('Corrupted stream state'), {code: 13}),
+              );
+            });
+          });
+          return grpcStream;
+        },
+      });
+
+      const receivedBatches: arrow.RecordBatch[] = [];
+      await assert.rejects(async () => {
+        for await (const batch of bq.createQueryArrowStream(
+          'SELECT id, name FROM tbl',
+        )) {
+          receivedBatches.push(batch);
+        }
+      }, /Corrupted stream state/);
+
+      // Verify the inline batch and first streamed batch were yielded before the non-retryable error aborted the stream without retrying.
+      assert.strictEqual(readRowsCalls, 1);
+      assert.strictEqual(receivedBatches.length, 2);
+    });
+
+    it('should stop retrying and surface the error when consecutive retryable errors exceed MAX_STREAM_RETRIES', async () => {
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-exhaust-1',
+            location: 'US',
+          },
+          pageRowCount: '0',
+          totalRows: '2',
+        },
+      });
+
+      let readRowsCalls = 0;
+      stubStorageReadClient(bq, {
+        readRows: () => {
+          readRowsCalls++;
+          const grpcStream = new EventEmitter();
+          process.nextTick(() => {
+            grpcStream.emit(
+              'error',
+              Object.assign(new Error('Persistent UNAVAILABLE'), {code: 14}),
+            );
+          });
+          return grpcStream;
+        },
+      });
+
+      // Verify initial call + 3 retries = 4 total calls before rejecting.
+      await assert.rejects(
+        bq.createQueryArrowStream('SELECT id, name FROM tbl').toArray(),
+        /Persistent UNAVAILABLE/,
+      );
+      assert.strictEqual(readRowsCalls, 4);
+    });
+
+    it('should leave only a no-op error listener on an abandoned ReadRows stream', async () => {
+      const payload = serializeArrowTable(makeSampleTable([1], ['alice']));
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-detach-1',
+            location: 'US',
+          },
+          pageRowCount: '0',
+          totalRows: '1',
+        },
+      });
+
+      const grpcStreams: EventEmitter[] = [];
+      stubStorageReadClient(bq, {
+        readRows: () => {
+          const grpcStream = new EventEmitter();
+          const attempt = grpcStreams.push(grpcStream);
+          process.nextTick(() => {
+            if (attempt === 1) {
+              grpcStream.emit(
+                'error',
+                Object.assign(new Error('Service unavailable'), {code: 14}),
+              );
+              return;
+            }
+            grpcStream.emit('data', {
+              arrowSchema: {
+                serializedSchema: Buffer.from(
+                  payload.serializedSchema,
+                  'base64',
+                ),
+              },
+              arrowRecordBatch: {
+                serializedRecordBatch: Buffer.from(
+                  payload.serializedRecordBatch,
+                  'base64',
+                ),
+              },
+            });
+            grpcStream.emit('end');
+          });
+          return grpcStream;
+        },
+      });
+
+      const batches = await bq
+        .createQueryArrowStream('SELECT id, name FROM tbl')
+        .toArray();
+
+      assert.strictEqual(batches.length, 1);
+      const [abandoned] = grpcStreams;
+      assert.strictEqual(abandoned.listenerCount('data'), 0);
+      assert.strictEqual(abandoned.listenerCount('end'), 0);
+      assert.strictEqual(abandoned.listenerCount('error'), 1);
+      // A late CANCELLED error on the abandoned stream must not throw.
+      abandoned.emit('error', Object.assign(new Error('Cancelled'), {code: 1}));
+    });
+
+    it('should surface a synchronous readRows error when reopening ReadRows', async () => {
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-reopen-throw-1',
+            location: 'US',
+          },
+          pageRowCount: '0',
+          totalRows: '1',
+        },
+      });
+
+      let readRowsCalls = 0;
+      stubStorageReadClient(bq, {
+        readRows: () => {
+          if (++readRowsCalls > 1) {
+            throw new Error('readRows failed');
+          }
+          const grpcStream = new EventEmitter();
+          process.nextTick(() => {
+            grpcStream.emit(
+              'error',
+              Object.assign(new Error('Service unavailable'), {code: 14}),
+            );
+          });
+          return grpcStream;
+        },
+      });
+
+      await assert.rejects(
+        bq.createQueryArrowStream('SELECT id, name FROM tbl').toArray(),
+        /readRows failed/,
+      );
+      assert.strictEqual(readRowsCalls, 2);
+    });
+
+    it('should not reopen ReadRows if the stream is destroyed while waiting to retry', async () => {
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-retry-wait-1',
+            location: 'US',
+          },
+          pageRowCount: '0',
+          totalRows: '1',
+        },
+      });
+
+      let readRowsCalls = 0;
+      stubStorageReadClient(bq, {
+        readRows: () => {
+          readRowsCalls++;
+          const grpcStream = new EventEmitter();
+          process.nextTick(() => {
+            grpcStream.emit(
+              'error',
+              Object.assign(new Error('Service unavailable'), {code: 14}),
+            );
+            setImmediate(() => stream.destroy());
+          });
+          return grpcStream;
+        },
+      });
+
+      const stream = bq.createQueryArrowStream('SELECT id, name FROM tbl');
+      stream.resume();
+      // Wait past the first retry delay (100 ms).
+      await new Promise(resolve => setTimeout(resolve, 250));
+      assert.strictEqual(readRowsCalls, 1);
     });
   });
 });
