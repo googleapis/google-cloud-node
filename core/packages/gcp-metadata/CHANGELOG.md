@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/gcp-metadata?activeTab=versions
 
+## [9.2.2](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.2.1...gcp-metadata-v9.2.2) (2026-10-16)
+
+
+### Bug Fixes
+
+* **gcp-metadata:** Recognize Bun socket error codes in isAvailable ([#9613](https://github.com/googleapis/google-cloud-node/issues/9613)) ([0fb3dee](https://github.com/googleapis/google-cloud-node/commit/0fb3deee4a967c5b07aaace6be0055c090f27871))
+
 ## [9.2.1](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.2.0...gcp-metadata-v9.2.1) (2026-10-14)
 
 
