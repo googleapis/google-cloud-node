@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include <node_api.h>
+#include <cmath>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
@@ -62,9 +63,21 @@ napi_value ConvertCellToJs(
       return cell->flags != 0 ? helpers.true_val : helpers.false_val;
 
     case CELL_KIND_FLOAT64:
-    case CELL_KIND_FLOAT32:
-      napi_create_double(env, cell->num.f64_val, &result);
+    case CELL_KIND_FLOAT32: {
+      double fv = cell->num.f64_val;
+      if (std::isnan(fv)) {
+        napi_create_string_utf8(env, "NaN", 3, &result);
+      } else if (std::isinf(fv)) {
+        if (fv > 0) {
+          napi_create_string_utf8(env, "Infinity", 8, &result);
+        } else {
+          napi_create_string_utf8(env, "-Infinity", 9, &result);
+        }
+      } else {
+        napi_create_double(env, fv, &result);
+      }
       return result;
+    }
 
     case CELL_KIND_STRING: {
       const char* ptr =
@@ -143,6 +156,33 @@ napi_value BuildJsBatchObject(
           env, b->retry_info_len, b->retry_info_pb, nullptr, &retry_buf);
       napi_set_named_property(env, res_obj, "retryInfoBytes", retry_buf);
     }
+
+    if (b->status_pb != nullptr && b->status_len > 0) {
+      napi_value status_buf;
+      napi_create_buffer_copy(
+          env, b->status_len, b->status_pb, nullptr, &status_buf);
+      napi_set_named_property(env, res_obj, "statusBytes", status_buf);
+    }
+
+    if (b->trailers_json != nullptr && b->trailers_len > 0) {
+      napi_value trailers_val;
+      napi_create_string_utf8(
+          env, b->trailers_json, b->trailers_len, &trailers_val);
+      napi_set_named_property(env, res_obj, "trailersJson", trailers_val);
+    }
+  }
+
+  if (b->schema_hash != 0) {
+    napi_value hash_val;
+    napi_create_uint32(env, b->schema_hash, &hash_val);
+    napi_set_named_property(env, res_obj, "schemaHash", hash_val);
+  }
+
+  if (b->request_id != nullptr) {
+    napi_value req_id_val;
+    napi_create_string_utf8(
+        env, b->request_id, NAPI_AUTO_LENGTH, &req_id_val);
+    napi_set_named_property(env, res_obj, "requestId", req_id_val);
   }
 
   if (b->has_read_timestamp != 0) {
@@ -244,6 +284,13 @@ struct AsyncStreamContext {
   napi_ref cb_ref = nullptr;
   CSpannerBatch* inline_batch = nullptr;
   std::atomic<bool> inline_used{false};
+  int64_t stream_id = 0;
+  bool enable_backpressure = false;
+  std::atomic<int32_t> abandoned{0};
+  std::mutex flow_mu;
+  std::condition_variable flow_cv;
+  int32_t in_flight_batches = 0;
+  bool stream_paused = false;
 };
 
 struct BatchCompletionEvent {
@@ -255,10 +302,22 @@ struct EnvDispatchContext {
   napi_env env = nullptr;
   napi_threadsafe_function tsfn = nullptr;
   std::atomic<bool> closing{false};
+  std::atomic<int32_t> ref_count{1};
   int32_t active_rpcs = 0;
   bool tsfn_refed = false;
+  std::unordered_map<int64_t, AsyncStreamContext*> active_streams;
 
   explicit EnvDispatchContext(napi_env e) : env(e) {}
+
+  void AddRef() {
+    ref_count.fetch_add(1, std::memory_order_relaxed);
+  }
+
+  void Release() {
+    if (ref_count.fetch_sub(1, std::memory_order_acq_rel) == 1) {
+      delete this;
+    }
+  }
 
   inline void OnRpcStarted(napi_env e) {
     if (++active_rpcs == 1 && !closing.load(std::memory_order_relaxed) &&
@@ -281,6 +340,16 @@ struct EnvDispatchContext {
     if (!closing.compare_exchange_strong(expected, true)) {
       return;
     }
+    for (auto& kv : active_streams) {
+      AsyncStreamContext* sctx = kv.second;
+      if (sctx != nullptr) {
+        sctx->abandoned.store(1, std::memory_order_release);
+        std::unique_lock<std::mutex> lk(sctx->flow_mu);
+        sctx->stream_paused = false;
+        sctx->flow_cv.notify_all();
+      }
+    }
+    active_streams.clear();
     if (tsfn != nullptr) {
       napi_release_threadsafe_function(tsfn, napi_tsfn_abort);
       tsfn = nullptr;
@@ -290,9 +359,7 @@ struct EnvDispatchContext {
 
 extern "C" void OnGoBatchCallback(void* user_data, CSpannerBatch* batch) {
   AsyncStreamContext* ctx = static_cast<AsyncStreamContext*>(user_data);
-  if (ctx == nullptr || ctx->env_ctx == nullptr ||
-      ctx->env_ctx->closing.load(std::memory_order_acquire) ||
-      ctx->env_ctx->tsfn == nullptr) {
+  if (ctx == nullptr || ctx->env_ctx == nullptr) {
     if (batch != nullptr) {
       FreeSpannerBatch(batch);
     }
@@ -300,14 +367,54 @@ extern "C" void OnGoBatchCallback(void* user_data, CSpannerBatch* batch) {
   }
 
   bool is_final = (batch == nullptr) || (batch->status != 0);
+
+  if (!is_final) {
+    if (ctx->abandoned.load(std::memory_order_acquire) != 0 ||
+        ctx->env_ctx->closing.load(std::memory_order_acquire) ||
+        ctx->env_ctx->tsfn == nullptr) {
+      FreeSpannerBatch(batch);
+      return;
+    }
+    if (ctx->enable_backpressure) {
+      std::unique_lock<std::mutex> lk(ctx->flow_mu);
+      ctx->flow_cv.wait(lk, [ctx]() {
+        return ctx->abandoned.load(std::memory_order_relaxed) != 0 ||
+               ctx->env_ctx->closing.load(std::memory_order_relaxed) ||
+               (!ctx->stream_paused && ctx->in_flight_batches < 2);
+      });
+      if (ctx->abandoned.load(std::memory_order_relaxed) != 0 ||
+          ctx->env_ctx->closing.load(std::memory_order_relaxed)) {
+        FreeSpannerBatch(batch);
+        return;
+      }
+      ctx->in_flight_batches++;
+    }
+  } else {
+    if (ctx->env_ctx->closing.load(std::memory_order_acquire) ||
+        ctx->env_ctx->tsfn == nullptr) {
+      if (batch != nullptr) {
+        FreeSpannerBatch(batch);
+      }
+      EnvDispatchContext* ec = ctx->env_ctx;
+      delete ctx;
+      ec->Release();
+      return;
+    }
+  }
+
   if (is_final &&
       !ctx->inline_used.exchange(true, std::memory_order_acq_rel)) {
     ctx->inline_batch = batch;
     // Tag low bit = 0 (direct AsyncStreamContext* pointer)
     napi_status st = napi_call_threadsafe_function(
         ctx->env_ctx->tsfn, ctx, napi_tsfn_nonblocking);
-    if (st != napi_ok && batch != nullptr) {
-      FreeSpannerBatch(batch);
+    if (st != napi_ok) {
+      if (batch != nullptr) {
+        FreeSpannerBatch(batch);
+      }
+      EnvDispatchContext* ec = ctx->env_ctx;
+      delete ctx;
+      ec->Release();
     }
     return;
   }
@@ -322,6 +429,11 @@ extern "C" void OnGoBatchCallback(void* user_data, CSpannerBatch* batch) {
       FreeSpannerBatch(batch);
     }
     delete ev;
+    if (is_final) {
+      EnvDispatchContext* ec = ctx->env_ctx;
+      delete ctx;
+      ec->Release();
+    }
   }
 }
 
@@ -350,9 +462,10 @@ void CallJsBatchHandler(
 
   BatchGuard guard(b);
   bool is_final = (b == nullptr) || (b->status != 0);
+  napi_value pending_exc = nullptr;
 
   if (env != nullptr && ctx != nullptr && ctx->cb_ref != nullptr &&
-      b != nullptr) {
+      b != nullptr && ctx->abandoned.load(std::memory_order_relaxed) == 0) {
     napi_value global, null_val, js_cb;
     napi_get_global(env, &global);
     napi_get_null(env, &null_val);
@@ -360,20 +473,63 @@ void CallJsBatchHandler(
 
     napi_value res_obj = BuildJsBatchObject(env, b, null_val);
     napi_value argv[2] = {null_val, res_obj};
-    napi_call_function(env, global, js_cb, 2, argv, nullptr);
+    napi_value ret_val = nullptr;
+    napi_status call_st =
+        napi_call_function(env, global, js_cb, 2, argv, &ret_val);
+    if (call_st != napi_ok) {
+      ctx->abandoned.store(1, std::memory_order_release);
+      bool has_exception = false;
+      if (napi_is_exception_pending(env, &has_exception) == napi_ok &&
+          has_exception) {
+        napi_get_and_clear_last_exception(env, &pending_exc);
+      }
+      if (!is_final && ctx->stream_id != 0) {
+        SpannerCoreCloseStream(ctx->stream_id);
+      }
+    } else if (ret_val != nullptr) {
+      bool keep_going = true;
+      if (napi_get_value_bool(env, ret_val, &keep_going) == napi_ok &&
+          !keep_going) {
+        ctx->abandoned.store(1, std::memory_order_release);
+      }
+    }
+  }
+
+  if (!is_final && ctx != nullptr && ctx->enable_backpressure) {
+    std::unique_lock<std::mutex> lk(ctx->flow_mu);
+    if (ctx->in_flight_batches > 0) {
+      ctx->in_flight_batches--;
+    }
+    if (ctx->abandoned.load(std::memory_order_relaxed) != 0) {
+      ctx->stream_paused = false;
+    }
+    if (!ctx->stream_paused) {
+      ctx->flow_cv.notify_all();
+    }
   }
 
   if (is_final && ctx != nullptr) {
+    EnvDispatchContext* ec = ctx->env_ctx;
     if (env != nullptr) {
       if (ctx->cb_ref != nullptr) {
         napi_delete_reference(env, ctx->cb_ref);
         ctx->cb_ref = nullptr;
       }
-      if (ctx->env_ctx != nullptr) {
-        ctx->env_ctx->OnRpcCompleted(env);
+      if (ec != nullptr) {
+        if (ctx->stream_id != 0) {
+          ec->active_streams.erase(ctx->stream_id);
+        }
+        ec->OnRpcCompleted(env);
       }
     }
     delete ctx;
+    if (ec != nullptr) {
+      ec->Release();
+    }
+  }
+
+  if (env != nullptr && pending_exc != nullptr) {
+    napi_fatal_exception(env, pending_exc);
   }
 }
 
@@ -390,7 +546,7 @@ void CleanupEnvDispatchContext(
   EnvDispatchContext* env_ctx = static_cast<EnvDispatchContext*>(finalize_data);
   if (env_ctx != nullptr) {
     env_ctx->Shutdown();
-    delete env_ctx;
+    env_ctx->Release();
   }
 }
 
@@ -566,7 +722,7 @@ struct StackStringArg {
       return;
     }
     len = copied;
-    if (copied >= sizeof(stack_buf) - 1) {
+    if (copied >= sizeof(stack_buf) - 4) {
       size_t full_len = 0;
       if (napi_get_value_string_utf8(env, val, nullptr, 0, &full_len) ==
               napi_ok &&
@@ -625,6 +781,8 @@ napi_value ExecuteStreamingSql(napi_env env, napi_callback_info info) {
 
       AsyncStreamContext* ctx = new AsyncStreamContext();
       ctx->env_ctx = env_ctx;
+      ctx->enable_backpressure = (skip_metadata & 4) == 0;
+      env_ctx->AddRef();
       napi_create_reference(env, args[7], 1, &ctx->cb_ref);
       env_ctx->OnRpcStarted(env);
 
@@ -638,7 +796,13 @@ napi_value ExecuteStreamingSql(napi_env env, napi_callback_info info) {
           skip_metadata,
           batch_row_size,
           OnGoBatchCallback,
-          ctx);
+          ctx,
+          reinterpret_cast<int32_t*>(&ctx->abandoned));
+
+      if (stream_id > 0) {
+        ctx->stream_id = static_cast<int64_t>(stream_id);
+        env_ctx->active_streams[ctx->stream_id] = ctx;
+      }
 
       napi_value result;
       napi_create_int64(env, static_cast<int64_t>(stream_id), &result);
@@ -692,6 +856,55 @@ napi_value NextBatch(napi_env env, napi_callback_info info) {
   return undefined_val;
 }
 
+napi_value PauseStream(napi_env env, napi_callback_info info) {
+  size_t argc = 1;
+  napi_value args[1];
+  napi_get_cb_info(env, info, &argc, args, nullptr, nullptr);
+
+  int64_t stream_handle = 0;
+  if (argc > 0) napi_get_value_int64(env, args[0], &stream_handle);
+
+  void* data = nullptr;
+  if (stream_handle > 0 && napi_get_instance_data(env, &data) == napi_ok &&
+      data != nullptr) {
+    EnvDispatchContext* env_ctx = static_cast<EnvDispatchContext*>(data);
+    auto it = env_ctx->active_streams.find(stream_handle);
+    if (it != env_ctx->active_streams.end() && it->second != nullptr) {
+      std::unique_lock<std::mutex> lk(it->second->flow_mu);
+      it->second->stream_paused = true;
+    }
+  }
+
+  napi_value undefined_val;
+  napi_get_undefined(env, &undefined_val);
+  return undefined_val;
+}
+
+napi_value ResumeStream(napi_env env, napi_callback_info info) {
+  size_t argc = 1;
+  napi_value args[1];
+  napi_get_cb_info(env, info, &argc, args, nullptr, nullptr);
+
+  int64_t stream_handle = 0;
+  if (argc > 0) napi_get_value_int64(env, args[0], &stream_handle);
+
+  void* data = nullptr;
+  if (stream_handle > 0 && napi_get_instance_data(env, &data) == napi_ok &&
+      data != nullptr) {
+    EnvDispatchContext* env_ctx = static_cast<EnvDispatchContext*>(data);
+    auto it = env_ctx->active_streams.find(stream_handle);
+    if (it != env_ctx->active_streams.end() && it->second != nullptr) {
+      std::unique_lock<std::mutex> lk(it->second->flow_mu);
+      it->second->stream_paused = false;
+      it->second->flow_cv.notify_all();
+    }
+  }
+
+  napi_value undefined_val;
+  napi_get_undefined(env, &undefined_val);
+  return undefined_val;
+}
+
 napi_value CloseStream(napi_env env, napi_callback_info info) {
   size_t argc = 1;
   napi_value args[1];
@@ -699,6 +912,20 @@ napi_value CloseStream(napi_env env, napi_callback_info info) {
 
   int64_t stream_handle = 0;
   if (argc > 0) napi_get_value_int64(env, args[0], &stream_handle);
+
+  void* data = nullptr;
+  if (stream_handle > 0 && napi_get_instance_data(env, &data) == napi_ok &&
+      data != nullptr) {
+    EnvDispatchContext* env_ctx = static_cast<EnvDispatchContext*>(data);
+    auto it = env_ctx->active_streams.find(stream_handle);
+    if (it != env_ctx->active_streams.end() && it->second != nullptr) {
+      AsyncStreamContext* sctx = it->second;
+      sctx->abandoned.store(1, std::memory_order_release);
+      std::unique_lock<std::mutex> lk(sctx->flow_mu);
+      sctx->stream_paused = false;
+      sctx->flow_cv.notify_all();
+    }
+  }
 
   SpannerCoreCloseStream(static_cast<long long>(stream_handle));
 
@@ -736,6 +963,22 @@ napi_value InitModule(napi_env env, napi_value exports) {
       {"nextBatch",
        nullptr,
        NextBatch,
+       nullptr,
+       nullptr,
+       nullptr,
+       napi_enumerable,
+       nullptr},
+      {"pauseStream",
+       nullptr,
+       PauseStream,
+       nullptr,
+       nullptr,
+       nullptr,
+       napi_enumerable,
+       nullptr},
+      {"resumeStream",
+       nullptr,
+       ResumeStream,
        nullptr,
        nullptr,
        nullptr,

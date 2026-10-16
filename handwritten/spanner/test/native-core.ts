@@ -488,9 +488,9 @@ describe('Go Shared Native Core (NATIVE_CORE_ENABLED)', () => {
         assert.strictEqual(rows.length, 1);
         const cells = rows[0] as Array<{name: string; value: unknown}>;
         assert.ok(cells[0].value instanceof Float);
-        assert.ok(Number.isNaN((cells[0].value as Float).value));
-        assert.strictEqual((cells[1].value as Float).value, Infinity);
-        assert.strictEqual((cells[2].value as Float).value, -Infinity);
+        assert.ok(Number.isNaN((cells[0].value as Float).valueOf()));
+        assert.strictEqual((cells[1].value as Float).valueOf(), Infinity);
+        assert.strictEqual((cells[2].value as Float).valueOf(), -Infinity);
         assert.ok(cells[3].value instanceof Float32);
         assert.strictEqual((cells[3].value as Float32).value, 3.5);
       } finally {
@@ -663,6 +663,7 @@ describe('Go Shared Native Core (NATIVE_CORE_ENABLED)', () => {
         servicePath: host,
         port: Number(portStr),
         sslCreds: grpc.credentials.createInsecure(),
+        disableBuiltInAuth: true,
         disableBuiltInMetrics: true,
         dynamicChannelPoolConfig: {
           enabled: true,

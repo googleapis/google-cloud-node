@@ -1157,15 +1157,25 @@ export function getDecoder(
           const len = fieldDecoders.length;
           for (let i = 0; i < len; i++) {
             const {name, decodedName, decoder, index} = fieldDecoders[i];
-            structObj[decodedName!] = decoder(
-              isArr
-                ? val[index]
-                : name !== null &&
-                    name !== undefined &&
-                    Object.prototype.hasOwnProperty.call(val, name)
-                  ? val[name]
-                  : val[index],
-            );
+            try {
+              structObj[decodedName!] = decoder(
+                isArr
+                  ? val[index]
+                  : name !== null &&
+                      name !== undefined &&
+                      Object.prototype.hasOwnProperty.call(val, name)
+                    ? val[name]
+                    : val[index],
+              );
+            } catch (e) {
+              (e as Error).message = [
+                `Serializing column "${decodedName}" encountered an error: ${
+                  (e as Error).message
+                }`,
+                'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
+              ].join(' ');
+              throw e;
+            }
           }
           return structObj;
         };
@@ -1199,6 +1209,19 @@ function decode(
   return getDecoder(type, columnMetadata)(value);
 }
 
+const PRECISE_DATE_FAST_LAYOUT_SUPPORTED = (() => {
+  try {
+    const probe = new PreciseDate(0) as unknown as Record<string, unknown>;
+    return (
+      typeof probe._micros === 'number' &&
+      typeof probe._nanos === 'number' &&
+      typeof probe._picos === 'number'
+    );
+  } catch {
+    return false;
+  }
+})();
+
 /**
  * Fast-path parser for RFC 3339 formatted Spanner UTC timestamp strings.
  *
@@ -1215,7 +1238,12 @@ function parsePreciseDate(
 ): PreciseDate {
   if (typeof isoString === 'object' && isoString !== null) {
     const {seconds, nanos} = isoString;
-    if (nanos >= 0 && nanos < 1_000_000_000) {
+    if (
+      PRECISE_DATE_FAST_LAYOUT_SUPPORTED &&
+      seconds >= 0 &&
+      nanos >= 0 &&
+      nanos < 1_000_000_000
+    ) {
       const milliseconds = (nanos / 1_000_000) | 0;
       const rem = nanos - milliseconds * 1_000_000;
       const microseconds = (rem / 1_000) | 0;

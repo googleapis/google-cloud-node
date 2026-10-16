@@ -46,6 +46,7 @@ import {
 import {context, propagation, ROOT_CONTEXT} from '@opentelemetry/api';
 import {Backup} from './backup';
 import {Database} from './database';
+import {closeNativeCoreForClient} from './native-core';
 import {
   Instance,
   CreateInstanceCallback,
@@ -199,6 +200,7 @@ export interface SpannerOptions extends GrpcClientOptions {
   >;
   observabilityOptions?: ObservabilityOptions;
   disableBuiltInMetrics?: boolean;
+  disableBuiltInAuth?: boolean;
   interceptors?: any[];
   sessionLabels?: {[key: string]: string};
   dynamicChannelPoolConfig?: DynamicChannelPoolConfig;
@@ -635,6 +637,7 @@ class Spanner extends GrpcService {
 
       // Always execute cleanup
       try {
+        closeNativeCoreForClient(this);
         await cleanup();
       } catch (err) {
         console.error('Error occured during cleanup: ', err);

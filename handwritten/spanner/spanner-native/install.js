@@ -15,14 +15,28 @@
 'use strict';
 
 const {execSync} = require('child_process');
+const fs = require('fs');
 const path = require('path');
 
 const nativeDir = __dirname;
 const goDir = path.join(nativeDir, 'spanner-go');
+const prebuiltAddon = path.join(nativeDir, 'build', 'Release', 'spanner_go.node');
+const prebuiltGoLib = path.join(goDir, 'libspanner_go.so');
+
+if (
+  process.env.SPANNER_FORCE_NATIVE_REBUILD !== 'true' &&
+  fs.existsSync(prebuiltAddon) &&
+  fs.existsSync(prebuiltGoLib)
+) {
+  process.exit(0);
+}
 
 try {
   execSync('./build.sh', {cwd: goDir, stdio: 'inherit'});
-  execSync('npx --yes node-gyp rebuild', {cwd: nativeDir, stdio: 'inherit'});
+  execSync('npx --no-install node-gyp rebuild', {
+    cwd: nativeDir,
+    stdio: 'inherit',
+  });
 } catch (err) {
   console.warn(
     '[spanner-native] Optional Go shared core build skipped:',

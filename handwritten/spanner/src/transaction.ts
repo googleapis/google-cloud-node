@@ -1581,7 +1581,12 @@ export class Snapshot extends EventEmitter {
         );
       };
 
-      if (nativeCore.canUseNativeCore(this)) {
+      if (
+        nativeCore.canUseNativeCore(this) &&
+        maxResumeRetries === undefined &&
+        !gaxOptions?.retry &&
+        !gaxOptions?.otherArgs?.options?.interceptors?.length
+      ) {
         streamSpan.addEvent('Starting stream');
         const injectedHeaders = injectRequestIDIntoHeaders(
           this.commonHeaders_,
@@ -1593,13 +1598,21 @@ export class Snapshot extends EventEmitter {
         if (runSpan && requestId) {
           runSpan.setAttribute(X_GOOG_SPANNER_REQUEST_ID_SPAN_ATTR, requestId);
         }
+        const mergedHeaders = gaxOptions?.otherArgs?.headers
+          ? Object.assign({}, gaxOptions.otherArgs.headers, injectedHeaders)
+          : injectedHeaders;
         nativeCore.executeNativeTransactionRun({
           snapshot: this,
           sanitizeRequest: () => {
             sanitizeRequest();
+            if (formattedRequest && formattedRequest.resumeToken !== undefined) {
+              formattedRequest = Object.assign({}, formattedRequest, {
+                resumeToken: undefined,
+              });
+            }
             return formattedRequest!;
           },
-          headers: injectedHeaders,
+          headers: mergedHeaders,
           rowOptions: {
             json,
             jsonOptions,
@@ -1607,7 +1620,7 @@ export class Snapshot extends EventEmitter {
             columnsMetadata,
             gaxOptions,
           },
-          timeoutMs: gaxOptions?.timeout ?? 0,
+          timeoutMs: gaxOptions?.timeout,
           streamSpan,
           onError: (err, rows, stats, metadata) => {
             const wasAborted = isErrorAborted(err);
@@ -1619,7 +1632,12 @@ export class Snapshot extends EventEmitter {
                 'transaction.id': this.id?.toString(),
               });
             }
-            complete(err, rows, stats, metadata);
+            const finalError =
+              gaxOptions?.timeout !== undefined &&
+              err?.code === grpc.status.DEADLINE_EXCEEDED
+                ? new DeadlineError(err)
+                : err;
+            complete(finalError, rows, stats, metadata);
           },
           onSuccess: (rows, stats, metadata) => {
             complete(null, rows, stats, metadata);
@@ -2076,7 +2094,10 @@ export class Snapshot extends EventEmitter {
       };
 
       const resultStream = (
-        nativeCore.canUseNativeCore(this)
+        nativeCore.canUseNativeCore(this) &&
+        maxResumeRetries === undefined &&
+        !gaxOptions?.retry &&
+        !gaxOptions?.otherArgs?.options?.interceptors?.length
           ? nativeCore.runStreamNative({
               snapshot: this,
               sanitizeRequest: () => {
@@ -2085,15 +2106,24 @@ export class Snapshot extends EventEmitter {
                 if (!reqOpts || (this.id && !reqOpts.transaction.id)) {
                   sanitizeRequest();
                 }
+                if (reqOpts && reqOpts.resumeToken !== undefined) {
+                  reqOpts = Object.assign({}, reqOpts, {
+                    resumeToken: undefined,
+                  });
+                }
                 return reqOpts!;
               },
-              getHeaders: () =>
-                injectRequestIDIntoHeaders(
+              getHeaders: () => {
+                const injected = injectRequestIDIntoHeaders(
                   this.commonHeaders_,
                   this.session,
                   nthRequest,
                   attempt || 1,
-                ),
+                );
+                return gaxOptions?.otherArgs?.headers
+                  ? Object.assign({}, gaxOptions.otherArgs.headers, injected)
+                  : injected;
+              },
               rowOptions: {
                 json,
                 jsonOptions,
@@ -2101,7 +2131,7 @@ export class Snapshot extends EventEmitter {
                 columnsMetadata,
                 gaxOptions,
               },
-              timeoutMs: gaxOptions?.timeout ?? 0,
+              timeoutMs: gaxOptions?.timeout,
             })
           : partialResultStream(this._wrapWithIdWaiter(makeRequest), {
               json,

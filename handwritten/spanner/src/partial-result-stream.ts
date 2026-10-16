@@ -243,7 +243,8 @@ export function formatRow(
   const jsonMode = Boolean(options?.json);
   const jsonOptions = options?.jsonOptions;
   const isJsonStubbed =
-    codec.convertFieldsToJson !== originalConvertFieldsToJson;
+    codec.convertFieldsToJson !== originalConvertFieldsToJson ||
+    codec.decode !== originalDecode;
 
   if (jsonMode && !isJsonStubbed) {
     return createJsonRow(

@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-import * as fs from 'fs';
 import * as path from 'path';
-import * as tls from 'tls';
 import {Transform} from 'stream';
 import * as streamEvents from 'stream-events';
-import {grpc} from 'google-gax';
+import {grpc, GoogleError} from 'google-gax';
 import {context, trace} from '@opentelemetry/api';
 import {protos} from '@google-cloud/spanner-api';
 import google = protos.google;
@@ -33,52 +31,30 @@ import {
 } from './partial-result-stream';
 import {codec, Int, Float, Numeric, Value} from './codec';
 import {isTracingEnabled} from './instrument';
+import {isAFEServerTimingEnabled} from './common';
+import {MetricsTracer} from './metrics/metrics-tracer';
+import {craftRequestId} from './request_id_header';
 
 const originalDecode = codec.decode;
 const decodeTimestamp = codec.getDecoder({
   code: 'TIMESTAMP',
 } as unknown as google.spanner.v1.Type);
 
-const BUNDLED_CA_PATH = '/tmp/spanner-node-bundled-ca.pem';
-let caInitialized = false;
-
-function ensureRootCertificatesForGo(): void {
-  if (caInitialized) {
-    return;
-  }
-  caInitialized = true;
-  if (process.env.SSL_CERT_FILE || process.env.SSL_CERT_DIR) {
-    return;
-  }
-  try {
-    if (
-      !fs.existsSync(BUNDLED_CA_PATH) &&
-      tls.rootCertificates &&
-      tls.rootCertificates.length > 0
-    ) {
-      fs.writeFileSync(BUNDLED_CA_PATH, tls.rootCertificates.join('\n'), {
-        mode: 0o644,
-      });
-    }
-    if (fs.existsSync(BUNDLED_CA_PATH)) {
-      process.env.SSL_CERT_FILE = BUNDLED_CA_PATH;
-    }
-  } catch (_) {
-    // Ignore filesystem errors on read-only /tmp
-  }
-}
-
 interface NativeBatchResult {
   status: number; // 0 = OK, 1 = EOF (may also contain final rows), <0 = Error
   errorCode?: number;
   errorMessage?: string;
   retryInfoBytes?: Buffer;
+  statusBytes?: Buffer;
+  trailersJson?: string;
   metadataBytes?: Buffer;
   statsBytes?: Buffer;
   precommitBytes?: Buffer;
   hasReadTimestamp?: boolean;
   readTimestampSec?: number;
   readTimestampNanos?: number;
+  schemaHash?: number;
+  requestId?: string;
   numRows?: number;
   numCols?: number;
   cells?: Value[];
@@ -114,13 +90,15 @@ interface SpannerGoAddon {
     timeoutMs: number,
     skipMetadata: number,
     batchRowSize: number,
-    callback?: (err: Error | null, res: NativeBatchResult) => void,
+    callback?: (err: Error | null, res: NativeBatchResult) => boolean | void,
   ): number;
   nextBatch(
     streamHandle: number,
     callback: (err: Error | null, res: NativeBatchResult) => void,
   ): void;
   closeStream(streamHandle: number): void;
+  pauseStream?(streamHandle: number): void;
+  resumeStream?(streamHandle: number): void;
 }
 
 const PROTO_TO_OBJECT_OPTS = {
@@ -195,6 +173,24 @@ const PRIORITY_MAP: {[k: string]: number} = {
   PRIORITY_HIGH: 3,
 };
 
+const ISOLATION_LEVEL_MAP: {[k: string]: number} = {
+  ISOLATION_LEVEL_UNSPECIFIED: 0,
+  SERIALIZABLE: 1,
+  REPEATABLE_READ: 2,
+};
+
+const READ_LOCK_MODE_MAP: {[k: string]: number} = {
+  READ_LOCK_MODE_UNSPECIFIED: 0,
+  PESSIMISTIC: 1,
+  OPTIMISTIC: 2,
+};
+
+const REPLICA_TYPE_MAP: {[k: string]: number} = {
+  TYPE_UNSPECIFIED: 0,
+  READ_WRITE: 1,
+  READ_ONLY: 2,
+};
+
 const SCALAR_TYPE_PROTOS: {[k: string]: google.spanner.v1.IType} = {
   bool: {code: google.spanner.v1.TypeCode.BOOL},
   int64: {code: google.spanner.v1.TypeCode.INT64},
@@ -205,6 +201,14 @@ const SCALAR_TYPE_PROTOS: {[k: string]: google.spanner.v1.IType} = {
 };
 
 const DEFAULT_STRONG_TX_SELECTOR: google.spanner.v1.ITransactionSelector = {
+  singleUse: {
+    readOnly: {
+      returnReadTimestamp: true,
+    },
+  },
+};
+
+const EXPLICIT_STRONG_TX_SELECTOR: google.spanner.v1.ITransactionSelector = {
   singleUse: {
     readOnly: {
       strong: true,
@@ -227,29 +231,39 @@ function encodeFastReadOnlySelector(
   }
   const exact = options.exactStaleness;
   if (typeof exact === 'number') {
-    let cached = exactStalenessSelectorCache.get(exact);
-    if (!cached) {
-      const secs = Math.floor(exact / 1000);
-      const nanos = Math.round((exact % 1000) * 1e6);
-      cached = {
-        singleUse: {
-          readOnly: {
-            exactStaleness: {seconds: secs, nanos},
-            returnReadTimestamp:
-              typeof options.returnReadTimestamp === 'boolean'
-                ? options.returnReadTimestamp
-                : true,
+    const rrt =
+      typeof options.returnReadTimestamp === 'boolean'
+        ? options.returnReadTimestamp
+        : true;
+    if (rrt) {
+      let cached = exactStalenessSelectorCache.get(exact);
+      if (!cached) {
+        const secs = Math.floor(exact / 1000);
+        const nanos = Math.round((exact % 1000) * 1e6);
+        cached = {
+          singleUse: {
+            readOnly: {
+              exactStaleness: {seconds: secs, nanos},
+              returnReadTimestamp: true,
+            },
           },
-        },
-      };
-      if (
-        exactStalenessSelectorCache.size < 64 &&
-        options.returnReadTimestamp === undefined
-      ) {
-        exactStalenessSelectorCache.set(exact, cached);
+        };
+        if (exactStalenessSelectorCache.size < 64) {
+          exactStalenessSelectorCache.set(exact, cached);
+        }
       }
+      return cached;
     }
-    return cached;
+    const secs = Math.floor(exact / 1000);
+    const nanos = Math.round((exact % 1000) * 1e6);
+    return {
+      singleUse: {
+        readOnly: {
+          exactStaleness: {seconds: secs, nanos},
+          returnReadTimestamp: false,
+        },
+      },
+    };
   }
   if (
     options.minReadTimestamp === undefined &&
@@ -260,7 +274,9 @@ function encodeFastReadOnlySelector(
     (options.returnReadTimestamp === undefined ||
       options.returnReadTimestamp === true)
   ) {
-    return DEFAULT_STRONG_TX_SELECTOR;
+    return options.strong === true
+      ? EXPLICIT_STRONG_TX_SELECTOR
+      : DEFAULT_STRONG_TX_SELECTOR;
   }
   return null;
 }
@@ -274,12 +290,16 @@ interface CachedSchemaEntry {
   fields: google.spanner.v1.StructType.Field[];
   fieldNames: (string | null | undefined)[];
   defaultDecoders: Function[];
+  schemaHash?: number;
 }
 
 interface GlobalNativeState {
   addon?: SpannerGoAddon | null;
   serviceHandles: Map<string, number>;
   schemaCache: Map<string, CachedSchemaEntry>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  trackedClients?: Set<any>;
+  handleRefCounts?: Map<number, number>;
 }
 
 const GLOBAL_STATE_KEY = Symbol.for('__google_cloud_spanner_native_core_state__');
@@ -291,9 +311,18 @@ function getGlobalState(): GlobalNativeState {
       addon: undefined,
       serviceHandles: new Map<string, number>(),
       schemaCache: new Map<string, CachedSchemaEntry>(),
+      trackedClients: new Set(),
+      handleRefCounts: new Map<number, number>(),
     };
   }
-  return g[GLOBAL_STATE_KEY];
+  const st = g[GLOBAL_STATE_KEY];
+  if (!st.trackedClients) {
+    st.trackedClients = new Set();
+  }
+  if (!st.handleRefCounts) {
+    st.handleRefCounts = new Map<number, number>();
+  }
+  return st;
 }
 
 function isTruthyFlag(val: string | undefined): boolean {
@@ -363,6 +392,35 @@ export function loadNativeAddon(): SpannerGoAddon | null {
   return null;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function isClientSupportedByNativeCore(spanner: any): boolean {
+  if (!spanner || typeof spanner.prepareGapicRequest_ !== 'function') {
+    return false;
+  }
+  const emulatorHost = process.env.SPANNER_EMULATOR_HOST;
+  if (!emulatorHost) {
+    const opts = spanner.options || {};
+    if (
+      opts.credentials ||
+      opts.keyFilename ||
+      opts.keyFile ||
+      opts.authClient ||
+      opts.token ||
+      opts.clientConfig
+    ) {
+      return false;
+    }
+    if (
+      !spanner._isInSecureCredentials &&
+      opts.sslCreds &&
+      opts.sslCreds._isSecure?.() !== false
+    ) {
+      return false;
+    }
+  }
+  return true;
+}
+
 /**
  * Checks whether a Snapshot / Transaction instance should execute via the
  * Go Shared Core. Automatically yields to the pure-JS path if the user or a
@@ -384,7 +442,7 @@ export function canUseNativeCore(snapshot: any): boolean {
   if (!session || !database || !spanner) {
     return false;
   }
-  if (typeof spanner.prepareGapicRequest_ !== 'function') {
+  if (!isClientSupportedByNativeCore(spanner)) {
     return false;
   }
   if (
@@ -398,20 +456,34 @@ export function canUseNativeCore(snapshot: any): boolean {
   if (Object.prototype.hasOwnProperty.call(spanner, 'requestStream')) {
     return false;
   }
-  return true;
+  return getOrCreateServiceHandle(spanner) > 0;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getOrCreateServiceHandle(spanner: any): number {
-  if (spanner && typeof spanner._nativeServiceHandle === 'number' && spanner._nativeServiceHandle > 0) {
-    return spanner._nativeServiceHandle;
+  const state = getGlobalState();
+  if (
+    spanner &&
+    typeof spanner._nativeServiceHandle === 'number' &&
+    spanner._nativeServiceHandle > 0
+  ) {
+    const cachedKey = spanner._nativeServiceCacheKey;
+    if (
+      cachedKey &&
+      state.serviceHandles.get(cachedKey) === spanner._nativeServiceHandle
+    ) {
+      return spanner._nativeServiceHandle;
+    }
+    spanner._nativeServiceHandle = undefined;
+    spanner._nativeServiceCacheKey = undefined;
+  }
+  if (!isClientSupportedByNativeCore(spanner)) {
+    return -1;
   }
   const addon = loadNativeAddon();
   if (!addon) {
     return -1;
   }
-
-  ensureRootCertificatesForGo();
 
   const opts = spanner?.options || {};
   const emulatorHost = process.env.SPANNER_EMULATOR_HOST;
@@ -422,11 +494,17 @@ function getOrCreateServiceHandle(spanner: any): number {
     endpoint = emulatorHost;
     usePlaintext = 1;
   } else {
+    const universeDomain =
+      spanner?._universeDomain ||
+      opts.universeDomain ||
+      opts.universe_domain ||
+      process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN ||
+      'googleapis.com';
     const rawHost: string =
       opts.servicePath ||
       opts.apiEndpoint ||
       spanner?.baseUrl_ ||
-      'spanner.googleapis.com';
+      `spanner.${universeDomain}`;
     const port: number = opts.port || 443;
     endpoint = rawHost.includes(':') ? rawHost : `${rawHost}:${port}`;
     if (
@@ -478,11 +556,34 @@ function getOrCreateServiceHandle(spanner: any): number {
     rawStrategy === 1 || rawStrategy === 'ROUND_ROBIN' ? 1 : 0;
 
   const cacheKey = `${endpoint}|${numChannels}|${usePlaintext}|${disableBuiltInAuth}|${enableDirectAccess}|${userAgent}|${dcpEnabled}|${dcpInitialChannels}|${dcpMinChannels}|${dcpMaxChannels}|${dcpMaxRpcPerChannel}|${dcpMinRpcPerChannel}|${dcpSelectionStrategy}`;
-  const state = getGlobalState();
   const existing = state.serviceHandles.get(cacheKey);
   if (existing !== undefined && existing > 0) {
     if (spanner) {
       spanner._nativeServiceHandle = existing;
+      spanner._nativeServiceCacheKey = cacheKey;
+      if (!state.trackedClients!.has(spanner)) {
+        state.trackedClients!.add(spanner);
+        // Also increment Go refcount via addon.init so each Spanner client has its own ref
+        addon.init(
+          endpoint,
+          numChannels,
+          usePlaintext,
+          disableBuiltInAuth,
+          enableDirectAccess,
+          userAgent,
+          dcpEnabled,
+          dcpInitialChannels,
+          dcpMinChannels,
+          dcpMaxChannels,
+          dcpMaxRpcPerChannel,
+          dcpMinRpcPerChannel,
+          dcpSelectionStrategy,
+        );
+        state.handleRefCounts!.set(
+          existing,
+          (state.handleRefCounts!.get(existing) || 1) + 1,
+        );
+      }
     }
     return existing;
   }
@@ -504,8 +605,11 @@ function getOrCreateServiceHandle(spanner: any): number {
   );
   if (handle > 0) {
     state.serviceHandles.set(cacheKey, handle);
+    state.handleRefCounts!.set(handle, 1);
     if (spanner) {
       spanner._nativeServiceHandle = handle;
+      spanner._nativeServiceCacheKey = cacheKey;
+      state.trackedClients!.add(spanner);
     }
   }
   return handle;
@@ -521,8 +625,7 @@ export function prewarmNativeCore(spanner: any): void {
   if (!isNativeCoreEnabled()) {
     return;
   }
-  // Do not prewarm if unit tests have stubbed requestStream on the Spanner instance.
-  if (!spanner || typeof spanner.prepareGapicRequest_ !== 'function') {
+  if (!isClientSupportedByNativeCore(spanner)) {
     return;
   }
   if (
@@ -531,7 +634,58 @@ export function prewarmNativeCore(spanner: any): void {
   ) {
     return;
   }
-  getOrCreateServiceHandle(spanner);
+  const state = getGlobalState();
+  if (state.addon !== undefined) {
+    getOrCreateServiceHandle(spanner);
+    return;
+  }
+  const timer = setImmediate(() => {
+    try {
+      getOrCreateServiceHandle(spanner);
+    } catch (_) {
+      // Ignore prewarm errors
+    }
+  });
+  if (typeof timer.unref === 'function') {
+    timer.unref();
+  }
+}
+
+/**
+ * Releases the Go Shared Core service handle associated with a single `Spanner`
+ * client instance when `spanner.close()` is called.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function closeNativeCoreForClient(spanner: any): void {
+  if (!spanner) {
+    return;
+  }
+  const state = getGlobalState();
+  const handle = spanner._nativeServiceHandle;
+  const cacheKey = spanner._nativeServiceCacheKey;
+  spanner._nativeServiceHandle = undefined;
+  spanner._nativeServiceCacheKey = undefined;
+  if (!state.trackedClients?.has(spanner)) {
+    return;
+  }
+  state.trackedClients.delete(spanner);
+  if (typeof handle === 'number' && handle > 0) {
+    const addon = state.addon;
+    try {
+      addon?.close(handle);
+    } catch (_) {
+      // Ignore teardown errors
+    }
+    const prevRefs = state.handleRefCounts?.get(handle) || 1;
+    if (prevRefs <= 1) {
+      state.handleRefCounts?.delete(handle);
+      if (cacheKey && state.serviceHandles.get(cacheKey) === handle) {
+        state.serviceHandles.delete(cacheKey);
+      }
+    } else {
+      state.handleRefCounts?.set(handle, prevRefs - 1);
+    }
+  }
 }
 
 /**
@@ -542,13 +696,26 @@ export function closeNativeCore(): void {
   const addon = state.addon;
   if (addon) {
     for (const handle of state.serviceHandles.values()) {
-      try {
-        addon.close(handle);
-      } catch (_) {
-        // Ignore teardown errors
+      const refs = state.handleRefCounts?.get(handle) || 1;
+      for (let i = 0; i < refs; i++) {
+        try {
+          addon.close(handle);
+        } catch (_) {
+          // Ignore teardown errors
+        }
       }
     }
   }
+  if (state.trackedClients) {
+    for (const client of state.trackedClients) {
+      if (client) {
+        client._nativeServiceHandle = undefined;
+        client._nativeServiceCacheKey = undefined;
+      }
+    }
+    state.trackedClients.clear();
+  }
+  state.handleRefCounts?.clear();
   state.serviceHandles.clear();
   state.schemaCache.clear();
 }
@@ -599,20 +766,126 @@ function buildHeadersString(
   return base;
 }
 
-function createGrpcServiceError(batch: NativeBatchResult): grpc.ServiceError {
+function createGrpcServiceError(
+  batch: NativeBatchResult,
+  fallbackReqId?: string,
+): grpc.ServiceError {
   const code = batch.errorCode ?? grpc.status.UNKNOWN;
   const codeName = GRPC_CODE_NAMES[code] || 'UNKNOWN';
   const details = batch.errorMessage || 'Unknown Spanner native core error';
   const message = `${code} ${codeName}: ${details}`;
   const metadata = new grpc.Metadata();
+  if (batch.trailersJson) {
+    try {
+      const tr = JSON.parse(batch.trailersJson) as Record<string, string>;
+      for (const [k, v] of Object.entries(tr)) {
+        if (!k.endsWith('-bin')) {
+          metadata.set(k, v);
+        }
+      }
+    } catch (_) {
+      // Ignore trailer JSON parse errors
+    }
+  }
+  if (batch.statusBytes && batch.statusBytes.length > 0) {
+    metadata.set('grpc-status-details-bin', batch.statusBytes);
+  }
   if (batch.retryInfoBytes && batch.retryInfoBytes.length > 0) {
     metadata.set('google.rpc.retryinfo-bin', batch.retryInfoBytes);
   }
-  const err = new Error(message) as grpc.ServiceError;
+  let err = new Error(message) as grpc.ServiceError;
   err.code = code;
   err.details = details;
   err.metadata = metadata;
+  if (batch.statusBytes && batch.statusBytes.length > 0) {
+    try {
+      err = GoogleError.parseGRPCStatusDetails(
+        err as unknown as GoogleError,
+      ) as unknown as grpc.ServiceError;
+      err.code = code;
+      err.details = details;
+      err.metadata = metadata;
+    } catch (_) {
+      // Ignore status details parse errors
+    }
+  }
+  const reqId = batch.requestId || fallbackReqId;
+  if (reqId) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (err as any).requestID = reqId;
+  }
   return err;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function normalizeNativeDecodeError(err: any): grpc.ServiceError {
+  const e =
+    err instanceof Error ? (err as grpc.ServiceError) : (new Error(String(err)) as grpc.ServiceError);
+  if (e.code === undefined) {
+    e.code = grpc.status.UNKNOWN;
+  }
+  if (e.details === undefined) {
+    e.details = e.message;
+  }
+  if (e.metadata === undefined) {
+    e.metadata = new grpc.Metadata();
+  }
+  return e;
+}
+
+function normalizeTimeoutMs(rawTimeout: number | undefined): number {
+  if (rawTimeout === undefined || rawTimeout === null || !Number.isFinite(rawTimeout)) {
+    return 0;
+  }
+  if (rawTimeout <= 0) {
+    return -1;
+  }
+  if (rawTimeout > 0 && rawTimeout < 1) {
+    return 1;
+  }
+  if (rawTimeout > 2147483000) {
+    return 2147483000;
+  }
+  return Math.floor(rawTimeout);
+}
+
+function recordNativeMetricsCompletion(
+  metricsTracer: MetricsTracer | null,
+  batch: NativeBatchResult | undefined,
+  statusCode: number,
+): void {
+  if (!metricsTracer || !metricsTracer.enabled) {
+    return;
+  }
+  try {
+    const attempts = batch?.attemptCount && batch.attemptCount > 0 ? batch.attemptCount : 1;
+    for (let i = 1; i < attempts; i++) {
+      metricsTracer.recordAttemptCompletion(grpc.status.UNAVAILABLE);
+      metricsTracer.recordAttemptStart();
+    }
+    if (batch?.gfeLatencyMs !== undefined && batch.gfeLatencyMs >= 0) {
+      metricsTracer.gfeLatency = batch.gfeLatencyMs;
+    }
+    if (batch?.afeLatencyMs !== undefined && batch.afeLatencyMs >= 0) {
+      metricsTracer.afeLatency = batch.afeLatencyMs;
+    }
+    metricsTracer.recordAttemptCompletion(statusCode);
+    if (metricsTracer.gfeLatency !== null) {
+      metricsTracer.recordGfeLatency(statusCode);
+    } else {
+      metricsTracer.recordGfeConnectivityErrorCount(statusCode);
+    }
+    if (isAFEServerTimingEnabled()) {
+      if (metricsTracer.afeLatency !== null) {
+        metricsTracer.recordAfeLatency(statusCode);
+      } else {
+        metricsTracer.recordAfeConnectivityErrorCount(statusCode);
+      }
+    }
+    metricsTracer.recordOperationCompletion();
+  } catch (_) {
+    // Ignore telemetry recording errors
+  }
 }
 
 function decodeResultSetMetadata(
@@ -675,7 +948,7 @@ function encodeExecuteSqlRequest(
   formattedRequest: google.spanner.v1.IExecuteSqlRequest,
   typesAlreadyNormalized = false,
 ): Buffer {
-  // Normalize string enum values in-place so ExecuteSqlRequest.encode() runs in
+  // Normalize string enum values so ExecuteSqlRequest.encode() runs in
   // a single pass without ExecuteSqlRequest.fromObject() deep-cloning the request.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const req = formattedRequest as any;
@@ -683,8 +956,34 @@ function encodeExecuteSqlRequest(
     req.queryMode = QUERY_MODE_MAP[req.queryMode] ?? 0;
   }
   if (req.requestOptions && typeof req.requestOptions.priority === 'string') {
-    req.requestOptions.priority =
-      PRIORITY_MAP[req.requestOptions.priority] ?? 0;
+    req.requestOptions = Object.assign({}, req.requestOptions, {
+      priority: PRIORITY_MAP[req.requestOptions.priority] ?? 0,
+    });
+  }
+  if (req.transaction?.begin) {
+    const begin = req.transaction.begin;
+    if (typeof begin.isolationLevel === 'string') {
+      begin.isolationLevel = ISOLATION_LEVEL_MAP[begin.isolationLevel] ?? 0;
+    }
+    if (begin.readWrite && typeof begin.readWrite.readLockMode === 'string') {
+      begin.readWrite.readLockMode =
+        READ_LOCK_MODE_MAP[begin.readWrite.readLockMode] ?? 0;
+    }
+  }
+  if (req.directedReadOptions) {
+    const dro = req.directedReadOptions;
+    const selections =
+      dro.includeReplicas?.replicaSelections ||
+      dro.excludeReplicas?.replicaSelections;
+    if (Array.isArray(selections)) {
+      for (let i = 0; i < selections.length; i++) {
+        if (selections[i] && typeof selections[i].type === 'string') {
+          selections[i] = Object.assign({}, selections[i], {
+            type: REPLICA_TYPE_MAP[selections[i].type] ?? 0,
+          });
+        }
+      }
+    }
   }
   if (!typesAlreadyNormalized && req.paramTypes) {
     const keys = Object.keys(req.paramTypes);
@@ -746,7 +1045,7 @@ export interface NativeTransactionRunParams {
   sanitizeRequest: () => google.spanner.v1.IExecuteSqlRequest;
   headers?: {[k: string]: string};
   rowOptions: RowOptions;
-  timeoutMs: number;
+  timeoutMs?: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   streamSpan: any;
   onSuccess: (
@@ -766,8 +1065,8 @@ export interface NativeTransactionRunParams {
  * Ultra-fast direct path for single-use `Database#run` queries on a multiplexed
  * session when OpenTelemetry tracing is not actively recording. Completely
  * avoids allocating a throwaway `Snapshot` (`GrpcServiceObject`, `EventEmitter`,
- * `uuid.v4()`, `MetricsTracer`, `snapshot.end()`), avoids `PreciseDate` readTimestamp
- * construction, and caches session headers and staleness selectors.
+ * `uuid.v4()`, `snapshot.end()`), avoids `PreciseDate` readTimestamp
+ * construction when not requested, and caches session headers and staleness selectors.
  *
  * Returns `true` if the query was dispatched via the fast path, or `false` if
  * the caller should fall back to `Database#_executeRunOnSession`.
@@ -792,6 +1091,7 @@ export function executeNativeDatabaseRun(
   const spanner = database?.parent?.parent;
   if (
     !spanner ||
+    !isClientSupportedByNativeCore(spanner) ||
     typeof spanner.prepareGapicRequest_ !== 'function' ||
     session.requestStream?.isSinonProxy ||
     database.requestStream?.isSinonProxy ||
@@ -825,7 +1125,7 @@ export function executeNativeDatabaseRun(
 
   let sql: string;
   let rowOptions: RowOptions = {};
-  let timeoutMs = 0;
+  const timeoutMs = 0;
   let reqObj: google.spanner.v1.IExecuteSqlRequest;
 
   if (typeof query === 'string') {
@@ -834,7 +1134,9 @@ export function executeNativeDatabaseRun(
       session: sessionName,
       sql,
       transaction: txSelector,
+      seqno: 1,
       queryOptions: database.queryOptions_,
+      directedReadOptions: spanner.directedReadOptions || undefined,
     };
   } else if (query && typeof query === 'object') {
     // If complex options or non-scalar params are used, let Snapshot#_run handle them
@@ -845,7 +1147,8 @@ export function executeNativeDatabaseRun(
       query.maxResumeRetries !== undefined ||
       query.DirectedReadOptions ||
       query.directedReadOptions ||
-      database.directedReadOptions_
+      database.directedReadOptions_ ||
+      process.env.SPANNER_ENABLE_UUID_AS_UNTYPED?.toLowerCase() === 'true'
     ) {
       return false;
     }
@@ -894,14 +1197,18 @@ export function executeNativeDatabaseRun(
               explicitTypeProto === SCALAR_TYPE_PROTOS.float64 ||
               explicitTypeProto === SCALAR_TYPE_PROTOS.float32
             ) {
-              fieldsMap[k] = {numberValue: v};
+              fieldsMap[k] = Number.isFinite(v)
+                ? {numberValue: v}
+                : {stringValue: v.toString()};
               paramTypesProto[k] = explicitTypeProto;
             } else if (Number.isInteger(v)) {
               fieldsMap[k] = {stringValue: String(v)};
               paramTypesProto[k] =
                 explicitTypeProto || SCALAR_TYPE_PROTOS.int64;
             } else if (!explicitTypeProto) {
-              fieldsMap[k] = {numberValue: v};
+              fieldsMap[k] = Number.isFinite(v)
+                ? {numberValue: v}
+                : {stringValue: v.toString()};
               paramTypesProto[k] = SCALAR_TYPE_PROTOS.float64;
             } else {
               return false;
@@ -910,7 +1217,9 @@ export function executeNativeDatabaseRun(
             fieldsMap[k] = {stringValue: String(v.value)};
             paramTypesProto[k] = explicitTypeProto || SCALAR_TYPE_PROTOS.int64;
           } else if (v instanceof Float) {
-            fieldsMap[k] = {numberValue: v.value};
+            fieldsMap[k] = Number.isFinite(v.value)
+              ? {numberValue: v.value}
+              : {stringValue: String(v.value)};
             paramTypesProto[k] =
               explicitTypeProto || SCALAR_TYPE_PROTOS.float64;
           } else if (v instanceof Numeric) {
@@ -934,11 +1243,12 @@ export function executeNativeDatabaseRun(
       paramTypes: paramTypesProto,
       queryMode: query.queryMode,
       partitionToken: query.partitionToken,
-      seqno: query.seqno,
+      seqno: 1,
       queryOptions: query.queryOptions
         ? Object.assign({}, database.queryOptions_, query.queryOptions)
         : database.queryOptions_,
       requestOptions: query.requestOptions,
+      directedReadOptions: spanner.directedReadOptions || undefined,
       dataBoostEnabled: query.dataBoostEnabled,
     };
   } else {
@@ -953,16 +1263,58 @@ export function executeNativeDatabaseRun(
   }
 
   if (!session._nativeHeadersStr) {
-    session._nativeHeadersStr = `x-goog-request-params:session=${encodeURIComponent(
-      sessionName,
-    )}\ngoogle-cloud-resource-prefix:${dbName}`;
+    let base = '';
+    const commonHdrs = session.commonHeaders_ || database.commonHeaders_;
+    if (commonHdrs && typeof commonHdrs === 'object') {
+      for (const [hk, hv] of Object.entries(commonHdrs)) {
+        if (hk !== 'x-goog-request-params' && hv !== undefined && hv !== null) {
+          base = base ? `${base}\n${hk}:${hv}` : `${hk}:${hv}`;
+        }
+      }
+    }
+    if (!base) {
+      base = `google-cloud-resource-prefix:${dbName}\nx-goog-spanner-enable-afe-server-timing:true`;
+    }
+    session._nativeHeadersStr = base;
   }
-  const headersStr: string = session._nativeHeadersStr;
+  const nthReq: number | undefined =
+    typeof database._nextNthRequest === 'function'
+      ? database._nextNthRequest()
+      : undefined;
+  const reqId: string | undefined =
+    nthReq !== undefined
+      ? database._requestIdPrefix
+        ? `${database._requestIdPrefix}${nthReq}.1`
+        : craftRequestId(
+            database._clientId ?? database._nthClientId ?? 1,
+            database._channelId ?? 1,
+            nthReq,
+            1,
+          )
+      : undefined;
+  const headersStr: string = reqId
+    ? `${session._nativeHeadersStr}\nx-goog-spanner-request-id:${reqId}`
+    : session._nativeHeadersStr;
+
+  let metricsTracer: MetricsTracer | null = null;
+  if (spanner?._metricsEnabled && typeof spanner._initMetricsTracer === 'function') {
+    metricsTracer = spanner._initMetricsTracer({
+      client: 'SpannerClient',
+      method: 'executeStreamingSql',
+      reqOpts: {session: sessionName},
+      headers: reqId ? {'x-goog-spanner-request-id': reqId} : undefined,
+    });
+    metricsTracer?.recordAttemptStart();
+  }
 
   const state = getGlobalState();
   const sqlKey = sql ? `${dbName}::${sql}` : '';
   const cachedSchema = sqlKey ? state.schemaCache.get(sqlKey) : undefined;
-  const skipMetadata = (cachedSchema ? 3 : 0) | 4;
+  const skipTxBit = options?.returnReadTimestamp === false ? 2 : 0;
+  const metricsBit = metricsTracer ? 8 : 0;
+  const schemaHashBits = (cachedSchema?.schemaHash || 0) << 8;
+  const skipMetadata =
+    (cachedSchema ? 1 | skipTxBit : 0) | 4 | metricsBit | schemaHashBits;
 
   const allRows: Row[] = [];
   let metadata: google.spanner.v1.ResultSetMetadata | undefined = cachedSchema
@@ -994,32 +1346,43 @@ export function executeNativeDatabaseRun(
     RUN_BATCH_ROW_SIZE,
     (napiErr, batch) => {
       if (finished) {
-        return;
+        return false;
       }
       if (napiErr) {
         finished = true;
+        recordNativeMetricsCompletion(
+          metricsTracer,
+          batch,
+          (napiErr as grpc.ServiceError).code ?? grpc.status.UNKNOWN,
+        );
         callback(napiErr as grpc.ServiceError, allRows, stats, metadata);
-        return;
+        return false;
       }
 
       if (batch.status < 0) {
         finished = true;
-        const grpcErr = createGrpcServiceError(batch);
+        const grpcErr = createGrpcServiceError(batch, reqId);
+        recordNativeMetricsCompletion(metricsTracer, batch, grpcErr.code ?? grpc.status.UNKNOWN);
         callback(grpcErr, allRows, stats, metadata);
-        return;
+        return false;
       }
 
       if (batch.metadataBytes && batch.metadataBytes.length > 0) {
         const decodedMeta = decodeResultSetMetadata(batch.metadataBytes);
+        const schemaChanged =
+          batch.schemaHash &&
+          cachedSchema &&
+          batch.schemaHash !== cachedSchema.schemaHash;
         if (
           cachedSchema &&
+          !schemaChanged &&
           (!decodedMeta.rowType || !decodedMeta.rowType.fields?.length)
         ) {
           decodedMeta.rowType = cachedSchema.rowType;
         }
         metadata = decodedMeta;
 
-        if (!fields && metadata.rowType?.fields) {
+        if ((!fields || schemaChanged) && metadata.rowType?.fields) {
           fields =
             metadata.rowType.fields as google.spanner.v1.StructType.Field[];
           fieldNames = fields.map(f => f.name);
@@ -1030,6 +1393,7 @@ export function executeNativeDatabaseRun(
               fields,
               fieldNames,
               defaultDecoders,
+              schemaHash: batch.schemaHash,
             });
           }
           decoders =
@@ -1039,6 +1403,19 @@ export function executeNativeDatabaseRun(
               ? defaultDecoders
               : createFieldDecoders(fields, rowOptions);
         }
+      } else if (batch.hasReadTimestamp) {
+        const secNum = batch.readTimestampSec || 0;
+        const nanosNum = batch.readTimestampNanos || 0;
+        metadata = {
+          rowType: cachedSchema?.rowType,
+          transaction: {
+            id: EMPTY_BUFFER,
+            readTimestamp: {
+              seconds: String(secNum),
+              nanos: nanosNum,
+            },
+          } as unknown as google.spanner.v1.ITransaction,
+        } as unknown as google.spanner.v1.ResultSetMetadata;
       }
 
       if (batch.statsBytes && batch.statsBytes.length > 0) {
@@ -1066,20 +1443,19 @@ export function executeNativeDatabaseRun(
         } catch (decodeErr) {
           finished = true;
           addon.closeStream(streamHandle);
-          callback(
-            decodeErr as grpc.ServiceError,
-            allRows,
-            stats,
-            metadata,
-          );
-          return;
+          const normErr = normalizeNativeDecodeError(decodeErr);
+          recordNativeMetricsCompletion(metricsTracer, batch, normErr.code ?? grpc.status.UNKNOWN);
+          callback(normErr, allRows, stats, metadata);
+          return false;
         }
       }
 
       if (batch.status === 1) {
         finished = true;
+        recordNativeMetricsCompletion(metricsTracer, batch, grpc.status.OK);
         callback(null, allRows, stats, metadata);
       }
+      return true;
     },
   );
 
@@ -1143,19 +1519,35 @@ export function executeNativeTransactionRun(
 
     const state = getGlobalState();
     const dbName: string = database?.formattedName_ || '';
+    const routingKey = formattedRequest.session || dbName;
+    const reqId = headers?.['x-goog-spanner-request-id'];
+
+    let metricsTracer: MetricsTracer | null = null;
+    if (spanner?._metricsEnabled && typeof spanner._initMetricsTracer === 'function') {
+      metricsTracer = spanner._initMetricsTracer({
+        client: 'SpannerClient',
+        method: 'executeStreamingSql',
+        reqOpts: {session: routingKey},
+        headers: reqId ? {'x-goog-spanner-request-id': reqId} : undefined,
+      });
+      metricsTracer?.recordAttemptStart();
+    }
+
     const sqlKey =
       dbName && formattedRequest.sql
         ? `${dbName}::${formattedRequest.sql}`
         : '';
     const cachedSchema = sqlKey ? state.schemaCache.get(sqlKey) : undefined;
-    const skipMetadata = (cachedSchema ? (snapshot.id ? 1 : 3) : 0) | 4;
+    const metricsBit = metricsTracer ? 8 : 0;
+    const schemaHashBits = (cachedSchema?.schemaHash || 0) << 8;
+    const skipMetadata =
+      (cachedSchema ? 1 : 0) | 4 | metricsBit | schemaHashBits;
 
     const headersStr = buildHeadersString(
       headers,
       undefined,
       Boolean(streamSpan),
     );
-    const routingKey = formattedRequest.session || dbName;
 
     const allRows: Row[] = [];
     let metadata: google.spanner.v1.ResultSetMetadata | undefined;
@@ -1187,30 +1579,41 @@ export function executeNativeTransactionRun(
       routingKey,
       reqBuffer,
       headersStr,
-      timeoutMs > 0 && Number.isFinite(timeoutMs) ? Math.floor(timeoutMs) : 0,
+      normalizeTimeoutMs(timeoutMs),
       skipMetadata,
       RUN_BATCH_ROW_SIZE,
       (napiErr, batch) => {
         if (finished) {
-          return;
+          return false;
         }
         if (napiErr) {
           finished = true;
+          recordNativeMetricsCompletion(
+            metricsTracer,
+            batch,
+            (napiErr as grpc.ServiceError).code ?? grpc.status.UNKNOWN,
+          );
           onError(napiErr as grpc.ServiceError, allRows, stats, metadata);
-          return;
+          return false;
         }
 
         if (batch.status < 0) {
           finished = true;
-          const grpcErr = createGrpcServiceError(batch);
+          const grpcErr = createGrpcServiceError(batch, reqId);
+          recordNativeMetricsCompletion(metricsTracer, batch, grpcErr.code ?? grpc.status.UNKNOWN);
           onError(grpcErr, allRows, stats, metadata);
-          return;
+          return false;
         }
 
         if (batch.metadataBytes && batch.metadataBytes.length > 0) {
           const decodedMeta = decodeResultSetMetadata(batch.metadataBytes);
+          const schemaChanged =
+            batch.schemaHash &&
+            cachedSchema &&
+            batch.schemaHash !== cachedSchema.schemaHash;
           if (
             cachedSchema &&
+            !schemaChanged &&
             (!decodedMeta.rowType || !decodedMeta.rowType.fields?.length)
           ) {
             decodedMeta.rowType = cachedSchema.rowType;
@@ -1221,7 +1624,7 @@ export function executeNativeTransactionRun(
             snapshot._update(metadata.transaction, streamSpan);
           }
 
-          if (!fields && metadata.rowType?.fields) {
+          if ((!fields || schemaChanged) && metadata.rowType?.fields) {
             fields =
               metadata.rowType.fields as google.spanner.v1.StructType.Field[];
             fieldNames = fields.map(f => f.name);
@@ -1232,6 +1635,7 @@ export function executeNativeTransactionRun(
                 fields,
                 fieldNames,
                 defaultDecoders,
+                schemaHash: batch.schemaHash,
               });
             }
             decoders =
@@ -1313,20 +1717,19 @@ export function executeNativeTransactionRun(
           } catch (decodeErr) {
             finished = true;
             addon.closeStream(streamHandle);
-            onError(
-              decodeErr as grpc.ServiceError,
-              allRows,
-              stats,
-              metadata,
-            );
-            return;
+            const normErr = normalizeNativeDecodeError(decodeErr);
+            recordNativeMetricsCompletion(metricsTracer, batch, normErr.code ?? grpc.status.UNKNOWN);
+            onError(normErr, allRows, stats, metadata);
+            return false;
           }
         }
 
         if (batch.status === 1) {
           finished = true;
+          recordNativeMetricsCompletion(metricsTracer, batch, grpc.status.OK);
           onSuccess(allRows, stats, metadata);
         }
+        return true;
       },
     );
   };
@@ -1349,7 +1752,7 @@ export interface NativeStreamParams {
   sanitizeRequest: () => google.spanner.v1.IExecuteSqlRequest;
   getHeaders: () => {[k: string]: string};
   rowOptions: RowOptions;
-  timeoutMs: number;
+  timeoutMs?: number;
 }
 
 /**
@@ -1366,12 +1769,27 @@ export function runStreamNative(
   let finishedReading = false;
   let eofReceived = false;
   let emittedResponse = false;
+  let nativeStreamPaused = false;
 
   let metadata: google.spanner.v1.ResultSetMetadata | undefined;
   let fields: google.spanner.v1.StructType.Field[] | undefined;
   let fieldNames: (string | null | undefined)[] | undefined;
   let decoders: Function[] | undefined;
   const rowBuffer: Row[] = [];
+
+  const pauseNativeIfNeeded = () => {
+    if (!nativeStreamPaused && streamHandle > 0 && !eofReceived && !finishedReading) {
+      nativeStreamPaused = true;
+      loadNativeAddon()?.pauseStream?.(streamHandle);
+    }
+  };
+
+  const resumeNativeIfNeeded = () => {
+    if (nativeStreamPaused && streamHandle > 0 && !eofReceived && !finishedReading) {
+      nativeStreamPaused = false;
+      loadNativeAddon()?.resumeStream?.(streamHandle);
+    }
+  };
 
   const readable = new Transform({
     objectMode: true,
@@ -1394,6 +1812,13 @@ export function runStreamNative(
     },
   });
 
+  readable.on('pause', () => {
+    pauseNativeIfNeeded();
+  });
+  readable.on('resume', () => {
+    drainBufferOrStart();
+  });
+
   const userStream = streamEvents(readable) as unknown as PartialResultStream;
   // Provide abort() method for PartialResultStream compatibility
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -1406,17 +1831,38 @@ export function runStreamNative(
       return;
     }
 
-    while (rowBuffer.length > 0) {
-      const nextRow = rowBuffer.shift()!;
-      if (!readable.push(nextRow)) {
-        return;
+    try {
+      while (rowBuffer.length > 0) {
+        const nextRow = rowBuffer.shift()!;
+        if (!readable.push(nextRow)) {
+          pauseNativeIfNeeded();
+          return;
+        }
       }
+    } catch (pushErr) {
+      finishedReading = true;
+      rowBuffer.length = 0;
+      if (streamHandle > 0) {
+        const addon = loadNativeAddon();
+        const handleToClose = streamHandle;
+        streamHandle = 0;
+        addon?.closeStream(handleToClose);
+      }
+      readable.destroy(normalizeNativeDecodeError(pushErr));
+      return;
     }
 
     if (eofReceived) {
       finishedReading = true;
       readable.push(null);
+      if (!readable.writableEnded) {
+        readable.end();
+      }
       return;
+    }
+
+    if (nativeStreamPaused && rowBuffer.length === 0) {
+      resumeNativeIfNeeded();
     }
 
     if (!started) {
@@ -1462,36 +1908,60 @@ export function runStreamNative(
       }
 
       const reqBuffer = encodeExecuteSqlRequest(formattedRequest);
-      const headersStr = buildHeadersString(getHeaders());
+      const rawHeaders = getHeaders();
+      const reqId = rawHeaders?.['x-goog-spanner-request-id'];
+      const headersStr = buildHeadersString(rawHeaders);
       const dbName: string = database?.formattedName_ || '';
       const routingKey = formattedRequest.session || dbName;
+
+      let metricsTracer: MetricsTracer | null = null;
+      if (spanner?._metricsEnabled && typeof spanner._initMetricsTracer === 'function') {
+        metricsTracer = spanner._initMetricsTracer({
+          client: 'SpannerClient',
+          method: 'executeStreamingSql',
+          reqOpts: {session: routingKey},
+          headers: reqId ? {'x-goog-spanner-request-id': reqId} : undefined,
+        });
+        metricsTracer?.recordAttemptStart();
+      }
+      const skipMetadata = metricsTracer ? 8 : 0;
 
       streamHandle = addon.executeStreamingSql(
         serviceHandle,
         routingKey,
         reqBuffer,
         headersStr,
-        timeoutMs > 0 && Number.isFinite(timeoutMs) ? Math.floor(timeoutMs) : 0,
-        0,
+        normalizeTimeoutMs(timeoutMs),
+        skipMetadata,
         STREAM_BATCH_ROW_SIZE,
         (napiErr, batch) => {
           if (finishedReading || userStream.destroyed) {
-            return;
+            return false;
           }
 
           if (napiErr) {
             finishedReading = true;
             streamHandle = 0;
+            recordNativeMetricsCompletion(
+              metricsTracer,
+              batch,
+              (napiErr as grpc.ServiceError).code ?? grpc.status.UNKNOWN,
+            );
             readable.destroy(napiErr);
-            return;
+            return false;
           }
 
           if (batch.status < 0) {
             finishedReading = true;
             streamHandle = 0;
-            const grpcErr = createGrpcServiceError(batch);
+            const grpcErr = createGrpcServiceError(batch, reqId);
+            recordNativeMetricsCompletion(
+              metricsTracer,
+              batch,
+              grpcErr.code ?? grpc.status.UNKNOWN,
+            );
             readable.destroy(grpcErr);
-            return;
+            return false;
           }
 
           let decodedStats: google.spanner.v1.ResultSetStats | undefined;
@@ -1556,8 +2026,14 @@ export function runStreamNative(
               const handleToClose = streamHandle;
               streamHandle = 0;
               addon.closeStream(handleToClose);
-              readable.destroy(decodeErr as Error);
-              return;
+              const normErr = normalizeNativeDecodeError(decodeErr);
+              recordNativeMetricsCompletion(
+                metricsTracer,
+                batch,
+                normErr.code ?? grpc.status.UNKNOWN,
+              );
+              readable.destroy(normErr);
+              return false;
             }
           }
 
@@ -1568,18 +2044,47 @@ export function runStreamNative(
           if (batch.status === 1) {
             eofReceived = true;
             streamHandle = 0;
+            recordNativeMetricsCompletion(metricsTracer, batch, grpc.status.OK);
           }
 
-          while (rowBuffer.length > 0) {
-            if (!readable.push(rowBuffer.shift()!)) {
-              return;
+          if (readable.readableFlowing === false) {
+            pauseNativeIfNeeded();
+            return true;
+          }
+
+          try {
+            while (rowBuffer.length > 0) {
+              if (!readable.push(rowBuffer.shift()!)) {
+                pauseNativeIfNeeded();
+                return true;
+              }
             }
+          } catch (pushErr) {
+            finishedReading = true;
+            rowBuffer.length = 0;
+            if (streamHandle > 0) {
+              const handleToClose = streamHandle;
+              streamHandle = 0;
+              addon.closeStream(handleToClose);
+            }
+            const normErr = normalizeNativeDecodeError(pushErr);
+            recordNativeMetricsCompletion(
+              metricsTracer,
+              batch,
+              normErr.code ?? grpc.status.UNKNOWN,
+            );
+            readable.destroy(normErr);
+            return false;
           }
 
           if (eofReceived && !finishedReading) {
             finishedReading = true;
             readable.push(null);
+            if (!readable.writableEnded) {
+              readable.end();
+            }
           }
+          return true;
         },
       );
     };

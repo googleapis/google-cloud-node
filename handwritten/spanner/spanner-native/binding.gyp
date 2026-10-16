@@ -11,6 +11,7 @@
       "libraries": [
         "-L<(module_root_dir)/spanner-go",
         "-lspanner_go",
+        "-Wl,-rpath,'$$ORIGIN/../../spanner-go'",
         "-Wl,-rpath,<(module_root_dir)/spanner-go"
       ],
       "cflags!": [ "-fno-exceptions" ],

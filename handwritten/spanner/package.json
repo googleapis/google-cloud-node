@@ -17,7 +17,8 @@
   "files": [
     "build/protos",
     "build/src",
-    "!build/src/**/*.map"
+    "!build/src/**/*.map",
+    "spanner-native"
   ],
   "keywords": [
     "google apis client",

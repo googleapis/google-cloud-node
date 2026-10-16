@@ -82,6 +82,12 @@ typedef struct {
   int32_t       direct_path_used; // 1 if DirectPath was used
   char*         logs_json;      // JSON array of structured log entries (NULL if none)
   int32_t       logs_len;
+  uint32_t      schema_hash;    // 24-bit non-zero FNV-1a fingerprint of RowType.Fields
+  char*         request_id;     // C string x-goog-spanner-request-id (NULL if none)
+  uint8_t*      status_pb;      // google.rpc.Status protobuf bytes (NULL if none)
+  int32_t       status_len;
+  char*         trailers_json;  // JSON object of error trailers (NULL if none)
+  int32_t       trailers_len;
 } CSpannerBatch;
 
 typedef void (*SpannerBatchCallback)(void* user_data, CSpannerBatch* batch);
@@ -163,18 +169,75 @@ func fnv32aStr(s string) uint32 {
 	return h
 }
 
-func (se *serviceEntry) resolveHeaders(hdrStr string) *cachedHeaderEntry {
+func splitRequestIDFromHeaders(hdrStr string) (string, string) {
 	if len(hdrStr) == 0 {
-		return nil
+		return "", ""
 	}
-	slot := fnv32aStr(hdrStr) & (headerCacheSlots - 1)
-	if cur := se.headerSlots[slot].Load(); cur != nil && cur.raw == hdrStr {
-		return cur
+	if hdrStr[0] == '{' {
+		var headers map[string]string
+		if err := json.Unmarshal([]byte(hdrStr), &headers); err != nil || len(headers) == 0 {
+			return hdrStr, ""
+		}
+		var reqID string
+		for k, v := range headers {
+			if strings.EqualFold(k, "x-goog-spanner-request-id") {
+				reqID = v
+				delete(headers, k)
+			}
+		}
+		if reqID == "" {
+			return hdrStr, ""
+		}
+		if len(headers) == 0 {
+			return "", reqID
+		}
+		b, err := json.Marshal(headers)
+		if err != nil {
+			return hdrStr, reqID
+		}
+		return string(b), reqID
 	}
-	if v, ok := se.headerOvfl.Load(hdrStr); ok {
-		return v.(*cachedHeaderEntry)
+
+	const prefix = "x-goog-spanner-request-id:"
+	idx := strings.Index(hdrStr, prefix)
+	for idx >= 0 {
+		if idx == 0 || hdrStr[idx-1] == '\n' {
+			valStart := idx + len(prefix)
+			nl := strings.IndexByte(hdrStr[valStart:], '\n')
+			if nl == -1 {
+				reqID := hdrStr[valStart:]
+				staticStr := hdrStr[:idx]
+				if len(staticStr) > 0 && staticStr[len(staticStr)-1] == '\n' {
+					staticStr = staticStr[:len(staticStr)-1]
+				}
+				return staticStr, reqID
+			}
+			reqID := hdrStr[valStart : valStart+nl]
+			staticStr := hdrStr[:idx] + hdrStr[valStart+nl+1:]
+			return staticStr, reqID
+		}
+		next := strings.Index(hdrStr[idx+len(prefix):], prefix)
+		if next < 0 {
+			break
+		}
+		idx = idx + len(prefix) + next
 	}
-	headers, pairs := parseHeaders(hdrStr)
+	return hdrStr, ""
+}
+
+func (se *serviceEntry) resolveHeadersAndRequestID(hdrStr string) (*cachedHeaderEntry, string) {
+	if len(hdrStr) == 0 {
+		return nil, ""
+	}
+	staticHdrStr, reqID := splitRequestIDFromHeaders(hdrStr)
+	if len(staticHdrStr) == 0 {
+		return &cachedHeaderEntry{}, reqID
+	}
+	slot := fnv32aStr(staticHdrStr) & (headerCacheSlots - 1)
+	if cur := se.headerSlots[slot].Load(); cur != nil && cur.raw == staticHdrStr {
+		return cur, reqID
+	}
+	headers, pairs := parseHeaders(staticHdrStr)
 	var mdPairs []string
 	hasTrace := false
 	if len(pairs) >= 2 {
@@ -207,14 +270,18 @@ func (se *serviceEntry) resolveHeaders(hdrStr string) *cachedHeaderEntry {
 		outMD = metadata.Pairs(mdPairs...)
 	}
 	entry := &cachedHeaderEntry{
-		raw:            hdrStr,
+		raw:            staticHdrStr,
 		headers:        headers,
 		headerPairs:    pairs,
 		outgoingMD:     outMD,
 		hasTraceparent: hasTrace,
 	}
-	se.headerSlots[slot].CompareAndSwap(nil, entry)
-	se.headerOvfl.Store(hdrStr, entry)
+	se.headerSlots[slot].Store(entry)
+	return entry, reqID
+}
+
+func (se *serviceEntry) resolveHeaders(hdrStr string) *cachedHeaderEntry {
+	entry, _ := se.resolveHeadersAndRequestID(hdrStr)
 	return entry
 }
 
@@ -450,6 +517,7 @@ func SpannerCoreExecuteStreamingSqlAsync(
 	batchRowSize C.int,
 	cb C.SpannerBatchCallback,
 	userData unsafe.Pointer,
+	abandonedFlag *C.int32_t,
 ) (streamID C.longlong) {
 	nonCancellable := (skipMetadata & 4) != 0
 	var id int64
@@ -480,9 +548,12 @@ func SpannerCoreExecuteStreamingSqlAsync(
 		rawReq = C.GoBytes(reqBytes, reqLen)
 	}
 
-	var hdrEntry *cachedHeaderEntry
+	var (
+		hdrEntry *cachedHeaderEntry
+		reqID    string
+	)
 	if headersJSON != nil {
-		hdrEntry = se.resolveHeaders(C.GoString(headersJSON))
+		hdrEntry, reqID = se.resolveHeadersAndRequestID(C.GoString(headersJSON))
 	}
 
 	var rKey string
@@ -490,14 +561,8 @@ func SpannerCoreExecuteStreamingSqlAsync(
 		rKey = C.GoString(routingKey)
 	}
 
-	var (
-		ctx    context.Context
-		cancel context.CancelFunc
-	)
-	if nonCancellable {
-		ctx = context.Background()
-	} else {
-		ctx, cancel = context.WithCancel(context.Background())
+	ctx, cancel := context.WithCancel(context.Background())
+	if !nonCancellable {
 		entry := &streamEntry{
 			se:     se,
 			cancel: cancel,
@@ -506,15 +571,19 @@ func SpannerCoreExecuteStreamingSqlAsync(
 	}
 
 	req := sharedcore.StreamRequest{
-		RoutingKey:        rKey,
-		RequestBytes:      rawReq,
-		SkipMetadata:      (skipMetadata & 1) != 0,
-		SkipReadTimestamp: (skipMetadata & 2) != 0,
-		SkipTelemetry:     true,
-		ReuseArenaBuffers: true,
-		TimeoutMs:         int64(timeoutMs),
-		HasTimeout:        timeoutMs > 0,
-		BatchRowSize:      int(batchRowSize),
+		RoutingKey:              rKey,
+		RequestID:               reqID,
+		RequestBytes:            rawReq,
+		SkipMetadata:            (skipMetadata & 1) != 0,
+		SkipReadTimestamp:       (skipMetadata & 2) != 0,
+		SkipTelemetry:           (skipMetadata & 8) == 0,
+		ExpectedSchemaHash:      uint32(skipMetadata) >> 8,
+		FlushOnChunkBoundary:    !nonCancellable,
+		MaxUncheckpointedChunks: 10,
+		ReuseArenaBuffers:       true,
+		TimeoutMs:               int64(timeoutMs),
+		HasTimeout:              timeoutMs != 0,
+		BatchRowSize:            int(batchRowSize),
 	}
 	if hdrEntry != nil {
 		req.Metadata = hdrEntry.headers
@@ -529,8 +598,8 @@ func SpannerCoreExecuteStreamingSqlAsync(
 		defer func() {
 			if !nonCancellable {
 				streams.Delete(id)
-				cancel()
 			}
+			cancel()
 			if r := recover(); r != nil {
 				errBatch := allocBatch()
 				populateErrorBatch(errBatch, status.Errorf(codes.Internal, "panic in ExecuteStreamingSQL goroutine: %v", r))
@@ -541,6 +610,10 @@ func SpannerCoreExecuteStreamingSqlAsync(
 		var sentEOF bool
 
 		tel, err := se.svc.ExecuteStreamingSQL(ctx, req, func(sb sharedcore.StreamBatch) error {
+			if abandonedFlag != nil && atomic.LoadInt32((*int32)(unsafe.Pointer(abandonedFlag))) != 0 {
+				cancel()
+				return context.Canceled
+			}
 			if ctx.Err() != nil {
 				return ctx.Err()
 			}
@@ -553,6 +626,10 @@ func SpannerCoreExecuteStreamingSqlAsync(
 				sentEOF = true
 			}
 			C.invoke_batch_callback(cb, userData, cBatch)
+			if abandonedFlag != nil && atomic.LoadInt32((*int32)(unsafe.Pointer(abandonedFlag))) != 0 {
+				cancel()
+				return context.Canceled
+			}
 			return nil
 		})
 
@@ -614,11 +691,11 @@ func SpannerCoreExecuteStreamingSql(
 	}
 
 	var (
-		headers     map[string]string
-		headerPairs []string
+		hdrEntry *cachedHeaderEntry
+		reqID    string
 	)
 	if headersJSON != nil {
-		headers, headerPairs = parseHeaders(C.GoString(headersJSON))
+		hdrEntry, reqID = se.resolveHeadersAndRequestID(C.GoString(headersJSON))
 	}
 
 	var rKey string
@@ -636,15 +713,26 @@ func SpannerCoreExecuteStreamingSql(
 	streams.Store(id, entry)
 
 	req := sharedcore.StreamRequest{
-		RoutingKey:        rKey,
-		Metadata:          headers,
-		MetadataPairs:     headerPairs,
-		RequestBytes:      rawReq,
-		SkipMetadata:      (skipMetadata & 1) != 0,
-		SkipReadTimestamp: (skipMetadata & 2) != 0,
-		TimeoutMs:         int64(timeoutMs),
-		HasTimeout:        timeoutMs > 0,
-		BatchRowSize:      int(batchRowSize),
+		RoutingKey:              rKey,
+		RequestID:               reqID,
+		RequestBytes:            rawReq,
+		SkipMetadata:            (skipMetadata & 1) != 0,
+		SkipReadTimestamp:       (skipMetadata & 2) != 0,
+		SkipTelemetry:           (skipMetadata & 8) == 0,
+		ExpectedSchemaHash:      uint32(skipMetadata) >> 8,
+		FlushOnChunkBoundary:    (skipMetadata & 4) == 0,
+		MaxUncheckpointedChunks: 10,
+		TimeoutMs:               int64(timeoutMs),
+		HasTimeout:              timeoutMs != 0,
+		BatchRowSize:            int(batchRowSize),
+	}
+	if hdrEntry != nil {
+		req.Metadata = hdrEntry.headers
+		req.MetadataPairs = hdrEntry.headerPairs
+		req.OutgoingMD = hdrEntry.outgoingMD
+		req.SkipTraceContext = !hdrEntry.hasTraceparent
+	} else {
+		req.SkipTraceContext = true
 	}
 
 	go func() {
@@ -658,8 +746,12 @@ func SpannerCoreExecuteStreamingSql(
 			close(ch)
 		}()
 
+		var sentEOF bool
 		tel, err := se.svc.ExecuteStreamingSQL(ctx, req, func(sb sharedcore.StreamBatch) error {
 			sbCopy := sb
+			if sbCopy.IsLast {
+				sentEOF = true
+			}
 			select {
 			case ch <- batchMsg{batch: &sbCopy}:
 				return nil
@@ -674,9 +766,11 @@ func SpannerCoreExecuteStreamingSql(
 			}
 			return
 		}
-		select {
-		case ch <- batchMsg{tel: &tel, eof: true}:
-		case <-ctx.Done():
+		if !sentEOF {
+			select {
+			case ch <- batchMsg{tel: &tel, eof: true}:
+			case <-ctx.Done():
+			}
 		}
 	}()
 
@@ -732,6 +826,12 @@ func SpannerCoreNextBatch(streamHandle C.longlong) (batch *C.CSpannerBatch) {
 	}
 
 	populateSuccessBatch(batch, msg.batch)
+	if msg.batch != nil && msg.batch.IsLast {
+		streams.Delete(int64(streamHandle))
+		entry.close()
+		populateTelemetry(batch, &msg.batch.Telemetry)
+		batch.status = 1 // EOF
+	}
 	return batch
 }
 
@@ -774,6 +874,15 @@ func FreeSpannerBatch(batch *C.CSpannerBatch) {
 	if batch.logs_json != nil {
 		C.free(unsafe.Pointer(batch.logs_json))
 	}
+	if batch.request_id != nil {
+		C.free(unsafe.Pointer(batch.request_id))
+	}
+	if batch.status_pb != nil {
+		C.free(unsafe.Pointer(batch.status_pb))
+	}
+	if batch.trailers_json != nil {
+		C.free(unsafe.Pointer(batch.trailers_json))
+	}
 	C.free(unsafe.Pointer(batch))
 }
 
@@ -791,6 +900,15 @@ func populateTelemetry(batch *C.CSpannerBatch, tel *sharedcore.StreamTelemetry) 
 	if tel.DirectPathUsed {
 		batch.direct_path_used = 1
 	}
+	if tel.RequestID != "" && batch.request_id == nil {
+		batch.request_id = C.CString(tel.RequestID)
+	}
+	if len(tel.ErrorTrailers) > 0 && batch.trailers_json == nil {
+		if b, err := json.Marshal(tel.ErrorTrailers); err == nil && len(b) > 0 {
+			batch.trailers_json = (*C.char)(C.CBytes(b))
+			batch.trailers_len = C.int32_t(len(b))
+		}
+	}
 }
 
 func populateErrorBatch(batch *C.CSpannerBatch, err error) {
@@ -805,25 +923,58 @@ func populateErrorBatch(batch *C.CSpannerBatch, err error) {
 		batch.retry_info_pb = (*C.uint8_t)(C.CBytes(retryPB))
 		batch.retry_info_len = C.int32_t(len(retryPB))
 	}
+	if statusPB := extractStatusProtoBytes(err); len(statusPB) > 0 {
+		batch.status_pb = (*C.uint8_t)(C.CBytes(statusPB))
+		batch.status_len = C.int32_t(len(statusPB))
+	}
 }
 
 // extractCleanErrorMessage unwraps *spanner.Error or gRPC status so Node.js
-// receives the canonical gRPC error description without a "spanner: code = ..." prefix.
+// receives the canonical gRPC error description without a "spanner: code = ..." prefix
+// or Go commit-specific suffixes.
 func extractCleanErrorMessage(err error) string {
-	var spErr *spanner.Error
-	if errors.As(err, &spErr) && spErr.Desc != "" {
-		return spErr.Desc
-	}
+	var msg string
 	for u := err; u != nil; u = errors.Unwrap(u) {
 		if st, ok := status.FromError(u); ok && st.Message() != "" {
-			return st.Message()
+			msg = st.Message()
+			break
 		}
 	}
-	msg := err.Error()
-	if idx := strings.Index(msg, `, desc = "`); idx != -1 && strings.HasSuffix(msg, `"`) {
-		return msg[idx+len(`, desc = "`):len(msg)-1]
+	if msg == "" {
+		var spErr *spanner.Error
+		if errors.As(err, &spErr) && spErr.Desc != "" {
+			msg = spErr.Desc
+		}
+	}
+	if msg == "" {
+		msg = err.Error()
+		if idx := strings.Index(msg, `, desc = "`); idx != -1 && strings.HasSuffix(msg, `"`) {
+			msg = msg[idx+len(`, desc = "`):len(msg)-1]
+		}
+	}
+	msg = strings.TrimSuffix(msg, ", transaction outcome unknown")
+	if idx := strings.Index(msg, "rpc error: code = "); idx != -1 {
+		if dIdx := strings.Index(msg[idx:], " desc = "); dIdx != -1 {
+			msg = msg[idx+dIdx+len(" desc = "):]
+		}
+	}
+	if msg == "context deadline exceeded" {
+		msg = "Deadline exceeded"
 	}
 	return msg
+}
+
+func extractStatusProtoBytes(err error) []byte {
+	for u := err; u != nil; u = errors.Unwrap(u) {
+		if st, ok := status.FromError(u); ok {
+			if p := st.Proto(); p != nil && len(p.Details) > 0 {
+				if b, mErr := proto.Marshal(p); mErr == nil {
+					return b
+				}
+			}
+		}
+	}
+	return nil
 }
 
 // extractRetryInfoBytes walks the error unwrap chain to find any attached
@@ -858,6 +1009,7 @@ func attachLogsToBatch(batch *C.CSpannerBatch, logs []logRecord) {
 
 func populateSuccessBatch(batch *C.CSpannerBatch, sb *sharedcore.StreamBatch) {
 	batch.status = 0
+	batch.schema_hash = C.uint32_t(sb.SchemaHash)
 
 	if sb.HasReadTimestamp {
 		batch.has_read_timestamp = 1
