@@ -21,7 +21,7 @@ export interface LogPayload {
   'http.response.status_code'?: number;
   'error.type'?: string;
   'gcp.errors.domain'?: string;
-  [key: `gcp.errors.metadata.${string}`]: string;
+  [key: `gcp.errors.metadata.${string}`]: string | undefined;
   'gcp.client.repo'?: string;
   'gcp.client.artifact'?: string;
   'gcp.client.version'?: string;
