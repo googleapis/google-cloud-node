@@ -960,16 +960,6 @@ export function createQueryArrowStream_(
       return;
     }
 
-    if (queryObj.writeDisposition === 'WRITE_APPEND') {
-      stream.destroy(
-        new Error(
-          'WRITE_APPEND is not supported with Arrow query results because reading ' +
-            'the destination table via the Storage Read API would include pre-existing rows.',
-        ),
-      );
-      return;
-    }
-
     let arrowSerializationOptions: ArrowSerializationOptions;
     try {
       arrowSerializationOptions = resolveArrowSerializationOptions(
