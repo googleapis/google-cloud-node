@@ -988,6 +988,22 @@ describe('BigQuery', () => {
       const timestamp = bq.timestamp(INPUT_PRECISE_DATE);
       assert.strictEqual(timestamp.value, EXPECTED_VALUE_MICROS);
     });
+
+    it('should preserve nanoseconds when microseconds are 0', () => {
+      const inputNanosWithZeroMicros = '2016-12-06T12:00:00.123000789Z';
+      const preciseDate = new PreciseDate(inputNanosWithZeroMicros);
+      assert.strictEqual(preciseDate.getMicroseconds(), 0);
+      assert.strictEqual(preciseDate.getNanoseconds(), 789);
+
+      const timestampFromPreciseDate = bq.timestamp(preciseDate);
+      assert.strictEqual(
+        timestampFromPreciseDate.value,
+        inputNanosWithZeroMicros,
+      );
+
+      const timestampFromString = bq.timestamp(inputNanosWithZeroMicros);
+      assert.strictEqual(timestampFromString.value, inputNanosWithZeroMicros);
+    });
   });
 
   describe('range', () => {

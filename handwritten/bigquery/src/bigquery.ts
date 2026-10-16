@@ -2903,8 +2903,8 @@ export class BigQueryTimestamp {
       pd = this.fromFloatValue_(value);
     }
     // to keep backward compatibility, only converts with microsecond
-    // precision if needed.
-    if (pd.getMicroseconds() > 0) {
+    // or nanosecond precision if needed.
+    if (pd.getMicroseconds() > 0 || pd.getNanoseconds() > 0) {
       this.value = pd.toISOString();
     } else {
       this.value = new Date(pd.getTime()).toJSON();
