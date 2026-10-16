@@ -107,8 +107,14 @@ import {
   InternalDefineStageOptions,
   InternalSubcollectionStageOptions,
   UpdateStage,
+  InternalUpdateStageOptions,
   Search,
   InternalSearchStageOptions,
+  InsertStage,
+  InternalInsertStageOptions,
+  UpsertStage,
+  LiteralsSource,
+  InternalLiteralsStageOptions,
 } from './stage';
 import {StructuredPipeline} from './structured-pipeline';
 import Selectable = FirebaseFirestore.Pipelines.Selectable;
@@ -125,6 +131,30 @@ import {
  */
 export class PipelineSource implements firestore.Pipelines.PipelineSource {
   constructor(private db: Firestore) {}
+
+  /**
+   * Set the pipeline's source to the in-memory documents specified by the given records.
+   *
+   * @param documents An array of objects/records specifying the in-memory documents.
+   */
+  literals(documents: Array<Record<string, unknown>>): Pipeline;
+  /**
+   * Set the pipeline's source to the in-memory documents specified by the given records.
+   *
+   * @param options Options defining how this LiteralsSource stage is evaluated.
+   */
+  literals(options: firestore.Pipelines.LiteralsStageOptions): Pipeline;
+  literals(
+    documentsOrOptions:
+      Array<Record<string, unknown>> | firestore.Pipelines.LiteralsStageOptions,
+  ): Pipeline {
+    const options: InternalLiteralsStageOptions = Array.isArray(
+      documentsOrOptions,
+    )
+      ? {documents: documentsOrOptions}
+      : documentsOrOptions;
+    return new Pipeline(this.db, [new LiteralsSource(options)]);
+  }
 
   /**
    * Returns all documents from the entire collection. The collection can be nested.
@@ -1735,7 +1765,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
    * Performs a delete operation on documents from previous stages.
    *
    * @example
@@ -1747,27 +1776,164 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    *
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
-  delete(): Pipeline {
-    return this._addStage(new DeleteStage());
+  delete(): Pipeline;
+  /**
+   * Performs a delete operation on documents from previous stages.
+   *
+   * @param options - Options defining how this Delete stage is evaluated.
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  delete(options: firestore.Pipelines.DeleteStageOptions): Pipeline;
+  delete(options?: firestore.Pipelines.DeleteStageOptions): Pipeline {
+    return this._addStage(new DeleteStage(options ?? {}));
   }
 
   /**
-   * @beta
    * Performs an update operation using documents from previous stages.
+   *
+   * Each input document is updated at the path in its `__name__` field.
+   * See `UpdateStageOptions` for details.
    *
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
   update(): Pipeline;
   /**
-   * @beta
    * Performs an update operation using documents from previous stages.
+   *
+   * Each input document is updated at the path in its `__name__` field.
+   * See `UpdateStageOptions` for details.
+   *
+   * @param transformedField - The first field transformation to apply.
+   * @param additionalFields - Additional field transformations to apply.
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  update(
+    transformedField: AliasedExpression,
+    ...additionalFields: AliasedExpression[]
+  ): Pipeline;
+  /**
+   * Performs an update operation using documents from previous stages.
+   *
+   * Each input document is updated at the path in its `__name__` field.
+   * See `UpdateStageOptions` for details.
    *
    * @param transformedFields - The list of transformations to apply.
    * @return A new {@code Pipeline} object with this stage appended to the stage list.
    */
   update(transformedFields: AliasedExpression[]): Pipeline;
-  update(transformedFields?: AliasedExpression[]): Pipeline {
-    return this._addStage(new UpdateStage(transformedFields));
+  /**
+   * Performs an update operation using documents from previous stages.
+   *
+   * Each input document is updated at the path in its `__name__` field.
+   * See `UpdateStageOptions` for details.
+   *
+   * @param options - Options defining how this Update stage is evaluated.
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  update(options: firestore.Pipelines.UpdateStageOptions): Pipeline;
+  update(
+    transformedFieldOrOptions?:
+      | AliasedExpression
+      | AliasedExpression[]
+      | firestore.Pipelines.UpdateStageOptions,
+    ...additionalFields: AliasedExpression[]
+  ): Pipeline {
+    let options: firestore.Pipelines.UpdateStageOptions;
+    if (isAliasedExpr(transformedFieldOrOptions)) {
+      options = {
+        transformedFields: [transformedFieldOrOptions, ...additionalFields],
+      };
+    } else if (Array.isArray(transformedFieldOrOptions)) {
+      options = {transformedFields: transformedFieldOrOptions};
+    } else {
+      options = transformedFieldOrOptions ?? {};
+    }
+
+    const {transformedFields, ...rest} = options;
+    const internalOptions: InternalUpdateStageOptions = {
+      ...rest,
+      ...(transformedFields
+        ? {
+            transformedFields: selectablesToMap(
+              transformedFields as AliasedExpression[],
+            ),
+          }
+        : {}),
+    };
+    return this._addStage(new UpdateStage(internalOptions));
+  }
+
+  /**
+   * Performs an insert operation on documents from previous stages.
+   *
+   * The operation fails if a target document already exists. See
+   * `InsertStageOptions` for how the target document is determined.
+   *
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  insert(): Pipeline;
+  /**
+   * Performs an insert operation on documents from previous stages.
+   *
+   * The operation fails if a target document already exists. See
+   * `InsertStageOptions` for how the target document is determined.
+   *
+   * @param options - Options defining how this Insert stage is evaluated.
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  insert(options: firestore.Pipelines.InsertStageOptions): Pipeline;
+  insert(options?: firestore.Pipelines.InsertStageOptions): Pipeline {
+    return this._addStage(
+      new InsertStage((options ?? {}) as InternalInsertStageOptions),
+    );
+  }
+
+  /**
+   * Performs an upsert operation on documents from previous stages.
+   *
+   * See `UpsertStageOptions` for how the target document is
+   * determined.
+   *
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  upsert(): Pipeline;
+  /**
+   * Performs an upsert operation on documents from previous stages.
+   *
+   * See `UpsertStageOptions` for how the target document is
+   * determined.
+   *
+   * @param additionalField - The first additional field to apply on upsert.
+   * @param additionalFields - Additional fields to apply on upsert.
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  upsert(
+    additionalField: AliasedExpression,
+    ...additionalFields: AliasedExpression[]
+  ): Pipeline;
+  /**
+   * Performs an upsert operation on documents from previous stages.
+   *
+   * See `UpsertStageOptions` for how the target document is
+   * determined.
+   *
+   * @param options - Options defining how this Upsert stage is evaluated.
+   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   */
+  upsert(options: firestore.Pipelines.UpsertStageOptions): Pipeline;
+  upsert(
+    additionalFieldOrOptions?:
+      AliasedExpression | firestore.Pipelines.UpsertStageOptions,
+    ...additionalFields: AliasedExpression[]
+  ): Pipeline {
+    if (isAliasedExpr(additionalFieldOrOptions)) {
+      return this._addStage(
+        new UpsertStage({
+          additionalFields: [additionalFieldOrOptions, ...additionalFields],
+        }),
+      );
+    }
+    return this._addStage(new UpsertStage(additionalFieldOrOptions ?? {}));
   }
 
   /**

@@ -465,6 +465,480 @@ describe.skipClassic('Pipeline class', () => {
         const res = await promise;
         expectResults(res, {documents_modified: 0});
       });
+
+      it('update skips input documents whose target does not exist', async () => {
+        const res = await firestore
+          .pipeline()
+          .literals([
+            {__name__: dmlCol.doc('book1'), status: 'Updated'},
+            {__name__: dmlCol.doc('missing_update_target'), status: 'Updated'},
+          ])
+          .update()
+          .execute();
+
+        expectResults(res, {documents_modified: 1});
+        const existing = await dmlCol.doc('book1').get();
+        expect(existing.get('status')).to.equal('Updated');
+        const missing = await dmlCol.doc('missing_update_target').get();
+        expect(missing.exists).to.be.false;
+      });
+
+      it('atomic update fails when a target document does not exist', async () => {
+        const promise = firestore
+          .pipeline()
+          .literals([
+            {__name__: dmlCol.doc('book1'), status: 'Updated'},
+            {__name__: dmlCol.doc('missing_update_target'), status: 'Updated'},
+          ])
+          .update()
+          .execute({atomic: true});
+
+        await expect(promise).to.be.rejectedWith(/No document to update/);
+        const existing = await dmlCol.doc('book1').get();
+        expect(existing.get('status')).to.be.undefined;
+        const missing = await dmlCol.doc('missing_update_target').get();
+        expect(missing.exists).to.be.false;
+      });
+
+      it('can execute insert stage', async () => {
+        const newDocId = 'newBook_insert_1';
+        const res = await firestore
+          .pipeline()
+          .literals([{title: 'New Book', author: 'Author 1'}])
+          .insert({
+            collection: dmlCol.path,
+            documentIdExpression: constant(newDocId),
+          })
+          .execute();
+
+        expectResults(res, {documents_modified: 1});
+
+        const snap = await dmlCol.doc(newDocId).get();
+        expect(snap.exists).to.be.true;
+        expect(snap.get('title')).to.equal('New Book');
+      });
+
+      it('can execute upsert stage with additionalFields', async () => {
+        const upsertDocId = 'upsertBook_1';
+        const res = await firestore
+          .pipeline()
+          .literals([{title: 'Upserted Book', count: 1}])
+          .upsert({
+            collection: dmlCol.path,
+            documentIdExpression: constant(upsertDocId),
+            additionalFields: [add(field('count'), constant(1)).as('count')],
+          })
+          .execute({atomic: true});
+
+        expectResults(res, {documents_modified: 1});
+
+        const snap = await dmlCol.doc(upsertDocId).get();
+        expect(snap.exists).to.be.true;
+        expect(snap.get('title')).to.equal('Upserted Book');
+      });
+
+      it('can execute DML with atomic option', async () => {
+        const atomicDocId = 'atomicBook_1';
+        const res = await firestore
+          .pipeline()
+          .literals([{title: 'Atomic Book'}])
+          .insert({
+            collection: dmlCol.path,
+            documentIdExpression: constant(atomicDocId),
+          })
+          .execute({atomic: true});
+
+        expectResults(res, {documents_modified: 1});
+
+        const snap = await dmlCol.doc(atomicDocId).get();
+        expect(snap.exists).to.be.true;
+      });
+
+      it('can execute insert/upsert stages inside transaction runner', async () => {
+        const txDocId = 'txBook_1';
+        await firestore.runTransaction(async transaction => {
+          const insertPpl = firestore
+            .pipeline()
+            .literals([{title: 'Tx Book'}])
+            .insert({
+              collection: dmlCol.path,
+              documentIdExpression: constant(txDocId),
+            });
+
+          const res = await transaction.execute(insertPpl);
+          expectResults(res, {documents_modified: 1});
+        });
+
+        const snap = await dmlCol.doc(txDocId).get();
+        expect(snap.exists).to.be.true;
+        expect(snap.get('title')).to.equal('Tx Book');
+      });
+
+      it('can delete a single document', async () => {
+        const deletePpl = firestore
+          .pipeline()
+          .documents([dmlCol.doc('book2')])
+          .delete();
+
+        const deleteRes = await deletePpl.execute();
+        expectResults(deleteRes, {documents_modified: 1});
+
+        const docSnap2 = await dmlCol.doc('book2').get();
+        expect(docSnap2.exists).to.be.false;
+
+        const docSnap1 = await dmlCol.doc('book1').get();
+        expect(docSnap1.exists).to.be.true;
+      });
+
+      it('can delete a non-existing document without error', async () => {
+        const nonExistingId = 'nonExistingId_999';
+        const deleteRes = await firestore
+          .pipeline()
+          .documents([dmlCol.doc(nonExistingId)])
+          .delete()
+          .execute();
+        expectResults(deleteRes, {documents_modified: 0});
+      });
+
+      it('can delete documents with atomic: true', async () => {
+        const deleteRes = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .delete()
+          .execute({atomic: true});
+        expectResults(deleteRes, {documents_modified: 1});
+
+        const docSnap1 = await dmlCol.doc('book1').get();
+        expect(docSnap1.exists).to.be.false;
+      });
+
+      it('can delete documents with atomic: false', async () => {
+        const deleteRes = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book3'))
+          .delete()
+          .execute({atomic: false});
+        expectResults(deleteRes, {documents_modified: 1});
+
+        const docSnap3 = await dmlCol.doc('book3').get();
+        expect(docSnap3.exists).to.be.false;
+      });
+
+      it('can update documents with a single vararg expression', async () => {
+        const res = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .update(constant('UpdatedVariadic').as('status'))
+          .execute();
+        expectResults(res, {documents_modified: 1});
+
+        const docSnap = await dmlCol.doc('book1').get();
+        expect(docSnap.get('status')).to.equal('UpdatedVariadic');
+      });
+
+      it('can update documents with multiple vararg expressions', async () => {
+        const res = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .update(
+            constant('UpdatedMulti').as('status'),
+            constant(99).as('newField'),
+          )
+          .execute();
+        expectResults(res, {documents_modified: 1});
+
+        const docSnap = await dmlCol.doc('book1').get();
+        expect(docSnap.get('status')).to.equal('UpdatedMulti');
+        expect(docSnap.get('newField')).to.equal(99);
+      });
+
+      it('can update documents atomically', async () => {
+        const res = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .update([constant('AtomicUpdate').as('status')])
+          .execute({atomic: true});
+        expectResults(res, {documents_modified: 1});
+
+        const docSnap = await dmlCol.doc('book1').get();
+        expect(docSnap.get('status')).to.equal('AtomicUpdate');
+      });
+
+      it('can execute update stage within a transaction', async () => {
+        await firestore.runTransaction(async transaction => {
+          const updatePpl = firestore
+            .pipeline()
+            .collection(dmlCol.path)
+            .where(equal(field('__name__').documentId(), 'book2'))
+            .update([constant('TxUpdated').as('status')]);
+
+          const res = await transaction.execute(updatePpl);
+          expectResults(res, {documents_modified: 1});
+        });
+
+        const docSnap = await dmlCol.doc('book2').get();
+        expect(docSnap.get('status')).to.equal('TxUpdated');
+      });
+
+      it('can insert a new document with auto-generated ID', async () => {
+        const res = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .removeFields('__name__')
+          .insert({collection: dmlCol.path})
+          .execute({atomic: true});
+        expectResults(res, {documents_modified: 1});
+
+        const snap = await dmlCol.get();
+        expect(snap.size).to.equal(11);
+      });
+
+      it('insert fails if document already exists', async () => {
+        let error: Error | undefined;
+        try {
+          await firestore
+            .pipeline()
+            .literals([{title: 'Duplicate Book'}])
+            .insert({
+              collection: dmlCol.path,
+              documentIdExpression: constant('book1'),
+            })
+            .execute({atomic: true});
+        } catch (e) {
+          error = e as Error;
+        }
+        expect(error).to.exist;
+      });
+
+      it('can insert into a different collection', async () => {
+        const targetCol = getTestRoot();
+        const res = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .removeFields('__name__')
+          .insert({collection: targetCol.path})
+          .execute({atomic: true});
+        expectResults(res, {documents_modified: 1});
+
+        const snap = await targetCol.get();
+        expect(snap.size).to.equal(1);
+        expect(snap.docs[0].get('title')).to.equal(
+          "The Hitchhiker's Guide to the Galaxy",
+        );
+      });
+
+      it('can upsert (update) an existing document with varargs', async () => {
+        const res = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .upsert(
+            constant('Comedy Sci-Fi').as('genre'),
+            add(field('rating'), constant(0.5)).as('rating'),
+          )
+          .execute({atomic: true});
+        expectResults(res, {documents_modified: 1});
+
+        const docSnap = await dmlCol.doc('book1').get();
+        expect(docSnap.get('genre')).to.equal('Comedy Sci-Fi');
+        expect(docSnap.get('rating')).to.equal(4.7);
+      });
+
+      it('can upsert (update) an existing document with additionalFields option', async () => {
+        const res = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .upsert({
+            additionalFields: [
+              constant('Updated Genre List').as('genre'),
+              constant(5.0).as('rating'),
+            ],
+          })
+          .execute({atomic: true});
+        expectResults(res, {documents_modified: 1});
+
+        const docSnap = await dmlCol.doc('book1').get();
+        expect(docSnap.get('genre')).to.equal('Updated Genre List');
+        expect(docSnap.get('rating')).to.equal(5.0);
+      });
+
+      it('can upsert into a different collection with additionalFields', async () => {
+        const targetCol = getTestRoot();
+        const res = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .upsert({
+            collection: targetCol.path,
+            documentIdExpression: constant('target_doc_1'),
+            additionalFields: [
+              constant('Target Upsert Title').as('title'),
+              constant('Target Genre').as('genre'),
+            ],
+          })
+          .execute({atomic: true});
+        expectResults(res, {documents_modified: 1});
+
+        const docSnap = await targetCol.doc('target_doc_1').get();
+        expect(docSnap.exists).to.be.true;
+        expect(docSnap.get('title')).to.equal('Target Upsert Title');
+        expect(docSnap.get('genre')).to.equal('Target Genre');
+      });
+
+      it('can upsert into a different collection without additionalFields', async () => {
+        const targetCol = getTestRoot();
+        const res = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .upsert({
+            collection: targetCol.path,
+            documentIdExpression: constant('target_doc_2'),
+          })
+          .execute({atomic: true});
+        expectResults(res, {documents_modified: 1});
+
+        const docSnap = await targetCol.doc('target_doc_2').get();
+        expect(docSnap.exists).to.be.true;
+        expect(docSnap.get('title')).to.equal(
+          "The Hitchhiker's Guide to the Galaxy",
+        );
+      });
+
+      it('can execute upsert stage within a transaction', async () => {
+        const txDocId = 'txUpsertBook_1';
+        await firestore.runTransaction(async transaction => {
+          const upsertPpl = firestore
+            .pipeline()
+            .literals([{title: 'Tx Upsert Book'}])
+            .upsert({
+              collection: dmlCol.path,
+              documentIdExpression: constant(txDocId),
+            });
+
+          const res = await transaction.execute(upsertPpl);
+          expectResults(res, {documents_modified: 1});
+        });
+
+        const snap = await dmlCol.doc(txDocId).get();
+        expect(snap.exists).to.be.true;
+        expect(snap.get('title')).to.equal('Tx Upsert Book');
+      });
+
+      it('treats a string documentIdExpression as a field name', async () => {
+        const targetCol = getTestRoot();
+        const res = await firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .addFields(constant('id_from_field').as('customId'))
+          .insert({
+            collection: targetCol.path,
+            documentIdExpression: 'customId',
+          })
+          .execute({atomic: true});
+        expectResults(res, {documents_modified: 1});
+
+        const docSnap = await targetCol.doc('id_from_field').get();
+        expect(docSnap.exists).to.be.true;
+        expect(docSnap.get('title')).to.equal(
+          "The Hitchhiker's Guide to the Galaxy",
+        );
+        // A literal document ID 'customId' is not used.
+        expect((await targetCol.doc('customId').get()).exists).to.be.false;
+      });
+
+      it('upsert with documentIdExpression requires a collection', async () => {
+        let error: Error | undefined;
+        try {
+          await firestore
+            .pipeline()
+            .collection(dmlCol.path)
+            .upsert({documentIdExpression: constant('some_id')})
+            .execute({atomic: true});
+        } catch (e) {
+          error = e as Error;
+        }
+        expect(error?.message).to.contain(
+          "The 'upsert(...)' stage must specify a collection when a document id is provided.",
+        );
+      });
+
+      it('can execute pipeline with literals stage', async () => {
+        const res = await firestore
+          .pipeline()
+          .literals([
+            {name: 'Alice', score: 100},
+            {name: 'Bob', score: 200},
+          ])
+          .execute();
+        expect(res.results.length).to.equal(2);
+        expect(res.results[0].data()).to.deep.equal({
+          name: 'Alice',
+          score: 100,
+        });
+        expect(res.results[1].data()).to.deep.equal({name: 'Bob', score: 200});
+      });
+
+      it('can execute literals stage with expressions', async () => {
+        const res = await firestore
+          .pipeline()
+          .literals([
+            {
+              base: 10,
+              computed: add(constant(10), constant(25)),
+            },
+          ])
+          .execute();
+        expect(res.results.length).to.equal(1);
+        expect(res.results[0].data()).to.deep.equal({base: 10, computed: 35});
+      });
+
+      it('can execute literals stage with nested expressions', async () => {
+        const res = await firestore
+          .pipeline()
+          .literals([
+            {
+              nested: {sum: add(constant(1), constant(2)), label: 'x'},
+              arr: [1, add(constant(3), constant(4))],
+              deep: {a: {b: [{c: add(constant(5), constant(6))}]}},
+            },
+          ])
+          .execute();
+        expect(res.results.length).to.equal(1);
+        expect(res.results[0].data()).to.deep.equal({
+          nested: {sum: 3, label: 'x'},
+          arr: [1, 7],
+          deep: {a: {b: [{c: 11}]}},
+        });
+      });
+
+      it('can execute literals stage with nested constant values', async () => {
+        const res = await firestore
+          .pipeline()
+          .literals([
+            {
+              emptyMap: {},
+              emptyArr: [],
+              nested: {a: 1, b: [true, null, 'str'], c: {d: 2.5}},
+            },
+          ])
+          .execute();
+        expect(res.results.length).to.equal(1);
+        expect(res.results[0].data()).to.deep.equal({
+          emptyMap: {},
+          emptyArr: [],
+          nested: {a: 1, b: [true, null, 'str'], c: {d: 2.5}},
+        });
+      });
     });
 
     it('empty snapshot as expected', async () => {
