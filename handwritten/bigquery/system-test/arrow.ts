@@ -790,4 +790,56 @@ describe('Arrow Query Results', () => {
       );
     }
   });
+
+  it('should enforce maxResults within the inline jobs.query page, across multi-page streams/_default results, and past the last row', async () => {
+    const totalRows = 15000;
+    const sql = `SELECT id, REPEAT('m', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`;
+
+    // 1. maxResults satisfied within the inline jobs.query page. jobs.query
+    // returns no rows inline when the whole result is over 512 KiB, so use a
+    // small result here.
+    const inlineBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query:
+          'SELECT id FROM UNNEST(GENERATE_ARRAY(1, 100)) AS id ORDER BY id',
+        useQueryCache: false,
+        maxResults: 10,
+      })
+      .toArray();
+    const inlineTable = new arrow.Table(inlineBatches);
+    assert.strictEqual(inlineTable.numRows, 10);
+    assert.strictEqual(Number(inlineTable.getChild('id')!.get(0)), 1);
+    assert.strictEqual(Number(inlineTable.getChild('id')!.get(9)), 10);
+
+    // 2. maxResults across a multi-page streams/_default result.
+    const streamLimit = 12000;
+    const multiBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: sql,
+        useQueryCache: false,
+        maxResults: streamLimit,
+      })
+      .toArray();
+    assert.ok(
+      multiBatches.length >= 2,
+      `Expected >= 2 batches for maxResults = ${streamLimit}, got ${multiBatches.length}`,
+    );
+    const multiTable = new arrow.Table(multiBatches);
+    assert.strictEqual(multiTable.numRows, streamLimit);
+    assert.strictEqual(Number(multiTable.getChild('id')!.get(0)), 1);
+    assert.strictEqual(
+      Number(multiTable.getChild('id')!.get(streamLimit - 1)),
+      streamLimit,
+    );
+
+    // 3. maxResults past the last row returns every row.
+    const allBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: sql,
+        useQueryCache: false,
+        maxResults: totalRows + 5000,
+      })
+      .toArray();
+    assert.strictEqual(new arrow.Table(allBatches).numRows, totalRows);
+  });
 });

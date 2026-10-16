@@ -411,6 +411,8 @@ export class BigQuery extends Service {
    *     Without a `destination` table, non-default precisions require an
    *     `@google-cloud/bigquery-storage` release that sends
    *     `arrowSerializationOptions` on `ReadRows`.
+   * @param {number} [options.maxResults] Maximum number of rows to read. With
+   *     `0`, the stream emits only the schema, as one 0-row `RecordBatch`.
    * @returns {ArrowRecordBatchStream} A stream of `RecordBatch` objects. The
    *     stream emits a `job` event with the {@link Job} when BigQuery creates
    *     a job, and sets `stream.queryId` and `stream.jobReference` (when
