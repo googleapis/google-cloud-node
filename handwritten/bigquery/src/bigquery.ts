@@ -919,6 +919,7 @@ export class BigQuery extends Service {
    *
    * @method BigQuery.timestamp
    * @param {Date|PreciseDate|string|number} value The time.
+   * @returns {BigQueryTimestamp}
    *
    * @example
    * ```
@@ -926,7 +927,9 @@ export class BigQuery extends Service {
    * const timestamp = BigQuery.timestamp(new Date());
    * ```
    */
-  static timestamp(value: Date | PreciseDate | string | number) {
+  static timestamp(
+    value: Date | PreciseDate | string | number,
+  ): BigQueryTimestamp {
     return new BigQueryTimestamp(value);
   }
 
@@ -939,6 +942,7 @@ export class BigQuery extends Service {
    * When passing a `number` input, it should be epoch seconds in float representation.
    *
    * @param {Date|PreciseDate|string|number} value The time.
+   * @returns {BigQueryTimestamp}
    *
    * @example
    * ```
@@ -947,7 +951,7 @@ export class BigQuery extends Service {
    * const timestamp = bigquery.timestamp(new Date());
    * ```
    */
-  timestamp(value: Date | PreciseDate | string | number) {
+  timestamp(value: Date | PreciseDate | string | number): BigQueryTimestamp {
     return BigQuery.timestamp(value);
   }
 

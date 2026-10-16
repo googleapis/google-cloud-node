@@ -1004,19 +1004,51 @@ describe('BigQuery', () => {
         INPUT_PRECISE_DATE_NANOS_ZERO_MICROS.getNanoseconds(),
         789,
       );
+      assert.strictEqual(
+        EXPECTED_VALUE_NANOS_ZERO_MICROS,
+        INPUT_STRING_NANOS_ZERO_MICROS,
+      );
 
       const timestampFromPreciseDate = bq.timestamp(
         INPUT_PRECISE_DATE_NANOS_ZERO_MICROS,
       );
       assert.strictEqual(
         timestampFromPreciseDate.value,
-        EXPECTED_VALUE_NANOS_ZERO_MICROS,
+        INPUT_STRING_NANOS_ZERO_MICROS,
+      );
+
+      const staticTimestampFromPreciseDate = BigQuery.timestamp(
+        INPUT_PRECISE_DATE_NANOS_ZERO_MICROS,
+      );
+      assert.strictEqual(
+        staticTimestampFromPreciseDate.value,
+        INPUT_STRING_NANOS_ZERO_MICROS,
       );
 
       const timestampFromString = bq.timestamp(INPUT_STRING_NANOS_ZERO_MICROS);
       assert.strictEqual(
         timestampFromString.value,
-        EXPECTED_VALUE_NANOS_ZERO_MICROS,
+        INPUT_STRING_NANOS_ZERO_MICROS,
+      );
+
+      const zeroMillisAndMicros = '2016-12-06T12:00:00.000000789Z';
+      assert.strictEqual(
+        bq.timestamp(new PreciseDate(zeroMillisAndMicros)).value,
+        zeroMillisAndMicros,
+      );
+
+      const preEpochZeroMicros = '1969-12-25T00:00:00.123000789Z';
+      assert.strictEqual(
+        bq.timestamp(new PreciseDate(preEpochZeroMicros)).value,
+        preEpochZeroMicros,
+      );
+
+      const queryParam = BigQuery.valueToQueryParameter_(
+        INPUT_PRECISE_DATE_NANOS_ZERO_MICROS,
+      );
+      assert.strictEqual(
+        queryParam.parameterValue?.value,
+        INPUT_STRING_NANOS_ZERO_MICROS,
       );
     });
   });
