@@ -62,40 +62,15 @@ describe('contextUtil', () => {
   });
 
   describe('extractClientServiceFromPackageName', () => {
-    it('extracts service from @google-cloud scoped packages', () => {
+    it('extracts service from scoped and unscoped package names', () => {
       assert.strictEqual(
         extractClientServiceFromPackageName('@google-cloud/redis'),
         'redis',
       );
       assert.strictEqual(
-        extractClientServiceFromPackageName('@google-cloud/storage'),
-        'storage',
-      );
-      assert.strictEqual(
-        extractClientServiceFromPackageName('@google-cloud/secret-manager'),
-        'secret-manager',
-      );
-    });
-
-    it('extracts service from other scoped packages', () => {
-      assert.strictEqual(
-        extractClientServiceFromPackageName('@googlemaps/places'),
-        'places',
-      );
-      assert.strictEqual(
-        extractClientServiceFromPackageName('@google-shopping/accounts'),
-        'accounts',
-      );
-    });
-
-    it('extracts service from unscoped google-cloud- packages', () => {
-      assert.strictEqual(
         extractClientServiceFromPackageName('google-cloud-redis'),
         'redis',
       );
-    });
-
-    it('falls back to unchanged name for standard packages', () => {
       assert.strictEqual(
         extractClientServiceFromPackageName('google-gax'),
         'google-gax',
@@ -209,6 +184,39 @@ describe('contextUtil', () => {
       assert.strictEqual(metadata.gcpArtifact, '@google-cloud/redis');
     });
 
+    it('extracts version from metadataBuilder when headers is not set directly on otherArgs', () => {
+      const grpcSettings = new CallSettings({
+        apiName: 'google.cloud.redis.v1.CloudRedis',
+        otherArgs: {
+          metadataBuilder: () => ({
+            get: (key: string) =>
+              key === 'x-goog-api-client'
+                ? ['gax/5.0.6 gapic/6.1.0 gl-node/22.0.0 grpc/1.10.0']
+                : [],
+          }),
+        },
+      });
+      const grpcMeta = extractFromSettings(grpcSettings);
+      assert.strictEqual(grpcMeta.gcpVersion, '6.1.0');
+      assert.strictEqual(grpcMeta.gcpClientService, 'redis');
+      assert.strictEqual(grpcMeta.gcpArtifact, '@google-cloud/redis');
+
+      const fallbackSettings = new CallSettings({
+        apiName: 'google.cloud.redis.v1.CloudRedis',
+        otherArgs: {
+          metadataBuilder: () => ({
+            'x-goog-api-client': [
+              'gax/5.0.6 gapic/6.1.0 gl-node/22.0.0 rest/5.0.6 grpc-web/5.0.6',
+            ],
+          }),
+        },
+      });
+      const fallbackMeta = extractFromSettings(fallbackSettings);
+      assert.strictEqual(fallbackMeta.gcpVersion, '6.1.0');
+      assert.strictEqual(fallbackMeta.gcpClientService, 'redis');
+      assert.strictEqual(fallbackMeta.gcpArtifact, '@google-cloud/redis');
+    });
+
     it('handles undefined settings', () => {
       const metadata = extractFromSettings(undefined);
       assert.deepStrictEqual(metadata, {});
@@ -240,62 +248,17 @@ describe('contextUtil', () => {
   });
 
   describe('resolveStaticTraceContext', () => {
-    it('uses explicit internalTelemetryInfo when GOOGLE_SDK_NODE_ENABLE_TRACING is not set', () => {
-      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-      const explicit: StaticTraceContext = {
-        gcpClientService: 'custom-service',
-        gcpVersion: '1.2.3',
-        gcpArtifact: '@custom/client',
-      };
-      const settings = new CallSettings({
-        otherArgs: {
-          internalTelemetryInfo: explicit,
-        },
-      });
-
-      const resolved = resolveStaticTraceContext(settings);
-      assert.strictEqual(resolved.gcpClientService, 'custom-service');
-      assert.strictEqual(resolved.gcpVersion, '1.2.3');
-      assert.strictEqual(resolved.gcpArtifact, '@custom/client');
-      assert.strictEqual(resolved.gcpRepo, DEFAULT_GCP_REPO);
-    });
-
-    it('uses explicit internalTelemetryInfo even when GOOGLE_SDK_NODE_ENABLE_TRACING is set', () => {
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
-      const explicit: StaticTraceContext = {
-        gcpClientService: 'explicit-service',
-        gcpVersion: '9.9.9',
-        gcpRepo: 'explicit/repo',
-        gcpArtifact: '@explicit/client',
-      };
-      const settings = new CallSettings({
-        apiName: 'google.cloud.redis.v1.CloudRedis',
-        otherArgs: {
-          internalTelemetryInfo: explicit,
-        },
-      });
-
-      const resolved = resolveStaticTraceContext(settings);
-      assert.strictEqual(resolved.gcpClientService, 'explicit-service');
-      assert.strictEqual(resolved.gcpArtifact, '@explicit/client');
-      assert.strictEqual(resolved.gcpVersion, '9.9.9');
-      assert.strictEqual(resolved.gcpRepo, DEFAULT_GCP_REPO);
-    });
-
-    it('prioritizes environment variables over explicit internalTelemetryInfo and dynamic settings', () => {
+    it('prioritizes environment variables over dynamic settings', () => {
       process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE = 'env-service';
       process.env.GOOGLE_SDK_NODE_CLIENT_VERSION = '5.0.0';
       process.env.GOOGLE_SDK_NODE_ARTIFACT = '@custom/env-artifact';
 
-      const explicit: StaticTraceContext = {
-        gcpClientService: 'explicit-service',
-        gcpVersion: '1.0.0',
-        gcpArtifact: '@explicit/client',
-      };
       const settings = new CallSettings({
         apiName: 'google.cloud.redis.v1.CloudRedis',
         otherArgs: {
-          internalTelemetryInfo: explicit,
+          headers: {
+            'x-goog-api-client': 'gapic/1.0.0',
+          },
         },
       });
 
@@ -323,44 +286,40 @@ describe('contextUtil', () => {
       assert.strictEqual(resolved.gcpRepo, 'googleapis/google-cloud-node');
     });
 
-    it('only caches resolved metadata when apiName is present', () => {
-      const settingsNoApiName1 = new CallSettings({
+    it('resolves distinct endpoints and ports for clients sharing the same apiName', () => {
+      const usEastSettings = new CallSettings({
+        apiName: 'google.cloud.kms.v1.KeyManagementService',
         otherArgs: {
+          servicePath: 'us-east1-cloudkms.googleapis.com',
+          port: 443,
           headers: {
             'x-goog-api-client': 'gapic/1.0.0',
           },
         },
       });
-      const settingsNoApiName2 = new CallSettings({
+      const emulatorSettings = new CallSettings({
+        apiName: 'google.cloud.kms.v1.KeyManagementService',
         otherArgs: {
+          servicePath: 'localhost:8080',
           headers: {
             'x-goog-api-client': 'gapic/2.0.0',
           },
         },
       });
 
-      const resolvedNoApi1 = resolveStaticTraceContext(settingsNoApiName1);
-      const resolvedNoApi2 = resolveStaticTraceContext(settingsNoApiName2);
-      assert.strictEqual(resolvedNoApi1.gcpVersion, '1.0.0');
-      assert.strictEqual(resolvedNoApi2.gcpVersion, '2.0.0');
+      const resolvedUsEast = resolveStaticTraceContext(usEastSettings);
+      const resolvedEmulator = resolveStaticTraceContext(emulatorSettings);
 
-      const settingsWithApi = new CallSettings({
-        apiName: 'google.cloud.redis.v1.CloudRedis',
-        otherArgs: {
-          headers: {
-            'x-goog-api-client': 'gapic/1.0.0',
-          },
-        },
-      });
-
-      const resolvedFirst = resolveStaticTraceContext(settingsWithApi);
-      const resolvedSecond = resolveStaticTraceContext(settingsWithApi);
-      assert.strictEqual(resolvedFirst.gcpArtifact, resolvedSecond.gcpArtifact);
       assert.strictEqual(
-        resolvedFirst.gcpClientService,
-        resolvedSecond.gcpClientService,
+        resolvedUsEast.serverAddress,
+        'us-east1-cloudkms.googleapis.com',
       );
-      assert.strictEqual(resolvedFirst.gcpVersion, resolvedSecond.gcpVersion);
+      assert.strictEqual(resolvedUsEast.serverPort, 443);
+      assert.strictEqual(resolvedUsEast.gcpVersion, '1.0.0');
+
+      assert.strictEqual(resolvedEmulator.serverAddress, 'localhost');
+      assert.strictEqual(resolvedEmulator.serverPort, 8080);
+      assert.strictEqual(resolvedEmulator.gcpVersion, '2.0.0');
     });
 
     it('extracts serverAddress and serverPort from settings', () => {

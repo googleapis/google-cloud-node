@@ -125,6 +125,7 @@ export interface AttemptTraceContext extends DynamicTraceContext {
 
 /**
  * Derives the GCP client service name from an NPM package name.
+ * @deprecated Retained for backwards compatibility.
  */
 export function extractClientServiceFromPackageName(name: string): string {
   const scopedMatch = name.match(/^@[^/]+\/(?:google-cloud-)?(.*)$/);
@@ -163,19 +164,6 @@ export function extractServiceFromApiName(apiName: string): string | undefined {
   return undefined;
 }
 
-let fallbackVersion: string | undefined;
-try {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  fallbackVersion = require('../../package.json').version;
-} catch {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    fallbackVersion = require('../../../package.json').version;
-  } catch {
-    // Ignore fallback failure
-  }
-}
-
 /**
  * Extracts static metadata from CallSettings headers or apiName.
  */
@@ -188,10 +176,38 @@ export function extractFromSettings(
   }
 
   // Extract artifact and version from x-goog-api-client header.
-  const headers = (
-    settings.otherArgs as {headers?: Record<string, string>} | undefined
-  )?.headers;
-  const clientHeader = headers?.['x-goog-api-client'];
+  const otherArgsWithMeta = settings.otherArgs as
+    | {
+        headers?: Record<string, string | string[]>;
+        metadataBuilder?: () => {
+          get?: (key: string) => unknown[];
+          [key: string]: unknown;
+        };
+      }
+    | undefined;
+  let rawClientHeader: unknown =
+    otherArgsWithMeta?.headers?.['x-goog-api-client'];
+  // Fall back to metadataBuilder if header is not in otherArgs.headers.
+  if (
+    !rawClientHeader &&
+    typeof otherArgsWithMeta?.metadataBuilder === 'function'
+  ) {
+    try {
+      const built = otherArgsWithMeta.metadataBuilder();
+      // Support both gRPC Metadata instances (.get) and plain objects.
+      if (built && typeof built.get === 'function') {
+        rawClientHeader = built.get('x-goog-api-client');
+      } else if (built && typeof built === 'object') {
+        rawClientHeader = built['x-goog-api-client'];
+      }
+    } catch {
+      // Ignore metadataBuilder errors
+    }
+  }
+  // Normalize array values into a single space-delimited string.
+  const clientHeader = Array.isArray(rawClientHeader)
+    ? rawClientHeader.join(' ')
+    : rawClientHeader;
   if (typeof clientHeader === 'string') {
     const tokens = clientHeader.trim().split(/\s+/);
     for (const token of tokens) {
@@ -226,11 +242,6 @@ export function extractFromSettings(
             : `@google-cloud/${serviceFromApi}`;
       }
     }
-  }
-
-  // Fall back to package.json version if missing.
-  if (!result.gcpVersion && fallbackVersion) {
-    result.gcpVersion = fallbackVersion;
   }
 
   // Extract server address and port from endpoint settings.
@@ -313,20 +324,17 @@ export function extractFromEnvironment(): StaticTraceContext {
   return result;
 }
 
-const metadataCache = new Map<string, StaticTraceContext>();
-
 /**
- * Clears the cached static metadata. Used primarily in unit tests.
+ * Clears the cached static metadata.
+ * @deprecated Static metadata is no longer cached across calls; retained as a no-op for backwards compatibility.
  */
-export function clearMetadataCache(): void {
-  metadataCache.clear();
-}
+export function clearMetadataCache(): void {}
 
 /**
  * Resolves static trace context dynamically at runtime by inspecting CallSettings,
  * environment variables, and standard defaults.
  *
- * Precedence: environment variables > compile-time internalTelemetryInfo > dynamic resolution from settings.
+ * Precedence: environment variables > dynamic resolution from settings.
  *
  * @param {CallSettings} [settings] - Call settings for the RPC invocation.
  * @param {string} [_callerFilePath] - Optional explicit path to the caller source file (deprecated).
@@ -338,41 +346,21 @@ export function resolveStaticTraceContext(
   _callerFilePath?: string,
 ): StaticTraceContext {
   const envMeta = extractFromEnvironment();
-  const explicit = settings?.otherArgs?.internalTelemetryInfo as
-    StaticTraceContext | undefined;
-
-  let dynamic: StaticTraceContext;
-  if (settings?.apiName) {
-    let cached = metadataCache.get(settings.apiName);
-    if (!cached) {
-      cached = extractFromSettings(settings);
-      metadataCache.set(settings.apiName, cached);
-    }
-    dynamic = cached;
-  } else {
-    dynamic = extractFromSettings(settings);
-  }
+  const dynamic = extractFromSettings(settings);
 
   const context: StaticTraceContext = {
-    gcpClientService:
-      envMeta.gcpClientService ??
-      explicit?.gcpClientService ??
-      dynamic.gcpClientService,
-    gcpVersion:
-      envMeta.gcpVersion ?? explicit?.gcpVersion ?? dynamic.gcpVersion,
+    gcpClientService: envMeta.gcpClientService ?? dynamic.gcpClientService,
+    gcpVersion: envMeta.gcpVersion ?? dynamic.gcpVersion,
     gcpRepo: DEFAULT_GCP_REPO,
-    gcpArtifact:
-      envMeta.gcpArtifact ?? explicit?.gcpArtifact ?? dynamic.gcpArtifact,
+    gcpArtifact: envMeta.gcpArtifact ?? dynamic.gcpArtifact,
   };
 
-  const serverAddress =
-    envMeta.serverAddress ?? explicit?.serverAddress ?? dynamic.serverAddress;
+  const serverAddress = envMeta.serverAddress ?? dynamic.serverAddress;
   if (serverAddress !== undefined) {
     context.serverAddress = serverAddress;
   }
 
-  const serverPort =
-    envMeta.serverPort ?? explicit?.serverPort ?? dynamic.serverPort;
+  const serverPort = envMeta.serverPort ?? dynamic.serverPort;
   if (serverPort !== undefined) {
     context.serverPort = serverPort;
   }
