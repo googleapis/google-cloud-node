@@ -124,6 +124,22 @@ export interface AttemptTraceContext extends DynamicTraceContext {
 }
 
 /**
+ * Derives the GCP client service name from an NPM package name.
+ * @deprecated Retained for backwards compatibility.
+ */
+export function extractClientServiceFromPackageName(name: string): string {
+  const scopedMatch = name.match(/^@[^/]+\/(?:google-cloud-)?(.*)$/);
+  if (scopedMatch && scopedMatch[1]) {
+    return scopedMatch[1];
+  }
+  const unscopedMatch = name.match(/^google-cloud-(.*)$/);
+  if (unscopedMatch && unscopedMatch[1]) {
+    return unscopedMatch[1];
+  }
+  return name;
+}
+
+/**
  * Derives the GCP service name from a protobuf apiName (e.g. google.cloud.redis.v1.CloudRedis).
  */
 export function extractServiceFromApiName(apiName: string): string | undefined {
@@ -308,14 +324,11 @@ export function extractFromEnvironment(): StaticTraceContext {
   return result;
 }
 
-const metadataCache = new Map<string, StaticTraceContext>();
-
 /**
- * Clears the cached static metadata. Used primarily in unit tests.
+ * Clears the cached static metadata.
+ * @deprecated Static metadata is no longer cached across calls; retained as a no-op for backwards compatibility.
  */
-export function clearMetadataCache(): void {
-  metadataCache.clear();
-}
+export function clearMetadataCache(): void {}
 
 /**
  * Resolves static trace context dynamically at runtime by inspecting CallSettings,
@@ -324,24 +337,16 @@ export function clearMetadataCache(): void {
  * Precedence: environment variables > dynamic resolution from settings.
  *
  * @param {CallSettings} [settings] - Call settings for the RPC invocation.
+ * @param {string} [_callerFilePath] - Optional explicit path to the caller source file (deprecated).
  * @returns {StaticTraceContext} The resolved static trace context.
  */
 export function resolveStaticTraceContext(
   settings?: CallSettings,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _callerFilePath?: string,
 ): StaticTraceContext {
   const envMeta = extractFromEnvironment();
-
-  let dynamic: StaticTraceContext;
-  if (settings?.apiName) {
-    let cached = metadataCache.get(settings.apiName);
-    if (!cached) {
-      cached = extractFromSettings(settings);
-      metadataCache.set(settings.apiName, cached);
-    }
-    dynamic = cached;
-  } else {
-    dynamic = extractFromSettings(settings);
-  }
+  const dynamic = extractFromSettings(settings);
 
   const context: StaticTraceContext = {
     gcpClientService: envMeta.gcpClientService ?? dynamic.gcpClientService,

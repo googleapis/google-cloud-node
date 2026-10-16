@@ -20,6 +20,7 @@ import {
   buildInitialAttributes,
   clearMetadataCache,
   DynamicTraceContext,
+  extractClientServiceFromPackageName,
   extractFromEnvironment,
   extractFromSettings,
   extractServiceFromApiName,
@@ -58,6 +59,23 @@ describe('contextUtil', () => {
     delete process.env.GCP_CLIENT_SERVICE;
     delete process.env.GCP_CLIENT_VERSION;
     delete process.env.GCP_ARTIFACT;
+  });
+
+  describe('extractClientServiceFromPackageName', () => {
+    it('extracts service from scoped and unscoped package names', () => {
+      assert.strictEqual(
+        extractClientServiceFromPackageName('@google-cloud/redis'),
+        'redis',
+      );
+      assert.strictEqual(
+        extractClientServiceFromPackageName('google-cloud-redis'),
+        'redis',
+      );
+      assert.strictEqual(
+        extractClientServiceFromPackageName('google-gax'),
+        'google-gax',
+      );
+    });
   });
 
   describe('extractServiceFromApiName', () => {
@@ -268,44 +286,40 @@ describe('contextUtil', () => {
       assert.strictEqual(resolved.gcpRepo, 'googleapis/google-cloud-node');
     });
 
-    it('only caches resolved metadata when apiName is present', () => {
-      const settingsNoApiName1 = new CallSettings({
+    it('resolves distinct endpoints and ports for clients sharing the same apiName', () => {
+      const usEastSettings = new CallSettings({
+        apiName: 'google.cloud.kms.v1.KeyManagementService',
         otherArgs: {
+          servicePath: 'us-east1-cloudkms.googleapis.com',
+          port: 443,
           headers: {
             'x-goog-api-client': 'gapic/1.0.0',
           },
         },
       });
-      const settingsNoApiName2 = new CallSettings({
+      const emulatorSettings = new CallSettings({
+        apiName: 'google.cloud.kms.v1.KeyManagementService',
         otherArgs: {
+          servicePath: 'localhost:8080',
           headers: {
             'x-goog-api-client': 'gapic/2.0.0',
           },
         },
       });
 
-      const resolvedNoApi1 = resolveStaticTraceContext(settingsNoApiName1);
-      const resolvedNoApi2 = resolveStaticTraceContext(settingsNoApiName2);
-      assert.strictEqual(resolvedNoApi1.gcpVersion, '1.0.0');
-      assert.strictEqual(resolvedNoApi2.gcpVersion, '2.0.0');
+      const resolvedUsEast = resolveStaticTraceContext(usEastSettings);
+      const resolvedEmulator = resolveStaticTraceContext(emulatorSettings);
 
-      const settingsWithApi = new CallSettings({
-        apiName: 'google.cloud.redis.v1.CloudRedis',
-        otherArgs: {
-          headers: {
-            'x-goog-api-client': 'gapic/1.0.0',
-          },
-        },
-      });
-
-      const resolvedFirst = resolveStaticTraceContext(settingsWithApi);
-      const resolvedSecond = resolveStaticTraceContext(settingsWithApi);
-      assert.strictEqual(resolvedFirst.gcpArtifact, resolvedSecond.gcpArtifact);
       assert.strictEqual(
-        resolvedFirst.gcpClientService,
-        resolvedSecond.gcpClientService,
+        resolvedUsEast.serverAddress,
+        'us-east1-cloudkms.googleapis.com',
       );
-      assert.strictEqual(resolvedFirst.gcpVersion, resolvedSecond.gcpVersion);
+      assert.strictEqual(resolvedUsEast.serverPort, 443);
+      assert.strictEqual(resolvedUsEast.gcpVersion, '1.0.0');
+
+      assert.strictEqual(resolvedEmulator.serverAddress, 'localhost');
+      assert.strictEqual(resolvedEmulator.serverPort, 8080);
+      assert.strictEqual(resolvedEmulator.gcpVersion, '2.0.0');
     });
 
     it('extracts serverAddress and serverPort from settings', () => {
