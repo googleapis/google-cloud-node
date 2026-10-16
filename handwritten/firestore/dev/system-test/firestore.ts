@@ -5381,12 +5381,8 @@ describe('Aggregation queries', () => {
   });
 
   it("terminate doesn't crash when there is aggregate query in flight", async () => {
-    const inflight = col
-      .aggregate({count: AggregateField.count()})
-      .get()
-      .catch(() => {});
+    void col.aggregate({count: AggregateField.count()}).get();
     await firestore.terminate();
-    await inflight;
   });
 
   // Only verify the error message for missing indexes when running against
