@@ -17,6 +17,7 @@
 import {ResourceStream} from '@google-cloud/paginator';
 import type {RecordBatch, Schema} from 'apache-arrow';
 import type {BigQuery, Query} from './bigquery';
+import type {Job} from './job';
 import type bigquery from './types';
 
 type ArrowModule = typeof import('apache-arrow');
@@ -36,7 +37,29 @@ interface ReadRowsStream extends NodeJS.EventEmitter {
   resume(): void;
 }
 
+export interface IReadSession {
+  arrowSchema?: {
+    serializedSchema?: Uint8Array | string | null;
+  } | null;
+  streams?: Array<{
+    name?: string | null;
+  }> | null;
+}
+
+export interface CreateReadSessionRequest {
+  parent: string;
+  readSession: {
+    table: string;
+    dataFormat: 'ARROW';
+  };
+  maxStreamCount: number;
+}
+
 export interface BigQueryReadClient {
+  createReadSession(
+    request: CreateReadSessionRequest,
+    callback: (err: Error | null, session?: IReadSession | null) => void,
+  ): void;
   readRows(request: {readStream: string; offset?: number}): ReadRowsStream;
 }
 
@@ -60,6 +83,21 @@ export type ArrowRecordBatchStream = ResourceStream<RecordBatch> & {
   queryId?: string;
   /** The job reference, when BigQuery creates a job for the query. */
   jobReference?: bigquery.IJobReference;
+};
+
+/**
+ * [Beta] Options for {@link BigQuery#createQueryArrowStream}: the
+ * {@link Query} options plus options that only apply to Arrow queries.
+ *
+ * @beta
+ */
+export type ArrowQuery = Query & {
+  /**
+   * How long to wait for `jobs.query` to complete, in milliseconds. If the
+   * query doesn't complete in time, the stream fails instead of waiting for
+   * the job.
+   */
+  timeoutMs?: number;
 };
 
 /**
@@ -256,9 +294,36 @@ export function decodeArrowPayload(
 }
 
 /**
+ * Emits a 0-row `RecordBatch` (preserving `serializedSchema` when present) and
+ * ends `stream`.
+ *
+ * @private
+ */
+function emitZeroRowBatchAndEnd(
+  arrow: ArrowModule,
+  stream: ArrowRecordBatchStream,
+  serializedSchema?: Uint8Array | string,
+): void {
+  try {
+    for (const batch of decodeArrowPayload(arrow, serializedSchema)) {
+      if (stream._ended || stream.destroyed) {
+        return;
+      }
+      stream.push(batch);
+    }
+    if (!stream._ended && !stream.destroyed) {
+      stream.end();
+    }
+  } catch (parseErr) {
+    stream.destroy(parseErr as Error);
+  }
+}
+
+/**
  * Streams Arrow `RecordBatch`es from a job's sessionless default stream
  * (`projects/{projectId}/locations/{location}/jobs/{jobId}/streams/_default`)
- * starting at `offset`.
+ * starting at `offset`. Pass the finished `job` when reading from offset 0 so
+ * a result without rows keeps its schema (see {@link readDestinationSchema}).
  *
  * @private
  */
@@ -267,6 +332,7 @@ function streamDefaultJobStream(
   jobRef: bigquery.IJobReference | undefined,
   offset: number,
   initialSchema?: Uint8Array | string,
+  job?: Job,
 ): void {
   const {bq, stream} = ctx;
   const projectId = resolveProjectId(bq, jobRef?.projectId);
@@ -281,7 +347,61 @@ function streamDefaultJobStream(
   }
 
   const readStream = `projects/${projectId}/locations/${location}/jobs/${jobId}/streams/_default`;
-  streamReadRows(ctx, {readStream, offset, initialSchema});
+  streamReadRows(ctx, {readStream, offset, initialSchema, job});
+}
+
+/**
+ * Reads the Arrow schema of a finished query job's results from its
+ * destination table. The default job stream sends no `ReadRowsResponse`, and
+ * so no schema, for a result without rows, but a read session on the
+ * destination table still returns it. Statements without a result table
+ * (e.g., DML) have no destination table, so `callback` gets no schema.
+ *
+ * @private
+ */
+function readDestinationSchema(
+  ctx: ArrowStreamContext,
+  job: Job,
+  callback: (err: Error | null, schema?: Uint8Array | string) => void,
+): void {
+  const {bq, storage} = ctx;
+  // A script's destination table is only set once the job finishes, so read
+  // the job's current metadata instead of the response that created it.
+  void job.getMetadata((err: Error | null, metadata?: bigquery.IJob) => {
+    if (err) {
+      callback(err);
+      return;
+    }
+    const destRef = metadata?.configuration?.query?.destinationTable;
+    if (!destRef) {
+      callback(null);
+      return;
+    }
+    let readClient: BigQueryReadClient;
+    try {
+      readClient = getStorageReadClient(bq, storage);
+    } catch (err) {
+      callback(err as Error);
+      return;
+    }
+    readClient.createReadSession(
+      {
+        parent: `projects/${resolveProjectId(
+          bq,
+          metadata?.jobReference?.projectId,
+          destRef.projectId,
+        )}`,
+        readSession: {
+          table: `projects/${destRef.projectId}/datasets/${destRef.datasetId}/tables/${destRef.tableId}`,
+          dataFormat: 'ARROW',
+        },
+        maxStreamCount: 1,
+      },
+      (err, session) => {
+        callback(err, session?.arrowSchema?.serializedSchema || undefined);
+      },
+    );
+  });
 }
 
 /**
@@ -296,10 +416,12 @@ function streamReadRows(
     readStream: string;
     offset: number;
     initialSchema?: Uint8Array | string;
+    /** The finished job, to read the schema of a result without rows. */
+    job?: Job;
   },
 ): void {
   const {bq, arrow, storage, stream} = ctx;
-  const {readStream, offset, initialSchema} = options;
+  const {readStream, offset, initialSchema, job} = options;
 
   let readClient: BigQueryReadClient;
   try {
@@ -332,6 +454,7 @@ function streamReadRows(
   let serializedSchema: Uint8Array | undefined = initialSchema
     ? toUint8Array(initialSchema)
     : undefined;
+  let emittedBatch = false;
 
   grpcStream.on('data', (resp: IReadRowsResponse) => {
     if (stream._ended || stream.destroyed) {
@@ -359,6 +482,7 @@ function streamReadRows(
           cancelGrpcStream();
           return;
         }
+        emittedBatch = true;
         if (!stream.push(batch)) {
           grpcStream.pause();
         }
@@ -381,10 +505,71 @@ function streamReadRows(
   grpcStream.on('end', () => {
     stream.removeListener('close', cancelGrpcStream);
     finished = true;
-    if (!stream._ended && !stream.destroyed) {
-      stream.end();
+    if (stream._ended || stream.destroyed) {
+      return;
     }
+    // When reading from offset = 0 (e.g., after waiting for an unfinished job)
+    // and the stream finishes with 0 rows, still emit a 0-row RecordBatch.
+    if (offset === 0 && !emittedBatch) {
+      if (serializedSchema || !job) {
+        emitZeroRowBatchAndEnd(arrow, stream, serializedSchema);
+        return;
+      }
+      readDestinationSchema(ctx, job, (err, schema) => {
+        if (stream._ended || stream.destroyed) {
+          return;
+        }
+        if (err) {
+          stream.destroy(err);
+          return;
+        }
+        emitZeroRowBatchAndEnd(arrow, stream, schema);
+      });
+      return;
+    }
+    stream.end();
   });
+}
+
+/**
+ * Waits for an unfinished BigQuery job to complete using `job.getQueryResults`
+ * without fetching any `STRUCT_ENCODING` rows (`maxResults: 0`).
+ *
+ * @private
+ */
+function waitForJobCompletion(
+  job: Job,
+  stream: ArrowRecordBatchStream,
+  onComplete: () => void,
+): void {
+  const poll = () => {
+    if (stream._ended || stream.destroyed) {
+      return;
+    }
+    // Set maxResults: 0 so jobs.getQueryResults blocks up to the server's
+    // default wait interval and surfaces job errors without returning JSON rows.
+    job.getQueryResults(
+      {
+        autoPaginate: false,
+        maxResults: 0,
+      },
+      (err, _rows, _nextQuery, res) => {
+        if (err) {
+          stream.destroy(err);
+          return;
+        }
+        if (stream._ended || stream.destroyed) {
+          return;
+        }
+        if (res?.jobComplete === false) {
+          poll();
+          return;
+        }
+        onComplete();
+      },
+    );
+  };
+  poll();
 }
 
 /**
@@ -394,7 +579,7 @@ function streamReadRows(
  */
 export function createQueryArrowStream_(
   bq: BigQuery,
-  query?: Query | string,
+  query?: ArrowQuery | string,
 ): ArrowRecordBatchStream {
   const stream = new ResourceStream<RecordBatch>(
     {},
@@ -425,7 +610,8 @@ export function createQueryArrowStream_(
       return;
     }
 
-    const queryObj: Query = typeof query === 'string' ? {query} : {...query};
+    const queryObj: ArrowQuery =
+      typeof query === 'string' ? {query} : {...query};
 
     if (queryObj.writeDisposition === 'WRITE_APPEND') {
       stream.destroy(
@@ -452,7 +638,9 @@ export function createQueryArrowStream_(
 
     let queryReq: bigquery.IQueryRequest | undefined;
     try {
-      queryReq = bq.buildQueryRequest_(queryObj, {});
+      queryReq = bq.buildQueryRequest_(queryObj, {
+        timeoutMs: queryObj.timeoutMs,
+      });
     } catch (err) {
       // For example, invalid query parameters.
       stream.destroy(err as Error);
@@ -487,10 +675,27 @@ export function createQueryArrowStream_(
       }
 
       if (res?.jobComplete === false) {
-        // TODO: Wait for unfinished jobs before streaming Arrow results.
-        stream.destroy(
-          new Error('Query did not complete within the jobs.query timeout.'),
-        );
+        // Match BigQuery#query: if the caller provided a non-zero timeoutMs,
+        // fail immediately instead of polling jobs.getQueryResults.
+        if (queryReq.timeoutMs) {
+          stream.destroy(
+            new Error(
+              `The query did not complete before ${queryReq.timeoutMs}ms`,
+            ),
+          );
+          return;
+        }
+        if (!res.jobReference || !job) {
+          stream.destroy(
+            new Error(
+              'Cannot wait for an incomplete query without a jobReference.',
+            ),
+          );
+          return;
+        }
+        waitForJobCompletion(job, stream, () => {
+          streamDefaultJobStream(ctx, res.jobReference, 0, undefined, job);
+        });
         return;
       }
 
