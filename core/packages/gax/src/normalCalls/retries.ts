@@ -69,7 +69,7 @@ export function retryable(
    * by the options in ``retry``.
    * @param {RequestType} argument The request object.
    * @param {APICallback} callback The callback.
-   * @return {GRPCCall}
+   * @return {GRPCCallResult}
    */
   return (argument: RequestType, callback: APICallback) => {
     let canceller: GRPCCallResult | null;
@@ -80,7 +80,7 @@ export function retryable(
       deadline = now.getTime() + retry.backoffSettings.totalTimeoutMillis;
     }
     let retries = 0;
-    const maxRetries = retry.backoffSettings.maxRetries!;
+    const maxRetries = retry.backoffSettings.maxRetries;
     // For retries, errorsEncountered maintains a list of errors encountered so
     // that they can be sent back to the user and the user can see ALL errors
     // that were encountered during a series of retries.
@@ -90,7 +90,7 @@ export function retryable(
     // user so we should concatenate them onto the details because details are
     // immediately visible to the user. This method provides a string we can
     // concatenate onto the details.
-    function errorDetailsSuffix(errsEncountered: GoogleError[]) {
+    function errorDetailsSuffix(errsEncountered: GoogleError[]): string {
       if (errsEncountered.length < 2) {
         // If only one error has been encountered then this information will
         // already be in the error message so no additional information is
@@ -115,7 +115,7 @@ export function retryable(
     }
 
     /** Repeat the API call as long as necessary. */
-    function repeat(err?: GoogleError) {
+    function repeat(err?: GoogleError): void {
       if (err) {
         errorsEncountered.push(err);
       }
@@ -133,7 +133,16 @@ export function retryable(
         return;
       }
 
-      if (retries && retries > maxRetries) {
+      // `retries` is incremented on every attempt (including the initial call),
+      // so upon re-entering `repeat(err)` it equals the number of completed
+      // attempts (`1 + retriesCompleted`). Checking `retries > maxRetries`
+      // allows `maxRetries` retry attempts after the initial call.
+      if (
+        retries &&
+        maxRetries !== undefined &&
+        maxRetries !== null &&
+        retries > maxRetries
+      ) {
         const error = new GoogleError(
           'Exceeded maximum number of retries ' +
             (err ? `retrying error ${err} ` : '') +

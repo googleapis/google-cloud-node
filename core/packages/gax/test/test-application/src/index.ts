@@ -81,7 +81,9 @@ async function testShowcase() {
 
   // assuming gRPC server is started locally
   await testEchoErrorWithRetries(grpcSequenceClientLegacyRetries);
-  await testEchoDeadlineExceededErrorWithRetries(grpcSequenceClientLegacyRetries);
+  await testEchoDeadlineExceededErrorWithRetries(
+    grpcSequenceClientLegacyRetries,
+  );
   await testEchoErrorWithRetriesMessage(grpcSequenceClientLegacyRetries);
   await testEchoErrorWithTimeout(grpcSequenceClientLegacyRetries);
   await testEcho(grpcClient);
@@ -417,6 +419,7 @@ async function testEchoErrorWithRetries(client: SequenceServiceClient) {
 
   try {
     await client.attemptSequence(attemptRequest, settings);
+    assert.fail('Expected attemptSequence to fail');
   } catch (err) {
     assert.strictEqual(JSON.stringify((err as GoogleError).code), '4');
     assert.match(
@@ -470,6 +473,7 @@ async function testEchoDeadlineExceededErrorWithRetries(
 
   try {
     await client.attemptSequence(attemptRequest, settings);
+    assert.fail('Expected attemptSequence to fail');
   } catch (err) {
     assert.strictEqual(
       (err as GoogleError).message,
@@ -517,6 +521,7 @@ async function testEchoErrorWithRetriesMessage(client: SequenceServiceClient) {
 
   try {
     await client.attemptSequence(attemptRequest, settings);
+    assert.fail('Expected attemptSequence to fail');
   } catch (err) {
     assert.strictEqual(JSON.stringify((err as GoogleError).code), '4');
     const expectedMessage =
@@ -2921,7 +2926,7 @@ async function main() {
     showcaseServer.stop();
   }
   // Run PQC tests with a different showcase server because setup with a certificate is required.
-  await runPqcComplianceTests()
+  await runPqcComplianceTests();
 }
 
 main();
