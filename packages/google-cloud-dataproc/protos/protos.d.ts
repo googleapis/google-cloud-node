@@ -5515,6 +5515,15 @@ export namespace google {
 
                     /** ClusterConfig auxiliaryNodeGroups */
                     auxiliaryNodeGroups?: (google.cloud.dataproc.v1.IAuxiliaryNodeGroup[]|null);
+
+                    /** ClusterConfig masterFlexibleConfig */
+                    masterFlexibleConfig?: (google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig|null);
+
+                    /** ClusterConfig workerFlexibleConfig */
+                    workerFlexibleConfig?: (google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig|null);
+
+                    /** ClusterConfig secondaryWorkerFlexibleConfig */
+                    secondaryWorkerFlexibleConfig?: (google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig|null);
                 }
 
                 /** Represents a ClusterConfig. */
@@ -5582,6 +5591,15 @@ export namespace google {
 
                     /** ClusterConfig auxiliaryNodeGroups. */
                     public auxiliaryNodeGroups: google.cloud.dataproc.v1.IAuxiliaryNodeGroup[];
+
+                    /** ClusterConfig masterFlexibleConfig. */
+                    public masterFlexibleConfig?: (google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig|null);
+
+                    /** ClusterConfig workerFlexibleConfig. */
+                    public workerFlexibleConfig?: (google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig|null);
+
+                    /** ClusterConfig secondaryWorkerFlexibleConfig. */
+                    public secondaryWorkerFlexibleConfig?: (google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig|null);
 
                     /**
                      * Creates a new ClusterConfig instance using the specified properties.
@@ -6210,6 +6228,9 @@ export namespace google {
                     /** GceClusterConfig zoneUri */
                     zoneUri?: (string|null);
 
+                    /** GceClusterConfig multiZoneConfig */
+                    multiZoneConfig?: (google.cloud.dataproc.v1.IMultiZoneConfig|null);
+
                     /** GceClusterConfig networkUri */
                     networkUri?: (string|null);
 
@@ -6261,6 +6282,9 @@ export namespace google {
 
                     /** GceClusterConfig zoneUri. */
                     public zoneUri: string;
+
+                    /** GceClusterConfig multiZoneConfig. */
+                    public multiZoneConfig?: (google.cloud.dataproc.v1.IMultiZoneConfig|null);
 
                     /** GceClusterConfig networkUri. */
                     public networkUri: string;
@@ -6387,6 +6411,112 @@ export namespace google {
                         INHERIT_FROM_SUBNETWORK = 1,
                         OUTBOUND = 2,
                         BIDIRECTIONAL = 3
+                    }
+                }
+
+                /** Properties of a MultiZoneConfig. */
+                interface IMultiZoneConfig {
+
+                    /** MultiZoneConfig targetShape */
+                    targetShape?: (google.cloud.dataproc.v1.MultiZoneConfig.TargetShape|keyof typeof google.cloud.dataproc.v1.MultiZoneConfig.TargetShape|null);
+                }
+
+                /** Represents a MultiZoneConfig. */
+                class MultiZoneConfig implements IMultiZoneConfig {
+
+                    /**
+                     * Constructs a new MultiZoneConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IMultiZoneConfig);
+
+                    /** MultiZoneConfig targetShape. */
+                    public targetShape: (google.cloud.dataproc.v1.MultiZoneConfig.TargetShape|keyof typeof google.cloud.dataproc.v1.MultiZoneConfig.TargetShape);
+
+                    /**
+                     * Creates a new MultiZoneConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MultiZoneConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IMultiZoneConfig): google.cloud.dataproc.v1.MultiZoneConfig;
+
+                    /**
+                     * Encodes the specified MultiZoneConfig message. Does not implicitly {@link google.cloud.dataproc.v1.MultiZoneConfig.verify|verify} messages.
+                     * @param message MultiZoneConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IMultiZoneConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MultiZoneConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.MultiZoneConfig.verify|verify} messages.
+                     * @param message MultiZoneConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IMultiZoneConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MultiZoneConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MultiZoneConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.MultiZoneConfig;
+
+                    /**
+                     * Decodes a MultiZoneConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MultiZoneConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.MultiZoneConfig;
+
+                    /**
+                     * Verifies a MultiZoneConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MultiZoneConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MultiZoneConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.MultiZoneConfig;
+
+                    /**
+                     * Creates a plain object from a MultiZoneConfig message. Also converts values to other types if specified.
+                     * @param message MultiZoneConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.MultiZoneConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MultiZoneConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MultiZoneConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace MultiZoneConfig {
+
+                    /** TargetShape enum. */
+                    enum TargetShape {
+                        TARGET_SHAPE_UNSPECIFIED = 0,
+                        ANY = 1
                     }
                 }
 
@@ -7641,6 +7771,131 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a FlexibleInstanceGroupConfig. */
+                interface IFlexibleInstanceGroupConfig {
+
+                    /** FlexibleInstanceGroupConfig numInstances */
+                    numInstances?: (number|null);
+
+                    /** FlexibleInstanceGroupConfig coreCount */
+                    coreCount?: (number|null);
+
+                    /** FlexibleInstanceGroupConfig bootDiskSizeGb */
+                    bootDiskSizeGb?: (number|null);
+
+                    /** FlexibleInstanceGroupConfig hardwareClass */
+                    hardwareClass?: (google.cloud.dataproc.v1.FlexibleInstanceGroupConfig.HardwareClass|keyof typeof google.cloud.dataproc.v1.FlexibleInstanceGroupConfig.HardwareClass|null);
+                }
+
+                /** Represents a FlexibleInstanceGroupConfig. */
+                class FlexibleInstanceGroupConfig implements IFlexibleInstanceGroupConfig {
+
+                    /**
+                     * Constructs a new FlexibleInstanceGroupConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig);
+
+                    /** FlexibleInstanceGroupConfig numInstances. */
+                    public numInstances: number;
+
+                    /** FlexibleInstanceGroupConfig coreCount. */
+                    public coreCount: number;
+
+                    /** FlexibleInstanceGroupConfig bootDiskSizeGb. */
+                    public bootDiskSizeGb: number;
+
+                    /** FlexibleInstanceGroupConfig hardwareClass. */
+                    public hardwareClass: (google.cloud.dataproc.v1.FlexibleInstanceGroupConfig.HardwareClass|keyof typeof google.cloud.dataproc.v1.FlexibleInstanceGroupConfig.HardwareClass);
+
+                    /**
+                     * Creates a new FlexibleInstanceGroupConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FlexibleInstanceGroupConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig): google.cloud.dataproc.v1.FlexibleInstanceGroupConfig;
+
+                    /**
+                     * Encodes the specified FlexibleInstanceGroupConfig message. Does not implicitly {@link google.cloud.dataproc.v1.FlexibleInstanceGroupConfig.verify|verify} messages.
+                     * @param message FlexibleInstanceGroupConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FlexibleInstanceGroupConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.FlexibleInstanceGroupConfig.verify|verify} messages.
+                     * @param message FlexibleInstanceGroupConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataproc.v1.IFlexibleInstanceGroupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FlexibleInstanceGroupConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FlexibleInstanceGroupConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataproc.v1.FlexibleInstanceGroupConfig;
+
+                    /**
+                     * Decodes a FlexibleInstanceGroupConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FlexibleInstanceGroupConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataproc.v1.FlexibleInstanceGroupConfig;
+
+                    /**
+                     * Verifies a FlexibleInstanceGroupConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FlexibleInstanceGroupConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FlexibleInstanceGroupConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataproc.v1.FlexibleInstanceGroupConfig;
+
+                    /**
+                     * Creates a plain object from a FlexibleInstanceGroupConfig message. Also converts values to other types if specified.
+                     * @param message FlexibleInstanceGroupConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataproc.v1.FlexibleInstanceGroupConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FlexibleInstanceGroupConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FlexibleInstanceGroupConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FlexibleInstanceGroupConfig {
+
+                    /** HardwareClass enum. */
+                    enum HardwareClass {
+                        HARDWARE_CLASS_UNSPECIFIED = 0,
+                        STANDARD = 1,
+                        PERFORMANCE = 2
                     }
                 }
 

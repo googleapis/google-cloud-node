@@ -101,6 +101,119 @@ for (const a of args) {
 
 const searchPaths = [...new Set([...targetPkgRoots, process.cwd(), repoRoot])];
 
+const WORKSPACE_LINK_PACKAGES = [
+  {
+    name: 'gaxios',
+    relDir: 'core/packages/gaxios',
+    entryPoint: 'build/cjs/src/index.js',
+  },
+  {
+    name: 'teeny-request',
+    relDir: 'core/packages/teeny-request',
+    entryPoint: 'build/src/index.js',
+  },
+];
+
+function linkTargetToWorkspacePackage(
+  targetPath,
+  workspacePkgDir,
+  realWorkspacePkgDir,
+  major,
+) {
+  try {
+    fs.lstatSync(targetPath);
+  } catch {
+    return;
+  }
+  try {
+    if (fs.realpathSync(targetPath) === realWorkspacePkgDir) {
+      return;
+    }
+    if (major) {
+      const targetPkgJson = JSON.parse(
+        fs.readFileSync(path.join(targetPath, 'package.json'), 'utf8'),
+      );
+      const targetMajor = String(targetPkgJson.version || '').split('.')[0];
+      if (targetMajor && targetMajor !== major) {
+        return;
+      }
+    }
+  } catch {
+    // Broken symlink or unreadable package.json; proceed to replace it.
+  }
+  try {
+    fs.rmSync(targetPath, {recursive: true, force: true});
+    fs.symlinkSync(workspacePkgDir, targetPath, 'junction');
+  } catch {
+    // Ignore permission or concurrent replacement errors.
+  }
+}
+
+// Ensures in-repo workspace packages (`gaxios`, `teeny-request`) are linked in
+// `node_modules` even when `release-please` bumps their `package.json` version
+// ahead of the version recorded in `pnpm-lock.yaml` (which causes `pnpm install
+// --config.prefer-workspace-packages=true` to keep the registry tarball).
+function ensureWorkspacePackagesLinked(
+  rootDir = repoRoot,
+  pkgSearchPaths = searchPaths,
+) {
+  const pnpmDir = path.join(rootDir, 'node_modules', '.pnpm');
+  let pnpmEntries = [];
+  try {
+    pnpmEntries = fs.readdirSync(pnpmDir);
+  } catch {
+    // Ignore when .pnpm virtual store directory is absent.
+  }
+
+  for (const {name, relDir, entryPoint} of WORKSPACE_LINK_PACKAGES) {
+    const workspacePkgDir = path.join(rootDir, relDir);
+    if (!fs.existsSync(path.join(workspacePkgDir, entryPoint))) {
+      continue;
+    }
+    let realWorkspacePkgDir;
+    let major;
+    try {
+      realWorkspacePkgDir = fs.realpathSync(workspacePkgDir);
+      const pkgJson = JSON.parse(
+        fs.readFileSync(path.join(workspacePkgDir, 'package.json'), 'utf8'),
+      );
+      major = String(pkgJson.version || '').split('.')[0];
+    } catch {
+      continue;
+    }
+
+    if (major) {
+      const prefix = `${name}@${major}.`;
+      for (const entry of pnpmEntries) {
+        if (entry.startsWith(prefix)) {
+          linkTargetToWorkspacePackage(
+            path.join(pnpmDir, entry, 'node_modules', name),
+            workspacePkgDir,
+            realWorkspacePkgDir,
+            major,
+          );
+        }
+      }
+    }
+
+    for (const base of pkgSearchPaths) {
+      try {
+        if (fs.realpathSync(base) === realWorkspacePkgDir) {
+          continue;
+        }
+      } catch {
+        continue;
+      }
+      linkTargetToWorkspacePackage(
+        path.join(base, 'node_modules', name),
+        workspacePkgDir,
+        realWorkspacePkgDir,
+        major,
+      );
+    }
+  }
+}
+
 const VALUE_FLAGS = new Set([
   '--config',
   '--package',
@@ -533,6 +646,8 @@ if (require.main === module) {
     process.exit(0);
   }
 
+  ensureWorkspacePackagesLinked();
+
   if (wantsBunRuntime) {
     process.env.MOCHA_PARALLEL = 'false';
     Object.assign(process.env, shimEnvVars);
@@ -616,4 +731,5 @@ module.exports = {
   resolveTestArgs,
   splitMochaArgs,
   resolveBin,
+  ensureWorkspacePackagesLinked,
 };

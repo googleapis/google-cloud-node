@@ -809,27 +809,36 @@ export class DatastreamClient {
    * @param {string} request.parent
    *   Required. The parent resource of the connection profile type. Must be in
    *   the format `projects/* /locations/*`.
-   * @param {google.cloud.datastream.v1.ConnectionProfile} request.connectionProfile
-   *   An ad-hoc connection profile configuration.
-   * @param {string} request.connectionProfileName
-   *   A reference to an existing connection profile.
-   * @param {boolean} request.fullHierarchy
-   *   Whether to retrieve the full hierarchy of data objects (TRUE) or only the
-   *   current level (FALSE).
-   * @param {number} request.hierarchyDepth
-   *   The number of hierarchy levels below the current level to be retrieved.
-   * @param {google.cloud.datastream.v1.OracleRdbms} request.oracleRdbms
-   *   Oracle RDBMS to enrich with child data objects and metadata.
-   * @param {google.cloud.datastream.v1.MysqlRdbms} request.mysqlRdbms
-   *   MySQL RDBMS to enrich with child data objects and metadata.
-   * @param {google.cloud.datastream.v1.PostgresqlRdbms} request.postgresqlRdbms
-   *   PostgreSQL RDBMS to enrich with child data objects and metadata.
-   * @param {google.cloud.datastream.v1.SqlServerRdbms} request.sqlServerRdbms
-   *   SQLServer RDBMS to enrich with child data objects and metadata.
-   * @param {google.cloud.datastream.v1.SalesforceOrg} request.salesforceOrg
-   *   Salesforce organization to enrich with child data objects and metadata.
-   * @param {google.cloud.datastream.v1.MongodbCluster} request.mongodbCluster
-   *   MongoDB cluster to enrich with child data objects and metadata.
+   * @param {google.cloud.datastream.v1.ConnectionProfile} [request.connectionProfile]
+   *   Optional. An ad-hoc connection profile configuration.
+   * @param {string} [request.connectionProfileName]
+   *   Optional. A reference to an existing connection profile.
+   * @param {boolean} [request.fullHierarchy]
+   *   Optional. Whether to retrieve the full hierarchy of data objects (TRUE)
+   *   or only the current level (FALSE).
+   * @param {number} [request.hierarchyDepth]
+   *   Optional. The number of hierarchy levels below the current level to be
+   *   retrieved.
+   * @param {google.cloud.datastream.v1.OracleRdbms} [request.oracleRdbms]
+   *   Optional. Oracle RDBMS to enrich with child data objects and metadata.
+   * @param {google.cloud.datastream.v1.MysqlRdbms} [request.mysqlRdbms]
+   *   Optional. MySQL RDBMS to enrich with child data objects and metadata.
+   * @param {google.cloud.datastream.v1.PostgresqlRdbms} [request.postgresqlRdbms]
+   *   Optional. PostgreSQL RDBMS to enrich with child data objects and
+   *   metadata.
+   * @param {google.cloud.datastream.v1.SqlServerRdbms} [request.sqlServerRdbms]
+   *   Optional. SQLServer RDBMS to enrich with child data objects and metadata.
+   * @param {google.cloud.datastream.v1.SalesforceOrg} [request.salesforceOrg]
+   *   Optional. Salesforce organization to enrich with child data objects and
+   *   metadata.
+   * @param {google.cloud.datastream.v1.MongodbCluster} [request.mongodbCluster]
+   *   Optional. MongoDB cluster to enrich with child data objects and metadata.
+   * @param {google.cloud.datastream.v1.SpannerDatabase} [request.spannerDatabase]
+   *   Optional. Spanner database to enrich with child data objects and
+   *   metadata.
+   * @param {google.cloud.datastream.v1.SourceCatalog} [request.sourceCatalog]
+   *   Optional. Source catalog to enrich with child data objects and metadata.
+   *   This is mainly used to represent SaaS sources databases.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1375,6 +1384,10 @@ export class DatastreamClient {
    * @param {string} request.object
    *   Required. The name of the stream object resource to start a backfill job
    *   for.
+   * @param {google.cloud.datastream.v1.EventFilter} [request.eventFilter]
+   *   Optional. Optional event filter. If not set, or empty, the backfill will be
+   *   performed on the entire object. This is currently used for partial backfill
+   *   and only supported for SQL sources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3980,20 +3993,20 @@ export class DatastreamClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent that owns the collection of connection profiles.
-   * @param {number} request.pageSize
-   *   Maximum number of connection profiles to return.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of connection profiles to return.
    *   If unspecified, at most 50 connection profiles will be returned.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListConnectionProfiles` call.
-   *   Provide this to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListConnectionProfiles`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListConnectionProfiles`
    *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4115,20 +4128,20 @@ export class DatastreamClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent that owns the collection of connection profiles.
-   * @param {number} request.pageSize
-   *   Maximum number of connection profiles to return.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of connection profiles to return.
    *   If unspecified, at most 50 connection profiles will be returned.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListConnectionProfiles` call.
-   *   Provide this to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListConnectionProfiles`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListConnectionProfiles`
    *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4173,20 +4186,20 @@ export class DatastreamClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent that owns the collection of connection profiles.
-   * @param {number} request.pageSize
-   *   Maximum number of connection profiles to return.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of connection profiles to return.
    *   If unspecified, at most 50 connection profiles will be returned.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListConnectionProfiles` call.
-   *   Provide this to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListConnectionProfiles`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListConnectionProfiles`
    *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4230,20 +4243,20 @@ export class DatastreamClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent that owns the collection of streams.
-   * @param {number} request.pageSize
-   *   Maximum number of streams to return.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of streams to return.
    *   If unspecified, at most 50 streams will  be returned. The maximum
    *   value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListStreams` call.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListStreams` call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListStreams`
    *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4359,20 +4372,20 @@ export class DatastreamClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent that owns the collection of streams.
-   * @param {number} request.pageSize
-   *   Maximum number of streams to return.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of streams to return.
    *   If unspecified, at most 50 streams will  be returned. The maximum
    *   value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListStreams` call.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListStreams` call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListStreams`
    *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4417,20 +4430,20 @@ export class DatastreamClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent that owns the collection of streams.
-   * @param {number} request.pageSize
-   *   Maximum number of streams to return.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of streams to return.
    *   If unspecified, at most 50 streams will  be returned. The maximum
    *   value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListStreams` call.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListStreams` call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to `ListStreams`
    *   must match the call that provided the page token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4474,12 +4487,12 @@ export class DatastreamClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent stream that owns the collection of objects.
-   * @param {number} request.pageSize
-   *   Maximum number of objects to return. Default is 50.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of objects to return. Default is 50.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListStreamObjectsRequest` call.
-   *   Provide this to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListStreamObjectsRequest`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListStreamObjectsRequest` must match the call that provided the page
@@ -4605,12 +4618,12 @@ export class DatastreamClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent stream that owns the collection of objects.
-   * @param {number} request.pageSize
-   *   Maximum number of objects to return. Default is 50.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of objects to return. Default is 50.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListStreamObjectsRequest` call.
-   *   Provide this to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListStreamObjectsRequest`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListStreamObjectsRequest` must match the call that provided the page
@@ -4659,12 +4672,12 @@ export class DatastreamClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent stream that owns the collection of objects.
-   * @param {number} request.pageSize
-   *   Maximum number of objects to return. Default is 50.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of objects to return. Default is 50.
    *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListStreamObjectsRequest` call.
-   *   Provide this to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListStreamObjectsRequest`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListStreamObjectsRequest` must match the call that provided the page
@@ -4714,10 +4727,10 @@ export class DatastreamClient {
    * @param {string} request.name
    *   Required. The resource name for the location for which static IPs should be
    *   returned. Must be in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of Ips to return, will likely not be specified.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListStaticIps` call.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of Ips to return, will likely not be specified.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListStaticIps` call.
    *   will likely not be specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -4841,10 +4854,10 @@ export class DatastreamClient {
    * @param {string} request.name
    *   Required. The resource name for the location for which static IPs should be
    *   returned. Must be in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of Ips to return, will likely not be specified.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListStaticIps` call.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of Ips to return, will likely not be specified.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListStaticIps` call.
    *   will likely not be specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -4891,10 +4904,10 @@ export class DatastreamClient {
    * @param {string} request.name
    *   Required. The resource name for the location for which static IPs should be
    *   returned. Must be in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of Ips to return, will likely not be specified.
-   * @param {string} request.pageToken
-   *   A page token, received from a previous `ListStaticIps` call.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of Ips to return, will likely not be specified.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListStaticIps` call.
    *   will likely not be specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -4946,17 +4959,17 @@ export class DatastreamClient {
    *   If unspecified, at most 50 private connectivity configurations that will be
    *   returned. The maximum value is 1000; values above 1000 will be coerced to
    *   1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListPrivateConnections` call.
-   *   Provide this to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListPrivateConnections`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListPrivateConnections` must match the call that provided the page
    *   token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5084,17 +5097,17 @@ export class DatastreamClient {
    *   If unspecified, at most 50 private connectivity configurations that will be
    *   returned. The maximum value is 1000; values above 1000 will be coerced to
    *   1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListPrivateConnections` call.
-   *   Provide this to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListPrivateConnections`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListPrivateConnections` must match the call that provided the page
    *   token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5145,17 +5158,17 @@ export class DatastreamClient {
    *   If unspecified, at most 50 private connectivity configurations that will be
    *   returned. The maximum value is 1000; values above 1000 will be coerced to
    *   1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListPrivateConnections` call.
-   *   Provide this to retrieve the subsequent page.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListPrivateConnections`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListPrivateConnections` must match the call that provided the page
    *   token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5200,22 +5213,22 @@ export class DatastreamClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent that owns the collection of Routess.
-   * @param {number} request.pageSize
-   *   Maximum number of Routes to return. The service may return
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of Routes to return. The service may return
    *   fewer than this value. If unspecified, at most 50 Routes
    *   will be returned. The maximum value is 1000; values above 1000 will be
    *   coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListRoutes` call.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListRoutes` call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListRoutes` must match the call that provided the page
    *   token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5331,22 +5344,22 @@ export class DatastreamClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent that owns the collection of Routess.
-   * @param {number} request.pageSize
-   *   Maximum number of Routes to return. The service may return
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of Routes to return. The service may return
    *   fewer than this value. If unspecified, at most 50 Routes
    *   will be returned. The maximum value is 1000; values above 1000 will be
    *   coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListRoutes` call.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListRoutes` call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListRoutes` must match the call that provided the page
    *   token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5391,22 +5404,22 @@ export class DatastreamClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent that owns the collection of Routess.
-   * @param {number} request.pageSize
-   *   Maximum number of Routes to return. The service may return
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of Routes to return. The service may return
    *   fewer than this value. If unspecified, at most 50 Routes
    *   will be returned. The maximum value is 1000; values above 1000 will be
    *   coerced to 1000.
-   * @param {string} request.pageToken
-   *   Page token received from a previous `ListRoutes` call.
+   * @param {string} [request.pageToken]
+   *   Optional. Page token received from a previous `ListRoutes` call.
    *   Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
    *   `ListRoutes` must match the call that provided the page
    *   token.
-   * @param {string} request.filter
-   *   Filter request.
-   * @param {string} request.orderBy
-   *   Order by fields for the result.
+   * @param {string} [request.filter]
+   *   Optional. Filter request.
+   * @param {string} [request.orderBy]
+   *   Optional. Order by fields for the result.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

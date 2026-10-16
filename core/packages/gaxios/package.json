@@ -1,11 +1,14 @@
 {
   "name": "gaxios",
-  "version": "8.3.0",
+  "version": "8.3.1",
   "description": "A simple common HTTP client specifically for Google APIs and services.",
   "main": "build/cjs/src/index.js",
   "types": "build/cjs/src/index.d.ts",
   "files": [
-    "build/"
+    "build/cjs/src",
+    "build/esm/src",
+    "build/esm/package.json",
+    "!build/**/*.map"
   ],
   "exports": {
     ".": {

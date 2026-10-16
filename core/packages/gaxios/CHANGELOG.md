@@ -1,6 +1,16 @@
 # Changelog
 
 
+## [8.3.1](https://github.com/googleapis/google-cloud-node/compare/gaxios-v8.3.0...gaxios-v8.3.1) (2026-10-14)
+
+
+### Bug Fixes
+
+* **gaxios:** Exclude compiled tests and .tsbuildinfo from published tarball ([#9612](https://github.com/googleapis/google-cloud-node/issues/9612)) ([7394a38](https://github.com/googleapis/google-cloud-node/commit/7394a3817c0dc8cc1a93a64a61c7ef06766d70b4))
+* **gaxios:** Normalize TimeoutError in _request and propagate retry timeout ([#9582](https://github.com/googleapis/google-cloud-node/issues/9582)) ([1b10df0](https://github.com/googleapis/google-cloud-node/commit/1b10df061581851f05bdd4f9162711b68726297c))
+* **gaxios:** Remove --abort-signal-timeout-shim ([#9555](https://github.com/googleapis/google-cloud-node/issues/9555)) ([29d8a5e](https://github.com/googleapis/google-cloud-node/commit/29d8a5e19b4498b63caa7de97bda6c1474ba19b1))
+* **gaxios:** Remove --bun-plugin-shim and support Bun fetch natively ([#9561](https://github.com/googleapis/google-cloud-node/issues/9561)) ([93b426d](https://github.com/googleapis/google-cloud-node/commit/93b426d1b94e6c42e3f4b0ef8f1be213f3bc1187))
+
 ## [8.3.0](https://github.com/googleapis/google-cloud-node/compare/gaxios-v8.2.0...gaxios-v8.3.0) (2026-10-08)
 
 

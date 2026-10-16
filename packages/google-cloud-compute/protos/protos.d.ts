@@ -29290,6 +29290,7 @@ export namespace google {
                         COMPUTE_OPTIMIZED_C3D = 383246484,
                         COMPUTE_OPTIMIZED_H3 = 428004939,
                         COMPUTE_OPTIMIZED_H4D = 383251320,
+                        COMPUTE_OPTIMIZED_H4D_3TB = 443379866,
                         GENERAL_PURPOSE = 299793543,
                         GENERAL_PURPOSE_C4 = 301911817,
                         GENERAL_PURPOSE_C4A = 232460888,
@@ -308503,6 +308504,7 @@ export namespace google {
                         STORAGE_OPTIMIZED_Z4D4T = 18503022,
                         STORAGE_OPTIMIZED_Z4DH = 35233722,
                         STORAGE_OPTIMIZED_Z4DS = 35233733,
+                        STORAGE_OPTIMIZED_Z4M = 157002327,
                         TYPE_UNSPECIFIED = 437714322
                     }
                 }
@@ -385456,6 +385458,7 @@ export namespace google {
                     /** LocalSsdEncryptionMode enum. */
                     enum LocalSsdEncryptionMode {
                         UNDEFINED_LOCAL_SSD_ENCRYPTION_MODE = 0,
+                        CMEK_ENCRYPTION = 35518610,
                         EPHEMERAL_KEY_ENCRYPTION = 413047941,
                         LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED = 454655720,
                         STANDARD_ENCRYPTION = 269392453
@@ -394838,6 +394841,7 @@ export namespace google {
                     /** LocalSsdEncryptionMode enum. */
                     enum LocalSsdEncryptionMode {
                         UNDEFINED_LOCAL_SSD_ENCRYPTION_MODE = 0,
+                        CMEK_ENCRYPTION = 35518610,
                         EPHEMERAL_KEY_ENCRYPTION = 413047941,
                         LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED = 454655720,
                         STANDARD_ENCRYPTION = 269392453
