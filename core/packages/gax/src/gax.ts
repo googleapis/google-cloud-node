@@ -24,7 +24,7 @@ import {warn} from './warnings';
 import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
 import {toLowerCamelCase} from './util';
-import {checkTelemetryEnabled} from './observability/util';
+import {checkTracingEnabled} from './observability/util';
 import {Status} from './status';
 import {RequestType} from './apitypes';
 
@@ -173,6 +173,7 @@ export interface CallOptions {
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
   enableTelemetryTracing?: boolean;
+  enableTelemetryLogging?: boolean;
   /**
    * Internal context used by resumable upload methods. Populated by
    * GAPIC-generated client libraries; do not set manually.
@@ -195,6 +196,7 @@ export class CallSettings {
   apiName?: string;
   retryRequestOptions?: RetryRequestOptions;
   enableTelemetryTracing?: boolean;
+  enableTelemetryLogging?: boolean;
   resumableUpload?: ResumableUploadContext;
 
   /**
@@ -230,6 +232,7 @@ export class CallSettings {
     this.apiName = settings.apiName ?? undefined;
     this.retryRequestOptions = settings.retryRequestOptions;
     this.enableTelemetryTracing = settings.enableTelemetryTracing;
+    this.enableTelemetryLogging = settings.enableTelemetryLogging;
     this.resumableUpload =
       'resumableUpload' in settings ? settings.resumableUpload : undefined;
   }
@@ -256,6 +259,7 @@ export class CallSettings {
     let apiName = this.apiName;
     let retryRequestOptions = this.retryRequestOptions;
     let enableTelemetryTracing = this.enableTelemetryTracing;
+    let enableTelemetryLogging = this.enableTelemetryLogging;
     let resumableUpload = this.resumableUpload;
 
     // If the user provides a timeout to the method, that timeout value will be used
@@ -315,6 +319,9 @@ export class CallSettings {
     if ('enableTelemetryTracing' in options) {
       enableTelemetryTracing = options.enableTelemetryTracing;
     }
+    if ('enableTelemetryLogging' in options) {
+      enableTelemetryLogging = options.enableTelemetryLogging;
+    }
     if ('resumableUpload' in options) {
       resumableUpload = options.resumableUpload;
     }
@@ -331,6 +338,7 @@ export class CallSettings {
       apiName,
       retryRequestOptions,
       enableTelemetryTracing,
+      enableTelemetryLogging,
       resumableUpload,
     });
   }
@@ -827,7 +835,7 @@ export function constructSettings(
   const envTracing = env.GOOGLE_SDK_NODE_ENABLE_TRACING?.trim();
   const isEnvSet = envTracing !== undefined && envTracing !== '';
 
-  const isEnvEnabled = checkTelemetryEnabled();
+  const isEnvEnabled = checkTracingEnabled();
 
   // Tracing is only enabled via GOOGLE_SDK_NODE_ENABLE_TRACING or when the user
   // passes enableTelemetryTracing: true in their client options. If
