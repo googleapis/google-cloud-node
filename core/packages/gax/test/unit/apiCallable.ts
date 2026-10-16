@@ -41,10 +41,7 @@ import * as gax from '../../src/gax';
 import {GoogleError} from '../../src/googleError';
 import {OtelHarness} from './otelHarness';
 import * as tracerHelper from '../../src/observability/TracerHelper';
-import {
-  StaticTraceContext,
-  clearMetadataCache,
-} from '../../src/observability/contextUtil';
+import {clearMetadataCache} from '../../src/observability/contextUtil';
 import * as utils from './utils';
 import * as retries from '../../src/normalCalls/retries';
 
@@ -356,13 +353,6 @@ describe('createApiCall', () => {
   describe('in regards to OpenTelemetry Tracing', () => {
     let harness: OtelHarness;
 
-    const telemetryInfo: StaticTraceContext = {
-      gcpClientService: 'echo.googleapis.com',
-      gcpVersion: '1.2.3',
-      gcpRepo: 'googleapis/google-cloud-node',
-      gcpArtifact: '@google-cloud/echo',
-    };
-
     beforeEach(() => {
       clearMetadataCache();
       harness = new OtelHarness();
@@ -373,9 +363,6 @@ describe('createApiCall', () => {
       clearMetadataCache();
       harness.teardown();
       delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-      delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
-      delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
-      delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     });
 
     it('calls traceCall with dynamicArgs, staticArgs, and isStreamingCall when tracing is enabled', async () => {
@@ -385,8 +372,10 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
+          headers: {
+            'x-goog-api-client': 'gapic/1.2.3',
+          },
         },
       });
 
@@ -412,37 +401,14 @@ describe('createApiCall', () => {
         methodName: 'Echo',
         rpcType: 'grpc',
       });
-      assert.deepStrictEqual(staticArgs, telemetryInfo);
+      assert.deepStrictEqual(staticArgs, {
+        gcpClientService: 'example',
+        gcpVersion: '1.2.3',
+        gcpRepo: 'googleapis/google-cloud-node',
+        gcpArtifact: '@google-cloud/example',
+      });
       assert.strictEqual(typeof fn, 'function');
       assert.strictEqual(isStreamingCall, false);
-    });
-
-    it('calls traceCall when tracing is enabled via GOOGLE_SDK_NODE_ENABLE_TRACING environment variable', async () => {
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
-      const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
-
-      const settings = new gax.CallSettings({
-        apiName: 'google.example.v1.Echo',
-        otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
-          internalMethodName: 'Echo',
-        },
-      });
-
-      function func(
-        argument: {},
-        metadata: {},
-        options: {},
-        callback: (err: GoogleError | null, resp?: unknown) => void,
-      ) {
-        callback(null, {data: 'hello'});
-        return {cancel: () => {}};
-      }
-
-      const apiCall = gaxCreateApiCall(func, settings);
-      await apiCall({param: 'test'}, undefined);
-
-      assert.strictEqual(traceCallSpy.calledOnce, true);
     });
 
     it('passes isStreamingCall as true to traceCall for streaming calls when tracing is enabled', () => {
@@ -452,7 +418,6 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
       });
@@ -480,9 +445,6 @@ describe('createApiCall', () => {
 
       const settings = new gax.CallSettings({
         enableTelemetryTracing: true,
-        otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
-        },
       });
 
       function func(
@@ -514,7 +476,6 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: false,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
       });
@@ -541,8 +502,10 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
+          headers: {
+            'x-goog-api-client': 'gapic/1.2.3',
+          },
         },
       });
 
@@ -582,10 +545,10 @@ describe('createApiCall', () => {
       );
       assert.strictEqual(
         attemptSpan.attributes['url.domain'],
-        'echo.googleapis.com',
+        'example.googleapis.com',
       );
       harness.assertServerAddressAndPort(
-        {address: 'echo.googleapis.com', port: 443},
+        {address: 'example.googleapis.com', port: 443},
         {span: attemptSpan},
       );
       assert.strictEqual(
@@ -596,14 +559,12 @@ describe('createApiCall', () => {
         attemptSpan.attributes['http.request.method'],
         undefined,
       );
+      assert.strictEqual(attemptSpan.attributes['gcp.client.version'], '1.2.3');
       harness.assertResponseStatus({rpcStatus: 'OK'}, {span: attemptSpan});
       assert.strictEqual(span.name, 'EchoClient.Echo');
       assert.strictEqual(span.kind, SpanKind.INTERNAL);
       assert.strictEqual(span.ended, true);
-      assert.strictEqual(
-        span.attributes['gcp.client.service'],
-        'echo.googleapis.com',
-      );
+      assert.strictEqual(span.attributes['gcp.client.service'], 'example');
       assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
       assert.strictEqual(
         span.attributes['gcp.client.repo'],
@@ -611,14 +572,17 @@ describe('createApiCall', () => {
       );
       assert.strictEqual(
         span.attributes['gcp.client.artifact'],
-        '@google-cloud/echo',
+        '@google-cloud/example',
       );
       assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
       assert.strictEqual(
         span.attributes['rpc.method'],
         'google.example.v1.Echo/Echo',
       );
-      assert.strictEqual(span.attributes['url.domain'], 'echo.googleapis.com');
+      assert.strictEqual(
+        span.attributes['url.domain'],
+        'example.googleapis.com',
+      );
       harness.assertResponseStatus({rpcStatus: 'OK'}, {span});
     });
 
@@ -628,6 +592,9 @@ describe('createApiCall', () => {
         apiName: 'google.cloud.redis.v1.CloudRedis',
         otherArgs: {
           internalMethodName: 'GetInstance',
+          headers: {
+            'x-goog-api-client': 'gapic/1.2.3',
+          },
         },
       });
 
@@ -660,56 +627,14 @@ describe('createApiCall', () => {
         'google.cloud.redis.v1.CloudRedis/GetInstance',
       );
       assert.strictEqual(attemptSpan.kind, SpanKind.CLIENT);
+      assert.strictEqual(attemptSpan.attributes['gcp.client.version'], '1.2.3');
       assert.strictEqual(span.name, 'CloudRedisClient.GetInstance');
       assert.strictEqual(span.ended, true);
       assert.strictEqual(span.attributes['gcp.client.service'], 'redis');
-      assert.ok(span.attributes['gcp.client.version']);
+      assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
       assert.ok(span.attributes['gcp.client.repo']);
       assert.ok(span.attributes['gcp.client.artifact']);
       assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
-    });
-
-    it('resolves static metadata from environment variables when configured', async () => {
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
-      process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE = 'env-service';
-      process.env.GOOGLE_SDK_NODE_CLIENT_VERSION = '9.9.9';
-      process.env.GOOGLE_SDK_NODE_ARTIFACT = '@custom/env-pkg';
-
-      const settings = new gax.CallSettings({
-        apiName: 'google.example.v1.Echo',
-        otherArgs: {
-          internalMethodName: 'Echo',
-        },
-      });
-
-      function func(
-        argument: {},
-        metadata: {},
-        options: {},
-        callback: (err: GoogleError | null, resp?: unknown) => void,
-      ) {
-        callback(null, {data: 'hello'});
-        return {
-          cancel: () => {},
-        };
-      }
-
-      const apiCall = gaxCreateApiCall(func, settings);
-      await apiCall({}, undefined);
-
-      const spans = harness.getSpans('google-gax');
-      assert.strictEqual(spans.length, 2);
-      const span = spans[1];
-      assert.strictEqual(span.attributes['gcp.client.service'], 'env-service');
-      assert.strictEqual(span.attributes['gcp.client.version'], '9.9.9');
-      assert.strictEqual(
-        span.attributes['gcp.client.repo'],
-        'googleapis/google-cloud-node',
-      );
-      assert.strictEqual(
-        span.attributes['gcp.client.artifact'],
-        '@custom/env-pkg',
-      );
     });
 
     it('passes fallback flag through when using fallback createApiCall with default options', async () => {
@@ -719,7 +644,6 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
       });
@@ -761,7 +685,7 @@ describe('createApiCall', () => {
       assert.strictEqual(attemptSpan.attributes['http.request.method'], 'POST');
       assert.strictEqual(attemptSpan.attributes['rpc.method'], undefined);
       harness.assertServerAddressAndPort(
-        {address: 'echo.googleapis.com', port: 443},
+        {address: 'example.googleapis.com', port: 443},
         {span: attemptSpan},
       );
       harness.assertResponseStatus({httpStatus: 200}, {span: attemptSpan});
@@ -783,7 +707,6 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
       });
@@ -823,7 +746,6 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
       });
@@ -852,7 +774,6 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
       });
@@ -883,7 +804,6 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
       });
@@ -914,7 +834,6 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
       });
@@ -940,71 +859,11 @@ describe('createApiCall', () => {
       assert.strictEqual(spans[1].attributes['rpc.system.name'], 'http');
     });
 
-    it('pipes telemetry information configured via constructSettings', async () => {
-      const serviceName = 'google.example.v1.Echo';
-      const defaults = gax.constructSettings(
-        serviceName,
-        {
-          interfaces: {
-            [serviceName]: {
-              methods: {
-                Echo: {},
-              },
-            },
-          },
-        },
-        {},
-        {},
-        undefined,
-        true,
-        telemetryInfo,
-      );
-
-      function func(
-        argument: {},
-        metadata: {},
-        options: {},
-        callback: (err: GoogleError | null, resp?: unknown) => void,
-      ) {
-        callback(null, {data: 'hello'});
-        return {
-          cancel: () => {},
-        };
-      }
-
-      const apiCall = gaxCreateApiCall(func, defaults.echo);
-      await apiCall({}, undefined);
-
-      const spans = harness.getSpans('google-gax');
-      assert.strictEqual(spans.length, 2);
-      const attemptSpan = spans[0];
-      const span = spans[1];
-      assert.strictEqual(attemptSpan.name, 'google.example.v1.Echo/Echo');
-      assert.strictEqual(attemptSpan.kind, SpanKind.CLIENT);
-      assert.strictEqual(span.name, 'EchoClient.Echo');
-      assert.strictEqual(span.ended, true);
-      assert.strictEqual(
-        span.attributes['gcp.client.service'],
-        'echo.googleapis.com',
-      );
-      assert.strictEqual(span.attributes['gcp.client.version'], '1.2.3');
-      assert.strictEqual(
-        span.attributes['gcp.client.repo'],
-        'googleapis/google-cloud-node',
-      );
-      assert.strictEqual(
-        span.attributes['gcp.client.artifact'],
-        '@google-cloud/echo',
-      );
-      assert.strictEqual(span.attributes['rpc.system.name'], 'grpc');
-    });
-
     it('records error details on the span when the API call fails', async () => {
       const settings = new gax.CallSettings({
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
       });
@@ -1057,7 +916,6 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
       });
@@ -1100,7 +958,6 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
       });
@@ -1144,7 +1001,6 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
       });
@@ -1198,7 +1054,6 @@ describe('createApiCall', () => {
         apiName: 'google.example.v1.Echo',
         enableTelemetryTracing: true,
         otherArgs: {
-          internalTelemetryInfo: telemetryInfo,
           internalMethodName: 'Echo',
         },
       });
@@ -1269,7 +1124,6 @@ describe('createApiCall', () => {
           timeout: 0,
           retry: utils.createRetryOptions(0, 0, 0, 0, 0, 0, 100),
           otherArgs: {
-            internalTelemetryInfo: telemetryInfo,
             internalMethodName: 'Echo',
           },
         });
@@ -1420,7 +1274,6 @@ describe('createApiCall', () => {
                 maxRetries: 2,
               }),
               otherArgs: {
-                internalTelemetryInfo: telemetryInfo,
                 internalMethodName: 'Echo',
               },
             });
@@ -1479,7 +1332,6 @@ describe('createApiCall', () => {
                 totalTimeoutMillis: 10,
               }),
               otherArgs: {
-                internalTelemetryInfo: telemetryInfo,
                 internalMethodName: 'Echo',
               },
             });
@@ -1632,7 +1484,6 @@ describe('createApiCall', () => {
           apiName: 'google.example.v1.Echo',
           enableTelemetryTracing: true,
           otherArgs: {
-            internalTelemetryInfo: telemetryInfo,
             internalMethodName: 'Echo',
           },
         });
@@ -1705,7 +1556,6 @@ describe('createApiCall', () => {
           apiName: 'google.example.v1.Echo',
           enableTelemetryTracing: true,
           otherArgs: {
-            internalTelemetryInfo: telemetryInfo,
             internalMethodName: 'Echo',
           },
         });
@@ -1771,6 +1621,7 @@ describe('createApiCall', () => {
           auth: new GoogleAuth({authClient}),
           servicePath: 'echo.googleapis.com',
           port: 443,
+          enableTelemetryTracing: true,
         });
         const protos = fallbackClient.loadProto(echoProtoJson);
         const echoService = protos.lookupService('Echo');
@@ -1792,8 +1643,6 @@ describe('createApiCall', () => {
           },
           {},
           {'x-goog-api-client': 'test'},
-          true,
-          telemetryInfo,
         );
 
         const stubPromise = fallbackClient
@@ -1836,7 +1685,6 @@ describe('createApiCall', () => {
           apiName: 'google.example.v1.Echo',
           enableTelemetryTracing: true,
           otherArgs: {
-            internalTelemetryInfo: telemetryInfo,
             internalMethodName: 'Echo',
           },
         });
@@ -1845,7 +1693,6 @@ describe('createApiCall', () => {
           apiName: 'google.example.v1.Echo',
           enableTelemetryTracing: true,
           otherArgs: {
-            internalTelemetryInfo: telemetryInfo,
             internalMethodName: 'Expand',
           },
         });

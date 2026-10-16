@@ -5,6 +5,8 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
+  gcp-metadata@>=8.0.0>gaxios: ^8.3.0
+  google-auth-library@>=10.0.0>gaxios: ^8.3.0
   yargs: ^17.7.2
 
 importers:
@@ -18,8 +20,8 @@ importers:
         specifier: ^6.0.0
         version: 6.1.0
       gaxios:
-        specifier: ^7.0.0-rc
-        version: 7.3.0
+        specifier: ^8.3.0
+        version: 8.3.0
       parse-link-header:
         specifier: ^2.0.0
         version: 2.0.0
@@ -687,8 +689,8 @@ importers:
   core/packages/gcp-metadata:
     dependencies:
       gaxios:
-        specifier: ^7.1.3
-        version: 7.3.0
+        specifier: ^8.3.0
+        version: 8.3.0
       google-logging-utils:
         specifier: ^2.0.0
         version: 2.0.1
@@ -769,8 +771,8 @@ importers:
         specifier: ^1.0.11
         version: 1.0.11
       gaxios:
-        specifier: ^7.1.4
-        version: 7.3.0
+        specifier: ^8.3.0
+        version: 8.3.0
       gcp-metadata:
         specifier: ^9.0.0
         version: 9.0.3
@@ -914,8 +916,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       gaxios:
-        specifier: ^7.3.0
-        version: 7.3.0
+        specifier: ^8.3.0
+        version: 8.3.0
       google-auth-library:
         specifier: ^11.0.0
         version: 11.0.2
@@ -1596,6 +1598,9 @@ importers:
       '@google-cloud/promisify':
         specifier: ^6.0.0
         version: 6.0.1
+      apache-arrow:
+        specifier: ^21.0.0
+        version: 21.2.0
       arrify:
         specifier: ^3.0.0
         version: 3.0.0
@@ -1615,6 +1620,9 @@ importers:
         specifier: ^11.0.0
         version: 11.0.1
     devDependencies:
+      '@google-cloud/bigquery-storage':
+        specifier: ^6.1.0
+        version: 6.2.0(protobufjs@8.8.0)
       '@google-cloud/storage':
         specifier: ^7.16.0
         version: 7.21.0(encoding@0.1.13)
@@ -1694,8 +1702,8 @@ importers:
   handwritten/bigquery-storage:
     dependencies:
       '@google-cloud/bigquery-storage-api':
-        specifier: ^0.3.0
-        version: 0.3.0
+        specifier: ^0.5.0
+        version: 0.5.0
       '@google-cloud/paginator':
         specifier: ^7.0.0
         version: 7.0.1
@@ -3051,9 +3059,6 @@ importers:
       '@types/big.js':
         specifier: ^6.2.2
         version: 6.2.2
-      '@types/stack-trace':
-        specifier: ^0.0.33
-        version: 0.0.33
       big.js:
         specifier: ^7.0.0
         version: 7.0.1
@@ -3075,18 +3080,12 @@ importers:
       lodash.snakecase:
         specifier: ^4.1.1
         version: 4.1.1
-      p-queue:
-        specifier: ^6.0.2
-        version: 6.6.2
       protobufjs:
         specifier: ^7.4.0
         version: 7.5.9
       retry-request:
         specifier: ^9.0.0
         version: 9.0.1
-      stack-trace:
-        specifier: 0.0.10
-        version: 0.0.10
       stream-events:
         specifier: ^1.0.5
         version: 1.0.5
@@ -3208,6 +3207,9 @@ importers:
       p-limit:
         specifier: ^3.0.1
         version: 3.1.0
+      p-queue:
+        specifier: ^6.0.2
+        version: 6.6.2
       path-to-regexp:
         specifier: ^8.2.0
         version: 8.4.2
@@ -3304,8 +3306,8 @@ importers:
         specifier: ^5.3.4
         version: 5.10.1
       gaxios:
-        specifier: ^7.1.4
-        version: 7.3.0
+        specifier: ^8.3.0
+        version: 8.3.0
       google-auth-library:
         specifier: ^11.0.0
         version: 11.0.2
@@ -3410,8 +3412,8 @@ importers:
         specifier: 6.0.0
         version: 6.0.0
       nock:
-        specifier: ~13.5.0
-        version: 13.5.6
+        specifier: ^14.0.5
+        version: 14.0.16
       pack-n-play:
         specifier: ^5.0.1
         version: 5.1.0
@@ -16389,6 +16391,16 @@ packages:
     resolution: {integrity: sha512-PPBOLw5IKE2wcdz/U4DV4KjeGHmt2Najwq73wrx9Jg0nHJor70jgsrrgdRNJ/4UvZ33ALhH55w0wmr2qk7PFrg==}
     engines: {node: '>=22'}
 
+  '@google-cloud/bigquery-storage-api@0.5.0':
+    resolution: {integrity: sha512-fN5uZpF13J61ukset7xhaHUweADtqTir5vI9KBq0CnRqirkEnKIvZxn34hoeO2NeP+rk8Ro2SeMVySJ6i16LuA==}
+    engines: {node: '>=22'}
+
+  '@google-cloud/bigquery-storage@6.2.0':
+    resolution: {integrity: sha512-ME41UGUxJJWywspFjcSGkq3ZE8izgBkmjLIyzZ1xqG0wucm9FP6XN+CHzT0vs3GEARguJEt8tuMfvJ7BJH328w==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      protobufjs: ~7.5.5
+
   '@google-cloud/bigquery@9.0.2':
     resolution: {integrity: sha512-KLRSKdU+1VsXMDz9tmqtFASQXuBazLFN3VN8fTkuW/jDWWQK7HuNjT2RIKev+5xlBGfBsqQZs4Z5jqT0seV0aw==}
     engines: {node: '>=22'}
@@ -20656,6 +20668,10 @@ packages:
   gaxios@7.3.0:
     resolution: {integrity: sha512-RB5vLV+vvQeoFPCX4QMK6/hjVkbIamPp1QSUD0CiZcnj12qbpiL+pLbYtgD+oZkWl0tl9z+o2Utp+MpM3QRhBA==}
     engines: {node: '>=18'}
+
+  gaxios@8.3.0:
+    resolution: {integrity: sha512-qrbx1exJ03MmFn2DjsON7mpLjGqGtKMJ13GTOaZNmZgx53latIyq4Onn9THZaWcvBgAL4YYtG8Dh8ETrnBLCiw==}
+    engines: {node: '>=22'}
 
   gcbuild@1.3.39:
     resolution: {integrity: sha512-NJqemT7EsE/a6fAGK8juUbDCTuaNwuxJxLHhmpsKZdyY0pFeUQ1Wxl5DPrZk9qCv0yE+t6uhmOGtD+rW50KomQ==}
@@ -26347,7 +26363,28 @@ snapshots:
 
   '@google-cloud/bigquery-storage-api@0.3.0':
     dependencies:
+      google-gax: 6.5.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@google-cloud/bigquery-storage-api@0.5.0':
+    dependencies:
       google-gax: 6.1.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@google-cloud/bigquery-storage@6.2.0(protobufjs@8.8.0)':
+    dependencies:
+      '@google-cloud/bigquery-storage-api': 0.3.0
+      '@google-cloud/paginator': 7.0.1
+      '@google-cloud/precise-date': 6.0.0
+      apache-arrow: 21.2.0
+      core-js: 3.49.0
+      extend: 3.0.2
+      google-auth-library: 11.0.2
+      google-gax: 6.5.0
+      long: 5.3.2
+      protobufjs: 8.8.0
     transitivePeerDependencies:
       - supports-color
 
@@ -32101,6 +32138,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  gaxios@8.3.0:
+    dependencies:
+      extend: 3.0.2
+      https-proxy-agent: 7.0.6
+      node-fetch: 3.3.2
+    transitivePeerDependencies:
+      - supports-color
+
   gcbuild@1.3.39(encoding@0.1.13):
     dependencies:
       chalk: 4.1.2
@@ -32134,7 +32179,7 @@ snapshots:
 
   gcp-metadata@8.1.2:
     dependencies:
-      gaxios: 7.3.0
+      gaxios: 8.3.0
       google-logging-utils: 1.1.3
       json-bigint: 1.0.0
     transitivePeerDependencies:
@@ -32142,7 +32187,7 @@ snapshots:
 
   gcp-metadata@9.0.3:
     dependencies:
-      gaxios: 7.3.0
+      gaxios: 8.3.0
       google-logging-utils: 2.0.1
       json-bigint: 1.0.0
     transitivePeerDependencies:
@@ -32313,7 +32358,7 @@ snapshots:
     dependencies:
       base64-js: 1.5.1
       ecdsa-sig-formatter: 1.0.11
-      gaxios: 7.3.0
+      gaxios: 8.3.0
       gcp-metadata: 8.1.2
       google-logging-utils: 1.1.3
       gtoken: 8.0.0
@@ -32325,7 +32370,7 @@ snapshots:
     dependencies:
       base64-js: 1.5.1
       ecdsa-sig-formatter: 1.0.11
-      gaxios: 7.3.0
+      gaxios: 8.3.0
       gcp-metadata: 8.1.2
       google-logging-utils: 1.1.3
       jws: 4.0.1
@@ -32336,7 +32381,7 @@ snapshots:
     dependencies:
       base64-js: 1.5.1
       ecdsa-sig-formatter: 1.0.11
-      gaxios: 7.3.0
+      gaxios: 8.3.0
       gcp-metadata: 9.0.3
       google-logging-utils: 2.0.1
       jws: 4.0.1

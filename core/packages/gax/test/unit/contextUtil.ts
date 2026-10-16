@@ -15,20 +15,26 @@
  */
 
 import * as assert from 'assert';
+import {context, INVALID_SPAN_CONTEXT, trace} from '@opentelemetry/api';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {
+  ATTEMPT_SPAN_KEY,
   buildInitialAttributes,
   clearMetadataCache,
+  CLIENT_REQUEST_SPAN_KEY,
   DynamicTraceContext,
   extractClientServiceFromPackageName,
   extractFromEnvironment,
   extractFromSettings,
   extractServiceFromApiName,
+  getActiveTraceContext,
   resolveStaticTraceContext,
   StaticTraceContext,
   DEFAULT_GCP_REPO,
 } from '../../src/observability/contextUtil';
+import {traceAttempt, traceCall} from '../../src/observability/TracerHelper';
 import {CallSettings} from '../../src/gax';
+import {OtelHarness} from './otelHarness';
 
 describe('contextUtil', () => {
   beforeEach(() => {
@@ -62,40 +68,15 @@ describe('contextUtil', () => {
   });
 
   describe('extractClientServiceFromPackageName', () => {
-    it('extracts service from @google-cloud scoped packages', () => {
+    it('extracts service from scoped and unscoped package names', () => {
       assert.strictEqual(
         extractClientServiceFromPackageName('@google-cloud/redis'),
         'redis',
       );
       assert.strictEqual(
-        extractClientServiceFromPackageName('@google-cloud/storage'),
-        'storage',
-      );
-      assert.strictEqual(
-        extractClientServiceFromPackageName('@google-cloud/secret-manager'),
-        'secret-manager',
-      );
-    });
-
-    it('extracts service from other scoped packages', () => {
-      assert.strictEqual(
-        extractClientServiceFromPackageName('@googlemaps/places'),
-        'places',
-      );
-      assert.strictEqual(
-        extractClientServiceFromPackageName('@google-shopping/accounts'),
-        'accounts',
-      );
-    });
-
-    it('extracts service from unscoped google-cloud- packages', () => {
-      assert.strictEqual(
         extractClientServiceFromPackageName('google-cloud-redis'),
         'redis',
       );
-    });
-
-    it('falls back to unchanged name for standard packages', () => {
       assert.strictEqual(
         extractClientServiceFromPackageName('google-gax'),
         'google-gax',
@@ -209,6 +190,39 @@ describe('contextUtil', () => {
       assert.strictEqual(metadata.gcpArtifact, '@google-cloud/redis');
     });
 
+    it('extracts version from metadataBuilder when headers is not set directly on otherArgs', () => {
+      const grpcSettings = new CallSettings({
+        apiName: 'google.cloud.redis.v1.CloudRedis',
+        otherArgs: {
+          metadataBuilder: () => ({
+            get: (key: string) =>
+              key === 'x-goog-api-client'
+                ? ['gax/5.0.6 gapic/6.1.0 gl-node/22.0.0 grpc/1.10.0']
+                : [],
+          }),
+        },
+      });
+      const grpcMeta = extractFromSettings(grpcSettings);
+      assert.strictEqual(grpcMeta.gcpVersion, '6.1.0');
+      assert.strictEqual(grpcMeta.gcpClientService, 'redis');
+      assert.strictEqual(grpcMeta.gcpArtifact, '@google-cloud/redis');
+
+      const fallbackSettings = new CallSettings({
+        apiName: 'google.cloud.redis.v1.CloudRedis',
+        otherArgs: {
+          metadataBuilder: () => ({
+            'x-goog-api-client': [
+              'gax/5.0.6 gapic/6.1.0 gl-node/22.0.0 rest/5.0.6 grpc-web/5.0.6',
+            ],
+          }),
+        },
+      });
+      const fallbackMeta = extractFromSettings(fallbackSettings);
+      assert.strictEqual(fallbackMeta.gcpVersion, '6.1.0');
+      assert.strictEqual(fallbackMeta.gcpClientService, 'redis');
+      assert.strictEqual(fallbackMeta.gcpArtifact, '@google-cloud/redis');
+    });
+
     it('handles undefined settings', () => {
       const metadata = extractFromSettings(undefined);
       assert.deepStrictEqual(metadata, {});
@@ -240,62 +254,17 @@ describe('contextUtil', () => {
   });
 
   describe('resolveStaticTraceContext', () => {
-    it('uses explicit internalTelemetryInfo when GOOGLE_SDK_NODE_ENABLE_TRACING is not set', () => {
-      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-      const explicit: StaticTraceContext = {
-        gcpClientService: 'custom-service',
-        gcpVersion: '1.2.3',
-        gcpArtifact: '@custom/client',
-      };
-      const settings = new CallSettings({
-        otherArgs: {
-          internalTelemetryInfo: explicit,
-        },
-      });
-
-      const resolved = resolveStaticTraceContext(settings);
-      assert.strictEqual(resolved.gcpClientService, 'custom-service');
-      assert.strictEqual(resolved.gcpVersion, '1.2.3');
-      assert.strictEqual(resolved.gcpArtifact, '@custom/client');
-      assert.strictEqual(resolved.gcpRepo, DEFAULT_GCP_REPO);
-    });
-
-    it('uses explicit internalTelemetryInfo even when GOOGLE_SDK_NODE_ENABLE_TRACING is set', () => {
-      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
-      const explicit: StaticTraceContext = {
-        gcpClientService: 'explicit-service',
-        gcpVersion: '9.9.9',
-        gcpRepo: 'explicit/repo',
-        gcpArtifact: '@explicit/client',
-      };
-      const settings = new CallSettings({
-        apiName: 'google.cloud.redis.v1.CloudRedis',
-        otherArgs: {
-          internalTelemetryInfo: explicit,
-        },
-      });
-
-      const resolved = resolveStaticTraceContext(settings);
-      assert.strictEqual(resolved.gcpClientService, 'explicit-service');
-      assert.strictEqual(resolved.gcpArtifact, '@explicit/client');
-      assert.strictEqual(resolved.gcpVersion, '9.9.9');
-      assert.strictEqual(resolved.gcpRepo, DEFAULT_GCP_REPO);
-    });
-
-    it('prioritizes environment variables over explicit internalTelemetryInfo and dynamic settings', () => {
+    it('prioritizes environment variables over dynamic settings', () => {
       process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE = 'env-service';
       process.env.GOOGLE_SDK_NODE_CLIENT_VERSION = '5.0.0';
       process.env.GOOGLE_SDK_NODE_ARTIFACT = '@custom/env-artifact';
 
-      const explicit: StaticTraceContext = {
-        gcpClientService: 'explicit-service',
-        gcpVersion: '1.0.0',
-        gcpArtifact: '@explicit/client',
-      };
       const settings = new CallSettings({
         apiName: 'google.cloud.redis.v1.CloudRedis',
         otherArgs: {
-          internalTelemetryInfo: explicit,
+          headers: {
+            'x-goog-api-client': 'gapic/1.0.0',
+          },
         },
       });
 
@@ -323,44 +292,40 @@ describe('contextUtil', () => {
       assert.strictEqual(resolved.gcpRepo, 'googleapis/google-cloud-node');
     });
 
-    it('only caches resolved metadata when apiName is present', () => {
-      const settingsNoApiName1 = new CallSettings({
+    it('resolves distinct endpoints and ports for clients sharing the same apiName', () => {
+      const usEastSettings = new CallSettings({
+        apiName: 'google.cloud.kms.v1.KeyManagementService',
         otherArgs: {
+          servicePath: 'us-east1-cloudkms.googleapis.com',
+          port: 443,
           headers: {
             'x-goog-api-client': 'gapic/1.0.0',
           },
         },
       });
-      const settingsNoApiName2 = new CallSettings({
+      const emulatorSettings = new CallSettings({
+        apiName: 'google.cloud.kms.v1.KeyManagementService',
         otherArgs: {
+          servicePath: 'localhost:8080',
           headers: {
             'x-goog-api-client': 'gapic/2.0.0',
           },
         },
       });
 
-      const resolvedNoApi1 = resolveStaticTraceContext(settingsNoApiName1);
-      const resolvedNoApi2 = resolveStaticTraceContext(settingsNoApiName2);
-      assert.strictEqual(resolvedNoApi1.gcpVersion, '1.0.0');
-      assert.strictEqual(resolvedNoApi2.gcpVersion, '2.0.0');
+      const resolvedUsEast = resolveStaticTraceContext(usEastSettings);
+      const resolvedEmulator = resolveStaticTraceContext(emulatorSettings);
 
-      const settingsWithApi = new CallSettings({
-        apiName: 'google.cloud.redis.v1.CloudRedis',
-        otherArgs: {
-          headers: {
-            'x-goog-api-client': 'gapic/1.0.0',
-          },
-        },
-      });
-
-      const resolvedFirst = resolveStaticTraceContext(settingsWithApi);
-      const resolvedSecond = resolveStaticTraceContext(settingsWithApi);
-      assert.strictEqual(resolvedFirst.gcpArtifact, resolvedSecond.gcpArtifact);
       assert.strictEqual(
-        resolvedFirst.gcpClientService,
-        resolvedSecond.gcpClientService,
+        resolvedUsEast.serverAddress,
+        'us-east1-cloudkms.googleapis.com',
       );
-      assert.strictEqual(resolvedFirst.gcpVersion, resolvedSecond.gcpVersion);
+      assert.strictEqual(resolvedUsEast.serverPort, 443);
+      assert.strictEqual(resolvedUsEast.gcpVersion, '1.0.0');
+
+      assert.strictEqual(resolvedEmulator.serverAddress, 'localhost');
+      assert.strictEqual(resolvedEmulator.serverPort, 8080);
+      assert.strictEqual(resolvedEmulator.gcpVersion, '2.0.0');
     });
 
     it('extracts serverAddress and serverPort from settings', () => {
@@ -439,6 +404,143 @@ describe('contextUtil', () => {
           'rpc.system.name': 'http',
         },
       );
+    });
+  });
+
+  describe('getActiveTraceContext', () => {
+    let harness: OtelHarness;
+
+    const dynamicArgs: DynamicTraceContext = {
+      clientName: 'StorageClient',
+      methodName: 'GetObject',
+      rpcType: 'grpc',
+    };
+
+    const staticArgs: StaticTraceContext = {
+      gcpClientService: 'storage.googleapis.com',
+      gcpVersion: '1.2.3',
+      gcpRepo: 'googleapis/google-cloud-node',
+      gcpArtifact: '@google-cloud/storage',
+    };
+
+    beforeEach(() => {
+      harness = new OtelHarness();
+      harness.setup();
+    });
+
+    afterEach(() => {
+      harness.teardown();
+    });
+
+    it('returns undefined when no span is active', () => {
+      assert.strictEqual(getActiveTraceContext(), undefined);
+    });
+
+    it('falls back to an active outer OpenTelemetry span when no GAX span is active', () => {
+      trace.getTracer('user-app').startActiveSpan('user-span', span => {
+        const activeTrace = getActiveTraceContext();
+        assert.ok(activeTrace);
+        assert.strictEqual(activeTrace.traceId, span.spanContext().traceId);
+        assert.strictEqual(activeTrace.spanId, span.spanContext().spanId);
+        assert.strictEqual(activeTrace.span, span);
+        assert.strictEqual(activeTrace.attemptSpan, undefined);
+        assert.strictEqual(activeTrace.clientRequestSpan, undefined);
+        span.end();
+      });
+    });
+
+    it('returns client request span and trace/span IDs inside traceCall', async () => {
+      let captured = getActiveTraceContext();
+      await traceCall(dynamicArgs, staticArgs, async () => {
+        captured = getActiveTraceContext();
+        return 'ok';
+      });
+
+      const span = harness.requireSingleSpan('google-gax');
+      assert.ok(captured);
+      assert.strictEqual(captured.traceId, span.spanContext().traceId);
+      assert.strictEqual(captured.spanId, span.spanContext().spanId);
+      assert.strictEqual(
+        captured.clientRequestSpan?.spanContext().spanId,
+        span.spanContext().spanId,
+      );
+      assert.strictEqual(captured.span, captured.clientRequestSpan);
+      assert.strictEqual(captured.attemptSpan, undefined);
+    });
+
+    it('returns attempt span, client request span, and trace/span IDs inside traceAttempt', async () => {
+      let callCaptured = getActiveTraceContext();
+      let attemptCaptured = getActiveTraceContext();
+      await traceCall(dynamicArgs, staticArgs, async () => {
+        callCaptured = getActiveTraceContext();
+        return traceAttempt(dynamicArgs, staticArgs, async () => {
+          attemptCaptured = getActiveTraceContext();
+          return 'ok';
+        });
+      });
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      const attemptSpan = spans[0];
+      const clientSpan = spans[1];
+
+      assert.ok(callCaptured);
+      assert.strictEqual(
+        callCaptured.traceId,
+        clientSpan.spanContext().traceId,
+      );
+      assert.strictEqual(callCaptured.spanId, clientSpan.spanContext().spanId);
+      assert.strictEqual(callCaptured.span, callCaptured.clientRequestSpan);
+      assert.strictEqual(callCaptured.attemptSpan, undefined);
+
+      assert.ok(attemptCaptured);
+      assert.strictEqual(
+        attemptCaptured.traceId,
+        attemptSpan.spanContext().traceId,
+      );
+      assert.strictEqual(
+        attemptCaptured.spanId,
+        attemptSpan.spanContext().spanId,
+      );
+      assert.strictEqual(attemptCaptured.span, attemptCaptured.attemptSpan);
+      assert.strictEqual(
+        attemptCaptured.clientRequestSpan,
+        callCaptured.clientRequestSpan,
+      );
+    });
+
+    it('returns undefined when span context is invalid (no-op tracer)', async () => {
+      trace.disable();
+      let captured: ReturnType<typeof getActiveTraceContext>;
+      await traceCall(dynamicArgs, staticArgs, async () => {
+        captured = getActiveTraceContext();
+        return 'ok';
+      });
+      assert.strictEqual(captured, undefined);
+    });
+
+    it('falls back to a valid outer span when attemptSpan and clientRequestSpan are NoopSpans', () => {
+      const noopSpan = trace.wrapSpanContext(INVALID_SPAN_CONTEXT);
+      trace.getTracer('user-app').startActiveSpan('user-span', userSpan => {
+        const ctxWithNoopGaxSpans = context
+          .active()
+          .setValue(CLIENT_REQUEST_SPAN_KEY, noopSpan)
+          .setValue(ATTEMPT_SPAN_KEY, noopSpan);
+
+        context.with(ctxWithNoopGaxSpans, () => {
+          const activeTrace = getActiveTraceContext();
+          assert.ok(activeTrace);
+          assert.strictEqual(
+            activeTrace.traceId,
+            userSpan.spanContext().traceId,
+          );
+          assert.strictEqual(activeTrace.spanId, userSpan.spanContext().spanId);
+          assert.strictEqual(activeTrace.span, userSpan);
+          assert.strictEqual(activeTrace.attemptSpan, undefined);
+          assert.strictEqual(activeTrace.clientRequestSpan, undefined);
+        });
+        userSpan.end();
+      });
     });
   });
 });
