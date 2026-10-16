@@ -918,7 +918,7 @@ export class BigQuery extends Service {
    * When passing a `number` input, it should be epoch seconds in float representation.
    *
    * @method BigQuery.timestamp
-   * @param {Date|string} value The time.
+   * @param {Date|PreciseDate|string|number} value The time.
    *
    * @example
    * ```
@@ -938,7 +938,7 @@ export class BigQuery extends Service {
    * If passing as a `string`, it should be Timestamp literals: https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical#timestamp_literals.
    * When passing a `number` input, it should be epoch seconds in float representation.
    *
-   * @param {Date|string|string|number} value The time.
+   * @param {Date|PreciseDate|string|number} value The time.
    *
    * @example
    * ```
