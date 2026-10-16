@@ -20,6 +20,8 @@ import * as arrow from 'apache-arrow';
 import {
   BigQuery,
   Job,
+  JobCallback,
+  JobOptions,
   Query,
   QueryResultsOptions,
   QueryRowsCallback,
@@ -160,6 +162,26 @@ function stubJobGetMetadata(
   ) => {
     process.nextTick(() => cb(outcome.err || null, outcome.metadata));
   }) as Job['getMetadata'];
+}
+
+/**
+ * Stubs `bq.createJob` for callback-based `jobs.insert` tests.
+ */
+function stubCreateJob(
+  bq: BigQuery,
+  impl: (opts: JobOptions, cb: JobCallback) => void,
+): void {
+  bq.createJob = impl as BigQuery['createJob'];
+}
+
+/**
+ * Stubs `bq.createQueryJob` for callback-based `jobs.insert` tests.
+ */
+function stubCreateQueryJob(
+  bq: BigQuery,
+  impl: (opts: Query | string, cb: JobCallback) => void,
+): void {
+  bq.createQueryJob = impl as BigQuery['createQueryJob'];
 }
 
 describe('Arrow Support', () => {
@@ -455,16 +477,6 @@ describe('Arrow Support', () => {
       await assert.rejects(
         bq.createQueryArrowStream({query: 'SELECT 1', destination}).toArray(),
         /Explicit destination tables are not yet supported in createQueryArrowStream\./,
-      );
-    });
-
-    it('should fail when the query configuration cannot be executed via jobs.query', async () => {
-      // TODO: Replace with jobs.insert (createQueryJob) fallback tests once added.
-      await assert.rejects(
-        bq
-          .createQueryArrowStream({query: 'SELECT 1', jobId: 'custom-job-1'})
-          .toArray(),
-        /Query configuration cannot be executed via jobs\.query\./,
       );
     });
 
@@ -1321,6 +1333,279 @@ describe('Arrow Support', () => {
       await assert.rejects(
         bq.createQueryArrowStream('SELECT id FROM tbl WHERE FALSE').toArray(),
         /jobs.get failed/,
+      );
+    });
+  });
+
+  describe('BigQuery#createQueryArrowStream (jobs.insert)', () => {
+    let bq: BigQuery;
+
+    beforeEach(() => {
+      bq = new BigQuery({projectId: 'test-project'});
+    });
+
+    it('should route jobs.insert-only options through createQueryJob without queryResultsFormat, wait for completion, and stream from streams/_default at offset = 0', async () => {
+      const getCapturedQueryReq = stubJobsQuery(bq, {res: {}});
+
+      let capturedJobOpts: JobOptions | undefined;
+      let getQueryResultsCalled = false;
+      const capturedReadRowsReqs: Array<{
+        readStream?: string;
+        offset?: number;
+      }> = [];
+
+      const fakeJob = bq.job('custom-job-1', {location: 'EU'});
+      fakeJob.metadata = {
+        jobReference: {
+          projectId: 'test-project',
+          jobId: 'custom-job-1',
+          location: 'EU',
+        },
+      };
+      stubJobGetQueryResults(fakeJob, (opts, cb) => {
+        getQueryResultsCalled = true;
+        assert.strictEqual(capturedReadRowsReqs.length, 0);
+        assert.deepStrictEqual(opts, {
+          autoPaginate: false,
+          maxResults: 0,
+        });
+        process.nextTick(() => {
+          cb(null, [], null, {jobComplete: true, totalRows: '2'});
+        });
+      });
+
+      // Intercept createJob (called by createQueryJob) to inspect the outgoing jobs.insert payload.
+      stubCreateJob(bq, (reqOpts, cb) => {
+        capturedJobOpts = reqOpts;
+        process.nextTick(() => {
+          cb(null, fakeJob, fakeJob.metadata);
+        });
+      });
+
+      stubStorageReadClient(bq, {
+        readRows: (req: {readStream?: string; offset?: number}) => {
+          capturedReadRowsReqs.push(req);
+          const grpcStream = new EventEmitter();
+          process.nextTick(() => {
+            grpcStream.emit('data', {
+              arrowSchema: {
+                serializedSchema: Buffer.from(
+                  SAMPLE_PAYLOAD.serializedSchema,
+                  'base64',
+                ),
+              },
+              arrowRecordBatch: {
+                serializedRecordBatch: Buffer.from(
+                  SAMPLE_PAYLOAD.serializedRecordBatch,
+                  'base64',
+                ),
+              },
+            });
+            grpcStream.emit('end');
+          });
+          return grpcStream;
+        },
+      });
+
+      let emittedJob: Job | undefined;
+      const stream = bq.createQueryArrowStream({
+        query: 'SELECT id, name FROM tbl',
+        jobId: 'custom-job-1',
+        location: 'EU',
+        jobCreationMode: 'JOB_CREATION_OPTIONAL',
+      });
+      stream.on('job', j => {
+        emittedJob = j;
+      });
+
+      const batches: arrow.RecordBatch[] = await stream.toArray();
+
+      // Verify jobs.query was bypassed and jobs.insert did not receive queryResultsFormat or jobCreationMode.
+      assert.strictEqual(getCapturedQueryReq(), undefined);
+      const queryConfig = capturedJobOpts?.configuration?.query;
+      assert.ok(queryConfig);
+      assert.strictEqual(queryConfig.query, 'SELECT id, name FROM tbl');
+      assert.strictEqual('queryResultsFormat' in queryConfig, false);
+      assert.strictEqual('jobCreationMode' in queryConfig, false);
+
+      // Verify metadata, job wait, and ReadRows at offset = 0 in the job's EU location.
+      assert.strictEqual(stream.queryId, undefined);
+      assert.deepStrictEqual(stream.jobReference, {
+        projectId: 'test-project',
+        jobId: 'custom-job-1',
+        location: 'EU',
+      });
+      assert.strictEqual(emittedJob, fakeJob);
+      assert.strictEqual(getQueryResultsCalled, true);
+      assert.deepStrictEqual(capturedReadRowsReqs, [
+        {
+          readStream:
+            'projects/test-project/locations/EU/jobs/custom-job-1/streams/_default',
+          offset: 0,
+        },
+      ]);
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 2);
+    });
+
+    it('should not retry a failed jobs.query call as jobs.insert', async () => {
+      stubJobsQuery(bq, {err: new Error('jobs.query failed')});
+      let createQueryJobCalled = false;
+      stubCreateQueryJob(bq, () => {
+        createQueryJobCalled = true;
+      });
+
+      // Verify a failed jobs.query surfaces its error directly without falling back to jobs.insert.
+      await assert.rejects(
+        bq.createQueryArrowStream('SELECT 1').toArray(),
+        /jobs\.query failed/,
+      );
+      assert.strictEqual(createQueryJobCalled, false);
+    });
+
+    it('should emit a 0-row, 0-column RecordBatch without waiting or calling ReadRows when dryRun is true', async () => {
+      const fakeJob = bq.job('dry-run-job-1', {location: 'US'});
+      fakeJob.metadata = {
+        jobReference: {
+          projectId: 'test-project',
+          jobId: 'dry-run-job-1',
+          location: 'US',
+        },
+      };
+      let getQueryResultsCalled = false;
+      stubJobGetQueryResults(fakeJob, () => {
+        getQueryResultsCalled = true;
+      });
+      stubCreateQueryJob(bq, (_opts, cb) => {
+        process.nextTick(() => {
+          cb(null, fakeJob, fakeJob.metadata);
+        });
+      });
+
+      const stream = bq.createQueryArrowStream({
+        query: 'SELECT 1',
+        dryRun: true,
+      });
+      const batches: arrow.RecordBatch[] = await stream.toArray();
+
+      // Verify dryRun emits an empty batch immediately without polling getQueryResults.
+      assert.strictEqual(getQueryResultsCalled, false);
+      assert.strictEqual(stream.jobReference?.jobId, 'dry-run-job-1');
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 0);
+      assert.strictEqual(batches[0].numCols, 0);
+    });
+
+    it('should bound the jobs.insert wait with timeoutMs and keep timeoutMs out of configuration.query', async () => {
+      const fakeJob = bq.job('timeout-job-1', {location: 'US'});
+      fakeJob.metadata = {
+        jobReference: {
+          projectId: 'test-project',
+          jobId: 'timeout-job-1',
+          location: 'US',
+        },
+      };
+      let waitOpts: QueryResultsOptions | undefined;
+      stubJobGetQueryResults(fakeJob, (opts, cb) => {
+        waitOpts = opts;
+        // Job.getQueryResults fails like this when timeoutMs passes before
+        // the job completes.
+        process.nextTick(() => {
+          cb(new Error('The query did not complete before 1000ms'), null);
+        });
+      });
+      let capturedJobOpts: JobOptions | undefined;
+      stubCreateJob(bq, (reqOpts, cb) => {
+        capturedJobOpts = reqOpts;
+        process.nextTick(() => {
+          cb(null, fakeJob, fakeJob.metadata);
+        });
+      });
+
+      // Verify the wait fails like BigQuery#query when timeoutMs passes.
+      await assert.rejects(
+        bq
+          .createQueryArrowStream({
+            query: 'SELECT 1',
+            jobTimeoutMs: 60000,
+            timeoutMs: 1000,
+          })
+          .toArray(),
+        /The query did not complete before 1000ms/,
+      );
+      // Verify timeoutMs bounded jobs.getQueryResults and wasn't sent as a
+      // jobs.insert configuration field.
+      assert.strictEqual(waitOpts?.timeoutMs, 1000);
+      assert.strictEqual(
+        (capturedJobOpts?.configuration?.query as Record<string, unknown>)
+          ?.timeoutMs,
+        undefined,
+      );
+    });
+
+    it('should wait without a timeout when timeoutMs is 0 on the jobs.insert path', async () => {
+      const fakeJob = bq.job('timeout-zero-job', {location: 'US'});
+      fakeJob.metadata = {
+        jobReference: {
+          projectId: 'test-project',
+          jobId: 'timeout-zero-job',
+          location: 'US',
+        },
+      };
+      const waitOpts: QueryResultsOptions[] = [];
+      stubJobGetQueryResults(fakeJob, (opts, cb) => {
+        waitOpts.push(opts);
+        process.nextTick(() =>
+          cb(new Error('stop after the first poll'), null),
+        );
+      });
+      stubCreateJob(bq, (_reqOpts, cb) => {
+        process.nextTick(() => cb(null, fakeJob, fakeJob.metadata));
+      });
+
+      await assert.rejects(
+        bq
+          .createQueryArrowStream({
+            query: 'SELECT 1',
+            jobTimeoutMs: 60000,
+            timeoutMs: 0,
+          })
+          .toArray(),
+        /stop after the first poll/,
+      );
+      // Verify 0 means "no limit", as in BigQuery#query: sending timeoutMs: 0
+      // would make jobs.getQueryResults return at once and poll in a loop.
+      assert.deepStrictEqual(waitOpts, [{autoPaginate: false, maxResults: 0}]);
+    });
+
+    it('should forward errors thrown synchronously by createQueryJob', async () => {
+      // jobId forces jobs.insert; a null parameter without a type makes
+      // createQueryJob throw before sending the request.
+      await assert.rejects(
+        bq
+          .createQueryArrowStream({
+            query: 'SELECT ?',
+            jobId: 'custom-job-throw',
+            params: [null],
+          })
+          .toArray(),
+        /Parameter types must be provided for null values/,
+      );
+    });
+
+    it('should forward createQueryJob errors to the stream', async () => {
+      stubCreateQueryJob(bq, (_opts, cb) => {
+        process.nextTick(() => {
+          cb(new Error('Permission denied creating job'), null);
+        });
+      });
+
+      // Verify errors from createQueryJob reject stream consumption.
+      await assert.rejects(
+        bq
+          .createQueryArrowStream({query: 'SELECT 1', jobId: 'custom-err-1'})
+          .toArray(),
+        /Permission denied creating job/,
       );
     });
   });

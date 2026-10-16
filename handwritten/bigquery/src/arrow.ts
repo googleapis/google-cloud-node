@@ -93,9 +93,9 @@ export type ArrowRecordBatchStream = ResourceStream<RecordBatch> & {
  */
 export type ArrowQuery = Query & {
   /**
-   * How long to wait for `jobs.query` to complete, in milliseconds. If the
-   * query doesn't complete in time, the stream fails instead of waiting for
-   * the job.
+   * How long to wait for the query to complete, in milliseconds. If it doesn't
+   * complete in time, the stream fails. If unset or 0, the stream waits until
+   * the job completes.
    */
   timeoutMs?: number;
 };
@@ -533,7 +533,9 @@ function streamReadRows(
 
 /**
  * Waits for an unfinished BigQuery job to complete using `job.getQueryResults`
- * without fetching any `STRUCT_ENCODING` rows (`maxResults: 0`).
+ * without fetching any `STRUCT_ENCODING` rows (`maxResults: 0`). If `timeoutMs`
+ * is set, fails like {@link BigQuery#query} when the job doesn't complete in
+ * time instead of polling again.
  *
  * @private
  */
@@ -541,6 +543,7 @@ function waitForJobCompletion(
   job: Job,
   stream: ArrowRecordBatchStream,
   onComplete: () => void,
+  timeoutMs?: number,
 ): void {
   const poll = () => {
     if (stream._ended || stream.destroyed) {
@@ -552,6 +555,9 @@ function waitForJobCompletion(
       {
         autoPaginate: false,
         maxResults: 0,
+        // 0 means no limit, as in BigQuery#query. Sending 0 would make
+        // jobs.getQueryResults return at once and this loop spin.
+        ...(timeoutMs && {timeoutMs}),
       },
       (err, _rows, _nextQuery, res) => {
         if (err) {
@@ -647,10 +653,50 @@ export function createQueryArrowStream_(
       return;
     }
     if (!queryReq) {
-      // TODO: Route queries that cannot use jobs.query through jobs.insert (createQueryJob).
-      stream.destroy(
-        new Error('Query configuration cannot be executed via jobs.query.'),
-      );
+      // buildQueryRequest_ returns undefined when the query sets an option
+      // that only jobs.insert accepts (e.g., jobId, dryRun, or jobTimeoutMs),
+      // or when FAST_QUERY_PATH=DISABLED. timeoutMs only bounds the wait
+      // below, and jobCreationMode only applies to jobs.query, so keep both
+      // out of the job configuration.
+      const {timeoutMs, ...jobQuery} = queryObj;
+      delete jobQuery.jobCreationMode;
+      try {
+        bq.createQueryJob(jobQuery, (err, job, resp) => {
+          if (err || !job) {
+            stream.destroy(err ?? new Error('jobs.insert returned no job.'));
+            return;
+          }
+
+          stream.jobReference = resp?.jobReference;
+          // For a dry run, job.metadata holds the query's statistics.
+          stream.emit('job', job);
+
+          // A dry run validates the query without running it.
+          if (queryObj.dryRun) {
+            emitZeroRowBatchAndEnd(arrow, stream);
+            return;
+          }
+
+          // Wait for the job to finish, then read all rows from streams/_default at offset = 0.
+          waitForJobCompletion(
+            job,
+            stream,
+            () => {
+              streamDefaultJobStream(
+                ctx,
+                resp?.jobReference,
+                0,
+                undefined,
+                job,
+              );
+            },
+            timeoutMs,
+          );
+        });
+      } catch (err) {
+        // For example, a destination that isn't a Table, or invalid parameters.
+        stream.destroy(err as Error);
+      }
       return;
     }
 
