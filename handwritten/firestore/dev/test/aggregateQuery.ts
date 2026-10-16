@@ -212,4 +212,14 @@ describe('aggregate query interface', () => {
         expect(attempts).toBe(1);
       });
   });
+
+  it('rejects when client is terminated', async () => {
+    firestore = await createInstance();
+    await firestore.terminate();
+
+    const query = firestore.collection('collectionId').count();
+    await expect(query.get()).rejects.toThrow(
+      'The client has already been terminated',
+    );
+  });
 });
