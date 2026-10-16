@@ -4,6 +4,33 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "62559f18d902330c546c787233dcaa7578774463",
+          "message": "Remove --fetch-shim and handle Bun fetch natively",
+          "issues": [
+            "9573"
+          ],
+          "scope": "core"
+        },
+        {
+          "type": "fix",
+          "sha": "640bf5136c7e9002d65cb257af976c336110d33f",
+          "message": "Remove --gaxios-shim and configure Bun Gaxios fetch",
+          "issues": [
+            "9569"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "8.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage",
+      "id": "ceb173c0-a25b-4169-afc5-149522ce5dac",
+      "createTime": "2026-10-16T00:52:03.538Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "fca6160fce7932d5491fb9fcca9c42c3de2102c1",
           "message": "Bump bigquery-storage-api to ^0.5.0",
@@ -105471,5 +105498,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-14T17:53:17.953Z"
+  "updateTime": "2026-10-16T00:52:03.538Z"
 }
