@@ -17,6 +17,7 @@ import {randomUUID} from 'crypto';
 import {after, before, describe, it} from 'mocha';
 import * as arrow from 'apache-arrow';
 import {BigQuery, Job} from '../src';
+import {checkArrowDependencies} from '../src/arrow';
 
 const bigquery = new BigQuery();
 const GCLOUD_TESTS_PREFIX = 'nodejs_bq_test';
@@ -176,6 +177,224 @@ describe('Arrow Query Results', () => {
         assert.strictEqual(arrowErr.code, structErr!.code);
         assert.strictEqual(arrowErr.message, structErr!.message);
         return true;
+      },
+    );
+  });
+
+  it('should stream multi-page results across inline jobs.query and streams/_default and support early cancellation', async () => {
+    const totalRows = 20000;
+    const sql = `SELECT id, REPEAT('x', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`;
+
+    // First, break out of iteration after the first batch to verify early cancellation keeps the shared client usable.
+    const earlyStream = bigquery.createQueryArrowStream({
+      query: sql,
+      useQueryCache: false,
+    });
+    let earlyBatches = 0;
+    for await (const batch of earlyStream) {
+      assert.ok(batch.numRows > 0);
+      earlyBatches++;
+      break;
+    }
+    assert.strictEqual(earlyBatches, 1);
+
+    // Then read the full multi-page result on the same BigQuery client.
+    const stream = bigquery.createQueryArrowStream({
+      query: sql,
+      useQueryCache: false,
+    });
+    const batches: arrow.RecordBatch[] = await stream.toArray();
+
+    // Verify the result spanned the inline jobs.query batch and streams/_default.
+    assert.ok(
+      batches.length >= 2,
+      `Expected >= 2 batches, got ${batches.length}`,
+    );
+    assert.ok(stream.jobReference?.jobId);
+
+    const table = new arrow.Table(batches);
+    assert.strictEqual(table.numRows, totalRows);
+    const ids = Array.from(table.getChild('id')!.toArray());
+    for (let i = 0; i < totalRows; i++) {
+      if (ids[i] !== BigInt(i + 1)) {
+        assert.fail(
+          `Expected id ${i + 1} at index ${i}, got ${String(ids[i])}`,
+        );
+      }
+    }
+  });
+
+  it('should stream multi-page cached results from streams/_default', async () => {
+    // A cache hit can return totalRows "0" with a pageToken and no inline
+    // rows, so the second run reads every row from streams/_default.
+    const totalRows = 20000;
+    const sql = `SELECT id, REPEAT('c', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`;
+    for (let run = 0; run < 2; run++) {
+      const table = new arrow.Table(
+        await bigquery
+          .createQueryArrowStream({query: sql, useQueryCache: true})
+          .toArray(),
+      );
+      assert.strictEqual(table.numRows, totalRows);
+      assert.strictEqual(Number(table.getChild('id')!.get(0)), 1);
+      assert.strictEqual(
+        Number(table.getChild('id')!.get(totalRows - 1)),
+        totalRows,
+      );
+    }
+  });
+
+  it('should cancel only the ReadRows stream of a read that ends early while another read on the same client continues', async () => {
+    // Concurrent reads share one BigQueryReadClient, so ending one read early
+    // must cancel only its own ReadRows stream. The read that ends early uses
+    // a 3M-row result so its stream is still open when it's cancelled.
+    const endedEarlySql =
+      'SELECT a * 1000 + b AS id FROM UNNEST(GENERATE_ARRAY(0, 2999)) AS a, UNNEST(GENERATE_ARRAY(0, 999)) AS b';
+    const totalRows = 20000;
+    const readFullySql = `SELECT id, REPEAT('x', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`;
+    const readClientProto =
+      checkArrowDependencies().storage.BigQueryReadClient.prototype;
+    const origReadRows = readClientProto.readRows;
+    let openedStreams = 0;
+    let cancelledStreams = 0;
+    readClientProto.readRows = function (
+      this: unknown,
+      ...args: Parameters<typeof origReadRows>
+    ) {
+      const grpcStream = origReadRows.apply(this, args);
+      openedStreams++;
+      const origCancel = grpcStream.cancel?.bind(grpcStream);
+      grpcStream.cancel = () => {
+        cancelledStreams++;
+        origCancel?.();
+      };
+      return grpcStream;
+    };
+
+    try {
+      const endedEarly = bigquery
+        .createQueryArrowStream({query: endedEarlySql, useQueryCache: false})
+        [Symbol.asyncIterator]();
+      const readFully = bigquery
+        .createQueryArrowStream({query: readFullySql, useQueryCache: false})
+        [Symbol.asyncIterator]();
+
+      // Advance each read until it has opened its own ReadRows stream.
+      while (openedStreams === 0) {
+        assert.ok(!(await endedEarly.next()).done);
+      }
+      const fullBatches: arrow.RecordBatch[] = [];
+      while (openedStreams === 1) {
+        const next = await readFully.next();
+        assert.ok(!next.done);
+        fullBatches.push(next.value);
+      }
+
+      // End the first read early, then finish the second.
+      await endedEarly.return!();
+      let next = await readFully.next();
+      while (!next.done) {
+        fullBatches.push(next.value);
+        next = await readFully.next();
+      }
+
+      // Verify only the ended read was cancelled and the other read every row.
+      assert.strictEqual(cancelledStreams, 1);
+      const ids = Array.from(new arrow.Table(fullBatches).getChild('id')!);
+      assert.strictEqual(ids.length, totalRows);
+      assert.strictEqual(ids[0], 1n);
+      assert.strictEqual(ids[totalRows - 1], BigInt(totalRows));
+    } finally {
+      readClientProto.readRows = origReadRows;
+    }
+  });
+
+  it('should stream multi-page results from streams/_default in a non-US location (EU)', async () => {
+    const totalRows = 15000;
+    const stream = bigquery.createQueryArrowStream({
+      query: `SELECT id, REPEAT('y', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`,
+      location: 'EU',
+      useQueryCache: false,
+    });
+
+    const batches: arrow.RecordBatch[] = await stream.toArray();
+
+    // Verify the job ran in EU and streamed all rows across inline + streams/_default.
+    assert.strictEqual(stream.jobReference?.location, 'EU');
+    assert.ok(
+      batches.length >= 2,
+      `Expected >= 2 batches, got ${batches.length}`,
+    );
+    const table = new arrow.Table(batches);
+    assert.strictEqual(table.numRows, totalRows);
+  });
+
+  it('should decode all BigQuery data types with rows split between the inline first page and streams/_default', async () => {
+    const totalRows = 15000;
+    const sql = `
+      SELECT
+        id,
+        IF(MOD(id, 2) = 1, TRUE, NULL) AS bool_col,
+        IF(MOD(id, 2) = 1, 42, NULL) AS int64_col,
+        IF(MOD(id, 2) = 1, 3.14, NULL) AS float64_col,
+        IF(MOD(id, 2) = 1, NUMERIC '123456789.123456789', NULL) AS numeric_col,
+        IF(MOD(id, 2) = 1, BIGNUMERIC '12345678901234567890.123456789012345678', NULL) AS bignumeric_col,
+        IF(MOD(id, 2) = 1, REPEAT('hello_', 200), NULL) AS string_col,
+        IF(MOD(id, 2) = 1, b'\\x01\\x02\\x03', NULL) AS bytes_col,
+        IF(MOD(id, 2) = 1, DATE '2026-01-15', NULL) AS date_col,
+        IF(MOD(id, 2) = 1, TIME '12:34:56.789012', NULL) AS time_col,
+        IF(MOD(id, 2) = 1, DATETIME '2026-01-15 12:34:56.789012', NULL) AS datetime_col,
+        IF(MOD(id, 2) = 1, TIMESTAMP '2026-01-15 12:34:56.789012Z', NULL) AS timestamp_col,
+        IF(MOD(id, 2) = 1, ST_GEOGPOINT(-122.4194, 37.7749), NULL) AS geography_col,
+        IF(MOD(id, 2) = 1, JSON '{"a": 1, "b": [true, "two"]}', NULL) AS json_col,
+        IF(MOD(id, 2) = 1, RANGE<DATE> '[2026-01-01, 2026-02-01)', NULL) AS range_col,
+        [id, id + 1] AS array_col,
+        STRUCT(id AS x, IF(MOD(id, 2) = 1, 'nested', NULL) AS y) AS struct_col
+      FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id
+      ORDER BY id
+    `;
+
+    const batches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({query: sql, useQueryCache: false})
+      .toArray();
+
+    // Verify rows were split across the inline first page and streams/_default and combine cleanly into a Table.
+    assert.ok(
+      batches.length >= 2,
+      `Expected >= 2 batches across inline and stream, got ${batches.length}`,
+    );
+    const table = new arrow.Table(batches);
+    assert.strictEqual(table.numRows, totalRows);
+    assert.strictEqual(table.numCols, 17);
+
+    // Check row 0 (id = 1, non-null values from inline page) and row 1 (id = 2, NULL values).
+    assert.strictEqual(table.getChild('bool_col')!.get(0), true);
+    assert.strictEqual(table.getChild('bool_col')!.get(1), null);
+    assert.strictEqual(table.getChild('int64_col')!.get(0), 42n);
+    assert.strictEqual(table.getChild('int64_col')!.get(1), null);
+    assert.strictEqual(table.getChild('float64_col')!.get(0), 3.14);
+    assert.strictEqual(
+      table.getChild('json_col')!.get(0),
+      '{"a":1,"b":[true,"two"]}',
+    );
+    assert.deepStrictEqual(
+      Array.from(table.getChild('array_col')!.get(0).toArray()),
+      [1n, 2n],
+    );
+    assert.deepStrictEqual(table.getChild('struct_col')!.get(0).toJSON(), {
+      x: 1n,
+      y: 'nested',
+    });
+
+    // Check the last row (id = 15000, streamed from streams/_default).
+    const lastIdx = totalRows - 1;
+    assert.strictEqual(table.getChild('id')!.get(lastIdx), BigInt(totalRows));
+    assert.strictEqual(table.getChild('bool_col')!.get(lastIdx), null);
+    assert.deepStrictEqual(
+      table.getChild('struct_col')!.get(lastIdx).toJSON(),
+      {
+        x: BigInt(totalRows),
+        y: null,
       },
     );
   });
