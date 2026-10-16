@@ -245,11 +245,6 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
    */
   retryOptions: RetryOptions;
 
-  /**
-   * Controls whether or not to use authentication when using a custom endpoint.
-   */
-  useAuthWithCustomEndpoint?: boolean;
-
   [GCCL_GCS_CMD_KEY]?: string;
 }
 
@@ -406,12 +401,7 @@ export class Upload extends Writable {
         !isSubDomainOfUniverse &&
         !isSubDomainOfDefaultUniverse
       ) {
-        // Check if we should use auth with custom endpoint
-        if (cfg.useAuthWithCustomEndpoint !== true) {
-          // Only bypass auth if explicitly not requested
-          this.authClient = gaxios;
-        }
-        // Otherwise keep the authenticated client
+        this.authClient = gaxios;
       }
     }
 

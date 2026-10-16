@@ -62,16 +62,6 @@ export interface ServiceConfig {
    * Reuse an existing `AuthClient` or `GoogleAuth` client instead of creating a new one.
    */
   authClient?: AuthClient | GoogleAuth<AuthClient>;
-
-  /**
-   * Set to true if the endpoint is a custom URL
-   */
-  customEndpoint?: boolean;
-
-  /**
-   * Controls whether or not to use authentication when using a custom endpoint.
-   */
-  useAuthWithCustomEndpoint?: boolean;
 }
 
 export interface ServiceOptions extends Omit<GoogleAuthOptions, 'authClient'> {
@@ -81,7 +71,6 @@ export interface ServiceOptions extends Omit<GoogleAuthOptions, 'authClient'> {
   token?: string;
   timeout?: number; // http.request.options.timeout
   userAgent?: string;
-  useAuthWithCustomEndpoint?: boolean;
 }
 
 export class Service {
@@ -94,11 +83,9 @@ export class Service {
   providedUserAgent?: string;
   makeAuthenticatedRequest: MakeAuthenticatedRequest;
   authClient: GoogleAuth<AuthClient>;
-  apiEndpoint: string;
+  protected apiEndpoint: string;
   timeout?: number;
   universeDomain: string;
-  customEndpoint: boolean;
-  useAuthWithCustomEndpoint?: boolean;
 
   /**
    * Service is a base class, meant to be inherited from by a "service," like
@@ -128,8 +115,6 @@ export class Service {
     this.projectIdRequired = config.projectIdRequired !== false;
     this.providedUserAgent = options.userAgent;
     this.universeDomain = options.universeDomain || DEFAULT_UNIVERSE;
-    this.customEndpoint = config.customEndpoint || false;
-    this.useAuthWithCustomEndpoint = config.useAuthWithCustomEndpoint;
 
     this.makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory({
       ...config,

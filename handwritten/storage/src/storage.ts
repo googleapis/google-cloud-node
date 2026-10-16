@@ -29,7 +29,7 @@ import {
   CRC32CValidatorGenerator,
   CRC32C_DEFAULT_VALIDATOR_GENERATOR,
 } from './crc32c.js';
-import {DEFAULT_UNIVERSE} from 'google-auth-library';
+import {DEFAULT_UNIVERSE, PassThroughClient} from 'google-auth-library';
 
 export interface GetServiceAccountOptions {
   userProject?: string;
@@ -541,6 +541,8 @@ export class Storage extends Service {
   }
 
   retryOptions: RetryOptions;
+  protected apiEndpoint: string;
+  #hasCustomEndpoint = false;
 
   /**
    * @callback Crc32cGeneratorToStringCallback
@@ -653,7 +655,6 @@ export class Storage extends Service {
    * @property {number} [timeout] The amount of time in milliseconds to wait per http request before timing out.
    * @property {object[]} [interceptors_] Array of custom request interceptors to be returned in the order they were assigned.
    * @property {string} [apiEndpoint = storage.google.com] The API endpoint of the service used to make requests.
-   * @property {boolean} [useAuthWithCustomEndpoint = false] Controls whether or not to use authentication when using a custom endpoint.
    * @property {Crc32cGeneratorCallback} [callback] A function that generates a CRC32C Validator. Defaults to {@link CRC32C}
    */
   /**
@@ -726,18 +727,28 @@ export class Storage extends Service {
     const universe = options.universeDomain || DEFAULT_UNIVERSE;
 
     let apiEndpoint = `https://storage.${universe}`;
-    let customEndpoint = false;
+    let hasCustomEndpoint = false;
 
     // Note: EMULATOR_HOST is an experimental configuration variable. Use apiEndpoint instead.
     const EMULATOR_HOST = process.env.STORAGE_EMULATOR_HOST;
     if (typeof EMULATOR_HOST === 'string') {
       apiEndpoint = Storage.sanitizeEndpoint(EMULATOR_HOST);
-      customEndpoint = true;
+      hasCustomEndpoint = true;
+      if (
+        !options.authClient &&
+        !options.keyFilename &&
+        !options.keyFile &&
+        !options.credentials
+      ) {
+        options = Object.assign({}, options, {
+          authClient: new PassThroughClient(),
+        });
+      }
     }
 
     if (options.apiEndpoint && options.apiEndpoint !== apiEndpoint) {
       apiEndpoint = Storage.sanitizeEndpoint(options.apiEndpoint);
-      customEndpoint = true;
+      hasCustomEndpoint = true;
     }
 
     options = Object.assign({}, options, {apiEndpoint});
@@ -773,8 +784,6 @@ export class Storage extends Service {
             : IDEMPOTENCY_STRATEGY_DEFAULT,
       },
       baseUrl,
-      customEndpoint,
-      useAuthWithCustomEndpoint: options?.useAuthWithCustomEndpoint,
       projectIdRequired: false,
       scopes: [
         'https://www.googleapis.com/auth/iam',
@@ -785,6 +794,9 @@ export class Storage extends Service {
     };
 
     super(config, options);
+
+    this.apiEndpoint = apiEndpoint;
+    this.#hasCustomEndpoint = hasCustomEndpoint;
 
     /**
      * Reference to {@link Storage.acl}.
@@ -800,6 +812,17 @@ export class Storage extends Service {
 
     this.getBucketsStream = paginator.streamify('getBuckets');
     this.getHmacKeysStream = paginator.streamify('getHmacKeys');
+  }
+
+  async getEndpoint(): Promise<string> {
+    if (!this.#hasCustomEndpoint) {
+      const universe =
+        typeof this.authClient.getUniverseDomain === 'function'
+          ? await this.authClient.getUniverseDomain()
+          : this.universeDomain;
+      this.apiEndpoint = Storage.sanitizeEndpoint(`storage.${universe}`);
+    }
+    return this.apiEndpoint;
   }
 
   private static sanitizeEndpoint(url: string) {
@@ -1630,5 +1653,5 @@ paginator.extend(Storage, ['getBuckets', 'getHmacKeys']);
  * that a callback is omitted.
  */
 promisifyAll(Storage, {
-  exclude: ['bucket', 'channel', 'hmacKey'],
+  exclude: ['bucket', 'channel', 'hmacKey', 'getEndpoint'],
 });
