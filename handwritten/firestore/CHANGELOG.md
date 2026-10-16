@@ -5,6 +5,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [9.3.2](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.3.1...firestore-v9.3.2) (2026-10-16)
+
+
+### Bug Fixes
+
+* **firestore,pubsub:** Align types and proto re-exports with -api packages ([#9621](https://github.com/googleapis/google-cloud-node/issues/9621)) ([25d945b](https://github.com/googleapis/google-cloud-node/commit/25d945b34979849ea1c6df699212854f8d390d79))
+* **firestore:** Resolve api-extractor from cloud-rad in api-report.mjs ([#9505](https://github.com/googleapis/google-cloud-node/issues/9505)) ([dc83ed8](https://github.com/googleapis/google-cloud-node/commit/dc83ed8c08bf896489d29af6036b3ef72a8e7365))
+
 ## [9.3.1](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.3.0...firestore-v9.3.1) (2026-10-01)
 
 
