@@ -63,6 +63,14 @@ export interface GrpcClientOptions extends GoogleAuthOptions {
    * options.
    */
   enableTelemetryTracing?: boolean;
+  /**
+   * Whether to enable telemetry logging for the client.
+   *
+   * Logging is only enabled when `GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING` is enabled
+   * AND either the `GOOGLE_SDK_NODE_ENABLE_LOGGING` environment variable is enabled
+   * or a user passes `enableTelemetryLogging: true` in their client options.
+   */
+  enableTelemetryLogging?: boolean;
 }
 
 export interface MetadataValue {
@@ -134,6 +142,7 @@ export class GrpcClient {
   private _servicePath?: string;
   private _port?: number;
   private _enableTelemetryTracing?: boolean;
+  private _enableTelemetryLogging?: boolean;
   /**
    * Base directory for resolving client certificates.
    *
@@ -193,6 +202,7 @@ export class GrpcClient {
         ? parseInt(options.port, 10)
         : options.port;
     this._enableTelemetryTracing = options.enableTelemetryTracing;
+    this._enableTelemetryLogging = options.enableTelemetryLogging;
 
     const minimumVersion = 10;
     const major = Number(process.version.match(/^v(\d+)/)?.[1]);
@@ -396,6 +406,8 @@ export class GrpcClient {
    * @param {Object} headers - A dictionary of additional HTTP header name to
    *   its value.
    * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
+   * @param {unknown} [_legacyTelemetryInfo] - Unused legacy parameter kept for backward compatibility.
+   * @param {boolean} [enableTelemetryLogging] - Flag to enable telemetry logging.
    * @return {Object} A mapping of method names to CallSettings.
    */
   constructSettings(
@@ -406,6 +418,7 @@ export class GrpcClient {
     enableTelemetryTracing?: boolean,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _legacyTelemetryInfo?: unknown,
+    enableTelemetryLogging?: boolean,
   ) {
     const otherArgs: Record<string, unknown> = {
       metadataBuilder: this.metadataBuilder(headers),
@@ -423,6 +436,8 @@ export class GrpcClient {
       this.grpc.status,
       otherArgs,
       enableTelemetryTracing ?? this._enableTelemetryTracing,
+      _legacyTelemetryInfo,
+      enableTelemetryLogging ?? this._enableTelemetryLogging,
     );
   }
 
