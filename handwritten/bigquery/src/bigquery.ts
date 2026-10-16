@@ -59,11 +59,12 @@ import {logger, setLogFunction} from './logger';
 import {
   ArrowQuery,
   ArrowRecordBatchStream,
+  ArrowSerializationOptions,
   createQueryArrowStream_,
 } from './arrow';
 
 // Third-Party Re-exports
-export {common, ArrowQuery, ArrowRecordBatchStream};
+export {common, ArrowQuery, ArrowRecordBatchStream, ArrowSerializationOptions};
 
 export interface RequestCallback<T> {
   (err: Error | null, response?: T | null): void;
@@ -402,6 +403,14 @@ export class BigQuery extends Service {
    * @param {number} [options.timeoutMs] How long to wait for `jobs.query` to
    *     complete, in milliseconds. If the query doesn't complete in time, the
    *     stream fails instead of waiting for the job.
+   * @param {object} [options.arrowSerializationOptions] Format options for
+   *     Apache Arrow serialization, such as `picosTimestampPrecision`
+   *     (`'TIMESTAMP_PRECISION_MICROS'`, `'TIMESTAMP_PRECISION_NANOS'`, or
+   *     `'TIMESTAMP_PRECISION_PICOS'`). Defaults to
+   *     `'TIMESTAMP_PRECISION_MICROS'`. `bufferCompression` isn't supported.
+   *     Without a `destination` table, non-default precisions require an
+   *     `@google-cloud/bigquery-storage` release that sends
+   *     `arrowSerializationOptions` on `ReadRows`.
    * @returns {ArrowRecordBatchStream} A stream of `RecordBatch` objects. The
    *     stream emits a `job` event with the {@link Job} when BigQuery creates
    *     a job, and sets `stream.queryId` and `stream.jobReference` (when
