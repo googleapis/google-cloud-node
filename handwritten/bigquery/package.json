@@ -50,17 +50,17 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "@google-cloud/common": "^8.0.0",
-    "@google-cloud/paginator": "^7.0.0",
-    "@google-cloud/precise-date": "^6.0.0",
-    "@google-cloud/promisify": "^6.0.0",
+    "@google-cloud/common": "^8.2.0",
+    "@google-cloud/paginator": "^7.2.0",
+    "@google-cloud/precise-date": "^6.2.0",
+    "@google-cloud/promisify": "^6.2.0",
     "apache-arrow": "^21.0.0",
-    "teeny-request": "^11.0.0",
     "arrify": "^3.0.0",
     "big.js": "^7.0.0",
     "duplexify": "^4.1.3",
     "extend": "^3.0.2",
-    "stream-events": "^1.0.5"
+    "stream-events": "^1.0.5",
+    "teeny-request": "^11.1.1"
   },
   "peerDependencies": {
     "@google-cloud/bigquery-storage": "^6.1.0"
@@ -77,8 +77,8 @@
     }
   },
   "devDependencies": {
-    "@google-cloud/bigquery-storage": "^6.1.0",
-    "@google-cloud/storage": "^7.16.0",
+    "@google-cloud/bigquery-storage": "^6.3.0",
+    "@google-cloud/storage": "^8.4.0",
     "@types/big.js": "^6.2.2",
     "@types/duplexify": "^3.6.4",
     "@types/extend": "^3.0.4",
@@ -93,11 +93,11 @@
     "eslint-plugin-prettier": "^5.2.6",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.4",
-    "jsdoc-fresh": "^6.0.0",
-    "jsdoc-region-tag": "^5.0.0",
+    "jsdoc-fresh": "^6.1.0",
+    "jsdoc-region-tag": "^5.1.0",
     "mocha": "^11.1.0",
     "nise": "^6.1.1",
-    "pack-n-play": "^5.0.0",
+    "pack-n-play": "^5.3.0",
     "path-to-regexp": "^8.2.0",
     "prettier": "^3.5.3",
     "proxyquire": "^2.1.3",
