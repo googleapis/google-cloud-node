@@ -37,9 +37,27 @@ describe('Publisher Hedging', () => {
       );
     });
 
+    it('returns undefined when hedging.enabled is false', () => {
+      assert.strictEqual(
+        HedgingTokenBucket.validateAndResolveHedgingOptions({enabled: false}),
+        undefined,
+      );
+      assert.strictEqual(
+        HedgingTokenBucket.validateAndResolveHedgingOptions(
+          {enabled: false},
+          true,
+        ),
+        undefined,
+      );
+    });
+
     it('applies default settings when an empty hedging object is provided', () => {
       const resolved = HedgingTokenBucket.validateAndResolveHedgingOptions({});
       assert.ok(resolved);
+      assert.strictEqual(
+        resolved.enabled,
+        defaultOptions.publish.hedging.enabled,
+      );
       assert.strictEqual(
         resolved.hedgeDelay.milliseconds,
         defaultOptions.publish.hedging.hedgeDelay.milliseconds,
