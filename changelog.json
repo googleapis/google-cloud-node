@@ -4,6 +4,33 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "2405101edaec264681f17d1038a6f65d126c7ea4",
+          "message": "Prefer AsyncLocalStorageContextManager in OpenTelemetry instrumentation",
+          "issues": [
+            "9610"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "7a5db1185a0c21a6f554f8c6bf640144178d5b9c",
+          "message": "ExcludeTxnFromChangeStreams field and request headers i…",
+          "issues": [
+            "9618"
+          ],
+          "scope": "Spanner"
+        }
+      ],
+      "version": "9.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "e36616b4-2454-4e21-8918-880fd6c897ec",
+      "createTime": "2026-10-16T19:31:57.499Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "fca6160fce7932d5491fb9fcca9c42c3de2102c1",
           "message": "Bump bigquery-storage-api to ^0.5.0",
@@ -105471,5 +105498,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-14T17:53:17.953Z"
+  "updateTime": "2026-10-16T19:31:57.499Z"
 }
