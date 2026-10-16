@@ -195,12 +195,10 @@ async function testCollectionWithDocs(
     [id: string]: DocumentData;
   },
 ): Promise<CollectionReference<DocumentData>> {
-  beginDocCreation = new Date().valueOf();
   for (const id in docs) {
     const ref = targetCol.doc(id);
     await ref.set(docs[id]);
   }
-  endDocCreation = new Date().valueOf();
   return targetCol;
 }
 
@@ -345,123 +343,15 @@ describe.skipClassic('Pipeline class', () => {
 
   beforeAll(async () => {
     randomCol = getTestRoot();
+    beginDocCreation = new Date().valueOf();
     await setupBookDocs(randomCol);
+    endDocCreation = new Date().valueOf();
     firestore = randomCol.firestore;
   });
 
   afterEach(() => verifyInstance(firestore as unknown as InternalFirestore));
 
   describe('pipeline results', () => {
-    describe('DML stages', () => {
-      let dmlCol: CollectionReference;
-
-      beforeEach(async () => {
-        dmlCol = getTestRoot();
-        await setupBookDocs(dmlCol);
-      });
-
-      it('can execute delete stage multiple documents', async () => {
-        const deletePpl = firestore
-          .pipeline()
-          .collection(dmlCol.path)
-          .where(equal(field('genre'), 'Science Fiction'))
-          .delete();
-
-        const promise = deletePpl.execute();
-
-        const deleteRes = await promise;
-        expectResults(deleteRes, {documents_modified: 2});
-
-        const docSnap1 = await dmlCol.doc('book1').get();
-        expect(docSnap1.exists).toBe(false);
-
-        const docSnap10 = await dmlCol.doc('book10').get();
-        expect(docSnap10.exists).toBe(false);
-      });
-
-      it('can execute delete stage within a transaction', async () => {
-        await firestore.runTransaction(async transaction => {
-          const deletePpl = firestore
-            .pipeline()
-            .collection(dmlCol.path)
-            .where(equal(field('__name__').documentId(), 'book2'))
-            .delete();
-
-          const deleteRes = await transaction.execute(deletePpl);
-          expectResults(deleteRes, {documents_modified: 1});
-        });
-
-        const docSnap = await dmlCol.doc('book2').get();
-        expect(docSnap.exists).toBe(false);
-      });
-
-      it('can execute update stage with addFields', async () => {
-        const ppl = firestore
-          .pipeline()
-          .collection(dmlCol.path)
-          .where(equal(field('__name__').documentId(), 'book3'))
-          .addFields(field('__name__').documentId().as('id'))
-          .update([constant('baz').as('foo')]);
-
-        const promise = ppl.execute();
-
-        const res = await promise;
-        expectResults(res, {documents_modified: 1});
-
-        const docSnap = await dmlCol.doc('book3').get();
-        expect(docSnap.get('foo')).toBe('baz');
-        expect(docSnap.get('id')).toBe('book3');
-      });
-
-      it('can update multiple documents and remove fields', async () => {
-        const promise = firestore
-          .pipeline()
-          .collection(dmlCol.path)
-          .where(equal(field('genre'), 'Science Fiction'))
-          .removeFields('awards')
-          .update([constant('Updated').as('status')])
-          .execute();
-
-        const res = await promise;
-        expectResults(res, {documents_modified: 2});
-
-        const docSnap1 = await dmlCol.doc('book1').get();
-        expect(docSnap1.get('status')).toBe('Updated');
-        expect(docSnap1.get('awards')).toBeUndefined();
-
-        const docSnap10 = await dmlCol.doc('book10').get();
-        expect(docSnap10.get('status')).toBe('Updated');
-        expect(docSnap10.get('awards')).toBeUndefined();
-      });
-
-      it('can update with expressions', async () => {
-        const promise = firestore
-          .pipeline()
-          .collection(dmlCol.path)
-          .where(equal(field('__name__').documentId(), 'book1'))
-          .update([add(field('rating'), constant(1.0)).as('rating')])
-          .execute();
-
-        const res = await promise;
-        expectResults(res, {documents_modified: 1});
-
-        const docSnap = await dmlCol.doc('book1').get();
-        expect(docSnap.get('rating')).toBe(5.2);
-      });
-
-      it('can update non existing document modifies zero documents', async () => {
-        const nonExistingId = 'nonExistingId_123';
-        const promise = firestore
-          .pipeline()
-          .documents([dmlCol.doc(nonExistingId)])
-          .update([constant('Updated').as('status')])
-          .execute();
-
-        const res = await promise;
-        expectResults(res, {documents_modified: 0});
-      });
-    });
-
     it('empty snapshot as expected', async () => {
       const snapshot = await firestore
         .pipeline()
@@ -607,6 +497,116 @@ describe.skipClassic('Pipeline class', () => {
       snapshot.results.forEach(doc => {
         expect(doc.updateTime).toBeUndefined();
         expect(doc.createTime).toBeUndefined();
+      });
+    });
+
+    describe('DML stages', () => {
+      let dmlCol: CollectionReference;
+
+      beforeEach(async () => {
+        dmlCol = getTestRoot();
+        await setupBookDocs(dmlCol);
+      });
+
+      it('can execute delete stage multiple documents', async () => {
+        const deletePpl = firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('genre'), 'Science Fiction'))
+          .delete();
+
+        const promise = deletePpl.execute();
+
+        const deleteRes = await promise;
+        expectResults(deleteRes, {documents_modified: 2});
+
+        const docSnap1 = await dmlCol.doc('book1').get();
+        expect(docSnap1.exists).toBe(false);
+
+        const docSnap10 = await dmlCol.doc('book10').get();
+        expect(docSnap10.exists).toBe(false);
+      });
+
+      it('can execute delete stage within a transaction', async () => {
+        await firestore.runTransaction(async transaction => {
+          const deletePpl = firestore
+            .pipeline()
+            .collection(dmlCol.path)
+            .where(equal(field('__name__').documentId(), 'book2'))
+            .delete();
+
+          const deleteRes = await transaction.execute(deletePpl);
+          expectResults(deleteRes, {documents_modified: 1});
+        });
+
+        const docSnap = await dmlCol.doc('book2').get();
+        expect(docSnap.exists).toBe(false);
+      });
+
+      it('can execute update stage with addFields', async () => {
+        const ppl = firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book3'))
+          .addFields(field('__name__').documentId().as('id'))
+          .update([constant('baz').as('foo')]);
+
+        const promise = ppl.execute();
+
+        const res = await promise;
+        expectResults(res, {documents_modified: 1});
+
+        const docSnap = await dmlCol.doc('book3').get();
+        expect(docSnap.get('foo')).toBe('baz');
+        expect(docSnap.get('id')).toBe('book3');
+      });
+
+      it('can update multiple documents and remove fields', async () => {
+        const promise = firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('genre'), 'Science Fiction'))
+          .removeFields('awards')
+          .update([constant('Updated').as('status')])
+          .execute();
+
+        const res = await promise;
+        expectResults(res, {documents_modified: 2});
+
+        const docSnap1 = await dmlCol.doc('book1').get();
+        expect(docSnap1.get('status')).toBe('Updated');
+        expect(docSnap1.get('awards')).toBeUndefined();
+
+        const docSnap10 = await dmlCol.doc('book10').get();
+        expect(docSnap10.get('status')).toBe('Updated');
+        expect(docSnap10.get('awards')).toBeUndefined();
+      });
+
+      it('can update with expressions', async () => {
+        const promise = firestore
+          .pipeline()
+          .collection(dmlCol.path)
+          .where(equal(field('__name__').documentId(), 'book1'))
+          .update([add(field('rating'), constant(1.0)).as('rating')])
+          .execute();
+
+        const res = await promise;
+        expectResults(res, {documents_modified: 1});
+
+        const docSnap = await dmlCol.doc('book1').get();
+        expect(docSnap.get('rating')).toBe(5.2);
+      });
+
+      it('can update non existing document modifies zero documents', async () => {
+        const nonExistingId = 'nonExistingId_123';
+        const promise = firestore
+          .pipeline()
+          .documents([dmlCol.doc(nonExistingId)])
+          .update([constant('Updated').as('status')])
+          .execute();
+
+        const res = await promise;
+        expectResults(res, {documents_modified: 0});
       });
     });
   });
