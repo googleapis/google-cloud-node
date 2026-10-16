@@ -57,6 +57,9 @@ export const defaultOptions = {
     maxDelayMillis: 10,
 
     hedging: {
+      // Whether publish hedging is enabled when hedging options are provided.
+      enabled: true,
+
       // The default delay before sending a hedged publish RPC.
       hedgeDelay: Duration.from({milliseconds: 1000}),
 

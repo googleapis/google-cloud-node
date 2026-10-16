@@ -1762,6 +1762,8 @@ describe('PubSub', () => {
         assert.strictEqual(getClientCalled, false);
         assert.ok(err);
         assert.strictEqual(err.code, gax.Status.CANCELLED);
+        assert.strictEqual(err.details, 'Call cancelled.');
+        assert.ok(err.metadata instanceof gax.grpc.Metadata);
         done();
       });
     });
@@ -1791,6 +1793,8 @@ describe('PubSub', () => {
         assert.strictEqual(clientMethodCalled, false);
         assert.ok(err);
         assert.strictEqual(err.code, gax.Status.CANCELLED);
+        assert.strictEqual(err.details, 'Call cancelled.');
+        assert.ok(err.metadata instanceof gax.grpc.Metadata);
         done();
       });
     });

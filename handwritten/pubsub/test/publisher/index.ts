@@ -385,13 +385,18 @@ describe('Publisher', () => {
         });
       });
 
-      it('should reject ordered messages when hedging is enabled', async () => {
+      it('should reject ordered messages when hedging is enabled without leaking OpenTelemetry spans', async () => {
+        tracing.setGloballyEnabled(true);
+        exporter.reset();
         publisher.setOptions({hedging: {}});
 
+        const messageWithOrdering: p.PubsubMessage = {data, orderingKey};
         await assert.rejects(
-          publisher.publishMessage(fakeMessage),
+          publisher.publishMessage(messageWithOrdering),
           /Publish hedging and message ordering cannot be enabled at the same time\./,
         );
+        assert.strictEqual(messageWithOrdering.parentSpan, undefined);
+        assert.strictEqual(exporter.getFinishedSpans().length, 0);
       });
 
       it('should reject publishing when hedging and messageOrdering are both enabled', async () => {
@@ -530,7 +535,7 @@ describe('Publisher', () => {
       assert.strictEqual(publisher.tokenBucket.getTokenBalance(), 0);
     });
 
-    it('should preserve hedging options when setOptions is called with other options', () => {
+    it('should preserve hedging options, tokenBucket balance, and hedgingScheduler when setOptions is called with unrelated options', () => {
       publisher.setOptions({
         hedging: {
           hedgeDelay: Duration.from({milliseconds: 300}),
@@ -538,6 +543,16 @@ describe('Publisher', () => {
           refillRatio: 0.2,
         },
       });
+      const initialBucket = publisher.tokenBucket;
+      const initialScheduler = publisher.hedgingScheduler;
+      assert.ok(initialBucket);
+      assert.ok(initialScheduler);
+
+      for (let i = 0; i < 5; i++) {
+        initialBucket.refillTokenBucket();
+      }
+      assert.strictEqual(initialBucket.getTokenBalance(), 1.0);
+
       publisher.setOptions({
         batching: {maxMessages: 50},
       });
@@ -545,6 +560,29 @@ describe('Publisher', () => {
       assert.strictEqual(publisher.hedgingOptions.hedgeDelay.milliseconds, 300);
       assert.strictEqual(publisher.hedgingOptions.maxTokens, 20);
       assert.strictEqual(publisher.hedgingOptions.refillRatio, 0.2);
+      assert.strictEqual(publisher.tokenBucket, initialBucket);
+      assert.strictEqual(publisher.tokenBucket?.getTokenBalance(), 1.0);
+      assert.strictEqual(publisher.hedgingScheduler, initialScheduler);
+
+      // Updating hedging options explicitly should recreate tokenBucket and hedgingScheduler
+      publisher.setOptions({
+        hedging: {
+          hedgeDelay: Duration.from({milliseconds: 400}),
+          maxTokens: 20,
+          refillRatio: 0.2,
+        },
+      });
+      assert.notStrictEqual(publisher.tokenBucket, initialBucket);
+      assert.strictEqual(publisher.tokenBucket?.getTokenBalance(), 0);
+      assert.notStrictEqual(publisher.hedgingScheduler, initialScheduler);
+
+      // Disabling hedging via enabled: false should clear hedgingOptions, tokenBucket, and hedgingScheduler
+      publisher.setOptions({
+        hedging: {enabled: false},
+      });
+      assert.strictEqual(publisher.hedgingOptions, undefined);
+      assert.strictEqual(publisher.tokenBucket, undefined);
+      assert.strictEqual(publisher.hedgingScheduler, undefined);
     });
 
     it('should throw when hedging and messageOrdering are both enabled', () => {
@@ -576,6 +614,24 @@ describe('Publisher', () => {
           !publisher.queue.batch || publisher.queue.batch.messages.length === 0,
           true,
         );
+        done();
+      });
+    });
+
+    it('should not clear hedgingScheduler for already-in-flight batches when flush is called', done => {
+      publisher.setOptions({hedging: {}});
+      assert.ok(publisher.hedgingScheduler);
+      const clearSpy = sandbox.spy(publisher.hedgingScheduler, 'clear');
+
+      sandbox.stub(publisher.queue, '_publish').callsFake(async () => {
+        process.nextTick(() => {
+          publisher.queue.emit('drain');
+        });
+      });
+
+      publisher.flush(err => {
+        assert.strictEqual(err, null);
+        assert.strictEqual(clearSpy.called, false);
         done();
       });
     });

@@ -842,6 +842,43 @@ describe('Message Queues', () => {
     let fakePub: FakePublisher;
     let queue: q.Queue;
 
+    function seedTokens(count: number): void {
+      for (let i = 0; i < count; i++) {
+        fakePub.refillTokenBucket();
+      }
+    }
+
+    function captureRequests(): CapturedPublishCall[] {
+      const calls: CapturedPublishCall[] = [];
+      sandbox
+        .stub(topic, 'request')
+        .callsFake(
+          (
+            config: RequestConfig,
+            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
+          ) => {
+            calls.push({config, callback});
+          },
+        );
+      return calls;
+    }
+
+    function decodeTelemetryHeader(
+      config: RequestConfig,
+    ): google.pubsub.v1.PubsubClientTelemetry {
+      const headers = config.gaxOpts?.otherArgs?.headers as
+        Record<string, string> | undefined;
+      const b64 = headers?.['x-goog-pubsub-client-telemetry'];
+      assert.ok(b64, 'Expected x-goog-pubsub-client-telemetry header');
+      const decoded = google.pubsub.v1.PubsubClientTelemetry.decode(
+        Buffer.from(b64, 'base64'),
+      );
+      assert.ok(
+        Number(decoded.publishOperation?.publishStartTime?.seconds ?? 0) > 0,
+      );
+      return decoded;
+    }
+
     beforeEach(() => {
       clock = TestUtils.useFakeTimers(sandbox, 10000);
       fakePub = publisher as unknown as FakePublisher;
@@ -858,22 +895,10 @@ describe('Message Queues', () => {
 
     it('triggers a hedged publish with default settings once tokens are available', async () => {
       fakePub.enableHedging({});
-      for (let i = 0; i < 10; i++) {
-        fakePub.refillTokenBucket();
-      }
+      seedTokens(10);
       assert.strictEqual(fakePub.tokenBucket?.getTokenBalance(), 1.0);
 
-      const calls: CapturedPublishCall[] = [];
-      sandbox
-        .stub(topic, 'request')
-        .callsFake(
-          (
-            config: RequestConfig,
-            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
-          ) => {
-            calls.push({config, callback});
-          },
-        );
+      const calls = captureRequests();
 
       const cbSpy = sandbox.spy();
       const publishPromise = queue._publish([{}], [cbSpy], 0, 'test');
@@ -907,21 +932,9 @@ describe('Message Queues', () => {
         maxTokens: 10,
         refillRatio: 0.2,
       });
-      for (let i = 0; i < 5; i++) {
-        fakePub.refillTokenBucket();
-      }
+      seedTokens(5);
 
-      const calls: CapturedPublishCall[] = [];
-      sandbox
-        .stub(topic, 'request')
-        .callsFake(
-          (
-            config: RequestConfig,
-            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
-          ) => {
-            calls.push({config, callback});
-          },
-        );
+      const calls = captureRequests();
 
       const message: p.PubsubMessage = {data: Buffer.from('hello')};
       const parentSpan = otel.PubsubSpans.createPublisherSpan(
@@ -964,21 +977,9 @@ describe('Message Queues', () => {
         maxTokens: 10,
         refillRatio: 0.2,
       });
-      for (let i = 0; i < 5; i++) {
-        fakePub.refillTokenBucket();
-      }
+      seedTokens(5);
 
-      const calls: CapturedPublishCall[] = [];
-      sandbox
-        .stub(topic, 'request')
-        .callsFake(
-          (
-            config: RequestConfig,
-            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
-          ) => {
-            calls.push({config, callback});
-          },
-        );
+      const calls = captureRequests();
 
       const message: p.PubsubMessage = {data: Buffer.from('hello')};
       const parentSpan = otel.PubsubSpans.createPublisherSpan(
@@ -1026,21 +1027,9 @@ describe('Message Queues', () => {
         maxTokens: 10,
         refillRatio: 0.2,
       });
-      for (let i = 0; i < 5; i++) {
-        fakePub.refillTokenBucket();
-      }
+      seedTokens(5);
 
-      const calls: CapturedPublishCall[] = [];
-      sandbox
-        .stub(topic, 'request')
-        .callsFake(
-          (
-            config: RequestConfig,
-            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
-          ) => {
-            calls.push({config, callback});
-          },
-        );
+      const calls = captureRequests();
 
       const cbSpy = sandbox.spy();
       const publishPromise = queue._publish([{}], [cbSpy], 0, 'test');
@@ -1070,21 +1059,9 @@ describe('Message Queues', () => {
         maxTokens: 10,
         refillRatio: 0.2,
       });
-      for (let i = 0; i < 5; i++) {
-        fakePub.refillTokenBucket();
-      }
+      seedTokens(5);
 
-      const calls: CapturedPublishCall[] = [];
-      sandbox
-        .stub(topic, 'request')
-        .callsFake(
-          (
-            config: RequestConfig,
-            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
-          ) => {
-            calls.push({config, callback});
-          },
-        );
+      const calls = captureRequests();
 
       const cbSpy = sandbox.spy();
       const publishPromise = queue._publish([{}], [cbSpy], 0, 'test');
@@ -1106,22 +1083,10 @@ describe('Message Queues', () => {
         maxTokens: 10,
         refillRatio: 0.2,
       });
-      for (let i = 0; i < 10; i++) {
-        fakePub.refillTokenBucket();
-      }
+      seedTokens(10);
       assert.strictEqual(fakePub.tokenBucket?.getTokenBalance(), 2.0);
 
-      const calls: CapturedPublishCall[] = [];
-      sandbox
-        .stub(topic, 'request')
-        .callsFake(
-          (
-            config: RequestConfig,
-            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
-          ) => {
-            calls.push({config, callback});
-          },
-        );
+      const calls = captureRequests();
 
       const cbSpy = sandbox.spy();
       const publishPromise = queue._publish([{}], [cbSpy], 0, 'test');
@@ -1144,15 +1109,9 @@ describe('Message Queues', () => {
       assert.strictEqual(calls[2].config.gaxOpts?.signal?.aborted, false);
 
       // Verify x-goog-pubsub-client-telemetry header on all attempts
-      const decodedTelemetry = calls.map(call => {
-        const headers = call.config.gaxOpts?.otherArgs?.headers as
-          Record<string, string> | undefined;
-        const b64 = headers?.['x-goog-pubsub-client-telemetry'];
-        assert.ok(b64, 'Expected x-goog-pubsub-client-telemetry header');
-        return google.pubsub.v1.PubsubClientTelemetry.decode(
-          Buffer.from(b64, 'base64'),
-        );
-      });
+      const decodedTelemetry = calls.map(call =>
+        decodeTelemetryHeader(call.config),
+      );
       assert.strictEqual(
         decodedTelemetry[0].publishOperation?.hedgedAttemptCount,
         0,
@@ -1183,17 +1142,7 @@ describe('Message Queues', () => {
       });
       assert.strictEqual(fakePub.tokenBucket?.getTokenBalance(), 0);
 
-      const calls: CapturedPublishCall[] = [];
-      sandbox
-        .stub(topic, 'request')
-        .callsFake(
-          (
-            config: RequestConfig,
-            callback: RequestCallback<google.pubsub.v1.IPublishResponse>,
-          ) => {
-            calls.push({config, callback});
-          },
-        );
+      const calls = captureRequests();
 
       const fakeLog = new FakeLog(q.logs.publishHedged);
       const firstPromise = queue._publish([{}], [sandbox.spy()], 0, 'test');
@@ -1261,6 +1210,45 @@ describe('Message Queues', () => {
         /Publish hedging and message ordering cannot be enabled at the same time\./,
       );
       assert.strictEqual(publishCbSpy.calledOnce, true);
+    });
+
+    it('removes completed batch from hedgingScheduler immediately and preserves in-flight hedges across concurrent publishDrain', async () => {
+      fakePub.enableHedging({
+        hedgeDelay: Duration.from({milliseconds: 200}),
+        maxTokens: 10,
+        refillRatio: 0.2,
+      });
+      seedTokens(5);
+      assert.strictEqual(fakePub.tokenBucket?.getTokenBalance(), 1.0);
+
+      const calls = captureRequests();
+      const internalScheduler = fakePub.hedgingScheduler as unknown as {
+        hedgingQueue: unknown[];
+        queueProcessingTimer?: NodeJS.Timeout;
+      };
+
+      const cbSpy = sandbox.spy();
+      const publishPromise = queue._publish([{}], [cbSpy], 0, 'test');
+      assert.strictEqual(calls.length, 1);
+      assert.strictEqual(internalScheduler.hedgingQueue.length, 1);
+      assert.ok(internalScheduler.queueProcessingTimer);
+
+      // Concurrent publishDrain on the empty current batch should not clear the in-flight hedge
+      await queue.publishDrain();
+      assert.strictEqual(internalScheduler.hedgingQueue.length, 1);
+
+      clock.tick(200);
+      assert.strictEqual(calls.length, 2);
+
+      calls[1].callback(null, {messageIds: ['hedged-after-drain']});
+      await publishPromise;
+
+      assert.strictEqual(
+        cbSpy.calledOnceWithExactly(null, 'hedged-after-drain'),
+        true,
+      );
+      assert.strictEqual(internalScheduler.hedgingQueue.length, 0);
+      assert.strictEqual(internalScheduler.queueProcessingTimer, undefined);
     });
   });
 });
