@@ -1283,7 +1283,7 @@ describe('createApiCall', () => {
               await apiCall({}, undefined);
             });
 
-            assert.strictEqual(attempts, 2);
+            assert.strictEqual(attempts, 3);
             const spans = harness.getSpans('google-gax');
             assert.strictEqual(spans.length, 1 + attempts);
             const span = spans.find(s => s.name === 'EchoClient.Echo')!;
@@ -1292,7 +1292,7 @@ describe('createApiCall', () => {
               span.attributes['rpc.system.name'],
               transport.rpcType,
             );
-            // 2 attempts made: initial send + 1 resend. The 2nd retry was not sent because maxRetries was reached.
+            // 3 attempts made: initial send + 2 resends.
             harness.assertResendCount(0, {span});
             const attemptSpans = spans.filter(
               s => s.name === expectedAttemptSpanName,
@@ -2048,10 +2048,55 @@ describe('retryable', () => {
       try {
         assert.ok(err instanceof GoogleError);
         assert.strictEqual(err!.code, status.DEADLINE_EXCEEDED);
-        assert.strictEqual(spy.callCount, toAttempt);
+        assert.strictEqual(spy.callCount, toAttempt + 1);
         assert.match(
           err.message,
           /Exceeded maximum number of retries retrying error Error before any response was received/,
+        );
+        done();
+      } catch (err) {
+        done(err);
+      }
+    });
+  });
+
+  it('encounters three errors when maxRetries is set to 2 and surfaces all in Previous errors', done => {
+    const maxRetries = 2;
+    const backoff = gax.createMaxRetriesBackoffSettings(
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      maxRetries,
+    );
+    const maxRetriesRetryOptions = utils.createRetryOptions(backoff);
+    const maxRetrySettings = {
+      settings: {timeout: 0, retry: maxRetriesRetryOptions},
+    };
+    let callCount = 0;
+    function failWithIndexedError(
+      argument: {},
+      metadata: {},
+      options: {},
+      callback: Function,
+    ) {
+      callCount++;
+      const error = new GoogleError(`error-${callCount}`);
+      error.code = FAKE_STATUS_CODE_1;
+      callback(error);
+    }
+    const spy = sinon.spy(failWithIndexedError);
+    const apiCall = createApiCall(spy, maxRetrySettings);
+    void apiCall({}, undefined, err => {
+      try {
+        assert.ok(err instanceof GoogleError);
+        assert.strictEqual(err!.code, status.DEADLINE_EXCEEDED);
+        assert.strictEqual(spy.callCount, 3);
+        assert.strictEqual(
+          err.message,
+          `Exceeded maximum number of retries retrying error Error: error-3 before any response was received : Previous errors : [{message: error-1, code: ${FAKE_STATUS_CODE_1}, details: , note: },{message: error-2, code: ${FAKE_STATUS_CODE_1}, details: , note: },{message: error-3, code: ${FAKE_STATUS_CODE_1}, details: , note: }]`,
         );
         done();
       } catch (err) {

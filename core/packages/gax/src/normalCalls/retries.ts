@@ -134,7 +134,7 @@ export function retryable(
         return;
       }
 
-      if (retries && retries >= maxRetries) {
+      if (retries && retries > maxRetries) {
         const error = new GoogleError(
           'Exceeded maximum number of retries ' +
             (err ? `retrying error ${err} ` : '') +
