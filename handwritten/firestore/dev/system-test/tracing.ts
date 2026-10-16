@@ -12,9 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as chaiAsPromised from 'chai-as-promised';
-import {expect, use} from 'chai';
-import {describe, it, beforeEach, afterEach, Test} from 'mocha';
+import {describe, it, beforeEach, afterEach, expect, VitestTask} from 'vitest';
 import {
   Attributes,
   context,
@@ -74,8 +72,6 @@ import {cloudtrace_v1, auth as gAuth} from '@googleapis/cloudtrace';
 import Schema$Trace = cloudtrace_v1.Schema$Trace;
 import Schema$TraceSpan = cloudtrace_v1.Schema$TraceSpan;
 import {logger} from '../src/logger';
-
-use(chaiAsPromised);
 
 const NUM_TRACE_ID_BYTES = 32;
 const NUM_SPAN_ID_BYTES = 16;
@@ -229,12 +225,12 @@ describe.skip('Tracing Tests', () => {
     return spanContext;
   }
 
-  function beforeEachTest(test: Test) {
+  function beforeEachTest(task: VitestTask) {
     testConfig = {
-      preferRest: test.parent?.title === REST_TEST_SUITE_TITLE,
+      preferRest: task.suite?.name === REST_TEST_SUITE_TITLE,
       useGlobalOpenTelemetry:
-        test.parent?.parent?.title === GLOBAL_OTEL_TEST_SUITE_TITLE,
-      e2e: test.parent?.parent?.parent?.title === E2E_TEST_SUITE_TITLE,
+        task.suite?.suite?.name === GLOBAL_OTEL_TEST_SUITE_TITLE,
+      e2e: task.suite?.suite?.suite?.name === E2E_TEST_SUITE_TITLE,
     };
 
     logger('beforeEach', null, 'Starting test with config:', testConfig);
@@ -276,7 +272,7 @@ describe.skip('Tracing Tests', () => {
     }
 
     // Using a unique tracer name for each test.
-    tracer = tracerProvider.getTracer(`${test.title}${Date.now()}`);
+    tracer = tracerProvider.getTracer(`${task.name}${Date.now()}`);
 
     customSpanContext = getNewSpanContext();
     customContext = trace.setSpanContext(ROOT_CONTEXT, customSpanContext);
@@ -448,10 +444,10 @@ describe.skip('Tracing Tests', () => {
     // `runFirestoreOperationInRootSpan`, and some Firestore operations outside
     // of it. Therefore, if a given test intends to capture some (but not all) spans,
     // the in-memory trace will have more spans than `numExpectedSpans`.
-    expect(spanIdToSpanData.size).to.greaterThanOrEqual(
-      numExpectedSpans,
+    expect(
+      spanIdToSpanData.size,
       `Could not find expected number of spans (${numExpectedSpans})`,
-    );
+    ).toBeGreaterThanOrEqual(numExpectedSpans);
   }
 
   function buildSpanMapsFromInMemorySpanExporter(): void {
@@ -590,10 +586,10 @@ describe.skip('Tracing Tests', () => {
   // to the same trace, and that Firestore-generated spans contain the expected
   // Firestore attributes.
   function expectSpanHierarchy(...spanNamesHierarchy: string[]): void {
-    expect(spanNamesHierarchy.length).to.be.greaterThan(
-      0,
+    expect(
+      spanNamesHierarchy.length,
       'The expected spans hierarchy was empty',
-    );
+    ).toBeGreaterThan(0);
 
     let matchingSpanHierarchy: SpanData[] = [];
 
@@ -614,10 +610,10 @@ describe.skip('Tracing Tests', () => {
       if (matchingSpanHierarchy.length > 0) break;
     }
 
-    expect(matchingSpanHierarchy.length).to.be.greaterThan(
-      0,
+    expect(
+      matchingSpanHierarchy.length,
       `Was not able to find the following span hierarchy: ${spanNamesHierarchy}`,
-    );
+    ).toBeGreaterThan(0);
     logger(
       'expectSpanHierarchy',
       null,
@@ -628,10 +624,10 @@ describe.skip('Tracing Tests', () => {
     for (let i = 0; i + 1 < matchingSpanHierarchy.length; ++i) {
       const parentSpan = matchingSpanHierarchy[i];
       const childSpan = matchingSpanHierarchy[i + 1];
-      expect(childSpan.traceId).to.equal(
-        parentSpan.traceId,
+      expect(
+        childSpan.traceId,
         `'${childSpan.name}' and '${parentSpan.name}' spans do not belong to the same trace`,
-      );
+      ).toBe(parentSpan.traceId);
 
       // The Cloud Trace API does not return span attributes and events.
       if (!testConfig.e2e) {
@@ -646,7 +642,7 @@ describe.skip('Tracing Tests', () => {
             // first operation do not contain a project ID. So, we'll just compare
             // this attribute on the leaf spans.
           } else {
-            expect(childSpan.attributes[attributesKey]).to.be.equal(
+            expect(childSpan.attributes[attributesKey]).toBe(
               settingsAttributes[attributesKey],
             );
           }
@@ -667,15 +663,13 @@ describe.skip('Tracing Tests', () => {
 
     // Expect that the span exists first.
     const span = getSpanByName(spanName);
-    expect(span, `Could not find the span named ${spanName}`).to.not.be.null;
+    expect(span, `Could not find the span named ${spanName}`).not.toBeNull();
 
     // Assert that the expected attributes are present in the span attributes.
     // Note that the span attributes may be a superset of the attributes passed
     // to this function.
     for (const attributesKey in attributes) {
-      expect(span!.attributes[attributesKey]).to.be.equal(
-        attributes[attributesKey],
-      );
+      expect(span!.attributes[attributesKey]).toBe(attributes[attributesKey]);
     }
   }
 
@@ -688,16 +682,16 @@ describe.skip('Tracing Tests', () => {
 
     // Expect that the span exists first.
     const span = getSpanByName(spanName);
-    expect(span, `Could not find the span named ${spanName}`).to.not.be.null;
+    expect(span, `Could not find the span named ${spanName}`).not.toBeNull();
 
     // Assert that the expected attributes are present in the span attributes.
     // Note that the span attributes may be a superset of the attributes passed
     // to this function.
     if (span?.events) {
       const numEvents = eventNames.length;
-      expect(numEvents).to.equal(span.events.length);
+      expect(numEvents).toBe(span.events.length);
       for (let i = 0; i < numEvents; ++i) {
-        expect(span.events[i].name).to.equal(eventNames[i]);
+        expect(span.events[i].name).toBe(eventNames[i]);
       }
     }
   }
@@ -705,15 +699,15 @@ describe.skip('Tracing Tests', () => {
   describe(IN_MEMORY_TEST_SUITE_TITLE, () => {
     describe(NON_GLOBAL_OTEL_TEST_SUITE_TITLE, () => {
       describe(GRPC_TEST_SUITE_TITLE, () => {
-        beforeEach(function () {
-          beforeEachTest(this.currentTest!);
+        beforeEach(ctx => {
+          beforeEachTest(ctx.task);
         });
         runTestCases();
         afterEach(async () => afterEachTest());
       });
       describe(REST_TEST_SUITE_TITLE, () => {
-        beforeEach(function () {
-          beforeEachTest(this.currentTest!);
+        beforeEach(ctx => {
+          beforeEachTest(ctx.task);
         });
         runTestCases();
         afterEach(async () => afterEachTest());
@@ -721,15 +715,15 @@ describe.skip('Tracing Tests', () => {
     });
     describe(GLOBAL_OTEL_TEST_SUITE_TITLE, () => {
       describe(GRPC_TEST_SUITE_TITLE, () => {
-        beforeEach(function () {
-          beforeEachTest(this.currentTest!);
+        beforeEach(ctx => {
+          beforeEachTest(ctx.task);
         });
         runTestCases();
         afterEach(async () => afterEachTest());
       });
       describe(REST_TEST_SUITE_TITLE, () => {
-        beforeEach(function () {
-          beforeEachTest(this.currentTest!);
+        beforeEach(ctx => {
+          beforeEachTest(ctx.task);
         });
         runTestCases();
         afterEach(async () => afterEachTest());
@@ -740,15 +734,15 @@ describe.skip('Tracing Tests', () => {
   describe(E2E_TEST_SUITE_TITLE, () => {
     describe(NON_GLOBAL_OTEL_TEST_SUITE_TITLE, () => {
       describe(GRPC_TEST_SUITE_TITLE, () => {
-        beforeEach(function () {
-          beforeEachTest(this.currentTest!);
+        beforeEach(ctx => {
+          beforeEachTest(ctx.task);
         });
         runTestCases();
         afterEach(async () => afterEachTest());
       });
       describe(REST_TEST_SUITE_TITLE, () => {
-        beforeEach(function () {
-          beforeEachTest(this.currentTest!);
+        beforeEach(ctx => {
+          beforeEachTest(ctx.task);
         });
         runTestCases();
         afterEach(async () => afterEachTest());
@@ -756,15 +750,15 @@ describe.skip('Tracing Tests', () => {
     });
     describe(GLOBAL_OTEL_TEST_SUITE_TITLE, () => {
       describe(GRPC_TEST_SUITE_TITLE, () => {
-        beforeEach(function () {
-          beforeEachTest(this.currentTest!);
+        beforeEach(ctx => {
+          beforeEachTest(ctx.task);
         });
         runTestCases();
         afterEach(async () => afterEachTest());
       });
       describe(REST_TEST_SUITE_TITLE, () => {
-        beforeEach(function () {
-          beforeEachTest(this.currentTest!);
+        beforeEach(ctx => {
+          beforeEachTest(ctx.task);
         });
         runTestCases();
         afterEach(async () => afterEachTest());

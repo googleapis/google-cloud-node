@@ -12,12 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, it, beforeEach, before, afterEach, after} from 'mocha';
-import {expect, use} from 'chai';
-import * as chaiAsPromised from 'chai-as-promised';
+import {
+  describe,
+  it,
+  beforeEach,
+  beforeAll,
+  afterEach,
+  afterAll,
+  expect,
+  vi,
+  MockInstance,
+} from 'vitest';
 import * as extend from 'extend';
 import {GoogleError, GrpcClient, Status} from 'google-gax';
-import * as sinon from 'sinon';
 
 import {google} from '../protos/firestore_v1_proto_api';
 
@@ -51,8 +58,6 @@ import {
 } from './util/helpers';
 
 import api = google.firestore.v1;
-
-use(chaiAsPromised);
 
 const {grpc} = new GrpcClient({});
 
@@ -573,7 +578,7 @@ const allSupportedTypesOutput: {[field: string]: unknown} = {
 describe('instantiation', () => {
   it('creates instance', () => {
     const firestore = new Firestore.Firestore(DEFAULT_SETTINGS);
-    expect(firestore).to.be.an.instanceOf(Firestore.Firestore);
+    expect(firestore).toBeInstanceOf(Firestore.Firestore);
   });
 
   it('merges settings', () => {
@@ -581,9 +586,9 @@ describe('instantiation', () => {
     firestore.settings({foo: 'bar'});
 
     /* eslint-disable @typescript-eslint/no-explicit-any */
-    expect((firestore as any)._settings.projectId).to.equal(PROJECT_ID);
-    expect((firestore as any)._settings.databaseId).to.be.undefined;
-    expect((firestore as any)._settings.foo).to.equal('bar');
+    expect((firestore as any)._settings.projectId).toBe(PROJECT_ID);
+    expect((firestore as any)._settings.databaseId).toBeUndefined();
+    expect((firestore as any)._settings.foo).toBe('bar');
     /* eslint-enable @typescript-eslint/no-explicit-any */
   });
 
@@ -591,7 +596,7 @@ describe('instantiation', () => {
     const firestore = new Firestore.Firestore(DEFAULT_SETTINGS);
     firestore.settings({});
 
-    expect(() => firestore.settings({})).to.throw(
+    expect(() => firestore.settings({})).toThrow(
       'Firestore has already been initialized. You can only call settings() once, and only before calling any other methods on a Firestore object.',
     );
   });
@@ -600,7 +605,7 @@ describe('instantiation', () => {
     const firestore = new Firestore.Firestore(DEFAULT_SETTINGS);
     await firestore.initializeIfNeeded('tag');
 
-    expect(() => firestore.settings({})).to.throw(
+    expect(() => firestore.settings({})).toThrow(
       'Firestore has already been initialized. You can only call settings() once, and only before calling any other methods on a Firestore object.',
     );
   });
@@ -609,7 +614,7 @@ describe('instantiation', () => {
     expect(() => {
       const settings = {...DEFAULT_SETTINGS, projectId: 1337};
       new Firestore.Firestore(settings as InvalidApiUsage);
-    }).to.throw(
+    }).toThrow(
       'Value for argument "settings.projectId" is not a valid string.',
     );
 
@@ -617,7 +622,7 @@ describe('instantiation', () => {
       new Firestore.Firestore(DEFAULT_SETTINGS).settings({
         projectId: 1337,
       } as InvalidApiUsage);
-    }).to.throw(
+    }).toThrow(
       'Value for argument "settings.projectId" is not a valid string.',
     );
   });
@@ -626,7 +631,7 @@ describe('instantiation', () => {
     expect(() => {
       const settings = {...DEFAULT_SETTINGS, databaseId: 1337};
       new Firestore.Firestore(settings as InvalidApiUsage);
-    }).to.throw(
+    }).toThrow(
       'Value for argument "settings.databaseId" is not a valid string.',
     );
 
@@ -634,7 +639,7 @@ describe('instantiation', () => {
       new Firestore.Firestore(DEFAULT_SETTINGS).settings({
         databaseId: 1337,
       } as InvalidApiUsage);
-    }).to.throw(
+    }).toThrow(
       'Value for argument "settings.databaseId" is not a valid string.',
     );
   });
@@ -646,7 +651,7 @@ describe('instantiation', () => {
       expect(() => {
         const settings = {...DEFAULT_SETTINGS, ssl: value};
         new Firestore.Firestore(settings as InvalidApiUsage);
-      }).to.throw('Value for argument "settings.ssl" is not a valid boolean.');
+      }).toThrow('Value for argument "settings.ssl" is not a valid boolean.');
     }
 
     new Firestore.Firestore({ssl: true});
@@ -663,7 +668,7 @@ describe('instantiation', () => {
     for (const value of invalidValues) {
       expect(() => {
         new Firestore.Firestore({host: value});
-      }).to.throw('Value for argument "settings.host" is not a valid host.');
+      }).toThrow('Value for argument "settings.host" is not a valid host.');
     }
 
     const validValues = [
@@ -694,7 +699,7 @@ describe('instantiation', () => {
         expect(() => {
           process.env.FIRESTORE_EMULATOR_HOST = value;
           new Firestore.Firestore();
-        }).to.throw(
+        }).toThrow(
           'Value for argument "FIRESTORE_EMULATOR_HOST" is not a valid host.',
         );
       }
@@ -730,20 +735,20 @@ describe('instantiation', () => {
         apiEndpoint: 'api-host',
       });
       firestore.settings({host: 'new-host:100'});
-      expect(firestore._settings.servicePath).to.equal('new-host');
+      expect(firestore._settings.servicePath).toBe('new-host');
 
       firestore = new Firestore.Firestore({
         servicePath: 'service-host',
       });
       firestore.settings({host: 'new-host:100'});
-      expect(firestore._settings.servicePath).to.equal('new-host');
+      expect(firestore._settings.servicePath).toBe('new-host');
 
       firestore = new Firestore.Firestore({
         apiEndpoint: 'api-host',
         servicePath: 'service-host',
       });
       firestore.settings({host: 'new-host:100'});
-      expect(firestore._settings.servicePath).to.equal('new-host');
+      expect(firestore._settings.servicePath).toBe('new-host');
     } finally {
       if (oldValue) {
         process.env.FIRESTORE_EMULATOR_HOST = oldValue;
@@ -761,9 +766,9 @@ describe('instantiation', () => {
       const firestore = new Firestore.Firestore({
         host: 'localhost:8080',
       });
-      expect(firestore._settings.servicePath).to.equal('env-host');
+      expect(firestore._settings.servicePath).toBe('env-host');
       firestore.settings({host: 'localhost:8080'});
-      expect(firestore._settings.servicePath).to.equal('env-host');
+      expect(firestore._settings.servicePath).toBe('env-host');
     } finally {
       if (oldValue) {
         process.env.FIRESTORE_EMULATOR_HOST = oldValue;
@@ -779,9 +784,9 @@ describe('instantiation', () => {
     try {
       process.env.FIRESTORE_EMULATOR_HOST = 'foo';
       const firestore = new Firestore.Firestore({servicePath: 'bar'});
-      expect(firestore._settings.servicePath).to.equal('foo');
+      expect(firestore._settings.servicePath).toBe('foo');
       firestore.settings({servicePath: 'bar'});
-      expect(firestore._settings.servicePath).to.equal('foo');
+      expect(firestore._settings.servicePath).toBe('foo');
     } finally {
       if (oldValue) {
         process.env.FIRESTORE_EMULATOR_HOST = oldValue;
@@ -791,44 +796,50 @@ describe('instantiation', () => {
     }
   });
 
-  it('FIRESTORE_EMULATOR_HOST overrides other endpoint', done => {
+  it('FIRESTORE_EMULATOR_HOST overrides other endpoint', () => {
     const oldValue = process.env.FIRESTORE_EMULATOR_HOST;
 
-    try {
-      process.env.FIRESTORE_EMULATOR_HOST = 'new';
-      const firestore = new Firestore.Firestore({servicePath: 'old'});
-      firestore['validateAndApplySettings'] = settings => {
-        expect(settings.servicePath).to.equal('new');
-        done();
-      };
-      firestore.settings({});
-    } finally {
-      if (oldValue) {
-        process.env.FIRESTORE_EMULATOR_HOST = oldValue;
-      } else {
-        delete process.env.FIRESTORE_EMULATOR_HOST;
+    return new Promise<void>(resolve => {
+      try {
+        process.env.FIRESTORE_EMULATOR_HOST = 'new';
+        const firestore = new Firestore.Firestore({servicePath: 'old'});
+        firestore['validateAndApplySettings'] = settings => {
+          expect(settings.servicePath).toBe('new');
+          resolve();
+        };
+        firestore.settings({});
+      } finally {
+        if (oldValue) {
+          process.env.FIRESTORE_EMULATOR_HOST = oldValue;
+        } else {
+          delete process.env.FIRESTORE_EMULATOR_HOST;
+        }
       }
-    }
+    });
   });
 
-  it('FIRESTORE_EMULATOR_HOST keeps user-provided headers', done => {
+  it('FIRESTORE_EMULATOR_HOST keeps user-provided headers', () => {
     const oldValue = process.env.FIRESTORE_EMULATOR_HOST;
 
-    try {
-      process.env.FIRESTORE_EMULATOR_HOST = 'new';
-      const firestore = new Firestore.Firestore({customHeaders: {foo: 'bar'}});
-      firestore['validateAndApplySettings'] = settings => {
-        expect(settings.customHeaders.foo).to.equal('bar');
-        done();
-      };
-      firestore.settings({});
-    } finally {
-      if (oldValue) {
-        process.env.FIRESTORE_EMULATOR_HOST = oldValue;
-      } else {
-        delete process.env.FIRESTORE_EMULATOR_HOST;
+    return new Promise<void>(resolve => {
+      try {
+        process.env.FIRESTORE_EMULATOR_HOST = 'new';
+        const firestore = new Firestore.Firestore({
+          customHeaders: {foo: 'bar'},
+        });
+        firestore['validateAndApplySettings'] = settings => {
+          expect(settings.customHeaders.foo).toBe('bar');
+          resolve();
+        };
+        firestore.settings({});
+      } finally {
+        if (oldValue) {
+          process.env.FIRESTORE_EMULATOR_HOST = oldValue;
+        } else {
+          delete process.env.FIRESTORE_EMULATOR_HOST;
+        }
       }
-    }
+    });
   });
 
   it('validates maxIdleChannels', () => {
@@ -838,7 +849,7 @@ describe('instantiation', () => {
       expect(() => {
         const settings = {...DEFAULT_SETTINGS, maxIdleChannels: value};
         new Firestore.Firestore(settings as InvalidApiUsage);
-      }).to.throw();
+      }).toThrow();
     }
 
     new Firestore.Firestore({maxIdleChannels: 1});
@@ -850,9 +861,7 @@ describe('instantiation', () => {
       databaseId: 'bar',
     });
 
-    return expect(firestore.formattedName).to.equal(
-      'projects/foo/databases/bar',
-    );
+    return expect(firestore.formattedName).toBe('projects/foo/databases/bar');
   });
 
   it('uses project id from gapic client', async () => {
@@ -863,10 +872,8 @@ describe('instantiation', () => {
       {projectId: undefined},
     ).then(async firestore => {
       await firestore.initializeIfNeeded('tag');
-      expect(firestore.projectId).to.equal('foo');
-      expect(firestore.formattedName).to.equal(
-        'projects/foo/databases/(default)',
-      );
+      expect(firestore.projectId).toBe('foo');
+      expect(firestore.formattedName).toBe('projects/foo/databases/(default)');
     });
   });
 
@@ -877,7 +884,7 @@ describe('instantiation', () => {
 
     firestore.settings({projectId: PROJECT_ID});
 
-    expect(firestore.formattedName).to.equal(
+    expect(firestore.formattedName).toBe(
       `projects/${PROJECT_ID}/databases/(default)`,
     );
   });
@@ -889,7 +896,7 @@ describe('instantiation', () => {
 
     firestore.settings({projectId: PROJECT_ID, databaseId: 'bar'});
 
-    expect(firestore.formattedName).to.equal(
+    expect(firestore.formattedName).toBe(
       `projects/${PROJECT_ID}/databases/bar`,
     );
   });
@@ -901,9 +908,9 @@ describe('instantiation', () => {
       },
       {projectId: undefined},
     ).then(firestore => {
-      return expect(
-        firestore.collection('foo').add({}),
-      ).to.eventually.be.rejectedWith('Injected Error');
+      return expect(firestore.collection('foo').add({})).rejects.toThrow(
+        'Injected Error',
+      );
     });
   });
 
@@ -939,7 +946,7 @@ describe('instantiation', () => {
       // undefined. We could test for undefined here, but converting
       // to boolean and testing for falsy-ness is consistent with the
       // code that consumes settings.
-      expect(!!firestore['_settings'].preferRest).to.be.false;
+      expect(!!firestore['_settings'].preferRest).toBe(false);
     });
 
     it('preferRest can be enabled by setting', async () => {
@@ -947,13 +954,13 @@ describe('instantiation', () => {
       const firestore = new Firestore.Firestore({
         preferRest: true,
       });
-      expect(firestore['_settings'].preferRest).to.be.true;
+      expect(firestore['_settings'].preferRest).toBe(true);
     });
 
     it('preferRest can be enabled by environment variable', async () => {
       process.env.FIRESTORE_PREFER_REST = 'true';
       const firestore = new Firestore.Firestore({});
-      expect(firestore['_settings'].preferRest).to.be.true;
+      expect(firestore['_settings'].preferRest).toBe(true);
     });
 
     it('the preferRest value from settings takes precedent over the environment var - disable', async () => {
@@ -961,7 +968,7 @@ describe('instantiation', () => {
       const firestore = new Firestore.Firestore({
         preferRest: false,
       });
-      expect(firestore['_settings'].preferRest).to.be.false;
+      expect(firestore['_settings'].preferRest).toBe(false);
     });
 
     it('the preferRest value from settings takes precedent over the environment var - enable', async () => {
@@ -969,58 +976,56 @@ describe('instantiation', () => {
       const firestore = new Firestore.Firestore({
         preferRest: true,
       });
-      expect(firestore['_settings'].preferRest).to.be.true;
+      expect(firestore['_settings'].preferRest).toBe(true);
     });
   });
 
   it('exports all types', () => {
     // Ordering as per firestore.d.ts
-    expect(Firestore.Firestore).to.exist;
-    expect(Firestore.Firestore.name).to.equal('Firestore');
-    expect(Firestore.Timestamp).to.exist;
-    expect(Firestore.Timestamp.name).to.equal('Timestamp');
-    expect(Firestore.GeoPoint).to.exist;
-    expect(Firestore.GeoPoint.name).to.equal('GeoPoint');
-    expect(Firestore.Transaction).to.exist;
-    expect(Firestore.Transaction.name).to.equal('Transaction');
-    expect(Firestore.WriteBatch).to.exist;
-    expect(Firestore.WriteBatch.name).to.equal('WriteBatch');
-    expect(Firestore.DocumentReference).to.exist;
-    expect(Firestore.DocumentReference.name).to.equal('DocumentReference');
-    expect(Firestore.WriteResult).to.exist;
-    expect(Firestore.WriteResult.name).to.equal('WriteResult');
-    expect(Firestore.DocumentSnapshot).to.exist;
-    expect(Firestore.DocumentSnapshot.name).to.equal('DocumentSnapshot');
-    expect(Firestore.QueryDocumentSnapshot).to.exist;
-    expect(Firestore.QueryDocumentSnapshot.name).to.equal(
-      'QueryDocumentSnapshot',
-    );
-    expect(Firestore.Query).to.exist;
-    expect(Firestore.Query.name).to.equal('Query');
-    expect(Firestore.QuerySnapshot).to.exist;
-    expect(Firestore.QuerySnapshot.name).to.equal('QuerySnapshot');
-    expect(Firestore.CollectionReference).to.exist;
-    expect(Firestore.CollectionReference.name).to.equal('CollectionReference');
-    expect(Firestore.FieldValue).to.exist;
-    expect(Firestore.FieldValue.name).to.equal('FieldValue');
-    expect(Firestore.FieldPath).to.exist;
-    expect(Firestore.Firestore.name).to.equal('Firestore');
+    expect(Firestore.Firestore).toBeDefined();
+    expect(Firestore.Firestore.name).toBe('Firestore');
+    expect(Firestore.Timestamp).toBeDefined();
+    expect(Firestore.Timestamp.name).toBe('Timestamp');
+    expect(Firestore.GeoPoint).toBeDefined();
+    expect(Firestore.GeoPoint.name).toBe('GeoPoint');
+    expect(Firestore.Transaction).toBeDefined();
+    expect(Firestore.Transaction.name).toBe('Transaction');
+    expect(Firestore.WriteBatch).toBeDefined();
+    expect(Firestore.WriteBatch.name).toBe('WriteBatch');
+    expect(Firestore.DocumentReference).toBeDefined();
+    expect(Firestore.DocumentReference.name).toBe('DocumentReference');
+    expect(Firestore.WriteResult).toBeDefined();
+    expect(Firestore.WriteResult.name).toBe('WriteResult');
+    expect(Firestore.DocumentSnapshot).toBeDefined();
+    expect(Firestore.DocumentSnapshot.name).toBe('DocumentSnapshot');
+    expect(Firestore.QueryDocumentSnapshot).toBeDefined();
+    expect(Firestore.QueryDocumentSnapshot.name).toBe('QueryDocumentSnapshot');
+    expect(Firestore.Query).toBeDefined();
+    expect(Firestore.Query.name).toBe('Query');
+    expect(Firestore.QuerySnapshot).toBeDefined();
+    expect(Firestore.QuerySnapshot.name).toBe('QuerySnapshot');
+    expect(Firestore.CollectionReference).toBeDefined();
+    expect(Firestore.CollectionReference.name).toBe('CollectionReference');
+    expect(Firestore.FieldValue).toBeDefined();
+    expect(Firestore.FieldValue.name).toBe('FieldValue');
+    expect(Firestore.FieldPath).toBeDefined();
+    expect(Firestore.Firestore.name).toBe('Firestore');
     expect(
       Firestore.FieldValue.serverTimestamp().isEqual(
         Firestore.FieldValue.delete(),
       ),
-    ).to.be.false;
+    ).toBe(false);
   });
 
   describe('grpcOptions flow control window size and subchannel pool', () => {
-    let createStubSpy: sinon.SinonSpy;
+    let createStubSpy: MockInstance;
 
     beforeEach(() => {
-      createStubSpy = sinon.spy(GrpcClient.prototype, 'createStub');
+      createStubSpy = vi.spyOn(GrpcClient.prototype, 'createStub');
     });
 
     afterEach(() => {
-      createStubSpy.restore();
+      createStubSpy.mockRestore();
     });
 
     it('defaults flow_control_window to 256 KB and use_local_subchannel_pool to 1', async () => {
@@ -1034,15 +1039,13 @@ describe('instantiation', () => {
         },
       );
 
-      expect(createStubSpy.calledOnce).to.be.true;
-      const clientOpts = createStubSpy.firstCall.args[1];
-      expect(clientOpts.grpcOptions).to.exist;
-      expect(clientOpts.grpcOptions['grpc-node.flow_control_window']).to.equal(
+      expect(createStubSpy).toHaveBeenCalledTimes(1);
+      const clientOpts = createStubSpy.mock.calls[0][1];
+      expect(clientOpts.grpcOptions).toBeDefined();
+      expect(clientOpts.grpcOptions['grpc-node.flow_control_window']).toBe(
         256 * 1024, // 256 KB
       );
-      expect(clientOpts.grpcOptions['grpc.use_local_subchannel_pool']).to.equal(
-        1,
-      );
+      expect(clientOpts.grpcOptions['grpc.use_local_subchannel_pool']).toBe(1);
     });
 
     it('allows user to override flow_control_window and use_local_subchannel_pool defaults', async () => {
@@ -1062,15 +1065,13 @@ describe('instantiation', () => {
         },
       );
 
-      expect(createStubSpy.calledOnce).to.be.true;
-      const clientOpts = createStubSpy.firstCall.args[1];
-      expect(clientOpts.grpcOptions).to.exist;
-      expect(clientOpts.grpcOptions['grpc-node.flow_control_window']).to.equal(
+      expect(createStubSpy).toHaveBeenCalledTimes(1);
+      const clientOpts = createStubSpy.mock.calls[0][1];
+      expect(clientOpts.grpcOptions).toBeDefined();
+      expect(clientOpts.grpcOptions['grpc-node.flow_control_window']).toBe(
         512 * 1024,
       );
-      expect(clientOpts.grpcOptions['grpc.use_local_subchannel_pool']).to.equal(
-        0,
-      );
+      expect(clientOpts.grpcOptions['grpc.use_local_subchannel_pool']).toBe(0);
     });
   });
 });
@@ -1079,7 +1080,7 @@ describe('serializer', () => {
   it('supports all types', () => {
     const overrides: ApiOverride = {
       commit: request => {
-        expect(allSupportedTypesProtobufJs.fields).to.deep.eq(
+        expect(allSupportedTypesProtobufJs.fields).toEqual(
           request.writes![0].update!.fields,
         );
         return response({
@@ -1106,23 +1107,23 @@ describe('snapshot_() method', () => {
     const expected = extend(true, {}, allSupportedTypesOutput);
     // Deep Equal doesn't support matching instances of DocumentRefs, so we
     // compare them manually and remove them from the resulting object.
-    expect(actualObject.get('pathValue').formattedName).to.equal(
+    expect(actualObject.get('pathValue').formattedName).toBe(
       (expected.pathValue as Firestore.DocumentReference).formattedName,
     );
     const data = actualObject.data()!;
     delete data.pathValue;
     delete expected.pathValue;
-    expect(data).to.deep.eq(expected);
+    expect(data).toEqual(expected);
 
     // We specifically test the GeoPoint properties to ensure 100% test
     // coverage.
-    expect(data.geoPointValue.latitude).to.equal(50.1430847);
-    expect(data.geoPointValue.longitude).to.equal(-122.947778);
+    expect(data.geoPointValue.latitude).toBe(50.1430847);
+    expect(data.geoPointValue.longitude).toBe(-122.947778);
     expect(
       data.geoPointValue.isEqual(
         new Firestore.GeoPoint(50.1430847, -122.947778),
       ),
-    ).to.be.true;
+    ).toBe(true);
   }
 
   beforeEach(() => {
@@ -1142,11 +1143,11 @@ describe('snapshot_() method', () => {
       {seconds: 5, nanos: 6},
     );
 
-    expect(doc.exists).to.be.true;
-    expect({foo: bytesData}).to.deep.eq(doc.data());
-    expect(doc.createTime!.isEqual(new Firestore.Timestamp(1, 2))).to.be.true;
-    expect(doc.updateTime!.isEqual(new Firestore.Timestamp(3, 4))).to.be.true;
-    expect(doc.readTime.isEqual(new Firestore.Timestamp(5, 6))).to.be.true;
+    expect(doc.exists).toBe(true);
+    expect({foo: bytesData}).toEqual(doc.data());
+    expect(doc.createTime!.isEqual(new Firestore.Timestamp(1, 2))).toBe(true);
+    expect(doc.updateTime!.isEqual(new Firestore.Timestamp(3, 4))).toBe(true);
+    expect(doc.readTime.isEqual(new Firestore.Timestamp(5, 6))).toBe(true);
   });
 
   it('handles Proto3 JSON together with existing types', () => {
@@ -1170,17 +1171,19 @@ describe('snapshot_() method', () => {
       'json',
     );
 
-    expect(doc.exists).to.be.true;
-    expect(doc.data()).to.deep.eq({
+    expect(doc.exists).toBe(true);
+    expect(doc.data()).toEqual({
       a: bytesData,
       b: Firestore.Timestamp.fromDate(new Date('1985-03-18T07:20:00.000Z')),
       c: bytesData,
     });
-    expect(doc.createTime!.isEqual(new Firestore.Timestamp(1, 2000000))).to.be
-      .true;
-    expect(doc.updateTime!.isEqual(new Firestore.Timestamp(3, 4000))).to.be
-      .true;
-    expect(doc.readTime.isEqual(new Firestore.Timestamp(5, 6))).to.be.true;
+    expect(doc.createTime!.isEqual(new Firestore.Timestamp(1, 2000000))).toBe(
+      true,
+    );
+    expect(doc.updateTime!.isEqual(new Firestore.Timestamp(3, 4000))).toBe(
+      true,
+    );
+    expect(doc.readTime.isEqual(new Firestore.Timestamp(5, 6))).toBe(true);
   });
 
   it('deserializes all supported types from Protobuf JS', () => {
@@ -1213,7 +1216,7 @@ describe('snapshot_() method', () => {
         '1970-01-01T00:00:05.000000006Z',
         'json',
       );
-    }).to.throw("Unable to infer type value from '{}'.");
+    }).toThrow("Unable to infer type value from '{}'.");
 
     expect(() => {
       firestore.snapshot_(
@@ -1226,7 +1229,7 @@ describe('snapshot_() method', () => {
         '1970-01-01T00:00:05.000000006Z',
         'json',
       );
-    }).to.throw(
+    }).toThrow(
       'Unable to infer type value from \'{"stringValue":"bar","integerValue":42}\'.',
     );
 
@@ -1241,7 +1244,7 @@ describe('snapshot_() method', () => {
         '1970-01-01T00:00:05.000000006Z',
         'json',
       );
-    }).to.throw(
+    }).toThrow(
       'Specify a valid ISO 8601 timestamp for "documentOrName.createTime".',
     );
   });
@@ -1253,8 +1256,8 @@ describe('snapshot_() method', () => {
       'json',
     );
 
-    expect(doc.exists).to.be.false;
-    expect(doc.readTime.isEqual(new Firestore.Timestamp(5, 6))).to.be.true;
+    expect(doc.exists).toBe(false);
+    expect(doc.readTime.isEqual(new Firestore.Timestamp(5, 6))).toBe(true);
   });
 
   it('handles invalid encoding format ', () => {
@@ -1264,7 +1267,7 @@ describe('snapshot_() method', () => {
         '1970-01-01T00:00:05.000000006Z',
         'ascii' as InvalidApiUsage,
       );
-    }).to.throw(
+    }).toThrow(
       'Unsupported encoding format. Expected "json" or "protobufJS", but was "ascii".',
     );
   });
@@ -1283,31 +1286,31 @@ describe('doc() method', () => {
 
   it('returns DocumentReference', () => {
     const documentRef = firestore.doc('collectionId/documentId');
-    expect(documentRef).to.be.an.instanceOf(Firestore.DocumentReference);
+    expect(documentRef).toBeInstanceOf(Firestore.DocumentReference);
   });
 
   it('requires document path', () => {
-    expect(() => (firestore as InvalidApiUsage).doc()).to.throw(
+    expect(() => (firestore as InvalidApiUsage).doc()).toThrow(
       'Value for argument "documentPath" is not a valid resource path. Path must be a non-empty string.',
     );
   });
 
   it("doesn't accept empty components", () => {
-    expect(() => firestore.doc('coll//doc')).to.throw(
+    expect(() => firestore.doc('coll//doc')).toThrow(
       'Value for argument "documentPath" is not a valid resource path. Paths must not contain //.',
     );
   });
 
   it('must point to document', () => {
-    expect(() => firestore.doc('collectionId')).to.throw(
+    expect(() => firestore.doc('collectionId')).toThrow(
       'Value for argument "documentPath" must point to a document, but was "collectionId". Your path does not contain an even number of components.',
     );
   });
 
   it('exposes properties', () => {
     const documentRef = firestore.doc('collectionId/documentId');
-    expect(documentRef.id).to.equal('documentId');
-    expect(documentRef.firestore).to.equal(firestore);
+    expect(documentRef.id).toBe('documentId');
+    expect(documentRef.firestore).toBe(firestore);
   });
 });
 
@@ -1324,26 +1327,26 @@ describe('collection() method', () => {
 
   it('returns collection', () => {
     const collection = firestore.collection('col1/doc1/col2');
-    expect(collection).to.be.an.instanceOf(Firestore.CollectionReference);
+    expect(collection).toBeInstanceOf(Firestore.CollectionReference);
   });
 
   it('requires collection id', () => {
-    expect(() => (firestore as InvalidApiUsage).collection()).to.throw(
+    expect(() => (firestore as InvalidApiUsage).collection()).toThrow(
       'Value for argument "collectionPath" is not a valid resource path. Path must be a non-empty string.',
     );
   });
 
   it('must point to a collection', () => {
-    expect(() => firestore.collection('collectionId/documentId')).to.throw(
+    expect(() => firestore.collection('collectionId/documentId')).toThrow(
       'Value for argument "collectionPath" must point to a collection, but was "collectionId/documentId". Your path does not contain an odd number of components.',
     );
   });
 
   it('exposes properties', () => {
     const collection = firestore.collection('collectionId');
-    expect(collection.id).to.exist;
-    expect(collection.doc).to.exist;
-    expect(collection.id).to.equal('collectionId');
+    expect(collection.id).toBeDefined();
+    expect(collection.doc).toBeDefined();
+    expect(collection.id).toBe('collectionId');
   });
 });
 
@@ -1351,7 +1354,7 @@ describe('listCollections() method', () => {
   it('returns collections', () => {
     const overrides: ApiOverride = {
       listCollectionIds: request => {
-        expect(request).to.deep.eq({
+        expect(request).toEqual({
           parent: `projects/${PROJECT_ID}/databases/(default)/documents`,
         });
 
@@ -1361,35 +1364,35 @@ describe('listCollections() method', () => {
 
     return createInstance(overrides).then(firestore => {
       return firestore.listCollections().then(collections => {
-        expect(collections[0].path).to.equal('first');
-        expect(collections[1].path).to.equal('second');
+        expect(collections[0].path).toBe('first');
+        expect(collections[1].path).toBe('second');
       });
     });
   });
 });
 
 describe('getAll() method', () => {
-  before(() => {
+  beforeAll(() => {
     setTimeoutHandler(setImmediate);
   });
 
-  after(() => setTimeoutHandler(setTimeout));
+  afterAll(() => setTimeoutHandler(setTimeout));
 
   function resultEquals(
     result: DocumentSnapshot[],
     ...docs: api.IBatchGetDocumentsResponse[]
   ) {
-    expect(result.length).to.equal(docs.length);
+    expect(result.length).toBe(docs.length);
 
     for (let i = 0; i < result.length; ++i) {
       const doc = docs[i];
 
       if (doc.found) {
-        expect(result[i].exists).to.be.true;
-        expect(result[i].ref.formattedName).to.equal(doc.found.name);
+        expect(result[i].exists).toBe(true);
+        expect(result[i].ref.formattedName).toBe(doc.found.name);
       } else {
-        expect(result[i].exists).to.be.false;
-        expect(result[i].ref.formattedName).to.equal(doc.missing);
+        expect(result[i].exists).toBe(false);
+        expect(result[i].ref.formattedName).toBe(doc.missing);
       }
     }
   }
@@ -1424,7 +1427,7 @@ describe('getAll() method', () => {
           throw new Error('Unexpected success in Promise');
         })
         .catch(err => {
-          expect(err.message).to.equal(
+          expect(err.message).toBe(
             'Did not receive document for "collectionId/documentId".',
           );
         });
@@ -1448,8 +1451,8 @@ describe('getAll() method', () => {
           throw new Error('Unexpected success in Promise');
         })
         .catch(err => {
-          expect(attempts).to.equal(5);
-          expect(err.message).to.equal('Expected exception');
+          expect(attempts).toBe(5);
+          expect(err.message).toBe('Expected exception');
         });
     });
   });
@@ -1473,7 +1476,7 @@ describe('getAll() method', () => {
         .doc('collectionId/documentId')
         .get()
         .then(() => {
-          expect(attempts).to.equal(3);
+          expect(attempts).toBe(3);
         });
     });
   });
@@ -1498,11 +1501,11 @@ describe('getAll() method', () => {
         firestore.doc('collectionId/doc3'),
       );
 
-      expect(attempts).to.equal(3);
-      expect(docs.length).to.equal(3);
-      expect(docs[0].ref.path).to.equal('collectionId/doc1');
-      expect(docs[1].ref.path).to.equal('collectionId/doc2');
-      expect(docs[2].ref.path).to.equal('collectionId/doc3');
+      expect(attempts).toBe(3);
+      expect(docs.length).toBe(3);
+      expect(docs[0].ref.path).toBe('collectionId/doc1');
+      expect(docs[1].ref.path).toBe('collectionId/doc2');
+      expect(docs[2].ref.path).toBe('collectionId/doc3');
     });
   });
 
@@ -1528,8 +1531,8 @@ describe('getAll() method', () => {
         );
         expect.fail();
       } catch (err) {
-        expect(attempts).to.equal(1);
-        expect(err.code).to.equal(Status.PERMISSION_DENIED);
+        expect(attempts).toBe(1);
+        expect(err.code).toBe(Status.PERMISSION_DENIED);
       }
     });
   });
@@ -1577,17 +1580,17 @@ describe('getAll() method', () => {
             throw new Error('Unexpected success in Promise');
           })
           .catch(err => {
-            expect(err.code).to.equal(Number(errorCode));
+            expect(err.code).toBe(Number(errorCode));
           });
       }
 
-      expect(actualErrorAttempts).to.deep.eq(expectedErrorAttempts);
+      expect(actualErrorAttempts).toEqual(expectedErrorAttempts);
     });
-  }).timeout(5000);
+  }, 5000);
 
   it('requires at least one argument', () => {
     return createInstance().then(firestore => {
-      expect(() => (firestore as InvalidApiUsage).getAll()).to.throw(
+      expect(() => (firestore as InvalidApiUsage).getAll()).toThrow(
         'Function "Firestore.getAll()" requires at least 1 argument.',
       );
     });
@@ -1595,7 +1598,7 @@ describe('getAll() method', () => {
 
   it('validates document references', () => {
     return createInstance().then(firestore => {
-      expect(() => firestore.getAll(null as InvalidApiUsage)).to.throw(
+      expect(() => firestore.getAll(null as InvalidApiUsage)).toThrow(
         'Element at index 0 is not a valid DocumentReference.',
       );
     });
@@ -1654,7 +1657,7 @@ describe('getAll() method', () => {
   it('accepts same document multiple times', () => {
     const overrides: ApiOverride = {
       batchGetDocuments: request => {
-        expect(request!.documents!.length).to.equal(2);
+        expect(request!.documents!.length).toBe(2);
         return stream(found('a'), found('b'));
       },
     };
@@ -1676,10 +1679,10 @@ describe('getAll() method', () => {
   it('applies field mask', () => {
     const overrides: ApiOverride = {
       batchGetDocuments: request => {
-        expect(request!.mask!.fieldPaths).to.have.members([
-          'foo.bar',
-          '`foo.bar`',
-        ]);
+        expect(request!.mask!.fieldPaths).toEqual(
+          expect.arrayContaining(['foo.bar', '`foo.bar`']),
+        );
+        expect(request!.mask!.fieldPaths).toHaveLength(2);
         return stream(found('a'));
       },
     };
@@ -1697,7 +1700,7 @@ describe('getAll() method', () => {
         firestore.getAll(firestore.doc('collectionId/a'), {
           fieldMask: null,
         } as InvalidApiUsage),
-      ).to.throw(
+      ).toThrow(
         'Value for argument "options" is not a valid read option. "fieldMask" is not an array.',
       );
 
@@ -1705,7 +1708,7 @@ describe('getAll() method', () => {
         firestore.getAll(firestore.doc('collectionId/a'), {
           fieldMask: ['a', new FieldPath('b'), null],
         } as InvalidApiUsage),
-      ).to.throw(
+      ).toThrow(
         'Value for argument "options" is not a valid read option. "fieldMask" is not valid: Element at index 2 is not a valid field path. Paths can only be specified as strings or via a FieldPath object.',
       );
     });
@@ -1724,8 +1727,8 @@ describe('toJSON', () => {
     // Instead of validating the serialized string for redacted credentials,
     // parse the settings and check the credential values.
     const parsedSettings = JSON.parse(serializedSettings);
-    expect(parsedSettings.credentials.client_email).to.equal('***');
-    expect(parsedSettings.credentials.private_key).to.equal('***');
+    expect(parsedSettings.credentials.client_email).toBe('***');
+    expect(parsedSettings.credentials.private_key).toBe('***');
   });
 
   it('Serializing Firestore instance', () => {
@@ -1743,6 +1746,6 @@ describe('toJSON', () => {
     };
 
     const parsedFirestore = JSON.parse(serializedFirestore);
-    expect(parsedFirestore).to.deep.equal(expectedParsedFirestore);
+    expect(parsedFirestore).toEqual(expectedParsedFirestore);
   });
 });

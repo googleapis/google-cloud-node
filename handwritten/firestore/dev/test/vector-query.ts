@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {afterEach, beforeEach, it} from 'mocha';
-import {fieldFiltersQuery, queryEquals, result} from './query';
+import {afterEach, beforeEach, it, expect} from 'vitest';
+import {fieldFiltersQuery, queryEquals, result} from './util/query_helpers';
 import {
   ApiOverride,
   createInstance,
@@ -30,13 +30,9 @@ import {
   Query,
   Timestamp,
 } from '../src';
-import {expect, use} from 'chai';
 import {google} from '../protos/firestore_v1_proto_api';
 import api = google.firestore.v1;
-import * as chaiAsPromised from 'chai-as-promised';
 import {setTimeoutHandler} from '../src/backoff';
-use(chaiAsPromised);
-
 export function findNearestQuery(
   fieldPath: string,
   queryVector: Array<number>,
@@ -101,7 +97,7 @@ describe('Vector(findNearest) query interface', () => {
             limit: 10,
           }),
         ),
-    ).to.be.true;
+    ).toBe(true);
     expect(
       queryA
         .findNearest({
@@ -118,7 +114,7 @@ describe('Vector(findNearest) query interface', () => {
             limit: 10,
           }),
         ),
-    ).to.be.true;
+    ).toBe(true);
     expect(
       queryA
         .findNearest({
@@ -137,7 +133,7 @@ describe('Vector(findNearest) query interface', () => {
             distanceThreshold: 0.125,
           }),
         ),
-    ).to.be.true;
+    ).toBe(true);
     expect(
       queryA
         .findNearest({
@@ -158,7 +154,7 @@ describe('Vector(findNearest) query interface', () => {
             distanceResultField: new FieldPath('foo'),
           }),
         ),
-    ).to.be.true;
+    ).toBe(true);
     expect(
       queryA
         .findNearest({
@@ -177,7 +173,7 @@ describe('Vector(findNearest) query interface', () => {
             distanceResultField: new FieldPath('distance'),
           }),
         ),
-    ).to.be.true;
+    ).toBe(true);
 
     expect(
       queryA
@@ -195,7 +191,7 @@ describe('Vector(findNearest) query interface', () => {
             limit: 10,
           }),
         ),
-    ).to.be.false;
+    ).toBe(false);
     expect(
       queryA
         .findNearest({
@@ -212,7 +208,7 @@ describe('Vector(findNearest) query interface', () => {
             limit: 10,
           }),
         ),
-    ).to.be.false;
+    ).toBe(false);
     expect(
       queryA
         .findNearest({
@@ -229,7 +225,7 @@ describe('Vector(findNearest) query interface', () => {
             limit: 1000,
           }),
         ),
-    ).to.be.false;
+    ).toBe(false);
     expect(
       queryA
         .findNearest({
@@ -246,7 +242,7 @@ describe('Vector(findNearest) query interface', () => {
             limit: 10,
           }),
         ),
-    ).to.be.false;
+    ).toBe(false);
     expect(
       queryA
         .findNearest({
@@ -265,7 +261,7 @@ describe('Vector(findNearest) query interface', () => {
             distanceThreshold: 0.125,
           }),
         ),
-    ).to.be.false;
+    ).toBe(false);
     expect(
       queryA
         .findNearest({
@@ -283,7 +279,7 @@ describe('Vector(findNearest) query interface', () => {
             distanceThreshold: 1,
           }),
         ),
-    ).to.be.false;
+    ).toBe(false);
     expect(
       queryA
         .findNearest({
@@ -301,7 +297,7 @@ describe('Vector(findNearest) query interface', () => {
             limit: 10,
           }),
         ),
-    ).to.be.false;
+    ).toBe(false);
     expect(
       queryA
         .findNearest({
@@ -320,7 +316,7 @@ describe('Vector(findNearest) query interface', () => {
             distanceResultField: 'result',
           }),
         ),
-    ).to.be.false;
+    ).toBe(false);
     expect(
       queryA
         .findNearest({
@@ -339,7 +335,7 @@ describe('Vector(findNearest) query interface', () => {
             distanceResultField: new FieldPath('foo'),
           }),
         ),
-    ).to.be.false;
+    ).toBe(false);
     expect(
       queryA
         .findNearest({
@@ -357,7 +353,7 @@ describe('Vector(findNearest) query interface', () => {
             distanceResultField: new FieldPath('foo'),
           }),
         ),
-    ).to.be.false;
+    ).toBe(false);
     expect(
       queryA
         .findNearest({
@@ -375,7 +371,7 @@ describe('Vector(findNearest) query interface', () => {
             limit: 10,
           }),
         ),
-    ).to.be.false;
+    ).toBe(false);
   });
 
   it('generates equal vector queries with deprecated API', () => {
@@ -396,7 +392,7 @@ describe('Vector(findNearest) query interface', () => {
             limit: 10,
           }),
         ),
-    ).to.be.true;
+    ).toBe(true);
     expect(
       queryA
         .findNearest('foo', [40, 41, 42, 43], {
@@ -411,7 +407,7 @@ describe('Vector(findNearest) query interface', () => {
             limit: 1,
           }),
         ),
-    ).to.be.true;
+    ).toBe(true);
   });
 
   it('generates proto', async () => {
@@ -448,7 +444,7 @@ describe('Vector(findNearest) query interface', () => {
         limit: 10,
         distanceMeasure: 'EUCLIDEAN',
       });
-    }).to.throw('not a valid vector size');
+    }).toThrow('not a valid vector size');
     expect(() => {
       query.findNearest({
         vectorField: 'embedding',
@@ -456,7 +452,7 @@ describe('Vector(findNearest) query interface', () => {
         limit: 0,
         distanceMeasure: 'EUCLIDEAN',
       });
-    }).to.throw('not a valid positive limit number');
+    }).toThrow('not a valid positive limit number');
   });
 
   it('validates inputs - preview (deprecated) API', async () => {
@@ -466,13 +462,13 @@ describe('Vector(findNearest) query interface', () => {
         limit: 10,
         distanceMeasure: 'EUCLIDEAN',
       });
-    }).to.throw('not a valid vector size');
+    }).toThrow('not a valid vector size');
     expect(() => {
       query.findNearest('embedding', [10, 1000], {
         limit: 0,
         distanceMeasure: 'EUCLIDEAN',
       });
-    }).to.throw('not a valid positive limit number');
+    }).toThrow('not a valid positive limit number');
   });
 
   const distanceMeasure: ('EUCLIDEAN' | 'DOT_PRODUCT' | 'COSINE')[] = [
@@ -501,24 +497,24 @@ describe('Vector(findNearest) query interface', () => {
           distanceMeasure: distanceMeasure,
         });
         return query.get().then(results => {
-          expect(results.size).to.equal(2);
-          expect(results.empty).to.be.false;
-          expect(results.readTime.isEqual(new Timestamp(5, 6))).to.be.true;
-          expect(results.docs[0].id).to.equal('first');
-          expect(results.docs[1].id).to.equal('second');
-          expect(results.docChanges()).to.have.length(2);
+          expect(results.size).toBe(2);
+          expect(results.empty).toBe(false);
+          expect(results.readTime.isEqual(new Timestamp(5, 6))).toBe(true);
+          expect(results.docs[0].id).toBe('first');
+          expect(results.docs[1].id).toBe('second');
+          expect(results.docChanges()).toHaveLength(2);
 
           let count = 0;
 
           results.forEach(doc => {
-            expect(doc instanceof DocumentSnapshot).to.be.true;
-            expect(doc.createTime.isEqual(new Timestamp(1, 2))).to.be.true;
-            expect(doc.updateTime.isEqual(new Timestamp(3, 4))).to.be.true;
-            expect(doc.readTime.isEqual(new Timestamp(5, 6))).to.be.true;
+            expect(doc instanceof DocumentSnapshot).toBe(true);
+            expect(doc.createTime.isEqual(new Timestamp(1, 2))).toBe(true);
+            expect(doc.updateTime.isEqual(new Timestamp(3, 4))).toBe(true);
+            expect(doc.readTime.isEqual(new Timestamp(5, 6))).toBe(true);
             ++count;
           });
 
-          expect(2).to.equal(count);
+          expect(2).toBe(count);
         });
       });
     });
@@ -542,13 +538,13 @@ describe('Vector(findNearest) query interface', () => {
         distanceMeasure: 'COSINE',
       });
       return query.get().then(results => {
-        expect(++counter).to.equal(1);
-        expect(results.size).to.equal(2);
-        expect(results.empty).to.be.false;
-        expect(results.readTime.isEqual(new Timestamp(5, 6))).to.be.true;
-        expect(results.docs[0].id).to.equal('first');
-        expect(results.docs[1].id).to.equal('second');
-        expect(results.docChanges()).to.have.length(2);
+        expect(++counter).toBe(1);
+        expect(results.size).toBe(2);
+        expect(results.empty).toBe(false);
+        expect(results.readTime.isEqual(new Timestamp(5, 6))).toBe(true);
+        expect(results.docs[0].id).toBe('first');
+        expect(results.docs[1].id).toBe('second');
+        expect(results.docChanges()).toHaveLength(2);
       });
     });
   });
@@ -573,8 +569,8 @@ describe('Vector(findNearest) query interface', () => {
         throw new Error('Unexpected success in Promise');
       })
       .catch(err => {
-        expect(err.message).to.equal('Expected error');
-        expect(attempts).to.equal(1);
+        expect(err.message).toBe('Expected error');
+        expect(attempts).toBe(1);
       });
   });
 
@@ -603,8 +599,8 @@ describe('Vector(findNearest) query interface', () => {
           throw new Error('Unexpected success in Promise');
         })
         .catch(err => {
-          expect(err.message).to.equal('Expected error');
-          expect(attempts).to.equal(5);
+          expect(err.message).toBe('Expected error');
+          expect(attempts).toBe(5);
         });
     });
   });

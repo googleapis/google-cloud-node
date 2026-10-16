@@ -19,7 +19,6 @@ import {
   PartialWithFieldValue,
 } from '@google-cloud/firestore';
 
-import {expect} from 'chai';
 import * as extend from 'extend';
 import {JSONStreamIterator} from 'length-prefixed-json-stream';
 import {Duplex, PassThrough} from 'stream';
@@ -339,14 +338,14 @@ export function requestEquals(
   actual: object | undefined,
   expected: object,
 ): void {
-  expect(actual).to.not.be.undefined;
+  expect(actual).not.toBeUndefined();
 
   // 'extend' removes undefined fields in the request object. The backend
   // ignores these fields, but we need to manually strip them before we compare
   // the expected and the actual request.
   actual = extend(true, {}, actual);
   const proto = Object.assign({database: DATABASE_ROOT}, expected);
-  expect(actual).to.deep.eq(proto);
+  expect(actual).toEqual(proto);
 }
 
 export function stream<T>(...elements: Array<T | Error>): Duplex {
@@ -422,9 +421,9 @@ export const postConverterMerge = {
     options?: SetOptions,
   ): DocumentData {
     if (options) {
-      expect(post).to.not.be.an.instanceOf(Post);
+      expect(post).not.toBeInstanceOf(Post);
     } else {
-      expect(post).to.be.an.instanceof(Post);
+      expect(post).toBeInstanceOf(Post);
     }
     const result: DocumentData = {};
     if (post.title) result.title = post.title;
@@ -459,7 +458,7 @@ export async function bundleToElementArray(
  * const iterator = query.stream()[Symbol.asyncIterator]()
  *   as AsyncIterator<QueryDocumentSnapshot>;
  * return collect(iterator).then(snapshots => {
- *   expect(snapshots).to.have.length(2);
+ *   expect(snapshots).toHaveLength(2);
  * });
  *
  * @param iterator the iterator whose elements over which to iterate.

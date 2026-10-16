@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {expect} from 'chai';
 import * as extend from 'extend';
-import {afterEach, beforeEach, describe, it} from 'mocha';
+import {afterEach, beforeEach, describe, it, expect} from 'vitest';
 import {firestore, google} from '../protos/firestore_v1_proto_api';
 import {Firestore, QuerySnapshot, Timestamp} from '../src';
 import {
@@ -25,28 +24,8 @@ import {
 } from './util/helpers';
 
 import IBundleElement = firestore.IBundleElement;
-import IBundleMetadata = firestore.IBundleMetadata;
 import ITimestamp = google.protobuf.ITimestamp;
-
-export const TEST_BUNDLE_ID = 'test-bundle';
-const TEST_BUNDLE_VERSION = 1;
-
-export function verifyMetadata(
-  meta: IBundleMetadata,
-  createTime: ITimestamp,
-  totalDocuments: number,
-  expectEmptyContent = false,
-): void {
-  if (!expectEmptyContent) {
-    expect(parseInt(meta.totalBytes!.toString())).greaterThan(0);
-  } else {
-    expect(parseInt(meta.totalBytes!.toString())).to.equal(0);
-  }
-  expect(meta.id).to.equal(TEST_BUNDLE_ID);
-  expect(meta.version).to.equal(TEST_BUNDLE_VERSION);
-  expect(meta.totalDocuments).to.equal(totalDocuments);
-  expect(meta.createTime).to.deep.equal(createTime);
-}
+import {TEST_BUNDLE_ID, verifyMetadata} from './util/bundle_helpers';
 
 describe('Bundle Builder', () => {
   let firestore: Firestore;
@@ -64,7 +43,7 @@ describe('Bundle Builder', () => {
     const bundleString =
       '20{"a":"string value"}9{"b":123}26{"c":{"d":"nested value"}}';
     const elements = await bundleToElementArray(Buffer.from(bundleString));
-    expect(elements).to.deep.equal([
+    expect(elements).toEqual([
       {a: 'string value'},
       {b: 123},
       {c: {d: 'nested value'}},
@@ -100,7 +79,7 @@ describe('Bundle Builder', () => {
     bundle.add(snap2);
     // Bundle is expected to be [bundleMeta, snap2Meta, snap2] because `snap1` is newer.
     const elements = await bundleToElementArray(bundle.build());
-    expect(elements.length).to.equal(3);
+    expect(elements.length).toBe(3);
 
     const meta = (elements[0] as IBundleElement).metadata;
     verifyMetadata(
@@ -113,12 +92,12 @@ describe('Bundle Builder', () => {
     // Verify doc1Meta and doc1Snap
     const docMeta = (elements[1] as IBundleElement).documentMetadata;
     const docSnap = (elements[2] as IBundleElement).document;
-    expect(docMeta).to.deep.equal({
+    expect(docMeta).toEqual({
       name: snap1.toDocumentProto().name,
       readTime: snap1.readTime.toProto().timestampValue,
       exists: true,
     });
-    expect(docSnap).to.deep.equal(snap1.toDocumentProto());
+    expect(docSnap).toEqual(snap1.toDocumentProto());
   });
 
   it('succeeds with query snapshots', async () => {
@@ -158,7 +137,7 @@ describe('Bundle Builder', () => {
     bundle.add('test-query-new', newQuerySnapshot);
     // Bundle is expected to be [bundleMeta, namedQuery, newNamedQuery, snapMeta, snap]
     const elements = await bundleToElementArray(bundle.build());
-    expect(elements.length).to.equal(5);
+    expect(elements.length).toBe(5);
 
     const meta = (elements[0] as IBundleElement).metadata;
     verifyMetadata(
@@ -175,7 +154,7 @@ describe('Bundle Builder', () => {
     const newNamedQuery = elements.find(
       e => e.namedQuery?.name === 'test-query-new',
     )!.namedQuery;
-    expect(namedQuery).to.deep.equal({
+    expect(namedQuery).toEqual({
       name: 'test-query',
       readTime: snap.readTime.toProto().timestampValue,
       bundledQuery: extend(
@@ -187,7 +166,7 @@ describe('Bundle Builder', () => {
         },
       ),
     });
-    expect(newNamedQuery).to.deep.equal({
+    expect(newNamedQuery).toEqual({
       name: 'test-query-new',
       readTime: snap.readTime.toProto().timestampValue,
       bundledQuery: extend(
@@ -204,13 +183,13 @@ describe('Bundle Builder', () => {
     const docMeta = (elements[3] as IBundleElement).documentMetadata;
     const docSnap = (elements[4] as IBundleElement).document;
     docMeta?.queries?.sort();
-    expect(docMeta).to.deep.equal({
+    expect(docMeta).toEqual({
       name: snap.toDocumentProto().name,
       readTime: snap.readTime.toProto().timestampValue,
       exists: true,
       queries: ['test-query', 'test-query-new'],
     });
-    expect(docSnap).to.deep.equal(snap.toDocumentProto());
+    expect(docSnap).toEqual(snap.toDocumentProto());
   });
 
   it('succeeds with multiple calls to build()', async () => {
@@ -230,7 +209,7 @@ describe('Bundle Builder', () => {
     // Bundle is expected to be [bundleMeta, doc1Meta, doc1Snap].
     const elements = await bundleToElementArray(bundle.build());
 
-    expect(elements.length).to.equal(3);
+    expect(elements.length).toBe(3);
 
     const meta = (elements[0] as IBundleElement).metadata;
     verifyMetadata(
@@ -243,12 +222,12 @@ describe('Bundle Builder', () => {
     // Verify doc1Meta and doc1Snap
     const doc1Meta = (elements[1] as IBundleElement).documentMetadata;
     const doc1Snap = (elements[2] as IBundleElement).document;
-    expect(doc1Meta).to.deep.equal({
+    expect(doc1Meta).toEqual({
       name: snap1.toDocumentProto().name,
       readTime: snap1.readTime.toProto().timestampValue,
       exists: true,
     });
-    expect(doc1Snap).to.deep.equal(snap1.toDocumentProto());
+    expect(doc1Snap).toEqual(snap1.toDocumentProto());
 
     // Add another document
     const snap2 = firestore.snapshot_(
@@ -266,7 +245,7 @@ describe('Bundle Builder', () => {
     // Bundle is expected to be [bundleMeta, doc1Meta, doc1Snap, doc2Meta, doc2Snap].
     const newElements = await bundleToElementArray(bundle.build());
 
-    expect(newElements.length).to.equal(5);
+    expect(newElements.length).toBe(5);
     const newMeta = (newElements[0] as IBundleElement).metadata;
     verifyMetadata(
       newMeta!,
@@ -274,17 +253,17 @@ describe('Bundle Builder', () => {
       snap1.readTime.toProto().timestampValue!,
       2,
     );
-    expect(newElements.slice(1, 3)).to.deep.equal(elements.slice(1));
+    expect(newElements.slice(1, 3)).toEqual(elements.slice(1));
 
     // Verify doc2Meta and doc2Snap
     const doc2Meta = (newElements[3] as IBundleElement).documentMetadata;
     const doc2Snap = (newElements[4] as IBundleElement).document;
-    expect(doc2Meta).to.deep.equal({
+    expect(doc2Meta).toEqual({
       name: snap2.toDocumentProto().name,
       readTime: snap2.readTime.toProto().timestampValue,
       exists: true,
     });
-    expect(doc2Snap).to.deep.equal(snap2.toDocumentProto());
+    expect(doc2Snap).toEqual(snap2.toDocumentProto());
   });
 
   it('succeeds when nothing is added', async () => {
@@ -292,7 +271,7 @@ describe('Bundle Builder', () => {
 
     // `elements` is expected to be [bundleMeta].
     const elements = await bundleToElementArray(bundle.build());
-    expect(elements.length).to.equal(1);
+    expect(elements.length).toBe(1);
 
     const meta = (elements[0] as IBundleElement).metadata;
     verifyMetadata(
@@ -332,7 +311,7 @@ describe('Bundle Builder', () => {
     bundle.add(snap2);
     // Bundle is expected to be [bundleMeta, snap1Meta, snap1, snap2Meta, snap2] because `snap1` is newer.
     const elements = await bundleToElementArray(bundle.build());
-    expect(elements.length).to.equal(5);
+    expect(elements.length).toBe(5);
 
     const meta = (elements[0] as IBundleElement).metadata;
     verifyMetadata(
@@ -345,22 +324,22 @@ describe('Bundle Builder', () => {
     // Verify doc1Meta and doc1Snap
     let docMeta = (elements[1] as IBundleElement).documentMetadata;
     let docSnap = (elements[2] as IBundleElement).document;
-    expect(docMeta).to.deep.equal({
+    expect(docMeta).toEqual({
       name: snap1.toDocumentProto().name,
       readTime: snap1.readTime.toProto().timestampValue,
       exists: true,
     });
-    expect(docSnap).to.deep.equal(snap1.toDocumentProto());
+    expect(docSnap).toEqual(snap1.toDocumentProto());
 
     // Verify doc2Meta and doc2Snap
     docMeta = (elements[3] as IBundleElement).documentMetadata;
     docSnap = (elements[4] as IBundleElement).document;
-    expect(docMeta).to.deep.equal({
+    expect(docMeta).toEqual({
       name: snap2.toDocumentProto().name,
       readTime: snap2.readTime.toProto().timestampValue,
       exists: true,
     });
-    expect(docSnap).to.deep.equal(snap2.toDocumentProto());
+    expect(docSnap).toEqual(snap2.toDocumentProto());
   });
 });
 
@@ -396,7 +375,7 @@ describe('Bundle Builder using BigInt', () => {
     const elements = await bundleToElementArray(bundle.build());
     // The point is to make sure BigInt gets encoded correctly into a string without losing
     // precision.
-    expect(elements[2].document?.fields).to.deep.equal({
+    expect(elements[2].document?.fields).toEqual({
       foo: {integerValue: bigIntValue.toString()},
     });
   });
