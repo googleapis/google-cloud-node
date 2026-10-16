@@ -2080,7 +2080,7 @@ describe('retryable', () => {
       argument: {},
       metadata: {},
       options: {},
-      callback: Function,
+      callback: (err: GoogleError | null, resp?: unknown) => void,
     ) {
       callCount++;
       const error = new GoogleError(`error-${callCount}`);

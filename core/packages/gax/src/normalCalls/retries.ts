@@ -38,7 +38,7 @@ import {addTimeoutArg} from './timeout';
  *
  * @param {GRPCCall} func - A function.
  * @param {RetryOptions} retry - Configures the exceptions upon which the
- *   function eshould retry, and the parameters to the exponential backoff retry
+ *   function should retry, and the parameters to the exponential backoff retry
  *   algorithm.
  * @param {GRPCCallOtherArgs} otherArgs - the additional arguments to be passed to func.
  * @param {string} [apiName] - the name of the API being called, used in error messages.
@@ -88,7 +88,7 @@ export function retryable(
 
     // The errors that were encountered should be immediately visible to the
     // user so we should concatenate them onto the details because details are
-    // immediately visible to the user. This method provideds a string we can
+    // immediately visible to the user. This method provides a string we can
     // concatenate onto the details.
     function errorDetailsSuffix(errsEncountered: GoogleError[]) {
       if (errsEncountered.length < 2) {
@@ -113,7 +113,6 @@ export function retryable(
         .join(',');
       return ` : Previous errors : [${errorsAsString}]`;
     }
-    // TODO: define A/B testing values for retry behaviors.
 
     /** Repeat the API call as long as necessary. */
     function repeat(err?: GoogleError) {
