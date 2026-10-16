@@ -586,7 +586,12 @@ describe('Bun Full Matrix Sign-off & Certification Suite', function () {
       );
     }
 
+    const savedNoProxy = process.env.NO_PROXY;
+    const savedLowerNoProxy = process.env.no_proxy;
+
     before(async () => {
+      process.env.NO_PROXY = '127.0.0.1,localhost';
+      process.env.no_proxy = '127.0.0.1,localhost';
       const authClient = new PassThroughClient();
       gaxGrpc = new GrpcClient({
         auth: new GoogleAuth({authClient}),
@@ -693,6 +698,16 @@ describe('Bun Full Matrix Sign-off & Certification Suite', function () {
     });
 
     after(async () => {
+      if (savedNoProxy === undefined) {
+        delete process.env.NO_PROXY;
+      } else {
+        process.env.NO_PROXY = savedNoProxy;
+      }
+      if (savedLowerNoProxy === undefined) {
+        delete process.env.no_proxy;
+      } else {
+        process.env.no_proxy = savedLowerNoProxy;
+      }
       if (grpcServer) {
         await new Promise<void>(resolve =>
           grpcServer.tryShutdown(() => resolve()),
@@ -701,8 +716,6 @@ describe('Bun Full Matrix Sign-off & Certification Suite', function () {
     });
 
     async function createStub() {
-      process.env.NO_PROXY = '127.0.0.1,localhost';
-      process.env.no_proxy = '127.0.0.1,localhost';
       const stub = await gaxGrpc.createStub(echoService, {
         servicePath: '127.0.0.1',
         port: serverPort,
