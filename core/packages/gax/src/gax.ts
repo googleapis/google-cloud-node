@@ -919,7 +919,12 @@ export function constructSettings(
         : null,
       otherArgs:
         tracingRequested || loggingRequested
-          ? {...otherArgs, internalMethodName: methodName}
+          ? {
+            ...otherArgs,
+            internalMethodName: methodName,
+            enableTelemetryTracing: tracingRequested,
+            enableTelemetryLogging: loggingRequested,
+          }
           : otherArgs,
       apiName,
       enableTelemetryTracing: isEnvSet ? isEnvEnabled : enableTelemetryTracing,

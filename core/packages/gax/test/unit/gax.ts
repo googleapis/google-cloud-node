@@ -223,6 +223,8 @@ describe('gax construct settings', () => {
     assert.strictEqual(settings.enableTelemetryTracing, true);
     assert.strictEqual(settings.otherArgs.key, 'value');
     assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
+    assert.strictEqual(settings.otherArgs.enableTelemetryTracing, true);
+    assert.strictEqual(settings.otherArgs.enableTelemetryLogging, false);
 
     const pageSettings = defaults.pageStreamingMethod;
     assert.strictEqual(pageSettings.enableTelemetryTracing, true);
@@ -259,6 +261,8 @@ describe('gax construct settings', () => {
     const settings = defaults.bundlingMethod;
     assert.strictEqual(settings.enableTelemetryTracing, true);
     assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
+    assert.strictEqual(settings.otherArgs.enableTelemetryTracing, true);
+    assert.strictEqual(settings.otherArgs.enableTelemetryLogging, false);
   });
 
   it('disables tracing when GOOGLE_SDK_NODE_ENABLE_TRACING=false even with client option', () => {
@@ -293,6 +297,8 @@ describe('gax construct settings', () => {
     assert.strictEqual(settings.enableTelemetryLogging, true);
     assert.strictEqual(settings.otherArgs.key, 'value');
     assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
+    assert.strictEqual(settings.otherArgs.enableTelemetryTracing, false);
+    assert.strictEqual(settings.otherArgs.enableTelemetryLogging, true);
   });
 
   it('disables logging when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING is not set even if enableTelemetryLogging=true', () => {
@@ -327,6 +333,8 @@ describe('gax construct settings', () => {
     const settings = defaults.bundlingMethod;
     assert.strictEqual(settings.enableTelemetryLogging, true);
     assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
+    assert.strictEqual(settings.otherArgs.enableTelemetryTracing, false);
+    assert.strictEqual(settings.otherArgs.enableTelemetryLogging, true);
   });
 
   it('disables logging when GOOGLE_SDK_NODE_ENABLE_LOGGING=false even with client option', () => {
