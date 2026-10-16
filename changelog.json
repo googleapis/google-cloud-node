@@ -4,6 +4,33 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "25d945b34979849ea1c6df699212854f8d390d79",
+          "message": "Align types and proto re-exports with -api packages",
+          "issues": [
+            "9621"
+          ],
+          "scope": "firestore,pubsub"
+        },
+        {
+          "type": "fix",
+          "sha": "dc83ed8c08bf896489d29af6036b3ef72a8e7365",
+          "message": "Resolve api-extractor from cloud-rad in api-report.mjs",
+          "issues": [
+            "9505"
+          ],
+          "scope": "firestore"
+        }
+      ],
+      "version": "9.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "6cb8ee79-fba1-47f5-b295-dadfd05ca398",
+      "createTime": "2026-10-16T20:39:15.190Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "fca6160fce7932d5491fb9fcca9c42c3de2102c1",
           "message": "Bump bigquery-storage-api to ^0.5.0",
@@ -105471,5 +105498,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-14T17:53:17.953Z"
+  "updateTime": "2026-10-16T20:39:15.190Z"
 }
