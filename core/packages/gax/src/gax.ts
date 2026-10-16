@@ -24,7 +24,7 @@ import {warn} from './warnings';
 import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
 import {toLowerCamelCase} from './util';
-import {checkTracingEnabled} from './observability/util';
+import {checkTracingEnabled, checkLoggingEnabled} from './observability/util';
 import {Status} from './status';
 import {RequestType} from './apitypes';
 
@@ -815,6 +815,9 @@ export interface ClientConfig {
  *   calls.
  * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing
  *   when passed in client options (or overridden by `GOOGLE_SDK_NODE_ENABLE_TRACING`).
+ * @param {unknown} [_legacyTelemetryInfo] - Unused legacy parameter kept for backward compatibility.
+ * @param {boolean} [enableTelemetryLogging] - Flag to enable telemetry logging
+ *   when passed in client options (or overridden by `GOOGLE_SDK_NODE_ENABLE_LOGGING`).
  * @return {Object} A mapping from method name to CallSettings, or null if the
  *   service is not found in the config.
  */
@@ -827,6 +830,7 @@ export function constructSettings(
   enableTelemetryTracing?: boolean,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _legacyTelemetryInfo?: unknown,
+  enableTelemetryLogging?: boolean,
 ) {
   const env: Record<string, string | undefined> =
     typeof process === 'object' && typeof process.env === 'object'
@@ -843,6 +847,18 @@ export function constructSettings(
   const tracingRequested = isEnvSet
     ? isEnvEnabled
     : Boolean(enableTelemetryTracing);
+
+  const experimentalLogging =
+    env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING?.trim().toLowerCase();
+  const isExperimentalLoggingEnabled =
+    experimentalLogging === 'true' || experimentalLogging === '1';
+  const envLogging = env.GOOGLE_SDK_NODE_ENABLE_LOGGING?.trim();
+  const isLoggingEnvSet = envLogging !== undefined && envLogging !== '';
+  const isLoggingEnvEnabled = checkLoggingEnabled();
+
+  const loggingRequested =
+    isExperimentalLoggingEnabled &&
+    (isLoggingEnvSet ? isLoggingEnvEnabled : Boolean(enableTelemetryLogging));
 
   otherArgs = otherArgs || {};
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -901,11 +917,19 @@ export function constructSettings(
       bundleOptions: bundlingConfig
         ? createBundleOptions(bundlingConfig)
         : null,
-      otherArgs: tracingRequested
-        ? {...otherArgs, internalMethodName: methodName}
-        : otherArgs,
+      otherArgs:
+        tracingRequested || loggingRequested
+          ? {...otherArgs, internalMethodName: methodName}
+          : otherArgs,
       apiName,
       enableTelemetryTracing: isEnvSet ? isEnvEnabled : enableTelemetryTracing,
+      enableTelemetryLogging: isExperimentalLoggingEnabled
+        ? isLoggingEnvSet
+          ? isLoggingEnvEnabled
+          : enableTelemetryLogging
+        : enableTelemetryLogging !== undefined || isLoggingEnvSet
+          ? false
+          : undefined,
     });
   }
 
