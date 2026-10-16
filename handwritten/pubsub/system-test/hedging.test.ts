@@ -178,6 +178,14 @@ describe('Publish Hedging System Tests', () => {
 
     assert.strictEqual(topic.publisher.tokenBucket?.getTokenBalance(), 1.0);
 
+    topic.setPublishOptions({
+      batching: {maxMessages: 1},
+      hedging: {
+        enabled: false,
+      },
+    });
+    assert.strictEqual(topic.publisher.tokenBucket, undefined);
+
     const received = await waitForMessages(subscription, {
       count: 6,
       timeoutMs: 20000,
