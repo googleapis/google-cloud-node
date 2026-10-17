@@ -15,7 +15,7 @@
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import {CallOptions, ServiceError} from 'google-gax';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import * as sinon from 'sinon';
 
 import {google} from '../protos/protos';

@@ -16,7 +16,7 @@ import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import {EventEmitter} from 'events';
 import {ServiceError} from 'google-gax';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import * as sinon from 'sinon';
 
 import {PubSub, RequestConfig} from '../src/pubsub';
