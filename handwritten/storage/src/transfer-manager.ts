@@ -30,8 +30,7 @@ import {CRC32C} from './crc32c.js';
 import {GoogleAuth} from 'google-auth-library';
 import {XMLParser, XMLBuilder} from 'fast-xml-parser';
 import AsyncRetry from 'async-retry';
-import {ApiError} from './nodejs-common/index.js';
-import {GaxiosResponse} from 'gaxios';
+import {GaxiosError, GaxiosResponse} from 'gaxios';
 import {createHash} from 'crypto';
 import {GCCL_GCS_CMD_KEY} from './nodejs-common/util.js';
 import {
@@ -101,7 +100,7 @@ export interface UploadManyFilesOptions {
   concurrencyLimit?: number;
   customDestinationBuilder?(
     path: string,
-    options: UploadManyFilesOptions
+    options: UploadManyFilesOptions,
   ): string;
   skipIfExists?: boolean;
   prefix?: string;
@@ -149,7 +148,7 @@ export interface MultiPartUploadHelper {
   uploadPart(
     partNumber: number,
     chunk: Buffer,
-    validation?: 'md5' | 'crc32c' | false
+    validation?: 'md5' | 'crc32c' | false,
   ): Promise<void>;
   completeUpload(): Promise<GaxiosResponse | undefined>;
   abortUpload(): Promise<void>;
@@ -159,14 +158,14 @@ export type MultiPartHelperGenerator = (
   bucket: Bucket,
   fileName: string,
   uploadId?: string,
-  partsMap?: Map<number, string>
+  partsMap?: Map<number, string>,
 ) => MultiPartUploadHelper;
 
 const defaultMultiPartGenerator: MultiPartHelperGenerator = (
   bucket,
   fileName,
   uploadId,
-  partsMap
+  partsMap,
 ) => {
   return new XMLMultiPartUploadHelper(bucket, fileName, uploadId, partsMap);
 };
@@ -178,7 +177,7 @@ export class MultiPartUploadError extends Error {
   constructor(
     message: string,
     uploadId: string,
-    partsMap: Map<number, string>
+    partsMap: Map<number, string>,
   ) {
     super(message);
     this.uploadId = uploadId;
@@ -207,9 +206,10 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
     bucket: Bucket,
     fileName: string,
     uploadId?: string,
-    partsMap?: Map<number, string>
+    partsMap?: Map<number, string>,
   ) {
-    this.authClient = bucket.storage.authClient || new GoogleAuth();
+    this.authClient =
+      bucket.storage.storageTransport.authClient || new GoogleAuth();
     this.uploadId = uploadId || '';
     this.bucket = bucket;
     this.fileName = fileName;
@@ -235,7 +235,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
       ) {
         headers.set(
           'x-goog-api-client',
-          `${existingGoogApiClient} gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`
+          `${existingGoogApiClient} gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`,
         );
       }
     } else {
@@ -243,7 +243,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
         'x-goog-api-client',
         `${getRuntimeTrackingString()} gccl/${
           packageJson.version
-        } gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`
+        } gccl-gcs-cmd/${GCCL_GCS_CMD_FEATURE.UPLOAD_SHARDED}`,
       );
     }
 
@@ -300,7 +300,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   async uploadPart(
     partNumber: number,
     chunk: Buffer,
-    validation?: 'md5' | 'crc32c' | false
+    validation?: 'md5' | 'crc32c' | false,
   ): Promise<void> {
     const url = `${this.baseUrl}?partNumber=${partNumber}&uploadId=${this.uploadId}`;
     const headers: Headers = this.#setGoogApiClientHeaders();
@@ -322,7 +322,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
             method: 'PUT',
             body: chunk,
             headers,
-          }
+          },
         );
         if (res.data && res.data.error) {
           throw res.data.error;
@@ -343,14 +343,14 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   async completeUpload(): Promise<GaxiosResponse | undefined> {
     const url = `${this.baseUrl}?uploadId=${this.uploadId}`;
     const sortedMap = new Map(
-      [...this.partsMap.entries()].sort((a, b) => a[0] - b[0])
+      [...this.partsMap.entries()].sort((a, b) => a[0] - b[0]),
     );
     const parts: {}[] = [];
     for (const entry of sortedMap.entries()) {
       parts.push({PartNumber: entry[0], ETag: entry[1]});
     }
     const body = `<CompleteMultipartUpload>${this.xmlBuilder.build(
-      parts
+      parts,
     )}</CompleteMultipartUpload>`;
     return AsyncRetry(async bail => {
       try {
@@ -360,7 +360,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
             url,
             method: 'POST',
             body,
-          }
+          },
         );
         if (res.data && res.data.error) {
           throw res.data.error;
@@ -387,13 +387,14 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
           {
             url,
             method: 'DELETE',
-          }
+          },
         );
         if (res.data && res.data.error) {
           throw res.data.error;
         }
       } catch (e) {
-        this.#handleErrorResponse(e as Error, bail);
+        this.#handleErrorResponse(e as GaxiosError, bail);
+        return;
       }
     }, this.retryOptions);
   }
@@ -407,7 +408,7 @@ class XMLMultiPartUploadHelper implements MultiPartUploadHelper {
   #handleErrorResponse(err: Error, bail: Function) {
     if (
       this.bucket.storage.retryOptions.autoRetry &&
-      this.bucket.storage.retryOptions.retryableErrorFn!(err as ApiError)
+      this.bucket.storage.retryOptions.retryableErrorFn!(err as GaxiosError)
     ) {
       throw err;
     } else {
@@ -475,7 +476,7 @@ export class TransferManager {
    */
   async uploadManyFiles(
     filePathsOrDirectory: string[] | string,
-    options: UploadManyFilesOptions = {}
+    options: UploadManyFilesOptions = {},
   ): Promise<UploadResponse[]> {
     if (options.skipIfExists && options.passthroughOptions?.preconditionOpts) {
       options.passthroughOptions.preconditionOpts.ifGenerationMatch = 0;
@@ -492,13 +493,13 @@ export class TransferManager {
 
     const pLimit = await getPLimit();
     const limit = pLimit(
-      options.concurrencyLimit || DEFAULT_PARALLEL_UPLOAD_LIMIT
+      options.concurrencyLimit || DEFAULT_PARALLEL_UPLOAD_LIMIT,
     );
     const promises: Promise<UploadResponse>[] = [];
     let allPaths: string[] = [];
     if (!Array.isArray(filePathsOrDirectory)) {
       for await (const curPath of this.getPathsFromDirectory(
-        filePathsOrDirectory
+        filePathsOrDirectory,
       )) {
         allPaths.push(curPath);
       }
@@ -523,14 +524,14 @@ export class TransferManager {
       if (options.prefix) {
         passThroughOptionsCopy.destination = path.posix.join(
           ...options.prefix.split(path.sep),
-          passThroughOptionsCopy.destination
+          passThroughOptionsCopy.destination,
         );
       }
 
       promises.push(
         limit(() =>
-          this.bucket.upload(filePath, passThroughOptionsCopy as UploadOptions)
-        )
+          this.bucket.upload(filePath, passThroughOptionsCopy as UploadOptions),
+        ),
       );
     }
 
@@ -616,17 +617,17 @@ export class TransferManager {
    */
   async downloadManyFiles(
     filesOrFolder: File[] | string[] | string,
-    options: DownloadManyFilesOptions = {}
+    options: DownloadManyFilesOptions = {},
   ): Promise<void | DownloadResponse[]> {
     const pLimit = await getPLimit();
     const limit = pLimit(
-      options.concurrencyLimit || DEFAULT_PARALLEL_DOWNLOAD_LIMIT
+      options.concurrencyLimit || DEFAULT_PARALLEL_DOWNLOAD_LIMIT,
     );
     const promises: Promise<void>[] = [];
     let files: File[] = [];
 
     const baseDestination = path.resolve(
-      options.passthroughOptions?.destination || '.'
+      options.passthroughOptions?.destination || '.',
     );
 
     if (!Array.isArray(filesOrFolder)) {
@@ -720,7 +721,7 @@ export class TransferManager {
             await fsp.mkdir(path.dirname(destination), {recursive: true});
 
             const resp = (await file.download(
-              passThroughOptionsCopy
+              passThroughOptionsCopy,
             )) as DownloadResponseWithStatus;
 
             finalResults[i] = {
@@ -738,7 +739,7 @@ export class TransferManager {
             errorResp.error = err as Error;
             finalResults[i] = errorResp;
           }
-        })
+        }),
       );
     }
 
@@ -790,13 +791,13 @@ export class TransferManager {
    */
   async downloadFileInChunks(
     fileOrName: File | string,
-    options: DownloadFileInChunksOptions = {}
+    options: DownloadFileInChunksOptions = {},
   ): Promise<void | DownloadResponse> {
     const pLimit = await getPLimit();
     let chunkSize =
       options.chunkSizeBytes || DOWNLOAD_IN_CHUNKS_DEFAULT_CHUNK_SIZE;
     let limit = pLimit(
-      options.concurrencyLimit || DEFAULT_PARALLEL_CHUNKED_DOWNLOAD_LIMIT
+      options.concurrencyLimit || DEFAULT_PARALLEL_CHUNKED_DOWNLOAD_LIMIT,
     );
     const noReturnData = Boolean(options.noReturnData);
     const promises: Promise<Buffer | void>[] = [];
@@ -838,11 +839,11 @@ export class TransferManager {
             resp[0],
             0,
             resp[0].length,
-            chunkStart
+            chunkStart,
           );
           if (noReturnData) return;
           return result.buffer;
-        })
+        }),
       );
 
       start += chunkSize;
@@ -860,7 +861,7 @@ export class TransferManager {
       const downloadedCrc32C = await CRC32C.fromFile(filePath);
       if (!downloadedCrc32C.validate(fileInfo[0].metadata.crc32c)) {
         const mismatchError = new RequestError(
-          FileExceptionMessages.DOWNLOAD_MISMATCH
+          FileExceptionMessages.DOWNLOAD_MISMATCH,
         );
         mismatchError.code = 'CONTENT_DOWNLOAD_MISMATCH';
         throw mismatchError;
@@ -918,13 +919,13 @@ export class TransferManager {
   async uploadFileInChunks(
     filePath: string,
     options: UploadFileInChunksOptions = {},
-    generator: MultiPartHelperGenerator = defaultMultiPartGenerator
+    generator: MultiPartHelperGenerator = defaultMultiPartGenerator,
   ): Promise<GaxiosResponse | undefined> {
     const pLimit = await getPLimit();
     const chunkSize =
       options.chunkSizeBytes || UPLOAD_IN_CHUNKS_DEFAULT_CHUNK_SIZE;
     const limit = pLimit(
-      options.concurrencyLimit || DEFAULT_PARALLEL_CHUNKED_UPLOAD_LIMIT
+      options.concurrencyLimit || DEFAULT_PARALLEL_CHUNKED_UPLOAD_LIMIT,
     );
     const maxQueueSize =
       options.maxQueueSize ||
@@ -935,7 +936,7 @@ export class TransferManager {
       this.bucket,
       fileName,
       options.uploadId,
-      options.partsMap
+      options.partsMap,
     );
     let partNumber = 1;
     let promises: Promise<void>[] = [];
@@ -957,7 +958,7 @@ export class TransferManager {
           promises = [];
         }
         promises.push(
-          limit(() => mpuHelper.uploadPart(partNumber++, curChunk, validation))
+          limit(() => mpuHelper.uploadPart(partNumber++, curChunk, validation)),
         );
       }
       await Promise.all(promises);
@@ -974,20 +975,20 @@ export class TransferManager {
           throw new MultiPartUploadError(
             (e as Error).message,
             mpuHelper.uploadId!,
-            mpuHelper.partsMap!
+            mpuHelper.partsMap!,
           );
         }
       }
       throw new MultiPartUploadError(
         (e as Error).message,
         mpuHelper.uploadId!,
-        mpuHelper.partsMap!
+        mpuHelper.partsMap!,
       );
     }
   }
 
   private async *getPathsFromDirectory(
-    directory: string
+    directory: string,
   ): AsyncGenerator<string> {
     const filesAndSubdirectories = await fsp.readdir(directory, {
       withFileTypes: true,
