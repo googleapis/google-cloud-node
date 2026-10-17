@@ -42,7 +42,6 @@ export {
   GetTokenOptions,
   OAuth2Client,
   OAuth2ClientOptions,
-  RefreshOptions,
   TokenInfo,
   VerifyIdTokenOptions,
   ClientAuthentication,
