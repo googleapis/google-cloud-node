@@ -137,6 +137,18 @@ const fakeZlib = {
   },
 };
 
+let pipelineOverride: Function | null;
+const fakeStream = {
+  Readable,
+  PassThrough,
+  Stream,
+  Duplex,
+  Transform,
+  pipeline(...args: Array<{}>) {
+    return (pipelineOverride || (pipeline as Function))(...args);
+  },
+};
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const osCached = require('os');
 const fakeOs = {...osCached};
@@ -223,6 +235,7 @@ describe('File', () => {
       '../src/resumable-upload': fakeResumableUpload,
       os: fakeOs,
       './signer': fakeSigner,
+      stream: fakeStream,
       zlib: fakeZlib,
     }).File;
   });
@@ -270,6 +283,7 @@ describe('File', () => {
     createGunzipOverride = null;
     handleRespOverride = null;
     makeWritableStreamOverride = null;
+    pipelineOverride = null;
     resumableUploadOverride = null;
   });
 
@@ -1541,6 +1555,93 @@ describe('File', () => {
               done(new Error('Should not have been called.'));
             })
             .resume();
+        });
+
+        it('should destroy rawResponseStream and return early if throughStream is already destroyed', done => {
+          const rawResponseStream = new PassThrough();
+          Object.assign(rawResponseStream, {
+            toJSON() {
+              return {headers: {}};
+            },
+          });
+          const destroySpy = sinon.spy(rawResponseStream, 'destroy');
+          const pipelineSpy = sinon.spy();
+          pipelineOverride = pipelineSpy;
+          const requestStream = new PassThrough();
+
+          const readStream = file.createReadStream({validation: false});
+
+          handleRespOverride = (
+            err: Error,
+            res: {},
+            body: {},
+            callback: Function
+          ) => {
+            readStream.destroy();
+            assert.strictEqual(readStream.destroyed, true);
+            assert.doesNotThrow(() => {
+              callback(null, null, rawResponseStream);
+            });
+            assert.strictEqual(pipelineSpy.called, false);
+            assert.strictEqual(destroySpy.calledOnce, true);
+            assert.strictEqual(rawResponseStream.destroyed, true);
+            done();
+          };
+
+          file.requestStream = () => {
+            setImmediate(() => {
+              requestStream.emit('response', rawResponseStream);
+            });
+            return requestStream;
+          };
+
+          readStream.resume();
+        });
+
+        it('should catch ERR_STREAM_UNABLE_TO_PIPE and destroy rawResponseStream', done => {
+          const rawResponseStream = new PassThrough();
+          Object.assign(rawResponseStream, {
+            toJSON() {
+              return {headers: {}};
+            },
+          });
+          const destroySpy = sinon.spy(rawResponseStream, 'destroy');
+          const requestStream = new PassThrough();
+
+          const readStream = file.createReadStream({validation: false});
+
+          pipelineOverride = () => {
+            const err = new Error(
+              'Cannot pipe to a closed or destroyed stream'
+            ) as Error & {code?: string};
+            err.code = 'ERR_STREAM_UNABLE_TO_PIPE';
+            throw err;
+          };
+
+          handleRespOverride = (
+            err: Error,
+            res: {},
+            body: {},
+            callback: Function
+          ) => {
+            assert.strictEqual(readStream.destroyed, false);
+            assert.doesNotThrow(() => {
+              callback(null, null, rawResponseStream);
+            });
+            assert.strictEqual(destroySpy.calledOnce, true);
+            assert.strictEqual(rawResponseStream.destroyed, true);
+            done();
+          };
+
+          file.requestStream = () => {
+            setImmediate(() => {
+              requestStream.emit('response', rawResponseStream);
+            });
+            return requestStream;
+          };
+
+          readStream.on('error', done);
+          readStream.resume();
         });
       });
     });
