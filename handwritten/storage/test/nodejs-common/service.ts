@@ -16,7 +16,7 @@
 
 import assert from 'assert';
 import {describe, it, before, beforeEach, after} from 'mocha';
-import proxyquire from 'proxyquire';
+import proxyquire from '../proxyquire.js';
 import {Request} from 'teeny-request';
 import {AuthClient, GoogleAuth, OAuth2Client} from 'google-auth-library';
 

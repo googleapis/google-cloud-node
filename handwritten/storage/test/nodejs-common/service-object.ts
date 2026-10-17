@@ -21,7 +21,7 @@ import {
 } from '@google-cloud/promisify';
 import assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
-import proxyquire from 'proxyquire';
+import proxyquire from '../proxyquire.js';
 import type {
   OptionsWithUri,
   Request as TeenyRequest,

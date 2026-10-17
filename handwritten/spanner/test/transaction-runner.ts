@@ -18,7 +18,7 @@ import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
 import {EventEmitter} from 'events';
 import {grpc} from 'google-gax';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import * as sinon from 'sinon';
 import * as through from 'through2';
 import {RunTransactionOptions} from '../src/transaction-runner';
@@ -329,6 +329,7 @@ describe('TransactionRunner', () => {
 
         runner
           .run()
+          // eslint-disable-next-line promise/always-return
           .then(() => {
             done(new Error('missing expected DEADLINE_EXCEEDED error'));
           })

@@ -21,7 +21,7 @@ import {before, beforeEach, afterEach, describe, it} from 'mocha';
 import {EventEmitter} from 'events';
 import * as extend from 'extend';
 import {ApiError, util} from '@google-cloud/common';
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from './proxyquire';
 import * as sinon from 'sinon';
 import {Transform, Duplex} from 'stream';
 import * as through from 'through2';
