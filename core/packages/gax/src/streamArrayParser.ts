@@ -153,6 +153,10 @@ export class StreamArrayParser extends Transform {
     callback();
   }
 
+  _destroy(err: Error | null, callback: (error?: Error | null) => void) {
+    callback(this.cancelRequested ? null : err);
+  }
+
   cancel(): void {
     this._done = true;
     this.cancelRequested = true;
