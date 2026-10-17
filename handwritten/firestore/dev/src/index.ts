@@ -181,6 +181,11 @@ setLibVersion(libVersion);
  */
 const CLOUD_RESOURCE_HEADER = 'google-cloud-resource-prefix';
 
+/*!
+ * HTTP header to indicate whether an RPC is part of a transaction.
+ */
+const IS_TRANSACTION_HEADER = 'x-goog-is-transaction';
+
 /**
  * The maximum number of times to retry idempotent requests.
  * @private
@@ -1624,11 +1629,24 @@ export class Firestore implements firestore.Firestore {
   private createCallOptions(
     methodName: string,
     retryCodes?: number[],
+    request?: {
+      transaction?: Uint8Array | null;
+      newTransaction?: api.ITransactionOptions | null;
+    },
   ): CallOptions {
+    const isTransaction =
+      methodName === 'beginTransaction' ||
+      methodName === 'rollback' ||
+      Boolean(
+        request &&
+          ((request.transaction && request.transaction.length > 0) ||
+            request.newTransaction),
+      );
     const callOptions: CallOptions = {
       otherArgs: {
         headers: {
           [CLOUD_RESOURCE_HEADER]: this.formattedName,
+          [IS_TRANSACTION_HEADER]: isTransaction ? 'true' : 'false',
           ...this._settings.customHeaders,
           ...this._settings[methodName]?.customHeaders,
         },
@@ -1841,7 +1859,14 @@ export class Firestore implements firestore.Firestore {
     requestTag: string,
     retryCodes?: number[],
   ): Promise<Resp> {
-    const callOptions = this.createCallOptions(methodName, retryCodes);
+    const callOptions = this.createCallOptions(
+      methodName,
+      retryCodes,
+      request as {
+        transaction?: Uint8Array | null;
+        newTransaction?: api.ITransactionOptions | null;
+      },
+    );
 
     return this._clientPool.run(
       requestTag,
@@ -1895,7 +1920,7 @@ export class Firestore implements firestore.Firestore {
     request: {},
     requestTag: string,
   ): Promise<Duplex> {
-    const callOptions = this.createCallOptions(methodName);
+    const callOptions = this.createCallOptions(methodName, undefined, request);
 
     const bidirectional = methodName === 'listen';
     let numResponses = 0;
