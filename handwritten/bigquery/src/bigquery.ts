@@ -918,7 +918,8 @@ export class BigQuery extends Service {
    * When passing a `number` input, it should be epoch seconds in float representation.
    *
    * @method BigQuery.timestamp
-   * @param {Date|string} value The time.
+   * @param {Date|PreciseDate|string|number} value The time.
+   * @returns {BigQueryTimestamp}
    *
    * @example
    * ```
@@ -926,7 +927,9 @@ export class BigQuery extends Service {
    * const timestamp = BigQuery.timestamp(new Date());
    * ```
    */
-  static timestamp(value: Date | PreciseDate | string | number) {
+  static timestamp(
+    value: Date | PreciseDate | string | number,
+  ): BigQueryTimestamp {
     return new BigQueryTimestamp(value);
   }
 
@@ -938,7 +941,8 @@ export class BigQuery extends Service {
    * If passing as a `string`, it should be Timestamp literals: https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical#timestamp_literals.
    * When passing a `number` input, it should be epoch seconds in float representation.
    *
-   * @param {Date|string|string|number} value The time.
+   * @param {Date|PreciseDate|string|number} value The time.
+   * @returns {BigQueryTimestamp}
    *
    * @example
    * ```
@@ -947,7 +951,7 @@ export class BigQuery extends Service {
    * const timestamp = bigquery.timestamp(new Date());
    * ```
    */
-  timestamp(value: Date | PreciseDate | string | number) {
+  timestamp(value: Date | PreciseDate | string | number): BigQueryTimestamp {
     return BigQuery.timestamp(value);
   }
 
@@ -2903,8 +2907,8 @@ export class BigQueryTimestamp {
       pd = this.fromFloatValue_(value);
     }
     // to keep backward compatibility, only converts with microsecond
-    // precision if needed.
-    if (pd.getMicroseconds() > 0) {
+    // or nanosecond precision if needed.
+    if (pd.getMicroseconds() > 0 || pd.getNanoseconds() > 0) {
       this.value = pd.toISOString();
     } else {
       this.value = new Date(pd.getTime()).toJSON();
