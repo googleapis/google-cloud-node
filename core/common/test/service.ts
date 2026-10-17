@@ -567,6 +567,21 @@ describe('Service', () => {
           service.request_(reqOpts, assert.ifError);
         });
 
+        it('should pass DEFAULT_PROJECT_ID_TOKEN unencoded to makeAuthenticatedRequest', done => {
+          // Regression: #9188 caused {{projectId}} to be encoded as
+          // %7B%7BprojectId%7D%7D, so replaceProjectIdToken() could no longer
+          // find and substitute it, causing 404s for ADC clients.
+          const config = extend({}, CONFIG, {projectIdRequired: true});
+          const service = new Service(config, {}); // no projectId → DEFAULT_PROJECT_ID_TOKEN
+
+          service.makeAuthenticatedRequest = (reqOpts_: DecorateRequestOptions) => {
+            assert.match(reqOpts_.uri, /projects\/\{\{projectId\}\}\//);
+            done();
+          };
+
+          service.request_({uri: 'queries'}, assert.ifError);
+        });
+
         it('should use projectId override', done => {
           const config = extend({}, CONFIG, {projectIdRequired: true});
           const service = new Service(config, OPTIONS);
