@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import * as proxyquire from 'proxyquire';
+import * as proxyquire from '../test/proxyquire';
 import {DatastoreRequest} from '../src';
 import {RequestCallback, RequestConfig} from '../src/request';
 
