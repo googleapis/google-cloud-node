@@ -21,12 +21,22 @@ const path = require('path');
 const nativeDir = __dirname;
 const goDir = path.join(nativeDir, 'spanner-go');
 const prebuiltAddon = path.join(nativeDir, 'build', 'Release', 'spanner_go.node');
-const prebuiltGoLib = path.join(goDir, 'libspanner_go.so');
+const goLibName =
+  process.platform === 'darwin'
+    ? 'libspanner_go.dylib'
+    : process.platform === 'win32'
+      ? 'spanner_go.dll'
+      : 'libspanner_go.so';
+const prebuiltGoLib = path.join(goDir, goLibName);
+const stampFile = path.join(nativeDir, 'build', 'Release', '.platform');
+const currentStamp = `${process.platform}-${process.arch}-${process.versions.modules}`;
 
 if (
   process.env.SPANNER_FORCE_NATIVE_REBUILD !== 'true' &&
   fs.existsSync(prebuiltAddon) &&
-  fs.existsSync(prebuiltGoLib)
+  fs.existsSync(prebuiltGoLib) &&
+  (!fs.existsSync(stampFile) ||
+    fs.readFileSync(stampFile, 'utf8').trim() === currentStamp)
 ) {
   process.exit(0);
 }
@@ -37,6 +47,7 @@ try {
     cwd: nativeDir,
     stdio: 'inherit',
   });
+  fs.writeFileSync(stampFile, currentStamp, 'utf8');
 } catch (err) {
   console.warn(
     '[spanner-native] Optional Go shared core build skipped:',

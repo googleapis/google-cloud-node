@@ -185,24 +185,25 @@ export function createJsonRow(
 ): Json {
   const json: Json = {};
   const len = fields.length;
+  let currentFieldName = '';
 
-  for (let i = 0; i < len; i++) {
-    const {name} = fields[i];
-    if (!name && !includeNameless) {
-      continue;
+  try {
+    for (let i = 0; i < len; i++) {
+      const {name} = fields[i];
+      if (!name && !includeNameless) {
+        continue;
+      }
+      currentFieldName = name || `_${i}`;
+      json[currentFieldName] = decoders[i](values[i]);
     }
-    const fieldName = name || `_${i}`;
-    try {
-      json[fieldName] = decoders[i](values[i]);
-    } catch (e) {
-      (e as Error).message = [
-        `Serializing column "${fieldName}" encountered an error: ${
-          (e as Error).message
-        }`,
-        'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
-      ].join(' ');
-      throw e;
-    }
+  } catch (e) {
+    (e as Error).message = [
+      `Serializing column "${currentFieldName}" encountered an error: ${
+        (e as Error).message
+      }`,
+      'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
+    ].join(' ');
+    throw e;
   }
   return json;
 }

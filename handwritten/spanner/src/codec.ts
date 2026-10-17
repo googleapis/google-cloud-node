@@ -1155,10 +1155,12 @@ export function getDecoder(
           const isArr = Array.isArray(val);
           const structObj: Json = {};
           const len = fieldDecoders.length;
-          for (let i = 0; i < len; i++) {
-            const {name, decodedName, decoder, index} = fieldDecoders[i];
-            try {
-              structObj[decodedName!] = decoder(
+          let currentFieldName = '';
+          try {
+            for (let i = 0; i < len; i++) {
+              const {name, decodedName, decoder, index} = fieldDecoders[i];
+              currentFieldName = decodedName!;
+              structObj[currentFieldName] = decoder(
                 isArr
                   ? val[index]
                   : name !== null &&
@@ -1167,15 +1169,15 @@ export function getDecoder(
                     ? val[name]
                     : val[index],
               );
-            } catch (e) {
-              (e as Error).message = [
-                `Serializing column "${decodedName}" encountered an error: ${
-                  (e as Error).message
-                }`,
-                'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
-              ].join(' ');
-              throw e;
             }
+          } catch (e) {
+            (e as Error).message = [
+              `Serializing column "${currentFieldName}" encountered an error: ${
+                (e as Error).message
+              }`,
+              'Call row.toJSON({ wrapNumbers: true }) to receive a custom type.',
+            ].join(' ');
+            throw e;
           }
           return structObj;
         };
@@ -1212,11 +1214,15 @@ function decode(
 const PRECISE_DATE_FAST_LAYOUT_SUPPORTED = (() => {
   try {
     const probe = new PreciseDate(0) as unknown as Record<string, unknown>;
-    return (
-      typeof probe._micros === 'number' &&
-      typeof probe._nanos === 'number' &&
-      typeof probe._picos === 'number'
-    );
+    if (
+      typeof probe._micros !== 'number' ||
+      typeof probe._nanos !== 'number' ||
+      typeof probe._picos !== 'number'
+    ) {
+      return false;
+    }
+    const negRef = new PreciseDate({seconds: -1, nanos: 1});
+    return negRef.getTime() === -2000 && negRef.getNanoseconds() === 1;
   } catch {
     return false;
   }
@@ -1240,7 +1246,6 @@ function parsePreciseDate(
     const {seconds, nanos} = isoString;
     if (
       PRECISE_DATE_FAST_LAYOUT_SUPPORTED &&
-      seconds >= 0 &&
       nanos >= 0 &&
       nanos < 1_000_000_000
     ) {
@@ -1248,7 +1253,16 @@ function parsePreciseDate(
       const rem = nanos - milliseconds * 1_000_000;
       const microseconds = (rem / 1_000) | 0;
       const nanoseconds = rem - microseconds * 1_000;
-      const utcMillis = seconds * 1000 + milliseconds;
+      let utcMillis: number;
+      if (seconds >= 0 || nanos === 0) {
+        utcMillis = seconds * 1000 + milliseconds;
+      } else if (milliseconds === 0) {
+        utcMillis = (seconds - 1) * 1000;
+      } else if (seconds === -1) {
+        utcMillis = milliseconds;
+      } else {
+        utcMillis = seconds * 1000 + milliseconds;
+      }
       if (Number.isSafeInteger(utcMillis)) {
         const preciseDate = Reflect.construct(
           Date,
@@ -1260,8 +1274,12 @@ function parsePreciseDate(
           _nanos: number;
           _picos: number;
         };
-        internal._micros = microseconds;
-        internal._nanos = nanoseconds;
+        internal._micros =
+          utcMillis < 0 && nanos > 0 && microseconds === 0 && nanoseconds === 0
+            ? -0
+            : microseconds;
+        internal._nanos =
+          utcMillis < 0 && nanoseconds === 0 ? -0 : nanoseconds;
         internal._picos = 0;
         return preciseDate;
       }
@@ -1642,8 +1660,7 @@ function getType(value: Value, enableUuidAsUntyped?: boolean): Type {
   }
 
   if (typeof value === 'string') {
-    const isUuidUntyped = enableUuidAsUntyped ?? isUuidUntypedEnv();
-    if (isUuidUntyped && isUuid(value)) {
+    if (isUuid(value) && (enableUuidAsUntyped ?? isUuidUntypedEnv())) {
       return TYPE_UNSPECIFIED;
     }
     return TYPE_STRING;

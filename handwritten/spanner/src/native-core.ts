@@ -15,6 +15,7 @@
  */
 
 import * as path from 'path';
+import * as tls from 'tls';
 import {Transform} from 'stream';
 import * as streamEvents from 'stream-events';
 import {grpc, GoogleError} from 'google-gax';
@@ -29,10 +30,12 @@ import {
   createFieldDecoders,
   formatRow,
 } from './partial-result-stream';
+import {DeadlineError} from './transaction-runner';
 import {codec, Int, Float, Numeric, Value} from './codec';
 import {isTracingEnabled} from './instrument';
 import {isAFEServerTimingEnabled} from './common';
 import {MetricsTracer} from './metrics/metrics-tracer';
+import {MetricsTracerFactory} from './metrics/metrics-tracer-factory';
 import {craftRequestId} from './request_id_header';
 
 const originalDecode = codec.decode;
@@ -99,6 +102,9 @@ interface SpannerGoAddon {
   closeStream(streamHandle: number): void;
   pauseStream?(streamHandle: number): void;
   resumeStream?(streamHandle: number): void;
+  setRootCertsPEM?(pem: string): void;
+  setNextUniverseDomain?(ud: string): void;
+  getLastInitError?(): string;
 }
 
 const PROTO_TO_OBJECT_OPTS = {
@@ -281,9 +287,11 @@ function encodeFastReadOnlySelector(
   return null;
 }
 
-const RUN_BATCH_ROW_SIZE = 256;
+const RUN_BATCH_ROW_SIZE = 2048;
 const STREAM_BATCH_ROW_SIZE = 256;
 const EMPTY_BUFFER = Buffer.alloc(0);
+
+const MAX_SCHEMA_CACHE_ENTRIES = 1024;
 
 interface CachedSchemaEntry {
   rowType: google.spanner.v1.IStructType;
@@ -300,6 +308,7 @@ interface GlobalNativeState {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   trackedClients?: Set<any>;
   handleRefCounts?: Map<number, number>;
+  generation?: number;
 }
 
 const GLOBAL_STATE_KEY = Symbol.for('__google_cloud_spanner_native_core_state__');
@@ -313,6 +322,7 @@ function getGlobalState(): GlobalNativeState {
       schemaCache: new Map<string, CachedSchemaEntry>(),
       trackedClients: new Set(),
       handleRefCounts: new Map<number, number>(),
+      generation: 1,
     };
   }
   const st = g[GLOBAL_STATE_KEY];
@@ -322,7 +332,27 @@ function getGlobalState(): GlobalNativeState {
   if (!st.handleRefCounts) {
     st.handleRefCounts = new Map<number, number>();
   }
+  if (!st.generation) {
+    st.generation = 1;
+  }
   return st;
+}
+
+function setSchemaCacheEntry(
+  state: GlobalNativeState,
+  key: string,
+  entry: CachedSchemaEntry,
+): void {
+  if (
+    !state.schemaCache.has(key) &&
+    state.schemaCache.size >= MAX_SCHEMA_CACHE_ENTRIES
+  ) {
+    const oldestKey = state.schemaCache.keys().next().value;
+    if (oldestKey !== undefined) {
+      state.schemaCache.delete(oldestKey);
+    }
+  }
+  state.schemaCache.set(key, entry);
 }
 
 function isTruthyFlag(val: string | undefined): boolean {
@@ -380,6 +410,16 @@ export function loadNativeAddon(): SpannerGoAddon | null {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const loaded = require(candidate) as SpannerGoAddon;
       if (loaded && typeof loaded.executeStreamingSql === 'function') {
+        if (
+          typeof loaded.setRootCertsPEM === 'function' &&
+          tls.rootCertificates?.length
+        ) {
+          try {
+            loaded.setRootCertsPEM(tls.rootCertificates.join('\n'));
+          } catch (_) {
+            // Ignore root cert initialization errors
+          }
+        }
         state.addon = loaded;
         return loaded;
       }
@@ -397,25 +437,49 @@ function isClientSupportedByNativeCore(spanner: any): boolean {
   if (!spanner || typeof spanner.prepareGapicRequest_ !== 'function') {
     return false;
   }
-  const emulatorHost = process.env.SPANNER_EMULATOR_HOST;
-  if (!emulatorHost) {
-    const opts = spanner.options || {};
-    if (
-      opts.credentials ||
-      opts.keyFilename ||
-      opts.keyFile ||
-      opts.authClient ||
-      opts.token ||
-      opts.clientConfig
-    ) {
+  const opts = spanner.options || {};
+  const hasCustomAuthOrTls =
+    opts.credentials ||
+    opts.keyFilename ||
+    opts.keyFile ||
+    opts.authClient ||
+    opts.token ||
+    opts.clientConfig ||
+    (!spanner._isInSecureCredentials &&
+      opts.sslCreds &&
+      opts.sslCreds._isSecure?.() !== false);
+  if (hasCustomAuthOrTls) {
+    const emulatorHost = process.env.SPANNER_EMULATOR_HOST;
+    if (!emulatorHost) {
       return false;
     }
-    if (
-      !spanner._isInSecureCredentials &&
-      opts.sslCreds &&
-      opts.sslCreds._isSecure?.() !== false
-    ) {
-      return false;
+  }
+  return true;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isGaxOptionsSupportedByNativeCore(gaxOptions: any): boolean {
+  if (!gaxOptions) {
+    return true;
+  }
+  if (gaxOptions.retry || gaxOptions.retryRequestOptions) {
+    return false;
+  }
+  const otherOpts = gaxOptions.otherArgs?.options;
+  if (otherOpts && Object.keys(otherOpts).length > 0) {
+    return false;
+  }
+  const hdrs = gaxOptions.otherArgs?.headers;
+  if (hdrs && typeof hdrs === 'object') {
+    for (const [k, v] of Object.entries(hdrs)) {
+      if (
+        k.toLowerCase().endsWith('-bin') ||
+        Buffer.isBuffer(v) ||
+        /[\r\n]/.test(k) ||
+        (typeof v === 'string' && /[\r\n]/.test(v))
+      ) {
+        return false;
+      }
     }
   }
   return true;
@@ -453,7 +517,13 @@ export function canUseNativeCore(snapshot: any): boolean {
   ) {
     return false;
   }
-  if (Object.prototype.hasOwnProperty.call(spanner, 'requestStream')) {
+  if (
+    (snapshot._defaultRequestStream &&
+      snapshot.requestStream !== snapshot._defaultRequestStream) ||
+    (!snapshot._defaultRequestStream &&
+      Object.prototype.hasOwnProperty.call(snapshot, 'requestStream')) ||
+    Object.prototype.hasOwnProperty.call(spanner, 'requestStream')
+  ) {
     return false;
   }
   return getOrCreateServiceHandle(spanner) > 0;
@@ -462,20 +532,24 @@ export function canUseNativeCore(snapshot: any): boolean {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getOrCreateServiceHandle(spanner: any): number {
   const state = getGlobalState();
-  if (
-    spanner &&
-    typeof spanner._nativeServiceHandle === 'number' &&
-    spanner._nativeServiceHandle > 0
-  ) {
+  if (spanner && typeof spanner._nativeServiceHandle === 'number') {
+    if (
+      spanner._nativeServiceGen === state.generation &&
+      spanner._nativeServiceHandle !== 0
+    ) {
+      return spanner._nativeServiceHandle;
+    }
     const cachedKey = spanner._nativeServiceCacheKey;
     if (
       cachedKey &&
       state.serviceHandles.get(cachedKey) === spanner._nativeServiceHandle
     ) {
+      spanner._nativeServiceGen = state.generation;
       return spanner._nativeServiceHandle;
     }
     spanner._nativeServiceHandle = undefined;
     spanner._nativeServiceCacheKey = undefined;
+    spanner._nativeServiceGen = undefined;
   }
   if (!isClientSupportedByNativeCore(spanner)) {
     return -1;
@@ -487,6 +561,12 @@ function getOrCreateServiceHandle(spanner: any): number {
 
   const opts = spanner?.options || {};
   const emulatorHost = process.env.SPANNER_EMULATOR_HOST;
+  const universeDomain: string =
+    spanner?._universeDomain ||
+    opts.universeDomain ||
+    opts.universe_domain ||
+    process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN ||
+    'googleapis.com';
   let endpoint: string;
   let usePlaintext = 0;
 
@@ -494,12 +574,6 @@ function getOrCreateServiceHandle(spanner: any): number {
     endpoint = emulatorHost;
     usePlaintext = 1;
   } else {
-    const universeDomain =
-      spanner?._universeDomain ||
-      opts.universeDomain ||
-      opts.universe_domain ||
-      process.env.GOOGLE_CLOUD_UNIVERSE_DOMAIN ||
-      'googleapis.com';
     const rawHost: string =
       opts.servicePath ||
       opts.apiEndpoint ||
@@ -516,7 +590,12 @@ function getOrCreateServiceHandle(spanner: any): number {
   }
 
   const numChannels = Number(opts.numChannels) > 0 ? Number(opts.numChannels) : 4;
-  const disableBuiltInAuth = usePlaintext ? 1 : 0;
+  const disableBuiltInAuth =
+    usePlaintext ||
+    opts.disableBuiltInAuth === true ||
+    spanner?.disableBuiltInAuth === true
+      ? 1
+      : 0;
   const enableDirectAccess = isTruthyFlag(
     process.env.GOOGLE_SPANNER_ENABLE_DIRECT_ACCESS,
   )
@@ -555,61 +634,102 @@ function getOrCreateServiceHandle(spanner: any): number {
   const dcpSelectionStrategy =
     rawStrategy === 1 || rawStrategy === 'ROUND_ROBIN' ? 1 : 0;
 
-  const cacheKey = `${endpoint}|${numChannels}|${usePlaintext}|${disableBuiltInAuth}|${enableDirectAccess}|${userAgent}|${dcpEnabled}|${dcpInitialChannels}|${dcpMinChannels}|${dcpMaxChannels}|${dcpMaxRpcPerChannel}|${dcpMinRpcPerChannel}|${dcpSelectionStrategy}`;
+  const cacheKey = `${endpoint}|${universeDomain}|${numChannels}|${usePlaintext}|${disableBuiltInAuth}|${enableDirectAccess}|${userAgent}|${dcpEnabled}|${dcpInitialChannels}|${dcpMinChannels}|${dcpMaxChannels}|${dcpMaxRpcPerChannel}|${dcpMinRpcPerChannel}|${dcpSelectionStrategy}`;
   const existing = state.serviceHandles.get(cacheKey);
+  if (existing === -1) {
+    if (spanner) {
+      spanner._nativeServiceHandle = -1;
+      spanner._nativeServiceCacheKey = cacheKey;
+      spanner._nativeServiceGen = state.generation;
+    }
+    return -1;
+  }
   if (existing !== undefined && existing > 0) {
     if (spanner) {
       spanner._nativeServiceHandle = existing;
       spanner._nativeServiceCacheKey = cacheKey;
+      spanner._nativeServiceGen = state.generation;
       if (!state.trackedClients!.has(spanner)) {
         state.trackedClients!.add(spanner);
-        // Also increment Go refcount via addon.init so each Spanner client has its own ref
-        addon.init(
-          endpoint,
-          numChannels,
-          usePlaintext,
-          disableBuiltInAuth,
-          enableDirectAccess,
-          userAgent,
-          dcpEnabled,
-          dcpInitialChannels,
-          dcpMinChannels,
-          dcpMaxChannels,
-          dcpMaxRpcPerChannel,
-          dcpMinRpcPerChannel,
-          dcpSelectionStrategy,
-        );
-        state.handleRefCounts!.set(
-          existing,
-          (state.handleRefCounts!.get(existing) || 1) + 1,
-        );
+        try {
+          addon.setNextUniverseDomain?.(universeDomain);
+          addon.init(
+            endpoint,
+            numChannels,
+            usePlaintext,
+            disableBuiltInAuth,
+            enableDirectAccess,
+            userAgent,
+            dcpEnabled,
+            dcpInitialChannels,
+            dcpMinChannels,
+            dcpMaxChannels,
+            dcpMaxRpcPerChannel,
+            dcpMinRpcPerChannel,
+            dcpSelectionStrategy,
+          );
+          state.handleRefCounts!.set(
+            existing,
+            (state.handleRefCounts!.get(existing) || 1) + 1,
+          );
+        } catch (_) {
+          // Ignore ref increment errors
+        }
       }
     }
     return existing;
   }
 
-  const handle = addon.init(
-    endpoint,
-    numChannels,
-    usePlaintext,
-    disableBuiltInAuth,
-    enableDirectAccess,
-    userAgent,
-    dcpEnabled,
-    dcpInitialChannels,
-    dcpMinChannels,
-    dcpMaxChannels,
-    dcpMaxRpcPerChannel,
-    dcpMinRpcPerChannel,
-    dcpSelectionStrategy,
-  );
+  let handle = -1;
+  try {
+    addon.setNextUniverseDomain?.(universeDomain);
+    handle = addon.init(
+      endpoint,
+      numChannels,
+      usePlaintext,
+      disableBuiltInAuth,
+      enableDirectAccess,
+      userAgent,
+      dcpEnabled,
+      dcpInitialChannels,
+      dcpMinChannels,
+      dcpMaxChannels,
+      dcpMaxRpcPerChannel,
+      dcpMinRpcPerChannel,
+      dcpSelectionStrategy,
+    );
+  } catch (initErr) {
+    handle = -1;
+    if (process.env.SPANNER_NATIVE_QUIET !== '1') {
+      process.emitWarning(
+        `[Spanner Native Core] Failed to initialize Go Shared Core (${(initErr as Error)?.message || initErr}); falling back to pure JS.`,
+        'SpannerNativeCoreInitWarning',
+      );
+    }
+  }
   if (handle > 0) {
     state.serviceHandles.set(cacheKey, handle);
     state.handleRefCounts!.set(handle, 1);
     if (spanner) {
       spanner._nativeServiceHandle = handle;
       spanner._nativeServiceCacheKey = cacheKey;
+      spanner._nativeServiceGen = state.generation;
       state.trackedClients!.add(spanner);
+    }
+  } else {
+    state.serviceHandles.set(cacheKey, -1);
+    if (spanner) {
+      spanner._nativeServiceHandle = -1;
+      spanner._nativeServiceCacheKey = cacheKey;
+      spanner._nativeServiceGen = state.generation;
+    }
+    if (process.env.SPANNER_NATIVE_QUIET !== '1') {
+      const detail =
+        addon.getLastInitError?.() || 'failed to create Go Shared Core service';
+      process.emitWarning(
+        `[Spanner Native Core] Failed to initialize Go Shared Core (${detail}); falling back to pure JS.`,
+        'SpannerNativeCoreInitWarning',
+      );
     }
   }
   return handle;
@@ -617,11 +737,14 @@ function getOrCreateServiceHandle(spanner: any): number {
 
 /**
  * Eagerly initializes the Go Shared Core service handle and starts non-blocking
- * background gRPC channel handshakes during `Database` construction when
- * `NATIVE_CORE_ENABLED` is enabled.
+ * background gRPC channel handshakes during `Spanner` / `Database` construction
+ * when `NATIVE_CORE_ENABLED` is enabled.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function prewarmNativeCore(spanner: any): void {
+  if (!spanner || spanner._nativeClosed || spanner._nativePrewarmTimer) {
+    return;
+  }
   if (!isNativeCoreEnabled()) {
     return;
   }
@@ -634,18 +757,18 @@ export function prewarmNativeCore(spanner: any): void {
   ) {
     return;
   }
-  const state = getGlobalState();
-  if (state.addon !== undefined) {
-    getOrCreateServiceHandle(spanner);
-    return;
-  }
   const timer = setImmediate(() => {
+    spanner._nativePrewarmTimer = undefined;
+    if (spanner._nativeClosed) {
+      return;
+    }
     try {
       getOrCreateServiceHandle(spanner);
     } catch (_) {
       // Ignore prewarm errors
     }
   });
+  spanner._nativePrewarmTimer = timer;
   if (typeof timer.unref === 'function') {
     timer.unref();
   }
@@ -660,11 +783,17 @@ export function closeNativeCoreForClient(spanner: any): void {
   if (!spanner) {
     return;
   }
+  spanner._nativeClosed = true;
+  if (spanner._nativePrewarmTimer) {
+    clearImmediate(spanner._nativePrewarmTimer);
+    spanner._nativePrewarmTimer = undefined;
+  }
   const state = getGlobalState();
   const handle = spanner._nativeServiceHandle;
   const cacheKey = spanner._nativeServiceCacheKey;
   spanner._nativeServiceHandle = undefined;
   spanner._nativeServiceCacheKey = undefined;
+  spanner._nativeServiceGen = undefined;
   if (!state.trackedClients?.has(spanner)) {
     return;
   }
@@ -693,9 +822,13 @@ export function closeNativeCoreForClient(spanner: any): void {
  */
 export function closeNativeCore(): void {
   const state = getGlobalState();
+  state.generation = (state.generation || 1) + 1;
   const addon = state.addon;
   if (addon) {
     for (const handle of state.serviceHandles.values()) {
+      if (handle <= 0) {
+        continue;
+      }
       const refs = state.handleRefCounts?.get(handle) || 1;
       for (let i = 0; i < refs; i++) {
         try {
@@ -709,8 +842,13 @@ export function closeNativeCore(): void {
   if (state.trackedClients) {
     for (const client of state.trackedClients) {
       if (client) {
+        if (client._nativePrewarmTimer) {
+          clearImmediate(client._nativePrewarmTimer);
+          client._nativePrewarmTimer = undefined;
+        }
         client._nativeServiceHandle = undefined;
         client._nativeServiceCacheKey = undefined;
+        client._nativeServiceGen = undefined;
       }
     }
     state.trackedClients.clear();
@@ -733,10 +871,12 @@ function buildHeadersString(
       const keys = Object.keys(rawHeaders);
       let s = '';
       for (let i = 0; i < keys.length; i++) {
-        const k = keys[i];
-        const v = rawHeaders[k];
+        const rawKey = keys[i];
+        const v = rawHeaders[rawKey];
         if (v !== undefined && v !== null) {
-          s = s ? `${s}\n${k}:${v}` : `${k}:${v}`;
+          const k = rawKey.replace(/[\r\n]+/g, '');
+          const cleanVal = String(v).replace(/[\r\n]+/g, ' ');
+          s = s ? `${s}\n${k}:${cleanVal}` : `${k}:${cleanVal}`;
         }
       }
       base = s;
@@ -777,10 +917,24 @@ function createGrpcServiceError(
   const metadata = new grpc.Metadata();
   if (batch.trailersJson) {
     try {
-      const tr = JSON.parse(batch.trailersJson) as Record<string, string>;
+      const tr = JSON.parse(batch.trailersJson) as Record<
+        string,
+        string[] | string
+      >;
       for (const [k, v] of Object.entries(tr)) {
-        if (!k.endsWith('-bin')) {
-          metadata.set(k, v);
+        const isBin = k.toLowerCase().endsWith('-bin');
+        if (Array.isArray(v)) {
+          for (let i = 0; i < v.length; i++) {
+            const item = v[i];
+            if (item !== undefined && item !== null) {
+              metadata.add(
+                k,
+                isBin ? Buffer.from(String(item), 'base64') : String(item),
+              );
+            }
+          }
+        } else if (v !== undefined && v !== null) {
+          metadata.add(k, isBin ? Buffer.from(String(v), 'base64') : String(v));
         }
       }
     } catch (_) {
@@ -820,7 +974,9 @@ function createGrpcServiceError(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function normalizeNativeDecodeError(err: any): grpc.ServiceError {
   const e =
-    err instanceof Error ? (err as grpc.ServiceError) : (new Error(String(err)) as grpc.ServiceError);
+    err instanceof Error
+      ? (err as grpc.ServiceError)
+      : (new Error(String(err)) as grpc.ServiceError);
   if (e.code === undefined) {
     e.code = grpc.status.UNKNOWN;
   }
@@ -834,10 +990,17 @@ function normalizeNativeDecodeError(err: any): grpc.ServiceError {
 }
 
 function normalizeTimeoutMs(rawTimeout: number | undefined): number {
-  if (rawTimeout === undefined || rawTimeout === null || !Number.isFinite(rawTimeout)) {
+  if (rawTimeout === 0 || Number.isNaN(rawTimeout)) {
+    return 30000;
+  }
+  if (
+    rawTimeout === undefined ||
+    rawTimeout === null ||
+    !Number.isFinite(rawTimeout)
+  ) {
     return 0;
   }
-  if (rawTimeout <= 0) {
+  if (rawTimeout < 0) {
     return -1;
   }
   if (rawTimeout > 0 && rawTimeout < 1) {
@@ -849,40 +1012,137 @@ function normalizeTimeoutMs(rawTimeout: number | undefined): number {
   return Math.floor(rawTimeout);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getOrCreateFastMetricsTracer(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  spanner: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  database: any,
+  routingKey: string,
+): MetricsTracer | null {
+  if (!spanner?._metricsEnabled) {
+    return null;
+  }
+  const projectId = spanner.projectId_;
+  if (!projectId || projectId === '{{projectId}}') {
+    return null;
+  }
+  const factory = MetricsTracerFactory?.getInstance(projectId);
+  if (!factory || !MetricsTracerFactory.enabled) {
+    return null;
+  }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const meterProvider = (factory as any)._meterProvider;
+  if (
+    database &&
+    database._nativeCachedMetricsTracer &&
+    database._nativeCachedMeterProvider === meterProvider
+  ) {
+    return database._nativeCachedMetricsTracer;
+  }
+  const tracer = factory.createMetricsTracer(
+    'executeStreamingSql',
+    database?.formattedName_ || routingKey,
+  );
+  if (database && tracer) {
+    database._nativeCachedMetricsTracer = tracer;
+    database._nativeCachedMeterProvider = meterProvider;
+  }
+  return tracer;
+}
+
 function recordNativeMetricsCompletion(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  spanner: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  database: any,
+  routingKey: string,
+  metricStartMs: number,
   metricsTracer: MetricsTracer | null,
   batch: NativeBatchResult | undefined,
   statusCode: number,
 ): void {
-  if (!metricsTracer || !metricsTracer.enabled) {
+  const tracer =
+    metricsTracer || getOrCreateFastMetricsTracer(spanner, database, routingKey);
+  if (!tracer || !tracer.enabled) {
     return;
   }
   try {
-    const attempts = batch?.attemptCount && batch.attemptCount > 0 ? batch.attemptCount : 1;
+    const attempts =
+      batch?.attemptCount && batch.attemptCount > 0 ? batch.attemptCount : 1;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const extractGfeProxied = Boolean((MetricsTracer.prototype.extractGfeLatency as any)?.isSinonProxy);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const extractAfeProxied = Boolean((MetricsTracer.prototype.extractAfeLatency as any)?.isSinonProxy);
+    const gfeLat: number | null =
+      batch?.gfeLatencyMs !== undefined && batch.gfeLatencyMs >= 0
+        ? batch.gfeLatencyMs
+        : extractGfeProxied
+          ? tracer.extractGfeLatency('')
+          : null;
+    const afeLat: number | null =
+      batch?.afeLatencyMs !== undefined && batch.afeLatencyMs >= 0
+        ? batch.afeLatencyMs
+        : extractAfeProxied
+          ? tracer.extractAfeLatency('')
+          : null;
+
+    if (metricsTracer) {
+      for (let i = 1; i < attempts; i++) {
+        metricsTracer.recordAttemptCompletion(grpc.status.UNAVAILABLE);
+        metricsTracer.recordAttemptStart();
+      }
+      if (gfeLat !== null) {
+        metricsTracer.gfeLatency = gfeLat;
+      }
+      if (afeLat !== null) {
+        metricsTracer.afeLatency = afeLat;
+      }
+      metricsTracer.recordAttemptCompletion(statusCode);
+      if (metricsTracer.gfeLatency !== null) {
+        metricsTracer.recordGfeLatency(statusCode);
+      } else {
+        metricsTracer.recordGfeConnectivityErrorCount(statusCode);
+      }
+      if (isAFEServerTimingEnabled()) {
+        if (metricsTracer.afeLatency !== null) {
+          metricsTracer.recordAfeLatency(statusCode);
+        } else {
+          metricsTracer.recordAfeConnectivityErrorCount(statusCode);
+        }
+      }
+      metricsTracer.recordOperationCompletion();
+      return;
+    }
+
+    // Fast allocation-free recording path using the per-Database cached MetricsTracer
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const t = tracer as any;
+    const elapsedMs =
+      metricStartMs >= 0 ? Math.max(0, performance.now() - metricStartMs) : 0;
+    const attemptElapsed = attempts > 1 ? elapsedMs / attempts : elapsedMs;
     for (let i = 1; i < attempts; i++) {
-      metricsTracer.recordAttemptCompletion(grpc.status.UNAVAILABLE);
-      metricsTracer.recordAttemptStart();
+      const unavailAttrs = t._getAttributesForStatus(grpc.status.UNAVAILABLE);
+      t._instrumentAttemptLatency?.record(attemptElapsed, unavailAttrs);
+      t._instrumentAttemptCounter?.add(1, unavailAttrs);
     }
-    if (batch?.gfeLatencyMs !== undefined && batch.gfeLatencyMs >= 0) {
-      metricsTracer.gfeLatency = batch.gfeLatencyMs;
-    }
-    if (batch?.afeLatencyMs !== undefined && batch.afeLatencyMs >= 0) {
-      metricsTracer.afeLatency = batch.afeLatencyMs;
-    }
-    metricsTracer.recordAttemptCompletion(statusCode);
-    if (metricsTracer.gfeLatency !== null) {
-      metricsTracer.recordGfeLatency(statusCode);
+    const finalAttrs = t._getAttributesForStatus(statusCode);
+    t._instrumentAttemptLatency?.record(attemptElapsed, finalAttrs);
+    t._instrumentAttemptCounter?.add(1, finalAttrs);
+    if (gfeLat !== null && Number.isFinite(gfeLat) && gfeLat >= 0) {
+      t._instrumentGfeLatency?.record(gfeLat, finalAttrs);
     } else {
-      metricsTracer.recordGfeConnectivityErrorCount(statusCode);
+      t._instrumentGfeConnectivityErrorCount?.add(1, finalAttrs);
     }
     if (isAFEServerTimingEnabled()) {
-      if (metricsTracer.afeLatency !== null) {
-        metricsTracer.recordAfeLatency(statusCode);
+      if (afeLat !== null && Number.isFinite(afeLat) && afeLat >= 0) {
+        t._instrumentAfeLatency?.record(afeLat, finalAttrs);
       } else {
-        metricsTracer.recordAfeConnectivityErrorCount(statusCode);
+        t._instrumentAfeConnectivityErrorCount?.add(1, finalAttrs);
       }
     }
-    metricsTracer.recordOperationCompletion();
+    t._instrumentOperationCounter?.add(1, finalAttrs);
+    t._instrumentOperationLatency?.record(elapsedMs, finalAttrs);
   } catch (_) {
     // Ignore telemetry recording errors
   }
@@ -951,7 +1211,7 @@ function encodeExecuteSqlRequest(
   // Normalize string enum values so ExecuteSqlRequest.encode() runs in
   // a single pass without ExecuteSqlRequest.fromObject() deep-cloning the request.
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const req = formattedRequest as any;
+  let req = formattedRequest as any;
   if (typeof req.queryMode === 'string') {
     req.queryMode = QUERY_MODE_MAP[req.queryMode] ?? 0;
   }
@@ -972,17 +1232,42 @@ function encodeExecuteSqlRequest(
   }
   if (req.directedReadOptions) {
     const dro = req.directedReadOptions;
-    const selections =
-      dro.includeReplicas?.replicaSelections ||
-      dro.excludeReplicas?.replicaSelections;
-    if (Array.isArray(selections)) {
-      for (let i = 0; i < selections.length; i++) {
-        if (selections[i] && typeof selections[i].type === 'string') {
-          selections[i] = Object.assign({}, selections[i], {
-            type: REPLICA_TYPE_MAP[selections[i].type] ?? 0,
-          });
-        }
-      }
+    const includeSels = dro.includeReplicas?.replicaSelections;
+    const excludeSels = dro.excludeReplicas?.replicaSelections;
+    if (
+      Array.isArray(includeSels) &&
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      includeSels.some((s: any) => s && typeof s.type === 'string')
+    ) {
+      req = Object.assign({}, req, {
+        directedReadOptions: Object.assign({}, dro, {
+          includeReplicas: Object.assign({}, dro.includeReplicas, {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            replicaSelections: includeSels.map((s: any) =>
+              s && typeof s.type === 'string'
+                ? Object.assign({}, s, {type: REPLICA_TYPE_MAP[s.type] ?? 0})
+                : s,
+            ),
+          }),
+        }),
+      });
+    } else if (
+      Array.isArray(excludeSels) &&
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      excludeSels.some((s: any) => s && typeof s.type === 'string')
+    ) {
+      req = Object.assign({}, req, {
+        directedReadOptions: Object.assign({}, dro, {
+          excludeReplicas: Object.assign({}, dro.excludeReplicas, {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            replicaSelections: excludeSels.map((s: any) =>
+              s && typeof s.type === 'string'
+                ? Object.assign({}, s, {type: REPLICA_TYPE_MAP[s.type] ?? 0})
+                : s,
+            ),
+          }),
+        }),
+      });
     }
   }
   if (!typesAlreadyNormalized && req.paramTypes) {
@@ -991,9 +1276,7 @@ function encodeExecuteSqlRequest(
       normalizeTypeProtoInPlace(req.paramTypes[keys[i]]);
     }
   }
-  const finished = google.spanner.v1.ExecuteSqlRequest.encode(
-    formattedRequest,
-  ).finish();
+  const finished = google.spanner.v1.ExecuteSqlRequest.encode(req).finish();
   return Buffer.isBuffer(finished)
     ? finished
     : Buffer.from(finished.buffer, finished.byteOffset, finished.byteLength);
@@ -1147,8 +1430,7 @@ export function executeNativeDatabaseRun(
       query.maxResumeRetries !== undefined ||
       query.DirectedReadOptions ||
       query.directedReadOptions ||
-      database.directedReadOptions_ ||
-      process.env.SPANNER_ENABLE_UUID_AS_UNTYPED?.toLowerCase() === 'true'
+      database.directedReadOptions_
     ) {
       return false;
     }
@@ -1187,6 +1469,14 @@ export function executeNativeDatabaseRun(
             return false;
           }
           if (typeof v === 'string') {
+            if (
+              v.length === 36 &&
+              !explicitTypeProto &&
+              process.env.SPANNER_ENABLE_UUID_AS_UNTYPED?.toLowerCase() ===
+                'true'
+            ) {
+              return false;
+            }
             fieldsMap[k] = {stringValue: v};
             paramTypesProto[k] = explicitTypeProto || SCALAR_TYPE_PROTOS.string;
           } else if (typeof v === 'boolean') {
@@ -1296,8 +1586,15 @@ export function executeNativeDatabaseRun(
     ? `${session._nativeHeadersStr}\nx-goog-spanner-request-id:${reqId}`
     : session._nativeHeadersStr;
 
+  const metricsEnabled = Boolean(spanner?._metricsEnabled);
+  const metricStartMs = metricsEnabled ? performance.now() : -1;
   let metricsTracer: MetricsTracer | null = null;
-  if (spanner?._metricsEnabled && typeof spanner._initMetricsTracer === 'function') {
+  if (
+    metricsEnabled &&
+    typeof spanner._initMetricsTracer === 'function' &&
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (spanner._initMetricsTracer as any).isSinonProxy
+  ) {
     metricsTracer = spanner._initMetricsTracer({
       client: 'SpannerClient',
       method: 'executeStreamingSql',
@@ -1311,7 +1608,7 @@ export function executeNativeDatabaseRun(
   const sqlKey = sql ? `${dbName}::${sql}` : '';
   const cachedSchema = sqlKey ? state.schemaCache.get(sqlKey) : undefined;
   const skipTxBit = options?.returnReadTimestamp === false ? 2 : 0;
-  const metricsBit = metricsTracer ? 8 : 0;
+  const metricsBit = metricsEnabled ? 8 : 0;
   const schemaHashBits = (cachedSchema?.schemaHash || 0) << 8;
   const skipMetadata =
     (cachedSchema ? 1 | skipTxBit : 0) | 4 | metricsBit | schemaHashBits;
@@ -1351,6 +1648,10 @@ export function executeNativeDatabaseRun(
       if (napiErr) {
         finished = true;
         recordNativeMetricsCompletion(
+          spanner,
+          database,
+          sessionName,
+          metricStartMs,
           metricsTracer,
           batch,
           (napiErr as grpc.ServiceError).code ?? grpc.status.UNKNOWN,
@@ -1362,7 +1663,15 @@ export function executeNativeDatabaseRun(
       if (batch.status < 0) {
         finished = true;
         const grpcErr = createGrpcServiceError(batch, reqId);
-        recordNativeMetricsCompletion(metricsTracer, batch, grpcErr.code ?? grpc.status.UNKNOWN);
+        recordNativeMetricsCompletion(
+          spanner,
+          database,
+          sessionName,
+          metricStartMs,
+          metricsTracer,
+          batch,
+          grpcErr.code ?? grpc.status.UNKNOWN,
+        );
         callback(grpcErr, allRows, stats, metadata);
         return false;
       }
@@ -1388,7 +1697,7 @@ export function executeNativeDatabaseRun(
           fieldNames = fields.map(f => f.name);
           const defaultDecoders = createFieldDecoders(fields, {});
           if (sqlKey && fields.length > 0) {
-            state.schemaCache.set(sqlKey, {
+            setSchemaCacheEntry(state, sqlKey, {
               rowType: metadata.rowType,
               fields,
               fieldNames,
@@ -1444,7 +1753,15 @@ export function executeNativeDatabaseRun(
           finished = true;
           addon.closeStream(streamHandle);
           const normErr = normalizeNativeDecodeError(decodeErr);
-          recordNativeMetricsCompletion(metricsTracer, batch, normErr.code ?? grpc.status.UNKNOWN);
+          recordNativeMetricsCompletion(
+            spanner,
+            database,
+            sessionName,
+            metricStartMs,
+            metricsTracer,
+            batch,
+            normErr.code ?? grpc.status.UNKNOWN,
+          );
           callback(normErr, allRows, stats, metadata);
           return false;
         }
@@ -1452,7 +1769,15 @@ export function executeNativeDatabaseRun(
 
       if (batch.status === 1) {
         finished = true;
-        recordNativeMetricsCompletion(metricsTracer, batch, grpc.status.OK);
+        recordNativeMetricsCompletion(
+          spanner,
+          database,
+          sessionName,
+          metricStartMs,
+          metricsTracer,
+          batch,
+          grpc.status.OK,
+        );
         callback(null, allRows, stats, metadata);
       }
       return true;
@@ -1522,8 +1847,15 @@ export function executeNativeTransactionRun(
     const routingKey = formattedRequest.session || dbName;
     const reqId = headers?.['x-goog-spanner-request-id'];
 
+    const metricsEnabled = Boolean(spanner?._metricsEnabled);
+    const metricStartMs = metricsEnabled ? performance.now() : -1;
     let metricsTracer: MetricsTracer | null = null;
-    if (spanner?._metricsEnabled && typeof spanner._initMetricsTracer === 'function') {
+    if (
+      metricsEnabled &&
+      typeof spanner._initMetricsTracer === 'function' &&
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (spanner._initMetricsTracer as any).isSinonProxy
+    ) {
       metricsTracer = spanner._initMetricsTracer({
         client: 'SpannerClient',
         method: 'executeStreamingSql',
@@ -1538,7 +1870,7 @@ export function executeNativeTransactionRun(
         ? `${dbName}::${formattedRequest.sql}`
         : '';
     const cachedSchema = sqlKey ? state.schemaCache.get(sqlKey) : undefined;
-    const metricsBit = metricsTracer ? 8 : 0;
+    const metricsBit = metricsEnabled ? 8 : 0;
     const schemaHashBits = (cachedSchema?.schemaHash || 0) << 8;
     const skipMetadata =
       (cachedSchema ? 1 : 0) | 4 | metricsBit | schemaHashBits;
@@ -1553,6 +1885,7 @@ export function executeNativeTransactionRun(
     let metadata: google.spanner.v1.ResultSetMetadata | undefined;
     let stats: google.spanner.v1.ResultSetStats | undefined;
     let finished = false;
+    let emittedRetryEvents = false;
     let fields: google.spanner.v1.StructType.Field[] | undefined =
       cachedSchema?.fields;
     let fieldNames: (string | null | undefined)[] | undefined =
@@ -1586,9 +1919,28 @@ export function executeNativeTransactionRun(
         if (finished) {
           return false;
         }
+        if (
+          !emittedRetryEvents &&
+          streamSpan &&
+          batch?.attemptCount &&
+          batch.attemptCount > 1
+        ) {
+          emittedRetryEvents = true;
+          streamSpan.addEvent?.('Re-attempting start stream', {attempt: 2});
+          for (let a = 3; a <= batch.attemptCount; a++) {
+            streamSpan.addEvent?.('Resuming stream', {
+              resume_token: '',
+              attempt: a,
+            });
+          }
+        }
         if (napiErr) {
           finished = true;
           recordNativeMetricsCompletion(
+            spanner,
+            database,
+            routingKey,
+            metricStartMs,
             metricsTracer,
             batch,
             (napiErr as grpc.ServiceError).code ?? grpc.status.UNKNOWN,
@@ -1600,7 +1952,15 @@ export function executeNativeTransactionRun(
         if (batch.status < 0) {
           finished = true;
           const grpcErr = createGrpcServiceError(batch, reqId);
-          recordNativeMetricsCompletion(metricsTracer, batch, grpcErr.code ?? grpc.status.UNKNOWN);
+          recordNativeMetricsCompletion(
+            spanner,
+            database,
+            routingKey,
+            metricStartMs,
+            metricsTracer,
+            batch,
+            grpcErr.code ?? grpc.status.UNKNOWN,
+          );
           onError(grpcErr, allRows, stats, metadata);
           return false;
         }
@@ -1630,7 +1990,7 @@ export function executeNativeTransactionRun(
             fieldNames = fields.map(f => f.name);
             const defaultDecoders = createFieldDecoders(fields, {});
             if (sqlKey && fields.length > 0) {
-              state.schemaCache.set(sqlKey, {
+              setSchemaCacheEntry(state, sqlKey, {
                 rowType: metadata.rowType,
                 fields,
                 fieldNames,
@@ -1662,22 +2022,9 @@ export function executeNativeTransactionRun(
             snapshot.metadata = txObj;
             streamSpan?.addEvent?.('Transaction Creation Done', {id: ''});
             snapshot.readTimestampProto = readTsProto;
-            let cachedReadTs: unknown;
-            Object.defineProperty(snapshot, 'readTimestamp', {
-              configurable: true,
-              enumerable: true,
-              get() {
-                if (cachedReadTs === undefined) {
-                  cachedReadTs = decodeTimestamp({
-                    seconds: secNum,
-                    nanos: nanosNum,
-                  });
-                }
-                return cachedReadTs;
-              },
-              set(v) {
-                cachedReadTs = v;
-              },
+            snapshot.readTimestamp = decodeTimestamp({
+              seconds: secNum,
+              nanos: nanosNum,
             });
             snapshot._releaseWaitingRequests?.();
           }
@@ -1718,7 +2065,15 @@ export function executeNativeTransactionRun(
             finished = true;
             addon.closeStream(streamHandle);
             const normErr = normalizeNativeDecodeError(decodeErr);
-            recordNativeMetricsCompletion(metricsTracer, batch, normErr.code ?? grpc.status.UNKNOWN);
+            recordNativeMetricsCompletion(
+              spanner,
+              database,
+              routingKey,
+              metricStartMs,
+              metricsTracer,
+              batch,
+              normErr.code ?? grpc.status.UNKNOWN,
+            );
             onError(normErr, allRows, stats, metadata);
             return false;
           }
@@ -1726,7 +2081,15 @@ export function executeNativeTransactionRun(
 
         if (batch.status === 1) {
           finished = true;
-          recordNativeMetricsCompletion(metricsTracer, batch, grpc.status.OK);
+          recordNativeMetricsCompletion(
+            spanner,
+            database,
+            routingKey,
+            metricStartMs,
+            metricsTracer,
+            batch,
+            grpc.status.OK,
+          );
           onSuccess(allRows, stats, metadata);
         }
         return true;
@@ -1848,7 +2211,7 @@ export function runStreamNative(
         streamHandle = 0;
         addon?.closeStream(handleToClose);
       }
-      readable.destroy(normalizeNativeDecodeError(pushErr));
+      readable.destroy(pushErr as Error);
       return;
     }
 
@@ -1914,8 +2277,15 @@ export function runStreamNative(
       const dbName: string = database?.formattedName_ || '';
       const routingKey = formattedRequest.session || dbName;
 
+      const metricsEnabled = Boolean(spanner?._metricsEnabled);
+      const metricStartMs = metricsEnabled ? performance.now() : -1;
       let metricsTracer: MetricsTracer | null = null;
-      if (spanner?._metricsEnabled && typeof spanner._initMetricsTracer === 'function') {
+      if (
+        metricsEnabled &&
+        typeof spanner._initMetricsTracer === 'function' &&
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (spanner._initMetricsTracer as any).isSinonProxy
+      ) {
         metricsTracer = spanner._initMetricsTracer({
           client: 'SpannerClient',
           method: 'executeStreamingSql',
@@ -1924,7 +2294,14 @@ export function runStreamNative(
         });
         metricsTracer?.recordAttemptStart();
       }
-      const skipMetadata = metricsTracer ? 8 : 0;
+      const skipMetadata = metricsEnabled ? 8 : 0;
+      const startTime = Date.now();
+      const effectiveTimeout =
+        timeoutMs === 0
+          ? 30000
+          : timeoutMs !== undefined && Number.isFinite(timeoutMs)
+            ? timeoutMs
+            : Infinity;
 
       streamHandle = addon.executeStreamingSql(
         serviceHandle,
@@ -1943,6 +2320,10 @@ export function runStreamNative(
             finishedReading = true;
             streamHandle = 0;
             recordNativeMetricsCompletion(
+              spanner,
+              database,
+              routingKey,
+              metricStartMs,
               metricsTracer,
               batch,
               (napiErr as grpc.ServiceError).code ?? grpc.status.UNKNOWN,
@@ -1956,11 +2337,21 @@ export function runStreamNative(
             streamHandle = 0;
             const grpcErr = createGrpcServiceError(batch, reqId);
             recordNativeMetricsCompletion(
+              spanner,
+              database,
+              routingKey,
+              metricStartMs,
               metricsTracer,
               batch,
               grpcErr.code ?? grpc.status.UNKNOWN,
             );
-            readable.destroy(grpcErr);
+            const finalErr =
+              grpcErr.code === grpc.status.DEADLINE_EXCEEDED &&
+              (effectiveTimeout < 1 ||
+                Date.now() - startTime >= effectiveTimeout - 15)
+                ? new DeadlineError(grpcErr)
+                : grpcErr;
+            readable.destroy(finalErr);
             return false;
           }
 
@@ -2028,6 +2419,10 @@ export function runStreamNative(
               addon.closeStream(handleToClose);
               const normErr = normalizeNativeDecodeError(decodeErr);
               recordNativeMetricsCompletion(
+                spanner,
+                database,
+                routingKey,
+                metricStartMs,
                 metricsTracer,
                 batch,
                 normErr.code ?? grpc.status.UNKNOWN,
@@ -2044,12 +2439,15 @@ export function runStreamNative(
           if (batch.status === 1) {
             eofReceived = true;
             streamHandle = 0;
-            recordNativeMetricsCompletion(metricsTracer, batch, grpc.status.OK);
-          }
-
-          if (readable.readableFlowing === false) {
-            pauseNativeIfNeeded();
-            return true;
+            recordNativeMetricsCompletion(
+              spanner,
+              database,
+              routingKey,
+              metricStartMs,
+              metricsTracer,
+              batch,
+              grpc.status.OK,
+            );
           }
 
           try {
@@ -2067,13 +2465,16 @@ export function runStreamNative(
               streamHandle = 0;
               addon.closeStream(handleToClose);
             }
-            const normErr = normalizeNativeDecodeError(pushErr);
             recordNativeMetricsCompletion(
+              spanner,
+              database,
+              routingKey,
+              metricStartMs,
               metricsTracer,
               batch,
-              normErr.code ?? grpc.status.UNKNOWN,
+              (pushErr as grpc.ServiceError)?.code ?? grpc.status.UNKNOWN,
             );
-            readable.destroy(normErr);
+            readable.destroy(pushErr as Error);
             return false;
           }
 

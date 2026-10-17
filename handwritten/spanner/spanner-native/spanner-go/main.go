@@ -102,11 +102,10 @@ import "C"
 
 import (
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"os"
-	"runtime"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -130,7 +129,8 @@ var (
 	nextStreamID atomic.Int64
 	streams      sync.Map // map[int64]*streamEntry
 
-	gomaxprocsOnce sync.Once
+	lastInitErr        atomic.Value // string
+	nextUniverseDomain atomic.Value // string
 )
 
 type logRecord struct {
@@ -152,12 +152,34 @@ type serviceEntry struct {
 	id          int64
 	key         string
 	refCount    int32
+	activeRPCs  atomic.Int32
+	closing     atomic.Bool
+	closeOnce   sync.Once
 	svc         *sharedcore.Service
 	logsMu      sync.Mutex
 	logs        []logRecord
 	hasLogs     atomic.Bool
 	headerSlots [headerCacheSlots]atomic.Pointer[cachedHeaderEntry]
-	headerOvfl  sync.Map // map[string]*cachedHeaderEntry
+}
+
+func (se *serviceEntry) closeServiceUnderlying() error {
+	var err error
+	se.closeOnce.Do(func() {
+		if se.svc != nil {
+			err = se.svc.Close()
+		}
+	})
+	return err
+}
+
+func (se *serviceEntry) onRPCStart() {
+	se.activeRPCs.Add(1)
+}
+
+func (se *serviceEntry) onRPCEnd() {
+	if se.activeRPCs.Add(-1) == 0 && se.closing.Load() {
+		_ = se.closeServiceUnderlying()
+	}
 }
 
 func fnv32aStr(s string) uint32 {
@@ -351,15 +373,31 @@ type batchMsg struct {
 }
 
 type streamEntry struct {
-	se      *serviceEntry
-	cancel  context.CancelFunc
-	ch      chan batchMsg
-	initErr error
+	se       *serviceEntry
+	cancel   context.CancelFunc
+	ch       chan batchMsg
+	initErr  error
+	inFlight atomic.Int32
+	paused   atomic.Bool
+	flowCh   chan struct{}
+}
+
+func (s *streamEntry) signalFlow() {
+	if s != nil && s.flowCh != nil {
+		select {
+		case s.flowCh <- struct{}{}:
+		default:
+		}
+	}
 }
 
 func (s *streamEntry) close() {
-	if s != nil && s.cancel != nil {
-		s.cancel()
+	if s != nil {
+		s.paused.Store(false)
+		if s.cancel != nil {
+			s.cancel()
+		}
+		s.signalFlow()
 	}
 }
 
@@ -368,6 +406,39 @@ func allocBatch() *C.CSpannerBatch {
 	batch.gfe_latency_ms = -1
 	batch.afe_latency_ms = -1
 	return batch
+}
+
+//export SpannerCoreSetRootCertsPEM
+func SpannerCoreSetRootCertsPEM(pem *C.char) {
+	if pem != nil {
+		sharedcore.SetFallbackRootCAPEM(C.GoString(pem))
+	}
+}
+
+//export SpannerCoreSetNextUniverseDomain
+func SpannerCoreSetNextUniverseDomain(ud *C.char) {
+	if ud != nil {
+		nextUniverseDomain.Store(C.GoString(ud))
+	} else {
+		nextUniverseDomain.Store("")
+	}
+}
+
+//export SpannerCoreGetLastInitError
+func SpannerCoreGetLastInitError() *C.char {
+	if v := lastInitErr.Load(); v != nil {
+		if s, ok := v.(string); ok && s != "" {
+			return C.CString(s)
+		}
+	}
+	return nil
+}
+
+//export SpannerCoreFreeString
+func SpannerCoreFreeString(p *C.char) {
+	if p != nil {
+		C.free(unsafe.Pointer(p))
+	}
 }
 
 //export SpannerCoreInit
@@ -388,24 +459,16 @@ func SpannerCoreInit(
 ) (handle C.longlong) {
 	defer func() {
 		if r := recover(); r != nil {
+			lastInitErr.Store(fmt.Sprintf("panic in SpannerCoreInit: %v", r))
 			handle = -1
 		}
 	}()
 
-	// Cap default GOMAXPROCS when embedded inside a Node.js process unless
-	// explicitly configured via GOMAXPROCS env var, avoiding work-stealing spin
-	// loops across 24+ OS threads on high-core-count machines while preserving
-	// Go 1.25's cgroup-aware GOMAXPROCS when <= 4.
-	gomaxprocsOnce.Do(func() {
-		if os.Getenv("GOMAXPROCS") == "" && runtime.GOMAXPROCS(0) > 4 {
-			runtime.GOMAXPROCS(4)
-		}
-	})
-
 	epStr := C.GoString(endpoint)
 	uaStr := C.GoString(userAgent)
+	udStr, _ := nextUniverseDomain.Swap("").(string)
 	key := fmt.Sprintf(
-		"%s|%d|%d|%d|%d|%s|%d|%d|%d|%d|%g|%g|%d",
+		"%s|%d|%d|%d|%d|%s|%d|%d|%d|%d|%g|%g|%d|%s",
 		epStr,
 		int(numChannels),
 		int(usePlaintext),
@@ -419,6 +482,7 @@ func SpannerCoreInit(
 		float64(dcpMaxRpcPerChannel),
 		float64(dcpMinRpcPerChannel),
 		int(dcpSelectionStrategy),
+		udStr,
 	)
 
 	serviceMu.Lock()
@@ -426,6 +490,7 @@ func SpannerCoreInit(
 		existing.refCount++
 		id := existing.id
 		serviceMu.Unlock()
+		lastInitErr.Store("")
 		return C.longlong(id)
 	}
 	serviceMu.Unlock()
@@ -436,6 +501,7 @@ func SpannerCoreInit(
 	}
 	cfg := sharedcore.ClientConfig{
 		Endpoint:           epStr,
+		UniverseDomain:     udStr,
 		NumChannels:        int(numChannels),
 		PlainText:          usePlaintext != 0,
 		DisableBuiltInAuth: disableBuiltInAuth != 0,
@@ -455,8 +521,10 @@ func SpannerCoreInit(
 
 	svc, err := sharedcore.NewService(context.Background(), cfg)
 	if err != nil {
+		lastInitErr.Store(err.Error())
 		return -1
 	}
+	lastInitErr.Store("")
 	se.svc = svc
 
 	serviceMu.Lock()
@@ -497,10 +565,20 @@ func SpannerCoreClose(serviceHandle C.longlong) (rc C.int) {
 	}
 	services.Delete(int64(serviceHandle))
 	delete(servicesByKey, se.key)
+	se.closing.Store(true)
 	serviceMu.Unlock()
 
-	if err := se.svc.Close(); err != nil {
-		return -1
+	streams.Range(func(_, v any) bool {
+		if st, ok := v.(*streamEntry); ok && st != nil && st.se == se && st.paused.Load() {
+			st.close()
+		}
+		return true
+	})
+
+	if se.activeRPCs.Load() <= 0 {
+		if err := se.closeServiceUnderlying(); err != nil {
+			return -1
+		}
 	}
 	return 0
 }
@@ -520,6 +598,7 @@ func SpannerCoreExecuteStreamingSqlAsync(
 	abandonedFlag *C.int32_t,
 ) (streamID C.longlong) {
 	nonCancellable := (skipMetadata & 4) != 0
+	skipMeta := (skipMetadata & 1) != 0
 	var id int64
 	if !nonCancellable {
 		id = nextStreamID.Add(1)
@@ -542,6 +621,7 @@ func SpannerCoreExecuteStreamingSqlAsync(
 		return streamID
 	}
 	se := val.(*serviceEntry)
+	se.onRPCStart()
 
 	var rawReq []byte
 	if reqBytes != nil && reqLen > 0 {
@@ -561,20 +641,28 @@ func SpannerCoreExecuteStreamingSqlAsync(
 		rKey = C.GoString(routingKey)
 	}
 
-	ctx, cancel := context.WithCancel(context.Background())
+	var (
+		ctx    context.Context
+		cancel context.CancelFunc
+		entry  *streamEntry
+	)
 	if !nonCancellable {
-		entry := &streamEntry{
+		ctx, cancel = context.WithCancel(context.Background())
+		entry = &streamEntry{
 			se:     se,
 			cancel: cancel,
+			flowCh: make(chan struct{}, 1),
 		}
 		streams.Store(id, entry)
+	} else {
+		ctx = context.Background()
 	}
 
 	req := sharedcore.StreamRequest{
 		RoutingKey:              rKey,
 		RequestID:               reqID,
 		RequestBytes:            rawReq,
-		SkipMetadata:            (skipMetadata & 1) != 0,
+		SkipMetadata:            skipMeta,
 		SkipReadTimestamp:       (skipMetadata & 2) != 0,
 		SkipTelemetry:           (skipMetadata & 8) == 0,
 		ExpectedSchemaHash:      uint32(skipMetadata) >> 8,
@@ -595,60 +683,96 @@ func SpannerCoreExecuteStreamingSqlAsync(
 	}
 
 	go func() {
+		var finalSent bool
+		sendFinal := func(b *C.CSpannerBatch) {
+			if !finalSent {
+				finalSent = true
+				C.invoke_batch_callback(cb, userData, b)
+			} else if b != nil {
+				FreeSpannerBatch(b)
+			}
+		}
+
 		defer func() {
 			if !nonCancellable {
 				streams.Delete(id)
 			}
-			cancel()
-			if r := recover(); r != nil {
+			if cancel != nil {
+				cancel()
+			}
+			se.onRPCEnd()
+			if r := recover(); r != nil && !finalSent {
 				errBatch := allocBatch()
 				populateErrorBatch(errBatch, status.Errorf(codes.Internal, "panic in ExecuteStreamingSQL goroutine: %v", r))
-				C.invoke_batch_callback(cb, userData, errBatch)
+				sendFinal(errBatch)
 			}
 		}()
 
-		var sentEOF bool
-
 		tel, err := se.svc.ExecuteStreamingSQL(ctx, req, func(sb sharedcore.StreamBatch) error {
 			if abandonedFlag != nil && atomic.LoadInt32((*int32)(unsafe.Pointer(abandonedFlag))) != 0 {
-				cancel()
+				if cancel != nil {
+					cancel()
+				}
 				return context.Canceled
 			}
 			if ctx.Err() != nil {
 				return ctx.Err()
 			}
+			if !sb.IsLast && entry != nil {
+				for entry.paused.Load() || entry.inFlight.Load() >= 2 {
+					if abandonedFlag != nil && atomic.LoadInt32((*int32)(unsafe.Pointer(abandonedFlag))) != 0 {
+						entry.close()
+						return context.Canceled
+					}
+					select {
+					case <-ctx.Done():
+						return ctx.Err()
+					case <-entry.flowCh:
+					}
+				}
+				if abandonedFlag != nil && atomic.LoadInt32((*int32)(unsafe.Pointer(abandonedFlag))) != 0 {
+					entry.close()
+					return context.Canceled
+				}
+				entry.inFlight.Add(1)
+			}
 			cBatch := allocBatch()
-			populateSuccessBatch(cBatch, &sb)
+			populateSuccessBatchWithSkip(cBatch, &sb, skipMeta)
 			attachLogsToBatch(cBatch, se.drainLogs())
 			if sb.IsLast {
 				populateTelemetry(cBatch, &sb.Telemetry)
 				cBatch.status = 1 // EOF (plus any final rows/metadata/stats)
-				sentEOF = true
+				sendFinal(cBatch)
+				return nil
 			}
 			C.invoke_batch_callback(cb, userData, cBatch)
 			if abandonedFlag != nil && atomic.LoadInt32((*int32)(unsafe.Pointer(abandonedFlag))) != 0 {
-				cancel()
+				if cancel != nil {
+					cancel()
+				}
 				return context.Canceled
 			}
 			return nil
 		})
+
+		if finalSent {
+			return
+		}
 
 		if err != nil {
 			errBatch := allocBatch()
 			attachLogsToBatch(errBatch, se.drainLogs())
 			populateTelemetry(errBatch, &tel)
 			populateErrorBatch(errBatch, err)
-			C.invoke_batch_callback(cb, userData, errBatch)
+			sendFinal(errBatch)
 			return
 		}
 
-		if !sentEOF {
-			finalBatch := allocBatch()
-			attachLogsToBatch(finalBatch, se.drainLogs())
-			populateTelemetry(finalBatch, &tel)
-			finalBatch.status = 1 // EOF
-			C.invoke_batch_callback(cb, userData, finalBatch)
-		}
+		finalBatch := allocBatch()
+		attachLogsToBatch(finalBatch, se.drainLogs())
+		populateTelemetry(finalBatch, &tel)
+		finalBatch.status = 1 // EOF
+		sendFinal(finalBatch)
 	}()
 
 	return streamID
@@ -684,6 +808,7 @@ func SpannerCoreExecuteStreamingSql(
 		return streamID
 	}
 	se := val.(*serviceEntry)
+	se.onRPCStart()
 
 	var rawReq []byte
 	if reqBytes != nil && reqLen > 0 {
@@ -737,6 +862,7 @@ func SpannerCoreExecuteStreamingSql(
 
 	go func() {
 		defer func() {
+			se.onRPCEnd()
 			if r := recover(); r != nil {
 				select {
 				case ch <- batchMsg{err: status.Errorf(codes.Internal, "panic in ExecuteStreamingSQL goroutine: %v", r)}:
@@ -835,6 +961,40 @@ func SpannerCoreNextBatch(streamHandle C.longlong) (batch *C.CSpannerBatch) {
 	return batch
 }
 
+//export SpannerCorePauseStream
+func SpannerCorePauseStream(streamHandle C.longlong) {
+	if val, ok := streams.Load(int64(streamHandle)); ok {
+		entry := val.(*streamEntry)
+		if entry.se != nil && entry.se.closing.Load() {
+			entry.close()
+			return
+		}
+		entry.paused.Store(true)
+	}
+}
+
+//export SpannerCoreResumeStream
+func SpannerCoreResumeStream(streamHandle C.longlong) {
+	if val, ok := streams.Load(int64(streamHandle)); ok {
+		entry := val.(*streamEntry)
+		entry.paused.Store(false)
+		entry.signalFlow()
+	}
+}
+
+//export SpannerCoreAckBatch
+func SpannerCoreAckBatch(streamHandle C.longlong) {
+	if val, ok := streams.Load(int64(streamHandle)); ok {
+		entry := val.(*streamEntry)
+		if entry.inFlight.Add(-1) < 0 {
+			entry.inFlight.Store(0)
+		}
+		if !entry.paused.Load() {
+			entry.signalFlow()
+		}
+	}
+}
+
 //export SpannerCoreCloseStream
 func SpannerCoreCloseStream(streamHandle C.longlong) {
 	defer func() {
@@ -904,7 +1064,26 @@ func populateTelemetry(batch *C.CSpannerBatch, tel *sharedcore.StreamTelemetry) 
 		batch.request_id = C.CString(tel.RequestID)
 	}
 	if len(tel.ErrorTrailers) > 0 && batch.trailers_json == nil {
-		if b, err := json.Marshal(tel.ErrorTrailers); err == nil && len(b) > 0 {
+		trailersMap := tel.ErrorTrailers
+		for k := range trailersMap {
+			if strings.HasSuffix(strings.ToLower(k), "-bin") {
+				cloned := make(map[string][]string, len(trailersMap))
+				for ck, cv := range trailersMap {
+					if strings.HasSuffix(strings.ToLower(ck), "-bin") {
+						enc := make([]string, len(cv))
+						for i, raw := range cv {
+							enc[i] = base64.StdEncoding.EncodeToString([]byte(raw))
+						}
+						cloned[ck] = enc
+					} else {
+						cloned[ck] = cv
+					}
+				}
+				trailersMap = cloned
+				break
+			}
+		}
+		if b, err := json.Marshal(trailersMap); err == nil && len(b) > 0 {
 			batch.trailers_json = (*C.char)(C.CBytes(b))
 			batch.trailers_len = C.int32_t(len(b))
 		}
@@ -1008,8 +1187,14 @@ func attachLogsToBatch(batch *C.CSpannerBatch, logs []logRecord) {
 }
 
 func populateSuccessBatch(batch *C.CSpannerBatch, sb *sharedcore.StreamBatch) {
+	populateSuccessBatchWithSkip(batch, sb, false)
+}
+
+func populateSuccessBatchWithSkip(batch *C.CSpannerBatch, sb *sharedcore.StreamBatch, skipMeta bool) {
 	batch.status = 0
-	batch.schema_hash = C.uint32_t(sb.SchemaHash)
+	if !skipMeta || len(sb.MetadataBytes) > 0 {
+		batch.schema_hash = C.uint32_t(sb.SchemaHash)
+	}
 
 	if sb.HasReadTimestamp {
 		batch.has_read_timestamp = 1

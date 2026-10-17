@@ -450,6 +450,8 @@ export class Snapshot extends EventEmitter {
       this.request = session.request.bind(session);
       this.requestStream = session.requestStream.bind(session);
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (this as any)._defaultRequestStream = this.requestStream;
 
     const readOnly = Snapshot.encodeTimestampBounds(options || {});
     this._options = {readOnly};
@@ -1584,8 +1586,7 @@ export class Snapshot extends EventEmitter {
       if (
         nativeCore.canUseNativeCore(this) &&
         maxResumeRetries === undefined &&
-        !gaxOptions?.retry &&
-        !gaxOptions?.otherArgs?.options?.interceptors?.length
+        nativeCore.isGaxOptionsSupportedByNativeCore(gaxOptions)
       ) {
         streamSpan.addEvent('Starting stream');
         const injectedHeaders = injectRequestIDIntoHeaders(
@@ -1601,6 +1602,14 @@ export class Snapshot extends EventEmitter {
         const mergedHeaders = gaxOptions?.otherArgs?.headers
           ? Object.assign({}, gaxOptions.otherArgs.headers, injectedHeaders)
           : injectedHeaders;
+        const nativeStartTime = Date.now();
+        const effectiveTimeout =
+          gaxOptions?.timeout === 0
+            ? 30000
+            : gaxOptions?.timeout !== undefined &&
+                Number.isFinite(gaxOptions.timeout)
+              ? gaxOptions.timeout
+              : Infinity;
         nativeCore.executeNativeTransactionRun({
           snapshot: this,
           sanitizeRequest: () => {
@@ -1633,8 +1642,9 @@ export class Snapshot extends EventEmitter {
               });
             }
             const finalError =
-              gaxOptions?.timeout !== undefined &&
-              err?.code === grpc.status.DEADLINE_EXCEEDED
+              err?.code === grpc.status.DEADLINE_EXCEEDED &&
+              (effectiveTimeout < 1 ||
+                Date.now() - nativeStartTime >= effectiveTimeout - 15)
                 ? new DeadlineError(err)
                 : err;
             complete(finalError, rows, stats, metadata);
@@ -2096,8 +2106,7 @@ export class Snapshot extends EventEmitter {
       const resultStream = (
         nativeCore.canUseNativeCore(this) &&
         maxResumeRetries === undefined &&
-        !gaxOptions?.retry &&
-        !gaxOptions?.otherArgs?.options?.interceptors?.length
+        nativeCore.isGaxOptionsSupportedByNativeCore(gaxOptions)
           ? nativeCore.runStreamNative({
               snapshot: this,
               sanitizeRequest: () => {

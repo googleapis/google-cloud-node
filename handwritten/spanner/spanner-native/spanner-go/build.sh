@@ -18,4 +18,15 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${SCRIPT_DIR}"
 
-CGO_ENABLED=1 go build -buildmode=c-shared -o libspanner_go.so .
+TARGET_OS="$(go env GOOS)"
+case "${TARGET_OS}" in
+  darwin)
+    CGO_ENABLED=1 go build -buildmode=c-shared -o libspanner_go.dylib .
+    ;;
+  windows)
+    CGO_ENABLED=1 go build -buildmode=c-shared -o spanner_go.dll .
+    ;;
+  *)
+    CGO_ENABLED=1 go build -buildmode=c-shared -o libspanner_go.so .
+    ;;
+esac

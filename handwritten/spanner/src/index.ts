@@ -46,7 +46,7 @@ import {
 import {context, propagation, ROOT_CONTEXT} from '@opentelemetry/api';
 import {Backup} from './backup';
 import {Database} from './database';
-import {closeNativeCoreForClient} from './native-core';
+import {closeNativeCoreForClient, prewarmNativeCore} from './native-core';
 import {
   Instance,
   CreateInstanceCallback,
@@ -548,6 +548,7 @@ class Spanner extends GrpcService {
     this._universeDomain = universeEndpoint;
     this.projectId_ = options.projectId;
     this.configureMetrics_(options.disableBuiltInMetrics);
+    prewarmNativeCore(this);
   }
 
   get universeDomain() {

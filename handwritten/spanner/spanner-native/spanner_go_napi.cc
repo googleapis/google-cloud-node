@@ -287,10 +287,8 @@ struct AsyncStreamContext {
   int64_t stream_id = 0;
   bool enable_backpressure = false;
   std::atomic<int32_t> abandoned{0};
-  std::mutex flow_mu;
-  std::condition_variable flow_cv;
-  int32_t in_flight_batches = 0;
-  bool stream_paused = false;
+  AsyncStreamContext* prev = nullptr;
+  AsyncStreamContext* next = nullptr;
 };
 
 struct BatchCompletionEvent {
@@ -301,10 +299,12 @@ struct BatchCompletionEvent {
 struct EnvDispatchContext {
   napi_env env = nullptr;
   napi_threadsafe_function tsfn = nullptr;
+  std::mutex tsfn_mu;
   std::atomic<bool> closing{false};
   std::atomic<int32_t> ref_count{1};
   int32_t active_rpcs = 0;
   bool tsfn_refed = false;
+  AsyncStreamContext* head = nullptr;
   std::unordered_map<int64_t, AsyncStreamContext*> active_streams;
 
   explicit EnvDispatchContext(napi_env e) : env(e) {}
@@ -317,6 +317,30 @@ struct EnvDispatchContext {
     if (ref_count.fetch_sub(1, std::memory_order_acq_rel) == 1) {
       delete this;
     }
+  }
+
+  void InsertContext(AsyncStreamContext* ctx) {
+    std::lock_guard<std::mutex> lk(tsfn_mu);
+    ctx->prev = nullptr;
+    ctx->next = head;
+    if (head != nullptr) {
+      head->prev = ctx;
+    }
+    head = ctx;
+  }
+
+  void RemoveContext(AsyncStreamContext* ctx) {
+    std::lock_guard<std::mutex> lk(tsfn_mu);
+    if (ctx->prev != nullptr) {
+      ctx->prev->next = ctx->next;
+    } else if (head == ctx) {
+      head = ctx->next;
+    }
+    if (ctx->next != nullptr) {
+      ctx->next->prev = ctx->prev;
+    }
+    ctx->prev = nullptr;
+    ctx->next = nullptr;
   }
 
   inline void OnRpcStarted(napi_env e) {
@@ -336,23 +360,26 @@ struct EnvDispatchContext {
   }
 
   void Shutdown() {
+    std::unique_lock<std::mutex> lk(tsfn_mu);
     bool expected = false;
     if (!closing.compare_exchange_strong(expected, true)) {
       return;
     }
-    for (auto& kv : active_streams) {
-      AsyncStreamContext* sctx = kv.second;
-      if (sctx != nullptr) {
-        sctx->abandoned.store(1, std::memory_order_release);
-        std::unique_lock<std::mutex> lk(sctx->flow_mu);
-        sctx->stream_paused = false;
-        sctx->flow_cv.notify_all();
+    std::vector<int64_t> streams_to_close;
+    for (AsyncStreamContext* cur = head; cur != nullptr; cur = cur->next) {
+      cur->abandoned.store(1, std::memory_order_release);
+      if (cur->stream_id != 0) {
+        streams_to_close.push_back(cur->stream_id);
       }
     }
     active_streams.clear();
     if (tsfn != nullptr) {
       napi_release_threadsafe_function(tsfn, napi_tsfn_abort);
       tsfn = nullptr;
+    }
+    lk.unlock();
+    for (int64_t sid : streams_to_close) {
+      SpannerCoreCloseStream(static_cast<long long>(sid));
     }
   }
 };
@@ -367,39 +394,32 @@ extern "C" void OnGoBatchCallback(void* user_data, CSpannerBatch* batch) {
   }
 
   bool is_final = (batch == nullptr) || (batch->status != 0);
+  EnvDispatchContext* ec = ctx->env_ctx;
 
-  if (!is_final) {
-    if (ctx->abandoned.load(std::memory_order_acquire) != 0 ||
-        ctx->env_ctx->closing.load(std::memory_order_acquire) ||
-        ctx->env_ctx->tsfn == nullptr) {
+  if (!is_final && ctx->abandoned.load(std::memory_order_acquire) != 0) {
+    FreeSpannerBatch(batch);
+    return;
+  }
+
+  std::unique_lock<std::mutex> lk(ec->tsfn_mu);
+  if (ec->closing.load(std::memory_order_relaxed) || ec->tsfn == nullptr) {
+    if (batch != nullptr) {
       FreeSpannerBatch(batch);
-      return;
     }
-    if (ctx->enable_backpressure) {
-      std::unique_lock<std::mutex> lk(ctx->flow_mu);
-      ctx->flow_cv.wait(lk, [ctx]() {
-        return ctx->abandoned.load(std::memory_order_relaxed) != 0 ||
-               ctx->env_ctx->closing.load(std::memory_order_relaxed) ||
-               (!ctx->stream_paused && ctx->in_flight_batches < 2);
-      });
-      if (ctx->abandoned.load(std::memory_order_relaxed) != 0 ||
-          ctx->env_ctx->closing.load(std::memory_order_relaxed)) {
-        FreeSpannerBatch(batch);
-        return;
+    if (is_final) {
+      if (ctx->prev != nullptr) {
+        ctx->prev->next = ctx->next;
+      } else if (ec->head == ctx) {
+        ec->head = ctx->next;
       }
-      ctx->in_flight_batches++;
-    }
-  } else {
-    if (ctx->env_ctx->closing.load(std::memory_order_acquire) ||
-        ctx->env_ctx->tsfn == nullptr) {
-      if (batch != nullptr) {
-        FreeSpannerBatch(batch);
+      if (ctx->next != nullptr) {
+        ctx->next->prev = ctx->prev;
       }
-      EnvDispatchContext* ec = ctx->env_ctx;
+      lk.unlock();
       delete ctx;
       ec->Release();
-      return;
     }
+    return;
   }
 
   if (is_final &&
@@ -407,12 +427,20 @@ extern "C" void OnGoBatchCallback(void* user_data, CSpannerBatch* batch) {
     ctx->inline_batch = batch;
     // Tag low bit = 0 (direct AsyncStreamContext* pointer)
     napi_status st = napi_call_threadsafe_function(
-        ctx->env_ctx->tsfn, ctx, napi_tsfn_nonblocking);
+        ec->tsfn, ctx, napi_tsfn_nonblocking);
     if (st != napi_ok) {
       if (batch != nullptr) {
         FreeSpannerBatch(batch);
       }
-      EnvDispatchContext* ec = ctx->env_ctx;
+      if (ctx->prev != nullptr) {
+        ctx->prev->next = ctx->next;
+      } else if (ec->head == ctx) {
+        ec->head = ctx->next;
+      }
+      if (ctx->next != nullptr) {
+        ctx->next->prev = ctx->prev;
+      }
+      lk.unlock();
       delete ctx;
       ec->Release();
     }
@@ -423,14 +451,22 @@ extern "C" void OnGoBatchCallback(void* user_data, CSpannerBatch* batch) {
   // Tag low bit = 1 to distinguish multi-batch heap event from direct ctx pointer
   void* tagged = reinterpret_cast<void*>(reinterpret_cast<uintptr_t>(ev) | 1ULL);
   napi_status st = napi_call_threadsafe_function(
-      ctx->env_ctx->tsfn, tagged, napi_tsfn_nonblocking);
+      ec->tsfn, tagged, napi_tsfn_nonblocking);
   if (st != napi_ok) {
     if (batch != nullptr) {
       FreeSpannerBatch(batch);
     }
     delete ev;
     if (is_final) {
-      EnvDispatchContext* ec = ctx->env_ctx;
+      if (ctx->prev != nullptr) {
+        ctx->prev->next = ctx->next;
+      } else if (ec->head == ctx) {
+        ec->head = ctx->next;
+      }
+      if (ctx->next != nullptr) {
+        ctx->next->prev = ctx->prev;
+      }
+      lk.unlock();
       delete ctx;
       ec->Release();
     }
@@ -484,32 +520,31 @@ void CallJsBatchHandler(
         napi_get_and_clear_last_exception(env, &pending_exc);
       }
       if (!is_final && ctx->stream_id != 0) {
-        SpannerCoreCloseStream(ctx->stream_id);
+        SpannerCoreCloseStream(static_cast<long long>(ctx->stream_id));
       }
     } else if (ret_val != nullptr) {
       bool keep_going = true;
       if (napi_get_value_bool(env, ret_val, &keep_going) == napi_ok &&
           !keep_going) {
         ctx->abandoned.store(1, std::memory_order_release);
+        if (!is_final && ctx->stream_id != 0) {
+          SpannerCoreCloseStream(static_cast<long long>(ctx->stream_id));
+        }
       }
     }
   }
 
-  if (!is_final && ctx != nullptr && ctx->enable_backpressure) {
-    std::unique_lock<std::mutex> lk(ctx->flow_mu);
-    if (ctx->in_flight_batches > 0) {
-      ctx->in_flight_batches--;
-    }
-    if (ctx->abandoned.load(std::memory_order_relaxed) != 0) {
-      ctx->stream_paused = false;
-    }
-    if (!ctx->stream_paused) {
-      ctx->flow_cv.notify_all();
-    }
+  if (!is_final && ctx != nullptr && ctx->enable_backpressure &&
+      ctx->stream_id != 0 &&
+      ctx->abandoned.load(std::memory_order_relaxed) == 0) {
+    SpannerCoreAckBatch(static_cast<long long>(ctx->stream_id));
   }
 
   if (is_final && ctx != nullptr) {
     EnvDispatchContext* ec = ctx->env_ctx;
+    if (ec != nullptr) {
+      ec->RemoveContext(ctx);
+    }
     if (env != nullptr) {
       if (ctx->cb_ref != nullptr) {
         napi_delete_reference(env, ctx->cb_ref);
@@ -708,6 +743,43 @@ napi_value CloseService(napi_env env, napi_callback_info info) {
   return result;
 }
 
+napi_value SetRootCertsPEM(napi_env env, napi_callback_info info) {
+  size_t argc = 1;
+  napi_value args[1];
+  napi_get_cb_info(env, info, &argc, args, nullptr, nullptr);
+  if (argc > 0) {
+    std::string pem = GetStringArg(env, args[0]);
+    SpannerCoreSetRootCertsPEM(const_cast<char*>(pem.c_str()));
+  }
+  napi_value undefined_val;
+  napi_get_undefined(env, &undefined_val);
+  return undefined_val;
+}
+
+napi_value SetNextUniverseDomain(napi_env env, napi_callback_info info) {
+  size_t argc = 1;
+  napi_value args[1];
+  napi_get_cb_info(env, info, &argc, args, nullptr, nullptr);
+  std::string ud = argc > 0 ? GetStringArg(env, args[0]) : "";
+  SpannerCoreSetNextUniverseDomain(const_cast<char*>(ud.c_str()));
+  napi_value undefined_val;
+  napi_get_undefined(env, &undefined_val);
+  return undefined_val;
+}
+
+napi_value GetLastInitError(napi_env env, napi_callback_info /*info*/) {
+  char* c_err = SpannerCoreGetLastInitError();
+  if (c_err == nullptr) {
+    napi_value empty_str;
+    napi_create_string_utf8(env, "", 0, &empty_str);
+    return empty_str;
+  }
+  napi_value err_str;
+  napi_create_string_utf8(env, c_err, NAPI_AUTO_LENGTH, &err_str);
+  SpannerCoreFreeString(c_err);
+  return err_str;
+}
+
 struct StackStringArg {
   char stack_buf[512];
   std::string heap_str;
@@ -785,6 +857,7 @@ napi_value ExecuteStreamingSql(napi_env env, napi_callback_info info) {
       env_ctx->AddRef();
       napi_create_reference(env, args[7], 1, &ctx->cb_ref);
       env_ctx->OnRpcStarted(env);
+      env_ctx->InsertContext(ctx);
 
       long long stream_id = SpannerCoreExecuteStreamingSqlAsync(
           static_cast<long long>(service_handle),
@@ -864,15 +937,8 @@ napi_value PauseStream(napi_env env, napi_callback_info info) {
   int64_t stream_handle = 0;
   if (argc > 0) napi_get_value_int64(env, args[0], &stream_handle);
 
-  void* data = nullptr;
-  if (stream_handle > 0 && napi_get_instance_data(env, &data) == napi_ok &&
-      data != nullptr) {
-    EnvDispatchContext* env_ctx = static_cast<EnvDispatchContext*>(data);
-    auto it = env_ctx->active_streams.find(stream_handle);
-    if (it != env_ctx->active_streams.end() && it->second != nullptr) {
-      std::unique_lock<std::mutex> lk(it->second->flow_mu);
-      it->second->stream_paused = true;
-    }
+  if (stream_handle > 0) {
+    SpannerCorePauseStream(static_cast<long long>(stream_handle));
   }
 
   napi_value undefined_val;
@@ -888,16 +954,8 @@ napi_value ResumeStream(napi_env env, napi_callback_info info) {
   int64_t stream_handle = 0;
   if (argc > 0) napi_get_value_int64(env, args[0], &stream_handle);
 
-  void* data = nullptr;
-  if (stream_handle > 0 && napi_get_instance_data(env, &data) == napi_ok &&
-      data != nullptr) {
-    EnvDispatchContext* env_ctx = static_cast<EnvDispatchContext*>(data);
-    auto it = env_ctx->active_streams.find(stream_handle);
-    if (it != env_ctx->active_streams.end() && it->second != nullptr) {
-      std::unique_lock<std::mutex> lk(it->second->flow_mu);
-      it->second->stream_paused = false;
-      it->second->flow_cv.notify_all();
-    }
+  if (stream_handle > 0) {
+    SpannerCoreResumeStream(static_cast<long long>(stream_handle));
   }
 
   napi_value undefined_val;
@@ -921,9 +979,6 @@ napi_value CloseStream(napi_env env, napi_callback_info info) {
     if (it != env_ctx->active_streams.end() && it->second != nullptr) {
       AsyncStreamContext* sctx = it->second;
       sctx->abandoned.store(1, std::memory_order_release);
-      std::unique_lock<std::mutex> lk(sctx->flow_mu);
-      sctx->stream_paused = false;
-      sctx->flow_cv.notify_all();
     }
   }
 
@@ -947,6 +1002,30 @@ napi_value InitModule(napi_env env, napi_value exports) {
       {"close",
        nullptr,
        CloseService,
+       nullptr,
+       nullptr,
+       nullptr,
+       napi_enumerable,
+       nullptr},
+      {"setRootCertsPEM",
+       nullptr,
+       SetRootCertsPEM,
+       nullptr,
+       nullptr,
+       nullptr,
+       napi_enumerable,
+       nullptr},
+      {"setNextUniverseDomain",
+       nullptr,
+       SetNextUniverseDomain,
+       nullptr,
+       nullptr,
+       nullptr,
+       napi_enumerable,
+       nullptr},
+      {"getLastInitError",
+       nullptr,
+       GetLastInitError,
        nullptr,
        nullptr,
        nullptr,

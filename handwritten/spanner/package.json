@@ -18,7 +18,13 @@
     "build/protos",
     "build/src",
     "!build/src/**/*.map",
-    "spanner-native"
+    "spanner-native/binding.gyp",
+    "spanner-native/install.js",
+    "spanner-native/spanner_go_napi.cc",
+    "spanner-native/spanner-go/*.go",
+    "spanner-native/spanner-go/go.mod",
+    "spanner-native/spanner-go/go.sum",
+    "spanner-native/spanner-go/build.sh"
   ],
   "keywords": [
     "google apis client",
@@ -111,6 +117,7 @@
     "dedent": "^1.5.3",
     "execa": "^5.0.0",
     "gapic-tools": "^2.0.0",
+    "google-proto-files": "^6.0.0",
     "google-test-utils": "workspace:^0.1.0",
     "grpc-health-check": "^2.1.0",
     "gts": "^6.0.2",

@@ -111,21 +111,15 @@ describe('Go Shared Native Core (NATIVE_CORE_ENABLED)', () => {
         this.skip();
       }
 
-      const packageDefinition = protoLoader.loadSync(
-        'google/spanner/v1/spanner.proto',
-        {
-          keepCase: false,
-          longs: String,
-          enums: String,
-          defaults: true,
-          oneofs: true,
-          includeDirs: [
-            PROTO_DIR,
-            path.join(SPANNER_PKG_DIR, 'node_modules/google-gax/build/protos'),
-            path.join(SPANNER_PKG_DIR, 'node_modules/google-proto-files'),
-          ],
-        },
-      );
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const protosJson = require('@google-cloud/spanner-api/build/protos/protos.json');
+      const packageDefinition = protoLoader.fromJSON(protosJson, {
+        keepCase: false,
+        longs: String,
+        enums: String,
+        defaults: true,
+        oneofs: true,
+      });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const proto = grpc.loadPackageDefinition(packageDefinition) as any;
       const spannerService = proto.google.spanner.v1.Spanner.service;
@@ -488,8 +482,11 @@ describe('Go Shared Native Core (NATIVE_CORE_ENABLED)', () => {
         assert.strictEqual(rows.length, 1);
         const cells = rows[0] as Array<{name: string; value: unknown}>;
         assert.ok(cells[0].value instanceof Float);
+        assert.strictEqual((cells[0].value as Float).value, 'NaN');
         assert.ok(Number.isNaN((cells[0].value as Float).valueOf()));
+        assert.strictEqual((cells[1].value as Float).value, 'Infinity');
         assert.strictEqual((cells[1].value as Float).valueOf(), Infinity);
+        assert.strictEqual((cells[2].value as Float).value, '-Infinity');
         assert.strictEqual((cells[2].value as Float).valueOf(), -Infinity);
         assert.ok(cells[3].value instanceof Float32);
         assert.strictEqual((cells[3].value as Float32).value, 3.5);
