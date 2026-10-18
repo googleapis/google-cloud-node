@@ -20,7 +20,6 @@ import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {Duplex, Readable} from 'stream';
 import {EventEmitter} from 'events';
-import {GaxiosResponse} from 'gaxios';
 import * as http2Types from '../src/http2';
 
 import {GoogleAuth} from '../src';
@@ -53,7 +52,7 @@ describe('http2', () => {
   // persists across test runs.
   sinon.stub(auth, 'request').resolves({
     data: {},
-  } as GaxiosResponse<{}>);
+  } as unknown as Awaited<ReturnType<GoogleAuth['request']>>);
 
   function fakeConnect(host: string) {
     return (connectStub || (() => {}))(host);
@@ -153,7 +152,7 @@ describe('http2', () => {
     requestStream.push(Buffer.from('{}'));
     requestStream.push(null);
     await resPromise;
-    await new Promise(r => setTimeout(r, 500));
+    await new Promise(resolve => setTimeout(resolve, 500));
     assert.strictEqual(Object.keys(http2.sessions).length, 0);
   });
 
