@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-api-v0.7.0...pubsub-api-v0.8.0) (2026-10-19)
+
+
+### Features
+
+* Update API sources and regenerate ([#9620](https://github.com/googleapis/google-cloud-node/issues/9620)) ([c812bc3](https://github.com/googleapis/google-cloud-node/commit/c812bc38fd5af3d710057ec9aa4a19eeff621175))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-api-v0.6.0...pubsub-api-v0.7.0) (2026-10-08)
 
 
