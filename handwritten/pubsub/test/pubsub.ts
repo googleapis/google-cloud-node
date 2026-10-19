@@ -1741,6 +1741,8 @@ describe('PubSub', () => {
       pubsub.close(err => {
         assert.strictEqual(err, error);
         assert.strictEqual(schemaClientClosed, true);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        assert.strictEqual((pubsub as any).schemaClient, undefined);
         assert.strictEqual(pubsub.isOpen, false);
         done();
       });
@@ -1756,6 +1758,8 @@ describe('PubSub', () => {
 
       pubsub.close(err => {
         assert.strictEqual(err, error);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        assert.strictEqual((pubsub as any).schemaClient, undefined);
         assert.strictEqual(pubsub.isOpen, false);
         done();
       });
