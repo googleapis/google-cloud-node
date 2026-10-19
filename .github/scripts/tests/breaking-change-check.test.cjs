@@ -66,7 +66,10 @@ describe('breaking-change-check holistic TypeScript assignability engine', () =>
       true,
     );
     assert.equal(isIgnoredSourceFile('core/packages/gax/src/grpc.ts'), false);
-    assert.equal(isIgnoredSourceFile('handwritten/pubsub/src/pubsub.ts'), false);
+    assert.equal(
+      isIgnoredSourceFile('handwritten/pubsub/src/pubsub.ts'),
+      false,
+    );
   });
 
   it('detects all breaking change categories from the capability matrix', () => {
@@ -205,7 +208,12 @@ describe('breaking-change-check holistic TypeScript assignability engine', () =>
       ],
     ];
 
-    for (const [label, baseSrc, headSrc, expectedPattern] of breakingScenarios) {
+    for (const [
+      label,
+      baseSrc,
+      headSrc,
+      expectedPattern,
+    ] of breakingScenarios) {
       const res = checkSnippet(baseSrc, headSrc);
       assert.ok(
         res.some(item => expectedPattern.test(item.explanation)),

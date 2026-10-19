@@ -575,7 +575,9 @@ function buildAugmentedDts(sf) {
         classTps.length > 0
           ? '<' +
             classTps
-              .map(tp => formatTypeParamWithoutDefault(tp, sf, name, selfTpNames))
+              .map(tp =>
+                formatTypeParamWithoutDefault(tp, sf, name, selfTpNames),
+              )
               .join(', ') +
             '>'
           : '';
@@ -610,9 +612,9 @@ function buildAugmentedDts(sf) {
         let hasPrivateCtor = false;
         const hasExtends = Boolean(
           stmt.heritageClauses &&
-            stmt.heritageClauses.some(
-              h => h.token === ts.SyntaxKind.ExtendsKeyword,
-            ),
+          stmt.heritageClauses.some(
+            h => h.token === ts.SyntaxKind.ExtendsKeyword,
+          ),
         );
         for (const m of stmt.members) {
           const vis = getVisibility(m, sf);
@@ -1223,7 +1225,10 @@ function compareDeclarationPairs(
           if (bM.visibility === 'private') continue;
           const hM = hMembers.get(key);
           if (!hM) {
-            record(file, `Member '${bM.name}' was removed from class '${name}'.`);
+            record(
+              file,
+              `Member '${bM.name}' was removed from class '${name}'.`,
+            );
             hadClassMemberError = true;
             continue;
           }
@@ -1586,12 +1591,8 @@ function checkPackageChanges({
   const modifiedMap = new Map();
   for (const e of modifiedEntries) {
     if (e.status.startsWith('A')) continue;
-    const oldDtsRel = path
-      .relative(pkgDir, e.oldAbs)
-      .replace(/\.ts$/, '.d.ts');
-    const newDtsRel = path
-      .relative(pkgDir, e.newAbs)
-      .replace(/\.ts$/, '.d.ts');
+    const oldDtsRel = path.relative(pkgDir, e.oldAbs).replace(/\.ts$/, '.d.ts');
+    const newDtsRel = path.relative(pkgDir, e.newAbs).replace(/\.ts$/, '.d.ts');
     modifiedMap.set(oldDtsRel, {newDtsRel, reportFile: e.newRel});
   }
 
@@ -1626,10 +1627,7 @@ function checkPackageChanges({
 function findPackageDir(filePath, repoRoot = process.cwd()) {
   let dir = path.dirname(path.resolve(repoRoot, filePath));
   const resolvedRoot = path.resolve(repoRoot);
-  while (
-    dir === resolvedRoot ||
-    dir.startsWith(resolvedRoot + path.sep)
-  ) {
+  while (dir === resolvedRoot || dir.startsWith(resolvedRoot + path.sep)) {
     if (
       fs.existsSync(path.join(dir, 'package.json')) &&
       fs.existsSync(path.join(dir, 'tsconfig.json'))
