@@ -19,16 +19,10 @@ import {CallSettings} from '../gax';
 /**
  * Checks if telemetry tracing is enabled.
  *
- * If `GOOGLE_SDK_NODE_ENABLE_TRACING` is explicitly set, then the client option
- * doesn't matter (only the environment variable determines whether tracing is enabled).
- * The client option is only checked if the environment variable isn't set.
- *
- * Tracing can be enabled purely through environment variables without
- * requiring client libraries to pass generator parameters, as metadata
- * is resolved dynamically at runtime.
- *
- * If the environment variable is not set, tracing requires the client option
- * and the client must have supplied `internalTelemetryInfo` (the extra protoc param).
+ * Tracing is only enabled via the `GOOGLE_SDK_NODE_ENABLE_TRACING` environment
+ * variable or when a user passes `enableTelemetryTracing: true` in their client options.
+ * If `GOOGLE_SDK_NODE_ENABLE_TRACING` is explicitly set, it takes precedence over
+ * the client option.
  *
  * @param settings
  * @returns true if telemetry tracing is enabled, false otherwise
@@ -48,12 +42,8 @@ export function checkTelemetryEnabled(settings?: CallSettings): boolean {
     return lower === 'true' || lower === '1';
   }
 
-  const clientOptIn = Boolean(
+  return Boolean(
     settings?.enableTelemetryTracing ||
     settings?.otherArgs?.enableTelemetryTracing,
-  );
-
-  return (
-    clientOptIn && settings?.otherArgs?.internalTelemetryInfo !== undefined
   );
 }
