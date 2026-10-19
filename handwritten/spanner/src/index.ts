@@ -385,8 +385,7 @@ class Spanner extends GrpcService {
    * Gets the configured Spanner emulator host from an environment variable.
    */
   static getSpannerEmulatorHost():
-    | {endpoint: string; port?: number}
-    | undefined {
+    {endpoint: string; port?: number} | undefined {
     const endpointWithPort = process.env.SPANNER_EMULATOR_HOST;
     if (endpointWithPort) {
       if (
@@ -1575,8 +1574,7 @@ class Spanner extends GrpcService {
   ): void;
   getInstanceConfigOperations(
     optionsOrCallback?:
-      | GetInstanceConfigOperationsOptions
-      | GetInstanceConfigOperationsCallback,
+      GetInstanceConfigOperationsOptions | GetInstanceConfigOperationsCallback,
     cb?: GetInstanceConfigOperationsCallback,
   ): void | Promise<GetInstanceConfigOperationsResponse> {
     const callback =
