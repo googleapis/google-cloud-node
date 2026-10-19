@@ -170,6 +170,7 @@ export const ignoredClientHeaderTokens = [
   'gl-node',
   'gl-web',
   'grpc',
+  'grpc-web',
   'rest',
   'gax',
   'auth',
