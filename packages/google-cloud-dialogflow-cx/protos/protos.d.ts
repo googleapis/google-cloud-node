@@ -9324,6 +9324,9 @@ export namespace google {
                         /** Fulfillment tag */
                         tag?: (string|null);
 
+                        /** Fulfillment codeBlockFunction */
+                        codeBlockFunction?: (string|null);
+
                         /** Fulfillment setParameterActions */
                         setParameterActions?: (google.cloud.dialogflow.cx.v3.Fulfillment.ISetParameterAction[]|null);
 
@@ -9360,6 +9363,9 @@ export namespace google {
 
                         /** Fulfillment tag. */
                         public tag: string;
+
+                        /** Fulfillment codeBlockFunction. */
+                        public codeBlockFunction: string;
 
                         /** Fulfillment setParameterActions. */
                         public setParameterActions: google.cloud.dialogflow.cx.v3.Fulfillment.ISetParameterAction[];
@@ -58748,6 +58754,9 @@ export namespace google {
                         /** Fulfillment tag */
                         tag?: (string|null);
 
+                        /** Fulfillment codeBlockFunction */
+                        codeBlockFunction?: (string|null);
+
                         /** Fulfillment setParameterActions */
                         setParameterActions?: (google.cloud.dialogflow.cx.v3beta1.Fulfillment.ISetParameterAction[]|null);
 
@@ -58784,6 +58793,9 @@ export namespace google {
 
                         /** Fulfillment tag. */
                         public tag: string;
+
+                        /** Fulfillment codeBlockFunction. */
+                        public codeBlockFunction: string;
 
                         /** Fulfillment setParameterActions. */
                         public setParameterActions: google.cloud.dialogflow.cx.v3beta1.Fulfillment.ISetParameterAction[];

@@ -538,6 +538,20 @@ export namespace google {
                         public deleteAppConnector(request: google.cloud.beyondcorp.appconnectors.v1.IDeleteAppConnectorRequest): Promise<google.longrunning.Operation>;
 
                         /**
+                         * Calls ResolveInstanceConfig.
+                         * @param request ResolveInstanceConfigRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ResolveInstanceConfigResponse
+                         */
+                        public resolveInstanceConfig(request: google.cloud.beyondcorp.appconnectors.v1.IResolveInstanceConfigRequest, callback: google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService.ResolveInstanceConfigCallback): void;
+
+                        /**
+                         * Calls ResolveInstanceConfig.
+                         * @param request ResolveInstanceConfigRequest message or plain object
+                         * @returns Promise
+                         */
+                        public resolveInstanceConfig(request: google.cloud.beyondcorp.appconnectors.v1.IResolveInstanceConfigRequest): Promise<google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigResponse>;
+
+                        /**
                          * Calls ReportStatus.
                          * @param request ReportStatusRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Operation
@@ -588,6 +602,13 @@ export namespace google {
                          * @param [response] Operation
                          */
                         type DeleteAppConnectorCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService|resolveInstanceConfig}.
+                         * @param error Error, if any
+                         * @param [response] ResolveInstanceConfigResponse
+                         */
+                        type ResolveInstanceConfigCallback = (error: (Error|null), response?: google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigResponse) => void;
 
                         /**
                          * Callback as used by {@link google.cloud.beyondcorp.appconnectors.v1.AppConnectorsService|reportStatus}.
@@ -1263,6 +1284,200 @@ export namespace google {
 
                         /**
                          * Gets the default type url for DeleteAppConnectorRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ResolveInstanceConfigRequest. */
+                    interface IResolveInstanceConfigRequest {
+
+                        /** ResolveInstanceConfigRequest appConnector */
+                        appConnector?: (string|null);
+                    }
+
+                    /** Represents a ResolveInstanceConfigRequest. */
+                    class ResolveInstanceConfigRequest implements IResolveInstanceConfigRequest {
+
+                        /**
+                         * Constructs a new ResolveInstanceConfigRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.beyondcorp.appconnectors.v1.IResolveInstanceConfigRequest);
+
+                        /** ResolveInstanceConfigRequest appConnector. */
+                        public appConnector: string;
+
+                        /**
+                         * Creates a new ResolveInstanceConfigRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ResolveInstanceConfigRequest instance
+                         */
+                        public static create(properties?: google.cloud.beyondcorp.appconnectors.v1.IResolveInstanceConfigRequest): google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigRequest;
+
+                        /**
+                         * Encodes the specified ResolveInstanceConfigRequest message. Does not implicitly {@link google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigRequest.verify|verify} messages.
+                         * @param message ResolveInstanceConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.beyondcorp.appconnectors.v1.IResolveInstanceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ResolveInstanceConfigRequest message, length delimited. Does not implicitly {@link google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigRequest.verify|verify} messages.
+                         * @param message ResolveInstanceConfigRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.beyondcorp.appconnectors.v1.IResolveInstanceConfigRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ResolveInstanceConfigRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ResolveInstanceConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigRequest;
+
+                        /**
+                         * Decodes a ResolveInstanceConfigRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ResolveInstanceConfigRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigRequest;
+
+                        /**
+                         * Verifies a ResolveInstanceConfigRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ResolveInstanceConfigRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ResolveInstanceConfigRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigRequest;
+
+                        /**
+                         * Creates a plain object from a ResolveInstanceConfigRequest message. Also converts values to other types if specified.
+                         * @param message ResolveInstanceConfigRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ResolveInstanceConfigRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ResolveInstanceConfigRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ResolveInstanceConfigResponse. */
+                    interface IResolveInstanceConfigResponse {
+
+                        /** ResolveInstanceConfigResponse instanceConfig */
+                        instanceConfig?: (google.cloud.beyondcorp.appconnectors.v1.IAppConnectorInstanceConfig|null);
+                    }
+
+                    /** Represents a ResolveInstanceConfigResponse. */
+                    class ResolveInstanceConfigResponse implements IResolveInstanceConfigResponse {
+
+                        /**
+                         * Constructs a new ResolveInstanceConfigResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.beyondcorp.appconnectors.v1.IResolveInstanceConfigResponse);
+
+                        /** ResolveInstanceConfigResponse instanceConfig. */
+                        public instanceConfig?: (google.cloud.beyondcorp.appconnectors.v1.IAppConnectorInstanceConfig|null);
+
+                        /**
+                         * Creates a new ResolveInstanceConfigResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ResolveInstanceConfigResponse instance
+                         */
+                        public static create(properties?: google.cloud.beyondcorp.appconnectors.v1.IResolveInstanceConfigResponse): google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigResponse;
+
+                        /**
+                         * Encodes the specified ResolveInstanceConfigResponse message. Does not implicitly {@link google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigResponse.verify|verify} messages.
+                         * @param message ResolveInstanceConfigResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.beyondcorp.appconnectors.v1.IResolveInstanceConfigResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ResolveInstanceConfigResponse message, length delimited. Does not implicitly {@link google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigResponse.verify|verify} messages.
+                         * @param message ResolveInstanceConfigResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.beyondcorp.appconnectors.v1.IResolveInstanceConfigResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ResolveInstanceConfigResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ResolveInstanceConfigResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigResponse;
+
+                        /**
+                         * Decodes a ResolveInstanceConfigResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ResolveInstanceConfigResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigResponse;
+
+                        /**
+                         * Verifies a ResolveInstanceConfigResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ResolveInstanceConfigResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ResolveInstanceConfigResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigResponse;
+
+                        /**
+                         * Creates a plain object from a ResolveInstanceConfigResponse message. Also converts values to other types if specified.
+                         * @param message ResolveInstanceConfigResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.beyondcorp.appconnectors.v1.ResolveInstanceConfigResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ResolveInstanceConfigResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ResolveInstanceConfigResponse
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -1999,6 +2214,212 @@ export namespace google {
 
                         /**
                          * Gets the default type url for ResourceInfo
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ContainerHealthDetails. */
+                    interface IContainerHealthDetails {
+
+                        /** ContainerHealthDetails expectedConfigVersion */
+                        expectedConfigVersion?: (string|null);
+
+                        /** ContainerHealthDetails currentConfigVersion */
+                        currentConfigVersion?: (string|null);
+
+                        /** ContainerHealthDetails extendedStatus */
+                        extendedStatus?: ({ [k: string]: string }|null);
+
+                        /** ContainerHealthDetails errorMsg */
+                        errorMsg?: (string|null);
+                    }
+
+                    /** Represents a ContainerHealthDetails. */
+                    class ContainerHealthDetails implements IContainerHealthDetails {
+
+                        /**
+                         * Constructs a new ContainerHealthDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.beyondcorp.appconnectors.v1.IContainerHealthDetails);
+
+                        /** ContainerHealthDetails expectedConfigVersion. */
+                        public expectedConfigVersion: string;
+
+                        /** ContainerHealthDetails currentConfigVersion. */
+                        public currentConfigVersion: string;
+
+                        /** ContainerHealthDetails extendedStatus. */
+                        public extendedStatus: { [k: string]: string };
+
+                        /** ContainerHealthDetails errorMsg. */
+                        public errorMsg: string;
+
+                        /**
+                         * Creates a new ContainerHealthDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ContainerHealthDetails instance
+                         */
+                        public static create(properties?: google.cloud.beyondcorp.appconnectors.v1.IContainerHealthDetails): google.cloud.beyondcorp.appconnectors.v1.ContainerHealthDetails;
+
+                        /**
+                         * Encodes the specified ContainerHealthDetails message. Does not implicitly {@link google.cloud.beyondcorp.appconnectors.v1.ContainerHealthDetails.verify|verify} messages.
+                         * @param message ContainerHealthDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.beyondcorp.appconnectors.v1.IContainerHealthDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ContainerHealthDetails message, length delimited. Does not implicitly {@link google.cloud.beyondcorp.appconnectors.v1.ContainerHealthDetails.verify|verify} messages.
+                         * @param message ContainerHealthDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.beyondcorp.appconnectors.v1.IContainerHealthDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ContainerHealthDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ContainerHealthDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.beyondcorp.appconnectors.v1.ContainerHealthDetails;
+
+                        /**
+                         * Decodes a ContainerHealthDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ContainerHealthDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.beyondcorp.appconnectors.v1.ContainerHealthDetails;
+
+                        /**
+                         * Verifies a ContainerHealthDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ContainerHealthDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ContainerHealthDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.beyondcorp.appconnectors.v1.ContainerHealthDetails;
+
+                        /**
+                         * Creates a plain object from a ContainerHealthDetails message. Also converts values to other types if specified.
+                         * @param message ContainerHealthDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.beyondcorp.appconnectors.v1.ContainerHealthDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ContainerHealthDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ContainerHealthDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a RemoteAgentDetails. */
+                    interface IRemoteAgentDetails {
+                    }
+
+                    /** Represents a RemoteAgentDetails. */
+                    class RemoteAgentDetails implements IRemoteAgentDetails {
+
+                        /**
+                         * Constructs a new RemoteAgentDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.beyondcorp.appconnectors.v1.IRemoteAgentDetails);
+
+                        /**
+                         * Creates a new RemoteAgentDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RemoteAgentDetails instance
+                         */
+                        public static create(properties?: google.cloud.beyondcorp.appconnectors.v1.IRemoteAgentDetails): google.cloud.beyondcorp.appconnectors.v1.RemoteAgentDetails;
+
+                        /**
+                         * Encodes the specified RemoteAgentDetails message. Does not implicitly {@link google.cloud.beyondcorp.appconnectors.v1.RemoteAgentDetails.verify|verify} messages.
+                         * @param message RemoteAgentDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.beyondcorp.appconnectors.v1.IRemoteAgentDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RemoteAgentDetails message, length delimited. Does not implicitly {@link google.cloud.beyondcorp.appconnectors.v1.RemoteAgentDetails.verify|verify} messages.
+                         * @param message RemoteAgentDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.beyondcorp.appconnectors.v1.IRemoteAgentDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RemoteAgentDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RemoteAgentDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.beyondcorp.appconnectors.v1.RemoteAgentDetails;
+
+                        /**
+                         * Decodes a RemoteAgentDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RemoteAgentDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.beyondcorp.appconnectors.v1.RemoteAgentDetails;
+
+                        /**
+                         * Verifies a RemoteAgentDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RemoteAgentDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RemoteAgentDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.beyondcorp.appconnectors.v1.RemoteAgentDetails;
+
+                        /**
+                         * Creates a plain object from a RemoteAgentDetails message. Also converts values to other types if specified.
+                         * @param message RemoteAgentDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.beyondcorp.appconnectors.v1.RemoteAgentDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RemoteAgentDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for RemoteAgentDetails
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */

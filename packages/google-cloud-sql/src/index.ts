@@ -19,6 +19,8 @@
 import * as v1 from './v1';
 import * as v1beta4 from './v1beta4';
 
+const BlueGreenDeploymentsServiceClient = v1.BlueGreenDeploymentsServiceClient;
+type BlueGreenDeploymentsServiceClient = v1.BlueGreenDeploymentsServiceClient;
 
 
 const SqlBackupRunsServiceClient = v1.SqlBackupRunsServiceClient;
@@ -51,8 +53,10 @@ const SqlTiersServiceClient = v1.SqlTiersServiceClient;
 type SqlTiersServiceClient = v1.SqlTiersServiceClient;
 const SqlUsersServiceClient = v1.SqlUsersServiceClient;
 type SqlUsersServiceClient = v1.SqlUsersServiceClient;
+const SqlWorkloadCapturesServiceClient = v1.SqlWorkloadCapturesServiceClient;
+type SqlWorkloadCapturesServiceClient = v1.SqlWorkloadCapturesServiceClient;
 
-export {v1, v1beta4, SqlBackupRunsServiceClient, SqlConnectServiceClient, SqlDatabasesServiceClient, SqlFlagsServiceClient, SqlInstancesServiceClient, SqlOperationsServiceClient, SqlSslCertsServiceClient, SqlTiersServiceClient, SqlUsersServiceClient};
-export default {v1, v1beta4, SqlBackupRunsServiceClient, SqlConnectServiceClient, SqlDatabasesServiceClient, SqlFlagsServiceClient, SqlInstancesServiceClient, SqlOperationsServiceClient, SqlSslCertsServiceClient, SqlTiersServiceClient, SqlUsersServiceClient};
+export {v1, v1beta4, BlueGreenDeploymentsServiceClient, SqlBackupRunsServiceClient, SqlConnectServiceClient, SqlDatabasesServiceClient, SqlFlagsServiceClient, SqlInstancesServiceClient, SqlOperationsServiceClient, SqlSslCertsServiceClient, SqlTiersServiceClient, SqlUsersServiceClient, SqlWorkloadCapturesServiceClient};
+export default {v1, v1beta4, BlueGreenDeploymentsServiceClient, SqlBackupRunsServiceClient, SqlConnectServiceClient, SqlDatabasesServiceClient, SqlFlagsServiceClient, SqlInstancesServiceClient, SqlOperationsServiceClient, SqlSslCertsServiceClient, SqlTiersServiceClient, SqlUsersServiceClient, SqlWorkloadCapturesServiceClient};
 import * as protos from '../protos/protos';
 export {protos};

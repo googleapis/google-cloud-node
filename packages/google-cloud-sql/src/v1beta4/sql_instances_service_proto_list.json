@@ -1,9 +1,11 @@
 [
   "../../protos/google/cloud/sql/v1beta4/cloud_sql.proto",
+  "../../protos/google/cloud/sql/v1beta4/cloud_sql_blue_green_deployments.proto",
   "../../protos/google/cloud/sql/v1beta4/cloud_sql_connect.proto",
   "../../protos/google/cloud/sql/v1beta4/cloud_sql_data.proto",
   "../../protos/google/cloud/sql/v1beta4/cloud_sql_iam_policies.proto",
   "../../protos/google/cloud/sql/v1beta4/cloud_sql_resources.proto",
   "../../protos/google/cloud/sql/v1beta4/cloud_sql_tiers.proto",
-  "../../protos/google/cloud/sql/v1beta4/cloud_sql_users.proto"
+  "../../protos/google/cloud/sql/v1beta4/cloud_sql_users.proto",
+  "../../protos/google/cloud/sql/v1beta4/cloud_sql_workload_captures.proto"
 ]

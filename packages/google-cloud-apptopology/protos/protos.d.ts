@@ -2366,6 +2366,20 @@ export namespace google {
                     public getSchema(request: google.cloud.apptopology.v1.IGetSchemaRequest): Promise<google.cloud.apptopology.v1.Schema>;
 
                     /**
+                     * Calls ExploreSchema.
+                     * @param request ExploreSchemaRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ExploreSchemaResponse
+                     */
+                    public exploreSchema(request: google.cloud.apptopology.v1.IExploreSchemaRequest, callback: google.cloud.apptopology.v1.AppTopology.ExploreSchemaCallback): void;
+
+                    /**
+                     * Calls ExploreSchema.
+                     * @param request ExploreSchemaRequest message or plain object
+                     * @returns Promise
+                     */
+                    public exploreSchema(request: google.cloud.apptopology.v1.IExploreSchemaRequest): Promise<google.cloud.apptopology.v1.ExploreSchemaResponse>;
+
+                    /**
                      * Calls GetDomain.
                      * @param request GetDomainRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Domain
@@ -2409,6 +2423,13 @@ export namespace google {
                      * @param [response] Schema
                      */
                     type GetSchemaCallback = (error: (Error|null), response?: google.cloud.apptopology.v1.Schema) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apptopology.v1.AppTopology|exploreSchema}.
+                     * @param error Error, if any
+                     * @param [response] ExploreSchemaResponse
+                     */
+                    type ExploreSchemaCallback = (error: (Error|null), response?: google.cloud.apptopology.v1.ExploreSchemaResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.apptopology.v1.AppTopology|getDomain}.
@@ -2858,6 +2879,248 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetSchemaRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExploreSchemaRequest. */
+                interface IExploreSchemaRequest {
+
+                    /** ExploreSchemaRequest name */
+                    name?: (string|null);
+
+                    /** ExploreSchemaRequest startLabels */
+                    startLabels?: (string[]|null);
+
+                    /** ExploreSchemaRequest depth */
+                    depth?: (number|null);
+
+                    /** ExploreSchemaRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ExploreSchemaRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents an ExploreSchemaRequest. */
+                class ExploreSchemaRequest implements IExploreSchemaRequest {
+
+                    /**
+                     * Constructs a new ExploreSchemaRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apptopology.v1.IExploreSchemaRequest);
+
+                    /** ExploreSchemaRequest name. */
+                    public name: string;
+
+                    /** ExploreSchemaRequest startLabels. */
+                    public startLabels: string[];
+
+                    /** ExploreSchemaRequest depth. */
+                    public depth: number;
+
+                    /** ExploreSchemaRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ExploreSchemaRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ExploreSchemaRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExploreSchemaRequest instance
+                     */
+                    public static create(properties?: google.cloud.apptopology.v1.IExploreSchemaRequest): google.cloud.apptopology.v1.ExploreSchemaRequest;
+
+                    /**
+                     * Encodes the specified ExploreSchemaRequest message. Does not implicitly {@link google.cloud.apptopology.v1.ExploreSchemaRequest.verify|verify} messages.
+                     * @param message ExploreSchemaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apptopology.v1.IExploreSchemaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExploreSchemaRequest message, length delimited. Does not implicitly {@link google.cloud.apptopology.v1.ExploreSchemaRequest.verify|verify} messages.
+                     * @param message ExploreSchemaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apptopology.v1.IExploreSchemaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExploreSchemaRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExploreSchemaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apptopology.v1.ExploreSchemaRequest;
+
+                    /**
+                     * Decodes an ExploreSchemaRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExploreSchemaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apptopology.v1.ExploreSchemaRequest;
+
+                    /**
+                     * Verifies an ExploreSchemaRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExploreSchemaRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExploreSchemaRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apptopology.v1.ExploreSchemaRequest;
+
+                    /**
+                     * Creates a plain object from an ExploreSchemaRequest message. Also converts values to other types if specified.
+                     * @param message ExploreSchemaRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apptopology.v1.ExploreSchemaRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExploreSchemaRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExploreSchemaRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExploreSchemaResponse. */
+                interface IExploreSchemaResponse {
+
+                    /** ExploreSchemaResponse nodeTypes */
+                    nodeTypes?: (google.cloud.apptopology.v1.INodeType[]|null);
+
+                    /** ExploreSchemaResponse edgeTypes */
+                    edgeTypes?: (google.cloud.apptopology.v1.IEdgeType[]|null);
+
+                    /** ExploreSchemaResponse labelProperties */
+                    labelProperties?: (google.cloud.apptopology.v1.ILabelProperties[]|null);
+
+                    /** ExploreSchemaResponse edgeRules */
+                    edgeRules?: (google.cloud.apptopology.v1.IEdgeRule[]|null);
+
+                    /** ExploreSchemaResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents an ExploreSchemaResponse. */
+                class ExploreSchemaResponse implements IExploreSchemaResponse {
+
+                    /**
+                     * Constructs a new ExploreSchemaResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apptopology.v1.IExploreSchemaResponse);
+
+                    /** ExploreSchemaResponse nodeTypes. */
+                    public nodeTypes: google.cloud.apptopology.v1.INodeType[];
+
+                    /** ExploreSchemaResponse edgeTypes. */
+                    public edgeTypes: google.cloud.apptopology.v1.IEdgeType[];
+
+                    /** ExploreSchemaResponse labelProperties. */
+                    public labelProperties: google.cloud.apptopology.v1.ILabelProperties[];
+
+                    /** ExploreSchemaResponse edgeRules. */
+                    public edgeRules: google.cloud.apptopology.v1.IEdgeRule[];
+
+                    /** ExploreSchemaResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ExploreSchemaResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExploreSchemaResponse instance
+                     */
+                    public static create(properties?: google.cloud.apptopology.v1.IExploreSchemaResponse): google.cloud.apptopology.v1.ExploreSchemaResponse;
+
+                    /**
+                     * Encodes the specified ExploreSchemaResponse message. Does not implicitly {@link google.cloud.apptopology.v1.ExploreSchemaResponse.verify|verify} messages.
+                     * @param message ExploreSchemaResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apptopology.v1.IExploreSchemaResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExploreSchemaResponse message, length delimited. Does not implicitly {@link google.cloud.apptopology.v1.ExploreSchemaResponse.verify|verify} messages.
+                     * @param message ExploreSchemaResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apptopology.v1.IExploreSchemaResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExploreSchemaResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExploreSchemaResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apptopology.v1.ExploreSchemaResponse;
+
+                    /**
+                     * Decodes an ExploreSchemaResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExploreSchemaResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apptopology.v1.ExploreSchemaResponse;
+
+                    /**
+                     * Verifies an ExploreSchemaResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExploreSchemaResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExploreSchemaResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apptopology.v1.ExploreSchemaResponse;
+
+                    /**
+                     * Creates a plain object from an ExploreSchemaResponse message. Also converts values to other types if specified.
+                     * @param message ExploreSchemaResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apptopology.v1.ExploreSchemaResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExploreSchemaResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExploreSchemaResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

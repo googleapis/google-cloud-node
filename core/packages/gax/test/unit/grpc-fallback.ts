@@ -270,7 +270,7 @@ describe('grpc-fallback', () => {
     assert.strictEqual(settings.echo.otherArgs.internalMethodName, undefined);
   });
 
-  it('constructSettings should accept enableTelemetryTracing and internalTelemetryInfo', () => {
+  it('constructSettings should enable tracing when enableTelemetryTracing: true is passed in client options', () => {
     const gapicConfig = {
       interfaces: {
         'google.showcase.v1beta1.Echo': {
@@ -284,26 +284,47 @@ describe('grpc-fallback', () => {
         },
       },
     };
-    const telemetryInfo = {
-      gcpClientService: 'fake',
-      gcpVersion: 'v1',
-      gcpRepo: 'googleapis/google-cloud-node',
-      gcpArtifact: '@google-cloud/fake',
-    };
-    const settings = gaxGrpc.constructSettings(
+    const clientWithTracing = new GrpcClient({
+      ...opts,
+      enableTelemetryTracing: true,
+    });
+    const settings = clientWithTracing.constructSettings(
       'google.showcase.v1beta1.Echo',
       gapicConfig,
       {},
       {},
-      true,
-      telemetryInfo,
     );
     assert.strictEqual(settings.echo.enableTelemetryTracing, true);
-    assert.deepStrictEqual(
-      settings.echo.otherArgs.internalTelemetryInfo,
-      telemetryInfo,
-    );
     assert.strictEqual(settings.echo.otherArgs.internalMethodName, 'Echo');
+  });
+
+  it('constructSettings should enable tracing when GOOGLE_SDK_NODE_ENABLE_TRACING=true environment variable is set', () => {
+    process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+    try {
+      const gapicConfig = {
+        interfaces: {
+          'google.showcase.v1beta1.Echo': {
+            retry_codes: {},
+            retry_params: {},
+            methods: {
+              Echo: {
+                timeout_millis: 60000,
+              },
+            },
+          },
+        },
+      };
+      const settings = gaxGrpc.constructSettings(
+        'google.showcase.v1beta1.Echo',
+        gapicConfig,
+        {},
+        {},
+      );
+      assert.strictEqual(settings.echo.enableTelemetryTracing, true);
+      assert.strictEqual(settings.echo.otherArgs.internalMethodName, 'Echo');
+    } finally {
+      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    }
   });
 
   it('should make a request', async () => {

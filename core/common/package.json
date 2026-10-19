@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/common",
   "description": "Common components for Cloud APIs Node.js Client Libraries",
-  "version": "8.1.0",
+  "version": "8.2.1",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
-    "test": "c8 mocha build/test",
+    "test": "node ../../bin/run-test.cjs --proxyquire-shim build/test",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "compile": "tsc -p .",

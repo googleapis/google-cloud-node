@@ -13,14 +13,14 @@
 // limitations under the License.
 
 export {
-  Resource,
+  type Resource,
   TestResources,
-  TokenMaker,
+  type TokenMaker,
   defaultMaker as defaultTokenMaker,
 } from './testResources';
 export {
   READONLY_PROPERTY_ERROR_REGEX,
-  RuntimeVersions,
+  type RuntimeVersions,
   assertArraySubclassStrictEqual,
   getNodeMajorVersion,
   isBun,

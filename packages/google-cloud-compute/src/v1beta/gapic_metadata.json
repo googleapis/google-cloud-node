@@ -4579,6 +4579,11 @@
                 "setLabels"
               ]
             },
+            "SetName": {
+              "methods": [
+                "setName"
+              ]
+            },
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
@@ -4629,6 +4634,11 @@
             "SetLabels": {
               "methods": [
                 "setLabels"
+              ]
+            },
+            "SetName": {
+              "methods": [
+                "setName"
               ]
             },
             "TestIamPermissions": {

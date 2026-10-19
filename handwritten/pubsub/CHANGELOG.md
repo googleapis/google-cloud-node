@@ -5,6 +5,33 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/pubsub?activeTab=versions
 
+## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.3.0...pubsub-v6.3.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **firestore,pubsub:** Align types and proto re-exports with -api packages ([#9621](https://github.com/googleapis/google-cloud-node/issues/9621)) ([25d945b](https://github.com/googleapis/google-cloud-node/commit/25d945b34979849ea1c6df699212854f8d390d79))
+
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.2.0...pubsub-v6.3.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.1.1...pubsub-v6.2.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
+
+### Bug Fixes
+
+* **pubsub:** Avoid invoking callback inside promise handler in getClient_ ([#9544](https://github.com/googleapis/google-cloud-node/issues/9544)) ([752d1d7](https://github.com/googleapis/google-cloud-node/commit/752d1d72c75c2a4df5214027ea1a453a5e2c0d7f))
+* **pubsub:** Pause underlying pull streams and skip keepalive teardown while paused ([#9521](https://github.com/googleapis/google-cloud-node/issues/9521)) ([f863ecc](https://github.com/googleapis/google-cloud-node/commit/f863ecc3a280a40304ec27e83b3629bd3e55a311))
+
 ## [6.1.1](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.1.0...pubsub-v6.1.1) (2026-10-06)
 
 

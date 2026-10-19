@@ -1,5 +1,19 @@
 # Changelog
 
+## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v6.2.0...cloudbuild-v6.3.0) (2026-10-19)
+
+
+### Features
+
+* Update API sources and regenerate ([#9620](https://github.com/googleapis/google-cloud-node/issues/9620)) ([c812bc3](https://github.com/googleapis/google-cloud-node/commit/c812bc38fd5af3d710057ec9aa4a19eeff621175))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v6.1.1...cloudbuild-v6.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
 ## [6.1.1](https://github.com/googleapis/google-cloud-node/compare/cloudbuild-v6.1.0...cloudbuild-v6.1.1) (2026-09-28)
 
 

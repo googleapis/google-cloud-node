@@ -5,6 +5,36 @@
 
 [1]: https://www.npmjs.com/package/gcp-metadata?activeTab=versions
 
+## [9.2.2](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.2.1...gcp-metadata-v9.2.2) (2026-10-19)
+
+
+### Bug Fixes
+
+* **gcp-metadata:** Recognize Bun socket error codes in isAvailable ([#9613](https://github.com/googleapis/google-cloud-node/issues/9613)) ([0fb3dee](https://github.com/googleapis/google-cloud-node/commit/0fb3deee4a967c5b07aaace6be0055c090f27871))
+
+## [9.2.1](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.2.0...gcp-metadata-v9.2.1) (2026-10-14)
+
+
+### Bug Fixes
+
+* **core:** Remove --fetch-shim and handle Bun fetch natively ([#9573](https://github.com/googleapis/google-cloud-node/issues/9573)) ([62559f1](https://github.com/googleapis/google-cloud-node/commit/62559f18d902330c546c787233dcaa7578774463))
+* **core:** Remove --gaxios-shim and configure Bun Gaxios fetch ([#9569](https://github.com/googleapis/google-cloud-node/issues/9569)) ([640bf51](https://github.com/googleapis/google-cloud-node/commit/640bf5136c7e9002d65cb257af976c336110d33f))
+* **gcp-metadata:** Remove --promise-any-shim and backfill AggregateError ([#9557](https://github.com/googleapis/google-cloud-node/issues/9557)) ([64bdaee](https://github.com/googleapis/google-cloud-node/commit/64bdaee933ebda0752722d98f226765a373c79f8))
+
+## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.1.0...gcp-metadata-v9.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.0.4...gcp-metadata-v9.1.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
 ## [9.0.4](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.0.3...gcp-metadata-v9.0.4) (2026-09-16)
 
 

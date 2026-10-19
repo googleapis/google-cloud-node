@@ -5,6 +5,28 @@
 
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
+## [6.13.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.12.1...google-gax-v6.13.0) (2026-10-19)
+
+
+### Features
+
+* **gax:** Add LoggerHelper with context helper ([#9631](https://github.com/googleapis/google-cloud-node/issues/9631)) ([c410f90](https://github.com/googleapis/google-cloud-node/commit/c410f90278445e8d63a537f8faa888824597b067))
+* **gax:** Remove references to static telemetry information ([#9630](https://github.com/googleapis/google-cloud-node/issues/9630)) ([8954cff](https://github.com/googleapis/google-cloud-node/commit/8954cff885fbb9d2d526a908f11f9b7f3114fa85))
+
+## [6.12.1](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.12.0...google-gax-v6.12.1) (2026-10-08)
+
+
+### Bug Fixes
+
+* **gax:** Resolve low level network attributes ([#9564](https://github.com/googleapis/google-cloud-node/issues/9564)) ([4bab312](https://github.com/googleapis/google-cloud-node/commit/4bab3123317218621cf627a31235cecb9e4ab1dc))
+
+## [6.12.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.11.1...google-gax-v6.12.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
 ## [6.11.1](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.11.0...google-gax-v6.11.1) (2026-10-06)
 
 

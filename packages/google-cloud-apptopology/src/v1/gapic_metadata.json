@@ -25,6 +25,13 @@
                 "getDomain"
               ]
             },
+            "ExploreSchema": {
+              "methods": [
+                "exploreSchema",
+                "exploreSchemaStream",
+                "exploreSchemaAsync"
+              ]
+            },
             "ListDomains": {
               "methods": [
                 "listDomains",
@@ -50,6 +57,13 @@
             "GetDomain": {
               "methods": [
                 "getDomain"
+              ]
+            },
+            "ExploreSchema": {
+              "methods": [
+                "exploreSchema",
+                "exploreSchemaStream",
+                "exploreSchemaAsync"
               ]
             },
             "ListDomains": {
