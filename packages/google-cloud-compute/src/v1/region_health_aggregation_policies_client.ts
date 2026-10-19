@@ -42,6 +42,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  The RegionHealthAggregationPolicies API.
+ *
+ *  This client uses RegionHealthAggregationPolicies version 2026-09-01.
  * @class
  * @memberof v1
  */
@@ -220,7 +222,10 @@ export class RegionHealthAggregationPoliciesClient {
       'google.cloud.compute.v1.RegionHealthAggregationPolicies',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      {
+        'x-goog-api-client': clientHeader.join(' '),
+        'x-goog-api-version': '2026-09-01',
+      },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation
@@ -1302,13 +1307,6 @@ export class RegionHealthAggregationPoliciesClient {
    *   the next page of results.
    * @param {string} request.project
    *   Name of the project scoping this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {number} request.serviceProjectNumber
    *   The Shared VPC service project id or service project number for which
    *   aggregated list request is invoked for subnetworks list-usable api.
@@ -1448,13 +1446,6 @@ export class RegionHealthAggregationPoliciesClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region scoping this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1660,13 +1651,6 @@ export class RegionHealthAggregationPoliciesClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region scoping this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1795,13 +1779,6 @@ export class RegionHealthAggregationPoliciesClient {
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region scoping this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case
-   *   of failure. The default value is false.
-   *
-   *   For example, when partial success behavior is enabled, aggregatedList for a
-   *   single zone scope either returns all resources in the zone or no resources,
-   *   with an error code.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

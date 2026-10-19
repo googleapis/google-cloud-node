@@ -5,6 +5,47 @@
 
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
+## [6.12.1](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.12.0...google-gax-v6.12.1) (2026-10-08)
+
+
+### Bug Fixes
+
+* **gax:** Resolve low level network attributes ([#9564](https://github.com/googleapis/google-cloud-node/issues/9564)) ([4bab312](https://github.com/googleapis/google-cloud-node/commit/4bab3123317218621cf627a31235cecb9e4ab1dc))
+
+## [6.12.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.11.1...google-gax-v6.12.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
+## [6.11.1](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.11.0...google-gax-v6.11.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* **gax:** Only set resend_count on T4 attempt spans ([#9540](https://github.com/googleapis/google-cloud-node/issues/9540)) ([3b3f600](https://github.com/googleapis/google-cloud-node/commit/3b3f600a7adeb27b77df12c556e54b5f08b61325))
+* **gax:** Widen port to number | string in GrpcClientOptions ([#9542](https://github.com/googleapis/google-cloud-node/issues/9542)) ([17978e7](https://github.com/googleapis/google-cloud-node/commit/17978e7f9ef7773111c6472194f20679f6e2bd6d))
+
+## [6.11.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.10.0...google-gax-v6.11.0) (2026-10-03)
+
+
+### Features
+
+* **gax:** Emit T4 attempt spans ([#9496](https://github.com/googleapis/google-cloud-node/issues/9496)) ([51aedce](https://github.com/googleapis/google-cloud-node/commit/51aedceb77684ff6a14825c5916836c6e71060b4))
+
+
+### Bug Fixes
+
+* **gax:** Propagate chunk granularity on resume and preserve retry error details ([#9480](https://github.com/googleapis/google-cloud-node/issues/9480)) ([02b9478](https://github.com/googleapis/google-cloud-node/commit/02b94781828d50b91a255187f89a168f8b1e3b84))
+
+## [6.10.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.9.0...google-gax-v6.10.0) (2026-09-29)
+
+
+### Features
+
+* **docs:** Add o11y sample ([#9456](https://github.com/googleapis/google-cloud-node/issues/9456)) ([c0e0540](https://github.com/googleapis/google-cloud-node/commit/c0e0540ebaca4c934d3439156bef2e437a2c5e32))
+
 ## [6.9.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.8.0...google-gax-v6.9.0) (2026-09-28)
 
 

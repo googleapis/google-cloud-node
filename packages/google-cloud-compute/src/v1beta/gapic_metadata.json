@@ -2632,6 +2632,13 @@
               "methods": [
                 "get"
               ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
             }
           }
         },
@@ -2641,6 +2648,13 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
               ]
             }
           }
@@ -4565,6 +4579,11 @@
                 "setLabels"
               ]
             },
+            "SetName": {
+              "methods": [
+                "setName"
+              ]
+            },
             "TestIamPermissions": {
               "methods": [
                 "testIamPermissions"
@@ -4615,6 +4634,11 @@
             "SetLabels": {
               "methods": [
                 "setLabels"
+              ]
+            },
+            "SetName": {
+              "methods": [
+                "setName"
               ]
             },
             "TestIamPermissions": {

@@ -683,10 +683,10 @@ export class Snapshot extends EventEmitter {
 
     const session = this.session.formattedName_!;
     const options = this._options;
-    if (
-      this.multiplexedSessionPreviousTransactionId &&
-      (this.session.parent as Database).isMuxEnabledForRW_
-    ) {
+    if (this._options.readWrite) {
+      this._inlineBeginStarted = true;
+    }
+    if (this.multiplexedSessionPreviousTransactionId) {
       options.readWrite!.multiplexedSessionPreviousTransactionId =
         this.multiplexedSessionPreviousTransactionId;
     }
@@ -732,7 +732,9 @@ export class Snapshot extends EventEmitter {
             resp: spannerClient.spanner.v1.ITransaction,
           ) => {
             if (err) {
+              this._inlineBeginStarted = false;
               setSpanError(span, err);
+              this._releaseWaitingRequests(err);
             } else {
               this._updatePrecommitToken(resp);
               this._update(resp, span);
@@ -944,11 +946,7 @@ export class Snapshot extends EventEmitter {
       transaction.singleUse = this._options;
     }
 
-    if (
-      !this.id &&
-      this._options.readWrite &&
-      (this.session.parent as Database).isMuxEnabledForRW_
-    ) {
+    if (!this.id && this._options.readWrite) {
       this._setPreviousTransactionId(transaction);
     }
 
@@ -1495,11 +1493,7 @@ export class Snapshot extends EventEmitter {
         transaction.singleUse = this._options;
       }
 
-      if (
-        !this.id &&
-        this._options.readWrite &&
-        (this.session.parent as Database).isMuxEnabledForRW_
-      ) {
+      if (!this.id && this._options.readWrite) {
         this._setPreviousTransactionId(transaction);
       }
 
@@ -1833,11 +1827,11 @@ export class Snapshot extends EventEmitter {
    * @property {object} [gaxOptions] Request configuration options,
    *     See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions}
    *     for more details.
-   *  @property {number} [maxResumeRetries] The maximum number of times that the
-   *     stream will retry to push data downstream, when the downstream indicates
-   *     that it is not ready for any more data. Increase this value if you
-   *     experience 'Stream is still not ready to receive data' errors as a
-   *     result of a slow writer in your receiving stream.
+   * @property {number} [maxResumeRetries] The maximum number of times that the
+   *     query will retry on retryable errors (such as UNAVAILABLE). Only
+   *     applicable to non-streaming queries executed via {@link Snapshot#run}.
+   *     For streaming queries ({@link Snapshot#runStream}), this option is
+   *     deprecated as backpressure is managed automatically.
    *  @property {object} [directedReadOptions]
    *     Indicates which replicas or regions should be used for non-transactional reads or queries.
    */
@@ -1950,11 +1944,7 @@ export class Snapshot extends EventEmitter {
         transaction.singleUse = this._options;
       }
 
-      if (
-        !this.id &&
-        this._options.readWrite &&
-        (this.session.parent as Database).isMuxEnabledForRW_
-      ) {
+      if (!this.id && this._options.readWrite) {
         this._setPreviousTransactionId(transaction);
       }
       reqOpts = Object.assign({}, cleanQuery, {
@@ -2682,11 +2672,7 @@ export class Transaction extends Dml {
       transaction.begin = this._options;
     }
 
-    if (
-      !this.id &&
-      this._options.readWrite &&
-      (this.session.parent as Database).isMuxEnabledForRW_
-    ) {
+    if (!this.id && this._options.readWrite) {
       this._setPreviousTransactionId(transaction);
     }
 
@@ -2905,9 +2891,7 @@ export class Transaction extends Dml {
         } else if (!this._useInRunner) {
           reqOpts.singleUseTransaction = this._options;
         } else {
-          if ((this.session.parent as Database).isMuxEnabledForRW_) {
-            this._setMutationKey(mutations);
-          }
+          this._setMutationKey(mutations);
           this.begin()
             .then(() => {
               this.commit(options, (err, resp) => {

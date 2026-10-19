@@ -16,6 +16,7 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
+import {isReadOnlyPropertyError} from 'google-test-utils';
 import {hasProjectIdToken, replaceProjectIdToken} from '../src/helper';
 import {Stream} from 'stream';
 
@@ -123,9 +124,12 @@ describe('helper', () => {
         name: 'projects/{{projectId}}',
       });
 
-      assert.throws(() => {
-        replaceProjectIdToken(frozenObj, projectId);
-      }, /Cannot assign to read only property/);
+      assert.throws(
+        () => {
+          replaceProjectIdToken(frozenObj, projectId);
+        },
+        err => isReadOnlyPropertyError(err, 'name'),
+      );
     });
 
     it('should replace more than one {{projectId}}', () => {

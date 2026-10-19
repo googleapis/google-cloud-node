@@ -37,6 +37,7 @@ function main() {
   const futureReservationsClient = new compute.FutureReservationsClient();
   const globalAddressesClient = new compute.GlobalAddressesClient();
   const globalForwardingRulesClient = new compute.GlobalForwardingRulesClient();
+  const globalFrontendSettingsServiceClient = new compute.GlobalFrontendSettingsServiceClient();
   const globalNetworkEndpointGroupsClient = new compute.GlobalNetworkEndpointGroupsClient();
   const globalOperationsClient = new compute.GlobalOperationsClient();
   const globalOrganizationOperationsClient = new compute.GlobalOrganizationOperationsClient();
@@ -46,6 +47,7 @@ function main() {
   const hostsClient = new compute.HostsClient();
   const imageFamilyViewsClient = new compute.ImageFamilyViewsClient();
   const imagesClient = new compute.ImagesClient();
+  const imageViewsClient = new compute.ImageViewsClient();
   const instanceGroupManagerResizeRequestsClient = new compute.InstanceGroupManagerResizeRequestsClient();
   const instanceGroupManagersClient = new compute.InstanceGroupManagersClient();
   const instanceGroupsClient = new compute.InstanceGroupsClient();
@@ -64,6 +66,7 @@ function main() {
   const licensesClient = new compute.LicensesClient();
   const machineImagesClient = new compute.MachineImagesClient();
   const machineTypesClient = new compute.MachineTypesClient();
+  const managedRulesetsClient = new compute.ManagedRulesetsClient();
   const networkAttachmentsClient = new compute.NetworkAttachmentsClient();
   const networkEdgeSecurityServicesClient = new compute.NetworkEdgeSecurityServicesClient();
   const networkEndpointGroupsClient = new compute.NetworkEndpointGroupsClient();

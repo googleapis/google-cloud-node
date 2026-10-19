@@ -306,6 +306,11 @@ export class NetAppClient {
         'nextPageToken',
         'hostGroups',
       ),
+      listBackupConfigs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'volumeBackupConfigs',
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
@@ -401,6 +406,12 @@ export class NetAppClient {
       '.google.cloud.netapp.v1.Volume',
     ) as gax.protobuf.Type;
     const revertVolumeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const startSplitResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.Volume',
+    ) as gax.protobuf.Type;
+    const startSplitMetadata = protoFilesRoot.lookup(
       '.google.cloud.netapp.v1.OperationMetadata',
     ) as gax.protobuf.Type;
     const establishVolumePeeringResponse = protoFilesRoot.lookup(
@@ -613,6 +624,18 @@ export class NetAppClient {
     const deleteHostGroupMetadata = protoFilesRoot.lookup(
       '.google.cloud.netapp.v1.OperationMetadata',
     ) as gax.protobuf.Type;
+    const restoreVolumeResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.RestoreVolumeResponse',
+    ) as gax.protobuf.Type;
+    const restoreVolumeMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const updateBackupConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.UpdateBackupConfigResponse',
+    ) as gax.protobuf.Type;
+    const updateBackupConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.netapp.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createStoragePool: new this._gaxModule.LongrunningDescriptor(
@@ -667,6 +690,11 @@ export class NetAppClient {
         this.operationsClient,
         revertVolumeResponse.decode.bind(revertVolumeResponse),
         revertVolumeMetadata.decode.bind(revertVolumeMetadata),
+      ),
+      startSplit: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        startSplitResponse.decode.bind(startSplitResponse),
+        startSplitMetadata.decode.bind(startSplitMetadata),
       ),
       establishVolumePeering: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -863,6 +891,16 @@ export class NetAppClient {
         deleteHostGroupResponse.decode.bind(deleteHostGroupResponse),
         deleteHostGroupMetadata.decode.bind(deleteHostGroupMetadata),
       ),
+      restoreVolume: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        restoreVolumeResponse.decode.bind(restoreVolumeResponse),
+        restoreVolumeMetadata.decode.bind(restoreVolumeMetadata),
+      ),
+      updateBackupConfig: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateBackupConfigResponse.decode.bind(updateBackupConfigResponse),
+        updateBackupConfigMetadata.decode.bind(updateBackupConfigMetadata),
+      ),
     };
 
     // Put together the default options sent with requests.
@@ -928,6 +966,8 @@ export class NetAppClient {
       'updateVolume',
       'deleteVolume',
       'revertVolume',
+      'startSplit',
+      'getSplitStatus',
       'establishVolumePeering',
       'listSnapshots',
       'getSnapshot',
@@ -986,6 +1026,9 @@ export class NetAppClient {
       'executeOntapGet',
       'executeOntapDelete',
       'executeOntapPatch',
+      'restoreVolume',
+      'listBackupConfigs',
+      'updateBackupConfig',
     ];
     for (const methodName of netAppStubMethods) {
       const callPromise = this.netAppStub.then(
@@ -1335,6 +1378,137 @@ export class NetAppClient {
           {} | undefined,
         ]) => {
           this._log.info('getVolume response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Retrieves the current state, progress, and details of a split operation for
+   * a volume. This method is relevant when the volume is a clone. For volumes
+   * that are not clones, this method will return an error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The full name of the volume.
+   *   Format: projects/{project_number}/locations/{location}/volumes/{volume_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.netapp.v1.SplitStatus|SplitStatus}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.get_split_status.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_GetSplitStatus_async
+   */
+  getSplitStatus(
+    request?: protos.google.cloud.netapp.v1.IGetSplitStatusRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.netapp.v1.ISplitStatus,
+      protos.google.cloud.netapp.v1.IGetSplitStatusRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getSplitStatus(
+    request: protos.google.cloud.netapp.v1.IGetSplitStatusRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.netapp.v1.ISplitStatus,
+      protos.google.cloud.netapp.v1.IGetSplitStatusRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getSplitStatus(
+    request: protos.google.cloud.netapp.v1.IGetSplitStatusRequest,
+    callback: Callback<
+      protos.google.cloud.netapp.v1.ISplitStatus,
+      protos.google.cloud.netapp.v1.IGetSplitStatusRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getSplitStatus(
+    request?: protos.google.cloud.netapp.v1.IGetSplitStatusRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.netapp.v1.ISplitStatus,
+          | protos.google.cloud.netapp.v1.IGetSplitStatusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.netapp.v1.ISplitStatus,
+      protos.google.cloud.netapp.v1.IGetSplitStatusRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.netapp.v1.ISplitStatus,
+      protos.google.cloud.netapp.v1.IGetSplitStatusRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getSplitStatus request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.netapp.v1.ISplitStatus,
+          | protos.google.cloud.netapp.v1.IGetSplitStatusRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getSplitStatus response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getSplitStatus(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.netapp.v1.ISplitStatus,
+          protos.google.cloud.netapp.v1.IGetSplitStatusRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getSplitStatus response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2629,7 +2803,7 @@ export class NetAppClient {
       });
   }
   /**
-   * `ExecuteOntapPost` dispatches the ONTAP `POST` request to the
+   * `ExecuteOntapPost` sends the ONTAP `POST` request to the
    * `StoragePool` cluster.
    *
    * @param {Object} request
@@ -2647,7 +2821,7 @@ export class NetAppClient {
    *   }
    *   ```
    * @param {string} request.ontapPath
-   *   Required. The resource path of the ONTAP resource.
+   *   Required. The path of the ONTAP resource.
    *   Format:
    *   `projects/{project_number}/locations/{location_id}/storagePools/{storage_pool_id}/ontap/{ontap_resource_path}`.
    *   For example:
@@ -2774,7 +2948,7 @@ export class NetAppClient {
       });
   }
   /**
-   * `ExecuteOntapGet` dispatches the ONTAP `GET` request to the
+   * `ExecuteOntapGet` sends the ONTAP `GET` request to the
    * `StoragePool` cluster.
    *
    * @param {Object} request
@@ -2907,7 +3081,7 @@ export class NetAppClient {
       });
   }
   /**
-   * `ExecuteOntapDelete` dispatches the ONTAP `DELETE` request to the
+   * `ExecuteOntapDelete` sends the ONTAP `DELETE` request to the
    * `StoragePool` cluster.
    *
    * @param {Object} request
@@ -3046,7 +3220,7 @@ export class NetAppClient {
       });
   }
   /**
-   * `ExecuteOntapPatch` dispatches the ONTAP `PATCH` request to the
+   * `ExecuteOntapPatch` sends the ONTAP `PATCH` request to the
    * `StoragePool` cluster.
    *
    * @param {Object} request
@@ -4760,6 +4934,179 @@ export class NetAppClient {
     >;
   }
   /**
+   * Splits a clone volume from its source volume.
+   * This operation will only work for volumes which have clone_details
+   * set(clones).
+   * For volumes that are not clones, this operation will return an error.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The full name of the clone volume to be split from its source.
+   *   Format: projects/{project_number}/locations/{location}/volumes/{volume_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.start_split.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_StartSplit_async
+   */
+  startSplit(
+    request?: protos.google.cloud.netapp.v1.IStartSplitRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IVolume,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  startSplit(
+    request: protos.google.cloud.netapp.v1.IStartSplitRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IVolume,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  startSplit(
+    request: protos.google.cloud.netapp.v1.IStartSplitRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IVolume,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  startSplit(
+    request?: protos.google.cloud.netapp.v1.IStartSplitRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IVolume,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IVolume,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IVolume,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IVolume,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('startSplit response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('startSplit request %j', request);
+    return this.innerApiCalls
+      .startSplit(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IVolume,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('startSplit response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `startSplit()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.start_split.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_StartSplit_async
+   */
+  async checkStartSplitProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.netapp.v1.Volume,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >
+  > {
+    this._log.info('startSplit long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.startSplit,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.netapp.v1.Volume,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >;
+  }
+  /**
    * Establish volume peering. This is used to establish cluster and svm
    * peerings between the GCNV and OnPrem clusters.
    *
@@ -4775,7 +5122,7 @@ export class NetAppClient {
    *   Required. Name of the user's local source vserver svm to be peered with the
    *   destination vserver svm.
    * @param {string[]} [request.peerIpAddresses]
-   *   Optional. List of IPv4 ip addresses to be used for peering.
+   *   Optional. List of IPv4 IP addresses to be used for peering.
    * @param {string} request.peerVolumeName
    *   Required. Name of the user's local source volume to be peered with the
    *   destination volume.
@@ -10859,6 +11206,359 @@ export class NetAppClient {
     >;
   }
   /**
+   * Restores a backup to an ONTAP-mode volume.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.netapp.v1.BackupSource} request.backupSource
+   *   The backup source of the restore operation.
+   * @param {google.cloud.netapp.v1.OntapVolumeTarget} request.ontapVolumeTarget
+   *   The ONTAP volume target of the restore operation.
+   * @param {string} request.name
+   *   Required. The resource name of the ONTAP mode storage pool, in the format
+   *   of `projects/{project}/locations/{location}/storagePools/{storage_pool}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.restore_volume.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_RestoreVolume_async
+   */
+  restoreVolume(
+    request?: protos.google.cloud.netapp.v1.IRestoreVolumeRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IRestoreVolumeResponse,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  restoreVolume(
+    request: protos.google.cloud.netapp.v1.IRestoreVolumeRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IRestoreVolumeResponse,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  restoreVolume(
+    request: protos.google.cloud.netapp.v1.IRestoreVolumeRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IRestoreVolumeResponse,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  restoreVolume(
+    request?: protos.google.cloud.netapp.v1.IRestoreVolumeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IRestoreVolumeResponse,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IRestoreVolumeResponse,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IRestoreVolumeResponse,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IRestoreVolumeResponse,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('restoreVolume response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('restoreVolume request %j', request);
+    return this.innerApiCalls
+      .restoreVolume(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IRestoreVolumeResponse,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('restoreVolume response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `restoreVolume()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.restore_volume.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_RestoreVolume_async
+   */
+  async checkRestoreVolumeProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.netapp.v1.RestoreVolumeResponse,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >
+  > {
+    this._log.info('restoreVolume long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.restoreVolume,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.netapp.v1.RestoreVolumeResponse,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Updates the backup configuration for an ONTAP-mode volume.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the StoragePool, in the format:
+   *   projects/{projectNumber}/locations/{locationId}/storagePools/{poolId}
+   * @param {string} request.volumeUuid
+   *   Required. The UUID of the ONTAP-mode volume.
+   * @param {google.cloud.netapp.v1.BackupConfig} request.backupConfig
+   *   Required. Backup configuration to apply.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. Field mask is used to specify the fields to be overwritten in the
+   *   BackupConfig for the Volume.
+   *   The fields specified in the update_mask are relative to the resource, not
+   *   the full request. A field will be overwritten if it is in the mask.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.update_backup_config.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_UpdateBackupConfig_async
+   */
+  updateBackupConfig(
+    request?: protos.google.cloud.netapp.v1.IUpdateBackupConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IUpdateBackupConfigResponse,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateBackupConfig(
+    request: protos.google.cloud.netapp.v1.IUpdateBackupConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IUpdateBackupConfigResponse,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateBackupConfig(
+    request: protos.google.cloud.netapp.v1.IUpdateBackupConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IUpdateBackupConfigResponse,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateBackupConfig(
+    request?: protos.google.cloud.netapp.v1.IUpdateBackupConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IUpdateBackupConfigResponse,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.netapp.v1.IUpdateBackupConfigResponse,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.netapp.v1.IUpdateBackupConfigResponse,
+        protos.google.cloud.netapp.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.netapp.v1.IUpdateBackupConfigResponse,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateBackupConfig response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateBackupConfig request %j', request);
+    return this.innerApiCalls
+      .updateBackupConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.netapp.v1.IUpdateBackupConfigResponse,
+            protos.google.cloud.netapp.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateBackupConfig response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateBackupConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.update_backup_config.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_UpdateBackupConfig_async
+   */
+  async checkUpdateBackupConfigProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.netapp.v1.UpdateBackupConfigResponse,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >
+  > {
+    this._log.info('updateBackupConfig long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateBackupConfig,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.netapp.v1.UpdateBackupConfigResponse,
+      protos.google.cloud.netapp.v1.OperationMetadata
+    >;
+  }
+  /**
    * Returns descriptions of all storage pools owned by the caller.
    *
    * @param {Object} request
@@ -13459,6 +14159,253 @@ export class NetAppClient {
       request as {},
       callSettings,
     ) as AsyncIterable<protos.google.cloud.netapp.v1.IHostGroup>;
+  }
+  /**
+   * Lists backup configurations for all volumes in an ONTAP-mode Storage Pool.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The ONTAP StoragePool for which to retrieve backup configuration
+   *   information, in the format
+   *   `projects/{project}/locations/{location}/storagePools/{storage_pool}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return. The service may return
+   *   fewer than this value. The maximum value is 1000; values above 1000 will be
+   *   coerced to 1000. If unspecified or set to 0, a default of 50 will be used.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported values are "volume_id" or ""
+   * @param {string} [request.filter]
+   *   Optional. The standard list filter.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.netapp.v1.VolumeBackupConfig|VolumeBackupConfig}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBackupConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listBackupConfigs(
+    request?: protos.google.cloud.netapp.v1.IListBackupConfigsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.netapp.v1.IVolumeBackupConfig[],
+      protos.google.cloud.netapp.v1.IListBackupConfigsRequest | null,
+      protos.google.cloud.netapp.v1.IListBackupConfigsResponse,
+    ]
+  >;
+  listBackupConfigs(
+    request: protos.google.cloud.netapp.v1.IListBackupConfigsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.netapp.v1.IListBackupConfigsRequest,
+      | protos.google.cloud.netapp.v1.IListBackupConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.netapp.v1.IVolumeBackupConfig
+    >,
+  ): void;
+  listBackupConfigs(
+    request: protos.google.cloud.netapp.v1.IListBackupConfigsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.netapp.v1.IListBackupConfigsRequest,
+      | protos.google.cloud.netapp.v1.IListBackupConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.netapp.v1.IVolumeBackupConfig
+    >,
+  ): void;
+  listBackupConfigs(
+    request?: protos.google.cloud.netapp.v1.IListBackupConfigsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.netapp.v1.IListBackupConfigsRequest,
+          | protos.google.cloud.netapp.v1.IListBackupConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.netapp.v1.IVolumeBackupConfig
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.netapp.v1.IListBackupConfigsRequest,
+      | protos.google.cloud.netapp.v1.IListBackupConfigsResponse
+      | null
+      | undefined,
+      protos.google.cloud.netapp.v1.IVolumeBackupConfig
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.netapp.v1.IVolumeBackupConfig[],
+      protos.google.cloud.netapp.v1.IListBackupConfigsRequest | null,
+      protos.google.cloud.netapp.v1.IListBackupConfigsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.netapp.v1.IListBackupConfigsRequest,
+          | protos.google.cloud.netapp.v1.IListBackupConfigsResponse
+          | null
+          | undefined,
+          protos.google.cloud.netapp.v1.IVolumeBackupConfig
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listBackupConfigs values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listBackupConfigs request %j', request);
+    return this.innerApiCalls
+      .listBackupConfigs(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.netapp.v1.IVolumeBackupConfig[],
+          protos.google.cloud.netapp.v1.IListBackupConfigsRequest | null,
+          protos.google.cloud.netapp.v1.IListBackupConfigsResponse,
+        ]) => {
+          this._log.info('listBackupConfigs values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listBackupConfigs`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The ONTAP StoragePool for which to retrieve backup configuration
+   *   information, in the format
+   *   `projects/{project}/locations/{location}/storagePools/{storage_pool}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return. The service may return
+   *   fewer than this value. The maximum value is 1000; values above 1000 will be
+   *   coerced to 1000. If unspecified or set to 0, a default of 50 will be used.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported values are "volume_id" or ""
+   * @param {string} [request.filter]
+   *   Optional. The standard list filter.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.netapp.v1.VolumeBackupConfig|VolumeBackupConfig} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBackupConfigsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listBackupConfigsStream(
+    request?: protos.google.cloud.netapp.v1.IListBackupConfigsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listBackupConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBackupConfigs stream %j', request);
+    return this.descriptors.page.listBackupConfigs.createStream(
+      this.innerApiCalls.listBackupConfigs as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listBackupConfigs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The ONTAP StoragePool for which to retrieve backup configuration
+   *   information, in the format
+   *   `projects/{project}/locations/{location}/storagePools/{storage_pool}`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return. The service may return
+   *   fewer than this value. The maximum value is 1000; values above 1000 will be
+   *   coerced to 1000. If unspecified or set to 0, a default of 50 will be used.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value to use if there are additional
+   *   results to retrieve for this list request.
+   * @param {string} [request.orderBy]
+   *   Optional. Sort results. Supported values are "volume_id" or ""
+   * @param {string} [request.filter]
+   *   Optional. The standard list filter.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.netapp.v1.VolumeBackupConfig|VolumeBackupConfig}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/net_app.list_backup_configs.js</caption>
+   * region_tag:netapp_v1_generated_NetApp_ListBackupConfigs_async
+   */
+  listBackupConfigsAsync(
+    request?: protos.google.cloud.netapp.v1.IListBackupConfigsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.netapp.v1.IVolumeBackupConfig> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listBackupConfigs'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listBackupConfigs iterate %j', request);
+    return this.descriptors.page.listBackupConfigs.asyncIterate(
+      this.innerApiCalls['listBackupConfigs'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.netapp.v1.IVolumeBackupConfig>;
   }
 
   /**

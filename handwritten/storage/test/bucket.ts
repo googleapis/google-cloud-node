@@ -3347,7 +3347,12 @@ describe('Bucket', () => {
       const fakeFile = new FakeFile(bucket, 'file-name');
       const options = {destination: fakeFile};
       fakeFile.createWriteStream = () => {
-        const ws = new stream.PassThrough();
+        const ws = new stream.Writable({
+          write(_chunk, _enc, cb) {
+            cb();
+          },
+          final() {},
+        });
         setImmediate(() => {
           ws.destroy(error);
         });
@@ -3366,8 +3371,8 @@ describe('Bucket', () => {
 
       fakeFile.createWriteStream = () => {
         const ws = new stream.PassThrough();
+        fakeFile.metadata = metadata;
         setImmediate(() => {
-          fakeFile.metadata = metadata;
           ws.end();
         });
         return ws;

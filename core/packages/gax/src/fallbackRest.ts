@@ -21,7 +21,7 @@ import {defaultToObjectOptions} from './fallback';
 import {FetchParameters, FetchParametersMethod} from './fallbackServiceStub';
 import {GoogleError} from './googleError';
 import {rpcCodeFromHttpStatusCode} from './status';
-import {transcode} from './transcoding';
+import {getMatchedUrlTemplate, transcode} from './transcoding';
 
 export function encodeRequest(
   rpc: protobuf.Method,
@@ -82,6 +82,7 @@ export function encodeRequest(
   return {
     method,
     url,
+    urlTemplate: getMatchedUrlTemplate(transcoded),
     headers,
     body,
   };

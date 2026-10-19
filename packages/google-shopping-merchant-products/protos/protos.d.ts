@@ -1090,6 +1090,9 @@ export namespace google {
                         /** ProductAttributes minimumOrderValues */
                         minimumOrderValues?: (google.shopping.merchant.products.v1.IProductMinimumOrderValue[]|null);
 
+                        /** ProductAttributes warranty */
+                        warranty?: (google.shopping.merchant.products.v1.ProductAttributes.IWarranty|null);
+
                         /** ProductAttributes vin */
                         vin?: (string|null);
 
@@ -1150,8 +1153,8 @@ export namespace google {
                         /** ProductAttributes vehicleExpenses */
                         vehicleExpenses?: (google.shopping.type.IPrice|null);
 
-                        /** ProductAttributes warranty */
-                        warranty?: (google.shopping.merchant.products.v1.ProductAttributes.IWarranty|null);
+                        /** ProductAttributes returns */
+                        returns?: (google.shopping.merchant.products.v1.ProductAttributes.IReturns[]|null);
 
                         /** ProductAttributes displayAddress */
                         displayAddress?: (google.shopping.merchant.products.v1.ProductAttributes.IDisplayAddress|null);
@@ -1200,6 +1203,9 @@ export namespace google {
 
                         /** ProductAttributes shortTitle */
                         shortTitle?: (string|null);
+
+                        /** ProductAttributes leaseTerm */
+                        leaseTerm?: (google.shopping.merchant.products.v1.ProductAttributes.ILeaseTerm|null);
 
                         /** ProductAttributes questionsAndAnswers */
                         questionsAndAnswers?: (google.shopping.merchant.products.v1.ProductAttributes.IQuestionAndAnswer[]|null);
@@ -1529,6 +1535,9 @@ export namespace google {
                         /** ProductAttributes minimumOrderValues. */
                         public minimumOrderValues: google.shopping.merchant.products.v1.IProductMinimumOrderValue[];
 
+                        /** ProductAttributes warranty. */
+                        public warranty?: (google.shopping.merchant.products.v1.ProductAttributes.IWarranty|null);
+
                         /** ProductAttributes vin. */
                         public vin: string;
 
@@ -1589,8 +1598,8 @@ export namespace google {
                         /** ProductAttributes vehicleExpenses. */
                         public vehicleExpenses?: (google.shopping.type.IPrice|null);
 
-                        /** ProductAttributes warranty. */
-                        public warranty?: (google.shopping.merchant.products.v1.ProductAttributes.IWarranty|null);
+                        /** ProductAttributes returns. */
+                        public returns: google.shopping.merchant.products.v1.ProductAttributes.IReturns[];
 
                         /** ProductAttributes displayAddress. */
                         public displayAddress?: (google.shopping.merchant.products.v1.ProductAttributes.IDisplayAddress|null);
@@ -1639,6 +1648,9 @@ export namespace google {
 
                         /** ProductAttributes shortTitle. */
                         public shortTitle?: (string|null);
+
+                        /** ProductAttributes leaseTerm. */
+                        public leaseTerm?: (google.shopping.merchant.products.v1.ProductAttributes.ILeaseTerm|null);
 
                         /** ProductAttributes questionsAndAnswers. */
                         public questionsAndAnswers: google.shopping.merchant.products.v1.ProductAttributes.IQuestionAndAnswer[];
@@ -2468,6 +2480,9 @@ export namespace google {
 
                             /** Warranty mileage */
                             mileage?: (google.shopping.merchant.products.v1.ProductAttributes.IMileage|null);
+
+                            /** Warranty durationUnit */
+                            durationUnit?: (google.shopping.merchant.products.v1.ProductAttributes.Warranty.WarrantyDurationUnit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.Warranty.WarrantyDurationUnit|null);
                         }
 
                         /** Represents a Warranty. */
@@ -2484,6 +2499,9 @@ export namespace google {
 
                             /** Warranty mileage. */
                             public mileage?: (google.shopping.merchant.products.v1.ProductAttributes.IMileage|null);
+
+                            /** Warranty durationUnit. */
+                            public durationUnit: (google.shopping.merchant.products.v1.ProductAttributes.Warranty.WarrantyDurationUnit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.Warranty.WarrantyDurationUnit);
 
                             /**
                              * Creates a new Warranty instance using the specified properties.
@@ -2561,6 +2579,16 @@ export namespace google {
                              * @returns The default type url
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Warranty {
+
+                            /** WarrantyDurationUnit enum. */
+                            enum WarrantyDurationUnit {
+                                WARRANTY_DURATION_UNIT_UNSPECIFIED = 0,
+                                MONTH = 1,
+                                YEAR = 2
+                            }
                         }
 
                         /** Properties of a ProductFee. */
@@ -3022,6 +3050,335 @@ export namespace google {
                                 CATS = 1,
                                 LARGE_DOGS = 2,
                                 SMALL_DOGS = 3
+                            }
+                        }
+
+                        /** Properties of a LeaseTerm. */
+                        interface ILeaseTerm {
+
+                            /** LeaseTerm type */
+                            type?: (google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm.LeaseTermType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm.LeaseTermType|null);
+
+                            /** LeaseTerm durationValue */
+                            durationValue?: (number|Long|string|null);
+
+                            /** LeaseTerm durationUnit */
+                            durationUnit?: (google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm.DurationUnit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm.DurationUnit|null);
+                        }
+
+                        /** Represents a LeaseTerm. */
+                        class LeaseTerm implements ILeaseTerm {
+
+                            /**
+                             * Constructs a new LeaseTerm.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.ILeaseTerm);
+
+                            /** LeaseTerm type. */
+                            public type: (google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm.LeaseTermType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm.LeaseTermType);
+
+                            /** LeaseTerm durationValue. */
+                            public durationValue?: (number|Long|string|null);
+
+                            /** LeaseTerm durationUnit. */
+                            public durationUnit: (google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm.DurationUnit|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm.DurationUnit);
+
+                            /**
+                             * Creates a new LeaseTerm instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LeaseTerm instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.ILeaseTerm): google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm;
+
+                            /**
+                             * Encodes the specified LeaseTerm message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm.verify|verify} messages.
+                             * @param message LeaseTerm message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.ILeaseTerm, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LeaseTerm message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm.verify|verify} messages.
+                             * @param message LeaseTerm message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.ILeaseTerm, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LeaseTerm message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LeaseTerm
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm;
+
+                            /**
+                             * Decodes a LeaseTerm message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LeaseTerm
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm;
+
+                            /**
+                             * Verifies a LeaseTerm message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LeaseTerm message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LeaseTerm
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm;
+
+                            /**
+                             * Creates a plain object from a LeaseTerm message. Also converts values to other types if specified.
+                             * @param message LeaseTerm
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.LeaseTerm, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LeaseTerm to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for LeaseTerm
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace LeaseTerm {
+
+                            /** LeaseTermType enum. */
+                            enum LeaseTermType {
+                                LEASE_TERM_TYPE_UNSPECIFIED = 0,
+                                FIXED_TERM = 1
+                            }
+
+                            /** DurationUnit enum. */
+                            enum DurationUnit {
+                                DURATION_UNIT_UNSPECIFIED = 0,
+                                MONTHS = 1,
+                                WEEKS = 2
+                            }
+                        }
+
+                        /** Properties of a Returns. */
+                        interface IReturns {
+
+                            /** Returns restockingFee */
+                            restockingFee?: (google.shopping.type.IPrice|null);
+
+                            /** Returns restockingPercentageFee */
+                            restockingPercentageFee?: (number|null);
+
+                            /** Returns countries */
+                            countries?: (string[]|null);
+
+                            /** Returns windowDays */
+                            windowDays?: (number|Long|string|null);
+
+                            /** Returns windowType */
+                            windowType?: (google.shopping.merchant.products.v1.ProductAttributes.Returns.ReturnWindowType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.Returns.ReturnWindowType|null);
+
+                            /** Returns itemConditions */
+                            itemConditions?: (google.shopping.merchant.products.v1.ProductAttributes.Returns.ItemCondition[]|null);
+
+                            /** Returns methods */
+                            methods?: (google.shopping.merchant.products.v1.ProductAttributes.Returns.ReturnMethod[]|null);
+
+                            /** Returns outcomes */
+                            outcomes?: (google.shopping.merchant.products.v1.ProductAttributes.Returns.ReturnOutcome[]|null);
+
+                            /** Returns shippingFee */
+                            shippingFee?: (google.shopping.type.IPrice|null);
+
+                            /** Returns shippingFeeType */
+                            shippingFeeType?: (google.shopping.merchant.products.v1.ProductAttributes.Returns.ReturnShippingFeeType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.Returns.ReturnShippingFeeType|null);
+
+                            /** Returns policyUrl */
+                            policyUrl?: (string|null);
+                        }
+
+                        /** Represents a Returns. */
+                        class Returns implements IReturns {
+
+                            /**
+                             * Constructs a new Returns.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.IReturns);
+
+                            /** Returns restockingFee. */
+                            public restockingFee?: (google.shopping.type.IPrice|null);
+
+                            /** Returns restockingPercentageFee. */
+                            public restockingPercentageFee?: (number|null);
+
+                            /** Returns countries. */
+                            public countries: string[];
+
+                            /** Returns windowDays. */
+                            public windowDays?: (number|Long|string|null);
+
+                            /** Returns windowType. */
+                            public windowType?: (google.shopping.merchant.products.v1.ProductAttributes.Returns.ReturnWindowType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.Returns.ReturnWindowType|null);
+
+                            /** Returns itemConditions. */
+                            public itemConditions: google.shopping.merchant.products.v1.ProductAttributes.Returns.ItemCondition[];
+
+                            /** Returns methods. */
+                            public methods: google.shopping.merchant.products.v1.ProductAttributes.Returns.ReturnMethod[];
+
+                            /** Returns outcomes. */
+                            public outcomes: google.shopping.merchant.products.v1.ProductAttributes.Returns.ReturnOutcome[];
+
+                            /** Returns shippingFee. */
+                            public shippingFee?: (google.shopping.type.IPrice|null);
+
+                            /** Returns shippingFeeType. */
+                            public shippingFeeType?: (google.shopping.merchant.products.v1.ProductAttributes.Returns.ReturnShippingFeeType|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.Returns.ReturnShippingFeeType|null);
+
+                            /** Returns policyUrl. */
+                            public policyUrl?: (string|null);
+
+                            /** Returns restockingFeeOneof. */
+                            public restockingFeeOneof?: ("restockingFee"|"restockingPercentageFee");
+
+                            /**
+                             * Creates a new Returns instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Returns instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.IReturns): google.shopping.merchant.products.v1.ProductAttributes.Returns;
+
+                            /**
+                             * Encodes the specified Returns message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.Returns.verify|verify} messages.
+                             * @param message Returns message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.IReturns, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Returns message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.Returns.verify|verify} messages.
+                             * @param message Returns message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.IReturns, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Returns message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Returns
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.Returns;
+
+                            /**
+                             * Decodes a Returns message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Returns
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.Returns;
+
+                            /**
+                             * Verifies a Returns message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Returns message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Returns
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.Returns;
+
+                            /**
+                             * Creates a plain object from a Returns message. Also converts values to other types if specified.
+                             * @param message Returns
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.Returns, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Returns to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Returns
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Returns {
+
+                            /** ReturnWindowType enum. */
+                            enum ReturnWindowType {
+                                RETURN_WINDOW_TYPE_UNSPECIFIED = 0,
+                                FINITE_RETURN_WINDOW = 1,
+                                NO_RETURNS = 2,
+                                LIFETIME = 3
+                            }
+
+                            /** ReturnMethod enum. */
+                            enum ReturnMethod {
+                                RETURN_METHOD_UNSPECIFIED = 0,
+                                BY_MAIL = 1,
+                                IN_STORE = 2,
+                                AT_A_KIOSK = 3,
+                                DROP_OFF_LOCATION = 4
+                            }
+
+                            /** ItemCondition enum. */
+                            enum ItemCondition {
+                                ITEM_CONDITION_UNSPECIFIED = 0,
+                                NEW = 1,
+                                LIKE_NEW = 2,
+                                USED = 3,
+                                DEFECTIVE_ONLY = 4
+                            }
+
+                            /** ReturnOutcome enum. */
+                            enum ReturnOutcome {
+                                RETURN_OUTCOME_UNSPECIFIED = 0,
+                                REFUND = 1,
+                                EXCHANGE = 2,
+                                STORE_CREDIT = 3
+                            }
+
+                            /** ReturnShippingFeeType enum. */
+                            enum ReturnShippingFeeType {
+                                RETURN_SHIPPING_FEE_TYPE_UNSPECIFIED = 0,
+                                CUSTOMER_RESPONSIBILITY = 1,
+                                DEDUCTED_FROM_REFUND = 2
                             }
                         }
 
@@ -4120,6 +4477,9 @@ export namespace google {
 
                         /** ProductInstallment totalAmount */
                         totalAmount?: (google.shopping.type.IPrice|null);
+
+                        /** ProductInstallment mileageAllowance */
+                        mileageAllowance?: (google.shopping.merchant.products.v1.ProductAttributes.IMileage|null);
                     }
 
                     /** Represents a ProductInstallment. */
@@ -4148,6 +4508,9 @@ export namespace google {
 
                         /** ProductInstallment totalAmount. */
                         public totalAmount?: (google.shopping.type.IPrice|null);
+
+                        /** ProductInstallment mileageAllowance. */
+                        public mileageAllowance?: (google.shopping.merchant.products.v1.ProductAttributes.IMileage|null);
 
                         /**
                          * Creates a new ProductInstallment instance using the specified properties.
@@ -4876,6 +5239,12 @@ export namespace google {
 
                         /** ProductCertification certificationValue */
                         certificationValue?: (string|null);
+
+                        /** ProductCertification certificationDocumentLink */
+                        certificationDocumentLink?: (string|null);
+
+                        /** ProductCertification certificationLabelLink */
+                        certificationLabelLink?: (string|null);
                     }
 
                     /** Represents a ProductCertification. */
@@ -4898,6 +5267,12 @@ export namespace google {
 
                         /** ProductCertification certificationValue. */
                         public certificationValue?: (string|null);
+
+                        /** ProductCertification certificationDocumentLink. */
+                        public certificationDocumentLink?: (string|null);
+
+                        /** ProductCertification certificationLabelLink. */
+                        public certificationLabelLink?: (string|null);
 
                         /**
                          * Creates a new ProductCertification instance using the specified properties.

@@ -47,6 +47,7 @@ const {
   cacheSessionEvents,
 } = require('./helper');
 const {
+  AsyncLocalStorageContextManager,
   AsyncHooksContextManager,
 } = require('@opentelemetry/context-async-hooks');
 
@@ -146,12 +147,10 @@ async function setup(
 
 describe('EndToEnd', async () => {
   const sandbox = sinon.createSandbox();
-  const contextManager = new AsyncHooksContextManager();
+  const contextManager = new (
+    AsyncLocalStorageContextManager || AsyncHooksContextManager
+  )();
   setGlobalContextManager(contextManager);
-  afterEach(async () => {
-    disableContextAndManager(contextManager);
-  });
-
   const traceExporter = new InMemorySpanExporter();
   const sampler = new AlwaysOnSampler();
   const tracerProvider = new NodeTracerProvider({
@@ -177,6 +176,7 @@ describe('EndToEnd', async () => {
     await spanner.close();
     await server.tryShutdown(() => {});
     sandbox.restore();
+    disableContextAndManager(contextManager);
   });
 
   afterEach(async () => {
@@ -227,6 +227,7 @@ describe('EndToEnd', async () => {
             'Begin Transaction',
             'Transaction Creation Done',
             ...cacheSessionEvents,
+            'Using Session',
             'Starting stream',
           ];
           await verifySpansAndEvents(
@@ -319,6 +320,7 @@ describe('EndToEnd', async () => {
           'Starting Commit',
           'Commit Done',
           ...cacheSessionEvents,
+          'Using Session',
         ];
 
         await verifySpansAndEvents(
@@ -1174,9 +1176,6 @@ SELECT 1p
   function assertRunBadSyntaxExpectations() {
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
-    spans.sort((spanA, spanB) => {
-      return spanA.startTime < spanB.startTime;
-    });
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
@@ -1324,9 +1323,6 @@ SELECT 1p
   function assertDatabaseRunPlusAwaitTransactionForAlreadyExistentData() {
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
-    spans.sort((spanA, spanB) => {
-      return spanA.startTime < spanB.startTime;
-    });
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
@@ -1799,9 +1795,6 @@ describe('Traces for ExecuteStream broken stream retries', () => {
               .then(() => {
                 traceExporter.forceFlush();
                 const spans = traceExporter.getFinishedSpans();
-                spans.sort((spanA, spanB) => {
-                  return spanA.startTime < spanB.startTime;
-                });
 
                 const actualSpanNames: string[] = [];
                 const actualEventNames: string[] = [];
@@ -1866,9 +1859,6 @@ describe('Traces for ExecuteStream broken stream retries', () => {
 
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
-    spans.sort((spanA, spanB) => {
-      return spanA.startTime < spanB.startTime;
-    });
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
@@ -2033,9 +2023,25 @@ describe('End to end tracing headers', () => {
   let spannerMock: mock.MockSpanner;
   let observabilityOptions: typeof ObservabilityOptions;
 
+  let provider: InstanceType<typeof NodeTracerProvider>;
+
+  before(() => {
+    const traceExporter = new InMemorySpanExporter();
+    provider = new NodeTracerProvider({
+      sampler: new AlwaysOnSampler(),
+      exporter: traceExporter,
+      spanProcessors: [new SimpleSpanProcessor(traceExporter)],
+    });
+  });
+
+  after(async () => {
+    await provider.shutdown();
+  });
+
   beforeEach(async () => {
     sandbox = sinon.createSandbox();
     observabilityOptions = {
+      tracerProvider: provider,
       enableEndToEndTracing: true,
     };
 

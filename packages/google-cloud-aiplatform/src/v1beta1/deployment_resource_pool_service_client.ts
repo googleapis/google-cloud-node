@@ -299,9 +299,6 @@ export class DeploymentResourcePoolServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}',
       ),
-      memoryPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/memories/{memory}',
-      ),
       metadataSchemaPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/metadataStores/{metadata_store}/metadataSchemas/{metadata_schema}',
       ),
@@ -365,9 +362,25 @@ export class DeploymentResourcePoolServiceClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}/features/{feature}',
         ),
+      projectLocationMemoryBankMemoriesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/memoryBanks/{memory_bank}/memories/{memory}',
+        ),
+      projectLocationMemoryBankMemoryMemoryRevisionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/memoryBanks/{memory_bank}/memories/{memory}/revisions/{memory_revision}',
+        ),
       projectLocationPublisherModelPathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/publishers/{publisher}/models/{model}',
+        ),
+      projectLocationReasoningEngineMemoriesPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/memories/{memory}',
+        ),
+      projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/reasoningEngines/{reasoning_engine}/memories/{memory}/revisions/{memory_revision}',
         ),
       publisherModelPathTemplate: new this._gaxModule.PathTemplate(
         'publishers/{publisher}/models/{model}',
@@ -5892,74 +5905,6 @@ export class DeploymentResourcePoolServiceClient {
   }
 
   /**
-   * Return a fully-qualified memory resource name string.
-   *
-   * @param {string} project
-   * @param {string} location
-   * @param {string} reasoning_engine
-   * @param {string} memory
-   * @returns {string} Resource name string.
-   */
-  memoryPath(
-    project: string,
-    location: string,
-    reasoningEngine: string,
-    memory: string,
-  ) {
-    return this.pathTemplates.memoryPathTemplate.render({
-      project: project,
-      location: location,
-      reasoning_engine: reasoningEngine,
-      memory: memory,
-    });
-  }
-
-  /**
-   * Parse the project from Memory resource.
-   *
-   * @param {string} memoryName
-   *   A fully-qualified path representing Memory resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromMemoryName(memoryName: string) {
-    return this.pathTemplates.memoryPathTemplate.match(memoryName).project;
-  }
-
-  /**
-   * Parse the location from Memory resource.
-   *
-   * @param {string} memoryName
-   *   A fully-qualified path representing Memory resource.
-   * @returns {string} A string representing the location.
-   */
-  matchLocationFromMemoryName(memoryName: string) {
-    return this.pathTemplates.memoryPathTemplate.match(memoryName).location;
-  }
-
-  /**
-   * Parse the reasoning_engine from Memory resource.
-   *
-   * @param {string} memoryName
-   *   A fully-qualified path representing Memory resource.
-   * @returns {string} A string representing the reasoning_engine.
-   */
-  matchReasoningEngineFromMemoryName(memoryName: string) {
-    return this.pathTemplates.memoryPathTemplate.match(memoryName)
-      .reasoning_engine;
-  }
-
-  /**
-   * Parse the memory from Memory resource.
-   *
-   * @param {string} memoryName
-   *   A fully-qualified path representing Memory resource.
-   * @returns {string} A string representing the memory.
-   */
-  matchMemoryFromMemoryName(memoryName: string) {
-    return this.pathTemplates.memoryPathTemplate.match(memoryName).memory;
-  }
-
-  /**
    * Return a fully-qualified metadataSchema resource name string.
    *
    * @param {string} project
@@ -7255,6 +7200,194 @@ export class DeploymentResourcePoolServiceClient {
   }
 
   /**
+   * Return a fully-qualified projectLocationMemoryBankMemories resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} memory_bank
+   * @param {string} memory
+   * @returns {string} Resource name string.
+   */
+  projectLocationMemoryBankMemoriesPath(
+    project: string,
+    location: string,
+    memoryBank: string,
+    memory: string,
+  ) {
+    return this.pathTemplates.projectLocationMemoryBankMemoriesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        memory_bank: memoryBank,
+        memory: memory,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationMemoryBankMemories resource.
+   *
+   * @param {string} projectLocationMemoryBankMemoriesName
+   *   A fully-qualified path representing project_location_memory_bank_memories resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationMemoryBankMemoriesName(
+    projectLocationMemoryBankMemoriesName: string,
+  ) {
+    return this.pathTemplates.projectLocationMemoryBankMemoriesPathTemplate.match(
+      projectLocationMemoryBankMemoriesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationMemoryBankMemories resource.
+   *
+   * @param {string} projectLocationMemoryBankMemoriesName
+   *   A fully-qualified path representing project_location_memory_bank_memories resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationMemoryBankMemoriesName(
+    projectLocationMemoryBankMemoriesName: string,
+  ) {
+    return this.pathTemplates.projectLocationMemoryBankMemoriesPathTemplate.match(
+      projectLocationMemoryBankMemoriesName,
+    ).location;
+  }
+
+  /**
+   * Parse the memory_bank from ProjectLocationMemoryBankMemories resource.
+   *
+   * @param {string} projectLocationMemoryBankMemoriesName
+   *   A fully-qualified path representing project_location_memory_bank_memories resource.
+   * @returns {string} A string representing the memory_bank.
+   */
+  matchMemoryBankFromProjectLocationMemoryBankMemoriesName(
+    projectLocationMemoryBankMemoriesName: string,
+  ) {
+    return this.pathTemplates.projectLocationMemoryBankMemoriesPathTemplate.match(
+      projectLocationMemoryBankMemoriesName,
+    ).memory_bank;
+  }
+
+  /**
+   * Parse the memory from ProjectLocationMemoryBankMemories resource.
+   *
+   * @param {string} projectLocationMemoryBankMemoriesName
+   *   A fully-qualified path representing project_location_memory_bank_memories resource.
+   * @returns {string} A string representing the memory.
+   */
+  matchMemoryFromProjectLocationMemoryBankMemoriesName(
+    projectLocationMemoryBankMemoriesName: string,
+  ) {
+    return this.pathTemplates.projectLocationMemoryBankMemoriesPathTemplate.match(
+      projectLocationMemoryBankMemoriesName,
+    ).memory;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationMemoryBankMemoryMemoryRevision resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} memory_bank
+   * @param {string} memory
+   * @param {string} memory_revision
+   * @returns {string} Resource name string.
+   */
+  projectLocationMemoryBankMemoryMemoryRevisionPath(
+    project: string,
+    location: string,
+    memoryBank: string,
+    memory: string,
+    memoryRevision: string,
+  ) {
+    return this.pathTemplates.projectLocationMemoryBankMemoryMemoryRevisionPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        memory_bank: memoryBank,
+        memory: memory,
+        memory_revision: memoryRevision,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationMemoryBankMemoryMemoryRevision resource.
+   *
+   * @param {string} projectLocationMemoryBankMemoryMemoryRevisionName
+   *   A fully-qualified path representing project_location_memory_bank_memory_memory_revision resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationMemoryBankMemoryMemoryRevisionName(
+    projectLocationMemoryBankMemoryMemoryRevisionName: string,
+  ) {
+    return this.pathTemplates.projectLocationMemoryBankMemoryMemoryRevisionPathTemplate.match(
+      projectLocationMemoryBankMemoryMemoryRevisionName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationMemoryBankMemoryMemoryRevision resource.
+   *
+   * @param {string} projectLocationMemoryBankMemoryMemoryRevisionName
+   *   A fully-qualified path representing project_location_memory_bank_memory_memory_revision resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationMemoryBankMemoryMemoryRevisionName(
+    projectLocationMemoryBankMemoryMemoryRevisionName: string,
+  ) {
+    return this.pathTemplates.projectLocationMemoryBankMemoryMemoryRevisionPathTemplate.match(
+      projectLocationMemoryBankMemoryMemoryRevisionName,
+    ).location;
+  }
+
+  /**
+   * Parse the memory_bank from ProjectLocationMemoryBankMemoryMemoryRevision resource.
+   *
+   * @param {string} projectLocationMemoryBankMemoryMemoryRevisionName
+   *   A fully-qualified path representing project_location_memory_bank_memory_memory_revision resource.
+   * @returns {string} A string representing the memory_bank.
+   */
+  matchMemoryBankFromProjectLocationMemoryBankMemoryMemoryRevisionName(
+    projectLocationMemoryBankMemoryMemoryRevisionName: string,
+  ) {
+    return this.pathTemplates.projectLocationMemoryBankMemoryMemoryRevisionPathTemplate.match(
+      projectLocationMemoryBankMemoryMemoryRevisionName,
+    ).memory_bank;
+  }
+
+  /**
+   * Parse the memory from ProjectLocationMemoryBankMemoryMemoryRevision resource.
+   *
+   * @param {string} projectLocationMemoryBankMemoryMemoryRevisionName
+   *   A fully-qualified path representing project_location_memory_bank_memory_memory_revision resource.
+   * @returns {string} A string representing the memory.
+   */
+  matchMemoryFromProjectLocationMemoryBankMemoryMemoryRevisionName(
+    projectLocationMemoryBankMemoryMemoryRevisionName: string,
+  ) {
+    return this.pathTemplates.projectLocationMemoryBankMemoryMemoryRevisionPathTemplate.match(
+      projectLocationMemoryBankMemoryMemoryRevisionName,
+    ).memory;
+  }
+
+  /**
+   * Parse the memory_revision from ProjectLocationMemoryBankMemoryMemoryRevision resource.
+   *
+   * @param {string} projectLocationMemoryBankMemoryMemoryRevisionName
+   *   A fully-qualified path representing project_location_memory_bank_memory_memory_revision resource.
+   * @returns {string} A string representing the memory_revision.
+   */
+  matchMemoryRevisionFromProjectLocationMemoryBankMemoryMemoryRevisionName(
+    projectLocationMemoryBankMemoryMemoryRevisionName: string,
+  ) {
+    return this.pathTemplates.projectLocationMemoryBankMemoryMemoryRevisionPathTemplate.match(
+      projectLocationMemoryBankMemoryMemoryRevisionName,
+    ).memory_revision;
+  }
+
+  /**
    * Return a fully-qualified projectLocationPublisherModel resource name string.
    *
    * @param {string} project
@@ -7335,6 +7468,194 @@ export class DeploymentResourcePoolServiceClient {
     return this.pathTemplates.projectLocationPublisherModelPathTemplate.match(
       projectLocationPublisherModelName,
     ).model;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationReasoningEngineMemories resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} memory
+   * @returns {string} Resource name string.
+   */
+  projectLocationReasoningEngineMemoriesPath(
+    project: string,
+    location: string,
+    reasoningEngine: string,
+    memory: string,
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineMemoriesPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        reasoning_engine: reasoningEngine,
+        memory: memory,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationReasoningEngineMemories resource.
+   *
+   * @param {string} projectLocationReasoningEngineMemoriesName
+   *   A fully-qualified path representing project_location_reasoning_engine_memories resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationReasoningEngineMemoriesName(
+    projectLocationReasoningEngineMemoriesName: string,
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineMemoriesPathTemplate.match(
+      projectLocationReasoningEngineMemoriesName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationReasoningEngineMemories resource.
+   *
+   * @param {string} projectLocationReasoningEngineMemoriesName
+   *   A fully-qualified path representing project_location_reasoning_engine_memories resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationReasoningEngineMemoriesName(
+    projectLocationReasoningEngineMemoriesName: string,
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineMemoriesPathTemplate.match(
+      projectLocationReasoningEngineMemoriesName,
+    ).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from ProjectLocationReasoningEngineMemories resource.
+   *
+   * @param {string} projectLocationReasoningEngineMemoriesName
+   *   A fully-qualified path representing project_location_reasoning_engine_memories resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromProjectLocationReasoningEngineMemoriesName(
+    projectLocationReasoningEngineMemoriesName: string,
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineMemoriesPathTemplate.match(
+      projectLocationReasoningEngineMemoriesName,
+    ).reasoning_engine;
+  }
+
+  /**
+   * Parse the memory from ProjectLocationReasoningEngineMemories resource.
+   *
+   * @param {string} projectLocationReasoningEngineMemoriesName
+   *   A fully-qualified path representing project_location_reasoning_engine_memories resource.
+   * @returns {string} A string representing the memory.
+   */
+  matchMemoryFromProjectLocationReasoningEngineMemoriesName(
+    projectLocationReasoningEngineMemoriesName: string,
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineMemoriesPathTemplate.match(
+      projectLocationReasoningEngineMemoriesName,
+    ).memory;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationReasoningEngineMemoryMemoryRevision resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reasoning_engine
+   * @param {string} memory
+   * @param {string} memory_revision
+   * @returns {string} Resource name string.
+   */
+  projectLocationReasoningEngineMemoryMemoryRevisionPath(
+    project: string,
+    location: string,
+    reasoningEngine: string,
+    memory: string,
+    memoryRevision: string,
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        reasoning_engine: reasoningEngine,
+        memory: memory,
+        memory_revision: memoryRevision,
+      },
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationReasoningEngineMemoryMemoryRevision resource.
+   *
+   * @param {string} projectLocationReasoningEngineMemoryMemoryRevisionName
+   *   A fully-qualified path representing project_location_reasoning_engine_memory_memory_revision resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationReasoningEngineMemoryMemoryRevisionName(
+    projectLocationReasoningEngineMemoryMemoryRevisionName: string,
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate.match(
+      projectLocationReasoningEngineMemoryMemoryRevisionName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationReasoningEngineMemoryMemoryRevision resource.
+   *
+   * @param {string} projectLocationReasoningEngineMemoryMemoryRevisionName
+   *   A fully-qualified path representing project_location_reasoning_engine_memory_memory_revision resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationReasoningEngineMemoryMemoryRevisionName(
+    projectLocationReasoningEngineMemoryMemoryRevisionName: string,
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate.match(
+      projectLocationReasoningEngineMemoryMemoryRevisionName,
+    ).location;
+  }
+
+  /**
+   * Parse the reasoning_engine from ProjectLocationReasoningEngineMemoryMemoryRevision resource.
+   *
+   * @param {string} projectLocationReasoningEngineMemoryMemoryRevisionName
+   *   A fully-qualified path representing project_location_reasoning_engine_memory_memory_revision resource.
+   * @returns {string} A string representing the reasoning_engine.
+   */
+  matchReasoningEngineFromProjectLocationReasoningEngineMemoryMemoryRevisionName(
+    projectLocationReasoningEngineMemoryMemoryRevisionName: string,
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate.match(
+      projectLocationReasoningEngineMemoryMemoryRevisionName,
+    ).reasoning_engine;
+  }
+
+  /**
+   * Parse the memory from ProjectLocationReasoningEngineMemoryMemoryRevision resource.
+   *
+   * @param {string} projectLocationReasoningEngineMemoryMemoryRevisionName
+   *   A fully-qualified path representing project_location_reasoning_engine_memory_memory_revision resource.
+   * @returns {string} A string representing the memory.
+   */
+  matchMemoryFromProjectLocationReasoningEngineMemoryMemoryRevisionName(
+    projectLocationReasoningEngineMemoryMemoryRevisionName: string,
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate.match(
+      projectLocationReasoningEngineMemoryMemoryRevisionName,
+    ).memory;
+  }
+
+  /**
+   * Parse the memory_revision from ProjectLocationReasoningEngineMemoryMemoryRevision resource.
+   *
+   * @param {string} projectLocationReasoningEngineMemoryMemoryRevisionName
+   *   A fully-qualified path representing project_location_reasoning_engine_memory_memory_revision resource.
+   * @returns {string} A string representing the memory_revision.
+   */
+  matchMemoryRevisionFromProjectLocationReasoningEngineMemoryMemoryRevisionName(
+    projectLocationReasoningEngineMemoryMemoryRevisionName: string,
+  ) {
+    return this.pathTemplates.projectLocationReasoningEngineMemoryMemoryRevisionPathTemplate.match(
+      projectLocationReasoningEngineMemoryMemoryRevisionName,
+    ).memory_revision;
   }
 
   /**

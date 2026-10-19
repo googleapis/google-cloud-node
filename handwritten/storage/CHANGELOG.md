@@ -5,6 +5,28 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [8.4.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.3.0...storage-v8.4.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [8.3.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.2.1...storage-v8.3.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
+## [8.2.1](https://github.com/googleapis/google-cloud-node/compare/storage-v8.2.0...storage-v8.2.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* **storage:** Re-enable docs check and update linkinator ([#9257](https://github.com/googleapis/google-cloud-node/issues/9257)) ([6f9d967](https://github.com/googleapis/google-cloud-node/commit/6f9d967049cb80ac201964258a6d3fd016ad0963))
+* **storage:** Upgrade google-auth-library to v11, gaxios to v7 and align auth client types ([#9289](https://github.com/googleapis/google-cloud-node/issues/9289)) ([c6c946d](https://github.com/googleapis/google-cloud-node/commit/c6c946d25ffd2cba6a703f7e2c910d866a5d9694))
+
 ## [8.2.0](https://github.com/googleapis/google-cloud-node/compare/storage-v8.1.0...storage-v8.2.0) (2026-09-17)
 
 

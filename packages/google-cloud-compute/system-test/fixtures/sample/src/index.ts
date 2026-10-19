@@ -33,6 +33,7 @@ import {
   FutureReservationsClient,
   GlobalAddressesClient,
   GlobalForwardingRulesClient,
+  GlobalFrontendSettingsServiceClient,
   GlobalNetworkEndpointGroupsClient,
   GlobalOperationsClient,
   GlobalOrganizationOperationsClient,
@@ -42,6 +43,7 @@ import {
   HostsClient,
   ImageFamilyViewsClient,
   ImagesClient,
+  ImageViewsClient,
   InstanceGroupManagerResizeRequestsClient,
   InstanceGroupManagersClient,
   InstanceGroupsClient,
@@ -60,6 +62,7 @@ import {
   LicensesClient,
   MachineImagesClient,
   MachineTypesClient,
+  ManagedRulesetsClient,
   NetworkAttachmentsClient,
   NetworkEdgeSecurityServicesClient,
   NetworkEndpointGroupsClient,
@@ -198,6 +201,11 @@ function doStuffWithGlobalForwardingRulesClient(
 ) {
   client.close();
 }
+function doStuffWithGlobalFrontendSettingsServiceClient(
+  client: GlobalFrontendSettingsServiceClient,
+) {
+  client.close();
+}
 function doStuffWithGlobalNetworkEndpointGroupsClient(
   client: GlobalNetworkEndpointGroupsClient,
 ) {
@@ -231,6 +239,9 @@ function doStuffWithImageFamilyViewsClient(client: ImageFamilyViewsClient) {
   client.close();
 }
 function doStuffWithImagesClient(client: ImagesClient) {
+  client.close();
+}
+function doStuffWithImageViewsClient(client: ImageViewsClient) {
   client.close();
 }
 function doStuffWithInstanceGroupManagerResizeRequestsClient(
@@ -301,6 +312,9 @@ function doStuffWithMachineImagesClient(client: MachineImagesClient) {
   client.close();
 }
 function doStuffWithMachineTypesClient(client: MachineTypesClient) {
+  client.close();
+}
+function doStuffWithManagedRulesetsClient(client: ManagedRulesetsClient) {
   client.close();
 }
 function doStuffWithNetworkAttachmentsClient(client: NetworkAttachmentsClient) {
@@ -663,6 +677,12 @@ function main() {
   const globalForwardingRulesClient = new GlobalForwardingRulesClient();
   doStuffWithGlobalForwardingRulesClient(globalForwardingRulesClient);
   // check that the client instance can be created
+  const globalFrontendSettingsServiceClient =
+    new GlobalFrontendSettingsServiceClient();
+  doStuffWithGlobalFrontendSettingsServiceClient(
+    globalFrontendSettingsServiceClient,
+  );
+  // check that the client instance can be created
   const globalNetworkEndpointGroupsClient =
     new GlobalNetworkEndpointGroupsClient();
   doStuffWithGlobalNetworkEndpointGroupsClient(
@@ -698,6 +718,9 @@ function main() {
   // check that the client instance can be created
   const imagesClient = new ImagesClient();
   doStuffWithImagesClient(imagesClient);
+  // check that the client instance can be created
+  const imageViewsClient = new ImageViewsClient();
+  doStuffWithImageViewsClient(imageViewsClient);
   // check that the client instance can be created
   const instanceGroupManagerResizeRequestsClient =
     new InstanceGroupManagerResizeRequestsClient();
@@ -761,6 +784,9 @@ function main() {
   // check that the client instance can be created
   const machineTypesClient = new MachineTypesClient();
   doStuffWithMachineTypesClient(machineTypesClient);
+  // check that the client instance can be created
+  const managedRulesetsClient = new ManagedRulesetsClient();
+  doStuffWithManagedRulesetsClient(managedRulesetsClient);
   // check that the client instance can be created
   const networkAttachmentsClient = new NetworkAttachmentsClient();
   doStuffWithNetworkAttachmentsClient(networkAttachmentsClient);

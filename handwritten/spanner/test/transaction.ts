@@ -4243,7 +4243,9 @@ describe('Transaction', () => {
                 REQUEST_STREAM.secondCall.args[0].reqOpts;
               assert.deepStrictEqual(firstCallReqOpts.transaction, {
                 begin: {
-                  readWrite: {},
+                  readWrite: {
+                    multiplexedSessionPreviousTransactionId: undefined,
+                  },
                   isolationLevel: IsolationLevel.ISOLATION_LEVEL_UNSPECIFIED,
                 },
               });

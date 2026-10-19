@@ -30,10 +30,9 @@ function main(parent, requests) {
    */
   /**
    *  Required. The parent resource where
-   *  Partner google.ads.admanager.v1.Partner s will be updated. Format:
-   *  `networks/{network_code}` The parent field in the
-   *  UpdatePartnerRequest google.ads.admanager.v1.UpdatePartnerRequest  must
-   *  match this field.
+   *  Partners google.ads.admanager.v1.Partner  will be updated. Format:
+   *  `networks/{network_code}` The parent field in the `UpdatePartnerRequest`
+   *  must match this field.
    */
   // const parent = 'abc123'
   /**

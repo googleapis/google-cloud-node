@@ -1731,6 +1731,9 @@ export namespace google {
 
                     /** Repository internalMetadata */
                     internalMetadata?: (string|null);
+
+                    /** Repository endUserAuthConfig */
+                    endUserAuthConfig?: (google.cloud.dataform.v1.Repository.IEndUserAuthConfig|null);
                 }
 
                 /** Represents a Repository. */
@@ -1783,6 +1786,9 @@ export namespace google {
 
                     /** Repository internalMetadata. */
                     public internalMetadata?: (string|null);
+
+                    /** Repository endUserAuthConfig. */
+                    public endUserAuthConfig?: (google.cloud.dataform.v1.Repository.IEndUserAuthConfig|null);
 
                     /**
                      * Creates a new Repository instance using the specified properties.
@@ -2219,6 +2225,200 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of an EndUserAuthConfig. */
+                    interface IEndUserAuthConfig {
+
+                        /** EndUserAuthConfig oauthConfig */
+                        oauthConfig?: (google.cloud.dataform.v1.IOAuthConfig|null);
+                    }
+
+                    /** Represents an EndUserAuthConfig. */
+                    class EndUserAuthConfig implements IEndUserAuthConfig {
+
+                        /**
+                         * Constructs a new EndUserAuthConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataform.v1.Repository.IEndUserAuthConfig);
+
+                        /** EndUserAuthConfig oauthConfig. */
+                        public oauthConfig?: (google.cloud.dataform.v1.IOAuthConfig|null);
+
+                        /**
+                         * Creates a new EndUserAuthConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EndUserAuthConfig instance
+                         */
+                        public static create(properties?: google.cloud.dataform.v1.Repository.IEndUserAuthConfig): google.cloud.dataform.v1.Repository.EndUserAuthConfig;
+
+                        /**
+                         * Encodes the specified EndUserAuthConfig message. Does not implicitly {@link google.cloud.dataform.v1.Repository.EndUserAuthConfig.verify|verify} messages.
+                         * @param message EndUserAuthConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataform.v1.Repository.IEndUserAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EndUserAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1.Repository.EndUserAuthConfig.verify|verify} messages.
+                         * @param message EndUserAuthConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataform.v1.Repository.IEndUserAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EndUserAuthConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EndUserAuthConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1.Repository.EndUserAuthConfig;
+
+                        /**
+                         * Decodes an EndUserAuthConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EndUserAuthConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1.Repository.EndUserAuthConfig;
+
+                        /**
+                         * Verifies an EndUserAuthConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EndUserAuthConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EndUserAuthConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1.Repository.EndUserAuthConfig;
+
+                        /**
+                         * Creates a plain object from an EndUserAuthConfig message. Also converts values to other types if specified.
+                         * @param message EndUserAuthConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataform.v1.Repository.EndUserAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EndUserAuthConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EndUserAuthConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a OAuthConfig. */
+                interface IOAuthConfig {
+
+                    /** OAuthConfig additionalOauthScopes */
+                    additionalOauthScopes?: (string[]|null);
+                }
+
+                /** Represents a OAuthConfig. */
+                class OAuthConfig implements IOAuthConfig {
+
+                    /**
+                     * Constructs a new OAuthConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1.IOAuthConfig);
+
+                    /** OAuthConfig additionalOauthScopes. */
+                    public additionalOauthScopes: string[];
+
+                    /**
+                     * Creates a new OAuthConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OAuthConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1.IOAuthConfig): google.cloud.dataform.v1.OAuthConfig;
+
+                    /**
+                     * Encodes the specified OAuthConfig message. Does not implicitly {@link google.cloud.dataform.v1.OAuthConfig.verify|verify} messages.
+                     * @param message OAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1.IOAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1.OAuthConfig.verify|verify} messages.
+                     * @param message OAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1.IOAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a OAuthConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1.OAuthConfig;
+
+                    /**
+                     * Decodes a OAuthConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1.OAuthConfig;
+
+                    /**
+                     * Verifies a OAuthConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a OAuthConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OAuthConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1.OAuthConfig;
+
+                    /**
+                     * Creates a plain object from a OAuthConfig message. Also converts values to other types if specified.
+                     * @param message OAuthConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1.OAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OAuthConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OAuthConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a PrivateResourceMetadata. */
@@ -14310,6 +14510,9 @@ export namespace google {
                     /** InvocationConfig serviceAccount */
                     serviceAccount?: (string|null);
 
+                    /** InvocationConfig endUserAuthConfig */
+                    endUserAuthConfig?: (google.cloud.dataform.v1.InvocationConfig.IEndUserAuthenticationConfig|null);
+
                     /** InvocationConfig queryPriority */
                     queryPriority?: (google.cloud.dataform.v1.InvocationConfig.QueryPriority|keyof typeof google.cloud.dataform.v1.InvocationConfig.QueryPriority|null);
                 }
@@ -14340,6 +14543,9 @@ export namespace google {
 
                     /** InvocationConfig serviceAccount. */
                     public serviceAccount: string;
+
+                    /** InvocationConfig endUserAuthConfig. */
+                    public endUserAuthConfig?: (google.cloud.dataform.v1.InvocationConfig.IEndUserAuthenticationConfig|null);
 
                     /** InvocationConfig queryPriority. */
                     public queryPriority?: (google.cloud.dataform.v1.InvocationConfig.QueryPriority|keyof typeof google.cloud.dataform.v1.InvocationConfig.QueryPriority|null);
@@ -14423,6 +14629,109 @@ export namespace google {
                 }
 
                 namespace InvocationConfig {
+
+                    /** Properties of an EndUserAuthenticationConfig. */
+                    interface IEndUserAuthenticationConfig {
+
+                        /** EndUserAuthenticationConfig userEmail */
+                        userEmail?: (string|null);
+
+                        /** EndUserAuthenticationConfig oauthConfig */
+                        oauthConfig?: (google.cloud.dataform.v1.IOAuthConfig|null);
+                    }
+
+                    /** Represents an EndUserAuthenticationConfig. */
+                    class EndUserAuthenticationConfig implements IEndUserAuthenticationConfig {
+
+                        /**
+                         * Constructs a new EndUserAuthenticationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataform.v1.InvocationConfig.IEndUserAuthenticationConfig);
+
+                        /** EndUserAuthenticationConfig userEmail. */
+                        public userEmail: string;
+
+                        /** EndUserAuthenticationConfig oauthConfig. */
+                        public oauthConfig?: (google.cloud.dataform.v1.IOAuthConfig|null);
+
+                        /**
+                         * Creates a new EndUserAuthenticationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EndUserAuthenticationConfig instance
+                         */
+                        public static create(properties?: google.cloud.dataform.v1.InvocationConfig.IEndUserAuthenticationConfig): google.cloud.dataform.v1.InvocationConfig.EndUserAuthenticationConfig;
+
+                        /**
+                         * Encodes the specified EndUserAuthenticationConfig message. Does not implicitly {@link google.cloud.dataform.v1.InvocationConfig.EndUserAuthenticationConfig.verify|verify} messages.
+                         * @param message EndUserAuthenticationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataform.v1.InvocationConfig.IEndUserAuthenticationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EndUserAuthenticationConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1.InvocationConfig.EndUserAuthenticationConfig.verify|verify} messages.
+                         * @param message EndUserAuthenticationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataform.v1.InvocationConfig.IEndUserAuthenticationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EndUserAuthenticationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EndUserAuthenticationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1.InvocationConfig.EndUserAuthenticationConfig;
+
+                        /**
+                         * Decodes an EndUserAuthenticationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EndUserAuthenticationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1.InvocationConfig.EndUserAuthenticationConfig;
+
+                        /**
+                         * Verifies an EndUserAuthenticationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EndUserAuthenticationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EndUserAuthenticationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1.InvocationConfig.EndUserAuthenticationConfig;
+
+                        /**
+                         * Creates a plain object from an EndUserAuthenticationConfig message. Also converts values to other types if specified.
+                         * @param message EndUserAuthenticationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataform.v1.InvocationConfig.EndUserAuthenticationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EndUserAuthenticationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EndUserAuthenticationConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** QueryPriority enum. */
                     enum QueryPriority {
@@ -22413,6 +22722,9 @@ export namespace google {
 
                     /** Repository internalMetadata */
                     internalMetadata?: (string|null);
+
+                    /** Repository endUserAuthConfig */
+                    endUserAuthConfig?: (google.cloud.dataform.v1beta1.Repository.IEndUserAuthConfig|null);
                 }
 
                 /** Represents a Repository. */
@@ -22465,6 +22777,9 @@ export namespace google {
 
                     /** Repository internalMetadata. */
                     public internalMetadata?: (string|null);
+
+                    /** Repository endUserAuthConfig. */
+                    public endUserAuthConfig?: (google.cloud.dataform.v1beta1.Repository.IEndUserAuthConfig|null);
 
                     /**
                      * Creates a new Repository instance using the specified properties.
@@ -22901,6 +23216,200 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of an EndUserAuthConfig. */
+                    interface IEndUserAuthConfig {
+
+                        /** EndUserAuthConfig oauthConfig */
+                        oauthConfig?: (google.cloud.dataform.v1beta1.IOAuthConfig|null);
+                    }
+
+                    /** Represents an EndUserAuthConfig. */
+                    class EndUserAuthConfig implements IEndUserAuthConfig {
+
+                        /**
+                         * Constructs a new EndUserAuthConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataform.v1beta1.Repository.IEndUserAuthConfig);
+
+                        /** EndUserAuthConfig oauthConfig. */
+                        public oauthConfig?: (google.cloud.dataform.v1beta1.IOAuthConfig|null);
+
+                        /**
+                         * Creates a new EndUserAuthConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EndUserAuthConfig instance
+                         */
+                        public static create(properties?: google.cloud.dataform.v1beta1.Repository.IEndUserAuthConfig): google.cloud.dataform.v1beta1.Repository.EndUserAuthConfig;
+
+                        /**
+                         * Encodes the specified EndUserAuthConfig message. Does not implicitly {@link google.cloud.dataform.v1beta1.Repository.EndUserAuthConfig.verify|verify} messages.
+                         * @param message EndUserAuthConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataform.v1beta1.Repository.IEndUserAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EndUserAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.Repository.EndUserAuthConfig.verify|verify} messages.
+                         * @param message EndUserAuthConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataform.v1beta1.Repository.IEndUserAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EndUserAuthConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EndUserAuthConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.Repository.EndUserAuthConfig;
+
+                        /**
+                         * Decodes an EndUserAuthConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EndUserAuthConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.Repository.EndUserAuthConfig;
+
+                        /**
+                         * Verifies an EndUserAuthConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EndUserAuthConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EndUserAuthConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.Repository.EndUserAuthConfig;
+
+                        /**
+                         * Creates a plain object from an EndUserAuthConfig message. Also converts values to other types if specified.
+                         * @param message EndUserAuthConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataform.v1beta1.Repository.EndUserAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EndUserAuthConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EndUserAuthConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a OAuthConfig. */
+                interface IOAuthConfig {
+
+                    /** OAuthConfig additionalOauthScopes */
+                    additionalOauthScopes?: (string[]|null);
+                }
+
+                /** Represents a OAuthConfig. */
+                class OAuthConfig implements IOAuthConfig {
+
+                    /**
+                     * Constructs a new OAuthConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataform.v1beta1.IOAuthConfig);
+
+                    /** OAuthConfig additionalOauthScopes. */
+                    public additionalOauthScopes: string[];
+
+                    /**
+                     * Creates a new OAuthConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OAuthConfig instance
+                     */
+                    public static create(properties?: google.cloud.dataform.v1beta1.IOAuthConfig): google.cloud.dataform.v1beta1.OAuthConfig;
+
+                    /**
+                     * Encodes the specified OAuthConfig message. Does not implicitly {@link google.cloud.dataform.v1beta1.OAuthConfig.verify|verify} messages.
+                     * @param message OAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataform.v1beta1.IOAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OAuthConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.OAuthConfig.verify|verify} messages.
+                     * @param message OAuthConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataform.v1beta1.IOAuthConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a OAuthConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.OAuthConfig;
+
+                    /**
+                     * Decodes a OAuthConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OAuthConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.OAuthConfig;
+
+                    /**
+                     * Verifies a OAuthConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a OAuthConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OAuthConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.OAuthConfig;
+
+                    /**
+                     * Creates a plain object from a OAuthConfig message. Also converts values to other types if specified.
+                     * @param message OAuthConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataform.v1beta1.OAuthConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OAuthConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OAuthConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a PrivateResourceMetadata. */
@@ -36174,6 +36683,9 @@ export namespace google {
                     /** InvocationConfig serviceAccount */
                     serviceAccount?: (string|null);
 
+                    /** InvocationConfig endUserAuthConfig */
+                    endUserAuthConfig?: (google.cloud.dataform.v1beta1.InvocationConfig.IEndUserAuthenticationConfig|null);
+
                     /** InvocationConfig queryPriority */
                     queryPriority?: (google.cloud.dataform.v1beta1.InvocationConfig.QueryPriority|keyof typeof google.cloud.dataform.v1beta1.InvocationConfig.QueryPriority|null);
                 }
@@ -36204,6 +36716,9 @@ export namespace google {
 
                     /** InvocationConfig serviceAccount. */
                     public serviceAccount: string;
+
+                    /** InvocationConfig endUserAuthConfig. */
+                    public endUserAuthConfig?: (google.cloud.dataform.v1beta1.InvocationConfig.IEndUserAuthenticationConfig|null);
 
                     /** InvocationConfig queryPriority. */
                     public queryPriority?: (google.cloud.dataform.v1beta1.InvocationConfig.QueryPriority|keyof typeof google.cloud.dataform.v1beta1.InvocationConfig.QueryPriority|null);
@@ -36287,6 +36802,109 @@ export namespace google {
                 }
 
                 namespace InvocationConfig {
+
+                    /** Properties of an EndUserAuthenticationConfig. */
+                    interface IEndUserAuthenticationConfig {
+
+                        /** EndUserAuthenticationConfig userEmail */
+                        userEmail?: (string|null);
+
+                        /** EndUserAuthenticationConfig oauthConfig */
+                        oauthConfig?: (google.cloud.dataform.v1beta1.IOAuthConfig|null);
+                    }
+
+                    /** Represents an EndUserAuthenticationConfig. */
+                    class EndUserAuthenticationConfig implements IEndUserAuthenticationConfig {
+
+                        /**
+                         * Constructs a new EndUserAuthenticationConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dataform.v1beta1.InvocationConfig.IEndUserAuthenticationConfig);
+
+                        /** EndUserAuthenticationConfig userEmail. */
+                        public userEmail: string;
+
+                        /** EndUserAuthenticationConfig oauthConfig. */
+                        public oauthConfig?: (google.cloud.dataform.v1beta1.IOAuthConfig|null);
+
+                        /**
+                         * Creates a new EndUserAuthenticationConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns EndUserAuthenticationConfig instance
+                         */
+                        public static create(properties?: google.cloud.dataform.v1beta1.InvocationConfig.IEndUserAuthenticationConfig): google.cloud.dataform.v1beta1.InvocationConfig.EndUserAuthenticationConfig;
+
+                        /**
+                         * Encodes the specified EndUserAuthenticationConfig message. Does not implicitly {@link google.cloud.dataform.v1beta1.InvocationConfig.EndUserAuthenticationConfig.verify|verify} messages.
+                         * @param message EndUserAuthenticationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dataform.v1beta1.InvocationConfig.IEndUserAuthenticationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified EndUserAuthenticationConfig message, length delimited. Does not implicitly {@link google.cloud.dataform.v1beta1.InvocationConfig.EndUserAuthenticationConfig.verify|verify} messages.
+                         * @param message EndUserAuthenticationConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dataform.v1beta1.InvocationConfig.IEndUserAuthenticationConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an EndUserAuthenticationConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns EndUserAuthenticationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataform.v1beta1.InvocationConfig.EndUserAuthenticationConfig;
+
+                        /**
+                         * Decodes an EndUserAuthenticationConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns EndUserAuthenticationConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataform.v1beta1.InvocationConfig.EndUserAuthenticationConfig;
+
+                        /**
+                         * Verifies an EndUserAuthenticationConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an EndUserAuthenticationConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns EndUserAuthenticationConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dataform.v1beta1.InvocationConfig.EndUserAuthenticationConfig;
+
+                        /**
+                         * Creates a plain object from an EndUserAuthenticationConfig message. Also converts values to other types if specified.
+                         * @param message EndUserAuthenticationConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dataform.v1beta1.InvocationConfig.EndUserAuthenticationConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this EndUserAuthenticationConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for EndUserAuthenticationConfig
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
 
                     /** QueryPriority enum. */
                     enum QueryPriority {

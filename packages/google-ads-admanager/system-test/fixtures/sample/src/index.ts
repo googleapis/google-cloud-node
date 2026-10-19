@@ -37,6 +37,7 @@ import {
   ContentBundleServiceClient,
   ContentLabelServiceClient,
   ContentServiceClient,
+  CreativeServiceClient,
   CreativeSetServiceClient,
   CreativeTemplateServiceClient,
   CreativeWrapperServiceClient,
@@ -50,9 +51,12 @@ import {
   DeviceCategoryServiceClient,
   DeviceManufacturerServiceClient,
   EntitySignalsMappingServiceClient,
+  ForecastServiceClient,
   GeoTargetServiceClient,
   LabelServiceClient,
+  LineItemCreativeAssociationServiceClient,
   LineItemServiceClient,
+  LineItemTemplateServiceClient,
   LinkedDeviceServiceClient,
   LiveStreamServiceClient,
   McmEarningsServiceClient,
@@ -164,6 +168,9 @@ function doStuffWithContentLabelServiceClient(
 function doStuffWithContentServiceClient(client: ContentServiceClient) {
   client.close();
 }
+function doStuffWithCreativeServiceClient(client: CreativeServiceClient) {
+  client.close();
+}
 function doStuffWithCreativeSetServiceClient(client: CreativeSetServiceClient) {
   client.close();
 }
@@ -223,13 +230,26 @@ function doStuffWithEntitySignalsMappingServiceClient(
 ) {
   client.close();
 }
+function doStuffWithForecastServiceClient(client: ForecastServiceClient) {
+  client.close();
+}
 function doStuffWithGeoTargetServiceClient(client: GeoTargetServiceClient) {
   client.close();
 }
 function doStuffWithLabelServiceClient(client: LabelServiceClient) {
   client.close();
 }
+function doStuffWithLineItemCreativeAssociationServiceClient(
+  client: LineItemCreativeAssociationServiceClient,
+) {
+  client.close();
+}
 function doStuffWithLineItemServiceClient(client: LineItemServiceClient) {
+  client.close();
+}
+function doStuffWithLineItemTemplateServiceClient(
+  client: LineItemTemplateServiceClient,
+) {
   client.close();
 }
 function doStuffWithLinkedDeviceServiceClient(
@@ -409,6 +429,9 @@ function main() {
   const contentServiceClient = new ContentServiceClient();
   doStuffWithContentServiceClient(contentServiceClient);
   // check that the client instance can be created
+  const creativeServiceClient = new CreativeServiceClient();
+  doStuffWithCreativeServiceClient(creativeServiceClient);
+  // check that the client instance can be created
   const creativeSetServiceClient = new CreativeSetServiceClient();
   doStuffWithCreativeSetServiceClient(creativeSetServiceClient);
   // check that the client instance can be created
@@ -457,14 +480,26 @@ function main() {
     entitySignalsMappingServiceClient,
   );
   // check that the client instance can be created
+  const forecastServiceClient = new ForecastServiceClient();
+  doStuffWithForecastServiceClient(forecastServiceClient);
+  // check that the client instance can be created
   const geoTargetServiceClient = new GeoTargetServiceClient();
   doStuffWithGeoTargetServiceClient(geoTargetServiceClient);
   // check that the client instance can be created
   const labelServiceClient = new LabelServiceClient();
   doStuffWithLabelServiceClient(labelServiceClient);
   // check that the client instance can be created
+  const lineItemCreativeAssociationServiceClient =
+    new LineItemCreativeAssociationServiceClient();
+  doStuffWithLineItemCreativeAssociationServiceClient(
+    lineItemCreativeAssociationServiceClient,
+  );
+  // check that the client instance can be created
   const lineItemServiceClient = new LineItemServiceClient();
   doStuffWithLineItemServiceClient(lineItemServiceClient);
+  // check that the client instance can be created
+  const lineItemTemplateServiceClient = new LineItemTemplateServiceClient();
+  doStuffWithLineItemTemplateServiceClient(lineItemTemplateServiceClient);
   // check that the client instance can be created
   const linkedDeviceServiceClient = new LinkedDeviceServiceClient();
   doStuffWithLinkedDeviceServiceClient(linkedDeviceServiceClient);
