@@ -14,10 +14,35 @@
  * limitations under the License.
  */
 
-import {Attributes} from '@opentelemetry/api';
+import {
+  Attributes,
+  context,
+  Context,
+  createContextKey,
+  isSpanContextValid,
+  Span,
+  trace,
+} from '@opentelemetry/api';
 import {CallSettings} from '../gax';
 import {ignoredClientHeaderTokens} from '../util';
 export const DEFAULT_GCP_REPO = 'googleapis/google-cloud-node';
+
+// Context keys for GAX client request and per-attempt spans.
+export const CLIENT_REQUEST_SPAN_KEY = createContextKey(
+  'google-gax-client-request-span',
+);
+export const ATTEMPT_SPAN_KEY = createContextKey('google-gax-attempt-span');
+
+/**
+ * Active OpenTelemetry trace/span identifiers and span references for the current context.
+ */
+export interface ActiveTraceContext {
+  traceId: string;
+  spanId: string;
+  span: Span;
+  attemptSpan?: Span;
+  clientRequestSpan?: Span;
+}
 
 /**
  * Static metadata about the Google Cloud client library used to populate
@@ -125,6 +150,7 @@ export interface AttemptTraceContext extends DynamicTraceContext {
 
 /**
  * Derives the GCP client service name from an NPM package name.
+ * @deprecated Retained for backwards compatibility.
  */
 export function extractClientServiceFromPackageName(name: string): string {
   const scopedMatch = name.match(/^@[^/]+\/(?:google-cloud-)?(.*)$/);
@@ -163,19 +189,6 @@ export function extractServiceFromApiName(apiName: string): string | undefined {
   return undefined;
 }
 
-let fallbackVersion: string | undefined;
-try {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  fallbackVersion = require('../../package.json').version;
-} catch {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    fallbackVersion = require('../../../package.json').version;
-  } catch {
-    // Ignore fallback failure
-  }
-}
-
 /**
  * Extracts static metadata from CallSettings headers or apiName.
  */
@@ -188,10 +201,38 @@ export function extractFromSettings(
   }
 
   // Extract artifact and version from x-goog-api-client header.
-  const headers = (
-    settings.otherArgs as {headers?: Record<string, string>} | undefined
-  )?.headers;
-  const clientHeader = headers?.['x-goog-api-client'];
+  const otherArgsWithMeta = settings.otherArgs as
+    | {
+        headers?: Record<string, string | string[]>;
+        metadataBuilder?: () => {
+          get?: (key: string) => unknown[];
+          [key: string]: unknown;
+        };
+      }
+    | undefined;
+  let rawClientHeader: unknown =
+    otherArgsWithMeta?.headers?.['x-goog-api-client'];
+  // Fall back to metadataBuilder if header is not in otherArgs.headers.
+  if (
+    !rawClientHeader &&
+    typeof otherArgsWithMeta?.metadataBuilder === 'function'
+  ) {
+    try {
+      const built = otherArgsWithMeta.metadataBuilder();
+      // Support both gRPC Metadata instances (.get) and plain objects.
+      if (built && typeof built.get === 'function') {
+        rawClientHeader = built.get('x-goog-api-client');
+      } else if (built && typeof built === 'object') {
+        rawClientHeader = built['x-goog-api-client'];
+      }
+    } catch {
+      // Ignore metadataBuilder errors
+    }
+  }
+  // Normalize array values into a single space-delimited string.
+  const clientHeader = Array.isArray(rawClientHeader)
+    ? rawClientHeader.join(' ')
+    : rawClientHeader;
   if (typeof clientHeader === 'string') {
     const tokens = clientHeader.trim().split(/\s+/);
     for (const token of tokens) {
@@ -226,11 +267,6 @@ export function extractFromSettings(
             : `@google-cloud/${serviceFromApi}`;
       }
     }
-  }
-
-  // Fall back to package.json version if missing.
-  if (!result.gcpVersion && fallbackVersion) {
-    result.gcpVersion = fallbackVersion;
   }
 
   // Extract server address and port from endpoint settings.
@@ -313,20 +349,17 @@ export function extractFromEnvironment(): StaticTraceContext {
   return result;
 }
 
-const metadataCache = new Map<string, StaticTraceContext>();
-
 /**
- * Clears the cached static metadata. Used primarily in unit tests.
+ * Clears the cached static metadata.
+ * @deprecated Static metadata is no longer cached across calls; retained as a no-op for backwards compatibility.
  */
-export function clearMetadataCache(): void {
-  metadataCache.clear();
-}
+export function clearMetadataCache(): void {}
 
 /**
  * Resolves static trace context dynamically at runtime by inspecting CallSettings,
  * environment variables, and standard defaults.
  *
- * Precedence: environment variables > compile-time internalTelemetryInfo > dynamic resolution from settings.
+ * Precedence: environment variables > dynamic resolution from settings.
  *
  * @param {CallSettings} [settings] - Call settings for the RPC invocation.
  * @param {string} [_callerFilePath] - Optional explicit path to the caller source file (deprecated).
@@ -338,41 +371,21 @@ export function resolveStaticTraceContext(
   _callerFilePath?: string,
 ): StaticTraceContext {
   const envMeta = extractFromEnvironment();
-  const explicit = settings?.otherArgs?.internalTelemetryInfo as
-    StaticTraceContext | undefined;
-
-  let dynamic: StaticTraceContext;
-  if (settings?.apiName) {
-    let cached = metadataCache.get(settings.apiName);
-    if (!cached) {
-      cached = extractFromSettings(settings);
-      metadataCache.set(settings.apiName, cached);
-    }
-    dynamic = cached;
-  } else {
-    dynamic = extractFromSettings(settings);
-  }
+  const dynamic = extractFromSettings(settings);
 
   const context: StaticTraceContext = {
-    gcpClientService:
-      envMeta.gcpClientService ??
-      explicit?.gcpClientService ??
-      dynamic.gcpClientService,
-    gcpVersion:
-      envMeta.gcpVersion ?? explicit?.gcpVersion ?? dynamic.gcpVersion,
+    gcpClientService: envMeta.gcpClientService ?? dynamic.gcpClientService,
+    gcpVersion: envMeta.gcpVersion ?? dynamic.gcpVersion,
     gcpRepo: DEFAULT_GCP_REPO,
-    gcpArtifact:
-      envMeta.gcpArtifact ?? explicit?.gcpArtifact ?? dynamic.gcpArtifact,
+    gcpArtifact: envMeta.gcpArtifact ?? dynamic.gcpArtifact,
   };
 
-  const serverAddress =
-    envMeta.serverAddress ?? explicit?.serverAddress ?? dynamic.serverAddress;
+  const serverAddress = envMeta.serverAddress ?? dynamic.serverAddress;
   if (serverAddress !== undefined) {
     context.serverAddress = serverAddress;
   }
 
-  const serverPort =
-    envMeta.serverPort ?? explicit?.serverPort ?? dynamic.serverPort;
+  const serverPort = envMeta.serverPort ?? dynamic.serverPort;
   if (serverPort !== undefined) {
     context.serverPort = serverPort;
   }
@@ -405,4 +418,48 @@ export function buildInitialAttributes(
     attributes['url.domain'] = urlDomain;
   }
   return attributes;
+}
+
+/**
+ * Returns the span if defined and its span context is valid.
+ */
+function getValidSpan(span: Span | undefined): Span | undefined {
+  return span && isSpanContextValid(span.spanContext()) ? span : undefined;
+}
+
+/**
+ * Returns the active trace and span IDs (`traceId` and `spanId`) along with
+ * the active span references (`span`, `attemptSpan`, `clientRequestSpan`) if a
+ * GAX attempt span, GAX client request span, or outer OpenTelemetry span is
+ * active and has a valid span context, or `undefined` otherwise.
+ *
+ * @param {Context} [activeContext=context.active()] - The OpenTelemetry context to inspect.
+ * @returns {ActiveTraceContext | undefined} The active trace context, or undefined.
+ */
+export function getActiveTraceContext(
+  activeContext: Context = context.active(),
+): ActiveTraceContext | undefined {
+  // Retrieve GAX-managed spans from the context if valid.
+  const attemptSpan = getValidSpan(
+    activeContext.getValue(ATTEMPT_SPAN_KEY) as Span | undefined,
+  );
+  const clientRequestSpan = getValidSpan(
+    activeContext.getValue(CLIENT_REQUEST_SPAN_KEY) as Span | undefined,
+  );
+  // Prefer attempt span > client request span > outer OpenTelemetry span.
+  const activeSpan =
+    attemptSpan ??
+    clientRequestSpan ??
+    getValidSpan(trace.getSpan(activeContext));
+  if (!activeSpan) {
+    return undefined;
+  }
+  const spanContext = activeSpan.spanContext();
+  return {
+    traceId: spanContext.traceId,
+    spanId: spanContext.spanId,
+    span: activeSpan,
+    attemptSpan,
+    clientRequestSpan,
+  };
 }
