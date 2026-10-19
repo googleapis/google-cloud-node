@@ -1068,9 +1068,9 @@ describe.skip('BulkWriter', () => {
     }
 
     it('does not send batches if doing so exceeds the rate limit', () => {
-      return new Promise<void>(resolve => {
-        void instantiateInstance({throttling: {maxOpsPerSecond: 5}}).then(
-          bulkWriter => {
+      return new Promise<void>((resolve, reject) => {
+        instantiateInstance({throttling: {maxOpsPerSecond: 5}})
+          .then(bulkWriter => {
             let timeoutCalled = false;
             setTimeoutHandler((_, timeout) => {
               if (!timeoutCalled && timeout > 0) {
@@ -1088,8 +1088,8 @@ describe.skip('BulkWriter', () => {
             // after the timeout will not be made. The close() call is used to
             // ensure that the final batch is sent.
             void bulkWriter.close();
-          },
-        );
+          })
+          .catch(reject);
       });
     });
   });
