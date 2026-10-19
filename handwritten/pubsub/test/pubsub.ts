@@ -1589,6 +1589,90 @@ describe('PubSub', () => {
         done();
       });
     });
+
+    it('should not invoke callback a second time if callback throws synchronously', done => {
+      sandbox
+        .stub(pubsub, 'getClientAsync_')
+        .withArgs(CONFIG)
+        .resolves(FAKE_CLIENT_INSTANCE);
+
+      const callbackError = new Error('callback error');
+      const originalNextTick = process.nextTick;
+      let callCount = 0;
+
+      const callback = (err: Error | null, client?: gax.ClientStub) => {
+        callCount++;
+        assert.ifError(err);
+        assert.strictEqual(client, FAKE_CLIENT_INSTANCE);
+        throw callbackError;
+      };
+
+      const nextTickStub = sandbox
+        .stub(process, 'nextTick')
+        .callsFake(((fn: Function, ...args: unknown[]) => {
+          if (fn === callback) {
+            originalNextTick(() => {
+              try {
+                fn(...args);
+              } catch (err) {
+                assert.strictEqual(err, callbackError);
+                assert.strictEqual(callCount, 1);
+                nextTickStub.restore();
+                done();
+              }
+            });
+          } else {
+            originalNextTick(fn, ...args);
+          }
+        }) as unknown as typeof process.nextTick);
+
+      pubsub.getClient_(CONFIG, callback);
+    });
+
+    it('should not invoke close callback a second time if callback throws synchronously', done => {
+      sandbox.stub(pubsub, 'closeAllClients_').resolves();
+
+      const callbackError = new Error('close callback error');
+      const originalNextTick = process.nextTick;
+      let callCount = 0;
+
+      const callback: pubsubTypes.EmptyCallback = err => {
+        callCount++;
+        assert.ifError(err);
+        throw callbackError;
+      };
+
+      const nextTickStub = sandbox
+        .stub(process, 'nextTick')
+        .callsFake(((fn: Function, ...args: unknown[]) => {
+          if (fn === callback) {
+            originalNextTick(() => {
+              try {
+                fn(...args);
+              } catch (err) {
+                assert.strictEqual(err, callbackError);
+                assert.strictEqual(callCount, 1);
+                nextTickStub.restore();
+                done();
+              }
+            });
+          } else {
+            originalNextTick(fn, ...args);
+          }
+        }) as unknown as typeof process.nextTick);
+
+      pubsub.close(callback);
+    });
+
+    it('should pass back errors from closeAllClients_ to close callback', done => {
+      const error = new Error('close error');
+      sandbox.stub(pubsub, 'closeAllClients_').rejects(error);
+
+      pubsub.close(err => {
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
   });
 
   describe('request', () => {

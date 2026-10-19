@@ -386,8 +386,8 @@ export class PubSub {
       this.isOpen = false;
       this.closeAllClients_()
         .then(() => this.schemaClient?.close())
-        .then(() => definedCallback(null))
-        .catch(definedCallback);
+        .then(() => process.nextTick(definedCallback, null))
+        .catch(err => process.nextTick(definedCallback, err));
     } else {
       definedCallback(null);
     }
