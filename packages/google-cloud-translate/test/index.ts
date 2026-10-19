@@ -96,7 +96,11 @@ describe('Translate v2', () => {
       Translate = require('../src/v2').Translate;
     } finally {
       mod.prototype.require = origRequire;
-      if (cached) require.cache[v2Path] = cached;
+      if (cached) {
+        require.cache[v2Path] = cached;
+      } else {
+        delete require.cache[v2Path];
+      }
     }
   });
 
