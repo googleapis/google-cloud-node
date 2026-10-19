@@ -245,6 +245,12 @@ export interface UploadConfig extends Pick<WritableOptions, 'highWaterMark'> {
    */
   retryOptions: RetryOptions;
 
+  /**
+   * Controls whether or not to use authentication when using a custom endpoint.
+   * @deprecated
+   */
+  useAuthWithCustomEndpoint?: boolean;
+
   [GCCL_GCS_CMD_KEY]?: string;
 }
 

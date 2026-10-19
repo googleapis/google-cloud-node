@@ -169,6 +169,18 @@ export interface MakeAuthenticatedRequestFactoryConfig extends Omit<
   autoRetry?: boolean;
 
   /**
+   * If true, just return the provided request options. Default: false.
+   * @deprecated
+   */
+  customEndpoint?: boolean;
+
+  /**
+   * If true, will authenticate when using a custom endpoint. Default: false.
+   * @deprecated
+   */
+  useAuthWithCustomEndpoint?: boolean;
+
+  /**
    * Account email address, required for PEM/P12 usage.
    */
   email?: string;

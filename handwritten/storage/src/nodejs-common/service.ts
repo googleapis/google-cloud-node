@@ -62,6 +62,18 @@ export interface ServiceConfig {
    * Reuse an existing `AuthClient` or `GoogleAuth` client instead of creating a new one.
    */
   authClient?: AuthClient | GoogleAuth<AuthClient>;
+
+  /**
+   * Set to true if the endpoint is a custom URL
+   * @deprecated
+   */
+  customEndpoint?: boolean;
+
+  /**
+   * Controls whether or not to use authentication when using a custom endpoint.
+   * @deprecated
+   */
+  useAuthWithCustomEndpoint?: boolean;
 }
 
 export interface ServiceOptions extends Omit<GoogleAuthOptions, 'authClient'> {
@@ -71,6 +83,10 @@ export interface ServiceOptions extends Omit<GoogleAuthOptions, 'authClient'> {
   token?: string;
   timeout?: number; // http.request.options.timeout
   userAgent?: string;
+  /**
+   * @deprecated
+   */
+  useAuthWithCustomEndpoint?: boolean;
 }
 
 export class Service {
@@ -86,6 +102,14 @@ export class Service {
   protected apiEndpoint: string;
   timeout?: number;
   universeDomain: string;
+  /**
+   * @deprecated
+   */
+  customEndpoint = false;
+  /**
+   * @deprecated
+   */
+  useAuthWithCustomEndpoint?: boolean;
 
   /**
    * Service is a base class, meant to be inherited from by a "service," like
