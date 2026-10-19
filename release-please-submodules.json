@@ -8,6 +8,9 @@
     "handwritten/spanner": {
       "component": "spanner"
     },
+    "handwritten/spanner-driver": {
+      "component": "spanner-driver"
+    },
     "handwritten/storage": {
       "component": "storage"
     },
