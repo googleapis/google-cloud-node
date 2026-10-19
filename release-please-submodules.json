@@ -10,6 +10,9 @@
     },
     "handwritten/spanner-driver": {
       "component": "spanner-driver"
+    },
+    "handwritten/storage": {
+      "component": "storage"
     }
   },
   "plugins": [
