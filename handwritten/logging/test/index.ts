@@ -270,17 +270,13 @@ describe('Logging', () => {
     it('should throw if a name is not provided', () => {
       const error = new Error('A sink name must be provided.');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return (logging as any).createSink().then(noop, (err: Error) => {
-        assert.deepStrictEqual(err, error);
-      });
+      return assert.rejects((logging as any).createSink(), error);
     });
 
     it('should throw if a config object is not provided', () => {
       const error = new Error('A sink configuration object must be provided.');
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return (logging as any).createSink(SINK_NAME).then(noop, (err: Error) => {
-        assert.deepStrictEqual(err, error);
-      });
+      return assert.rejects((logging as any).createSink(SINK_NAME), error);
     });
 
     it('should set acls for a Dataset destination', async () => {
@@ -424,9 +420,10 @@ describe('Logging', () => {
             throw error;
           };
 
-          return logging
-            .createSink(SINK_NAME, {} as CreateSinkRequest)
-            .then(noop, (err: Error) => assert.deepStrictEqual(err, error));
+          return assert.rejects(
+            logging.createSink(SINK_NAME, {} as CreateSinkRequest),
+            error
+          );
         });
       });
 
@@ -643,9 +640,7 @@ describe('Logging', () => {
       });
 
       it('should reject promise with error', () => {
-        return logging
-          .getEntries()
-          .then(noop, err => assert.strictEqual(err, error));
+        return assert.rejects(logging.getEntries(), error);
       });
     });
 
@@ -910,9 +905,7 @@ describe('Logging', () => {
         logging.loggingService.listLogs = async () => {
           throw error;
         };
-        return logging
-          .getLogs(OPTIONS)
-          .then(noop, err => assert.strictEqual(err, error));
+        return assert.rejects(logging.getLogs(OPTIONS), error);
       });
     });
 
@@ -1081,9 +1074,7 @@ describe('Logging', () => {
         logging.configService.listSinks = async () => {
           throw error;
         };
-        return logging
-          .getSinks(OPTIONS)
-          .then(noop, err => assert.strictEqual(err, error));
+        return assert.rejects(logging.getSinks(OPTIONS), error);
       });
     });
 
@@ -1563,9 +1554,7 @@ describe('Logging', () => {
       });
 
       it('should return error', () => {
-        return logging
-          .setAclForBucket_(CONFIG)
-          .then(noop, err => assert.deepStrictEqual(err, error));
+        return assert.rejects(logging.setAclForBucket_(CONFIG), error);
       });
     });
 
@@ -1612,9 +1601,7 @@ describe('Logging', () => {
         });
 
         it('should reject with error', () => {
-          return logging
-            .setAclForDataset_(CONFIG)
-            .then(noop, err => assert.deepStrictEqual(err, error));
+          return assert.rejects(logging.setAclForDataset_(CONFIG), error);
         });
       });
 
@@ -1660,9 +1647,7 @@ describe('Logging', () => {
           });
 
           it('should reject with error', () => {
-            return logging
-              .setAclForDataset_(CONFIG)
-              .then(noop, err => assert.deepStrictEqual(err, error));
+            return assert.rejects(logging.setAclForDataset_(CONFIG), error);
           });
         });
 
@@ -1719,9 +1704,7 @@ describe('Logging', () => {
         });
 
         it('should throw error', () => {
-          return logging
-            .setAclForTopic_(CONFIG)
-            .then(noop, err => assert.deepStrictEqual(err, error));
+          return assert.rejects(logging.setAclForTopic_(CONFIG), error);
         });
       });
 
@@ -1766,9 +1749,7 @@ describe('Logging', () => {
           });
 
           it('should throw error', () => {
-            return logging
-              .setAclForTopic_(CONFIG)
-              .then(noop, err => assert.deepStrictEqual(err, error));
+            return assert.rejects(logging.setAclForTopic_(CONFIG), error);
           });
         });
 
