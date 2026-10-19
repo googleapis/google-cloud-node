@@ -267,6 +267,7 @@ const DEFAULT_TEST_DIRS = [
 
 const FALLBACK_SOURCE_DIRS = [
   'test',
+  'cjs/test',
   'esm/test',
   'system-test',
   'conformance-test',
@@ -276,18 +277,200 @@ const FALLBACK_SOURCE_DIRS = [
   'dev/conformance',
 ];
 
-const ONLY_PATTERN = /\b(?:it|describe|context|suite|test|specify)\.only\s*\(/;
+const PACKAGE_TEST_SUITES = [
+  {
+    buildDir: 'build/test',
+    sourceDirs: ['test', 'dev/test'],
+  },
+  {
+    buildDir: 'build/cjs/test',
+    sourceDirs: ['cjs/test', 'test', 'dev/test'],
+  },
+  {
+    buildDir: 'build/esm/test',
+    sourceDirs: ['esm/test', 'test', 'dev/test'],
+  },
+  {
+    buildDir: 'build/conformance',
+    sourceDirs: ['dev/conformance', 'conformance', 'conformance-test'],
+  },
+  {
+    buildDir: 'build/conformance-test',
+    sourceDirs: ['conformance-test', 'dev/conformance', 'conformance'],
+  },
+];
+
+const REGEX_PRECEDING_KEYWORDS = new Set([
+  'await',
+  'case',
+  'delete',
+  'do',
+  'else',
+  'in',
+  'instanceof',
+  'new',
+  'of',
+  'return',
+  'throw',
+  'typeof',
+  'void',
+  'yield',
+]);
+
+const ONLY_PATTERN =
+  /\b(?:it|describe|context|suite|test|specify)(?:\.only\s*(?:\(|\.[A-Za-z_$][\w$]*\s*\()|\s*\[\s*['"`]only['"`]\s*\]\s*\()/;
 
 function stripCommentsAndStrings(code) {
-  return code.replace(
-    /\/\*[\s\S]*?\*\/|\/\/.*$|'(?:\\[\s\S]|[^'\\\r\n])*'|"(?:\\[\s\S]|[^"\\\r\n])*"|`(?:\\[\s\S]|[^`\\])*`|\/(?![/*])(?:\\[\s\S]|\[(?:\\[\s\S]|[^\]\\\r\n])*\]|[^/\\\r\n])+\/[dgimsuvy]*/gm,
-    match =>
-      match.startsWith('//') || match.startsWith('/*')
-        ? ' '
-        : match.startsWith('/')
-          ? '//'
-          : '""',
-  );
+  let out = '';
+  let i = 0;
+  let canBeRegex = true;
+  const len = code.length;
+
+  while (i < len) {
+    const ch = code[i];
+
+    if (ch === ' ' || ch === '\t' || ch === '\r' || ch === '\n') {
+      out += ch;
+      i++;
+      continue;
+    }
+
+    if (ch === '/' && code[i + 1] === '/') {
+      out += ' ';
+      i += 2;
+      while (i < len && code[i] !== '\n' && code[i] !== '\r') {
+        i++;
+      }
+      continue;
+    }
+
+    if (ch === '/' && code[i + 1] === '*') {
+      out += ' ';
+      i += 2;
+      while (i < len && !(code[i] === '*' && code[i + 1] === '/')) {
+        if (code[i] === '\n' || code[i] === '\r') {
+          out += code[i];
+        }
+        i++;
+      }
+      if (i < len) {
+        i += 2;
+      }
+      continue;
+    }
+
+    if (ch === "'" || ch === '"') {
+      const quote = ch;
+      const start = i;
+      i++;
+      while (
+        i < len &&
+        code[i] !== quote &&
+        code[i] !== '\n' &&
+        code[i] !== '\r'
+      ) {
+        if (code[i] === '\\') {
+          i += 2;
+        } else {
+          i++;
+        }
+      }
+      if (i < len && code[i] === quote) {
+        i++;
+      }
+      const raw = code.slice(start, i);
+      out += raw === "'only'" || raw === '"only"' ? raw : '""';
+      canBeRegex = false;
+      continue;
+    }
+
+    if (ch === '`') {
+      const start = i;
+      i++;
+      while (i < len && code[i] !== '`') {
+        if (code[i] === '\\') {
+          i += 2;
+        } else {
+          if (code[i] === '\n' || code[i] === '\r') {
+            out += code[i];
+          }
+          i++;
+        }
+      }
+      if (i < len && code[i] === '`') {
+        i++;
+      }
+      const raw = code.slice(start, i);
+      out += raw === '`only`' ? raw : '""';
+      canBeRegex = false;
+      continue;
+    }
+
+    if (ch === '/' && canBeRegex) {
+      let j = i + 1;
+      let inCharClass = false;
+      let foundEnd = false;
+      while (j < len && code[j] !== '\n' && code[j] !== '\r') {
+        const c = code[j];
+        if (c === '\\') {
+          j += 2;
+          continue;
+        }
+        if (c === '[') {
+          inCharClass = true;
+        } else if (c === ']') {
+          inCharClass = false;
+        } else if (c === '/' && !inCharClass) {
+          foundEnd = true;
+          j++;
+          while (j < len && /[dgimsuvy]/.test(code[j])) {
+            j++;
+          }
+          break;
+        }
+        j++;
+      }
+      if (foundEnd) {
+        out += '//';
+        i = j;
+        canBeRegex = false;
+        continue;
+      }
+    }
+
+    if (/[A-Za-z_$]/.test(ch)) {
+      const start = i;
+      i++;
+      while (i < len && /[\w$]/.test(code[i])) {
+        i++;
+      }
+      const word = code.slice(start, i);
+      out += word;
+      canBeRegex = REGEX_PRECEDING_KEYWORDS.has(word);
+      continue;
+    }
+
+    if (/[0-9]/.test(ch)) {
+      const start = i;
+      i++;
+      while (i < len && /[\w.]/.test(code[i])) {
+        i++;
+      }
+      out += code.slice(start, i);
+      canBeRegex = false;
+      continue;
+    }
+
+    out += ch;
+    i++;
+    if (ch === ')' || ch === ']') {
+      canBeRegex = false;
+    } else {
+      canBeRegex = true;
+    }
+  }
+
+  return out;
 }
 
 function fileHasOnly(filePath) {
@@ -457,19 +640,75 @@ function findOnlyFiles(targets, cwd) {
   return onlyFiles;
 }
 
-function getCandidateSourceDirs(targets, cwd) {
+function stripTargetQuotes(rawTarget) {
+  return rawTarget.replace(/^(['"])(.*)\1$/, '$2');
+}
+
+function getNonGlobTargetPath(rawTarget, cwd) {
+  const clean = stripTargetQuotes(rawTarget).replace(/\\/g, '/');
+  const segments = clean.split('/');
+  const firstGlobIdx = segments.findIndex(s => /[*?]/.test(s));
+  const prefixSegments =
+    firstGlobIdx === -1 ? segments : segments.slice(0, firstGlobIdx);
+  const prefix = prefixSegments.join('/');
+  return path.resolve(cwd, prefix || '.');
+}
+
+function resolvePackageDir(targets, cwd) {
+  for (const rawTarget of targets) {
+    const absTarget = getNonGlobTargetPath(rawTarget, cwd);
+    const relToCwd = path.relative(cwd, absTarget).split(path.sep).join('/');
+    if (relToCwd && !relToCwd.startsWith('..')) {
+      const parts = relToCwd.split('/');
+      const buildIdx = parts.indexOf('build');
+      if (buildIdx > 0) {
+        const candidate = path.resolve(cwd, parts.slice(0, buildIdx).join('/'));
+        if (fs.existsSync(path.join(candidate, 'package.json'))) {
+          return candidate;
+        }
+      }
+    }
+    const pkgRoot = findPackageRoot(absTarget);
+    if (pkgRoot) {
+      return pkgRoot;
+    }
+  }
+  return findPackageRoot(cwd) || cwd;
+}
+
+function getContainingBuildDirs(
+  targets,
+  cwd,
+  pkgDir = resolvePackageDir(targets, cwd),
+) {
+  const effectiveTargets = getEffectiveTargets(targets, cwd);
+  const dirs = new Set();
+  for (const rawTarget of effectiveTargets) {
+    let absPrefix = getNonGlobTargetPath(rawTarget, cwd);
+    if (
+      /\.[cm]?[jt]s$/.test(absPrefix) ||
+      (fs.existsSync(absPrefix) && fs.statSync(absPrefix).isFile())
+    ) {
+      absPrefix = path.dirname(absPrefix);
+    }
+    const rel = path.relative(pkgDir, absPrefix).split(path.sep).join('/');
+    if (/^build(?:\/|$)/.test(rel)) {
+      dirs.add(rel);
+    }
+  }
+  return [...dirs];
+}
+
+function getCandidateSourceDirs(
+  targets,
+  cwd,
+  pkgDir = resolvePackageDir(targets, cwd),
+) {
   const effectiveTargets = getEffectiveTargets(targets, cwd);
   const derived = new Set();
   for (const rawTarget of effectiveTargets) {
-    const clean = rawTarget.replace(/^(['"])(.*)\1$/, '$2').replace(/\\/g, '/');
-    const nonGlobPrefix = clean
-      .split('/')
-      .filter(s => !/[*?]/.test(s))
-      .join('/');
-    const rel = path
-      .relative(cwd, path.resolve(cwd, nonGlobPrefix || '.'))
-      .split(path.sep)
-      .join('/');
+    const absPrefix = getNonGlobTargetPath(rawTarget, cwd);
+    const rel = path.relative(pkgDir, absPrefix).split(path.sep).join('/');
     if (/^build\/(?:cjs\/|esm\/)?/.test(rel)) {
       let sub = rel.replace(/^build\/(?:cjs\/|esm\/)?/, '');
       if (/\.[cm]?[jt]s$/.test(sub)) {
@@ -477,26 +716,77 @@ function getCandidateSourceDirs(targets, cwd) {
       }
       if (sub && sub !== '.') {
         derived.add(sub);
+        derived.add(path.posix.join('cjs', sub));
         derived.add(path.posix.join('esm', sub));
         derived.add(path.posix.join('dev', sub));
+        if (sub === 'conformance') {
+          derived.add('conformance-test');
+        }
       }
     }
   }
   return derived.size > 0 ? [...derived] : FALLBACK_SOURCE_DIRS;
 }
 
-function maybeCompileStaleSourceOnly(targets, onlyFiles, cwd) {
+function suiteHasOnly(suite, pkgDir) {
+  let hasTs = false;
+  for (const srcDir of suite.sourceDirs) {
+    const absSrcDir = path.resolve(pkgDir, srcDir);
+    if (!fs.existsSync(absSrcDir)) continue;
+    for (const filePath of collectFilesFromDir(absSrcDir)) {
+      if (/\.[cm]?ts$/.test(filePath)) {
+        hasTs = true;
+        if (fileHasOnly(filePath)) {
+          return true;
+        }
+      }
+    }
+  }
+  if (hasTs) {
+    return false;
+  }
+  return findOnlyFiles([suite.buildDir], pkgDir).length > 0;
+}
+
+function hasSiblingSuiteOnly(targets, cwd, pkgDir) {
+  const containingBuildDirs = getContainingBuildDirs(targets, cwd, pkgDir);
+  if (containingBuildDirs.length === 0) {
+    return false;
+  }
+  if (findOnlyFiles(containingBuildDirs, pkgDir).length > 0) {
+    return true;
+  }
+  const knownSuiteSet = new Set(PACKAGE_TEST_SUITES.map(s => s.buildDir));
+  if (!containingBuildDirs.some(d => knownSuiteSet.has(d))) {
+    return false;
+  }
+  const currentSet = new Set(containingBuildDirs);
+  for (const suite of PACKAGE_TEST_SUITES) {
+    if (currentSet.has(suite.buildDir)) continue;
+    if (suiteHasOnly(suite, pkgDir)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function maybeCompileStaleSourceOnly(
+  targets,
+  onlyFiles,
+  cwd,
+  pkgDir = resolvePackageDir(targets, cwd),
+) {
   if (process.env.RUN_TEST_SKIP_COMPILE === 'true') {
     return onlyFiles;
   }
   if (onlyFiles.length > 0 && onlyFiles.every(f => /\.[cm]?ts$/.test(f))) {
     return onlyFiles;
   }
-  const sourceDirs = getCandidateSourceDirs(targets, cwd);
+  const sourceDirs = getCandidateSourceDirs(targets, cwd, pkgDir);
   let hasTsFiles = false;
   const sourceOnlyFiles = [];
   for (const dir of sourceDirs) {
-    const absDir = path.resolve(cwd, dir);
+    const absDir = path.resolve(pkgDir, dir);
     if (!fs.existsSync(absDir)) continue;
     for (const filePath of collectFilesFromDir(absDir)) {
       if (/\.[cm]?ts$/.test(filePath)) {
@@ -507,16 +797,24 @@ function maybeCompileStaleSourceOnly(targets, onlyFiles, cwd) {
       }
     }
   }
-  if (!hasTsFiles || (sourceOnlyFiles.length === 0 && onlyFiles.length === 0)) {
+  const containingBuildDirs = getContainingBuildDirs(targets, cwd, pkgDir);
+  const buildOnlyFiles =
+    containingBuildDirs.length > 0
+      ? findOnlyFiles(containingBuildDirs, pkgDir)
+      : onlyFiles;
+  if (
+    !hasTsFiles ||
+    (sourceOnlyFiles.length === 0 && buildOnlyFiles.length === 0)
+  ) {
     return onlyFiles;
   }
-  const onlyStems = [
-    ...new Set(onlyFiles.map(f => getRelativeTestStem(f, cwd))),
+  const buildOnlyStems = [
+    ...new Set(buildOnlyFiles.map(f => getRelativeTestStem(f, pkgDir))),
   ]
     .sort()
     .join('\0');
   const sourceOnlyStems = [
-    ...new Set(sourceOnlyFiles.map(f => getRelativeTestStem(f, cwd))),
+    ...new Set(sourceOnlyFiles.map(f => getRelativeTestStem(f, pkgDir))),
   ]
     .sort()
     .join('\0');
@@ -525,19 +823,19 @@ function maybeCompileStaleSourceOnly(targets, onlyFiles, cwd) {
     0,
   );
   const minTargetMtime =
-    onlyFiles.length > 0
-      ? onlyFiles.reduce(
+    buildOnlyFiles.length > 0
+      ? buildOnlyFiles.reduce(
           (min, f) => Math.min(min, fs.statSync(f).mtimeMs),
           Infinity,
         )
       : 0;
   const isInSync =
-    onlyStems === sourceOnlyStems &&
-    (onlyFiles.length === 0 || minTargetMtime >= maxSourceOnlyMtime);
+    buildOnlyStems === sourceOnlyStems &&
+    (buildOnlyFiles.length === 0 || minTargetMtime >= maxSourceOnlyMtime);
   if (isInSync) {
     return onlyFiles;
   }
-  const pkgJsonPath = path.join(cwd, 'package.json');
+  const pkgJsonPath = path.join(pkgDir, 'package.json');
   if (!fs.existsSync(pkgJsonPath)) {
     return onlyFiles;
   }
@@ -549,10 +847,13 @@ function maybeCompileStaleSourceOnly(targets, onlyFiles, cwd) {
         ? 'pnpm'
         : /^bun\//i.test(ua)
           ? 'bun'
-          : 'npm';
+          : /^yarn\//i.test(ua)
+            ? 'yarn'
+            : 'npm';
       const compileRes = spawnSync(pm, ['run', 'compile'], {
-        cwd,
+        cwd: pkgDir,
         stdio: 'inherit',
+        shell: process.platform === 'win32' && pm !== 'bun',
         env: {...process.env, RUN_TEST_SKIP_COMPILE: 'true'},
       });
       if (compileRes.status === 0) {
@@ -576,10 +877,17 @@ function isParallelFlag(arg) {
 
 function resolveTestArgs(inputArgs, cwd = process.cwd()) {
   const {optionArgs, positionalArgs} = splitMochaArgs(inputArgs);
+  const pkgDir = resolvePackageDir(positionalArgs, cwd);
   let onlyFiles = findOnlyFiles(positionalArgs, cwd);
-  onlyFiles = maybeCompileStaleSourceOnly(positionalArgs, onlyFiles, cwd);
+  onlyFiles = maybeCompileStaleSourceOnly(
+    positionalArgs,
+    onlyFiles,
+    cwd,
+    pkgDir,
+  );
   if (onlyFiles.length === 0) {
-    return {args: [...inputArgs], hasOnly: false, onlyFiles: []};
+    const skip = hasSiblingSuiteOnly(positionalArgs, cwd, pkgDir);
+    return {args: [...inputArgs], hasOnly: false, onlyFiles: [], skip};
   }
   const filteredOptions = optionArgs.filter(a => !isParallelFlag(a));
   if (!filteredOptions.includes('--no-parallel')) {
@@ -590,6 +898,7 @@ function resolveTestArgs(inputArgs, cwd = process.cwd()) {
     args: [...filteredOptions, ...relOnlyFiles],
     hasOnly: true,
     onlyFiles: relOnlyFiles,
+    skip: false,
   };
 }
 
@@ -670,7 +979,10 @@ if (require.main === module) {
       process.exit(res.status ?? 1);
     }
 
-    const {args: resolvedArgs} = resolveTestArgs(args);
+    const {args: resolvedArgs, skip} = resolveTestArgs(args);
+    if (skip) {
+      process.exit(0);
+    }
 
     const mochaBin = resolveBin('mocha/bin/mocha.js');
     const mochaArgs = resolvedArgs.filter(a => !isParallelFlag(a));
@@ -698,7 +1010,10 @@ if (require.main === module) {
     // test file contains `.only`, disable parallel mode and run only the
     // exclusive test file(s) so `.only` is respected without throwing
     // "`.only` is not supported in parallel mode".
-    const {args: resolvedArgs, hasOnly} = resolveTestArgs(args);
+    const {args: resolvedArgs, hasOnly, skip} = resolveTestArgs(args);
+    if (skip) {
+      process.exit(0);
+    }
     if (hasOnly) {
       process.env.MOCHA_PARALLEL = 'false';
     }

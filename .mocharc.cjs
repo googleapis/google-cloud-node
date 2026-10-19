@@ -13,6 +13,7 @@
 // limitations under the License.
 
 const path = require('path');
+const {findOnlyFiles, splitMochaArgs} = require('./bin/run-test.cjs');
 
 const config = {
   "enable-source-maps": true,
@@ -26,6 +27,11 @@ if (process.env.MOCHA_THROW_DEPRECATION === 'false') {
 }
 if (process.env.MOCHA_PARALLEL === 'false' || typeof Bun !== 'undefined') {
   config.parallel = false;
+} else {
+  const {positionalArgs} = splitMochaArgs(process.argv.slice(2));
+  if (findOnlyFiles(positionalArgs, process.cwd()).length > 0) {
+    config.parallel = false;
+  }
 }
 if (typeof Bun !== 'undefined') {
   config.require = [path.resolve(__dirname, 'bin/proxyquire-bun-shim.cjs')];
