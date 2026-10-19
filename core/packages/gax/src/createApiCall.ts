@@ -136,29 +136,22 @@ export function createApiCall(
 
     const ongoingCall = currentApiCaller.init(callback);
     const signal = thisSettings.signal;
-    if (signal) {
+    if (signal && !(ongoingCall instanceof StreamProxy)) {
       if (signal.aborted) {
-        ongoingCall.cancel();
-      } else {
-        const abortListener = () => {
+        process.nextTick(() => {
           ongoingCall.cancel();
-        };
-        signal.addEventListener('abort', abortListener, {once: true});
-        const removeAbortListener = () => {
-          signal.removeEventListener('abort', abortListener);
-        };
-        if (ongoingCall instanceof StreamProxy) {
-          ongoingCall.once('close', removeAbortListener);
-          ongoingCall.once('end', removeAbortListener);
-          ongoingCall.once('error', removeAbortListener);
-        } else {
-          const originalCallback = ongoingCall.callback;
-          ongoingCall.callback = (...args: Parameters<APICallback>) => {
-            removeAbortListener();
-            originalCallback?.(...args);
-          };
-        }
+        });
+        return currentApiCaller.result(ongoingCall);
       }
+      const abortListener = () => {
+        ongoingCall.cancel();
+      };
+      signal.addEventListener('abort', abortListener, {once: true});
+      const originalCallback = ongoingCall.callback;
+      ongoingCall.callback = (...args: Parameters<APICallback>) => {
+        signal.removeEventListener('abort', abortListener);
+        originalCallback?.(...args);
+      };
     }
 
     // Track resends per logical request so auto-paginated subsequent page

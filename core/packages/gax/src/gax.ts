@@ -179,7 +179,7 @@ export interface CallOptions {
    */
   resumableUpload?: ResumableUploadContext;
   /**
-   * An AbortSignal to cancel the ongoing API call.
+   * An AbortSignal to cancel the ongoing non-streaming API call.
    */
   signal?: AbortSignal;
 }

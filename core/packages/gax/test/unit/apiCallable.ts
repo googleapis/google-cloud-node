@@ -1919,6 +1919,7 @@ describe('Promise', () => {
 
   it('immediately cancels call when AbortSignal is already aborted', done => {
     let funcCalled = false;
+    let returnedSynchronously = false;
     function func(argument: {}, metadata: {}, options: {}, callback: Function) {
       funcCalled = true;
       callback(null, 42);
@@ -1928,6 +1929,7 @@ describe('Promise', () => {
     const apiCall = createApiCall(func);
     void apiCall({}, {signal: controller.signal}, err => {
       try {
+        assert.strictEqual(returnedSynchronously, true);
         assert.strictEqual(funcCalled, false);
         assert(err instanceof GoogleError);
         assert.strictEqual(err.code, status.CANCELLED);
@@ -1936,6 +1938,7 @@ describe('Promise', () => {
         done(assertErr);
       }
     });
+    returnedSynchronously = true;
   });
 
   it('removes abort listener from AbortSignal when call completes', async () => {
