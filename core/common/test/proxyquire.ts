@@ -25,7 +25,9 @@ const mod = Module as unknown as {
 };
 const {hasOwnProperty} = Object.prototype;
 const hasOwn = (o: unknown, k: string) =>
-  Boolean(o && typeof o === 'object' && hasOwnProperty.call(o, k));
+  Boolean(
+    o && ['object', 'function'].includes(typeof o) && hasOwnProperty.call(o, k),
+  );
 const isGlobal = (s: unknown) =>
   hasOwn(s, '@global') || hasOwn(s, '@runtimeGlobal');
 const resolveFrom = (base: string, req: string) => {
@@ -76,7 +78,13 @@ function proxyquire<T = any>(request: string, stubs: Stubs = {}): T {
               const real = prev.call(this, id);
               if (real && ['object', 'function'].includes(typeof real)) {
                 for (const k of Object.keys(real)) {
-                  if (!(k in stub)) stub[k] = real[k];
+                  if (!(k in stub)) {
+                    try {
+                      stub[k] = real[k];
+                    } catch {
+                      // ignore
+                    }
+                  }
                 }
               }
             } catch {
