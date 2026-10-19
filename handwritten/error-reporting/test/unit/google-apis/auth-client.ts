@@ -23,6 +23,14 @@ import {
 import {RequestHandler} from '../../../src/google-apis/auth-client';
 import {deepStrictEqual} from '../../util';
 
+const origMakeAuthFactory = util.makeAuthenticatedRequestFactory;
+const origRequest = RequestHandler.prototype.request;
+
+function restoreStubs() {
+  util.makeAuthenticatedRequestFactory = origMakeAuthFactory;
+  RequestHandler.prototype.request = origRequest;
+}
+
 function verifyReportedMessage(
   config1: ConfigurationOptions,
   errToReturn: Error | null | undefined,
@@ -51,8 +59,6 @@ function verifyReportedMessage(
     },
   } as {} as Logger;
   const config2 = new Configuration(config1, logger);
-  const origMakeAuthFactory = util.makeAuthenticatedRequestFactory;
-  const origRequest = RequestHandler.prototype.request;
   util.makeAuthenticatedRequestFactory = (() => ({
     authClient: {
       async getAccessToken() {
@@ -68,11 +74,12 @@ function verifyReportedMessage(
   try {
     // tslint:disable-next-line:no-unused-expression
     new RequestHandler(config2, logger);
-  } finally {
-    util.makeAuthenticatedRequestFactory = origMakeAuthFactory;
-    RequestHandler.prototype.request = origRequest;
+  } catch (err) {
+    restoreStubs();
+    throw err;
   }
   setImmediate(() => {
+    restoreStubs();
     deepStrictEqual(logs, expectedLogs);
     done();
   });
@@ -84,6 +91,7 @@ describe('RequestHandler', () => {
   });
 
   afterEach(() => {
+    restoreStubs();
     if (nodeEnv === undefined) {
       delete process.env.NODE_ENV;
     } else {

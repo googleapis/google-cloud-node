@@ -21,7 +21,7 @@ import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {after, afterEach, before, beforeEach, describe, it} from 'mocha';
 import * as extend from 'extend';
-import * as Module from 'module';
+import {Module} from 'module';
 import * as r from 'request';
 
 import * as orig from '../src';
@@ -81,12 +81,11 @@ describe('Translate v2', () => {
       },
       '@google-cloud/promisify': fakePromisify,
     };
-    const mod = Module as unknown as {prototype: {require: NodeRequire}};
-    const origRequire = mod.prototype.require;
+    const origRequire = Module.prototype.require;
     const v2Path = require.resolve('../src/v2');
     const cached = require.cache[v2Path];
     delete require.cache[v2Path];
-    mod.prototype.require = Object.assign(function (
+    Module.prototype.require = Object.assign(function (
       this: NodeModule,
       id: string,
     ) {
@@ -95,7 +94,7 @@ describe('Translate v2', () => {
     try {
       Translate = require('../src/v2').Translate;
     } finally {
-      mod.prototype.require = origRequire;
+      Module.prototype.require = origRequire;
       if (cached) {
         require.cache[v2Path] = cached;
       } else {
