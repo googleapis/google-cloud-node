@@ -56,9 +56,10 @@ import {
 } from '@google-cloud/common/build/src/util';
 import bigquery from './types';
 import {logger, setLogFunction} from './logger';
+import {ArrowRecordBatchStream, createQueryArrowStream_} from './arrow';
 
 // Third-Party Re-exports
-export {common};
+export {common, ArrowRecordBatchStream};
 
 export interface RequestCallback<T> {
   (err: Error | null, response?: T | null): void;
@@ -373,6 +374,52 @@ export class BigQuery extends Service {
   createQueryStream(options?: Query | string): ResourceStream<RowMetadata> {
     // placeholder body, overwritten in constructor
     return new ResourceStream<RowMetadata>({}, () => {});
+  }
+
+  /**
+   * [Beta] Run a query scoped to your project and stream results as Apache
+   * Arrow `RecordBatch` objects.
+   *
+   * This method uses the `ARROW` query results format of the BigQuery API,
+   * which isn't generally available yet, so it may change in ways that aren't
+   * backward compatible.
+   *
+   * Requires the optional `@google-cloud/bigquery-storage` (>= 6.1.0) package
+   * to be installed.
+   *
+   * @param {string|object} [options] A string SQL query or configuration
+   *     object. See {@link BigQuery#query} for a complete list of options.
+   * @returns {ArrowRecordBatchStream} A stream of `RecordBatch` objects. The
+   *     stream emits a `job` event with the {@link Job} when BigQuery creates
+   *     a job, and sets `stream.queryId` and `stream.jobReference` (when
+   *     available) before the first batch.
+   *
+   * @example
+   * ```
+   * const {BigQuery} = require('@google-cloud/bigquery');
+   * const bigquery = new BigQuery();
+   *
+   * const query = 'SELECT url FROM `publicdata.samples.github_nested` LIMIT 100';
+   *
+   * bigquery.createQueryArrowStream(query)
+   *   .on('error', console.error)
+   *   .on('data', function(batch) {
+   *     // batch is an apache-arrow RecordBatch from your query.
+   *   })
+   *   .on('end', function() {
+   *     // All batches retrieved.
+   *   });
+   *
+   * //-
+   * // You can also consume the stream using `for await...of` or `toArray()`.
+   * //-
+   * const batches = await bigquery.createQueryArrowStream(query).toArray();
+   * ```
+   *
+   * @beta
+   */
+  createQueryArrowStream(options?: Query | string): ArrowRecordBatchStream {
+    return createQueryArrowStream_(this, options);
   }
 
   getDatasetsStream(options?: GetDatasetsOptions): ResourceStream<Dataset> {
@@ -2310,8 +2357,10 @@ export class BigQuery extends Service {
    * @param query string | Query
    * @param options QueryOptions
    * @returns bigquery.IQueryRequest | undefined
+   *
+   * @private
    */
-  private buildQueryRequest_(
+  buildQueryRequest_(
     query: string | Query,
     options: QueryOptions,
   ): bigquery.IQueryRequest | undefined {
@@ -2413,7 +2462,12 @@ export class BigQuery extends Service {
     return req;
   }
 
-  private runJobsQuery(
+  /**
+   * Runs a `jobs.query` request.
+   *
+   * @private
+   */
+  runJobsQuery(
     req: bigquery.IQueryRequest,
     callback?: JobsQueryCallback,
   ): void | Promise<JobsQueryResponse> {

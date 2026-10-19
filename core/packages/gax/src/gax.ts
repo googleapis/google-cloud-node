@@ -25,7 +25,6 @@ import {GoogleError} from './googleError';
 import {BundleOptions} from './bundlingCalls/bundleExecutor';
 import {toLowerCamelCase} from './util';
 import {checkTelemetryEnabled} from './observability/util';
-import {StaticTraceContext} from './observability/contextUtil';
 import {Status} from './status';
 import {RequestType} from './apitypes';
 
@@ -806,8 +805,8 @@ export interface ClientConfig {
  *   those codes.
  * @param {Object} [otherArgs] - the non-request arguments to be passed to the API
  *   calls.
- * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
- * @param {StaticTraceContext} [internalTelemetryInfo] - Static trace context for telemetry.
+ * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing
+ *   when passed in client options (or overridden by `GOOGLE_SDK_NODE_ENABLE_TRACING`).
  * @return {Object} A mapping from method name to CallSettings, or null if the
  *   service is not found in the config.
  */
@@ -818,7 +817,8 @@ export function constructSettings(
   retryNames: {},
   otherArgs?: {},
   enableTelemetryTracing?: boolean,
-  internalTelemetryInfo?: StaticTraceContext,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _legacyTelemetryInfo?: unknown,
 ) {
   const env: Record<string, string | undefined> =
     typeof process === 'object' && typeof process.env === 'object'
@@ -829,15 +829,14 @@ export function constructSettings(
 
   const isEnvEnabled = checkTelemetryEnabled();
 
-  // If GOOGLE_SDK_NODE_ENABLE_TRACING is explicitly set, then the client option doesn't matter.
-  // The extra protoc param only matters if the environmental variable isn't set.
+  // Tracing is only enabled via GOOGLE_SDK_NODE_ENABLE_TRACING or when the user
+  // passes enableTelemetryTracing: true in their client options. If
+  // GOOGLE_SDK_NODE_ENABLE_TRACING is explicitly set, it takes precedence.
   const tracingRequested = isEnvSet
     ? isEnvEnabled
-    : Boolean(internalTelemetryInfo || enableTelemetryTracing);
+    : Boolean(enableTelemetryTracing);
 
-  otherArgs = internalTelemetryInfo
-    ? {...otherArgs, internalTelemetryInfo}
-    : otherArgs || {};
+  otherArgs = otherArgs || {};
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaults: any = {};
 
