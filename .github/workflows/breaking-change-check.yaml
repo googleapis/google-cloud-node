@@ -28,6 +28,14 @@ jobs:
             check:
               - 'core/**/*.ts'
               - 'handwritten/**/*.ts'
+              - '.github/scripts/breaking-change-check.cjs'
+              - '.github/scripts/tests/breaking-change-check.test.cjs'
+              - '.github/scripts/package.json'
+              - '.github/workflows/breaking-change-check.yaml'
+            checker_self:
+              - '.github/scripts/breaking-change-check.cjs'
+              - '.github/scripts/tests/breaking-change-check.test.cjs'
+              - '.github/scripts/package.json'
               - '.github/workflows/breaking-change-check.yaml'
       - name: Use Node.js 24
         if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
@@ -36,95 +44,15 @@ jobs:
           node-version: 24
       - uses: ./.github/actions/pnpm-lockfile-check
         if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
+      - name: Run breaking change checker unit tests
+        if: steps.changes.outputs.checker_self == 'true' || github.event_name == 'workflow_dispatch'
+        run: node ./bin/run-test.cjs --no-c8 .github/scripts/tests/breaking-change-check.test.cjs
       - name: Compile affected packages and workspace dependents via pnpm
         if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
         run: |
-          pnpm --config.link-workspace-packages=deep --config.prefer-workspace-packages=true --filter "...[HEAD^1...HEAD]" --filter "!./packages/*" --if-present run compile
-      - name: Check declaration changes with pnpm dlx @api-extractor-tools/change-detector
+          pnpm --config.link-workspace-packages=deep --config.prefer-workspace-packages=true --filter "...[HEAD^1...HEAD]..." --filter "!./packages/*" --if-present run compile
+      - name: Check declaration changes with TypeScript TypeChecker assignability
         if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
-        run: |
-          node --input-type=module - <<'EOF'
-          import {execFileSync} from 'node:child_process';
-          import fs from 'node:fs';
-          import {createRequire} from 'node:module';
-          import path from 'node:path';
-
-          const require = createRequire(path.join(process.cwd(), 'package.json'));
-          const ts = require('typescript');
-
-          const diff = execFileSync(
-            'git',
-            [
-              'diff',
-              '--name-status',
-              'HEAD^1...HEAD',
-              '--',
-              '*.ts',
-              ':!packages',
-              ':!**/test/**',
-              ':!**/tests/**',
-              ':!**/system-test/**',
-              ':!**/samples/**',
-              ':!**/fixtures/**',
-              ':!**/benchmark/**',
-            ],
-            {encoding: 'utf8'},
-          );
-
-          const findCompiledDts = file => {
-            let dir = path.dirname(path.resolve(file));
-            while (dir !== path.dirname(dir) && !fs.existsSync(path.join(dir, 'package.json'))) {
-              dir = path.dirname(dir);
-            }
-            const relInPkg = path.relative(dir, path.resolve(file));
-            const candidates = [
-              path.join(dir, 'build', relInPkg.replace(/\.ts$/, '.d.ts')),
-              path.join(dir, 'build', relInPkg.replace(/^src[\\/]/, '').replace(/\.ts$/, '.d.ts')),
-            ];
-            return candidates.find(c => fs.existsSync(c));
-          };
-
-          const breaking = [];
-          for (const line of diff.split('\n').map(l => l.trim()).filter(Boolean)) {
-            const [status, oldPath, newPath] = line.split(/\t+/);
-            const file = status?.startsWith('R') ? newPath : oldPath;
-            if (!status || !file || !oldPath || !file.endsWith('.ts') || /\.(test|spec)\.ts$/.test(file)) continue;
-            if (status.startsWith('A')) continue;
-            if (status.startsWith('D')) {
-              breaking.push({file: oldPath, explanation: 'Public source file was deleted.'});
-              continue;
-            }
-            const baseSrc = execFileSync('git', ['show', `HEAD^1:${oldPath}`], {encoding: 'utf8'});
-            fs.writeFileSync('/tmp/base.d.ts', ts.transpileDeclaration(baseSrc, {fileName: oldPath}).outputText);
-            const compiledDts = findCompiledDts(file);
-            const headDts = compiledDts
-              ? fs.readFileSync(compiledDts, 'utf8')
-              : ts.transpileDeclaration(fs.readFileSync(file, 'utf8'), {fileName: file}).outputText;
-            fs.writeFileSync('/tmp/head.d.ts', headDts);
-
-            const out = execFileSync(
-              'pnpm',
-              ['dlx', '@api-extractor-tools/change-detector', '/tmp/base.d.ts', '/tmp/head.d.ts', '--json'],
-              {encoding: 'utf8'},
-            );
-            const report = JSON.parse(out.slice(out.indexOf('{')));
-            const visit = list => {
-              for (const c of list || []) {
-                if (c.action === 'removed' || c.impact === 'narrowing') {
-                  breaking.push({file, explanation: c.explanation});
-                }
-                if (c.nestedChanges) visit(c.nestedChanges);
-              }
-            };
-            for (const group of Object.values(report.changes || {})) visit(group);
-          }
-
-          if (breaking.length > 0) {
-            for (const b of breaking) {
-              console.log(`::error file=${b.file},title=Breaking Change Detected::${b.explanation}`);
-            }
-            process.exitCode = 1;
-          } else {
-            console.log('No breaking changes detected.');
-          }
-          EOF
+        env:
+          GIT_DIFF_ARG: "HEAD^1...HEAD"
+        run: node ./.github/scripts/breaking-change-check.cjs
