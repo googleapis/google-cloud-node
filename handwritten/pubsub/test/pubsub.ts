@@ -196,7 +196,7 @@ describe('PubSub', () => {
       './snapshot': {Snapshot: FakeSnapshot},
       './subscription': {Subscription},
       './topic': {Topic: FakeTopic},
-      './index': {v1:v1Override},
+      './index': {v1: v1Override},
       './util': fakeUtil,
     }).PubSub;
   });
@@ -1607,24 +1607,25 @@ describe('PubSub', () => {
         throw callbackError;
       };
 
-      const nextTickStub = sandbox
-        .stub(process, 'nextTick')
-        .callsFake(((fn: Function, ...args: unknown[]) => {
-          if (fn === callback) {
-            originalNextTick(() => {
-              try {
-                fn(...args);
-              } catch (err) {
-                assert.strictEqual(err, callbackError);
-                assert.strictEqual(callCount, 1);
-                nextTickStub.restore();
-                done();
-              }
-            });
-          } else {
-            originalNextTick(fn, ...args);
-          }
-        }) as unknown as typeof process.nextTick);
+      const nextTickStub = sandbox.stub(process, 'nextTick').callsFake(((
+        fn: (...cbArgs: unknown[]) => void,
+        ...args: unknown[]
+      ) => {
+        if (fn === callback) {
+          originalNextTick(() => {
+            try {
+              fn(...args);
+            } catch (err) {
+              assert.strictEqual(err, callbackError);
+              assert.strictEqual(callCount, 1);
+              nextTickStub.restore();
+              done();
+            }
+          });
+        } else {
+          originalNextTick(fn, ...args);
+        }
+      }) as unknown as typeof process.nextTick);
 
       pubsub.getClient_(CONFIG, callback);
     });
@@ -1642,24 +1643,25 @@ describe('PubSub', () => {
         throw callbackError;
       };
 
-      const nextTickStub = sandbox
-        .stub(process, 'nextTick')
-        .callsFake(((fn: Function, ...args: unknown[]) => {
-          if (fn === callback) {
-            originalNextTick(() => {
-              try {
-                fn(...args);
-              } catch (err) {
-                assert.strictEqual(err, callbackError);
-                assert.strictEqual(callCount, 1);
-                nextTickStub.restore();
-                done();
-              }
-            });
-          } else {
-            originalNextTick(fn, ...args);
-          }
-        }) as unknown as typeof process.nextTick);
+      const nextTickStub = sandbox.stub(process, 'nextTick').callsFake(((
+        fn: (...cbArgs: unknown[]) => void,
+        ...args: unknown[]
+      ) => {
+        if (fn === callback) {
+          originalNextTick(() => {
+            try {
+              fn(...args);
+            } catch (err) {
+              assert.strictEqual(err, callbackError);
+              assert.strictEqual(callCount, 1);
+              nextTickStub.restore();
+              done();
+            }
+          });
+        } else {
+          originalNextTick(fn, ...args);
+        }
+      }) as unknown as typeof process.nextTick);
 
       pubsub.close(callback);
     });
