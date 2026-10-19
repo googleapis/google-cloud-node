@@ -85,11 +85,11 @@ Structure the pull request body using the following template:
 ```markdown
 ## Description
 
-<1 sentence describing what the pull request does>
+<1 complete sentence (never more than 12 words) describing what the pull request does>
 
 ## Impact
 
-<1 sentence describing what the impact of the PR is and what problem it solves>
+<1 complete sentence (never more than 12 words) describing what the impact of the PR is and what problem it solves>
 
 ## Changes
 
@@ -104,10 +104,12 @@ Structure the pull request body using the following template:
 <Explain alternatives considered against merging the PR including the option of not merging a PR at all because of the risks it introduces>
 ```
 
--   **`## Description`**: Write 1 sentence describing what the pull request
-    does.
--   **`## Impact`**: Write 1 sentence describing what the impact of the pull
-    request is and what problem it solves.
+-   **`## Description`**: Write one complete sentence describing what the pull
+    request does. This section must always be one sentence and never more than
+    12 words.
+-   **`## Impact`**: Write one complete sentence describing what the impact of
+    the pull request is and what problem it solves. This section must always be
+    one sentence and never more than 12 words.
 -   **`## Changes`**: Provide bullet points of what the changes are at a high
     level (a more detailed explanation of the description).
 -   **`## Testing`**: Explain what tests were added, deleted, or changed in a

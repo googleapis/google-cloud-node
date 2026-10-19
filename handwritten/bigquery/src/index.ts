@@ -15,6 +15,7 @@
  */
 
 export {
+  ArrowRecordBatchStream,
   BigQuery,
   BigQueryDate,
   BigQueryDateOptions,
