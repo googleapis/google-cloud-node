@@ -1919,6 +1919,7 @@ describe('Promise', () => {
 
   it('immediately cancels call when AbortSignal is already aborted', done => {
     let funcCalled = false;
+    let returnedSynchronously = false;
     function func(argument: {}, metadata: {}, options: {}, callback: Function) {
       funcCalled = true;
       callback(null, 42);
@@ -1928,6 +1929,7 @@ describe('Promise', () => {
     const apiCall = createApiCall(func);
     void apiCall({}, {signal: controller.signal}, err => {
       try {
+        assert.strictEqual(returnedSynchronously, true);
         assert.strictEqual(funcCalled, false);
         assert(err instanceof GoogleError);
         assert.strictEqual(err.code, status.CANCELLED);
@@ -1936,6 +1938,7 @@ describe('Promise', () => {
         done(assertErr);
       }
     });
+    returnedSynchronously = true;
   });
 
   it('removes abort listener from AbortSignal when call completes', async () => {
@@ -2036,6 +2039,46 @@ describe('retryable', () => {
       assert(err instanceof Error);
       return true;
     });
+  });
+
+  it('does not retry when cancelled in-flight even if Status.CANCELLED is in retryCodes', async () => {
+    const retryWithCancelled = gax.createRetryOptions(
+      [status.CANCELLED],
+      gax.createBackoffSettings(1, 1, 5, 50, 1, 50, 500),
+    );
+    const cancelRetrySettings = {
+      settings: {timeout: 0, retry: retryWithCancelled, apiName: 'TestApi'},
+      returnCancelFunc: true,
+    };
+
+    let callCount = 0;
+    function func(argument: {}, metadata: {}, options: {}, callback: Function) {
+      callCount++;
+      const timer = setTimeout(() => {
+        callback(null, 42);
+      }, 50);
+      return () => {
+        clearTimeout(timer);
+        const err = new GoogleError('cancelled by caller');
+        err.code = status.CANCELLED;
+        callback(err);
+      };
+    }
+
+    const controller = new AbortController();
+    const apiCall = createApiCall(func, cancelRetrySettings);
+    const promise = apiCall({}, {signal: controller.signal});
+    setTimeout(() => {
+      controller.abort();
+    }, 5);
+
+    await assert.rejects(promise, (err: unknown) => {
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, status.CANCELLED);
+      return true;
+    });
+    await new Promise(resolve => setTimeout(resolve, 20));
+    assert.strictEqual(callCount, 1);
   });
 
   it("doesn't retry if no codes", done => {
