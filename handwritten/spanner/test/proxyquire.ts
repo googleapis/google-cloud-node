@@ -76,15 +76,31 @@ function proxyquire<T = any>(request: string, stubs: Stubs = {}): T {
             try {
               const real = prev.call(this, id);
               if (real && ['object', 'function'].includes(typeof real)) {
-                for (const k of Object.keys(real)) {
-                  if (!(k in stub)) {
-                    try {
-                      stub[k] = real[k];
-                    } catch {
-                      // ignore
+                return new Proxy(stub, {
+                  get(target, prop) {
+                    if (prop in target) {
+                      return Reflect.get(target, prop);
                     }
-                  }
-                }
+                    return Reflect.get(real, prop);
+                  },
+                  has(target, prop) {
+                    return prop in target || prop in real;
+                  },
+                  ownKeys(target) {
+                    return Array.from(
+                      new Set([
+                        ...Reflect.ownKeys(target),
+                        ...Reflect.ownKeys(real),
+                      ]),
+                    );
+                  },
+                  getOwnPropertyDescriptor(target, prop) {
+                    const desc =
+                      Reflect.getOwnPropertyDescriptor(target, prop) ||
+                      Reflect.getOwnPropertyDescriptor(real, prop);
+                    return desc ? {...desc, configurable: true} : undefined;
+                  },
+                });
               }
             } catch {
               // ignore
