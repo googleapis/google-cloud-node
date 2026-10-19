@@ -27,7 +27,6 @@ import * as protobuf from 'protobufjs';
 import objectHash from 'object-hash';
 
 import * as gax from './gax';
-import {StaticTraceContext} from './observability/contextUtil';
 import {ClientOptions} from '@grpc/grpc-js/build/src/client';
 
 const googleProtoFilesDir = path.join(__dirname, '..', '..', 'build', 'protos');
@@ -56,6 +55,14 @@ export interface GrpcClientOptions extends GoogleAuthOptions {
   servicePath?: string;
   apiEndpoint?: string;
   port?: number | string;
+  /**
+   * Whether to enable telemetry tracing for the client.
+   *
+   * Tracing is only enabled via the `GOOGLE_SDK_NODE_ENABLE_TRACING` environment
+   * variable or when a user passes `enableTelemetryTracing: true` in their client
+   * options.
+   */
+  enableTelemetryTracing?: boolean;
 }
 
 export interface MetadataValue {
@@ -126,6 +133,7 @@ export class GrpcClient {
   httpRules?: Array<google.api.IHttpRule>;
   private _servicePath?: string;
   private _port?: number;
+  private _enableTelemetryTracing?: boolean;
   /**
    * Base directory for resolving client certificates.
    *
@@ -184,6 +192,7 @@ export class GrpcClient {
       typeof options.port === 'string'
         ? parseInt(options.port, 10)
         : options.port;
+    this._enableTelemetryTracing = options.enableTelemetryTracing;
 
     const minimumVersion = 10;
     const major = Number(process.version.match(/^v(\d+)/)?.[1]);
@@ -387,7 +396,6 @@ export class GrpcClient {
    * @param {Object} headers - A dictionary of additional HTTP header name to
    *   its value.
    * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
-   * @param {StaticTraceContext} [internalTelemetryInfo] - Static trace context for telemetry.
    * @return {Object} A mapping of method names to CallSettings.
    */
   constructSettings(
@@ -396,7 +404,8 @@ export class GrpcClient {
     configOverrides: gax.ClientConfig,
     headers: OutgoingHttpHeaders,
     enableTelemetryTracing?: boolean,
-    internalTelemetryInfo?: StaticTraceContext,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _legacyTelemetryInfo?: unknown,
   ) {
     const otherArgs: Record<string, unknown> = {
       metadataBuilder: this.metadataBuilder(headers),
@@ -413,8 +422,7 @@ export class GrpcClient {
       configOverrides,
       this.grpc.status,
       otherArgs,
-      enableTelemetryTracing,
-      internalTelemetryInfo,
+      enableTelemetryTracing ?? this._enableTelemetryTracing,
     );
   }
 
