@@ -106,7 +106,11 @@
     "handwritten/pubsub": {
       "component": "pubsub"
     },
+    "handwritten/storage": {
+      "component": "storage"
+    },
     "packages/google-ads-admanager": {},
+    "packages/google-ads-datamanager": {},
     "packages/google-ai-generativelanguage": {},
     "packages/google-analytics-admin": {},
     "packages/google-analytics-data": {},
