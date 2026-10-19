@@ -201,7 +201,7 @@ export type ObjectStream<O> = {
   ): ObjectStream<O>;
 } & Transform;
 
-interface GetClientCallback {
+export interface GetClientCallback {
   (err: Error | null, gaxClient?: gax.ClientStub): void;
 }
 
@@ -384,12 +384,13 @@ export class PubSub {
     const definedCallback = callback || (() => {});
     if (this.isOpen) {
       this.isOpen = false;
-      this.closeAllClients_()
-        .then(() => this.schemaClient?.close())
+      const schemaClient = this.schemaClient;
+      this.schemaClient = undefined;
+      Promise.all([this.closeAllClients_(), schemaClient?.close()])
         .then(() => process.nextTick(definedCallback, null))
         .catch(err => process.nextTick(definedCallback, err));
     } else {
-      definedCallback(null);
+      process.nextTick(definedCallback, null);
     }
   }
 

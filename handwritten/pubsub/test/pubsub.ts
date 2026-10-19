@@ -1561,6 +1561,44 @@ describe('PubSub', () => {
     });
   });
 
+  function expectCallbackThrowOnNextTick(
+    targetCallback: (...cbArgs: never[]) => void,
+    expectedError: Error,
+    getCallCount: () => number,
+    done: Mocha.Done,
+  ) {
+    const originalNextTick = process.nextTick;
+    const nextTickStub = sandbox.stub(process, 'nextTick').callsFake(((
+      fn: (...cbArgs: unknown[]) => void,
+      ...args: unknown[]
+    ) => {
+      if (fn === targetCallback) {
+        originalNextTick(() => {
+          try {
+            assert.throws(() => {
+              fn(...args);
+            }, expectedError);
+            originalNextTick(() => {
+              try {
+                assert.strictEqual(getCallCount(), 1);
+                nextTickStub.restore();
+                done();
+              } catch (err) {
+                nextTickStub.restore();
+                done(err);
+              }
+            });
+          } catch (err) {
+            nextTickStub.restore();
+            done(err);
+          }
+        });
+      } else {
+        originalNextTick(fn, ...args);
+      }
+    }) as unknown as typeof process.nextTick);
+  }
+
   describe('getClient_', () => {
     const FAKE_CLIENT_INSTANCE = {} as unknown as gax.ClientStub;
     const CONFIG = {
@@ -1590,90 +1628,150 @@ describe('PubSub', () => {
       });
     });
 
-    it('should not invoke callback a second time if callback throws synchronously', done => {
+    it('should not invoke callback a second time if callback throws synchronously on success', done => {
       sandbox
         .stub(pubsub, 'getClientAsync_')
         .withArgs(CONFIG)
         .resolves(FAKE_CLIENT_INSTANCE);
 
       const callbackError = new Error('callback error');
-      const originalNextTick = process.nextTick;
       let callCount = 0;
 
-      const callback = (err: Error | null, client?: gax.ClientStub) => {
+      const callback: pubsubTypes.GetClientCallback = (err, client) => {
         callCount++;
         assert.ifError(err);
         assert.strictEqual(client, FAKE_CLIENT_INSTANCE);
         throw callbackError;
       };
 
-      const nextTickStub = sandbox.stub(process, 'nextTick').callsFake(((
-        fn: (...cbArgs: unknown[]) => void,
-        ...args: unknown[]
-      ) => {
-        if (fn === callback) {
-          originalNextTick(() => {
-            try {
-              fn(...args);
-            } catch (err) {
-              assert.strictEqual(err, callbackError);
-              assert.strictEqual(callCount, 1);
-              nextTickStub.restore();
-              done();
-            }
-          });
-        } else {
-          originalNextTick(fn, ...args);
-        }
-      }) as unknown as typeof process.nextTick);
+      expectCallbackThrowOnNextTick(
+        callback,
+        callbackError,
+        () => callCount,
+        done,
+      );
 
       pubsub.getClient_(CONFIG, callback);
     });
 
-    it('should not invoke close callback a second time if callback throws synchronously', done => {
+    it('should not invoke callback a second time if callback throws synchronously on error', done => {
+      const requestError = new Error('request error');
+      sandbox.stub(pubsub, 'getClientAsync_').rejects(requestError);
+
+      const callbackError = new Error('callback error');
+      let callCount = 0;
+
+      const callback: pubsubTypes.GetClientCallback = err => {
+        callCount++;
+        assert.strictEqual(err, requestError);
+        throw callbackError;
+      };
+
+      expectCallbackThrowOnNextTick(
+        callback,
+        callbackError,
+        () => callCount,
+        done,
+      );
+
+      pubsub.getClient_(CONFIG, callback);
+    });
+  });
+
+  describe('close', () => {
+    it('should not invoke close callback a second time if callback throws synchronously on success', done => {
       sandbox.stub(pubsub, 'closeAllClients_').resolves();
 
       const callbackError = new Error('close callback error');
-      const originalNextTick = process.nextTick;
       let callCount = 0;
 
       const callback: pubsubTypes.EmptyCallback = err => {
         callCount++;
         assert.ifError(err);
+        assert.strictEqual(pubsub.isOpen, false);
         throw callbackError;
       };
 
-      const nextTickStub = sandbox.stub(process, 'nextTick').callsFake(((
-        fn: (...cbArgs: unknown[]) => void,
-        ...args: unknown[]
-      ) => {
-        if (fn === callback) {
-          originalNextTick(() => {
-            try {
-              fn(...args);
-            } catch (err) {
-              assert.strictEqual(err, callbackError);
-              assert.strictEqual(callCount, 1);
-              nextTickStub.restore();
-              done();
-            }
-          });
-        } else {
-          originalNextTick(fn, ...args);
-        }
-      }) as unknown as typeof process.nextTick);
+      expectCallbackThrowOnNextTick(
+        callback,
+        callbackError,
+        () => callCount,
+        done,
+      );
 
       pubsub.close(callback);
     });
 
-    it('should pass back errors from closeAllClients_ to close callback', done => {
+    it('should not invoke close callback a second time if callback throws synchronously on error', done => {
+      const closeError = new Error('close error');
+      sandbox.stub(pubsub, 'closeAllClients_').rejects(closeError);
+
+      const callbackError = new Error('close callback error');
+      let callCount = 0;
+
+      const callback: pubsubTypes.EmptyCallback = err => {
+        callCount++;
+        assert.strictEqual(err, closeError);
+        assert.strictEqual(pubsub.isOpen, false);
+        throw callbackError;
+      };
+
+      expectCallbackThrowOnNextTick(
+        callback,
+        callbackError,
+        () => callCount,
+        done,
+      );
+
+      pubsub.close(callback);
+    });
+
+    it('should pass back errors from closeAllClients_ and still close schemaClient', done => {
       const error = new Error('close error');
       sandbox.stub(pubsub, 'closeAllClients_').rejects(error);
+      let schemaClientClosed = false;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (pubsub as any).schemaClient = {
+        close: () => {
+          schemaClientClosed = true;
+          return Promise.resolve();
+        },
+      };
 
       pubsub.close(err => {
         assert.strictEqual(err, error);
+        assert.strictEqual(schemaClientClosed, true);
+        assert.strictEqual(pubsub.isOpen, false);
         done();
       });
+    });
+
+    it('should pass back errors from schemaClient.close to close callback', done => {
+      const error = new Error('schema close error');
+      sandbox.stub(pubsub, 'closeAllClients_').resolves();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (pubsub as any).schemaClient = {
+        close: () => Promise.reject(error),
+      };
+
+      pubsub.close(err => {
+        assert.strictEqual(err, error);
+        assert.strictEqual(pubsub.isOpen, false);
+        done();
+      });
+    });
+
+    it('should invoke callback asynchronously when PubSub is already closed', done => {
+      pubsub.isOpen = false;
+      let syncCompleted = false;
+
+      pubsub.close(err => {
+        assert.ifError(err);
+        assert.strictEqual(syncCompleted, true);
+        done();
+      });
+
+      syncCompleted = true;
     });
   });
 
