@@ -81,14 +81,17 @@ function isOutputNamedType(name) {
 }
 
 /**
- * Ensures JSDoc comments placed on the same line after `{` or `;` are on their
- * own line so TypeScript's `stripInternal` compiler option recognizes `@internal`.
+ * Ensures JSDoc `@internal` comments placed on the same line after `{`, `}`, or `;`
+ * are on their own line so TypeScript's `stripInternal` compiler option recognizes them.
  *
  * @param {string} src
  * @returns {string}
  */
 function normalizeInternalComments(src) {
-  return src.replace(/([{};])[ \t]*(\/\*\*[\s\S]*?\*\/)/g, '$1\n$2\n');
+  return src.replace(
+    /([{};])[ \t]*(\/\*\*(?:(?!\*\/)[\s\S])*?@internal\b(?:(?!\*\/)[\s\S])*?\*\/)/g,
+    '$1\n$2\n',
+  );
 }
 
 function isInternalNode(node, sf) {
@@ -132,6 +135,17 @@ function isValidIdentifier(name) {
 
 function replaceThisInTypeNode(typeNode, selfTypeNode, ctx) {
   const visit = node => {
+    if (
+      ts.isTypePredicateNode(node) &&
+      node.parameterName.kind === ts.SyntaxKind.ThisType
+    ) {
+      return ts.factory.updateTypePredicateNode(
+        node,
+        node.assertsModifier,
+        node.parameterName,
+        node.type ? ts.visitNode(node.type, visit) : undefined,
+      );
+    }
     if (node.kind === ts.SyntaxKind.ThisType) {
       return selfTypeNode;
     }
@@ -163,6 +177,93 @@ function formatTypeParamWithoutDefault(tp, sf, selfName, selfTpNames) {
   return `${tp.name.text}${constraint}`;
 }
 
+function collectLocalExportedNames(sf) {
+  const exported = new Set();
+  for (const stmt of sf.statements) {
+    if (isInternalNode(stmt, sf)) continue;
+    if (hasModifier(stmt, ts.SyntaxKind.ExportKeyword) && stmt.name) {
+      exported.add(stmt.name.text);
+    }
+    if (
+      ts.isExportDeclaration(stmt) &&
+      !stmt.moduleSpecifier &&
+      stmt.exportClause &&
+      ts.isNamedExports(stmt.exportClause)
+    ) {
+      for (const el of stmt.exportClause.elements) {
+        const localName = (el.propertyName || el.name).text;
+        exported.add(localName);
+      }
+    }
+  }
+  return exported;
+}
+
+function buildStructuralEnumLines(stmt, sf, isExported) {
+  const eName = stmt.name.text;
+  const exp = isExported ? 'export ' : '';
+  const unionParts = [];
+  const nsLines = [];
+  const propLines = [];
+  let nextNumericValue = 0;
+
+  for (const m of stmt.members) {
+    const mName = getMemberName(m, sf);
+    if (!mName) continue;
+    let litType = 'number | string';
+    if (m.initializer) {
+      const initText = m.initializer.getText(sf).trim();
+      if (/^-?\d+(?:\.\d+)?$/.test(initText)) {
+        litType = initText;
+        nextNumericValue = Number(initText) + 1;
+      } else if (/^['"`]/.test(initText)) {
+        litType = initText;
+        nextNumericValue = NaN;
+      } else {
+        nextNumericValue = NaN;
+      }
+    } else if (!Number.isNaN(nextNumericValue)) {
+      litType = String(nextNumericValue);
+      nextNumericValue++;
+    }
+    unionParts.push(litType);
+    const propKey = isValidIdentifier(mName)
+      ? mName
+      : JSON.stringify(String(mName));
+    if (isValidIdentifier(mName)) {
+      nsLines.push(`  export type ${mName} = ${litType};`);
+    }
+    propLines.push(`  readonly ${propKey}: ${litType};`);
+  }
+
+  const unionStr = unionParts.length > 0 ? unionParts.join(' | ') : 'never';
+  return [
+    `${exp}type ${eName} = ${unionStr};`,
+    `${exp}declare namespace ${eName} {\n${nsLines.join('\n')}\n}`,
+    `${exp}declare const ${eName}: {\n${propLines.join('\n')}\n};`,
+  ].join('\n');
+}
+
+function typeNodeReferencesAny(typeNode, sf, targetNames) {
+  if (!typeNode || targetNames.size === 0) return false;
+  let found = false;
+  const visit = node => {
+    if (found || !node) return;
+    if (ts.isTypeReferenceNode(node)) {
+      const refName = ts.isIdentifier(node.typeName)
+        ? node.typeName.text
+        : node.typeName.getText(sf);
+      if (targetNames.has(refName)) {
+        found = true;
+        return;
+      }
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(typeNode);
+  return found;
+}
+
 function collectDtsInfo(sourceText, fileName) {
   const sf = ts.createSourceFile(
     fileName,
@@ -170,7 +271,9 @@ function collectDtsInfo(sourceText, fileName) {
     ts.ScriptTarget.Latest,
     true,
   );
+  const localExported = collectLocalExportedNames(sf);
   const classes = new Map();
+  const classMeta = new Map();
   const interfaces = new Map();
   const typeParams = new Map();
   const enums = new Map();
@@ -234,17 +337,27 @@ function collectDtsInfo(sourceText, fileName) {
   };
 
   const recordTypeParams = (name, tps) => {
-    if (!tps || tps.length === 0) {
-      typeParams.set(name, {minArity: 0, maxArity: 0});
+    const minArity = tps ? tps.filter(tp => !tp.default).length : 0;
+    const maxArity = tps ? tps.length : 0;
+    if (!typeParams.has(name)) {
+      typeParams.set(name, {minArity, maxArity});
       return;
     }
-    const minArity = tps.filter(tp => !tp.default).length;
-    typeParams.set(name, {minArity, maxArity: tps.length});
+    const prev = typeParams.get(name);
+    if (maxArity > 0) {
+      typeParams.set(name, {
+        minArity:
+          prev.maxArity === 0 ? minArity : Math.min(prev.minArity, minArity),
+        maxArity: Math.max(prev.maxArity, maxArity),
+      });
+    }
   };
 
   for (const stmt of sf.statements) {
     if (isInternalNode(stmt, sf)) continue;
-    const isExported = hasModifier(stmt, ts.SyntaxKind.ExportKeyword);
+    const isExported =
+      hasModifier(stmt, ts.SyntaxKind.ExportKeyword) ||
+      Boolean(stmt.name && localExported.has(stmt.name.text));
     if (ts.isFunctionDeclaration(stmt) && isExported) {
       if (stmt.name) recordTypeParams(stmt.name.text, stmt.typeParameters);
       for (const p of stmt.parameters) {
@@ -257,25 +370,41 @@ function collectDtsInfo(sourceText, fileName) {
       }
     } else if (ts.isEnumDeclaration(stmt) && isExported && stmt.name) {
       const eMap = new Map();
+      let nextVal = 0;
       for (const m of stmt.members) {
         const mName = getMemberName(m, sf);
-        if (mName) {
-          eMap.set(
-            mName,
-            m.initializer ? m.initializer.getText(sf) : undefined,
-          );
+        if (!mName) continue;
+        let valText;
+        if (m.initializer) {
+          valText = m.initializer.getText(sf).trim();
+          if (/^-?\d+(?:\.\d+)?$/.test(valText)) {
+            nextVal = Number(valText) + 1;
+          } else {
+            nextVal = NaN;
+          }
+        } else if (!Number.isNaN(nextVal)) {
+          valText = String(nextVal);
+          nextVal++;
         }
+        eMap.set(mName, valText);
       }
       enums.set(stmt.name.text, eMap);
     } else if (ts.isClassDeclaration(stmt) && isExported && stmt.name) {
       const cName = stmt.name.text;
       recordTypeParams(cName, stmt.typeParameters);
+      const isClassAbstract = hasModifier(stmt, ts.SyntaxKind.AbstractKeyword);
+      let ctorVisibility = 'public';
+      let hasExplicitCtor = false;
       const memberMap = new Map();
       const getters = new Set();
       const setters = new Set();
       for (const m of stmt.members) {
         const vis = getVisibility(m, sf);
         if (ts.isConstructorDeclaration(m)) {
+          if (!hasExplicitCtor || vis === 'public') {
+            ctorVisibility = vis;
+          }
+          hasExplicitCtor = true;
           if (vis !== 'private') {
             for (const p of m.parameters) {
               if (p.type) walkTypeWithPolarity(p.type, 'in', undefined);
@@ -286,6 +415,7 @@ function collectDtsInfo(sourceText, fileName) {
         const mName = getMemberName(m, sf);
         if (!mName) continue;
         const isStatic = hasModifier(m, ts.SyntaxKind.StaticKeyword);
+        const isAbstract = hasModifier(m, ts.SyntaxKind.AbstractKeyword);
         const key = `${isStatic ? 'static:' : ''}${mName}`;
         if (ts.isGetAccessorDeclaration(m)) getters.add(key);
         if (ts.isSetAccessorDeclaration(m)) setters.add(key);
@@ -297,11 +427,15 @@ function collectDtsInfo(sourceText, fileName) {
             name: mName,
             key,
             isStatic,
+            isAbstract,
             visibility: vis,
             isReadonly,
             isOptional,
             kind,
+            hasSetter: setters.has(key),
           });
+        } else if (setters.has(key)) {
+          memberMap.get(key).hasSetter = true;
         }
         if (vis !== 'private') {
           if (ts.isMethodDeclaration(m) || ts.isSetAccessorDeclaration(m)) {
@@ -326,8 +460,16 @@ function collectDtsInfo(sourceText, fileName) {
         if (getters.has(key) && !setters.has(key)) {
           info.isReadonly = true;
         }
+        if (setters.has(key)) {
+          info.hasSetter = true;
+        }
       }
       classes.set(cName, memberMap);
+      classMeta.set(cName, {
+        isAbstract: isClassAbstract,
+        ctorVisibility,
+        hasExplicitCtor,
+      });
     } else if (ts.isInterfaceDeclaration(stmt) && isExported && stmt.name) {
       const iName = stmt.name.text;
       recordTypeParams(iName, stmt.typeParameters);
@@ -410,41 +552,52 @@ function collectDtsInfo(sourceText, fileName) {
     }
   }
 
+  const classNames = new Set(classes.keys());
   return {
     classes,
+    classMeta,
     interfaces,
     typeParams,
     enums,
     callableTypes,
     directRoles,
     typeRefsInDecl,
-    augmentedText: buildAugmentedDts(sf),
+    augmentedText: buildAugmentedDts(sf, localExported, classNames),
   };
 }
 
 /**
  * Transforms a `.d.ts` source file by stripping `@internal` and `private`
- * members, normalizing `protected` members for structural comparison, and
- * appending synthetic top-level function probes (`__type_in_`, `__type_out_`,
- * `__tp_`, `__ctor_`, `__method_`, `__static_`, `__prop_`, `__static_prop_`) so
+ * members, normalizing `protected` members and `enum` declarations for
+ * structural comparison, and appending synthetic top-level function probes so
  * TypeScript's `TypeChecker` enforces `strictFunctionTypes` contravariance on
- * method and constructor parameters as well as generic type parameter unification.
+ * method/constructor/setter parameters and generic type parameter unification.
  *
  * @param {ts.SourceFile} sf
+ * @param {Set<string>} localExported
+ * @param {Set<string>} classNames
  * @returns {string}
  */
-function buildAugmentedDts(sf) {
+function buildAugmentedDts(sf, localExported, classNames) {
   const extraLines = [];
   const transformer = ctx => {
     const visit = node => {
       if (ts.isSourceFile(node)) {
         const stmts = node.statements
-          .filter(s => !isInternalNode(s, sf))
+          .filter(s => !isInternalNode(s, sf) && !ts.isEnumDeclaration(s))
           .map(s => ts.visitNode(s, visit));
         return ts.factory.updateSourceFile(node, stmts);
       }
+      if (ts.isModuleBlock(node)) {
+        const stmts = node.statements
+          .filter(s => !isInternalNode(s, sf))
+          .map(s => ts.visitNode(s, visit));
+        return ts.factory.updateModuleBlock(node, stmts);
+      }
       if (ts.isInterfaceDeclaration(node)) {
-        const members = node.members.filter(m => !isInternalNode(m, sf));
+        const members = node.members
+          .filter(m => !isInternalNode(m, sf))
+          .map(m => ts.visitNode(m, visit));
         return ts.factory.updateInterfaceDeclaration(
           node,
           node.modifiers,
@@ -453,6 +606,12 @@ function buildAugmentedDts(sf) {
           node.heritageClauses,
           members,
         );
+      }
+      if (ts.isTypeLiteralNode(node)) {
+        const members = node.members
+          .filter(m => !isInternalNode(m, sf))
+          .map(m => ts.visitNode(m, visit));
+        return ts.factory.updateTypeLiteralNode(node, members);
       }
       if (ts.isClassDeclaration(node)) {
         const members = node.members
@@ -539,14 +698,26 @@ function buildAugmentedDts(sf) {
   let out = ts.createPrinter().printFile(res.transformed[0]);
   res.dispose();
 
+  const emittedFnTpProbes = new Set();
+
   for (const stmt of sf.statements) {
     if (isInternalNode(stmt, sf)) continue;
-    if (!hasModifier(stmt, ts.SyntaxKind.ExportKeyword)) continue;
+    const isExported =
+      hasModifier(stmt, ts.SyntaxKind.ExportKeyword) ||
+      Boolean(stmt.name && localExported.has(stmt.name.text));
+    if (ts.isEnumDeclaration(stmt) && stmt.name) {
+      extraLines.push(buildStructuralEnumLines(stmt, sf, isExported));
+      continue;
+    }
+    if (!isExported) continue;
     if (ts.isFunctionDeclaration(stmt) && stmt.name && stmt.typeParameters) {
       const fnName = stmt.name.text;
       const fnTps = stmt.typeParameters;
       const tpNames = fnTps.map(tp => tp.name.text);
       for (let i = 0; i < fnTps.length; i++) {
+        const probeKey = `__tp_${fnName}_${i}`;
+        if (emittedFnTpProbes.has(probeKey)) continue;
+        emittedFnTpProbes.add(probeKey);
         const prefixTps = fnTps
           .map((tp, idx) =>
             idx < i
@@ -558,7 +729,7 @@ function buildAugmentedDts(sf) {
           ? fnTps[i].constraint.getText(sf)
           : 'unknown';
         extraLines.push(
-          `export declare function __tp_${fnName}_${i}<${prefixTps}>(__arg: ${cText}): void;`,
+          `export declare function ${probeKey}<${prefixTps}>(__arg: ${cText}): void;`,
         );
       }
     }
@@ -607,7 +778,14 @@ function buildAugmentedDts(sf) {
         );
       }
 
-      if (ts.isClassDeclaration(stmt) || ts.isInterfaceDeclaration(stmt)) {
+      const memberNodes =
+        ts.isClassDeclaration(stmt) || ts.isInterfaceDeclaration(stmt)
+          ? stmt.members
+          : ts.isTypeAliasDeclaration(stmt) && ts.isTypeLiteralNode(stmt.type)
+            ? stmt.type.members
+            : undefined;
+
+      if (memberNodes) {
         let hasExplicitCtor = false;
         let hasPrivateCtor = false;
         const hasExtends = Boolean(
@@ -616,7 +794,9 @@ function buildAugmentedDts(sf) {
             h => h.token === ts.SyntaxKind.ExtendsKeyword,
           ),
         );
-        for (const m of stmt.members) {
+        const emittedSetterProbes = new Set();
+
+        for (const m of memberNodes) {
           const vis = getVisibility(m, sf);
           if (ts.isConstructorDeclaration(m)) {
             hasExplicitCtor = true;
@@ -634,6 +814,8 @@ function buildAugmentedDts(sf) {
           }
           if (vis === 'private') continue;
           const isStatic = hasModifier(m, ts.SyntaxKind.StaticKeyword);
+          const activeTpNames = isStatic ? [] : selfTpNames;
+
           if (
             (ts.isMethodDeclaration(m) || ts.isMethodSignature(m)) &&
             m.name &&
@@ -652,40 +834,79 @@ function buildAugmentedDts(sf) {
                 ? '<' +
                   allTps
                     .map(tp =>
-                      formatTypeParamWithoutDefault(tp, sf, name, selfTpNames),
+                      formatTypeParamWithoutDefault(
+                        tp,
+                        sf,
+                        name,
+                        activeTpNames,
+                      ),
                     )
                     .join(', ') +
                   '>'
                 : '';
-            const params = m.parameters
-              .map(p => printNodeWithSelfType(p, sf, name, selfTpNames))
-              .join(', ');
+            const paramStrings = m.parameters.map(p =>
+              printNodeWithSelfType(p, sf, name, activeTpNames),
+            );
+            const isThisPred = Boolean(
+              m.type &&
+              ts.isTypePredicateNode(m.type) &&
+              m.type.parameterName.kind === ts.SyntaxKind.ThisType,
+            );
+            const hasExplicitThisParam =
+              m.parameters.length > 0 &&
+              ts.isIdentifier(m.parameters[0].name) &&
+              m.parameters[0].name.text === 'this';
+            if (isThisPred && !hasExplicitThisParam) {
+              paramStrings.unshift(
+                `this: ${isStatic ? `typeof ${name}` : selfType}`,
+              );
+            }
+            const params = paramStrings.join(', ');
             const ret = m.type
-              ? printNodeWithSelfType(m.type, sf, name, selfTpNames)
+              ? printNodeWithSelfType(m.type, sf, name, activeTpNames)
               : 'any';
-            const qToken = m.questionToken ? '_opt' : '';
             const prefix = isStatic
-              ? `__static_${name}_${mName}${qToken}`
-              : `__method_${name}_${mName}${qToken}`;
+              ? `__static_${name}_${mName}`
+              : `__method_${name}_${mName}`;
             extraLines.push(
               `export declare function ${prefix}${mTpDecl}(${params}): ${ret};`,
             );
           } else if (
             ts.isClassDeclaration(stmt) &&
+            ts.isSetAccessorDeclaration(m) &&
+            m.name &&
+            ts.isIdentifier(m.name) &&
+            isValidIdentifier(m.name.text) &&
+            m.parameters.length > 0
+          ) {
+            const mName = m.name.text;
+            const propTpDecl = isStatic ? '' : tpDecl;
+            const paramText = printNodeWithSelfType(
+              m.parameters[0],
+              sf,
+              name,
+              activeTpNames,
+            );
+            const prefix = isStatic
+              ? `__static_set_${name}_${mName}`
+              : `__set_${name}_${mName}`;
+            emittedSetterProbes.add(prefix);
+            extraLines.push(
+              `export declare function ${prefix}${propTpDecl}(${paramText}): void;`,
+            );
+          } else if (
+            ts.isClassDeclaration(stmt) &&
             (ts.isPropertyDeclaration(m) || ts.isGetAccessorDeclaration(m)) &&
-            m.type &&
+            (m.type || m.initializer) &&
             m.name &&
             ts.isIdentifier(m.name) &&
             isValidIdentifier(m.name.text)
           ) {
             const mName = m.name.text;
             const propTpDecl = isStatic ? '' : tpDecl;
-            const propType = printNodeWithSelfType(
-              m.type,
-              sf,
-              name,
-              selfTpNames,
-            );
+            const propType = m.type
+              ? printNodeWithSelfType(m.type, sf, name, activeTpNames)
+              : m.initializer.getText(sf);
             const optSuffix = m.questionToken ? ' | undefined' : '';
             const prefix = isStatic
               ? `__static_prop_${name}_${mName}`
@@ -693,6 +914,21 @@ function buildAugmentedDts(sf) {
             extraLines.push(
               `export declare function ${prefix}${propTpDecl}(): ${propType}${optSuffix};`,
             );
+            const setPrefix = isStatic
+              ? `__static_set_${name}_${mName}`
+              : `__set_${name}_${mName}`;
+            if (
+              ts.isPropertyDeclaration(m) &&
+              !hasModifier(m, ts.SyntaxKind.ReadonlyKeyword) &&
+              m.type &&
+              !typeNodeReferencesAny(m.type, sf, classNames) &&
+              !emittedSetterProbes.has(setPrefix)
+            ) {
+              emittedSetterProbes.add(setPrefix);
+              extraLines.push(
+                `export declare function ${setPrefix}${propTpDecl}(__val: ${propType}${optSuffix}): void;`,
+              );
+            }
           }
         }
         if (
@@ -749,18 +985,39 @@ function resolveAllTypeRoles(infoList) {
   return roles;
 }
 
-function describePropertyBreakages(name, role, bExp, hExp, bSf, hSf, checker) {
+function describePropertyBreakages(
+  name,
+  role,
+  p,
+  bExp,
+  hExp,
+  bSf,
+  hSf,
+  checker,
+) {
   const details = [];
   const bDecl = checker.getDeclaredTypeOfSymbol(bExp);
   const hDecl = checker.getDeclaredTypeOfSymbol(hExp);
   if (!bDecl || !hDecl) return details;
 
+  const hasTypeParams = Boolean(
+    p.baseInfo.typeParams.get(name)?.maxArity > 0 ||
+    (bDecl.typeParameters && bDecl.typeParameters.length > 0) ||
+    (bDecl.aliasTypeArguments && bDecl.aliasTypeArguments.length > 0),
+  );
+
   const bProps = new Map(
-    checker.getPropertiesOfType(bDecl).map(p => [p.getName(), p]),
+    checker.getPropertiesOfType(bDecl).map(pr => [pr.getName(), pr]),
   );
   const hProps = new Map(
-    checker.getPropertiesOfType(hDecl).map(p => [p.getName(), p]),
+    checker.getPropertiesOfType(hDecl).map(pr => [pr.getName(), pr]),
   );
+
+  const bIndexInfos = checker.getIndexInfosOfType(bDecl) || [];
+  const hIndexInfos = checker.getIndexInfosOfType(hDecl) || [];
+  if (bIndexInfos.length > 0 && hIndexInfos.length === 0) {
+    details.push(`Index signature was removed from '${name}'.`);
+  }
 
   if (role === 'in') {
     for (const [pName, hProp] of hProps) {
@@ -783,10 +1040,7 @@ function describePropertyBreakages(name, role, bExp, hExp, bSf, hSf, checker) {
       }
       const bPropT = checker.getTypeOfSymbolAtLocation(bProp, bSf);
       const hPropT = checker.getTypeOfSymbolAtLocation(hProp, hSf);
-      if (
-        (!bDecl.typeParameters || bDecl.typeParameters.length === 0) &&
-        !checker.isTypeAssignableTo(bPropT, hPropT)
-      ) {
+      if (!hasTypeParams && !checker.isTypeAssignableTo(bPropT, hPropT)) {
         details.push(
           `Input type '${name}' property '${pName}' was narrowed from '${checker.typeToString(bPropT)}' to '${checker.typeToString(hPropT)}'.`,
         );
@@ -806,10 +1060,7 @@ function describePropertyBreakages(name, role, bExp, hExp, bSf, hSf, checker) {
       }
       const bPropT = checker.getTypeOfSymbolAtLocation(bProp, bSf);
       const hPropT = checker.getTypeOfSymbolAtLocation(hProp, hSf);
-      if (
-        (!bDecl.typeParameters || bDecl.typeParameters.length === 0) &&
-        !checker.isTypeAssignableTo(hPropT, bPropT)
-      ) {
+      if (!hasTypeParams && !checker.isTypeAssignableTo(hPropT, bPropT)) {
         details.push(
           `Return type '${name}' property '${pName}' was widened from '${checker.typeToString(bPropT)}' to '${checker.typeToString(hPropT)}'.`,
         );
@@ -872,9 +1123,9 @@ function replaceTypeDeclarationsWithBase(baseDts, headDts, namesToReplace) {
 const DEFAULT_SF_CACHE = new Map();
 
 function getEffectiveRoles(name, allRoles) {
-  let roles = allRoles.get(name);
-  if (!roles || roles.size === 0) {
-    return new Set([isOutputNamedType(name) ? 'out' : 'in']);
+  const roles = allRoles.get(name);
+  if (roles && roles.size === 1) {
+    return roles;
   }
   if (isInputNamedType(name)) {
     return new Set(['in']);
@@ -882,7 +1133,27 @@ function getEffectiveRoles(name, allRoles) {
   if (isOutputNamedType(name)) {
     return new Set(['out']);
   }
+  if (!roles || roles.size === 0) {
+    return new Set(['in']);
+  }
   return roles;
+}
+
+function stripVirtualSegment(filePath) {
+  const resolved = path.resolve(filePath);
+  if (
+    resolved.endsWith('.d.ts') ||
+    resolved.endsWith('.d.mts') ||
+    resolved.endsWith('.d.cts') ||
+    resolved.endsWith('.json')
+  ) {
+    return resolved.replace(/[/\\]__(?:base|head)__(?=[/\\]|$)/, '');
+  }
+  return resolved;
+}
+
+function stripVirtualDirSegment(dirPath) {
+  return path.resolve(dirPath).replace(/[/\\]__(?:base|head)__(?=[/\\]|$)/, '');
 }
 
 /**
@@ -939,26 +1210,39 @@ function compareDeclarationPairs(
   };
   const host = ts.createCompilerHost(checkOpts);
   const origGetSf = host.getSourceFile.bind(host);
+  const tmpRoot = os.tmpdir() + path.sep;
   host.getSourceFile = (f, l) => {
     const abs = path.resolve(f);
     if (virtualFiles.has(abs)) {
       return ts.createSourceFile(abs, virtualFiles.get(abs), l, true);
     }
-    if (sharedSfCache.has(abs)) {
-      return sharedSfCache.get(abs);
+    const diskAbs = stripVirtualSegment(abs);
+    if (!diskAbs.startsWith(tmpRoot) && sharedSfCache.has(diskAbs)) {
+      return sharedSfCache.get(diskAbs);
     }
-    const sf = origGetSf(f, l);
-    sharedSfCache.set(abs, sf);
+    const sf = origGetSf(diskAbs, l);
+    if (!diskAbs.startsWith(tmpRoot)) {
+      sharedSfCache.set(diskAbs, sf);
+    }
     return sf;
   };
-  host.fileExists = f =>
-    virtualFiles.has(path.resolve(f)) || ts.sys.fileExists(f);
-  host.directoryExists = d =>
-    virtualDirs.has(path.resolve(d)) || ts.sys.directoryExists(d);
-  host.readFile = f =>
-    virtualFiles.has(path.resolve(f))
-      ? virtualFiles.get(path.resolve(f))
-      : ts.sys.readFile(f);
+  host.fileExists = f => {
+    const abs = path.resolve(f);
+    return virtualFiles.has(abs) || ts.sys.fileExists(stripVirtualSegment(abs));
+  };
+  host.directoryExists = d => {
+    const abs = path.resolve(d);
+    return (
+      virtualDirs.has(abs) ||
+      ts.sys.directoryExists(stripVirtualDirSegment(abs))
+    );
+  };
+  host.readFile = f => {
+    const abs = path.resolve(f);
+    return virtualFiles.has(abs)
+      ? virtualFiles.get(abs)
+      : ts.sys.readFile(stripVirtualSegment(abs));
+  };
 
   const rootFiles = [];
   for (const p of prepared) {
@@ -989,7 +1273,9 @@ function compareDeclarationPairs(
     name.startsWith('__method_') ||
     name.startsWith('__static_') ||
     name.startsWith('__prop_') ||
-    name.startsWith('__static_prop_');
+    name.startsWith('__static_prop_') ||
+    name.startsWith('__set_') ||
+    name.startsWith('__static_set_');
 
   const checkTypeParamCompatibility = (p, name, checkProbeAssignable) => {
     if (!p.baseInfo.typeParams.has(name) || !p.headInfo.typeParams.has(name)) {
@@ -1012,7 +1298,7 @@ function compareDeclarationPairs(
     }
   };
 
-  const checkInterfaceMembers = (p, name, checkProbeAssignable) => {
+  const checkInterfaceMembers = (p, name, roles, checkProbeAssignable) => {
     let hadMemberError = false;
     if (p.baseInfo.interfaces.has(name) && p.headInfo.interfaces.has(name)) {
       const bMembers = p.baseInfo.interfaces.get(name);
@@ -1027,9 +1313,23 @@ function compareDeclarationPairs(
           hadMemberError = true;
           continue;
         }
+        if (roles.has('in') && bM.isOptional && !hM.isOptional) {
+          record(
+            p.reportFile,
+            `Input type '${name}' optional ${bM.kind} '${mName}' was made required.`,
+          );
+          hadMemberError = true;
+        }
+        if (roles.has('out') && !bM.isOptional && hM.isOptional) {
+          record(
+            p.reportFile,
+            `Return type '${name}' required ${bM.kind} '${mName}' was made optional.`,
+          );
+          hadMemberError = true;
+        }
         if (bM.kind === 'method' && isValidIdentifier(mName)) {
           const ok = checkProbeAssignable(
-            `__method_${name}_${mName}${bM.isOptional ? '_opt' : ''}`,
+            `__method_${name}_${mName}`,
             `Method '${name}.${mName}' signature changed incompatibly`,
           );
           if (!ok) hadMemberError = true;
@@ -1097,7 +1397,7 @@ function compareDeclarationPairs(
         continue;
       }
       const hExp = hExports.get(name);
-      if (!hExp) continue;
+      if (!hExp || !(hExp.flags & ts.SymbolFlags.Type)) continue;
       const roles = getEffectiveRoles(name, allRoles);
       if (!roles.has('in') || roles.has('out')) continue;
 
@@ -1106,27 +1406,27 @@ function compareDeclarationPairs(
       const hadMemberError = checkInterfaceMembers(
         p,
         name,
+        roles,
         checkProbeAssignable,
       );
       const inOk = checkProbeAssignable(`__type_in_${name}`, '');
-      if (!inOk) {
-        const propDetails = describePropertyBreakages(
-          name,
-          'in',
-          bExp,
-          hExp,
-          bSf,
-          hSf,
-          checker,
-        );
-        if (propDetails.length > 0) {
-          for (const d of propDetails) record(file, d);
-        } else if (!hadMemberError) {
-          record(file, `Input type '${name}' became more restrictive.`);
-        }
+      const propDetails = describePropertyBreakages(
+        name,
+        'in',
+        p,
+        bExp,
+        hExp,
+        bSf,
+        hSf,
+        checker,
+      );
+      if (propDetails.length > 0) {
+        for (const d of propDetails) record(file, d);
+      } else if (!inOk && !hadMemberError) {
+        record(file, `Input type '${name}' became more restrictive.`);
       }
       const outOk = checkProbeAssignable(`__type_out_${name}`, '');
-      if (!inOk || !outOk) {
+      if (!inOk || !outOk || hadMemberError || propDetails.length > 0) {
         inputsToNormalize.add(name);
       }
     }
@@ -1171,7 +1471,13 @@ function compareDeclarationPairs(
     const checkProbeAssignable = (probeName, label) => {
       const bProbe = bExports.get(probeName);
       const hProbe = hExports.get(probeName);
-      if (!bProbe || !hProbe) return true;
+      if (!bProbe) return true;
+      if (!hProbe) {
+        if (label) {
+          record(file, `${label}.`);
+        }
+        return false;
+      }
       const bT = checker.getTypeOfSymbolAtLocation(bProbe, bSf);
       const hT = checker.getTypeOfSymbolAtLocation(hProbe, hSf);
       if (!checker.isTypeAssignableTo(hT, bT)) {
@@ -1194,6 +1500,15 @@ function compareDeclarationPairs(
         record(file, `Export '${name}' was removed.`);
         continue;
       }
+
+      const bResolved =
+        bExp.flags & ts.SymbolFlags.Alias
+          ? checker.getAliasedSymbol(bExp)
+          : bExp;
+      const hResolved =
+        hExp.flags & ts.SymbolFlags.Alias
+          ? checker.getAliasedSymbol(hExp)
+          : hExp;
 
       checkTypeParamCompatibility(p, name, checkProbeAssignable);
 
@@ -1218,9 +1533,43 @@ function compareDeclarationPairs(
       }
 
       if (p.baseInfo.classes.has(name)) {
+        if (!p.headInfo.classes.has(name)) {
+          record(
+            file,
+            `Class '${name}' was changed to a non-class declaration.`,
+          );
+          continue;
+        }
+        const bMeta = p.baseInfo.classMeta.get(name);
+        const hMeta = p.headInfo.classMeta.get(name);
+        let hadClassMemberError = false;
+        if (bMeta && hMeta) {
+          if (!bMeta.isAbstract && hMeta.isAbstract) {
+            record(file, `Class '${name}' was made abstract.`);
+            hadClassMemberError = true;
+          }
+          if (
+            bMeta.ctorVisibility === 'public' &&
+            hMeta.ctorVisibility !== 'public'
+          ) {
+            record(
+              file,
+              `Constructor of class '${name}' visibility was restricted from 'public' to '${hMeta.ctorVisibility}'.`,
+            );
+            hadClassMemberError = true;
+          } else if (
+            bMeta.ctorVisibility === 'protected' &&
+            hMeta.ctorVisibility === 'private'
+          ) {
+            record(
+              file,
+              `Constructor of class '${name}' visibility was restricted from 'protected' to 'private'.`,
+            );
+            hadClassMemberError = true;
+          }
+        }
         const bMembers = p.baseInfo.classes.get(name);
         const hMembers = p.headInfo.classes.get(name) || new Map();
-        let hadClassMemberError = false;
         for (const [key, bM] of bMembers) {
           if (bM.visibility === 'private') continue;
           const hM = hMembers.get(key);
@@ -1248,6 +1597,10 @@ function compareDeclarationPairs(
             hadClassMemberError = true;
             continue;
           }
+          if (!bM.isAbstract && hM.isAbstract) {
+            record(file, `Member '${name}.${bM.name}' was made abstract.`);
+            hadClassMemberError = true;
+          }
           if (!bM.isReadonly && hM.isReadonly) {
             record(file, `Member '${name}.${bM.name}' was made readonly.`);
             hadClassMemberError = true;
@@ -1261,26 +1614,42 @@ function compareDeclarationPairs(
               ? `__static_${name}_${bM.name}`
               : `__method_${name}_${bM.name}`;
             const ok = checkProbeAssignable(
-              `${prefix}${bM.isOptional ? '_opt' : ''}`,
+              prefix,
               `Method '${name}.${bM.name}' signature changed incompatibly`,
             );
             if (!ok) hadClassMemberError = true;
           } else if (bM.kind === 'property' && isValidIdentifier(bM.name)) {
-            const prefix = bM.isStatic
+            const propPrefix = bM.isStatic
               ? `__static_prop_${name}_${bM.name}`
               : `__prop_${name}_${bM.name}`;
-            const ok = checkProbeAssignable(
-              prefix,
+            const propOk = checkProbeAssignable(
+              propPrefix,
               `Property '${name}.${bM.name}' type changed incompatibly`,
             );
-            if (!ok) hadClassMemberError = true;
+            if (!propOk) hadClassMemberError = true;
+
+            const setPrefix = bM.isStatic
+              ? `__static_set_${name}_${bM.name}`
+              : `__set_${name}_${bM.name}`;
+            if (bExports.has(setPrefix)) {
+              const setOk = checkProbeAssignable(
+                setPrefix,
+                `Property or setter '${name}.${bM.name}' write type was narrowed`,
+              );
+              if (!setOk) hadClassMemberError = true;
+            }
           }
         }
-        const ctorOk = checkProbeAssignable(
-          `__ctor_${name}`,
-          `Constructor of class '${name}' changed incompatibly`,
-        );
-        if (!ctorOk) hadClassMemberError = true;
+        if (
+          bMeta?.ctorVisibility !== 'private' &&
+          hMeta?.ctorVisibility !== 'private'
+        ) {
+          const ctorOk = checkProbeAssignable(
+            `__ctor_${name}`,
+            `Constructor of class '${name}' changed incompatibly`,
+          );
+          if (!ctorOk) hadClassMemberError = true;
+        }
         if (!hadClassMemberError) {
           checkProbeAssignable(
             `__type_out_${name}`,
@@ -1298,21 +1667,37 @@ function compareDeclarationPairs(
         continue;
       }
 
-      if (bExp.flags & ts.SymbolFlags.Value) {
-        const bVal = checker.getTypeOfSymbolAtLocation(bExp, bSf);
-        const hVal = checker.getTypeOfSymbolAtLocation(hExp, hSf);
-        if (!checker.isTypeAssignableTo(hVal, bVal)) {
+      if (bResolved.flags & ts.SymbolFlags.Value) {
+        if (!(hResolved.flags & ts.SymbolFlags.Value)) {
           record(
             file,
-            `Export '${name}' signature or type changed incompatibly (${checker.typeToString(bVal)} -> ${checker.typeToString(hVal)}).`,
+            `Value export '${name}' was replaced by a type-only export.`,
           );
+        } else {
+          const bVal = checker.getTypeOfSymbolAtLocation(bExp, bSf);
+          const hVal = checker.getTypeOfSymbolAtLocation(hExp, hSf);
+          if (!checker.isTypeAssignableTo(hVal, bVal)) {
+            record(
+              file,
+              `Export '${name}' signature or type changed incompatibly (${checker.typeToString(bVal)} -> ${checker.typeToString(hVal)}).`,
+            );
+          }
         }
       }
 
-      if (bExp.flags & ts.SymbolFlags.Type) {
+      if (bResolved.flags & ts.SymbolFlags.Type) {
+        if (!(hResolved.flags & ts.SymbolFlags.Type)) {
+          record(
+            file,
+            `Type export '${name}' was replaced by a value-only export.`,
+          );
+          continue;
+        }
+        const roles = getEffectiveRoles(name, allRoles);
         const hadMemberError = checkInterfaceMembers(
           p,
           name,
+          roles,
           checkProbeAssignable,
         );
 
@@ -1327,43 +1712,64 @@ function compareDeclarationPairs(
           continue;
         }
 
-        const roles = getEffectiveRoles(name, allRoles);
         if (roles.has('in')) {
-          const ok = checkProbeAssignable(`__type_in_${name}`, '');
-          if (!ok) {
-            const propDetails = describePropertyBreakages(
-              name,
-              'in',
-              bExp,
-              hExp,
-              bSf,
-              hSf,
-              checker,
-            );
-            if (propDetails.length > 0) {
-              for (const d of propDetails) record(file, d);
-            } else if (!hadMemberError) {
-              record(file, `Input type '${name}' became more restrictive.`);
+          const hasProbe =
+            bExports.has(`__type_in_${name}`) &&
+            hExports.has(`__type_in_${name}`);
+          let inOk = true;
+          if (hasProbe) {
+            inOk = checkProbeAssignable(`__type_in_${name}`, '');
+          } else {
+            const bDecl = checker.getDeclaredTypeOfSymbol(bExp);
+            const hDecl = checker.getDeclaredTypeOfSymbol(hExp);
+            if (bDecl && hDecl) {
+              inOk = checker.isTypeAssignableTo(bDecl, hDecl);
             }
+          }
+          const propDetails = describePropertyBreakages(
+            name,
+            'in',
+            p,
+            bExp,
+            hExp,
+            bSf,
+            hSf,
+            checker,
+          );
+          if (propDetails.length > 0) {
+            for (const d of propDetails) record(file, d);
+          } else if (!inOk && !hadMemberError) {
+            record(file, `Input type '${name}' became more restrictive.`);
           }
         }
         if (roles.has('out')) {
-          const ok = checkProbeAssignable(`__type_out_${name}`, '');
-          if (!ok) {
-            const propDetails = describePropertyBreakages(
-              name,
-              'out',
-              bExp,
-              hExp,
-              bSf,
-              hSf,
-              checker,
-            );
-            if (propDetails.length > 0) {
-              for (const d of propDetails) record(file, d);
-            } else if (!hadMemberError) {
-              record(file, `Return type '${name}' became less restrictive.`);
+          const hasProbe =
+            bExports.has(`__type_out_${name}`) &&
+            hExports.has(`__type_out_${name}`);
+          let outOk = true;
+          if (hasProbe) {
+            outOk = checkProbeAssignable(`__type_out_${name}`, '');
+          } else {
+            const bDecl = checker.getDeclaredTypeOfSymbol(bExp);
+            const hDecl = checker.getDeclaredTypeOfSymbol(hExp);
+            if (bDecl && hDecl) {
+              outOk = checker.isTypeAssignableTo(hDecl, bDecl);
             }
+          }
+          const propDetails = describePropertyBreakages(
+            name,
+            'out',
+            p,
+            bExp,
+            hExp,
+            bSf,
+            hSf,
+            checker,
+          );
+          if (propDetails.length > 0) {
+            for (const d of propDetails) record(file, d);
+          } else if (!outOk && !hadMemberError) {
+            record(file, `Return type '${name}' became less restrictive.`);
           }
         }
       }
@@ -1380,6 +1786,7 @@ function compareDeclarationPairs(
  *
  * @param {{
  *   pkgDir: string,
+ *   repoRoot?: string,
  *   modifiedEntries: Array<{
  *     status: string,
  *     oldRel: string,
@@ -1395,6 +1802,7 @@ function compareDeclarationPairs(
  */
 function checkPackageChanges({
   pkgDir,
+  repoRoot = process.cwd(),
   modifiedEntries,
   baseFileReader,
   headFileReader,
@@ -1403,7 +1811,6 @@ function checkPackageChanges({
   const tsconfigPath = path.join(pkgDir, 'tsconfig.json');
   const cfgFile = ts.readConfigFile(tsconfigPath, ts.sys.readFile);
   const parsed = ts.parseJsonConfigFileContent(cfgFile.config, ts.sys, pkgDir);
-  const repoRoot = process.cwd();
   const baseSrcFiles = parsed.fileNames.filter(
     f =>
       path.resolve(f).startsWith(pkgDir + path.sep) &&
@@ -1424,6 +1831,7 @@ function checkPackageChanges({
     ...parsed.options,
     rootDir: pkgDir,
     outDir: path.join(pkgDir, 'build'),
+    declarationDir: undefined,
     declaration: true,
     emitDeclarationOnly: true,
     noEmit: false,
@@ -1437,9 +1845,28 @@ function checkPackageChanges({
   const baseDeleted = new Set();
   const headOverrides = new Map();
   const headDeleted = new Set();
+  const deletedBreakages = [];
 
   for (const e of modifiedEntries) {
-    if (e.status.startsWith('A')) {
+    if (e.status.startsWith('D')) {
+      headDeleted.add(e.oldAbs);
+      deletedBreakages.push({
+        file: e.oldRel,
+        explanation: 'Public source file was deleted.',
+      });
+      const bTxt = baseFileReader(e.oldRel, e.oldAbs);
+      if (bTxt !== undefined) {
+        baseOverrides.set(
+          e.oldAbs,
+          ts.createSourceFile(
+            e.oldAbs,
+            normalizeInternalComments(bTxt),
+            ts.ScriptTarget.Latest,
+            true,
+          ),
+        );
+      }
+    } else if (e.status.startsWith('A')) {
       baseDeleted.add(e.newAbs);
       const hTxt = headFileReader(e.newRel, e.newAbs);
       if (hTxt !== undefined) {
@@ -1590,7 +2017,7 @@ function checkPackageChanges({
 
   const modifiedMap = new Map();
   for (const e of modifiedEntries) {
-    if (e.status.startsWith('A')) continue;
+    if (e.status.startsWith('A') || e.status.startsWith('D')) continue;
     const oldDtsRel = path.relative(pkgDir, e.oldAbs).replace(/\.ts$/, '.d.ts');
     const newDtsRel = path.relative(pkgDir, e.newAbs).replace(/\.ts$/, '.d.ts');
     modifiedMap.set(oldDtsRel, {newDtsRel, reportFile: e.newRel});
@@ -1621,7 +2048,10 @@ function checkPackageChanges({
     });
   }
 
-  return compareDeclarationPairs(pairs, parsed.options, sharedSfCache);
+  return [
+    ...deletedBreakages,
+    ...compareDeclarationPairs(pairs, parsed.options, sharedSfCache),
+  ];
 }
 
 function findPackageDir(filePath, repoRoot = process.cwd()) {
@@ -1641,6 +2071,27 @@ function findPackageDir(filePath, repoRoot = process.cwd()) {
   return undefined;
 }
 
+function resolveBaseGitRef(diffRange, repoRoot) {
+  if (diffRange.includes('...')) {
+    const [left, right] = diffRange.split('...');
+    const leftRef = left || 'HEAD^1';
+    const rightRef = right || 'HEAD';
+    try {
+      return execFileSync('git', ['merge-base', leftRef, rightRef], {
+        cwd: repoRoot,
+        encoding: 'utf8',
+        stdio: ['pipe', 'pipe', 'ignore'],
+      }).trim();
+    } catch {
+      return leftRef;
+    }
+  }
+  if (diffRange.includes('..')) {
+    return diffRange.split('..')[0] || 'HEAD^1';
+  }
+  return diffRange || 'HEAD^1';
+}
+
 /**
  * Runs the CLI breaking-change check across modified TypeScript files in `diffRange`.
  *
@@ -1652,11 +2103,10 @@ function runGitDiffCheck(
   diffRange = process.env.GIT_DIFF_ARG?.trim() || 'HEAD^1...HEAD',
   repoRoot = process.cwd(),
 ) {
-  const baseRef = diffRange.includes('...')
-    ? diffRange.split('...')[0]
-    : diffRange.includes('..')
-      ? diffRange.split('..')[0]
-      : 'HEAD^1';
+  if (diffRange.startsWith('-')) {
+    throw new Error(`Invalid git diff range: ${diffRange}`);
+  }
+  const baseRef = resolveBaseGitRef(diffRange, repoRoot);
 
   const diffOut = execFileSync(
     'git',
@@ -1679,15 +2129,16 @@ function runGitDiffCheck(
     ) {
       continue;
     }
-    if (status.startsWith('D')) {
-      breaking.push({
-        file: oldPath,
-        explanation: 'Public source file was deleted.',
-      });
+    const pkgDir = findPackageDir(activePath, repoRoot);
+    if (!pkgDir || pkgDir === path.resolve(repoRoot)) {
+      if (status.startsWith('D')) {
+        breaking.push({
+          file: oldPath,
+          explanation: 'Public source file was deleted.',
+        });
+      }
       continue;
     }
-    const pkgDir = findPackageDir(activePath, repoRoot);
-    if (!pkgDir || pkgDir === path.resolve(repoRoot)) continue;
     if (!entriesByPkg.has(pkgDir)) entriesByPkg.set(pkgDir, []);
     entriesByPkg.get(pkgDir).push({
       status,
@@ -1698,10 +2149,10 @@ function runGitDiffCheck(
     });
   }
 
-  const sharedSfCache = new Map();
   for (const [pkgDir, modifiedEntries] of entriesByPkg) {
     const pkgBreakages = checkPackageChanges({
       pkgDir,
+      repoRoot,
       modifiedEntries,
       baseFileReader: relPath => {
         try {
@@ -1721,7 +2172,7 @@ function runGitDiffCheck(
           return undefined;
         }
       },
-      sharedSfCache,
+      sharedSfCache: DEFAULT_SF_CACHE,
     });
     breaking.push(...pkgBreakages);
   }

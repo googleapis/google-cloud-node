@@ -36,17 +36,21 @@ function transpile(src, fileName = 'index.ts') {
   }).outputText;
 }
 
-function checkSnippet(baseSrc, headSrc) {
+function compareDts(baseDts, headDts) {
   return compareDeclarationPairs([
     {
       reportFile: 'src/index.ts',
       basePath: path.resolve('__test_base__/index.d.ts'),
       headPath: path.resolve('__test_head__/index.d.ts'),
-      baseDts: transpile(baseSrc),
-      headDts: transpile(headSrc),
+      baseDts,
+      headDts,
       checkExports: true,
     },
   ]);
+}
+
+function checkSnippet(baseSrc, headSrc) {
+  return compareDts(transpile(baseSrc), transpile(headSrc));
 }
 
 describe('breaking-change-check holistic TypeScript assignability engine', () => {
@@ -472,5 +476,92 @@ describe('breaking-change-check holistic TypeScript assignability engine', () =>
         }),
     });
     assert.deepEqual(pr9549Res, []);
+  });
+
+  it('handles enum references without false positives and catches enum & class visibility/setter/index-signature breakages', () => {
+    // 1. Unchanged enum referenced by function (input + output) and interface, or enum with added member in input position, produces 0 false positives
+    const unchangedEnum = compareDts(
+      'export declare enum Status { OK = 0, CANCELLED = 1 }\nexport interface CallOptions { status?: Status; }\nexport declare function checkStatus(s: Status): Status;\n',
+      'export declare enum Status { OK = 0, CANCELLED = 1 }\nexport interface CallOptions { status?: Status; description?: string; }\nexport declare function checkStatus(s: Status, strict?: boolean): Status;\n',
+    );
+    assert.deepEqual(unchangedEnum, []);
+
+    const widenedInputEnum = compareDts(
+      'export declare enum Status { OK = 0, CANCELLED = 1 }\nexport interface CallOptions { status?: Status; }\nexport declare function acceptStatus(s: Status): boolean;\n',
+      'export declare enum Status { OK = 0, CANCELLED = 1, UNKNOWN = 2 }\nexport interface CallOptions { status?: Status; }\nexport declare function acceptStatus(s: Status): boolean;\n',
+    );
+    assert.deepEqual(widenedInputEnum, []);
+
+    // 2. Removed enum member or changed enum value is caught
+    const removedEnumMember = compareDts(
+      'export declare enum Status { OK = 0, CANCELLED = 1 }\n',
+      'export declare enum Status { OK = 0 }\n',
+    );
+    assert.equal(removedEnumMember.length, 1);
+    assert.match(
+      removedEnumMember[0].explanation,
+      /Member 'CANCELLED' was removed from enum 'Status'/,
+    );
+
+    // 3. Constructor visibility restricted (public -> protected/private) is caught
+    const restrictedCtor = compareDts(
+      'export declare class Client { constructor(opts?: object); }\n',
+      'export declare class Client { protected constructor(opts?: object); }\n',
+    );
+    assert.ok(
+      restrictedCtor.some(e =>
+        e.explanation.includes(
+          "Constructor of class 'Client' visibility was restricted",
+        ),
+      ),
+      `Expected restricted constructor error, got: ${JSON.stringify(restrictedCtor)}`,
+    );
+
+    // 4. Mutable class property or setter narrowed is caught
+    const narrowedMutableProp = compareDts(
+      'export declare class Client { port: string | number; }\n',
+      'export declare class Client { port: number; }\n',
+    );
+    assert.ok(
+      narrowedMutableProp.some(e =>
+        e.explanation.includes(
+          "Property or setter 'Client.port' write type was narrowed",
+        ),
+      ),
+      `Expected mutable property narrowing error, got: ${JSON.stringify(narrowedMutableProp)}`,
+    );
+
+    // 5. Removed index signature is caught
+    const removedIndexSig = compareDts(
+      'export interface Metadata { [key: string]: string | number; }\nexport declare function getMeta(): Metadata;\n',
+      'export interface Metadata { id: string; }\nexport declare function getMeta(): Metadata;\n',
+    );
+    assert.ok(
+      removedIndexSig.some(e =>
+        e.explanation.includes("Index signature was removed from 'Metadata'"),
+      ),
+      `Expected removed index signature error, got: ${JSON.stringify(removedIndexSig)}`,
+    );
+
+    // 6. Type predicate `this is Sub` and local `export { ... }` specifier work without false positives
+    const typePredAndExportList = compareDts(
+      'declare class Base { isSub(): this is Sub; }\ndeclare class Sub extends Base { extra: string; }\nexport { Base, Sub };\n',
+      'declare class Base { isSub(): this is Sub; }\ndeclare class Sub extends Base { extra: string; }\nexport { Base, Sub };\n',
+    );
+    assert.deepEqual(typePredAndExportList, []);
+
+    // 7. Unambiguous input parameter type named `LogEntry` is checked contravariantly (as 'in')
+    const narrowedLogEntry = compareDts(
+      'export interface LogEntry { severity?: string | number; }\nexport declare function writeEntry(entry: LogEntry): void;\n',
+      'export interface LogEntry { severity?: number; }\nexport declare function writeEntry(entry: LogEntry): void;\n',
+    );
+    assert.ok(
+      narrowedLogEntry.some(e =>
+        e.explanation.includes(
+          "Input type 'LogEntry' property 'severity' was narrowed",
+        ),
+      ),
+      `Expected input type LogEntry narrowing to be caught, got: ${JSON.stringify(narrowedLogEntry)}`,
+    );
   });
 });

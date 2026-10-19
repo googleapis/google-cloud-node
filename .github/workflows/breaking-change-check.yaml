@@ -30,10 +30,12 @@ jobs:
               - 'handwritten/**/*.ts'
               - '.github/scripts/breaking-change-check.cjs'
               - '.github/scripts/tests/breaking-change-check.test.cjs'
+              - '.github/scripts/package.json'
               - '.github/workflows/breaking-change-check.yaml'
             checker_self:
               - '.github/scripts/breaking-change-check.cjs'
               - '.github/scripts/tests/breaking-change-check.test.cjs'
+              - '.github/scripts/package.json'
               - '.github/workflows/breaking-change-check.yaml'
       - name: Use Node.js 24
         if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
@@ -48,7 +50,7 @@ jobs:
       - name: Compile affected packages and workspace dependents via pnpm
         if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
         run: |
-          pnpm --config.link-workspace-packages=deep --config.prefer-workspace-packages=true --filter "...[HEAD^1...HEAD]" --filter "!./packages/*" --if-present run compile
+          pnpm --config.link-workspace-packages=deep --config.prefer-workspace-packages=true --filter "...[HEAD^1...HEAD]..." --filter "!./packages/*" --if-present run compile
       - name: Check declaration changes with TypeScript TypeChecker assignability
         if: steps.changes.outputs.check == 'true' || github.event_name == 'workflow_dispatch'
         env:
