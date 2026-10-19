@@ -412,11 +412,11 @@ describe('breaking-change-check holistic TypeScript assignability engine', () =>
     }
 
     try {
-      execFileSync('git', ['cat-file', '-e', '4443d6d6b1'], {
+      execFileSync('git', ['cat-file', '-e', '4443d6d6b1^'], {
         cwd: repoRoot,
         stdio: 'ignore',
       });
-      execFileSync('git', ['cat-file', '-e', 'd62a64f338'], {
+      execFileSync('git', ['cat-file', '-e', 'd62a64f338^'], {
         cwd: repoRoot,
         stdio: 'ignore',
       });

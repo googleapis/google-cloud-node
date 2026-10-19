@@ -3,6 +3,7 @@
   "private": true,
   "description": "tests for script",
   "scripts": {
+    "compile": "echo 'no compile!'",
     "test": "mocha tests/close-invalid-link.test.cjs && mocha tests/close-or-remove-response-label.test.cjs && mocha tests/run-test.test.cjs && mocha tests/breaking-change-check.test.cjs",
     "samples-test": "echo 'no samples test!'",
     "system-test": "echo 'no system test!'"
