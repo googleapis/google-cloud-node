@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/pubsub?activeTab=versions
 
+## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.3.0...pubsub-v6.3.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **firestore,pubsub:** Align types and proto re-exports with -api packages ([#9621](https://github.com/googleapis/google-cloud-node/issues/9621)) ([25d945b](https://github.com/googleapis/google-cloud-node/commit/25d945b34979849ea1c6df699212854f8d390d79))
+
 ## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.2.0...pubsub-v6.3.0) (2026-10-08)
 
 
