@@ -37,7 +37,7 @@ interface ReadRowsStream extends NodeJS.EventEmitter {
   resume(): void;
 }
 
-export interface IReadSession {
+interface IReadSession {
   arrowSchema?: {
     serializedSchema?: Uint8Array | string | null;
   } | null;
@@ -46,6 +46,12 @@ export interface IReadSession {
   }> | null;
 }
 
+/**
+ * The `CreateReadSession` request that {@link BigQuery#createQueryArrowStream}
+ * sends. Exported for tests.
+ *
+ * @private
+ */
 export interface CreateReadSessionRequest {
   parent: string;
   readSession: {
