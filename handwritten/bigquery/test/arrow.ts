@@ -182,18 +182,45 @@ function stubJobGetMetadata(
 }
 
 /**
- * Returns a fake ReadRows stream that emits `responses`, then ends, on the
- * next tick.
+ * Returns a fake ReadRows stream that emits `responses` on the next tick,
+ * then ends, or fails with `err` once the consumer has read them.
  */
-function fakeReadRowsStream(responses: object[] = []): EventEmitter {
+function fakeReadRowsStream(
+  responses: object[] = [],
+  err?: Error,
+): EventEmitter {
   const grpcStream = new EventEmitter();
   process.nextTick(() => {
     for (const resp of responses) {
       grpcStream.emit('data', resp);
     }
-    grpcStream.emit('end');
+    if (err) {
+      setImmediate(() => grpcStream.emit('error', err));
+    } else {
+      grpcStream.emit('end');
+    }
   });
   return grpcStream;
+}
+
+/** Returns an error with a gRPC status `code`, like google-gax emits. */
+function grpcError(message: string, code: number): Error {
+  return Object.assign(new Error(message), {code});
+}
+
+/** Returns a ReadRowsResponse carrying a serialized Arrow table as bytes. */
+function toReadRowsResponse(payload: ReturnType<typeof serializeArrowTable>) {
+  return {
+    arrowSchema: {
+      serializedSchema: Buffer.from(payload.serializedSchema, 'base64'),
+    },
+    arrowRecordBatch: {
+      serializedRecordBatch: Buffer.from(
+        payload.serializedRecordBatch,
+        'base64',
+      ),
+    },
+  };
 }
 
 /** A ReadRowsResponse carrying `SAMPLE_PAYLOAD` as bytes. */
@@ -1977,6 +2004,193 @@ describe('Arrow Support', () => {
         /Cannot create an Arrow read session without a project ID\./,
       );
       assert.strictEqual(readSessions, 0);
+    });
+  });
+
+  describe('BigQuery#createQueryArrowStream (stream resumption)', () => {
+    const jobReference = {
+      projectId: 'test-project',
+      jobId: 'job-resume-1',
+      location: 'US',
+    };
+    const readStream =
+      'projects/test-project/locations/US/jobs/job-resume-1/streams/_default';
+    let bq: BigQuery;
+    // The ReadRows streams opened, in order.
+    let grpcStreams: EventEmitter[];
+
+    beforeEach(() => {
+      bq = new BigQuery({projectId: 'test-project'});
+      grpcStreams = [];
+    });
+
+    const track = (grpcStream: EventEmitter) => {
+      grpcStreams.push(grpcStream);
+      return grpcStream;
+    };
+
+    // Stubs jobs.query to return `inline` as its first page out of
+    // `totalRows`, so the remaining rows are read with ReadRows.
+    const stubFirstPage = (
+      totalRows: number,
+      inline?: ReturnType<typeof serializeArrowTable>,
+      inlineRows = 0,
+    ) =>
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference,
+          pageRowCount: String(inlineRows),
+          totalRows: String(totalRows),
+          arrowSchema: {serializedSchema: inline?.serializedSchema},
+          arrowRecordBatch: {
+            serializedRecordBatch: inline?.serializedRecordBatch,
+          },
+        },
+      });
+
+    it('should resume ReadRows at offset + rowsReceived on UNAVAILABLE, DEADLINE_EXCEEDED, and RST_STREAM errors without gaps or duplicates', async () => {
+      stubFirstPage(4, serializeArrowTable(makeSampleTable([1], ['alice'])), 1);
+      const page2 = toReadRowsResponse(
+        serializeArrowTable(makeSampleTable([2, 3], ['bob', 'carol'])),
+      );
+      const page3 = toReadRowsResponse(
+        serializeArrowTable(makeSampleTable([4], ['dave'])),
+      );
+      // Each ReadRows call's responses and the error it fails with, if any.
+      const attempts: Array<[object[], Error?]> = [
+        [[page2], grpcError('Service unavailable', 14)],
+        [[], grpcError('Deadline exceeded', 4)],
+        [[], grpcError('Received RST_STREAM with code 2', 13)],
+        // Without a schema, so the batch decodes with the one sent earlier.
+        [[{arrowRecordBatch: page3.arrowRecordBatch}]],
+      ];
+      const requests: ReadRowsRequest[] = [];
+      stubStorageReadClient(bq, {
+        readRows: req => {
+          const [responses, err] = attempts[requests.push(req) - 1];
+          return track(fakeReadRowsStream(responses, err));
+        },
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream('SELECT id, name FROM tbl')
+        .toArray();
+
+      // Verify ReadRows started after the inline row, and every reopen
+      // resumed after the 2 rows read before the first error.
+      assert.deepStrictEqual(requests, [
+        {readStream, offset: 1},
+        {readStream, offset: 3},
+        {readStream, offset: 3},
+        {readStream, offset: 3},
+      ]);
+      // Verify all rows arrived in order without gaps or duplicates.
+      const table = new arrow.Table(batches);
+      assert.deepStrictEqual(
+        Array.from(table.getChild('id')!.toArray()),
+        [1, 2, 3, 4],
+      );
+      assert.deepStrictEqual(table.getChild('name')!.toArray(), [
+        'alice',
+        'bob',
+        'carol',
+        'dave',
+      ]);
+      // Verify each attempt, failed or not, kept none of our listeners.
+      grpcStreams.forEach(assertReadRowsListenersRemoved);
+    });
+
+    it('should surface non-retryable ReadRows errors after yielding earlier batches', async () => {
+      stubFirstPage(3, serializeArrowTable(makeSampleTable([1], ['alice'])), 1);
+      stubStorageReadClient(bq, {
+        readRows: () =>
+          track(
+            fakeReadRowsStream(
+              [
+                toReadRowsResponse(
+                  serializeArrowTable(makeSampleTable([2], ['bob'])),
+                ),
+              ],
+              // INTERNAL without RST_STREAM isn't safe to resume.
+              grpcError('Corrupted stream state', 13),
+            ),
+          ),
+      });
+
+      const batches: arrow.RecordBatch[] = [];
+      await assert.rejects(async () => {
+        for await (const batch of bq.createQueryArrowStream(
+          'SELECT id, name FROM tbl',
+        )) {
+          batches.push(batch);
+        }
+      }, /Corrupted stream state/);
+
+      // Verify the inline and streamed batches arrived, and ReadRows wasn't
+      // reopened.
+      assert.strictEqual(batches.length, 2);
+      assert.strictEqual(grpcStreams.length, 1);
+      assertReadRowsListenersRemoved(grpcStreams[0]);
+    });
+
+    it('should stop retrying and surface the error when consecutive retryable errors exceed MAX_STREAM_RETRIES', async () => {
+      stubFirstPage(2);
+      stubStorageReadClient(bq, {
+        readRows: () =>
+          track(
+            fakeReadRowsStream([], grpcError('Persistent UNAVAILABLE', 14)),
+          ),
+      });
+
+      await assert.rejects(
+        bq.createQueryArrowStream('SELECT id, name FROM tbl').toArray(),
+        /Persistent UNAVAILABLE/,
+      );
+
+      // Verify the first call and 3 retries each kept none of our listeners.
+      assert.strictEqual(grpcStreams.length, 4);
+      grpcStreams.forEach(assertReadRowsListenersRemoved);
+    });
+
+    it('should surface a synchronous readRows error when reopening ReadRows', async () => {
+      stubFirstPage(1);
+      let readRowsCalls = 0;
+      stubStorageReadClient(bq, {
+        readRows: () => {
+          if (++readRowsCalls > 1) {
+            throw new Error('readRows failed');
+          }
+          return fakeReadRowsStream([], grpcError('Service unavailable', 14));
+        },
+      });
+
+      await assert.rejects(
+        bq.createQueryArrowStream('SELECT id, name FROM tbl').toArray(),
+        /readRows failed/,
+      );
+      assert.strictEqual(readRowsCalls, 2);
+    });
+
+    it('should not reopen ReadRows if the stream is destroyed while waiting to retry', async () => {
+      stubFirstPage(1);
+      let readRowsCalls = 0;
+      stubStorageReadClient(bq, {
+        readRows: () => {
+          readRowsCalls++;
+          return fakeReadRowsStream([], grpcError('Service unavailable', 14));
+        },
+      });
+
+      const stream = bq.createQueryArrowStream('SELECT id, name FROM tbl');
+      stream.resume();
+      // Destroy the stream after the first error, within the first retry
+      // delay (100 ms), then wait past it.
+      await new Promise(resolve => setTimeout(resolve, 20));
+      stream.destroy();
+      await new Promise(resolve => setTimeout(resolve, 250));
+
+      assert.strictEqual(readRowsCalls, 1);
     });
   });
 });
