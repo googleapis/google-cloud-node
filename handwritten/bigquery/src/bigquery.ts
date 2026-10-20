@@ -415,6 +415,8 @@ export class BigQuery extends Service {
    *     (`'TIMESTAMP_PRECISION_MICROS'`, `'TIMESTAMP_PRECISION_NANOS'`, or
    *     `'TIMESTAMP_PRECISION_PICOS'`). Defaults to
    *     `'TIMESTAMP_PRECISION_MICROS'`. `bufferCompression` isn't supported.
+   * @param {number} [options.maxResults] Maximum number of rows to read. With
+   *     `0`, the stream emits only the schema, as one 0-row `RecordBatch`.
    * @returns {ArrowRecordBatchStream} A stream of `RecordBatch` objects. The
    *     stream emits a `job` event with the {@link Job} when BigQuery creates
    *     a job, and sets `stream.queryId` and `stream.jobReference` (when
