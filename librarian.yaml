@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.48.0
+version: v0.49.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
@@ -246,7 +246,7 @@ libraries:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
   - name: google-cloud-aiplatform
-    version: 7.6.0
+    version: 7.7.0
     apis:
       - path: google/cloud/aiplatform/v1
       - path: google/cloud/aiplatform/v1beta1
@@ -266,7 +266,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-alloydb
-    version: 3.4.0
+    version: 3.5.0
     apis:
       - path: google/cloud/alloydb/v1
       - path: google/cloud/alloydb/v1beta
@@ -627,7 +627,7 @@ libraries:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 7.8.0
+    version: 7.9.0
     apis:
       - path: google/cloud/compute/v1
         nodejs:
@@ -688,7 +688,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-contactcenterinsights
-    version: 5.2.0
+    version: 5.3.0
     apis:
       - path: google/cloud/contactcenterinsights/v1
     copyright_year: "2026"
@@ -774,7 +774,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://cloud.google.com/dataplex
   - name: google-cloud-dataproc
-    version: 7.2.0
+    version: 7.3.0
     apis:
       - path: google/cloud/dataproc/v1
     copyright_year: "2026"
@@ -800,7 +800,7 @@ libraries:
       metadata_name_override: datastore-api
       name_pretty_override: Datastore API
   - name: google-cloud-datastream
-    version: 5.2.0
+    version: 5.3.0
     apis:
       - path: google/cloud/datastream/v1
       - path: google/cloud/datastream/v1alpha1
@@ -1174,7 +1174,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-memorystore
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/memorystore/v1
       - path: google/cloud/memorystore/v1beta
@@ -1381,7 +1381,7 @@ libraries:
       - path: google/cloud/productregistry/v1
     copyright_year: "2026"
   - name: google-cloud-pubsub-api
-    version: 0.7.0
+    version: 0.8.0
     apis:
       - path: google/pubsub/v1
     nodejs:
@@ -1419,7 +1419,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-redis-cluster
-    version: 0.16.0
+    version: 0.17.0
     apis:
       - path: google/cloud/redis/cluster/v1
       - path: google/cloud/redis/cluster/v1beta1
@@ -1516,7 +1516,7 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/publicca'
   - name: google-cloud-securitycenter
-    version: 10.2.0
+    version: 10.3.0
     apis:
       - path: google/cloud/securitycenter/v2
       - path: google/cloud/securitycenter/v1
@@ -1864,7 +1864,7 @@ libraries:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
   - name: google-developer-knowledge
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/developers/knowledge/v1
     copyright_year: "2026"
@@ -1890,7 +1890,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/artifact-registry'
   - name: google-devtools-cloudbuild
-    version: 6.2.0
+    version: 6.3.0
     apis:
       - path: google/devtools/cloudbuild/v2
       - path: google/devtools/cloudbuild/v1
