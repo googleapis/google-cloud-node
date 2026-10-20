@@ -16,7 +16,7 @@ import {util} from '@google-cloud/common';
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import {Duplex, Stream} from 'stream';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import * as q from '../src/rowQueue';
 import * as t from '../src/table';

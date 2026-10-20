@@ -21,7 +21,7 @@ import {
   DatastoreOptions,
 } from '../../src';
 import * as assert from 'assert';
-import * as proxyquire from '../proxyquire';
+import {proxyquire} from 'google-test-utils';
 import {Callback, CallOptions} from 'google-gax';
 import * as protos from '../../src/protos';
 import * as ds from '../../src';

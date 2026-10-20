@@ -17,7 +17,7 @@ import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
 import * as extend from 'extend';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 
 import * as _root from '../src';
 
