@@ -112,6 +112,11 @@ const WORKSPACE_LINK_PACKAGES = [
     relDir: 'core/packages/teeny-request',
     entryPoint: 'build/src/index.js',
   },
+  {
+    name: 'google-test-utils',
+    relDir: 'core/test-utils',
+    entryPoint: 'build/src/index.js',
+  },
 ];
 
 function linkTargetToWorkspacePackage(

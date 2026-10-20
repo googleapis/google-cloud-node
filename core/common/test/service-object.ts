@@ -20,7 +20,7 @@ import {
 import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as extend from 'extend';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 // eslint-disable-next-line import/namespace
 import * as r from 'teeny-request';
 import * as sinon from 'sinon';

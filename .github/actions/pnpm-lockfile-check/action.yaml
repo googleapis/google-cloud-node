@@ -39,3 +39,5 @@ runs:
         git checkout -- pnpm-lock.yaml
         pnpm --dir core/packages/gaxios run compile
         pnpm --dir core/packages/teeny-request run compile
+        pnpm --dir core/test-utils run compile
+        node -e "require('./bin/run-test.cjs').ensureWorkspacePackagesLinked()"

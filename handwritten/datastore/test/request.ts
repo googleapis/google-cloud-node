@@ -18,7 +18,7 @@ import {after, afterEach, before, beforeEach, describe, it} from 'mocha';
 import * as extend from 'extend';
 import * as gax from 'google-gax';
 import * as is from 'is';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import {PassThrough, Transform} from 'stream';
 
