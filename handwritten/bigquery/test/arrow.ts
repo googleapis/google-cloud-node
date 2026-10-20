@@ -17,10 +17,17 @@ import {EventEmitter} from 'events';
 import {describe, it, before, after, beforeEach} from 'mocha';
 import * as Module from 'module';
 import * as arrow from 'apache-arrow';
-import {BigQuery, Job, Query} from '../src';
+import {
+  BigQuery,
+  Job,
+  Query,
+  QueryResultsOptions,
+  QueryRowsCallback,
+} from '../src';
 import {
   BigQueryReadClient,
   checkArrowDependencies,
+  CreateReadSessionRequest,
   getStorageReadClient,
   StorageModule,
 } from '../src/arrow';
@@ -107,11 +114,18 @@ type FakeReadRowsStream = EventEmitter &
  */
 function stubStorageReadClient(
   bq: BigQuery,
-  client: {readRows: (req: ReadRowsRequest) => FakeReadRowsStream},
+  client: {
+    readRows: (req: ReadRowsRequest) => FakeReadRowsStream;
+    createReadSession?: BigQueryReadClient['createReadSession'];
+  },
 ): BigQueryReadClient {
   const noop = () => {};
+  const notStubbed = (): never => {
+    throw new Error('createReadSession is not stubbed');
+  };
   return getStorageReadClient(bq, {
     BigQueryReadClient: class {
+      createReadSession = client.createReadSession ?? notStubbed;
       readRows(req: ReadRowsRequest) {
         const grpcStream = client.readRows(req);
         return Object.assign(grpcStream, {
@@ -136,6 +150,66 @@ function assertReadRowsListenersRemoved(grpcStream: EventEmitter): void {
   const cancelled = Object.assign(new Error('1 CANCELLED'), {code: 1});
   assert.doesNotThrow(() => grpcStream.emit('error', cancelled));
 }
+
+/**
+ * Stubs `job.getQueryResults` with a callback-style `impl`, returning a
+ * promise because the code calls the promisified method.
+ */
+function stubJobGetQueryResults(
+  job: Job,
+  impl: (opts: QueryResultsOptions, cb: QueryRowsCallback) => void,
+): void {
+  job.getQueryResults = ((opts: QueryResultsOptions) =>
+    new Promise((resolve, reject) => {
+      impl(opts, (err, rows, nextQuery, res) =>
+        err ? reject(err) : resolve([rows, nextQuery, res]),
+      );
+    })) as unknown as Job['getQueryResults'];
+}
+
+/**
+ * Stubs `job.getMetadata` (`jobs.get`) to resolve with the given job resource
+ * or reject with the given error.
+ */
+function stubJobGetMetadata(
+  job: Job,
+  outcome: {err?: Error; metadata?: bigquery.IJob},
+): void {
+  job.getMetadata = (async () => {
+    if (outcome.err) {
+      throw outcome.err;
+    }
+    return [outcome.metadata];
+  }) as unknown as Job['getMetadata'];
+}
+
+/**
+ * Returns a fake ReadRows stream that emits `responses`, then ends, on the
+ * next tick.
+ */
+function fakeReadRowsStream(responses: object[] = []): EventEmitter {
+  const grpcStream = new EventEmitter();
+  process.nextTick(() => {
+    for (const resp of responses) {
+      grpcStream.emit('data', resp);
+    }
+    grpcStream.emit('end');
+  });
+  return grpcStream;
+}
+
+/** A ReadRowsResponse carrying `SAMPLE_PAYLOAD` as bytes. */
+const SAMPLE_READ_ROWS_RESPONSE = {
+  arrowSchema: {
+    serializedSchema: Buffer.from(SAMPLE_PAYLOAD.serializedSchema, 'base64'),
+  },
+  arrowRecordBatch: {
+    serializedRecordBatch: Buffer.from(
+      SAMPLE_PAYLOAD.serializedRecordBatch,
+      'base64',
+    ),
+  },
+};
 
 describe('Arrow Support', () => {
   let originalRequire: typeof Module.prototype.require;
@@ -452,16 +526,6 @@ describe('Arrow Support', () => {
         /Parameter types must be provided for null values/,
       );
     });
-
-    it('should fail when jobs.query returns jobComplete = false', async () => {
-      stubJobsQuery(bq, {res: {jobComplete: false}});
-
-      // TODO: Replace with job wait (jobComplete === false) tests once unfinished job polling is added.
-      await assert.rejects(
-        bq.createQueryArrowStream('SELECT 1').toArray(),
-        /Query did not complete within the jobs\.query timeout\./,
-      );
-    });
   });
 
   describe('BigQuery#createQueryArrowStream (default job stream)', () => {
@@ -482,6 +546,9 @@ describe('Arrow Support', () => {
             capturedOpts.push(opts || {});
           }
           readRows(): never {
+            throw new Error('not called');
+          }
+          createReadSession(): never {
             throw new Error('not called');
           }
         },
@@ -733,6 +800,9 @@ describe('Arrow Support', () => {
             readRows(): never {
               throw new Error('should not instantiate a new client');
             }
+            createReadSession(): never {
+              throw new Error('should not instantiate a new client');
+            }
           },
         }),
         sharedClient,
@@ -895,6 +965,373 @@ describe('Arrow Support', () => {
       // of returning an empty result.
       assert.deepStrictEqual(capturedOffsets, [0]);
       assert.strictEqual(new arrow.Table(batches).numRows, 2);
+    });
+  });
+
+  describe('BigQuery#createQueryArrowStream (job wait)', () => {
+    let bq: BigQuery;
+
+    beforeEach(() => {
+      bq = new BigQuery({projectId: 'test-project'});
+    });
+
+    it('should poll job.getQueryResults with maxResults = 0 and call ReadRows at offset = 0 only after the job completes', async () => {
+      const fakeJob = bq.job('job-wait-1', {location: 'US'});
+      const getQueryResultsCalls: QueryResultsOptions[] = [];
+      const capturedReadRowsReqs: Array<{
+        readStream?: string;
+        offset?: number;
+      }> = [];
+
+      // First poll returns jobComplete: false; second poll returns jobComplete: true.
+      stubJobGetQueryResults(fakeJob, (opts, cb) => {
+        getQueryResultsCalls.push(opts);
+        // Verify ReadRows has not been called while waiting for the job to complete.
+        assert.strictEqual(capturedReadRowsReqs.length, 0);
+        const isDone = getQueryResultsCalls.length >= 2;
+        process.nextTick(() => {
+          cb(null, [], null, {
+            jobComplete: isDone,
+            totalRows: isDone ? '2' : undefined,
+          });
+        });
+      });
+
+      stubJobsQuery(bq, {
+        job: fakeJob,
+        res: {
+          jobComplete: false,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-wait-1',
+            location: 'US',
+          },
+        },
+      });
+
+      stubStorageReadClient(bq, {
+        readRows: (req: {readStream?: string; offset?: number}) => {
+          capturedReadRowsReqs.push(req);
+          return fakeReadRowsStream([SAMPLE_READ_ROWS_RESPONSE]);
+        },
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream('SELECT id, name FROM tbl')
+        .toArray();
+
+      // Verify job.getQueryResults was polled twice with maxResults: 0 and autoPaginate: false.
+      assert.strictEqual(getQueryResultsCalls.length, 2);
+      for (const opts of getQueryResultsCalls) {
+        assert.deepStrictEqual(opts, {
+          autoPaginate: false,
+          maxResults: 0,
+        });
+      }
+
+      // Verify ReadRows was called at offset = 0 only after the job completed.
+      assert.deepStrictEqual(capturedReadRowsReqs, [
+        {
+          readStream:
+            'projects/test-project/locations/US/jobs/job-wait-1/streams/_default',
+          offset: 0,
+        },
+      ]);
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 2);
+    });
+
+    it('should fail with a timeout error when jobs.query returns jobComplete = false and timeoutMs was specified', async () => {
+      const fakeJob = bq.job('job-timeout-1', {location: 'US'});
+      let getQueryResultsCalled = false;
+      stubJobGetQueryResults(fakeJob, () => {
+        getQueryResultsCalled = true;
+      });
+
+      const getCapturedReq = stubJobsQuery(bq, {
+        job: fakeJob,
+        res: {
+          jobComplete: false,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-timeout-1',
+            location: 'US',
+          },
+        },
+      });
+
+      // Verify caller-provided timeoutMs fails immediately when jobComplete is false.
+      await assert.rejects(
+        bq
+          .createQueryArrowStream({query: 'SELECT 1', timeoutMs: 250})
+          .toArray(),
+        /The query did not complete before 250ms/,
+      );
+      assert.strictEqual(getCapturedReq()?.timeoutMs, 250);
+      assert.strictEqual(getQueryResultsCalled, false);
+    });
+
+    it('should fail when jobs.query returns jobComplete = false without a jobReference', async () => {
+      stubJobsQuery(bq, {res: {jobComplete: false, queryId: 'stateless-1'}});
+
+      // Verify an actionable error instead of waiting on a job that doesn't exist.
+      await assert.rejects(
+        bq.createQueryArrowStream('SELECT 1').toArray(),
+        /Cannot wait for an incomplete query without a jobReference\./,
+      );
+    });
+
+    it('should stop polling and never call ReadRows when the stream is destroyed during the wait', async () => {
+      const fakeJob = bq.job('job-wait-destroy', {location: 'US'});
+      const stream = bq.createQueryArrowStream('SELECT id, name FROM tbl');
+      let polls = 0;
+      stubJobGetQueryResults(fakeJob, (_opts, cb) => {
+        polls++;
+        // The consumer gives up while this poll is in flight.
+        stream.destroy();
+        process.nextTick(() => cb(null, [], null, {jobComplete: false}));
+      });
+      stubJobsQuery(bq, {
+        job: fakeJob,
+        res: {
+          jobComplete: false,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-wait-destroy',
+            location: 'US',
+          },
+        },
+      });
+      let readRowsCalls = 0;
+      stubStorageReadClient(bq, {
+        readRows: () => {
+          readRowsCalls++;
+          return new EventEmitter();
+        },
+      });
+
+      stream.resume();
+      // The poll's callback runs on the next tick; wait past it.
+      await new Promise(resolve => setImmediate(resolve));
+
+      // Verify the in-flight poll didn't start another one or call ReadRows.
+      assert.strictEqual(polls, 1);
+      assert.strictEqual(readRowsCalls, 0);
+    });
+
+    it('should wait for the job instead of failing when timeoutMs is 0, matching BigQuery#query', async () => {
+      const fakeJob = bq.job('job-timeout-0', {location: 'US'});
+      const getQueryResultsCalls: QueryResultsOptions[] = [];
+      stubJobGetQueryResults(fakeJob, (opts, cb) => {
+        getQueryResultsCalls.push(opts);
+        process.nextTick(() => cb(null, [], null, {jobComplete: true}));
+      });
+
+      stubJobsQuery(bq, {
+        job: fakeJob,
+        res: {
+          jobComplete: false,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-timeout-0',
+            location: 'US',
+          },
+        },
+      });
+
+      stubStorageReadClient(bq, {
+        readRows: () => fakeReadRowsStream([SAMPLE_READ_ROWS_RESPONSE]),
+      });
+
+      // BigQuery#query treats a falsy timeoutMs as "no override", so 0 must
+      // not reject with "did not complete before 0ms"; poll and stream instead.
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream({query: 'SELECT 1', timeoutMs: 0})
+        .toArray();
+      assert.deepStrictEqual(getQueryResultsCalls, [
+        {autoPaginate: false, maxResults: 0},
+      ]);
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 2);
+    });
+
+    it('should forward job.getQueryResults errors to the stream without calling ReadRows', async () => {
+      const fakeJob = bq.job('job-err-1', {location: 'US'});
+      stubJobGetQueryResults(fakeJob, (_opts, cb) => {
+        process.nextTick(() => {
+          cb(new Error('Resources exceeded during query execution'));
+        });
+      });
+
+      let readRowsCalled = false;
+      stubStorageReadClient(bq, {
+        readRows: () => {
+          readRowsCalled = true;
+          return new EventEmitter();
+        },
+      });
+
+      stubJobsQuery(bq, {
+        job: fakeJob,
+        res: {
+          jobComplete: false,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-err-1',
+            location: 'US',
+          },
+        },
+      });
+
+      // Verify errors from job.getQueryResults reject stream consumption and skip ReadRows.
+      await assert.rejects(
+        bq.createQueryArrowStream('SELECT 1').toArray(),
+        /Resources exceeded during query execution/,
+      );
+      assert.strictEqual(readRowsCalled, false);
+    });
+
+    it('should emit a 0-row, 0-column RecordBatch when ReadRows at offset = 0 ends without rows and the job has no destination table', async () => {
+      const fakeJob = bq.job('job-empty-1', {location: 'US'});
+      stubJobGetQueryResults(fakeJob, (_opts, cb) => {
+        process.nextTick(() => {
+          cb(null, [], null, {jobComplete: true, totalRows: '0'});
+        });
+      });
+      // Statements without a result table, like DECLARE, have no destination.
+      stubJobGetMetadata(fakeJob, {metadata: {configuration: {query: {}}}});
+
+      stubJobsQuery(bq, {
+        job: fakeJob,
+        res: {
+          jobComplete: false,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-empty-1',
+            location: 'US',
+          },
+        },
+      });
+
+      // createReadSession isn't stubbed, so calling it fails the test.
+      stubStorageReadClient(bq, {
+        readRows: () => fakeReadRowsStream(),
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream('DECLARE x INT64 DEFAULT 1')
+        .toArray();
+
+      // Verify a 0-row RecordBatch is still emitted when streams/_default returns 0 messages at offset = 0.
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 0);
+      assert.strictEqual(batches[0].numCols, 0);
+    });
+
+    it('should read the schema from the destination table when ReadRows at offset = 0 ends without rows or a schema', async () => {
+      // streams/_default sends no ReadRowsResponse for a result without rows,
+      // so the schema has to come from a read session on the destination table.
+      const fakeJob = bq.job('job-empty-2', {location: 'US'});
+      stubJobGetQueryResults(fakeJob, (_opts, cb) => {
+        process.nextTick(() => {
+          cb(null, [], null, {jobComplete: true, totalRows: '0'});
+        });
+      });
+      stubJobGetMetadata(fakeJob, {
+        metadata: {
+          jobReference: {projectId: 'test-project', jobId: 'job-empty-2'},
+          configuration: {
+            query: {
+              destinationTable: {
+                projectId: 'test-project',
+                datasetId: '_anon',
+                tableId: 'anon_table',
+              },
+            },
+          },
+        },
+      });
+
+      stubJobsQuery(bq, {
+        job: fakeJob,
+        res: {
+          jobComplete: false,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-empty-2',
+            location: 'US',
+          },
+        },
+      });
+
+      const sessionReqs: CreateReadSessionRequest[] = [];
+      stubStorageReadClient(bq, {
+        createReadSession: async req => {
+          sessionReqs.push(req);
+          return [
+            {
+              arrowSchema: {
+                serializedSchema: Buffer.from(
+                  SAMPLE_PAYLOAD.serializedSchema,
+                  'base64',
+                ),
+              },
+            },
+          ];
+        },
+        readRows: () => fakeReadRowsStream(),
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream('SELECT id, name FROM tbl WHERE FALSE')
+        .toArray();
+
+      // Verify the 0-row RecordBatch carries the destination table's schema.
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 0);
+      assert.deepStrictEqual(
+        batches[0].schema.fields.map(f => f.name),
+        ['id', 'name'],
+      );
+      assert.strictEqual(sessionReqs.length, 1);
+      assert.strictEqual(sessionReqs[0].parent, 'projects/test-project');
+      assert.strictEqual(
+        sessionReqs[0].readSession.table,
+        'projects/test-project/datasets/_anon/tables/anon_table',
+      );
+      assert.strictEqual(sessionReqs[0].maxStreamCount, 1);
+    });
+
+    it('should forward jobs.get errors when reading the schema of a result without rows', async () => {
+      const fakeJob = bq.job('job-empty-3', {location: 'US'});
+      stubJobGetQueryResults(fakeJob, (_opts, cb) => {
+        process.nextTick(() => {
+          cb(null, [], null, {jobComplete: true, totalRows: '0'});
+        });
+      });
+      stubJobGetMetadata(fakeJob, {err: new Error('jobs.get failed')});
+
+      stubJobsQuery(bq, {
+        job: fakeJob,
+        res: {
+          jobComplete: false,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-empty-3',
+            location: 'US',
+          },
+        },
+      });
+
+      stubStorageReadClient(bq, {
+        readRows: () => fakeReadRowsStream(),
+      });
+
+      // Verify the jobs.get error reaches the stream instead of a schema-less batch.
+      await assert.rejects(
+        bq.createQueryArrowStream('SELECT id FROM tbl WHERE FALSE').toArray(),
+        /jobs.get failed/,
+      );
     });
   });
 });
