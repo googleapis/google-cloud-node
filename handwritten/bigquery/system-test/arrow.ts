@@ -632,4 +632,53 @@ describe('Arrow Query Results', () => {
     assert.ok(arrow.DataType.isInt(batches[0].schema.fields[0].type));
     assert.ok(arrow.DataType.isUtf8(batches[0].schema.fields[1].type));
   });
+
+  it('should stream Arrow results from an explicit destination table via CreateReadSession with default writeDisposition and WRITE_TRUNCATE', async () => {
+    const destTable = dataset.table('dest_results');
+
+    // 1. Default writeDisposition (writes to a new destination table).
+    const initialBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query:
+          'SELECT x AS id, CONCAT("row_", CAST(x AS STRING)) AS label FROM UNNEST(GENERATE_ARRAY(1, 100)) AS x ORDER BY x',
+        destination: destTable,
+      })
+      .toArray();
+
+    const initialTable = new arrow.Table(initialBatches);
+    assert.strictEqual(initialTable.numRows, 100);
+    assert.strictEqual(initialTable.getChild('id')!.get(0), 1n);
+    assert.strictEqual(initialTable.getChild('id')!.get(99), 100n);
+
+    // 2. WRITE_TRUNCATE overwrites the destination table and reads only the new rows.
+    const truncatedBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query:
+          'SELECT x AS id, CONCAT("new_", CAST(x AS STRING)) AS label FROM UNNEST(GENERATE_ARRAY(1, 10)) AS x ORDER BY x',
+        destination: destTable,
+        writeDisposition: 'WRITE_TRUNCATE',
+      })
+      .toArray();
+
+    const truncatedTable = new arrow.Table(truncatedBatches);
+    assert.strictEqual(truncatedTable.numRows, 10);
+    assert.strictEqual(truncatedTable.getChild('id')!.get(0), 1n);
+    assert.strictEqual(truncatedTable.getChild('label')!.get(0), 'new_1');
+
+    // 3. 0-row query into an explicit destination table preserves the schema.
+    const emptyBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: 'SELECT 1 AS id, "empty" AS label FROM UNNEST([1]) WHERE FALSE',
+        destination: destTable,
+        writeDisposition: 'WRITE_TRUNCATE',
+      })
+      .toArray();
+
+    assert.strictEqual(emptyBatches.length, 1);
+    assert.strictEqual(emptyBatches[0].numRows, 0);
+    assert.deepStrictEqual(
+      emptyBatches[0].schema.fields.map(f => f.name),
+      ['id', 'label'],
+    );
+  });
 });
