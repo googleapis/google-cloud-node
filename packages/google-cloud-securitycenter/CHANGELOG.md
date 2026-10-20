@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [10.3.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v10.2.0...security-center-v10.3.0) (2026-10-19)
+
+
+### Features
+
+* Update API sources and regenerate ([#9620](https://github.com/googleapis/google-cloud-node/issues/9620)) ([c812bc3](https://github.com/googleapis/google-cloud-node/commit/c812bc38fd5af3d710057ec9aa4a19eeff621175))
+
 ## [10.2.0](https://github.com/googleapis/google-cloud-node/compare/security-center-v10.1.1...security-center-v10.2.0) (2026-10-08)
 
 
