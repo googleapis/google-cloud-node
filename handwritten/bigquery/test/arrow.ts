@@ -252,7 +252,7 @@ describe('Arrow Support', () => {
         return storageStub;
       }
       if (id === '@google-cloud/bigquery-storage/package.json') {
-        return {version: '6.1.0'};
+        return {version: '6.3.0'};
       }
       return originalRequire.call(this, id);
     }, originalRequire);
@@ -263,7 +263,7 @@ describe('Arrow Support', () => {
   });
 
   describe('checkArrowDependencies', () => {
-    it('should succeed when @google-cloud/bigquery-storage >= 6.1.0 is installed', () => {
+    it('should succeed when @google-cloud/bigquery-storage >= 6.3.0 is installed', () => {
       const {arrow: arrowMod, storage} = checkArrowDependencies();
       // Verify the returned modules expose RecordBatchReader and BigQueryReadClient.
       assert.strictEqual(typeof arrowMod.RecordBatchReader.from, 'function');
@@ -289,7 +289,7 @@ describe('Arrow Support', () => {
     it('should throw an actionable error when @google-cloud/bigquery-storage is below the minimum version', () => {
       const fakeRequire = ((id: string) => {
         if (id === '@google-cloud/bigquery-storage/package.json') {
-          return {version: '6.0.0'};
+          return {version: '6.2.0'};
         }
         return require(id);
       }) as NodeRequire;
@@ -297,7 +297,7 @@ describe('Arrow Support', () => {
       // Verify outdated package versions are rejected with upgrade instructions.
       assert.throws(
         () => checkArrowDependencies(fakeRequire),
-        /requires "@google-cloud\/bigquery-storage" >= 6\.1\.0 \(found 6\.0\.0\)/,
+        /requires "@google-cloud\/bigquery-storage" >= 6\.3\.0 \(found 6\.2\.0\)/,
       );
     });
 

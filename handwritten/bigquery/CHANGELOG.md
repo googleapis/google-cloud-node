@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery?activeTab=versions
 
+## [9.4.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.3.0...bigquery-v9.4.0) (2026-10-19)
+
+
+### Features
+
+* **bigquery:** Add createQueryArrowStream for inline jobs.query results ([#9596](https://github.com/googleapis/google-cloud-node/issues/9596)) ([69157ed](https://github.com/googleapis/google-cloud-node/commit/69157ed3dc9a56239f08b4dc8bd831a96ae80226))
+
 ## [9.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.2.0...bigquery-v9.3.0) (2026-10-08)
 
 
