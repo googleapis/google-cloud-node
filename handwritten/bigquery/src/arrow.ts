@@ -145,7 +145,7 @@ export function decodeArrowPayload(
   if (!serializedSchema) {
     // Without a schema the batch can't be decoded; returning an empty batch
     // would silently drop its rows.
-    if (serializedRecordBatch) {
+    if (serializedRecordBatch && serializedRecordBatch.length > 0) {
       throw new Error('Got an Arrow record batch before its schema.');
     }
     return [new arrow.RecordBatch({})];

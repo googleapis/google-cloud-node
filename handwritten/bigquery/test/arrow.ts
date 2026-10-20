@@ -287,6 +287,27 @@ describe('Arrow Support', () => {
       );
     });
 
+    it('should treat an empty record batch without a schema like a missing one', async () => {
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          totalRows: '0',
+          arrowRecordBatch: {
+            // An empty Uint8Array is truthy but carries no rows.
+            serializedRecordBatch: new Uint8Array(0) as unknown as string,
+          },
+        },
+      });
+
+      // Verify one 0-row, 0-column RecordBatch is emitted instead of an error.
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream('SELECT 1')
+        .toArray();
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 0);
+      assert.strictEqual(batches[0].numCols, 0);
+    });
+
     it('should emit a 0-row RecordBatch preserving the schema when arrowSchema is present without arrowRecordBatch', async () => {
       // Include nested Struct and List fields to verify 0-row buffer initialization.
       const schema = new arrow.Schema([
