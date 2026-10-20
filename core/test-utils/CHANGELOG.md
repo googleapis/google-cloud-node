@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/test-utils-v0.3.0...test-utils-v0.3.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **tools:** Export test-utils types and exempt cloud-profiler on Bun ([#9611](https://github.com/googleapis/google-cloud-node/issues/9611)) ([ec74599](https://github.com/googleapis/google-cloud-node/commit/ec745996da1c3ced29382dbd4365e80e6800a840))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/test-utils-v0.2.1...test-utils-v0.3.0) (2026-10-08)
 
 
