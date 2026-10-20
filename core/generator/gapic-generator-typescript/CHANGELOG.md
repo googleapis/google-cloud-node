@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [5.7.1](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.7.0...gapic-generator-v5.7.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **generator:** Use .jsdoc.json with build/esm/src in ESM template ([#9523](https://github.com/googleapis/google-cloud-node/issues/9523)) ([0131ab8](https://github.com/googleapis/google-cloud-node/commit/0131ab800546769bf644ab55948e1d1994d4d582))
+
 ## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.6.0...gapic-generator-v5.7.0) (2026-10-08)
 
 
