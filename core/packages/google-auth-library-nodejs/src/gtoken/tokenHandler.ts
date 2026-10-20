@@ -36,6 +36,7 @@ class TokenHandler {
       );
       this.tokenOptions.key = credentials.privateKey;
       this.tokenOptions.email = credentials.clientEmail;
+      this.tokenOptions.iss = this.tokenOptions.iss || credentials.clientEmail;
     }
   }
 
