@@ -930,13 +930,6 @@ export function createQueryArrowStream_(
       throw new Error('maxResults must be a non-negative integer.');
     }
 
-    if (queryObj.writeDisposition === 'WRITE_APPEND') {
-      throw new Error(
-        'WRITE_APPEND is not supported with Arrow query results because reading ' +
-          'the destination table via the Storage Read API would include pre-existing rows.',
-      );
-    }
-
     const ctx: ArrowStreamContext = {
       bq,
       arrow,
