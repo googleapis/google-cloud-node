@@ -20,7 +20,7 @@ import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
 import {ApiError} from '@google-cloud/common';
 import {grpc} from 'google-gax';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as pfy from '@google-cloud/promisify';
 import * as sinon from 'sinon';
 import snakeCase = require('lodash.snakecase');

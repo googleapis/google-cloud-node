@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    cd ../.. && corepack enable pnpm && pnpm install --filter "...{./handwritten/logging-bunyan}"
+    cd ../.. && corepack enable pnpm && pnpm install --filter "./core/test-utils" --filter "...{./handwritten/logging-bunyan}" --ignore-scripts && pnpm --dir core/test-utils run compile && node -e "require('./bin/run-test.cjs').ensureWorkspacePackagesLinked()" && pnpm --filter "...{./handwritten/logging-bunyan}" run prepare --if-present
   dir: 'handwritten/logging-bunyan'
   id: 'install-dependencies'
 

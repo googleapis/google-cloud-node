@@ -20,7 +20,7 @@ import {before, beforeEach, after, afterEach, describe, it} from 'mocha';
 import * as duplexify from 'duplexify';
 import * as extend from 'extend';
 import {grpc, GrpcClient} from 'google-gax';
-import * as proxyquire from '../proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as retryRequest from 'retry-request';
 import * as sn from 'sinon';
 import {PassThrough} from 'stream';

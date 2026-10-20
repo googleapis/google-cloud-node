@@ -26,7 +26,7 @@ import {EventEmitter} from 'events';
 import {Test} from './testTypes';
 import {ServiceError, GrpcClient, GoogleError, CallOptions} from 'google-gax';
 import {PassThrough} from 'stream';
-import * as proxyquire from '../test/proxyquire';
+import {proxyquire} from 'google-test-utils';
 import {TabularApiSurface} from '../src/tabular-api-surface';
 import * as mocha from 'mocha';
 import {generateId} from './common';

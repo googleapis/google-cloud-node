@@ -26,7 +26,7 @@ import {Bigtable} from '../src';
 import {ResourceMetrics} from '@opentelemetry/sdk-metrics';
 import * as assert from 'assert';
 import {ClientOptions} from 'google-gax';
-import * as proxyquire from '../test/proxyquire';
+import {proxyquire} from 'google-test-utils';
 
 function getHandler(Exporter: typeof CloudMonitoringExporter) {
   const FakeCGPMetricsHandler = proxyquire(

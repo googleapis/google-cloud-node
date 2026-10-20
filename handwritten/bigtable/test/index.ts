@@ -17,7 +17,7 @@ import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {afterEach, before, beforeEach, describe, it} from 'mocha';
 import * as gax from 'google-gax';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sn from 'sinon';
 
 import {Cluster} from '../src/cluster.js';

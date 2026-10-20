@@ -13,7 +13,7 @@
 // limitations under the License.
 import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import {inspect} from 'util';
 
 import {LoggingBunyan} from '../src';

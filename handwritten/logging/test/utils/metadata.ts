@@ -17,7 +17,7 @@ import {describe, it, beforeEach, before, after, afterEach} from 'mocha';
 import BigNumber from 'bignumber.js';
 import * as extend from 'extend';
 import {GCPEnv} from 'google-auth-library';
-import * as proxyquire from '../proxyquire';
+import {proxyquire} from 'google-test-utils';
 
 let instanceOverride: {} | null;
 const fakeGcpMetadata = {

@@ -15,7 +15,7 @@
 import * as promisify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import {CallOptions} from 'google-gax';
 
 let promisified = false;

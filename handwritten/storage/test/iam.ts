@@ -15,7 +15,7 @@
 import {DecorateRequestOptions, util} from '../src/nodejs-common/index.js';
 import assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
-import proxyquire from './proxyquire.js';
+import {proxyquire} from 'google-test-utils';
 import {IAMExceptionMessages} from '../src/iam.js';
 
 describe('storage/iam', () => {

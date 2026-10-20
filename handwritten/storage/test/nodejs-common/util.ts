@@ -27,7 +27,7 @@ import {
   OAuth2Client,
 } from 'google-auth-library';
 import * as nock from 'nock';
-import proxyquire from '../proxyquire.js';
+import {proxyquire} from 'google-test-utils';
 import retryRequest from 'retry-request';
 import * as sinon from 'sinon';
 import * as stream from 'stream';

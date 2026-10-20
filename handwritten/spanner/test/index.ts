@@ -20,7 +20,7 @@ import * as assert from 'assert';
 import {before, beforeEach, afterEach, describe, it} from 'mocha';
 import * as extend from 'extend';
 import * as path from 'path';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as through from 'through2';
 import {util} from '@google-cloud/common';
 import {PreciseDate} from '@google-cloud/precise-date';

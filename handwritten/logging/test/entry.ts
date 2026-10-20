@@ -15,7 +15,7 @@
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import * as extend from 'extend';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as entryTypes from '../src/entry';
 import * as common from '../src/utils/common';
 import * as http from 'http';
