@@ -14,7 +14,7 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
-import proxyquire from './proxyquire.js';
+import {proxyquire} from 'google-test-utils';
 
 const error = Error('not implemented');
 

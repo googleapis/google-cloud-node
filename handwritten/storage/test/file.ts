@@ -36,7 +36,7 @@ import * as crypto from 'crypto';
 import duplexify from 'duplexify';
 import * as fs from 'fs';
 import * as path from 'path';
-import proxyquire from './proxyquire.js';
+import {proxyquire} from 'google-test-utils';
 import * as resumableUpload from '../src/resumable-upload.js';
 import * as sinon from 'sinon';
 import * as tmp from 'tmp';

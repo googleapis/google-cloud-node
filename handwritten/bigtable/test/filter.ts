@@ -14,7 +14,7 @@
 
 import * as assert from 'assert';
 import {afterEach, before, beforeEach, describe, it} from 'mocha';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import * as fr from '../src/filter';
 import {Row} from '../src/row';

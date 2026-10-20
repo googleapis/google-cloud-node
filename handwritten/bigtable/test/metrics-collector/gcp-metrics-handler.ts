@@ -30,7 +30,7 @@ import {
 } from '../../test-common/expected-otel-export-input';
 import * as assert from 'assert';
 import {replaceTimestamps} from '../../test-common/replace-timestamps';
-import * as proxyquire from '../proxyquire';
+import {proxyquire} from 'google-test-utils';
 
 /**
  * Cleans a ResourceMetrics object by replacing client UUIDs with a placeholder.

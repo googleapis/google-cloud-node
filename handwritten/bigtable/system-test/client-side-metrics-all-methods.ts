@@ -21,7 +21,7 @@ import {
 import {ResourceMetrics} from '@opentelemetry/sdk-metrics';
 import * as assert from 'assert';
 import {GCPMetricsHandler} from '../src/client-side-metrics/gcp-metrics-handler';
-import * as proxyquire from '../test/proxyquire';
+import {proxyquire} from 'google-test-utils';
 import {Bigtable, RawFilter} from '../src';
 import {Mutation} from '../src/mutation';
 import {Row} from '../src/row';
