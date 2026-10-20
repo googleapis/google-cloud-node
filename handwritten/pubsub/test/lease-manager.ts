@@ -17,7 +17,7 @@
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import {EventEmitter} from 'events';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import * as defer from 'p-defer';
 

@@ -14,7 +14,7 @@
 
 import * as assert from 'assert';
 import {describe, it, before, beforeEach} from 'mocha';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 
 import * as iamTypes from '../src/iam';
 import {PubSub, RequestConfig} from '../src/pubsub';

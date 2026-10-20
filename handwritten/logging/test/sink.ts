@@ -16,7 +16,7 @@ import * as callbackify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import * as extend from 'extend';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import {Sink as SINK} from '../src/sink';
 import {Logging, CreateSinkRequest, LogSink} from '../src/index';
