@@ -384,7 +384,7 @@ export class BigQuery extends Service {
    * which isn't generally available yet, so it may change in ways that aren't
    * backward compatible.
    *
-   * Requires the optional `@google-cloud/bigquery-storage` (>= 6.1.0) package
+   * Requires the optional `@google-cloud/bigquery-storage` (>= 6.3.0) package
    * to be installed.
    *
    * @param {string|object} [options] A string SQL query or configuration

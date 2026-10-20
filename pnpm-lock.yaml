@@ -1621,8 +1621,8 @@ importers:
         version: 11.0.1
     devDependencies:
       '@google-cloud/bigquery-storage':
-        specifier: ^6.1.0
-        version: 6.2.0(protobufjs@8.8.0)
+        specifier: ^6.3.0
+        version: 6.3.0(protobufjs@8.8.0)
       '@google-cloud/storage':
         specifier: ^7.16.0
         version: 7.21.0(encoding@0.1.13)
@@ -16414,16 +16414,12 @@ packages:
   '@foliojs-fork/restructure@2.0.2':
     resolution: {integrity: sha512-59SgoZ3EXbkfSX7b63tsou/SDGzwUEK6MuB5sKqgVK1/XE0fxmpsOb9DQI8LXW3KfGnAjImCGhhEb7uPPAUVNA==}
 
-  '@google-cloud/bigquery-storage-api@0.3.0':
-    resolution: {integrity: sha512-PPBOLw5IKE2wcdz/U4DV4KjeGHmt2Najwq73wrx9Jg0nHJor70jgsrrgdRNJ/4UvZ33ALhH55w0wmr2qk7PFrg==}
-    engines: {node: '>=22'}
-
   '@google-cloud/bigquery-storage-api@0.5.0':
     resolution: {integrity: sha512-fN5uZpF13J61ukset7xhaHUweADtqTir5vI9KBq0CnRqirkEnKIvZxn34hoeO2NeP+rk8Ro2SeMVySJ6i16LuA==}
     engines: {node: '>=22'}
 
-  '@google-cloud/bigquery-storage@6.2.0':
-    resolution: {integrity: sha512-ME41UGUxJJWywspFjcSGkq3ZE8izgBkmjLIyzZ1xqG0wucm9FP6XN+CHzT0vs3GEARguJEt8tuMfvJ7BJH328w==}
+  '@google-cloud/bigquery-storage@6.3.0':
+    resolution: {integrity: sha512-SuDtIDbaKHfGQQGP9Wn5xc5yLzXAo+ShYv8s6YziuLAJ4kAvpmPtUicdn7+rUQJDWWEjHHghVWGSPpCX+BwDfw==}
     engines: {node: '>=22'}
     peerDependencies:
       protobufjs: ~7.5.5
@@ -26029,21 +26025,15 @@ snapshots:
 
   '@foliojs-fork/restructure@2.0.2': {}
 
-  '@google-cloud/bigquery-storage-api@0.3.0':
-    dependencies:
-      google-gax: 6.5.0
-    transitivePeerDependencies:
-      - supports-color
-
   '@google-cloud/bigquery-storage-api@0.5.0':
     dependencies:
       google-gax: 6.1.0
     transitivePeerDependencies:
       - supports-color
 
-  '@google-cloud/bigquery-storage@6.2.0(protobufjs@8.8.0)':
+  '@google-cloud/bigquery-storage@6.3.0(protobufjs@8.8.0)':
     dependencies:
-      '@google-cloud/bigquery-storage-api': 0.3.0
+      '@google-cloud/bigquery-storage-api': 0.5.0
       '@google-cloud/paginator': 7.0.1
       '@google-cloud/precise-date': 6.0.0
       apache-arrow: 21.2.0
