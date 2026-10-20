@@ -15,7 +15,7 @@
 import * as assert from 'assert';
 import {describe, it, beforeEach} from 'mocha';
 import * as TransportStream from 'winston-transport';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import {Options} from '../src';
 
 describe('logging-winston', () => {

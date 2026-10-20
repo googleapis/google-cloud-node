@@ -15,7 +15,7 @@
 import * as assert from 'assert';
 import {before, beforeEach, after, afterEach, describe, it} from 'mocha';
 import * as gax from 'google-gax';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import {PassThrough, Readable} from 'stream';
 
 import * as ds from '../src';

@@ -17,7 +17,7 @@
 import * as assert from 'assert';
 import {describe, it, beforeEach} from 'mocha';
 import * as EventEmitter from 'events';
-import * as proxyquire from '../../proxyquire';
+import {proxyquire} from 'google-test-utils';
 
 const FAKE_PROJECT_ID = 'project-🦄';
 

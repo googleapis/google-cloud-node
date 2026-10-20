@@ -129,6 +129,9 @@ importers:
       codecov:
         specifier: ^3.8.3
         version: 3.8.3(encoding@0.1.13)
+      google-test-utils:
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -1662,6 +1665,9 @@ importers:
       eslint-plugin-prettier:
         specifier: ^5.2.6
         version: 5.5.6(eslint-config-prettier@9.1.2(eslint@8.57.1))(eslint@8.57.1)(prettier@3.9.6)
+      google-test-utils:
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2173,6 +2179,9 @@ importers:
       gapic-tools:
         specifier: ^2.0.0
         version: 2.0.1(protobufjs@7.5.9)
+      google-test-utils:
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2515,6 +2524,9 @@ importers:
       codecov:
         specifier: ^3.8.3
         version: 3.8.3(encoding@0.1.13)
+      google-test-utils:
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2660,6 +2672,9 @@ importers:
       gapic-tools:
         specifier: ^2.0.0
         version: 2.0.1(protobufjs@8.8.0)
+      google-test-utils:
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^5.0.0
         version: 5.3.1(typescript@5.9.3)
@@ -2757,6 +2772,9 @@ importers:
       express:
         specifier: ^4.16.3
         version: 4.22.2
+      google-test-utils:
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2824,6 +2842,9 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
+      google-test-utils:
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2967,8 +2988,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.1(protobufjs@7.5.9)
       google-test-utils:
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^6.0.0
         version: 6.0.2(typescript@5.9.3)
@@ -20758,6 +20779,10 @@ packages:
     resolution: {integrity: sha512-OP7B5iS65EjAlRctfq3uUdGWXN5AvIGRYQSx5luCVqkfh3uaGvVzuY1y3hCyxLk6MGf5DYkJ3rZxgJ6JsMmSog==}
     engines: {node: '>=22'}
 
+  google-test-utils@0.3.0:
+    resolution: {integrity: sha512-atGLcriC2MS6gWCJnCNrxLqYh4Xs5WkgaS9+lwxF/3rZdzt5eFv/Bc2VIeCCl5DGzGP3So8dj5f7pfBUNRhzXw==}
+    engines: {node: '>=22'}
+
   googleapis-common@4.4.3:
     resolution: {integrity: sha512-W46WKCk3QtlCCfmZyQIH5zxmDOyeV5Qj+qs7nr2ox08eRkEJMWp6iwv542R/PsokXaGUSrmif4vCC4+rGzRSsQ==}
     engines: {node: '>=10.10.0'}
@@ -32041,6 +32066,8 @@ snapshots:
       walkdir: 0.4.1
 
   google-test-utils@0.2.0: {}
+
+  google-test-utils@0.3.0: {}
 
   googleapis-common@4.4.3(encoding@0.1.13):
     dependencies:

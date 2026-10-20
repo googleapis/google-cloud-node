@@ -19,7 +19,7 @@ import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {EventEmitter} from 'events';
 import {common as protobuf} from 'protobufjs';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import {PassThrough} from 'stream';
 import * as opentelemetry from '@opentelemetry/api';

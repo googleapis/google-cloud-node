@@ -18,7 +18,7 @@ import arrify = require('arrify');
 import * as assert from 'assert';
 import {describe, it, beforeEach, before} from 'mocha';
 import * as extend from 'extend';
-import * as proxyquire from './proxyquire';
+import {proxyquire} from 'google-test-utils';
 import {
   Logging as LOGGING,
   LoggingOptions,
