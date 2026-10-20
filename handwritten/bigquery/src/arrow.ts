@@ -143,6 +143,11 @@ export function decodeArrowPayload(
   serializedRecordBatch?: Uint8Array | string,
 ): RecordBatch[] {
   if (!serializedSchema) {
+    // Without a schema the batch can't be decoded; returning an empty batch
+    // would silently drop its rows.
+    if (serializedRecordBatch) {
+      throw new Error('Got an Arrow record batch before its schema.');
+    }
     return [new arrow.RecordBatch({})];
   }
   // BigQuery returns the Arrow IPC Schema message and RecordBatch message as
