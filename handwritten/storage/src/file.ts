@@ -1788,9 +1788,16 @@ class File extends ServiceObject<File, FileMetadata> {
         } else if (typeof responseStream?.resume === 'function') {
           responseStream.resume();
         }
+        for (const stream of transformStreams) {
+          stream.destroy();
+        }
       };
 
-      if (throughStream.destroyed) {
+      if (
+        throughStream.destroyed ||
+        throughStream.closed ||
+        throughStream.writableEnded
+      ) {
         cleanupSourceStream();
         return;
       }
