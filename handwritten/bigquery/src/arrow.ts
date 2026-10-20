@@ -16,7 +16,7 @@
 
 import {ResourceStream} from '@google-cloud/paginator';
 import type {RecordBatch, Schema} from 'apache-arrow';
-import type {BigQuery, Query} from './bigquery';
+import type {BigQuery, JobsQueryResponse, Query} from './bigquery';
 import type bigquery from './types';
 
 type ArrowModule = typeof import('apache-arrow');
@@ -262,31 +262,34 @@ export function decodeArrowPayload(
  *
  * @private
  */
-function streamDefaultJobStream(
+async function streamDefaultJobStream(
   ctx: ArrowStreamContext,
   jobRef: bigquery.IJobReference | undefined,
   offset: number,
   initialSchema?: Uint8Array | string,
-): void {
-  const {bq, stream} = ctx;
+): Promise<void> {
+  const {bq} = ctx;
   const projectId = resolveProjectId(bq, jobRef?.projectId);
   const jobId = jobRef?.jobId;
   const location = jobRef?.location || bq.location;
 
   if (!projectId || !jobId || !location) {
-    stream.destroy(
-      new Error('Cannot stream remaining Arrow rows without a jobReference.'),
+    throw new Error(
+      'Cannot stream remaining Arrow rows without a jobReference.',
     );
-    return;
   }
 
   const readStream = `projects/${projectId}/locations/${location}/jobs/${jobId}/streams/_default`;
-  streamReadRows(ctx, {readStream, offset, initialSchema});
+  await streamReadRows(ctx, {readStream, offset, initialSchema});
 }
 
 /**
  * Streams Arrow `RecordBatch`es from a Storage Read API stream starting at
  * `offset`, pausing `ReadRows` while the consumer is behind.
+ *
+ * Resolves when `ReadRows` ends or the consumer destroys the stream, and
+ * rejects on a `ReadRows` or decode error. In every case, the listeners added
+ * here are removed, and `ReadRows` is cancelled unless it already finished.
  *
  * @private
  */
@@ -297,93 +300,94 @@ function streamReadRows(
     offset: number;
     initialSchema?: Uint8Array | string;
   },
-): void {
+): Promise<void> {
   const {bq, arrow, storage, stream} = ctx;
   const {readStream, offset, initialSchema} = options;
 
-  let readClient: BigQueryReadClient;
-  try {
-    readClient = getStorageReadClient(bq, storage);
-  } catch (err) {
-    stream.destroy(err as Error);
-    return;
-  }
+  return new Promise((resolve, reject) => {
+    const grpcStream = getStorageReadClient(bq, storage).readRows({
+      readStream,
+      offset,
+    });
 
-  const grpcStream = readClient.readRows({
-    readStream,
-    offset,
-  });
+    let serializedSchema: Uint8Array | undefined = initialSchema
+      ? toUint8Array(initialSchema)
+      : undefined;
 
-  // Cancel only the active ReadRows gRPC stream if the caller ends iteration
-  // early, keeping the shared BigQueryReadClient open for subsequent queries.
-  let finished = false;
-  const cancelGrpcStream = () => {
-    if (!finished) {
-      finished = true;
-      grpcStream.cancel();
-    }
-  };
-  stream.once('close', cancelGrpcStream);
-
-  // ReadRows is paused when push() reports a full buffer; resume it when the
-  // consumer asks for more so slow consumers don't buffer the whole result.
-  ctx.onRead = () => grpcStream.resume();
-
-  let serializedSchema: Uint8Array | undefined = initialSchema
-    ? toUint8Array(initialSchema)
-    : undefined;
-
-  grpcStream.on('data', (resp: IReadRowsResponse) => {
-    if (stream._ended || stream.destroyed) {
-      cancelGrpcStream();
-      return;
-    }
-    // The Storage Read API sends arrowSchema on the first ReadRowsResponse and
-    // may also emit responses without record batch bytes (e.g., heartbeats).
-    if (resp.arrowSchema?.serializedSchema) {
-      serializedSchema = toUint8Array(resp.arrowSchema.serializedSchema);
-    }
-    const rawBatch = resp.arrowRecordBatch?.serializedRecordBatch;
-    const hasBatchBytes =
-      rawBatch &&
-      (typeof rawBatch === 'string'
-        ? rawBatch.length > 0
-        : rawBatch.byteLength > 0);
-    if (!hasBatchBytes) {
-      return;
-    }
-    try {
-      const batches = decodeArrowPayload(arrow, serializedSchema, rawBatch);
-      for (const batch of batches) {
-        if (stream._ended || stream.destroyed) {
-          cancelGrpcStream();
-          return;
-        }
-        if (!stream.push(batch)) {
-          grpcStream.pause();
-        }
+    let settled = false;
+    // Detaches every listener added here and settles the promise. Cancels
+    // only this ReadRows call, keeping the shared BigQueryReadClient open.
+    const settle = (opts: {cancel: boolean; err?: Error}) => {
+      if (settled) {
+        return;
       }
-    } catch (parseErr) {
-      cancelGrpcStream();
-      stream.destroy(parseErr as Error);
-    }
-  });
+      settled = true;
+      grpcStream.removeListener('data', onData);
+      grpcStream.removeListener('error', onError);
+      grpcStream.removeListener('end', onEnd);
+      stream.removeListener('close', onClose);
+      ctx.onRead = undefined;
+      // cancel() makes gRPC emit a CANCELLED 'error' on a later tick, which
+      // would crash the process if no 'error' listener were attached.
+      grpcStream.on('error', () => {});
+      if (opts.cancel) {
+        grpcStream.cancel();
+      }
+      if (opts.err) {
+        reject(opts.err);
+      } else {
+        resolve();
+      }
+    };
 
-  grpcStream.on('error', (err: Error) => {
-    stream.removeListener('close', cancelGrpcStream);
-    if (finished || stream._ended || stream.destroyed) {
-      return;
-    }
-    finished = true;
-    stream.destroy(err);
-  });
+    const onData = (resp: IReadRowsResponse) => {
+      if (stream.destroyed) {
+        settle({cancel: true});
+        return;
+      }
+      // The Storage Read API sends arrowSchema on the first ReadRowsResponse
+      // and may also emit responses without record batch bytes (e.g.,
+      // heartbeats).
+      if (resp.arrowSchema?.serializedSchema) {
+        serializedSchema = toUint8Array(resp.arrowSchema.serializedSchema);
+      }
+      const rawBatch = resp.arrowRecordBatch?.serializedRecordBatch;
+      const hasBatchBytes =
+        rawBatch &&
+        (typeof rawBatch === 'string'
+          ? rawBatch.length > 0
+          : rawBatch.byteLength > 0);
+      if (!hasBatchBytes) {
+        return;
+      }
+      try {
+        const batches = decodeArrowPayload(arrow, serializedSchema, rawBatch);
+        for (const batch of batches) {
+          if (stream.destroyed) {
+            settle({cancel: true});
+            return;
+          }
+          if (!stream.push(batch)) {
+            grpcStream.pause();
+          }
+        }
+      } catch (parseErr) {
+        settle({cancel: true, err: parseErr as Error});
+      }
+    };
+    const onError = (err: Error) => settle({cancel: false, err});
+    const onEnd = () => settle({cancel: false});
+    // The consumer destroyed the stream (e.g., ended iteration early).
+    const onClose = () => settle({cancel: true});
 
-  grpcStream.on('end', () => {
-    stream.removeListener('close', cancelGrpcStream);
-    finished = true;
-    if (!stream._ended && !stream.destroyed) {
-      stream.end();
-    }
+    // ReadRows is paused when push() reports a full buffer; resume it when the
+    // consumer asks for more so slow consumers don't buffer the whole result.
+    ctx.onRead = () => grpcStream.resume();
+
+    grpcStream.on('data', onData);
+    grpcStream.on('error', onError);
+    grpcStream.on('end', onEnd);
+    stream.on('close', onClose);
   });
 }
 
@@ -404,66 +408,40 @@ export function createQueryArrowStream_(
   let started = false;
   // Set once the query starts, so later reads can resume the active ReadRows.
   let readCtx: ArrowStreamContext | undefined;
-  stream._read = () => {
-    if (started) {
-      readCtx?.onRead?.();
-      return;
-    }
-    started = true;
 
-    let arrow: ArrowModule;
-    let storage: StorageModule;
-    try {
-      ({arrow, storage} = checkArrowDependencies());
-    } catch (err) {
-      stream.destroy(err as Error);
-      return;
-    }
+  // Runs the query and pushes its batches. The returned promise settles once
+  // all batches are pushed, the consumer destroys the stream, or a step fails.
+  const runQuery = async (): Promise<void> => {
+    const {arrow, storage} = checkArrowDependencies();
 
     if (!query || (typeof query === 'object' && !query.query)) {
-      stream.destroy(new Error('A SQL query string is required.'));
-      return;
+      throw new Error('A SQL query string is required.');
     }
 
     const queryObj: Query = typeof query === 'string' ? {query} : {...query};
 
     if (queryObj.writeDisposition === 'WRITE_APPEND') {
-      stream.destroy(
-        new Error(
-          'WRITE_APPEND is not supported with Arrow query results because reading ' +
-            'the destination table via the Storage Read API would include pre-existing rows.',
-        ),
+      throw new Error(
+        'WRITE_APPEND is not supported with Arrow query results because reading ' +
+          'the destination table via the Storage Read API would include pre-existing rows.',
       );
-      return;
     }
 
     if (queryObj.destination) {
       // TODO: Support explicit destination tables via CreateReadSession.
-      stream.destroy(
-        new Error(
-          'Explicit destination tables are not yet supported in createQueryArrowStream.',
-        ),
+      throw new Error(
+        'Explicit destination tables are not yet supported in createQueryArrowStream.',
       );
-      return;
     }
 
     const ctx: ArrowStreamContext = {bq, arrow, storage, stream};
     readCtx = ctx;
 
-    let queryReq: bigquery.IQueryRequest | undefined;
-    try {
-      queryReq = bq.buildQueryRequest_(queryObj, {});
-    } catch (err) {
-      // For example, invalid query parameters.
-      stream.destroy(err as Error);
-      return;
-    }
+    // Throws for an invalid request, for example invalid query parameters.
+    const queryReq = bq.buildQueryRequest_(queryObj, {});
     if (!queryReq) {
       // TODO: Route queries that cannot use jobs.query through jobs.insert (createQueryJob).
-      stream.destroy(
-        new Error('Query configuration cannot be executed via jobs.query.'),
-      );
-      return;
+      throw new Error('Query configuration cannot be executed via jobs.query.');
     }
 
     // Default to JOB_CREATION_OPTIONAL unless overridden on the query or client.
@@ -472,75 +450,75 @@ export function createQueryArrowStream_(
     }
     queryReq.queryResultsFormat = 'ARROW';
 
-    void bq.runJobsQuery(queryReq, (err, job, res) => {
-      if (err) {
-        stream.destroy(err);
-        return;
-      }
+    const [job, res] = (await bq.runJobsQuery(queryReq)) as JobsQueryResponse;
 
-      if (res?.queryId) {
-        stream.queryId = res.queryId;
-      }
-      if (res?.jobReference && job) {
-        stream.jobReference = res.jobReference;
-        stream.emit('job', job);
-      }
+    if (res?.queryId) {
+      stream.queryId = res.queryId;
+    }
+    if (res?.jobReference && job) {
+      stream.jobReference = res.jobReference;
+      stream.emit('job', job);
+    }
 
-      if (res?.jobComplete === false) {
-        // TODO: Wait for unfinished jobs before streaming Arrow results.
-        stream.destroy(
-          new Error('Query did not complete within the jobs.query timeout.'),
-        );
-        return;
-      }
+    if (res?.jobComplete === false) {
+      // TODO: Wait for unfinished jobs before streaming Arrow results.
+      throw new Error('Query did not complete within the jobs.query timeout.');
+    }
 
-      // pageRowCount and totalRows are returned as uint64 strings in REST JSON.
-      const inlineRowsCount = BigInt(res?.pageRowCount ?? 0);
-      const totalRowsCount = BigInt(res?.totalRows ?? 0);
-      // Also check pageToken: on cached multi-page results, jobs.query can
-      // return totalRows "0" and omit pageRowCount while setting pageToken.
-      const hasRemainingRows =
-        Boolean(res?.pageToken) || inlineRowsCount < totalRowsCount;
+    // pageRowCount and totalRows are returned as uint64 strings in REST JSON.
+    const inlineRowsCount = BigInt(res?.pageRowCount ?? 0);
+    const totalRowsCount = BigInt(res?.totalRows ?? 0);
+    // Also check pageToken: on cached multi-page results, jobs.query can
+    // return totalRows "0" and omit pageRowCount while setting pageToken.
+    const hasRemainingRows =
+      Boolean(res?.pageToken) || inlineRowsCount < totalRowsCount;
 
-      // Emit the inline first page (or 0-row schema-preserving batch when totalRows is 0)
-      // before resuming remaining rows from streams/_default at offset = pageRowCount.
-      if (!hasRemainingRows || inlineRowsCount > 0n) {
-        try {
-          const batches = decodeArrowPayload(
-            arrow,
-            res?.arrowSchema?.serializedSchema,
-            res?.arrowRecordBatch?.serializedRecordBatch,
-          );
-          for (const batch of batches) {
-            if (stream._ended || stream.destroyed) {
-              return;
-            }
-            stream.push(batch);
-          }
-        } catch (parseErr) {
-          stream.destroy(parseErr as Error);
+    // Emit the inline first page (or 0-row schema-preserving batch when totalRows is 0)
+    // before resuming remaining rows from streams/_default at offset = pageRowCount.
+    if (!hasRemainingRows || inlineRowsCount > 0n) {
+      const batches = decodeArrowPayload(
+        arrow,
+        res?.arrowSchema?.serializedSchema,
+        res?.arrowRecordBatch?.serializedRecordBatch,
+      );
+      for (const batch of batches) {
+        if (stream.destroyed) {
           return;
         }
+        stream.push(batch);
       }
+    }
 
-      if (!hasRemainingRows) {
-        if (!stream._ended && !stream.destroyed) {
-          stream.end();
-        }
+    if (!hasRemainingRows || stream.destroyed) {
+      return;
+    }
+
+    await streamDefaultJobStream(
+      ctx,
+      res?.jobReference,
+      Number(inlineRowsCount),
+      res?.arrowSchema?.serializedSchema,
+    );
+  };
+
+  stream._read = () => {
+    if (started) {
+      readCtx?.onRead?.();
+      return;
+    }
+    started = true;
+    // The only place that ends or destroys the stream.
+    void (async () => {
+      try {
+        await runQuery();
+      } catch (err) {
+        stream.destroy(err as Error);
         return;
       }
-
-      if (stream._ended || stream.destroyed) {
-        return;
+      if (!stream.destroyed) {
+        stream.end();
       }
-
-      streamDefaultJobStream(
-        ctx,
-        res?.jobReference,
-        Number(inlineRowsCount),
-        res?.arrowSchema?.serializedSchema,
-      );
-    });
+    })();
   };
 
   return stream;

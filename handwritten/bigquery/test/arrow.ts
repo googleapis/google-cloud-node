@@ -124,6 +124,19 @@ function stubStorageReadClient(
   });
 }
 
+/**
+ * Asserts that only a no-op 'error' listener remains on a finished ReadRows
+ * stream, so an error gRPC emits afterwards (e.g., CANCELLED after cancel())
+ * is swallowed instead of crashing the process.
+ */
+function assertReadRowsListenersRemoved(grpcStream: EventEmitter): void {
+  assert.strictEqual(grpcStream.listenerCount('data'), 0);
+  assert.strictEqual(grpcStream.listenerCount('end'), 0);
+  assert.strictEqual(grpcStream.listenerCount('error'), 1);
+  const cancelled = Object.assign(new Error('1 CANCELLED'), {code: 1});
+  assert.doesNotThrow(() => grpcStream.emit('error', cancelled));
+}
+
 describe('Arrow Support', () => {
   let originalRequire: typeof Module.prototype.require;
 
@@ -517,10 +530,12 @@ describe('Arrow Support', () => {
         readStream?: string;
         offset?: number;
       }> = [];
+      let readRowsStream: EventEmitter | undefined;
       stubStorageReadClient(bq, {
         readRows: (req: {readStream?: string; offset?: number}) => {
           capturedReadRowsReqs.push(req);
           const grpcStream = new EventEmitter();
+          readRowsStream = grpcStream;
           process.nextTick(() => {
             grpcStream.emit('data', {
               arrowSchema: {
@@ -568,6 +583,8 @@ describe('Arrow Support', () => {
         'carol',
         'dave',
       ]);
+      // Verify the ReadRows listeners were removed once it ended.
+      assertReadRowsListenersRemoved(readRowsStream!);
     });
 
     it('should pause ReadRows while the consumer is behind and resume it when the consumer reads', async () => {
@@ -665,11 +682,13 @@ describe('Arrow Support', () => {
       });
 
       let cancelCount = 0;
+      let readRowsStream: EventEmitter | undefined;
       const sharedClient = stubStorageReadClient(bq, {
         readRows: () => {
           const grpcStream = new EventEmitter() as EventEmitter & {
             cancel: () => void;
           };
+          readRowsStream = grpcStream;
           grpcStream.cancel = () => {
             cancelCount++;
           };
@@ -718,6 +737,9 @@ describe('Arrow Support', () => {
         }),
         sharedClient,
       );
+      // Verify the ReadRows listeners were removed and the CANCELLED error
+      // that follows cancel() doesn't crash the process.
+      assertReadRowsListenersRemoved(readRowsStream!);
     });
 
     it('should raise a ReadRows error after the batches already emitted', async () => {
@@ -740,9 +762,11 @@ describe('Arrow Support', () => {
       const readRowsError = Object.assign(new Error('permission denied'), {
         code: 7,
       });
+      let readRowsStream: EventEmitter | undefined;
       stubStorageReadClient(bq, {
         readRows: () => {
           const grpcStream = new EventEmitter();
+          readRowsStream = grpcStream;
           process.nextTick(() => grpcStream.emit('error', readRowsError));
           return grpcStream;
         },
@@ -761,6 +785,8 @@ describe('Arrow Support', () => {
       // the ReadRows error.
       assert.strictEqual(received.length, 1);
       assert.deepStrictEqual(errors, [readRowsError]);
+      // Verify the ReadRows listeners were removed after the error.
+      assertReadRowsListenersRemoved(readRowsStream!);
     });
 
     it('should cancel ReadRows and raise the error when a streamed batch fails to decode', async () => {
@@ -777,11 +803,13 @@ describe('Arrow Support', () => {
         },
       });
       let cancelCount = 0;
+      let readRowsStream: EventEmitter | undefined;
       stubStorageReadClient(bq, {
         readRows: () => {
           const grpcStream = Object.assign(new EventEmitter(), {
             cancel: () => cancelCount++,
           });
+          readRowsStream = grpcStream;
           process.nextTick(() =>
             grpcStream.emit('data', {
               arrowRecordBatch: {
@@ -793,11 +821,13 @@ describe('Arrow Support', () => {
         },
       });
 
-      // Verify the decode error is raised and the gRPC stream is cancelled.
+      // Verify the decode error is raised, the gRPC stream is cancelled, and
+      // its listeners are removed.
       await assert.rejects(
         bq.createQueryArrowStream('SELECT id, name FROM tbl').toArray(),
       );
       assert.strictEqual(cancelCount, 1);
+      assertReadRowsListenersRemoved(readRowsStream!);
     });
 
     it('should fail when remaining rows must be streamed but jobReference is missing', async () => {
