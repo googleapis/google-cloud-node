@@ -35,17 +35,19 @@ type ModuleConstructor = {
   _cache?: NodeJS.Dict<NodeModule>;
   _resolveFilename: (request: string, parent: NodeModule) => string;
   _nodeModulePaths: (from: string) => string[];
+  createRequire?: (filename: string) => NodeRequire;
 };
 
-const mod = ((Module as unknown as {Module?: ModuleConstructor}).Module ??
+const rawMod = ((Module as unknown as {Module?: ModuleConstructor}).Module ??
   Module) as unknown as ModuleConstructor;
 const {hasOwnProperty} = Object.prototype;
-const modProto: {require: NodeRequire} = hasOwnProperty.call(
-  mod.prototype,
-  'require',
-)
-  ? mod.prototype
-  : Object.getPrototypeOf(mod.prototype);
+const isDirectMod = hasOwnProperty.call(rawMod.prototype, 'require');
+const mod: ModuleConstructor = isDirectMod
+  ? rawMod
+  : (Object.getPrototypeOf(rawMod) as ModuleConstructor);
+const modProto: {require: NodeRequire} = isDirectMod
+  ? rawMod.prototype
+  : Object.getPrototypeOf(rawMod.prototype);
 const isObj = (o: unknown): o is Record<PropertyKey, unknown> =>
   Boolean(o && (typeof o === 'object' || typeof o === 'function'));
 const hasOwn = (o: unknown, k: string): boolean =>
@@ -209,7 +211,11 @@ export function createProxyquire(caller?: NodeModule | string): Proxyquire {
     };
     modProto.require = Object.assign(req, prev);
     try {
-      return prev.call(parent, request);
+      return typeof parent.require === 'function' && parent instanceof mod
+        ? prev.call(parent, request)
+        : mod.createRequire
+          ? mod.createRequire(parent.filename)(request)
+          : prev.call(parent, request);
     } finally {
       modProto.require = prev;
       for (const id of global ? Object.keys(cache) : [sut]) {
