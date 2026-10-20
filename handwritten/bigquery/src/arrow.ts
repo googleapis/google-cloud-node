@@ -36,10 +36,22 @@ interface ReadRowsStream extends NodeJS.EventEmitter {
   resume(): void;
 }
 
+/**
+ * The part of `@google-cloud/bigquery-storage`'s `BigQueryReadClient` that
+ * {@link BigQuery#createQueryArrowStream} uses. Exported for tests.
+ *
+ * @private
+ */
 export interface BigQueryReadClient {
   readRows(request: {readStream: string; offset?: number}): ReadRowsStream;
 }
 
+/**
+ * The part of the `@google-cloud/bigquery-storage` module that
+ * {@link BigQuery#createQueryArrowStream} uses. Exported for tests.
+ *
+ * @private
+ */
 export interface StorageModule {
   BigQueryReadClient: new (
     options?: Record<string, unknown>,
