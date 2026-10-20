@@ -57,6 +57,9 @@ export interface CreateReadSessionRequest {
   readSession: {
     table: string;
     dataFormat: 'ARROW';
+    readOptions?: {
+      arrowSerializationOptions?: ArrowSerializationOptions;
+    };
   };
   maxStreamCount: number;
 }
@@ -71,7 +74,11 @@ export interface BigQueryReadClient {
   createReadSession(
     request: CreateReadSessionRequest,
   ): Promise<[IReadSession, ...unknown[]]>;
-  readRows(request: {readStream: string; offset?: number}): ReadRowsStream;
+  readRows(request: {
+    readStream: string;
+    offset?: number;
+    arrowSerializationOptions?: ArrowSerializationOptions;
+  }): ReadRowsStream;
 }
 
 /**
@@ -115,7 +122,21 @@ export type ArrowQuery = Query & {
    * the job completes.
    */
   timeoutMs?: number;
+  /**
+   * Arrow serialization options sent on `jobs.query`, `ReadRows`, and
+   * `CreateReadSession`, such as `picosTimestampPrecision`. Buffer compression
+   * isn't supported.
+   */
+  arrowSerializationOptions?: ArrowSerializationOptions;
 };
+
+/**
+ * [Beta] Arrow serialization options for
+ * {@link BigQuery#createQueryArrowStream}.
+ *
+ * @beta
+ */
+export type ArrowSerializationOptions = bigquery.IArrowSerializationOptions;
 
 /**
  * State shared by the helpers that stream rows for one
@@ -126,6 +147,7 @@ interface ArrowStreamContext {
   arrow: ArrowModule;
   storage: StorageModule;
   stream: ArrowRecordBatchStream;
+  arrowSerializationOptions: ArrowSerializationOptions;
   /** Called when the consumer wants more batches. */
   onRead?: () => void;
 }
@@ -139,6 +161,35 @@ const GRPC_STATUS_UNAVAILABLE = 14;
 // How many times in a row a failed ReadRows call is reopened before the
 // error is passed to the caller. Any rows read reset the count.
 const MAX_STREAM_RETRIES = 3;
+
+/**
+ * Validates and normalizes `arrowSerializationOptions`, rejecting compressed
+ * Arrow buffers (`apache-arrow` doesn't bundle LZ4 or ZSTD codecs) and
+ * defaulting `picosTimestampPrecision` to `'TIMESTAMP_PRECISION_MICROS'`.
+ * Other options aren't forwarded, so every batch stays decodable.
+ *
+ * @private
+ */
+function resolveArrowSerializationOptions(
+  options?: ArrowSerializationOptions,
+): ArrowSerializationOptions {
+  if (
+    options?.bufferCompression &&
+    options.bufferCompression !== 'COMPRESSION_UNSPECIFIED'
+  ) {
+    throw new Error(
+      `Unsupported arrowSerializationOptions.bufferCompression "${options.bufferCompression}": ` +
+        'apache-arrow does not bundle LZ4 or ZSTD decompression codecs.',
+    );
+  }
+  const precision = options?.picosTimestampPrecision;
+  return {
+    picosTimestampPrecision:
+      precision && precision !== 'PICOS_TIMESTAMP_PRECISION_UNSPECIFIED'
+        ? precision
+        : 'TIMESTAMP_PRECISION_MICROS',
+  };
+}
 
 /**
  * Returns the first project ID from `candidates`, falling back to the
@@ -363,6 +414,7 @@ async function streamDefaultJobStream(
     readStream,
     offset,
     initialSchema,
+    arrowSerializationOptions: ctx.arrowSerializationOptions,
   });
 
   // When reading from offset = 0 (e.g., after waiting for an unfinished job)
@@ -399,6 +451,7 @@ async function createArrowReadSession(
     readSession: {
       table: `projects/${table.projectId}/datasets/${table.datasetId}/tables/${table.tableId}`,
       dataFormat: 'ARROW',
+      readOptions: {arrowSerializationOptions: ctx.arrowSerializationOptions},
     },
     // One stream keeps rows in the query's order (e.g., ORDER BY).
     maxStreamCount: 1,
@@ -488,9 +541,11 @@ async function streamReadRows(
     readStream: string;
     offset: number;
     initialSchema?: Uint8Array | string;
+    // Only the default job stream accepts these on ReadRows.
+    arrowSerializationOptions?: ArrowSerializationOptions;
   },
 ): Promise<{emittedBatch: boolean; serializedSchema?: Uint8Array}> {
-  const {readStream, offset, initialSchema} = options;
+  const {offset, initialSchema, ...request} = options;
   const progress: ReadRowsProgress = {
     offset,
     emittedBatch: false,
@@ -501,7 +556,7 @@ async function streamReadRows(
   while (!ctx.stream.destroyed) {
     const attemptOffset = progress.offset;
     try {
-      await readRowsOnce(ctx, readStream, progress);
+      await readRowsOnce(ctx, request, progress);
       break;
     } catch (err) {
       if (progress.offset > attemptOffset) {
@@ -533,14 +588,17 @@ async function streamReadRows(
  */
 async function readRowsOnce(
   ctx: ArrowStreamContext,
-  readStream: string,
+  request: {
+    readStream: string;
+    arrowSerializationOptions?: ArrowSerializationOptions;
+  },
   progress: ReadRowsProgress,
 ): Promise<void> {
   const {bq, arrow, storage, stream} = ctx;
 
   return new Promise((resolve, reject) => {
     const grpcStream = getStorageReadClient(bq, storage).readRows({
-      readStream,
+      ...request,
       offset: progress.offset,
     });
 
@@ -660,6 +718,7 @@ async function streamDestinationTable(
     return;
   }
 
+  // Session streams use the options passed to CreateReadSession.
   const {emittedBatch, serializedSchema} = await streamReadRows(ctx, {
     readStream,
     offset: 0,
@@ -822,8 +881,12 @@ export function createQueryArrowStream_(
       throw new Error('A SQL query string is required.');
     }
 
-    const queryObj: ArrowQuery =
-      typeof query === 'string' ? {query} : {...query};
+    // Keep arrowSerializationOptions out of queryObj so it never reaches the
+    // jobs.insert configuration; it's sent explicitly where supported.
+    const {
+      arrowSerializationOptions: requestedSerializationOptions,
+      ...queryObj
+    }: ArrowQuery = typeof query === 'string' ? {query} : query;
 
     if (queryObj.writeDisposition === 'WRITE_APPEND') {
       throw new Error(
@@ -832,7 +895,15 @@ export function createQueryArrowStream_(
       );
     }
 
-    const ctx: ArrowStreamContext = {bq, arrow, storage, stream};
+    const ctx: ArrowStreamContext = {
+      bq,
+      arrow,
+      storage,
+      stream,
+      arrowSerializationOptions: resolveArrowSerializationOptions(
+        requestedSerializationOptions,
+      ),
+    };
     readCtx = ctx;
 
     // Throws for an invalid request, for example invalid query parameters.
@@ -852,6 +923,7 @@ export function createQueryArrowStream_(
       queryReq.jobCreationMode = 'JOB_CREATION_OPTIONAL';
     }
     queryReq.queryResultsFormat = 'ARROW';
+    queryReq.arrowSerializationOptions = ctx.arrowSerializationOptions;
 
     const [job, res] = (await bq.runJobsQuery(queryReq)) as JobsQueryResponse;
     // The consumer may have destroyed the stream while jobs.query ran.
