@@ -110,9 +110,9 @@ export type ArrowRecordBatchStream = ResourceStream<RecordBatch> & {
  */
 export type ArrowQuery = Query & {
   /**
-   * How long to wait for `jobs.query` to complete, in milliseconds. If the
-   * query doesn't complete in time, the stream fails instead of waiting for
-   * the job.
+   * How long to wait for the query to complete, in milliseconds. If it doesn't
+   * complete in time, the stream fails. If unset or 0, the stream waits until
+   * the job completes.
    */
   timeoutMs?: number;
 };
@@ -520,13 +520,16 @@ function streamReadRows(
 /**
  * Waits for an unfinished BigQuery job to complete using `job.getQueryResults`
  * without fetching any `STRUCT_ENCODING` rows (`maxResults: 0`). Returns early
- * if the consumer destroys `stream`.
+ * if the consumer destroys `stream`. If `timeoutMs` is set, fails like
+ * {@link BigQuery#query} when the job doesn't complete in time instead of
+ * polling again.
  *
  * @private
  */
 async function waitForJobCompletion(
   job: Job,
   stream: ArrowRecordBatchStream,
+  timeoutMs?: number,
 ): Promise<void> {
   while (!stream.destroyed) {
     // Set maxResults: 0 so jobs.getQueryResults blocks up to the server's
@@ -535,11 +538,70 @@ async function waitForJobCompletion(
     const [, , res] = await job.getQueryResults({
       autoPaginate: false,
       maxResults: 0,
+      // 0 means no limit, as in BigQuery#query. Sending 0 would make
+      // jobs.getQueryResults return at once and this loop spin.
+      ...(timeoutMs && {timeoutMs}),
     });
     if (res?.jobComplete !== false) {
       return;
     }
   }
+}
+
+/**
+ * Waits for `job` to finish, then streams all of its rows from the default job
+ * stream. An unfinished jobs.query and jobs.insert return no rows or schema,
+ * so this reads every row from offset 0 and passes the job to look up the
+ * schema of an empty result.
+ *
+ * @private
+ */
+async function streamJobWhenComplete(
+  ctx: ArrowStreamContext,
+  job: Job,
+  jobRef: bigquery.IJobReference | undefined,
+  timeoutMs?: number,
+): Promise<void> {
+  await waitForJobCompletion(job, ctx.stream, timeoutMs);
+  if (ctx.stream.destroyed) {
+    return;
+  }
+  await streamDefaultJobStream(ctx, jobRef, 0, undefined, job);
+}
+
+/**
+ * Runs `queryObj` with `jobs.insert` and streams its results. A dry run emits
+ * one 0-row, 0-column `RecordBatch` without waiting or streaming.
+ *
+ * @private
+ */
+async function streamQueryJob(
+  ctx: ArrowStreamContext,
+  queryObj: ArrowQuery,
+): Promise<void> {
+  const {bq, arrow, stream} = ctx;
+  // timeoutMs only bounds the wait below, and jobCreationMode only applies to
+  // jobs.query, so keep both out of the job configuration.
+  const {timeoutMs, ...jobQuery} = queryObj;
+  delete jobQuery.jobCreationMode;
+  // Throws for an invalid request, for example a destination that isn't a
+  // Table, or invalid parameters.
+  const [job, resp] = await bq.createQueryJob(jobQuery);
+  if (!job) {
+    throw new Error('jobs.insert returned no job.');
+  }
+
+  stream.jobReference = resp?.jobReference;
+  // For a dry run, job.metadata holds the query's statistics.
+  stream.emit('job', job);
+
+  // A dry run validates the query without running it.
+  if (queryObj.dryRun) {
+    pushBatches(stream, decodeArrowPayload(arrow));
+    return;
+  }
+
+  await streamJobWhenComplete(ctx, job, resp?.jobReference, timeoutMs);
 }
 
 /**
@@ -594,8 +656,11 @@ export function createQueryArrowStream_(
       timeoutMs: queryObj.timeoutMs,
     });
     if (!queryReq) {
-      // TODO: Route queries that cannot use jobs.query through jobs.insert (createQueryJob).
-      throw new Error('Query configuration cannot be executed via jobs.query.');
+      // buildQueryRequest_ returns undefined when the query sets an option
+      // that only jobs.insert accepts (e.g., jobId, dryRun, or jobTimeoutMs),
+      // or when FAST_QUERY_PATH=DISABLED.
+      await streamQueryJob(ctx, queryObj);
+      return;
     }
 
     // Default to JOB_CREATION_OPTIONAL unless overridden on the query or client.
@@ -630,14 +695,7 @@ export function createQueryArrowStream_(
           'Cannot wait for an incomplete query without a jobReference.',
         );
       }
-      await waitForJobCompletion(job, stream);
-      if (stream.destroyed) {
-        return;
-      }
-      // An unfinished jobs.query returns no rows or schema, so read every row
-      // from offset 0 and pass the job to look up the schema of an empty
-      // result.
-      await streamDefaultJobStream(ctx, res.jobReference, 0, undefined, job);
+      await streamJobWhenComplete(ctx, job, res.jobReference);
       return;
     }
 
