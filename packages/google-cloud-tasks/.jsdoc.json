@@ -1,0 +1,35 @@
+{
+  "opts": {
+    "readme": "./README.md",
+    "package": "./package.json",
+    "template": "./node_modules/jsdoc-fresh",
+    "recurse": true,
+    "verbose": true,
+    "destination": "./docs/"
+  },
+  "plugins": [
+    "plugins/markdown",
+    "jsdoc-region-tag"
+  ],
+  "source": {
+    "excludePattern": "(^|\\/|\\\\)[._]",
+    "include": [
+      "build/esm/src",
+      "protos"
+    ],
+    "includePattern": "\\.js$"
+  },
+  "templates": {
+    "copyright": "Copyright 2026 Google LLC",
+    "includeDate": false,
+    "sourceFiles": false,
+    "systemName": "@google-cloud/tasks",
+    "theme": "lumen",
+    "default": {
+      "outputSourceFiles": false
+    }
+  },
+  "markdown": {
+    "idInHeadings": true
+  }
+}
