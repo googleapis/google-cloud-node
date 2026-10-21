@@ -15,11 +15,15 @@
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
 import {EventEmitter} from 'events';
-import * as restify from 'restify';
 
 import {Configuration} from '../../../src/configuration';
 import {RequestHandler} from '../../../src/google-apis/auth-client';
-import {handlerSetup as restifyInterface} from '../../../src/interfaces/restify';
+import {
+  handlerSetup as restifyInterface,
+  Request,
+  Response,
+  Server,
+} from '../../../src/interfaces/restify';
 
 // node v0.12 compatibility
 if (!EventEmitter.prototype.listenerCount) {
@@ -45,7 +49,7 @@ describe('restifyInterface', () => {
       // return the bound function which the user will actually interface with
       const errorHandlerInstance = restifyInterface(null!, null!);
       // execute the handler the user will use with the stubbed server instance
-      errorHandlerInstance(ee as restify.Server);
+      errorHandlerInstance(ee as Server);
       assert.strictEqual(
         ee.listenerCount(UNCAUGHT_EVENT),
         1,
@@ -56,7 +60,7 @@ describe('restifyInterface', () => {
   describe('Request handler lifecycle events', () => {
     const ee = new EventEmitter();
     const errorHandlerInstance = restifyInterface(null!, null!);
-    const requestHandlerInstance = errorHandlerInstance(ee as restify.Server);
+    const requestHandlerInstance = errorHandlerInstance(ee as Server);
     describe('default path on invalid input', () => {
       it('Should not throw', () => {
         assert.doesNotThrow(() => {
@@ -74,11 +78,7 @@ describe('restifyInterface', () => {
       });
       it('Should not throw while handling the req/res objects', () => {
         assert.doesNotThrow(() => {
-          requestHandlerInstance(
-            req as restify.Request,
-            res as restify.Response,
-            noOp,
-          );
+          requestHandlerInstance(req as Request, res as Response, noOp);
         });
       });
       it('Should have 1 listener', () => {
@@ -116,7 +116,7 @@ describe('restifyInterface', () => {
         client as {} as RequestHandler,
         config,
       );
-      const requestHandlerInstance = errorHandlerInstance(ee as restify.Server);
+      const requestHandlerInstance = errorHandlerInstance(ee as Server);
       const req = new EventEmitter();
       const res = new EventEmitter();
       (res as {} as {statusCode: number}).statusCode = 500;
@@ -125,11 +125,7 @@ describe('restifyInterface', () => {
       });
       it('Should not throw on instantiation', () => {
         assert.doesNotThrow(() => {
-          requestHandlerInstance(
-            req as restify.Request,
-            res as restify.Response,
-            noOp,
-          );
+          requestHandlerInstance(req as Request, res as Response, noOp);
         });
       });
       it('Should have 1 listener on the finish event', () => {
