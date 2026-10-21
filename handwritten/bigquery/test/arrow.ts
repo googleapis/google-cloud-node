@@ -1820,6 +1820,43 @@ describe('Arrow Support', () => {
       };
     }
 
+    it('should emit the read session schema without calling ReadRows when maxResults is 0', async () => {
+      const {destination} = stubDestinationJob('dest_tbl', 'dest-job-max-0');
+      let readRowsCalled = false;
+      stubStorageReadClient(bq, {
+        createReadSession: async () => [
+          {
+            arrowSchema: SAMPLE_READ_ROWS_RESPONSE.arrowSchema,
+            streams: [
+              {
+                name: 'projects/test-project/locations/US/sessions/sess-0/streams/stream-0',
+              },
+            ],
+          },
+        ],
+        readRows: () => {
+          readRowsCalled = true;
+          return fakeReadRowsStream();
+        },
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream({
+          query: 'SELECT id, name FROM tbl',
+          destination,
+          maxResults: 0,
+        })
+        .toArray();
+
+      assert.strictEqual(readRowsCalled, false);
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 0);
+      assert.deepStrictEqual(
+        batches[0].schema.fields.map(f => f.name),
+        ['id', 'name'],
+      );
+    });
+
     it('should preserve the Table instance through createQueryJob, call createReadSession with maxStreamCount = 1 and dataFormat = ARROW, and stream from streams[0].name', async () => {
       const capturedSessionReqs: CreateReadSessionRequest[] = [];
       const capturedReadRowsReqs: Array<{
@@ -2393,6 +2430,301 @@ describe('Arrow Support', () => {
 
       // Verify no BigQuery API call was made when bufferCompression is unsupported.
       assert.strictEqual(getCapturedReq(), undefined);
+    });
+  });
+
+  describe('BigQuery#createQueryArrowStream (maxResults)', () => {
+    const jobReference = {
+      projectId: 'test-project',
+      jobId: 'job-max-1',
+      location: 'US',
+    };
+    let bq: BigQuery;
+
+    beforeEach(() => {
+      bq = new BigQuery({projectId: 'test-project'});
+    });
+
+    // Stubs createReadSession and readRows, failing the test if ReadRows is
+    // opened.
+    const stubNoReadRows = (
+      session: {arrowSchema?: {serializedSchema?: Uint8Array}} = {},
+    ) =>
+      stubStorageReadClient(bq, {
+        createReadSession: async () => [session],
+        readRows: () => assert.fail('ReadRows should not be opened'),
+      });
+
+    // Stubs jobs.insert (createJob) to create a finished job with `metadata`.
+    const stubFinishedInsertJob = (
+      jobId: string,
+      metadata?: bigquery.IJob,
+    ): (() => JobOptions | undefined) => {
+      let capturedJobOpts: JobOptions | undefined;
+      const fakeJob = bq.job(jobId, {location: 'US'});
+      fakeJob.metadata = {jobReference: {...jobReference, jobId}};
+      stubJobGetQueryResults(fakeJob, async () => [
+        [],
+        null,
+        {jobComplete: true},
+      ]);
+      if (metadata) {
+        stubJobGetMetadata(fakeJob, {metadata});
+      }
+      stubCreateJob(bq, (opts, cb) => {
+        capturedJobOpts = opts;
+        process.nextTick(() => cb(null, fakeJob, fakeJob.metadata));
+      });
+      return () => capturedJobOpts;
+    };
+
+    it('should slice the inline RecordBatch and skip opening ReadRows when maxResults is reached within the first page', async () => {
+      const page1 = serializeArrowTable(
+        makeSampleTable([1, 2, 3], ['alice', 'bob', 'carol']),
+      );
+      const getCapturedReq = stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference,
+          pageRowCount: '3',
+          totalRows: '10',
+          arrowSchema: {serializedSchema: page1.serializedSchema},
+          arrowRecordBatch: {
+            serializedRecordBatch: page1.serializedRecordBatch,
+          },
+        },
+      });
+      stubNoReadRows();
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream({
+          query: 'SELECT id, name FROM tbl',
+          maxResults: 2,
+        })
+        .toArray();
+
+      // Verify maxResults was forwarded to jobs.query and the 3-row inline
+      // batch was sliced to 2 rows.
+      assert.strictEqual(getCapturedReq()?.maxResults, 2);
+      const table = new arrow.Table(batches);
+      assert.deepStrictEqual(
+        Array.from(table.getChild('id')!.toArray()),
+        [1, 2],
+      );
+      assert.deepStrictEqual(table.getChild('name')?.toJSON(), [
+        'alice',
+        'bob',
+      ]);
+    });
+
+    it('should count rows across the inline page and ReadRows stream, slice the batch that reaches maxResults, and cancel the active ReadRows stream', async () => {
+      const page1 = serializeArrowTable(
+        makeSampleTable([1, 2], ['alice', 'bob']),
+      );
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference,
+          pageRowCount: '2',
+          totalRows: '9',
+          arrowSchema: {serializedSchema: page1.serializedSchema},
+          arrowRecordBatch: {
+            serializedRecordBatch: page1.serializedRecordBatch,
+          },
+        },
+      });
+
+      let cancelled = false;
+      const requests: ReadRowsRequest[] = [];
+      let grpcStream: EventEmitter | undefined;
+      stubStorageReadClient(bq, {
+        readRows: req => {
+          requests.push(req);
+          grpcStream = Object.assign(
+            fakeReadRowsStream(
+              [
+                makeSampleTable([3, 4], ['carol', 'dave']),
+                makeSampleTable([5, 6, 7], ['erin', 'frank', 'grace']),
+                makeSampleTable([8, 9], ['heidi', 'ivan']),
+              ].map(t => toReadRowsResponse(serializeArrowTable(t))),
+            ),
+            {
+              cancel: () => {
+                cancelled = true;
+              },
+            },
+          );
+          return grpcStream;
+        },
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream({
+          query: 'SELECT id, name FROM tbl',
+          maxResults: 5,
+        })
+        .toArray();
+
+      // Verify 2 inline rows + 2 streamed rows + 1 sliced row = 5 rows, and
+      // ReadRows was cancelled with none of our listeners left on it.
+      assert.deepStrictEqual(
+        requests.map(req => req.offset),
+        [2],
+      );
+      const table = new arrow.Table(batches);
+      assert.deepStrictEqual(
+        Array.from(table.getChild('id')!.toArray()),
+        [1, 2, 3, 4, 5],
+      );
+      assert.strictEqual(cancelled, true);
+      assertReadRowsListenersRemoved(grpcStream!);
+    });
+
+    it('should emit a 0-row RecordBatch preserving schema without calling ReadRows when maxResults is 0', async () => {
+      const getCapturedReq = stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference,
+          totalRows: '10',
+          pageToken: 'page-2',
+          arrowSchema: {serializedSchema: SAMPLE_PAYLOAD.serializedSchema},
+        },
+      });
+      stubNoReadRows();
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream({
+          query: 'SELECT id, name FROM tbl',
+          maxResults: 0,
+        })
+        .toArray();
+
+      assert.strictEqual(getCapturedReq()?.maxResults, 0);
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 0);
+      assert.deepStrictEqual(
+        batches[0].schema.fields.map(f => f.name),
+        ['id', 'name'],
+      );
+    });
+
+    it('should read the schema from the job when maxResults is 0 and jobs.query returns no arrowSchema', async () => {
+      const fakeJob = bq.job(jobReference.jobId, {location: 'US'});
+      stubJobGetMetadata(fakeJob, {
+        metadata: {
+          jobReference,
+          configuration: {
+            query: {
+              destinationTable: {
+                projectId: 'test-project',
+                datasetId: '_anon',
+                tableId: 'anon_tbl',
+              },
+            },
+          },
+        },
+      });
+      stubJobsQuery(bq, {
+        job: fakeJob,
+        res: {
+          jobComplete: true,
+          jobReference,
+          totalRows: '10',
+          pageToken: 'p2',
+        },
+      });
+      stubNoReadRows({arrowSchema: SAMPLE_READ_ROWS_RESPONSE.arrowSchema});
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream({
+          query: 'SELECT id, name FROM tbl',
+          maxResults: 0,
+        })
+        .toArray();
+
+      // Verify the 0-row batch carries the schema of the job's result table.
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 0);
+      assert.deepStrictEqual(
+        batches[0].schema.fields.map(f => f.name),
+        ['id', 'name'],
+      );
+    });
+
+    it('should reject a maxResults that is not a non-negative integer before sending a query', async () => {
+      const getCapturedReq = stubJobsQuery(bq, {});
+      for (const maxResults of [NaN, -1, 1.5]) {
+        await assert.rejects(
+          bq.createQueryArrowStream({query: 'SELECT 1', maxResults}).toArray(),
+          /maxResults must be a non-negative integer/,
+        );
+      }
+      assert.strictEqual(getCapturedReq(), undefined);
+    });
+
+    it('should strip maxResults from jobs.insert configuration.query and enforce it on ReadRows', async () => {
+      const getCapturedJobOpts = stubFinishedInsertJob('job-insert-max');
+      stubStorageReadClient(bq, {
+        readRows: () => fakeReadRowsStream([SAMPLE_READ_ROWS_RESPONSE]),
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream({
+          query: 'SELECT id, name FROM tbl',
+          jobTimeoutMs: 5000,
+          maxResults: 1,
+        })
+        .toArray();
+
+      const queryConfig = getCapturedJobOpts()?.configuration?.query;
+      assert.ok(queryConfig);
+      assert.strictEqual('maxResults' in queryConfig, false);
+      assert.strictEqual(batches.length, 1);
+      assert.deepStrictEqual(
+        Array.from(batches[0].getChild('id')!.toArray()),
+        [1],
+      );
+    });
+
+    it('should read the schema from the destination table without calling ReadRows when maxResults is 0 on jobs.insert', async () => {
+      stubFinishedInsertJob('job-insert-max-zero', {
+        jobReference: {...jobReference, jobId: 'job-insert-max-zero'},
+        configuration: {
+          query: {
+            destinationTable: {
+              projectId: 'test-project',
+              datasetId: '_anon',
+              tableId: 'anon_tbl',
+            },
+          },
+        },
+      });
+      const sessionTables: string[] = [];
+      stubStorageReadClient(bq, {
+        createReadSession: async req => {
+          sessionTables.push(req.readSession.table);
+          return [{arrowSchema: SAMPLE_READ_ROWS_RESPONSE.arrowSchema}];
+        },
+        readRows: () => assert.fail('ReadRows should not be opened'),
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream({
+          query: 'SELECT id, name FROM tbl',
+          jobTimeoutMs: 5000,
+          maxResults: 0,
+        })
+        .toArray();
+
+      assert.deepStrictEqual(sessionTables, [
+        'projects/test-project/datasets/_anon/tables/anon_tbl',
+      ]);
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 0);
+      assert.deepStrictEqual(
+        batches[0].schema.fields.map(f => f.name),
+        ['id', 'name'],
+      );
     });
   });
 });

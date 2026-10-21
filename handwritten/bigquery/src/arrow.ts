@@ -150,6 +150,8 @@ interface ArrowStreamContext {
   arrowSerializationOptions: ArrowSerializationOptions;
   /** Called when the consumer wants more batches. */
   onRead?: () => void;
+  /** Rows left before the caller's `maxResults` limit; unset when unlimited. */
+  remainingRows?: number;
 }
 
 const readClients = new WeakMap<BigQuery, BigQueryReadClient>();
@@ -384,6 +386,32 @@ function pushBatches(
 }
 
 /**
+ * Cuts `batches` at the caller's `maxResults` limit, slicing the batch that
+ * crosses it and counting the kept rows against `ctx.remainingRows`. Always
+ * keeps the first batch, so a result cut to 0 rows still carries its schema.
+ *
+ * @private
+ */
+function limitRows(
+  ctx: ArrowStreamContext,
+  batches: RecordBatch[],
+): RecordBatch[] {
+  if (ctx.remainingRows === undefined) {
+    return batches;
+  }
+  const kept: RecordBatch[] = [];
+  for (const batch of batches) {
+    if (kept.length > 0 && ctx.remainingRows === 0) {
+      break;
+    }
+    const rows = Math.min(batch.numRows, ctx.remainingRows);
+    kept.push(rows < batch.numRows ? batch.slice(0, rows) : batch);
+    ctx.remainingRows -= rows;
+  }
+  return kept;
+}
+
+/**
  * Streams Arrow `RecordBatch`es from a job's sessionless default stream
  * (`projects/{projectId}/locations/{location}/jobs/{jobId}/streams/_default`)
  * starting at `offset`. Pass the finished `job` when reading from offset 0 so
@@ -553,7 +581,8 @@ async function streamReadRows(
   };
 
   let retries = 0;
-  while (!ctx.stream.destroyed) {
+  // Also stops at the caller's maxResults, without opening ReadRows for 0.
+  while (!ctx.stream.destroyed && ctx.remainingRows !== 0) {
     const attemptOffset = progress.offset;
     try {
       await readRowsOnce(ctx, request, progress);
@@ -654,10 +683,9 @@ async function readRowsOnce(
         return;
       }
       try {
-        const batches = decodeArrowPayload(
-          arrow,
-          progress.serializedSchema,
-          rawBatch,
+        const batches = limitRows(
+          ctx,
+          decodeArrowPayload(arrow, progress.serializedSchema, rawBatch),
         );
         for (const batch of batches) {
           if (stream.destroyed) {
@@ -669,6 +697,10 @@ async function readRowsOnce(
           if (!stream.push(batch)) {
             grpcStream.pause();
           }
+        }
+        // Reached maxResults, so the rest of the stream isn't needed.
+        if (ctx.remainingRows === 0) {
+          settle({cancel: true});
         }
       } catch (parseErr) {
         settle({cancel: true, err: parseErr as Error});
@@ -881,12 +913,22 @@ export function createQueryArrowStream_(
       throw new Error('A SQL query string is required.');
     }
 
-    // Keep arrowSerializationOptions out of queryObj so it never reaches the
-    // jobs.insert configuration; it's sent explicitly where supported.
+    // Keep arrowSerializationOptions and maxResults out of queryObj so they
+    // never reach the jobs.insert configuration; they're applied explicitly.
     const {
       arrowSerializationOptions: requestedSerializationOptions,
+      maxResults,
       ...queryObj
     }: ArrowQuery = typeof query === 'string' ? {query} : query;
+
+    // NaN would never reach the row limit, and a negative limit would run
+    // the whole query just to return no rows.
+    if (
+      maxResults !== undefined &&
+      (!Number.isInteger(maxResults) || maxResults < 0)
+    ) {
+      throw new Error('maxResults must be a non-negative integer.');
+    }
 
     if (queryObj.writeDisposition === 'WRITE_APPEND') {
       throw new Error(
@@ -903,6 +945,7 @@ export function createQueryArrowStream_(
       arrowSerializationOptions: resolveArrowSerializationOptions(
         requestedSerializationOptions,
       ),
+      remainingRows: maxResults,
     };
     readCtx = ctx;
 
@@ -924,6 +967,8 @@ export function createQueryArrowStream_(
     }
     queryReq.queryResultsFormat = 'ARROW';
     queryReq.arrowSerializationOptions = ctx.arrowSerializationOptions;
+    // Set directly: buildQueryRequest_ drops a maxResults of 0.
+    queryReq.maxResults = maxResults;
 
     const [job, res] = (await bq.runJobsQuery(queryReq)) as JobsQueryResponse;
     // The consumer may have destroyed the stream while jobs.query ran.
@@ -972,10 +1017,13 @@ export function createQueryArrowStream_(
     if (!hasRemainingRows || inlineRowsCount > 0n) {
       pushBatches(
         stream,
-        decodeArrowPayload(
-          arrow,
-          res?.arrowSchema?.serializedSchema,
-          res?.arrowRecordBatch?.serializedRecordBatch,
+        limitRows(
+          ctx,
+          decodeArrowPayload(
+            arrow,
+            res?.arrowSchema?.serializedSchema,
+            res?.arrowRecordBatch?.serializedRecordBatch,
+          ),
         ),
       );
     }
@@ -989,6 +1037,7 @@ export function createQueryArrowStream_(
       res?.jobReference,
       Number(inlineRowsCount),
       res?.arrowSchema?.serializedSchema,
+      job ?? undefined,
     );
   };
 
