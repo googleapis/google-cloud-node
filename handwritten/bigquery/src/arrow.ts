@@ -350,20 +350,29 @@ export function decodeArrowPayload(
   serializedSchema?: Uint8Array | string,
   serializedRecordBatch?: Uint8Array | string,
 ): RecordBatch[] {
-  if (!serializedSchema) {
+  const hasSchema =
+    serializedSchema !== undefined && serializedSchema.length > 0;
+  const hasBatch =
+    serializedRecordBatch !== undefined && serializedRecordBatch.length > 0;
+  if (!hasSchema) {
+    // Without a schema the batch can't be decoded; returning an empty batch
+    // would silently drop its rows.
+    if (hasBatch) {
+      throw new Error('Got an Arrow record batch before its schema.');
+    }
     return [new arrow.RecordBatch({})];
   }
   // BigQuery returns the Arrow IPC Schema message and RecordBatch message as
   // separate fields; the reader accepts them as consecutive chunks of one IPC
   // stream, which avoids copying them into a single buffer.
-  const chunks = serializedRecordBatch
+  const chunks = hasBatch
     ? [toUint8Array(serializedSchema), toUint8Array(serializedRecordBatch)]
     : [toUint8Array(serializedSchema)];
   const reader = arrow.RecordBatchReader.from(chunks);
   reader.open();
   // With no record batch, the reader yields its own 0-row placeholder batch,
   // which leaves nested Struct children empty and List children undefined.
-  return serializedRecordBatch
+  return hasBatch
     ? [...reader]
     : [createEmptyRecordBatch(arrow, reader.schema)];
 }

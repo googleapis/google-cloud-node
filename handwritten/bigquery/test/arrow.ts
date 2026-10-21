@@ -449,6 +449,46 @@ describe('Arrow Support', () => {
       assert.strictEqual(batches[0].numRows, 2);
     });
 
+    it('should fail instead of dropping rows when jobs.query returns a record batch without a schema', async () => {
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          totalRows: '2',
+          pageRowCount: '2',
+          arrowRecordBatch: {
+            serializedRecordBatch: SAMPLE_PAYLOAD.serializedRecordBatch,
+          },
+        },
+      });
+
+      // Verify the batch isn't silently replaced with an empty RecordBatch.
+      await assert.rejects(
+        bq.createQueryArrowStream('SELECT 1').toArray(),
+        /Got an Arrow record batch before its schema\./,
+      );
+    });
+
+    it('should treat an empty record batch without a schema like a missing one', async () => {
+      stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          totalRows: '0',
+          arrowRecordBatch: {
+            // An empty Uint8Array is truthy but carries no rows.
+            serializedRecordBatch: new Uint8Array(0) as unknown as string,
+          },
+        },
+      });
+
+      // Verify one 0-row, 0-column RecordBatch is emitted instead of an error.
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream('SELECT 1')
+        .toArray();
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 0);
+      assert.strictEqual(batches[0].numCols, 0);
+    });
+
     it('should emit a 0-row RecordBatch preserving the schema when arrowSchema is present without arrowRecordBatch', async () => {
       // Include nested Struct and List fields to verify 0-row buffer initialization.
       const schema = new arrow.Schema([
