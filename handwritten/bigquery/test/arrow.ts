@@ -1933,5 +1933,50 @@ describe('Arrow Support', () => {
         /bigquery\.readsessions\.create denied/,
       );
     });
+
+    it('should fail with a clear error instead of creating a read session for projects/undefined', async () => {
+      // Neither the job nor the client has a project ID.
+      bq.projectId = '{{projectId}}';
+      const fakeJob = bq.job('dest-no-project', {location: 'US'});
+      stubJobGetQueryResults(fakeJob, async () => [
+        [],
+        null,
+        {jobComplete: true},
+      ]);
+      stubCreateQueryJob(bq, async () => [
+        fakeJob,
+        {
+          jobReference: {jobId: 'dest-no-project', location: 'US'},
+          configuration: {
+            query: {
+              destinationTable: {
+                projectId: 'other-project',
+                datasetId: 'dest_ds',
+                tableId: 'tbl',
+              },
+            },
+          },
+        },
+      ]);
+      let readSessions = 0;
+      stubStorageReadClient(bq, {
+        createReadSession: async () => {
+          readSessions++;
+          return [{}];
+        },
+        readRows: () => new EventEmitter(),
+      });
+
+      await assert.rejects(
+        bq
+          .createQueryArrowStream({
+            query: 'SELECT 1',
+            destination: bq.dataset('dest_ds').table('tbl'),
+          })
+          .toArray(),
+        /Cannot create an Arrow read session without a project ID\./,
+      );
+      assert.strictEqual(readSessions, 0);
+    });
   });
 });

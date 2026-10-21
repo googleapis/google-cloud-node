@@ -378,6 +378,11 @@ async function createArrowReadSession(
   parentProjectId: string | undefined,
   table: bigquery.ITableReference,
 ): Promise<IReadSession | undefined> {
+  if (!parentProjectId) {
+    throw new Error(
+      'Cannot create an Arrow read session without a project ID.',
+    );
+  }
   const [session] = await getStorageReadClient(
     ctx.bq,
     ctx.storage,
