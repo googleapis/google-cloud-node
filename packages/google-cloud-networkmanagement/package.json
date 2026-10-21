@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/network-management",
-  "version": "6.1.1",
+  "version": "6.2.0",
   "description": "networkmanagement client for Node.js",
   "repository": {
     "type": "git",

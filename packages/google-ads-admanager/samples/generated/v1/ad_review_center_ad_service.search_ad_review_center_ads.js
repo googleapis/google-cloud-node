@@ -30,13 +30,15 @@ function main(parent) {
    */
   /**
    *  Optional. Only return ads with the given status.
+   *  Use this filter for web properties where Manual Creative Review
+   *  (MCR) (https://support.google.com/admanager/answer/2913553) is not
+   *  enabled.
    */
   // const status = {}
   /**
-   *  Optional. Only return ads with the given manual review status. Only
-   *  available for networks with Manual Creative Review enabled. For more
-   *  information, see
-   *  https://support.google.com/admanager/answer/2586531#manual-creative-review.
+   *  Optional. Only return ads with the given manual review status.
+   *  Use this filter for web properties where Manual Creative Review
+   *  (MCR) (https://support.google.com/admanager/answer/2913553) is enabled.
    */
   // const manualReviewStatus = {}
   /**
@@ -70,9 +72,8 @@ function main(parent) {
   // const adReviewCenterAdId = ['abc','def']
   /**
    *  Optional. If provided, only return ads that served within the given date
-   *  range (inclusive). The  date range must be within the last 30 days. If not
-   *  provided, the date range will be the last 30 days. This filter does not
-   *  apply to the PENDING manual review status.
+   *  range (inclusive). The date range must be within the last 30 days. If not
+   *  provided, the date range will be the last 30 days.
    */
   // const dateTimeRange = {}
   /**
@@ -89,6 +90,53 @@ function main(parent) {
    *  buyer account IDs can be found using the `ProgrammaticBuyerService`.
    */
   // const buyerAccountId = [1,2,3,4]
+  /**
+   *  Optional. If provided, only return ads with the given ad response IDs.
+   *  This filter is exclusive and cannot be combined with any other filters.
+   *  Maximum of 10 IDs can be specified.
+   */
+  // const adResponseId = ['abc','def']
+  /**
+   *  Optional. If provided, restrict the search to creatives with the given
+   *  advertiser names.
+   */
+  // const advertiserDisplayNames = ['abc','def']
+  /**
+   *  Optional. If provided, restrict the search to creatives serving in the
+   *  given language codes.
+   */
+  // const languageCodes = ['abc','def']
+  /**
+   *  Optional. If provided, restrict the search to creatives serving in the
+   *  given region codes.
+   */
+  // const regionCodes = ['abc','def']
+  /**
+   *  Optional. If provided, restrict the search to creatives with the given ad
+   *  types.
+   */
+  // const adTypes = [1,2,3,4]
+  /**
+   *  Optional. If provided, restrict the search to creatives promoting the given
+   *  app.
+   */
+  // const advertiserApps = ['abc','def']
+  /**
+   *  Optional. If provided, restrict the search to creatives belonging to the
+   *  given publisher domain.
+   */
+  // const publisherDomains = ['abc','def']
+  /**
+   *  Optional. If provided, restrict the search to creatives which appeared for
+   *  the first time within the past X days. Must be within the last 30 days (1
+   *  to 30, inclusive).
+   */
+  // const newInLastDays = 1234
+  /**
+   *  Optional. If provided, restrict the search to creatives associated with the
+   *  given custom label IDs.
+   */
+  // const labelIds = ['abc','def']
 
   // Imports the Admanager library
   const {AdReviewCenterAdServiceClient} = require('@google-ads/admanager').v1;

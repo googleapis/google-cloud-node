@@ -15,6 +15,21 @@
                 "getCluster"
               ]
             },
+            "GetAclPolicy": {
+              "methods": [
+                "getAclPolicy"
+              ]
+            },
+            "GetAclPolicyRevision": {
+              "methods": [
+                "getAclPolicyRevision"
+              ]
+            },
+            "CreateAclPolicy": {
+              "methods": [
+                "createAclPolicy"
+              ]
+            },
             "GetClusterCertificateAuthority": {
               "methods": [
                 "getClusterCertificateAuthority"
@@ -35,14 +50,34 @@
                 "getBackup"
               ]
             },
+            "GetTokenAuthUser": {
+              "methods": [
+                "getTokenAuthUser"
+              ]
+            },
+            "GetAuthToken": {
+              "methods": [
+                "getAuthToken"
+              ]
+            },
             "UpdateCluster": {
               "methods": [
                 "updateCluster"
               ]
             },
+            "UpdateAclPolicy": {
+              "methods": [
+                "updateAclPolicy"
+              ]
+            },
             "DeleteCluster": {
               "methods": [
                 "deleteCluster"
+              ]
+            },
+            "DeleteAclPolicy": {
+              "methods": [
+                "deleteAclPolicy"
               ]
             },
             "CreateCluster": {
@@ -70,11 +105,45 @@
                 "backupCluster"
               ]
             },
+            "AddTokenAuthUser": {
+              "methods": [
+                "addTokenAuthUser"
+              ]
+            },
+            "DeleteTokenAuthUser": {
+              "methods": [
+                "deleteTokenAuthUser"
+              ]
+            },
+            "AddAuthToken": {
+              "methods": [
+                "addAuthToken"
+              ]
+            },
+            "DeleteAuthToken": {
+              "methods": [
+                "deleteAuthToken"
+              ]
+            },
             "ListClusters": {
               "methods": [
                 "listClusters",
                 "listClustersStream",
                 "listClustersAsync"
+              ]
+            },
+            "ListAclPolicies": {
+              "methods": [
+                "listAclPolicies",
+                "listAclPoliciesStream",
+                "listAclPoliciesAsync"
+              ]
+            },
+            "ListAclPolicyRevisions": {
+              "methods": [
+                "listAclPolicyRevisions",
+                "listAclPolicyRevisionsStream",
+                "listAclPolicyRevisionsAsync"
               ]
             },
             "ListBackupCollections": {
@@ -89,6 +158,20 @@
                 "listBackups",
                 "listBackupsStream",
                 "listBackupsAsync"
+              ]
+            },
+            "ListTokenAuthUsers": {
+              "methods": [
+                "listTokenAuthUsers",
+                "listTokenAuthUsersStream",
+                "listTokenAuthUsersAsync"
+              ]
+            },
+            "ListAuthTokens": {
+              "methods": [
+                "listAuthTokens",
+                "listAuthTokensStream",
+                "listAuthTokensAsync"
               ]
             }
           }
@@ -101,6 +184,21 @@
                 "getCluster"
               ]
             },
+            "GetAclPolicy": {
+              "methods": [
+                "getAclPolicy"
+              ]
+            },
+            "GetAclPolicyRevision": {
+              "methods": [
+                "getAclPolicyRevision"
+              ]
+            },
+            "CreateAclPolicy": {
+              "methods": [
+                "createAclPolicy"
+              ]
+            },
             "GetClusterCertificateAuthority": {
               "methods": [
                 "getClusterCertificateAuthority"
@@ -121,14 +219,34 @@
                 "getBackup"
               ]
             },
+            "GetTokenAuthUser": {
+              "methods": [
+                "getTokenAuthUser"
+              ]
+            },
+            "GetAuthToken": {
+              "methods": [
+                "getAuthToken"
+              ]
+            },
             "UpdateCluster": {
               "methods": [
                 "updateCluster"
               ]
             },
+            "UpdateAclPolicy": {
+              "methods": [
+                "updateAclPolicy"
+              ]
+            },
             "DeleteCluster": {
               "methods": [
                 "deleteCluster"
+              ]
+            },
+            "DeleteAclPolicy": {
+              "methods": [
+                "deleteAclPolicy"
               ]
             },
             "CreateCluster": {
@@ -156,11 +274,45 @@
                 "backupCluster"
               ]
             },
+            "AddTokenAuthUser": {
+              "methods": [
+                "addTokenAuthUser"
+              ]
+            },
+            "DeleteTokenAuthUser": {
+              "methods": [
+                "deleteTokenAuthUser"
+              ]
+            },
+            "AddAuthToken": {
+              "methods": [
+                "addAuthToken"
+              ]
+            },
+            "DeleteAuthToken": {
+              "methods": [
+                "deleteAuthToken"
+              ]
+            },
             "ListClusters": {
               "methods": [
                 "listClusters",
                 "listClustersStream",
                 "listClustersAsync"
+              ]
+            },
+            "ListAclPolicies": {
+              "methods": [
+                "listAclPolicies",
+                "listAclPoliciesStream",
+                "listAclPoliciesAsync"
+              ]
+            },
+            "ListAclPolicyRevisions": {
+              "methods": [
+                "listAclPolicyRevisions",
+                "listAclPolicyRevisionsStream",
+                "listAclPolicyRevisionsAsync"
               ]
             },
             "ListBackupCollections": {
@@ -175,6 +327,20 @@
                 "listBackups",
                 "listBackupsStream",
                 "listBackupsAsync"
+              ]
+            },
+            "ListTokenAuthUsers": {
+              "methods": [
+                "listTokenAuthUsers",
+                "listTokenAuthUsersStream",
+                "listTokenAuthUsersAsync"
+              ]
+            },
+            "ListAuthTokens": {
+              "methods": [
+                "listAuthTokens",
+                "listAuthTokensStream",
+                "listAuthTokensAsync"
               ]
             }
           }

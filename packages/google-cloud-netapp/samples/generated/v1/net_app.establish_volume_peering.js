@@ -44,7 +44,7 @@ function main(name, peerClusterName, peerSvmName, peerVolumeName) {
    */
   // const peerSvmName = 'abc123'
   /**
-   *  Optional. List of IPv4 ip addresses to be used for peering.
+   *  Optional. List of IPv4 IP addresses to be used for peering.
    */
   // const peerIpAddresses = ['abc','def']
   /**

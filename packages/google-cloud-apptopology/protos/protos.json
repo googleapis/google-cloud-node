@@ -511,6 +511,26 @@
                             }
                           ]
                         },
+                        "ExploreSchema": {
+                          "requestType": "ExploreSchemaRequest",
+                          "responseType": "ExploreSchemaResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/domains/*/schema}:explore",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/domains/*/schema}:explore",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
                         "GetDomain": {
                           "requestType": "GetDomainRequest",
                           "responseType": "Domain",
@@ -651,6 +671,75 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "apptopology.googleapis.com/Schema"
                           }
+                        }
+                      }
+                    },
+                    "ExploreSchemaRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "apptopology.googleapis.com/Schema"
+                          }
+                        },
+                        "startLabels": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "depth": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ExploreSchemaResponse": {
+                      "fields": {
+                        "nodeTypes": {
+                          "rule": "repeated",
+                          "type": "NodeType",
+                          "id": 1
+                        },
+                        "edgeTypes": {
+                          "rule": "repeated",
+                          "type": "EdgeType",
+                          "id": 2
+                        },
+                        "labelProperties": {
+                          "rule": "repeated",
+                          "type": "LabelProperties",
+                          "id": 3
+                        },
+                        "edgeRules": {
+                          "rule": "repeated",
+                          "type": "EdgeRule",
+                          "id": 4
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },

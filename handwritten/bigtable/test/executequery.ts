@@ -1100,8 +1100,6 @@ describe('Bigtable/ExecuteQueryStateMachine', () => {
               ],
               'unreachableToken',
             ]);
-          },
-          () => {
             assert.equal(
               resultStream._stateMachine.state,
               'DrainingBeforeResumeToken',

@@ -16,7 +16,7 @@
  */
 
 import assert from 'assert';
-import {describe, it, afterEach} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as http from 'http';
 import * as https from 'https';
 import * as sinon from 'sinon';
@@ -38,6 +38,19 @@ describe('agents', () => {
   const httpUri = 'http://example.com';
   const httpsUri = 'https://example.com';
   const sandbox = sinon.createSandbox();
+
+  beforeEach(() => {
+    for (const v of [
+      'http_proxy',
+      'https_proxy',
+      'HTTP_PROXY',
+      'HTTPS_PROXY',
+      'no_proxy',
+      'NO_PROXY',
+    ]) {
+      delete process.env[v];
+    }
+  });
 
   afterEach(() => {
     sandbox.restore();
