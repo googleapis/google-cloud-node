@@ -138,28 +138,6 @@ describe('Arrow Query Results', () => {
     assert.deepStrictEqual(rows, [{x: 2}]);
   });
 
-  it('should reject WRITE_APPEND before running the query and leave the destination table unchanged', async () => {
-    // Reading a WRITE_APPEND destination would also return the rows already
-    // in the table, so the stream rejects it before sending the query.
-    const tableRef = `\`${dataset.id}.append_target\``;
-    await bigquery.query(`CREATE TABLE ${tableRef} AS SELECT 1 AS x`);
-
-    await assert.rejects(
-      bigquery
-        .createQueryArrowStream({
-          query: 'SELECT 2 AS x',
-          destination: dataset.table('append_target'),
-          writeDisposition: 'WRITE_APPEND',
-        })
-        .toArray(),
-      /WRITE_APPEND is not supported with Arrow query results/,
-    );
-
-    // Verify the query never ran: the table still holds only its original row.
-    const [rows] = await bigquery.query(`SELECT x FROM ${tableRef}`);
-    assert.deepStrictEqual(rows, [{x: 1}]);
-  });
-
   it('should raise the same error as query() when a query fails during execution', async () => {
     const sql = 'SELECT 1 / 0';
     let structErr: (Error & {code?: number}) | undefined;
@@ -960,5 +938,42 @@ describe('Arrow Query Results', () => {
       })
       .toArray();
     assert.strictEqual(new arrow.Table(allBatches).numRows, totalRows);
+  });
+
+  it('should return existing and new rows for WRITE_APPEND and fail WRITE_EMPTY on a non-empty destination table', async () => {
+    const tableRef = `\`${dataset.id}.append_target\``;
+    const destTable = dataset.table('append_target');
+    await bigquery.query(`CREATE TABLE ${tableRef} AS SELECT 1 AS x`);
+
+    // 1. WRITE_APPEND adds the new row and, like query(), reads back the whole
+    // destination table, including the row that was already there.
+    const appendBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: 'SELECT 2 AS x',
+        destination: destTable,
+        writeDisposition: 'WRITE_APPEND',
+      })
+      .toArray();
+    const appendTable = new arrow.Table(appendBatches);
+    assert.deepStrictEqual(
+      Array.from(appendTable.getChild('x')!.toArray()).sort(),
+      [1n, 2n],
+    );
+
+    // 2. WRITE_EMPTY fails because the destination table already has rows.
+    await assert.rejects(
+      bigquery
+        .createQueryArrowStream({
+          query: 'SELECT 3 AS x',
+          destination: destTable,
+          writeDisposition: 'WRITE_EMPTY',
+        })
+        .toArray(),
+      /Already Exists/,
+    );
+
+    // Verify the failed WRITE_EMPTY job left the table unchanged.
+    const [rows] = await bigquery.query(`SELECT x FROM ${tableRef} ORDER BY x`);
+    assert.deepStrictEqual(rows, [{x: 1}, {x: 2}]);
   });
 });

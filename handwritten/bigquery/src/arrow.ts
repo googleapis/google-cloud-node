@@ -481,7 +481,8 @@ async function createArrowReadSession(
       dataFormat: 'ARROW',
       readOptions: {arrowSerializationOptions: ctx.arrowSerializationOptions},
     },
-    // One stream keeps rows in the query's order (e.g., ORDER BY).
+    // One stream keeps rows in the query's order (e.g., ORDER BY) for a table
+    // the query just wrote.
     maxStreamCount: 1,
   });
   return session ?? undefined;
@@ -928,13 +929,6 @@ export function createQueryArrowStream_(
       (!Number.isInteger(maxResults) || maxResults < 0)
     ) {
       throw new Error('maxResults must be a non-negative integer.');
-    }
-
-    if (queryObj.writeDisposition === 'WRITE_APPEND') {
-      throw new Error(
-        'WRITE_APPEND is not supported with Arrow query results because reading ' +
-          'the destination table via the Storage Read API would include pre-existing rows.',
-      );
     }
 
     const ctx: ArrowStreamContext = {

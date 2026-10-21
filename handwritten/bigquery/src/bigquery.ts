@@ -403,7 +403,9 @@ export class BigQuery extends Service {
    * `for await` does this for you.
    *
    * With an explicit `destination` table, the stream reads that whole table
-   * through a Storage Read API session once the query finishes.
+   * through a Storage Read API session once the query finishes. With
+   * `writeDisposition: 'WRITE_APPEND'`, that includes rows the table already
+   * had, as with {@link BigQuery#query}.
    *
    * @param {string|ArrowQuery} [options] A string SQL query or configuration
    *     object. See {@link BigQuery#query} for a complete list of options.

@@ -514,22 +514,6 @@ describe('Arrow Support', () => {
       assert.strictEqual(batches[0].numCols, 0);
     });
 
-    it('should fail before sending the query when writeDisposition is WRITE_APPEND', async () => {
-      const getCapturedReq = stubJobsQuery(bq, {});
-
-      // Verify WRITE_APPEND is rejected before executing the query on BigQuery.
-      await assert.rejects(
-        bq
-          .createQueryArrowStream({
-            query: 'SELECT 1',
-            writeDisposition: 'WRITE_APPEND',
-          })
-          .toArray(),
-        /WRITE_APPEND is not supported with Arrow query results/,
-      );
-      assert.strictEqual(getCapturedReq(), undefined);
-    });
-
     it('should fail when a SQL query string is not provided', async () => {
       // Verify missing query string emits an error on the stream.
       await assert.rejects(
@@ -1949,6 +1933,54 @@ describe('Arrow Support', () => {
           offset: 0,
         },
       ]);
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 2);
+    });
+
+    it('should send WRITE_APPEND through createQueryJob and read the whole destination table through a read session', async () => {
+      const {destination, getCapturedJobOpts} = stubDestinationJob(
+        'append_tbl',
+        'dest-append-1',
+      );
+      const sessionReqs: CreateReadSessionRequest[] = [];
+      stubStorageReadClient(bq, {
+        createReadSession: async req => {
+          sessionReqs.push(req);
+          return [
+            {
+              arrowSchema: SAMPLE_READ_ROWS_RESPONSE.arrowSchema,
+              streams: [
+                {
+                  name: 'projects/test-project/locations/US/sessions/sess-2/streams/stream-0',
+                },
+              ],
+            },
+          ];
+        },
+        readRows: () =>
+          fakeReadRowsStream([
+            {arrowRecordBatch: SAMPLE_READ_ROWS_RESPONSE.arrowRecordBatch},
+          ]),
+      });
+
+      const batches: arrow.RecordBatch[] = await bq
+        .createQueryArrowStream({
+          query: 'SELECT id, name FROM tbl',
+          destination,
+          writeDisposition: 'WRITE_APPEND',
+        })
+        .toArray();
+
+      // Verify WRITE_APPEND is sent to jobs.insert instead of being rejected.
+      const queryConfig = getCapturedJobOpts()?.configuration?.query;
+      assert.strictEqual(queryConfig?.writeDisposition, 'WRITE_APPEND');
+
+      // Verify the stream reads the destination table, which holds the
+      // existing rows plus the appended ones.
+      assert.deepStrictEqual(
+        sessionReqs.map(req => req.readSession.table),
+        ['projects/test-project/datasets/dest_ds/tables/append_tbl'],
+      );
       assert.strictEqual(batches.length, 1);
       assert.strictEqual(batches[0].numRows, 2);
     });
