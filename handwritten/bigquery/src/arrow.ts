@@ -17,6 +17,7 @@
 import {ResourceStream} from '@google-cloud/paginator';
 import type {RecordBatch, Schema} from 'apache-arrow';
 import type {BigQuery, JobsQueryResponse, Query} from './bigquery';
+import type {Job} from './job';
 import type bigquery from './types';
 
 type ArrowModule = typeof import('apache-arrow');
@@ -36,6 +37,30 @@ interface ReadRowsStream extends NodeJS.EventEmitter {
   resume(): void;
 }
 
+interface IReadSession {
+  arrowSchema?: {
+    serializedSchema?: Uint8Array | string | null;
+  } | null;
+  streams?: Array<{
+    name?: string | null;
+  }> | null;
+}
+
+/**
+ * The `CreateReadSession` request that {@link BigQuery#createQueryArrowStream}
+ * sends. Exported for tests.
+ *
+ * @private
+ */
+export interface CreateReadSessionRequest {
+  parent: string;
+  readSession: {
+    table: string;
+    dataFormat: 'ARROW';
+  };
+  maxStreamCount: number;
+}
+
 /**
  * The part of `@google-cloud/bigquery-storage`'s `BigQueryReadClient` that
  * {@link BigQuery#createQueryArrowStream} uses. Exported for tests.
@@ -43,6 +68,9 @@ interface ReadRowsStream extends NodeJS.EventEmitter {
  * @private
  */
 export interface BigQueryReadClient {
+  createReadSession(
+    request: CreateReadSessionRequest,
+  ): Promise<[IReadSession, ...unknown[]]>;
   readRows(request: {readStream: string; offset?: number}): ReadRowsStream;
 }
 
@@ -72,6 +100,21 @@ export type ArrowRecordBatchStream = ResourceStream<RecordBatch> & {
   queryId?: string;
   /** The job reference, when BigQuery creates a job for the query. */
   jobReference?: bigquery.IJobReference;
+};
+
+/**
+ * [Beta] Options for {@link BigQuery#createQueryArrowStream}: the
+ * {@link Query} options plus options that only apply to Arrow queries.
+ *
+ * @beta
+ */
+export type ArrowQuery = Query & {
+  /**
+   * How long to wait for `jobs.query` to complete, in milliseconds. If the
+   * query doesn't complete in time, the stream fails instead of waiting for
+   * the job.
+   */
+  timeoutMs?: number;
 };
 
 /**
@@ -265,9 +308,27 @@ export function decodeArrowPayload(
 }
 
 /**
+ * Pushes `batches` to `stream`, stopping if the consumer destroys it.
+ *
+ * @private
+ */
+function pushBatches(
+  stream: ArrowRecordBatchStream,
+  batches: RecordBatch[],
+): void {
+  for (const batch of batches) {
+    if (stream.destroyed) {
+      return;
+    }
+    stream.push(batch);
+  }
+}
+
+/**
  * Streams Arrow `RecordBatch`es from a job's sessionless default stream
  * (`projects/{projectId}/locations/{location}/jobs/{jobId}/streams/_default`)
- * starting at `offset`.
+ * starting at `offset`. Pass the finished `job` when reading from offset 0 so
+ * a result without rows keeps its schema (see {@link readDestinationSchema}).
  *
  * @private
  */
@@ -276,8 +337,9 @@ async function streamDefaultJobStream(
   jobRef: bigquery.IJobReference | undefined,
   offset: number,
   initialSchema?: Uint8Array | string,
+  job?: Job,
 ): Promise<void> {
-  const {bq} = ctx;
+  const {bq, arrow, stream} = ctx;
   const projectId = resolveProjectId(bq, jobRef?.projectId);
   const jobId = jobRef?.jobId;
   const location = jobRef?.location || bq.location;
@@ -289,16 +351,67 @@ async function streamDefaultJobStream(
   }
 
   const readStream = `projects/${projectId}/locations/${location}/jobs/${jobId}/streams/_default`;
-  await streamReadRows(ctx, {readStream, offset, initialSchema});
+  const {emittedBatch, serializedSchema} = await streamReadRows(ctx, {
+    readStream,
+    offset,
+    initialSchema,
+  });
+
+  // When reading from offset = 0 (e.g., after waiting for an unfinished job)
+  // and the stream finishes with 0 rows, still emit a 0-row RecordBatch.
+  if (offset !== 0 || emittedBatch || stream.destroyed) {
+    return;
+  }
+  const schema =
+    serializedSchema ?? (job && (await readDestinationSchema(ctx, job)));
+  pushBatches(stream, decodeArrowPayload(arrow, schema));
+}
+
+/**
+ * Reads the Arrow schema of a finished query job's results from its
+ * destination table. The default job stream sends no `ReadRowsResponse`, and
+ * so no schema, for a result without rows, but a read session on the
+ * destination table still returns it. Statements without a result table
+ * (e.g., DML) have no destination table, so this resolves to `undefined`.
+ *
+ * @private
+ */
+async function readDestinationSchema(
+  ctx: ArrowStreamContext,
+  job: Job,
+): Promise<Uint8Array | string | undefined> {
+  const {bq, storage} = ctx;
+  // A script's destination table is only set once the job finishes, so read
+  // the job's current metadata instead of the response that created it.
+  const [metadata] = await job.getMetadata();
+  const destRef = metadata?.configuration?.query?.destinationTable;
+  // Skip the read session if the consumer destroyed the stream meanwhile.
+  if (!destRef || ctx.stream.destroyed) {
+    return undefined;
+  }
+  const [session] = await getStorageReadClient(bq, storage).createReadSession({
+    parent: `projects/${resolveProjectId(
+      bq,
+      metadata?.jobReference?.projectId,
+      destRef.projectId,
+    )}`,
+    readSession: {
+      table: `projects/${destRef.projectId}/datasets/${destRef.datasetId}/tables/${destRef.tableId}`,
+      dataFormat: 'ARROW',
+    },
+    maxStreamCount: 1,
+  });
+  return session?.arrowSchema?.serializedSchema || undefined;
 }
 
 /**
  * Streams Arrow `RecordBatch`es from a Storage Read API stream starting at
  * `offset`, pausing `ReadRows` while the consumer is behind.
  *
- * Resolves when `ReadRows` ends or the consumer destroys the stream, and
- * rejects on a `ReadRows` or decode error. In every case, the listeners added
- * here are removed, and `ReadRows` is cancelled unless it already finished.
+ * Resolves when `ReadRows` ends or the consumer destroys the stream, with
+ * whether any batch was emitted and the last Arrow schema seen, and rejects
+ * on a `ReadRows` or decode error. In every case, the listeners added here
+ * are removed, and `ReadRows` is cancelled unless it already finished.
  *
  * @private
  */
@@ -309,7 +422,7 @@ async function streamReadRows(
     offset: number;
     initialSchema?: Uint8Array | string;
   },
-): Promise<void> {
+): Promise<{emittedBatch: boolean; serializedSchema?: Uint8Array}> {
   const {bq, arrow, storage, stream} = ctx;
   const {readStream, offset, initialSchema} = options;
 
@@ -322,6 +435,7 @@ async function streamReadRows(
     let serializedSchema: Uint8Array | undefined = initialSchema
       ? toUint8Array(initialSchema)
       : undefined;
+    let emittedBatch = false;
 
     let settled = false;
     // Detaches every listener added here and settles the promise. Cancels
@@ -348,7 +462,7 @@ async function streamReadRows(
       if (opts.err) {
         reject(opts.err);
       } else {
-        resolve();
+        resolve({emittedBatch, serializedSchema});
       }
     };
 
@@ -379,6 +493,7 @@ async function streamReadRows(
             settle({cancel: true});
             return;
           }
+          emittedBatch = true;
           if (!stream.push(batch)) {
             grpcStream.pause();
           }
@@ -404,13 +519,38 @@ async function streamReadRows(
 }
 
 /**
+ * Waits for an unfinished BigQuery job to complete using `job.getQueryResults`
+ * without fetching any `STRUCT_ENCODING` rows (`maxResults: 0`). Returns early
+ * if the consumer destroys `stream`.
+ *
+ * @private
+ */
+async function waitForJobCompletion(
+  job: Job,
+  stream: ArrowRecordBatchStream,
+): Promise<void> {
+  while (!stream.destroyed) {
+    // Set maxResults: 0 so jobs.getQueryResults blocks up to the server's
+    // default wait interval (about 10s) and surfaces job errors without
+    // returning JSON rows, so polling again right away doesn't spin.
+    const [, , res] = await job.getQueryResults({
+      autoPaginate: false,
+      maxResults: 0,
+    });
+    if (res?.jobComplete !== false) {
+      return;
+    }
+  }
+}
+
+/**
  * Executes a query and returns a stream of `apache-arrow` `RecordBatch` objects.
  *
  * @private
  */
 export function createQueryArrowStream_(
   bq: BigQuery,
-  query?: Query | string,
+  query?: ArrowQuery | string,
 ): ArrowRecordBatchStream {
   let started = false;
   // Set once the query starts, so later reads can resume the active ReadRows.
@@ -446,7 +586,8 @@ export function createQueryArrowStream_(
       throw new Error('A SQL query string is required.');
     }
 
-    const queryObj: Query = typeof query === 'string' ? {query} : {...query};
+    const queryObj: ArrowQuery =
+      typeof query === 'string' ? {query} : {...query};
 
     if (queryObj.writeDisposition === 'WRITE_APPEND') {
       throw new Error(
@@ -466,7 +607,9 @@ export function createQueryArrowStream_(
     readCtx = ctx;
 
     // Throws for an invalid request, for example invalid query parameters.
-    const queryReq = bq.buildQueryRequest_(queryObj, {});
+    const queryReq = bq.buildQueryRequest_(queryObj, {
+      timeoutMs: queryObj.timeoutMs,
+    });
     if (!queryReq) {
       // TODO: Route queries that cannot use jobs.query through jobs.insert (createQueryJob).
       throw new Error('Query configuration cannot be executed via jobs.query.');
@@ -493,8 +636,30 @@ export function createQueryArrowStream_(
     }
 
     if (res?.jobComplete === false) {
-      // TODO: Wait for unfinished jobs before streaming Arrow results.
-      throw new Error('Query did not complete within the jobs.query timeout.');
+      // jobs.query already waited (about 10s by default) and the query is
+      // still running, so this depends on how long the query runs, not on
+      // how many rows it returns.
+      // Match BigQuery#query: if the caller provided a non-zero timeoutMs,
+      // fail immediately instead of polling jobs.getQueryResults.
+      if (queryReq.timeoutMs) {
+        throw new Error(
+          `The query did not complete before ${queryReq.timeoutMs}ms`,
+        );
+      }
+      if (!res.jobReference || !job) {
+        throw new Error(
+          'Cannot wait for an incomplete query without a jobReference.',
+        );
+      }
+      await waitForJobCompletion(job, stream);
+      if (stream.destroyed) {
+        return;
+      }
+      // An unfinished jobs.query returns no rows or schema, so read every row
+      // from offset 0 and pass the job to look up the schema of an empty
+      // result.
+      await streamDefaultJobStream(ctx, res.jobReference, 0, undefined, job);
+      return;
     }
 
     // pageRowCount and totalRows are returned as uint64 strings in REST JSON.
@@ -508,17 +673,14 @@ export function createQueryArrowStream_(
     // Emit the inline first page (or 0-row schema-preserving batch when totalRows is 0)
     // before resuming remaining rows from streams/_default at offset = pageRowCount.
     if (!hasRemainingRows || inlineRowsCount > 0n) {
-      const batches = decodeArrowPayload(
-        arrow,
-        res?.arrowSchema?.serializedSchema,
-        res?.arrowRecordBatch?.serializedRecordBatch,
+      pushBatches(
+        stream,
+        decodeArrowPayload(
+          arrow,
+          res?.arrowSchema?.serializedSchema,
+          res?.arrowRecordBatch?.serializedRecordBatch,
+        ),
       );
-      for (const batch of batches) {
-        if (stream.destroyed) {
-          return;
-        }
-        stream.push(batch);
-      }
     }
 
     if (!hasRemainingRows || stream.destroyed) {

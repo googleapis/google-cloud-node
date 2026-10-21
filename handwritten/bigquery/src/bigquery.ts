@@ -56,10 +56,14 @@ import {
 } from '@google-cloud/common/build/src/util';
 import bigquery from './types';
 import {logger, setLogFunction} from './logger';
-import {ArrowRecordBatchStream, createQueryArrowStream_} from './arrow';
+import {
+  ArrowQuery,
+  ArrowRecordBatchStream,
+  createQueryArrowStream_,
+} from './arrow';
 
 // Third-Party Re-exports
-export {common, ArrowRecordBatchStream};
+export {common, ArrowQuery, ArrowRecordBatchStream};
 
 export interface RequestCallback<T> {
   (err: Error | null, response?: T | null): void;
@@ -395,8 +399,11 @@ export class BigQuery extends Service {
    * If you stop reading before the stream ends, call `stream.destroy()` to
    * cancel the read; breaking out of `for await` does this for you.
    *
-   * @param {string|object} [options] A string SQL query or configuration
+   * @param {string|ArrowQuery} [options] A string SQL query or configuration
    *     object. See {@link BigQuery#query} for a complete list of options.
+   * @param {number} [options.timeoutMs] How long to wait for `jobs.query` to
+   *     complete, in milliseconds. If the query doesn't complete in time, the
+   *     stream fails instead of waiting for the job.
    * @returns {ArrowRecordBatchStream} A stream of `RecordBatch` objects. The
    *     stream emits a `job` event with the {@link Job} when BigQuery creates
    *     a job, and sets `stream.queryId` and `stream.jobReference` (when
@@ -426,7 +433,9 @@ export class BigQuery extends Service {
    *
    * @beta
    */
-  createQueryArrowStream(options?: Query | string): ArrowRecordBatchStream {
+  createQueryArrowStream(
+    options?: ArrowQuery | string,
+  ): ArrowRecordBatchStream {
     return createQueryArrowStream_(this, options);
   }
 

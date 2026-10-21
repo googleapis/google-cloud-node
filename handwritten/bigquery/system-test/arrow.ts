@@ -398,4 +398,144 @@ describe('Arrow Query Results', () => {
       },
     );
   });
+
+  it('should wait for an unfinished jobs.query via jobs.getQueryResults (maxResults = 0) and stream all rows from streams/_default at offset = 0', async () => {
+    const origRequest = bigquery.request.bind(bigquery);
+    let getQueryResultsCalls = 0;
+
+    // Force POST /queries to return jobComplete: false by setting a 1ms server wait on the wire
+    // while leaving the caller's Query object without timeoutMs so createQueryArrowStream waits.
+    bigquery.request = (reqOpts, callback) => {
+      if (reqOpts.uri === '/queries' && reqOpts.method === 'POST') {
+        reqOpts.json = {...reqOpts.json, timeoutMs: 1};
+      } else if (
+        typeof reqOpts.uri === 'string' &&
+        reqOpts.uri.startsWith('/queries/')
+      ) {
+        getQueryResultsCalls++;
+      }
+      return origRequest(reqOpts, callback);
+    };
+
+    try {
+      const sql =
+        'DECLARE n INT64 DEFAULT 50; SELECT x FROM UNNEST(GENERATE_ARRAY(1, n)) AS x ORDER BY x;';
+      const batches: arrow.RecordBatch[] = await bigquery
+        .createQueryArrowStream({query: sql, useQueryCache: false})
+        .toArray();
+
+      // Verify jobs.getQueryResults was polled to wait for completion and all 50 rows streamed from offset = 0.
+      assert.ok(
+        getQueryResultsCalls >= 1,
+        `Expected >= 1 jobs.getQueryResults call, got ${getQueryResultsCalls}`,
+      );
+      const table = new arrow.Table(batches);
+      assert.strictEqual(table.numRows, 50);
+      assert.strictEqual(table.getChild('x')!.get(0), 1n);
+      assert.strictEqual(table.getChild('x')!.get(49), 50n);
+    } finally {
+      bigquery.request = origRequest;
+    }
+  });
+
+  it('should keep the schema of an empty result after waiting for an unfinished jobs.query', async () => {
+    // After the wait, rows come from streams/_default at offset = 0, which
+    // sends nothing for a result without rows, so the schema has to come from
+    // the job's destination table.
+    const origRequest = bigquery.request.bind(bigquery);
+
+    // Force POST /queries to return jobComplete: false so the stream waits
+    // for the job before reading rows.
+    bigquery.request = (reqOpts, callback) => {
+      if (reqOpts.uri === '/queries' && reqOpts.method === 'POST') {
+        reqOpts.json = {...reqOpts.json, timeoutMs: 1};
+      }
+      return origRequest(reqOpts, callback);
+    };
+
+    try {
+      const sql = `DECLARE n INT64 DEFAULT 0;
+        SELECT x, CAST(x AS STRING) AS s FROM UNNEST(GENERATE_ARRAY(1, n)) AS x;`;
+      const batches: arrow.RecordBatch[] = await bigquery
+        .createQueryArrowStream({query: sql, useQueryCache: false})
+        .toArray();
+
+      // Verify one 0-row RecordBatch with the result's column names and types.
+      assert.strictEqual(batches.length, 1);
+      assert.strictEqual(batches[0].numRows, 0);
+      assert.deepStrictEqual(
+        batches[0].schema.fields.map(f => f.name),
+        ['x', 's'],
+      );
+      assert.ok(arrow.DataType.isInt(batches[0].schema.fields[0].type));
+      assert.ok(arrow.DataType.isUtf8(batches[0].schema.fields[1].type));
+    } finally {
+      bigquery.request = origRequest;
+    }
+  });
+
+  it('should wait for an unfinished job with a picosecond TIMESTAMP(12) column using default jobs.getQueryResults format options', async function () {
+    // Guards the job wait against format option regressions: the wait calls
+    // jobs.getQueryResults with maxResults = 0 and the library's default
+    // formatOptions (useInt64Timestamp), which must still succeed when the
+    // result has a picosecond TIMESTAMP(12) column. Picosecond timestamps are
+    // only enabled in some projects, so this runs only when
+    // BIGQUERY_PICOSECOND_SUPPORT is set.
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+      this.skip();
+    }
+    const origRequest = bigquery.request.bind(bigquery);
+    let getQueryResultsCalls = 0;
+
+    // Force POST /queries to return jobComplete: false so the stream waits
+    // for the job with jobs.getQueryResults before reading rows.
+    bigquery.request = (reqOpts, callback) => {
+      if (reqOpts.uri === '/queries' && reqOpts.method === 'POST') {
+        reqOpts.json = {...reqOpts.json, timeoutMs: 1};
+      } else if (
+        typeof reqOpts.uri === 'string' &&
+        reqOpts.uri.startsWith('/queries/')
+      ) {
+        getQueryResultsCalls++;
+      }
+      return origRequest(reqOpts, callback);
+    };
+
+    try {
+      const sql = `DECLARE n INT64 DEFAULT 3;
+        SELECT x, CAST('2026-01-15 12:34:56.123456789123+00' AS TIMESTAMP(12)) AS ts
+        FROM UNNEST(GENERATE_ARRAY(1, n)) AS x ORDER BY x;`;
+      const batches: arrow.RecordBatch[] = await bigquery
+        .createQueryArrowStream({query: sql, useQueryCache: false})
+        .toArray();
+
+      // Verify the wait ran and every row streamed with an Arrow timestamp.
+      assert.ok(
+        getQueryResultsCalls >= 1,
+        `Expected >= 1 jobs.getQueryResults call, got ${getQueryResultsCalls}`,
+      );
+      const table = new arrow.Table(batches);
+      assert.strictEqual(table.numRows, 3);
+      assert.ok(arrow.DataType.isTimestamp(table.schema.fields[1].type));
+    } finally {
+      bigquery.request = origRequest;
+    }
+  });
+
+  it('should reject when a query does not complete within caller-specified timeoutMs', async () => {
+    const sql =
+      'DECLARE n INT64 DEFAULT 50; SELECT x FROM UNNEST(GENERATE_ARRAY(1, n)) AS x ORDER BY x;';
+
+    // Verify specifying timeoutMs: 1 rejects when jobs.query returns jobComplete = false.
+    await assert.rejects(
+      bigquery
+        .createQueryArrowStream({
+          query: sql,
+          timeoutMs: 1,
+          useQueryCache: false,
+        })
+        .toArray(),
+      /The query did not complete before 1ms/,
+    );
+  });
 });
