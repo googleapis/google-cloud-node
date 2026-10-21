@@ -12362,18 +12362,14 @@ declare namespace FirebaseFirestore {
      * Provides the entry point for defining the data source of a Firestore `Pipeline`.
      *
      * Use the methods of this class (e.g., {@link PipelineSource#collection}, {@link PipelineSource#collectionGroup},
-     * {@link PipelineSource#database}, or {@link PipelineSource#documents}) to specify the initial data
-     * for your pipeline, such as a collection, a collection group, the entire database, or a set of specific documents.
+     * {@link PipelineSource#database}, {@link PipelineSource#documents}, or {@link PipelineSource#literals}) to specify the initial data
+     * for your pipeline, such as a collection, a collection group, the entire database, a set of specific documents, or in-memory documents.
      */
     export class PipelineSource {
       /**
        * Specifies the source for a new pipeline as a Firestore collection.
        * This method allows you to start a data pipeline by defining the collection
        * from which documents will be read.
-       *
-       * @param collectionPath The path to the collection as a string (e.g., 'users/alovelace/chats')
-       *                       or a {@link CollectionReference} object.
-       * @returns A new `Pipeline` object configured to read from the specified collection.
        *
        * @example
        * ```typescript
@@ -12384,18 +12380,23 @@ declare namespace FirebaseFirestore {
        * const collectionRef = firestore.collection('anotherCollection');
        * const pipeline2 = firestore.pipeline().collection(collectionRef);
        * ```
+       *
+       * @param collectionPath - Name or reference to the collection that will be used as the Pipeline source.
+       * @returns A new `Pipeline` object configured to read from the specified collection.
        */
       collection(collectionPath: string | CollectionReference): Pipeline;
       /**
        * Returns all documents from the entire collection. The collection can be nested.
+       *
        * @param options - Options defining how this CollectionStage is evaluated.
+       * @returns A new `Pipeline` object configured to read from the specified collection.
        */
       collection(options: CollectionStageOptions): Pipeline;
       /**
-       * Specifies the source as a collection group.
+       * Returns all documents from a collection ID regardless of the parent.
        *
-       * @param collectionId The ID of the collection group.
-       * @returns A new Pipeline object with the collection group as the source.
+       * @param collectionId - ID of the collection group to use as the Pipeline source.
+       * @returns A new `Pipeline` object with the collection group as the source.
        */
       collectionGroup(collectionId: string): Pipeline;
 
@@ -12406,59 +12407,66 @@ declare namespace FirebaseFirestore {
        * A collection group query can be used to query collections that have the same ID but
        * are located at different paths.
        *
+       * @example
        * ```typescript
        * // Query all 'cities' collections regardless of their parent document.
-       * const citiesPipeline = firestore.collectionGroup({ collectionId: 'cities' });
+       * const citiesPipeline = firestore.pipeline().collectionGroup({ collectionId: 'cities' });
        * ```
        *
-       * @param options Options defining how this CollectionGroupStage is evaluated, including the `collectionId`.
+       * @param options - Options defining how this CollectionGroupStage is evaluated, including the `collectionId`.
        * @returns A new `Pipeline` instance representing the collection group stage.
        */
       collectionGroup(options: CollectionGroupStageOptions): Pipeline;
       /**
-       * Specifies the source as a database.
+       * Returns all documents from the entire database.
        *
-       * @returns A new Pipeline object with the database as the source.
+       * @returns A new `Pipeline` object with the database as the source.
        */
       database(): Pipeline;
       /**
        * Returns all documents from the entire database.
+       *
        * @param options - Options defining how a DatabaseStage is evaluated.
+       * @returns A new `Pipeline` object with the database as the source.
        */
       database(options: DatabaseStageOptions): Pipeline;
       /**
-       * Specifies the source as a set of documents.
+       * Set the pipeline's source to the documents specified by the given paths and DocumentReferences.
        *
-       * @param docs The document references.
-       * @returns A new Pipeline object with the documents as the source.
+       * @param docs An array of paths and DocumentReferences specifying the individual documents that will be the source of this pipeline.
+       * The converters for these DocumentReferences will be ignored and not have an effect on this pipeline.
+       * @returns A new `Pipeline` object with the documents as the source.
+       * @throws Error if any of the provided DocumentReferences target a different project or database than the pipeline.
        */
       documents(docs: Array<string | DocumentReference>): Pipeline;
       /**
        * Set the pipeline's source to the documents specified by the given paths and DocumentReferences.
        *
        * @param options - Options defining how this DocumentsStage is evaluated.
-       *
-       * @throws {@FirestoreError} Thrown if any of the provided DocumentReferences target a different project or database than the pipeline.
+       * @returns A new `Pipeline` object with the documents as the source.
+       * @throws Error if any of the provided DocumentReferences target a different project or database than the pipeline.
        */
       documents(options: DocumentsStageOptions): Pipeline;
       /**
        * Convert the given Query into an equivalent Pipeline.
        *
        * @param query A Query to be converted into a Pipeline.
-       *
-       * @throws {@FirestoreError} Thrown if any of the provided DocumentReferences target a different project or database than the pipeline.
+       * @returns A new `Pipeline` object equivalent to the given Query.
+       * @throws Error if the provided Query targets a different project or database than the Pipeline.
        */
       createFrom(query: Query): Pipeline;
       /**
        * Set the pipeline's source to the in-memory documents specified by the given records.
        *
        * @param documents An array of objects/records specifying the in-memory documents.
+       * @returns A new `Pipeline` object with the literals as the source.
        */
       literals(documents: Array<Record<string, unknown>>): Pipeline;
       /**
        * Set the pipeline's source to the in-memory documents specified by the given records.
        *
        * @param options Options defining how this LiteralsSource stage is evaluated.
+       * @returns A new `Pipeline` object with the literals as the source.
        */
       literals(options: LiteralsStageOptions): Pipeline;
     }
@@ -12497,26 +12505,27 @@ declare namespace FirebaseFirestore {
      *
      * Usage Examples:
      *
+     * @example
      * ```typescript
      * const db: Firestore; // Assumes a valid firestore instance.
      *
      * // Example 1: Select specific fields and rename 'rating' to 'bookRating'
      * const results1 = await db.pipeline()
-     *     .collection("books")
-     *     .select("title", "author", Field.of("rating").as("bookRating"))
+     *     .collection('books')
+     *     .select('title', 'author', field('rating').as('bookRating'))
      *     .execute();
      *
-     * // Example 2: Filter documents where 'genre' is "Science Fiction" and 'published' is after 1950
+     * // Example 2: Filter documents where 'genre' is 'Science Fiction' and 'published' is after 1950
      * const results2 = await db.pipeline()
-     *     .collection("books")
-     *     .where(and(Field.of("genre").equal("Science Fiction"), Field.of("published").greaterThan(1950)))
+     *     .collection('books')
+     *     .where(and(field('genre').equal('Science Fiction'), field('published').greaterThan(1950)))
      *     .execute();
      *
      * // Example 3: Calculate the average rating of books published after 1980
      * const results3 = await db.pipeline()
-     *     .collection("books")
-     *     .where(Field.of("published").greaterThan(1980))
-     *     .aggregate(average(Field.of("rating")).as("averageRating"))
+     *     .collection('books')
+     *     .where(field('published').greaterThan(1980))
+     *     .aggregate(average(field('rating')).as('averageRating'))
      *     .execute();
      * ```
      */
@@ -12531,10 +12540,11 @@ declare namespace FirebaseFirestore {
        * The added fields are defined using `Selectable`s, which can be:
        *
        * - `Field`: References an existing document field.
-       * - `Expression`: Either a literal value (see {@link constant}) or a computed value
-       *   (see {@FunctionExpression}) with an assigned alias using {@link Expression#as}.
+       * - `Expression`: Either a literal value (see `constant()`) or a computed value
+       *   (see `Expression`) with an assigned alias using {@link Expression#as}.
        *
        *
+       * @example
        * ```typescript
        * firestore.pipeline().collection("books")
        *   .addFields(
@@ -12545,7 +12555,7 @@ declare namespace FirebaseFirestore {
        *
        * @param field The first field to add to the documents, specified as a `Selectable`.
        * @param additionalFields Optional additional fields to add to the documents, specified as `Selectable`s.
-       * @returns A new Pipeline object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       addFields(field: Selectable, ...additionalFields: Selectable[]): Pipeline;
       /**
@@ -12558,10 +12568,11 @@ declare namespace FirebaseFirestore {
        * The added fields are defined using `Selectable`s, which can be:
        *
        * - `Field`: References an existing document field.
-       * - `Expression`: Either a literal value (see {@link constant}) or a computed value
-       *   (see {@FunctionExpression}) with an assigned alias using {@link Expression#as}.
+       * - `Expression`: Either a literal value (see `constant()`) or a computed value
+       *   (see `Expression`) with an assigned alias using {@link Expression#as}.
        *
        *
+       * @example
        * ```typescript
        * firestore.pipeline().collection("books")
        *   .addFields(
@@ -12571,13 +12582,14 @@ declare namespace FirebaseFirestore {
        * ```
        *
        * @param options - An object that specifies required and optional parameters for the stage.
-       * @returns A new Pipeline object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       addFields(options: AddFieldsStageOptions): Pipeline;
       /**
        * Remove fields from outputs of previous stages.
        *
        *
+       * @example
        * ```typescript
        * firestore.pipeline().collection('books')
        *   // removes field 'rating' and 'cost' from the previous stage outputs.
@@ -12589,7 +12601,7 @@ declare namespace FirebaseFirestore {
        *
        * @param fieldValue The first field to remove.
        * @param additionalFields Optional additional fields to remove.
-       * @returns A new Pipeline object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       removeFields(
         fieldValue: Field | string,
@@ -12597,16 +12609,13 @@ declare namespace FirebaseFirestore {
       ): Pipeline;
 
       /**
-       * Creates a stage that removes specified fields from the outputs of previous stages in the pipeline.
-       *
-       * This is useful for reducing the data transferred, by excluding fields
-       * that are no longer needed after certain pipeline operations.
+       * Remove fields from outputs of previous stages.
        *
        *
+       * @example
        * ```typescript
        * firestore.pipeline().collection('books')
-       *   // Removes the 'rating' and 'cost' fields from the documents
-       *   // processed by the preceding stages.
+       *   // removes field 'rating' and 'cost' from the previous stage outputs.
        *   .removeFields({
        *     fields: [
        *       field('rating'),
@@ -12615,9 +12624,7 @@ declare namespace FirebaseFirestore {
        *   });
        * ```
        *
-       * @param options - An object containing the configuration for this stage.
-       *   @param options.fields - An array of field names (strings) or `Expression` objects
-       *     representing the fields to be removed from the output.
+       * @param options - An object that specifies required and optional parameters for the stage.
        * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       removeFields(options: RemoveFieldsStageOptions): Pipeline;
@@ -12647,7 +12654,7 @@ declare namespace FirebaseFirestore {
        *
        * @param aliasedExpression - The first expression to bind to a variable.
        * @param additionalExpressions - Optional additional expressions to bind to a variable.
-       * @returns A new Pipeline object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       define(
         aliasedExpression: AliasedExpression,
@@ -12677,7 +12684,7 @@ declare namespace FirebaseFirestore {
        * ```
        *
        * @param options - An object that specifies required and optional parameters for the stage.
-       * @returns A new Pipeline object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       define(options: DefineStageOptions): Pipeline;
 
@@ -12700,8 +12707,8 @@ declare namespace FirebaseFirestore {
        *             .where(field("book_id").equal(variable("current_book_id")))
        *             .select(field("reviewer"))
        *             .toArrayExpression()
-       *             .as("reviewers");
-       *     )
+       *             .as("reviewers")
+       *     );
        * ```
        *
        * Output:
@@ -12719,13 +12726,14 @@ declare namespace FirebaseFirestore {
        * ```typescript
        * // Get a list of reviews (reviewer and rating) for each book
        * db.pipeline().collection("books")
-       *     .define(field("id").as("book_id"))
+       *     .define(field("id").as("current_book_id"))
        *     .addFields(
        *         db.pipeline().collection("reviews")
-       *             .where(field("book_id").equal(variable("book_id")))
+       *             .where(field("book_id").equal(variable("current_book_id")))
        *             .select(field("reviewer"), field("rating"))
        *             .toArrayExpression()
-       *             .as("reviews"));
+       *             .as("reviews")
+       *    );
        * ```
        *
        * Output:
@@ -12818,15 +12826,20 @@ declare namespace FirebaseFirestore {
        * <p>The selected fields are defined using `Selectable` expressions, which can be:
        *
        * <ul>
-       *   <li>`string`: The name of an existing field.</li>
-       *   <li>`Field`: A reference to an existing field.</li>
-       *   <li>`Expression`: An expression (e.g., a {@link FunctionExpression}) that represents the result of an expression.,
-       *       The Expression must be aliased using {@link Expression#as}.</li>
+       *   <li>`string`: Name of an existing field</li>
+       *   <li>`Field`: References an existing field.</li>
+       *   <li>`AliasedExpression`: Represents the result of a function with an assigned alias name using
+       *       {@link Expression#as}</li>
        * </ul>
        *
+       * <p>If no selections are provided, the output of this stage is empty. Use {@link
+       * Pipeline#addFields} instead if only additions are
+       * desired.
        *
+       *
+       * @example
        * ```typescript
-       * firestore.pipeline().collection("books")
+       * db.pipeline().collection("books")
        *   .select(
        *     "firstName",
        *     field("lastName"),
@@ -12834,11 +12847,11 @@ declare namespace FirebaseFirestore {
        *   );
        * ```
        *
-       * @param selection The first field to include in the output documents, specified as a {@link
-       *     Pipelines.Selectable} expression or a string value representing the field name.
-       * @param additionalSelections Optional additional fields to include in the output documents, specified as {@link
-       *     Pipelines.Selectable} expressions or `string` values representing field names.
-       * @returns A new Pipeline object with this stage appended to the stage list.
+       * @param selection The first field to include in the output documents, specified as
+       *     `Selectable` expression or string value representing the field name.
+       * @param additionalSelections Optional additional fields to include in the output documents, specified as
+       *     `Selectable` expressions or `string` values representing field names.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       select(
         selection: Selectable | string,
@@ -12851,21 +12864,22 @@ declare namespace FirebaseFirestore {
        * <p>The selected fields are defined using `Selectable` expressions, which can be:
        *
        * <ul>
-       *   <li>`string`: The name of an existing field.</li>
-       *   <li>`Field`: A reference to an existing field.</li>
-       *   <li>`Expression`: An expression (e.g., a {@link FunctionExpression}) that represents the result of an expression.,
-       *       The Expression must be aliased using {@link Expression#as}.</li>
+       *   <li>`string`: Name of an existing field</li>
+       *   <li>`Field`: References an existing field.</li>
+       *   <li>`AliasedExpression`: Represents the result of a function with an assigned alias name using
+       *       {@link Expression#as}</li>
        * </ul>
        *
-       * If no selections are provided within the `options` (i.e., the `fields` array is empty),
-       * the output of this stage will be an empty document. If the intention is to add new fields
-       * without replacing existing ones, consider using {@link Pipeline#addFields} instead.
+       * <p>If no selections are provided, the output of this stage is empty. Use {@link
+       * Pipeline#addFields} instead if only additions are
+       * desired.
        *
        *
+       * @example
        * ```typescript
        * db.pipeline().collection("books")
        *   .select({
-       *     fields: [
+       *     selections: [
        *       "firstName",
        *       field("lastName"),
        *       field("address").toUppercase().as("upperAddress"),
@@ -12873,42 +12887,48 @@ declare namespace FirebaseFirestore {
        *   });
        * ```
        *
-       * @param options An object of type {@link SelectStageOptions} that defines the selection criteria for this stage.
-       *                It is expected to contain a `fields` property, which is an array of `Selectable` expressions.
-       * @returns A new `Pipeline` object with this select stage appended to its list of stages.
+       * @param options - An object that specifies required and optional parameters for the stage.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       select(options: SelectStageOptions): Pipeline;
       /**
        * Performs a delete operation on documents from previous stages.
        *
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       * @example
+       * ```typescript
+       * // Deletes all documents in the "books" collection.
+       * firestore.pipeline().collection("books")
+       *    .delete();
+       * ```
+       *
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       delete(): Pipeline;
       /**
        * Performs a delete operation on documents from previous stages.
        *
        * @param options - Options defining how this Delete stage is evaluated.
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       delete(options: DeleteStageOptions): Pipeline;
       /**
        * Performs an update operation using documents from previous stages.
        *
        * Each input document is updated at the path in its `__name__` field.
-       * See {@link UpdateStageOptions} for details.
+       * See `UpdateStageOptions` for details.
        *
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       update(): Pipeline;
       /**
        * Performs an update operation using documents from previous stages.
        *
        * Each input document is updated at the path in its `__name__` field.
-       * See {@link UpdateStageOptions} for details.
+       * See `UpdateStageOptions` for details.
        *
        * @param transformedField - The first field transformation to apply.
        * @param additionalFields - Additional field transformations to apply.
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       update(
         transformedField: AliasedExpression,
@@ -12918,59 +12938,59 @@ declare namespace FirebaseFirestore {
        * Performs an update operation using documents from previous stages.
        *
        * Each input document is updated at the path in its `__name__` field.
-       * See {@link UpdateStageOptions} for details.
+       * See `UpdateStageOptions` for details.
        *
        * @param transformedFields - The list of transformations to apply.
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       update(transformedFields: AliasedExpression[]): Pipeline;
       /**
        * Performs an update operation using documents from previous stages.
        *
        * Each input document is updated at the path in its `__name__` field.
-       * See {@link UpdateStageOptions} for details.
+       * See `UpdateStageOptions` for details.
        *
        * @param options - Options defining how this Update stage is evaluated.
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       update(options: UpdateStageOptions): Pipeline;
       /**
        * Performs an insert operation on documents from previous stages.
        *
        * The operation fails if a target document already exists. See
-       * {@link InsertStageOptions} for how the target document is determined.
+       * `InsertStageOptions` for how the target document is determined.
        *
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       insert(): Pipeline;
       /**
        * Performs an insert operation on documents from previous stages.
        *
        * The operation fails if a target document already exists. See
-       * {@link InsertStageOptions} for how the target document is determined.
+       * `InsertStageOptions` for how the target document is determined.
        *
        * @param options - Options defining how this Insert stage is evaluated.
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       insert(options: InsertStageOptions): Pipeline;
       /**
        * Performs an upsert operation on documents from previous stages.
        *
-       * See {@link UpsertStageOptions} for how the target document is
+       * See `UpsertStageOptions` for how the target document is
        * determined.
        *
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       upsert(): Pipeline;
       /**
        * Performs an upsert operation on documents from previous stages.
        *
-       * See {@link UpsertStageOptions} for how the target document is
+       * See `UpsertStageOptions` for how the target document is
        * determined.
        *
        * @param additionalField - The first additional field to apply on upsert.
        * @param additionalFields - Additional fields to apply on upsert.
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       upsert(
         additionalField: AliasedExpression,
@@ -12979,20 +12999,19 @@ declare namespace FirebaseFirestore {
       /**
        * Performs an upsert operation on documents from previous stages.
        *
-       * See {@link UpsertStageOptions} for how the target document is
+       * See `UpsertStageOptions` for how the target document is
        * determined.
        *
        * @param options - Options defining how this Upsert stage is evaluated.
-       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       upsert(options: UpsertStageOptions): Pipeline;
       /**
-       * Filters the documents from previous stages to only include those matching the specified {@link
-       * BooleanExpression}.
+       * Filters the documents from previous stages to only include those matching the specified `BooleanExpression`.
        *
        * <p>This stage allows you to apply conditions to the data, similar to a "WHERE" clause in SQL.
-       * You can filter documents based on their field values, using implementations of {@link
-       * BooleanExpression}, typically including but not limited to:
+       * You can filter documents based on their field values, using implementations of `BooleanExpression`, typically
+       * including but not limited to:
        *
        * <ul>
        *   <li>field comparators: {@link Function#equal}, {@link Function#lessThan} (less than), {@link
@@ -13003,6 +13022,7 @@ declare namespace FirebaseFirestore {
        * </ul>
        *
        *
+       * @example
        * ```typescript
        * firestore.pipeline().collection("books")
        *   .where(
@@ -13014,16 +13034,15 @@ declare namespace FirebaseFirestore {
        * ```
        *
        * @param condition The `BooleanExpression` to apply.
-       * @returns A new Pipeline object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       where(condition: BooleanExpression): Pipeline;
       /**
-       * Filters the documents from previous stages to only include those matching the specified {@link
-       * BooleanExpression}.
+       * Filters the documents from previous stages to only include those matching the specified `BooleanExpression`.
        *
        * <p>This stage allows you to apply conditions to the data, similar to a "WHERE" clause in SQL.
-       * You can filter documents based on their field values, using implementations of {@link
-       * BooleanExpression}, typically including but not limited to:
+       * You can filter documents based on their field values, using implementations of `BooleanExpression`, typically
+       * including but not limited to:
        *
        * <ul>
        *   <li>field comparators: {@link Function#equal}, {@link Function#lessThan} (less than), {@link
@@ -13034,18 +13053,19 @@ declare namespace FirebaseFirestore {
        * </ul>
        *
        *
+       * @example
        * ```typescript
        * firestore.pipeline().collection("books")
        *   .where({
-       *     filter: and(
+       *     condition: and(
        *         greaterThan(field("rating"), 4.0),   // Filter for ratings greater than 4.0
        *         field("genre").equal("Science Fiction") // Equivalent to greaterThan("genre", "Science Fiction")
        *     )
        *   });
        * ```
        *
-       * @param options An object that specifies the filtering criteria. It is expected to contain a `filter` property of type `BooleanExpression`.
-       * @returns A new Pipeline object with this stage appended to the stage list.
+       * @param options - An object that specifies required and optional parameters for the stage.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       where(options: WhereStageOptions): Pipeline;
       /**
@@ -13056,26 +13076,7 @@ declare namespace FirebaseFirestore {
        * size of each page.
        *
        *
-       * ```typescript
-       * // Retrieve the second page of 20 results
-       * firestore.pipeline().collection("books")
-       *     .sort(Field.of("published").descending())
-       *     .offset(20)  // Skip the first 20 results
-       *     .limit(20);   // Take the next 20 results
-       * ```
-       *
-       * @param offset The number of documents to skip.
-       * @returns A new Pipeline object with this stage appended to the stage list.
-       */
-      offset(offset: number): Pipeline;
-
-      /**
-       * Skips a specified number of documents from the results of previous stages.
-       *
-       * This stage is useful for implementing pagination in your pipelines, enabling you to
-       * retrieve results in manageable chunks. It is commonly used alongside {@link Pipeline.limit}
-       * to define the size of each page.
-       *
+       * @example
        * ```typescript
        * // Retrieve the second page of 20 results
        * firestore.pipeline().collection('books')
@@ -13084,8 +13085,29 @@ declare namespace FirebaseFirestore {
        *     .limit(20);   // Take the next 20 results
        * ```
        *
-       * @param options An object containing the configuration for the offset stage,
-       *   including the number of documents to skip.
+       * @param offset The number of documents to skip.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
+       */
+      offset(offset: number): Pipeline;
+
+      /**
+       * Skips the first `offset` number of documents from the results of previous stages.
+       *
+       * <p>This stage is useful for implementing pagination in your pipelines, allowing you to retrieve
+       * results in chunks. It is typically used in conjunction with `limit` to control the
+       * size of each page.
+       *
+       *
+       * @example
+       * ```typescript
+       * // Retrieve the second page of 20 results
+       * firestore.pipeline().collection('books')
+       *     .sort(field('published').descending())
+       *     .offset(20)  // Skip the first 20 results
+       *     .limit(20);   // Take the next 20 results
+       * ```
+       *
+       * @param options - An object that specifies required and optional parameters for the stage.
        * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       offset(options: OffsetStageOptions): Pipeline;
@@ -13103,32 +13125,34 @@ declare namespace FirebaseFirestore {
        * </ul>
        *
        *
+       * @example
        * ```typescript
        * // Limit the results to the top 10 highest-rated books
-       * firestore.pipeline().collection("books")
-       *     .sort(Field.of("rating").descending())
+       * firestore.pipeline().collection('books')
+       *     .sort(field('rating').descending())
        *     .limit(10);
        * ```
        *
        * @param limit The maximum number of documents to return.
-       * @returns A new Pipeline object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       limit(limit: number): Pipeline;
 
       /**
-       * Limits the maximum number of documents returned by previous stages.
+       * Limits the maximum number of documents returned by previous stages to `limit`.
        *
        * <p>This stage is particularly useful when you want to retrieve a controlled subset of data from
        * a potentially large result set. It's often used for:
        *
        * <ul>
-       *   <li><b>Pagination:</b> In combination with `offset` to retrieve specific pages of
+       *   <li>**Pagination:** In combination with `offset` to retrieve specific pages of
        *       results.</li>
-       *   <li><b>Limiting Data Retrieval:</b> To prevent excessive data transfer and improve performance,
+       *   <li>**Limiting Data Retrieval:** To prevent excessive data transfer and improve performance,
        *       especially when dealing with large collections.</li>
        * </ul>
        *
        *
+       * @example
        * ```typescript
        * // Limit the results to the top 10 highest-rated books
        * firestore.pipeline().collection('books')
@@ -13136,7 +13160,7 @@ declare namespace FirebaseFirestore {
        *     .limit({ limit: 10 });
        * ```
        *
-       * @param options - An object that specifies the limit. It must contain a `limit` property, which is a number representing the maximum number of documents to return.
+       * @param options - An object that specifies required and optional parameters for the stage.
        * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       limit(options: LimitStageOptions): Pipeline;
@@ -13154,6 +13178,7 @@ declare namespace FirebaseFirestore {
        *   using {@link Expression#as}.
        *
        *
+       * @example
        * ```typescript
        * // Get a list of unique author names in uppercase and genre combinations.
        * firestore.pipeline().collection("books")
@@ -13175,7 +13200,7 @@ declare namespace FirebaseFirestore {
        * Returns a set of distinct values from the inputs to this stage.
        *
        * This stage runs through the results from previous stages to include only results with
-       * unique combinations of `Expression` values (`Field`, {@link Function}, etc).
+       * unique combinations of `Expression` values.
        *
        * The parameters to this stage are defined using `Selectable` expressions or strings:
        *
@@ -13185,6 +13210,7 @@ declare namespace FirebaseFirestore {
        *   using {@link Expression#as}.
        *
        *
+       * @example
        * ```typescript
        * // Get a list of unique author names in uppercase and genre combinations.
        * firestore.pipeline().collection("books")
@@ -13204,6 +13230,7 @@ declare namespace FirebaseFirestore {
        * calling {@link Expression#as} on `AggregateFunction` instances.
        *
        *
+       * @example
        * ```typescript
        * // Calculate the average rating and the total number of books
        * firestore.pipeline().collection("books")
@@ -13217,7 +13244,7 @@ declare namespace FirebaseFirestore {
        *     and providing a name for the accumulated results.
        * @param additionalAccumulators Optional additional `AliasedAggregate`, each wrapping an `AggregateFunction`
        *     and providing a name for the accumulated results.
-       * @returns A new Pipeline object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       aggregate(
         accumulator: AliasedAggregate,
@@ -13241,6 +13268,7 @@ declare namespace FirebaseFirestore {
        * </ul>
        *
        *
+       * @example
        * ```typescript
        * // Calculate the average rating for each genre.
        * firestore.pipeline().collection("books")
@@ -13261,6 +13289,7 @@ declare namespace FirebaseFirestore {
        * returned documents will be sorted in order from nearest to furthest from the query `vectorValue`.
        *
        *
+       * @example
        * ```typescript
        * // Find the 10 most similar books based on the book description.
        * const bookDescription = "Lorem ipsum...";
@@ -13288,6 +13317,7 @@ declare namespace FirebaseFirestore {
        * on the document that contains the corresponding value.
        *
        *
+       * @example
        * ```typescript
        * // Input.
        * // {
@@ -13321,6 +13351,7 @@ declare namespace FirebaseFirestore {
        * in the resulting map will become a field-value pair in the document.
        *
        *
+       * @example
        * ```typescript
        * // Input document:
        * // {
@@ -13359,6 +13390,7 @@ declare namespace FirebaseFirestore {
        * expressions that refer to fields from the input document.
        *
        *
+       * @example
        * ```typescript
        * // Input document:
        * // {
@@ -13373,13 +13405,15 @@ declare namespace FirebaseFirestore {
        *
        * // Replace the document with a new structure, selecting and renaming fields,
        * // and adding new literal values.
-       * firestore.pipeline().collection('products').replaceWith(map({
-       *   id: field('productId'),
-       *   productName: field('itemName'),
-       *   displayPrice: concat('$', field('price')),
-       *   category: 'Electronics',
-       *   weightInKg: field('details.weight')
-       * }));
+       * firestore.pipeline().collection('products').replaceWith({
+       *   map: map({
+       *     id: field('productId'),
+       *     productName: field('itemName'),
+       *     displayPrice: concat('$', field('price')),
+       *     category: 'Electronics',
+       *     weightInKg: field('details.weight')
+       *   })
+       * });
        *
        * // Output document:
        * // {
@@ -13391,25 +13425,27 @@ declare namespace FirebaseFirestore {
        * // }
        * ```
        *
-       * @param options - An object that specifies the map expression to use for replacement.
+       * @param options - An object that specifies required and optional parameters for the stage.
        * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       replaceWith(options: ReplaceWithStageOptions): Pipeline;
 
       /**
-       * Performs a pseudo-random sampling of documents from the previous stage in the pipeline.
+       * Performs a pseudo-random sampling of the documents from the previous stage.
        *
-       * This stage filters documents pseudo-randomly, returning a specified number of documents.
+       * <p>This stage will filter documents pseudo-randomly. The parameter specifies how number of
+       * documents to be returned.
        *
-       * Examples:
+       * <p>Examples:
        *
+       * @example
        * ```typescript
        * // Sample 25 books, if available.
        * firestore.pipeline().collection('books')
        *     .sample(25);
        * ```
        *
-       * @param documents The maximum number of documents to sample.
+       * @param documents The number of documents to sample.
        * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       sample(documents: number): Pipeline;
@@ -13417,10 +13453,10 @@ declare namespace FirebaseFirestore {
        * Performs a pseudo-random sampling of the documents from the previous stage.
        *
        * <p>This stage will filter documents pseudo-randomly. The 'options' parameter specifies how
-       * sampling will be performed. See `SampleOptions` for more information.
+       * sampling will be performed. See `SampleStageOptions` for more information.
        *
-       * <p>Examples:
-       *
+       * @example
+       * ```typescript
        * // Sample 10 books, if available.
        * firestore.pipeline().collection("books")
        *     .sample({ documents: 10 });
@@ -13428,6 +13464,7 @@ declare namespace FirebaseFirestore {
        * // Sample 50% of books.
        * firestore.pipeline().collection("books")
        *     .sample({ percentage: 0.5 });
+       * ```
        *
        * @param options - An object that specifies required and optional parameters for the stage.
        * @returns A new `Pipeline` object with this stage appended to the stage list.
@@ -13441,6 +13478,7 @@ declare namespace FirebaseFirestore {
        * emitted from this stage is undefined.
        *
        *
+       * @example
        * ```typescript
        * // Emit documents from books collection and magazines collection.
        * firestore.pipeline().collection('books')
@@ -13459,6 +13497,7 @@ declare namespace FirebaseFirestore {
        * emitted from this stage is undefined.
        *
        *
+       * @example
        * ```typescript
        * // Emit documents from books collection and magazines collection.
        * firestore.pipeline().collection('books')
@@ -13482,6 +13521,7 @@ declare namespace FirebaseFirestore {
        * No documents are emitted when `selectable` evaluates to an empty array.
        *
        *
+       * @example
        * ```typescript
        * // Input:
        * // { "title": "The Hitchhiker's Guide to the Galaxy", "tags": [ "comedy", "space", "adventure" ], ... }
@@ -13514,6 +13554,7 @@ declare namespace FirebaseFirestore {
        * No documents are emitted when `selectable` evaluates to an empty array.
        *
        *
+       * @example
        * ```typescript
        * // Input:
        * // { "title": "The Hitchhiker's Guide to the Galaxy", "tags": [ "comedy", "space", "adventure" ], ... }
@@ -13549,19 +13590,20 @@ declare namespace FirebaseFirestore {
        *
        * @param options - An object that specifies required and optional parameters
        *                  for the stage.
-       * @return A new `Pipeline` object with this stage appended to the stage list.
+       * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       search(options: SearchStageOptions): Pipeline;
       /**
        * Sorts the documents from previous stages based on one or more `Ordering` criteria.
        *
-       * <p>This stage allows you to order the results of your pipeline. You can specify multiple {@link
-       * Ordering} instances to sort by multiple fields in ascending or descending order. If documents
+       * <p>This stage allows you to order the results of your pipeline. You can specify multiple
+       * `Ordering` instances to sort by multiple fields in ascending or descending order. If documents
        * have the same value for a field used for sorting, the next specified ordering will be used. If
        * all orderings result in equal comparison, the documents are considered equal and the order is
        * unspecified.
        *
        *
+       * @example
        * ```typescript
        * // Sort books by rating in descending order, and then by title in ascending order for books
        * // with the same rating
@@ -13580,13 +13622,14 @@ declare namespace FirebaseFirestore {
       /**
        * Sorts the documents from previous stages based on one or more `Ordering` criteria.
        *
-       * <p>This stage allows you to order the results of your pipeline. You can specify multiple {@link
-       * Ordering} instances to sort by multiple fields in ascending or descending order. If documents
+       * <p>This stage allows you to order the results of your pipeline. You can specify multiple
+       * `Ordering` instances to sort by multiple fields in ascending or descending order. If documents
        * have the same value for a field used for sorting, the next specified ordering will be used. If
        * all orderings result in equal comparison, the documents are considered equal and the order is
        * unspecified.
        *
        *
+       * @example
        * ```typescript
        * // Sort books by rating in descending order, and then by title in ascending order for books
        * // with the same rating
@@ -13608,17 +13651,19 @@ declare namespace FirebaseFirestore {
        * stages. Each raw stage is defined by a unique `name` and a set of `params` that control its
        * behavior.
        *
-       * <p>Example (Assuming there is no "where" stage available in SDK):
+       * @example
+       * Assuming there is no 'where' stage available in SDK:
        *
+       * @example
        * ```typescript
-       * // Assume we don't have a built-in "where" stage
-       * firestore.pipeline().collection("books")
-       *     .rawStage("where", [Field.of("published").lessThan(1900)]) // Custom "where" stage
-       *     .select("title", "author");
+       * // Assume we don't have a built-in 'where' stage
+       * firestore.pipeline().collection('books')
+       *     .rawStage('where', [field('published').lessThan(1900)]) // Custom 'where' stage
+       *     .select('title', 'author');
        * ```
        *
-       * @param name The unique name of the raw stage to add.
-       * @param params A list of parameters to configure the raw stage's behavior.
+       * @param name - The unique name of the raw stage to add.
+       * @param params - A list of parameters to configure the raw stage's behavior.
        * @returns A new `Pipeline` object with this stage appended to the stage list.
        */
       rawStage(name: string, params: any[]): Pipeline;
@@ -13643,10 +13688,11 @@ declare namespace FirebaseFirestore {
        * </ul>
        *
        *
+       * @example
        * ```typescript
-       * const futureResults = await firestore.pipeline().collection("books")
-       *     .where(greaterThan(Field.of("rating"), 4.5))
-       *     .select("title", "author", "rating")
+       * const futureResults = await firestore.pipeline().collection('books')
+       *     .where(greaterThan(field('rating'), 4.5))
+       *     .select('title', 'author', 'rating')
        *     .execute();
        * ```
        *
@@ -13660,13 +13706,13 @@ declare namespace FirebaseFirestore {
       /**
        * Executes this pipeline and streams the results as `PipelineResult`s.
        *
-       * @returns {NodeJS.ReadableStream} A Node.js ReadableStream that emits `PipelineResult` objects.
+       * @returns A Node.js ReadableStream that emits `PipelineResult` objects.
        *
        * @example
        * ```typescript
-       * firestore.pipeline().collection("books")
-       *     .where(greaterThan(Field.of("rating"), 4.5))
-       *     .select("title", "author", "rating")
+       * firestore.pipeline().collection('books')
+       *     .where(greaterThan(field('rating'), 4.5))
+       *     .select('title', 'author', 'rating')
        *     .stream()
        *     .on('data', (pipelineResult) => {
        *       console.log(pipelineResult);
@@ -14334,7 +14380,7 @@ declare namespace FirebaseFirestore {
      *
      * @example
      * ```typescript
-     * const snapshot = await firestore
+     * const snapshot: PipelineSnapshot = await firestore
      *   .pipeline()
      *   .collection('myCollection')
      *   .where(field('value').greaterThan(10))
@@ -14377,7 +14423,14 @@ declare namespace FirebaseFirestore {
      * value.
      */
     export class PipelineResult {
+      /**
+       * The time the document was created. Undefined if this result is not a document.
+       */
       readonly createTime: Timestamp | undefined;
+      /**
+       * The time the document was last updated (at the time the snapshot was
+       * generated). Undefined if this result is not a document.
+       */
       readonly updateTime: Timestamp | undefined;
       /**
        * The reference of the document, if it is a document; otherwise `undefined`.
@@ -14393,7 +14446,7 @@ declare namespace FirebaseFirestore {
       /**
        * Retrieves all fields of the document from the query result as a plain JavaScript object.
        *
-       * @returns {DocumentData} An object containing all fields in the document.
+       * @returns An object containing all fields in the document.
        *
        * @example
        * ```typescript
@@ -14407,11 +14460,10 @@ declare namespace FirebaseFirestore {
        */
       data(): DocumentData;
       /**
-       * Retrieves the field specified by `field`.
+       * Retrieves the field specified by `fieldPath`.
        *
-       * @param {string|FieldPath} fieldPath The field path
-       * (e.g. 'foo' or 'foo.bar') to a specific field.
-       * @returns {*} The data at the specified field location or undefined if no
+       * @param fieldPath The field path (e.g. 'foo' or 'foo.bar') to a specific field.
+       * @returns The data at the specified field location or undefined if no
        * such field exists.
        *
        * @example
