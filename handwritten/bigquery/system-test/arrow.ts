@@ -538,4 +538,135 @@ describe('Arrow Query Results', () => {
       /The query did not complete before 1ms/,
     );
   });
+
+  it('should execute queries with jobs.insert-only options via jobs.insert and stream Arrow results from streams/_default at offset = 0', async () => {
+    const sql =
+      'SELECT x, x * 2 AS doubled FROM UNNEST(GENERATE_ARRAY(1, 25)) AS x ORDER BY x';
+    let emittedJobId: string | undefined;
+
+    const stream = bigquery.createQueryArrowStream({
+      query: sql,
+      jobTimeoutMs: 60000,
+      location: 'EU',
+      useQueryCache: false,
+    });
+    stream.on('job', job => {
+      emittedJobId = job.id;
+    });
+
+    const batches: arrow.RecordBatch[] = await stream.toArray();
+    const [expectedRows] = await bigquery.query({
+      query: sql,
+      jobTimeoutMs: 60000,
+      location: 'EU',
+      useQueryCache: false,
+    });
+
+    // Verify the query ran via jobs.insert (no queryId, jobReference in EU) and matches STRUCT_ENCODING rows.
+    assert.strictEqual(stream.queryId, undefined);
+    assert.ok(stream.jobReference?.jobId);
+    assert.strictEqual(stream.jobReference?.location, 'EU');
+    assert.strictEqual(emittedJobId, stream.jobReference?.jobId);
+
+    const table = new arrow.Table(batches);
+    assert.strictEqual(table.numRows, expectedRows.length);
+    for (let i = 0; i < expectedRows.length; i++) {
+      assert.strictEqual(
+        Number(table.getChild('x')!.get(i)),
+        expectedRows[i].x,
+      );
+      assert.strictEqual(
+        Number(table.getChild('doubled')!.get(i)),
+        expectedRows[i].doubled,
+      );
+    }
+  });
+
+  it('should raise the same error as query() when a jobs.insert query fails during execution', async () => {
+    const failingQuery = {
+      query: 'SELECT 1 / 0',
+      jobTimeoutMs: 60000,
+      useQueryCache: false,
+    };
+
+    let expectedError: (Error & {code?: number}) | undefined;
+    try {
+      await bigquery.query(failingQuery);
+    } catch (err) {
+      expectedError = err as Error & {code?: number};
+    }
+    assert.ok(expectedError, 'Expected bigquery.query() to reject');
+
+    let actualError: (Error & {code?: number}) | undefined;
+    try {
+      await bigquery.createQueryArrowStream(failingQuery).toArray();
+    } catch (err) {
+      actualError = err as Error & {code?: number};
+    }
+
+    // Verify jobs.insert Arrow queries surface the same error code and message as query().
+    assert.ok(actualError, 'Expected createQueryArrowStream() to reject');
+    assert.strictEqual(actualError.code, expectedError.code);
+    assert.match(actualError.message, /division by zero/i);
+  });
+
+  it('should reject when a jobs.insert query does not complete within caller-specified timeoutMs', async () => {
+    // jobTimeoutMs forces jobs.insert; timeoutMs then bounds the wait on
+    // jobs.getQueryResults, like BigQuery#query.
+    await assert.rejects(
+      bigquery
+        .createQueryArrowStream({
+          query:
+            'DECLARE n INT64 DEFAULT 50; SELECT x FROM UNNEST(GENERATE_ARRAY(1, n)) AS x ORDER BY x;',
+          jobTimeoutMs: 60000,
+          timeoutMs: 1,
+          useQueryCache: false,
+        })
+        .toArray(),
+      /The query did not complete before 1ms/,
+    );
+  });
+
+  it('should emit one 0-row, 0-column RecordBatch and the job with dry-run statistics for dryRun', async () => {
+    let emittedJob: Job | undefined;
+    const stream = bigquery.createQueryArrowStream({
+      query: 'SELECT x FROM UNNEST(GENERATE_ARRAY(1, 10)) AS x',
+      dryRun: true,
+    });
+    stream.on('job', job => {
+      emittedJob = job;
+    });
+    const batches: arrow.RecordBatch[] = await stream.toArray();
+
+    // Verify the dry run returned no rows or columns, and its statistics
+    // are available on the emitted job.
+    assert.strictEqual(batches.length, 1);
+    assert.strictEqual(batches[0].numRows, 0);
+    assert.strictEqual(batches[0].numCols, 0);
+    assert.ok(emittedJob);
+    assert.ok(emittedJob.metadata?.statistics?.totalBytesProcessed);
+  });
+
+  it('should emit a 0-row RecordBatch preserving the schema for an empty result read via jobs.insert and streams/_default', async () => {
+    // jobs.insert returns no rows inline, so the schema of an empty result
+    // has to come from ReadRows on streams/_default.
+    const stream = bigquery.createQueryArrowStream({
+      query:
+        'SELECT x, CAST(x AS STRING) AS s FROM UNNEST(CAST([] AS ARRAY<INT64>)) AS x',
+      jobTimeoutMs: 60000,
+      useQueryCache: false,
+    });
+    const batches: arrow.RecordBatch[] = await stream.toArray();
+
+    // Verify the query ran via jobs.insert and emitted one 0-row batch with the column names and types.
+    assert.strictEqual(stream.queryId, undefined);
+    assert.strictEqual(batches.length, 1);
+    assert.strictEqual(batches[0].numRows, 0);
+    assert.deepStrictEqual(
+      batches[0].schema.fields.map(f => f.name),
+      ['x', 's'],
+    );
+    assert.ok(arrow.DataType.isInt(batches[0].schema.fields[0].type));
+    assert.ok(arrow.DataType.isUtf8(batches[0].schema.fields[1].type));
+  });
 });
