@@ -1774,14 +1774,14 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    *    .delete();
    * ```
    *
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   * @return A new `Pipeline` object with this stage appended to the stage list.
    */
   delete(): Pipeline;
   /**
    * Performs a delete operation on documents from previous stages.
    *
    * @param options - Options defining how this Delete stage is evaluated.
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   * @return A new `Pipeline` object with this stage appended to the stage list.
    */
   delete(options: firestore.Pipelines.DeleteStageOptions): Pipeline;
   delete(options?: firestore.Pipelines.DeleteStageOptions): Pipeline {
@@ -1794,7 +1794,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * Each input document is updated at the path in its `__name__` field.
    * See `UpdateStageOptions` for details.
    *
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   * @return A new `Pipeline` object with this stage appended to the stage list.
    */
   update(): Pipeline;
   /**
@@ -1805,7 +1805,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    *
    * @param transformedField - The first field transformation to apply.
    * @param additionalFields - Additional field transformations to apply.
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   * @return A new `Pipeline` object with this stage appended to the stage list.
    */
   update(
     transformedField: AliasedExpression,
@@ -1818,7 +1818,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * See `UpdateStageOptions` for details.
    *
    * @param transformedFields - The list of transformations to apply.
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   * @return A new `Pipeline` object with this stage appended to the stage list.
    */
   update(transformedFields: AliasedExpression[]): Pipeline;
   /**
@@ -1828,7 +1828,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * See `UpdateStageOptions` for details.
    *
    * @param options - Options defining how this Update stage is evaluated.
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   * @return A new `Pipeline` object with this stage appended to the stage list.
    */
   update(options: firestore.Pipelines.UpdateStageOptions): Pipeline;
   update(
@@ -1869,7 +1869,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * The operation fails if a target document already exists. See
    * `InsertStageOptions` for how the target document is determined.
    *
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   * @return A new `Pipeline` object with this stage appended to the stage list.
    */
   insert(): Pipeline;
   /**
@@ -1879,7 +1879,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * `InsertStageOptions` for how the target document is determined.
    *
    * @param options - Options defining how this Insert stage is evaluated.
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   * @return A new `Pipeline` object with this stage appended to the stage list.
    */
   insert(options: firestore.Pipelines.InsertStageOptions): Pipeline;
   insert(options?: firestore.Pipelines.InsertStageOptions): Pipeline {
@@ -1894,7 +1894,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * See `UpsertStageOptions` for how the target document is
    * determined.
    *
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   * @return A new `Pipeline` object with this stage appended to the stage list.
    */
   upsert(): Pipeline;
   /**
@@ -1905,7 +1905,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    *
    * @param additionalField - The first additional field to apply on upsert.
    * @param additionalFields - Additional fields to apply on upsert.
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   * @return A new `Pipeline` object with this stage appended to the stage list.
    */
   upsert(
     additionalField: AliasedExpression,
@@ -1918,7 +1918,7 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
    * determined.
    *
    * @param options - Options defining how this Upsert stage is evaluated.
-   * @return A new {@code Pipeline} object with this stage appended to the stage list.
+   * @return A new `Pipeline` object with this stage appended to the stage list.
    */
   upsert(options: firestore.Pipelines.UpsertStageOptions): Pipeline;
   upsert(
