@@ -105,6 +105,11 @@
                 "createCertificateIssuanceConfig"
               ]
             },
+            "UpdateCertificateIssuanceConfig": {
+              "methods": [
+                "updateCertificateIssuanceConfig"
+              ]
+            },
             "DeleteCertificateIssuanceConfig": {
               "methods": [
                 "deleteCertificateIssuanceConfig"
@@ -265,6 +270,11 @@
             "CreateCertificateIssuanceConfig": {
               "methods": [
                 "createCertificateIssuanceConfig"
+              ]
+            },
+            "UpdateCertificateIssuanceConfig": {
+              "methods": [
+                "updateCertificateIssuanceConfig"
               ]
             },
             "DeleteCertificateIssuanceConfig": {

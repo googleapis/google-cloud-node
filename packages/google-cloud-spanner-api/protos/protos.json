@@ -2753,6 +2753,14 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             },
+                            "allowedProcessingUnits": {
+                              "rule": "repeated",
+                              "type": "AllowedProcessingUnits",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
                             "quorumType": {
                               "type": "QuorumType",
                               "id": 18,
@@ -2790,6 +2798,22 @@
                                 "UNSUPPORTED": 2,
                                 "DISABLED": 3,
                                 "QUOTA_EXCEEDED": 4
+                              }
+                            },
+                            "AllowedProcessingUnits": {
+                              "fields": {
+                                "minProcessingUnits": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "maxProcessingUnits": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "processingUnitIncrement": {
+                                  "type": "int32",
+                                  "id": 3
+                                }
                               }
                             },
                             "QuorumType": {
