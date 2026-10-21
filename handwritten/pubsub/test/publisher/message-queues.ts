@@ -18,7 +18,7 @@ import {loggingUtils, ServiceError} from 'google-gax';
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import {EventEmitter} from 'events';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 
 import {RequestConfig, RequestCallback} from '../../src/pubsub';
@@ -187,10 +187,7 @@ describe('Message Queues', () => {
         fakeLog.remove();
 
         assert.strictEqual(fakeLog.called, true);
-        assert.strictEqual(
-          fakeLog.fields!.severity,
-          'INFO',
-        );
+        assert.strictEqual(fakeLog.fields!.severity, 'INFO');
         assert.strictEqual(fakeLog.args![1] as string, 'test');
       });
 
@@ -394,6 +391,7 @@ describe('Message Queues', () => {
           queue.batch = new FakeMessageBatch();
           queue.batch.messages = fakeMessages;
           queue.batch.callbacks = spies;
+          // eslint-disable-next-line promise/always-return
           void queue.publishDrain().then(() => {
             process.nextTick(() => {
               assert.strictEqual(stub.callCount, 2);
@@ -429,6 +427,7 @@ describe('Message Queues', () => {
           sandbox.stub(queue, '_publish').callsFake(async () => {});
 
           queue.on('drain', spy);
+          // eslint-disable-next-line promise/always-return
           void queue.publish('test').then(() => {
             process.nextTick(() => {
               assert.strictEqual(spy.callCount, 1);

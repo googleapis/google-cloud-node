@@ -16,7 +16,7 @@ import * as callbackify from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {describe, it, before, beforeEach, afterEach} from 'mocha';
 import * as extend from 'extend';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import {Sink as SINK} from '../src/sink';
 import {Logging, CreateSinkRequest, LogSink} from '../src/index';
@@ -75,7 +75,7 @@ describe('Sink', () => {
     it('should localize the formatted name', () => {
       assert.strictEqual(
         sink.formattedName_,
-        'projects/' + LOGGING.projectId + '/sinks/' + SINK_NAME,
+        'projects/' + LOGGING.projectId + '/sinks/' + SINK_NAME
       );
     });
   });
@@ -98,7 +98,7 @@ describe('Sink', () => {
       sink.logging.auth.getProjectId = async () => PROJECT_ID;
       sink.logging.configService.deleteSink = async (
         reqOpts: {},
-        gaxOpts: {},
+        gaxOpts: {}
       ) => {
         assert.deepStrictEqual(reqOpts, {
           sinkName: sink.formattedName_,
@@ -113,7 +113,7 @@ describe('Sink', () => {
       const gaxOptions = {};
       sink.logging.configService.deleteSink = async (
         reqOpts: {},
-        gaxOpts: {},
+        gaxOpts: {}
       ) => {
         assert.deepStrictEqual(gaxOpts, gaxOptions);
       };
@@ -201,10 +201,7 @@ describe('Sink', () => {
       sink.getMetadata = async () => {
         throw error;
       };
-      sink.setMetadata(METADATA).then(
-        () => {},
-        err => assert.strictEqual(err, error),
-      );
+      return assert.rejects(sink.setMetadata(METADATA), error);
     });
 
     it('should execute gax method', async () => {
@@ -213,7 +210,7 @@ describe('Sink', () => {
       sink.getMetadata = async () => [currentMetadata] as any;
       sink.logging.configService.updateSink = async (
         reqOpts: {},
-        gaxOpts: {},
+        gaxOpts: {}
       ) => {
         assert.deepStrictEqual(reqOpts, {
           sinkName: sink.formattedName_,

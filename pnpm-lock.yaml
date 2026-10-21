@@ -2666,6 +2666,9 @@ importers:
       gapic-tools:
         specifier: ^2.0.0
         version: 2.0.1(protobufjs@8.8.0)
+      google-test-utils:
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^5.0.0
         version: 5.3.1(typescript@5.9.3)
@@ -2763,6 +2766,9 @@ importers:
       express:
         specifier: ^4.16.3
         version: 4.22.2
+      google-test-utils:
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2830,6 +2836,9 @@ importers:
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
+      google-test-utils:
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2973,8 +2982,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.1(protobufjs@7.5.9)
       google-test-utils:
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^6.0.0
         version: 6.0.2(typescript@5.9.3)
@@ -28485,7 +28494,7 @@ snapshots:
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28495,7 +28504,7 @@ snapshots:
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.109.0)':
@@ -28505,7 +28514,7 @@ snapshots:
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack@5.109.0)':
     dependencies:
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.109.0)
 
   '@xtuc/ieee754@1.2.0': {}
@@ -34042,7 +34051,7 @@ snapshots:
     dependencies:
       loader-utils: 2.0.4
       schema-utils: 3.3.0
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
 
   nunjucks@3.2.4(chokidar@3.6.0):
     dependencies:
@@ -36083,7 +36092,7 @@ snapshots:
       picomatch: 4.0.5
       source-map: 0.7.6
       typescript: 5.8.3
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
     optionalDependencies:
       loader-utils: 2.0.4
 
@@ -36555,7 +36564,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.109.0(webpack-cli@6.0.1)
+      webpack: 5.109.0(uglify-js@3.19.3)(webpack-cli@6.0.1)
       webpack-merge: 6.0.1
 
   webpack-merge@4.2.2:

@@ -18,7 +18,7 @@ import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {EventEmitter} from 'events';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
 import * as sinon from 'sinon';
 import * as opentelemetry from '@opentelemetry/api';
 import {Topic} from '../../src';
