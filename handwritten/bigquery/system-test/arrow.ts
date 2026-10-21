@@ -718,4 +718,142 @@ describe('Arrow Query Results', () => {
       ['id', 'label'],
     );
   });
+
+  it('should apply arrowSerializationOptions.picosTimestampPrecision to an explicit destination table read via CreateReadSession', async () => {
+    const destTable = dataset.table('dest_timestamp_precision');
+    // apache-arrow returns timestamps as epoch milliseconds with fractional
+    // microseconds: 2026-01-15T12:34:56.123456Z.
+    const expectedMillis = Date.UTC(2026, 0, 15, 12, 34, 56, 123) + 0.456;
+
+    // A TIMESTAMP column has microsecond precision, so CreateReadSession
+    // should accept every precision and return the same value.
+    for (const picosTimestampPrecision of [
+      'TIMESTAMP_PRECISION_MICROS',
+      'TIMESTAMP_PRECISION_NANOS',
+      'TIMESTAMP_PRECISION_PICOS',
+    ] as const) {
+      const batches: arrow.RecordBatch[] = await bigquery
+        .createQueryArrowStream({
+          query: "SELECT TIMESTAMP '2026-01-15 12:34:56.123456Z' AS ts",
+          destination: destTable,
+          writeDisposition: 'WRITE_TRUNCATE',
+          arrowSerializationOptions: {picosTimestampPrecision},
+        })
+        .toArray();
+      const table = new arrow.Table(batches);
+      assert.ok(arrow.DataType.isTimestamp(table.schema.fields[0].type));
+      assert.strictEqual(table.getChild('ts')!.get(0), expectedMillis);
+    }
+
+    // When picosecond TIMESTAMP(12) support is enabled on the test project,
+    // also verify the default precision truncates to microseconds and
+    // TIMESTAMP_PRECISION_PICOS keeps all 12 digits.
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+      return;
+    }
+    const picosQuery =
+      "SELECT CAST('2026-01-15 12:34:56.123456789123+00' AS TIMESTAMP(12)) AS ts";
+    const defaultBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: picosQuery,
+        destination: destTable,
+        writeDisposition: 'WRITE_TRUNCATE',
+      })
+      .toArray();
+    assert.strictEqual(
+      new arrow.Table(defaultBatches).getChild('ts')!.get(0),
+      expectedMillis,
+    );
+
+    const picosBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: picosQuery,
+        destination: destTable,
+        writeDisposition: 'WRITE_TRUNCATE',
+        arrowSerializationOptions: {
+          picosTimestampPrecision: 'TIMESTAMP_PRECISION_PICOS',
+        },
+      })
+      .toArray();
+    assert.strictEqual(
+      new arrow.Table(picosBatches).getChild('ts')!.get(0),
+      '2026-01-15T12:34:56.123456789123Z',
+    );
+  });
+
+  it('should apply arrowSerializationOptions.picosTimestampPrecision across inline jobs.query and streams/_default', async () => {
+    const totalRows = 15000;
+    const sql = `SELECT id, TIMESTAMP '2026-01-15 12:34:56.123456Z' AS ts, REPEAT('z', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`;
+    // apache-arrow returns timestamps as epoch milliseconds with fractional
+    // microseconds: 2026-01-15T12:34:56.123456Z.
+    const expectedMillis = Date.UTC(2026, 0, 15, 12, 34, 56, 123) + 0.456;
+
+    for (const picosTimestampPrecision of [
+      'TIMESTAMP_PRECISION_MICROS',
+      'TIMESTAMP_PRECISION_NANOS',
+      'TIMESTAMP_PRECISION_PICOS',
+    ] as const) {
+      const batches: arrow.RecordBatch[] = await bigquery
+        .createQueryArrowStream({
+          query: sql,
+          useQueryCache: false,
+          arrowSerializationOptions: {picosTimestampPrecision},
+        })
+        .toArray();
+
+      // Verify the result spanned both inline jobs.query and streams/_default with consistent Timestamp values.
+      assert.ok(
+        batches.length >= 2,
+        `Expected >= 2 batches for ${picosTimestampPrecision}, got ${batches.length}`,
+      );
+      const table = new arrow.Table(batches);
+      assert.strictEqual(table.numRows, totalRows);
+      const tsField = table.schema.fields.find(f => f.name === 'ts');
+      assert.ok(arrow.DataType.isTimestamp(tsField?.type));
+      assert.strictEqual(table.getChild('ts')!.get(0), expectedMillis);
+      assert.strictEqual(
+        table.getChild('ts')!.get(totalRows - 1),
+        expectedMillis,
+      );
+    }
+
+    // When picosecond TIMESTAMP(12) support is enabled on the test project,
+    // also verify the default precision truncates to microseconds on every
+    // batch and TIMESTAMP_PRECISION_PICOS keeps all 12 digits.
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+      return;
+    }
+    const defaultBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: `SELECT id, CAST('2026-01-15 12:34:56.123456789123+00' AS TIMESTAMP(12)) AS ts, REPEAT('z', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`,
+        useQueryCache: false,
+      })
+      .toArray();
+    assert.ok(
+      defaultBatches.length >= 2,
+      `Expected >= 2 batches, got ${defaultBatches.length}`,
+    );
+    const defaultTable = new arrow.Table(defaultBatches);
+    assert.strictEqual(defaultTable.getChild('ts')!.get(0), expectedMillis);
+    assert.strictEqual(
+      defaultTable.getChild('ts')!.get(totalRows - 1),
+      expectedMillis,
+    );
+
+    const picosBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query:
+          "SELECT CAST('2026-01-15 12:34:56.123456789123+00' AS TIMESTAMP(12)) AS ts_picos",
+        useQueryCache: false,
+        arrowSerializationOptions: {
+          picosTimestampPrecision: 'TIMESTAMP_PRECISION_PICOS',
+        },
+      })
+      .toArray();
+    const picosTable = new arrow.Table(picosBatches);
+    assert.strictEqual(
+      picosTable.getChild('ts_picos')!.get(0),
+      '2026-01-15T12:34:56.123456789123Z',
+    );
+  });
 });

@@ -236,6 +236,11 @@ const SAMPLE_READ_ROWS_RESPONSE = {
   },
 };
 
+/** The `arrowSerializationOptions` sent when the caller sets none. */
+const DEFAULT_SERIALIZATION_OPTIONS: bigquery.IArrowSerializationOptions = {
+  picosTimestampPrecision: 'TIMESTAMP_PRECISION_MICROS',
+};
+
 /**
  * Stubs `bq.createJob` for callback-based `jobs.insert` tests.
  */
@@ -699,6 +704,7 @@ describe('Arrow Support', () => {
           readStream:
             'projects/test-project/locations/EU/jobs/job-multi-1/streams/_default',
           offset: 2,
+          arrowSerializationOptions: DEFAULT_SERIALIZATION_OPTIONS,
         },
       ]);
 
@@ -1102,6 +1108,7 @@ describe('Arrow Support', () => {
           readStream:
             'projects/test-project/locations/US/jobs/job-wait-1/streams/_default',
           offset: 0,
+          arrowSerializationOptions: DEFAULT_SERIALIZATION_OPTIONS,
         },
       ]);
       assert.strictEqual(batches.length, 1);
@@ -1560,6 +1567,7 @@ describe('Arrow Support', () => {
           readStream:
             'projects/test-project/locations/EU/jobs/custom-job-1/streams/_default',
           offset: 0,
+          arrowSerializationOptions: DEFAULT_SERIALIZATION_OPTIONS,
         },
       ]);
       assert.strictEqual(batches.length, 1);
@@ -1881,19 +1889,22 @@ describe('Arrow Support', () => {
       });
       assert.strictEqual(queryConfig?.writeDisposition, 'WRITE_TRUNCATE');
 
-      // Verify createReadSession was called with maxStreamCount: 1 and dataFormat: 'ARROW'.
+      // Verify createReadSession was called with maxStreamCount: 1, dataFormat: 'ARROW', and default arrowSerializationOptions.
       assert.deepStrictEqual(capturedSessionReqs, [
         {
           parent: 'projects/test-project',
           readSession: {
             table: 'projects/dest-project/datasets/dest_ds/tables/dest_tbl',
             dataFormat: 'ARROW',
+            readOptions: {
+              arrowSerializationOptions: DEFAULT_SERIALIZATION_OPTIONS,
+            },
           },
           maxStreamCount: 1,
         },
       ]);
 
-      // Verify readRows was called on session.streams[0].name at offset = 0.
+      // Verify readRows was called on session.streams[0].name at offset = 0 (without arrowSerializationOptions on the session stream).
       assert.deepStrictEqual(capturedReadRowsReqs, [
         {
           readStream:
@@ -2015,6 +2026,7 @@ describe('Arrow Support', () => {
     };
     const readStream =
       'projects/test-project/locations/US/jobs/job-resume-1/streams/_default';
+    const arrowSerializationOptions = DEFAULT_SERIALIZATION_OPTIONS;
     let bq: BigQuery;
     // The ReadRows streams opened, in order.
     let grpcStreams: EventEmitter[];
@@ -2080,10 +2092,10 @@ describe('Arrow Support', () => {
       // Verify ReadRows started after the inline row, and every reopen
       // resumed after the 2 rows read before the first error.
       assert.deepStrictEqual(requests, [
-        {readStream, offset: 1},
-        {readStream, offset: 3},
-        {readStream, offset: 3},
-        {readStream, offset: 3},
+        {readStream, offset: 1, arrowSerializationOptions},
+        {readStream, offset: 3, arrowSerializationOptions},
+        {readStream, offset: 3, arrowSerializationOptions},
+        {readStream, offset: 3, arrowSerializationOptions},
       ]);
       // Verify all rows arrived in order without gaps or duplicates.
       const table = new arrow.Table(batches);
@@ -2186,6 +2198,201 @@ describe('Arrow Support', () => {
         /readRows failed/,
       );
       assert.strictEqual(readRowsCalls, 2);
+    });
+  });
+
+  describe('BigQuery#createQueryArrowStream (arrowSerializationOptions)', () => {
+    let bq: BigQuery;
+
+    beforeEach(() => {
+      bq = new BigQuery({projectId: 'test-project'});
+    });
+
+    it('should default picosTimestampPrecision to TIMESTAMP_PRECISION_MICROS when unset or PICOS_TIMESTAMP_PRECISION_UNSPECIFIED', async () => {
+      const getCapturedReq = stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          totalRows: '2',
+          pageRowCount: '2',
+          arrowSchema: {serializedSchema: SAMPLE_PAYLOAD.serializedSchema},
+          arrowRecordBatch: {
+            serializedRecordBatch: SAMPLE_PAYLOAD.serializedRecordBatch,
+          },
+        },
+      });
+
+      await bq
+        .createQueryArrowStream({
+          query: 'SELECT 1',
+          arrowSerializationOptions: {
+            bufferCompression: 'COMPRESSION_UNSPECIFIED',
+            picosTimestampPrecision: 'PICOS_TIMESTAMP_PRECISION_UNSPECIFIED',
+          },
+        })
+        .toArray();
+
+      // Verify PICOS_TIMESTAMP_PRECISION_UNSPECIFIED is normalized to TIMESTAMP_PRECISION_MICROS.
+      assert.deepStrictEqual(
+        getCapturedReq()?.arrowSerializationOptions,
+        DEFAULT_SERIALIZATION_OPTIONS,
+      );
+    });
+
+    it('should forward explicit picosTimestampPrecision consistently across jobs.query and streams/_default (including stream resumption)', async () => {
+      const page1 = serializeArrowTable(makeSampleTable([1], ['alice']));
+      const page2 = serializeArrowTable(makeSampleTable([2], ['bob']));
+      const getCapturedReq = stubJobsQuery(bq, {
+        res: {
+          jobComplete: true,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-picos-1',
+            location: 'US',
+          },
+          pageRowCount: '1',
+          totalRows: '2',
+          arrowSchema: {serializedSchema: page1.serializedSchema},
+          arrowRecordBatch: {
+            serializedRecordBatch: page1.serializedRecordBatch,
+          },
+        },
+      });
+
+      const requests: ReadRowsRequest[] = [];
+      stubStorageReadClient(bq, {
+        readRows: req =>
+          // Fail the first call so the resumed call is checked too.
+          requests.push(req) === 1
+            ? fakeReadRowsStream([], grpcError('Service unavailable', 14))
+            : fakeReadRowsStream([toReadRowsResponse(page2)]),
+      });
+
+      const picos: bigquery.IArrowSerializationOptions = {
+        picosTimestampPrecision: 'TIMESTAMP_PRECISION_PICOS',
+      };
+      await bq
+        .createQueryArrowStream({
+          query: 'SELECT id, name FROM tbl',
+          arrowSerializationOptions: picos,
+        })
+        .toArray();
+
+      // Verify jobs.query, the initial ReadRows call, and the resumed ReadRows call all received TIMESTAMP_PRECISION_PICOS.
+      assert.deepStrictEqual(
+        getCapturedReq()?.arrowSerializationOptions,
+        picos,
+      );
+      const readStream =
+        'projects/test-project/locations/US/jobs/job-picos-1/streams/_default';
+      assert.deepStrictEqual(requests, [
+        {readStream, offset: 1, arrowSerializationOptions: picos},
+        {readStream, offset: 1, arrowSerializationOptions: picos},
+      ]);
+    });
+
+    it('should strip arrowSerializationOptions from jobs.insert configuration.query and forward it to CreateReadSession for destination tables', async () => {
+      const fakeJob = bq.job('dest-nanos-1', {location: 'US'});
+      fakeJob.metadata = {
+        jobReference: {
+          projectId: 'test-project',
+          jobId: 'dest-nanos-1',
+          location: 'US',
+        },
+        // jobs.insert echoes the destination table in the job configuration.
+        configuration: {
+          query: {
+            destinationTable: {
+              projectId: 'test-project',
+              datasetId: 'dest_ds',
+              tableId: 'dest_tbl_nanos',
+            },
+          },
+        },
+      };
+      stubJobGetQueryResults(fakeJob, async () => [
+        [],
+        null,
+        {jobComplete: true},
+      ]);
+      let capturedJobOpts: JobOptions | undefined;
+      stubCreateJob(bq, (reqOpts, cb) => {
+        capturedJobOpts = reqOpts;
+        process.nextTick(() => cb(null, fakeJob, fakeJob.metadata));
+      });
+
+      const sessionReqs: CreateReadSessionRequest[] = [];
+      const readRowsReqs: ReadRowsRequest[] = [];
+      const readStream =
+        'projects/test-project/locations/US/sessions/sess-nanos/streams/stream-0';
+      stubStorageReadClient(bq, {
+        createReadSession: async req => {
+          sessionReqs.push(req);
+          return [
+            {
+              arrowSchema: SAMPLE_READ_ROWS_RESPONSE.arrowSchema,
+              streams: [{name: readStream}],
+            },
+          ];
+        },
+        readRows: req => {
+          readRowsReqs.push(req);
+          return fakeReadRowsStream([
+            {arrowRecordBatch: SAMPLE_READ_ROWS_RESPONSE.arrowRecordBatch},
+          ]);
+        },
+      });
+
+      const nanos: bigquery.IArrowSerializationOptions = {
+        picosTimestampPrecision: 'TIMESTAMP_PRECISION_NANOS',
+      };
+      await bq
+        .createQueryArrowStream({
+          query: 'SELECT id, name FROM tbl',
+          destination: bq.dataset('dest_ds').table('dest_tbl_nanos'),
+          arrowSerializationOptions: nanos,
+        })
+        .toArray();
+
+      // Verify arrowSerializationOptions was stripped from jobs.insert
+      // configuration.query and passed on CreateReadSession instead of
+      // ReadRows.
+      const queryConfig = capturedJobOpts?.configuration?.query;
+      assert.ok(queryConfig);
+      assert.strictEqual('arrowSerializationOptions' in queryConfig, false);
+      assert.deepStrictEqual(sessionReqs, [
+        {
+          parent: 'projects/test-project',
+          readSession: {
+            table:
+              'projects/test-project/datasets/dest_ds/tables/dest_tbl_nanos',
+            dataFormat: 'ARROW',
+            readOptions: {arrowSerializationOptions: nanos},
+          },
+          maxStreamCount: 1,
+        },
+      ]);
+      assert.deepStrictEqual(readRowsReqs, [{readStream, offset: 0}]);
+    });
+
+    it('should reject LZ4_FRAME and ZSTD bufferCompression before sending a query request', async () => {
+      const getCapturedReq = stubJobsQuery(bq, {});
+
+      for (const compression of ['LZ4_FRAME', 'ZSTD'] as const) {
+        await assert.rejects(
+          bq
+            .createQueryArrowStream({
+              query: 'SELECT 1',
+              arrowSerializationOptions: {bufferCompression: compression},
+            })
+            .toArray(),
+          new RegExp(
+            `Unsupported arrowSerializationOptions\\.bufferCompression "${compression}"`,
+          ),
+        );
+      }
+
+      // Verify no BigQuery API call was made when bufferCompression is unsupported.
+      assert.strictEqual(getCapturedReq(), undefined);
     });
   });
 });
