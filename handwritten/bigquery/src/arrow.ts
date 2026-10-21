@@ -588,6 +588,10 @@ async function streamQueryJob(
   // Throws for an invalid request, for example a destination that isn't a
   // Table, or invalid parameters.
   const [job, resp] = await bq.createQueryJob(jobQuery);
+  // The consumer may have destroyed the stream while jobs.insert ran.
+  if (stream.destroyed) {
+    return;
+  }
   if (!job) {
     throw new Error('jobs.insert returned no job.');
   }

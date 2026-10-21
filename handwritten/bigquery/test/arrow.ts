@@ -220,19 +220,14 @@ function stubCreateJob(
 }
 
 /**
- * Stubs `bq.createQueryJob` with a callback-style `impl`, returning a promise
- * because the code calls the promisified method.
+ * Stubs `bq.createQueryJob`, which the code awaits, with an async `impl`
+ * that resolves to `[job, apiResponse]` or rejects.
  */
 function stubCreateQueryJob(
   bq: BigQuery,
-  impl: (opts: Query | string, cb: JobCallback) => void,
+  impl: (opts: Query | string) => Promise<[Job, bigquery.IJob | undefined]>,
 ): void {
-  bq.createQueryJob = ((opts: Query | string) =>
-    new Promise((resolve, reject) => {
-      impl(opts, (err, job, resp) =>
-        err ? reject(err) : resolve([job, resp]),
-      );
-    })) as unknown as BigQuery['createQueryJob'];
+  bq.createQueryJob = impl as unknown as BigQuery['createQueryJob'];
 }
 
 describe('Arrow Support', () => {
@@ -1557,8 +1552,9 @@ describe('Arrow Support', () => {
     it('should not retry a failed jobs.query call as jobs.insert', async () => {
       stubJobsQuery(bq, {err: new Error('jobs.query failed')});
       let createQueryJobCalled = false;
-      stubCreateQueryJob(bq, () => {
+      stubCreateQueryJob(bq, async () => {
         createQueryJobCalled = true;
+        throw new Error('createQueryJob should not be called');
       });
 
       // Verify a failed jobs.query surfaces its error directly without falling back to jobs.insert.
@@ -1583,11 +1579,7 @@ describe('Arrow Support', () => {
         getQueryResultsCalled = true;
         return [[], null, {jobComplete: true}];
       });
-      stubCreateQueryJob(bq, (_opts, cb) => {
-        process.nextTick(() => {
-          cb(null, fakeJob, fakeJob.metadata);
-        });
-      });
+      stubCreateQueryJob(bq, async () => [fakeJob, fakeJob.metadata]);
 
       const stream = bq.createQueryArrowStream({
         query: 'SELECT 1',
@@ -1696,11 +1688,48 @@ describe('Arrow Support', () => {
       );
     });
 
+    it('should not emit job or wait for the job when the stream is destroyed during jobs.insert', async () => {
+      const fakeJob = bq.job('destroyed-insert-job', {location: 'US'});
+      fakeJob.metadata = {
+        jobReference: {
+          projectId: 'test-project',
+          jobId: 'destroyed-insert-job',
+          location: 'US',
+        },
+      };
+      let getQueryResultsCalled = false;
+      stubJobGetQueryResults(fakeJob, async () => {
+        getQueryResultsCalled = true;
+        return [[], null, {jobComplete: true}];
+      });
+      const stream = bq.createQueryArrowStream({
+        query: 'SELECT 1',
+        jobId: 'destroyed-insert-job',
+      });
+      stubCreateQueryJob(bq, async () => {
+        // The consumer gives up while jobs.insert is in flight.
+        stream.destroy();
+        return [fakeJob, fakeJob.metadata];
+      });
+      let jobEmitted = false;
+      stream.on('job', () => {
+        jobEmitted = true;
+      });
+
+      stream.resume();
+      await new Promise(resolve => stream.once('close', resolve));
+      // Let the query finish its work after jobs.insert resolves.
+      await new Promise(resolve => setImmediate(resolve));
+
+      // Verify nothing happened on the destroyed stream.
+      assert.strictEqual(jobEmitted, false);
+      assert.strictEqual(stream.jobReference, undefined);
+      assert.strictEqual(getQueryResultsCalled, false);
+    });
+
     it('should forward createQueryJob errors to the stream', async () => {
-      stubCreateQueryJob(bq, (_opts, cb) => {
-        process.nextTick(() => {
-          cb(new Error('Permission denied creating job'), null);
-        });
+      stubCreateQueryJob(bq, async () => {
+        throw new Error('Permission denied creating job');
       });
 
       // Verify errors from createQueryJob reject stream consumption.

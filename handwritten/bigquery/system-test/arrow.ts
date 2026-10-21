@@ -610,6 +610,43 @@ describe('Arrow Query Results', () => {
     assert.match(actualError.message, /division by zero/i);
   });
 
+  it('should reject when a jobs.insert query does not complete within caller-specified timeoutMs', async () => {
+    // jobTimeoutMs forces jobs.insert; timeoutMs then bounds the wait on
+    // jobs.getQueryResults, like BigQuery#query.
+    await assert.rejects(
+      bigquery
+        .createQueryArrowStream({
+          query:
+            'DECLARE n INT64 DEFAULT 50; SELECT x FROM UNNEST(GENERATE_ARRAY(1, n)) AS x ORDER BY x;',
+          jobTimeoutMs: 60000,
+          timeoutMs: 1,
+          useQueryCache: false,
+        })
+        .toArray(),
+      /The query did not complete before 1ms/,
+    );
+  });
+
+  it('should emit one 0-row, 0-column RecordBatch and the job with dry-run statistics for dryRun', async () => {
+    let emittedJob: Job | undefined;
+    const stream = bigquery.createQueryArrowStream({
+      query: 'SELECT x FROM UNNEST(GENERATE_ARRAY(1, 10)) AS x',
+      dryRun: true,
+    });
+    stream.on('job', job => {
+      emittedJob = job;
+    });
+    const batches: arrow.RecordBatch[] = await stream.toArray();
+
+    // Verify the dry run returned no rows or columns, and its statistics
+    // are available on the emitted job.
+    assert.strictEqual(batches.length, 1);
+    assert.strictEqual(batches[0].numRows, 0);
+    assert.strictEqual(batches[0].numCols, 0);
+    assert.ok(emittedJob);
+    assert.ok(emittedJob.metadata?.statistics?.totalBytesProcessed);
+  });
+
   it('should emit a 0-row RecordBatch preserving the schema for an empty result read via jobs.insert and streams/_default', async () => {
     // jobs.insert returns no rows inline, so the schema of an empty result
     // has to come from ReadRows on streams/_default.
