@@ -20,10 +20,9 @@
 //   coverage and Mocha worker-thread parallelism (`parallel: true`).
 // - Under Bun (`typeof Bun !== 'undefined'` or `JS_RUNTIME === 'bun'`):
 //   Skips `c8` (which relies on Node's `NODE_V8_COVERAGE`), disables Mocha
-//   worker-thread parallelism (`--no-parallel`), preloads the Bun `proxyquire`
-//   shim (`bin/proxyquire-bun-shim.cjs`) when `--proxyquire-shim` is passed,
-//   and loads `mocha/bin/mocha.js` directly in-process so `#!/usr/bin/env node`
-//   shebangs never switch back to Node.js.
+//   worker-thread parallelism (`--no-parallel`), and loads `mocha/bin/mocha.js`
+//   directly in-process so `#!/usr/bin/env node` shebangs never switch back to
+//   Node.js.
 'use strict';
 
 const {spawnSync} = require('child_process');
@@ -32,26 +31,7 @@ const fs = require('fs');
 
 const rawArgs = process.argv.slice(2);
 const noC8 = rawArgs.includes('--no-c8');
-
-const SHIM_FLAGS = [
-  {
-    flag: '--proxyquire-shim',
-    envIn: 'BUN_PROXYQUIRE_SHIM',
-    envOut: 'BUN_ENABLE_PROXYQUIRE_SHIM',
-  },
-];
-
-const shimFlagSet = new Set(SHIM_FLAGS.map(s => s.flag));
-const shimEnvVars = {};
-for (const {flag, envIn, envOut} of SHIM_FLAGS) {
-  const enabled =
-    rawArgs.includes(flag) ||
-    process.env[envIn] === 'true' ||
-    process.env[envOut] === 'true';
-  shimEnvVars[envOut] = enabled ? 'true' : 'false';
-}
-
-const args = rawArgs.filter(a => a !== '--no-c8' && !shimFlagSet.has(a));
+const args = rawArgs.filter(a => a !== '--no-c8');
 
 const isBunRuntime = typeof Bun !== 'undefined';
 const isBunUserAgent = /^bun\//i.test(process.env.npm_config_user_agent || '');
@@ -655,7 +635,6 @@ if (require.main === module) {
 
   if (wantsBunRuntime) {
     process.env.MOCHA_PARALLEL = 'false';
-    Object.assign(process.env, shimEnvVars);
 
     // If Bun was requested (via JS_RUNTIME=bun or `bun run test`) but this
     // script was launched via Node.js, re-exec under the `bun` binary.
@@ -665,7 +644,6 @@ if (require.main === module) {
         env: {
           ...process.env,
           MOCHA_PARALLEL: 'false',
-          ...shimEnvVars,
         },
       });
       if (res.error) {
@@ -681,15 +659,6 @@ if (require.main === module) {
     const mochaArgs = resolvedArgs.filter(a => !isParallelFlag(a));
     if (!mochaArgs.includes('--no-parallel')) {
       mochaArgs.unshift('--no-parallel');
-    }
-
-    // Only preload the proxyquire shim when `--proxyquire-shim` is requested.
-    if (shimEnvVars.BUN_ENABLE_PROXYQUIRE_SHIM === 'true') {
-      const shimPath = path.resolve(__dirname, 'proxyquire-bun-shim.cjs');
-      require(shimPath);
-      if (!mochaArgs.includes(shimPath)) {
-        mochaArgs.unshift('--require', shimPath);
-      }
     }
 
     if (!mochaArgs.includes('--exit')) {
