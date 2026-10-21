@@ -12,9 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {describe, it} from 'mocha';
-import {expect} from 'chai';
-import {fieldFiltersQuery, orderBy, queryEquals, startAt} from './query';
+import {describe, it, expect} from 'vitest';
+import {
+  fieldFiltersQuery,
+  orderBy,
+  queryEquals,
+  startAt,
+} from './util/query_helpers';
 import {
   ApiOverride,
   create,
@@ -211,7 +215,7 @@ describe('rejects undefined values', () => {
         void firestore
           .doc('collectionId/documentId')
           .set(undefined as InvalidApiUsage);
-      }).to.throw(
+      }).toThrow(
         'Value for argument "data" is not a valid Firestore document. Input is not a plain JavaScript object.',
       );
     });
@@ -225,7 +229,7 @@ describe('rejects undefined values', () => {
         void firestore
           .doc('collectionId/documentId')
           .create(undefined as InvalidApiUsage);
-      }).to.throw(
+      }).toThrow(
         'Value for argument "data" is not a valid Firestore document. Input is not a plain JavaScript object.',
       );
     });
@@ -237,7 +241,7 @@ describe('rejects undefined values', () => {
       );
       expect(() => {
         void firestore.doc('collectionId/documentId').update('foo', undefined);
-      }).to.throw('"undefined" values are only ignored inside of objects.');
+      }).toThrow('"undefined" values are only ignored inside of objects.');
     });
 
     it('to Query.where()', async () => {
@@ -250,7 +254,7 @@ describe('rejects undefined values', () => {
           .doc('collectionId/documentId')
           .collection('collectionId')
           .where('foo', '==', undefined);
-      }).to.throw('"undefined" values are only ignored inside of objects.');
+      }).toThrow('"undefined" values are only ignored inside of objects.');
     });
 
     it('to Query.startAt()', async () => {
@@ -264,7 +268,7 @@ describe('rejects undefined values', () => {
           .collection('collectionId')
           .orderBy('foo')
           .startAt(undefined);
-      }).to.throw('"undefined" values are only ignored inside of objects.');
+      }).toThrow('"undefined" values are only ignored inside of objects.');
     });
   });
 
@@ -276,7 +280,7 @@ describe('rejects undefined values', () => {
           foo: 'foo',
           bar: undefined,
         });
-      }).to.throw(
+      }).toThrow(
         'Cannot use "undefined" as a Firestore value (found in field "bar"). If you want to ignore undefined values, enable `ignoreUndefinedProperties`.',
       );
     });
@@ -288,7 +292,7 @@ describe('rejects undefined values', () => {
           foo: 'foo',
           bar: undefined,
         });
-      }).to.throw(
+      }).toThrow(
         'Cannot use "undefined" as a Firestore value (found in field "bar"). If you want to ignore undefined values, enable `ignoreUndefinedProperties`.',
       );
     });
@@ -300,7 +304,7 @@ describe('rejects undefined values', () => {
           foo: 'foo',
           bar: undefined,
         });
-      }).to.throw(
+      }).toThrow(
         'Cannot use "undefined" as a Firestore value (found in field "foo.bar"). If you want to ignore undefined values, enable `ignoreUndefinedProperties`.',
       );
     });
@@ -311,7 +315,7 @@ describe('rejects undefined values', () => {
         firestore
           .collection('collectionId')
           .where('foo', '==', {bar: 'bar', baz: undefined});
-      }).to.throw(
+      }).toThrow(
         'Cannot use "undefined" as a Firestore value (found in field "baz"). If you want to ignore undefined values, enable `ignoreUndefinedProperties`.',
       );
     });
@@ -323,7 +327,7 @@ describe('rejects undefined values', () => {
           .collection('collectionId')
           .orderBy('foo')
           .startAt({bar: 'bar', baz: undefined});
-      }).to.throw(
+      }).toThrow(
         'Cannot use "undefined" as a Firestore value (found in field "baz"). If you want to ignore undefined values, enable `ignoreUndefinedProperties`.',
       );
     });

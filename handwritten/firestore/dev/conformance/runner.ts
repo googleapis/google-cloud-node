@@ -15,9 +15,6 @@
 import {DocumentData} from '@google-cloud/firestore';
 
 import * as duplexify from 'duplexify';
-
-import {it, xit, describe} from 'mocha';
-import {expect} from 'chai';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as protobufjs from 'protobufjs';
@@ -98,11 +95,9 @@ const watchQuery = () => {
   return firestore.collection('C').orderBy('a');
 };
 
-const createInstance = (overrides: ApiOverride) => {
-  return createInstanceHelper(overrides, {
+const createInstance = async (overrides: ApiOverride) => {
+  firestore = await createInstanceHelper(overrides, {
     projectId: CONFORMANCE_TEST_PROJECT_ID,
-  }).then(firestoreClient => {
-    firestore = firestoreClient;
   });
 };
 
@@ -262,7 +257,7 @@ function commitHandler(
   return request => {
     const actualCommit = COMMIT_REQUEST_TYPE.fromObject(request);
     const expectedCommit = COMMIT_REQUEST_TYPE.fromObject(spec.request);
-    expect(actualCommit).to.deep.equal(expectedCommit);
+    expect(actualCommit).toEqual(expectedCommit);
     const res: api.ICommitResponse = {
       commitTime: {},
       writeResults: [],
@@ -283,7 +278,7 @@ function queryHandler(spec: ConformanceProto) {
       request.structuredQuery!,
     );
     const expectedQuery = STRUCTURED_QUERY_TYPE.fromObject(spec.query);
-    expect(actualQuery).to.deep.equal(expectedQuery);
+    expect(actualQuery).toEqual(expectedQuery);
     const stream = through2.obj();
     setImmediate(() => {
       // Empty query always emits a readTime
@@ -298,7 +293,7 @@ function queryHandler(spec: ConformanceProto) {
 function getHandler(spec: ConformanceProto) {
   return (request: api.IBatchGetDocumentsRequest) => {
     const getDocument = spec.request;
-    expect(request.documents![0]).to.equal(getDocument.name);
+    expect(request.documents![0]).toBe(getDocument.name);
     const stream = through2.obj();
     setImmediate(() => {
       stream.push({
@@ -456,7 +451,7 @@ function runTest(spec: ConformanceProto) {
             }
           },
           err => {
-            expect(expectedSnapshots).to.have.length(0);
+            expect(expectedSnapshots).toHaveLength(0);
             unlisten();
             reject(err);
           },
@@ -507,12 +502,14 @@ function runTest(spec: ConformanceProto) {
 
   return testPromise.then(
     () => {
-      expect(testSpec.isError || false).to.be.false;
+      expect(testSpec.isError || false).toBe(false);
+      return undefined;
     },
     err => {
       if (!testSpec.isError) {
         throw err;
       }
+      return undefined;
     },
   );
 }
@@ -608,7 +605,7 @@ describe('Conformance Tests', () => {
     const isExclusive = exclusiveRe.find(re => re.test(testCase.description));
 
     if (isIgnored || (exclusiveRe.length > 0 && !isExclusive)) {
-      xit(`${testCase.description}`, () => {});
+      it.skip(`${testCase.description}`, () => {});
     } else {
       it(`${testCase.description}`, () => runTest(testCase));
     }
