@@ -410,7 +410,8 @@ async function readDestinationSchema(
   // the job's current metadata instead of the response that created it.
   const [metadata] = await job.getMetadata();
   const destRef = metadata?.configuration?.query?.destinationTable;
-  if (!destRef) {
+  // Skip the read session if the consumer destroyed the stream meanwhile.
+  if (!destRef || ctx.stream.destroyed) {
     return undefined;
   }
   const session = await createArrowReadSession(
@@ -436,7 +437,7 @@ async function readDestinationSchema(
  *
  * @private
  */
-function streamReadRows(
+async function streamReadRows(
   ctx: ArrowStreamContext,
   options: {
     readStream: string;
@@ -472,7 +473,10 @@ function streamReadRows(
       stream.removeListener('close', onClose);
       ctx.onRead = undefined;
       // cancel() makes gRPC emit a CANCELLED 'error' on a later tick, which
-      // would crash the process if no 'error' listener were attached.
+      // would crash the process if no 'error' listener were attached. This
+      // listener swallows every later error on this ReadRows call, not just
+      // CANCELLED: we're done with the call, so there's no value in
+      // surfacing them.
       grpcStream.on('error', () => {});
       if (opts.cancel) {
         grpcStream.cancel();
@@ -651,6 +655,10 @@ async function streamQueryJob(
   // Throws for an invalid request, for example a destination that isn't a
   // Table, or invalid parameters.
   const [job, resp] = await bq.createQueryJob(jobQuery);
+  // The consumer may have destroyed the stream while jobs.insert ran.
+  if (stream.destroyed) {
+    return;
+  }
   if (!job) {
     throw new Error('jobs.insert returned no job.');
   }
@@ -688,18 +696,34 @@ export function createQueryArrowStream_(
   bq: BigQuery,
   query?: ArrowQuery | string,
 ): ArrowRecordBatchStream {
-  const stream = new ResourceStream<RecordBatch>(
-    {},
-    () => {},
-  ) as ArrowRecordBatchStream;
-
   let started = false;
   // Set once the query starts, so later reads can resume the active ReadRows.
   let readCtx: ArrowStreamContext | undefined;
 
+  const stream = new ResourceStream<RecordBatch>(
+    {
+      streamOptions: {
+        // Buffer at most one decoded RecordBatch ahead of the consumer, since
+        // each batch can hold many rows.
+        highWaterMark: 1,
+        // Called when the consumer wants more batches: the first call starts
+        // the query, and later calls resume a paused ReadRows call.
+        read: () => {
+          if (started) {
+            readCtx?.onRead?.();
+            return;
+          }
+          started = true;
+          void runQuery();
+        },
+      },
+    },
+    () => {},
+  ) as ArrowRecordBatchStream;
+
   // Runs the query and pushes its batches. The returned promise settles once
   // all batches are pushed, the consumer destroys the stream, or a step fails.
-  const runQuery = async (): Promise<void> => {
+  const streamQueryResults = async (): Promise<void> => {
     const {arrow, storage} = checkArrowDependencies();
 
     if (!query || (typeof query === 'object' && !query.query)) {
@@ -738,6 +762,10 @@ export function createQueryArrowStream_(
     queryReq.queryResultsFormat = 'ARROW';
 
     const [job, res] = (await bq.runJobsQuery(queryReq)) as JobsQueryResponse;
+    // The consumer may have destroyed the stream while jobs.query ran.
+    if (stream.destroyed) {
+      return;
+    }
 
     if (res?.queryId) {
       stream.queryId = res.queryId;
@@ -800,24 +828,17 @@ export function createQueryArrowStream_(
     );
   };
 
-  stream._read = () => {
-    if (started) {
-      readCtx?.onRead?.();
+  // The only place that ends or destroys the stream.
+  const runQuery = async (): Promise<void> => {
+    try {
+      await streamQueryResults();
+    } catch (err) {
+      stream.destroy(err as Error);
       return;
     }
-    started = true;
-    // The only place that ends or destroys the stream.
-    void (async () => {
-      try {
-        await runQuery();
-      } catch (err) {
-        stream.destroy(err as Error);
-        return;
-      }
-      if (!stream.destroyed) {
-        stream.end();
-      }
-    })();
+    if (!stream.destroyed) {
+      stream.end();
+    }
   };
 
   return stream;

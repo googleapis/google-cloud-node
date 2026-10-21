@@ -391,17 +391,21 @@ export class BigQuery extends Service {
    * Requires the optional `@google-cloud/bigquery-storage` (>= 6.3.0) package
    * to be installed.
    *
-   * Rows that don't fit in the first `jobs.query` response are read with the
-   * BigQuery Storage Read API, which must be enabled in the project and is
-   * billed separately. The stream reads more rows only as the caller consumes
-   * batches, so iterate over batches to keep memory bounded; collecting every
-   * batch (for example with `toArray()`) holds the whole result in memory.
+   * Rows that don't fit in the first `jobs.query` response, and every row of a
+   * query that runs with `jobs.insert` (for example, one that sets `jobId` or
+   * `jobTimeoutMs`), are read with the BigQuery Storage Read API, which must be
+   * enabled in the project and is billed separately. The stream reads more
+   * rows only as the caller consumes batches, so iterate over batches to keep
+   * memory bounded; collecting every batch (for example with `toArray()`)
+   * holds the whole result in memory. If you stop reading before the stream
+   * ends, call `stream.destroy()` to cancel the read; breaking out of
+   * `for await` does this for you.
    *
    * @param {string|ArrowQuery} [options] A string SQL query or configuration
    *     object. See {@link BigQuery#query} for a complete list of options.
-   * @param {number} [options.timeoutMs] How long to wait for `jobs.query` to
-   *     complete, in milliseconds. If the query doesn't complete in time, the
-   *     stream fails instead of waiting for the job.
+   * @param {number} [options.timeoutMs] How long to wait for the query to
+   *     complete, in milliseconds. If it doesn't complete in time, the stream
+   *     fails. If unset or 0, the stream waits until the job completes.
    * @returns {ArrowRecordBatchStream} A stream of `RecordBatch` objects. The
    *     stream emits a `job` event with the {@link Job} when BigQuery creates
    *     a job, and sets `stream.queryId` and `stream.jobReference` (when
