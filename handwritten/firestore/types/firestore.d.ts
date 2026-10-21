@@ -513,7 +513,6 @@ declare namespace FirebaseFirestore {
     preferRest?: boolean;
     /**
      * Settings related to telemetry collection by this client.
-     * @beta
      */
     openTelemetry?: FirestoreOpenTelemetryOptions;
     /**
@@ -524,8 +523,6 @@ declare namespace FirebaseFirestore {
   }
   /**
    * Options to configure telemetry collection.
-   * This is a 'beta' interface and may change in backwards incompatible ways.
-   * @beta
    */
   export interface FirestoreOpenTelemetryOptions {
     /**
@@ -13747,7 +13744,8 @@ declare namespace FirebaseFirestore {
        */
       atomic?: boolean;
       /**
-       * @beta Options used to configure explain queries. */
+       * Options used to configure explain queries.
+       */
       explainOptions?: {
         /**
          * The explain mode configures what explain data
