@@ -132,6 +132,14 @@ interface ArrowStreamContext {
 
 const readClients = new WeakMap<BigQuery, BigQueryReadClient>();
 
+// gRPC status codes safe to resume from a row offset on ReadRows.
+const GRPC_STATUS_INTERNAL = 13;
+const GRPC_STATUS_UNAVAILABLE = 14;
+
+// How many times in a row a failed ReadRows call is reopened before the
+// error is passed to the caller. Any rows read reset the count.
+const MAX_STREAM_RETRIES = 3;
+
 /**
  * Returns the first project ID from `candidates`, falling back to the
  * `BigQuery` client's project and ignoring the uninitialized `'{{projectId}}'`
@@ -432,13 +440,45 @@ async function readDestinationSchema(
 }
 
 /**
- * Streams Arrow `RecordBatch`es from a Storage Read API stream starting at
- * `offset`, pausing `ReadRows` while the consumer is behind.
+ * Returns `true` if a `ReadRows` gRPC stream error is transient and safe to
+ * resume from the next unread row offset.
  *
- * Resolves when `ReadRows` ends or the consumer destroys the stream, with
- * whether any batch was emitted and the last Arrow schema seen, and rejects
- * on a `ReadRows` or decode error. In every case, the listeners added here
- * are removed, and `ReadRows` is cancelled unless it already finished.
+ * @private
+ */
+function isRetryableStreamError(err: Error & {code?: number}): boolean {
+  // DEADLINE_EXCEEDED isn't retried: it means the caller's deadline ran out.
+  if (err.code === GRPC_STATUS_UNAVAILABLE) {
+    return true;
+  }
+  // Long-lived HTTP/2 streams closed by the server with RST_STREAM surface as
+  // INTERNAL (code 13) in gRPC and are safe to reconnect at the next offset.
+  return (
+    err.code === GRPC_STATUS_INTERNAL &&
+    Boolean(err.message?.includes('RST_STREAM'))
+  );
+}
+
+/**
+ * Progress through a Storage Read API stream, kept across reconnects.
+ *
+ * @private
+ */
+interface ReadRowsProgress {
+  // The next unread row.
+  offset: number;
+  emittedBatch: boolean;
+  // The last Arrow schema seen, needed to decode later record batches.
+  serializedSchema?: Uint8Array;
+}
+
+/**
+ * Streams Arrow `RecordBatch`es from a Storage Read API stream starting at
+ * `offset`. If `ReadRows` fails with a transient error, reopens it at the next
+ * unread row.
+ *
+ * Resolves when the stream ends or the consumer destroys it, with whether any
+ * batch was emitted and the last Arrow schema seen. Rejects with the error
+ * once it isn't retryable or the retries run out.
  *
  * @private
  */
@@ -450,19 +490,59 @@ async function streamReadRows(
     initialSchema?: Uint8Array | string;
   },
 ): Promise<{emittedBatch: boolean; serializedSchema?: Uint8Array}> {
-  const {bq, arrow, storage, stream} = ctx;
   const {readStream, offset, initialSchema} = options;
+  const progress: ReadRowsProgress = {
+    offset,
+    emittedBatch: false,
+    serializedSchema: initialSchema ? toUint8Array(initialSchema) : undefined,
+  };
+
+  let retries = 0;
+  while (!ctx.stream.destroyed) {
+    const attemptOffset = progress.offset;
+    try {
+      await readRowsOnce(ctx, readStream, progress);
+      break;
+    } catch (err) {
+      if (progress.offset > attemptOffset) {
+        retries = 0;
+      }
+      if (
+        !isRetryableStreamError(err as Error & {code?: number}) ||
+        retries >= MAX_STREAM_RETRIES
+      ) {
+        throw err;
+      }
+      retries++;
+    }
+  }
+  const {emittedBatch, serializedSchema} = progress;
+  return {emittedBatch, serializedSchema};
+}
+
+/**
+ * Opens one `ReadRows` call at `progress.offset` and pushes its Arrow
+ * `RecordBatch`es, pausing `ReadRows` while the consumer is behind. Updates
+ * `progress` for each batch, so a retry resumes at the next unread row.
+ *
+ * Resolves when `ReadRows` ends or the consumer destroys the stream, and
+ * rejects on a `ReadRows` or decode error. In every case, the listeners added
+ * here are removed, and `ReadRows` is cancelled unless it already finished.
+ *
+ * @private
+ */
+async function readRowsOnce(
+  ctx: ArrowStreamContext,
+  readStream: string,
+  progress: ReadRowsProgress,
+): Promise<void> {
+  const {bq, arrow, storage, stream} = ctx;
 
   return new Promise((resolve, reject) => {
     const grpcStream = getStorageReadClient(bq, storage).readRows({
       readStream,
-      offset,
+      offset: progress.offset,
     });
-
-    let serializedSchema: Uint8Array | undefined = initialSchema
-      ? toUint8Array(initialSchema)
-      : undefined;
-    let emittedBatch = false;
 
     let settled = false;
     // Detaches every listener added here and settles the promise. Cancels
@@ -489,7 +569,7 @@ async function streamReadRows(
       if (opts.err) {
         reject(opts.err);
       } else {
-        resolve({emittedBatch, serializedSchema});
+        resolve();
       }
     };
 
@@ -502,7 +582,9 @@ async function streamReadRows(
       // and may also emit responses without record batch bytes (e.g.,
       // heartbeats).
       if (resp.arrowSchema?.serializedSchema) {
-        serializedSchema = toUint8Array(resp.arrowSchema.serializedSchema);
+        progress.serializedSchema = toUint8Array(
+          resp.arrowSchema.serializedSchema,
+        );
       }
       const rawBatch = resp.arrowRecordBatch?.serializedRecordBatch;
       const hasBatchBytes =
@@ -514,13 +596,18 @@ async function streamReadRows(
         return;
       }
       try {
-        const batches = decodeArrowPayload(arrow, serializedSchema, rawBatch);
+        const batches = decodeArrowPayload(
+          arrow,
+          progress.serializedSchema,
+          rawBatch,
+        );
         for (const batch of batches) {
           if (stream.destroyed) {
             settle({cancel: true});
             return;
           }
-          emittedBatch = true;
+          progress.offset += batch.numRows;
+          progress.emittedBatch = true;
           if (!stream.push(batch)) {
             grpcStream.pause();
           }
@@ -579,7 +666,7 @@ async function streamDestinationTable(
     initialSchema: sessionSchema,
   });
   // A stream that ends without rows still yields a 0-row RecordBatch.
-  if (!emittedBatch) {
+  if (!emittedBatch && !stream.destroyed) {
     pushBatches(stream, decodeArrowPayload(arrow, serializedSchema));
   }
 }
