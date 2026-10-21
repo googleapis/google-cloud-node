@@ -453,7 +453,8 @@ function isRetryableStreamError(err: Error & {code?: number}): boolean {
   // Long-lived HTTP/2 streams closed by the server with RST_STREAM surface as
   // INTERNAL (code 13) in gRPC and are safe to reconnect at the next offset.
   return (
-    err.code === GRPC_STATUS_INTERNAL && err.message.includes('RST_STREAM')
+    err.code === GRPC_STATUS_INTERNAL &&
+    Boolean(err.message?.includes('RST_STREAM'))
   );
 }
 
@@ -665,7 +666,7 @@ async function streamDestinationTable(
     initialSchema: sessionSchema,
   });
   // A stream that ends without rows still yields a 0-row RecordBatch.
-  if (!emittedBatch) {
+  if (!emittedBatch && !stream.destroyed) {
     pushBatches(stream, decodeArrowPayload(arrow, serializedSchema));
   }
 }
