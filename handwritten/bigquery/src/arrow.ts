@@ -15,7 +15,6 @@
  */
 
 import {ResourceStream} from '@google-cloud/paginator';
-import {setTimeout as delay} from 'timers/promises';
 import type {RecordBatch, Schema} from 'apache-arrow';
 import type {BigQuery, JobsQueryResponse, Query} from './bigquery';
 import type {Job} from './job';
@@ -140,8 +139,6 @@ const GRPC_STATUS_UNAVAILABLE = 14;
 // How many times in a row a failed ReadRows call is reopened before the
 // error is passed to the caller. Any rows read reset the count.
 const MAX_STREAM_RETRIES = 3;
-// Delay before the first reopen, doubled for each consecutive retry.
-const RETRY_BASE_DELAY_MS = 100;
 
 /**
  * Returns the first project ID from `candidates`, falling back to the
@@ -443,16 +440,6 @@ async function readDestinationSchema(
 }
 
 /**
- * Waits between `ReadRows` retries. Exported so tests can replace the wait
- * without real timers.
- *
- * @private
- */
-export const retryBackoff = {
-  wait: (ms: number): Promise<void> => delay(ms),
-};
-
-/**
  * Returns `true` if a `ReadRows` gRPC stream error is transient and safe to
  * resume from the next unread row offset.
  *
@@ -486,7 +473,7 @@ interface ReadRowsProgress {
 /**
  * Streams Arrow `RecordBatch`es from a Storage Read API stream starting at
  * `offset`. If `ReadRows` fails with a transient error, reopens it at the next
- * unread row, waiting longer before each consecutive retry.
+ * unread row.
  *
  * Resolves when the stream ends or the consumer destroys it, with whether any
  * batch was emitted and the last Arrow schema seen. Rejects with the error
@@ -526,9 +513,6 @@ async function streamReadRows(
         throw err;
       }
       retries++;
-      // Wait before reopening so a brief network blip doesn't use up every
-      // retry at once.
-      await retryBackoff.wait(RETRY_BASE_DELAY_MS * 2 ** (retries - 1));
     }
   }
   const {emittedBatch, serializedSchema} = progress;

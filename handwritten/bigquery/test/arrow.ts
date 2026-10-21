@@ -30,7 +30,6 @@ import {
   checkArrowDependencies,
   CreateReadSessionRequest,
   getStorageReadClient,
-  retryBackoff,
   StorageModule,
 } from '../src/arrow';
 import bigquery from '../src/types';
@@ -2019,22 +2018,10 @@ describe('Arrow Support', () => {
     let bq: BigQuery;
     // The ReadRows streams opened, in order.
     let grpcStreams: EventEmitter[];
-    // The retry backoffs requested, in ms. Replaces the real wait, so these
-    // tests don't use timers.
-    let waits: number[];
-    const realWait = retryBackoff.wait;
 
     beforeEach(() => {
       bq = new BigQuery({projectId: 'test-project'});
       grpcStreams = [];
-      waits = [];
-      retryBackoff.wait = async ms => {
-        waits.push(ms);
-      };
-    });
-
-    after(() => {
-      retryBackoff.wait = realWait;
     });
 
     const track = (grpcStream: EventEmitter) => {
@@ -2112,8 +2099,6 @@ describe('Arrow Support', () => {
       ]);
       // Verify each attempt, failed or not, kept none of our listeners.
       grpcStreams.forEach(assertReadRowsListenersRemoved);
-      // Verify the backoff doubled for each consecutive retry.
-      assert.deepStrictEqual(waits, [100, 200, 400]);
     });
 
     it('should not retry DEADLINE_EXCEEDED, which means the caller deadline ran out', async () => {
@@ -2129,7 +2114,6 @@ describe('Arrow Support', () => {
       );
       // Verify ReadRows wasn't reopened.
       assert.strictEqual(grpcStreams.length, 1);
-      assert.deepStrictEqual(waits, []);
       assertReadRowsListenersRemoved(grpcStreams[0]);
     });
 
@@ -2183,7 +2167,6 @@ describe('Arrow Support', () => {
       // Verify the first call and 3 retries each kept none of our listeners.
       assert.strictEqual(grpcStreams.length, 4);
       grpcStreams.forEach(assertReadRowsListenersRemoved);
-      assert.deepStrictEqual(waits, [100, 200, 400]);
     });
 
     it('should surface a synchronous readRows error when reopening ReadRows', async () => {
@@ -2203,31 +2186,6 @@ describe('Arrow Support', () => {
         /readRows failed/,
       );
       assert.strictEqual(readRowsCalls, 2);
-    });
-
-    it('should not reopen ReadRows if the stream is destroyed while waiting to retry', async () => {
-      stubFirstPage(1);
-      let readRowsCalls = 0;
-      stubStorageReadClient(bq, {
-        readRows: () => {
-          readRowsCalls++;
-          return fakeReadRowsStream([], grpcError('Service unavailable', 14));
-        },
-      });
-
-      const stream = bq.createQueryArrowStream('SELECT id, name FROM tbl');
-      // The consumer gives up while the stream waits to retry.
-      retryBackoff.wait = async ms => {
-        waits.push(ms);
-        stream.destroy();
-      };
-      const closed = new Promise(resolve => stream.once('close', resolve));
-      stream.resume();
-      await closed;
-
-      // Verify the stream waited once and didn't reopen ReadRows.
-      assert.deepStrictEqual(waits, [100]);
-      assert.strictEqual(readRowsCalls, 1);
     });
   });
 });
