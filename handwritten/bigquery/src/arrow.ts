@@ -134,7 +134,6 @@ interface ArrowStreamContext {
 const readClients = new WeakMap<BigQuery, BigQueryReadClient>();
 
 // gRPC status codes safe to resume from a row offset on ReadRows.
-const GRPC_STATUS_DEADLINE_EXCEEDED = 4;
 const GRPC_STATUS_INTERNAL = 13;
 const GRPC_STATUS_UNAVAILABLE = 14;
 
@@ -444,16 +443,24 @@ async function readDestinationSchema(
 }
 
 /**
+ * Waits between `ReadRows` retries. Exported so tests can replace the wait
+ * without real timers.
+ *
+ * @private
+ */
+export const retryBackoff = {
+  wait: (ms: number): Promise<void> => delay(ms),
+};
+
+/**
  * Returns `true` if a `ReadRows` gRPC stream error is transient and safe to
  * resume from the next unread row offset.
  *
  * @private
  */
 function isRetryableStreamError(err: Error & {code?: number}): boolean {
-  if (
-    err.code === GRPC_STATUS_DEADLINE_EXCEEDED ||
-    err.code === GRPC_STATUS_UNAVAILABLE
-  ) {
+  // DEADLINE_EXCEEDED isn't retried: it means the caller's deadline ran out.
+  if (err.code === GRPC_STATUS_UNAVAILABLE) {
     return true;
   }
   // Long-lived HTTP/2 streams closed by the server with RST_STREAM surface as
@@ -521,7 +528,7 @@ async function streamReadRows(
       retries++;
       // Wait before reopening so a brief network blip doesn't use up every
       // retry at once.
-      await delay(RETRY_BASE_DELAY_MS * 2 ** (retries - 1));
+      await retryBackoff.wait(RETRY_BASE_DELAY_MS * 2 ** (retries - 1));
     }
   }
   const {emittedBatch, serializedSchema} = progress;
@@ -539,7 +546,7 @@ async function streamReadRows(
  *
  * @private
  */
-function readRowsOnce(
+async function readRowsOnce(
   ctx: ArrowStreamContext,
   readStream: string,
   progress: ReadRowsProgress,

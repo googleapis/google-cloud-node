@@ -30,6 +30,7 @@ import {
   checkArrowDependencies,
   CreateReadSessionRequest,
   getStorageReadClient,
+  retryBackoff,
   StorageModule,
 } from '../src/arrow';
 import bigquery from '../src/types';
@@ -2018,10 +2019,22 @@ describe('Arrow Support', () => {
     let bq: BigQuery;
     // The ReadRows streams opened, in order.
     let grpcStreams: EventEmitter[];
+    // The retry backoffs requested, in ms. Replaces the real wait, so these
+    // tests don't use timers.
+    let waits: number[];
+    const realWait = retryBackoff.wait;
 
     beforeEach(() => {
       bq = new BigQuery({projectId: 'test-project'});
       grpcStreams = [];
+      waits = [];
+      retryBackoff.wait = async ms => {
+        waits.push(ms);
+      };
+    });
+
+    after(() => {
+      retryBackoff.wait = realWait;
     });
 
     const track = (grpcStream: EventEmitter) => {
@@ -2049,7 +2062,7 @@ describe('Arrow Support', () => {
         },
       });
 
-    it('should resume ReadRows at offset + rowsReceived on UNAVAILABLE, DEADLINE_EXCEEDED, and RST_STREAM errors without gaps or duplicates', async () => {
+    it('should resume ReadRows at offset + rowsReceived on UNAVAILABLE and RST_STREAM errors without gaps or duplicates', async () => {
       stubFirstPage(4, serializeArrowTable(makeSampleTable([1], ['alice'])), 1);
       const page2 = toReadRowsResponse(
         serializeArrowTable(makeSampleTable([2, 3], ['bob', 'carol'])),
@@ -2060,7 +2073,7 @@ describe('Arrow Support', () => {
       // Each ReadRows call's responses and the error it fails with, if any.
       const attempts: Array<[object[], Error?]> = [
         [[page2], grpcError('Service unavailable', 14)],
-        [[], grpcError('Deadline exceeded', 4)],
+        [[], grpcError('Connection reset', 14)],
         [[], grpcError('Received RST_STREAM with code 2', 13)],
         // Without a schema, so the batch decodes with the one sent earlier.
         [[{arrowRecordBatch: page3.arrowRecordBatch}]],
@@ -2099,6 +2112,25 @@ describe('Arrow Support', () => {
       ]);
       // Verify each attempt, failed or not, kept none of our listeners.
       grpcStreams.forEach(assertReadRowsListenersRemoved);
+      // Verify the backoff doubled for each consecutive retry.
+      assert.deepStrictEqual(waits, [100, 200, 400]);
+    });
+
+    it('should not retry DEADLINE_EXCEEDED, which means the caller deadline ran out', async () => {
+      stubFirstPage(2);
+      stubStorageReadClient(bq, {
+        readRows: () =>
+          track(fakeReadRowsStream([], grpcError('Deadline exceeded', 4))),
+      });
+
+      await assert.rejects(
+        bq.createQueryArrowStream('SELECT id, name FROM tbl').toArray(),
+        /Deadline exceeded/,
+      );
+      // Verify ReadRows wasn't reopened.
+      assert.strictEqual(grpcStreams.length, 1);
+      assert.deepStrictEqual(waits, []);
+      assertReadRowsListenersRemoved(grpcStreams[0]);
     });
 
     it('should surface non-retryable ReadRows errors after yielding earlier batches', async () => {
@@ -2151,6 +2183,7 @@ describe('Arrow Support', () => {
       // Verify the first call and 3 retries each kept none of our listeners.
       assert.strictEqual(grpcStreams.length, 4);
       grpcStreams.forEach(assertReadRowsListenersRemoved);
+      assert.deepStrictEqual(waits, [100, 200, 400]);
     });
 
     it('should surface a synchronous readRows error when reopening ReadRows', async () => {
@@ -2183,13 +2216,17 @@ describe('Arrow Support', () => {
       });
 
       const stream = bq.createQueryArrowStream('SELECT id, name FROM tbl');
+      // The consumer gives up while the stream waits to retry.
+      retryBackoff.wait = async ms => {
+        waits.push(ms);
+        stream.destroy();
+      };
+      const closed = new Promise(resolve => stream.once('close', resolve));
       stream.resume();
-      // Destroy the stream after the first error, within the first retry
-      // delay (100 ms), then wait past it.
-      await new Promise(resolve => setTimeout(resolve, 20));
-      stream.destroy();
-      await new Promise(resolve => setTimeout(resolve, 250));
+      await closed;
 
+      // Verify the stream waited once and didn't reopen ReadRows.
+      assert.deepStrictEqual(waits, [100]);
       assert.strictEqual(readRowsCalls, 1);
     });
   });
