@@ -387,6 +387,14 @@ export class BigQuery extends Service {
    * Requires the optional `@google-cloud/bigquery-storage` (>= 6.3.0) package
    * to be installed.
    *
+   * Rows that don't fit in the first `jobs.query` response are read with the
+   * BigQuery Storage Read API, which must be enabled in the project and is
+   * billed separately. The stream reads more rows only as the caller consumes
+   * batches, so iterate over batches to keep memory bounded; collecting every
+   * batch (for example with `toArray()`) holds the whole result in memory.
+   * If you stop reading before the stream ends, call `stream.destroy()` to
+   * cancel the read; breaking out of `for await` does this for you.
+   *
    * @param {string|object} [options] A string SQL query or configuration
    *     object. See {@link BigQuery#query} for a complete list of options.
    * @returns {ArrowRecordBatchStream} A stream of `RecordBatch` objects. The
