@@ -857,6 +857,59 @@ describe('Arrow Query Results', () => {
     );
   });
 
+  it('should enforce maxResults for jobs.insert queries read from streams/_default and from an explicit destination table', async () => {
+    const totalRows = 15000;
+    const sql = `SELECT id, REPEAT('m', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`;
+    const limit = 12000;
+
+    // 1. jobTimeoutMs sends the query via jobs.insert, so rows come from
+    // streams/_default starting at offset = 0.
+    const insertStream = bigquery.createQueryArrowStream({
+      query: sql,
+      jobTimeoutMs: 600000,
+      useQueryCache: false,
+      maxResults: limit,
+    });
+    const insertTable = new arrow.Table(await insertStream.toArray());
+    assert.strictEqual(insertStream.queryId, undefined);
+    assert.strictEqual(insertTable.numRows, limit);
+    assert.strictEqual(Number(insertTable.getChild('id')!.get(0)), 1);
+    assert.strictEqual(
+      Number(insertTable.getChild('id')!.get(limit - 1)),
+      limit,
+    );
+
+    // 2. An explicit destination table is read via CreateReadSession.
+    const destBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: sql,
+        destination: dataset.table('dest_max_results'),
+        writeDisposition: 'WRITE_TRUNCATE',
+        maxResults: limit,
+      })
+      .toArray();
+    const destTable = new arrow.Table(destBatches);
+    assert.strictEqual(destTable.numRows, limit);
+    assert.strictEqual(Number(destTable.getChild('id')!.get(0)), 1);
+    assert.strictEqual(Number(destTable.getChild('id')!.get(limit - 1)), limit);
+
+    // 3. maxResults = 0 returns one 0-row batch that keeps the schema.
+    const emptyBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: sql,
+        jobTimeoutMs: 600000,
+        useQueryCache: false,
+        maxResults: 0,
+      })
+      .toArray();
+    assert.strictEqual(emptyBatches.length, 1);
+    assert.strictEqual(emptyBatches[0].numRows, 0);
+    assert.deepStrictEqual(
+      emptyBatches[0].schema.fields.map(f => f.name),
+      ['id', 'payload'],
+    );
+  });
+
   it('should enforce maxResults within the inline jobs.query page, across multi-page streams/_default results, and past the last row', async () => {
     const totalRows = 15000;
     const sql = `SELECT id, REPEAT('m', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`;
