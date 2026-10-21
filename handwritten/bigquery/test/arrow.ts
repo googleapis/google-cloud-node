@@ -17,13 +17,7 @@ import {EventEmitter} from 'events';
 import {describe, it, before, after, beforeEach} from 'mocha';
 import * as Module from 'module';
 import * as arrow from 'apache-arrow';
-import {
-  BigQuery,
-  Job,
-  Query,
-  QueryResultsOptions,
-  QueryRowsCallback,
-} from '../src';
+import {BigQuery, Job, Query, QueryResultsOptions} from '../src';
 import {
   BigQueryReadClient,
   checkArrowDependencies,
@@ -152,19 +146,16 @@ function assertReadRowsListenersRemoved(grpcStream: EventEmitter): void {
 }
 
 /**
- * Stubs `job.getQueryResults` with a callback-style `impl`, returning a
- * promise because the code calls the promisified method.
+ * Stubs `job.getQueryResults`, which the code awaits, with an async `impl`
+ * that resolves to `[rows, nextQuery, response]` or rejects.
  */
 function stubJobGetQueryResults(
   job: Job,
-  impl: (opts: QueryResultsOptions, cb: QueryRowsCallback) => void,
+  impl: (
+    opts: QueryResultsOptions,
+  ) => Promise<[unknown[], null, bigquery.IGetQueryResultsResponse]>,
 ): void {
-  job.getQueryResults = ((opts: QueryResultsOptions) =>
-    new Promise((resolve, reject) => {
-      impl(opts, (err, rows, nextQuery, res) =>
-        err ? reject(err) : resolve([rows, nextQuery, res]),
-      );
-    })) as unknown as Job['getQueryResults'];
+  job.getQueryResults = impl as unknown as Job['getQueryResults'];
 }
 
 /**
@@ -1026,17 +1017,16 @@ describe('Arrow Support', () => {
       }> = [];
 
       // First poll returns jobComplete: false; second poll returns jobComplete: true.
-      stubJobGetQueryResults(fakeJob, (opts, cb) => {
+      stubJobGetQueryResults(fakeJob, async opts => {
         getQueryResultsCalls.push(opts);
         // Verify ReadRows has not been called while waiting for the job to complete.
         assert.strictEqual(capturedReadRowsReqs.length, 0);
         const isDone = getQueryResultsCalls.length >= 2;
-        process.nextTick(() => {
-          cb(null, [], null, {
-            jobComplete: isDone,
-            totalRows: isDone ? '2' : undefined,
-          });
-        });
+        return [
+          [],
+          null,
+          {jobComplete: isDone, totalRows: isDone ? '2' : undefined},
+        ];
       });
 
       stubJobsQuery(bq, {
@@ -1086,8 +1076,9 @@ describe('Arrow Support', () => {
     it('should fail with a timeout error when jobs.query returns jobComplete = false and timeoutMs was specified', async () => {
       const fakeJob = bq.job('job-timeout-1', {location: 'US'});
       let getQueryResultsCalled = false;
-      stubJobGetQueryResults(fakeJob, () => {
+      stubJobGetQueryResults(fakeJob, async () => {
         getQueryResultsCalled = true;
+        return [[], null, {jobComplete: true}];
       });
 
       const getCapturedReq = stubJobsQuery(bq, {
@@ -1127,11 +1118,11 @@ describe('Arrow Support', () => {
       const fakeJob = bq.job('job-wait-destroy', {location: 'US'});
       const stream = bq.createQueryArrowStream('SELECT id, name FROM tbl');
       let polls = 0;
-      stubJobGetQueryResults(fakeJob, (_opts, cb) => {
+      stubJobGetQueryResults(fakeJob, async () => {
         polls++;
         // The consumer gives up while this poll is in flight.
         stream.destroy();
-        process.nextTick(() => cb(null, [], null, {jobComplete: false}));
+        return [[], null, {jobComplete: false}];
       });
       stubJobsQuery(bq, {
         job: fakeJob,
@@ -1153,7 +1144,7 @@ describe('Arrow Support', () => {
       });
 
       stream.resume();
-      // The poll's callback runs on the next tick; wait past it.
+      // Wait for the in-flight poll to resolve.
       await new Promise(resolve => setImmediate(resolve));
 
       // Verify the in-flight poll didn't start another one or call ReadRows.
@@ -1164,9 +1155,9 @@ describe('Arrow Support', () => {
     it('should wait for the job instead of failing when timeoutMs is 0, matching BigQuery#query', async () => {
       const fakeJob = bq.job('job-timeout-0', {location: 'US'});
       const getQueryResultsCalls: QueryResultsOptions[] = [];
-      stubJobGetQueryResults(fakeJob, (opts, cb) => {
+      stubJobGetQueryResults(fakeJob, async opts => {
         getQueryResultsCalls.push(opts);
-        process.nextTick(() => cb(null, [], null, {jobComplete: true}));
+        return [[], null, {jobComplete: true}];
       });
 
       stubJobsQuery(bq, {
@@ -1199,10 +1190,8 @@ describe('Arrow Support', () => {
 
     it('should forward job.getQueryResults errors to the stream without calling ReadRows', async () => {
       const fakeJob = bq.job('job-err-1', {location: 'US'});
-      stubJobGetQueryResults(fakeJob, (_opts, cb) => {
-        process.nextTick(() => {
-          cb(new Error('Resources exceeded during query execution'));
-        });
+      stubJobGetQueryResults(fakeJob, async () => {
+        throw new Error('Resources exceeded during query execution');
       });
 
       let readRowsCalled = false;
@@ -1235,11 +1224,11 @@ describe('Arrow Support', () => {
 
     it('should emit a 0-row, 0-column RecordBatch when ReadRows at offset = 0 ends without rows and the job has no destination table', async () => {
       const fakeJob = bq.job('job-empty-1', {location: 'US'});
-      stubJobGetQueryResults(fakeJob, (_opts, cb) => {
-        process.nextTick(() => {
-          cb(null, [], null, {jobComplete: true, totalRows: '0'});
-        });
-      });
+      stubJobGetQueryResults(fakeJob, async () => [
+        [],
+        null,
+        {jobComplete: true, totalRows: '0'},
+      ]);
       // Statements without a result table, like DECLARE, have no destination.
       stubJobGetMetadata(fakeJob, {metadata: {configuration: {query: {}}}});
 
@@ -1274,11 +1263,11 @@ describe('Arrow Support', () => {
       // streams/_default sends no ReadRowsResponse for a result without rows,
       // so the schema has to come from a read session on the destination table.
       const fakeJob = bq.job('job-empty-2', {location: 'US'});
-      stubJobGetQueryResults(fakeJob, (_opts, cb) => {
-        process.nextTick(() => {
-          cb(null, [], null, {jobComplete: true, totalRows: '0'});
-        });
-      });
+      stubJobGetQueryResults(fakeJob, async () => [
+        [],
+        null,
+        {jobComplete: true, totalRows: '0'},
+      ]);
       stubJobGetMetadata(fakeJob, {
         metadata: {
           jobReference: {projectId: 'test-project', jobId: 'job-empty-2'},
@@ -1344,13 +1333,69 @@ describe('Arrow Support', () => {
       assert.strictEqual(sessionReqs[0].maxStreamCount, 1);
     });
 
+    it('should not create a read session if the stream is destroyed while reading the job metadata', async () => {
+      const fakeJob = bq.job('job-empty-destroy', {location: 'US'});
+      const stream = bq.createQueryArrowStream(
+        'SELECT id FROM tbl WHERE FALSE',
+      );
+      stubJobGetQueryResults(fakeJob, async () => [
+        [],
+        null,
+        {jobComplete: true, totalRows: '0'},
+      ]);
+      fakeJob.getMetadata = (async () => {
+        // The consumer gives up while jobs.get is in flight.
+        stream.destroy();
+        return [
+          {
+            configuration: {
+              query: {
+                destinationTable: {
+                  projectId: 'test-project',
+                  datasetId: '_anon',
+                  tableId: 'anon_table',
+                },
+              },
+            },
+          },
+        ];
+      }) as unknown as Job['getMetadata'];
+      stubJobsQuery(bq, {
+        job: fakeJob,
+        res: {
+          jobComplete: false,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-empty-destroy',
+            location: 'US',
+          },
+        },
+      });
+      let readSessions = 0;
+      stubStorageReadClient(bq, {
+        createReadSession: async () => {
+          readSessions++;
+          return [{}];
+        },
+        readRows: () => fakeReadRowsStream(),
+      });
+
+      stream.resume();
+      await new Promise(resolve => stream.once('close', resolve));
+      // Let the query finish its work after jobs.get resolves.
+      await new Promise(resolve => setImmediate(resolve));
+
+      // Verify no read session was created for the destroyed stream.
+      assert.strictEqual(readSessions, 0);
+    });
+
     it('should forward jobs.get errors when reading the schema of a result without rows', async () => {
       const fakeJob = bq.job('job-empty-3', {location: 'US'});
-      stubJobGetQueryResults(fakeJob, (_opts, cb) => {
-        process.nextTick(() => {
-          cb(null, [], null, {jobComplete: true, totalRows: '0'});
-        });
-      });
+      stubJobGetQueryResults(fakeJob, async () => [
+        [],
+        null,
+        {jobComplete: true, totalRows: '0'},
+      ]);
       stubJobGetMetadata(fakeJob, {err: new Error('jobs.get failed')});
 
       stubJobsQuery(bq, {

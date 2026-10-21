@@ -385,7 +385,8 @@ async function readDestinationSchema(
   // the job's current metadata instead of the response that created it.
   const [metadata] = await job.getMetadata();
   const destRef = metadata?.configuration?.query?.destinationTable;
-  if (!destRef) {
+  // Skip the read session if the consumer destroyed the stream meanwhile.
+  if (!destRef || ctx.stream.destroyed) {
     return undefined;
   }
   const [session] = await getStorageReadClient(bq, storage).createReadSession({
