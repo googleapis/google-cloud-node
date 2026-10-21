@@ -174,6 +174,7 @@
   "packages/google-cloud-networksecurity": "4.2.0",
   "packages/google-cloud-networkservices": "0.18.0",
   "packages/google-cloud-notebooks": "5.2.0",
+  "packages/google-cloud-observability": "0.0.0",
   "packages/google-cloud-oracledatabase": "0.12.0",
   "packages/google-cloud-orchestration-airflow-service": "5.2.0",
   "packages/google-cloud-orgpolicy": "5.2.0",
