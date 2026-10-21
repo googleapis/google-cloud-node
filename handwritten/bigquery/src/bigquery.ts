@@ -362,9 +362,6 @@ export const PROTOCOL_REGEX = /^(\w*):\/\//;
  * });
  *
  * ```
- * @example <caption>include:samples/quickstart.js</caption>
- * region_tag:bigquery_quickstart
- * Full quickstart example:
  */
 export class BigQuery extends Service {
   location?: string;
