@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/googleapis/google-cloud-node/compare/pubsub-api-v0.8.0...pubsub-api-v0.8.1) (2026-10-21)
+
+
+### Bug Fixes
+
+* Remove compile-protos from prepare script in pubsub-api and developer-knowledge ([#9666](https://github.com/googleapis/google-cloud-node/issues/9666)) ([3fb024d](https://github.com/googleapis/google-cloud-node/commit/3fb024d6f3613c923b0b8dd8bc34b3990017c2c3))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/pubsub-api-v0.7.0...pubsub-api-v0.8.0) (2026-10-19)
 
 
