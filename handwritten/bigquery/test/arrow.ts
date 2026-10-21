@@ -413,6 +413,45 @@ describe('Arrow Support', () => {
       );
     });
 
+    it('should not emit job or push batches when the stream is destroyed during jobs.query', async () => {
+      const fakeJob = bq.job('job-destroyed-1', {location: 'US'});
+      bq.job = () => fakeJob;
+      const stream = bq.createQueryArrowStream('SELECT 1');
+      bq.request = (reqOpts, callback) => {
+        // The consumer gives up while jobs.query is in flight.
+        stream.destroy();
+        callback(null, {
+          jobComplete: true,
+          jobReference: {
+            projectId: 'test-project',
+            jobId: 'job-destroyed-1',
+            location: 'US',
+          },
+          totalRows: '2',
+          pageRowCount: '2',
+          arrowSchema: {serializedSchema: SAMPLE_PAYLOAD.serializedSchema},
+          arrowRecordBatch: {
+            serializedRecordBatch: SAMPLE_PAYLOAD.serializedRecordBatch,
+          },
+        });
+      };
+      let jobEmitted = false;
+      stream.on('job', () => {
+        jobEmitted = true;
+      });
+      const batches: arrow.RecordBatch[] = [];
+      stream.on('data', batch => batches.push(batch));
+      stream.resume();
+      await new Promise(resolve => stream.once('close', resolve));
+      // Let the query finish its work after jobs.query returns.
+      await new Promise(resolve => setImmediate(resolve));
+
+      // Verify nothing is emitted on the destroyed stream.
+      assert.strictEqual(jobEmitted, false);
+      assert.strictEqual(stream.jobReference, undefined);
+      assert.strictEqual(batches.length, 0);
+    });
+
     it('should forward jobs.query errors to the stream error event', async () => {
       stubJobsQuery(bq, {err: new Error('syntax error in SQL')});
 
@@ -626,7 +665,7 @@ describe('Arrow Support', () => {
           });
           process.nextTick(() => {
             // Emit more batches in one tick than the output stream buffers
-            // (highWaterMark 16), before the consumer can read any of them.
+            // (highWaterMark 1), before the consumer can read any of them.
             for (let i = 0; i < streamedBatches; i++) {
               grpcStream.emit('data', {
                 arrowSchema: {
@@ -787,6 +826,9 @@ describe('Arrow Support', () => {
       assert.deepStrictEqual(errors, [readRowsError]);
       // Verify the ReadRows listeners were removed after the error.
       assertReadRowsListenersRemoved(readRowsStream!);
+      // Verify the 'close' listener added to the Arrow stream was removed too
+      // (the test's own once('close') listener has already fired).
+      assert.strictEqual(stream.listenerCount('close'), 0);
     });
 
     it('should cancel ReadRows and raise the error when a streamed batch fails to decode', async () => {

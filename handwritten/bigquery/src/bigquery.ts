@@ -392,6 +392,8 @@ export class BigQuery extends Service {
    * billed separately. The stream reads more rows only as the caller consumes
    * batches, so iterate over batches to keep memory bounded; collecting every
    * batch (for example with `toArray()`) holds the whole result in memory.
+   * If you stop reading before the stream ends, call `stream.destroy()` to
+   * cancel the read; breaking out of `for await` does this for you.
    *
    * @param {string|object} [options] A string SQL query or configuration
    *     object. See {@link BigQuery#query} for a complete list of options.
