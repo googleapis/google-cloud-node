@@ -43,6 +43,7 @@ export const cacheSessionEvents = ['Cache hit: has usable multiplexed session'];
  * and referring to context causes type/value collision errors.
  */
 export function setGlobalContextManager(manager: ContextManager) {
+  context.disable();
   if (typeof manager.enable === 'function') {
     manager.enable();
   }

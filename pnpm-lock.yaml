@@ -1934,6 +1934,9 @@ importers:
       gapic-tools:
         specifier: ^2.0.0
         version: 2.0.1(protobufjs@8.8.0)
+      google-test-utils:
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -3211,8 +3214,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.1(protobufjs@7.5.9)
       google-test-utils:
-        specifier: ^0.2.0
-        version: 0.2.0
+        specifier: ^0.3.0
+        version: 0.3.0
       grpc-health-check:
         specifier: ^2.1.0
         version: 2.1.0
@@ -3429,6 +3432,9 @@ importers:
       gapic-tools:
         specifier: ^2.0.1
         version: 2.0.1(protobufjs@8.8.0)
+      google-test-utils:
+        specifier: ^0.3.0
+        version: 0.3.0
       gts:
         specifier: ^5.0.0
         version: 5.3.1(typescript@5.9.3)
@@ -20675,10 +20681,6 @@ packages:
     resolution: {integrity: sha512-fbvUWVNh3rKGlVFWwlUNF7Sk1Tah0a89q02rLTXsWjbKKHGeuURAa8tl9rvu5TyWny1YiSIo5eDqF260Tai6vQ==}
     engines: {node: '>=22'}
 
-  google-test-utils@0.2.0:
-    resolution: {integrity: sha512-OP7B5iS65EjAlRctfq3uUdGWXN5AvIGRYQSx5luCVqkfh3uaGvVzuY1y3hCyxLk6MGf5DYkJ3rZxgJ6JsMmSog==}
-    engines: {node: '>=22'}
-
   google-test-utils@0.3.0:
     resolution: {integrity: sha512-atGLcriC2MS6gWCJnCNrxLqYh4Xs5WkgaS9+lwxF/3rZdzt5eFv/Bc2VIeCCl5DGzGP3So8dj5f7pfBUNRhzXw==}
     engines: {node: '>=22'}
@@ -31744,8 +31746,6 @@ snapshots:
     dependencies:
       protobufjs: 7.5.9
       walkdir: 0.4.1
-
-  google-test-utils@0.2.0: {}
 
   google-test-utils@0.3.0: {}
 
