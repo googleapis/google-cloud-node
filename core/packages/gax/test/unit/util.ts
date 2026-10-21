@@ -311,7 +311,7 @@ describe('util.ts', () => {
 
   describe('checkLoggingEnabled', () => {
     afterEach(() => {
-      delete process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING;
+      delete process.env.GOOGLE_SDK_NODE_LOGGING;
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
     });
 
@@ -320,13 +320,13 @@ describe('util.ts', () => {
     });
 
     it('returns false when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING is not set even if logging is enabled', () => {
-      process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING = 'true';
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'true';
       assert.strictEqual(checkLoggingEnabled(mockSettings), false);
     });
 
     it('returns false when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING is false', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'false';
-      process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING = 'true';
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'true';
       assert.strictEqual(checkLoggingEnabled(mockSettings), false);
     });
 
@@ -353,53 +353,53 @@ describe('util.ts', () => {
       assert.strictEqual(checkLoggingEnabled(undefined), false);
     });
 
-    it('returns true when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true and GOOGLE_SDK_NODE_ENABLE_LOGGING=true', () => {
+    it('returns true when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true and GOOGLE_SDK_NODE_LOGGING=true', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
-      process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING = 'true';
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'true';
       assert.strictEqual(checkLoggingEnabled(new CallSettings({})), true);
       assert.strictEqual(checkLoggingEnabled(), true);
     });
 
-    it('accepts GOOGLE_SDK_NODE_ENABLE_LOGGING and GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING case-insensitively', () => {
+    it('accepts GOOGLE_SDK_NODE_LOGGING and GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING case-insensitively', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'TRUE';
-      process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING = 'TRUE';
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'TRUE';
       assert.strictEqual(checkLoggingEnabled(new CallSettings({})), true);
     });
 
-    it('returns false when GOOGLE_SDK_NODE_ENABLE_LOGGING=false or 0 overrides the client option', () => {
+    it('returns false when GOOGLE_SDK_NODE_LOGGING=false or 0 overrides the client option', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
-      process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING = 'false';
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'false';
       assert.strictEqual(checkLoggingEnabled(mockSettings), false);
 
-      process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING = '0';
+      process.env.GOOGLE_SDK_NODE_LOGGING = '0';
       assert.strictEqual(checkLoggingEnabled(mockSettings), false);
     });
 
-    it('returns true when GOOGLE_SDK_NODE_ENABLE_LOGGING=true or 1 overrides enableTelemetryLogging=false on settings', () => {
+    it('returns true when GOOGLE_SDK_NODE_LOGGING=true or 1 overrides enableTelemetryLogging=false on settings', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
       const disabledSettings = new CallSettings({
         enableTelemetryLogging: false,
       });
 
-      process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING = 'true';
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'true';
       assert.strictEqual(checkLoggingEnabled(disabledSettings), true);
 
-      process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING = '1';
+      process.env.GOOGLE_SDK_NODE_LOGGING = '1';
       assert.strictEqual(checkLoggingEnabled(disabledSettings), true);
     });
 
-    it('falls back to the client option when GOOGLE_SDK_NODE_ENABLE_LOGGING is empty or whitespace', () => {
+    it('falls back to the client option when GOOGLE_SDK_NODE_LOGGING is empty or whitespace', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
-      process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING = '';
+      process.env.GOOGLE_SDK_NODE_LOGGING = '';
       assert.strictEqual(checkLoggingEnabled(mockSettings), true);
 
-      process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING = '   ';
+      process.env.GOOGLE_SDK_NODE_LOGGING = '   ';
       assert.strictEqual(checkLoggingEnabled(mockSettings), true);
     });
 
-    it('treats an unrecognized GOOGLE_SDK_NODE_ENABLE_LOGGING value as disabled', () => {
+    it('treats an unrecognized GOOGLE_SDK_NODE_LOGGING value as disabled', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
-      process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING = 'yes';
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'yes';
       assert.strictEqual(checkLoggingEnabled(mockSettings), false);
     });
 

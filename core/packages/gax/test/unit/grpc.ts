@@ -143,7 +143,7 @@ describe('grpc', () => {
 
     afterEach(() => {
       delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-      delete process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING;
+      delete process.env.GOOGLE_SDK_NODE_LOGGING;
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
     });
 

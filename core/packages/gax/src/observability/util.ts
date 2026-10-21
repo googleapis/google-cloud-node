@@ -52,9 +52,9 @@ export function checkTracingEnabled(settings?: CallSettings): boolean {
  * Checks if telemetry logging is enabled.
  *
  * Logging is only enabled when `GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING` is enabled
- * AND either the `GOOGLE_SDK_NODE_ENABLE_LOGGING` environment variable is enabled
+ * AND either the `GOOGLE_SDK_NODE_LOGGING` environment variable is enabled
  * or a user passes `enableTelemetryLogging: true` in their client options.
- * If `GOOGLE_SDK_NODE_ENABLE_LOGGING` is explicitly set, it takes precedence over
+ * If `GOOGLE_SDK_NODE_LOGGING` is explicitly set, it takes precedence over
  * the client option.
  *
  * @param settings
@@ -71,7 +71,7 @@ export function checkLoggingEnabled(settings?: CallSettings): boolean {
     return false;
   }
 
-  const envOptIn = env.GOOGLE_SDK_NODE_ENABLE_LOGGING?.trim();
+  const envOptIn = env.GOOGLE_SDK_NODE_LOGGING?.trim();
 
   if (envOptIn !== undefined && envOptIn !== '') {
     const lower = envOptIn.toLowerCase();

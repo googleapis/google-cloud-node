@@ -817,7 +817,7 @@ export interface ClientConfig {
  *   when passed in client options (or overridden by `GOOGLE_SDK_NODE_ENABLE_TRACING`).
  * @param {unknown} [_legacyTelemetryInfo] - Unused legacy parameter kept for backward compatibility.
  * @param {boolean} [enableTelemetryLogging] - Flag to enable telemetry logging
- *   when passed in client options (or overridden by `GOOGLE_SDK_NODE_ENABLE_LOGGING`).
+ *   when passed in client options (or overridden by `GOOGLE_SDK_NODE_LOGGING`).
  * @return {Object} A mapping from method name to CallSettings, or null if the
  *   service is not found in the config.
  */
@@ -852,7 +852,7 @@ export function constructSettings(
     env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING?.trim().toLowerCase();
   const isExperimentalLoggingEnabled =
     experimentalLogging === 'true' || experimentalLogging === '1';
-  const envLogging = env.GOOGLE_SDK_NODE_ENABLE_LOGGING?.trim();
+  const envLogging = env.GOOGLE_SDK_NODE_LOGGING?.trim();
   const isLoggingEnvSet = envLogging !== undefined && envLogging !== '';
   const isLoggingEnvEnabled = checkLoggingEnabled();
 

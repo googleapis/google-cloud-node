@@ -101,7 +101,7 @@ function expectBackoffSettings(obj: gax.BackoffSettings) {
 describe('gax construct settings', () => {
   afterEach(() => {
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
-    delete process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING;
+    delete process.env.GOOGLE_SDK_NODE_LOGGING;
     delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
   });
 
@@ -317,9 +317,9 @@ describe('gax construct settings', () => {
     assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
   });
 
-  it('ignores client option when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true and GOOGLE_SDK_NODE_ENABLE_LOGGING=true', () => {
+  it('ignores client option when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true and GOOGLE_SDK_NODE_LOGGING=true', () => {
     process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
-    process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING = 'true';
+    process.env.GOOGLE_SDK_NODE_LOGGING = 'true';
     const defaults = gax.constructSettings(
       SERVICE_NAME,
       A_CONFIG,
@@ -337,9 +337,9 @@ describe('gax construct settings', () => {
     assert.strictEqual(settings.otherArgs.enableTelemetryLogging, true);
   });
 
-  it('disables logging when GOOGLE_SDK_NODE_ENABLE_LOGGING=false even with client option', () => {
+  it('disables logging when GOOGLE_SDK_NODE_LOGGING=false even with client option', () => {
     process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
-    process.env.GOOGLE_SDK_NODE_ENABLE_LOGGING = 'false';
+    process.env.GOOGLE_SDK_NODE_LOGGING = 'false';
     const defaults = gax.constructSettings(
       SERVICE_NAME,
       A_CONFIG,
