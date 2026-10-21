@@ -401,6 +401,9 @@ export class BigQuery extends Service {
    * ends, call `stream.destroy()` to cancel the read; breaking out of
    * `for await` does this for you.
    *
+   * With an explicit `destination` table, the stream reads that whole table
+   * through a Storage Read API session once the query finishes.
+   *
    * @param {string|ArrowQuery} [options] A string SQL query or configuration
    *     object. See {@link BigQuery#query} for a complete list of options.
    * @param {number} [options.timeoutMs] How long to wait for the query to

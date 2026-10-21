@@ -368,6 +368,37 @@ async function streamDefaultJobStream(
 }
 
 /**
+ * Creates an Arrow read session with a single stream on `table`, billed to
+ * `parentProjectId`.
+ *
+ * @private
+ */
+async function createArrowReadSession(
+  ctx: ArrowStreamContext,
+  parentProjectId: string | undefined,
+  table: bigquery.ITableReference,
+): Promise<IReadSession | undefined> {
+  if (!parentProjectId) {
+    throw new Error(
+      'Cannot create an Arrow read session without a project ID.',
+    );
+  }
+  const [session] = await getStorageReadClient(
+    ctx.bq,
+    ctx.storage,
+  ).createReadSession({
+    parent: `projects/${parentProjectId}`,
+    readSession: {
+      table: `projects/${table.projectId}/datasets/${table.datasetId}/tables/${table.tableId}`,
+      dataFormat: 'ARROW',
+    },
+    // One stream keeps rows in the query's order (e.g., ORDER BY).
+    maxStreamCount: 1,
+  });
+  return session ?? undefined;
+}
+
+/**
  * Reads the Arrow schema of a finished query job's results from its
  * destination table. The default job stream sends no `ReadRowsResponse`, and
  * so no schema, for a result without rows, but a read session on the
@@ -380,7 +411,6 @@ async function readDestinationSchema(
   ctx: ArrowStreamContext,
   job: Job,
 ): Promise<Uint8Array | string | undefined> {
-  const {bq, storage} = ctx;
   // A script's destination table is only set once the job finishes, so read
   // the job's current metadata instead of the response that created it.
   const [metadata] = await job.getMetadata();
@@ -389,18 +419,15 @@ async function readDestinationSchema(
   if (!destRef || ctx.stream.destroyed) {
     return undefined;
   }
-  const [session] = await getStorageReadClient(bq, storage).createReadSession({
-    parent: `projects/${resolveProjectId(
-      bq,
+  const session = await createArrowReadSession(
+    ctx,
+    resolveProjectId(
+      ctx.bq,
       metadata?.jobReference?.projectId,
       destRef.projectId,
-    )}`,
-    readSession: {
-      table: `projects/${destRef.projectId}/datasets/${destRef.datasetId}/tables/${destRef.tableId}`,
-      dataFormat: 'ARROW',
-    },
-    maxStreamCount: 1,
-  });
+    ),
+    destRef,
+  );
   return session?.arrowSchema?.serializedSchema || undefined;
 }
 
@@ -519,6 +546,45 @@ async function streamReadRows(
 }
 
 /**
+ * Creates a Storage Read API session for an explicit destination table and
+ * streams Arrow `RecordBatch`es from its single stream.
+ *
+ * @private
+ */
+async function streamDestinationTable(
+  ctx: ArrowStreamContext,
+  jobRef: bigquery.IJobReference | undefined,
+  table: bigquery.ITableReference,
+): Promise<void> {
+  const {arrow, stream} = ctx;
+  // The session is billed to the job's project; the table can be in another.
+  const session = await createArrowReadSession(
+    ctx,
+    resolveProjectId(ctx.bq, jobRef?.projectId),
+    table,
+  );
+  const sessionSchema = session?.arrowSchema?.serializedSchema || undefined;
+  const streams = session?.streams ?? [];
+  const readStream = streams[0]?.name;
+  if (streams.length === 0 || !readStream) {
+    // An empty destination table returns 0 streams; emit a single 0-row
+    // RecordBatch carrying the session's Arrow schema.
+    pushBatches(stream, decodeArrowPayload(arrow, sessionSchema));
+    return;
+  }
+
+  const {emittedBatch, serializedSchema} = await streamReadRows(ctx, {
+    readStream,
+    offset: 0,
+    initialSchema: sessionSchema,
+  });
+  // A stream that ends without rows still yields a 0-row RecordBatch.
+  if (!emittedBatch) {
+    pushBatches(stream, decodeArrowPayload(arrow, serializedSchema));
+  }
+}
+
+/**
  * Waits for an unfinished BigQuery job to complete using `job.getQueryResults`
  * without fetching any `STRUCT_ENCODING` rows (`maxResults: 0`). Returns early
  * if the consumer destroys `stream`. If `timeoutMs` is set, fails like
@@ -550,10 +616,11 @@ async function waitForJobCompletion(
 }
 
 /**
- * Waits for `job` to finish, then streams all of its rows from the default job
- * stream. An unfinished jobs.query and jobs.insert return no rows or schema,
- * so this reads every row from offset 0 and passes the job to look up the
- * schema of an empty result.
+ * Waits for `job` to finish, then streams all of its rows: from
+ * `destinationTable` through a read session when the caller set one, or from
+ * the default job stream otherwise. An unfinished jobs.query and jobs.insert
+ * return no rows or schema, so the default job stream is read from offset 0,
+ * passing the job to look up the schema of an empty result.
  *
  * @private
  */
@@ -562,9 +629,14 @@ async function streamJobWhenComplete(
   job: Job,
   jobRef: bigquery.IJobReference | undefined,
   timeoutMs?: number,
+  destinationTable?: bigquery.ITableReference,
 ): Promise<void> {
   await waitForJobCompletion(job, ctx.stream, timeoutMs);
   if (ctx.stream.destroyed) {
+    return;
+  }
+  if (destinationTable) {
+    await streamDestinationTable(ctx, jobRef, destinationTable);
     return;
   }
   await streamDefaultJobStream(ctx, jobRef, 0, undefined, job);
@@ -606,7 +678,18 @@ async function streamQueryJob(
     return;
   }
 
-  await streamJobWhenComplete(ctx, job, resp?.jobReference, timeoutMs);
+  // BigQuery echoes the caller's destination table, with its resolved
+  // project, in the job's configuration.
+  const destinationTable = queryObj.destination
+    ? (resp?.configuration?.query?.destinationTable ?? undefined)
+    : undefined;
+  await streamJobWhenComplete(
+    ctx,
+    job,
+    resp?.jobReference,
+    timeoutMs,
+    destinationTable,
+  );
 }
 
 /**
@@ -662,13 +745,6 @@ export function createQueryArrowStream_(
       );
     }
 
-    if (queryObj.destination) {
-      // TODO: Support explicit destination tables via CreateReadSession.
-      throw new Error(
-        'Explicit destination tables are not yet supported in createQueryArrowStream.',
-      );
-    }
-
     const ctx: ArrowStreamContext = {bq, arrow, storage, stream};
     readCtx = ctx;
 
@@ -678,8 +754,8 @@ export function createQueryArrowStream_(
     });
     if (!queryReq) {
       // buildQueryRequest_ returns undefined when the query sets an option
-      // that only jobs.insert accepts (e.g., jobId, dryRun, or jobTimeoutMs),
-      // or when FAST_QUERY_PATH=DISABLED.
+      // that only jobs.insert accepts (e.g., destination, jobId, dryRun, or
+      // jobTimeoutMs), or when FAST_QUERY_PATH=DISABLED.
       await streamQueryJob(ctx, queryObj);
       return;
     }
