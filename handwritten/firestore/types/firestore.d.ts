@@ -14399,7 +14399,8 @@ declare namespace FirebaseFirestore {
       get pipeline(): Pipeline;
 
       /**
-       * @beta An array of all the results in the `PipelineSnapshot`. */
+       * An array of all the results in the `PipelineSnapshot`.
+       */
       get results(): PipelineResult[];
 
       /**

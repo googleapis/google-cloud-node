@@ -2322,7 +2322,8 @@ export class PipelineSnapshot implements firestore.Pipelines.PipelineSnapshot {
   }
 
   /**
-   * @beta An array of all the results in the `PipelineSnapshot`. */
+   * An array of all the results in the `PipelineSnapshot`.
+   */
   get results(): PipelineResult[] {
     return this._results;
   }
