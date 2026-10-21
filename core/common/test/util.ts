@@ -26,7 +26,8 @@ import {
   OAuth2Client,
 } from 'google-auth-library';
 import * as nock from 'nock';
-import * as proxyquire from 'proxyquire';
+import {proxyquire} from 'google-test-utils';
+// eslint-disable-next-line import/namespace
 import * as r from 'teeny-request';
 import * as retryRequest from 'retry-request';
 import * as sinon from 'sinon';
