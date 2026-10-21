@@ -481,7 +481,8 @@ async function createArrowReadSession(
       dataFormat: 'ARROW',
       readOptions: {arrowSerializationOptions: ctx.arrowSerializationOptions},
     },
-    // One stream keeps rows in the query's order (e.g., ORDER BY).
+    // One stream keeps rows in the query's order (e.g., ORDER BY) for a table
+    // the query just wrote.
     maxStreamCount: 1,
   });
   return session ?? undefined;
