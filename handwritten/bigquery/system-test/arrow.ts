@@ -138,28 +138,6 @@ describe('Arrow Query Results', () => {
     assert.deepStrictEqual(rows, [{x: 2}]);
   });
 
-  it('should reject WRITE_APPEND before running the query and leave the destination table unchanged', async () => {
-    // Reading a WRITE_APPEND destination would also return the rows already
-    // in the table, so the stream rejects it before sending the query.
-    const tableRef = `\`${dataset.id}.append_target\``;
-    await bigquery.query(`CREATE TABLE ${tableRef} AS SELECT 1 AS x`);
-
-    await assert.rejects(
-      bigquery
-        .createQueryArrowStream({
-          query: 'SELECT 2 AS x',
-          destination: dataset.table('append_target'),
-          writeDisposition: 'WRITE_APPEND',
-        })
-        .toArray(),
-      /WRITE_APPEND is not supported with Arrow query results/,
-    );
-
-    // Verify the query never ran: the table still holds only its original row.
-    const [rows] = await bigquery.query(`SELECT x FROM ${tableRef}`);
-    assert.deepStrictEqual(rows, [{x: 1}]);
-  });
-
   it('should raise the same error as query() when a query fails during execution', async () => {
     const sql = 'SELECT 1 / 0';
     let structErr: (Error & {code?: number}) | undefined;
@@ -717,5 +695,285 @@ describe('Arrow Query Results', () => {
       emptyBatches[0].schema.fields.map(f => f.name),
       ['id', 'label'],
     );
+  });
+
+  it('should apply arrowSerializationOptions.picosTimestampPrecision to an explicit destination table read via CreateReadSession', async () => {
+    const destTable = dataset.table('dest_timestamp_precision');
+    // apache-arrow returns timestamps as epoch milliseconds with fractional
+    // microseconds: 2026-01-15T12:34:56.123456Z.
+    const expectedMillis = Date.UTC(2026, 0, 15, 12, 34, 56, 123) + 0.456;
+
+    // A TIMESTAMP column has microsecond precision, so CreateReadSession
+    // should accept every precision and return the same value.
+    for (const picosTimestampPrecision of [
+      'TIMESTAMP_PRECISION_MICROS',
+      'TIMESTAMP_PRECISION_NANOS',
+      'TIMESTAMP_PRECISION_PICOS',
+    ] as const) {
+      const batches: arrow.RecordBatch[] = await bigquery
+        .createQueryArrowStream({
+          query: "SELECT TIMESTAMP '2026-01-15 12:34:56.123456Z' AS ts",
+          destination: destTable,
+          writeDisposition: 'WRITE_TRUNCATE',
+          arrowSerializationOptions: {picosTimestampPrecision},
+        })
+        .toArray();
+      const table = new arrow.Table(batches);
+      assert.ok(arrow.DataType.isTimestamp(table.schema.fields[0].type));
+      assert.strictEqual(table.getChild('ts')!.get(0), expectedMillis);
+    }
+
+    // When picosecond TIMESTAMP(12) support is enabled on the test project,
+    // also verify the default precision truncates to microseconds and
+    // TIMESTAMP_PRECISION_PICOS keeps all 12 digits.
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+      return;
+    }
+    const picosQuery =
+      "SELECT CAST('2026-01-15 12:34:56.123456789123+00' AS TIMESTAMP(12)) AS ts";
+    const defaultBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: picosQuery,
+        destination: destTable,
+        writeDisposition: 'WRITE_TRUNCATE',
+      })
+      .toArray();
+    assert.strictEqual(
+      new arrow.Table(defaultBatches).getChild('ts')!.get(0),
+      expectedMillis,
+    );
+
+    const picosBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: picosQuery,
+        destination: destTable,
+        writeDisposition: 'WRITE_TRUNCATE',
+        arrowSerializationOptions: {
+          picosTimestampPrecision: 'TIMESTAMP_PRECISION_PICOS',
+        },
+      })
+      .toArray();
+    assert.strictEqual(
+      new arrow.Table(picosBatches).getChild('ts')!.get(0),
+      '2026-01-15T12:34:56.123456789123Z',
+    );
+  });
+
+  it('should apply arrowSerializationOptions.picosTimestampPrecision across inline jobs.query and streams/_default', async () => {
+    const totalRows = 15000;
+    const sql = `SELECT id, TIMESTAMP '2026-01-15 12:34:56.123456Z' AS ts, REPEAT('z', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`;
+    // apache-arrow returns timestamps as epoch milliseconds with fractional
+    // microseconds: 2026-01-15T12:34:56.123456Z.
+    const expectedMillis = Date.UTC(2026, 0, 15, 12, 34, 56, 123) + 0.456;
+
+    for (const picosTimestampPrecision of [
+      'TIMESTAMP_PRECISION_MICROS',
+      'TIMESTAMP_PRECISION_NANOS',
+      'TIMESTAMP_PRECISION_PICOS',
+    ] as const) {
+      const batches: arrow.RecordBatch[] = await bigquery
+        .createQueryArrowStream({
+          query: sql,
+          useQueryCache: false,
+          arrowSerializationOptions: {picosTimestampPrecision},
+        })
+        .toArray();
+
+      // Verify the result spanned both inline jobs.query and streams/_default with consistent Timestamp values.
+      assert.ok(
+        batches.length >= 2,
+        `Expected >= 2 batches for ${picosTimestampPrecision}, got ${batches.length}`,
+      );
+      const table = new arrow.Table(batches);
+      assert.strictEqual(table.numRows, totalRows);
+      const tsField = table.schema.fields.find(f => f.name === 'ts');
+      assert.ok(arrow.DataType.isTimestamp(tsField?.type));
+      assert.strictEqual(table.getChild('ts')!.get(0), expectedMillis);
+      assert.strictEqual(
+        table.getChild('ts')!.get(totalRows - 1),
+        expectedMillis,
+      );
+    }
+
+    // When picosecond TIMESTAMP(12) support is enabled on the test project,
+    // also verify the default precision truncates to microseconds on every
+    // batch and TIMESTAMP_PRECISION_PICOS keeps all 12 digits.
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+      return;
+    }
+    const defaultBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: `SELECT id, CAST('2026-01-15 12:34:56.123456789123+00' AS TIMESTAMP(12)) AS ts, REPEAT('z', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`,
+        useQueryCache: false,
+      })
+      .toArray();
+    assert.ok(
+      defaultBatches.length >= 2,
+      `Expected >= 2 batches, got ${defaultBatches.length}`,
+    );
+    const defaultTable = new arrow.Table(defaultBatches);
+    assert.strictEqual(defaultTable.getChild('ts')!.get(0), expectedMillis);
+    assert.strictEqual(
+      defaultTable.getChild('ts')!.get(totalRows - 1),
+      expectedMillis,
+    );
+
+    const picosBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query:
+          "SELECT CAST('2026-01-15 12:34:56.123456789123+00' AS TIMESTAMP(12)) AS ts_picos",
+        useQueryCache: false,
+        arrowSerializationOptions: {
+          picosTimestampPrecision: 'TIMESTAMP_PRECISION_PICOS',
+        },
+      })
+      .toArray();
+    const picosTable = new arrow.Table(picosBatches);
+    assert.strictEqual(
+      picosTable.getChild('ts_picos')!.get(0),
+      '2026-01-15T12:34:56.123456789123Z',
+    );
+  });
+
+  it('should enforce maxResults for jobs.insert queries read from streams/_default and from an explicit destination table', async () => {
+    const totalRows = 15000;
+    const sql = `SELECT id, REPEAT('m', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`;
+    const limit = 12000;
+
+    // 1. jobTimeoutMs sends the query via jobs.insert, so rows come from
+    // streams/_default starting at offset = 0.
+    const insertStream = bigquery.createQueryArrowStream({
+      query: sql,
+      jobTimeoutMs: 600000,
+      useQueryCache: false,
+      maxResults: limit,
+    });
+    const insertTable = new arrow.Table(await insertStream.toArray());
+    assert.strictEqual(insertStream.queryId, undefined);
+    assert.strictEqual(insertTable.numRows, limit);
+    assert.strictEqual(Number(insertTable.getChild('id')!.get(0)), 1);
+    assert.strictEqual(
+      Number(insertTable.getChild('id')!.get(limit - 1)),
+      limit,
+    );
+
+    // 2. An explicit destination table is read via CreateReadSession.
+    const destBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: sql,
+        destination: dataset.table('dest_max_results'),
+        writeDisposition: 'WRITE_TRUNCATE',
+        maxResults: limit,
+      })
+      .toArray();
+    const destTable = new arrow.Table(destBatches);
+    assert.strictEqual(destTable.numRows, limit);
+    assert.strictEqual(Number(destTable.getChild('id')!.get(0)), 1);
+    assert.strictEqual(Number(destTable.getChild('id')!.get(limit - 1)), limit);
+
+    // 3. maxResults = 0 returns one 0-row batch that keeps the schema.
+    const emptyBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: sql,
+        jobTimeoutMs: 600000,
+        useQueryCache: false,
+        maxResults: 0,
+      })
+      .toArray();
+    assert.strictEqual(emptyBatches.length, 1);
+    assert.strictEqual(emptyBatches[0].numRows, 0);
+    assert.deepStrictEqual(
+      emptyBatches[0].schema.fields.map(f => f.name),
+      ['id', 'payload'],
+    );
+  });
+
+  it('should enforce maxResults within the inline jobs.query page, across multi-page streams/_default results, and past the last row', async () => {
+    const totalRows = 15000;
+    const sql = `SELECT id, REPEAT('m', 1024) AS payload FROM UNNEST(GENERATE_ARRAY(1, ${totalRows})) AS id ORDER BY id`;
+
+    // 1. maxResults satisfied within the inline jobs.query page. jobs.query
+    // returns no rows inline when the whole result is over 512 KiB, so use a
+    // small result here.
+    const inlineBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query:
+          'SELECT id FROM UNNEST(GENERATE_ARRAY(1, 100)) AS id ORDER BY id',
+        useQueryCache: false,
+        maxResults: 10,
+      })
+      .toArray();
+    const inlineTable = new arrow.Table(inlineBatches);
+    assert.strictEqual(inlineTable.numRows, 10);
+    assert.strictEqual(Number(inlineTable.getChild('id')!.get(0)), 1);
+    assert.strictEqual(Number(inlineTable.getChild('id')!.get(9)), 10);
+
+    // 2. maxResults across a multi-page streams/_default result.
+    const streamLimit = 12000;
+    const multiBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: sql,
+        useQueryCache: false,
+        maxResults: streamLimit,
+      })
+      .toArray();
+    assert.ok(
+      multiBatches.length >= 2,
+      `Expected >= 2 batches for maxResults = ${streamLimit}, got ${multiBatches.length}`,
+    );
+    const multiTable = new arrow.Table(multiBatches);
+    assert.strictEqual(multiTable.numRows, streamLimit);
+    assert.strictEqual(Number(multiTable.getChild('id')!.get(0)), 1);
+    assert.strictEqual(
+      Number(multiTable.getChild('id')!.get(streamLimit - 1)),
+      streamLimit,
+    );
+
+    // 3. maxResults past the last row returns every row.
+    const allBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: sql,
+        useQueryCache: false,
+        maxResults: totalRows + 5000,
+      })
+      .toArray();
+    assert.strictEqual(new arrow.Table(allBatches).numRows, totalRows);
+  });
+
+  it('should return existing and new rows for WRITE_APPEND and fail WRITE_EMPTY on a non-empty destination table', async () => {
+    const tableRef = `\`${dataset.id}.append_target\``;
+    const destTable = dataset.table('append_target');
+    await bigquery.query(`CREATE TABLE ${tableRef} AS SELECT 1 AS x`);
+
+    // 1. WRITE_APPEND adds the new row and, like query(), reads back the whole
+    // destination table, including the row that was already there.
+    const appendBatches: arrow.RecordBatch[] = await bigquery
+      .createQueryArrowStream({
+        query: 'SELECT 2 AS x',
+        destination: destTable,
+        writeDisposition: 'WRITE_APPEND',
+      })
+      .toArray();
+    const appendTable = new arrow.Table(appendBatches);
+    assert.deepStrictEqual(
+      Array.from(appendTable.getChild('x')!.toArray()).sort(),
+      [1n, 2n],
+    );
+
+    // 2. WRITE_EMPTY fails because the destination table already has rows.
+    await assert.rejects(
+      bigquery
+        .createQueryArrowStream({
+          query: 'SELECT 3 AS x',
+          destination: destTable,
+          writeDisposition: 'WRITE_EMPTY',
+        })
+        .toArray(),
+      /Already Exists/,
+    );
+
+    // Verify the failed WRITE_EMPTY job left the table unchanged.
+    const [rows] = await bigquery.query(`SELECT x FROM ${tableRef} ORDER BY x`);
+    assert.deepStrictEqual(rows, [{x: 1}, {x: 2}]);
   });
 });

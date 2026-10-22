@@ -57,6 +57,9 @@ export interface CreateReadSessionRequest {
   readSession: {
     table: string;
     dataFormat: 'ARROW';
+    readOptions?: {
+      arrowSerializationOptions?: ArrowSerializationOptions;
+    };
   };
   maxStreamCount: number;
 }
@@ -71,7 +74,11 @@ export interface BigQueryReadClient {
   createReadSession(
     request: CreateReadSessionRequest,
   ): Promise<[IReadSession, ...unknown[]]>;
-  readRows(request: {readStream: string; offset?: number}): ReadRowsStream;
+  readRows(request: {
+    readStream: string;
+    offset?: number;
+    arrowSerializationOptions?: ArrowSerializationOptions;
+  }): ReadRowsStream;
 }
 
 /**
@@ -115,7 +122,21 @@ export type ArrowQuery = Query & {
    * the job completes.
    */
   timeoutMs?: number;
+  /**
+   * Arrow serialization options sent on `jobs.query`, `ReadRows`, and
+   * `CreateReadSession`, such as `picosTimestampPrecision`. Buffer compression
+   * isn't supported.
+   */
+  arrowSerializationOptions?: ArrowSerializationOptions;
 };
+
+/**
+ * [Beta] Arrow serialization options for
+ * {@link BigQuery#createQueryArrowStream}.
+ *
+ * @beta
+ */
+export type ArrowSerializationOptions = bigquery.IArrowSerializationOptions;
 
 /**
  * State shared by the helpers that stream rows for one
@@ -126,11 +147,51 @@ interface ArrowStreamContext {
   arrow: ArrowModule;
   storage: StorageModule;
   stream: ArrowRecordBatchStream;
+  arrowSerializationOptions: ArrowSerializationOptions;
   /** Called when the consumer wants more batches. */
   onRead?: () => void;
+  /** Rows left before the caller's `maxResults` limit; unset when unlimited. */
+  remainingRows?: number;
 }
 
 const readClients = new WeakMap<BigQuery, BigQueryReadClient>();
+
+// gRPC status codes safe to resume from a row offset on ReadRows.
+const GRPC_STATUS_INTERNAL = 13;
+const GRPC_STATUS_UNAVAILABLE = 14;
+
+// How many times in a row a failed ReadRows call is reopened before the
+// error is passed to the caller. Any rows read reset the count.
+const MAX_STREAM_RETRIES = 3;
+
+/**
+ * Validates and normalizes `arrowSerializationOptions`, rejecting compressed
+ * Arrow buffers (`apache-arrow` doesn't bundle LZ4 or ZSTD codecs) and
+ * defaulting `picosTimestampPrecision` to `'TIMESTAMP_PRECISION_MICROS'`.
+ * Other options aren't forwarded, so every batch stays decodable.
+ *
+ * @private
+ */
+function resolveArrowSerializationOptions(
+  options?: ArrowSerializationOptions,
+): ArrowSerializationOptions {
+  if (
+    options?.bufferCompression &&
+    options.bufferCompression !== 'COMPRESSION_UNSPECIFIED'
+  ) {
+    throw new Error(
+      `Unsupported arrowSerializationOptions.bufferCompression "${options.bufferCompression}": ` +
+        'apache-arrow does not bundle LZ4 or ZSTD decompression codecs.',
+    );
+  }
+  const precision = options?.picosTimestampPrecision;
+  return {
+    picosTimestampPrecision:
+      precision && precision !== 'PICOS_TIMESTAMP_PRECISION_UNSPECIFIED'
+        ? precision
+        : 'TIMESTAMP_PRECISION_MICROS',
+  };
+}
 
 /**
  * Returns the first project ID from `candidates`, falling back to the
@@ -289,20 +350,29 @@ export function decodeArrowPayload(
   serializedSchema?: Uint8Array | string,
   serializedRecordBatch?: Uint8Array | string,
 ): RecordBatch[] {
-  if (!serializedSchema) {
+  const hasSchema =
+    serializedSchema !== undefined && serializedSchema.length > 0;
+  const hasBatch =
+    serializedRecordBatch !== undefined && serializedRecordBatch.length > 0;
+  if (!hasSchema) {
+    // Without a schema the batch can't be decoded; returning an empty batch
+    // would silently drop its rows.
+    if (hasBatch) {
+      throw new Error('Got an Arrow record batch before its schema.');
+    }
     return [new arrow.RecordBatch({})];
   }
   // BigQuery returns the Arrow IPC Schema message and RecordBatch message as
   // separate fields; the reader accepts them as consecutive chunks of one IPC
   // stream, which avoids copying them into a single buffer.
-  const chunks = serializedRecordBatch
+  const chunks = hasBatch
     ? [toUint8Array(serializedSchema), toUint8Array(serializedRecordBatch)]
     : [toUint8Array(serializedSchema)];
   const reader = arrow.RecordBatchReader.from(chunks);
   reader.open();
   // With no record batch, the reader yields its own 0-row placeholder batch,
   // which leaves nested Struct children empty and List children undefined.
-  return serializedRecordBatch
+  return hasBatch
     ? [...reader]
     : [createEmptyRecordBatch(arrow, reader.schema)];
 }
@@ -322,6 +392,32 @@ function pushBatches(
     }
     stream.push(batch);
   }
+}
+
+/**
+ * Cuts `batches` at the caller's `maxResults` limit, slicing the batch that
+ * crosses it and counting the kept rows against `ctx.remainingRows`. Always
+ * keeps the first batch, so a result cut to 0 rows still carries its schema.
+ *
+ * @private
+ */
+function limitRows(
+  ctx: ArrowStreamContext,
+  batches: RecordBatch[],
+): RecordBatch[] {
+  if (ctx.remainingRows === undefined) {
+    return batches;
+  }
+  const kept: RecordBatch[] = [];
+  for (const batch of batches) {
+    if (kept.length > 0 && ctx.remainingRows === 0) {
+      break;
+    }
+    const rows = Math.min(batch.numRows, ctx.remainingRows);
+    kept.push(rows < batch.numRows ? batch.slice(0, rows) : batch);
+    ctx.remainingRows -= rows;
+  }
+  return kept;
 }
 
 /**
@@ -355,6 +451,7 @@ async function streamDefaultJobStream(
     readStream,
     offset,
     initialSchema,
+    arrowSerializationOptions: ctx.arrowSerializationOptions,
   });
 
   // When reading from offset = 0 (e.g., after waiting for an unfinished job)
@@ -391,8 +488,10 @@ async function createArrowReadSession(
     readSession: {
       table: `projects/${table.projectId}/datasets/${table.datasetId}/tables/${table.tableId}`,
       dataFormat: 'ARROW',
+      readOptions: {arrowSerializationOptions: ctx.arrowSerializationOptions},
     },
-    // One stream keeps rows in the query's order (e.g., ORDER BY).
+    // One stream keeps rows in the query's order (e.g., ORDER BY) for a table
+    // the query just wrote.
     maxStreamCount: 1,
   });
   return session ?? undefined;
@@ -432,13 +531,45 @@ async function readDestinationSchema(
 }
 
 /**
- * Streams Arrow `RecordBatch`es from a Storage Read API stream starting at
- * `offset`, pausing `ReadRows` while the consumer is behind.
+ * Returns `true` if a `ReadRows` gRPC stream error is transient and safe to
+ * resume from the next unread row offset.
  *
- * Resolves when `ReadRows` ends or the consumer destroys the stream, with
- * whether any batch was emitted and the last Arrow schema seen, and rejects
- * on a `ReadRows` or decode error. In every case, the listeners added here
- * are removed, and `ReadRows` is cancelled unless it already finished.
+ * @private
+ */
+function isRetryableStreamError(err: Error & {code?: number}): boolean {
+  // DEADLINE_EXCEEDED isn't retried: it means the caller's deadline ran out.
+  if (err.code === GRPC_STATUS_UNAVAILABLE) {
+    return true;
+  }
+  // Long-lived HTTP/2 streams closed by the server with RST_STREAM surface as
+  // INTERNAL (code 13) in gRPC and are safe to reconnect at the next offset.
+  return (
+    err.code === GRPC_STATUS_INTERNAL &&
+    Boolean(err.message?.includes('RST_STREAM'))
+  );
+}
+
+/**
+ * Progress through a Storage Read API stream, kept across reconnects.
+ *
+ * @private
+ */
+interface ReadRowsProgress {
+  // The next unread row.
+  offset: number;
+  emittedBatch: boolean;
+  // The last Arrow schema seen, needed to decode later record batches.
+  serializedSchema?: Uint8Array;
+}
+
+/**
+ * Streams Arrow `RecordBatch`es from a Storage Read API stream starting at
+ * `offset`. If `ReadRows` fails with a transient error, reopens it at the next
+ * unread row.
+ *
+ * Resolves when the stream ends or the consumer destroys it, with whether any
+ * batch was emitted and the last Arrow schema seen. Rejects with the error
+ * once it isn't retryable or the retries run out.
  *
  * @private
  */
@@ -448,21 +579,67 @@ async function streamReadRows(
     readStream: string;
     offset: number;
     initialSchema?: Uint8Array | string;
+    // Only the default job stream accepts these on ReadRows.
+    arrowSerializationOptions?: ArrowSerializationOptions;
   },
 ): Promise<{emittedBatch: boolean; serializedSchema?: Uint8Array}> {
+  const {offset, initialSchema, ...request} = options;
+  const progress: ReadRowsProgress = {
+    offset,
+    emittedBatch: false,
+    serializedSchema: initialSchema ? toUint8Array(initialSchema) : undefined,
+  };
+
+  let retries = 0;
+  // Also stops at the caller's maxResults, without opening ReadRows for 0.
+  while (!ctx.stream.destroyed && ctx.remainingRows !== 0) {
+    const attemptOffset = progress.offset;
+    try {
+      await readRowsOnce(ctx, request, progress);
+      break;
+    } catch (err) {
+      if (progress.offset > attemptOffset) {
+        retries = 0;
+      }
+      if (
+        !isRetryableStreamError(err as Error & {code?: number}) ||
+        retries >= MAX_STREAM_RETRIES
+      ) {
+        throw err;
+      }
+      retries++;
+    }
+  }
+  const {emittedBatch, serializedSchema} = progress;
+  return {emittedBatch, serializedSchema};
+}
+
+/**
+ * Opens one `ReadRows` call at `progress.offset` and pushes its Arrow
+ * `RecordBatch`es, pausing `ReadRows` while the consumer is behind. Updates
+ * `progress` for each batch, so a retry resumes at the next unread row.
+ *
+ * Resolves when `ReadRows` ends or the consumer destroys the stream, and
+ * rejects on a `ReadRows` or decode error. In every case, the listeners added
+ * here are removed, and `ReadRows` is cancelled unless it already finished.
+ *
+ * @private
+ */
+async function readRowsOnce(
+  ctx: ArrowStreamContext,
+  request: {
+    readStream: string;
+    arrowSerializationOptions?: ArrowSerializationOptions;
+  },
+  progress: ReadRowsProgress,
+): Promise<void> {
   const {bq, arrow, storage, stream} = ctx;
-  const {readStream, offset, initialSchema} = options;
 
   return new Promise((resolve, reject) => {
     const grpcStream = getStorageReadClient(bq, storage).readRows({
-      readStream,
-      offset,
+      ...request,
+      offset: progress.offset,
     });
-
-    let serializedSchema: Uint8Array | undefined = initialSchema
-      ? toUint8Array(initialSchema)
-      : undefined;
-    let emittedBatch = false;
 
     let settled = false;
     // Detaches every listener added here and settles the promise. Cancels
@@ -489,7 +666,7 @@ async function streamReadRows(
       if (opts.err) {
         reject(opts.err);
       } else {
-        resolve({emittedBatch, serializedSchema});
+        resolve();
       }
     };
 
@@ -502,7 +679,9 @@ async function streamReadRows(
       // and may also emit responses without record batch bytes (e.g.,
       // heartbeats).
       if (resp.arrowSchema?.serializedSchema) {
-        serializedSchema = toUint8Array(resp.arrowSchema.serializedSchema);
+        progress.serializedSchema = toUint8Array(
+          resp.arrowSchema.serializedSchema,
+        );
       }
       const rawBatch = resp.arrowRecordBatch?.serializedRecordBatch;
       const hasBatchBytes =
@@ -514,16 +693,24 @@ async function streamReadRows(
         return;
       }
       try {
-        const batches = decodeArrowPayload(arrow, serializedSchema, rawBatch);
+        const batches = limitRows(
+          ctx,
+          decodeArrowPayload(arrow, progress.serializedSchema, rawBatch),
+        );
         for (const batch of batches) {
           if (stream.destroyed) {
             settle({cancel: true});
             return;
           }
-          emittedBatch = true;
+          progress.offset += batch.numRows;
+          progress.emittedBatch = true;
           if (!stream.push(batch)) {
             grpcStream.pause();
           }
+        }
+        // Reached maxResults, so the rest of the stream isn't needed.
+        if (ctx.remainingRows === 0) {
+          settle({cancel: true});
         }
       } catch (parseErr) {
         settle({cancel: true, err: parseErr as Error});
@@ -573,13 +760,14 @@ async function streamDestinationTable(
     return;
   }
 
+  // Session streams use the options passed to CreateReadSession.
   const {emittedBatch, serializedSchema} = await streamReadRows(ctx, {
     readStream,
     offset: 0,
     initialSchema: sessionSchema,
   });
   // A stream that ends without rows still yields a 0-row RecordBatch.
-  if (!emittedBatch) {
+  if (!emittedBatch && !stream.destroyed) {
     pushBatches(stream, decodeArrowPayload(arrow, serializedSchema));
   }
 }
@@ -735,17 +923,33 @@ export function createQueryArrowStream_(
       throw new Error('A SQL query string is required.');
     }
 
-    const queryObj: ArrowQuery =
-      typeof query === 'string' ? {query} : {...query};
+    // Keep arrowSerializationOptions and maxResults out of queryObj so they
+    // never reach the jobs.insert configuration; they're applied explicitly.
+    const {
+      arrowSerializationOptions: requestedSerializationOptions,
+      maxResults,
+      ...queryObj
+    }: ArrowQuery = typeof query === 'string' ? {query} : query;
 
-    if (queryObj.writeDisposition === 'WRITE_APPEND') {
-      throw new Error(
-        'WRITE_APPEND is not supported with Arrow query results because reading ' +
-          'the destination table via the Storage Read API would include pre-existing rows.',
-      );
+    // NaN would never reach the row limit, and a negative limit would run
+    // the whole query just to return no rows.
+    if (
+      maxResults !== undefined &&
+      (!Number.isInteger(maxResults) || maxResults < 0)
+    ) {
+      throw new Error('maxResults must be a non-negative integer.');
     }
 
-    const ctx: ArrowStreamContext = {bq, arrow, storage, stream};
+    const ctx: ArrowStreamContext = {
+      bq,
+      arrow,
+      storage,
+      stream,
+      arrowSerializationOptions: resolveArrowSerializationOptions(
+        requestedSerializationOptions,
+      ),
+      remainingRows: maxResults,
+    };
     readCtx = ctx;
 
     // Throws for an invalid request, for example invalid query parameters.
@@ -765,6 +969,9 @@ export function createQueryArrowStream_(
       queryReq.jobCreationMode = 'JOB_CREATION_OPTIONAL';
     }
     queryReq.queryResultsFormat = 'ARROW';
+    queryReq.arrowSerializationOptions = ctx.arrowSerializationOptions;
+    // Set directly: buildQueryRequest_ drops a maxResults of 0.
+    queryReq.maxResults = maxResults;
 
     const [job, res] = (await bq.runJobsQuery(queryReq)) as JobsQueryResponse;
     // The consumer may have destroyed the stream while jobs.query ran.
@@ -813,10 +1020,13 @@ export function createQueryArrowStream_(
     if (!hasRemainingRows || inlineRowsCount > 0n) {
       pushBatches(
         stream,
-        decodeArrowPayload(
-          arrow,
-          res?.arrowSchema?.serializedSchema,
-          res?.arrowRecordBatch?.serializedRecordBatch,
+        limitRows(
+          ctx,
+          decodeArrowPayload(
+            arrow,
+            res?.arrowSchema?.serializedSchema,
+            res?.arrowRecordBatch?.serializedRecordBatch,
+          ),
         ),
       );
     }
@@ -830,6 +1040,7 @@ export function createQueryArrowStream_(
       res?.jobReference,
       Number(inlineRowsCount),
       res?.arrowSchema?.serializedSchema,
+      job ?? undefined,
     );
   };
 
