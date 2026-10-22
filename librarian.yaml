@@ -2114,6 +2114,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/accounts'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Accounts
   - name: google-shopping-merchant-conversions
     version: 0.9.0
     apis:
@@ -2124,6 +2125,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/conversions'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Conversions
   - name: google-shopping-merchant-datasources
     version: 0.13.0
     apis:
@@ -2134,6 +2136,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/datasources'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Data Sources
   - name: google-shopping-merchant-inventories
     version: 0.15.0
     apis:
@@ -2144,6 +2147,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/inventories'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Inventories
   - name: google-shopping-merchant-issueresolution
     version: 0.6.0
     apis:
@@ -2154,6 +2158,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/issueresolution'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Issue Resolution
   - name: google-shopping-merchant-lfp
     version: 0.12.0
     apis:
@@ -2164,6 +2169,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/lfp'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant LFP
   - name: google-shopping-merchant-loyaltycustomers
     version: 0.4.0
     apis:
@@ -2173,6 +2179,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/loyaltycustomers'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Loyalty Customers
   - name: google-shopping-merchant-notifications
     version: 0.11.0
     apis:
@@ -2183,6 +2190,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/notifications'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Notifications
   - name: google-shopping-merchant-ordertracking
     version: 0.6.0
     apis:
@@ -2193,6 +2201,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/ordertracking'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Order Tracking
   - name: google-shopping-merchant-products
     version: 0.13.0
     apis:
@@ -2203,6 +2212,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/products'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Products
   - name: google-shopping-merchant-promotions
     version: 0.8.0
     apis:
@@ -2213,6 +2223,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/promotions'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Promotions
   - name: google-shopping-merchant-quota
     version: 0.11.0
     apis:
@@ -2223,6 +2234,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/quota'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Quota
   - name: google-shopping-merchant-reports
     version: 0.18.0
     apis:
@@ -2234,6 +2246,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/reports'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Reports
   - name: google-shopping-merchant-reviews
     version: 0.8.0
     apis:
@@ -2243,6 +2256,7 @@ libraries:
       default_version: v1beta
       package_name: '@google-shopping/reviews'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Reviews
   - name: google-storage-control
     version: 0.13.0
     apis:
