@@ -18,11 +18,11 @@ import {Duplex, Transform} from 'stream';
 import {google} from '../../protos/firestore_v1_proto_api';
 
 import * as protos from '../../protos/firestore_v1_proto_api';
-import './expression';
-import Firestore, {
+import {
   CollectionReference,
   DocumentReference,
   FieldValue,
+  Firestore,
   Timestamp,
   VectorValue,
 } from '../index';
@@ -270,6 +270,9 @@ export class ExecutionUtil {
           request.readTime = transactionOrReadTime.toProto().timestampValue;
         } else if (transactionOrReadTime) {
           request.newTransaction = transactionOrReadTime;
+        } else if (structuredPipeline.options?.atomic) {
+          request.newTransaction = {readWrite: {}};
+          request.autoCommitTransaction = true;
         }
 
         let streamActive: Deferred<boolean>;
@@ -300,6 +303,7 @@ export class ExecutionUtil {
           backendStream.resume();
           backendStream.pipe(stream);
         } while (await streamActive.promise);
+        return;
       })
       .catch(e => {
         logger(

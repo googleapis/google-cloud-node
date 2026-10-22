@@ -12,14 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import {EventEmitter} from 'events';
 import * as express from 'express';
-import * as restify from 'restify';
 
 import {ErrorMessage} from '../classes/error-message';
 import {Configuration} from '../configuration';
 import {RequestHandler} from '../google-apis/auth-client';
 import {populateErrorMessage} from '../populate-error-message';
 import * as expressRequestInformationExtractor from '../request-extractors/express';
+
+export interface Request extends EventEmitter {}
+
+export interface Response extends EventEmitter {
+  statusCode: number;
+}
+
+export interface Server extends EventEmitter {}
 
 /**
  * The restifyErrorHandler is responsible for taking the captured error, setting
@@ -67,8 +75,8 @@ function restifyErrorHandler(
 function restifyRequestFinishHandler(
   client: RequestHandler,
   config: Configuration,
-  req: restify.Request,
-  res: restify.Response,
+  req: Request,
+  res: Response,
 ) {
   let em;
 
@@ -111,8 +119,8 @@ function restifyRequestFinishHandler(
 function restifyRequestHandler(
   client: RequestHandler,
   config: Configuration,
-  req: restify.Request,
-  res: restify.Response,
+  req: Request,
+  res: Response,
   next: Function,
 ) {
   // TODO: Address the fact that a cast is needed to use `listener`
@@ -157,7 +165,7 @@ function restifyRequestHandler(
 function serverErrorHandler(
   client: RequestHandler,
   config: Configuration,
-  server: restify.Server,
+  server: Server,
 ) {
   server.on('uncaughtException', (req, res, reqConfig, err) => {
     const em = new ErrorMessage().consumeRequestInformation(

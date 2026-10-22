@@ -31,11 +31,12 @@
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-policytroubleshooter-iam",
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
+    "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
+    "postpack": "minifyProtoJson",
     "prelint": "cd samples; npm link ../; npm i",
     "prepare": "npm run compile",
     "system-test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/system-test",
