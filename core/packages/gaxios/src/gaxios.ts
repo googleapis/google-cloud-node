@@ -701,8 +701,7 @@ export class Gaxios implements FetchCompliance {
    */
   //
   static #fetch?:
-    | typeof nodeFetch
-    | NonNullable<GaxiosOptions['fetchImplementation']>;
+    typeof nodeFetch | NonNullable<GaxiosOptions['fetchImplementation']>;
 
   static #bunFetch?: NonNullable<GaxiosOptions['fetchImplementation']>;
 

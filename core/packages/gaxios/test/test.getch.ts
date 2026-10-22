@@ -1963,7 +1963,7 @@ describe('fetch-compatible API', () => {
     ) => gaxios.fetch(...args);
     const bunStyleFetch = Object.assign(
       (...args: Parameters<typeof fetch>) => gaxios.fetch(...args),
-      {preconnect: (_target: string | URL) => {}},
+      {preconnect: (target: string | URL) => void target},
     );
     const optsWithWrapper: GaxiosOptions = {fetchImplementation: wrappedFetch};
     const optsWithBunFetch: GaxiosOptions = {
