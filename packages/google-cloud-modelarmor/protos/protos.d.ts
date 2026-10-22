@@ -344,6 +344,121 @@ export namespace google {
                     MODALITY_IMAGE = 2
                 }
 
+                /** FilterVersionAlias enum. */
+                enum FilterVersionAlias {
+                    FILTER_VERSION_ALIAS_UNSPECIFIED = 0,
+                    FILTER_VERSION_ALIAS_STABLE = 1,
+                    FILTER_VERSION_ALIAS_LATEST = 2,
+                    FILTER_VERSION_ALIAS_LEGACY = 3,
+                    FILTER_VERSION_ALIAS_RETIRED = 4
+                }
+
+                /** Properties of a FilterVersionSelector. */
+                interface IFilterVersionSelector {
+
+                    /** FilterVersionSelector version */
+                    version?: (string|null);
+
+                    /** FilterVersionSelector alias */
+                    alias?: (google.cloud.modelarmor.v1.FilterVersionAlias|keyof typeof google.cloud.modelarmor.v1.FilterVersionAlias|null);
+                }
+
+                /** Represents a FilterVersionSelector. */
+                class FilterVersionSelector implements IFilterVersionSelector {
+
+                    /**
+                     * Constructs a new FilterVersionSelector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1.IFilterVersionSelector);
+
+                    /** FilterVersionSelector version. */
+                    public version?: (string|null);
+
+                    /** FilterVersionSelector alias. */
+                    public alias?: (google.cloud.modelarmor.v1.FilterVersionAlias|keyof typeof google.cloud.modelarmor.v1.FilterVersionAlias|null);
+
+                    /** FilterVersionSelector versionSpec. */
+                    public versionSpec?: ("version"|"alias");
+
+                    /**
+                     * Creates a new FilterVersionSelector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FilterVersionSelector instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1.IFilterVersionSelector): google.cloud.modelarmor.v1.FilterVersionSelector;
+
+                    /**
+                     * Encodes the specified FilterVersionSelector message. Does not implicitly {@link google.cloud.modelarmor.v1.FilterVersionSelector.verify|verify} messages.
+                     * @param message FilterVersionSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1.IFilterVersionSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FilterVersionSelector message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.FilterVersionSelector.verify|verify} messages.
+                     * @param message FilterVersionSelector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1.IFilterVersionSelector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FilterVersionSelector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FilterVersionSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1.FilterVersionSelector;
+
+                    /**
+                     * Decodes a FilterVersionSelector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FilterVersionSelector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1.FilterVersionSelector;
+
+                    /**
+                     * Verifies a FilterVersionSelector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FilterVersionSelector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FilterVersionSelector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1.FilterVersionSelector;
+
+                    /**
+                     * Creates a plain object from a FilterVersionSelector message. Also converts values to other types if specified.
+                     * @param message FilterVersionSelector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1.FilterVersionSelector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FilterVersionSelector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FilterVersionSelector
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Template. */
                 interface ITemplate {
 
@@ -503,8 +618,14 @@ export namespace google {
                         /** TemplateMetadata multiLanguageDetection */
                         multiLanguageDetection?: (google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection|null);
 
+                        /** TemplateMetadata filterVersionSelector */
+                        filterVersionSelector?: (google.cloud.modelarmor.v1.IFilterVersionSelector|null);
+
                         /** TemplateMetadata modalities */
                         modalities?: (google.cloud.modelarmor.v1.Modality[]|null);
+
+                        /** TemplateMetadata dataResidencyCompliant */
+                        dataResidencyCompliant?: (boolean|null);
                     }
 
                     /** Represents a TemplateMetadata. */
@@ -543,8 +664,14 @@ export namespace google {
                         /** TemplateMetadata multiLanguageDetection. */
                         public multiLanguageDetection?: (google.cloud.modelarmor.v1.Template.TemplateMetadata.IMultiLanguageDetection|null);
 
+                        /** TemplateMetadata filterVersionSelector. */
+                        public filterVersionSelector?: (google.cloud.modelarmor.v1.IFilterVersionSelector|null);
+
                         /** TemplateMetadata modalities. */
                         public modalities: google.cloud.modelarmor.v1.Modality[];
+
+                        /** TemplateMetadata dataResidencyCompliant. */
+                        public dataResidencyCompliant?: (boolean|null);
 
                         /**
                          * Creates a new TemplateMetadata instance using the specified properties.
@@ -758,6 +885,9 @@ export namespace google {
 
                     /** FloorSetting floorSettingMetadata */
                     floorSettingMetadata?: (google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata|null);
+
+                    /** FloorSetting googleMcpServerFloorSetting */
+                    googleMcpServerFloorSetting?: (google.cloud.modelarmor.v1.IMcpServerFloorSetting|null);
                 }
 
                 /** Represents a FloorSetting. */
@@ -792,6 +922,9 @@ export namespace google {
 
                     /** FloorSetting floorSettingMetadata. */
                     public floorSettingMetadata?: (google.cloud.modelarmor.v1.FloorSetting.IFloorSettingMetadata|null);
+
+                    /** FloorSetting googleMcpServerFloorSetting. */
+                    public googleMcpServerFloorSetting?: (google.cloud.modelarmor.v1.IMcpServerFloorSetting|null);
 
                     /**
                      * Creates a new FloorSetting instance using the specified properties.
@@ -1073,8 +1206,121 @@ export namespace google {
                     /** IntegratedService enum. */
                     enum IntegratedService {
                         INTEGRATED_SERVICE_UNSPECIFIED = 0,
-                        AI_PLATFORM = 1
+                        AI_PLATFORM = 1,
+                        GOOGLE_MCP_SERVER = 2
                     }
+                }
+
+                /** Properties of a McpServerFloorSetting. */
+                interface IMcpServerFloorSetting {
+
+                    /** McpServerFloorSetting inspectOnly */
+                    inspectOnly?: (boolean|null);
+
+                    /** McpServerFloorSetting inspectAndBlock */
+                    inspectAndBlock?: (boolean|null);
+
+                    /** McpServerFloorSetting enableCloudLogging */
+                    enableCloudLogging?: (boolean|null);
+                }
+
+                /** Represents a McpServerFloorSetting. */
+                class McpServerFloorSetting implements IMcpServerFloorSetting {
+
+                    /**
+                     * Constructs a new McpServerFloorSetting.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1.IMcpServerFloorSetting);
+
+                    /** McpServerFloorSetting inspectOnly. */
+                    public inspectOnly?: (boolean|null);
+
+                    /** McpServerFloorSetting inspectAndBlock. */
+                    public inspectAndBlock?: (boolean|null);
+
+                    /** McpServerFloorSetting enableCloudLogging. */
+                    public enableCloudLogging: boolean;
+
+                    /** McpServerFloorSetting enforcementType. */
+                    public enforcementType?: ("inspectOnly"|"inspectAndBlock");
+
+                    /**
+                     * Creates a new McpServerFloorSetting instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns McpServerFloorSetting instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1.IMcpServerFloorSetting): google.cloud.modelarmor.v1.McpServerFloorSetting;
+
+                    /**
+                     * Encodes the specified McpServerFloorSetting message. Does not implicitly {@link google.cloud.modelarmor.v1.McpServerFloorSetting.verify|verify} messages.
+                     * @param message McpServerFloorSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1.IMcpServerFloorSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified McpServerFloorSetting message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.McpServerFloorSetting.verify|verify} messages.
+                     * @param message McpServerFloorSetting message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1.IMcpServerFloorSetting, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a McpServerFloorSetting message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns McpServerFloorSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1.McpServerFloorSetting;
+
+                    /**
+                     * Decodes a McpServerFloorSetting message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns McpServerFloorSetting
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1.McpServerFloorSetting;
+
+                    /**
+                     * Verifies a McpServerFloorSetting message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a McpServerFloorSetting message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns McpServerFloorSetting
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1.McpServerFloorSetting;
+
+                    /**
+                     * Creates a plain object from a McpServerFloorSetting message. Also converts values to other types if specified.
+                     * @param message McpServerFloorSetting
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1.McpServerFloorSetting, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this McpServerFloorSetting to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for McpServerFloorSetting
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an AiPlatformFloorSetting. */
@@ -3327,6 +3573,127 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a FilterVersionConfig. */
+                interface IFilterVersionConfig {
+
+                    /** FilterVersionConfig filterVersion */
+                    filterVersion?: (string|null);
+
+                    /** FilterVersionConfig filterVersionAlias */
+                    filterVersionAlias?: (google.cloud.modelarmor.v1.FilterVersionAlias|keyof typeof google.cloud.modelarmor.v1.FilterVersionAlias|null);
+
+                    /** FilterVersionConfig releaseDate */
+                    releaseDate?: (google.type.IDate|null);
+
+                    /** FilterVersionConfig projectedDeprecationDate */
+                    projectedDeprecationDate?: (google.type.IDate|null);
+
+                    /** FilterVersionConfig messageItems */
+                    messageItems?: (google.cloud.modelarmor.v1.IMessageItem[]|null);
+                }
+
+                /** Represents a FilterVersionConfig. */
+                class FilterVersionConfig implements IFilterVersionConfig {
+
+                    /**
+                     * Constructs a new FilterVersionConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.modelarmor.v1.IFilterVersionConfig);
+
+                    /** FilterVersionConfig filterVersion. */
+                    public filterVersion: string;
+
+                    /** FilterVersionConfig filterVersionAlias. */
+                    public filterVersionAlias?: (google.cloud.modelarmor.v1.FilterVersionAlias|keyof typeof google.cloud.modelarmor.v1.FilterVersionAlias|null);
+
+                    /** FilterVersionConfig releaseDate. */
+                    public releaseDate?: (google.type.IDate|null);
+
+                    /** FilterVersionConfig projectedDeprecationDate. */
+                    public projectedDeprecationDate?: (google.type.IDate|null);
+
+                    /** FilterVersionConfig messageItems. */
+                    public messageItems: google.cloud.modelarmor.v1.IMessageItem[];
+
+                    /**
+                     * Creates a new FilterVersionConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FilterVersionConfig instance
+                     */
+                    public static create(properties?: google.cloud.modelarmor.v1.IFilterVersionConfig): google.cloud.modelarmor.v1.FilterVersionConfig;
+
+                    /**
+                     * Encodes the specified FilterVersionConfig message. Does not implicitly {@link google.cloud.modelarmor.v1.FilterVersionConfig.verify|verify} messages.
+                     * @param message FilterVersionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.modelarmor.v1.IFilterVersionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FilterVersionConfig message, length delimited. Does not implicitly {@link google.cloud.modelarmor.v1.FilterVersionConfig.verify|verify} messages.
+                     * @param message FilterVersionConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.modelarmor.v1.IFilterVersionConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FilterVersionConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FilterVersionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.modelarmor.v1.FilterVersionConfig;
+
+                    /**
+                     * Decodes a FilterVersionConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FilterVersionConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.modelarmor.v1.FilterVersionConfig;
+
+                    /**
+                     * Verifies a FilterVersionConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FilterVersionConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FilterVersionConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.modelarmor.v1.FilterVersionConfig;
+
+                    /**
+                     * Creates a plain object from a FilterVersionConfig message. Also converts values to other types if specified.
+                     * @param message FilterVersionConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.modelarmor.v1.FilterVersionConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FilterVersionConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FilterVersionConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a SanitizationResult. */
                 interface ISanitizationResult {
 
@@ -3458,6 +3825,9 @@ export namespace google {
 
                         /** SanitizationMetadata streamChunkProcessed */
                         streamChunkProcessed?: (google.cloud.modelarmor.v1.IDataItem|null);
+
+                        /** SanitizationMetadata filterVersionConfig */
+                        filterVersionConfig?: (google.cloud.modelarmor.v1.IFilterVersionConfig|null);
                     }
 
                     /** Represents a SanitizationMetadata. */
@@ -3480,6 +3850,9 @@ export namespace google {
 
                         /** SanitizationMetadata streamChunkProcessed. */
                         public streamChunkProcessed?: (google.cloud.modelarmor.v1.IDataItem|null);
+
+                        /** SanitizationMetadata filterVersionConfig. */
+                        public filterVersionConfig?: (google.cloud.modelarmor.v1.IFilterVersionConfig|null);
 
                         /**
                          * Creates a new SanitizationMetadata instance using the specified properties.
@@ -4373,6 +4746,9 @@ export namespace google {
 
                     /** ByteDataItem byteData */
                     byteData?: (Uint8Array|Buffer|string|null);
+
+                    /** ByteDataItem fileLabel */
+                    fileLabel?: (string|null);
                 }
 
                 /** Represents a ByteDataItem. */
@@ -4389,6 +4765,9 @@ export namespace google {
 
                     /** ByteDataItem byteData. */
                     public byteData: (Uint8Array|Buffer|string);
+
+                    /** ByteDataItem fileLabel. */
+                    public fileLabel: string;
 
                     /**
                      * Creates a new ByteDataItem instance using the specified properties.

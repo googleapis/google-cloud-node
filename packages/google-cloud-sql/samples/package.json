@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-cloud/sql": "^0.29.1"
+    "@google-cloud/sql": "^0.30.0"
   },
   "devDependencies": {
     "c8": "^10.0.0",

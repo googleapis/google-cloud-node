@@ -2442,6 +2442,10 @@
                           "type": "GitRepoSource",
                           "id": 26
                         },
+                        "approvalConfig": {
+                          "type": "ApprovalConfig",
+                          "id": 28
+                        },
                         "serviceAccount": {
                           "type": "string",
                           "id": 33,
@@ -2888,6 +2892,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "workerRelease": {
+                          "type": "string",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "resolvedWorkerRelease": {
+                          "type": "string",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -2936,6 +2954,20 @@
                               "id": 1,
                               "options": {
                                 "(google.api.resource_reference).type": "cloudbuild.googleapis.com/WorkerPool"
+                              }
+                            },
+                            "workerRelease": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "resolvedWorkerRelease": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           }
@@ -3223,6 +3255,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
+                              }
+                            },
+                            "workerRelease": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }

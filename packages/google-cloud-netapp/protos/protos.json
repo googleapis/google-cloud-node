@@ -402,6 +402,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "ontapSource": {
+                          "type": "OntapSource",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -535,6 +542,40 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "OntapSource": {
+                      "oneofs": {
+                        "_storagePool": {
+                          "oneof": [
+                            "storagePool"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "storagePool": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/StoragePool",
+                            "proto3_optional": true
+                          }
+                        },
+                        "volumeUuid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "snapshotUuid": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -825,7 +866,7 @@
                           "type": "string",
                           "id": 7,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "locations.googleapis.com/Location"
                           }
                         },
@@ -1376,6 +1417,52 @@
                                 "response_type": "Volume",
                                 "metadata_type": "OperationMetadata"
                               }
+                            }
+                          ]
+                        },
+                        "StartSplit": {
+                          "requestType": "StartSplitRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/volumes/*}:startSplit",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Volume",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/volumes/*}:startSplit",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Volume",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "GetSplitStatus": {
+                          "requestType": "GetSplitStatusRequest",
+                          "responseType": "SplitStatus",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/volumes/*}:getSplitStatus",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/volumes/*}:getSplitStatus"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         },
@@ -2708,6 +2795,80 @@
                               }
                             }
                           ]
+                        },
+                        "RestoreVolume": {
+                          "requestType": "RestoreVolumeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/storagePools/*}:restoreVolume",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,backup_source,ontap_volume_target",
+                            "(google.longrunning.operation_info).response_type": "RestoreVolumeResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/storagePools/*}:restoreVolume",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,backup_source,ontap_volume_target"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "RestoreVolumeResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListBackupConfigs": {
+                          "requestType": "ListBackupConfigsRequest",
+                          "responseType": "ListBackupConfigsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/storagePools/*}/backupConfigs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/storagePools/*}/backupConfigs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateBackupConfig": {
+                          "requestType": "UpdateBackupConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/storagePools/*}:updateBackupConfig",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name,volume_uuid,backup_config,update_mask",
+                            "(google.longrunning.operation_info).response_type": "UpdateBackupConfigResponse",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/storagePools/*}:updateBackupConfig",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,volume_uuid,backup_config,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "UpdateBackupConfigResponse",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -3073,6 +3234,21 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "flexPerformanceTier": {
+                          "type": "FlexPerformanceTier",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "FlexPerformanceTier": {
+                          "values": {
+                            "FLEX_PERFORMANCE_TIER_UNSPECIFIED": 0,
+                            "LIMITED": 1
+                          }
                         }
                       }
                     },
@@ -3270,7 +3446,8 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
                           }
                         },
                         "state": {
@@ -4265,7 +4442,8 @@
                         "NFSV3": 1,
                         "NFSV4": 2,
                         "SMB": 3,
-                        "ISCSI": 4
+                        "ISCSI": 4,
+                        "NVME": 5
                       }
                     },
                     "AccessType": {
@@ -4288,6 +4466,14 @@
                         "SHOW_PREVIOUS_VERSIONS": 7,
                         "ACCESS_BASED_ENUMERATION": 8,
                         "CONTINUOUSLY_AVAILABLE": 9
+                      }
+                    },
+                    "SplitState": {
+                      "values": {
+                        "SPLIT_STATE_UNSPECIFIED": 0,
+                        "SPLIT_STATE_NOT_SPLITTING": 1,
+                        "SPLIT_STATE_IN_PROGRESS": 2,
+                        "SPLIT_STATE_FAILED": 3
                       }
                     },
                     "SecurityStyle": {
@@ -4346,6 +4532,79 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "ListBackupConfigsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/StoragePool"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListBackupConfigsResponse": {
+                      "fields": {
+                        "volumeBackupConfigs": {
+                          "rule": "repeated",
+                          "type": "VolumeBackupConfig",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "UNORDERED_LIST"
+                          }
+                        }
+                      }
+                    },
+                    "VolumeBackupConfig": {
+                      "fields": {
+                        "volumeUuid": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "backupConfig": {
+                          "type": "BackupConfig",
+                          "id": 2
                         }
                       }
                     },
@@ -4436,6 +4695,55 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "StartSplitRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Volume"
+                          }
+                        }
+                      }
+                    },
+                    "GetSplitStatusRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Volume"
+                          }
+                        }
+                      }
+                    },
+                    "SplitStatus": {
+                      "fields": {
+                        "splitState": {
+                          "type": "SplitState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "stateDetails": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "progressPercent": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -4801,6 +5109,13 @@
                             "sharedSpaceGib": {
                               "type": "int64",
                               "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "splitState": {
+                              "type": "SplitState",
+                              "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -5801,6 +6116,79 @@
                     "RestoreBackupFilesResponse": {
                       "fields": {}
                     },
+                    "RestoreVolumeRequest": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "backupSource"
+                          ]
+                        },
+                        "target": {
+                          "oneof": [
+                            "ontapVolumeTarget"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "backupSource": {
+                          "type": "BackupSource",
+                          "id": 2
+                        },
+                        "ontapVolumeTarget": {
+                          "type": "OntapVolumeTarget",
+                          "id": 3
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/StoragePool"
+                          }
+                        }
+                      }
+                    },
+                    "BackupSource": {
+                      "fields": {
+                        "backup": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/Backup"
+                          }
+                        },
+                        "fileList": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "OntapVolumeTarget": {
+                      "fields": {
+                        "volumeUuid": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "restoreDestinationPath": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RestoreVolumeResponse": {
+                      "fields": {}
+                    },
                     "EstablishVolumePeeringRequest": {
                       "fields": {
                         "name": {
@@ -5839,6 +6227,51 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        }
+                      }
+                    },
+                    "UpdateBackupConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "netapp.googleapis.com/StoragePool"
+                          }
+                        },
+                        "volumeUuid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "backupConfig": {
+                          "type": "BackupConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateBackupConfigResponse": {
+                      "fields": {
+                        "volumeUuid": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "backupConfig": {
+                          "type": "BackupConfig",
+                          "id": 2
                         }
                       }
                     },

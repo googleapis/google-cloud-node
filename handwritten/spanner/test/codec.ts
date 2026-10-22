@@ -2557,6 +2557,7 @@ describe('codec', () => {
     });
 
     it('should determine if the uuid value is unspecified when SPANNER_ENABLE_UUID_AS_UNTYPED is true', () => {
+      codec._resetUuidUntypedFlagWarnedForTest();
       const emitWarningStub = sandbox.stub(process, 'emitWarning');
       try {
         process.env['SPANNER_ENABLE_UUID_AS_UNTYPED'] = 'true';

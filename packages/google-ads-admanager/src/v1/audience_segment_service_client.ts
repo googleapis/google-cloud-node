@@ -227,6 +227,9 @@ export class AudienceSegmentServiceClient {
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/applications/{application}',
       ),
+      assetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/assets/{asset}',
+      ),
       audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/audienceSegments/{audience_segment}',
       ),
@@ -323,6 +326,12 @@ export class AudienceSegmentServiceClient {
       ),
       lineItemPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/lineItems/{line_item}',
+      ),
+      lineItemCreativeAssociationPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItems/{line_item}/creatives/{creative}',
+      ),
+      lineItemTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItemTemplates/{line_item_template}',
       ),
       linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/linkedDevices/{linked_device}',
@@ -478,6 +487,8 @@ export class AudienceSegmentServiceClient {
       'listAudienceSegments',
       'createAudienceSegment',
       'batchCreateAudienceSegments',
+      'updateAudienceSegment',
+      'batchUpdateAudienceSegments',
       'batchActivateAudienceSegments',
       'batchDeactivateAudienceSegments',
       'batchApproveAudienceSegments',
@@ -1005,6 +1016,294 @@ export class AudienceSegmentServiceClient {
           {} | undefined,
         ]) => {
           this._log.info('batchCreateAudienceSegments response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates an `AudienceSegment` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.ads.admanager.v1.AudienceSegment} request.audienceSegment
+   *   Required. The `AudienceSegment` to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.AudienceSegment|AudienceSegment}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/audience_segment_service.update_audience_segment.js</caption>
+   * region_tag:admanager_v1_generated_AudienceSegmentService_UpdateAudienceSegment_async
+   */
+  updateAudienceSegment(
+    request?: protos.google.ads.admanager.v1.IUpdateAudienceSegmentRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IAudienceSegment,
+      protos.google.ads.admanager.v1.IUpdateAudienceSegmentRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateAudienceSegment(
+    request: protos.google.ads.admanager.v1.IUpdateAudienceSegmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IAudienceSegment,
+      | protos.google.ads.admanager.v1.IUpdateAudienceSegmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAudienceSegment(
+    request: protos.google.ads.admanager.v1.IUpdateAudienceSegmentRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IAudienceSegment,
+      | protos.google.ads.admanager.v1.IUpdateAudienceSegmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateAudienceSegment(
+    request?: protos.google.ads.admanager.v1.IUpdateAudienceSegmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IAudienceSegment,
+          | protos.google.ads.admanager.v1.IUpdateAudienceSegmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IAudienceSegment,
+      | protos.google.ads.admanager.v1.IUpdateAudienceSegmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IAudienceSegment,
+      protos.google.ads.admanager.v1.IUpdateAudienceSegmentRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'audience_segment.name': request.audienceSegment!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateAudienceSegment request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IAudienceSegment,
+          | protos.google.ads.admanager.v1.IUpdateAudienceSegmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateAudienceSegment response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateAudienceSegment(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IAudienceSegment,
+          (
+            | protos.google.ads.admanager.v1.IUpdateAudienceSegmentRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('updateAudienceSegment response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch updates `AudienceSegment` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `AudienceSegments` will be updated.
+   *   Format: `networks/{network_code}`
+   *   The parent field in the UpdateAudienceSegmentRequest.audienceSegment must
+   *   match this field.
+   * @param {number[]} request.requests
+   *   Required. The `AudienceSegment` objects to update.
+   *   A maximum of 100 objects can be updated in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateAudienceSegmentsResponse|BatchUpdateAudienceSegmentsResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/audience_segment_service.batch_update_audience_segments.js</caption>
+   * region_tag:admanager_v1_generated_AudienceSegmentService_BatchUpdateAudienceSegments_async
+   */
+  batchUpdateAudienceSegments(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  >;
+  batchUpdateAudienceSegments(
+    request: protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateAudienceSegments(
+    request: protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateAudienceSegments(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsResponse,
+      (
+        | protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsRequest
+        | undefined
+      ),
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchUpdateAudienceSegments request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateAudienceSegments response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateAudienceSegments(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchUpdateAudienceSegmentsRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateAudienceSegments response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -2350,6 +2649,42 @@ export class AudienceSegmentServiceClient {
   }
 
   /**
+   * Return a fully-qualified asset resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} asset
+   * @returns {string} Resource name string.
+   */
+  assetPath(networkCode: string, asset: string) {
+    return this.pathTemplates.assetPathTemplate.render({
+      network_code: networkCode,
+      asset: asset,
+    });
+  }
+
+  /**
+   * Parse the network_code from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).network_code;
+  }
+
+  /**
+   * Parse the asset from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the asset.
+   */
+  matchAssetFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).asset;
+  }
+
+  /**
    * Return a fully-qualified audienceSegment resource name string.
    *
    * @param {string} network_code
@@ -3597,6 +3932,111 @@ export class AudienceSegmentServiceClient {
   matchLineItemFromLineItemName(lineItemName: string) {
     return this.pathTemplates.lineItemPathTemplate.match(lineItemName)
       .line_item;
+  }
+
+  /**
+   * Return a fully-qualified lineItemCreativeAssociation resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  lineItemCreativeAssociationPath(
+    networkCode: string,
+    lineItem: string,
+    creative: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.render({
+      network_code: networkCode,
+      line_item: lineItem,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the line_item.
+   */
+  matchLineItemFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).line_item;
+  }
+
+  /**
+   * Parse the creative from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).creative;
+  }
+
+  /**
+   * Return a fully-qualified lineItemTemplate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item_template
+   * @returns {string} Resource name string.
+   */
+  lineItemTemplatePath(networkCode: string, lineItemTemplate: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.render({
+      network_code: networkCode,
+      line_item_template: lineItemTemplate,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item_template from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the line_item_template.
+   */
+  matchLineItemTemplateFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).line_item_template;
   }
 
   /**

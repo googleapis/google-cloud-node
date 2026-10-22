@@ -23,8 +23,10 @@ import type {
   CallOptions,
   Descriptors,
   ClientOptions,
+  PaginationCallback,
+  GaxCall,
 } from 'google-gax';
-
+import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
@@ -224,6 +226,9 @@ export class UserServiceClient {
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/applications/{application}',
       ),
+      assetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/assets/{asset}',
+      ),
       audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/audienceSegments/{audience_segment}',
       ),
@@ -321,6 +326,12 @@ export class UserServiceClient {
       lineItemPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/lineItems/{line_item}',
       ),
+      lineItemCreativeAssociationPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItems/{line_item}/creatives/{creative}',
+      ),
+      lineItemTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItemTemplates/{line_item_template}',
+      ),
       linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/linkedDevices/{linked_device}',
       ),
@@ -410,6 +421,17 @@ export class UserServiceClient {
       ),
     };
 
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listUsers: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'users',
+      ),
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.ads.admanager.v1.UserService',
@@ -459,7 +481,16 @@ export class UserServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const userServiceStubMethods = ['getUser'];
+    const userServiceStubMethods = [
+      'getUser',
+      'listUsers',
+      'createUser',
+      'batchCreateUsers',
+      'batchActivateUsers',
+      'batchDeactivateUsers',
+      'updateUser',
+      'batchUpdateUsers',
+    ];
     for (const methodName of userServiceStubMethods) {
       const callPromise = this.userServiceStub.then(
         stub =>
@@ -475,7 +506,7 @@ export class UserServiceClient {
         },
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -704,7 +735,1112 @@ export class UserServiceClient {
         throw error;
       });
   }
+  /**
+   * Creates a `User` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this `User` will be created.
+   *   Format: `networks/{network_code}`
+   * @param {google.ads.admanager.v1.User} request.user
+   *   Required. The `User` to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.User|User}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/user_service.create_user.js</caption>
+   * region_tag:admanager_v1_generated_UserService_CreateUser_async
+   */
+  createUser(
+    request?: protos.google.ads.admanager.v1.ICreateUserRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IUser,
+      protos.google.ads.admanager.v1.ICreateUserRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  createUser(
+    request: protos.google.ads.admanager.v1.ICreateUserRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IUser,
+      protos.google.ads.admanager.v1.ICreateUserRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createUser(
+    request: protos.google.ads.admanager.v1.ICreateUserRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IUser,
+      protos.google.ads.admanager.v1.ICreateUserRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createUser(
+    request?: protos.google.ads.admanager.v1.ICreateUserRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IUser,
+          protos.google.ads.admanager.v1.ICreateUserRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IUser,
+      protos.google.ads.admanager.v1.ICreateUserRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IUser,
+      protos.google.ads.admanager.v1.ICreateUserRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('createUser request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IUser,
+          protos.google.ads.admanager.v1.ICreateUserRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createUser response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .createUser(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IUser,
+          protos.google.ads.admanager.v1.ICreateUserRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createUser response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Creates `User` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `Users` will be created.
+   *   Format: `networks/{network_code}`
+   *   The parent field in the CreateUserRequest must match this
+   *   field.
+   * @param {number[]} request.requests
+   *   Required. The `User` objects to create.
+   *   A maximum of 100 objects can be created in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchCreateUsersResponse|BatchCreateUsersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/user_service.batch_create_users.js</caption>
+   * region_tag:admanager_v1_generated_UserService_BatchCreateUsers_async
+   */
+  batchCreateUsers(
+    request?: protos.google.ads.admanager.v1.IBatchCreateUsersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateUsersResponse,
+      protos.google.ads.admanager.v1.IBatchCreateUsersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchCreateUsers(
+    request: protos.google.ads.admanager.v1.IBatchCreateUsersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateUsersResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateUsersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchCreateUsers(
+    request: protos.google.ads.admanager.v1.IBatchCreateUsersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateUsersResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateUsersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchCreateUsers(
+    request?: protos.google.ads.admanager.v1.IBatchCreateUsersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchCreateUsersResponse,
+          | protos.google.ads.admanager.v1.IBatchCreateUsersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchCreateUsersResponse,
+      | protos.google.ads.admanager.v1.IBatchCreateUsersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchCreateUsersResponse,
+      protos.google.ads.admanager.v1.IBatchCreateUsersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchCreateUsers request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchCreateUsersResponse,
+          | protos.google.ads.admanager.v1.IBatchCreateUsersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchCreateUsers response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchCreateUsers(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchCreateUsersResponse,
+          protos.google.ads.admanager.v1.IBatchCreateUsersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchCreateUsers response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Activates a list of `User` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the `User` objects to activate.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchActivateUsersResponse|BatchActivateUsersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/user_service.batch_activate_users.js</caption>
+   * region_tag:admanager_v1_generated_UserService_BatchActivateUsers_async
+   */
+  batchActivateUsers(
+    request?: protos.google.ads.admanager.v1.IBatchActivateUsersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchActivateUsersResponse,
+      protos.google.ads.admanager.v1.IBatchActivateUsersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchActivateUsers(
+    request: protos.google.ads.admanager.v1.IBatchActivateUsersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateUsersResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateUsersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchActivateUsers(
+    request: protos.google.ads.admanager.v1.IBatchActivateUsersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateUsersResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateUsersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchActivateUsers(
+    request?: protos.google.ads.admanager.v1.IBatchActivateUsersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchActivateUsersResponse,
+          | protos.google.ads.admanager.v1.IBatchActivateUsersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchActivateUsersResponse,
+      | protos.google.ads.admanager.v1.IBatchActivateUsersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchActivateUsersResponse,
+      protos.google.ads.admanager.v1.IBatchActivateUsersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchActivateUsers request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchActivateUsersResponse,
+          | protos.google.ads.admanager.v1.IBatchActivateUsersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchActivateUsers response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchActivateUsers(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchActivateUsersResponse,
+          protos.google.ads.admanager.v1.IBatchActivateUsersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchActivateUsers response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Deactivates a list of `User` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Format: `networks/{network_code}`
+   * @param {string[]} request.names
+   *   Required. The resource names of the `User` objects to deactivate.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchDeactivateUsersResponse|BatchDeactivateUsersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/user_service.batch_deactivate_users.js</caption>
+   * region_tag:admanager_v1_generated_UserService_BatchDeactivateUsers_async
+   */
+  batchDeactivateUsers(
+    request?: protos.google.ads.admanager.v1.IBatchDeactivateUsersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDeactivateUsersResponse,
+      protos.google.ads.admanager.v1.IBatchDeactivateUsersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchDeactivateUsers(
+    request: protos.google.ads.admanager.v1.IBatchDeactivateUsersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateUsersResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateUsersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeactivateUsers(
+    request: protos.google.ads.admanager.v1.IBatchDeactivateUsersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateUsersResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateUsersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchDeactivateUsers(
+    request?: protos.google.ads.admanager.v1.IBatchDeactivateUsersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateUsersResponse,
+          | protos.google.ads.admanager.v1.IBatchDeactivateUsersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchDeactivateUsersResponse,
+      | protos.google.ads.admanager.v1.IBatchDeactivateUsersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchDeactivateUsersResponse,
+      protos.google.ads.admanager.v1.IBatchDeactivateUsersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchDeactivateUsers request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchDeactivateUsersResponse,
+          | protos.google.ads.admanager.v1.IBatchDeactivateUsersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchDeactivateUsers response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchDeactivateUsers(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchDeactivateUsersResponse,
+          (
+            | protos.google.ads.admanager.v1.IBatchDeactivateUsersRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('batchDeactivateUsers response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Updates a `User` object.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.ads.admanager.v1.User} request.user
+   *   Required. The `User` to update.
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. The list of fields to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.User|User}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/user_service.update_user.js</caption>
+   * region_tag:admanager_v1_generated_UserService_UpdateUser_async
+   */
+  updateUser(
+    request?: protos.google.ads.admanager.v1.IUpdateUserRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IUser,
+      protos.google.ads.admanager.v1.IUpdateUserRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateUser(
+    request: protos.google.ads.admanager.v1.IUpdateUserRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IUser,
+      protos.google.ads.admanager.v1.IUpdateUserRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateUser(
+    request: protos.google.ads.admanager.v1.IUpdateUserRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IUser,
+      protos.google.ads.admanager.v1.IUpdateUserRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateUser(
+    request?: protos.google.ads.admanager.v1.IUpdateUserRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IUser,
+          protos.google.ads.admanager.v1.IUpdateUserRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IUser,
+      protos.google.ads.admanager.v1.IUpdateUserRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IUser,
+      protos.google.ads.admanager.v1.IUpdateUserRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'user.name': request.user!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('updateUser request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IUser,
+          protos.google.ads.admanager.v1.IUpdateUserRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('updateUser response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .updateUser(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IUser,
+          protos.google.ads.admanager.v1.IUpdateUserRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateUser response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Batch updates `User` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where `Users` will be updated.
+   *   Format: `networks/{network_code}`
+   *   The parent field in the UpdateUserRequest must match this
+   *   field.
+   * @param {number[]} request.requests
+   *   Required. The `User` objects to update.
+   *   A maximum of 100 objects can be updated in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.ads.admanager.v1.BatchUpdateUsersResponse|BatchUpdateUsersResponse}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/user_service.batch_update_users.js</caption>
+   * region_tag:admanager_v1_generated_UserService_BatchUpdateUsers_async
+   */
+  batchUpdateUsers(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateUsersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateUsersResponse,
+      protos.google.ads.admanager.v1.IBatchUpdateUsersRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  batchUpdateUsers(
+    request: protos.google.ads.admanager.v1.IBatchUpdateUsersRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateUsersResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateUsersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateUsers(
+    request: protos.google.ads.admanager.v1.IBatchUpdateUsersRequest,
+    callback: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateUsersResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateUsersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  batchUpdateUsers(
+    request?: protos.google.ads.admanager.v1.IBatchUpdateUsersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateUsersResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateUsersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.ads.admanager.v1.IBatchUpdateUsersResponse,
+      | protos.google.ads.admanager.v1.IBatchUpdateUsersRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IBatchUpdateUsersResponse,
+      protos.google.ads.admanager.v1.IBatchUpdateUsersRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('batchUpdateUsers request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.ads.admanager.v1.IBatchUpdateUsersResponse,
+          | protos.google.ads.admanager.v1.IBatchUpdateUsersRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('batchUpdateUsers response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .batchUpdateUsers(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.ads.admanager.v1.IBatchUpdateUsersResponse,
+          protos.google.ads.admanager.v1.IBatchUpdateUsersRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('batchUpdateUsers response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
 
+  /**
+   * Lists `User` objects.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Users.
+   *   Format: `networks/{network_code}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Users to return. The service may return
+   *   fewer than this value. If unspecified, at most 50 users will be returned.
+   *   The maximum value is 1000; values greater than 1000 will be coerced to
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListUsers` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListUsers` must match
+   *   the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Expression to filter the response.
+   *    See syntax details at
+   *    https://developers.google.com/ad-manager/api/beta/filters
+   *
+   *   **Filterable fields:**
+   *
+   *   * `active`
+   *   * `displayName`
+   *   * `email`
+   *   * `externalId`
+   *   * `name`
+   *   * `role`
+   *   * `serviceAccount`
+   *   * `userId`
+   * @param {string} [request.orderBy]
+   *   Optional. Expression to specify sorting order.
+   *   See syntax details at
+   *   https://developers.google.com/ad-manager/api/beta/filters#order
+   * @param {number} [request.skip]
+   *   Optional. Number of individual resources to skip while paginating.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.ads.admanager.v1.User|User}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listUsersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listUsers(
+    request?: protos.google.ads.admanager.v1.IListUsersRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IUser[],
+      protos.google.ads.admanager.v1.IListUsersRequest | null,
+      protos.google.ads.admanager.v1.IListUsersResponse,
+    ]
+  >;
+  listUsers(
+    request: protos.google.ads.admanager.v1.IListUsersRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.ads.admanager.v1.IListUsersRequest,
+      protos.google.ads.admanager.v1.IListUsersResponse | null | undefined,
+      protos.google.ads.admanager.v1.IUser
+    >,
+  ): void;
+  listUsers(
+    request: protos.google.ads.admanager.v1.IListUsersRequest,
+    callback: PaginationCallback<
+      protos.google.ads.admanager.v1.IListUsersRequest,
+      protos.google.ads.admanager.v1.IListUsersResponse | null | undefined,
+      protos.google.ads.admanager.v1.IUser
+    >,
+  ): void;
+  listUsers(
+    request?: protos.google.ads.admanager.v1.IListUsersRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.ads.admanager.v1.IListUsersRequest,
+          protos.google.ads.admanager.v1.IListUsersResponse | null | undefined,
+          protos.google.ads.admanager.v1.IUser
+        >,
+    callback?: PaginationCallback<
+      protos.google.ads.admanager.v1.IListUsersRequest,
+      protos.google.ads.admanager.v1.IListUsersResponse | null | undefined,
+      protos.google.ads.admanager.v1.IUser
+    >,
+  ): Promise<
+    [
+      protos.google.ads.admanager.v1.IUser[],
+      protos.google.ads.admanager.v1.IListUsersRequest | null,
+      protos.google.ads.admanager.v1.IListUsersResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.ads.admanager.v1.IListUsersRequest,
+          protos.google.ads.admanager.v1.IListUsersResponse | null | undefined,
+          protos.google.ads.admanager.v1.IUser
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listUsers values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listUsers request %j', request);
+    return this.innerApiCalls
+      .listUsers(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.ads.admanager.v1.IUser[],
+          protos.google.ads.admanager.v1.IListUsersRequest | null,
+          protos.google.ads.admanager.v1.IListUsersResponse,
+        ]) => {
+          this._log.info('listUsers values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listUsers`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Users.
+   *   Format: `networks/{network_code}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Users to return. The service may return
+   *   fewer than this value. If unspecified, at most 50 users will be returned.
+   *   The maximum value is 1000; values greater than 1000 will be coerced to
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListUsers` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListUsers` must match
+   *   the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Expression to filter the response.
+   *    See syntax details at
+   *    https://developers.google.com/ad-manager/api/beta/filters
+   *
+   *   **Filterable fields:**
+   *
+   *   * `active`
+   *   * `displayName`
+   *   * `email`
+   *   * `externalId`
+   *   * `name`
+   *   * `role`
+   *   * `serviceAccount`
+   *   * `userId`
+   * @param {string} [request.orderBy]
+   *   Optional. Expression to specify sorting order.
+   *   See syntax details at
+   *   https://developers.google.com/ad-manager/api/beta/filters#order
+   * @param {number} [request.skip]
+   *   Optional. Number of individual resources to skip while paginating.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.ads.admanager.v1.User|User} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listUsersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listUsersStream(
+    request?: protos.google.ads.admanager.v1.IListUsersRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listUsers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listUsers stream %j', request);
+    return this.descriptors.page.listUsers.createStream(
+      this.innerApiCalls.listUsers as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listUsers`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent, which owns this collection of Users.
+   *   Format: `networks/{network_code}`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of Users to return. The service may return
+   *   fewer than this value. If unspecified, at most 50 users will be returned.
+   *   The maximum value is 1000; values greater than 1000 will be coerced to
+   *   1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListUsers` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListUsers` must match
+   *   the call that provided the page token.
+   * @param {string} [request.filter]
+   *   Optional. Expression to filter the response.
+   *    See syntax details at
+   *    https://developers.google.com/ad-manager/api/beta/filters
+   *
+   *   **Filterable fields:**
+   *
+   *   * `active`
+   *   * `displayName`
+   *   * `email`
+   *   * `externalId`
+   *   * `name`
+   *   * `role`
+   *   * `serviceAccount`
+   *   * `userId`
+   * @param {string} [request.orderBy]
+   *   Optional. Expression to specify sorting order.
+   *   See syntax details at
+   *   https://developers.google.com/ad-manager/api/beta/filters#order
+   * @param {number} [request.skip]
+   *   Optional. Number of individual resources to skip while paginating.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.ads.admanager.v1.User|User}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/user_service.list_users.js</caption>
+   * region_tag:admanager_v1_generated_UserService_ListUsers_async
+   */
+  listUsersAsync(
+    request?: protos.google.ads.admanager.v1.IListUsersRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.ads.admanager.v1.IUser> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listUsers'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listUsers iterate %j', request);
+    return this.descriptors.page.listUsers.asyncIterate(
+      this.innerApiCalls['listUsers'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.ads.admanager.v1.IUser>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -962,6 +2098,42 @@ export class UserServiceClient {
   matchApplicationFromApplicationName(applicationName: string) {
     return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .application;
+  }
+
+  /**
+   * Return a fully-qualified asset resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} asset
+   * @returns {string} Resource name string.
+   */
+  assetPath(networkCode: string, asset: string) {
+    return this.pathTemplates.assetPathTemplate.render({
+      network_code: networkCode,
+      asset: asset,
+    });
+  }
+
+  /**
+   * Parse the network_code from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).network_code;
+  }
+
+  /**
+   * Parse the asset from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the asset.
+   */
+  matchAssetFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).asset;
   }
 
   /**
@@ -2212,6 +3384,111 @@ export class UserServiceClient {
   matchLineItemFromLineItemName(lineItemName: string) {
     return this.pathTemplates.lineItemPathTemplate.match(lineItemName)
       .line_item;
+  }
+
+  /**
+   * Return a fully-qualified lineItemCreativeAssociation resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  lineItemCreativeAssociationPath(
+    networkCode: string,
+    lineItem: string,
+    creative: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.render({
+      network_code: networkCode,
+      line_item: lineItem,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the line_item.
+   */
+  matchLineItemFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).line_item;
+  }
+
+  /**
+   * Parse the creative from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).creative;
+  }
+
+  /**
+   * Return a fully-qualified lineItemTemplate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item_template
+   * @returns {string} Resource name string.
+   */
+  lineItemTemplatePath(networkCode: string, lineItemTemplate: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.render({
+      network_code: networkCode,
+      line_item_template: lineItemTemplate,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item_template from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the line_item_template.
+   */
+  matchLineItemTemplateFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).line_item_template;
   }
 
   /**

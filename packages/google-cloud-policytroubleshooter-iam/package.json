@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/policy-troubleshooter-iam",
-  "version": "0.10.1",
+  "version": "0.11.0",
   "description": "Iam client for Node.js",
   "repository": {
     "type": "git",
@@ -31,11 +31,12 @@
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-policytroubleshooter-iam",
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/ && minifyProtoJson",
+    "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
+    "postpack": "minifyProtoJson",
     "prelint": "cd samples; npm link ../; npm i",
     "prepare": "npm run compile",
     "system-test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/system-test",

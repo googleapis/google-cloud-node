@@ -568,6 +568,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "deletionNotificationsEnabled": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2800,6 +2807,13 @@
                         "streamingConfig": {
                           "type": "StreamingConfig",
                           "id": 5
+                        },
+                        "deletionNotificationsEnabled": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -2833,6 +2847,10 @@
                         "resource": {
                           "type": "Resource",
                           "id": 3
+                        },
+                        "deletedFinding": {
+                          "type": "bool",
+                          "id": 5
                         }
                       }
                     },
@@ -10017,6 +10035,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "deletionNotificationsEnabled": {
+                          "type": "bool",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -12379,6 +12404,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "deletionNotificationsEnabled": {
+                          "type": "bool",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -12412,6 +12444,10 @@
                         "resource": {
                           "type": "Resource",
                           "id": 3
+                        },
+                        "deletedFinding": {
+                          "type": "bool",
+                          "id": 5
                         }
                       }
                     },

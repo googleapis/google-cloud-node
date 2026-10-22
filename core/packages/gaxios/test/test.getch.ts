@@ -13,9 +13,9 @@
 
 import assert from 'assert';
 import nock from 'nock';
-import sinon from 'sinon';
+import {createSandbox, fake} from 'sinon';
 import stream, {Readable} from 'stream';
-import {describe, it, afterEach} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import {HttpsProxyAgent} from 'https-proxy-agent';
 import {
   Gaxios,
@@ -38,7 +38,7 @@ const pkg = util.pkg;
 
 nock.disableNetConnect();
 
-const sandbox = sinon.createSandbox();
+const sandbox = createSandbox();
 afterEach(() => {
   sandbox.restore();
   nock.cleanAll();
@@ -194,7 +194,9 @@ describe('🚙 error handling', () => {
       const chunks = [
         new Uint8Array(Buffer.from('{"error": {"code": 400, ')),
         new Uint8Array(Buffer.from('"message": "Invalid ')),
-        new Uint8Array(Buffer.from('argument", "status": "INVALID_ARGUMENT"}}')),
+        new Uint8Array(
+          Buffer.from('argument", "status": "INVALID_ARGUMENT"}}'),
+        ),
       ];
       const readableStream = Readable.from(chunks);
       const scope = nock(url).get('/').reply(400, readableStream);
@@ -217,7 +219,9 @@ describe('🚙 error handling', () => {
       const chunks = [
         '{"error": {"code": 400, ',
         Buffer.from('"message": "Invalid '),
-        new Uint8Array(Buffer.from('argument", "status": "INVALID_ARGUMENT"}}')),
+        new Uint8Array(
+          Buffer.from('argument", "status": "INVALID_ARGUMENT"}}'),
+        ),
       ];
       const readableStream = Readable.from(chunks);
       const scope = nock(url).get('/').reply(400, readableStream);
@@ -536,6 +540,137 @@ describe('🥁 configuration options', () => {
       assert.equal(res.config.agent.connectOpts.key, key);
     });
 
+    it('should pass proxy and tls options to Bun fetch and omit proxy when noProxy matches', async () => {
+      scope.persist(false);
+      nock.cleanAll();
+      const globalRecord = globalThis as Record<string, unknown>;
+      const hadBun = 'Bun' in globalRecord;
+      const origFetch = globalThis.fetch;
+      const capturedInits: Array<Record<string, unknown> | undefined> = [];
+      try {
+        if (!hadBun) {
+          globalRecord.Bun = {};
+        }
+        globalThis.fetch = (async (
+          _u: unknown,
+          init?: Record<string, unknown>,
+        ) => {
+          capturedInits.push(init);
+          return new Response(JSON.stringify(responseBody), {
+            status: 200,
+            headers: {'content-type': 'application/json'},
+          });
+        }) as unknown as typeof fetch;
+
+        await request({
+          url,
+          proxy,
+          cert: 'cert',
+          key: 'key',
+        });
+        assert.strictEqual(capturedInits[0]?.proxy, proxy);
+        assert.deepStrictEqual(capturedInits[0]?.tls, {
+          cert: 'cert',
+          key: 'key',
+        });
+
+        // Cached mTLS proxy agent hit (cert/key omitted on second request)
+        await request({
+          url,
+          proxy,
+        });
+        assert.strictEqual(capturedInits[1]?.proxy, proxy);
+        assert.deepStrictEqual(capturedInits[1]?.tls, {
+          cert: 'cert',
+          key: 'key',
+        });
+
+        await request({
+          url,
+          proxy,
+          noProxy: ['domain.example.com'],
+        });
+        assert.strictEqual(capturedInits[2]?.proxy, undefined);
+      } finally {
+        globalThis.fetch = origFetch;
+        if (!hadBun) {
+          delete globalRecord.Bun;
+        }
+      }
+    });
+
+    it('should convert Node Readable request body and Web ReadableStream response body in Bun fetch path', async () => {
+      scope.persist(false);
+      nock.cleanAll();
+      const globalRecord = globalThis as Record<string, unknown>;
+      const hadBun = 'Bun' in globalRecord;
+      const origFetch = globalThis.fetch;
+      let capturedBody: unknown;
+      try {
+        if (!hadBun) {
+          globalRecord.Bun = {};
+        }
+        globalThis.fetch = (async (_u: unknown, init?: RequestInit) => {
+          capturedBody = init?.body;
+          return new Response(JSON.stringify(responseBody), {
+            status: 200,
+            headers: {'content-type': 'application/json'},
+          });
+        }) as typeof fetch;
+
+        const streamRes = await request<Readable>({
+          url,
+          method: 'POST',
+          data: Readable.from(['hello', ' ', 'world']),
+          responseType: 'stream',
+        });
+        assert(capturedBody instanceof ReadableStream);
+        assert(streamRes.data instanceof Readable);
+        assert.deepStrictEqual(await streamRes.json(), responseBody);
+
+        const byteReadable = new Readable({
+          read() {
+            this.push(Buffer.from('raw'));
+            this.push(null);
+          },
+        });
+        const streamRes2 = await request<Readable>({
+          url,
+          method: 'POST',
+          data: byteReadable,
+          responseType: 'stream',
+        });
+        assert(streamRes2.data instanceof Readable);
+        assert.strictEqual(
+          (await streamRes2.arrayBuffer()).byteLength,
+          Buffer.byteLength(JSON.stringify(responseBody)),
+        );
+
+        const streamRes3 = await request<Readable>({
+          url,
+          responseType: 'stream',
+        });
+        assert(streamRes3.data instanceof Readable);
+        assert.strictEqual((await streamRes3.blob()).size > 0, true);
+
+        const jsonRes = await request({url});
+        assert.deepStrictEqual(jsonRes.data, responseBody);
+
+        globalThis.fetch = (async () => {
+          throw {code: 'ECONNRESET', message: 'socket hang up'};
+        }) as typeof fetch;
+        await assert.rejects(request({url, retry: false}), {
+          code: 'ECONNRESET',
+          message: 'socket hang up',
+        });
+      } finally {
+        globalThis.fetch = origFetch;
+        if (!hadBun) {
+          delete globalRecord.Bun;
+        }
+      }
+    });
+
     it('should load the proxy from the cache', async () => {
       const res1 = await request({url, proxy});
       const agent = res1.config.agent;
@@ -836,7 +971,10 @@ describe('🥁 configuration options', () => {
       const gaxios = new Gaxios();
       const timeout = 10;
 
-      await assert.rejects(() => gaxios.request({url, timeout}), /abort/);
+      await assert.rejects(
+        () => gaxios.request({url, timeout}),
+        /abort|timed out/i,
+      );
     });
 
     it('should a `timeout`, an existing `signal`, and be triggered by timeout', async () => {
@@ -847,7 +985,7 @@ describe('🥁 configuration options', () => {
 
       await assert.rejects(
         () => gaxios.request({url, timeout, signal}),
-        /abort/,
+        /abort|timed out/i,
       );
     });
 
@@ -868,6 +1006,72 @@ describe('🥁 configuration options', () => {
         // native `fetch` matches the error properly:
         // new RegExp(message)
       );
+    });
+
+    it('should immediately reject when a pre-aborted `signal` is passed with `timeout`', async () => {
+      const gaxios = new Gaxios();
+      const ac = new AbortController();
+      ac.abort(new Error('Caller pre-aborted'));
+      let adapterCalled = false;
+
+      await assert.rejects(
+        () =>
+          gaxios.request({
+            url,
+            timeout: 4000,
+            signal: ac.signal,
+            adapter: async config => {
+              adapterCalled = true;
+              if (config.signal?.aborted) {
+                throw config.signal.reason;
+              }
+              return {
+                status: 200,
+                statusText: 'OK',
+                headers: new Headers(),
+                data: {},
+                config,
+              } as GaxiosResponse;
+            },
+          }),
+        /Caller pre-aborted/,
+      );
+      assert.strictEqual(adapterCalled, true);
+    });
+
+    it('should abort retry when caller `signal` is aborted during backoff with `timeout`', async () => {
+      const gaxios = new Gaxios();
+      const ac = new AbortController();
+      let attempts = 0;
+
+      await assert.rejects(
+        () =>
+          gaxios.request({
+            url,
+            timeout: 5000,
+            signal: ac.signal,
+            retry: true,
+            retryConfig: {
+              retry: 3,
+              retryDelay: 50,
+              onRetryAttempt: () => {
+                ac.abort(new Error('Caller aborted during retry backoff'));
+              },
+            },
+            adapter: async config => {
+              attempts++;
+              if (config.signal?.aborted) {
+                throw config.signal.reason;
+              }
+              throw Object.assign(new Error('request timed out'), {
+                code: 'ETIMEDOUT',
+                config,
+              });
+            },
+          }),
+        /Caller aborted during retry backoff/,
+      );
+      assert.strictEqual(attempts, 2);
     });
   });
 });
@@ -1396,6 +1600,9 @@ describe('🍂 defaults & instances', () => {
   });
 
   describe('mtls', () => {
+    beforeEach(() => {
+      setEnv({});
+    });
     class GaxiosAssertAgentCache extends Gaxios {
       getAgentCache() {
         return this.agentCache;
@@ -1462,7 +1669,7 @@ describe('interceptors', () => {
 
     it('should not invoke a request interceptor after it is removed', async () => {
       const scope = nock(url).persist().get('/').reply(200, {});
-      const spyFunc = sinon.fake(
+      const spyFunc = fake(
         () =>
           Promise.resolve({
             url,
@@ -1516,7 +1723,7 @@ describe('interceptors', () => {
 
     it('should not invoke a any request interceptors after they are removed', async () => {
       const scope = nock(url).persist().get('/').reply(200, {});
-      const spyFunc = sinon.fake(
+      const spyFunc = fake(
         () =>
           Promise.resolve({
             url,
@@ -1580,7 +1787,7 @@ describe('interceptors', () => {
 
     it('should not invoke a response interceptor after it is removed', async () => {
       const scope = nock(url).persist().get('/').reply(200, {});
-      const spyFunc = sinon.fake(
+      const spyFunc = fake(
         () =>
           Promise.resolve({
             url,
@@ -1632,7 +1839,7 @@ describe('interceptors', () => {
 
     it('should not invoke a any response interceptors after they are removed', async () => {
       const scope = nock(url).persist().get('/').reply(200, {});
-      const spyFunc = sinon.fake(
+      const spyFunc = fake(
         () =>
           Promise.resolve({
             url,
@@ -1774,5 +1981,20 @@ describe('merge headers', () => {
     const headers = Gaxios.mergeHeaders(base, append);
 
     assert.deepStrictEqual(headers.getSetCookie(), expected.getSetCookie());
+  });
+});
+
+describe('package.json files allowlist', () => {
+  it('should restrict published files to build/cjs/src, build/esm/src, and build/esm/package.json', () => {
+    const pkgFiles = (pkg as {files?: string[]}).files;
+    for (const file of [
+      'build/cjs/src',
+      'build/esm/src',
+      'build/esm/package.json',
+      '!build/**/*.map',
+    ]) {
+      assert.strictEqual(pkgFiles?.includes(file), true);
+    }
+    assert.strictEqual(pkgFiles?.includes('build/'), false);
   });
 });

@@ -67,9 +67,9 @@ type SchemaServiceClient = v1.SchemaServiceClient;
  */
 const PROJECT_ID_PLACEHOLDER = '{{projectId}}';
 
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+export type Omit<T, K extends PropertyKey> = Pick<T, Exclude<keyof T, K>>;
 
-export interface ClientConfig extends gax.GrpcClientOptions {
+export interface ClientConfig extends Omit<gax.GrpcClientOptions, 'port'> {
   apiEndpoint?: string;
 
   /**
@@ -127,12 +127,10 @@ type GetAllSubscriptionsResponse = PagedResponse<
 >;
 
 export type GetSubscriptionsCallback =
-  | GetAllSubscriptionsCallback
-  | GetTopicSubscriptionsCallback;
+  GetAllSubscriptionsCallback | GetTopicSubscriptionsCallback;
 
 export type GetSubscriptionsResponse =
-  | GetAllSubscriptionsResponse
-  | GetTopicSubscriptionsResponse;
+  GetAllSubscriptionsResponse | GetTopicSubscriptionsResponse;
 
 export type GetTopicsCallback = RequestCallback<
   Topic,
@@ -189,8 +187,7 @@ export interface PagedCallback<Item, Response> {
 }
 
 export type PagedResponse<Item, Response> =
-  | [Item[]]
-  | [Item[], {} | null, Response];
+  [Item[]] | [Item[], {} | null, Response];
 
 export type ObjectStream<O> = {
   addListener(event: 'data', listener: (data: O) => void): ObjectStream<O>;
@@ -389,9 +386,7 @@ export class PubSub {
       this.isOpen = false;
       this.closeAllClients_()
         .then(() => this.schemaClient?.close())
-        .then(() => {
-          definedCallback(null);
-        })
+        .then(() => definedCallback(null))
         .catch(definedCallback);
     } else {
       definedCallback(null);
@@ -1262,7 +1257,7 @@ export class PubSub {
    */
   async getSchemaClient(): Promise<SchemaServiceClient> {
     if (!this.schemaClient) {
-      const options = await this.getClientConfig() as gax.ClientOptions;
+      const options = (await this.getClientConfig()) as gax.ClientOptions;
       this.schemaClient = new v1.SchemaServiceClient(options);
     }
 
@@ -1289,10 +1284,9 @@ export class PubSub {
    * @param {function} [callback] The callback function.
    */
   getClient_(config: GetClientConfig, callback: GetClientCallback) {
-    this.getClientAsync_(config).then(
-      client => callback(null, client),
-      callback,
-    );
+    this.getClientAsync_(config)
+      .then(client => process.nextTick(callback, null, client))
+      .catch(err => process.nextTick(callback, err));
   }
   /**
    * Get the PubSub client object.
@@ -1307,7 +1301,7 @@ export class PubSub {
    */
   async getClientAsync_(config: GetClientConfig): Promise<gax.ClientStub> {
     // Make sure we've got a fully created config with projectId and such.
-    const options = await this.getClientConfig() as gax.ClientOptions;
+    const options = (await this.getClientConfig()) as gax.ClientOptions;
 
     let gaxClient = this.api[config.client];
 

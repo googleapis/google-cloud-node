@@ -1,6 +1,6 @@
 {
   "name": "@google-shopping/inventories",
-  "version": "0.14.1",
+  "version": "0.15.0",
   "description": "Merchant API client for Node.js",
   "repository": {
     "type": "git",
@@ -36,7 +36,7 @@
     "fix": "gts fix",
     "lint": "gts check",
     "postpack": "minifyProtoJson",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile",
     "system-test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/system-test",
     "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",

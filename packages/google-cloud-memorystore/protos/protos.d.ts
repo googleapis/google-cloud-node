@@ -8590,6 +8590,20 @@ export namespace google {
                     public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Memorystore;
 
                     /**
+                     * Calls ListAclPolicies.
+                     * @param request ListAclPoliciesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAclPoliciesResponse
+                     */
+                    public listAclPolicies(request: google.cloud.memorystore.v1beta.IListAclPoliciesRequest, callback: google.cloud.memorystore.v1beta.Memorystore.ListAclPoliciesCallback): void;
+
+                    /**
+                     * Calls ListAclPolicies.
+                     * @param request ListAclPoliciesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAclPolicies(request: google.cloud.memorystore.v1beta.IListAclPoliciesRequest): Promise<google.cloud.memorystore.v1beta.ListAclPoliciesResponse>;
+
+                    /**
                      * Calls ListInstances.
                      * @param request ListInstancesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListInstancesResponse
@@ -8602,6 +8616,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public listInstances(request: google.cloud.memorystore.v1beta.IListInstancesRequest): Promise<google.cloud.memorystore.v1beta.ListInstancesResponse>;
+
+                    /**
+                     * Calls GetAclPolicy.
+                     * @param request GetAclPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AclPolicy
+                     */
+                    public getAclPolicy(request: google.cloud.memorystore.v1beta.IGetAclPolicyRequest, callback: google.cloud.memorystore.v1beta.Memorystore.GetAclPolicyCallback): void;
+
+                    /**
+                     * Calls GetAclPolicy.
+                     * @param request GetAclPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAclPolicy(request: google.cloud.memorystore.v1beta.IGetAclPolicyRequest): Promise<google.cloud.memorystore.v1beta.AclPolicy>;
 
                     /**
                      * Calls GetInstance.
@@ -8618,6 +8646,20 @@ export namespace google {
                     public getInstance(request: google.cloud.memorystore.v1beta.IGetInstanceRequest): Promise<google.cloud.memorystore.v1beta.Instance>;
 
                     /**
+                     * Calls CreateAclPolicy.
+                     * @param request CreateAclPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AclPolicy
+                     */
+                    public createAclPolicy(request: google.cloud.memorystore.v1beta.ICreateAclPolicyRequest, callback: google.cloud.memorystore.v1beta.Memorystore.CreateAclPolicyCallback): void;
+
+                    /**
+                     * Calls CreateAclPolicy.
+                     * @param request CreateAclPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createAclPolicy(request: google.cloud.memorystore.v1beta.ICreateAclPolicyRequest): Promise<google.cloud.memorystore.v1beta.AclPolicy>;
+
+                    /**
                      * Calls CreateInstance.
                      * @param request CreateInstanceRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -8632,6 +8674,20 @@ export namespace google {
                     public createInstance(request: google.cloud.memorystore.v1beta.ICreateInstanceRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls UpdateAclPolicy.
+                     * @param request UpdateAclPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateAclPolicy(request: google.cloud.memorystore.v1beta.IUpdateAclPolicyRequest, callback: google.cloud.memorystore.v1beta.Memorystore.UpdateAclPolicyCallback): void;
+
+                    /**
+                     * Calls UpdateAclPolicy.
+                     * @param request UpdateAclPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAclPolicy(request: google.cloud.memorystore.v1beta.IUpdateAclPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls UpdateInstance.
                      * @param request UpdateInstanceRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -8644,6 +8700,48 @@ export namespace google {
                      * @returns Promise
                      */
                     public updateInstance(request: google.cloud.memorystore.v1beta.IUpdateInstanceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteAclPolicy.
+                     * @param request DeleteAclPolicyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteAclPolicy(request: google.cloud.memorystore.v1beta.IDeleteAclPolicyRequest, callback: google.cloud.memorystore.v1beta.Memorystore.DeleteAclPolicyCallback): void;
+
+                    /**
+                     * Calls DeleteAclPolicy.
+                     * @param request DeleteAclPolicyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteAclPolicy(request: google.cloud.memorystore.v1beta.IDeleteAclPolicyRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetAclPolicyRevision.
+                     * @param request GetAclPolicyRevisionRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AclPolicyRevision
+                     */
+                    public getAclPolicyRevision(request: google.cloud.memorystore.v1beta.IGetAclPolicyRevisionRequest, callback: google.cloud.memorystore.v1beta.Memorystore.GetAclPolicyRevisionCallback): void;
+
+                    /**
+                     * Calls GetAclPolicyRevision.
+                     * @param request GetAclPolicyRevisionRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getAclPolicyRevision(request: google.cloud.memorystore.v1beta.IGetAclPolicyRevisionRequest): Promise<google.cloud.memorystore.v1beta.AclPolicyRevision>;
+
+                    /**
+                     * Calls ListAclPolicyRevisions.
+                     * @param request ListAclPolicyRevisionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAclPolicyRevisionsResponse
+                     */
+                    public listAclPolicyRevisions(request: google.cloud.memorystore.v1beta.IListAclPolicyRevisionsRequest, callback: google.cloud.memorystore.v1beta.Memorystore.ListAclPolicyRevisionsCallback): void;
+
+                    /**
+                     * Calls ListAclPolicyRevisions.
+                     * @param request ListAclPolicyRevisionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAclPolicyRevisions(request: google.cloud.memorystore.v1beta.IListAclPolicyRevisionsRequest): Promise<google.cloud.memorystore.v1beta.ListAclPolicyRevisionsResponse>;
 
                     /**
                      * Calls DeleteInstance.
@@ -8943,11 +9041,25 @@ export namespace google {
                 namespace Memorystore {
 
                     /**
+                     * Callback as used by {@link google.cloud.memorystore.v1beta.Memorystore|listAclPolicies}.
+                     * @param error Error, if any
+                     * @param [response] ListAclPoliciesResponse
+                     */
+                    type ListAclPoliciesCallback = (error: (Error|null), response?: google.cloud.memorystore.v1beta.ListAclPoliciesResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.memorystore.v1beta.Memorystore|listInstances}.
                      * @param error Error, if any
                      * @param [response] ListInstancesResponse
                      */
                     type ListInstancesCallback = (error: (Error|null), response?: google.cloud.memorystore.v1beta.ListInstancesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memorystore.v1beta.Memorystore|getAclPolicy}.
+                     * @param error Error, if any
+                     * @param [response] AclPolicy
+                     */
+                    type GetAclPolicyCallback = (error: (Error|null), response?: google.cloud.memorystore.v1beta.AclPolicy) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.memorystore.v1beta.Memorystore|getInstance}.
@@ -8957,6 +9069,13 @@ export namespace google {
                     type GetInstanceCallback = (error: (Error|null), response?: google.cloud.memorystore.v1beta.Instance) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.memorystore.v1beta.Memorystore|createAclPolicy}.
+                     * @param error Error, if any
+                     * @param [response] AclPolicy
+                     */
+                    type CreateAclPolicyCallback = (error: (Error|null), response?: google.cloud.memorystore.v1beta.AclPolicy) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.memorystore.v1beta.Memorystore|createInstance}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -8964,11 +9083,39 @@ export namespace google {
                     type CreateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.memorystore.v1beta.Memorystore|updateAclPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateAclPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.memorystore.v1beta.Memorystore|updateInstance}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type UpdateInstanceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memorystore.v1beta.Memorystore|deleteAclPolicy}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteAclPolicyCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memorystore.v1beta.Memorystore|getAclPolicyRevision}.
+                     * @param error Error, if any
+                     * @param [response] AclPolicyRevision
+                     */
+                    type GetAclPolicyRevisionCallback = (error: (Error|null), response?: google.cloud.memorystore.v1beta.AclPolicyRevision) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.memorystore.v1beta.Memorystore|listAclPolicyRevisions}.
+                     * @param error Error, if any
+                     * @param [response] ListAclPolicyRevisionsResponse
+                     */
+                    type ListAclPolicyRevisionsCallback = (error: (Error|null), response?: google.cloud.memorystore.v1beta.ListAclPolicyRevisionsResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.memorystore.v1beta.Memorystore|deleteInstance}.
@@ -9270,6 +9417,12 @@ export namespace google {
 
                     /** Instance migrationConfig */
                     migrationConfig?: (google.cloud.memorystore.v1beta.IMigrationConfig|null);
+
+                    /** Instance aclPolicy */
+                    aclPolicy?: (string|null);
+
+                    /** Instance aclPolicyInfo */
+                    aclPolicyInfo?: (google.cloud.memorystore.v1beta.IAclPolicyInfo|null);
                 }
 
                 /** Represents an Instance. */
@@ -9415,6 +9568,12 @@ export namespace google {
 
                     /** Instance migrationConfig. */
                     public migrationConfig?: (google.cloud.memorystore.v1beta.IMigrationConfig|null);
+
+                    /** Instance aclPolicy. */
+                    public aclPolicy?: (string|null);
+
+                    /** Instance aclPolicyInfo. */
+                    public aclPolicyInfo?: (google.cloud.memorystore.v1beta.IAclPolicyInfo|null);
 
                     /** Instance importSources. */
                     public importSources?: ("gcsSource"|"managedBackupSource");
@@ -10174,6 +10333,121 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an AclPolicyInfo. */
+                interface IAclPolicyInfo {
+
+                    /** AclPolicyInfo appliedAclPolicy */
+                    appliedAclPolicy?: (string|null);
+
+                    /** AclPolicyInfo appliedAclPolicyRevision */
+                    appliedAclPolicyRevision?: (string|null);
+
+                    /** AclPolicyInfo appliedAclPolicyRevisionNumber */
+                    appliedAclPolicyRevisionNumber?: (number|Long|string|null);
+
+                    /** AclPolicyInfo aclPolicyRevisionStatuses */
+                    aclPolicyRevisionStatuses?: (google.cloud.memorystore.v1beta.IAclPolicyRevisionStatus[]|null);
+                }
+
+                /** Represents an AclPolicyInfo. */
+                class AclPolicyInfo implements IAclPolicyInfo {
+
+                    /**
+                     * Constructs a new AclPolicyInfo.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IAclPolicyInfo);
+
+                    /** AclPolicyInfo appliedAclPolicy. */
+                    public appliedAclPolicy: string;
+
+                    /** AclPolicyInfo appliedAclPolicyRevision. */
+                    public appliedAclPolicyRevision: string;
+
+                    /** AclPolicyInfo appliedAclPolicyRevisionNumber. */
+                    public appliedAclPolicyRevisionNumber: (number|Long|string);
+
+                    /** AclPolicyInfo aclPolicyRevisionStatuses. */
+                    public aclPolicyRevisionStatuses: google.cloud.memorystore.v1beta.IAclPolicyRevisionStatus[];
+
+                    /**
+                     * Creates a new AclPolicyInfo instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AclPolicyInfo instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IAclPolicyInfo): google.cloud.memorystore.v1beta.AclPolicyInfo;
+
+                    /**
+                     * Encodes the specified AclPolicyInfo message. Does not implicitly {@link google.cloud.memorystore.v1beta.AclPolicyInfo.verify|verify} messages.
+                     * @param message AclPolicyInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IAclPolicyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AclPolicyInfo message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.AclPolicyInfo.verify|verify} messages.
+                     * @param message AclPolicyInfo message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IAclPolicyInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AclPolicyInfo message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AclPolicyInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.AclPolicyInfo;
+
+                    /**
+                     * Decodes an AclPolicyInfo message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AclPolicyInfo
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.AclPolicyInfo;
+
+                    /**
+                     * Verifies an AclPolicyInfo message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AclPolicyInfo message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AclPolicyInfo
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.AclPolicyInfo;
+
+                    /**
+                     * Creates a plain object from an AclPolicyInfo message. Also converts values to other types if specified.
+                     * @param message AclPolicyInfo
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.AclPolicyInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AclPolicyInfo to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AclPolicyInfo
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a StartMigrationRequest. */
                 interface IStartMigrationRequest {
 
@@ -10614,6 +10888,603 @@ export namespace google {
                         REPLICATION_ESTABLISHED = 6,
                         MIGRATED = 4
                     }
+                }
+
+                /** Properties of an AclPolicy. */
+                interface IAclPolicy {
+
+                    /** AclPolicy name */
+                    name?: (string|null);
+
+                    /** AclPolicy rules */
+                    rules?: (google.cloud.memorystore.v1beta.IAclRule[]|null);
+
+                    /** AclPolicy state */
+                    state?: (google.cloud.memorystore.v1beta.AclPolicy.State|keyof typeof google.cloud.memorystore.v1beta.AclPolicy.State|null);
+
+                    /** AclPolicy etag */
+                    etag?: (string|null);
+
+                    /** AclPolicy instanceAclPolicyAttachments */
+                    instanceAclPolicyAttachments?: (google.cloud.memorystore.v1beta.IInstanceAclPolicyAttachment[]|null);
+
+                    /** AclPolicy createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AclPolicy updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an AclPolicy. */
+                class AclPolicy implements IAclPolicy {
+
+                    /**
+                     * Constructs a new AclPolicy.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IAclPolicy);
+
+                    /** AclPolicy name. */
+                    public name: string;
+
+                    /** AclPolicy rules. */
+                    public rules: google.cloud.memorystore.v1beta.IAclRule[];
+
+                    /** AclPolicy state. */
+                    public state: (google.cloud.memorystore.v1beta.AclPolicy.State|keyof typeof google.cloud.memorystore.v1beta.AclPolicy.State);
+
+                    /** AclPolicy etag. */
+                    public etag?: (string|null);
+
+                    /** AclPolicy instanceAclPolicyAttachments. */
+                    public instanceAclPolicyAttachments: google.cloud.memorystore.v1beta.IInstanceAclPolicyAttachment[];
+
+                    /** AclPolicy createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AclPolicy updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new AclPolicy instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AclPolicy instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IAclPolicy): google.cloud.memorystore.v1beta.AclPolicy;
+
+                    /**
+                     * Encodes the specified AclPolicy message. Does not implicitly {@link google.cloud.memorystore.v1beta.AclPolicy.verify|verify} messages.
+                     * @param message AclPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IAclPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AclPolicy message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.AclPolicy.verify|verify} messages.
+                     * @param message AclPolicy message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IAclPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AclPolicy message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AclPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.AclPolicy;
+
+                    /**
+                     * Decodes an AclPolicy message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AclPolicy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.AclPolicy;
+
+                    /**
+                     * Verifies an AclPolicy message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AclPolicy message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AclPolicy
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.AclPolicy;
+
+                    /**
+                     * Creates a plain object from an AclPolicy message. Also converts values to other types if specified.
+                     * @param message AclPolicy
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.AclPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AclPolicy to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AclPolicy
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AclPolicy {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ACTIVE = 1,
+                        UPDATING = 2,
+                        DELETING = 3
+                    }
+                }
+
+                /** Properties of an AclPolicyRevision. */
+                interface IAclPolicyRevision {
+
+                    /** AclPolicyRevision name */
+                    name?: (string|null);
+
+                    /** AclPolicyRevision revisionNumber */
+                    revisionNumber?: (number|Long|string|null);
+
+                    /** AclPolicyRevision snapshot */
+                    snapshot?: (google.cloud.memorystore.v1beta.IAclPolicy|null);
+
+                    /** AclPolicyRevision createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AclPolicyRevision attachedInstances */
+                    attachedInstances?: (string[]|null);
+                }
+
+                /** Represents an AclPolicyRevision. */
+                class AclPolicyRevision implements IAclPolicyRevision {
+
+                    /**
+                     * Constructs a new AclPolicyRevision.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IAclPolicyRevision);
+
+                    /** AclPolicyRevision name. */
+                    public name: string;
+
+                    /** AclPolicyRevision revisionNumber. */
+                    public revisionNumber: (number|Long|string);
+
+                    /** AclPolicyRevision snapshot. */
+                    public snapshot?: (google.cloud.memorystore.v1beta.IAclPolicy|null);
+
+                    /** AclPolicyRevision createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AclPolicyRevision attachedInstances. */
+                    public attachedInstances: string[];
+
+                    /**
+                     * Creates a new AclPolicyRevision instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AclPolicyRevision instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IAclPolicyRevision): google.cloud.memorystore.v1beta.AclPolicyRevision;
+
+                    /**
+                     * Encodes the specified AclPolicyRevision message. Does not implicitly {@link google.cloud.memorystore.v1beta.AclPolicyRevision.verify|verify} messages.
+                     * @param message AclPolicyRevision message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IAclPolicyRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AclPolicyRevision message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.AclPolicyRevision.verify|verify} messages.
+                     * @param message AclPolicyRevision message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IAclPolicyRevision, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AclPolicyRevision message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AclPolicyRevision
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.AclPolicyRevision;
+
+                    /**
+                     * Decodes an AclPolicyRevision message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AclPolicyRevision
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.AclPolicyRevision;
+
+                    /**
+                     * Verifies an AclPolicyRevision message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AclPolicyRevision message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AclPolicyRevision
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.AclPolicyRevision;
+
+                    /**
+                     * Creates a plain object from an AclPolicyRevision message. Also converts values to other types if specified.
+                     * @param message AclPolicyRevision
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.AclPolicyRevision, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AclPolicyRevision to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AclPolicyRevision
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AclPolicyRevisionStatus. */
+                interface IAclPolicyRevisionStatus {
+
+                    /** AclPolicyRevisionStatus aclPolicyRevision */
+                    aclPolicyRevision?: (string|null);
+
+                    /** AclPolicyRevisionStatus aclPolicyRevisionNumber */
+                    aclPolicyRevisionNumber?: (number|Long|string|null);
+
+                    /** AclPolicyRevisionStatus state */
+                    state?: (google.cloud.memorystore.v1beta.AclPolicyRevisionStatus.State|keyof typeof google.cloud.memorystore.v1beta.AclPolicyRevisionStatus.State|null);
+
+                    /** AclPolicyRevisionStatus errorMessage */
+                    errorMessage?: (string|null);
+                }
+
+                /** Represents an AclPolicyRevisionStatus. */
+                class AclPolicyRevisionStatus implements IAclPolicyRevisionStatus {
+
+                    /**
+                     * Constructs a new AclPolicyRevisionStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IAclPolicyRevisionStatus);
+
+                    /** AclPolicyRevisionStatus aclPolicyRevision. */
+                    public aclPolicyRevision: string;
+
+                    /** AclPolicyRevisionStatus aclPolicyRevisionNumber. */
+                    public aclPolicyRevisionNumber: (number|Long|string);
+
+                    /** AclPolicyRevisionStatus state. */
+                    public state: (google.cloud.memorystore.v1beta.AclPolicyRevisionStatus.State|keyof typeof google.cloud.memorystore.v1beta.AclPolicyRevisionStatus.State);
+
+                    /** AclPolicyRevisionStatus errorMessage. */
+                    public errorMessage: string;
+
+                    /**
+                     * Creates a new AclPolicyRevisionStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AclPolicyRevisionStatus instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IAclPolicyRevisionStatus): google.cloud.memorystore.v1beta.AclPolicyRevisionStatus;
+
+                    /**
+                     * Encodes the specified AclPolicyRevisionStatus message. Does not implicitly {@link google.cloud.memorystore.v1beta.AclPolicyRevisionStatus.verify|verify} messages.
+                     * @param message AclPolicyRevisionStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IAclPolicyRevisionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AclPolicyRevisionStatus message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.AclPolicyRevisionStatus.verify|verify} messages.
+                     * @param message AclPolicyRevisionStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IAclPolicyRevisionStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AclPolicyRevisionStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AclPolicyRevisionStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.AclPolicyRevisionStatus;
+
+                    /**
+                     * Decodes an AclPolicyRevisionStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AclPolicyRevisionStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.AclPolicyRevisionStatus;
+
+                    /**
+                     * Verifies an AclPolicyRevisionStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AclPolicyRevisionStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AclPolicyRevisionStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.AclPolicyRevisionStatus;
+
+                    /**
+                     * Creates a plain object from an AclPolicyRevisionStatus message. Also converts values to other types if specified.
+                     * @param message AclPolicyRevisionStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.AclPolicyRevisionStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AclPolicyRevisionStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AclPolicyRevisionStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AclPolicyRevisionStatus {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        APPLYING = 1,
+                        APPLIED = 2,
+                        FAILED = 3
+                    }
+                }
+
+                /** Properties of an InstanceAclPolicyAttachment. */
+                interface IInstanceAclPolicyAttachment {
+
+                    /** InstanceAclPolicyAttachment instance */
+                    instance?: (string|null);
+
+                    /** InstanceAclPolicyAttachment aclPolicyRevisionStatuses */
+                    aclPolicyRevisionStatuses?: (google.cloud.memorystore.v1beta.IAclPolicyRevisionStatus[]|null);
+                }
+
+                /** Represents an InstanceAclPolicyAttachment. */
+                class InstanceAclPolicyAttachment implements IInstanceAclPolicyAttachment {
+
+                    /**
+                     * Constructs a new InstanceAclPolicyAttachment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IInstanceAclPolicyAttachment);
+
+                    /** InstanceAclPolicyAttachment instance. */
+                    public instance: string;
+
+                    /** InstanceAclPolicyAttachment aclPolicyRevisionStatuses. */
+                    public aclPolicyRevisionStatuses: google.cloud.memorystore.v1beta.IAclPolicyRevisionStatus[];
+
+                    /**
+                     * Creates a new InstanceAclPolicyAttachment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns InstanceAclPolicyAttachment instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IInstanceAclPolicyAttachment): google.cloud.memorystore.v1beta.InstanceAclPolicyAttachment;
+
+                    /**
+                     * Encodes the specified InstanceAclPolicyAttachment message. Does not implicitly {@link google.cloud.memorystore.v1beta.InstanceAclPolicyAttachment.verify|verify} messages.
+                     * @param message InstanceAclPolicyAttachment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IInstanceAclPolicyAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified InstanceAclPolicyAttachment message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.InstanceAclPolicyAttachment.verify|verify} messages.
+                     * @param message InstanceAclPolicyAttachment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IInstanceAclPolicyAttachment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an InstanceAclPolicyAttachment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns InstanceAclPolicyAttachment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.InstanceAclPolicyAttachment;
+
+                    /**
+                     * Decodes an InstanceAclPolicyAttachment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns InstanceAclPolicyAttachment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.InstanceAclPolicyAttachment;
+
+                    /**
+                     * Verifies an InstanceAclPolicyAttachment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an InstanceAclPolicyAttachment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns InstanceAclPolicyAttachment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.InstanceAclPolicyAttachment;
+
+                    /**
+                     * Creates a plain object from an InstanceAclPolicyAttachment message. Also converts values to other types if specified.
+                     * @param message InstanceAclPolicyAttachment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.InstanceAclPolicyAttachment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this InstanceAclPolicyAttachment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for InstanceAclPolicyAttachment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AclRule. */
+                interface IAclRule {
+
+                    /** AclRule username */
+                    username?: (string|null);
+
+                    /** AclRule rule */
+                    rule?: (string|null);
+                }
+
+                /** Represents an AclRule. */
+                class AclRule implements IAclRule {
+
+                    /**
+                     * Constructs a new AclRule.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IAclRule);
+
+                    /** AclRule username. */
+                    public username: string;
+
+                    /** AclRule rule. */
+                    public rule: string;
+
+                    /**
+                     * Creates a new AclRule instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AclRule instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IAclRule): google.cloud.memorystore.v1beta.AclRule;
+
+                    /**
+                     * Encodes the specified AclRule message. Does not implicitly {@link google.cloud.memorystore.v1beta.AclRule.verify|verify} messages.
+                     * @param message AclRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IAclRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AclRule message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.AclRule.verify|verify} messages.
+                     * @param message AclRule message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IAclRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AclRule message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AclRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.AclRule;
+
+                    /**
+                     * Decodes an AclRule message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AclRule
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.AclRule;
+
+                    /**
+                     * Verifies an AclRule message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AclRule message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AclRule
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.AclRule;
+
+                    /**
+                     * Creates a plain object from an AclRule message. Also converts values to other types if specified.
+                     * @param message AclRule
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.AclRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AclRule to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AclRule
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an AutomatedBackupConfig. */
@@ -13363,6 +14234,442 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a ListAclPoliciesRequest. */
+                interface IListAclPoliciesRequest {
+
+                    /** ListAclPoliciesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAclPoliciesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAclPoliciesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAclPoliciesRequest. */
+                class ListAclPoliciesRequest implements IListAclPoliciesRequest {
+
+                    /**
+                     * Constructs a new ListAclPoliciesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IListAclPoliciesRequest);
+
+                    /** ListAclPoliciesRequest parent. */
+                    public parent: string;
+
+                    /** ListAclPoliciesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAclPoliciesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAclPoliciesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAclPoliciesRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IListAclPoliciesRequest): google.cloud.memorystore.v1beta.ListAclPoliciesRequest;
+
+                    /**
+                     * Encodes the specified ListAclPoliciesRequest message. Does not implicitly {@link google.cloud.memorystore.v1beta.ListAclPoliciesRequest.verify|verify} messages.
+                     * @param message ListAclPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IListAclPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAclPoliciesRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.ListAclPoliciesRequest.verify|verify} messages.
+                     * @param message ListAclPoliciesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IListAclPoliciesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAclPoliciesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAclPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.ListAclPoliciesRequest;
+
+                    /**
+                     * Decodes a ListAclPoliciesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAclPoliciesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.ListAclPoliciesRequest;
+
+                    /**
+                     * Verifies a ListAclPoliciesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAclPoliciesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAclPoliciesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.ListAclPoliciesRequest;
+
+                    /**
+                     * Creates a plain object from a ListAclPoliciesRequest message. Also converts values to other types if specified.
+                     * @param message ListAclPoliciesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.ListAclPoliciesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAclPoliciesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAclPoliciesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAclPoliciesResponse. */
+                interface IListAclPoliciesResponse {
+
+                    /** ListAclPoliciesResponse aclPolicies */
+                    aclPolicies?: (google.cloud.memorystore.v1beta.IAclPolicy[]|null);
+
+                    /** ListAclPoliciesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAclPoliciesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAclPoliciesResponse. */
+                class ListAclPoliciesResponse implements IListAclPoliciesResponse {
+
+                    /**
+                     * Constructs a new ListAclPoliciesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IListAclPoliciesResponse);
+
+                    /** ListAclPoliciesResponse aclPolicies. */
+                    public aclPolicies: google.cloud.memorystore.v1beta.IAclPolicy[];
+
+                    /** ListAclPoliciesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAclPoliciesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAclPoliciesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAclPoliciesResponse instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IListAclPoliciesResponse): google.cloud.memorystore.v1beta.ListAclPoliciesResponse;
+
+                    /**
+                     * Encodes the specified ListAclPoliciesResponse message. Does not implicitly {@link google.cloud.memorystore.v1beta.ListAclPoliciesResponse.verify|verify} messages.
+                     * @param message ListAclPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IListAclPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAclPoliciesResponse message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.ListAclPoliciesResponse.verify|verify} messages.
+                     * @param message ListAclPoliciesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IListAclPoliciesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAclPoliciesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAclPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.ListAclPoliciesResponse;
+
+                    /**
+                     * Decodes a ListAclPoliciesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAclPoliciesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.ListAclPoliciesResponse;
+
+                    /**
+                     * Verifies a ListAclPoliciesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAclPoliciesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAclPoliciesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.ListAclPoliciesResponse;
+
+                    /**
+                     * Creates a plain object from a ListAclPoliciesResponse message. Also converts values to other types if specified.
+                     * @param message ListAclPoliciesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.ListAclPoliciesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAclPoliciesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAclPoliciesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAclPolicyRevisionsRequest. */
+                interface IListAclPolicyRevisionsRequest {
+
+                    /** ListAclPolicyRevisionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAclPolicyRevisionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAclPolicyRevisionsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAclPolicyRevisionsRequest. */
+                class ListAclPolicyRevisionsRequest implements IListAclPolicyRevisionsRequest {
+
+                    /**
+                     * Constructs a new ListAclPolicyRevisionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IListAclPolicyRevisionsRequest);
+
+                    /** ListAclPolicyRevisionsRequest parent. */
+                    public parent: string;
+
+                    /** ListAclPolicyRevisionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAclPolicyRevisionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAclPolicyRevisionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAclPolicyRevisionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IListAclPolicyRevisionsRequest): google.cloud.memorystore.v1beta.ListAclPolicyRevisionsRequest;
+
+                    /**
+                     * Encodes the specified ListAclPolicyRevisionsRequest message. Does not implicitly {@link google.cloud.memorystore.v1beta.ListAclPolicyRevisionsRequest.verify|verify} messages.
+                     * @param message ListAclPolicyRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IListAclPolicyRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAclPolicyRevisionsRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.ListAclPolicyRevisionsRequest.verify|verify} messages.
+                     * @param message ListAclPolicyRevisionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IListAclPolicyRevisionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAclPolicyRevisionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAclPolicyRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.ListAclPolicyRevisionsRequest;
+
+                    /**
+                     * Decodes a ListAclPolicyRevisionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAclPolicyRevisionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.ListAclPolicyRevisionsRequest;
+
+                    /**
+                     * Verifies a ListAclPolicyRevisionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAclPolicyRevisionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAclPolicyRevisionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.ListAclPolicyRevisionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAclPolicyRevisionsRequest message. Also converts values to other types if specified.
+                     * @param message ListAclPolicyRevisionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.ListAclPolicyRevisionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAclPolicyRevisionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAclPolicyRevisionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListAclPolicyRevisionsResponse. */
+                interface IListAclPolicyRevisionsResponse {
+
+                    /** ListAclPolicyRevisionsResponse aclPolicyRevisions */
+                    aclPolicyRevisions?: (google.cloud.memorystore.v1beta.IAclPolicyRevision[]|null);
+
+                    /** ListAclPolicyRevisionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListAclPolicyRevisionsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListAclPolicyRevisionsResponse. */
+                class ListAclPolicyRevisionsResponse implements IListAclPolicyRevisionsResponse {
+
+                    /**
+                     * Constructs a new ListAclPolicyRevisionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IListAclPolicyRevisionsResponse);
+
+                    /** ListAclPolicyRevisionsResponse aclPolicyRevisions. */
+                    public aclPolicyRevisions: google.cloud.memorystore.v1beta.IAclPolicyRevision[];
+
+                    /** ListAclPolicyRevisionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListAclPolicyRevisionsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListAclPolicyRevisionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAclPolicyRevisionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IListAclPolicyRevisionsResponse): google.cloud.memorystore.v1beta.ListAclPolicyRevisionsResponse;
+
+                    /**
+                     * Encodes the specified ListAclPolicyRevisionsResponse message. Does not implicitly {@link google.cloud.memorystore.v1beta.ListAclPolicyRevisionsResponse.verify|verify} messages.
+                     * @param message ListAclPolicyRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IListAclPolicyRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAclPolicyRevisionsResponse message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.ListAclPolicyRevisionsResponse.verify|verify} messages.
+                     * @param message ListAclPolicyRevisionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IListAclPolicyRevisionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAclPolicyRevisionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAclPolicyRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.ListAclPolicyRevisionsResponse;
+
+                    /**
+                     * Decodes a ListAclPolicyRevisionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAclPolicyRevisionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.ListAclPolicyRevisionsResponse;
+
+                    /**
+                     * Verifies a ListAclPolicyRevisionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAclPolicyRevisionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAclPolicyRevisionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.ListAclPolicyRevisionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAclPolicyRevisionsResponse message. Also converts values to other types if specified.
+                     * @param message ListAclPolicyRevisionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.ListAclPolicyRevisionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAclPolicyRevisionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListAclPolicyRevisionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a ListInstancesRequest. */
                 interface IListInstancesRequest {
 
@@ -13593,6 +14900,200 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetAclPolicyRequest. */
+                interface IGetAclPolicyRequest {
+
+                    /** GetAclPolicyRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAclPolicyRequest. */
+                class GetAclPolicyRequest implements IGetAclPolicyRequest {
+
+                    /**
+                     * Constructs a new GetAclPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IGetAclPolicyRequest);
+
+                    /** GetAclPolicyRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAclPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAclPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IGetAclPolicyRequest): google.cloud.memorystore.v1beta.GetAclPolicyRequest;
+
+                    /**
+                     * Encodes the specified GetAclPolicyRequest message. Does not implicitly {@link google.cloud.memorystore.v1beta.GetAclPolicyRequest.verify|verify} messages.
+                     * @param message GetAclPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IGetAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAclPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.GetAclPolicyRequest.verify|verify} messages.
+                     * @param message GetAclPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IGetAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAclPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAclPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.GetAclPolicyRequest;
+
+                    /**
+                     * Decodes a GetAclPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAclPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.GetAclPolicyRequest;
+
+                    /**
+                     * Verifies a GetAclPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAclPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAclPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.GetAclPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a GetAclPolicyRequest message. Also converts values to other types if specified.
+                     * @param message GetAclPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.GetAclPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAclPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAclPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetAclPolicyRevisionRequest. */
+                interface IGetAclPolicyRevisionRequest {
+
+                    /** GetAclPolicyRevisionRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetAclPolicyRevisionRequest. */
+                class GetAclPolicyRevisionRequest implements IGetAclPolicyRevisionRequest {
+
+                    /**
+                     * Constructs a new GetAclPolicyRevisionRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IGetAclPolicyRevisionRequest);
+
+                    /** GetAclPolicyRevisionRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetAclPolicyRevisionRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetAclPolicyRevisionRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IGetAclPolicyRevisionRequest): google.cloud.memorystore.v1beta.GetAclPolicyRevisionRequest;
+
+                    /**
+                     * Encodes the specified GetAclPolicyRevisionRequest message. Does not implicitly {@link google.cloud.memorystore.v1beta.GetAclPolicyRevisionRequest.verify|verify} messages.
+                     * @param message GetAclPolicyRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IGetAclPolicyRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetAclPolicyRevisionRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.GetAclPolicyRevisionRequest.verify|verify} messages.
+                     * @param message GetAclPolicyRevisionRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IGetAclPolicyRevisionRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetAclPolicyRevisionRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetAclPolicyRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.GetAclPolicyRevisionRequest;
+
+                    /**
+                     * Decodes a GetAclPolicyRevisionRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetAclPolicyRevisionRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.GetAclPolicyRevisionRequest;
+
+                    /**
+                     * Verifies a GetAclPolicyRevisionRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetAclPolicyRevisionRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetAclPolicyRevisionRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.GetAclPolicyRevisionRequest;
+
+                    /**
+                     * Creates a plain object from a GetAclPolicyRevisionRequest message. Also converts values to other types if specified.
+                     * @param message GetAclPolicyRevisionRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.GetAclPolicyRevisionRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetAclPolicyRevisionRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetAclPolicyRevisionRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GetInstanceRequest. */
                 interface IGetInstanceRequest {
 
@@ -13684,6 +15185,121 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateAclPolicyRequest. */
+                interface ICreateAclPolicyRequest {
+
+                    /** CreateAclPolicyRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateAclPolicyRequest aclPolicyId */
+                    aclPolicyId?: (string|null);
+
+                    /** CreateAclPolicyRequest aclPolicy */
+                    aclPolicy?: (google.cloud.memorystore.v1beta.IAclPolicy|null);
+
+                    /** CreateAclPolicyRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateAclPolicyRequest. */
+                class CreateAclPolicyRequest implements ICreateAclPolicyRequest {
+
+                    /**
+                     * Constructs a new CreateAclPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.ICreateAclPolicyRequest);
+
+                    /** CreateAclPolicyRequest parent. */
+                    public parent: string;
+
+                    /** CreateAclPolicyRequest aclPolicyId. */
+                    public aclPolicyId: string;
+
+                    /** CreateAclPolicyRequest aclPolicy. */
+                    public aclPolicy?: (google.cloud.memorystore.v1beta.IAclPolicy|null);
+
+                    /** CreateAclPolicyRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateAclPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateAclPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.ICreateAclPolicyRequest): google.cloud.memorystore.v1beta.CreateAclPolicyRequest;
+
+                    /**
+                     * Encodes the specified CreateAclPolicyRequest message. Does not implicitly {@link google.cloud.memorystore.v1beta.CreateAclPolicyRequest.verify|verify} messages.
+                     * @param message CreateAclPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.ICreateAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateAclPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.CreateAclPolicyRequest.verify|verify} messages.
+                     * @param message CreateAclPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.ICreateAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateAclPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateAclPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.CreateAclPolicyRequest;
+
+                    /**
+                     * Decodes a CreateAclPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateAclPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.CreateAclPolicyRequest;
+
+                    /**
+                     * Verifies a CreateAclPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateAclPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateAclPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.CreateAclPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a CreateAclPolicyRequest message. Also converts values to other types if specified.
+                     * @param message CreateAclPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.CreateAclPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateAclPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateAclPolicyRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -13805,6 +15421,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpdateAclPolicyRequest. */
+                interface IUpdateAclPolicyRequest {
+
+                    /** UpdateAclPolicyRequest aclPolicy */
+                    aclPolicy?: (google.cloud.memorystore.v1beta.IAclPolicy|null);
+
+                    /** UpdateAclPolicyRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAclPolicyRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateAclPolicyRequest. */
+                class UpdateAclPolicyRequest implements IUpdateAclPolicyRequest {
+
+                    /**
+                     * Constructs a new UpdateAclPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IUpdateAclPolicyRequest);
+
+                    /** UpdateAclPolicyRequest aclPolicy. */
+                    public aclPolicy?: (google.cloud.memorystore.v1beta.IAclPolicy|null);
+
+                    /** UpdateAclPolicyRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAclPolicyRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateAclPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAclPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IUpdateAclPolicyRequest): google.cloud.memorystore.v1beta.UpdateAclPolicyRequest;
+
+                    /**
+                     * Encodes the specified UpdateAclPolicyRequest message. Does not implicitly {@link google.cloud.memorystore.v1beta.UpdateAclPolicyRequest.verify|verify} messages.
+                     * @param message UpdateAclPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IUpdateAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAclPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.UpdateAclPolicyRequest.verify|verify} messages.
+                     * @param message UpdateAclPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IUpdateAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAclPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAclPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.UpdateAclPolicyRequest;
+
+                    /**
+                     * Decodes an UpdateAclPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAclPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.UpdateAclPolicyRequest;
+
+                    /**
+                     * Verifies an UpdateAclPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAclPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAclPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.UpdateAclPolicyRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAclPolicyRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAclPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.UpdateAclPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAclPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAclPolicyRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an UpdateInstanceRequest. */
                 interface IUpdateInstanceRequest {
 
@@ -13908,6 +15633,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for UpdateInstanceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteAclPolicyRequest. */
+                interface IDeleteAclPolicyRequest {
+
+                    /** DeleteAclPolicyRequest name */
+                    name?: (string|null);
+
+                    /** DeleteAclPolicyRequest requestId */
+                    requestId?: (string|null);
+
+                    /** DeleteAclPolicyRequest etag */
+                    etag?: (string|null);
+                }
+
+                /** Represents a DeleteAclPolicyRequest. */
+                class DeleteAclPolicyRequest implements IDeleteAclPolicyRequest {
+
+                    /**
+                     * Constructs a new DeleteAclPolicyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.memorystore.v1beta.IDeleteAclPolicyRequest);
+
+                    /** DeleteAclPolicyRequest name. */
+                    public name: string;
+
+                    /** DeleteAclPolicyRequest requestId. */
+                    public requestId: string;
+
+                    /** DeleteAclPolicyRequest etag. */
+                    public etag: string;
+
+                    /**
+                     * Creates a new DeleteAclPolicyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteAclPolicyRequest instance
+                     */
+                    public static create(properties?: google.cloud.memorystore.v1beta.IDeleteAclPolicyRequest): google.cloud.memorystore.v1beta.DeleteAclPolicyRequest;
+
+                    /**
+                     * Encodes the specified DeleteAclPolicyRequest message. Does not implicitly {@link google.cloud.memorystore.v1beta.DeleteAclPolicyRequest.verify|verify} messages.
+                     * @param message DeleteAclPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.memorystore.v1beta.IDeleteAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteAclPolicyRequest message, length delimited. Does not implicitly {@link google.cloud.memorystore.v1beta.DeleteAclPolicyRequest.verify|verify} messages.
+                     * @param message DeleteAclPolicyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.memorystore.v1beta.IDeleteAclPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteAclPolicyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteAclPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.memorystore.v1beta.DeleteAclPolicyRequest;
+
+                    /**
+                     * Decodes a DeleteAclPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteAclPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.memorystore.v1beta.DeleteAclPolicyRequest;
+
+                    /**
+                     * Verifies a DeleteAclPolicyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteAclPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteAclPolicyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.memorystore.v1beta.DeleteAclPolicyRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteAclPolicyRequest message. Also converts values to other types if specified.
+                     * @param message DeleteAclPolicyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.memorystore.v1beta.DeleteAclPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteAclPolicyRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteAclPolicyRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

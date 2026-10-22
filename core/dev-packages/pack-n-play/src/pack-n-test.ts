@@ -135,7 +135,7 @@ export async function packNTest(options: TestOptions) {
       devDependencies.push('@types/node');
 
       if (tsconfigPath === GTS_CONFIG_PATH) {
-        devDependencies.push('gts');
+        devDependencies.push('gts@6.0.2');
       }
     }
 

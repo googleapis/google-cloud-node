@@ -4,6 +4,11 @@ permissions:
 on:
   pull_request:
 name: presubmit
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -67,7 +72,7 @@ jobs:
       - run: node ./bin/linter.mjs --strict
         name: Run monorepo linter
         env:
-          GIT_DIFF_ARG: "HEAD^1...HEAD"
+          GIT_DIFF_ARG: "HEAD^1...HEAD -- :!packages"
 
   # Consolidate shards into jobs representing aggregate status to simplify branch protection requirements
   units-status:

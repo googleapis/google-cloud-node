@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/speech",
   "description": "Cloud Speech Client Library for Node.js",
-  "version": "8.1.1",
+  "version": "8.2.0",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -40,7 +40,7 @@
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile",
+    "prepare": "npm run compile",
     "prelint": "cd samples; npm link ../; npm i",
     "postpack": "minifyProtoJson",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",

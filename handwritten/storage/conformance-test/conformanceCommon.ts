@@ -206,25 +206,48 @@ function generateName(storageMethodString: String, bucketOrFile: string) {
   return `${TESTS_PREFIX}${storageMethodString.toLowerCase()}${bucketOrFile}.${shortUUID()}`;
 }
 
+async function fetchTestBenchWithRetry(
+  url: string,
+  init: Parameters<typeof fetch>[1],
+  retries = 3
+): ReturnType<typeof fetch> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await fetch(url, init);
+    } catch (err) {
+      if (attempt >= retries) {
+        throw err;
+      }
+      await new Promise(resolve => setTimeout(resolve, 100 * (attempt + 1)));
+    }
+  }
+}
+
 async function createTestBenchRetryTest(
   instructions: String[],
   methodName: string
 ): Promise<ConformanceTestCreationResult> {
   const requestBody = {instructions: {[methodName]: instructions}};
-  const response = await fetch(`${TESTBENCH_HOST}retry_test`, {
-    method: 'POST',
-    body: JSON.stringify(requestBody),
-    headers: {'Content-Type': 'application/json'},
-  });
+  const response = await fetchTestBenchWithRetry(
+    `${TESTBENCH_HOST}retry_test`,
+    {
+      method: 'POST',
+      body: JSON.stringify(requestBody),
+      headers: {'Content-Type': 'application/json'},
+    }
+  );
   return response.json() as Promise<ConformanceTestCreationResult>;
 }
 
 async function getTestBenchRetryTest(
   testId: string
 ): Promise<ConformanceTestResult> {
-  const response = await fetch(`${TESTBENCH_HOST}retry_test/${testId}`, {
-    method: 'GET',
-  });
+  const response = await fetchTestBenchWithRetry(
+    `${TESTBENCH_HOST}retry_test/${testId}`,
+    {
+      method: 'GET',
+    }
+  );
 
   return response.json() as Promise<ConformanceTestResult>;
 }

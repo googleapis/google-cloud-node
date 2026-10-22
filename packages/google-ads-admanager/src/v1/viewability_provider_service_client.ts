@@ -228,6 +228,9 @@ export class ViewabilityProviderServiceClient {
       applicationPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/applications/{application}',
       ),
+      assetPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/assets/{asset}',
+      ),
       audienceSegmentPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/audienceSegments/{audience_segment}',
       ),
@@ -324,6 +327,12 @@ export class ViewabilityProviderServiceClient {
       ),
       lineItemPathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/lineItems/{line_item}',
+      ),
+      lineItemCreativeAssociationPathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItems/{line_item}/creatives/{creative}',
+      ),
+      lineItemTemplatePathTemplate: new this._gaxModule.PathTemplate(
+        'networks/{network_code}/lineItemTemplates/{line_item_template}',
       ),
       linkedDevicePathTemplate: new this._gaxModule.PathTemplate(
         'networks/{network_code}/linkedDevices/{linked_device}',
@@ -897,7 +906,7 @@ export class ViewabilityProviderServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource where
-   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProvider}s will be
+   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProviders} will be
    *   created. Format: `networks/{network_code}` The parent field in the
    *   CreateViewabilityProviderRequest must match this field.
    * @param {number[]} request.requests
@@ -1208,7 +1217,7 @@ export class ViewabilityProviderServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent resource where
-   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProvider}s will be
+   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProviders} will be
    *   updated. Format: `networks/{network_code}` The parent field in the
    *   UpdateViewabilityProviderRequest must match this field.
    * @param {number[]} request.requests
@@ -1366,22 +1375,21 @@ export class ViewabilityProviderServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of
-   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProvider}s.
+   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProviders}.
    *   Format: `networks/{network_code}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of
-   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProvider}s to
+   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProviders} to
    *   return. The service may return fewer than this value. If unspecified, at
-   *   most 50 {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProvider}s
+   *   most 50 {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProviders}
    *   will be returned. The maximum value is 1000; values above 1000 will be
    *   coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   {@link protos.|ListViewabilityProviders} call. Provide this to retrieve the subsequent
-   *   page.
+   *   Optional. A page token, received from a previous `ListViewabilityProviders`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link protos.|ListViewabilityProviders} must match the call that provided the page
+   *   `ListViewabilityProviders` must match the call that provided the page
    *   token.
    * @param {string} [request.filter]
    *   Optional. Expression to filter the response.
@@ -1530,22 +1538,21 @@ export class ViewabilityProviderServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of
-   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProvider}s.
+   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProviders}.
    *   Format: `networks/{network_code}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of
-   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProvider}s to
+   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProviders} to
    *   return. The service may return fewer than this value. If unspecified, at
-   *   most 50 {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProvider}s
+   *   most 50 {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProviders}
    *   will be returned. The maximum value is 1000; values above 1000 will be
    *   coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   {@link protos.|ListViewabilityProviders} call. Provide this to retrieve the subsequent
-   *   page.
+   *   Optional. A page token, received from a previous `ListViewabilityProviders`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link protos.|ListViewabilityProviders} must match the call that provided the page
+   *   `ListViewabilityProviders` must match the call that provided the page
    *   token.
    * @param {string} [request.filter]
    *   Optional. Expression to filter the response.
@@ -1617,22 +1624,21 @@ export class ViewabilityProviderServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent, which owns this collection of
-   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProvider}s.
+   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProviders}.
    *   Format: `networks/{network_code}`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of
-   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProvider}s to
+   *   {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProviders} to
    *   return. The service may return fewer than this value. If unspecified, at
-   *   most 50 {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProvider}s
+   *   most 50 {@link protos.google.ads.admanager.v1.ViewabilityProvider|ViewabilityProviders}
    *   will be returned. The maximum value is 1000; values above 1000 will be
    *   coerced to 1000.
    * @param {string} [request.pageToken]
-   *   Optional. A page token, received from a previous
-   *   {@link protos.|ListViewabilityProviders} call. Provide this to retrieve the subsequent
-   *   page.
+   *   Optional. A page token, received from a previous `ListViewabilityProviders`
+   *   call. Provide this to retrieve the subsequent page.
    *
    *   When paginating, all other parameters provided to
-   *   {@link protos.|ListViewabilityProviders} must match the call that provided the page
+   *   `ListViewabilityProviders` must match the call that provided the page
    *   token.
    * @param {string} [request.filter]
    *   Optional. Expression to filter the response.
@@ -1953,6 +1959,42 @@ export class ViewabilityProviderServiceClient {
   matchApplicationFromApplicationName(applicationName: string) {
     return this.pathTemplates.applicationPathTemplate.match(applicationName)
       .application;
+  }
+
+  /**
+   * Return a fully-qualified asset resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} asset
+   * @returns {string} Resource name string.
+   */
+  assetPath(networkCode: string, asset: string) {
+    return this.pathTemplates.assetPathTemplate.render({
+      network_code: networkCode,
+      asset: asset,
+    });
+  }
+
+  /**
+   * Parse the network_code from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).network_code;
+  }
+
+  /**
+   * Parse the asset from Asset resource.
+   *
+   * @param {string} assetName
+   *   A fully-qualified path representing Asset resource.
+   * @returns {string} A string representing the asset.
+   */
+  matchAssetFromAssetName(assetName: string) {
+    return this.pathTemplates.assetPathTemplate.match(assetName).asset;
   }
 
   /**
@@ -3203,6 +3245,111 @@ export class ViewabilityProviderServiceClient {
   matchLineItemFromLineItemName(lineItemName: string) {
     return this.pathTemplates.lineItemPathTemplate.match(lineItemName)
       .line_item;
+  }
+
+  /**
+   * Return a fully-qualified lineItemCreativeAssociation resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item
+   * @param {string} creative
+   * @returns {string} Resource name string.
+   */
+  lineItemCreativeAssociationPath(
+    networkCode: string,
+    lineItem: string,
+    creative: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.render({
+      network_code: networkCode,
+      line_item: lineItem,
+      creative: creative,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the line_item.
+   */
+  matchLineItemFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).line_item;
+  }
+
+  /**
+   * Parse the creative from LineItemCreativeAssociation resource.
+   *
+   * @param {string} lineItemCreativeAssociationName
+   *   A fully-qualified path representing LineItemCreativeAssociation resource.
+   * @returns {string} A string representing the creative.
+   */
+  matchCreativeFromLineItemCreativeAssociationName(
+    lineItemCreativeAssociationName: string,
+  ) {
+    return this.pathTemplates.lineItemCreativeAssociationPathTemplate.match(
+      lineItemCreativeAssociationName,
+    ).creative;
+  }
+
+  /**
+   * Return a fully-qualified lineItemTemplate resource name string.
+   *
+   * @param {string} network_code
+   * @param {string} line_item_template
+   * @returns {string} Resource name string.
+   */
+  lineItemTemplatePath(networkCode: string, lineItemTemplate: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.render({
+      network_code: networkCode,
+      line_item_template: lineItemTemplate,
+    });
+  }
+
+  /**
+   * Parse the network_code from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the network_code.
+   */
+  matchNetworkCodeFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).network_code;
+  }
+
+  /**
+   * Parse the line_item_template from LineItemTemplate resource.
+   *
+   * @param {string} lineItemTemplateName
+   *   A fully-qualified path representing LineItemTemplate resource.
+   * @returns {string} A string representing the line_item_template.
+   */
+  matchLineItemTemplateFromLineItemTemplateName(lineItemTemplateName: string) {
+    return this.pathTemplates.lineItemTemplatePathTemplate.match(
+      lineItemTemplateName,
+    ).line_item_template;
   }
 
   /**

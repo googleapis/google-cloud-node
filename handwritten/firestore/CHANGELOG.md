@@ -5,6 +5,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [9.3.1](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.3.0...firestore-v9.3.1) (2026-10-01)
+
+
+### Bug Fixes
+
+* **ci:** Deduplicate pnpm install in run_single_test and refine turbo compile inputs ([#9439](https://github.com/googleapis/google-cloud-node/issues/9439)) ([102b3f6](https://github.com/googleapis/google-cloud-node/commit/102b3f6d0eb80b3b8814d71d53e50b5240556340))
+* **firestore:** Unblock Cloud RAD docs generation ([#9474](https://github.com/googleapis/google-cloud-node/issues/9474)) ([5f580f0](https://github.com/googleapis/google-cloud-node/commit/5f580f0f6a457c32c613dfbeffe3dbd151b4e8fd))
+
 ## [9.3.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.2.0...firestore-v9.3.0) (2026-09-29)
 
 

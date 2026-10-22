@@ -35,7 +35,9 @@ import {logs as baseLogs, LoggingFunction} from './logs';
  * @private
  */
 export const logs = {
-  subscriberStreams: baseLogs.pubsub.sublog('subscriber-streams') as LoggingFunction,
+  subscriberStreams: baseLogs.pubsub.sublog(
+    'subscriber-streams',
+  ) as LoggingFunction,
 };
 
 /*!
@@ -47,9 +49,9 @@ const KEEP_ALIVE_INTERVAL = 30000;
  * Deadline for the stream. This will need to go away and be replaced with something
  * more graceful for pulling the config out of the pubsub-api package.
  */
-const PULL_TIMEOUT = require('./v1-old/subscriber_client_config.json').interfaces[
-  'google.pubsub.v1.Subscriber'
-].methods.StreamingPull.timeout_millis;
+const PULL_TIMEOUT = require('./v1-old/subscriber_client_config.json')
+  .interfaces['google.pubsub.v1.Subscriber'].methods.StreamingPull
+  .timeout_millis;
 
 /**
  * @typedef {object} MessageStreamOptions
@@ -160,6 +162,7 @@ interface StreamTracked {
 export class MessageStream extends PassThrough {
   private _keepAliveHandle?: NodeJS.Timeout;
   private _options: MessageStreamOptions;
+  private _paused: boolean;
   private _retrier: ExponentialRetry<StreamTracked>;
 
   private _streams: StreamTracked[];
@@ -171,6 +174,7 @@ export class MessageStream extends PassThrough {
     super({objectMode: true, highWaterMark: options.highWaterMark});
 
     this._options = options;
+    this._paused = false;
     this._retrier = new ExponentialRetry<{}>(
       options.retryMinBackoff!, // Filled by DEFAULT_OPTIONS
       options.retryMaxBackoff!,
@@ -198,6 +202,39 @@ export class MessageStream extends PassThrough {
       KEEP_ALIVE_INTERVAL,
     );
     this._keepAliveHandle.unref();
+  }
+
+  /**
+   * Pauses the message stream and all underlying StreamingPull streams.
+   */
+  pause(): this {
+    super.pause();
+    this._paused = true;
+
+    for (const tracker of this._streams) {
+      this._clearAliveTimer(tracker);
+      if (tracker.stream) {
+        tracker.stream.pause();
+      }
+    }
+
+    return this;
+  }
+
+  /**
+   * Resumes the message stream and all underlying StreamingPull streams.
+   */
+  resume(): this {
+    super.resume();
+    this._paused = false;
+
+    for (const tracker of this._streams) {
+      if (tracker.stream) {
+        tracker.stream.resume();
+      }
+    }
+
+    return this;
   }
 
   /**
@@ -269,6 +306,10 @@ export class MessageStream extends PassThrough {
       .on('error', err => this._onError(index, err))
       .once('status', status => this._onStatus(index, status))
       .on('data', (data: PullResponse) => this._onData(index, data));
+
+    if (this._paused) {
+      stream.pause();
+    }
   }
 
   private _onData(index: number, data: PullResponse): void {
@@ -289,6 +330,9 @@ export class MessageStream extends PassThrough {
 
   private _checkAliveTimer(index: number): void {
     const tracker = this._streams[index];
+    if (this._paused || tracker.stream?.isPaused()) {
+      return;
+    }
     const lastPingTime = tracker.lastPingTime ?? -1;
     const lastResponseTime = tracker.lastResponseTime ?? 0;
     if (lastPingTime <= lastResponseTime) {
@@ -440,8 +484,10 @@ export class MessageStream extends PassThrough {
       // result in a `write after end` error.
       if (!tracker.receivedStatus && tracker.stream) {
         tracker.stream.write({});
-        tracker.lastPingTime = Date.now();
-        this._setAliveTimer(index);
+        if (!this._paused && !tracker.stream.isPaused()) {
+          tracker.lastPingTime = Date.now();
+          this._setAliveTimer(index);
+        }
       }
     });
   }

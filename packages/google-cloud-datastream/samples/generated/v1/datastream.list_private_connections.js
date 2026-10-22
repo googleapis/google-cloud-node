@@ -41,19 +41,19 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  Page token received from a previous `ListPrivateConnections` call.
-   *  Provide this to retrieve the subsequent page.
+   *  Optional. Page token received from a previous `ListPrivateConnections`
+   *  call. Provide this to retrieve the subsequent page.
    *  When paginating, all other parameters provided to
    *  `ListPrivateConnections` must match the call that provided the page
    *  token.
    */
   // const pageToken = 'abc123'
   /**
-   *  Filter request.
+   *  Optional. Filter request.
    */
   // const filter = 'abc123'
   /**
-   *  Order by fields for the result.
+   *  Optional. Order by fields for the result.
    */
   // const orderBy = 'abc123'
 
