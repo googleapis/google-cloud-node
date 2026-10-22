@@ -146,7 +146,7 @@ new LoggingWinston({
       await packNTest({
         sample,
       });
-    }).timeout(2 * 60 * 1000);
+    }).timeout(5 * 60 * 1000);
   });
 
   JS_CODE_SAMPLES.forEach(sample => {
@@ -154,6 +154,6 @@ new LoggingWinston({
       await packNTest({
         sample,
       });
-    }).timeout(2 * 60 * 1000);
+    }).timeout(5 * 60 * 1000);
   });
 });

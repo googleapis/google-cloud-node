@@ -20,9 +20,8 @@
 
 import assert from 'assert';
 import * as path from 'path';
-import proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
-import {mkdirSync, writeFileSync} from 'fs';
+import fs, {mkdirSync, writeFileSync} from 'fs';
 import * as fsp from 'fs/promises';
 import {afterEach, describe, it, beforeEach} from 'mocha';
 
@@ -647,28 +646,28 @@ describe('grpc', () => {
       const originPath = path.join('test', 'path', 'location');
       const includePath = path.join('example', 'import.proto');
 
+      afterEach(() => {
+        sinon.restore();
+      });
+
       it('should throw an error if a file is not found', () => {
-        const findIncludePath = proxyquire('../../src/grpc', {
-          fs: {
-            existsSync: () => {
-              return false;
-            },
-          },
-        }).GoogleProtoFilesRoot._findIncludePath;
-        assert.throws(findIncludePath.bind(null, originPath, includePath));
+        sinon.stub(fs, 'existsSync').returns(false);
+        assert.throws(
+          GoogleProtoFilesRoot._findIncludePath.bind(
+            null,
+            originPath,
+            includePath,
+          ),
+        );
       });
 
       it('should return the correct resolved import path', () => {
         const correctPath = path.join('test', 'example', 'import.proto');
-        const findIncludePath = proxyquire('../../src/grpc', {
-          fs: {
-            existsSync(path: string) {
-              return path === correctPath;
-            },
-          },
-        }).GoogleProtoFilesRoot._findIncludePath;
+        sinon
+          .stub(fs, 'existsSync')
+          .callsFake((p: fs.PathLike) => p === correctPath);
         assert.strictEqual(
-          findIncludePath(originPath, includePath),
+          GoogleProtoFilesRoot._findIncludePath(originPath, includePath),
           correctPath,
         );
       });
