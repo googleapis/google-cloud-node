@@ -1607,3 +1607,4 @@ API is 100% identical.
 - make synth.py generate library to ./dev ([#337](https://github.com/googleapis/nodejs-firestore/pull/337))
 - Revert "Re-generate library using /synth.py ([#331](https://github.com/googleapis/nodejs-firestore/pull/331))" ([#334](https://github.com/googleapis/nodejs-firestore/pull/334))
 - Re-generate library using /synth.py ([#331](https://github.com/googleapis/nodejs-firestore/pull/331))
+
