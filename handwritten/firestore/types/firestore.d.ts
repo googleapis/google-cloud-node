@@ -12076,7 +12076,6 @@ declare namespace FirebaseFirestore {
 
     // TODO(search) enable with backend support
     // /**
-    //  * @beta
     //  * Perform a full-text search on the specified field.
     //  *
     //  * @remarks This Expression can only be used within a `search` stage.
@@ -12110,8 +12109,6 @@ declare namespace FirebaseFirestore {
     ): BooleanExpression;
 
     /**
-     * @beta
-     *
      * Evaluates to the search score that reflects the topicality of the document
      * to all of the text predicates (for example: `documentMatches`)
      * in the search query. If `SearchOptions.query` is not set or does not contain
@@ -12170,8 +12167,6 @@ declare namespace FirebaseFirestore {
     // ): Expression;
 
     /**
-     * @beta
-     *
      * Evaluates to the distance in meters between the location in the specified
      * field and the query location.
      *
@@ -13571,8 +13566,6 @@ declare namespace FirebaseFirestore {
        */
       unnest(options: UnnestStageOptions): Pipeline;
       /**
-       * @beta
-       *
        * Add a search stage to the Pipeline.
        *
        * @remarks This must be the first stage of the pipeline.
@@ -14095,7 +14088,6 @@ declare namespace FirebaseFirestore {
     };
 
     ///**
-    // * @beta
     // * Specifies if the `matches` and `snippet` expressions will enhance the user
     // * provided query to perform matching of synonyms, misspellings, lemmatization,
     // * stemming.
@@ -14110,8 +14102,6 @@ declare namespace FirebaseFirestore {
     // export type QueryEnhancement = 'disabled' | 'required' | 'preferred';
 
     /**
-     * @beta
-     *
      * Options defining how a SearchStage is evaluated. See {@link @firebase/firestore/pipelines#Pipeline.(search)}.
      */
     export type SearchStageOptions = StageOptions & {
@@ -14194,7 +14184,6 @@ declare namespace FirebaseFirestore {
 
     // TODO(search) enable with backend support
     // /**
-    //  * @beta
     //  * Options defining how a snippet expression is evaluated.
     //  */
     // export type SnippetOptions = {

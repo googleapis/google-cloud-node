@@ -1699,8 +1699,6 @@ export class Pipeline implements firestore.Pipelines.Pipeline {
   }
 
   /**
-   * @beta
-   *
    * Add a search stage to the Pipeline.
    *
    * @remarks This must be the first stage of the pipeline.
