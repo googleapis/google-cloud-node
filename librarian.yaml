@@ -2237,12 +2237,14 @@ libraries:
   - name: google-shopping-merchant-reviews
     version: 0.8.0
     apis:
+      - path: google/shopping/merchant/reviews/v1
       - path: google/shopping/merchant/reviews/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1beta
       package_name: '@google-shopping/reviews'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Reviews
   - name: google-storage-control
     version: 0.13.0
     apis:

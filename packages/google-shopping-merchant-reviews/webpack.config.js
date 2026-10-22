@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'MerchantReviewsService',
-    filename: './merchant-reviews-service.js',
+    library: 'ProductReviewsService',
+    filename: './product-reviews-service.js',
   },
   node: {
     child_process: 'empty',
