@@ -145,7 +145,7 @@ interface GaxiosOptions = {
 
   /**
    * Implementation of `fetch` to use when making the API call. Will use
-   * `node-fetch` by default.
+   * `fetch` by default.
    */
   fetchImplementation?: (
     ...args: Parameters<typeof fetch>

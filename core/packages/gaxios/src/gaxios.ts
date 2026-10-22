@@ -88,7 +88,7 @@ export class Gaxios implements FetchCompliance {
    *
    * ```ts
    * const gaxios = new Gaxios();
-   * const myFetch: FetchCompliance['fetch'] = (...args) => gaxios.fetch(...args);
+   * const myFetch: GaxiosOptions['fetchImplementation'] = (...args) => gaxios.fetch(...args);
    * await myFetch('https://example.com');
    * ```
    *
