@@ -66,6 +66,7 @@ describe('BigQuery System Tests (High Precision)', () => {
     // Programmatically require the tests. Mocha will discover and register them inside this 'describe' block.
     require('./bigquery');
     require('./timestamp_output_format');
+    require('./arrow');
   });
 });
 

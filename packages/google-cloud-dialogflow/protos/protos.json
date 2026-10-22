@@ -3440,6 +3440,14 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "responseMessages": {
+                          "rule": "repeated",
+                          "type": "ResponseMessage",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "languageCode": {
                           "type": "string",
                           "id": 3,
@@ -4185,6 +4193,30 @@
                           "type": "DetectIntentResponse",
                           "id": 1
                         },
+                        "responseMessages": {
+                          "rule": "repeated",
+                          "type": "ResponseMessage",
+                          "id": 3
+                        },
+                        "intent": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Intent"
+                          }
+                        },
+                        "event": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "matchConfidence": {
+                          "type": "float",
+                          "id": 9
+                        },
+                        "parameters": {
+                          "type": "google.protobuf.Struct",
+                          "id": 10
+                        },
                         "automatedAgentReplyType": {
                           "type": "AutomatedAgentReplyType",
                           "id": 7
@@ -4196,6 +4228,10 @@
                         "cxCurrentPage": {
                           "type": "string",
                           "id": 11
+                        },
+                        "callCompanionAuthCode": {
+                          "type": "bytes",
+                          "id": 12
                         }
                       },
                       "nested": {
@@ -4466,6 +4502,123 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 1
+                        }
+                      }
+                    },
+                    "ResponseMessage": {
+                      "oneofs": {
+                        "message": {
+                          "oneof": [
+                            "text",
+                            "payload",
+                            "liveAgentHandoff",
+                            "endInteraction",
+                            "mixedAudio",
+                            "telephonyTransferCall"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "text": {
+                          "type": "Text",
+                          "id": 1
+                        },
+                        "payload": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2
+                        },
+                        "liveAgentHandoff": {
+                          "type": "LiveAgentHandoff",
+                          "id": 3
+                        },
+                        "endInteraction": {
+                          "type": "EndInteraction",
+                          "id": 4
+                        },
+                        "mixedAudio": {
+                          "type": "MixedAudio",
+                          "id": 5
+                        },
+                        "telephonyTransferCall": {
+                          "type": "TelephonyTransferCall",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "Text": {
+                          "fields": {
+                            "text": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "LiveAgentHandoff": {
+                          "fields": {
+                            "metadata": {
+                              "type": "google.protobuf.Struct",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "EndInteraction": {
+                          "fields": {}
+                        },
+                        "MixedAudio": {
+                          "fields": {
+                            "segments": {
+                              "rule": "repeated",
+                              "type": "Segment",
+                              "id": 1
+                            }
+                          },
+                          "nested": {
+                            "Segment": {
+                              "oneofs": {
+                                "content": {
+                                  "oneof": [
+                                    "audio",
+                                    "uri"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "audio": {
+                                  "type": "bytes",
+                                  "id": 1
+                                },
+                                "uri": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "allowPlaybackInterruption": {
+                                  "type": "bool",
+                                  "id": 3
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "TelephonyTransferCall": {
+                          "oneofs": {
+                            "endpoint": {
+                              "oneof": [
+                                "phoneNumber",
+                                "sipUri"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "phoneNumber": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "sipUri": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
@@ -5137,6 +5290,11 @@
                                   "oneof": [
                                     "useGeminiAsr"
                                   ]
+                                },
+                                "_disableInterimInputTranscripts": {
+                                  "oneof": [
+                                    "disableInterimInputTranscripts"
+                                  ]
                                 }
                               },
                               "fields": {
@@ -5192,6 +5350,14 @@
                                 "useGeminiAsr": {
                                   "type": "bool",
                                   "id": 25,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "disableInterimInputTranscripts": {
+                                  "type": "bool",
+                                  "id": 26,
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL",
                                     "proto3_optional": true
@@ -5354,6 +5520,11 @@
                           "oneof": [
                             "useGeminiAsr"
                           ]
+                        },
+                        "_disableInterimInputTranscripts": {
+                          "oneof": [
+                            "disableInterimInputTranscripts"
+                          ]
                         }
                       },
                       "fields": {
@@ -5444,6 +5615,14 @@
                         "useGeminiAsr": {
                           "type": "bool",
                           "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "disableInterimInputTranscripts": {
+                          "type": "bool",
+                          "id": 32,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -5571,6 +5750,13 @@
                       }
                     },
                     "SpeechToTextConfig": {
+                      "oneofs": {
+                        "_disableInterimInputTranscripts": {
+                          "oneof": [
+                            "disableInterimInputTranscripts"
+                          ]
+                        }
+                      },
                       "fields": {
                         "speechModelVariant": {
                           "type": "SpeechModelVariant",
@@ -5621,18 +5807,19 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "disableInterimInputTranscripts": {
+                          "type": "bool",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
                         "GeminiAsrConfig": {
                           "fields": {
-                            "modelId": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
                             "silenceDurationMs": {
                               "type": "int32",
                               "id": 2,
@@ -6857,6 +7044,13 @@
                         "queryTextSentiment": {
                           "type": "Sentiment",
                           "id": 1
+                        },
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
