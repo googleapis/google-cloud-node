@@ -415,6 +415,12 @@ export class CertificateManagerClient {
     const createCertificateIssuanceConfigMetadata = protoFilesRoot.lookup(
       '.google.cloud.certificatemanager.v1.OperationMetadata',
     ) as gax.protobuf.Type;
+    const updateCertificateIssuanceConfigResponse = protoFilesRoot.lookup(
+      '.google.cloud.certificatemanager.v1.CertificateIssuanceConfig',
+    ) as gax.protobuf.Type;
+    const updateCertificateIssuanceConfigMetadata = protoFilesRoot.lookup(
+      '.google.cloud.certificatemanager.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const deleteCertificateIssuanceConfigResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty',
     ) as gax.protobuf.Type;
@@ -535,6 +541,16 @@ export class CertificateManagerClient {
             createCertificateIssuanceConfigMetadata,
           ),
         ),
+      updateCertificateIssuanceConfig:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          updateCertificateIssuanceConfigResponse.decode.bind(
+            updateCertificateIssuanceConfigResponse,
+          ),
+          updateCertificateIssuanceConfigMetadata.decode.bind(
+            updateCertificateIssuanceConfigMetadata,
+          ),
+        ),
       deleteCertificateIssuanceConfig:
         new this._gaxModule.LongrunningDescriptor(
           this.operationsClient,
@@ -636,6 +652,7 @@ export class CertificateManagerClient {
       'listCertificateIssuanceConfigs',
       'getCertificateIssuanceConfig',
       'createCertificateIssuanceConfig',
+      'updateCertificateIssuanceConfig',
       'deleteCertificateIssuanceConfig',
       'listTrustConfigs',
       'getTrustConfig',
@@ -3875,6 +3892,186 @@ export class CertificateManagerClient {
     >;
   }
   /**
+   * Updates a CertificateIssuanceConfig.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.certificatemanager.v1.CertificateIssuanceConfig} request.certificateIssuanceConfig
+   *   Required. A definition of the certificate issuance config to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The update mask applies to the resource. For the `FieldMask`
+   *   definition, see
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate_issuance_config.js</caption>
+   * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificateIssuanceConfig_async
+   */
+  updateCertificateIssuanceConfig(
+    request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateIssuanceConfigRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateCertificateIssuanceConfig(
+    request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateIssuanceConfigRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateCertificateIssuanceConfig(
+    request: protos.google.cloud.certificatemanager.v1.IUpdateCertificateIssuanceConfigRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateCertificateIssuanceConfig(
+    request?: protos.google.cloud.certificatemanager.v1.IUpdateCertificateIssuanceConfigRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+        protos.google.cloud.certificatemanager.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'certificate_issuance_config.name':
+          request.certificateIssuanceConfig!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info(
+            'updateCertificateIssuanceConfig response %j',
+            rawResponse,
+          );
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateCertificateIssuanceConfig request %j', request);
+    return this.innerApiCalls
+      .updateCertificateIssuanceConfig(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.certificatemanager.v1.ICertificateIssuanceConfig,
+            protos.google.cloud.certificatemanager.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info(
+            'updateCertificateIssuanceConfig response %j',
+            rawResponse,
+          );
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateCertificateIssuanceConfig()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/certificate_manager.update_certificate_issuance_config.js</caption>
+   * region_tag:certificatemanager_v1_generated_CertificateManager_UpdateCertificateIssuanceConfig_async
+   */
+  async checkUpdateCertificateIssuanceConfigProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig,
+      protos.google.cloud.certificatemanager.v1.OperationMetadata
+    >
+  > {
+    this._log.info('updateCertificateIssuanceConfig long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateCertificateIssuanceConfig,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.certificatemanager.v1.CertificateIssuanceConfig,
+      protos.google.cloud.certificatemanager.v1.OperationMetadata
+    >;
+  }
+  /**
    * Deletes a single CertificateIssuanceConfig.
    *
    * @param {Object} request
@@ -4406,8 +4603,8 @@ export class CertificateManagerClient {
    * @param {string} request.name
    *   Required. A name of the TrustConfig to delete. Must be in the format
    *   `projects/* /locations/* /trustConfigs/*`.
-   * @param {string} request.etag
-   *   The current etag of the TrustConfig.
+   * @param {string} [request.etag]
+   *   Optional. The current etag of the TrustConfig.
    *   If an etag is provided and does not match the current etag of the resource,
    *   deletion will be blocked and an ABORTED error will be returned.
    * @param {object} [options]
@@ -4580,18 +4777,18 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the certificate should be
    *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificates to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificatesResponse`. Indicates that
-   *   this is a continuation of a prior `ListCertificates` call, and that the
-   *   system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate field names used to specify the order of the returned
-   *   results. The default sorting order is ascending. To specify descending
-   *   order for a field, add a suffix `" desc"`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of certificates to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListCertificatesResponse`.
+   *   Indicates that this is a continuation of a prior `ListCertificates` call,
+   *   and that the system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the Certificates returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Certificate field names used to specify the order of
+   *   the returned results. The default sorting order is ascending. To specify
+   *   descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4714,18 +4911,18 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the certificate should be
    *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificates to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificatesResponse`. Indicates that
-   *   this is a continuation of a prior `ListCertificates` call, and that the
-   *   system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate field names used to specify the order of the returned
-   *   results. The default sorting order is ascending. To specify descending
-   *   order for a field, add a suffix `" desc"`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of certificates to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListCertificatesResponse`.
+   *   Indicates that this is a continuation of a prior `ListCertificates` call,
+   *   and that the system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the Certificates returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Certificate field names used to specify the order of
+   *   the returned results. The default sorting order is ascending. To specify
+   *   descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -4771,18 +4968,18 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the certificate should be
    *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificates to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificatesResponse`. Indicates that
-   *   this is a continuation of a prior `ListCertificates` call, and that the
-   *   system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate field names used to specify the order of the returned
-   *   results. The default sorting order is ascending. To specify descending
-   *   order for a field, add a suffix `" desc"`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of certificates to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListCertificatesResponse`.
+   *   Indicates that this is a continuation of a prior `ListCertificates` call,
+   *   and that the system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the Certificates returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Certificate field names used to specify the order of
+   *   the returned results. The default sorting order is ascending. To specify
+   *   descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -4827,17 +5024,17 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the certificate maps should
    *   be listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate maps to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateMapsResponse`. Indicates
-   *   that this is a continuation of a prior `ListCertificateMaps` call, and that
-   *   the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates Maps returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate Map field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of certificate maps to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListCertificateMapsResponse`.
+   *   Indicates that this is a continuation of a prior `ListCertificateMaps`
+   *   call, and that the system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the Certificates Maps returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Certificate Map field names used to specify the order
+   *   of the returned results. The default sorting order is ascending. To specify
    *   descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -4961,17 +5158,17 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the certificate maps should
    *   be listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate maps to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateMapsResponse`. Indicates
-   *   that this is a continuation of a prior `ListCertificateMaps` call, and that
-   *   the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates Maps returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate Map field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of certificate maps to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListCertificateMapsResponse`.
+   *   Indicates that this is a continuation of a prior `ListCertificateMaps`
+   *   call, and that the system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the Certificates Maps returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Certificate Map field names used to specify the order
+   *   of the returned results. The default sorting order is ascending. To specify
    *   descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -5018,17 +5215,17 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the certificate maps should
    *   be listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate maps to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateMapsResponse`. Indicates
-   *   that this is a continuation of a prior `ListCertificateMaps` call, and that
-   *   the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates Maps returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate Map field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of certificate maps to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListCertificateMapsResponse`.
+   *   Indicates that this is a continuation of a prior `ListCertificateMaps`
+   *   call, and that the system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the Certificates Maps returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Certificate Map field names used to specify the order
+   *   of the returned results. The default sorting order is ascending. To specify
    *   descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -5075,20 +5272,21 @@ export class CertificateManagerClient {
    *   Required. The project, location and certificate map from which the
    *   certificate map entries should be listed, specified in the format
    *   `projects/* /locations/* /certificateMaps/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate map entries to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 certificate map entries will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateMapEntriesResponse`.
-   *   Indicates that this is a continuation of a prior
-   *   `ListCertificateMapEntries` call, and that the system should return the
-   *   next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the returned Certificate Map Entries.
-   * @param {string} request.orderBy
-   *   A list of Certificate Map Entry field names used to specify
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of certificate map entries to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 certificate
+   *   map entries will be returned. The maximum value is 1000; values above 1000
+   *   will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListCertificateMapEntriesResponse`. Indicates that this is a continuation
+   *   of a prior `ListCertificateMapEntries` call, and that the system should
+   *   return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the returned Certificate Map
+   *   Entries.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Certificate Map Entry field names used to specify
    *   the order of the returned results. The default sorting order is ascending.
    *   To specify descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
@@ -5214,20 +5412,21 @@ export class CertificateManagerClient {
    *   Required. The project, location and certificate map from which the
    *   certificate map entries should be listed, specified in the format
    *   `projects/* /locations/* /certificateMaps/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate map entries to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 certificate map entries will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateMapEntriesResponse`.
-   *   Indicates that this is a continuation of a prior
-   *   `ListCertificateMapEntries` call, and that the system should return the
-   *   next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the returned Certificate Map Entries.
-   * @param {string} request.orderBy
-   *   A list of Certificate Map Entry field names used to specify
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of certificate map entries to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 certificate
+   *   map entries will be returned. The maximum value is 1000; values above 1000
+   *   will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListCertificateMapEntriesResponse`. Indicates that this is a continuation
+   *   of a prior `ListCertificateMapEntries` call, and that the system should
+   *   return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the returned Certificate Map
+   *   Entries.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Certificate Map Entry field names used to specify
    *   the order of the returned results. The default sorting order is ascending.
    *   To specify descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
@@ -5276,20 +5475,21 @@ export class CertificateManagerClient {
    *   Required. The project, location and certificate map from which the
    *   certificate map entries should be listed, specified in the format
    *   `projects/* /locations/* /certificateMaps/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate map entries to return. The service may return
-   *   fewer than this value.
-   *   If unspecified, at most 50 certificate map entries will be returned.
-   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateMapEntriesResponse`.
-   *   Indicates that this is a continuation of a prior
-   *   `ListCertificateMapEntries` call, and that the system should return the
-   *   next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the returned Certificate Map Entries.
-   * @param {string} request.orderBy
-   *   A list of Certificate Map Entry field names used to specify
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of certificate map entries to return. The service
+   *   may return fewer than this value. If unspecified, at most 50 certificate
+   *   map entries will be returned. The maximum value is 1000; values above 1000
+   *   will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListCertificateMapEntriesResponse`. Indicates that this is a continuation
+   *   of a prior `ListCertificateMapEntries` call, and that the system should
+   *   return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the returned Certificate Map
+   *   Entries.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Certificate Map Entry field names used to specify
    *   the order of the returned results. The default sorting order is ascending.
    *   To specify descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
@@ -5336,17 +5536,17 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the dns authorizations should
    *   be listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of dns authorizations to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListDnsAuthorizationsResponse`. Indicates
-   *   that this is a continuation of a prior `ListDnsAuthorizations` call, and
-   *   that the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Dns Authorizations returned.
-   * @param {string} request.orderBy
-   *   A list of Dns Authorization field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of dns authorizations to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListDnsAuthorizationsResponse`.
+   *   Indicates that this is a continuation of a prior `ListDnsAuthorizations`
+   *   call, and that the system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the Dns Authorizations returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Dns Authorization field names used to specify the order
+   *   of the returned results. The default sorting order is ascending. To specify
    *   descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -5470,17 +5670,17 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the dns authorizations should
    *   be listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of dns authorizations to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListDnsAuthorizationsResponse`. Indicates
-   *   that this is a continuation of a prior `ListDnsAuthorizations` call, and
-   *   that the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Dns Authorizations returned.
-   * @param {string} request.orderBy
-   *   A list of Dns Authorization field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of dns authorizations to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListDnsAuthorizationsResponse`.
+   *   Indicates that this is a continuation of a prior `ListDnsAuthorizations`
+   *   call, and that the system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the Dns Authorizations returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Dns Authorization field names used to specify the order
+   *   of the returned results. The default sorting order is ascending. To specify
    *   descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -5527,17 +5727,17 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the dns authorizations should
    *   be listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of dns authorizations to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListDnsAuthorizationsResponse`. Indicates
-   *   that this is a continuation of a prior `ListDnsAuthorizations` call, and
-   *   that the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Dns Authorizations returned.
-   * @param {string} request.orderBy
-   *   A list of Dns Authorization field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of dns authorizations to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListDnsAuthorizationsResponse`.
+   *   Indicates that this is a continuation of a prior `ListDnsAuthorizations`
+   *   call, and that the system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the Dns Authorizations returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Dns Authorization field names used to specify the order
+   *   of the returned results. The default sorting order is ascending. To specify
    *   descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -5583,19 +5783,19 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the certificate should be
    *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate configs to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateIssuanceConfigsResponse`.
-   *   Indicates that this is a continuation of a prior
-   *   `ListCertificateIssuanceConfigs` call, and that the system should return
-   *   the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates Configs returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate Config field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of certificate configs to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListCertificateIssuanceConfigsResponse`. Indicates that this is a
+   *   continuation of a prior `ListCertificateIssuanceConfigs` call, and that the
+   *   system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the Certificates Configs returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Certificate Config field names used to specify the
+   *   order of the returned results. The default sorting order is ascending. To
+   *   specify descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5718,19 +5918,19 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the certificate should be
    *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate configs to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateIssuanceConfigsResponse`.
-   *   Indicates that this is a continuation of a prior
-   *   `ListCertificateIssuanceConfigs` call, and that the system should return
-   *   the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates Configs returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate Config field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of certificate configs to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListCertificateIssuanceConfigsResponse`. Indicates that this is a
+   *   continuation of a prior `ListCertificateIssuanceConfigs` call, and that the
+   *   system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the Certificates Configs returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Certificate Config field names used to specify the
+   *   order of the returned results. The default sorting order is ascending. To
+   *   specify descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5777,19 +5977,19 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the certificate should be
    *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of certificate configs to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListCertificateIssuanceConfigsResponse`.
-   *   Indicates that this is a continuation of a prior
-   *   `ListCertificateIssuanceConfigs` call, and that the system should return
-   *   the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the Certificates Configs returned.
-   * @param {string} request.orderBy
-   *   A list of Certificate Config field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
-   *   descending order for a field, add a suffix `" desc"`.
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of certificate configs to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last
+   *   `ListCertificateIssuanceConfigsResponse`. Indicates that this is a
+   *   continuation of a prior `ListCertificateIssuanceConfigs` call, and that the
+   *   system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the Certificates Configs returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of Certificate Config field names used to specify the
+   *   order of the returned results. The default sorting order is ascending. To
+   *   specify descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5835,17 +6035,17 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the TrustConfigs should be
    *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of TrustConfigs to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListTrustConfigsResponse`. Indicates
-   *   that this is a continuation of a prior `ListTrustConfigs` call, and that
-   *   the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the TrustConfigs returned.
-   * @param {string} request.orderBy
-   *   A list of TrustConfig field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of TrustConfigs to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListTrustConfigsResponse`.
+   *   Indicates that this is a continuation of a prior `ListTrustConfigs` call,
+   *   and that the system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the TrustConfigs returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of TrustConfig field names used to specify the order of
+   *   the returned results. The default sorting order is ascending. To specify
    *   descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -5969,17 +6169,17 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the TrustConfigs should be
    *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of TrustConfigs to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListTrustConfigsResponse`. Indicates
-   *   that this is a continuation of a prior `ListTrustConfigs` call, and that
-   *   the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the TrustConfigs returned.
-   * @param {string} request.orderBy
-   *   A list of TrustConfig field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of TrustConfigs to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListTrustConfigsResponse`.
+   *   Indicates that this is a continuation of a prior `ListTrustConfigs` call,
+   *   and that the system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the TrustConfigs returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of TrustConfig field names used to specify the order of
+   *   the returned results. The default sorting order is ascending. To specify
    *   descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -6026,17 +6226,17 @@ export class CertificateManagerClient {
    * @param {string} request.parent
    *   Required. The project and location from which the TrustConfigs should be
    *   listed, specified in the format `projects/* /locations/*`.
-   * @param {number} request.pageSize
-   *   Maximum number of TrustConfigs to return per call.
-   * @param {string} request.pageToken
-   *   The value returned by the last `ListTrustConfigsResponse`. Indicates
-   *   that this is a continuation of a prior `ListTrustConfigs` call, and that
-   *   the system should return the next page of data.
-   * @param {string} request.filter
-   *   Filter expression to restrict the TrustConfigs returned.
-   * @param {string} request.orderBy
-   *   A list of TrustConfig field names used to specify the order of the
-   *   returned results. The default sorting order is ascending. To specify
+   * @param {number} [request.pageSize]
+   *   Optional. Maximum number of TrustConfigs to return per call.
+   * @param {string} [request.pageToken]
+   *   Optional. The value returned by the last `ListTrustConfigsResponse`.
+   *   Indicates that this is a continuation of a prior `ListTrustConfigs` call,
+   *   and that the system should return the next page of data.
+   * @param {string} [request.filter]
+   *   Optional. Filter expression to restrict the TrustConfigs returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A list of TrustConfig field names used to specify the order of
+   *   the returned results. The default sorting order is ascending. To specify
    *   descending order for a field, add a suffix `" desc"`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.

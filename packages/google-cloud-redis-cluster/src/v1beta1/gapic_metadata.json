@@ -50,6 +50,16 @@
                 "getBackup"
               ]
             },
+            "GetTokenAuthUser": {
+              "methods": [
+                "getTokenAuthUser"
+              ]
+            },
+            "GetAuthToken": {
+              "methods": [
+                "getAuthToken"
+              ]
+            },
             "UpdateCluster": {
               "methods": [
                 "updateCluster"
@@ -95,6 +105,26 @@
                 "backupCluster"
               ]
             },
+            "AddTokenAuthUser": {
+              "methods": [
+                "addTokenAuthUser"
+              ]
+            },
+            "DeleteTokenAuthUser": {
+              "methods": [
+                "deleteTokenAuthUser"
+              ]
+            },
+            "AddAuthToken": {
+              "methods": [
+                "addAuthToken"
+              ]
+            },
+            "DeleteAuthToken": {
+              "methods": [
+                "deleteAuthToken"
+              ]
+            },
             "ListClusters": {
               "methods": [
                 "listClusters",
@@ -128,6 +158,20 @@
                 "listBackups",
                 "listBackupsStream",
                 "listBackupsAsync"
+              ]
+            },
+            "ListTokenAuthUsers": {
+              "methods": [
+                "listTokenAuthUsers",
+                "listTokenAuthUsersStream",
+                "listTokenAuthUsersAsync"
+              ]
+            },
+            "ListAuthTokens": {
+              "methods": [
+                "listAuthTokens",
+                "listAuthTokensStream",
+                "listAuthTokensAsync"
               ]
             }
           }
@@ -175,6 +219,16 @@
                 "getBackup"
               ]
             },
+            "GetTokenAuthUser": {
+              "methods": [
+                "getTokenAuthUser"
+              ]
+            },
+            "GetAuthToken": {
+              "methods": [
+                "getAuthToken"
+              ]
+            },
             "UpdateCluster": {
               "methods": [
                 "updateCluster"
@@ -220,6 +274,26 @@
                 "backupCluster"
               ]
             },
+            "AddTokenAuthUser": {
+              "methods": [
+                "addTokenAuthUser"
+              ]
+            },
+            "DeleteTokenAuthUser": {
+              "methods": [
+                "deleteTokenAuthUser"
+              ]
+            },
+            "AddAuthToken": {
+              "methods": [
+                "addAuthToken"
+              ]
+            },
+            "DeleteAuthToken": {
+              "methods": [
+                "deleteAuthToken"
+              ]
+            },
             "ListClusters": {
               "methods": [
                 "listClusters",
@@ -253,6 +327,20 @@
                 "listBackups",
                 "listBackupsStream",
                 "listBackupsAsync"
+              ]
+            },
+            "ListTokenAuthUsers": {
+              "methods": [
+                "listTokenAuthUsers",
+                "listTokenAuthUsersStream",
+                "listTokenAuthUsersAsync"
+              ]
+            },
+            "ListAuthTokens": {
+              "methods": [
+                "listAuthTokens",
+                "listAuthTokensStream",
+                "listAuthTokensAsync"
               ]
             }
           }

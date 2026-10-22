@@ -5,6 +5,159 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "bec0c146-13ff-4c12-a5d1-53c408ea085f",
+      "createTime": "2026-10-21T16:19:51.864Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/health",
+      "id": "e1082617-d8e2-4d4b-b947-cbb32e3e88ac",
+      "createTime": "2026-10-21T16:19:51.822Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3fb024d6f3613c923b0b8dd8bc34b3990017c2c3",
+          "message": "Remove compile-protos from prepare script in pubsub-api and developer-knowledge",
+          "issues": [
+            "9666"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/developer-knowledge",
+      "id": "dd767c76-b2be-43ab-b823-98f2bffa4a63",
+      "createTime": "2026-10-21T16:19:51.783Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner-api",
+      "id": "1ce90e99-d2fb-4af4-b1b7-c4cfa3b66dab",
+      "createTime": "2026-10-21T16:19:51.738Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "0.18.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "3699ae78-b5d5-416f-9a7d-886f70a7c031",
+      "createTime": "2026-10-21T16:19:51.698Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3fb024d6f3613c923b0b8dd8bc34b3990017c2c3",
+          "message": "Remove compile-protos from prepare script in pubsub-api and developer-knowledge",
+          "issues": [
+            "9666"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub-api",
+      "id": "e8cfdcc4-fb1b-4f7b-89ae-a6c58895cf93",
+      "createTime": "2026-10-21T16:19:51.656Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "78151466-4c53-4e1f-8171-97631846650e",
+      "createTime": "2026-10-21T16:19:51.617Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "8.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "110c2e67-82e7-4b62-bc42-fd4e6987b938",
+      "createTime": "2026-10-21T16:19:51.570Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "9ebb4434-2622-477a-92d9-a06a4ea37b03",
+      "createTime": "2026-10-21T16:19:51.525Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
           "message": "Update API sources and regenerate",
           "issues": [
@@ -105882,5 +106035,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-19T19:49:06.448Z"
+  "updateTime": "2026-10-21T16:19:51.864Z"
 }

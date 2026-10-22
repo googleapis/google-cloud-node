@@ -56,10 +56,15 @@ import {
 } from '@google-cloud/common/build/src/util';
 import bigquery from './types';
 import {logger, setLogFunction} from './logger';
-import {ArrowRecordBatchStream, createQueryArrowStream_} from './arrow';
+import {
+  ArrowQuery,
+  ArrowRecordBatchStream,
+  ArrowSerializationOptions,
+  createQueryArrowStream_,
+} from './arrow';
 
 // Third-Party Re-exports
-export {common, ArrowRecordBatchStream};
+export {common, ArrowQuery, ArrowRecordBatchStream, ArrowSerializationOptions};
 
 export interface RequestCallback<T> {
   (err: Error | null, response?: T | null): void;
@@ -384,11 +389,36 @@ export class BigQuery extends Service {
    * which isn't generally available yet, so it may change in ways that aren't
    * backward compatible.
    *
-   * Requires the optional `@google-cloud/bigquery-storage` (>= 6.1.0) package
+   * Requires the optional `@google-cloud/bigquery-storage` (>= 6.3.0) package
    * to be installed.
    *
-   * @param {string|object} [options] A string SQL query or configuration
+   * Rows that don't fit in the first `jobs.query` response, and every row of a
+   * query that runs with `jobs.insert` (for example, one that sets `jobId` or
+   * `jobTimeoutMs`), are read with the BigQuery Storage Read API, which must be
+   * enabled in the project and is billed separately. The stream reads more
+   * rows only as the caller consumes batches, so iterate over batches to keep
+   * memory bounded; collecting every batch (for example with `toArray()`)
+   * holds the whole result in memory. If you stop reading before the stream
+   * ends, call `stream.destroy()` to cancel the read; breaking out of
+   * `for await` does this for you.
+   *
+   * With an explicit `destination` table, the stream reads that whole table
+   * through a Storage Read API session once the query finishes. With
+   * `writeDisposition: 'WRITE_APPEND'`, that includes rows the table already
+   * had, as with {@link BigQuery#query}.
+   *
+   * @param {string|ArrowQuery} [options] A string SQL query or configuration
    *     object. See {@link BigQuery#query} for a complete list of options.
+   * @param {number} [options.timeoutMs] How long to wait for the query to
+   *     complete, in milliseconds. If it doesn't complete in time, the stream
+   *     fails. If unset or 0, the stream waits until the job completes.
+   * @param {object} [options.arrowSerializationOptions] Format options for
+   *     Apache Arrow serialization, such as `picosTimestampPrecision`
+   *     (`'TIMESTAMP_PRECISION_MICROS'`, `'TIMESTAMP_PRECISION_NANOS'`, or
+   *     `'TIMESTAMP_PRECISION_PICOS'`). Defaults to
+   *     `'TIMESTAMP_PRECISION_MICROS'`. `bufferCompression` isn't supported.
+   * @param {number} [options.maxResults] Maximum number of rows to read. With
+   *     `0`, the stream emits only the schema, as one 0-row `RecordBatch`.
    * @returns {ArrowRecordBatchStream} A stream of `RecordBatch` objects. The
    *     stream emits a `job` event with the {@link Job} when BigQuery creates
    *     a job, and sets `stream.queryId` and `stream.jobReference` (when
@@ -418,7 +448,9 @@ export class BigQuery extends Service {
    *
    * @beta
    */
-  createQueryArrowStream(options?: Query | string): ArrowRecordBatchStream {
+  createQueryArrowStream(
+    options?: ArrowQuery | string,
+  ): ArrowRecordBatchStream {
     return createQueryArrowStream_(this, options);
   }
 
