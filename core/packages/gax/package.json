@@ -1,6 +1,6 @@
 {
   "name": "google-gax",
-  "version": "6.12.1",
+  "version": "6.13.0",
   "description": "Google API Extensions",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -65,7 +65,7 @@
   "scripts": {
     "docs": "jsdoc -c .jsdoc.js",
     "pretest": "pnpm run compile",
-    "test": "node ../../../bin/run-test.cjs --proxyquire-shim build/test/unit",
+    "test": "node ../../../bin/run-test.cjs build/test/unit",
     "lint": "gts check src samples test",
     "clean": "gts clean",
     "compile": "node ./scripts/copy-protos.js && tsc -p . && cp src/*.json build/src && cp -r test/fixtures build/test && cp -r protos build/",

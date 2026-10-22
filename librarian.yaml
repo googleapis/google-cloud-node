@@ -12,18 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.48.0
+version: v0.49.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: b6efa15f5537f053786e5d8875d75bc3a6246455
-    sha256: d432e85ea4bb83e7b0ed83415d24fae57a52e7c51afc7a96c6147a27da85eb02
+    commit: 14a161a98ef045be80c12ab69d924504a756f109
+    sha256: ce3cee2da77fbdff0e269bc520dc61e8b32efcdec7628b39b9e474a02bc951f6
 tools:
   pnpm:
     - name: gapic-generator-typescript
-      version: gapic-generator-v5.5.0
-      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.5.0.tar.gz
-      checksum: dec0756bf04ff1cb881cd7a8a51c538fd5d25daedd1b65d93800632d85baddea
+      version: gapic-generator-v5.7.1
+      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.7.1.tar.gz
+      checksum: 0d9d0bfc0115b46b27288eac457e9e5aede8e7f6e39aaabe8a188b9e491dff61
       build:
         - pnpm install --frozen-lockfile --filter @google-cloud/gapic-generator
         - pnpm run compile
@@ -246,7 +246,7 @@ libraries:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
   - name: google-cloud-aiplatform
-    version: 7.6.0
+    version: 7.7.0
     apis:
       - path: google/cloud/aiplatform/v1
       - path: google/cloud/aiplatform/v1beta1
@@ -266,7 +266,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-alloydb
-    version: 3.4.0
+    version: 3.5.0
     apis:
       - path: google/cloud/alloydb/v1
       - path: google/cloud/alloydb/v1beta
@@ -552,7 +552,7 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-cloud-certificatemanager
-    version: 3.2.0
+    version: 3.3.0
     apis:
       - path: google/cloud/certificatemanager/v1
     copyright_year: "2026"
@@ -627,7 +627,7 @@ libraries:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
   - name: google-cloud-compute
-    version: 7.8.0
+    version: 7.9.0
     apis:
       - path: google/cloud/compute/v1
         nodejs:
@@ -688,7 +688,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-contactcenterinsights
-    version: 5.2.0
+    version: 5.3.0
     apis:
       - path: google/cloud/contactcenterinsights/v1
     copyright_year: "2026"
@@ -774,7 +774,7 @@ libraries:
       default_version: v1
       client_documentation_override: https://cloud.google.com/dataplex
   - name: google-cloud-dataproc
-    version: 7.2.0
+    version: 7.3.0
     apis:
       - path: google/cloud/dataproc/v1
     copyright_year: "2026"
@@ -800,7 +800,7 @@ libraries:
       metadata_name_override: datastore-api
       name_pretty_override: Datastore API
   - name: google-cloud-datastream
-    version: 5.2.0
+    version: 5.3.0
     apis:
       - path: google/cloud/datastream/v1
       - path: google/cloud/datastream/v1alpha1
@@ -829,7 +829,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-dialogflow
-    version: 8.3.0
+    version: 8.4.0
     apis:
       - path: google/cloud/dialogflow/v2
       - path: google/cloud/dialogflow/v2beta1
@@ -1174,7 +1174,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-memorystore
-    version: 0.11.0
+    version: 0.12.0
     apis:
       - path: google/cloud/memorystore/v1
       - path: google/cloud/memorystore/v1beta
@@ -1199,7 +1199,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-modelarmor
-    version: 0.10.0
+    version: 0.11.0
     apis:
       - path: google/cloud/modelarmor/v1
       - path: google/cloud/modelarmor/v1beta
@@ -1381,7 +1381,7 @@ libraries:
       - path: google/cloud/productregistry/v1
     copyright_year: "2026"
   - name: google-cloud-pubsub-api
-    version: 0.7.0
+    version: 0.8.1
     apis:
       - path: google/pubsub/v1
     nodejs:
@@ -1419,7 +1419,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-redis-cluster
-    version: 0.16.0
+    version: 0.18.0
     apis:
       - path: google/cloud/redis/cluster/v1
       - path: google/cloud/redis/cluster/v1beta1
@@ -1516,7 +1516,7 @@ libraries:
       default_version: v1beta1
       package_name: '@google-cloud/publicca'
   - name: google-cloud-securitycenter
-    version: 10.2.0
+    version: 10.3.0
     apis:
       - path: google/cloud/securitycenter/v2
       - path: google/cloud/securitycenter/v1
@@ -1560,7 +1560,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-spanner-api
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/spanner/v1
       - path: google/spanner/executor/v1
@@ -1864,7 +1864,7 @@ libraries:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
   - name: google-developer-knowledge
-    version: 0.9.0
+    version: 0.10.1
     apis:
       - path: google/developers/knowledge/v1
     copyright_year: "2026"
@@ -1872,7 +1872,7 @@ libraries:
       package_name: '@google/developer-knowledge'
       metadata_name_override: google-developer-knowledge
   - name: google-devicesandservices-health
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/devicesandservices/health/v4
       - path: google/devicesandservices/health/v4beta
@@ -1890,7 +1890,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/artifact-registry'
   - name: google-devtools-cloudbuild
-    version: 6.2.0
+    version: 6.4.0
     apis:
       - path: google/devtools/cloudbuild/v2
       - path: google/devtools/cloudbuild/v1
@@ -2114,6 +2114,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/accounts'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Accounts
   - name: google-shopping-merchant-conversions
     version: 0.9.0
     apis:
@@ -2124,6 +2125,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/conversions'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Conversions
   - name: google-shopping-merchant-datasources
     version: 0.13.0
     apis:
@@ -2134,6 +2136,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/datasources'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Data Sources
   - name: google-shopping-merchant-inventories
     version: 0.15.0
     apis:
@@ -2144,6 +2147,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/inventories'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Inventories
   - name: google-shopping-merchant-issueresolution
     version: 0.6.0
     apis:
@@ -2154,6 +2158,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/issueresolution'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Issue Resolution
   - name: google-shopping-merchant-lfp
     version: 0.12.0
     apis:
@@ -2164,6 +2169,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/lfp'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant LFP
   - name: google-shopping-merchant-loyaltycustomers
     version: 0.4.0
     apis:
@@ -2173,6 +2179,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/loyaltycustomers'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Loyalty Customers
   - name: google-shopping-merchant-notifications
     version: 0.11.0
     apis:
@@ -2183,6 +2190,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/notifications'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Notifications
   - name: google-shopping-merchant-ordertracking
     version: 0.6.0
     apis:
@@ -2193,6 +2201,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/ordertracking'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Order Tracking
   - name: google-shopping-merchant-products
     version: 0.13.0
     apis:
@@ -2203,6 +2212,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/products'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Products
   - name: google-shopping-merchant-promotions
     version: 0.8.0
     apis:
@@ -2213,6 +2223,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/promotions'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Promotions
   - name: google-shopping-merchant-quota
     version: 0.11.0
     apis:
@@ -2223,6 +2234,7 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/quota'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Quota
   - name: google-shopping-merchant-reports
     version: 0.18.0
     apis:
@@ -2234,15 +2246,18 @@ libraries:
       default_version: v1
       package_name: '@google-shopping/reports'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Reports
   - name: google-shopping-merchant-reviews
     version: 0.8.0
     apis:
+      - path: google/shopping/merchant/reviews/v1
       - path: google/shopping/merchant/reviews/v1beta
     copyright_year: "2026"
     nodejs:
       default_version: v1beta
       package_name: '@google-shopping/reviews'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
+      name_pretty_override: Shopping Merchant Reviews
   - name: google-storage-control
     version: 0.13.0
     apis:

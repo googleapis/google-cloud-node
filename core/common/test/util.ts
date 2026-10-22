@@ -27,11 +27,15 @@ import {
 } from 'google-auth-library';
 import * as nock from 'nock';
 import * as proxyquire from 'proxyquire';
-import * as r from 'teeny-request';
 import * as retryRequest from 'retry-request';
 import * as sinon from 'sinon';
 import * as stream from 'stream';
-import {teenyRequest} from 'teeny-request';
+import {
+  RequestCallback,
+  RequestPart,
+  Response,
+  teenyRequest,
+} from 'teeny-request';
 
 import {
   Abortable,
@@ -44,7 +48,6 @@ import {
   MakeAuthenticatedRequestFactoryConfig,
   MakeRequestConfig,
   ParsedHttpRespMessage,
-  ParsedHttpResponseBody,
   Util,
 } from '../src/util';
 import {DEFAULT_PROJECT_ID_TOKEN} from '../src/service';
@@ -57,12 +60,12 @@ nock.disableNetConnect();
 const fakeResponse = {
   statusCode: 200,
   body: {star: 'trek'},
-} as r.Response;
+} as Response;
 
 const fakeBadResp = {
   statusCode: 400,
   statusMessage: 'Not Good',
-} as r.Response;
+} as Response;
 
 const fakeReqOpts: DecorateRequestOptions = {
   uri: 'http://so-fake',
@@ -180,7 +183,7 @@ describe('common/util', () => {
 
     it('should build correct ApiError', () => {
       const fakeMessage = 'Formatted Error.';
-      const fakeResponse = {statusCode: 200} as r.Response;
+      const fakeResponse = {statusCode: 200} as Response;
       const errors = [{message: 'Hi'}, {message: 'Bye'}];
       const error = {
         errors,
@@ -214,7 +217,7 @@ describe('common/util', () => {
               errors,
             },
           }),
-        } as r.Response,
+        } as Response,
       };
 
       sandbox
@@ -234,7 +237,7 @@ describe('common/util', () => {
         const errors = [new Error(errorMessage)];
         const error = {
           code: 100,
-          response: {} as r.Response,
+          response: {} as Response,
           message: customErrorMessage,
         };
 
@@ -251,7 +254,7 @@ describe('common/util', () => {
         const errors: GoogleInnerError[] = messages.map(message => ({message}));
         const error: GoogleErrorBody = {
           code: 100,
-          response: {} as r.Response,
+          response: {} as Response,
         };
 
         const expectedErrorMessage = createExpectedErrorMessage(messages);
@@ -268,7 +271,7 @@ describe('common/util', () => {
           code: 100,
           response: {
             body: Buffer.from(responseBodyMsg),
-          } as r.Response,
+          } as Response,
         };
 
         const expectedErrorMessage = createExpectedErrorMessage([
@@ -280,7 +283,7 @@ describe('common/util', () => {
       });
 
       it('should use default message if there are no errors', () => {
-        const fakeResponse = {statusCode: 200} as r.Response;
+        const fakeResponse = {statusCode: 200} as Response;
         const expectedErrorMessage = 'A failure occurred during this request.';
         const error = {
           code: 100,
@@ -298,7 +301,7 @@ describe('common/util', () => {
           message: expectedErrorMessage,
           response: {
             body: expectedErrorMessage,
-          } as r.Response,
+          } as Response,
         };
 
         const multiError = ApiError.createMultiErrorMessage(error);
@@ -425,7 +428,7 @@ describe('common/util', () => {
 
       util.handleResp(
         null,
-        {body: unparseableBody, statusCode} as r.Response,
+        {body: unparseableBody, statusCode} as Response,
         unparseableBody,
         err => {
           assert(err, 'there should be an error');
@@ -509,7 +512,7 @@ describe('common/util', () => {
 
           assert.strictEqual(Array.isArray(request.multipart), true);
 
-          const mp = request.multipart as r.RequestPart[];
+          const mp = request.multipart as RequestPart[];
 
           assert.strictEqual(
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -655,7 +658,7 @@ describe('common/util', () => {
 
       requestOverride = (
         reqOpts: DecorateRequestOptions,
-        callback: (err: Error | null, res: r.Response) => void,
+        callback: (err: Error | null, res: Response) => void,
       ) => {
         callback(null, fakeResponse);
       };
@@ -1654,7 +1657,7 @@ describe('common/util', () => {
         retryRequestOverride = (
           rOpts: DecorateRequestOptions,
           opts: MakeRequestConfig,
-          callback: r.RequestCallback,
+          callback: RequestCallback,
         ) => {
           callback(error, fakeResponse, body);
         };
@@ -1842,6 +1845,71 @@ describe('common/util', () => {
       assert.deepStrictEqual(util.decorateRequest(reqOpts, projectId), {
         uri: decoratedUri,
       });
+    });
+
+    it('should encode resolved projectId before replacing token in uri', () => {
+      const reqOpts = {
+        uri: `https://bigquery.googleapis.com/bigquery/v2/projects/${DEFAULT_PROJECT_ID_TOKEN}/datasets`,
+      };
+      let capturedProjectId: string | undefined;
+      replaceProjectIdTokenOverride = (uri: string, projectId_: string) => {
+        capturedProjectId = projectId_;
+        return uri.replace(DEFAULT_PROJECT_ID_TOKEN, projectId_);
+      };
+
+      const decorated = util.decorateRequest(
+        reqOpts,
+        'my-project?foo=bar#fragment',
+      );
+      assert.strictEqual(
+        capturedProjectId,
+        'my-project%3Ffoo%3Dbar%23fragment',
+      );
+      assert.strictEqual(
+        decorated.uri,
+        'https://bigquery.googleapis.com/bigquery/v2/projects/my-project%3Ffoo%3Dbar%23fragment/datasets',
+      );
+    });
+
+    it('should preserve domain-scoped projectId when replacing token in uri', () => {
+      const reqOpts = {
+        uri: `https://bigquery.googleapis.com/bigquery/v2/projects/${DEFAULT_PROJECT_ID_TOKEN}/datasets`,
+      };
+      let capturedProjectId: string | undefined;
+      replaceProjectIdTokenOverride = (uri: string, projectId_: string) => {
+        capturedProjectId = projectId_;
+        return uri.replace(DEFAULT_PROJECT_ID_TOKEN, projectId_);
+      };
+
+      const decorated = util.decorateRequest(reqOpts, 'example.com:my-project');
+      assert.strictEqual(capturedProjectId, 'example.com:my-project');
+      assert.strictEqual(
+        decorated.uri,
+        'https://bigquery.googleapis.com/bigquery/v2/projects/example.com:my-project/datasets',
+      );
+    });
+
+    it('should reject path traversal in resolved projectId', () => {
+      const reqOpts = {
+        uri: `https://bigquery.googleapis.com/bigquery/v2/projects/${DEFAULT_PROJECT_ID_TOKEN}/datasets`,
+      };
+      assert.throws(() => {
+        util.decorateRequest(reqOpts, '..');
+      }, /Invalid value \.\. for path segment/);
+    });
+
+    it('should pass DEFAULT_PROJECT_ID_TOKEN through unencoded to replaceProjectIdToken', () => {
+      const reqOpts = {
+        uri: `https://bigquery.googleapis.com/bigquery/v2/projects/${DEFAULT_PROJECT_ID_TOKEN}/datasets`,
+      };
+      let capturedProjectId: string | undefined;
+      replaceProjectIdTokenOverride = (uri: string, projectId_: string) => {
+        capturedProjectId = projectId_;
+        return uri;
+      };
+
+      util.decorateRequest(reqOpts, DEFAULT_PROJECT_ID_TOKEN);
+      assert.strictEqual(capturedProjectId, DEFAULT_PROJECT_ID_TOKEN);
     });
   });
 

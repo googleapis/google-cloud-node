@@ -5,6 +5,570 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "bec0c146-13ff-4c12-a5d1-53c408ea085f",
+      "createTime": "2026-10-21T16:19:51.864Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/health",
+      "id": "e1082617-d8e2-4d4b-b947-cbb32e3e88ac",
+      "createTime": "2026-10-21T16:19:51.822Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3fb024d6f3613c923b0b8dd8bc34b3990017c2c3",
+          "message": "Remove compile-protos from prepare script in pubsub-api and developer-knowledge",
+          "issues": [
+            "9666"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/developer-knowledge",
+      "id": "dd767c76-b2be-43ab-b823-98f2bffa4a63",
+      "createTime": "2026-10-21T16:19:51.783Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner-api",
+      "id": "1ce90e99-d2fb-4af4-b1b7-c4cfa3b66dab",
+      "createTime": "2026-10-21T16:19:51.738Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "0.18.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "3699ae78-b5d5-416f-9a7d-886f70a7c031",
+      "createTime": "2026-10-21T16:19:51.698Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3fb024d6f3613c923b0b8dd8bc34b3990017c2c3",
+          "message": "Remove compile-protos from prepare script in pubsub-api and developer-knowledge",
+          "issues": [
+            "9666"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub-api",
+      "id": "e8cfdcc4-fb1b-4f7b-89ae-a6c58895cf93",
+      "createTime": "2026-10-21T16:19:51.656Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "78151466-4c53-4e1f-8171-97631846650e",
+      "createTime": "2026-10-21T16:19:51.617Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "8.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "110c2e67-82e7-4b62-bc42-fd4e6987b938",
+      "createTime": "2026-10-21T16:19:51.570Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "9ebb4434-2622-477a-92d9-a06a4ea37b03",
+      "createTime": "2026-10-21T16:19:51.525Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9620"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "4fb3ec53-c391-4e62-a9a9-2e4e4021f392",
+      "createTime": "2026-10-19T19:49:06.448Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9620"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/developer-knowledge",
+      "id": "67021ca8-3dc0-4a1c-b3af-388c2e29c343",
+      "createTime": "2026-10-19T19:49:06.392Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9620"
+          ]
+        }
+      ],
+      "version": "10.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "d700d33c-bc1a-461f-a7f8-762d535e4b34",
+      "createTime": "2026-10-19T19:49:06.342Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9620"
+          ]
+        }
+      ],
+      "version": "0.17.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "97dad83e-ebde-4153-8dfd-fd3f76b9b016",
+      "createTime": "2026-10-19T19:49:06.300Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9620"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub-api",
+      "id": "d54438fe-1649-4670-bbab-1d24b020007f",
+      "createTime": "2026-10-19T19:49:06.261Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9620"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "9b82daba-8d49-4bcc-aefd-a7220c3574b0",
+      "createTime": "2026-10-19T19:49:06.208Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9620"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "a7d2890a-1d40-4951-901d-4b3f29c24c83",
+      "createTime": "2026-10-19T19:49:06.159Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9620"
+          ]
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "397788a6-bf65-4d30-956c-a292357a63b1",
+      "createTime": "2026-10-19T19:49:06.110Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9620"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "a0944806-4f7c-4e52-b8c9-e8f9fc277360",
+      "createTime": "2026-10-19T19:49:06.054Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9620"
+          ]
+        }
+      ],
+      "version": "7.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "3825eb5d-7fe5-42f9-83c2-74c3f79ba78b",
+      "createTime": "2026-10-19T19:49:05.997Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9620"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "b39ecd11-f5e1-4ae1-b52a-13c73e8b42d4",
+      "createTime": "2026-10-19T19:49:05.954Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9620"
+          ]
+        }
+      ],
+      "version": "7.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "0e0e94a8-80b3-46ee-b6b1-7c9cb5d8a102",
+      "createTime": "2026-10-19T19:49:05.898Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "25d945b34979849ea1c6df699212854f8d390d79",
+          "message": "Align types and proto re-exports with -api packages",
+          "issues": [
+            "9621"
+          ],
+          "scope": "firestore,pubsub"
+        }
+      ],
+      "version": "6.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub",
+      "id": "75a87bda-5644-4e7f-911e-62f870bef5f2",
+      "createTime": "2026-10-19T19:49:05.860Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "69157ed3dc9a56239f08b4dc8bd831a96ae80226",
+          "message": "Add createQueryArrowStream for inline jobs.query results",
+          "issues": [
+            "9596"
+          ],
+          "scope": "bigquery"
+        }
+      ],
+      "version": "9.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "1a05ea65-b70e-440d-a6eb-09cbf4870114",
+      "createTime": "2026-10-19T19:49:05.818Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ec745996da1c3ced29382dbd4365e80e6800a840",
+          "message": "Export test-utils types and exempt cloud-profiler on Bun",
+          "issues": [
+            "9611"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-test-utils",
+      "id": "03ea673b-69e1-4eb5-9579-986d8f8250ae",
+      "createTime": "2026-10-19T19:49:05.777Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ec745996da1c3ced29382dbd4365e80e6800a840",
+          "message": "Export test-utils types and exempt cloud-profiler on Bun",
+          "issues": [
+            "9611"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "6.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/promisify",
+      "id": "d2e16671-f2e7-47b4-afc1-ad6981ae0dd4",
+      "createTime": "2026-10-19T19:49:05.737Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ec745996da1c3ced29382dbd4365e80e6800a840",
+          "message": "Export test-utils types and exempt cloud-profiler on Bun",
+          "issues": [
+            "9611"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "6.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/projectify",
+      "id": "9f2b92c4-7e68-42a4-904c-8b1f3057aa29",
+      "createTime": "2026-10-19T19:49:05.691Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ec745996da1c3ced29382dbd4365e80e6800a840",
+          "message": "Export test-utils types and exempt cloud-profiler on Bun",
+          "issues": [
+            "9611"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "6.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/precise-date",
+      "id": "9b386d22-bc84-4507-b54e-b85378111edb",
+      "createTime": "2026-10-19T19:49:05.645Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "0fb3deee4a967c5b07aaace6be0055c090f27871",
+          "message": "Recognize Bun socket error codes in isAvailable",
+          "issues": [
+            "9613"
+          ],
+          "scope": "gcp-metadata"
+        }
+      ],
+      "version": "9.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "gcp-metadata",
+      "id": "45ec2e20-d123-42ff-a69f-448c34e5fb75",
+      "createTime": "2026-10-19T19:49:05.604Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c410f90278445e8d63a537f8faa888824597b067",
+          "message": "Add LoggerHelper with context helper",
+          "issues": [
+            "9631"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "8954cff885fbb9d2d526a908f11f9b7f3114fa85",
+          "message": "Remove references to static telemetry information",
+          "issues": [
+            "9630"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "304e6998-8c43-4144-af07-e429c7c9249f",
+      "createTime": "2026-10-19T19:49:05.552Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "0131ab800546769bf644ab55948e1d1994d4d582",
+          "message": "Use .jsdoc.json with build/esm/src in ESM template",
+          "issues": [
+            "9523"
+          ],
+          "scope": "generator"
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "965d3514-f852-4017-9dda-76cacd8492bc",
+      "createTime": "2026-10-19T19:49:05.516Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "0131ab800546769bf644ab55948e1d1994d4d582",
+          "message": "Use .jsdoc.json with build/esm/src in ESM template",
+          "issues": [
+            "9523"
+          ],
+          "scope": "generator"
+        }
+      ],
+      "version": "5.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "42a29daf-0e43-4033-aef7-39335f58addb",
+      "createTime": "2026-10-19T19:49:05.476Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "ec745996da1c3ced29382dbd4365e80e6800a840",
+          "message": "Export test-utils types and exempt cloud-profiler on Bun",
+          "issues": [
+            "9611"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "8.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/common",
+      "id": "b9c8da46-955e-4b66-9855-a86f08677d07",
+      "createTime": "2026-10-19T19:49:05.418Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "fca6160fce7932d5491fb9fcca9c42c3de2102c1",
           "message": "Bump bigquery-storage-api to ^0.5.0",
           "issues": [
@@ -105471,5 +106035,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-14T17:53:17.953Z"
+  "updateTime": "2026-10-21T16:19:51.864Z"
 }
