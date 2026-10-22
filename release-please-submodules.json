@@ -13,9 +13,6 @@
     },
     "handwritten/storage": {
       "component": "storage"
-    },
-    "packages/google-ads-datamanager": {
-      "component": "google-ads-datamanager"
     }
   },
   "plugins": [

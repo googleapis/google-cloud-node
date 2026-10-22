@@ -63,7 +63,7 @@ interface BeginAsyncResponse {
  * @see {@link https://cloud.google.com/datastore/docs/concepts/transactions| Transactions Reference}
  *
  * @class
- * @extends {Request}
+ * @extends {DatastoreRequest}
  * @param {Datastore} datastore A Datastore instance.
  * @mixes module:datastore/request
  *

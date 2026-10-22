@@ -12449,6 +12449,18 @@ declare namespace FirebaseFirestore {
        * @throws {@FirestoreError} Thrown if any of the provided DocumentReferences target a different project or database than the pipeline.
        */
       createFrom(query: Query): Pipeline;
+      /**
+       * Set the pipeline's source to the in-memory documents specified by the given records.
+       *
+       * @param documents An array of objects/records specifying the in-memory documents.
+       */
+      literals(documents: Array<Record<string, unknown>>): Pipeline;
+      /**
+       * Set the pipeline's source to the in-memory documents specified by the given records.
+       *
+       * @param options Options defining how this LiteralsSource stage is evaluated.
+       */
+      literals(options: LiteralsStageOptions): Pipeline;
     }
 
     /**
@@ -12867,27 +12879,113 @@ declare namespace FirebaseFirestore {
        */
       select(options: SelectStageOptions): Pipeline;
       /**
-       * @beta
        * Performs a delete operation on documents from previous stages.
        *
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
       delete(): Pipeline;
       /**
-       * @beta
+       * Performs a delete operation on documents from previous stages.
+       *
+       * @param options - Options defining how this Delete stage is evaluated.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      delete(options: DeleteStageOptions): Pipeline;
+      /**
        * Performs an update operation using documents from previous stages.
+       *
+       * Each input document is updated at the path in its `__name__` field.
+       * See {@link UpdateStageOptions} for details.
        *
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
       update(): Pipeline;
       /**
-       * @beta
        * Performs an update operation using documents from previous stages.
+       *
+       * Each input document is updated at the path in its `__name__` field.
+       * See {@link UpdateStageOptions} for details.
+       *
+       * @param transformedField - The first field transformation to apply.
+       * @param additionalFields - Additional field transformations to apply.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      update(
+        transformedField: AliasedExpression,
+        ...additionalFields: AliasedExpression[]
+      ): Pipeline;
+      /**
+       * Performs an update operation using documents from previous stages.
+       *
+       * Each input document is updated at the path in its `__name__` field.
+       * See {@link UpdateStageOptions} for details.
        *
        * @param transformedFields - The list of transformations to apply.
        * @return A new {@link Pipeline} object with this stage appended to the stage list.
        */
       update(transformedFields: AliasedExpression[]): Pipeline;
+      /**
+       * Performs an update operation using documents from previous stages.
+       *
+       * Each input document is updated at the path in its `__name__` field.
+       * See {@link UpdateStageOptions} for details.
+       *
+       * @param options - Options defining how this Update stage is evaluated.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      update(options: UpdateStageOptions): Pipeline;
+      /**
+       * Performs an insert operation on documents from previous stages.
+       *
+       * The operation fails if a target document already exists. See
+       * {@link InsertStageOptions} for how the target document is determined.
+       *
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      insert(): Pipeline;
+      /**
+       * Performs an insert operation on documents from previous stages.
+       *
+       * The operation fails if a target document already exists. See
+       * {@link InsertStageOptions} for how the target document is determined.
+       *
+       * @param options - Options defining how this Insert stage is evaluated.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      insert(options: InsertStageOptions): Pipeline;
+      /**
+       * Performs an upsert operation on documents from previous stages.
+       *
+       * See {@link UpsertStageOptions} for how the target document is
+       * determined.
+       *
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      upsert(): Pipeline;
+      /**
+       * Performs an upsert operation on documents from previous stages.
+       *
+       * See {@link UpsertStageOptions} for how the target document is
+       * determined.
+       *
+       * @param additionalField - The first additional field to apply on upsert.
+       * @param additionalFields - Additional fields to apply on upsert.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      upsert(
+        additionalField: AliasedExpression,
+        ...additionalFields: AliasedExpression[]
+      ): Pipeline;
+      /**
+       * Performs an upsert operation on documents from previous stages.
+       *
+       * See {@link UpsertStageOptions} for how the target document is
+       * determined.
+       *
+       * @param options - Options defining how this Upsert stage is evaluated.
+       * @return A new {@link Pipeline} object with this stage appended to the stage list.
+       */
+      upsert(options: UpsertStageOptions): Pipeline;
       /**
        * Filters the documents from previous stages to only include those matching the specified {@link
        * BooleanExpression}.
@@ -13589,6 +13687,20 @@ declare namespace FirebaseFirestore {
        */
       indexMode?: 'recommended';
       /**
+       * If `true`, the pipeline is executed in a new read-write transaction that
+       * is committed automatically when the pipeline completes, so all writes
+       * made by DML stages (`insert`, `upsert`, `update`, `delete`) succeed or
+       * fail together.
+       *
+       * If `false` or omitted, DML writes are applied per document without a
+       * transaction, and the pipeline may partially succeed. Some DML pipelines
+       * (e.g. an `upsert` from a `literals()` source) can only be executed
+       * atomically, and are otherwise rejected with "The non-transactional DML
+       * operation was rejected because it was impossible to guarantee
+       * document-level atomicity."
+       */
+      atomic?: boolean;
+      /**
        * @beta Options used to configure explain queries. */
       explainOptions?: {
         /**
@@ -14064,6 +14176,115 @@ declare namespace FirebaseFirestore {
     //    */
     //   separator?: string;
     // };
+
+    /**
+     * Options defining how a Delete stage is evaluated.
+     */
+    export type DeleteStageOptions = StageOptions;
+
+    /**
+     * Options defining how an Update stage is evaluated.
+     *
+     * Each input document is written to the existing document at the path in
+     * its `__name__` field. The update stage never creates documents. If the
+     * document at that path does not exist, the input document is skipped and
+     * is not counted in `documents_modified`. When the pipeline is executed
+     * with `atomic: true`, the pipeline instead fails with a `NOT_FOUND` error
+     * and no documents are updated.
+     */
+    export type UpdateStageOptions = StageOptions & {
+      /**
+       * The field transformations to apply to each document being updated.
+       */
+      transformedFields?: AliasedExpression[];
+    };
+
+    /**
+     * Options defining how an Insert stage is evaluated.
+     *
+     * Each input document is written as a new document; the insert fails if the
+     * target document already exists. The target is determined by `collection`
+     * and `documentIdExpression`:
+     *
+     * - Only `collection` set: the input document's ID is reused under
+     *   `collection`. If the input document has no ID (e.g. it came from
+     *   `literals()`), an ID is generated automatically.
+     * - Only `documentIdExpression` set: the evaluated ID is used under the input
+     *   document's parent collection.
+     * - Both set: the evaluated ID is used under `collection`.
+     *
+     * If neither is set, each document is written back to its input document's
+     * path, which fails for documents read from the database because they
+     * already exist. It also fails for input documents that have no ID (e.g.
+     * documents from `literals()`, or after `removeFields('__name__')`).
+     */
+    export type InsertStageOptions = StageOptions & {
+      /**
+       * The collection to insert documents into. If omitted, each document is
+       * inserted into the parent collection of its input document.
+       */
+      collection?: string | CollectionReference;
+      /**
+       * An expression that is evaluated against each input document to produce
+       * the ID of the document to insert. It must evaluate to a document ID
+       * (e.g. `'abc123'`), not a document path or `DocumentReference`.
+       *
+       * A string is treated as a field name: `'id'` is equivalent to
+       * `field('id')`, and uses the value of each input document's `id` field as
+       * its document ID. To use a fixed document ID, pass `constant('abc123')`.
+       */
+      documentIdExpression?: string | Expression;
+    };
+
+    /**
+     * Options defining how an Upsert stage is evaluated.
+     *
+     * Each input document is written to its target document. A target document
+     * that doesn't exist is created; an existing one is replaced entirely
+     * (stored fields are not merged). The target is determined by `collection`
+     * and `documentIdExpression`:
+     *
+     * - Neither set: each document is written back to its input document's path.
+     *   This fails for input documents that have no ID (e.g. documents from
+     *   `literals()`, or after `removeFields('__name__')`).
+     * - Only `collection` set: the input document's ID is reused under
+     *   `collection`. If the input document has no ID, an ID is generated
+     *   automatically.
+     * - Both set: the evaluated ID is used under `collection`.
+     */
+    export type UpsertStageOptions = StageOptions & {
+      /**
+       * Fields to add to each input document before it is written. A field with
+       * the same name as an existing input field overwrites that field.
+       */
+      additionalFields?: AliasedExpression[];
+      /**
+       * The collection to upsert documents into. If omitted, each document is
+       * written to the parent collection of its input document. Required when
+       * `documentIdExpression` is set.
+       */
+      collection?: string | CollectionReference;
+      /**
+       * An expression that is evaluated against each input document to produce
+       * the ID of the target document. It must evaluate to a document ID
+       * (e.g. `'abc123'`), not a document path or `DocumentReference`. Requires
+       * `collection`.
+       *
+       * A string is treated as a field name: `'id'` is equivalent to
+       * `field('id')`. To use a fixed document ID, pass `constant('abc123')`.
+       */
+      documentIdExpression?: string | Expression;
+    };
+
+    /**
+     * Options defining how a LiteralsSource stage is evaluated.
+     */
+    export type LiteralsStageOptions = StageOptions & {
+      /**
+       * An array of objects specifying the in-memory documents that will be the source of this pipeline.
+       */
+      documents: Array<Record<string, unknown>>;
+    };
 
     /**
      * Represents a field value within the explain statistics, which can be a primitive type (null, string, number, boolean)
