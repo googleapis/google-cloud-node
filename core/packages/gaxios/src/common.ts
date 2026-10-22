@@ -416,7 +416,9 @@ export interface GaxiosOptions extends RequestInit {
    *
    * {fetchImplementation: myFetch};
    */
-  fetchImplementation?: typeof fetch;
+  fetchImplementation?: (
+    ...args: Parameters<typeof fetch>
+  ) => ReturnType<typeof fetch>;
   // Configure client to use mTLS:
   cert?: string;
   key?: string;

@@ -147,7 +147,9 @@ interface GaxiosOptions = {
    * Implementation of `fetch` to use when making the API call. Will use
    * `node-fetch` by default.
    */
-  fetchImplementation?: typeof fetch;
+  fetchImplementation?: (
+    ...args: Parameters<typeof fetch>
+  ) => ReturnType<typeof fetch>;
 
   // Configuration for retrying of requests.
   retryConfig: {

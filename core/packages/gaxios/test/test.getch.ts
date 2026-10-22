@@ -1935,6 +1935,43 @@ describe('fetch-compatible API', () => {
     scope.done();
     assert.deepStrictEqual(res.data, {});
   });
+
+  it('should emit fetch call-signature types compatible with @types/bun when skipLibCheck is false', () => {
+    for (const dtsPath of [
+      './build/esm/src/gaxios.d.ts',
+      './build/cjs/src/gaxios.d.ts',
+      './build/esm/src/common.d.ts',
+      './build/cjs/src/common.d.ts',
+    ]) {
+      const content = fs.readFileSync(dtsPath, 'utf8');
+      assert(
+        content.includes(
+          '(...args: Parameters<typeof fetch>) => ReturnType<typeof fetch>',
+        ),
+        `Expected ${dtsPath} to narrow fetch signature to call signature`,
+      );
+      assert(
+        !content.includes('fetch: typeof fetch;') &&
+          !content.includes('fetchImplementation?: typeof fetch;'),
+        `Expected ${dtsPath} not to require static namespace properties on typeof fetch`,
+      );
+    }
+
+    const gaxios = new Gaxios();
+    const wrappedFetch: NonNullable<GaxiosOptions['fetchImplementation']> = (
+      ...args
+    ) => gaxios.fetch(...args);
+    const bunStyleFetch = Object.assign(
+      (...args: Parameters<typeof fetch>) => gaxios.fetch(...args),
+      {preconnect: (_target: string | URL) => {}},
+    );
+    const optsWithWrapper: GaxiosOptions = {fetchImplementation: wrappedFetch};
+    const optsWithBunFetch: GaxiosOptions = {
+      fetchImplementation: bunStyleFetch,
+    };
+    assert.strictEqual(optsWithWrapper.fetchImplementation, wrappedFetch);
+    assert.strictEqual(optsWithBunFetch.fetchImplementation, bunStyleFetch);
+  });
 });
 
 describe('merge headers', () => {
