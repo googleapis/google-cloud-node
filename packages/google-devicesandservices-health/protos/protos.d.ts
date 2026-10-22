@@ -22276,353 +22276,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a SkinTemperature. */
-                interface ISkinTemperature {
-
-                    /** SkinTemperature sampleTime */
-                    sampleTime?: (google.devicesandservices.health.v4beta.IObservationSampleTime|null);
-
-                    /** SkinTemperature temperatureCelsius */
-                    temperatureCelsius?: (number|null);
-
-                    /** SkinTemperature baselineTemperatureCelsius */
-                    baselineTemperatureCelsius?: (number|null);
-
-                    /** SkinTemperature metadata */
-                    metadata?: (google.devicesandservices.health.v4beta.SkinTemperature.ISkinTemperatureMetadata|null);
-                }
-
-                /** Represents a SkinTemperature. */
-                class SkinTemperature implements ISkinTemperature {
-
-                    /**
-                     * Constructs a new SkinTemperature.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.devicesandservices.health.v4beta.ISkinTemperature);
-
-                    /** SkinTemperature sampleTime. */
-                    public sampleTime?: (google.devicesandservices.health.v4beta.IObservationSampleTime|null);
-
-                    /** SkinTemperature temperatureCelsius. */
-                    public temperatureCelsius?: (number|null);
-
-                    /** SkinTemperature baselineTemperatureCelsius. */
-                    public baselineTemperatureCelsius?: (number|null);
-
-                    /** SkinTemperature metadata. */
-                    public metadata?: (google.devicesandservices.health.v4beta.SkinTemperature.ISkinTemperatureMetadata|null);
-
-                    /**
-                     * Creates a new SkinTemperature instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SkinTemperature instance
-                     */
-                    public static create(properties?: google.devicesandservices.health.v4beta.ISkinTemperature): google.devicesandservices.health.v4beta.SkinTemperature;
-
-                    /**
-                     * Encodes the specified SkinTemperature message. Does not implicitly {@link google.devicesandservices.health.v4beta.SkinTemperature.verify|verify} messages.
-                     * @param message SkinTemperature message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.devicesandservices.health.v4beta.ISkinTemperature, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SkinTemperature message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4beta.SkinTemperature.verify|verify} messages.
-                     * @param message SkinTemperature message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.devicesandservices.health.v4beta.ISkinTemperature, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SkinTemperature message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SkinTemperature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4beta.SkinTemperature;
-
-                    /**
-                     * Decodes a SkinTemperature message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SkinTemperature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4beta.SkinTemperature;
-
-                    /**
-                     * Verifies a SkinTemperature message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SkinTemperature message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SkinTemperature
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4beta.SkinTemperature;
-
-                    /**
-                     * Creates a plain object from a SkinTemperature message. Also converts values to other types if specified.
-                     * @param message SkinTemperature
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.devicesandservices.health.v4beta.SkinTemperature, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SkinTemperature to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for SkinTemperature
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace SkinTemperature {
-
-                    /** Properties of a SkinTemperatureMetadata. */
-                    interface ISkinTemperatureMetadata {
-
-                        /** SkinTemperatureMetadata measurementLocation */
-                        measurementLocation?: (google.devicesandservices.health.v4beta.SkinTemperature.MeasurementLocation|keyof typeof google.devicesandservices.health.v4beta.SkinTemperature.MeasurementLocation|null);
-
-                        /** SkinTemperatureMetadata measurementState */
-                        measurementState?: (google.devicesandservices.health.v4beta.SkinTemperature.MeasurementState|keyof typeof google.devicesandservices.health.v4beta.SkinTemperature.MeasurementState|null);
-                    }
-
-                    /** Represents a SkinTemperatureMetadata. */
-                    class SkinTemperatureMetadata implements ISkinTemperatureMetadata {
-
-                        /**
-                         * Constructs a new SkinTemperatureMetadata.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.devicesandservices.health.v4beta.SkinTemperature.ISkinTemperatureMetadata);
-
-                        /** SkinTemperatureMetadata measurementLocation. */
-                        public measurementLocation: (google.devicesandservices.health.v4beta.SkinTemperature.MeasurementLocation|keyof typeof google.devicesandservices.health.v4beta.SkinTemperature.MeasurementLocation);
-
-                        /** SkinTemperatureMetadata measurementState. */
-                        public measurementState: (google.devicesandservices.health.v4beta.SkinTemperature.MeasurementState|keyof typeof google.devicesandservices.health.v4beta.SkinTemperature.MeasurementState);
-
-                        /**
-                         * Creates a new SkinTemperatureMetadata instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns SkinTemperatureMetadata instance
-                         */
-                        public static create(properties?: google.devicesandservices.health.v4beta.SkinTemperature.ISkinTemperatureMetadata): google.devicesandservices.health.v4beta.SkinTemperature.SkinTemperatureMetadata;
-
-                        /**
-                         * Encodes the specified SkinTemperatureMetadata message. Does not implicitly {@link google.devicesandservices.health.v4beta.SkinTemperature.SkinTemperatureMetadata.verify|verify} messages.
-                         * @param message SkinTemperatureMetadata message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.devicesandservices.health.v4beta.SkinTemperature.ISkinTemperatureMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified SkinTemperatureMetadata message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4beta.SkinTemperature.SkinTemperatureMetadata.verify|verify} messages.
-                         * @param message SkinTemperatureMetadata message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.devicesandservices.health.v4beta.SkinTemperature.ISkinTemperatureMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a SkinTemperatureMetadata message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns SkinTemperatureMetadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4beta.SkinTemperature.SkinTemperatureMetadata;
-
-                        /**
-                         * Decodes a SkinTemperatureMetadata message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns SkinTemperatureMetadata
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4beta.SkinTemperature.SkinTemperatureMetadata;
-
-                        /**
-                         * Verifies a SkinTemperatureMetadata message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a SkinTemperatureMetadata message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns SkinTemperatureMetadata
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4beta.SkinTemperature.SkinTemperatureMetadata;
-
-                        /**
-                         * Creates a plain object from a SkinTemperatureMetadata message. Also converts values to other types if specified.
-                         * @param message SkinTemperatureMetadata
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.devicesandservices.health.v4beta.SkinTemperature.SkinTemperatureMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this SkinTemperatureMetadata to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for SkinTemperatureMetadata
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
-                    /** MeasurementLocation enum. */
-                    enum MeasurementLocation {
-                        MEASUREMENT_LOCATION_UNSPECIFIED = 0,
-                        OTHER = 1,
-                        FINGER = 2,
-                        TOE = 3,
-                        WRIST = 4
-                    }
-
-                    /** MeasurementState enum. */
-                    enum MeasurementState {
-                        MEASUREMENT_STATE_UNSPECIFIED = 0,
-                        MEASUREMENT_STATE_OTHER = 1,
-                        MEASUREMENT_STATE_AT_REST = 2,
-                        MEASUREMENT_STATE_SLEEP = 3
-                    }
-                }
-
-                /** Properties of a SkinTemperatureRollupValue. */
-                interface ISkinTemperatureRollupValue {
-
-                    /** SkinTemperatureRollupValue temperatureCelsiusAvg */
-                    temperatureCelsiusAvg?: (number|null);
-
-                    /** SkinTemperatureRollupValue temperatureCelsiusMax */
-                    temperatureCelsiusMax?: (number|null);
-
-                    /** SkinTemperatureRollupValue temperatureCelsiusMin */
-                    temperatureCelsiusMin?: (number|null);
-                }
-
-                /** Represents a SkinTemperatureRollupValue. */
-                class SkinTemperatureRollupValue implements ISkinTemperatureRollupValue {
-
-                    /**
-                     * Constructs a new SkinTemperatureRollupValue.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.devicesandservices.health.v4beta.ISkinTemperatureRollupValue);
-
-                    /** SkinTemperatureRollupValue temperatureCelsiusAvg. */
-                    public temperatureCelsiusAvg?: (number|null);
-
-                    /** SkinTemperatureRollupValue temperatureCelsiusMax. */
-                    public temperatureCelsiusMax?: (number|null);
-
-                    /** SkinTemperatureRollupValue temperatureCelsiusMin. */
-                    public temperatureCelsiusMin?: (number|null);
-
-                    /**
-                     * Creates a new SkinTemperatureRollupValue instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SkinTemperatureRollupValue instance
-                     */
-                    public static create(properties?: google.devicesandservices.health.v4beta.ISkinTemperatureRollupValue): google.devicesandservices.health.v4beta.SkinTemperatureRollupValue;
-
-                    /**
-                     * Encodes the specified SkinTemperatureRollupValue message. Does not implicitly {@link google.devicesandservices.health.v4beta.SkinTemperatureRollupValue.verify|verify} messages.
-                     * @param message SkinTemperatureRollupValue message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.devicesandservices.health.v4beta.ISkinTemperatureRollupValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SkinTemperatureRollupValue message, length delimited. Does not implicitly {@link google.devicesandservices.health.v4beta.SkinTemperatureRollupValue.verify|verify} messages.
-                     * @param message SkinTemperatureRollupValue message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.devicesandservices.health.v4beta.ISkinTemperatureRollupValue, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SkinTemperatureRollupValue message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SkinTemperatureRollupValue
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devicesandservices.health.v4beta.SkinTemperatureRollupValue;
-
-                    /**
-                     * Decodes a SkinTemperatureRollupValue message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SkinTemperatureRollupValue
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devicesandservices.health.v4beta.SkinTemperatureRollupValue;
-
-                    /**
-                     * Verifies a SkinTemperatureRollupValue message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SkinTemperatureRollupValue message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SkinTemperatureRollupValue
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.devicesandservices.health.v4beta.SkinTemperatureRollupValue;
-
-                    /**
-                     * Creates a plain object from a SkinTemperatureRollupValue message. Also converts values to other types if specified.
-                     * @param message SkinTemperatureRollupValue
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.devicesandservices.health.v4beta.SkinTemperatureRollupValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SkinTemperatureRollupValue to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for SkinTemperatureRollupValue
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Properties of a SkinTemperatureSensors. */
                 interface ISkinTemperatureSensors {
 
@@ -33492,9 +33145,6 @@ export namespace google {
                     /** DataPoint moods */
                     moods?: (google.devicesandservices.health.v4beta.IMoods|null);
 
-                    /** DataPoint skinTemperature */
-                    skinTemperature?: (google.devicesandservices.health.v4beta.ISkinTemperature|null);
-
                     /** DataPoint skinTemperatureSensors */
                     skinTemperatureSensors?: (google.devicesandservices.health.v4beta.ISkinTemperatureSensors|null);
 
@@ -33640,9 +33290,6 @@ export namespace google {
                     /** DataPoint moods. */
                     public moods?: (google.devicesandservices.health.v4beta.IMoods|null);
 
-                    /** DataPoint skinTemperature. */
-                    public skinTemperature?: (google.devicesandservices.health.v4beta.ISkinTemperature|null);
-
                     /** DataPoint skinTemperatureSensors. */
                     public skinTemperatureSensors?: (google.devicesandservices.health.v4beta.ISkinTemperatureSensors|null);
 
@@ -33653,7 +33300,7 @@ export namespace google {
                     public dataSource?: (google.devicesandservices.health.v4beta.IDataSource|null);
 
                     /** DataPoint data. */
-                    public data?: ("steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"nutritionLog"|"irregularRhythmNotification"|"electrocardiogram"|"dailyHeartRateZones"|"hydrationLog"|"food"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned"|"coreBodyTemperature"|"activeEnergyBurned"|"foodMeasurementUnit"|"bloodGlucose"|"menstrualPeriod"|"ovulationTest"|"symptoms"|"moods"|"skinTemperature"|"skinTemperatureSensors");
+                    public data?: ("steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"nutritionLog"|"irregularRhythmNotification"|"electrocardiogram"|"dailyHeartRateZones"|"hydrationLog"|"food"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned"|"coreBodyTemperature"|"activeEnergyBurned"|"foodMeasurementUnit"|"bloodGlucose"|"menstrualPeriod"|"ovulationTest"|"symptoms"|"moods"|"skinTemperatureSensors");
 
                     /**
                      * Creates a new DataPoint instance using the specified properties.
@@ -33838,9 +33485,6 @@ export namespace google {
                     /** ReconciledDataPoint bloodGlucose */
                     bloodGlucose?: (google.devicesandservices.health.v4beta.IBloodGlucose|null);
 
-                    /** ReconciledDataPoint skinTemperature */
-                    skinTemperature?: (google.devicesandservices.health.v4beta.ISkinTemperature|null);
-
                     /** ReconciledDataPoint skinTemperatureSensors */
                     skinTemperatureSensors?: (google.devicesandservices.health.v4beta.ISkinTemperatureSensors|null);
 
@@ -33959,9 +33603,6 @@ export namespace google {
                     /** ReconciledDataPoint bloodGlucose. */
                     public bloodGlucose?: (google.devicesandservices.health.v4beta.IBloodGlucose|null);
 
-                    /** ReconciledDataPoint skinTemperature. */
-                    public skinTemperature?: (google.devicesandservices.health.v4beta.ISkinTemperature|null);
-
                     /** ReconciledDataPoint skinTemperatureSensors. */
                     public skinTemperatureSensors?: (google.devicesandservices.health.v4beta.ISkinTemperatureSensors|null);
 
@@ -33969,7 +33610,7 @@ export namespace google {
                     public dataPointName: string;
 
                     /** ReconciledDataPoint data. */
-                    public data?: ("steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"nutritionLog"|"dailyHeartRateZones"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned"|"coreBodyTemperature"|"activeEnergyBurned"|"bloodGlucose"|"skinTemperature"|"skinTemperatureSensors");
+                    public data?: ("steps"|"floors"|"heartRate"|"sleep"|"dailyRestingHeartRate"|"dailyHeartRateVariability"|"exercise"|"weight"|"altitude"|"distance"|"bodyFat"|"activeZoneMinutes"|"heartRateVariability"|"dailySleepTemperatureDerivations"|"sedentaryPeriod"|"runVo2Max"|"oxygenSaturation"|"dailyOxygenSaturation"|"activityLevel"|"vo2Max"|"dailyVo2Max"|"nutritionLog"|"dailyHeartRateZones"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"respiratoryRateSleepSummary"|"dailyRespiratoryRate"|"swimLengthsData"|"height"|"basalEnergyBurned"|"coreBodyTemperature"|"activeEnergyBurned"|"bloodGlucose"|"skinTemperatureSensors");
 
                     /**
                      * Creates a new ReconciledDataPoint instance using the specified properties.
@@ -34115,9 +33756,6 @@ export namespace google {
                     /** RollupDataPoint bloodGlucose */
                     bloodGlucose?: (google.devicesandservices.health.v4beta.IBloodGlucoseRollupValue|null);
 
-                    /** RollupDataPoint skinTemperature */
-                    skinTemperature?: (google.devicesandservices.health.v4beta.ISkinTemperatureRollupValue|null);
-
                     /** RollupDataPoint startTime */
                     startTime?: (google.protobuf.ITimestamp|null);
 
@@ -34197,9 +33835,6 @@ export namespace google {
                     /** RollupDataPoint bloodGlucose. */
                     public bloodGlucose?: (google.devicesandservices.health.v4beta.IBloodGlucoseRollupValue|null);
 
-                    /** RollupDataPoint skinTemperature. */
-                    public skinTemperature?: (google.devicesandservices.health.v4beta.ISkinTemperatureRollupValue|null);
-
                     /** RollupDataPoint startTime. */
                     public startTime?: (google.protobuf.ITimestamp|null);
 
@@ -34207,7 +33842,7 @@ export namespace google {
                     public endTime?: (google.protobuf.ITimestamp|null);
 
                     /** RollupDataPoint value. */
-                    public value?: ("steps"|"floors"|"heartRate"|"weight"|"altitude"|"distance"|"bodyFat"|"totalCalories"|"activeZoneMinutes"|"sedentaryPeriod"|"runVo2Max"|"caloriesInHeartRateZone"|"activityLevel"|"nutritionLog"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"swimLengthsData"|"coreBodyTemperature"|"activeEnergyBurned"|"bloodGlucose"|"skinTemperature");
+                    public value?: ("steps"|"floors"|"heartRate"|"weight"|"altitude"|"distance"|"bodyFat"|"totalCalories"|"activeZoneMinutes"|"sedentaryPeriod"|"runVo2Max"|"caloriesInHeartRateZone"|"activityLevel"|"nutritionLog"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"swimLengthsData"|"coreBodyTemperature"|"activeEnergyBurned"|"bloodGlucose");
 
                     /**
                      * Creates a new RollupDataPoint instance using the specified properties.
@@ -34359,9 +33994,6 @@ export namespace google {
                     /** DailyRollupDataPoint bloodGlucose */
                     bloodGlucose?: (google.devicesandservices.health.v4beta.IBloodGlucoseRollupValue|null);
 
-                    /** DailyRollupDataPoint skinTemperature */
-                    skinTemperature?: (google.devicesandservices.health.v4beta.ISkinTemperatureRollupValue|null);
-
                     /** DailyRollupDataPoint civilStartTime */
                     civilStartTime?: (google.devicesandservices.health.v4beta.ICivilDateTime|null);
 
@@ -34447,9 +34079,6 @@ export namespace google {
                     /** DailyRollupDataPoint bloodGlucose. */
                     public bloodGlucose?: (google.devicesandservices.health.v4beta.IBloodGlucoseRollupValue|null);
 
-                    /** DailyRollupDataPoint skinTemperature. */
-                    public skinTemperature?: (google.devicesandservices.health.v4beta.ISkinTemperatureRollupValue|null);
-
                     /** DailyRollupDataPoint civilStartTime. */
                     public civilStartTime?: (google.devicesandservices.health.v4beta.ICivilDateTime|null);
 
@@ -34457,7 +34086,7 @@ export namespace google {
                     public civilEndTime?: (google.devicesandservices.health.v4beta.ICivilDateTime|null);
 
                     /** DailyRollupDataPoint value. */
-                    public value?: ("steps"|"floors"|"heartRate"|"restingHeartRatePersonalRange"|"heartRateVariabilityPersonalRange"|"weight"|"altitude"|"distance"|"bodyFat"|"totalCalories"|"activeZoneMinutes"|"sedentaryPeriod"|"runVo2Max"|"caloriesInHeartRateZone"|"activityLevel"|"nutritionLog"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"swimLengthsData"|"coreBodyTemperature"|"activeEnergyBurned"|"bloodGlucose"|"skinTemperature");
+                    public value?: ("steps"|"floors"|"heartRate"|"restingHeartRatePersonalRange"|"heartRateVariabilityPersonalRange"|"weight"|"altitude"|"distance"|"bodyFat"|"totalCalories"|"activeZoneMinutes"|"sedentaryPeriod"|"runVo2Max"|"caloriesInHeartRateZone"|"activityLevel"|"nutritionLog"|"hydrationLog"|"timeInHeartRateZone"|"activeMinutes"|"swimLengthsData"|"coreBodyTemperature"|"activeEnergyBurned"|"bloodGlucose");
 
                     /**
                      * Creates a new DailyRollupDataPoint instance using the specified properties.
@@ -36123,6 +35752,9 @@ export namespace google {
 
                     /** DailyRollUpDataPointsResponse rollupDataPoints */
                     rollupDataPoints?: (google.devicesandservices.health.v4beta.IDailyRollupDataPoint[]|null);
+
+                    /** DailyRollUpDataPointsResponse nextPageToken */
+                    nextPageToken?: (string|null);
                 }
 
                 /** Represents a DailyRollUpDataPointsResponse. */
@@ -36136,6 +35768,9 @@ export namespace google {
 
                     /** DailyRollUpDataPointsResponse rollupDataPoints. */
                     public rollupDataPoints: google.devicesandservices.health.v4beta.IDailyRollupDataPoint[];
+
+                    /** DailyRollUpDataPointsResponse nextPageToken. */
+                    public nextPageToken: string;
 
                     /**
                      * Creates a new DailyRollUpDataPointsResponse instance using the specified properties.

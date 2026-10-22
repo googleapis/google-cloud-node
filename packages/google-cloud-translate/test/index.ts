@@ -21,7 +21,7 @@ import * as pfy from '@google-cloud/promisify';
 import * as assert from 'assert';
 import {after, afterEach, before, beforeEach, describe, it} from 'mocha';
 import * as extend from 'extend';
-import * as proxyquire from 'proxyquire';
+import {Module} from 'module';
 import * as r from 'request';
 
 import * as orig from '../src';
@@ -44,7 +44,7 @@ const fakeUtil = extend({}, util, {
   makeRequest(
     opts: DecorateRequestOptions,
     cfg: MakeRequestConfig,
-    cb: BodyResponseCallback
+    cb: BodyResponseCallback,
   ) {
     if (makeRequestOverride) {
       return makeRequestOverride(opts, cfg, cb);
@@ -74,13 +74,33 @@ describe('Translate v2', () => {
   let translate: any;
 
   before(() => {
-    Translate = proxyquire('../src/v2', {
+    const stubs: Record<string, unknown> = {
       '@google-cloud/common': {
         util: fakeUtil,
         Service: FakeService,
       },
       '@google-cloud/promisify': fakePromisify,
-    }).Translate;
+    };
+    const origRequire = Module.prototype.require;
+    const v2Path = require.resolve('../src/v2');
+    const cached = require.cache[v2Path];
+    delete require.cache[v2Path];
+    Module.prototype.require = Object.assign(function (
+      this: NodeModule,
+      id: string,
+    ) {
+      return id in stubs ? stubs[id] : origRequire.call(this, id);
+    }, origRequire);
+    try {
+      Translate = require('../src/v2').Translate;
+    } finally {
+      Module.prototype.require = origRequire;
+      if (cached) {
+        require.cache[v2Path] = cached;
+      } else {
+        delete require.cache[v2Path];
+      }
+    }
   });
 
   beforeEach(() => {
@@ -266,7 +286,7 @@ describe('Translate v2', () => {
             assert.strictEqual(apiResponse_, apiResponse);
             assert.deepStrictEqual(apiResponse_, originalApiResponse);
             done();
-          }
+          },
         );
       });
     });
@@ -314,7 +334,7 @@ describe('Translate v2', () => {
             assert.strictEqual(languages, null);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          }
+          },
         );
       });
     });
@@ -359,7 +379,7 @@ describe('Translate v2', () => {
             assert.deepStrictEqual(languages, expectedResults);
             assert.strictEqual(apiResponse_, apiResponse);
             done();
-          }
+          },
         );
       });
     });
@@ -407,7 +427,7 @@ describe('Translate v2', () => {
             from: SOURCE_LANG_CODE,
             to: TARGET_LANG_CODE,
           },
-          assert.ifError
+          assert.ifError,
         );
       });
     });
@@ -496,7 +516,7 @@ describe('Translate v2', () => {
             assert.strictEqual(translations, null);
             assert.strictEqual(resp, apiResponse);
             done();
-          }
+          },
         );
       });
     });
@@ -531,7 +551,7 @@ describe('Translate v2', () => {
             assert.deepStrictEqual(translations, expectedResults);
             assert.strictEqual(resp, apiResponse);
             done();
-          }
+          },
         );
       });
 
@@ -552,7 +572,7 @@ describe('Translate v2', () => {
             assert.ifError(err);
             assert.deepStrictEqual(translations, [expectedResults]);
             done();
-          }
+          },
         );
       });
     });
@@ -584,7 +604,7 @@ describe('Translate v2', () => {
 
         FakeService.prototype.request = (
           reqOpts: r.Options,
-          callback: Function
+          callback: Function,
         ) => {
           assert.strictEqual(reqOpts, fakeOptions);
           callback();
@@ -640,7 +660,7 @@ describe('Translate v2', () => {
         makeRequestOverride = (
           reqOpts: r.Options,
           options: {},
-          callback: Function
+          callback: Function,
         ) => {
           assert.deepStrictEqual(reqOpts, expectedReqOpts);
           assert.strictEqual(options, translate.options);

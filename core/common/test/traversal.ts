@@ -17,6 +17,7 @@ import {describe, it} from 'mocha';
 import {Request, Response} from 'teeny-request';
 
 import {Service, ServiceObject} from '../src';
+import {DEFAULT_PROJECT_ID_TOKEN} from '../src/service';
 import {
   ApiError,
   BodyResponseCallback,
@@ -97,6 +98,12 @@ describe('URI path handling and traversal (ServiceObject & Service)', () => {
       datasetId: 'project:item%2520name',
       expectedError: /Not found: Dataset.*datasets\/project:item%2520name/,
     },
+    {
+      description:
+        'should keep pre-encoded projectId token (%7B%7BprojectId%7D%7D) percent-encoded in resource IDs',
+      datasetId: '%7B%7BprojectId%7D%7D',
+      expectedError: /Not found: Dataset.*datasets\/%7B%7BprojectId%7D%7D/,
+    },
   ];
 
   for (const {description, datasetId, expectedError} of testCases) {
@@ -157,6 +164,46 @@ describe('URI path handling and traversal (ServiceObject & Service)', () => {
             if (err) return reject(err);
             resolve(resp);
           });
+        });
+      }, expectedError);
+
+      // Test Service path handling when projectIdRequired is true and projectId is deferred ({{projectId}})
+      const projectScopedService = new Service({
+        scopes: [],
+        baseUrl: 'https://bigquery.googleapis.com/bigquery/v2',
+        projectIdRequired: true,
+        apiEndpoint: 'bigquery.googleapis.com',
+        packageJson: {name: 'test', version: '1.0.0'},
+      });
+      projectScopedService.makeAuthenticatedRequest = ((
+        reqOpts: DecorateRequestOptions,
+        callback?: BodyResponseCallback,
+      ) => {
+        assert.ok(
+          reqOpts.uri.includes(
+            `/projects/${DEFAULT_PROJECT_ID_TOKEN}/datasets/`,
+          ),
+          `Expected deferred ${DEFAULT_PROJECT_ID_TOKEN} token in URI, got: ${reqOpts.uri}`,
+        );
+        const notFoundError = new ApiError({
+          message: `Not found: Dataset ${reqOpts.uri}`,
+          code: 404,
+          response: {} as Response,
+        });
+        if (typeof callback === 'function') {
+          callback(notFoundError, null, {} as Response);
+        }
+      }) as unknown as MakeAuthenticatedRequest;
+
+      await assert.rejects(async () => {
+        await new Promise((resolve, reject) => {
+          projectScopedService.request(
+            {uri: `datasets/${datasetId}`},
+            (err, resp) => {
+              if (err) return reject(err);
+              resolve(resp);
+            },
+          );
         });
       }, expectedError);
     });
