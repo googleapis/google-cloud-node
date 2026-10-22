@@ -34,7 +34,7 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  The current etag of the TrustConfig.
+   *  Optional. The current etag of the TrustConfig.
    *  If an etag is provided and does not match the current etag of the resource,
    *  deletion will be blocked and an ABORTED error will be returned.
    */

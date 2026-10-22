@@ -17,7 +17,9 @@ import * as protos from '../../protos/firestore_v1_proto_api';
 import api = protos.google.firestore.v1;
 
 import {DocumentReference} from '../reference/document-reference';
-import {ProtoSerializable, Serializer} from '../serializer';
+import {hasUserData, ProtoSerializable, Serializer} from '../serializer';
+import {FieldTransform} from '../field-value';
+import {isPlainObject} from '../util';
 
 import {
   AggregateFunction,
@@ -26,11 +28,16 @@ import {
   Expression,
   Field,
   field,
+  MapValue,
   Ordering,
 } from './expression';
 import {OptionsUtil} from './options-util';
 import {CollectionReference} from '../reference/collection-reference';
-import {validateUserDataHelper, selectablesToMap} from './pipeline-util';
+import {
+  validateUserDataHelper,
+  selectablesToMap,
+  valueToDefaultExpr,
+} from './pipeline-util';
 import {Pipeline} from './pipelines';
 
 /**
@@ -908,13 +915,18 @@ export class RawStage implements Stage {
 }
 
 /**
+ * Internal options for Delete stage.
+ */
+export type InternalDeleteStageOptions = firestore.Pipelines.DeleteStageOptions;
+
+/**
  * Delete stage.
  */
 export class DeleteStage implements Stage {
   name = 'delete';
   readonly optionsUtil = new OptionsUtil({});
 
-  constructor() {}
+  constructor(private options: InternalDeleteStageOptions = {}) {}
 
   _toProto(serializer: Serializer): api.Pipeline.IStage {
     const args: api.IValue[] = [];
@@ -922,12 +934,26 @@ export class DeleteStage implements Stage {
     return {
       name: this.name,
       args,
-      options: this.optionsUtil.getOptionsProto(serializer, {}, {}),
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
     };
   }
 
   _validateUserData(_: boolean): void {}
 }
+
+/**
+ * Internal options for Update stage.
+ */
+export type InternalUpdateStageOptions = Omit<
+  firestore.Pipelines.UpdateStageOptions,
+  'transformedFields'
+> & {
+  transformedFields?: Map<string, Expression>;
+};
 
 /**
  * Update stage.
@@ -936,28 +962,269 @@ export class UpdateStage implements Stage {
   name = 'update';
   readonly optionsUtil = new OptionsUtil({});
 
-  constructor(private transformedFields?: AliasedExpression[]) {}
+  constructor(private options: InternalUpdateStageOptions = {}) {}
 
   _toProto(serializer: Serializer): api.Pipeline.IStage {
-    const args: api.IValue[] = [];
-
-    if (this.transformedFields && this.transformedFields.length > 0) {
-      const mapped = selectablesToMap(this.transformedFields);
-      args.push(serializer.encodeValue(mapped)!);
-    } else {
-      args.push(serializer.encodeValue(new Map())!);
-    }
+    const args: api.IValue[] = [
+      serializer.encodeValue(this.options.transformedFields ?? new Map())!,
+    ];
 
     return {
       name: this.name,
       args,
-      options: this.optionsUtil.getOptionsProto(serializer, {}, {}),
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
     };
   }
 
   _validateUserData(ignoreUndefinedProperties: boolean): void {
-    if (this.transformedFields) {
-      validateUserDataHelper(this.transformedFields, ignoreUndefinedProperties);
+    if (this.options.transformedFields) {
+      validateUserDataHelper(
+        this.options.transformedFields,
+        ignoreUndefinedProperties,
+      );
     }
+  }
+}
+
+/**
+ * Converts the `collection` option of an insert or upsert stage to a
+ * collection path with a leading slash. Throws if the path is empty.
+ */
+function normalizeDmlCollectionPath(
+  methodName: string,
+  collection: string | CollectionReference | firestore.CollectionReference,
+): string {
+  const path =
+    typeof collection === 'string'
+      ? collection
+      : (collection as CollectionReference).path;
+  if (!path) {
+    // The error matches the Web SDK.
+    throw new Error(
+      `Function ${methodName}() cannot be called with an empty collection path.`,
+    );
+  }
+  return path.startsWith('/') ? path : '/' + path;
+}
+
+/**
+ * Internal options for Insert stage.
+ */
+export type InternalInsertStageOptions = Omit<
+  firestore.Pipelines.InsertStageOptions,
+  'collection' | 'documentIdExpression'
+> & {
+  collection?: string | CollectionReference | firestore.CollectionReference;
+  documentIdExpression?: string | Expression | firestore.Pipelines.Expression;
+};
+
+/**
+ * Insert stage.
+ */
+export class InsertStage implements Stage {
+  name = 'insert';
+  readonly optionsUtil = new OptionsUtil({});
+  private readonly collectionPath?: string;
+  private readonly documentIdExpr?: Expression;
+
+  constructor(private options: InternalInsertStageOptions = {}) {
+    if (options.collection !== undefined) {
+      this.collectionPath = normalizeDmlCollectionPath(
+        'insert',
+        options.collection,
+      );
+    }
+    if (options.documentIdExpression) {
+      this.documentIdExpr =
+        typeof options.documentIdExpression === 'string'
+          ? field(options.documentIdExpression)
+          : (options.documentIdExpression as Expression);
+    }
+  }
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    const options =
+      this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ) || {};
+
+    if (this.collectionPath) {
+      options['collection'] = serializer.encodeReference(this.collectionPath);
+    }
+    if (this.documentIdExpr) {
+      options['document_id'] = this.documentIdExpr._toProto(serializer);
+    }
+
+    return {
+      name: this.name,
+      args: [],
+      options: Object.keys(options).length > 0 ? options : undefined,
+    };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    if (this.documentIdExpr) {
+      validateUserDataHelper(this.documentIdExpr, ignoreUndefinedProperties);
+    }
+  }
+}
+
+/**
+ * Internal options for Upsert stage.
+ */
+export type InternalUpsertStageOptions = Omit<
+  firestore.Pipelines.UpsertStageOptions,
+  'additionalFields' | 'collection' | 'documentIdExpression'
+> & {
+  additionalFields?:
+    AliasedExpression[] | firestore.Pipelines.AliasedExpression[];
+  collection?: string | CollectionReference | firestore.CollectionReference;
+  documentIdExpression?: string | Expression | firestore.Pipelines.Expression;
+};
+
+/**
+ * Upsert stage.
+ */
+export class UpsertStage implements Stage {
+  name = 'upsert';
+  readonly optionsUtil = new OptionsUtil({});
+  private readonly collectionPath?: string;
+  private readonly documentIdExpr?: Expression;
+  private readonly additionalFields: Map<string, Expression>;
+
+  constructor(private readonly options: InternalUpsertStageOptions = {}) {
+    const opts = options;
+
+    this.additionalFields = selectablesToMap(
+      (opts.additionalFields ?? []) as AliasedExpression[],
+    );
+    if (opts.collection !== undefined) {
+      this.collectionPath = normalizeDmlCollectionPath(
+        'upsert',
+        opts.collection,
+      );
+    }
+    if (opts.documentIdExpression) {
+      this.documentIdExpr =
+        typeof opts.documentIdExpression === 'string'
+          ? field(opts.documentIdExpression)
+          : (opts.documentIdExpression as Expression);
+    }
+  }
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    const options =
+      this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ) || {};
+
+    if (this.collectionPath) {
+      options['collection'] = serializer.encodeReference(this.collectionPath);
+    }
+    if (this.documentIdExpr) {
+      options['document_id'] = this.documentIdExpr._toProto(serializer);
+    }
+
+    const args: api.IValue[] = [serializer.encodeValue(this.additionalFields)!];
+
+    return {
+      name: this.name,
+      args,
+      options: Object.keys(options).length > 0 ? options : undefined,
+    };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    validateUserDataHelper(this.additionalFields, ignoreUndefinedProperties);
+    if (this.documentIdExpr) {
+      validateUserDataHelper(this.documentIdExpr, ignoreUndefinedProperties);
+    }
+  }
+}
+
+/**
+ * Internal options for Literals stage.
+ */
+export type InternalLiteralsStageOptions =
+  firestore.Pipelines.LiteralsStageOptions;
+
+/**
+ * Literals stage.
+ */
+export class LiteralsSource implements Stage {
+  name = 'literals';
+  readonly optionsUtil = new OptionsUtil({});
+
+  constructor(private options: InternalLiteralsStageOptions) {}
+
+  _toProto(serializer: Serializer): api.Pipeline.IStage {
+    // Each document is sent as a top-level mapValue. The backend only
+    // evaluates expressions in the top-level fields of a literal document, so
+    // nested objects and arrays are converted to map() and array() expressions
+    // (the same conversion used for objects and arrays passed to expressions
+    // and to rawStage()). This allows expressions at any depth.
+    const args: api.IValue[] = this.options.documents.map(doc => {
+      const fields = new Map<string, Expression>();
+      for (const [key, value] of Object.entries(doc)) {
+        if (value !== undefined) {
+          fields.set(key, valueToDefaultExpr(value));
+        }
+      }
+      return new MapValue(fields)._toProto(serializer);
+    });
+    return {
+      name: this.name,
+      args,
+      options: this.optionsUtil.getOptionsProto(
+        serializer,
+        this.options,
+        this.options.rawOptions,
+      ),
+    };
+  }
+
+  _validateUserData(ignoreUndefinedProperties: boolean): void {
+    const validate = (value: unknown, path: string[]): void => {
+      const location =
+        path.length > 0 ? ` (found in field ${path.join('.')})` : '';
+      if (value instanceof FieldTransform) {
+        // FieldValue sentinels (serverTimestamp(), increment(), delete(), ...)
+        // have no representation in a pipeline, so they cannot be encoded.
+        // The error matches the Web SDK.
+        throw new Error(
+          `Function literals() called with invalid data. ${value.methodName}() ` +
+            `can only be used with update() and set()${location}`,
+        );
+      } else if (value === undefined) {
+        // Undefined values are omitted from the encoded document, which is
+        // only allowed when `ignoreUndefinedProperties` is enabled.
+        if (!ignoreUndefinedProperties) {
+          throw new Error(
+            'Function literals() called with invalid data. Cannot use ' +
+              `"undefined" as a Firestore value${location}. If you want to ` +
+              'ignore undefined values, enable `ignoreUndefinedProperties`.',
+          );
+        }
+      } else if (value === null) {
+        // null is a valid literal value.
+      } else if (hasUserData(value)) {
+        value._validateUserData(ignoreUndefinedProperties);
+      } else if (Array.isArray(value)) {
+        value.forEach(element => validate(element, path));
+      } else if (isPlainObject(value)) {
+        Object.entries(value as Record<string, unknown>).forEach(
+          ([key, fieldValue]) => validate(fieldValue, [...path, key]),
+        );
+      }
+    };
+    this.options.documents.forEach(doc => validate(doc, []));
   }
 }

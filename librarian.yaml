@@ -12,18 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: nodejs
-version: v0.48.0
+version: v0.49.0
 repo: googleapis/google-cloud-node
 sources:
   googleapis:
-    commit: b6efa15f5537f053786e5d8875d75bc3a6246455
-    sha256: d432e85ea4bb83e7b0ed83415d24fae57a52e7c51afc7a96c6147a27da85eb02
+    commit: 14a161a98ef045be80c12ab69d924504a756f109
+    sha256: ce3cee2da77fbdff0e269bc520dc61e8b32efcdec7628b39b9e474a02bc951f6
 tools:
   pnpm:
     - name: gapic-generator-typescript
-      version: gapic-generator-v5.5.0
-      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.5.0.tar.gz
-      checksum: dec0756bf04ff1cb881cd7a8a51c538fd5d25daedd1b65d93800632d85baddea
+      version: gapic-generator-v5.7.1
+      package: https://github.com/googleapis/google-cloud-node/archive/gapic-generator-v5.7.1.tar.gz
+      checksum: 0d9d0bfc0115b46b27288eac457e9e5aede8e7f6e39aaabe8a188b9e491dff61
       build:
         - pnpm install --frozen-lockfile --filter @google-cloud/gapic-generator
         - pnpm run compile
@@ -552,7 +552,7 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-cloud-certificatemanager
-    version: 3.2.0
+    version: 3.3.0
     apis:
       - path: google/cloud/certificatemanager/v1
     copyright_year: "2026"
@@ -829,7 +829,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-dialogflow
-    version: 8.3.0
+    version: 8.4.0
     apis:
       - path: google/cloud/dialogflow/v2
       - path: google/cloud/dialogflow/v2beta1
@@ -1199,7 +1199,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-modelarmor
-    version: 0.10.0
+    version: 0.11.0
     apis:
       - path: google/cloud/modelarmor/v1
       - path: google/cloud/modelarmor/v1beta
@@ -1381,7 +1381,7 @@ libraries:
       - path: google/cloud/productregistry/v1
     copyright_year: "2026"
   - name: google-cloud-pubsub-api
-    version: 0.8.0
+    version: 0.8.1
     apis:
       - path: google/pubsub/v1
     nodejs:
@@ -1419,7 +1419,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-redis-cluster
-    version: 0.17.0
+    version: 0.18.0
     apis:
       - path: google/cloud/redis/cluster/v1
       - path: google/cloud/redis/cluster/v1beta1
@@ -1560,7 +1560,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-spanner-api
-    version: 0.5.0
+    version: 0.6.0
     apis:
       - path: google/spanner/v1
       - path: google/spanner/executor/v1
@@ -1864,7 +1864,7 @@ libraries:
       default_version: v1beta3
       package_name: '@google-cloud/dataflow'
   - name: google-developer-knowledge
-    version: 0.10.0
+    version: 0.10.1
     apis:
       - path: google/developers/knowledge/v1
     copyright_year: "2026"
@@ -1872,7 +1872,7 @@ libraries:
       package_name: '@google/developer-knowledge'
       metadata_name_override: google-developer-knowledge
   - name: google-devicesandservices-health
-    version: 0.9.0
+    version: 0.10.0
     apis:
       - path: google/devicesandservices/health/v4
       - path: google/devicesandservices/health/v4beta
@@ -1890,7 +1890,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/artifact-registry'
   - name: google-devtools-cloudbuild
-    version: 6.3.0
+    version: 6.4.0
     apis:
       - path: google/devtools/cloudbuild/v2
       - path: google/devtools/cloudbuild/v1
