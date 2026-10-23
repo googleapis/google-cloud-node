@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import * as fs from 'fs';
 import * as path from 'path';
 import * as tls from 'tls';
 import {Transform} from 'stream';
@@ -105,6 +106,70 @@ interface SpannerGoAddon {
   setRootCertsPEM?(pem: string): void;
   setNextUniverseDomain?(ud: string): void;
   getLastInitError?(): string;
+  // IPC transport only (spanner_ipc.node).
+  transport?: string;
+  configure?(opts: NativeIpcSidecarConfig): void;
+  getSidecarInfo?(): NativeIpcSidecarInfo;
+  getSidecarStats?(): NativeIpcSidecarStats | null;
+  shutdownSidecar?(): void;
+}
+
+/**
+ * The Go Shared Core transport.
+ *   - `ipc`: out-of-process Go sidecar reached over Unix domain sockets
+ *     (`spanner_ipc.node` + `spanner-go-sidecar`, see spanner-native/IPC_PROTOCOL.md).
+ *   - `ffi`: in-process cgo shared library (`spanner_go.node` + `libspanner_go.so`).
+ */
+export type NativeCoreTransport = 'ffi' | 'ipc';
+
+const DEFAULT_NATIVE_CORE_TRANSPORT: NativeCoreTransport = 'ipc';
+
+interface NativeIpcSidecarConfig {
+  sidecarPath: string;
+  connections?: number;
+  socketBuffer?: number;
+  startupTimeoutMs?: number;
+  requestTimeoutMs?: number;
+  extraArgs?: string[];
+}
+
+export interface NativeIpcSidecarInfo {
+  transport: 'ipc';
+  running: boolean;
+  pid: number;
+  generation: number;
+  spawnCount: number;
+  connections: number;
+  configuredConnections: number;
+  protocolVersion: number;
+  services: number;
+  sidecarPath: string;
+  lastError: string;
+  lastExit: string;
+}
+
+export interface NativeIpcSidecarStats {
+  utimeUs: number;
+  stimeUs: number;
+  maxRssKb: number;
+  nvcsw: number;
+  nivcsw: number;
+  goroutines: number;
+  gomaxprocs: number;
+  numCpu: number;
+  pid: number;
+  activeStreams: number;
+  services: number;
+  heapAllocBytes: number;
+  heapSysBytes: number;
+  numGc: number;
+  rssBytes: number;
+}
+
+export interface NativeCoreTransportInfo {
+  transport: NativeCoreTransport;
+  loaded: boolean;
+  sidecar?: NativeIpcSidecarInfo;
 }
 
 const PROTO_TO_OBJECT_OPTS = {
@@ -303,6 +368,7 @@ interface CachedSchemaEntry {
 
 interface GlobalNativeState {
   addon?: SpannerGoAddon | null;
+  transport?: NativeCoreTransport;
   serviceHandles: Map<string, number>;
   schemaCache: Map<string, CachedSchemaEntry>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -389,7 +455,106 @@ export function isNativeCoreEnabled(): boolean {
 }
 
 /**
- * Loads the compiled C++ N-API addon (`spanner_go.node`) on demand.
+ * Parses a transport name: `ipc` | `sidecar` | `uds` -> 'ipc';
+ * `ffi` | `cgo` | `inprocess` | `in-process` -> 'ffi'; anything else -> the default.
+ */
+export function parseNativeCoreTransport(
+  raw: string | undefined,
+): NativeCoreTransport {
+  const normalized = (raw ?? '').trim().toLowerCase();
+  if (
+    normalized === 'ffi' ||
+    normalized === 'cgo' ||
+    normalized === 'inprocess' ||
+    normalized === 'in-process'
+  ) {
+    return 'ffi';
+  }
+  if (normalized === 'ipc' || normalized === 'sidecar' || normalized === 'uds') {
+    return 'ipc';
+  }
+  return DEFAULT_NATIVE_CORE_TRANSPORT;
+}
+
+/**
+ * Returns the Go Shared Core transport selected by
+ * `SPANNER_NATIVE_CORE_TRANSPORT` (alias `NATIVE_CORE_TRANSPORT`):
+ *   - `ipc` | `sidecar` | `uds` (default): out-of-process Go sidecar.
+ *   - `ffi` | `cgo` | `in-process`: in-process cgo shared library.
+ * The transport is fixed for the lifetime of the process once the addon loads.
+ */
+export function getNativeCoreTransport(): NativeCoreTransport {
+  const state = getGlobalState();
+  if (state.transport !== undefined && state.addon !== undefined) {
+    return state.transport;
+  }
+  return parseNativeCoreTransport(
+    process.env.SPANNER_NATIVE_CORE_TRANSPORT ??
+      process.env.NATIVE_CORE_TRANSPORT,
+  );
+}
+
+function readIntEnv(name: string, fallback: number, min: number): number {
+  const raw = process.env[name];
+  if (raw === undefined || raw.trim() === '') {
+    return fallback;
+  }
+  const val = Number(raw);
+  return Number.isInteger(val) && val >= min ? val : fallback;
+}
+
+function resolveIpcSidecarPath(addonPath: string): string | undefined {
+  const exe =
+    process.platform === 'win32'
+      ? 'spanner-go-sidecar.exe'
+      : 'spanner-go-sidecar';
+  const candidates = [
+    process.env.SPANNER_NATIVE_IPC_SIDECAR_PATH,
+    path.resolve(path.dirname(addonPath), '..', '..', 'spanner-go', exe),
+  ];
+  for (const candidate of candidates) {
+    if (candidate && fs.existsSync(candidate)) {
+      return candidate;
+    }
+  }
+  return undefined;
+}
+
+/**
+ * Points the IPC addon at the Go sidecar executable. The sidecar itself is
+ * spawned lazily by the addon on the first `init()` (one per process, shared by
+ * all worker threads).
+ */
+function configureIpcAddon(addon: SpannerGoAddon, addonPath: string): boolean {
+  if (typeof addon.configure !== 'function') {
+    return false;
+  }
+  const sidecarPath = resolveIpcSidecarPath(addonPath);
+  if (!sidecarPath) {
+    if (process.env.SPANNER_NATIVE_QUIET !== '1') {
+      process.emitWarning(
+        '[Spanner Native Core] Go Shared Core IPC sidecar executable not found (build spanner-native/spanner-go with build.sh or set SPANNER_NATIVE_IPC_SIDECAR_PATH); falling back to pure JS.',
+        'SpannerNativeCoreInitWarning',
+      );
+    }
+    return false;
+  }
+  addon.configure({
+    sidecarPath,
+    connections: readIntEnv('SPANNER_NATIVE_IPC_CONNECTIONS', 1, 1),
+    socketBuffer: readIntEnv('SPANNER_NATIVE_IPC_SOCKET_BUFFER', 0, 0),
+    startupTimeoutMs: readIntEnv(
+      'SPANNER_NATIVE_IPC_STARTUP_TIMEOUT_MS',
+      15000,
+      1,
+    ),
+  });
+  return true;
+}
+
+/**
+ * Loads the compiled C++ N-API addon for the selected transport on demand:
+ * `spanner_ipc.node` (IPC, default) or `spanner_go.node` (FFI).
  */
 export function loadNativeAddon(): SpannerGoAddon | null {
   const state = getGlobalState();
@@ -397,12 +562,12 @@ export function loadNativeAddon(): SpannerGoAddon | null {
     return state.addon;
   }
 
+  const transport = getNativeCoreTransport();
+  state.transport = transport;
+  const addonFile = transport === 'ipc' ? 'spanner_ipc.node' : 'spanner_go.node';
   const candidatePaths = [
-    path.resolve(
-      __dirname,
-      '../../spanner-native/build/Release/spanner_go.node',
-    ),
-    path.resolve(__dirname, '../spanner-native/build/Release/spanner_go.node'),
+    path.resolve(__dirname, '../../spanner-native/build/Release', addonFile),
+    path.resolve(__dirname, '../spanner-native/build/Release', addonFile),
   ];
 
   for (const candidate of candidatePaths) {
@@ -410,6 +575,9 @@ export function loadNativeAddon(): SpannerGoAddon | null {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const loaded = require(candidate) as SpannerGoAddon;
       if (loaded && typeof loaded.executeStreamingSql === 'function') {
+        if (transport === 'ipc' && !configureIpcAddon(loaded, candidate)) {
+          continue;
+        }
         if (
           typeof loaded.setRootCertsPEM === 'function' &&
           tls.rootCertificates?.length
@@ -856,6 +1024,74 @@ export function closeNativeCore(): void {
   state.handleRefCounts?.clear();
   state.serviceHandles.clear();
   state.schemaCache.clear();
+}
+
+/**
+ * Reports which Go Shared Core transport is active and, for the IPC transport,
+ * the sidecar process state (pid, spawn count, connections). Benchmarks must
+ * add the sidecar process CPU when comparing IPC with FFI, because the FFI Go
+ * runtime runs inside the Node.js process.
+ */
+export function getNativeCoreTransportInfo(): NativeCoreTransportInfo {
+  const state = getGlobalState();
+  const transport = state.transport ?? getNativeCoreTransport();
+  const addon = state.addon;
+  const info: NativeCoreTransportInfo = {transport, loaded: !!addon};
+  if (addon && transport === 'ipc' && typeof addon.getSidecarInfo === 'function') {
+    try {
+      info.sidecar = addon.getSidecarInfo();
+    } catch (_) {
+      // Ignore diagnostics errors
+    }
+  }
+  return info;
+}
+
+/**
+ * Returns resource usage of the IPC sidecar process (getrusage CPU, current
+ * RSS and Go runtime counters), or null when the IPC transport is not active
+ * or the sidecar is not running. The sidecar is shared by every isolate of the
+ * process, so this also works from a thread (e.g. a benchmark's main thread)
+ * that has not issued queries itself: the addon is loaded on demand, which
+ * never spawns the sidecar.
+ */
+export function getNativeCoreSidecarStats(): NativeIpcSidecarStats | null {
+  const state = getGlobalState();
+  if (
+    state.addon === undefined &&
+    isNativeCoreEnabled() &&
+    getNativeCoreTransport() === 'ipc'
+  ) {
+    loadNativeAddon();
+  }
+  const addon = state.addon;
+  if (
+    !addon ||
+    state.transport !== 'ipc' ||
+    typeof addon.getSidecarStats !== 'function'
+  ) {
+    return null;
+  }
+  try {
+    return addon.getSidecarStats();
+  } catch (_) {
+    return null;
+  }
+}
+
+/**
+ * Stops the IPC sidecar process. In-flight queries fail with UNAVAILABLE and
+ * the next query transparently respawns the sidecar. No-op for FFI.
+ */
+export function shutdownNativeCoreSidecar(): void {
+  const state = getGlobalState();
+  if (state.transport === 'ipc') {
+    try {
+      state.addon?.shutdownSidecar?.();
+    } catch (_) {
+      // Ignore teardown errors
+    }
+  }
 }
 
 function buildHeadersString(

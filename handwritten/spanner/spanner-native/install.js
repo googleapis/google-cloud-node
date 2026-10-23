@@ -21,6 +21,15 @@ const path = require('path');
 const nativeDir = __dirname;
 const goDir = path.join(nativeDir, 'spanner-go');
 const prebuiltAddon = path.join(nativeDir, 'build', 'Release', 'spanner_go.node');
+const prebuiltIpcAddon = path.join(
+  nativeDir,
+  'build',
+  'Release',
+  'spanner_ipc.node',
+);
+const sidecarName =
+  process.platform === 'win32' ? 'spanner-go-sidecar.exe' : 'spanner-go-sidecar';
+const prebuiltSidecar = path.join(goDir, sidecarName);
 const goLibName =
   process.platform === 'darwin'
     ? 'libspanner_go.dylib'
@@ -35,6 +44,8 @@ if (
   process.env.SPANNER_FORCE_NATIVE_REBUILD !== 'true' &&
   fs.existsSync(prebuiltAddon) &&
   fs.existsSync(prebuiltGoLib) &&
+  (process.platform === 'win32' ||
+    (fs.existsSync(prebuiltIpcAddon) && fs.existsSync(prebuiltSidecar))) &&
   (!fs.existsSync(stampFile) ||
     fs.readFileSync(stampFile, 'utf8').trim() === currentStamp)
 ) {

@@ -17,6 +17,8 @@
 import * as assert from 'assert';
 import {before, after, beforeEach, afterEach, describe, it} from 'mocha';
 import * as path from 'path';
+import {spawn} from 'child_process';
+import {Worker} from 'worker_threads';
 import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
 import {PreciseDate} from '@google-cloud/precise-date';
@@ -24,6 +26,9 @@ import {
   isNativeCoreEnabled,
   loadNativeAddon,
   closeNativeCore,
+  getNativeCoreSidecarStats,
+  getNativeCoreTransportInfo,
+  parseNativeCoreTransport,
 } from '../src/native-core';
 import {Spanner, Float, Float32, Int, Struct} from '../src';
 
@@ -59,6 +64,17 @@ describe('Go Shared Native Core (NATIVE_CORE_ENABLED)', () => {
   });
 
   describe('Environment Variable Gating (isNativeCoreEnabled)', () => {
+    it('should parse SPANNER_NATIVE_CORE_TRANSPORT values (default ipc)', () => {
+      for (const val of ['ipc', 'IPC', 'sidecar', ' uds ']) {
+        assert.strictEqual(parseNativeCoreTransport(val), 'ipc', val);
+      }
+      for (const val of ['ffi', 'FFI', 'cgo', 'inprocess', 'in-process']) {
+        assert.strictEqual(parseNativeCoreTransport(val), 'ffi', val);
+      }
+      for (const val of [undefined, '', 'bogus']) {
+        assert.strictEqual(parseNativeCoreTransport(val), 'ipc', String(val));
+      }
+    });
     it('should default to false when no environment variable is set', () => {
       assert.strictEqual(isNativeCoreEnabled(), false);
     });
@@ -176,6 +192,21 @@ describe('Go Shared Native Core (NATIVE_CORE_ENABLED)', () => {
                details: 'Syntax error: Unexpected identifier "BAD_SQL"',
               message: 'Syntax error: Unexpected identifier "BAD_SQL"',
             });
+            return;
+          }
+
+          if (sql.includes('SLOW_QUERY')) {
+            const timer = setTimeout(() => {
+              call.write({
+                metadata: {
+                  rowType: {fields: [{name: 'id', type: {code: 'INT64'}}]},
+                },
+                values: [{stringValue: '1'}],
+                resumeToken: Buffer.from('tok-slow'),
+              });
+              call.end();
+            }, 3000);
+            call.on('cancelled', () => clearTimeout(timer));
             return;
           }
 
@@ -678,6 +709,217 @@ describe('Go Shared Native Core (NATIVE_CORE_ENABLED)', () => {
       } finally {
         await db.close();
       }
+    });
+
+    describe('IPC transport (Go Shared Core sidecar process)', () => {
+      const sleep = (ms: number) =>
+        new Promise<void>(resolve => setTimeout(resolve, ms));
+
+      const isAlive = (pid: number): boolean => {
+        try {
+          process.kill(pid, 0);
+          return true;
+        } catch (_) {
+          return false;
+        }
+      };
+
+      const waitForExit = async (pid: number, timeoutMs: number) => {
+        const deadline = Date.now() + timeoutMs;
+        while (Date.now() < deadline) {
+          if (!isAlive(pid)) {
+            return true;
+          }
+          await sleep(25);
+        }
+        return !isAlive(pid);
+      };
+
+      const newDb = () => {
+        const spanner = new Spanner({
+          projectId: 'test-proj',
+          disableBuiltInMetrics: true,
+        });
+        return spanner.instance('test-inst').database('test-db');
+      };
+
+      before(function () {
+        process.env.NATIVE_CORE_ENABLED = 'true';
+        if (getNativeCoreTransportInfo().transport !== 'ipc') {
+          this.skip();
+        }
+      });
+
+      beforeEach(() => {
+        process.env.NATIVE_CORE_ENABLED = 'true';
+        process.env.SPANNER_EMULATOR_HOST = serverHost;
+      });
+
+      it('should run every client through one shared sidecar process', async () => {
+        const db1 = newDb();
+        const db2 = newDb();
+        try {
+          const [rows1] = await db1.run('SELECT * FROM ScalarTable');
+          const before = getNativeCoreTransportInfo().sidecar!;
+          const [rows2] = await db2.run('SELECT * FROM ScalarTable');
+          const after = getNativeCoreTransportInfo().sidecar!;
+          assert.strictEqual(rows1.length, 1);
+          assert.strictEqual(rows2.length, 1);
+          assert.strictEqual(after.running, true);
+          assert.ok(after.pid > 0);
+          assert.notStrictEqual(after.pid, process.pid);
+          assert.strictEqual(after.pid, before.pid);
+          assert.strictEqual(after.spawnCount, before.spawnCount);
+          assert.ok(isAlive(after.pid));
+        } finally {
+          await db1.close();
+          await db2.close();
+        }
+      });
+
+      it('should report sidecar resource usage for benchmark CPU attribution', async () => {
+        const db = newDb();
+        try {
+          await db.run('SELECT * FROM ScalarTable');
+          const stats = getNativeCoreSidecarStats();
+          assert.ok(stats);
+          assert.strictEqual(
+            stats!.pid,
+            getNativeCoreTransportInfo().sidecar!.pid,
+          );
+          assert.ok(stats!.utimeUs + stats!.stimeUs > 0);
+          assert.ok(stats!.goroutines > 0);
+          assert.ok(stats!.services >= 1);
+        } finally {
+          await db.close();
+        }
+      });
+
+      it('should fail in-flight queries with UNAVAILABLE when the sidecar dies', async () => {
+        const db = newDb();
+        try {
+          await db.run('SELECT * FROM ScalarTable');
+          const pid = getNativeCoreTransportInfo().sidecar!.pid;
+          const pending = db.run('SELECT * FROM T /* SLOW_QUERY */').then(
+            () => null,
+            (err: Error & {code?: number}) => err,
+          );
+          await sleep(300);
+          process.kill(pid, 'SIGKILL');
+          const err = await pending;
+          assert.ok(err, 'expected the in-flight query to fail');
+          assert.strictEqual(err!.code, grpc.status.UNAVAILABLE);
+          assert.ok(/sidecar/i.test(err!.message), err!.message);
+          assert.ok(await waitForExit(pid, 5000));
+        } finally {
+          await db.close();
+        }
+      });
+
+      it('should transparently respawn the sidecar and re-init services after a crash', async () => {
+        const db = newDb();
+        try {
+          await db.run('SELECT * FROM ScalarTable');
+          const before = getNativeCoreTransportInfo().sidecar!;
+          process.kill(before.pid, 'SIGKILL');
+          assert.ok(await waitForExit(before.pid, 5000));
+          const [rows] = await db.run('SELECT * FROM ScalarTable');
+          assert.strictEqual(rows.length, 1);
+          const after = getNativeCoreTransportInfo().sidecar!;
+          assert.strictEqual(after.running, true);
+          assert.notStrictEqual(after.pid, before.pid);
+          assert.strictEqual(after.spawnCount, before.spawnCount + 1);
+        } finally {
+          await db.close();
+        }
+      });
+
+      it('should share one sidecar process across worker_threads', async () => {
+        const db = newDb();
+        let worker: Worker | undefined;
+        try {
+          await db.run('SELECT * FROM ScalarTable');
+          const mainPid = getNativeCoreTransportInfo().sidecar!.pid;
+          const srcDir = path.resolve(__dirname, '..', 'src');
+          const workerCode = `
+            const {parentPort, workerData} = require('worker_threads');
+            const {Spanner} = require(workerData.srcDir + '/index.js');
+            const nc = require(workerData.srcDir + '/native-core.js');
+            (async () => {
+              const spanner = new Spanner({projectId: 'test-proj', disableBuiltInMetrics: true});
+              const db = spanner.instance('test-inst').database('test-db');
+              const [rows] = await db.run('SELECT * FROM ScalarTable');
+              const info = nc.getNativeCoreTransportInfo();
+              await db.close();
+              parentPort.postMessage({
+                rows: rows.length,
+                transport: info.transport,
+                pid: info.sidecar ? info.sidecar.pid : -1,
+              });
+            })().catch(e => parentPort.postMessage({error: String((e && e.stack) || e)}));
+          `;
+          worker = new Worker(workerCode, {eval: true, workerData: {srcDir}});
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const result: any = await new Promise((resolve, reject) => {
+            worker!.once('message', resolve);
+            worker!.once('error', reject);
+          });
+          assert.ifError(result.error);
+          assert.strictEqual(result.rows, 1);
+          assert.strictEqual(result.transport, 'ipc');
+          assert.strictEqual(result.pid, mainPid);
+        } finally {
+          if (worker) {
+            await worker.terminate();
+          }
+          await db.close();
+        }
+      });
+
+      it('should never leave an orphan sidecar when the Node.js process is SIGKILLed', async () => {
+        const srcDir = path.resolve(__dirname, '..', 'src');
+        const script = `
+          const {Spanner} = require(${JSON.stringify(path.join(srcDir, 'index.js'))});
+          const nc = require(${JSON.stringify(path.join(srcDir, 'native-core.js'))});
+          (async () => {
+            const spanner = new Spanner({projectId: 'test-proj', disableBuiltInMetrics: true});
+            const db = spanner.instance('test-inst').database('test-db');
+            const [rows] = await db.run('SELECT * FROM ScalarTable');
+            process.stdout.write('SIDECAR_PID=' + nc.getNativeCoreTransportInfo().sidecar.pid + ' ROWS=' + rows.length + '\\n', () => {
+              process.kill(process.pid, 'SIGKILL');
+            });
+          })();
+        `;
+        const child = spawn(process.execPath, ['-e', script], {
+          env: {
+            ...process.env,
+            NATIVE_CORE_ENABLED: 'true',
+            SPANNER_EMULATOR_HOST: serverHost,
+            SPANNER_NATIVE_QUIET: '1',
+          },
+          stdio: ['ignore', 'pipe', 'inherit'],
+        });
+        let out = '';
+        child.stdout!.on('data', d => (out += d.toString()));
+        const signal = await new Promise<string | null>(resolve => {
+          const timer = setTimeout(() => {
+            child.kill('SIGKILL');
+            resolve('timeout');
+          }, 15000);
+          child.on('exit', (_code, sig) => {
+            clearTimeout(timer);
+            resolve(sig);
+          });
+        });
+        assert.strictEqual(signal, 'SIGKILL', out);
+        const match = /SIDECAR_PID=(\d+) ROWS=1/.exec(out);
+        assert.ok(match, out);
+        const sidecarPid = Number(match![1]);
+        assert.ok(
+          await waitForExit(sidecarPid, 5000),
+          'the sidecar must exit once its parent is gone',
+        );
+      });
     });
   });
 });

@@ -19,6 +19,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "${SCRIPT_DIR}"
 
 TARGET_OS="$(go env GOOS)"
+
+# 1. In-process FFI transport: cgo shared library loaded by spanner_go.node.
 case "${TARGET_OS}" in
   darwin)
     CGO_ENABLED=1 go build -buildmode=c-shared -o libspanner_go.dylib .
@@ -28,5 +30,16 @@ case "${TARGET_OS}" in
     ;;
   *)
     CGO_ENABLED=1 go build -buildmode=c-shared -o libspanner_go.so .
+    ;;
+esac
+
+# 2. Out-of-process IPC transport: pure-Go sidecar executable spawned by
+#    spanner_ipc.node (see ../IPC_PROTOCOL.md). Static, no cgo.
+case "${TARGET_OS}" in
+  windows)
+    CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o spanner-go-sidecar.exe ./sidecar
+    ;;
+  *)
+    CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o spanner-go-sidecar ./sidecar
     ;;
 esac

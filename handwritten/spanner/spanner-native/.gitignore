@@ -1,3 +1,5 @@
 build/
 spanner-go/libspanner_go.so
 spanner-go/libspanner_go.h
+spanner-go/spanner-go-sidecar
+spanner-go/spanner-go-sidecar.exe
