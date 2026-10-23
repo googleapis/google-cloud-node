@@ -5,6 +5,10 @@ on:
   pull_request:
 name: presubmit-bun
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 env:
   JS_RUNTIME: bun
   MOCHA_PARALLEL: 'false'

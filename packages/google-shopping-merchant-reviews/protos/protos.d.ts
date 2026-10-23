@@ -26,6 +26,1524 @@ export namespace google {
             /** Namespace reviews. */
             namespace reviews {
 
+                /** Namespace v1. */
+                namespace v1 {
+
+                    /** Represents a ProductReviewsService */
+                    class ProductReviewsService extends $protobuf.rpc.Service {
+
+                        /**
+                         * Constructs a new ProductReviewsService service.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                        /**
+                         * Creates new ProductReviewsService service using the specified rpc implementation.
+                         * @param rpcImpl RPC implementation
+                         * @param [requestDelimited=false] Whether requests are length-delimited
+                         * @param [responseDelimited=false] Whether responses are length-delimited
+                         * @returns RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): ProductReviewsService;
+
+                        /**
+                         * Calls GetProductReview.
+                         * @param request GetProductReviewRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ProductReview
+                         */
+                        public getProductReview(request: google.shopping.merchant.reviews.v1.IGetProductReviewRequest, callback: google.shopping.merchant.reviews.v1.ProductReviewsService.GetProductReviewCallback): void;
+
+                        /**
+                         * Calls GetProductReview.
+                         * @param request GetProductReviewRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getProductReview(request: google.shopping.merchant.reviews.v1.IGetProductReviewRequest): Promise<google.shopping.merchant.reviews.v1.ProductReview>;
+
+                        /**
+                         * Calls ListProductReviews.
+                         * @param request ListProductReviewsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListProductReviewsResponse
+                         */
+                        public listProductReviews(request: google.shopping.merchant.reviews.v1.IListProductReviewsRequest, callback: google.shopping.merchant.reviews.v1.ProductReviewsService.ListProductReviewsCallback): void;
+
+                        /**
+                         * Calls ListProductReviews.
+                         * @param request ListProductReviewsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listProductReviews(request: google.shopping.merchant.reviews.v1.IListProductReviewsRequest): Promise<google.shopping.merchant.reviews.v1.ListProductReviewsResponse>;
+
+                        /**
+                         * Calls InsertProductReview.
+                         * @param request InsertProductReviewRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ProductReview
+                         */
+                        public insertProductReview(request: google.shopping.merchant.reviews.v1.IInsertProductReviewRequest, callback: google.shopping.merchant.reviews.v1.ProductReviewsService.InsertProductReviewCallback): void;
+
+                        /**
+                         * Calls InsertProductReview.
+                         * @param request InsertProductReviewRequest message or plain object
+                         * @returns Promise
+                         */
+                        public insertProductReview(request: google.shopping.merchant.reviews.v1.IInsertProductReviewRequest): Promise<google.shopping.merchant.reviews.v1.ProductReview>;
+
+                        /**
+                         * Calls DeleteProductReview.
+                         * @param request DeleteProductReviewRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteProductReview(request: google.shopping.merchant.reviews.v1.IDeleteProductReviewRequest, callback: google.shopping.merchant.reviews.v1.ProductReviewsService.DeleteProductReviewCallback): void;
+
+                        /**
+                         * Calls DeleteProductReview.
+                         * @param request DeleteProductReviewRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteProductReview(request: google.shopping.merchant.reviews.v1.IDeleteProductReviewRequest): Promise<google.protobuf.Empty>;
+                    }
+
+                    namespace ProductReviewsService {
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.reviews.v1.ProductReviewsService|getProductReview}.
+                         * @param error Error, if any
+                         * @param [response] ProductReview
+                         */
+                        type GetProductReviewCallback = (error: (Error|null), response?: google.shopping.merchant.reviews.v1.ProductReview) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.reviews.v1.ProductReviewsService|listProductReviews}.
+                         * @param error Error, if any
+                         * @param [response] ListProductReviewsResponse
+                         */
+                        type ListProductReviewsCallback = (error: (Error|null), response?: google.shopping.merchant.reviews.v1.ListProductReviewsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.reviews.v1.ProductReviewsService|insertProductReview}.
+                         * @param error Error, if any
+                         * @param [response] ProductReview
+                         */
+                        type InsertProductReviewCallback = (error: (Error|null), response?: google.shopping.merchant.reviews.v1.ProductReview) => void;
+
+                        /**
+                         * Callback as used by {@link google.shopping.merchant.reviews.v1.ProductReviewsService|deleteProductReview}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteProductReviewCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+                    }
+
+                    /** Properties of a GetProductReviewRequest. */
+                    interface IGetProductReviewRequest {
+
+                        /** GetProductReviewRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetProductReviewRequest. */
+                    class GetProductReviewRequest implements IGetProductReviewRequest {
+
+                        /**
+                         * Constructs a new GetProductReviewRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reviews.v1.IGetProductReviewRequest);
+
+                        /** GetProductReviewRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetProductReviewRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetProductReviewRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reviews.v1.IGetProductReviewRequest): google.shopping.merchant.reviews.v1.GetProductReviewRequest;
+
+                        /**
+                         * Encodes the specified GetProductReviewRequest message. Does not implicitly {@link google.shopping.merchant.reviews.v1.GetProductReviewRequest.verify|verify} messages.
+                         * @param message GetProductReviewRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reviews.v1.IGetProductReviewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetProductReviewRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.reviews.v1.GetProductReviewRequest.verify|verify} messages.
+                         * @param message GetProductReviewRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reviews.v1.IGetProductReviewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetProductReviewRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetProductReviewRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reviews.v1.GetProductReviewRequest;
+
+                        /**
+                         * Decodes a GetProductReviewRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetProductReviewRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reviews.v1.GetProductReviewRequest;
+
+                        /**
+                         * Verifies a GetProductReviewRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetProductReviewRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetProductReviewRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reviews.v1.GetProductReviewRequest;
+
+                        /**
+                         * Creates a plain object from a GetProductReviewRequest message. Also converts values to other types if specified.
+                         * @param message GetProductReviewRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reviews.v1.GetProductReviewRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetProductReviewRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetProductReviewRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteProductReviewRequest. */
+                    interface IDeleteProductReviewRequest {
+
+                        /** DeleteProductReviewRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteProductReviewRequest. */
+                    class DeleteProductReviewRequest implements IDeleteProductReviewRequest {
+
+                        /**
+                         * Constructs a new DeleteProductReviewRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reviews.v1.IDeleteProductReviewRequest);
+
+                        /** DeleteProductReviewRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteProductReviewRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteProductReviewRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reviews.v1.IDeleteProductReviewRequest): google.shopping.merchant.reviews.v1.DeleteProductReviewRequest;
+
+                        /**
+                         * Encodes the specified DeleteProductReviewRequest message. Does not implicitly {@link google.shopping.merchant.reviews.v1.DeleteProductReviewRequest.verify|verify} messages.
+                         * @param message DeleteProductReviewRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reviews.v1.IDeleteProductReviewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteProductReviewRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.reviews.v1.DeleteProductReviewRequest.verify|verify} messages.
+                         * @param message DeleteProductReviewRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reviews.v1.IDeleteProductReviewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteProductReviewRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteProductReviewRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reviews.v1.DeleteProductReviewRequest;
+
+                        /**
+                         * Decodes a DeleteProductReviewRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteProductReviewRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reviews.v1.DeleteProductReviewRequest;
+
+                        /**
+                         * Verifies a DeleteProductReviewRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteProductReviewRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteProductReviewRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reviews.v1.DeleteProductReviewRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteProductReviewRequest message. Also converts values to other types if specified.
+                         * @param message DeleteProductReviewRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reviews.v1.DeleteProductReviewRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteProductReviewRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteProductReviewRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListProductReviewsRequest. */
+                    interface IListProductReviewsRequest {
+
+                        /** ListProductReviewsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListProductReviewsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListProductReviewsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListProductReviewsRequest. */
+                    class ListProductReviewsRequest implements IListProductReviewsRequest {
+
+                        /**
+                         * Constructs a new ListProductReviewsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reviews.v1.IListProductReviewsRequest);
+
+                        /** ListProductReviewsRequest parent. */
+                        public parent: string;
+
+                        /** ListProductReviewsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListProductReviewsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListProductReviewsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListProductReviewsRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reviews.v1.IListProductReviewsRequest): google.shopping.merchant.reviews.v1.ListProductReviewsRequest;
+
+                        /**
+                         * Encodes the specified ListProductReviewsRequest message. Does not implicitly {@link google.shopping.merchant.reviews.v1.ListProductReviewsRequest.verify|verify} messages.
+                         * @param message ListProductReviewsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reviews.v1.IListProductReviewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListProductReviewsRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.reviews.v1.ListProductReviewsRequest.verify|verify} messages.
+                         * @param message ListProductReviewsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reviews.v1.IListProductReviewsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListProductReviewsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListProductReviewsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reviews.v1.ListProductReviewsRequest;
+
+                        /**
+                         * Decodes a ListProductReviewsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListProductReviewsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reviews.v1.ListProductReviewsRequest;
+
+                        /**
+                         * Verifies a ListProductReviewsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListProductReviewsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListProductReviewsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reviews.v1.ListProductReviewsRequest;
+
+                        /**
+                         * Creates a plain object from a ListProductReviewsRequest message. Also converts values to other types if specified.
+                         * @param message ListProductReviewsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reviews.v1.ListProductReviewsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListProductReviewsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListProductReviewsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an InsertProductReviewRequest. */
+                    interface IInsertProductReviewRequest {
+
+                        /** InsertProductReviewRequest parent */
+                        parent?: (string|null);
+
+                        /** InsertProductReviewRequest productReview */
+                        productReview?: (google.shopping.merchant.reviews.v1.IProductReview|null);
+
+                        /** InsertProductReviewRequest dataSource */
+                        dataSource?: (string|null);
+                    }
+
+                    /** Represents an InsertProductReviewRequest. */
+                    class InsertProductReviewRequest implements IInsertProductReviewRequest {
+
+                        /**
+                         * Constructs a new InsertProductReviewRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reviews.v1.IInsertProductReviewRequest);
+
+                        /** InsertProductReviewRequest parent. */
+                        public parent: string;
+
+                        /** InsertProductReviewRequest productReview. */
+                        public productReview?: (google.shopping.merchant.reviews.v1.IProductReview|null);
+
+                        /** InsertProductReviewRequest dataSource. */
+                        public dataSource: string;
+
+                        /**
+                         * Creates a new InsertProductReviewRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns InsertProductReviewRequest instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reviews.v1.IInsertProductReviewRequest): google.shopping.merchant.reviews.v1.InsertProductReviewRequest;
+
+                        /**
+                         * Encodes the specified InsertProductReviewRequest message. Does not implicitly {@link google.shopping.merchant.reviews.v1.InsertProductReviewRequest.verify|verify} messages.
+                         * @param message InsertProductReviewRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reviews.v1.IInsertProductReviewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified InsertProductReviewRequest message, length delimited. Does not implicitly {@link google.shopping.merchant.reviews.v1.InsertProductReviewRequest.verify|verify} messages.
+                         * @param message InsertProductReviewRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reviews.v1.IInsertProductReviewRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an InsertProductReviewRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns InsertProductReviewRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reviews.v1.InsertProductReviewRequest;
+
+                        /**
+                         * Decodes an InsertProductReviewRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns InsertProductReviewRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reviews.v1.InsertProductReviewRequest;
+
+                        /**
+                         * Verifies an InsertProductReviewRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an InsertProductReviewRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns InsertProductReviewRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reviews.v1.InsertProductReviewRequest;
+
+                        /**
+                         * Creates a plain object from an InsertProductReviewRequest message. Also converts values to other types if specified.
+                         * @param message InsertProductReviewRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reviews.v1.InsertProductReviewRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this InsertProductReviewRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for InsertProductReviewRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListProductReviewsResponse. */
+                    interface IListProductReviewsResponse {
+
+                        /** ListProductReviewsResponse productReviews */
+                        productReviews?: (google.shopping.merchant.reviews.v1.IProductReview[]|null);
+
+                        /** ListProductReviewsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListProductReviewsResponse. */
+                    class ListProductReviewsResponse implements IListProductReviewsResponse {
+
+                        /**
+                         * Constructs a new ListProductReviewsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reviews.v1.IListProductReviewsResponse);
+
+                        /** ListProductReviewsResponse productReviews. */
+                        public productReviews: google.shopping.merchant.reviews.v1.IProductReview[];
+
+                        /** ListProductReviewsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListProductReviewsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListProductReviewsResponse instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reviews.v1.IListProductReviewsResponse): google.shopping.merchant.reviews.v1.ListProductReviewsResponse;
+
+                        /**
+                         * Encodes the specified ListProductReviewsResponse message. Does not implicitly {@link google.shopping.merchant.reviews.v1.ListProductReviewsResponse.verify|verify} messages.
+                         * @param message ListProductReviewsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reviews.v1.IListProductReviewsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListProductReviewsResponse message, length delimited. Does not implicitly {@link google.shopping.merchant.reviews.v1.ListProductReviewsResponse.verify|verify} messages.
+                         * @param message ListProductReviewsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reviews.v1.IListProductReviewsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListProductReviewsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListProductReviewsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reviews.v1.ListProductReviewsResponse;
+
+                        /**
+                         * Decodes a ListProductReviewsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListProductReviewsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reviews.v1.ListProductReviewsResponse;
+
+                        /**
+                         * Verifies a ListProductReviewsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListProductReviewsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListProductReviewsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reviews.v1.ListProductReviewsResponse;
+
+                        /**
+                         * Creates a plain object from a ListProductReviewsResponse message. Also converts values to other types if specified.
+                         * @param message ListProductReviewsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reviews.v1.ListProductReviewsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListProductReviewsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListProductReviewsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ProductReview. */
+                    interface IProductReview {
+
+                        /** ProductReview name */
+                        name?: (string|null);
+
+                        /** ProductReview productReviewId */
+                        productReviewId?: (string|null);
+
+                        /** ProductReview productReviewAttributes */
+                        productReviewAttributes?: (google.shopping.merchant.reviews.v1.IProductReviewAttributes|null);
+
+                        /** ProductReview customAttributes */
+                        customAttributes?: (google.shopping.type.ICustomAttribute[]|null);
+
+                        /** ProductReview dataSource */
+                        dataSource?: (string|null);
+
+                        /** ProductReview productReviewStatus */
+                        productReviewStatus?: (google.shopping.merchant.reviews.v1.IProductReviewStatus|null);
+                    }
+
+                    /** Represents a ProductReview. */
+                    class ProductReview implements IProductReview {
+
+                        /**
+                         * Constructs a new ProductReview.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reviews.v1.IProductReview);
+
+                        /** ProductReview name. */
+                        public name: string;
+
+                        /** ProductReview productReviewId. */
+                        public productReviewId: string;
+
+                        /** ProductReview productReviewAttributes. */
+                        public productReviewAttributes?: (google.shopping.merchant.reviews.v1.IProductReviewAttributes|null);
+
+                        /** ProductReview customAttributes. */
+                        public customAttributes: google.shopping.type.ICustomAttribute[];
+
+                        /** ProductReview dataSource. */
+                        public dataSource: string;
+
+                        /** ProductReview productReviewStatus. */
+                        public productReviewStatus?: (google.shopping.merchant.reviews.v1.IProductReviewStatus|null);
+
+                        /**
+                         * Creates a new ProductReview instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProductReview instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reviews.v1.IProductReview): google.shopping.merchant.reviews.v1.ProductReview;
+
+                        /**
+                         * Encodes the specified ProductReview message. Does not implicitly {@link google.shopping.merchant.reviews.v1.ProductReview.verify|verify} messages.
+                         * @param message ProductReview message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reviews.v1.IProductReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProductReview message, length delimited. Does not implicitly {@link google.shopping.merchant.reviews.v1.ProductReview.verify|verify} messages.
+                         * @param message ProductReview message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reviews.v1.IProductReview, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProductReview message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProductReview
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reviews.v1.ProductReview;
+
+                        /**
+                         * Decodes a ProductReview message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProductReview
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reviews.v1.ProductReview;
+
+                        /**
+                         * Verifies a ProductReview message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProductReview message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProductReview
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reviews.v1.ProductReview;
+
+                        /**
+                         * Creates a plain object from a ProductReview message. Also converts values to other types if specified.
+                         * @param message ProductReview
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reviews.v1.ProductReview, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProductReview to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProductReview
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ProductReviewAttributes. */
+                    interface IProductReviewAttributes {
+
+                        /** ProductReviewAttributes aggregatorName */
+                        aggregatorName?: (string|null);
+
+                        /** ProductReviewAttributes subclientName */
+                        subclientName?: (string|null);
+
+                        /** ProductReviewAttributes publisherName */
+                        publisherName?: (string|null);
+
+                        /** ProductReviewAttributes publisherFavicon */
+                        publisherFavicon?: (string|null);
+
+                        /** ProductReviewAttributes reviewerId */
+                        reviewerId?: (string|null);
+
+                        /** ProductReviewAttributes reviewerIsAnonymous */
+                        reviewerIsAnonymous?: (boolean|null);
+
+                        /** ProductReviewAttributes reviewerUsername */
+                        reviewerUsername?: (string|null);
+
+                        /** ProductReviewAttributes reviewLanguage */
+                        reviewLanguage?: (string|null);
+
+                        /** ProductReviewAttributes reviewCountry */
+                        reviewCountry?: (string|null);
+
+                        /** ProductReviewAttributes reviewTime */
+                        reviewTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ProductReviewAttributes title */
+                        title?: (string|null);
+
+                        /** ProductReviewAttributes content */
+                        content?: (string|null);
+
+                        /** ProductReviewAttributes pros */
+                        pros?: (string[]|null);
+
+                        /** ProductReviewAttributes cons */
+                        cons?: (string[]|null);
+
+                        /** ProductReviewAttributes reviewLink */
+                        reviewLink?: (google.shopping.merchant.reviews.v1.ProductReviewAttributes.IReviewLink|null);
+
+                        /** ProductReviewAttributes reviewerImageLinks */
+                        reviewerImageLinks?: (string[]|null);
+
+                        /** ProductReviewAttributes minRating */
+                        minRating?: (number|Long|string|null);
+
+                        /** ProductReviewAttributes maxRating */
+                        maxRating?: (number|Long|string|null);
+
+                        /** ProductReviewAttributes rating */
+                        rating?: (number|null);
+
+                        /** ProductReviewAttributes productNames */
+                        productNames?: (string[]|null);
+
+                        /** ProductReviewAttributes productLinks */
+                        productLinks?: (string[]|null);
+
+                        /** ProductReviewAttributes asins */
+                        asins?: (string[]|null);
+
+                        /** ProductReviewAttributes gtins */
+                        gtins?: (string[]|null);
+
+                        /** ProductReviewAttributes mpns */
+                        mpns?: (string[]|null);
+
+                        /** ProductReviewAttributes skus */
+                        skus?: (string[]|null);
+
+                        /** ProductReviewAttributes brands */
+                        brands?: (string[]|null);
+
+                        /** ProductReviewAttributes isSpam */
+                        isSpam?: (boolean|null);
+
+                        /** ProductReviewAttributes isVerifiedPurchase */
+                        isVerifiedPurchase?: (boolean|null);
+
+                        /** ProductReviewAttributes isIncentivizedReview */
+                        isIncentivizedReview?: (boolean|null);
+
+                        /** ProductReviewAttributes collectionMethod */
+                        collectionMethod?: (google.shopping.merchant.reviews.v1.ProductReviewAttributes.CollectionMethod|keyof typeof google.shopping.merchant.reviews.v1.ProductReviewAttributes.CollectionMethod|null);
+
+                        /** ProductReviewAttributes transactionId */
+                        transactionId?: (string|null);
+                    }
+
+                    /** Represents a ProductReviewAttributes. */
+                    class ProductReviewAttributes implements IProductReviewAttributes {
+
+                        /**
+                         * Constructs a new ProductReviewAttributes.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reviews.v1.IProductReviewAttributes);
+
+                        /** ProductReviewAttributes aggregatorName. */
+                        public aggregatorName?: (string|null);
+
+                        /** ProductReviewAttributes subclientName. */
+                        public subclientName?: (string|null);
+
+                        /** ProductReviewAttributes publisherName. */
+                        public publisherName?: (string|null);
+
+                        /** ProductReviewAttributes publisherFavicon. */
+                        public publisherFavicon?: (string|null);
+
+                        /** ProductReviewAttributes reviewerId. */
+                        public reviewerId?: (string|null);
+
+                        /** ProductReviewAttributes reviewerIsAnonymous. */
+                        public reviewerIsAnonymous?: (boolean|null);
+
+                        /** ProductReviewAttributes reviewerUsername. */
+                        public reviewerUsername?: (string|null);
+
+                        /** ProductReviewAttributes reviewLanguage. */
+                        public reviewLanguage?: (string|null);
+
+                        /** ProductReviewAttributes reviewCountry. */
+                        public reviewCountry?: (string|null);
+
+                        /** ProductReviewAttributes reviewTime. */
+                        public reviewTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ProductReviewAttributes title. */
+                        public title?: (string|null);
+
+                        /** ProductReviewAttributes content. */
+                        public content?: (string|null);
+
+                        /** ProductReviewAttributes pros. */
+                        public pros: string[];
+
+                        /** ProductReviewAttributes cons. */
+                        public cons: string[];
+
+                        /** ProductReviewAttributes reviewLink. */
+                        public reviewLink?: (google.shopping.merchant.reviews.v1.ProductReviewAttributes.IReviewLink|null);
+
+                        /** ProductReviewAttributes reviewerImageLinks. */
+                        public reviewerImageLinks: string[];
+
+                        /** ProductReviewAttributes minRating. */
+                        public minRating?: (number|Long|string|null);
+
+                        /** ProductReviewAttributes maxRating. */
+                        public maxRating?: (number|Long|string|null);
+
+                        /** ProductReviewAttributes rating. */
+                        public rating?: (number|null);
+
+                        /** ProductReviewAttributes productNames. */
+                        public productNames: string[];
+
+                        /** ProductReviewAttributes productLinks. */
+                        public productLinks: string[];
+
+                        /** ProductReviewAttributes asins. */
+                        public asins: string[];
+
+                        /** ProductReviewAttributes gtins. */
+                        public gtins: string[];
+
+                        /** ProductReviewAttributes mpns. */
+                        public mpns: string[];
+
+                        /** ProductReviewAttributes skus. */
+                        public skus: string[];
+
+                        /** ProductReviewAttributes brands. */
+                        public brands: string[];
+
+                        /** ProductReviewAttributes isSpam. */
+                        public isSpam?: (boolean|null);
+
+                        /** ProductReviewAttributes isVerifiedPurchase. */
+                        public isVerifiedPurchase?: (boolean|null);
+
+                        /** ProductReviewAttributes isIncentivizedReview. */
+                        public isIncentivizedReview?: (boolean|null);
+
+                        /** ProductReviewAttributes collectionMethod. */
+                        public collectionMethod: (google.shopping.merchant.reviews.v1.ProductReviewAttributes.CollectionMethod|keyof typeof google.shopping.merchant.reviews.v1.ProductReviewAttributes.CollectionMethod);
+
+                        /** ProductReviewAttributes transactionId. */
+                        public transactionId: string;
+
+                        /**
+                         * Creates a new ProductReviewAttributes instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProductReviewAttributes instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reviews.v1.IProductReviewAttributes): google.shopping.merchant.reviews.v1.ProductReviewAttributes;
+
+                        /**
+                         * Encodes the specified ProductReviewAttributes message. Does not implicitly {@link google.shopping.merchant.reviews.v1.ProductReviewAttributes.verify|verify} messages.
+                         * @param message ProductReviewAttributes message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reviews.v1.IProductReviewAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProductReviewAttributes message, length delimited. Does not implicitly {@link google.shopping.merchant.reviews.v1.ProductReviewAttributes.verify|verify} messages.
+                         * @param message ProductReviewAttributes message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reviews.v1.IProductReviewAttributes, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProductReviewAttributes message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProductReviewAttributes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reviews.v1.ProductReviewAttributes;
+
+                        /**
+                         * Decodes a ProductReviewAttributes message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProductReviewAttributes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reviews.v1.ProductReviewAttributes;
+
+                        /**
+                         * Verifies a ProductReviewAttributes message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProductReviewAttributes message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProductReviewAttributes
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reviews.v1.ProductReviewAttributes;
+
+                        /**
+                         * Creates a plain object from a ProductReviewAttributes message. Also converts values to other types if specified.
+                         * @param message ProductReviewAttributes
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reviews.v1.ProductReviewAttributes, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProductReviewAttributes to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProductReviewAttributes
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ProductReviewAttributes {
+
+                        /** Properties of a ReviewLink. */
+                        interface IReviewLink {
+
+                            /** ReviewLink type */
+                            type?: (google.shopping.merchant.reviews.v1.ProductReviewAttributes.ReviewLink.Type|keyof typeof google.shopping.merchant.reviews.v1.ProductReviewAttributes.ReviewLink.Type|null);
+
+                            /** ReviewLink link */
+                            link?: (string|null);
+                        }
+
+                        /** Represents a ReviewLink. */
+                        class ReviewLink implements IReviewLink {
+
+                            /**
+                             * Constructs a new ReviewLink.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.reviews.v1.ProductReviewAttributes.IReviewLink);
+
+                            /** ReviewLink type. */
+                            public type: (google.shopping.merchant.reviews.v1.ProductReviewAttributes.ReviewLink.Type|keyof typeof google.shopping.merchant.reviews.v1.ProductReviewAttributes.ReviewLink.Type);
+
+                            /** ReviewLink link. */
+                            public link: string;
+
+                            /**
+                             * Creates a new ReviewLink instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ReviewLink instance
+                             */
+                            public static create(properties?: google.shopping.merchant.reviews.v1.ProductReviewAttributes.IReviewLink): google.shopping.merchant.reviews.v1.ProductReviewAttributes.ReviewLink;
+
+                            /**
+                             * Encodes the specified ReviewLink message. Does not implicitly {@link google.shopping.merchant.reviews.v1.ProductReviewAttributes.ReviewLink.verify|verify} messages.
+                             * @param message ReviewLink message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.reviews.v1.ProductReviewAttributes.IReviewLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ReviewLink message, length delimited. Does not implicitly {@link google.shopping.merchant.reviews.v1.ProductReviewAttributes.ReviewLink.verify|verify} messages.
+                             * @param message ReviewLink message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.reviews.v1.ProductReviewAttributes.IReviewLink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ReviewLink message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ReviewLink
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reviews.v1.ProductReviewAttributes.ReviewLink;
+
+                            /**
+                             * Decodes a ReviewLink message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ReviewLink
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reviews.v1.ProductReviewAttributes.ReviewLink;
+
+                            /**
+                             * Verifies a ReviewLink message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ReviewLink message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ReviewLink
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reviews.v1.ProductReviewAttributes.ReviewLink;
+
+                            /**
+                             * Creates a plain object from a ReviewLink message. Also converts values to other types if specified.
+                             * @param message ReviewLink
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.reviews.v1.ProductReviewAttributes.ReviewLink, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ReviewLink to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ReviewLink
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ReviewLink {
+
+                            /** Type enum. */
+                            enum Type {
+                                TYPE_UNSPECIFIED = 0,
+                                SINGLETON = 1,
+                                GROUP = 2
+                            }
+                        }
+
+                        /** CollectionMethod enum. */
+                        enum CollectionMethod {
+                            COLLECTION_METHOD_UNSPECIFIED = 0,
+                            UNSOLICITED = 1,
+                            POST_FULFILLMENT = 2
+                        }
+                    }
+
+                    /** Properties of a ProductReviewStatus. */
+                    interface IProductReviewStatus {
+
+                        /** ProductReviewStatus destinationStatuses */
+                        destinationStatuses?: (google.shopping.merchant.reviews.v1.ProductReviewStatus.IProductReviewDestinationStatus[]|null);
+
+                        /** ProductReviewStatus itemLevelIssues */
+                        itemLevelIssues?: (google.shopping.merchant.reviews.v1.ProductReviewStatus.IProductReviewItemLevelIssue[]|null);
+
+                        /** ProductReviewStatus createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ProductReviewStatus lastUpdateTime */
+                        lastUpdateTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a ProductReviewStatus. */
+                    class ProductReviewStatus implements IProductReviewStatus {
+
+                        /**
+                         * Constructs a new ProductReviewStatus.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.reviews.v1.IProductReviewStatus);
+
+                        /** ProductReviewStatus destinationStatuses. */
+                        public destinationStatuses: google.shopping.merchant.reviews.v1.ProductReviewStatus.IProductReviewDestinationStatus[];
+
+                        /** ProductReviewStatus itemLevelIssues. */
+                        public itemLevelIssues: google.shopping.merchant.reviews.v1.ProductReviewStatus.IProductReviewItemLevelIssue[];
+
+                        /** ProductReviewStatus createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ProductReviewStatus lastUpdateTime. */
+                        public lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new ProductReviewStatus instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ProductReviewStatus instance
+                         */
+                        public static create(properties?: google.shopping.merchant.reviews.v1.IProductReviewStatus): google.shopping.merchant.reviews.v1.ProductReviewStatus;
+
+                        /**
+                         * Encodes the specified ProductReviewStatus message. Does not implicitly {@link google.shopping.merchant.reviews.v1.ProductReviewStatus.verify|verify} messages.
+                         * @param message ProductReviewStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.reviews.v1.IProductReviewStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ProductReviewStatus message, length delimited. Does not implicitly {@link google.shopping.merchant.reviews.v1.ProductReviewStatus.verify|verify} messages.
+                         * @param message ProductReviewStatus message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.reviews.v1.IProductReviewStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ProductReviewStatus message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ProductReviewStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reviews.v1.ProductReviewStatus;
+
+                        /**
+                         * Decodes a ProductReviewStatus message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ProductReviewStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reviews.v1.ProductReviewStatus;
+
+                        /**
+                         * Verifies a ProductReviewStatus message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ProductReviewStatus message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ProductReviewStatus
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reviews.v1.ProductReviewStatus;
+
+                        /**
+                         * Creates a plain object from a ProductReviewStatus message. Also converts values to other types if specified.
+                         * @param message ProductReviewStatus
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.reviews.v1.ProductReviewStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ProductReviewStatus to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ProductReviewStatus
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ProductReviewStatus {
+
+                        /** Properties of a ProductReviewDestinationStatus. */
+                        interface IProductReviewDestinationStatus {
+
+                            /** ProductReviewDestinationStatus reportingContext */
+                            reportingContext?: (google.shopping.type.ReportingContext.ReportingContextEnum|keyof typeof google.shopping.type.ReportingContext.ReportingContextEnum|null);
+                        }
+
+                        /** Represents a ProductReviewDestinationStatus. */
+                        class ProductReviewDestinationStatus implements IProductReviewDestinationStatus {
+
+                            /**
+                             * Constructs a new ProductReviewDestinationStatus.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.reviews.v1.ProductReviewStatus.IProductReviewDestinationStatus);
+
+                            /** ProductReviewDestinationStatus reportingContext. */
+                            public reportingContext: (google.shopping.type.ReportingContext.ReportingContextEnum|keyof typeof google.shopping.type.ReportingContext.ReportingContextEnum);
+
+                            /**
+                             * Creates a new ProductReviewDestinationStatus instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ProductReviewDestinationStatus instance
+                             */
+                            public static create(properties?: google.shopping.merchant.reviews.v1.ProductReviewStatus.IProductReviewDestinationStatus): google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewDestinationStatus;
+
+                            /**
+                             * Encodes the specified ProductReviewDestinationStatus message. Does not implicitly {@link google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewDestinationStatus.verify|verify} messages.
+                             * @param message ProductReviewDestinationStatus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.reviews.v1.ProductReviewStatus.IProductReviewDestinationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ProductReviewDestinationStatus message, length delimited. Does not implicitly {@link google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewDestinationStatus.verify|verify} messages.
+                             * @param message ProductReviewDestinationStatus message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.reviews.v1.ProductReviewStatus.IProductReviewDestinationStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ProductReviewDestinationStatus message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ProductReviewDestinationStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewDestinationStatus;
+
+                            /**
+                             * Decodes a ProductReviewDestinationStatus message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ProductReviewDestinationStatus
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewDestinationStatus;
+
+                            /**
+                             * Verifies a ProductReviewDestinationStatus message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ProductReviewDestinationStatus message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ProductReviewDestinationStatus
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewDestinationStatus;
+
+                            /**
+                             * Creates a plain object from a ProductReviewDestinationStatus message. Also converts values to other types if specified.
+                             * @param message ProductReviewDestinationStatus
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewDestinationStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ProductReviewDestinationStatus to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ProductReviewDestinationStatus
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a ProductReviewItemLevelIssue. */
+                        interface IProductReviewItemLevelIssue {
+
+                            /** ProductReviewItemLevelIssue code */
+                            code?: (string|null);
+
+                            /** ProductReviewItemLevelIssue severity */
+                            severity?: (google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewItemLevelIssue.Severity|keyof typeof google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewItemLevelIssue.Severity|null);
+
+                            /** ProductReviewItemLevelIssue resolution */
+                            resolution?: (string|null);
+
+                            /** ProductReviewItemLevelIssue attribute */
+                            attribute?: (string|null);
+
+                            /** ProductReviewItemLevelIssue reportingContext */
+                            reportingContext?: (google.shopping.type.ReportingContext.ReportingContextEnum|keyof typeof google.shopping.type.ReportingContext.ReportingContextEnum|null);
+
+                            /** ProductReviewItemLevelIssue description */
+                            description?: (string|null);
+
+                            /** ProductReviewItemLevelIssue detail */
+                            detail?: (string|null);
+
+                            /** ProductReviewItemLevelIssue documentation */
+                            documentation?: (string|null);
+                        }
+
+                        /** Represents a ProductReviewItemLevelIssue. */
+                        class ProductReviewItemLevelIssue implements IProductReviewItemLevelIssue {
+
+                            /**
+                             * Constructs a new ProductReviewItemLevelIssue.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.reviews.v1.ProductReviewStatus.IProductReviewItemLevelIssue);
+
+                            /** ProductReviewItemLevelIssue code. */
+                            public code: string;
+
+                            /** ProductReviewItemLevelIssue severity. */
+                            public severity: (google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewItemLevelIssue.Severity|keyof typeof google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewItemLevelIssue.Severity);
+
+                            /** ProductReviewItemLevelIssue resolution. */
+                            public resolution: string;
+
+                            /** ProductReviewItemLevelIssue attribute. */
+                            public attribute: string;
+
+                            /** ProductReviewItemLevelIssue reportingContext. */
+                            public reportingContext: (google.shopping.type.ReportingContext.ReportingContextEnum|keyof typeof google.shopping.type.ReportingContext.ReportingContextEnum);
+
+                            /** ProductReviewItemLevelIssue description. */
+                            public description: string;
+
+                            /** ProductReviewItemLevelIssue detail. */
+                            public detail: string;
+
+                            /** ProductReviewItemLevelIssue documentation. */
+                            public documentation: string;
+
+                            /**
+                             * Creates a new ProductReviewItemLevelIssue instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ProductReviewItemLevelIssue instance
+                             */
+                            public static create(properties?: google.shopping.merchant.reviews.v1.ProductReviewStatus.IProductReviewItemLevelIssue): google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewItemLevelIssue;
+
+                            /**
+                             * Encodes the specified ProductReviewItemLevelIssue message. Does not implicitly {@link google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewItemLevelIssue.verify|verify} messages.
+                             * @param message ProductReviewItemLevelIssue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.reviews.v1.ProductReviewStatus.IProductReviewItemLevelIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ProductReviewItemLevelIssue message, length delimited. Does not implicitly {@link google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewItemLevelIssue.verify|verify} messages.
+                             * @param message ProductReviewItemLevelIssue message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.reviews.v1.ProductReviewStatus.IProductReviewItemLevelIssue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ProductReviewItemLevelIssue message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ProductReviewItemLevelIssue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewItemLevelIssue;
+
+                            /**
+                             * Decodes a ProductReviewItemLevelIssue message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ProductReviewItemLevelIssue
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewItemLevelIssue;
+
+                            /**
+                             * Verifies a ProductReviewItemLevelIssue message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ProductReviewItemLevelIssue message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ProductReviewItemLevelIssue
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewItemLevelIssue;
+
+                            /**
+                             * Creates a plain object from a ProductReviewItemLevelIssue message. Also converts values to other types if specified.
+                             * @param message ProductReviewItemLevelIssue
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.reviews.v1.ProductReviewStatus.ProductReviewItemLevelIssue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ProductReviewItemLevelIssue to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ProductReviewItemLevelIssue
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace ProductReviewItemLevelIssue {
+
+                            /** Severity enum. */
+                            enum Severity {
+                                SEVERITY_UNSPECIFIED = 0,
+                                NOT_IMPACTED = 1,
+                                DISAPPROVED = 2
+                            }
+                        }
+                    }
+                }
+
                 /** Namespace v1beta. */
                 namespace v1beta {
 
