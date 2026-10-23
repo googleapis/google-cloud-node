@@ -5,6 +5,42 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "f803bff4714360aa7c05387251bcb319536ae3f3",
+          "message": "Use ReadonlyMap for EncodedKeyMap implements clause",
+          "issues": [
+            "9709"
+          ],
+          "scope": "bigtable"
+        }
+      ],
+      "version": "7.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable",
+      "id": "ab2a9ff9-cc06-4518-b9ea-8c5fdcbc6735",
+      "createTime": "2026-10-23T20:18:40.417Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "c0ab589ef64398cf139779619a147761029e3c03",
+          "message": "Add observability logging flag",
+          "issues": [
+            "9656"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "ba12a5cb-e87d-4c91-85a5-78a1b4ad6028",
+      "createTime": "2026-10-23T20:18:40.389Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
           "message": "Remove compile-protos from prepare",
           "issues": [
@@ -106648,5 +106684,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-23T15:29:30.412Z"
+  "updateTime": "2026-10-23T20:18:40.417Z"
 }
