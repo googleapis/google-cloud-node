@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/firestore?activeTab=versions
 
+## [9.4.1](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.4.0...firestore-v9.4.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* **firestore:** Graduate pipeline search from preview to GA ([#9700](https://github.com/googleapis/google-cloud-node/issues/9700)) ([eb47174](https://github.com/googleapis/google-cloud-node/commit/eb47174fc7b2cc4ef808146f65dea1891d895e8f))
+
 ## [9.4.0](https://github.com/googleapis/google-cloud-node/compare/firestore-v9.3.1...firestore-v9.4.0) (2026-10-22)
 
 
