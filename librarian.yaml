@@ -109,7 +109,7 @@ libraries:
     nodejs:
       default_version: v1alpha
       dependencies:
-        google-auth-library: ^10.0.0-rc.1
+        google-auth-library: ^11.3.1
         server-destroy: ^1.0.1
       package_name: '@google-analytics/admin'
       client_documentation_override: https://googleapis.dev/nodejs/analytics-admin/latest/
@@ -1688,7 +1688,7 @@ libraries:
       default_version: v3
       dependencies:
         '@google-cloud/common': ^6.0.0
-        '@google-cloud/promisify': ^5.0.0
+        '@google-cloud/promisify': ^6.2.0
         arrify: ^2.0.0
         extend: ^3.0.2
         is-html: ^2.0.0
@@ -1762,7 +1762,7 @@ libraries:
     nodejs:
       default_version: v1
       dependencies:
-        '@google-cloud/promisify': ^5.0.0
+        '@google-cloud/promisify': ^6.2.0
       main_service: vision
   - name: google-cloud-visionai
     version: 0.5.0
@@ -1923,7 +1923,7 @@ libraries:
     nodejs:
       default_version: v1
       dependencies:
-        '@google-cloud/grafeas': ^6.0.0
+        '@google-cloud/grafeas': ^7.1.0
       main_service: containeranalysis
       package_name: '@google-cloud/containeranalysis'
   - name: google-iam
