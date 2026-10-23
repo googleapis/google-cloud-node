@@ -178,8 +178,9 @@ class CRC32C implements CRC32CValidator {
     let current = this.#crc32c ^ 0xffffffff;
     let i = 0;
     const len = data.length;
+    const limit = len - 8;
 
-    while (i + 8 <= len) {
+    while (i <= limit) {
       const c1 =
         current ^
         (data[i] |
