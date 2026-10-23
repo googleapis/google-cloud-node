@@ -44,6 +44,8 @@ import google = protos.google;
 
 type IBackup = google.bigtable.admin.v2.IBackup;
 
+const BACKUP_QUOTA_COOLDOWN_MS = 60001;
+
 describe('Bigtable', () => {
   const bigtable = new Bigtable();
   const INSTANCE = bigtable.instance(generateId('instance'));
@@ -1560,7 +1562,7 @@ describe('Bigtable', () => {
         // Sleep here for just over a minute so that the system tests don't
         // experience quota issues due to too many requests per minute.
         await new Promise(resolve => {
-          setTimeout(resolve, 60001);
+          setTimeout(resolve, BACKUP_QUOTA_COOLDOWN_MS);
         });
       });
       /*
@@ -1918,14 +1920,18 @@ describe('Bigtable', () => {
 
     beforeEach(async () => {
       // This is not ideal, but we are running into quota issues for admin API access.
-      await new Promise(r => setTimeout(r, 60 * 1000));
+      await new Promise(resolve =>
+        setTimeout(resolve, BACKUP_QUOTA_COOLDOWN_MS),
+      );
     });
 
     before(async () => {
       // Sleep here for just over a minute before the "before all" hook creates
       // backups so that requests from the preceding backup tests do not trigger
       // per-minute 'Backup metadata write requests' quota exhaustion.
-      await new Promise(r => setTimeout(r, 60001));
+      await new Promise(resolve =>
+        setTimeout(resolve, BACKUP_QUOTA_COOLDOWN_MS),
+      );
       const [backupOpSSD] = await withBackupQuotaRetry(() =>
         tableAdmin.createBackup({
           parent: replaceProjectIdToken(
@@ -2686,6 +2692,10 @@ function createInstanceConfig(
   };
 }
 
+/**
+ * Executes a backup metadata write operation and retries after a 1-minute
+ * cooldown when a `RESOURCE_EXHAUSTED` (gRPC code 8) quota error is returned.
+ */
 async function withBackupQuotaRetry<T>(
   fn: () => Promise<T>,
   retries = 3,
@@ -2700,7 +2710,9 @@ async function withBackupQuotaRetry<T>(
       if (!isQuotaError || attempt >= retries) {
         throw err;
       }
-      await new Promise(resolve => setTimeout(resolve, 60001));
+      await new Promise(resolve =>
+        setTimeout(resolve, BACKUP_QUOTA_COOLDOWN_MS),
+      );
     }
   }
 }
