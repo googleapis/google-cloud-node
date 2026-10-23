@@ -227,4 +227,30 @@ export class EncodedKeyMap
     this.map_impl.set(_parseBufferToMapKey(key), [key, value]);
     return this;
   }
+
+  getOrInsert(
+    key: string | bigint | Uint8Array | null,
+    defaultValue: SqlValue,
+  ): SqlValue {
+    if (this.has(key)) {
+      return this.get(key) as SqlValue;
+    }
+    this.set(key, defaultValue);
+    return defaultValue;
+  }
+
+  getOrInsertComputed(
+    key: string | bigint | Uint8Array | null,
+    callback: (key: string | bigint | Uint8Array | null) => SqlValue,
+  ): SqlValue {
+    if (typeof callback !== 'function') {
+      throw new TypeError('callback is not a function');
+    }
+    if (this.has(key)) {
+      return this.get(key) as SqlValue;
+    }
+    const value = callback(key);
+    this.set(key, value);
+    return value;
+  }
 }

@@ -180,5 +180,64 @@ describe('Bigtable/EncodedKeyMap', () => {
       assert.deepStrictEqual(resultForEach[1][0], 'stringKey1');
       assert.deepStrictEqual(resultForEach[1][1], 'valueForString1');
     });
+    it('test getOrInsert and getOrInsertComputed', () => {
+      const map = new EncodedKeyMap([
+        [Buffer.from('existingBuffer'), 'initialBufferValue'],
+        ['existingNullValue', null],
+      ]);
+
+      assert.strictEqual(
+        map.getOrInsert(Buffer.from('existingBuffer'), 'fallbackValue'),
+        'initialBufferValue',
+      );
+      assert.strictEqual(
+        map.getOrInsert('existingNullValue', 'fallbackForNull'),
+        null,
+      );
+      assert.strictEqual(
+        map.getOrInsert(Buffer.from('newBuffer'), 'insertedBufferValue'),
+        'insertedBufferValue',
+      );
+      assert.strictEqual(
+        map.get(Buffer.from('newBuffer')),
+        'insertedBufferValue',
+      );
+
+      let callbackCount = 0;
+      assert.strictEqual(
+        map.getOrInsertComputed(Buffer.from('existingBuffer'), () => {
+          callbackCount++;
+          return 'computedFallback';
+        }),
+        'initialBufferValue',
+      );
+      assert.strictEqual(callbackCount, 0);
+
+      const computedKey = Buffer.from('computedBuffer');
+      assert.strictEqual(
+        map.getOrInsertComputed(computedKey, key => {
+          callbackCount++;
+          assert.strictEqual(key, computedKey);
+          return 'computedBufferValue';
+        }),
+        'computedBufferValue',
+      );
+      assert.strictEqual(callbackCount, 1);
+      assert.strictEqual(
+        map.get(Buffer.from('computedBuffer')),
+        'computedBufferValue',
+      );
+
+      assert.throws(
+        () =>
+          map.getOrInsertComputed(
+            'existingNullValue',
+            null as unknown as (
+              key: string | bigint | Uint8Array | null,
+            ) => SqlValue,
+          ),
+        TypeError,
+      );
+    });
   });
 });
