@@ -963,23 +963,20 @@ export class TransferManager {
       await Promise.all(promises);
       return await mpuHelper.completeUpload();
     } catch (e) {
+      let uploadMsg = (e as Error)?.message ?? String(e);
       if (
         (options.autoAbortFailure === undefined || options.autoAbortFailure) &&
         mpuHelper.uploadId
       ) {
         try {
           await mpuHelper.abortUpload();
-          return;
-        } catch (e) {
-          throw new MultiPartUploadError(
-            (e as Error).message,
-            mpuHelper.uploadId!,
-            mpuHelper.partsMap!
-          );
+        } catch (abortErr) {
+          const abortMsg = (abortErr as Error)?.message ?? String(abortErr);
+          uploadMsg += `\n${abortMsg}`;
         }
       }
       throw new MultiPartUploadError(
-        (e as Error).message,
+        uploadMsg,
         mpuHelper.uploadId!,
         mpuHelper.partsMap!
       );
