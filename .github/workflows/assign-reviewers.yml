@@ -280,21 +280,84 @@ jobs:
               defaultTeamReviewSatisfied &&
               (hasDefaultTeamMember || hasAllAssignedTeams || (!requiresDefaultTeamReview && (humanRequestedReviewers.length > 0 || humanAssignees.length > 0 || hasReviews)));
 
-            if (shouldExit) {
-              if (hasDefaultTeam) {
-                console.log("PR already has sufficient reviewers/assignees/reviews, but default cloud-sdk-nodejs-team is requested. Removing it...");
-                try {
-                  await github.rest.pulls.removeRequestedReviewers({
+            const removeDefaultTeam = async () => {
+              if (!hasDefaultTeam) return;
+              console.log("Removing default cloud-sdk-nodejs-team reviewer...");
+              try {
+                await github.rest.pulls.removeRequestedReviewers({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.payload.pull_request.number,
+                  reviewers: [],
+                  team_reviewers: ['cloud-sdk-nodejs-team'],
+                });
+              } catch (err) {
+                console.warn("Failed to remove default cloud-sdk-nodejs-team reviewer via REST:", err.message || err);
+              }
+
+              // cloud-sdk-nodejs-team has privacy: "closed", so REST removeRequestedReviewers with GITHUB_TOKEN
+              // cannot resolve its team slug. Use GraphQL requestReviews (union: false) with node IDs to replace
+              // the PR's requested reviewers with only the intended user and partner team node IDs.
+              try {
+                const { data: currentReviewers } = await github.rest.pulls.listRequestedReviewers({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: context.payload.pull_request.number,
+                });
+                const userIds = (currentReviewers.users || [])
+                  .map(u => u.node_id)
+                  .filter(Boolean);
+
+                const teamNodeIdsBySlug = new Map();
+                for (const t of (context.payload.pull_request.requested_teams || [])) {
+                  if (t && t.slug && t.node_id) {
+                    teamNodeIdsBySlug.set(t.slug, t.node_id);
+                  }
+                }
+                if (assignedTeams.size > 0 && teamNodeIdsBySlug.size < assignedTeams.size) {
+                  const issueEvents = await github.paginate(github.rest.issues.listEvents, {
                     owner: context.repo.owner,
                     repo: context.repo.repo,
-                    pull_number: context.payload.pull_request.number,
-                    reviewers: [],
-                    team_reviewers: ['cloud-sdk-nodejs-team'],
+                    issue_number: context.payload.pull_request.number,
+                    per_page: 100,
                   });
-                } catch (err) {
-                  console.warn("Failed to remove default cloud-sdk-nodejs-team reviewer:", err.message || err);
+                  for (const ev of issueEvents) {
+                    if (ev.requested_team && ev.requested_team.slug && ev.requested_team.node_id) {
+                      teamNodeIdsBySlug.set(ev.requested_team.slug, ev.requested_team.node_id);
+                    }
+                  }
                 }
+
+                const teamIds = Array.from(assignedTeams)
+                  .map(slug => teamNodeIdsBySlug.get(slug))
+                  .filter(Boolean);
+
+                if (teamIds.length === assignedTeams.size) {
+                  await github.graphql(
+                    `mutation($pullRequestId: ID!, $userIds: [ID!], $teamIds: [ID!]) {
+                      requestReviews(input: {
+                        pullRequestId: $pullRequestId,
+                        userIds: $userIds,
+                        teamIds: $teamIds,
+                        union: false
+                      }) {
+                        pullRequest { id }
+                      }
+                    }`,
+                    {
+                      pullRequestId: context.payload.pull_request.node_id,
+                      userIds,
+                      teamIds,
+                    }
+                  );
+                }
+              } catch (gqlErr) {
+                console.warn("Failed to remove default cloud-sdk-nodejs-team reviewer via GraphQL:", gqlErr.message || gqlErr);
               }
+            };
+
+            if (shouldExit) {
+              await removeDefaultTeam();
               console.log("Skipping auto-assignment.");
               return;
             }
@@ -371,17 +434,6 @@ jobs:
               }
             }
 
-            if (assigned && hasDefaultTeam) {
-              console.log("Removing default cloud-sdk-nodejs-team reviewer...");
-              try {
-                await github.rest.pulls.removeRequestedReviewers({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  pull_number: context.payload.pull_request.number,
-                  reviewers: [],
-                  team_reviewers: ['cloud-sdk-nodejs-team'],
-                });
-              } catch (err) {
-                console.warn("Failed to remove default cloud-sdk-nodejs-team reviewer:", err.message || err);
-              }
+            if (assigned) {
+              await removeDefaultTeam();
             }
