@@ -41,7 +41,7 @@ const randomUUID = async () =>
  * compatible with the `fetch` API.
  */
 interface FetchCompliance {
-  fetch: typeof fetch;
+  fetch: (...args: Parameters<typeof fetch>) => ReturnType<typeof fetch>;
 }
 
 const HTTP_STATUS_NO_CONTENT = 204;
@@ -88,7 +88,7 @@ export class Gaxios implements FetchCompliance {
    *
    * ```ts
    * const gaxios = new Gaxios();
-   * const myFetch: typeof fetch = (...args) => gaxios.fetch(...args);
+   * const myFetch: GaxiosOptions['fetchImplementation'] = (...args) => gaxios.fetch(...args);
    * await myFetch('https://example.com');
    * ```
    *
@@ -700,9 +700,10 @@ export class Gaxios implements FetchCompliance {
    * Should use {@link Gaxios[#getFetch]} to retrieve.
    */
   //
-  static #fetch?: typeof nodeFetch | typeof fetch;
+  static #fetch?:
+    typeof nodeFetch | NonNullable<GaxiosOptions['fetchImplementation']>;
 
-  static #bunFetch?: typeof fetch;
+  static #bunFetch?: NonNullable<GaxiosOptions['fetchImplementation']>;
 
   /**
    * Imports, caches, and returns a proxy agent - if not already imported
@@ -715,7 +716,7 @@ export class Gaxios implements FetchCompliance {
     return this.#proxyAgent;
   }
 
-  static #createBunFetch(): typeof fetch {
+  static #createBunFetch(): NonNullable<GaxiosOptions['fetchImplementation']> {
     return async (input, init) => {
       const rawInit = init
         ? ({...init} as Omit<RequestInit, 'body'> & {
