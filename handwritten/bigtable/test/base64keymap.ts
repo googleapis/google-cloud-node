@@ -194,6 +194,7 @@ describe('Bigtable/EncodedKeyMap', () => {
         'initialBufferValue',
       );
       assert.strictEqual(readonlyMap.get('existingNullValue'), null);
+      assert.strictEqual(map.get(Buffer.from('missingBuffer')), undefined);
       assert.strictEqual('getOrInsert' in map, false);
       assert.strictEqual('getOrInsertComputed' in map, false);
     });
