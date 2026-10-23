@@ -776,4 +776,82 @@ describe('addWindowFields() serialization', () => {
       expect(stage.options).to.deep.equal({});
     });
   });
+
+  describe('user data validation', () => {
+    const invalidExpr = constant(undefined as unknown as number);
+    const expectedError = /Cannot use "undefined" as a Firestore value/;
+
+    it('validates expressions in partition', () => {
+      expect(() =>
+        windowStage(
+          basePipeline().addWindowFields(
+            {partition: [invalidExpr]},
+            countAll().as('c'),
+          ),
+        ),
+      ).to.throw(expectedError);
+    });
+
+    it('validates expressions in sort', () => {
+      expect(() =>
+        windowStage(
+          basePipeline().addWindowFields(
+            {sort: ascending(invalidExpr)},
+            countAll().as('c'),
+          ),
+        ),
+      ).to.throw(expectedError);
+    });
+
+    it('validates expressions in documents and range frame bounds and unit', () => {
+      expect(() =>
+        windowStage(
+          basePipeline().addWindowFields(
+            {
+              sort: ascending('date'),
+              documents: {preceding: invalidExpr, following: 'current'},
+            },
+            countAll().as('c'),
+          ),
+        ),
+      ).to.throw(expectedError);
+
+      expect(() =>
+        windowStage(
+          basePipeline().addWindowFields(
+            {
+              sort: ascending('date'),
+              range: {
+                preceding: 1,
+                following: 'current',
+                unit: invalidExpr,
+              },
+            },
+            countAll().as('c'),
+          ),
+        ),
+      ).to.throw(expectedError);
+    });
+
+    it('validates expressions in fields and over() frames', () => {
+      expect(() =>
+        windowStage(
+          basePipeline().addWindowFields({}, sum(invalidExpr).as('total')),
+        ),
+      ).to.throw(expectedError);
+
+      expect(() =>
+        windowStage(
+          basePipeline().addWindowFields(
+            {sort: ascending('date')},
+            countAll()
+              .over({
+                documents: {preceding: 'unbounded', following: invalidExpr},
+              })
+              .as('c'),
+          ),
+        ),
+      ).to.throw(expectedError);
+    });
+  });
 });
