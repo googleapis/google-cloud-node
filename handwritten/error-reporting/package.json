@@ -19,7 +19,7 @@
     "!build/src/**/*.map"
   ],
   "scripts": {
-    "docs": "compodoc src/",
+    "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
     "presystem-test": "pnpm run compile",
     "system-test": "MOCHA_THROW_DEPRECATION=false node ../../bin/run-test.cjs build/system-test",
@@ -37,7 +37,6 @@
     "console-log-level": "^1.4.1"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "1.1.25",
     "@hapi/hapi": "^21.4.4",
     "@types/boom": "^7.3.5",
     "@types/console-log-level": "^1.4.0",
@@ -55,6 +54,9 @@
     "gts": "^6.0.2",
     "joi": "^17.13.8",
     "js-green-licenses": "^4.0.0",
+    "jsdoc": "^4.0.4",
+    "jsdoc-fresh": "^6.0.0",
+    "jsdoc-region-tag": "^5.0.0",
     "json-stable-stringify": "^1.3.0",
     "koa": "^3.1.1",
     "mocha": "^11.7.5",
