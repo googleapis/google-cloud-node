@@ -1592,7 +1592,7 @@ libraries:
     nodejs:
       default_version: v1
       dependencies:
-        '@google-cloud/common': ^6.0.0
+        '@google-cloud/common': ^8.2.2
         '@types/pumpify': ^1.4.4
         pumpify: ^2.0.1
         stream-events: ^1.0.5
@@ -1687,7 +1687,7 @@ libraries:
     nodejs:
       default_version: v3
       dependencies:
-        '@google-cloud/common': ^6.0.0
+        '@google-cloud/common': ^8.2.2
         '@google-cloud/promisify': ^6.2.0
         arrify: ^2.0.0
         extend: ^3.0.2
