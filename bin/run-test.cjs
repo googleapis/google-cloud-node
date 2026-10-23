@@ -53,6 +53,21 @@ for (const {flag, envIn, envOut} of SHIM_FLAGS) {
 
 const args = rawArgs.filter(a => a !== '--no-c8' && !shimFlagSet.has(a));
 
+// Skip single-service packages whose sole service is marked deprecated in
+// googleapis, causing gapic-generator-typescript to omit generating unit tests.
+const SKIPPED_TEST_PACKAGES = [
+  'google-cloud-beyondcorp-appconnections',
+  'google-cloud-beyondcorp-appconnectors',
+  'google-cloud-beyondcorp-appgateways',
+];
+const currentPkg = path.basename(process.cwd());
+if (SKIPPED_TEST_PACKAGES.includes(currentPkg)) {
+  console.warn(
+    `[run-test] Skipping ${currentPkg} (deprecated service package)`,
+  );
+  process.exit(0);
+}
+
 const isBunRuntime = typeof Bun !== 'undefined';
 const isBunUserAgent = /^bun\//i.test(process.env.npm_config_user_agent || '');
 const wantsBunRuntime =
