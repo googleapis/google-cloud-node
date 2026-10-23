@@ -4,6 +4,67 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "64c3a2bafc62273f7cdc3b9612756d631afc3f97",
+          "message": "Use npm in prepare/compile lifecycle scripts",
+          "issues": [
+            "9587"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "1ea27c9c9bf4e4cbf79381321dcb9bce7951a76f",
+          "message": "PNPM workspace",
+          "issues": [
+            "8973"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "4c4bbdc3a19f6af664f7804cff6f717945a975f3",
+          "message": "Integrate native spannerlib-node wrapper and implement type system",
+          "issues": [
+            "9141"
+          ],
+          "scope": "spanner-driver"
+        },
+        {
+          "type": "feat",
+          "sha": "87d33388daca34f57b061f01a563629952872e46",
+          "message": "Implement full connection pooling in Pool class",
+          "issues": [
+            "9106"
+          ],
+          "scope": "spanner-driver"
+        },
+        {
+          "type": "feat",
+          "sha": "d95645257888629c08756ce40b2314e7b0c0c7ef",
+          "message": "Add support for DSN resolution and Error State",
+          "issues": [
+            "8983"
+          ],
+          "scope": "spanner-driver"
+        },
+        {
+          "type": "feat",
+          "sha": "65445e9ead80a685e723615ea9acecba3b704ae6",
+          "message": "Introduce @google-cloud/spanner-driver package scaffolding",
+          "issues": [
+            "8981"
+          ],
+          "scope": "spanner-driver"
+        }
+      ],
+      "version": "1.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner-driver",
+      "id": "88d2a2e9-f6e4-4824-b473-8f01197b4526",
+      "createTime": "2026-10-23T05:18:50.383Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "263965060a675d2819a6987d96d4e1b75c30adeb",
           "message": "Add DML stages (insert, upsert, delete, update), literals source, and atomic execution option to Node SDK pipelines",
@@ -106069,5 +106130,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-22T21:29:43.447Z"
+  "updateTime": "2026-10-23T05:18:50.383Z"
 }
