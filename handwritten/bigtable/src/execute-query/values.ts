@@ -38,10 +38,7 @@ export type ExecuteQueryParameterValue =
   | null;
 
 export type SqlValue =
-  | ExecuteQueryParameterValue
-  | Struct
-  | Array<SqlValue>
-  | BigtableMap;
+  ExecuteQueryParameterValue | Struct | Array<SqlValue> | BigtableMap;
 
 /**
  * A custom class created to allow setting year, month and date to 0.
@@ -117,9 +114,10 @@ type MapKey = bigint | string | Uint8Array | null;
 // internal representation of the map contains the original key and value tuple
 type _MapValue = [MapKey, SqlValue];
 
-export class EncodedKeyMap
-  implements Map<bigint | string | Uint8Array | null, SqlValue>
-{
+export class EncodedKeyMap implements ReadonlyMap<
+  bigint | string | Uint8Array | null,
+  SqlValue
+> {
   private map_impl: Map<bigint | string | null, _MapValue>;
   /**
    * Class representing a Map Value returned by ExecuteQuery. Native JS Map
@@ -226,35 +224,5 @@ export class EncodedKeyMap
   set(key: string | bigint | Uint8Array | null, value: SqlValue): this {
     this.map_impl.set(_parseBufferToMapKey(key), [key, value]);
     return this;
-  }
-
-  getOrInsert(
-    key: string | bigint | Uint8Array | null,
-    defaultValue: SqlValue,
-  ): SqlValue {
-    const parsedKey = _parseBufferToMapKey(key);
-    const existing = this.map_impl.get(parsedKey);
-    if (existing !== undefined) {
-      return existing[1];
-    }
-    this.map_impl.set(parsedKey, [key, defaultValue]);
-    return defaultValue;
-  }
-
-  getOrInsertComputed(
-    key: string | bigint | Uint8Array | null,
-    callback: (key: string | bigint | Uint8Array | null) => SqlValue,
-  ): SqlValue {
-    if (typeof callback !== 'function') {
-      throw new TypeError('callback is not a function');
-    }
-    const parsedKey = _parseBufferToMapKey(key);
-    const existing = this.map_impl.get(parsedKey);
-    if (existing !== undefined) {
-      return existing[1];
-    }
-    const value = callback(key);
-    this.map_impl.set(parsedKey, [key, value]);
-    return value;
   }
 }

@@ -180,95 +180,23 @@ describe('Bigtable/EncodedKeyMap', () => {
       assert.deepStrictEqual(resultForEach[1][0], 'stringKey1');
       assert.deepStrictEqual(resultForEach[1][1], 'valueForString1');
     });
-    it('test getOrInsert and getOrInsertComputed', () => {
+    it('implements ReadonlyMap without adding extra methods', () => {
       const map = new EncodedKeyMap([
         [Buffer.from('existingBuffer'), 'initialBufferValue'],
         ['existingNullValue', null],
       ]);
-
+      const readonlyMap: ReadonlyMap<
+        string | bigint | Uint8Array | null,
+        SqlValue
+      > = map;
+      const es2023Map: Map<string | bigint | Uint8Array | null, SqlValue> = map;
       assert.strictEqual(
-        map.getOrInsert(Buffer.from('existingBuffer'), 'fallbackValue'),
+        readonlyMap.get(Buffer.from('existingBuffer')),
         'initialBufferValue',
       );
-      assert.strictEqual(
-        map.getOrInsert('existingNullValue', 'fallbackForNull'),
-        null,
-      );
-      assert.strictEqual(
-        map.getOrInsert(Buffer.from('newBuffer'), 'insertedBufferValue'),
-        'insertedBufferValue',
-      );
-      assert.strictEqual(
-        map.get(Buffer.from('newBuffer')),
-        'insertedBufferValue',
-      );
-
-      let callbackCount = 0;
-      assert.strictEqual(
-        map.getOrInsertComputed(Buffer.from('existingBuffer'), () => {
-          callbackCount++;
-          return 'computedFallback';
-        }),
-        'initialBufferValue',
-      );
-      assert.strictEqual(callbackCount, 0);
-
-      const computedKey = Buffer.from('computedBuffer');
-      assert.strictEqual(
-        map.getOrInsertComputed(computedKey, key => {
-          callbackCount++;
-          assert.strictEqual(key, computedKey);
-          return 'computedBufferValue';
-        }),
-        'computedBufferValue',
-      );
-      assert.strictEqual(callbackCount, 1);
-      assert.strictEqual(
-        map.get(Buffer.from('computedBuffer')),
-        'computedBufferValue',
-      );
-
-      assert.throws(
-        () =>
-          map.getOrInsertComputed(
-            'existingNullValue',
-            null as unknown as (
-              key: string | bigint | Uint8Array | null,
-            ) => SqlValue,
-          ),
-        TypeError,
-      );
-
-      // Existing null value does not trigger callback in getOrInsertComputed
-      assert.strictEqual(
-        map.getOrInsertComputed('existingNullValue', () => {
-          callbackCount++;
-          return 'shouldNotBeCalled';
-        }),
-        null,
-      );
-      assert.strictEqual(callbackCount, 1);
-
-      // bigint, null, and Uint8Array keys
-      assert.strictEqual(map.getOrInsert(42n, 'bigintVal'), 'bigintVal');
-      assert.strictEqual(map.getOrInsert(42n, 'otherBigintVal'), 'bigintVal');
-      assert.strictEqual(map.getOrInsert(null, 'nullKeyVal'), 'nullKeyVal');
-      assert.strictEqual(
-        map.getOrInsertComputed(new Uint8Array([1, 2, 3]), () => 'uint8Val'),
-        'uint8Val',
-      );
-      assert.strictEqual(
-        map.get(new Uint8Array([1, 2, 3])),
-        'uint8Val',
-      );
-
-      // Error thrown by callback propagates and does not insert entry
-      assert.throws(() => {
-        map.getOrInsertComputed('throwingKey', () => {
-          throw new Error('computation failed');
-        });
-      }, /computation failed/);
-      assert.strictEqual(map.has('throwingKey'), false);
+      assert.strictEqual(es2023Map.get('existingNullValue'), null);
+      assert.strictEqual('getOrInsert' in map, false);
+      assert.strictEqual('getOrInsertComputed' in map, false);
     });
   });
 });
