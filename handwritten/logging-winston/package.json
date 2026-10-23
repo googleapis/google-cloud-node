@@ -58,7 +58,7 @@
     "winston-transport": "^4.9.0"
   },
   "devDependencies": {
-    "@google-cloud/common": "^8.0.0",
+    "@google-cloud/common": "^8.2.2",
     "@types/lodash.mapvalues": "^4.6.9",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.10.1",
