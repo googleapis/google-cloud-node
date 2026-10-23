@@ -14,4 +14,3 @@ ignoreFiles:
   - '**/protos/protos.js'
   - 'core/packages/typeless-sample-bot/test/fixtures/**/*.ts'
   - 'core/packages/typeless-sample-bot/test/fixtures/**/*.js'
-ignoreLicenseYear: true
