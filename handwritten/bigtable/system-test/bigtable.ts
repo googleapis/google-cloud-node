@@ -44,6 +44,8 @@ import google = protos.google;
 
 type IBackup = google.bigtable.admin.v2.IBackup;
 
+const BACKUP_QUOTA_COOLDOWN_MS = 60001;
+
 describe('Bigtable', () => {
   const bigtable = new Bigtable();
   const INSTANCE = bigtable.instance(generateId('instance'));
@@ -1370,10 +1372,6 @@ describe('Bigtable', () => {
     // the real functionality - it is just a way to keep things organized!
     const backupIdFromCluster = generateId('backup');
     let backupNameFromCluster: string;
-    const restoreTableIdFromCluster = generateId('table');
-
-    const backupIdFromTable = generateId('backup');
-    let backupNameFromTable: string;
 
     // The minimum backup expiry time is 6 hours. The times here each have a 2
     // hour padding to tolerate latency and clock drift. Also, while the time
@@ -1385,18 +1383,16 @@ describe('Bigtable', () => {
     );
 
     before(async () => {
-      const [backup, op] = await CLUSTER.createBackup(backupIdFromCluster, {
-        table: TABLE,
-        expireTime,
-      });
+      const [backup, op] = await withBackupQuotaRetry(() =>
+        CLUSTER.createBackup(backupIdFromCluster, {
+          table: TABLE,
+          expireTime,
+        }),
+      );
       BACKUP = backup;
       await op.promise();
       backupNameFromCluster = replaceProjectIdToken(
         `${CLUSTER.name}/backups/${backupIdFromCluster}`,
-        bigtable.projectId,
-      );
-      backupNameFromTable = replaceProjectIdToken(
-        `${CLUSTER.name}/backups/${backupIdFromTable}`,
         bigtable.projectId,
       );
     });
@@ -1410,15 +1406,30 @@ describe('Bigtable', () => {
     });
 
     it('should create backup of a table (from table)', async () => {
-      const [backup, op] = await TABLE.createBackup(backupIdFromTable, {
-        expireTime,
-      });
-      await op.promise();
-      await backup.getMetadata();
+      const backupIdFromTable = generateId('backup');
+      const backupNameFromTable = replaceProjectIdToken(
+        `${CLUSTER.name}/backups/${backupIdFromTable}`,
+        bigtable.projectId,
+      );
+      const [backup, op] = await withBackupQuotaRetry(() =>
+        TABLE.createBackup(backupIdFromTable, {
+          expireTime,
+        }),
+      );
+      try {
+        await op.promise();
+        await backup.getMetadata();
 
-      assert.strictEqual(backup.metadata!.name, backupNameFromTable);
+        assert.strictEqual(backup.metadata!.name, backupNameFromTable);
 
-      assert.deepStrictEqual(backup.expireDate, expireTime);
+        assert.deepStrictEqual(backup.expireDate, expireTime);
+      } finally {
+        try {
+          await withBackupQuotaRetry(() => backup.delete());
+        } catch {
+          // Ignore cleanup errors if the backup was not created.
+        }
+      }
     });
 
     it('should get a specific backup (cluster)', async () => {
@@ -1470,6 +1481,7 @@ describe('Bigtable', () => {
     });
 
     it('should restore a backup (cluster)', async () => {
+      const restoreTableIdFromCluster = generateId('table');
       const backup = CLUSTER.backup(backupIdFromCluster);
       const [table, op] = await backup.restore(restoreTableIdFromCluster);
       await op.promise();
@@ -1479,18 +1491,22 @@ describe('Bigtable', () => {
     });
 
     it('should restore a backup to a different instance', async () => {
-      const [, operation] = await DIFF_INSTANCE.create(
-        createInstanceConfig(
-          generateId('d-clust'),
-          'us-east1-c',
-          3,
-          Date.now(),
-        ),
-      );
-      await operation.promise();
+      const [alreadyExists] = await DIFF_INSTANCE.exists();
+      if (!alreadyExists) {
+        const [, operation] = await DIFF_INSTANCE.create(
+          createInstanceConfig(
+            generateId('d-clust'),
+            'us-east1-c',
+            3,
+            Date.now(),
+          ),
+        );
+        await operation.promise();
+      }
       const [iExists] = await DIFF_INSTANCE.exists();
       assert.strictEqual(iExists, true);
 
+      const restoreTableIdFromCluster = generateId('table');
       const backup = CLUSTER.backup(backupIdFromCluster);
       const [table, op] = await backup.restoreTo({
         tableId: restoreTableIdFromCluster,
@@ -1504,9 +1520,11 @@ describe('Bigtable', () => {
 
     it('should update a backup (cluster)', async () => {
       const backup = CLUSTER.backup(backupIdFromCluster);
-      const [metadata] = await backup.setMetadata({
-        expireTime: updateExpireTime,
-      });
+      const [metadata] = await withBackupQuotaRetry(() =>
+        backup.setMetadata({
+          expireTime: updateExpireTime,
+        }),
+      );
 
       assert.strictEqual(metadata.name, backupNameFromCluster);
       assert.deepStrictEqual(backup.expireDate, updateExpireTime);
@@ -1554,7 +1572,7 @@ describe('Bigtable', () => {
         // Sleep here for just over a minute so that the system tests don't
         // experience quota issues due to too many requests per minute.
         await new Promise(resolve => {
-          setTimeout(resolve, 60001);
+          setTimeout(resolve, BACKUP_QUOTA_COOLDOWN_MS);
         });
       });
       /*
@@ -1570,7 +1588,9 @@ describe('Bigtable', () => {
         const [backupsBeforeCopy] = await instance.getBackups();
         const backupIdsBeforeCopy = backupsBeforeCopy.map(backup => backup.id);
         // Copy the backup
-        const [newBackup, operation] = await backup.copy(config);
+        const [newBackup, operation] = await withBackupQuotaRetry(() =>
+          backup.copy(config),
+        );
         try {
           assert.strictEqual(config.id, newBackup.id);
           await operation.promise();
@@ -1604,7 +1624,13 @@ describe('Bigtable', () => {
           assert.strictEqual(fetchedNewBackup.name, backupPath);
           // Delete the copied backup
         } finally {
-          await config.cluster.backup(newBackup.id).delete();
+          try {
+            await withBackupQuotaRetry(() =>
+              config.cluster.backup(newBackup.id).delete(),
+            );
+          } catch {
+            // Ignore cleanup errors if the copied backup was not created.
+          }
         }
       }
 
@@ -1613,9 +1639,11 @@ describe('Bigtable', () => {
           sourceTestExpireTime: BackupTimestamp,
           copyTestExpireTime: BackupTimestamp,
         ) {
-          const [backup, op] = await TABLE.createBackup(generateId('backup'), {
-            expireTime: sourceTestExpireTime,
-          });
+          const [backup, op] = await withBackupQuotaRetry(() =>
+            TABLE.createBackup(generateId('backup'), {
+              expireTime: sourceTestExpireTime,
+            }),
+          );
           try {
             {
               await op.promise();
@@ -1633,7 +1661,11 @@ describe('Bigtable', () => {
               INSTANCE,
             );
           } finally {
-            await backup.delete();
+            try {
+              await withBackupQuotaRetry(() => backup.delete());
+            } catch {
+              // Ignore cleanup errors if the source backup was not created.
+            }
           }
         }
         it('should copy to the same cluster with precise date expiry times', async () => {
@@ -1655,9 +1687,11 @@ describe('Bigtable', () => {
         });
       });
       it('should create backup of a table and copy it on another cluster of another instance', async () => {
-        const [backup, op] = await TABLE.createBackup(generateId('backup'), {
-          expireTime: sourceExpireTime,
-        });
+        const [backup, op] = await withBackupQuotaRetry(() =>
+          TABLE.createBackup(generateId('backup'), {
+            expireTime: sourceExpireTime,
+          }),
+        );
         try {
           {
             await op.promise();
@@ -1668,45 +1702,57 @@ describe('Bigtable', () => {
           // Create another instance
           const instance = bigtable.instance(generateId('instance'));
           const destinationClusterId = generateId('cluster');
-          {
-            // Create production instance with given options
-            const instanceOptions: InstanceOptions = {
-              clusters: [
-                {
-                  id: destinationClusterId,
-                  nodes: 1,
-                  location: 'us-central2-d',
-                  storage: 'ssd',
-                },
-              ],
-              labels: {
-                'prod-label': 'prod-label',
-                time_created: String(Date.now()),
+          // Create production instance with given options
+          const instanceOptions: InstanceOptions = {
+            clusters: [
+              {
+                id: destinationClusterId,
+                nodes: 1,
+                location: 'us-central2-d',
+                storage: 'ssd',
               },
-              type: 'production',
-            };
-            const [, operation] = await instance.create(instanceOptions);
-            await operation.promise();
-          }
-          // Create the copy and test the copied backup
-          await testCopyBackup(
-            backup,
-            {
-              cluster: new Cluster(instance, destinationClusterId),
-              id: generateId('backup'),
-              expireTime: copyExpireTime,
+            ],
+            labels: {
+              'prod-label': 'prod-label',
+              time_created: String(Date.now()),
             },
-            instance,
-          );
-          await instance.delete();
+            type: 'production',
+          };
+          const [, operation] = await instance.create(instanceOptions);
+          try {
+            await operation.promise();
+            // Create the copy and test the copied backup
+            await testCopyBackup(
+              backup,
+              {
+                cluster: new Cluster(instance, destinationClusterId),
+                id: generateId('backup'),
+                expireTime: copyExpireTime,
+              },
+              instance,
+            );
+          } finally {
+            await reapBackups(instance);
+            try {
+              await instance.delete();
+            } catch {
+              // Ignore cleanup errors if the instance was not created.
+            }
+          }
         } finally {
-          await backup.delete();
+          try {
+            await withBackupQuotaRetry(() => backup.delete());
+          } catch {
+            // Ignore cleanup errors if the source backup was not created.
+          }
         }
       });
       it('should create backup of a table and copy it on another cluster of the same instance', async () => {
-        const [backup, op] = await TABLE.createBackup(generateId('backup'), {
-          expireTime: sourceExpireTime,
-        });
+        const [backup, op] = await withBackupQuotaRetry(() =>
+          TABLE.createBackup(generateId('backup'), {
+            expireTime: sourceExpireTime,
+          }),
+        );
         try {
           {
             await op.promise();
@@ -1715,34 +1761,45 @@ describe('Bigtable', () => {
             assert.deepStrictEqual(backup.expireDate, sourceExpireTime);
           }
           const destinationClusterId = generateId('cluster');
-          {
-            // Create destination cluster with given options
-            const [, operation] = await INSTANCE.cluster(
-              destinationClusterId,
-            ).create({
-              location: 'us-central2-b',
-              nodes: 1,
-            });
+          const destinationCluster = INSTANCE.cluster(destinationClusterId);
+          // Create destination cluster with given options
+          const [, operation] = await destinationCluster.create({
+            location: 'us-central2-b',
+            nodes: 1,
+          });
+          try {
             await operation.promise();
+            // Create the copy and test the copied backup
+            await testCopyBackup(
+              backup,
+              {
+                cluster: new Cluster(INSTANCE, destinationClusterId),
+                id: generateId('backup'),
+                expireTime: copyExpireTime,
+              },
+              INSTANCE,
+            );
+          } finally {
+            try {
+              await destinationCluster.delete();
+            } catch {
+              // Ignore cleanup errors if the destination cluster was not created.
+            }
           }
-          // Create the copy and test the copied backup
-          await testCopyBackup(
-            backup,
-            {
-              cluster: new Cluster(INSTANCE, destinationClusterId),
-              id: generateId('backup'),
-              expireTime: copyExpireTime,
-            },
-            INSTANCE,
-          );
         } finally {
-          await backup.delete();
+          try {
+            await withBackupQuotaRetry(() => backup.delete());
+          } catch {
+            // Ignore cleanup errors if the source backup was not created.
+          }
         }
       });
       it('should create backup of a table and copy it on another project', async () => {
-        const [backup, op] = await TABLE.createBackup(generateId('backup'), {
-          expireTime: sourceExpireTime,
-        });
+        const [backup, op] = await withBackupQuotaRetry(() =>
+          TABLE.createBackup(generateId('backup'), {
+            expireTime: sourceExpireTime,
+          }),
+        );
         try {
           {
             await op.promise();
@@ -1760,42 +1817,56 @@ describe('Bigtable', () => {
             generateId('instance'),
           );
           const destinationClusterId = generateId('cluster');
-          {
-            // Create production instance with given options
-            const instanceOptions: InstanceOptions = {
-              clusters: [
-                {
-                  id: destinationClusterId,
-                  nodes: 1,
-                  location: 'us-central2-d',
-                  storage: 'ssd',
-                },
-              ],
-              labels: {'prod-label': 'prod-label'},
-              type: 'production',
-            };
-            const [, operation] = await secondInstance.create(instanceOptions);
+          // Create production instance with given options
+          const instanceOptions: InstanceOptions = {
+            clusters: [
+              {
+                id: destinationClusterId,
+                nodes: 1,
+                location: 'us-central2-d',
+                storage: 'ssd',
+              },
+            ],
+            labels: {'prod-label': 'prod-label'},
+            type: 'production',
+          };
+          const [, operation] = await secondInstance.create(instanceOptions);
+          try {
             await operation.promise();
+            // Create the copy and test the copied backup
+            await testCopyBackup(
+              backup,
+              {
+                cluster: new Cluster(secondInstance, destinationClusterId),
+                id: generateId('backup'),
+                expireTime: copyExpireTime,
+              },
+              secondInstance,
+            );
+          } finally {
+            await reapBackups(secondInstance);
+            try {
+              await secondInstance.delete();
+            } catch {
+              // Ignore cleanup errors if the second instance was not created.
+            }
           }
-          // Create the copy and test the copied backup
-          await testCopyBackup(
-            backup,
-            {
-              cluster: new Cluster(secondInstance, destinationClusterId),
-              id: generateId('backup'),
-              expireTime: copyExpireTime,
-            },
-            secondInstance,
-          );
-          await secondInstance.delete();
         } finally {
-          await backup.delete();
+          try {
+            await withBackupQuotaRetry(() => backup.delete());
+          } catch {
+            // Ignore cleanup errors if the source backup was not created.
+          }
         }
       });
       it('should restore a copied backup', async () => {
         const backupId = generateId('backup');
-        const table = INSTANCE.table('old-table');
-        {
+        const table = INSTANCE.table(generateId('table'));
+        const restoredTableId = generateId('table');
+        let backup: Backup | undefined;
+        let newBackup: Backup | undefined;
+        let newTable: Table | undefined;
+        try {
           // Create a table and insert data into it.
           await table.create();
           await table.createFamily('follows');
@@ -1809,32 +1880,63 @@ describe('Bigtable', () => {
               },
             },
           ]);
-        }
-        // Create the backup
-        const [backup, createBackupOperation] = await table.createBackup(
-          backupId,
-          {
-            expireTime: sourceExpireTime,
-          },
-        );
-        try {
+          await table.waitForReplication();
+          // Create the backup
+          const [createdBackup, createBackupOperation] =
+            await withBackupQuotaRetry(() =>
+              table.createBackup(backupId, {
+                expireTime: sourceExpireTime,
+              }),
+            );
+          backup = createdBackup;
           await createBackupOperation.promise();
           // Copy the backup
           const config = {
-            cluster: backup.cluster,
+            cluster: createdBackup.cluster,
             id: generateId('backup'),
             expireTime: copyExpireTime,
           };
-          const [newBackup, copyOperation] = await backup.copy(config);
+          const [copiedBackup, copyOperation] = await withBackupQuotaRetry(() =>
+            createdBackup.copy(config),
+          );
+          newBackup = copiedBackup;
           await copyOperation.promise();
           // Restore a table from the copied backup
-          const [newTable, restoreOperation] =
-            await newBackup.restore('new-table');
+          const [restoredTable, restoreOperation] =
+            await copiedBackup.restore(restoredTableId);
+          newTable = restoredTable;
           await restoreOperation.promise();
-          const rows = await newTable.getRows();
+          const rows = await restoredTable.getRows();
           assert.deepStrictEqual(rows[0][0].id, 'some-data-to-copy-key');
         } finally {
-          await backup.delete();
+          if (newBackup) {
+            const copiedBackupToDelete = newBackup;
+            try {
+              await withBackupQuotaRetry(() => copiedBackupToDelete.delete());
+            } catch {
+              // Ignore cleanup errors if the copied backup was not created.
+            }
+          }
+          if (backup) {
+            const sourceBackupToDelete = backup;
+            try {
+              await withBackupQuotaRetry(() => sourceBackupToDelete.delete());
+            } catch {
+              // Ignore cleanup errors if the source backup was not created.
+            }
+          }
+          if (newTable) {
+            try {
+              await newTable.delete();
+            } catch {
+              // Ignore cleanup errors if the restored table was not created.
+            }
+          }
+          try {
+            await table.delete();
+          } catch {
+            // Ignore cleanup errors if the source table was not created.
+          }
         }
       });
     });
@@ -1847,9 +1949,6 @@ describe('Bigtable', () => {
     const tableAdmin = bigtable.admin.getTableAdminClient();
 
     let backupSSD: IBackup, backupHDD: IBackup;
-
-    const targetTableIdSSD = generateId('ttbl'),
-      targetTableIdHDD = generateId('ttbl');
 
     // We just test from table here.
     const backupIdFromTableSSD = generateId('backup'),
@@ -1867,35 +1966,47 @@ describe('Bigtable', () => {
 
     beforeEach(async () => {
       // This is not ideal, but we are running into quota issues for admin API access.
-      await new Promise(r => setTimeout(r, 60 * 1000));
+      await new Promise(resolve =>
+        setTimeout(resolve, BACKUP_QUOTA_COOLDOWN_MS),
+      );
     });
 
     before(async () => {
-      const [backupOpSSD] = await tableAdmin.createBackup({
-        parent: replaceProjectIdToken(
-          INSTANCE.cluster(CLUSTER_ID).name,
-          bigtable.projectId,
-        ),
-        backupId: backupIdFromTableSSD,
-        backup: {
-          expireTime,
-          sourceTable: replaceProjectIdToken(TABLE.name, bigtable.projectId),
-        },
-      });
-      const [backupOpHDD] = await tableAdmin.createBackup({
-        parent: replaceProjectIdToken(
-          INSTANCE_HDD.cluster(CLUSTER_ID_HDD).name,
-          bigtable.projectId,
-        ),
-        backupId: backupIdFromTableHDD,
-        backup: {
-          expireTime,
-          sourceTable: replaceProjectIdToken(
-            TABLE_HDD.name,
+      // Sleep here for just over a minute before the "before all" hook creates
+      // backups so that requests from the preceding backup tests do not trigger
+      // per-minute 'Backup metadata write requests' quota exhaustion.
+      await new Promise(resolve =>
+        setTimeout(resolve, BACKUP_QUOTA_COOLDOWN_MS),
+      );
+      const [backupOpSSD] = await withBackupQuotaRetry(() =>
+        tableAdmin.createBackup({
+          parent: replaceProjectIdToken(
+            INSTANCE.cluster(CLUSTER_ID).name,
             bigtable.projectId,
           ),
-        },
-      });
+          backupId: backupIdFromTableSSD,
+          backup: {
+            expireTime,
+            sourceTable: replaceProjectIdToken(TABLE.name, bigtable.projectId),
+          },
+        }),
+      );
+      const [backupOpHDD] = await withBackupQuotaRetry(() =>
+        tableAdmin.createBackup({
+          parent: replaceProjectIdToken(
+            INSTANCE_HDD.cluster(CLUSTER_ID_HDD).name,
+            bigtable.projectId,
+          ),
+          backupId: backupIdFromTableHDD,
+          backup: {
+            expireTime,
+            sourceTable: replaceProjectIdToken(
+              TABLE_HDD.name,
+              bigtable.projectId,
+            ),
+          },
+        }),
+      );
       const [resSSD, resHDD] = await Promise.all([
         backupOpSSD.promise(),
         backupOpHDD.promise(),
@@ -1932,6 +2043,7 @@ describe('Bigtable', () => {
 
     it('should not optimize when restoring from the same backing type', async () => {
       // HDD -> HDD and SSD -> SSD should both not trigger an optimize pass.
+      const targetTableIdHDD = generateId('ttbl');
       const [restoreOp] = await tableAdmin.restoreTable({
         parent: replaceProjectIdToken(INSTANCE_HDD.name, bigtable.projectId),
         tableId: targetTableIdHDD,
@@ -1943,6 +2055,7 @@ describe('Bigtable', () => {
 
     it('should optimize when restoring from a different backing type', async () => {
       // HDD -> SSD should trigger an optimize.
+      const targetTableIdSSD = generateId('ttbl');
       const [restoreOp] = await tableAdmin.restoreTable({
         parent: replaceProjectIdToken(INSTANCE.name, bigtable.projectId),
         tableId: targetTableIdSSD,
@@ -2623,4 +2736,29 @@ function createInstanceConfig(
       time_created,
     },
   };
+}
+
+/**
+ * Executes a backup metadata write operation and retries after a 1-minute
+ * cooldown when a `RESOURCE_EXHAUSTED` (gRPC code 8) quota error is returned.
+ */
+async function withBackupQuotaRetry<T>(
+  fn: () => Promise<T>,
+  retries = 2,
+): Promise<T> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      const isQuotaError =
+        (err as ServiceError)?.code === 8 ||
+        (err as Error)?.message?.includes('RESOURCE_EXHAUSTED');
+      if (!isQuotaError || attempt >= retries) {
+        throw err;
+      }
+      await new Promise(resolve =>
+        setTimeout(resolve, BACKUP_QUOTA_COOLDOWN_MS),
+      );
+    }
+  }
 }
