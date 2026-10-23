@@ -231,6 +231,11 @@ export interface MakeWritableStreamOptions {
   connection?: {};
 
   /**
+   * Stream `highWaterMark` in bytes for the underlying writable stream.
+   */
+  highWaterMark?: number;
+
+  /**
    * Metadata to send at the head of the request.
    */
   metadata?: {contentType?: string};
@@ -525,7 +530,9 @@ export class Util {
   ) {
     onComplete = onComplete || util.noop;
 
-    const writeStream = new ProgressStream();
+    const writeStream = new ProgressStream({
+      highWaterMark: options.highWaterMark,
+    });
     writeStream.on('progress', evt => dup.emit('progress', evt));
     dup.setWritable(writeStream);
 
