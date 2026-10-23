@@ -26,12 +26,12 @@ const execAsync = promisify(require('child_process').exec);
 const extractAsync = async (input, opts) => {
   const output = Math.random() + '.tar.gz';
 
-  await pipelineAsync(
-    (got as unknown as got.Got).stream(input),
-    fs.createWriteStream(output),
-  );
-
   try {
+    await pipelineAsync(
+      (got as unknown as got.Got).stream(input),
+      fs.createWriteStream(output),
+    );
+
     await tar.extract({
       file: output,
       strip: opts.strip,
@@ -45,7 +45,9 @@ const extractAsync = async (input, opts) => {
       },
     });
   } finally {
-    await fs.promises.unlink(output);
+    await fs.promises.unlink(output).catch(err => {
+      if (err.code !== 'ENOENT') throw err;
+    });
   }
 };
 
@@ -63,8 +65,7 @@ async function main() {
     strip: 2,
     filter: file => {
       return (
-        file.parent.indexOf('protobuf-main') === 0 &&
-        file.parent.indexOf('protobuf-main/src/') === 0 &&
+        file.parent.startsWith('protobuf-main/src/') &&
         file.parent.indexOf('/internal') === -1 &&
         file.filename.indexOf('unittest') === -1 &&
         file.filename.indexOf('test') === -1
