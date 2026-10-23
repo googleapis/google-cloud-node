@@ -378,6 +378,291 @@ describe('v1.AdReviewCenterAdServiceClient', () => {
     });
   });
 
+  describe('fetchAdReviewCenterCustomLabels', () => {
+    it('invokes fetchAdReviewCenterCustomLabels without error', async () => {
+      const client =
+        new adreviewcenteradserviceModule.v1.AdReviewCenterAdServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.FetchAdReviewCenterCustomLabelsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.FetchAdReviewCenterCustomLabelsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.FetchAdReviewCenterCustomLabelsResponse(),
+      );
+      client.innerApiCalls.fetchAdReviewCenterCustomLabels =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.fetchAdReviewCenterCustomLabels(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchAdReviewCenterCustomLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchAdReviewCenterCustomLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchAdReviewCenterCustomLabels without error using callback', async () => {
+      const client =
+        new adreviewcenteradserviceModule.v1.AdReviewCenterAdServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.FetchAdReviewCenterCustomLabelsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.FetchAdReviewCenterCustomLabelsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.FetchAdReviewCenterCustomLabelsResponse(),
+      );
+      client.innerApiCalls.fetchAdReviewCenterCustomLabels =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.fetchAdReviewCenterCustomLabels(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IFetchAdReviewCenterCustomLabelsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.fetchAdReviewCenterCustomLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchAdReviewCenterCustomLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchAdReviewCenterCustomLabels with error', async () => {
+      const client =
+        new adreviewcenteradserviceModule.v1.AdReviewCenterAdServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.FetchAdReviewCenterCustomLabelsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.FetchAdReviewCenterCustomLabelsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.fetchAdReviewCenterCustomLabels = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.fetchAdReviewCenterCustomLabels(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.fetchAdReviewCenterCustomLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchAdReviewCenterCustomLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes fetchAdReviewCenterCustomLabels with closed client', async () => {
+      const client =
+        new adreviewcenteradserviceModule.v1.AdReviewCenterAdServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.FetchAdReviewCenterCustomLabelsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.FetchAdReviewCenterCustomLabelsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.fetchAdReviewCenterCustomLabels(request),
+        expectedError,
+      );
+    });
+  });
+
+  describe('batchApplyAdReviewCenterCustomLabels', () => {
+    it('invokes batchApplyAdReviewCenterCustomLabels without error', async () => {
+      const client =
+        new adreviewcenteradserviceModule.v1.AdReviewCenterAdServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApplyAdReviewCenterCustomLabelsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApplyAdReviewCenterCustomLabelsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApplyAdReviewCenterCustomLabelsResponse(),
+      );
+      client.innerApiCalls.batchApplyAdReviewCenterCustomLabels =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.batchApplyAdReviewCenterCustomLabels(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchApplyAdReviewCenterCustomLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApplyAdReviewCenterCustomLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApplyAdReviewCenterCustomLabels without error using callback', async () => {
+      const client =
+        new adreviewcenteradserviceModule.v1.AdReviewCenterAdServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApplyAdReviewCenterCustomLabelsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApplyAdReviewCenterCustomLabelsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApplyAdReviewCenterCustomLabelsResponse(),
+      );
+      client.innerApiCalls.batchApplyAdReviewCenterCustomLabels =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchApplyAdReviewCenterCustomLabels(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.ads.admanager.v1.IBatchApplyAdReviewCenterCustomLabelsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.batchApplyAdReviewCenterCustomLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApplyAdReviewCenterCustomLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApplyAdReviewCenterCustomLabels with error', async () => {
+      const client =
+        new adreviewcenteradserviceModule.v1.AdReviewCenterAdServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApplyAdReviewCenterCustomLabelsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApplyAdReviewCenterCustomLabelsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchApplyAdReviewCenterCustomLabels =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.batchApplyAdReviewCenterCustomLabels(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.batchApplyAdReviewCenterCustomLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchApplyAdReviewCenterCustomLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes batchApplyAdReviewCenterCustomLabels with closed client', async () => {
+      const client =
+        new adreviewcenteradserviceModule.v1.AdReviewCenterAdServiceClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.ads.admanager.v1.BatchApplyAdReviewCenterCustomLabelsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.ads.admanager.v1.BatchApplyAdReviewCenterCustomLabelsRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.batchApplyAdReviewCenterCustomLabels(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('batchAllowAdReviewCenterAds', () => {
     it('invokes batchAllowAdReviewCenterAds without error', async () => {
       const client =
@@ -1803,6 +2088,56 @@ describe('v1.AdReviewCenterAdServiceClient', () => {
         assert.strictEqual(result, 'applicationValue');
         assert(
           (client.pathTemplates.applicationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('asset', async () => {
+      const fakePath = '/rendered/path/asset';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        asset: 'assetValue',
+      };
+      const client =
+        new adreviewcenteradserviceModule.v1.AdReviewCenterAdServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.assetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.assetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('assetPath', () => {
+        const result = client.assetPath('networkCodeValue', 'assetValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.assetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromAssetName', () => {
+        const result = client.matchNetworkCodeFromAssetName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.assetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAssetFromAssetName', () => {
+        const result = client.matchAssetFromAssetName(fakePath);
+        assert.strictEqual(result, 'assetValue');
+        assert(
+          (client.pathTemplates.assetPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );
@@ -3566,6 +3901,143 @@ describe('v1.AdReviewCenterAdServiceClient', () => {
         assert.strictEqual(result, 'lineItemValue');
         assert(
           (client.pathTemplates.lineItemPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('lineItemCreativeAssociation', async () => {
+      const fakePath = '/rendered/path/lineItemCreativeAssociation';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        line_item: 'lineItemValue',
+        creative: 'creativeValue',
+      };
+      const client =
+        new adreviewcenteradserviceModule.v1.AdReviewCenterAdServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.lineItemCreativeAssociationPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.lineItemCreativeAssociationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lineItemCreativeAssociationPath', () => {
+        const result = client.lineItemCreativeAssociationPath(
+          'networkCodeValue',
+          'lineItemValue',
+          'creativeValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.lineItemCreativeAssociationPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromLineItemCreativeAssociationName', () => {
+        const result =
+          client.matchNetworkCodeFromLineItemCreativeAssociationName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (
+            client.pathTemplates.lineItemCreativeAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLineItemFromLineItemCreativeAssociationName', () => {
+        const result =
+          client.matchLineItemFromLineItemCreativeAssociationName(fakePath);
+        assert.strictEqual(result, 'lineItemValue');
+        assert(
+          (
+            client.pathTemplates.lineItemCreativeAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCreativeFromLineItemCreativeAssociationName', () => {
+        const result =
+          client.matchCreativeFromLineItemCreativeAssociationName(fakePath);
+        assert.strictEqual(result, 'creativeValue');
+        assert(
+          (
+            client.pathTemplates.lineItemCreativeAssociationPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('lineItemTemplate', async () => {
+      const fakePath = '/rendered/path/lineItemTemplate';
+      const expectedParameters = {
+        network_code: 'networkCodeValue',
+        line_item_template: 'lineItemTemplateValue',
+      };
+      const client =
+        new adreviewcenteradserviceModule.v1.AdReviewCenterAdServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.lineItemTemplatePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.lineItemTemplatePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('lineItemTemplatePath', () => {
+        const result = client.lineItemTemplatePath(
+          'networkCodeValue',
+          'lineItemTemplateValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.lineItemTemplatePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchNetworkCodeFromLineItemTemplateName', () => {
+        const result =
+          client.matchNetworkCodeFromLineItemTemplateName(fakePath);
+        assert.strictEqual(result, 'networkCodeValue');
+        assert(
+          (client.pathTemplates.lineItemTemplatePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLineItemTemplateFromLineItemTemplateName', () => {
+        const result =
+          client.matchLineItemTemplateFromLineItemTemplateName(fakePath);
+        assert.strictEqual(result, 'lineItemTemplateValue');
+        assert(
+          (client.pathTemplates.lineItemTemplatePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

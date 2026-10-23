@@ -423,6 +423,62 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteApplication(request: google.cloud.apphub.v1.IDeleteApplicationRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetBoundary.
+                     * @param request GetBoundaryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Boundary
+                     */
+                    public getBoundary(request: google.cloud.apphub.v1.IGetBoundaryRequest, callback: google.cloud.apphub.v1.AppHub.GetBoundaryCallback): void;
+
+                    /**
+                     * Calls GetBoundary.
+                     * @param request GetBoundaryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBoundary(request: google.cloud.apphub.v1.IGetBoundaryRequest): Promise<google.cloud.apphub.v1.Boundary>;
+
+                    /**
+                     * Calls UpdateBoundary.
+                     * @param request UpdateBoundaryRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateBoundary(request: google.cloud.apphub.v1.IUpdateBoundaryRequest, callback: google.cloud.apphub.v1.AppHub.UpdateBoundaryCallback): void;
+
+                    /**
+                     * Calls UpdateBoundary.
+                     * @param request UpdateBoundaryRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateBoundary(request: google.cloud.apphub.v1.IUpdateBoundaryRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls GetExtendedMetadataSchema.
+                     * @param request GetExtendedMetadataSchemaRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ExtendedMetadataSchema
+                     */
+                    public getExtendedMetadataSchema(request: google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest, callback: google.cloud.apphub.v1.AppHub.GetExtendedMetadataSchemaCallback): void;
+
+                    /**
+                     * Calls GetExtendedMetadataSchema.
+                     * @param request GetExtendedMetadataSchemaRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getExtendedMetadataSchema(request: google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest): Promise<google.cloud.apphub.v1.ExtendedMetadataSchema>;
+
+                    /**
+                     * Calls ListExtendedMetadataSchemas.
+                     * @param request ListExtendedMetadataSchemasRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListExtendedMetadataSchemasResponse
+                     */
+                    public listExtendedMetadataSchemas(request: google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest, callback: google.cloud.apphub.v1.AppHub.ListExtendedMetadataSchemasCallback): void;
+
+                    /**
+                     * Calls ListExtendedMetadataSchemas.
+                     * @param request ListExtendedMetadataSchemasRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listExtendedMetadataSchemas(request: google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest): Promise<google.cloud.apphub.v1.ListExtendedMetadataSchemasResponse>;
                 }
 
                 namespace AppHub {
@@ -615,6 +671,34 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteApplicationCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apphub.v1.AppHub|getBoundary}.
+                     * @param error Error, if any
+                     * @param [response] Boundary
+                     */
+                    type GetBoundaryCallback = (error: (Error|null), response?: google.cloud.apphub.v1.Boundary) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apphub.v1.AppHub|updateBoundary}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateBoundaryCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apphub.v1.AppHub|getExtendedMetadataSchema}.
+                     * @param error Error, if any
+                     * @param [response] ExtendedMetadataSchema
+                     */
+                    type GetExtendedMetadataSchemaCallback = (error: (Error|null), response?: google.cloud.apphub.v1.ExtendedMetadataSchema) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.apphub.v1.AppHub|listExtendedMetadataSchemas}.
+                     * @param error Error, if any
+                     * @param [response] ListExtendedMetadataSchemasResponse
+                     */
+                    type ListExtendedMetadataSchemasCallback = (error: (Error|null), response?: google.cloud.apphub.v1.ListExtendedMetadataSchemasResponse) => void;
                 }
 
                 /** Properties of a LookupServiceProjectAttachmentRequest. */
@@ -4560,6 +4644,212 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetBoundaryRequest. */
+                interface IGetBoundaryRequest {
+
+                    /** GetBoundaryRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetBoundaryRequest. */
+                class GetBoundaryRequest implements IGetBoundaryRequest {
+
+                    /**
+                     * Constructs a new GetBoundaryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apphub.v1.IGetBoundaryRequest);
+
+                    /** GetBoundaryRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetBoundaryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetBoundaryRequest instance
+                     */
+                    public static create(properties?: google.cloud.apphub.v1.IGetBoundaryRequest): google.cloud.apphub.v1.GetBoundaryRequest;
+
+                    /**
+                     * Encodes the specified GetBoundaryRequest message. Does not implicitly {@link google.cloud.apphub.v1.GetBoundaryRequest.verify|verify} messages.
+                     * @param message GetBoundaryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apphub.v1.IGetBoundaryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetBoundaryRequest message, length delimited. Does not implicitly {@link google.cloud.apphub.v1.GetBoundaryRequest.verify|verify} messages.
+                     * @param message GetBoundaryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apphub.v1.IGetBoundaryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetBoundaryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetBoundaryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apphub.v1.GetBoundaryRequest;
+
+                    /**
+                     * Decodes a GetBoundaryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetBoundaryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apphub.v1.GetBoundaryRequest;
+
+                    /**
+                     * Verifies a GetBoundaryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetBoundaryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetBoundaryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apphub.v1.GetBoundaryRequest;
+
+                    /**
+                     * Creates a plain object from a GetBoundaryRequest message. Also converts values to other types if specified.
+                     * @param message GetBoundaryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apphub.v1.GetBoundaryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetBoundaryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetBoundaryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateBoundaryRequest. */
+                interface IUpdateBoundaryRequest {
+
+                    /** UpdateBoundaryRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateBoundaryRequest boundary */
+                    boundary?: (google.cloud.apphub.v1.IBoundary|null);
+
+                    /** UpdateBoundaryRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateBoundaryRequest. */
+                class UpdateBoundaryRequest implements IUpdateBoundaryRequest {
+
+                    /**
+                     * Constructs a new UpdateBoundaryRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apphub.v1.IUpdateBoundaryRequest);
+
+                    /** UpdateBoundaryRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateBoundaryRequest boundary. */
+                    public boundary?: (google.cloud.apphub.v1.IBoundary|null);
+
+                    /** UpdateBoundaryRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateBoundaryRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateBoundaryRequest instance
+                     */
+                    public static create(properties?: google.cloud.apphub.v1.IUpdateBoundaryRequest): google.cloud.apphub.v1.UpdateBoundaryRequest;
+
+                    /**
+                     * Encodes the specified UpdateBoundaryRequest message. Does not implicitly {@link google.cloud.apphub.v1.UpdateBoundaryRequest.verify|verify} messages.
+                     * @param message UpdateBoundaryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apphub.v1.IUpdateBoundaryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateBoundaryRequest message, length delimited. Does not implicitly {@link google.cloud.apphub.v1.UpdateBoundaryRequest.verify|verify} messages.
+                     * @param message UpdateBoundaryRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apphub.v1.IUpdateBoundaryRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateBoundaryRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateBoundaryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apphub.v1.UpdateBoundaryRequest;
+
+                    /**
+                     * Decodes an UpdateBoundaryRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateBoundaryRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apphub.v1.UpdateBoundaryRequest;
+
+                    /**
+                     * Verifies an UpdateBoundaryRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateBoundaryRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateBoundaryRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apphub.v1.UpdateBoundaryRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateBoundaryRequest message. Also converts values to other types if specified.
+                     * @param message UpdateBoundaryRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apphub.v1.UpdateBoundaryRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateBoundaryRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateBoundaryRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an OperationMetadata. */
                 interface IOperationMetadata {
 
@@ -4693,6 +4983,315 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a GetExtendedMetadataSchemaRequest. */
+                interface IGetExtendedMetadataSchemaRequest {
+
+                    /** GetExtendedMetadataSchemaRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetExtendedMetadataSchemaRequest. */
+                class GetExtendedMetadataSchemaRequest implements IGetExtendedMetadataSchemaRequest {
+
+                    /**
+                     * Constructs a new GetExtendedMetadataSchemaRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest);
+
+                    /** GetExtendedMetadataSchemaRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetExtendedMetadataSchemaRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetExtendedMetadataSchemaRequest instance
+                     */
+                    public static create(properties?: google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest): google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest;
+
+                    /**
+                     * Encodes the specified GetExtendedMetadataSchemaRequest message. Does not implicitly {@link google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest.verify|verify} messages.
+                     * @param message GetExtendedMetadataSchemaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetExtendedMetadataSchemaRequest message, length delimited. Does not implicitly {@link google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest.verify|verify} messages.
+                     * @param message GetExtendedMetadataSchemaRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apphub.v1.IGetExtendedMetadataSchemaRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetExtendedMetadataSchemaRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetExtendedMetadataSchemaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest;
+
+                    /**
+                     * Decodes a GetExtendedMetadataSchemaRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetExtendedMetadataSchemaRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest;
+
+                    /**
+                     * Verifies a GetExtendedMetadataSchemaRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetExtendedMetadataSchemaRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetExtendedMetadataSchemaRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest;
+
+                    /**
+                     * Creates a plain object from a GetExtendedMetadataSchemaRequest message. Also converts values to other types if specified.
+                     * @param message GetExtendedMetadataSchemaRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apphub.v1.GetExtendedMetadataSchemaRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetExtendedMetadataSchemaRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetExtendedMetadataSchemaRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListExtendedMetadataSchemasRequest. */
+                interface IListExtendedMetadataSchemasRequest {
+
+                    /** ListExtendedMetadataSchemasRequest parent */
+                    parent?: (string|null);
+
+                    /** ListExtendedMetadataSchemasRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListExtendedMetadataSchemasRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListExtendedMetadataSchemasRequest. */
+                class ListExtendedMetadataSchemasRequest implements IListExtendedMetadataSchemasRequest {
+
+                    /**
+                     * Constructs a new ListExtendedMetadataSchemasRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest);
+
+                    /** ListExtendedMetadataSchemasRequest parent. */
+                    public parent: string;
+
+                    /** ListExtendedMetadataSchemasRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListExtendedMetadataSchemasRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListExtendedMetadataSchemasRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListExtendedMetadataSchemasRequest instance
+                     */
+                    public static create(properties?: google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest): google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest;
+
+                    /**
+                     * Encodes the specified ListExtendedMetadataSchemasRequest message. Does not implicitly {@link google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest.verify|verify} messages.
+                     * @param message ListExtendedMetadataSchemasRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListExtendedMetadataSchemasRequest message, length delimited. Does not implicitly {@link google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest.verify|verify} messages.
+                     * @param message ListExtendedMetadataSchemasRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apphub.v1.IListExtendedMetadataSchemasRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListExtendedMetadataSchemasRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListExtendedMetadataSchemasRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest;
+
+                    /**
+                     * Decodes a ListExtendedMetadataSchemasRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListExtendedMetadataSchemasRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest;
+
+                    /**
+                     * Verifies a ListExtendedMetadataSchemasRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListExtendedMetadataSchemasRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListExtendedMetadataSchemasRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest;
+
+                    /**
+                     * Creates a plain object from a ListExtendedMetadataSchemasRequest message. Also converts values to other types if specified.
+                     * @param message ListExtendedMetadataSchemasRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apphub.v1.ListExtendedMetadataSchemasRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListExtendedMetadataSchemasRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListExtendedMetadataSchemasRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListExtendedMetadataSchemasResponse. */
+                interface IListExtendedMetadataSchemasResponse {
+
+                    /** ListExtendedMetadataSchemasResponse extendedMetadataSchemas */
+                    extendedMetadataSchemas?: (google.cloud.apphub.v1.IExtendedMetadataSchema[]|null);
+
+                    /** ListExtendedMetadataSchemasResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListExtendedMetadataSchemasResponse. */
+                class ListExtendedMetadataSchemasResponse implements IListExtendedMetadataSchemasResponse {
+
+                    /**
+                     * Constructs a new ListExtendedMetadataSchemasResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apphub.v1.IListExtendedMetadataSchemasResponse);
+
+                    /** ListExtendedMetadataSchemasResponse extendedMetadataSchemas. */
+                    public extendedMetadataSchemas: google.cloud.apphub.v1.IExtendedMetadataSchema[];
+
+                    /** ListExtendedMetadataSchemasResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListExtendedMetadataSchemasResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListExtendedMetadataSchemasResponse instance
+                     */
+                    public static create(properties?: google.cloud.apphub.v1.IListExtendedMetadataSchemasResponse): google.cloud.apphub.v1.ListExtendedMetadataSchemasResponse;
+
+                    /**
+                     * Encodes the specified ListExtendedMetadataSchemasResponse message. Does not implicitly {@link google.cloud.apphub.v1.ListExtendedMetadataSchemasResponse.verify|verify} messages.
+                     * @param message ListExtendedMetadataSchemasResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apphub.v1.IListExtendedMetadataSchemasResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListExtendedMetadataSchemasResponse message, length delimited. Does not implicitly {@link google.cloud.apphub.v1.ListExtendedMetadataSchemasResponse.verify|verify} messages.
+                     * @param message ListExtendedMetadataSchemasResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apphub.v1.IListExtendedMetadataSchemasResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListExtendedMetadataSchemasResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListExtendedMetadataSchemasResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apphub.v1.ListExtendedMetadataSchemasResponse;
+
+                    /**
+                     * Decodes a ListExtendedMetadataSchemasResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListExtendedMetadataSchemasResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apphub.v1.ListExtendedMetadataSchemasResponse;
+
+                    /**
+                     * Verifies a ListExtendedMetadataSchemasResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListExtendedMetadataSchemasResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListExtendedMetadataSchemasResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apphub.v1.ListExtendedMetadataSchemasResponse;
+
+                    /**
+                     * Creates a plain object from a ListExtendedMetadataSchemasResponse message. Also converts values to other types if specified.
+                     * @param message ListExtendedMetadataSchemasResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apphub.v1.ListExtendedMetadataSchemasResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListExtendedMetadataSchemasResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListExtendedMetadataSchemasResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of an Application. */
                 interface IApplication {
 
@@ -4722,6 +5321,12 @@ export namespace google {
 
                     /** Application state */
                     state?: (google.cloud.apphub.v1.Application.State|keyof typeof google.cloud.apphub.v1.Application.State|null);
+
+                    /** Application applicationProperties */
+                    applicationProperties?: (google.cloud.apphub.v1.IApplicationProperties|null);
+
+                    /** Application applicationType */
+                    applicationType?: (google.cloud.apphub.v1.IApplicationType|null);
                 }
 
                 /** Represents an Application. */
@@ -4759,6 +5364,12 @@ export namespace google {
 
                     /** Application state. */
                     public state: (google.cloud.apphub.v1.Application.State|keyof typeof google.cloud.apphub.v1.Application.State);
+
+                    /** Application applicationProperties. */
+                    public applicationProperties?: (google.cloud.apphub.v1.IApplicationProperties|null);
+
+                    /** Application applicationType. */
+                    public applicationType?: (google.cloud.apphub.v1.IApplicationType|null);
 
                     /**
                      * Creates a new Application instance using the specified properties.
@@ -4846,6 +5457,112 @@ export namespace google {
                         CREATING = 1,
                         ACTIVE = 2,
                         DELETING = 3
+                    }
+                }
+
+                /** Properties of an ApplicationType. */
+                interface IApplicationType {
+
+                    /** ApplicationType type */
+                    type?: (google.cloud.apphub.v1.ApplicationType.Type|keyof typeof google.cloud.apphub.v1.ApplicationType.Type|null);
+                }
+
+                /** Represents an ApplicationType. */
+                class ApplicationType implements IApplicationType {
+
+                    /**
+                     * Constructs a new ApplicationType.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apphub.v1.IApplicationType);
+
+                    /** ApplicationType type. */
+                    public type: (google.cloud.apphub.v1.ApplicationType.Type|keyof typeof google.cloud.apphub.v1.ApplicationType.Type);
+
+                    /**
+                     * Creates a new ApplicationType instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApplicationType instance
+                     */
+                    public static create(properties?: google.cloud.apphub.v1.IApplicationType): google.cloud.apphub.v1.ApplicationType;
+
+                    /**
+                     * Encodes the specified ApplicationType message. Does not implicitly {@link google.cloud.apphub.v1.ApplicationType.verify|verify} messages.
+                     * @param message ApplicationType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apphub.v1.IApplicationType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApplicationType message, length delimited. Does not implicitly {@link google.cloud.apphub.v1.ApplicationType.verify|verify} messages.
+                     * @param message ApplicationType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apphub.v1.IApplicationType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApplicationType message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApplicationType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apphub.v1.ApplicationType;
+
+                    /**
+                     * Decodes an ApplicationType message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApplicationType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apphub.v1.ApplicationType;
+
+                    /**
+                     * Verifies an ApplicationType message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApplicationType message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApplicationType
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apphub.v1.ApplicationType;
+
+                    /**
+                     * Creates a plain object from an ApplicationType message. Also converts values to other types if specified.
+                     * @param message ApplicationType
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apphub.v1.ApplicationType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApplicationType to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ApplicationType
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ApplicationType {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        AI_APPLICATION = 1
                     }
                 }
 
@@ -4954,6 +5671,103 @@ export namespace google {
                         REGIONAL = 1,
                         GLOBAL = 2
                     }
+                }
+
+                /** Properties of an ApplicationProperties. */
+                interface IApplicationProperties {
+
+                    /** ApplicationProperties extendedMetadata */
+                    extendedMetadata?: ({ [k: string]: google.cloud.apphub.v1.IExtendedMetadata }|null);
+                }
+
+                /** Represents an ApplicationProperties. */
+                class ApplicationProperties implements IApplicationProperties {
+
+                    /**
+                     * Constructs a new ApplicationProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apphub.v1.IApplicationProperties);
+
+                    /** ApplicationProperties extendedMetadata. */
+                    public extendedMetadata: { [k: string]: google.cloud.apphub.v1.IExtendedMetadata };
+
+                    /**
+                     * Creates a new ApplicationProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApplicationProperties instance
+                     */
+                    public static create(properties?: google.cloud.apphub.v1.IApplicationProperties): google.cloud.apphub.v1.ApplicationProperties;
+
+                    /**
+                     * Encodes the specified ApplicationProperties message. Does not implicitly {@link google.cloud.apphub.v1.ApplicationProperties.verify|verify} messages.
+                     * @param message ApplicationProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apphub.v1.IApplicationProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApplicationProperties message, length delimited. Does not implicitly {@link google.cloud.apphub.v1.ApplicationProperties.verify|verify} messages.
+                     * @param message ApplicationProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apphub.v1.IApplicationProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApplicationProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApplicationProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apphub.v1.ApplicationProperties;
+
+                    /**
+                     * Decodes an ApplicationProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApplicationProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apphub.v1.ApplicationProperties;
+
+                    /**
+                     * Verifies an ApplicationProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApplicationProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApplicationProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apphub.v1.ApplicationProperties;
+
+                    /**
+                     * Creates a plain object from an ApplicationProperties message. Also converts values to other types if specified.
+                     * @param message ApplicationProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apphub.v1.ApplicationProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApplicationProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ApplicationProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of an Attributes. */
@@ -5398,6 +6212,659 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a FunctionalType. */
+                interface IFunctionalType {
+
+                    /** FunctionalType type */
+                    type?: (google.cloud.apphub.v1.FunctionalType.Type|keyof typeof google.cloud.apphub.v1.FunctionalType.Type|null);
+                }
+
+                /** Represents a FunctionalType. */
+                class FunctionalType implements IFunctionalType {
+
+                    /**
+                     * Constructs a new FunctionalType.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apphub.v1.IFunctionalType);
+
+                    /** FunctionalType type. */
+                    public type: (google.cloud.apphub.v1.FunctionalType.Type|keyof typeof google.cloud.apphub.v1.FunctionalType.Type);
+
+                    /**
+                     * Creates a new FunctionalType instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FunctionalType instance
+                     */
+                    public static create(properties?: google.cloud.apphub.v1.IFunctionalType): google.cloud.apphub.v1.FunctionalType;
+
+                    /**
+                     * Encodes the specified FunctionalType message. Does not implicitly {@link google.cloud.apphub.v1.FunctionalType.verify|verify} messages.
+                     * @param message FunctionalType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apphub.v1.IFunctionalType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FunctionalType message, length delimited. Does not implicitly {@link google.cloud.apphub.v1.FunctionalType.verify|verify} messages.
+                     * @param message FunctionalType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apphub.v1.IFunctionalType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FunctionalType message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FunctionalType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apphub.v1.FunctionalType;
+
+                    /**
+                     * Decodes a FunctionalType message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FunctionalType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apphub.v1.FunctionalType;
+
+                    /**
+                     * Verifies a FunctionalType message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FunctionalType message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FunctionalType
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apphub.v1.FunctionalType;
+
+                    /**
+                     * Creates a plain object from a FunctionalType message. Also converts values to other types if specified.
+                     * @param message FunctionalType
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apphub.v1.FunctionalType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FunctionalType to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FunctionalType
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FunctionalType {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        AGENT = 1,
+                        MCP_SERVER = 2,
+                        ENDPOINT = 3
+                    }
+                }
+
+                /** Properties of a RegistrationType. */
+                interface IRegistrationType {
+
+                    /** RegistrationType type */
+                    type?: (google.cloud.apphub.v1.RegistrationType.Type|keyof typeof google.cloud.apphub.v1.RegistrationType.Type|null);
+                }
+
+                /** Represents a RegistrationType. */
+                class RegistrationType implements IRegistrationType {
+
+                    /**
+                     * Constructs a new RegistrationType.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apphub.v1.IRegistrationType);
+
+                    /** RegistrationType type. */
+                    public type: (google.cloud.apphub.v1.RegistrationType.Type|keyof typeof google.cloud.apphub.v1.RegistrationType.Type);
+
+                    /**
+                     * Creates a new RegistrationType instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RegistrationType instance
+                     */
+                    public static create(properties?: google.cloud.apphub.v1.IRegistrationType): google.cloud.apphub.v1.RegistrationType;
+
+                    /**
+                     * Encodes the specified RegistrationType message. Does not implicitly {@link google.cloud.apphub.v1.RegistrationType.verify|verify} messages.
+                     * @param message RegistrationType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apphub.v1.IRegistrationType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RegistrationType message, length delimited. Does not implicitly {@link google.cloud.apphub.v1.RegistrationType.verify|verify} messages.
+                     * @param message RegistrationType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apphub.v1.IRegistrationType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RegistrationType message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RegistrationType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apphub.v1.RegistrationType;
+
+                    /**
+                     * Decodes a RegistrationType message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RegistrationType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apphub.v1.RegistrationType;
+
+                    /**
+                     * Verifies a RegistrationType message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RegistrationType message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RegistrationType
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apphub.v1.RegistrationType;
+
+                    /**
+                     * Creates a plain object from a RegistrationType message. Also converts values to other types if specified.
+                     * @param message RegistrationType
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apphub.v1.RegistrationType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RegistrationType to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RegistrationType
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace RegistrationType {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        EXCLUSIVE = 1,
+                        SHARED = 2
+                    }
+                }
+
+                /** Properties of an ExtendedMetadata. */
+                interface IExtendedMetadata {
+
+                    /** ExtendedMetadata metadataStruct */
+                    metadataStruct?: (google.protobuf.IStruct|null);
+                }
+
+                /** Represents an ExtendedMetadata. */
+                class ExtendedMetadata implements IExtendedMetadata {
+
+                    /**
+                     * Constructs a new ExtendedMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apphub.v1.IExtendedMetadata);
+
+                    /** ExtendedMetadata metadataStruct. */
+                    public metadataStruct?: (google.protobuf.IStruct|null);
+
+                    /**
+                     * Creates a new ExtendedMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExtendedMetadata instance
+                     */
+                    public static create(properties?: google.cloud.apphub.v1.IExtendedMetadata): google.cloud.apphub.v1.ExtendedMetadata;
+
+                    /**
+                     * Encodes the specified ExtendedMetadata message. Does not implicitly {@link google.cloud.apphub.v1.ExtendedMetadata.verify|verify} messages.
+                     * @param message ExtendedMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apphub.v1.IExtendedMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExtendedMetadata message, length delimited. Does not implicitly {@link google.cloud.apphub.v1.ExtendedMetadata.verify|verify} messages.
+                     * @param message ExtendedMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apphub.v1.IExtendedMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExtendedMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExtendedMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apphub.v1.ExtendedMetadata;
+
+                    /**
+                     * Decodes an ExtendedMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExtendedMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apphub.v1.ExtendedMetadata;
+
+                    /**
+                     * Verifies an ExtendedMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExtendedMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExtendedMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apphub.v1.ExtendedMetadata;
+
+                    /**
+                     * Creates a plain object from an ExtendedMetadata message. Also converts values to other types if specified.
+                     * @param message ExtendedMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apphub.v1.ExtendedMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExtendedMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExtendedMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an Identity. */
+                interface IIdentity {
+
+                    /** Identity principal */
+                    principal?: (string|null);
+                }
+
+                /** Represents an Identity. */
+                class Identity implements IIdentity {
+
+                    /**
+                     * Constructs a new Identity.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apphub.v1.IIdentity);
+
+                    /** Identity principal. */
+                    public principal: string;
+
+                    /**
+                     * Creates a new Identity instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Identity instance
+                     */
+                    public static create(properties?: google.cloud.apphub.v1.IIdentity): google.cloud.apphub.v1.Identity;
+
+                    /**
+                     * Encodes the specified Identity message. Does not implicitly {@link google.cloud.apphub.v1.Identity.verify|verify} messages.
+                     * @param message Identity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apphub.v1.IIdentity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Identity message, length delimited. Does not implicitly {@link google.cloud.apphub.v1.Identity.verify|verify} messages.
+                     * @param message Identity message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apphub.v1.IIdentity, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Identity message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Identity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apphub.v1.Identity;
+
+                    /**
+                     * Decodes an Identity message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Identity
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apphub.v1.Identity;
+
+                    /**
+                     * Verifies an Identity message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Identity message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Identity
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apphub.v1.Identity;
+
+                    /**
+                     * Creates a plain object from an Identity message. Also converts values to other types if specified.
+                     * @param message Identity
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apphub.v1.Identity, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Identity to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Identity
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a Boundary. */
+                interface IBoundary {
+
+                    /** Boundary crmNode */
+                    crmNode?: (string|null);
+
+                    /** Boundary name */
+                    name?: (string|null);
+
+                    /** Boundary createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Boundary updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Boundary type */
+                    type?: (google.cloud.apphub.v1.Boundary.Type|keyof typeof google.cloud.apphub.v1.Boundary.Type|null);
+                }
+
+                /** Represents a Boundary. */
+                class Boundary implements IBoundary {
+
+                    /**
+                     * Constructs a new Boundary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apphub.v1.IBoundary);
+
+                    /** Boundary crmNode. */
+                    public crmNode?: (string|null);
+
+                    /** Boundary name. */
+                    public name: string;
+
+                    /** Boundary createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Boundary updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Boundary type. */
+                    public type: (google.cloud.apphub.v1.Boundary.Type|keyof typeof google.cloud.apphub.v1.Boundary.Type);
+
+                    /** Boundary scope. */
+                    public scope?: "crmNode";
+
+                    /**
+                     * Creates a new Boundary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Boundary instance
+                     */
+                    public static create(properties?: google.cloud.apphub.v1.IBoundary): google.cloud.apphub.v1.Boundary;
+
+                    /**
+                     * Encodes the specified Boundary message. Does not implicitly {@link google.cloud.apphub.v1.Boundary.verify|verify} messages.
+                     * @param message Boundary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apphub.v1.IBoundary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Boundary message, length delimited. Does not implicitly {@link google.cloud.apphub.v1.Boundary.verify|verify} messages.
+                     * @param message Boundary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apphub.v1.IBoundary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Boundary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Boundary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apphub.v1.Boundary;
+
+                    /**
+                     * Decodes a Boundary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Boundary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apphub.v1.Boundary;
+
+                    /**
+                     * Verifies a Boundary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Boundary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Boundary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apphub.v1.Boundary;
+
+                    /**
+                     * Creates a plain object from a Boundary message. Also converts values to other types if specified.
+                     * @param message Boundary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apphub.v1.Boundary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Boundary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Boundary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Boundary {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        AUTOMATIC = 1,
+                        MANUAL = 2,
+                        MANAGED_AUTOMATIC = 3
+                    }
+                }
+
+                /** Properties of an ExtendedMetadataSchema. */
+                interface IExtendedMetadataSchema {
+
+                    /** ExtendedMetadataSchema name */
+                    name?: (string|null);
+
+                    /** ExtendedMetadataSchema jsonSchema */
+                    jsonSchema?: (string|null);
+
+                    /** ExtendedMetadataSchema schemaVersion */
+                    schemaVersion?: (number|Long|string|null);
+                }
+
+                /** Represents an ExtendedMetadataSchema. */
+                class ExtendedMetadataSchema implements IExtendedMetadataSchema {
+
+                    /**
+                     * Constructs a new ExtendedMetadataSchema.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.apphub.v1.IExtendedMetadataSchema);
+
+                    /** ExtendedMetadataSchema name. */
+                    public name: string;
+
+                    /** ExtendedMetadataSchema jsonSchema. */
+                    public jsonSchema: string;
+
+                    /** ExtendedMetadataSchema schemaVersion. */
+                    public schemaVersion: (number|Long|string);
+
+                    /**
+                     * Creates a new ExtendedMetadataSchema instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExtendedMetadataSchema instance
+                     */
+                    public static create(properties?: google.cloud.apphub.v1.IExtendedMetadataSchema): google.cloud.apphub.v1.ExtendedMetadataSchema;
+
+                    /**
+                     * Encodes the specified ExtendedMetadataSchema message. Does not implicitly {@link google.cloud.apphub.v1.ExtendedMetadataSchema.verify|verify} messages.
+                     * @param message ExtendedMetadataSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.apphub.v1.IExtendedMetadataSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExtendedMetadataSchema message, length delimited. Does not implicitly {@link google.cloud.apphub.v1.ExtendedMetadataSchema.verify|verify} messages.
+                     * @param message ExtendedMetadataSchema message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.apphub.v1.IExtendedMetadataSchema, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExtendedMetadataSchema message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExtendedMetadataSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.apphub.v1.ExtendedMetadataSchema;
+
+                    /**
+                     * Decodes an ExtendedMetadataSchema message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExtendedMetadataSchema
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.apphub.v1.ExtendedMetadataSchema;
+
+                    /**
+                     * Verifies an ExtendedMetadataSchema message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExtendedMetadataSchema message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExtendedMetadataSchema
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.apphub.v1.ExtendedMetadataSchema;
+
+                    /**
+                     * Creates a plain object from an ExtendedMetadataSchema message. Also converts values to other types if specified.
+                     * @param message ExtendedMetadataSchema
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.apphub.v1.ExtendedMetadataSchema, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExtendedMetadataSchema to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExtendedMetadataSchema
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a Service. */
                 interface IService {
 
@@ -5675,6 +7142,18 @@ export namespace google {
 
                     /** ServiceProperties zone */
                     zone?: (string|null);
+
+                    /** ServiceProperties functionalType */
+                    functionalType?: (google.cloud.apphub.v1.IFunctionalType|null);
+
+                    /** ServiceProperties registrationType */
+                    registrationType?: (google.cloud.apphub.v1.IRegistrationType|null);
+
+                    /** ServiceProperties extendedMetadata */
+                    extendedMetadata?: ({ [k: string]: google.cloud.apphub.v1.IExtendedMetadata }|null);
+
+                    /** ServiceProperties identity */
+                    identity?: (google.cloud.apphub.v1.IIdentity|null);
                 }
 
                 /** Represents a ServiceProperties. */
@@ -5694,6 +7173,18 @@ export namespace google {
 
                     /** ServiceProperties zone. */
                     public zone: string;
+
+                    /** ServiceProperties functionalType. */
+                    public functionalType?: (google.cloud.apphub.v1.IFunctionalType|null);
+
+                    /** ServiceProperties registrationType. */
+                    public registrationType?: (google.cloud.apphub.v1.IRegistrationType|null);
+
+                    /** ServiceProperties extendedMetadata. */
+                    public extendedMetadata: { [k: string]: google.cloud.apphub.v1.IExtendedMetadata };
+
+                    /** ServiceProperties identity. */
+                    public identity?: (google.cloud.apphub.v1.IIdentity|null);
 
                     /**
                      * Creates a new ServiceProperties instance using the specified properties.
@@ -6291,6 +7782,15 @@ export namespace google {
 
                     /** WorkloadProperties zone */
                     zone?: (string|null);
+
+                    /** WorkloadProperties functionalType */
+                    functionalType?: (google.cloud.apphub.v1.IFunctionalType|null);
+
+                    /** WorkloadProperties extendedMetadata */
+                    extendedMetadata?: ({ [k: string]: google.cloud.apphub.v1.IExtendedMetadata }|null);
+
+                    /** WorkloadProperties identity */
+                    identity?: (google.cloud.apphub.v1.IIdentity|null);
                 }
 
                 /** Represents a WorkloadProperties. */
@@ -6310,6 +7810,15 @@ export namespace google {
 
                     /** WorkloadProperties zone. */
                     public zone: string;
+
+                    /** WorkloadProperties functionalType. */
+                    public functionalType?: (google.cloud.apphub.v1.IFunctionalType|null);
+
+                    /** WorkloadProperties extendedMetadata. */
+                    public extendedMetadata: { [k: string]: google.cloud.apphub.v1.IExtendedMetadata };
+
+                    /** WorkloadProperties identity. */
+                    public identity?: (google.cloud.apphub.v1.IIdentity|null);
 
                     /**
                      * Creates a new WorkloadProperties instance using the specified properties.
@@ -8974,6 +10483,218 @@ export namespace google {
             IDENTIFIER = 8
         }
 
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a ResourceDescriptor. */
         interface IResourceDescriptor {
 
@@ -9220,218 +10941,6 @@ export namespace google {
 
             /**
              * Gets the default type url for ResourceReference
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of a FieldInfo. */
-        interface IFieldInfo {
-
-            /** FieldInfo format */
-            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
-
-            /** FieldInfo referencedTypes */
-            referencedTypes?: (google.api.ITypeReference[]|null);
-        }
-
-        /** Represents a FieldInfo. */
-        class FieldInfo implements IFieldInfo {
-
-            /**
-             * Constructs a new FieldInfo.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IFieldInfo);
-
-            /** FieldInfo format. */
-            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
-
-            /** FieldInfo referencedTypes. */
-            public referencedTypes: google.api.ITypeReference[];
-
-            /**
-             * Creates a new FieldInfo instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldInfo instance
-             */
-            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
-
-            /**
-             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
-
-            /**
-             * Verifies a FieldInfo message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldInfo
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
-
-            /**
-             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
-             * @param message FieldInfo
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldInfo to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldInfo
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace FieldInfo {
-
-            /** Format enum. */
-            enum Format {
-                FORMAT_UNSPECIFIED = 0,
-                UUID4 = 1,
-                IPV4 = 2,
-                IPV6 = 3,
-                IPV4_OR_IPV6 = 4
-            }
-        }
-
-        /** Properties of a TypeReference. */
-        interface ITypeReference {
-
-            /** TypeReference typeName */
-            typeName?: (string|null);
-        }
-
-        /** Represents a TypeReference. */
-        class TypeReference implements ITypeReference {
-
-            /**
-             * Constructs a new TypeReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ITypeReference);
-
-            /** TypeReference typeName. */
-            public typeName: string;
-
-            /**
-             * Creates a new TypeReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns TypeReference instance
-             */
-            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
-
-            /**
-             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
-             * @param message TypeReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
-             * @param message TypeReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a TypeReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns TypeReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
-
-            /**
-             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns TypeReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
-
-            /**
-             * Verifies a TypeReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns TypeReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
-
-            /**
-             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
-             * @param message TypeReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this TypeReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for TypeReference
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -11633,11 +13142,11 @@ export namespace google {
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);
 
-            /** FieldOptions .google.api.resourceReference */
-            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
-
             /** FieldOptions .google.api.fieldInfo */
             ".google.api.fieldInfo"?: (google.api.IFieldInfo|null);
+
+            /** FieldOptions .google.api.resourceReference */
+            ".google.api.resourceReference"?: (google.api.IResourceReference|null);
         }
 
         /** Represents a FieldOptions. */
@@ -14047,6 +15556,335 @@ export namespace google {
 
             /**
              * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Struct. */
+        interface IStruct {
+
+            /** Struct fields */
+            fields?: ({ [k: string]: google.protobuf.IValue }|null);
+        }
+
+        /** Represents a Struct. */
+        class Struct implements IStruct {
+
+            /**
+             * Constructs a new Struct.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IStruct);
+
+            /** Struct fields. */
+            public fields: { [k: string]: google.protobuf.IValue };
+
+            /**
+             * Creates a new Struct instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Struct instance
+             */
+            public static create(properties?: google.protobuf.IStruct): google.protobuf.Struct;
+
+            /**
+             * Encodes the specified Struct message. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Struct message, length delimited. Does not implicitly {@link google.protobuf.Struct.verify|verify} messages.
+             * @param message Struct message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IStruct, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Struct message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Struct
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Struct;
+
+            /**
+             * Decodes a Struct message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Struct
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Struct;
+
+            /**
+             * Verifies a Struct message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Struct message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Struct
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Struct;
+
+            /**
+             * Creates a plain object from a Struct message. Also converts values to other types if specified.
+             * @param message Struct
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Struct, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Struct to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Struct
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a Value. */
+        interface IValue {
+
+            /** Value nullValue */
+            nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+            /** Value numberValue */
+            numberValue?: (number|null);
+
+            /** Value stringValue */
+            stringValue?: (string|null);
+
+            /** Value boolValue */
+            boolValue?: (boolean|null);
+
+            /** Value structValue */
+            structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue */
+            listValue?: (google.protobuf.IListValue|null);
+        }
+
+        /** Represents a Value. */
+        class Value implements IValue {
+
+            /**
+             * Constructs a new Value.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IValue);
+
+            /** Value nullValue. */
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
+
+            /** Value numberValue. */
+            public numberValue?: (number|null);
+
+            /** Value stringValue. */
+            public stringValue?: (string|null);
+
+            /** Value boolValue. */
+            public boolValue?: (boolean|null);
+
+            /** Value structValue. */
+            public structValue?: (google.protobuf.IStruct|null);
+
+            /** Value listValue. */
+            public listValue?: (google.protobuf.IListValue|null);
+
+            /** Value kind. */
+            public kind?: ("nullValue"|"numberValue"|"stringValue"|"boolValue"|"structValue"|"listValue");
+
+            /**
+             * Creates a new Value instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Value instance
+             */
+            public static create(properties?: google.protobuf.IValue): google.protobuf.Value;
+
+            /**
+             * Encodes the specified Value message. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Value message, length delimited. Does not implicitly {@link google.protobuf.Value.verify|verify} messages.
+             * @param message Value message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Value message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Value
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Value;
+
+            /**
+             * Decodes a Value message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Value
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Value;
+
+            /**
+             * Verifies a Value message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Value message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Value
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Value;
+
+            /**
+             * Creates a plain object from a Value message. Also converts values to other types if specified.
+             * @param message Value
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Value, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Value to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Value
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** NullValue enum. */
+        enum NullValue {
+            NULL_VALUE = 0
+        }
+
+        /** Properties of a ListValue. */
+        interface IListValue {
+
+            /** ListValue values */
+            values?: (google.protobuf.IValue[]|null);
+        }
+
+        /** Represents a ListValue. */
+        class ListValue implements IListValue {
+
+            /**
+             * Constructs a new ListValue.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IListValue);
+
+            /** ListValue values. */
+            public values: google.protobuf.IValue[];
+
+            /**
+             * Creates a new ListValue instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ListValue instance
+             */
+            public static create(properties?: google.protobuf.IListValue): google.protobuf.ListValue;
+
+            /**
+             * Encodes the specified ListValue message. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ListValue message, length delimited. Does not implicitly {@link google.protobuf.ListValue.verify|verify} messages.
+             * @param message ListValue message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IListValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ListValue message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ListValue
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.ListValue;
+
+            /**
+             * Decodes a ListValue message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ListValue
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.ListValue;
+
+            /**
+             * Verifies a ListValue message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ListValue message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ListValue
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.ListValue;
+
+            /**
+             * Creates a plain object from a ListValue message. Also converts values to other types if specified.
+             * @param message ListValue
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.ListValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ListValue to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ListValue
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

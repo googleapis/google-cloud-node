@@ -5,6 +5,28 @@
 
 [1]: https://www.npmjs.com/package/nodejs-googleapis-common?activeTab=versions
 
+## [9.3.1](https://github.com/googleapis/google-cloud-node/compare/googleapis-common-v9.3.0...googleapis-common-v9.3.1) (2026-10-14)
+
+
+### Bug Fixes
+
+* **core:** Remove --fetch-shim and handle Bun fetch natively ([#9573](https://github.com/googleapis/google-cloud-node/issues/9573)) ([62559f1](https://github.com/googleapis/google-cloud-node/commit/62559f18d902330c546c787233dcaa7578774463))
+* **core:** Remove --gaxios-shim and configure Bun Gaxios fetch ([#9569](https://github.com/googleapis/google-cloud-node/issues/9569)) ([640bf51](https://github.com/googleapis/google-cloud-node/commit/640bf5136c7e9002d65cb257af976c336110d33f))
+
+## [9.3.0](https://github.com/googleapis/google-cloud-node/compare/googleapis-common-v9.2.0...googleapis-common-v9.3.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [9.2.0](https://github.com/googleapis/google-cloud-node/compare/googleapis-common-v9.1.0...googleapis-common-v9.2.0) (2026-10-07)
+
+
+### Features
+
+* **tools:** Add individual CLI flags for Bun monkey patches ([#9533](https://github.com/googleapis/google-cloud-node/issues/9533)) ([a5eec89](https://github.com/googleapis/google-cloud-node/commit/a5eec894b054e0605fd8e79591a88393bb2697c6))
+
 ## [9.1.0](https://github.com/googleapis/google-cloud-node/compare/googleapis-common-v9.0.4...googleapis-common-v9.1.0) (2026-09-15)
 
 

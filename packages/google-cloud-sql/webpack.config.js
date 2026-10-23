@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'SqlAvailableDatabaseVersionsService',
-    filename: './sql-available-database-versions-service.js',
+    library: 'BlueGreenDeploymentsService',
+    filename: './blue-green-deployments-service.js',
   },
   node: {
     child_process: 'empty',

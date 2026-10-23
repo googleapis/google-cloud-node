@@ -95,6 +95,14 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "StartSplit": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetSplitStatus": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "EstablishVolumePeering": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -364,6 +372,18 @@
           "retry_params_name": "default"
         },
         "ExecuteOntapPatch": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RestoreVolume": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListBackupConfigs": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateBackupConfig": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

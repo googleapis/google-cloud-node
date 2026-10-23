@@ -8,11 +8,11 @@
     "handwritten/spanner": {
       "component": "spanner"
     },
+    "handwritten/spanner-driver": {
+      "component": "spanner-driver"
+    },
     "handwritten/storage": {
       "component": "storage"
-    },
-    "packages/google-ads-datamanager": {
-      "component": "google-ads-datamanager"
     }
   },
   "plugins": [

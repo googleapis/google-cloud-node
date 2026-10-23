@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.3.0...gapic-node-processing-v0.3.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **generator:** Use .jsdoc.json with build/esm/src in ESM template ([#9523](https://github.com/googleapis/google-cloud-node/issues/9523)) ([0131ab8](https://github.com/googleapis/google-cloud-node/commit/0131ab800546769bf644ab55948e1d1994d4d582))
+
+## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.2.2...gapic-node-processing-v0.3.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
 ## [0.2.2](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.2.1...gapic-node-processing-v0.2.2) (2026-08-12)
 
 

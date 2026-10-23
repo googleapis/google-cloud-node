@@ -15,7 +15,7 @@
  */
 
 import {grpc} from 'google-gax';
-import {Database, Instance, SessionPool, Snapshot, Spanner} from '../src';
+import {Database, Instance, Snapshot, Spanner} from '../src';
 import * as mock from '../test/mockserver/mockspanner';
 import {SimulatedExecutionTime} from '../test/mockserver/mockspanner';
 import * as mockInstanceAdmin from '../test/mockserver/mockinstanceadmin';
@@ -302,7 +302,6 @@ async function burstRead() {
       max: 400,
       incStep: incStep,
     });
-    const pool = database.pool_ as SessionPool;
     try {
       if (incStep) {
         console.time(`burstRead incStep ${incStep}`);
@@ -316,7 +315,6 @@ async function burstRead() {
       await Promise.all(promises);
       if (incStep) {
         console.timeEnd(`burstRead incStep ${incStep}`);
-        console.log(`Current session pool size: ${pool.size}`);
       }
     } finally {
       await database.close();
@@ -338,7 +336,6 @@ async function burstWrite() {
       max: 400,
       incStep: incStep,
     });
-    const pool = database.pool_ as SessionPool;
     try {
       if (incStep) {
         console.time(`burstWrite incStep ${incStep}`);
@@ -351,7 +348,6 @@ async function burstWrite() {
       await Promise.all(promises);
       if (incStep) {
         console.timeEnd(`burstWrite incStep ${incStep}`);
-        console.log(`Current session pool size: ${pool.size}`);
       }
     } finally {
       await database.close();
@@ -375,7 +371,6 @@ async function burstReadAndWrite() {
       max: 400,
       incStep: incStep,
     });
-    const pool = database.pool_ as SessionPool;
     try {
       if (incStep) {
         console.time(`burstReadAndWrite incStep ${incStep}`);
@@ -394,7 +389,6 @@ async function burstReadAndWrite() {
       await Promise.all(readPromises.concat(writePromises));
       if (incStep) {
         console.timeEnd(`burstReadAndWrite incStep ${incStep}`);
-        console.log(`Current session pool size: ${pool.size}`);
       }
     } finally {
       await database.close();
@@ -415,7 +409,6 @@ async function multipleWriteBursts() {
       max: 400,
       incStep: incStep,
     });
-    const pool = database.pool_ as SessionPool;
     try {
       if (incStep) {
         console.time(`multipleWriteBursts incStep ${incStep}`);
@@ -431,7 +424,6 @@ async function multipleWriteBursts() {
       }
       if (incStep) {
         console.timeEnd(`multipleWriteBursts incStep ${incStep}`);
-        console.log(`Current session pool size: ${pool.size}`);
       }
     } finally {
       await database.close();
@@ -443,16 +435,13 @@ async function oneReadTransactionPerSecond() {
   console.log('Starting oneReadTransactionPerSecond');
   const RND_WAIT_TIME_BETWEEN_REQUESTS = 100000;
   const NUM_TRANSACTIONS = RND_WAIT_TIME_BETWEEN_REQUESTS / 1000;
+  const DEFAULT_INC_STEP = 25;
   for (const minSessions of [0, 25]) {
     const database = newTestDatabase({
       min: minSessions,
     });
-    const pool = database.pool_ as SessionPool;
     try {
-      // Execute a batch of write requests to initialize the session pool with only
-      // write sessions. The dynamic scaling of the session pool should automatically
-      // change this into an appropriate number of read sessions as the test runs.
-      await queueWriteOperations(database, pool.options.incStep!, 0);
+      await queueWriteOperations(database, DEFAULT_INC_STEP, 0);
       const readPromises = queueReadOperations(
         database,
         NUM_TRANSACTIONS,
@@ -462,6 +451,7 @@ async function oneReadTransactionPerSecond() {
       readPromises.forEach(p =>
         p.then(t => {
           console.log(`Time taken: ${t}ms`);
+          return null;
         }),
       );
       const t = await Promise.all(readPromises);
@@ -474,7 +464,6 @@ async function oneReadTransactionPerSecond() {
       console.log(`Min: ${min}`);
       console.log(`Avg: ${avg}`);
       console.log(`P90: ${p90}`);
-      console.log(`Current session pool size: ${pool.size}`);
     } finally {
       await database.close();
     }
@@ -489,9 +478,7 @@ async function oneWriteTransactionPerSecond() {
     const database = newTestDatabase({
       min: minSessions,
     });
-    const pool = database.pool_ as SessionPool;
     try {
-      // Execute one read request to initialize the session pool.
       await queueReadOperations(database, 1, 0, 0);
       const writePromises = queueWriteOperations(
         database,
@@ -501,6 +488,7 @@ async function oneWriteTransactionPerSecond() {
       writePromises.forEach(p =>
         p.then(t => {
           console.log(`Time taken: ${t}ms`);
+          return null;
         }),
       );
       const t = await Promise.all(writePromises);
@@ -513,7 +501,6 @@ async function oneWriteTransactionPerSecond() {
       console.log(`Min: ${min}`);
       console.log(`Avg: ${avg}`);
       console.log(`P90: ${p90}`);
-      console.log(`Current session pool size: ${pool.size}`);
     } finally {
       await database.close();
     }
@@ -529,7 +516,6 @@ async function oneReadAndOneWriteTransactionPerSecond() {
     const database = newTestDatabase({
       min: minSessions,
     });
-    const pool = database.pool_ as SessionPool;
     try {
       const readPromises = queueReadOperations(
         database,
@@ -545,11 +531,13 @@ async function oneReadAndOneWriteTransactionPerSecond() {
       readPromises.forEach(p =>
         p.then(t => {
           console.log(`Read tx: ${t}ms`);
+          return null;
         }),
       );
       writePromises.forEach(p =>
         p.then(t => {
           console.log(`Write tx: ${t}ms`);
+          return null;
         }),
       );
       const t = await Promise.all(readPromises.concat(writePromises));
@@ -562,7 +550,6 @@ async function oneReadAndOneWriteTransactionPerSecond() {
       console.log(`Min: ${min}`);
       console.log(`Avg: ${avg}`);
       console.log(`P90: ${p90}`);
-      console.log(`Current session pool size: ${pool.size}`);
     } finally {
       await database.close();
     }
@@ -574,20 +561,20 @@ async function oneReadAndOneWriteTransactionPerSecond() {
  */
 async function steadyIncrease() {
   console.log('Starting steadyIncrease');
+  const MAX_SESSIONS = 400;
   // Value 'undefined' is used to warm up the compiler.
   for (const incStep of [undefined, 1, 10, 20, 25, 30, 40, 50, 100]) {
     const database = newTestDatabase({
       min: 100,
-      max: 400,
+      max: MAX_SESSIONS,
       incStep: incStep,
     });
-    const pool = database.pool_ as SessionPool;
     const snapshots: Snapshot[] = [];
     try {
       if (incStep) {
         console.time(`steadyIncrease incStep ${incStep}`);
       }
-      for (let i = 0; i < pool.options.max!; i++) {
+      for (let i = 0; i < MAX_SESSIONS; i++) {
         const [snapshot] = await database.getSnapshot();
         snapshots.unshift(snapshot);
       }
@@ -596,7 +583,6 @@ async function steadyIncrease() {
       }
       if (incStep) {
         console.timeEnd(`steadyIncrease incStep ${incStep}`);
-        console.log(`Current session pool size: ${pool.size}`);
       }
     } finally {
       await database.close();
@@ -635,9 +621,9 @@ function queueReadOperations(
           database
             .runStream(selectSql)
             .on('data', async () => {
-              p = new Promise<void>(r => {
+              p = new Promise<void>(_resolve => {
                 setTimeout(() => {
-                  r();
+                  _resolve();
                 }, Math.random() * holdSessionTime);
               });
             })
@@ -670,7 +656,7 @@ function queueWriteOperations(
   const promises: Promise<number>[] = [];
   for (let run = 0; run < numRequests; run++) {
     promises.unshift(
-      new Promise<number>((resolve, rejects) => {
+      new Promise<number>((resolve, reject) => {
         setTimeout(() => {
           const t1 = performance.now();
           database.runTransaction((err, tx) => {
@@ -681,11 +667,11 @@ function queueWriteOperations(
                   .commit()
                   .then(() => resolve(performance.now() - t1))
                   .catch(err => {
-                    rejects(err);
+                    reject(err);
                   }),
               )
               .catch(err => {
-                rejects(err);
+                reject(err);
               });
           });
         }, Math.random() * waitBetweenRequests);

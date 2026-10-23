@@ -39,13 +39,15 @@ import {warn} from './warnings';
 import {
   traceCall,
   traceAttempt,
+  ResendRecorder,
+} from './observability/TracerHelper';
+import {checkTelemetryEnabled} from './observability/util';
+import {
   StaticTraceContext,
   DynamicTraceContext,
   AttemptTraceContext,
-  ResendRecorder,
-} from './observability/TracerHelper';
-import {resolveStaticTraceContext} from './observability/metadataResolver';
-import {checkTelemetryEnabled} from './util';
+  resolveStaticTraceContext,
+} from './observability/contextUtil';
 
 /**
  * Converts an rpc call into an API call governed by the settings.
@@ -61,8 +63,10 @@ import {checkTelemetryEnabled} from './util';
  * @param {Promise<GRPCCall>|GRPCCall} func - is either a promise to be used to make
  *   a bare RPC call, or just a bare RPC call.
  * @param {CallSettings} settings - provides the settings for this call
- * @param {Descriptor} descriptor - optionally specify the descriptor for
+ * @param {Descriptor} [descriptor] - optionally specify the descriptor for
  *   the method call.
+ * @param {boolean | 'proto' | 'rest'} [_fallback] - optionally specify whether
+ *   the call uses HTTP/REST fallback transport rather than gRPC.
  * @return {GaxCall} func - a bound method on a request stub used
  *   to make an rpc call.
  */
@@ -70,8 +74,7 @@ export function createApiCall(
   func: Promise<GRPCCall> | GRPCCall,
   settings: CallSettings,
   descriptor?: Descriptor,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _fallback?: boolean | 'proto' | 'rest', // unused here, used in fallback.ts implementation
+  _fallback?: boolean | 'proto' | 'rest',
 ): GaxCall {
   // we want to be able to accept both promise resolving to a function and a
   // function. Currently client librares are only calling this method with a
@@ -106,7 +109,6 @@ export function createApiCall(
     request: RequestType,
     callOptions?: CallOptions,
     callback?: APICallback,
-    recordResend?: ResendRecorder,
   ) => {
     // Capture the active client request span context to parent async low level network attempt spans.
     const parentContext = tracingEnabled ? context.active() : undefined;
@@ -138,19 +140,16 @@ export function createApiCall(
     // requests start at resendCount = 0 instead of being counted as retries.
     let attemptResendCount = 0;
     let isRetryAttempt = false;
-    const originalRecordResend = recordResend;
-    if (tracingEnabled) {
-      recordResend = () => {
-        originalRecordResend?.();
-        attemptResendCount++;
-        isRetryAttempt = true;
-      };
-    }
+    const recordResend: ResendRecorder | undefined = tracingEnabled
+      ? () => {
+          attemptResendCount++;
+          isRetryAttempt = true;
+        }
+      : undefined;
 
     // Server-streaming calls retry inside the stream rather than through
-    // `retryable`, so the recorder is handed to the stream itself. It is the
-    // same span either way: the proxy outlives its resumptions, so the call
-    // span is still open while they happen.
+    // `retryable`, so the recorder is handed to the stream proxy so each
+    // resumed stream attempt span receives the incremented resendCount.
     if (recordResend && ongoingCall instanceof StreamProxy) {
       ongoingCall.recordResend = recordResend;
     }
@@ -272,18 +271,13 @@ export function createApiCall(
       return traceCall(
         dynamicArgs,
         staticArgs,
-        (tracedCallback?: APICallback, recordResend?: ResendRecorder) => {
+        (tracedCallback?: APICallback) => {
           // `traceCall` wraps the user's callback whenever one was supplied,
           // for stream and non-stream calls alike, and that wrapper is what
           // closes the span. It is undefined only when there is no callback to
           // wrap, in which case the span is bound to the returned promise or
           // stream instead; the fallback keeps this correct either way.
-          return invokeCall(
-            request,
-            callOptions,
-            tracedCallback ?? callback,
-            recordResend,
-          );
+          return invokeCall(request, callOptions, tracedCallback ?? callback);
         },
         isStreamingCall,
         callback,

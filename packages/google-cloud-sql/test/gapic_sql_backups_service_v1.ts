@@ -1394,6 +1394,252 @@ describe('v1.SqlBackupsServiceClient', () => {
       });
     });
 
+    describe('blueGreenDeployment', async () => {
+      const fakePath = '/rendered/path/blueGreenDeployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        blue_green_deployment: 'blueGreenDeploymentValue',
+      };
+      const client = new sqlbackupsserviceModule.v1.SqlBackupsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.blueGreenDeploymentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.blueGreenDeploymentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('blueGreenDeploymentPath', () => {
+        const result = client.blueGreenDeploymentPath(
+          'projectValue',
+          'locationValue',
+          'blueGreenDeploymentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.blueGreenDeploymentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromBlueGreenDeploymentName', () => {
+        const result = client.matchProjectFromBlueGreenDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.blueGreenDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromBlueGreenDeploymentName', () => {
+        const result =
+          client.matchLocationFromBlueGreenDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.blueGreenDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBlueGreenDeploymentFromBlueGreenDeploymentName', () => {
+        const result =
+          client.matchBlueGreenDeploymentFromBlueGreenDeploymentName(fakePath);
+        assert.strictEqual(result, 'blueGreenDeploymentValue');
+        assert(
+          (
+            client.pathTemplates.blueGreenDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('cryptoKey', async () => {
+      const fakePath = '/rendered/path/cryptoKey';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        key_ring: 'keyRingValue',
+        crypto_key: 'cryptoKeyValue',
+      };
+      const client = new sqlbackupsserviceModule.v1.SqlBackupsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.cryptoKeyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cryptoKeyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cryptoKeyPath', () => {
+        const result = client.cryptoKeyPath(
+          'projectValue',
+          'locationValue',
+          'keyRingValue',
+          'cryptoKeyValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromCryptoKeyName', () => {
+        const result = client.matchProjectFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromCryptoKeyName', () => {
+        const result = client.matchLocationFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchKeyRingFromCryptoKeyName', () => {
+        const result = client.matchKeyRingFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'keyRingValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCryptoKeyFromCryptoKeyName', () => {
+        const result = client.matchCryptoKeyFromCryptoKeyName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyValue');
+        assert(
+          (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('cryptoKeyVersion', async () => {
+      const fakePath = '/rendered/path/cryptoKeyVersion';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        key_ring: 'keyRingValue',
+        crypto_key: 'cryptoKeyValue',
+        crypto_key_version: 'cryptoKeyVersionValue',
+      };
+      const client = new sqlbackupsserviceModule.v1.SqlBackupsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.cryptoKeyVersionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.cryptoKeyVersionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('cryptoKeyVersionPath', () => {
+        const result = client.cryptoKeyVersionPath(
+          'projectValue',
+          'locationValue',
+          'keyRingValue',
+          'cryptoKeyValue',
+          'cryptoKeyVersionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.cryptoKeyVersionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromCryptoKeyVersionName', () => {
+        const result = client.matchProjectFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromCryptoKeyVersionName', () => {
+        const result = client.matchLocationFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchKeyRingFromCryptoKeyVersionName', () => {
+        const result = client.matchKeyRingFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'keyRingValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCryptoKeyFromCryptoKeyVersionName', () => {
+        const result = client.matchCryptoKeyFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchCryptoKeyVersionFromCryptoKeyVersionName', () => {
+        const result =
+          client.matchCryptoKeyVersionFromCryptoKeyVersionName(fakePath);
+        assert.strictEqual(result, 'cryptoKeyVersionValue');
+        assert(
+          (client.pathTemplates.cryptoKeyVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('project', async () => {
       const fakePath = '/rendered/path/project';
       const expectedParameters = {

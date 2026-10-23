@@ -15,6 +15,11 @@
                 "getAppConnector"
               ]
             },
+            "ResolveInstanceConfig": {
+              "methods": [
+                "resolveInstanceConfig"
+              ]
+            },
             "CreateAppConnector": {
               "methods": [
                 "createAppConnector"
@@ -50,6 +55,11 @@
             "GetAppConnector": {
               "methods": [
                 "getAppConnector"
+              ]
+            },
+            "ResolveInstanceConfig": {
+              "methods": [
+                "resolveInstanceConfig"
               ]
             },
             "CreateAppConnector": {

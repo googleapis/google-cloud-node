@@ -30,21 +30,21 @@ function main(parent) {
    */
   /**
    *  Required. The parent, which owns this collection of
-   *  Partner google.ads.admanager.v1.Partner s. Format:
+   *  Partners google.ads.admanager.v1.Partner. Format:
    *  `networks/{network_code}`
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of Partner google.ads.admanager.v1.Partner s
+   *  Optional. The maximum number of Partners google.ads.admanager.v1.Partner 
    *  to return. The service may return fewer than this value. If unspecified, at
-   *  most 50 Partner google.ads.admanager.v1.Partner s will be returned. The
+   *  most 50 Partners google.ads.admanager.v1.Partner  will be returned. The
    *  maximum value is 1000; values greater than 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A page token, received from a previous ListPartners   call.
+   *  Optional. A page token, received from a previous `ListPartners` call.
    *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to ListPartners   must
+   *  When paginating, all other parameters provided to `ListPartners` must
    *  match the call that provided the page token.
    */
   // const pageToken = 'abc123'

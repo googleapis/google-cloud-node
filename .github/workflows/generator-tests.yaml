@@ -15,10 +15,15 @@ on:
       - '.github/workflows/generator-tests.yaml'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   presubmit:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     container: gcr.io/gapic-images/googleapis:20250404
     steps:
     - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
@@ -68,7 +73,7 @@ jobs:
       working-directory: core/generator/gapic-generator-typescript
       run: |
         mkdir -p ~/artifacts
-        zip -r ~/artifacts/outputs.zip .test-out-*
+        zip -qr ~/artifacts/outputs.zip .test-out-*
         tar cfz ~/artifacts/node_modules.tar.gz node_modules
 
     - name: Save artifacts
@@ -84,7 +89,7 @@ jobs:
         set -ex
         cp ../../../.mocharc.cjs .
         cp -r ../../../bin .
-        unzip ~/artifacts/outputs.zip -d library
+        unzip -q ~/artifacts/outputs.zip -d library
         FAIL=0
         PIDS=()
         for lib in showcase kms translate monitoring dlp texttospeech showcase-legacy compute logging bigquery-v2 redis retail; do
@@ -92,9 +97,10 @@ jobs:
             set -ex
             echo "--- Testing library $lib ---"
             cd "library/.test-out-$lib"
-            pnpm install --no-frozen-lockfile --ignore-workspace --silent
-            pnpm test
+            pnpm install --ignore-scripts --no-frozen-lockfile --ignore-workspace --reporter=append-only < /dev/null
+            pnpm run compile-protos
             pnpm run compile
+            pnpm test
             pnpm run system-test
           ) &
           PIDS+=($!)
@@ -127,9 +133,10 @@ jobs:
             set -ex
             echo "--- Testing ESM library $lib ---"
             cd "library/.test-out-$lib-esm"
-            pnpm install --no-frozen-lockfile --ignore-workspace --silent
-            pnpm test
+            pnpm install --ignore-scripts --no-frozen-lockfile --ignore-workspace --reporter=append-only < /dev/null
+            pnpm run compile-protos
             pnpm run compile
+            pnpm test
             pnpm run system-test
           ) &
           PIDS+=($!)

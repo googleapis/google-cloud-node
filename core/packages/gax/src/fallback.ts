@@ -32,7 +32,6 @@ import {isNodeJS} from './featureDetection';
 import {generateServiceStub} from './fallbackServiceStub';
 import {StreamType} from './streamingCalls/streaming';
 import {toLowerCamelCase} from './util';
-import {StaticTraceContext} from './observability/TracerHelper';
 import {google} from '../protos/http';
 import * as IamProtos from '../protos/iam_service';
 import * as LocationProtos from '../protos/locations';
@@ -110,6 +109,7 @@ export class GrpcClient {
   minifyJson: boolean;
   private _servicePath?: string;
   private _port?: number;
+  private _enableTelemetryTracing?: boolean;
 
   /**
    * In rare cases users might need to deallocate all memory consumed by loaded protos.
@@ -161,7 +161,11 @@ export class GrpcClient {
     this._servicePath =
       (options as GrpcClientOptions).servicePath ||
       (options as GrpcClientOptions).apiEndpoint;
-    this._port = (options as GrpcClientOptions).port;
+    const rawPort = (options as GrpcClientOptions).port;
+    this._port = typeof rawPort === 'string' ? parseInt(rawPort, 10) : rawPort;
+    this._enableTelemetryTracing = (
+      options as GrpcClientOptions
+    ).enableTelemetryTracing;
   }
 
   /**
@@ -217,7 +221,6 @@ export class GrpcClient {
    * @param {Object} headers - A dictionary of additional HTTP header name to
    *   its value.
    * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
-   * @param {StaticTraceContext} [internalTelemetryInfo] - Static trace context for telemetry.
    * @return {Object} A mapping of method names to CallSettings.
    */
   constructSettings(
@@ -226,7 +229,8 @@ export class GrpcClient {
     configOverrides: gax.ClientConfig,
     headers: OutgoingHttpHeaders,
     enableTelemetryTracing?: boolean,
-    internalTelemetryInfo?: StaticTraceContext,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _legacyTelemetryInfo?: unknown,
   ) {
     function buildMetadata(abTests: {}, moreHeaders: OutgoingHttpHeaders) {
       const metadata: OutgoingHttpHeaders = {};
@@ -300,8 +304,7 @@ export class GrpcClient {
       configOverrides,
       Status,
       otherArgs,
-      enableTelemetryTracing,
-      internalTelemetryInfo,
+      enableTelemetryTracing ?? this._enableTelemetryTracing,
     );
   }
 
@@ -371,7 +374,8 @@ export class GrpcClient {
       servicePort = parseInt(match[2]);
     }
     if (opts.port) {
-      servicePort = opts.port;
+      servicePort =
+        typeof opts.port === 'string' ? parseInt(opts.port, 10) : opts.port;
     } else if (!servicePort) {
       servicePort = 443;
     }
