@@ -24,8 +24,8 @@ if [[ -z "$CREDENTIALS" ]]; then
   export PATH="$PATH:${NPM_CONFIG_PREFIX}/bin"
   cd $(dirname $0)/../..
 fi
-npm install -g pnpm@9
-pnpm install
+npm install -g pnpm@10
+pnpm install --filter @google-cloud/profiler... --frozen-lockfile
 pnpm run docs
 
 # create docs.metadata, based on package.json and .repo-metadata.json.

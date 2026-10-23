@@ -33,7 +33,12 @@ import {
   ResourceCallback,
   addLeaderAwareRoutingHeader,
 } from '../src/common';
-import {startTrace, setSpanError, traceConfig} from './instrument';
+import {
+  startTrace,
+  setSpanError,
+  traceConfig,
+  getQueryTraceConfig,
+} from './instrument';
 import {injectRequestIDIntoHeaders} from './request_id_header';
 import {isString} from './helper';
 
@@ -169,15 +174,24 @@ class BatchTransaction extends Snapshot {
     const request: ExecuteSqlRequest =
       typeof query === 'string' ? {sql: query} : query;
 
-    const reqOpts = Object.assign({}, request, Snapshot.encodeParams(request));
+    const {
+      gaxOptions: _omittedGaxOptions,
+      types: _omittedTypes,
+      ...cleanRequest
+    } = request as ExecuteSqlRequest & {types?: unknown};
+    void _omittedGaxOptions;
+    void _omittedTypes;
 
-    delete (reqOpts as any).gaxOptions;
-    delete (reqOpts as any).types;
+    const reqOpts = Object.assign(
+      {},
+      cleanRequest,
+      Snapshot.encodeParams(request),
+    );
 
     const traceConfig: traceConfig = {
-      sql: request.sql,
       opts: this._observabilityOptions,
       dbName: this.getDBName(),
+      ...getQueryTraceConfig(query),
     };
     return startTrace(
       'BatchTransaction.createQueryPartitions',
@@ -233,17 +247,21 @@ class BatchTransaction extends Snapshot {
       'BatchTransaction.createPartitions_',
       traceConfig,
       span => {
-        const query = Object.assign({}, config.reqOpts, {
+        const baseRequest = Object.assign({}, config.reqOpts, {
           session: this.session.formattedName_,
           transaction: {id: this.id},
         });
-        config.reqOpts = Object.assign({}, query);
+        config.reqOpts = baseRequest;
         const headers = {
           [CLOUD_RESOURCE_HEADER]: (this.session.parent as Database)
             .formattedName_,
         };
         config.headers = injectRequestIDIntoHeaders(headers, this.session);
-        delete query.partitionOptions;
+        const {
+          partitionOptions: _omittedPartitionOptions,
+          ...baseRequestWithoutPartitionOptions
+        } = baseRequest;
+        void _omittedPartitionOptions;
         this.session.request(config, (err, resp) => {
           if (err) {
             setSpanError(span, err);
@@ -253,7 +271,11 @@ class BatchTransaction extends Snapshot {
           }
 
           const partitions = resp.partitions.map(partition => {
-            return Object.assign({}, query, partition);
+            return Object.assign(
+              {},
+              baseRequestWithoutPartitionOptions,
+              partition,
+            );
           });
 
           if (resp.transaction) {
@@ -323,13 +345,19 @@ class BatchTransaction extends Snapshot {
       'BatchTransaction.createReadPartitions',
       traceConfig,
       span => {
-        const reqOpts = Object.assign({}, options, {
+        const {
+          gaxOptions: _omittedGaxOptions,
+          keys: _omittedKeys,
+          ranges: _omittedRanges,
+          ...cleanOptions
+        } = options;
+        void _omittedGaxOptions;
+        void _omittedKeys;
+        void _omittedRanges;
+
+        const reqOpts = Object.assign({}, cleanOptions, {
           keySet: Snapshot.encodeKeySet(options),
         });
-
-        delete reqOpts.gaxOptions;
-        delete reqOpts.keys;
-        delete reqOpts.ranges;
 
         const headers: {[k: string]: string} = {};
         if (this._getSpanner().routeToLeaderEnabled) {

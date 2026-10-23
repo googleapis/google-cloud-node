@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.21.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.20.1...netapp-v0.21.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [0.20.1](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.20.0...netapp-v0.20.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [0.20.0](https://github.com/googleapis/google-cloud-node/compare/netapp-v0.19.0...netapp-v0.20.0) (2026-09-08)
 
 

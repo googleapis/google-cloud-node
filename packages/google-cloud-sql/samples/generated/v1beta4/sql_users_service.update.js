@@ -70,6 +70,10 @@ function main() {
   /**
    */
   // const body = {}
+  /**
+   *  Optional. Region of the Cloud SQL instance.
+   */
+  // const location = 'abc123'
 
   // Imports the Sql library
   const {SqlUsersServiceClient} = require('@google-cloud/sql').v1beta4;

@@ -19,30 +19,10 @@ import {google} from '../../protos/firestore_v1_proto_api';
 
 import * as protos from '../../protos/firestore_v1_proto_api';
 import {
-  Expression,
-  BooleanExpression,
-  and,
-  or,
-  field as createField,
-  constant,
-  map,
-  array,
-  Constant,
-  field,
-  Ordering,
-  greaterThan,
-  lessThan,
-  Field,
-  AggregateFunction,
-  AliasedWindowFunction,
-  WindowFunction,
-  pipelineValue,
-  AliasedExpression,
-} from './expression';
-import Firestore, {
   CollectionReference,
   DocumentReference,
   FieldValue,
+  Firestore,
   Timestamp,
   VectorValue,
 } from '../index';
@@ -69,6 +49,27 @@ import {
 } from '../util';
 import api = protos.google.firestore.v1;
 
+import {
+  Expression,
+  BooleanExpression,
+  and,
+  or,
+  field as createField,
+  constant,
+  map,
+  array,
+  Constant,
+  field,
+  Ordering,
+  greaterThan,
+  lessThan,
+  Field,
+  AggregateFunction,
+  AliasedWindowFunction,
+  WindowFunction,
+  pipelineValue,
+  AliasedExpression,
+} from './expression';
 import {Pipeline, PipelineResult, ExplainStats} from './pipelines';
 import {StructuredPipeline} from './structured-pipeline';
 import Selectable = FirebaseFirestore.Pipelines.Selectable;
@@ -271,6 +272,9 @@ export class ExecutionUtil {
           request.readTime = transactionOrReadTime.toProto().timestampValue;
         } else if (transactionOrReadTime) {
           request.newTransaction = transactionOrReadTime;
+        } else if (structuredPipeline.options?.atomic) {
+          request.newTransaction = {readWrite: {}};
+          request.autoCommitTransaction = true;
         }
 
         let streamActive: Deferred<boolean>;
@@ -301,6 +305,7 @@ export class ExecutionUtil {
           backendStream.resume();
           backendStream.pipe(stream);
         } while (await streamActive.promise);
+        return;
       })
       .catch(e => {
         logger(

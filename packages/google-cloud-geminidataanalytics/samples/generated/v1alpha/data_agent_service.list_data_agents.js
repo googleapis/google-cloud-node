@@ -59,6 +59,10 @@ function main(parent) {
    *  Defaults to false.
    */
   // const showDeleted = true
+  /**
+   *  Optional. Filter for the creator of the agent.
+   */
+  // const creatorFilter = {}
 
   // Imports the Geminidataanalytics library
   const {DataAgentServiceClient} = require('@google-cloud/geminidataanalytics').v1alpha;

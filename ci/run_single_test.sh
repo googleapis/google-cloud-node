@@ -18,7 +18,14 @@ set -e
 
 export REGION_ID='uc'
 export PROJECT_ROOT=$(realpath $(dirname "${BASH_SOURCE[0]}")/..)
-export NODE_OPTIONS="${NODE_OPTIONS} --max_old_space_size=6144 --no-deprecation"
+# Cap the V8 heap at 2 GB on Windows (instead of 6 GB) so parallel Mocha worker
+# processes do not exhaust the 14 GB Windows runner VM pagefile and crash with OOM.
+if [[ "$OSTYPE" == "msys"* || "$OSTYPE" == "cygwin"* || "$OS" == "Windows_NT" ]]; then
+    MAX_OLD_SPACE_SIZE=2048
+else
+    MAX_OLD_SPACE_SIZE=6144
+fi
+export NODE_OPTIONS="${NODE_OPTIONS} --max_old_space_size=${MAX_OLD_SPACE_SIZE} --no-deprecation"
 
 if [ -z "${BUILD_TYPE}" ]; then
     echo "missing BUILD_TYPE env var"
@@ -43,31 +50,12 @@ else
     export MOCHA_REPORTER=dot
 fi
 
-# Install dependencies
-# Normalize POSIX paths to Windows-compatible mixed paths (forward slashes) on Windows Git Bash
-# so native Node.js and pnpm processes can resolve .pnpmfile.cjs without segmentation faults.
-PNPMFILE_PATH="${PROJECT_ROOT}/.pnpmfile.cjs"
-if command -v cygpath >/dev/null 2>&1; then
-    PNPMFILE_PATH=$(cygpath -m "${PNPMFILE_PATH}")
+# Install workspace dependencies only if not already installed at the monorepo root.
+# In CI, .github/actions/pnpm-lockfile-check already installs the workspace once per job;
+# skipping redundant per-package installs avoids re-linking all 280+ workspace packages on every test.
+if [ ! -d "${PROJECT_ROOT}/node_modules/.pnpm" ]; then
+    pnpm --dir "${PROJECT_ROOT}" install --frozen-lockfile --ignore-scripts
 fi
-
-echo "pnpm install --engine-strict --pnpmfile \"${PNPMFILE_PATH}\""
-if ! pnpm install --engine-strict --pnpmfile "${PNPMFILE_PATH}"; then
-    echo "::error title=PNPM Install Failed::pnpm install failed in $(pwd)."
-    echo ""
-    echo "===================================================================================================="
-    echo "❌ PNPM Install Failed"
-    echo ""
-    echo "If this failure is caused by an outdated lockfile or changed package.json dependencies, run:"
-    echo "    pnpm install --no-frozen-lockfile"
-    echo "    git add pnpm-lock.yaml"
-    echo "    git commit -m \"chore: update pnpm-lock.yaml\""
-    echo "    git push"
-    echo "===================================================================================================="
-    echo ""
-    exit 1
-fi
-
 
 retval=0
 
@@ -107,6 +95,9 @@ system)
     retval=$?
     ;;
 units)
+    if [ ! -d "build" ] && grep -q '"compile":' package.json; then
+        ${TEST_CMD} compile || exit $?
+    fi
     ${TEST_CMD} test
     retval=$?
     ;;

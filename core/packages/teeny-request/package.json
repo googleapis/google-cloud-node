@@ -1,6 +1,6 @@
 {
   "name": "teeny-request",
-  "version": "11.0.1",
+  "version": "11.1.1",
   "description": "Like request, but smaller.",
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
@@ -8,7 +8,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "test": "c8 mocha build/test",
+    "test": "node ../../../bin/run-test.cjs build/test",
     "compile": "tsc -p .",
     "pretest": "npm run compile",
     "lint": "gts check",

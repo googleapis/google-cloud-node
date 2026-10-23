@@ -28,7 +28,15 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "CreateNativeStyle": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "BatchCreateNativeStyles": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateNativeStyle": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

@@ -34,7 +34,7 @@ import {
   SubscriptionOptions,
 } from '../src';
 import {MessageOptions} from '../src/topic';
-import {TestResources} from '../test/testResources';
+import {TestResources} from 'google-test-utils';
 import {GoogleError} from 'google-gax';
 import {waitForMessage, waitForMessages, withSubscriptionScope} from './common';
 

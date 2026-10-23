@@ -605,5 +605,83 @@ describe('v1.SqlFlagsServiceClient', () => {
         );
       });
     });
+
+    describe('blueGreenDeployment', async () => {
+      const fakePath = '/rendered/path/blueGreenDeployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        blue_green_deployment: 'blueGreenDeploymentValue',
+      };
+      const client = new sqlflagsserviceModule.v1.SqlFlagsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.blueGreenDeploymentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.blueGreenDeploymentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('blueGreenDeploymentPath', () => {
+        const result = client.blueGreenDeploymentPath(
+          'projectValue',
+          'locationValue',
+          'blueGreenDeploymentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.blueGreenDeploymentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromBlueGreenDeploymentName', () => {
+        const result = client.matchProjectFromBlueGreenDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.blueGreenDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromBlueGreenDeploymentName', () => {
+        const result =
+          client.matchLocationFromBlueGreenDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.blueGreenDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBlueGreenDeploymentFromBlueGreenDeploymentName', () => {
+        const result =
+          client.matchBlueGreenDeploymentFromBlueGreenDeploymentName(fakePath);
+        assert.strictEqual(result, 'blueGreenDeploymentValue');
+        assert(
+          (
+            client.pathTemplates.blueGreenDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
   });
 });

@@ -2,6 +2,7 @@
   "bump-minor-pre-major": true,
   "commit-batch-size": 10,
   "initial-version": "0.1.0",
+  "last-release-sha": "a3fde62dbe19594ffc40fc6fe55256a59a988890",
   "packages": {
     "core/common": {
       "component": "common"
@@ -69,6 +70,9 @@
     "core/promisify": {
       "component": "promisify"
     },
+    "core/test-utils": {
+      "component": "test-utils"
+    },
     "handwritten/bigquery": {
       "component": "bigquery"
     },
@@ -103,6 +107,7 @@
       "component": "pubsub"
     },
     "packages/google-ads-admanager": {},
+    "packages/google-ads-datamanager": {},
     "packages/google-ai-generativelanguage": {},
     "packages/google-analytics-admin": {},
     "packages/google-analytics-data": {},
@@ -149,12 +154,8 @@
     "packages/google-cloud-bigquery-datatransfer": {},
     "packages/google-cloud-bigquery-migration": {},
     "packages/google-cloud-bigquery-reservation": {},
-    "packages/google-cloud-bigquery-storage-api": {
-      "component": "google-cloud-bigquery-storage-api"
-    },
-    "packages/google-cloud-bigtable-api": {
-      "component": "google-cloud-bigtable-api"
-    },
+    "packages/google-cloud-bigquery-storage-api": {},
+    "packages/google-cloud-bigtable-api": {},
     "packages/google-cloud-billing": {},
     "packages/google-cloud-billing-budgets": {},
     "packages/google-cloud-binaryauthorization": {},
@@ -185,9 +186,7 @@
     "packages/google-cloud-dataplex": {},
     "packages/google-cloud-dataproc": {},
     "packages/google-cloud-dataqna": {},
-    "packages/google-cloud-datastore-api": {
-      "component": "google-cloud-datastore-api"
-    },
+    "packages/google-cloud-datastore-api": {},
     "packages/google-cloud-datastream": {},
     "packages/google-cloud-deploy": {},
     "packages/google-cloud-developerconnect": {},
@@ -204,9 +203,7 @@
     "packages/google-cloud-eventarc-publishing": {},
     "packages/google-cloud-filestore": {},
     "packages/google-cloud-financialservices": {},
-    "packages/google-cloud-firestore-api": {
-      "component": "google-cloud-firestore-api"
-    },
+    "packages/google-cloud-firestore-api": {},
     "packages/google-cloud-ftp": {},
     "packages/google-cloud-functions": {},
     "packages/google-cloud-gdchardwaremanagement": {},
@@ -227,9 +224,7 @@
     "packages/google-cloud-licensemanager": {},
     "packages/google-cloud-lifesciences": {},
     "packages/google-cloud-locationfinder": {},
-    "packages/google-cloud-logging-api": {
-      "component": "google-cloud-logging-api"
-    },
+    "packages/google-cloud-logging-api": {},
     "packages/google-cloud-lustre": {},
     "packages/google-cloud-maintenance-api": {},
     "packages/google-cloud-managedidentities": {},
@@ -262,9 +257,7 @@
     "packages/google-cloud-privatecatalog": {},
     "packages/google-cloud-privilegedaccessmanager": {},
     "packages/google-cloud-productregistry": {},
-    "packages/google-cloud-pubsub-api": {
-      "component": "google-cloud-pubsub-api"
-    },
+    "packages/google-cloud-pubsub-api": {},
     "packages/google-cloud-rapidmigrationassessment": {},
     "packages/google-cloud-recaptchaenterprise": {},
     "packages/google-cloud-recommender": {},
@@ -284,9 +277,7 @@
     "packages/google-cloud-servicedirectory": {},
     "packages/google-cloud-servicehealth": {},
     "packages/google-cloud-shell": {},
-    "packages/google-cloud-spanner-api": {
-      "component": "google-cloud-spanner-api"
-    },
+    "packages/google-cloud-spanner-api": {},
     "packages/google-cloud-speech": {},
     "packages/google-cloud-sql": {},
     "packages/google-cloud-storagebatchoperations": {},

@@ -29,21 +29,23 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent, which owns this collection of Companies .
-   *  Format: `networks/{network_code}`
+   *  Required. The parent, which owns this collection of
+   *  Companies google.ads.admanager.v1.Company. Format:
+   *  `networks/{network_code}`
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of Companies   to return. The service may
-   *  return fewer than this value. If unspecified, at most 50 Companies   will
-   *  be returned. The maximum value is 1000; values greater than 1000 will be
-   *  coerced to 1000.
+   *  Optional. The maximum number of
+   *  Companies google.ads.admanager.v1.Company  to return. The service may
+   *  return fewer than this value. If unspecified, at most 50
+   *  Companies google.ads.admanager.v1.Company  will be returned. The maximum
+   *  value is 1000; values greater than 1000 will be coerced to 1000.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A page token, received from a previous ListCompanies   call.
+   *  Optional. A page token, received from a previous `ListCompanies` call.
    *  Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to ListCompanies   must
+   *  When paginating, all other parameters provided to `ListCompanies` must
    *  match the call that provided the page token.
    */
   // const pageToken = 'abc123'

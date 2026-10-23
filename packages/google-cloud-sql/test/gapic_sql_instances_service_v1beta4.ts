@@ -2152,12 +2152,10 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlInstancesInsertRequest(),
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlInstancesInsertRequest',
-        ['project'],
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
+      request.body = {};
+      // path template: {region=**}
+      request.body.region = 'value';
+      const expectedHeaderRequestParams = 'region=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation(),
       );
@@ -2184,12 +2182,10 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlInstancesInsertRequest(),
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlInstancesInsertRequest',
-        ['project'],
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
+      request.body = {};
+      // path template: {region=**}
+      request.body.region = 'value';
+      const expectedHeaderRequestParams = 'region=value';
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.Operation(),
       );
@@ -2232,12 +2228,10 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlInstancesInsertRequest(),
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlInstancesInsertRequest',
-        ['project'],
-      );
-      request.project = defaultValue1;
-      const expectedHeaderRequestParams = `project=${defaultValue1 ?? ''}`;
+      request.body = {};
+      // path template: {region=**}
+      request.body.region = 'value';
+      const expectedHeaderRequestParams = 'region=value';
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
@@ -2261,11 +2255,9 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.sql.v1beta4.SqlInstancesInsertRequest(),
       );
-      const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlInstancesInsertRequest',
-        ['project'],
-      );
-      request.project = defaultValue1;
+      request.body = {};
+      // path template: {region=**}
+      request.body.region = 'value';
       const expectedError = new Error('The client has already been closed.');
       client.close().catch(err => {
         throw err;
@@ -7200,6 +7192,85 @@ describe('v1beta4.SqlInstancesServiceClient', () => {
         assert.strictEqual(result, 'backupValue');
         assert(
           (client.pathTemplates.backupPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('blueGreenDeployment', async () => {
+      const fakePath = '/rendered/path/blueGreenDeployment';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        blue_green_deployment: 'blueGreenDeploymentValue',
+      };
+      const client =
+        new sqlinstancesserviceModule.v1beta4.SqlInstancesServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      await client.initialize();
+      client.pathTemplates.blueGreenDeploymentPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.blueGreenDeploymentPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('blueGreenDeploymentPath', () => {
+        const result = client.blueGreenDeploymentPath(
+          'projectValue',
+          'locationValue',
+          'blueGreenDeploymentValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.blueGreenDeploymentPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromBlueGreenDeploymentName', () => {
+        const result = client.matchProjectFromBlueGreenDeploymentName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.blueGreenDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromBlueGreenDeploymentName', () => {
+        const result =
+          client.matchLocationFromBlueGreenDeploymentName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.blueGreenDeploymentPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchBlueGreenDeploymentFromBlueGreenDeploymentName', () => {
+        const result =
+          client.matchBlueGreenDeploymentFromBlueGreenDeploymentName(fakePath);
+        assert.strictEqual(result, 'blueGreenDeploymentValue');
+        assert(
+          (
+            client.pathTemplates.blueGreenDeploymentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath),
         );

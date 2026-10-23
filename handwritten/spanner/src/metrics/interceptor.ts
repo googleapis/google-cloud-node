@@ -14,10 +14,7 @@
 
 import {grpc} from 'google-gax';
 import {InterceptingListener, Metadata, StatusObject} from '@grpc/grpc-js';
-import {MetricsTracerFactory} from './metrics-tracer-factory';
 import {isAFEServerTimingEnabled} from '../common';
-
-const PROJECT_ID_REGEX = /^projects\/([^/]+)\//;
 
 /**
  * Interceptor for recording metrics on gRPC calls.
@@ -33,21 +30,9 @@ const PROJECT_ID_REGEX = /^projects\/([^/]+)\//;
 export const MetricInterceptor = (options, nextCall) => {
   return new grpc.InterceptingCall(nextCall(options), {
     start: function (metadata, listener, next) {
-      // Record attempt metric on request start
-      const resourcePrefix = metadata.get(
-        'google-cloud-resource-prefix',
-      )[0] as string;
-      const match =
-        typeof resourcePrefix === 'string'
-          ? PROJECT_ID_REGEX.exec(resourcePrefix)
-          : null;
-      const projectId = match ? match[1] : undefined;
-      let factory;
-      if (projectId) {
-        factory = MetricsTracerFactory.getInstance(projectId);
-      }
-      const requestId = metadata.get('x-goog-spanner-request-id')[0] as string;
-      const metricsTracer = factory?.getCurrentTracer(requestId);
+      // Record attempt metric on request start.
+      // The tracer is carried directly on the call options.
+      const metricsTracer = options?.metricsTracer ?? null;
       metricsTracer?.recordAttemptStart();
       const afeServerTimingEnabled = isAFEServerTimingEnabled();
 
@@ -78,26 +63,32 @@ export const MetricInterceptor = (options, nextCall) => {
           listener.onReceiveMessage(message);
         },
         onReceiveStatus: function (status: StatusObject) {
-          listener.onReceiveStatus(status);
-
-          if (!metricsTracer) {
-            return;
-          }
-
-          // Record attempt metric completion
-          metricsTracer.recordAttemptCompletion(status.code);
-          if (typeof metricsTracer.gfeLatency === 'number') {
-            metricsTracer.recordGfeLatency(status.code);
-          } else {
-            metricsTracer.recordGfeConnectivityErrorCount(status.code);
-          }
-          if (afeServerTimingEnabled) {
-            if (typeof metricsTracer.afeLatency === 'number') {
-              metricsTracer.recordAfeLatency(status.code);
+          if (metricsTracer) {
+            // Record attempt metric completion before notifying downstream listener
+            metricsTracer.recordAttemptCompletion(status?.code);
+            if (
+              typeof metricsTracer.gfeLatency === 'number' &&
+              Number.isFinite(metricsTracer.gfeLatency) &&
+              metricsTracer.gfeLatency >= 0
+            ) {
+              metricsTracer.recordGfeLatency(status?.code);
             } else {
-              metricsTracer.recordAfeConnectivityErrorCount(status.code);
+              metricsTracer.recordGfeConnectivityErrorCount(status?.code);
+            }
+            if (afeServerTimingEnabled) {
+              if (
+                typeof metricsTracer.afeLatency === 'number' &&
+                Number.isFinite(metricsTracer.afeLatency) &&
+                metricsTracer.afeLatency >= 0
+              ) {
+                metricsTracer.recordAfeLatency(status?.code);
+              } else {
+                metricsTracer.recordAfeConnectivityErrorCount(status?.code);
+              }
             }
           }
+
+          listener.onReceiveStatus(status);
         },
       };
 

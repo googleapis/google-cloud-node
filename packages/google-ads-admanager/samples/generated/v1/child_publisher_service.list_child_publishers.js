@@ -30,23 +30,23 @@ function main(parent) {
    */
   /**
    *  Required. The parent, which owns this collection of
-   *  ChildPublisher google.ads.admanager.v1.ChildPublisher s. Format:
+   *  ChildPublishers google.ads.admanager.v1.ChildPublisher. Format:
    *  `networks/{network_code}`
    */
   // const parent = 'abc123'
   /**
    *  Optional. The maximum number of
-   *  ChildPublisher google.ads.admanager.v1.ChildPublisher s to return. The
+   *  ChildPublishers google.ads.admanager.v1.ChildPublisher  to return. The
    *  service may return fewer than this value. If unspecified, at most 50
-   *  ChildPublisher google.ads.admanager.v1.ChildPublisher s will be returned.
+   *  ChildPublishers google.ads.admanager.v1.ChildPublisher  will be returned.
    *  The maximum value is 1000; values greater than 1000 will be coerced to
    *  1000.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A page token, received from a previous ListChildPublishers  
+   *  Optional. A page token, received from a previous `ListChildPublishers`
    *  call. Provide this to retrieve the subsequent page.
-   *  When paginating, all other parameters provided to ListChildPublishers  
+   *  When paginating, all other parameters provided to `ListChildPublishers`
    *  must match the call that provided the page token.
    */
   // const pageToken = 'abc123'

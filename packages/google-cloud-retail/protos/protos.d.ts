@@ -31516,6 +31516,9 @@ export namespace google {
 
                     /** CompletionConfig lastAllowlistImportOperation */
                     lastAllowlistImportOperation?: (string|null);
+
+                    /** CompletionConfig enableAgentPrompts */
+                    enableAgentPrompts?: (boolean|null);
                 }
 
                 /** Represents a CompletionConfig. */
@@ -31559,6 +31562,9 @@ export namespace google {
 
                     /** CompletionConfig lastAllowlistImportOperation. */
                     public lastAllowlistImportOperation: string;
+
+                    /** CompletionConfig enableAgentPrompts. */
+                    public enableAgentPrompts: boolean;
 
                     /**
                      * Creates a new CompletionConfig instance using the specified properties.

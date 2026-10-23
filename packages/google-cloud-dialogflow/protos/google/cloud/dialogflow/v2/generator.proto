@@ -335,9 +335,10 @@ message SummarizationSection {
     // Section name: "reason_for_cancellation".
     REASON_FOR_CANCELLATION = 4;
 
-    // "Unsatisfied" or "Satisfied" depending on the customer's feelings at
-    // the end of the conversation.
-    // Section name: "customer_satisfaction".
+    // Customer satisfaction derived from the text transcript only (not audio).
+    // Categorized based on customer statements by the end of the conversation.
+    // `D` for dissatisfied and `N` for neutral or satisfied (default).
+    // Section name: `customer_satisfaction`.
     CUSTOMER_SATISFACTION = 5;
 
     // Key entities extracted from the conversation, such as ticket number,
@@ -474,9 +475,10 @@ message Generator {
   repeated CesToolSpec ces_tool_specs = 28
       [(google.api.field_behavior) = OPTIONAL];
 
-  // Optional. List of CES app specs that the generator can choose from.
+  // Optional. Deprecated: Use `ces_tool_specs` instead.
+  // List of CES app specs that the generator can choose from.
   repeated CesAppSpec ces_app_specs = 29
-      [(google.api.field_behavior) = OPTIONAL];
+      [deprecated = true, (google.api.field_behavior) = OPTIONAL];
 }
 
 // Suggestion generated using free form generator.

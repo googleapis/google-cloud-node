@@ -14,7 +14,7 @@
 
 import {status as Status} from '@grpc/grpc-js';
 import {Counter, Histogram} from '@opentelemetry/api';
-import {MetricsTracerFactory} from './metrics-tracer-factory';
+
 import {
   METRIC_LABEL_KEY_DATABASE,
   METRIC_LABEL_KEY_METHOD,
@@ -257,7 +257,7 @@ export class MetricsTracer {
     private _instance: string,
     private _projectId: string,
     private _methodName: string,
-    private _request: string,
+    private _request?: string,
     attributesCache?: Map<string, Record<string, string>>,
   ) {
     this._clientAttributes[METRIC_LABEL_KEY_DATABASE] = _database;
@@ -373,9 +373,7 @@ export class MetricsTracer {
       operationLatencyMilliseconds,
       operationAttributes,
     );
-    MetricsTracerFactory.getInstance(this._projectId)?.clearCurrentTracer(
-      this._request,
-    );
+    this.currentOperation = null;
   }
 
   /**
@@ -436,7 +434,11 @@ export class MetricsTracer {
    */
   public recordGfeLatency(statusCode: Status) {
     if (!this.enabled || !this._instrumentGfeLatency) return;
-    if (typeof this.gfeLatency !== 'number') {
+    if (
+      typeof this.gfeLatency !== 'number' ||
+      !Number.isFinite(this.gfeLatency) ||
+      this.gfeLatency < 0
+    ) {
       console.error(
         'ERROR: Attempted to record GFE metric with no latency value.',
       );
@@ -485,7 +487,11 @@ export class MetricsTracer {
     ) {
       return;
     }
-    if (typeof this.afeLatency !== 'number') {
+    if (
+      typeof this.afeLatency !== 'number' ||
+      !Number.isFinite(this.afeLatency) ||
+      this.afeLatency < 0
+    ) {
       console.error(
         'ERROR: Attempted to record AFE metric with no latency value.',
       );

@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 import {
+  BlueGreenDeploymentsServiceClient,
   
   SqlBackupRunsServiceClient,
   
@@ -33,9 +34,15 @@ import {
   SqlSslCertsServiceClient,
   SqlTiersServiceClient,
   SqlUsersServiceClient,
+  SqlWorkloadCapturesServiceClient,
 } from '@google-cloud/sql';
 
 // check that the client class type name can be used
+function doStuffWithBlueGreenDeploymentsServiceClient(
+  client: BlueGreenDeploymentsServiceClient,
+) {
+  client.close();
+}
 
 function doStuffWithSqlBackupRunsServiceClient(
   client: SqlBackupRunsServiceClient,
@@ -78,8 +85,19 @@ function doStuffWithSqlTiersServiceClient(client: SqlTiersServiceClient) {
 function doStuffWithSqlUsersServiceClient(client: SqlUsersServiceClient) {
   client.close();
 }
+function doStuffWithSqlWorkloadCapturesServiceClient(
+  client: SqlWorkloadCapturesServiceClient,
+) {
+  client.close();
+}
 
 function main() {
+  // check that the client instance can be created
+  const blueGreenDeploymentsServiceClient =
+    new BlueGreenDeploymentsServiceClient();
+  doStuffWithBlueGreenDeploymentsServiceClient(
+    blueGreenDeploymentsServiceClient,
+  );
   
   // check that the client instance can be created
   const sqlBackupRunsServiceClient = new SqlBackupRunsServiceClient();
@@ -114,6 +132,10 @@ function main() {
   // check that the client instance can be created
   const sqlUsersServiceClient = new SqlUsersServiceClient();
   doStuffWithSqlUsersServiceClient(sqlUsersServiceClient);
+  // check that the client instance can be created
+  const sqlWorkloadCapturesServiceClient =
+    new SqlWorkloadCapturesServiceClient();
+  doStuffWithSqlWorkloadCapturesServiceClient(sqlWorkloadCapturesServiceClient);
 }
 
 main();

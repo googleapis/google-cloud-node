@@ -19,3 +19,7 @@ const mkdirp = require('mkdirp');
 // package.json file because CI is also run on Windows, which does not support
 // the `-p` flag.
 mkdirp.sync('build/conformance/conformance-tests');
+// The emitted declarations in build/types/src import '../protos/*', but tsc
+// does not copy the hand-maintained proto .d.ts files, so postcompile copies
+// them here.
+mkdirp.sync('build/types/protos');

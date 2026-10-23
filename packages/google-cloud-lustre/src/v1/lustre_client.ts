@@ -27,6 +27,8 @@ import type {
   LROperation,
   PaginationCallback,
   GaxCall,
+  IamClient,
+  IamProtos,
   LocationsClient,
   LocationProtos,
 } from 'google-gax';
@@ -69,6 +71,7 @@ export class LustreClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  iamClient: IamClient;
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
@@ -185,6 +188,8 @@ export class LustreClient {
     if (servicePath === this._servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
+
     this.locationsClient = new this._gaxModule.LocationsClient(
       this._gaxGrpc,
       opts,
@@ -212,8 +217,14 @@ export class LustreClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      directoryPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/directoryPolicies/{directory_policy}',
+      ),
       instancePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/instances/{instance}',
+      ),
+      mirrorPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/mirrors/{mirror}',
       ),
     };
 
@@ -225,6 +236,16 @@ export class LustreClient {
         'pageToken',
         'nextPageToken',
         'instances',
+      ),
+      listMirrors: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'mirrors',
+      ),
+      listDirectoryPolicies: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'directoryPolicies',
       ),
     };
 
@@ -246,6 +267,37 @@ export class LustreClient {
         {
           selector: 'google.cloud.location.Locations.ListLocations',
           get: '/v1/{name=projects/*}/locations',
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.GetIamPolicy',
+          get: '/v1/{resource=projects/*/locations/*/instances/*}:getIamPolicy',
+          additional_bindings: [
+            {
+              get: '/v1/{resource=projects/*/locations/*/instances/*/directoryPolicies/*}:getIamPolicy',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.SetIamPolicy',
+          post: '/v1/{resource=projects/*/locations/*/instances/*}:setIamPolicy',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/instances/*/directoryPolicies/*}:setIamPolicy',
+              body: '*',
+            },
+          ],
+        },
+        {
+          selector: 'google.iam.v1.IAMPolicy.TestIamPermissions',
+          post: '/v1/{resource=projects/*/locations/*/instances/*}:testIamPermissions',
+          body: '*',
+          additional_bindings: [
+            {
+              post: '/v1/{resource=projects/*/locations/*/instances/*/directoryPolicies/*}:testIamPermissions',
+              body: '*',
+            },
+          ],
         },
         {
           selector: 'google.longrunning.Operations.CancelOperation',
@@ -286,6 +338,12 @@ export class LustreClient {
     const deleteInstanceMetadata = protoFilesRoot.lookup(
       '.google.cloud.lustre.v1.OperationMetadata',
     ) as gax.protobuf.Type;
+    const rescheduleMaintenanceResponse = protoFilesRoot.lookup(
+      '.google.cloud.lustre.v1.Instance',
+    ) as gax.protobuf.Type;
+    const rescheduleMaintenanceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.lustre.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
     const importDataResponse = protoFilesRoot.lookup(
       '.google.cloud.lustre.v1.ImportDataResponse',
     ) as gax.protobuf.Type;
@@ -297,6 +355,36 @@ export class LustreClient {
     ) as gax.protobuf.Type;
     const exportDataMetadata = protoFilesRoot.lookup(
       '.google.cloud.lustre.v1.ExportDataMetadata',
+    ) as gax.protobuf.Type;
+    const createMirrorResponse = protoFilesRoot.lookup(
+      '.google.cloud.lustre.v1.Mirror',
+    ) as gax.protobuf.Type;
+    const createMirrorMetadata = protoFilesRoot.lookup(
+      '.google.cloud.lustre.v1.CreateMirrorMetadata',
+    ) as gax.protobuf.Type;
+    const updateMirrorResponse = protoFilesRoot.lookup(
+      '.google.cloud.lustre.v1.Mirror',
+    ) as gax.protobuf.Type;
+    const updateMirrorMetadata = protoFilesRoot.lookup(
+      '.google.cloud.lustre.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const deleteMirrorResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteMirrorMetadata = protoFilesRoot.lookup(
+      '.google.cloud.lustre.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const createDirectoryPolicyResponse = protoFilesRoot.lookup(
+      '.google.cloud.lustre.v1.DirectoryPolicy',
+    ) as gax.protobuf.Type;
+    const createDirectoryPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.lustre.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const deleteDirectoryPolicyResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteDirectoryPolicyMetadata = protoFilesRoot.lookup(
+      '.google.cloud.lustre.v1.OperationMetadata',
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
@@ -315,6 +403,15 @@ export class LustreClient {
         deleteInstanceResponse.decode.bind(deleteInstanceResponse),
         deleteInstanceMetadata.decode.bind(deleteInstanceMetadata),
       ),
+      rescheduleMaintenance: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        rescheduleMaintenanceResponse.decode.bind(
+          rescheduleMaintenanceResponse,
+        ),
+        rescheduleMaintenanceMetadata.decode.bind(
+          rescheduleMaintenanceMetadata,
+        ),
+      ),
       importData: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importDataResponse.decode.bind(importDataResponse),
@@ -324,6 +421,39 @@ export class LustreClient {
         this.operationsClient,
         exportDataResponse.decode.bind(exportDataResponse),
         exportDataMetadata.decode.bind(exportDataMetadata),
+      ),
+      createMirror: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createMirrorResponse.decode.bind(createMirrorResponse),
+        createMirrorMetadata.decode.bind(createMirrorMetadata),
+      ),
+      updateMirror: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateMirrorResponse.decode.bind(updateMirrorResponse),
+        updateMirrorMetadata.decode.bind(updateMirrorMetadata),
+      ),
+      deleteMirror: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteMirrorResponse.decode.bind(deleteMirrorResponse),
+        deleteMirrorMetadata.decode.bind(deleteMirrorMetadata),
+      ),
+      createDirectoryPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createDirectoryPolicyResponse.decode.bind(
+          createDirectoryPolicyResponse,
+        ),
+        createDirectoryPolicyMetadata.decode.bind(
+          createDirectoryPolicyMetadata,
+        ),
+      ),
+      deleteDirectoryPolicy: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteDirectoryPolicyResponse.decode.bind(
+          deleteDirectoryPolicyResponse,
+        ),
+        deleteDirectoryPolicyMetadata.decode.bind(
+          deleteDirectoryPolicyMetadata,
+        ),
       ),
     };
 
@@ -382,8 +512,18 @@ export class LustreClient {
       'createInstance',
       'updateInstance',
       'deleteInstance',
+      'rescheduleMaintenance',
       'importData',
       'exportData',
+      'createMirror',
+      'updateMirror',
+      'deleteMirror',
+      'getMirror',
+      'listMirrors',
+      'createDirectoryPolicy',
+      'deleteDirectoryPolicy',
+      'getDirectoryPolicy',
+      'listDirectoryPolicies',
     ];
     for (const methodName of lustreStubMethods) {
       const callPromise = this.lustreStub.then(
@@ -606,6 +746,267 @@ export class LustreClient {
           {} | undefined,
         ]) => {
           this._log.info('getInstance response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a single mirror.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the mirror to retrieve, in the format:
+   *   `projects/{project}/locations/{location}/instances/{instance}/mirrors/{mirror}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.lustre.v1.Mirror|Mirror}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.get_mirror.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_GetMirror_async
+   */
+  getMirror(
+    request?: protos.google.cloud.lustre.v1.IGetMirrorRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.lustre.v1.IMirror,
+      protos.google.cloud.lustre.v1.IGetMirrorRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getMirror(
+    request: protos.google.cloud.lustre.v1.IGetMirrorRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.lustre.v1.IMirror,
+      protos.google.cloud.lustre.v1.IGetMirrorRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getMirror(
+    request: protos.google.cloud.lustre.v1.IGetMirrorRequest,
+    callback: Callback<
+      protos.google.cloud.lustre.v1.IMirror,
+      protos.google.cloud.lustre.v1.IGetMirrorRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getMirror(
+    request?: protos.google.cloud.lustre.v1.IGetMirrorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.lustre.v1.IMirror,
+          protos.google.cloud.lustre.v1.IGetMirrorRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.lustre.v1.IMirror,
+      protos.google.cloud.lustre.v1.IGetMirrorRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.lustre.v1.IMirror,
+      protos.google.cloud.lustre.v1.IGetMirrorRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getMirror request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.lustre.v1.IMirror,
+          protos.google.cloud.lustre.v1.IGetMirrorRequest | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getMirror response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getMirror(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.lustre.v1.IMirror,
+          protos.google.cloud.lustre.v1.IGetMirrorRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getMirror response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a single directory policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the directory policy.
+   *   DirectoryPolicy names have the form
+   *   `projects/{project}/locations/{location}/instances/{instance}/directoryPolicies/{id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.lustre.v1.DirectoryPolicy|DirectoryPolicy}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.get_directory_policy.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_GetDirectoryPolicy_async
+   */
+  getDirectoryPolicy(
+    request?: protos.google.cloud.lustre.v1.IGetDirectoryPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.lustre.v1.IDirectoryPolicy,
+      protos.google.cloud.lustre.v1.IGetDirectoryPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getDirectoryPolicy(
+    request: protos.google.cloud.lustre.v1.IGetDirectoryPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.lustre.v1.IDirectoryPolicy,
+      | protos.google.cloud.lustre.v1.IGetDirectoryPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getDirectoryPolicy(
+    request: protos.google.cloud.lustre.v1.IGetDirectoryPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.lustre.v1.IDirectoryPolicy,
+      | protos.google.cloud.lustre.v1.IGetDirectoryPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getDirectoryPolicy(
+    request?: protos.google.cloud.lustre.v1.IGetDirectoryPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.lustre.v1.IDirectoryPolicy,
+          | protos.google.cloud.lustre.v1.IGetDirectoryPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.lustre.v1.IDirectoryPolicy,
+      | protos.google.cloud.lustre.v1.IGetDirectoryPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.lustre.v1.IDirectoryPolicy,
+      protos.google.cloud.lustre.v1.IGetDirectoryPolicyRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getDirectoryPolicy request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.lustre.v1.IDirectoryPolicy,
+          | protos.google.cloud.lustre.v1.IGetDirectoryPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getDirectoryPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getDirectoryPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.lustre.v1.IDirectoryPolicy,
+          protos.google.cloud.lustre.v1.IGetDirectoryPolicyRequest | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('getDirectoryPolicy response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1035,6 +1436,10 @@ export class LustreClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is
    *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {boolean} [request.force]
+   *   Optional. If set to true, any sub-resources from this instance will also be
+   *   deleted. Otherwise, the request will only work if the instance has no
+   *   sub-resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1198,6 +1603,181 @@ export class LustreClient {
     >;
   }
   /**
+   * Reschedules a planned maintenance event for a specific instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Format:
+   *   projects/{project}/locations/{location}/instances/{instance}
+   * @param {google.cloud.lustre.v1.RescheduleMaintenanceRequest.Reschedule} request.reschedule
+   *   Required. The desired reschedule settings.
+   * @param {string} [request.requestId]
+   *   Optional. A unique identifier for this request. A random UUID is
+   *   recommended. This request is only idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.reschedule_maintenance.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_RescheduleMaintenance_async
+   */
+  rescheduleMaintenance(
+    request?: protos.google.cloud.lustre.v1.IRescheduleMaintenanceRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.lustre.v1.IInstance,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  rescheduleMaintenance(
+    request: protos.google.cloud.lustre.v1.IRescheduleMaintenanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.lustre.v1.IInstance,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  rescheduleMaintenance(
+    request: protos.google.cloud.lustre.v1.IRescheduleMaintenanceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.lustre.v1.IInstance,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  rescheduleMaintenance(
+    request?: protos.google.cloud.lustre.v1.IRescheduleMaintenanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.lustre.v1.IInstance,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.lustre.v1.IInstance,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.lustre.v1.IInstance,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.lustre.v1.IInstance,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('rescheduleMaintenance response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('rescheduleMaintenance request %j', request);
+    return this.innerApiCalls
+      .rescheduleMaintenance(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.lustre.v1.IInstance,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('rescheduleMaintenance response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `rescheduleMaintenance()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.reschedule_maintenance.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_RescheduleMaintenance_async
+   */
+  async checkRescheduleMaintenanceProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.lustre.v1.Instance,
+      protos.google.cloud.lustre.v1.OperationMetadata
+    >
+  > {
+    this._log.info('rescheduleMaintenance long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.rescheduleMaintenance,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.lustre.v1.Instance,
+      protos.google.cloud.lustre.v1.OperationMetadata
+    >;
+  }
+  /**
    * Imports data from Cloud Storage to a Managed Lustre instance.
    *
    * @param {Object} request
@@ -1216,6 +1796,12 @@ export class LustreClient {
    * @param {string} [request.serviceAccount]
    *   Optional. User-specified service account used to perform the transfer.
    *   If unspecified, the default Managed Lustre service agent will be used.
+   *
+   *   Use one of the following formats:
+   *
+   *   * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *   * `projects/{PROJECT_ID}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *   * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1399,6 +1985,12 @@ export class LustreClient {
    * @param {string} [request.serviceAccount]
    *   Optional. User-specified service account used to perform the transfer.
    *   If unspecified, the Managed Lustre service agent is used.
+   *
+   *   Use one of the following formats:
+   *
+   *   * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *   * `projects/{PROJECT_ID}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+   *   * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1559,6 +2151,924 @@ export class LustreClient {
     return decodeOperation as LROperation<
       protos.google.cloud.lustre.v1.ExportDataResponse,
       protos.google.cloud.lustre.v1.ExportDataMetadata
+    >;
+  }
+  /**
+   * Creates a new mirror in a given instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent instance resource where the mirror will be created, in the
+   *   format: `projects/{project}/locations/{location}/instances/{instance}`
+   * @param {string} request.mirrorId
+   *   Required. The ID to use for the mirror.
+   *
+   *   * Must contain only lowercase letters, numbers, and hyphens.
+   *   * Must start with a letter.
+   *   * Must be between 1-63 characters.
+   *   * Must end with a number or a letter.
+   *
+   *   The ID cannot be changed after the mirror is created.
+   * @param {google.cloud.lustre.v1.Mirror} request.mirror
+   *   Required. The mirror to create.
+   * @param {string} [request.requestId]
+   *   Optional. The unique ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in creation of duplicate mirrors for at least 60
+   *   minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate mirrors.
+   *
+   *   The request ID must be a valid UUID version 4 with the exception that zero
+   *   UUID is not supported (`00000000-0000-0000-0000-000000000000`).
+   *   This request is only idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.create_mirror.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_CreateMirror_async
+   */
+  createMirror(
+    request?: protos.google.cloud.lustre.v1.ICreateMirrorRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.lustre.v1.IMirror,
+        protos.google.cloud.lustre.v1.ICreateMirrorMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createMirror(
+    request: protos.google.cloud.lustre.v1.ICreateMirrorRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.lustre.v1.IMirror,
+        protos.google.cloud.lustre.v1.ICreateMirrorMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createMirror(
+    request: protos.google.cloud.lustre.v1.ICreateMirrorRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.lustre.v1.IMirror,
+        protos.google.cloud.lustre.v1.ICreateMirrorMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createMirror(
+    request?: protos.google.cloud.lustre.v1.ICreateMirrorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.lustre.v1.IMirror,
+            protos.google.cloud.lustre.v1.ICreateMirrorMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.lustre.v1.IMirror,
+        protos.google.cloud.lustre.v1.ICreateMirrorMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.lustre.v1.IMirror,
+        protos.google.cloud.lustre.v1.ICreateMirrorMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.lustre.v1.IMirror,
+            protos.google.cloud.lustre.v1.ICreateMirrorMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createMirror response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createMirror request %j', request);
+    return this.innerApiCalls
+      .createMirror(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.lustre.v1.IMirror,
+            protos.google.cloud.lustre.v1.ICreateMirrorMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createMirror response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createMirror()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.create_mirror.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_CreateMirror_async
+   */
+  async checkCreateMirrorProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.lustre.v1.Mirror,
+      protos.google.cloud.lustre.v1.CreateMirrorMetadata
+    >
+  > {
+    this._log.info('createMirror long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createMirror,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.lustre.v1.Mirror,
+      protos.google.cloud.lustre.v1.CreateMirrorMetadata
+    >;
+  }
+  /**
+   * Updates the parameters of a single mirror.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.lustre.v1.Mirror} request.mirror
+   *   Required. Mirror to update. The mirror's `name` field is used to identify
+   *   the mirror to update, in the format:
+   *   `projects/{project}/locations/{location}/instances/{instance}/mirrors/{mirror}`
+   * @param {google.protobuf.FieldMask} [request.updateMask]
+   *   Optional. Fields specified in the update_mask are relative to the resource,
+   *   not the full request. A field will be overwritten if it is in the mask. If
+   *   no mask is provided then all fields present in the request are overwritten.
+   * @param {string} [request.requestId]
+   *   Optional. The unique ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in the same update request being executed for at
+   *   least 60 minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request.
+   *
+   *   The request ID must be a valid UUID version 4 with the exception that zero
+   *   UUID is not supported (`00000000-0000-0000-0000-000000000000`).
+   *   This request is only idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.update_mirror.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_UpdateMirror_async
+   */
+  updateMirror(
+    request?: protos.google.cloud.lustre.v1.IUpdateMirrorRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.lustre.v1.IMirror,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  updateMirror(
+    request: protos.google.cloud.lustre.v1.IUpdateMirrorRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.lustre.v1.IMirror,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateMirror(
+    request: protos.google.cloud.lustre.v1.IUpdateMirrorRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.lustre.v1.IMirror,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  updateMirror(
+    request?: protos.google.cloud.lustre.v1.IUpdateMirrorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.lustre.v1.IMirror,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.lustre.v1.IMirror,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.lustre.v1.IMirror,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        'mirror.name': request.mirror!.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.lustre.v1.IMirror,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateMirror response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateMirror request %j', request);
+    return this.innerApiCalls
+      .updateMirror(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.lustre.v1.IMirror,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('updateMirror response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateMirror()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.update_mirror.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_UpdateMirror_async
+   */
+  async checkUpdateMirrorProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.lustre.v1.Mirror,
+      protos.google.cloud.lustre.v1.OperationMetadata
+    >
+  > {
+    this._log.info('updateMirror long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.updateMirror,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.lustre.v1.Mirror,
+      protos.google.cloud.lustre.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single mirror.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the mirror to delete, in the format:
+   *   `projects/{project}/locations/{location}/instances/{instance}/mirrors/{mirror}`
+   * @param {string} [request.requestId]
+   *   Optional. The unique ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server guarantees that a
+   *   request doesn't result in the same delete request being executed for at
+   *   least 60 minutes.
+   *
+   *   For example, consider a situation where you make an initial request and the
+   *   request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request.
+   *
+   *   The request ID must be a valid UUID version 4 with the exception that zero
+   *   UUID is not supported (`00000000-0000-0000-0000-000000000000`).
+   *   This request is only idempotent if a `request_id` is provided.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.delete_mirror.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_DeleteMirror_async
+   */
+  deleteMirror(
+    request?: protos.google.cloud.lustre.v1.IDeleteMirrorRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteMirror(
+    request: protos.google.cloud.lustre.v1.IDeleteMirrorRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteMirror(
+    request: protos.google.cloud.lustre.v1.IDeleteMirrorRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteMirror(
+    request?: protos.google.cloud.lustre.v1.IDeleteMirrorRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteMirror response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteMirror request %j', request);
+    return this.innerApiCalls
+      .deleteMirror(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteMirror response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteMirror()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.delete_mirror.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_DeleteMirror_async
+   */
+  async checkDeleteMirrorProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.lustre.v1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteMirror long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteMirror,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.lustre.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a directory policy resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent instance.
+   *   It must be in the format of
+   *   `projects/{project}/locations/{location}/instances/{instance}`.
+   * @param {string} request.directoryPolicyId
+   *   Required. The ID for the DirectoryPolicy to create.
+   * @param {google.cloud.lustre.v1.DirectoryPolicy} request.directoryPolicy
+   *   Required. The directory policy to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.create_directory_policy.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_CreateDirectoryPolicy_async
+   */
+  createDirectoryPolicy(
+    request?: protos.google.cloud.lustre.v1.ICreateDirectoryPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.lustre.v1.IDirectoryPolicy,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createDirectoryPolicy(
+    request: protos.google.cloud.lustre.v1.ICreateDirectoryPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.lustre.v1.IDirectoryPolicy,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createDirectoryPolicy(
+    request: protos.google.cloud.lustre.v1.ICreateDirectoryPolicyRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.lustre.v1.IDirectoryPolicy,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createDirectoryPolicy(
+    request?: protos.google.cloud.lustre.v1.ICreateDirectoryPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.lustre.v1.IDirectoryPolicy,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.lustre.v1.IDirectoryPolicy,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.lustre.v1.IDirectoryPolicy,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.lustre.v1.IDirectoryPolicy,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createDirectoryPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createDirectoryPolicy request %j', request);
+    return this.innerApiCalls
+      .createDirectoryPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.lustre.v1.IDirectoryPolicy,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createDirectoryPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createDirectoryPolicy()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.create_directory_policy.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_CreateDirectoryPolicy_async
+   */
+  async checkCreateDirectoryPolicyProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.lustre.v1.DirectoryPolicy,
+      protos.google.cloud.lustre.v1.OperationMetadata
+    >
+  > {
+    this._log.info('createDirectoryPolicy long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createDirectoryPolicy,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.lustre.v1.DirectoryPolicy,
+      protos.google.cloud.lustre.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a directory policy resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the directory policy.
+   *   DirectoryPolicy names have the form
+   *   `projects/{project}/locations/{location}/instances/{instance}/directoryPolicies/{id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.delete_directory_policy.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_DeleteDirectoryPolicy_async
+   */
+  deleteDirectoryPolicy(
+    request?: protos.google.cloud.lustre.v1.IDeleteDirectoryPolicyRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteDirectoryPolicy(
+    request: protos.google.cloud.lustre.v1.IDeleteDirectoryPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteDirectoryPolicy(
+    request: protos.google.cloud.lustre.v1.IDeleteDirectoryPolicyRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteDirectoryPolicy(
+    request?: protos.google.cloud.lustre.v1.IDeleteDirectoryPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.lustre.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteDirectoryPolicy response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteDirectoryPolicy request %j', request);
+    return this.innerApiCalls
+      .deleteDirectoryPolicy(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.lustre.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteDirectoryPolicy response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteDirectoryPolicy()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.delete_directory_policy.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_DeleteDirectoryPolicy_async
+   */
+  async checkDeleteDirectoryPolicyProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.lustre.v1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteDirectoryPolicy long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteDirectoryPolicy,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.lustre.v1.OperationMetadata
     >;
   }
   /**
@@ -1801,6 +3311,624 @@ export class LustreClient {
       request as {},
       callSettings,
     ) as AsyncIterable<protos.google.cloud.lustre.v1.IInstance>;
+  }
+  /**
+   * Gets details of multiple mirrors under a given instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent instance resource where the mirrors will be listed, in the
+   *   format: `projects/{project}/locations/{location}/instances/{instance}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server might return fewer items than
+   *   requested. If unspecified, the default page size is 10. The maximum value
+   *   is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMirrors` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListMirrors` must match
+   *   the call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. Desired order of results.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.lustre.v1.Mirror|Mirror}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMirrorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMirrors(
+    request?: protos.google.cloud.lustre.v1.IListMirrorsRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.lustre.v1.IMirror[],
+      protos.google.cloud.lustre.v1.IListMirrorsRequest | null,
+      protos.google.cloud.lustre.v1.IListMirrorsResponse,
+    ]
+  >;
+  listMirrors(
+    request: protos.google.cloud.lustre.v1.IListMirrorsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.lustre.v1.IListMirrorsRequest,
+      protos.google.cloud.lustre.v1.IListMirrorsResponse | null | undefined,
+      protos.google.cloud.lustre.v1.IMirror
+    >,
+  ): void;
+  listMirrors(
+    request: protos.google.cloud.lustre.v1.IListMirrorsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.lustre.v1.IListMirrorsRequest,
+      protos.google.cloud.lustre.v1.IListMirrorsResponse | null | undefined,
+      protos.google.cloud.lustre.v1.IMirror
+    >,
+  ): void;
+  listMirrors(
+    request?: protos.google.cloud.lustre.v1.IListMirrorsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.lustre.v1.IListMirrorsRequest,
+          protos.google.cloud.lustre.v1.IListMirrorsResponse | null | undefined,
+          protos.google.cloud.lustre.v1.IMirror
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.lustre.v1.IListMirrorsRequest,
+      protos.google.cloud.lustre.v1.IListMirrorsResponse | null | undefined,
+      protos.google.cloud.lustre.v1.IMirror
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.lustre.v1.IMirror[],
+      protos.google.cloud.lustre.v1.IListMirrorsRequest | null,
+      protos.google.cloud.lustre.v1.IListMirrorsResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.lustre.v1.IListMirrorsRequest,
+          protos.google.cloud.lustre.v1.IListMirrorsResponse | null | undefined,
+          protos.google.cloud.lustre.v1.IMirror
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listMirrors values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listMirrors request %j', request);
+    return this.innerApiCalls
+      .listMirrors(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.lustre.v1.IMirror[],
+          protos.google.cloud.lustre.v1.IListMirrorsRequest | null,
+          protos.google.cloud.lustre.v1.IListMirrorsResponse,
+        ]) => {
+          this._log.info('listMirrors values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listMirrors`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent instance resource where the mirrors will be listed, in the
+   *   format: `projects/{project}/locations/{location}/instances/{instance}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server might return fewer items than
+   *   requested. If unspecified, the default page size is 10. The maximum value
+   *   is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMirrors` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListMirrors` must match
+   *   the call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. Desired order of results.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.lustre.v1.Mirror|Mirror} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMirrorsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listMirrorsStream(
+    request?: protos.google.cloud.lustre.v1.IListMirrorsRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMirrors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMirrors stream %j', request);
+    return this.descriptors.page.listMirrors.createStream(
+      this.innerApiCalls.listMirrors as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listMirrors`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Parent instance resource where the mirrors will be listed, in the
+   *   format: `projects/{project}/locations/{location}/instances/{instance}`
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. The server might return fewer items than
+   *   requested. If unspecified, the default page size is 10. The maximum value
+   *   is 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListMirrors` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListMirrors` must match
+   *   the call that provided the page token.
+   * @param {string} [request.orderBy]
+   *   Optional. Desired order of results.
+   * @param {string} [request.filter]
+   *   Optional. Filtering results.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.lustre.v1.Mirror|Mirror}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.list_mirrors.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_ListMirrors_async
+   */
+  listMirrorsAsync(
+    request?: protos.google.cloud.lustre.v1.IListMirrorsRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.lustre.v1.IMirror> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listMirrors'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listMirrors iterate %j', request);
+    return this.descriptors.page.listMirrors.asyncIterate(
+      this.innerApiCalls['listMirrors'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.lustre.v1.IMirror>;
+  }
+  /**
+   * Gets details of multiple directory policies under a given instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent instance.
+   *   It must be in the format of
+   *   `projects/{project}/locations/{location}/instances/{instance}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server might return fewer items than
+   *   requested. If unspecified, the server will pick an appropriate default. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDirectoryPolicies`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListDirectoryPolicies` must match the call
+   *   that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.lustre.v1.DirectoryPolicy|DirectoryPolicy}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listDirectoryPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDirectoryPolicies(
+    request?: protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.lustre.v1.IDirectoryPolicy[],
+      protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest | null,
+      protos.google.cloud.lustre.v1.IListDirectoryPoliciesResponse,
+    ]
+  >;
+  listDirectoryPolicies(
+    request: protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest,
+      | protos.google.cloud.lustre.v1.IListDirectoryPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.lustre.v1.IDirectoryPolicy
+    >,
+  ): void;
+  listDirectoryPolicies(
+    request: protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest,
+      | protos.google.cloud.lustre.v1.IListDirectoryPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.lustre.v1.IDirectoryPolicy
+    >,
+  ): void;
+  listDirectoryPolicies(
+    request?: protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest,
+          | protos.google.cloud.lustre.v1.IListDirectoryPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.lustre.v1.IDirectoryPolicy
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest,
+      | protos.google.cloud.lustre.v1.IListDirectoryPoliciesResponse
+      | null
+      | undefined,
+      protos.google.cloud.lustre.v1.IDirectoryPolicy
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.lustre.v1.IDirectoryPolicy[],
+      protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest | null,
+      protos.google.cloud.lustre.v1.IListDirectoryPoliciesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest,
+          | protos.google.cloud.lustre.v1.IListDirectoryPoliciesResponse
+          | null
+          | undefined,
+          protos.google.cloud.lustre.v1.IDirectoryPolicy
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listDirectoryPolicies values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listDirectoryPolicies request %j', request);
+    return this.innerApiCalls
+      .listDirectoryPolicies(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.lustre.v1.IDirectoryPolicy[],
+          protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest | null,
+          protos.google.cloud.lustre.v1.IListDirectoryPoliciesResponse,
+        ]) => {
+          this._log.info('listDirectoryPolicies values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listDirectoryPolicies`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent instance.
+   *   It must be in the format of
+   *   `projects/{project}/locations/{location}/instances/{instance}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server might return fewer items than
+   *   requested. If unspecified, the server will pick an appropriate default. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDirectoryPolicies`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListDirectoryPolicies` must match the call
+   *   that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.lustre.v1.DirectoryPolicy|DirectoryPolicy} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listDirectoryPoliciesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listDirectoryPoliciesStream(
+    request?: protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDirectoryPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDirectoryPolicies stream %j', request);
+    return this.descriptors.page.listDirectoryPolicies.createStream(
+      this.innerApiCalls.listDirectoryPolicies as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listDirectoryPolicies`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent instance.
+   *   It must be in the format of
+   *   `projects/{project}/locations/{location}/instances/{instance}`.
+   * @param {number} [request.pageSize]
+   *   Optional. Requested page size. Server might return fewer items than
+   *   requested. If unspecified, the server will pick an appropriate default. The
+   *   maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous `ListDirectoryPolicies`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListDirectoryPolicies` must match the call
+   *   that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.lustre.v1.DirectoryPolicy|DirectoryPolicy}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/lustre.list_directory_policies.js</caption>
+   * region_tag:lustre_v1_generated_Lustre_ListDirectoryPolicies_async
+   */
+  listDirectoryPoliciesAsync(
+    request?: protos.google.cloud.lustre.v1.IListDirectoryPoliciesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.lustre.v1.IDirectoryPolicy> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listDirectoryPolicies'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listDirectoryPolicies iterate %j', request);
+    return this.descriptors.page.listDirectoryPolicies.asyncIterate(
+      this.innerApiCalls['listDirectoryPolicies'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.lustre.v1.IDirectoryPolicy>;
+  }
+  /**
+   * Gets the access control policy for a resource. Returns an empty policy
+   * if the resource exists and does not have a policy set.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {Object} [request.options]
+   *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *   `GetIamPolicy`. This field is only used by Cloud IAM.
+   *
+   *   This object should have the same structure as {@link google.iam.v1.GetPolicyOptions | GetPolicyOptions}.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.Policy | Policy}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.Policy | Policy}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  getIamPolicy(
+    request: IamProtos.google.iam.v1.GetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.GetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+    return this.iamClient.getIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   */
+  setIamPolicy(
+    request: IamProtos.google.iam.v1.SetIamPolicyRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.Policy,
+          IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.Policy,
+      IamProtos.google.iam.v1.SetIamPolicyRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<[IamProtos.google.iam.v1.Policy]> {
+    return this.iamClient.setIamPolicy(request, options, callback);
+  }
+
+  /**
+   * Returns permissions that a caller has on the specified resource. If the
+   * resource does not exist, this will return an empty set of
+   * permissions, not a NOT_FOUND error.
+   *
+   * Note: This operation is designed to be used for building
+   * permission-aware UIs and command-line tools, not for authorization
+   * checking. This operation may "fail open" without warning.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   REQUIRED: The resource for which the policy detail is being requested.
+   *   See the operation documentation for the appropriate value for this field.
+   * @param {string[]} request.permissions
+   *   The set of permissions to check for the `resource`. Permissions with
+   *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+   *   information see {@link https://cloud.google.com/iam/docs/overview#permissions | IAM Overview }.
+   * @param {Object} [options]
+   *   Optional parameters. You can override the default settings for this call, e.g, timeout,
+   *   retries, paginations, etc. See {@link https://googleapis.github.io/gax-nodejs/interfaces/CallOptions.html | gax.CallOptions} for the details.
+   * @param {function(?Error, ?Object)} [callback]
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link google.iam.v1.TestIamPermissionsResponse | TestIamPermissionsResponse}.
+   *   The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   */
+  testIamPermissions(
+    request: IamProtos.google.iam.v1.TestIamPermissionsRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          IamProtos.google.iam.v1.TestIamPermissionsResponse,
+          IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      IamProtos.google.iam.v1.TestIamPermissionsResponse,
+      IamProtos.google.iam.v1.TestIamPermissionsRequest | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<[IamProtos.google.iam.v1.TestIamPermissionsResponse]> {
+    return this.iamClient.testIamPermissions(request, options, callback);
   }
 
   /**
@@ -2108,6 +4236,81 @@ export class LustreClient {
   // --------------------
 
   /**
+   * Return a fully-qualified directoryPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} directory_policy
+   * @returns {string} Resource name string.
+   */
+  directoryPolicyPath(
+    project: string,
+    location: string,
+    instance: string,
+    directoryPolicy: string,
+  ) {
+    return this.pathTemplates.directoryPolicyPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      directory_policy: directoryPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from DirectoryPolicy resource.
+   *
+   * @param {string} directoryPolicyName
+   *   A fully-qualified path representing DirectoryPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromDirectoryPolicyName(directoryPolicyName: string) {
+    return this.pathTemplates.directoryPolicyPathTemplate.match(
+      directoryPolicyName,
+    ).project;
+  }
+
+  /**
+   * Parse the location from DirectoryPolicy resource.
+   *
+   * @param {string} directoryPolicyName
+   *   A fully-qualified path representing DirectoryPolicy resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromDirectoryPolicyName(directoryPolicyName: string) {
+    return this.pathTemplates.directoryPolicyPathTemplate.match(
+      directoryPolicyName,
+    ).location;
+  }
+
+  /**
+   * Parse the instance from DirectoryPolicy resource.
+   *
+   * @param {string} directoryPolicyName
+   *   A fully-qualified path representing DirectoryPolicy resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromDirectoryPolicyName(directoryPolicyName: string) {
+    return this.pathTemplates.directoryPolicyPathTemplate.match(
+      directoryPolicyName,
+    ).instance;
+  }
+
+  /**
+   * Parse the directory_policy from DirectoryPolicy resource.
+   *
+   * @param {string} directoryPolicyName
+   *   A fully-qualified path representing DirectoryPolicy resource.
+   * @returns {string} A string representing the directory_policy.
+   */
+  matchDirectoryPolicyFromDirectoryPolicyName(directoryPolicyName: string) {
+    return this.pathTemplates.directoryPolicyPathTemplate.match(
+      directoryPolicyName,
+    ).directory_policy;
+  }
+
+  /**
    * Return a fully-qualified instance resource name string.
    *
    * @param {string} project
@@ -2157,6 +4360,73 @@ export class LustreClient {
   }
 
   /**
+   * Return a fully-qualified mirror resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @param {string} mirror
+   * @returns {string} Resource name string.
+   */
+  mirrorPath(
+    project: string,
+    location: string,
+    instance: string,
+    mirror: string,
+  ) {
+    return this.pathTemplates.mirrorPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+      mirror: mirror,
+    });
+  }
+
+  /**
+   * Parse the project from Mirror resource.
+   *
+   * @param {string} mirrorName
+   *   A fully-qualified path representing Mirror resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromMirrorName(mirrorName: string) {
+    return this.pathTemplates.mirrorPathTemplate.match(mirrorName).project;
+  }
+
+  /**
+   * Parse the location from Mirror resource.
+   *
+   * @param {string} mirrorName
+   *   A fully-qualified path representing Mirror resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromMirrorName(mirrorName: string) {
+    return this.pathTemplates.mirrorPathTemplate.match(mirrorName).location;
+  }
+
+  /**
+   * Parse the instance from Mirror resource.
+   *
+   * @param {string} mirrorName
+   *   A fully-qualified path representing Mirror resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromMirrorName(mirrorName: string) {
+    return this.pathTemplates.mirrorPathTemplate.match(mirrorName).instance;
+  }
+
+  /**
+   * Parse the mirror from Mirror resource.
+   *
+   * @param {string} mirrorName
+   *   A fully-qualified path representing Mirror resource.
+   * @returns {string} A string representing the mirror.
+   */
+  matchMirrorFromMirrorName(mirrorName: string) {
+    return this.pathTemplates.mirrorPathTemplate.match(mirrorName).mirror;
+  }
+
+  /**
    * Terminate the gRPC channel and close the client.
    *
    * The client will no longer be usable and all future behavior is undefined.
@@ -2168,6 +4438,9 @@ export class LustreClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
+        this.iamClient.close().catch(err => {
+          throw err;
+        });
         this.locationsClient.close().catch(err => {
           throw err;
         });

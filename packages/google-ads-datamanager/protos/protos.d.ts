@@ -3640,12 +3640,14 @@ export namespace google {
                     CUSTOM_VARIABLE_NOT_ENABLED = 118,
                     INVALID_CUSTOM_VARIABLE_VALUE = 119,
                     CUSTOM_VARIABLE_NOT_FOUND = 120,
+                    TOO_MANY_USERS = 121,
                     BASELINE_LOCATION_AUTO_DETECTION_FAILED = 122,
                     INSIGHTS_MISSING_FOR_DIMENSION = 123,
                     REQUIRED_PREREQUISITE_LINK_MISSING = 124,
                     INVALID_REMOVE_AS_OF_TIME = 125,
                     REQUEST_TOO_OLD = 126,
-                    CONVERSION_ACTION_TOO_RECENTLY_CREATED = 127
+                    CONVERSION_ACTION_TOO_RECENTLY_CREATED = 127,
+                    INVALID_AD_IDENTIFIER_FOR_ACCOUNT = 128
                 }
 
                 /** Properties of an Event. */
@@ -4806,6 +4808,34 @@ export namespace google {
                     public ingestEvents(request: google.ads.datamanager.v1.IIngestEventsRequest): Promise<google.ads.datamanager.v1.IngestEventsResponse>;
 
                     /**
+                     * Calls IngestUsers.
+                     * @param request IngestUsersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and IngestUsersResponse
+                     */
+                    public ingestUsers(request: google.ads.datamanager.v1.IIngestUsersRequest, callback: google.ads.datamanager.v1.IngestionService.IngestUsersCallback): void;
+
+                    /**
+                     * Calls IngestUsers.
+                     * @param request IngestUsersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public ingestUsers(request: google.ads.datamanager.v1.IIngestUsersRequest): Promise<google.ads.datamanager.v1.IngestUsersResponse>;
+
+                    /**
+                     * Calls RemoveUsers.
+                     * @param request RemoveUsersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RemoveUsersResponse
+                     */
+                    public removeUsers(request: google.ads.datamanager.v1.IRemoveUsersRequest, callback: google.ads.datamanager.v1.IngestionService.RemoveUsersCallback): void;
+
+                    /**
+                     * Calls RemoveUsers.
+                     * @param request RemoveUsersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public removeUsers(request: google.ads.datamanager.v1.IRemoveUsersRequest): Promise<google.ads.datamanager.v1.RemoveUsersResponse>;
+
+                    /**
                      * Calls IngestAdEvents.
                      * @param request IngestAdEventsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and IngestAdEventsResponse
@@ -4863,6 +4893,20 @@ export namespace google {
                      * @param [response] IngestEventsResponse
                      */
                     type IngestEventsCallback = (error: (Error|null), response?: google.ads.datamanager.v1.IngestEventsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.datamanager.v1.IngestionService|ingestUsers}.
+                     * @param error Error, if any
+                     * @param [response] IngestUsersResponse
+                     */
+                    type IngestUsersCallback = (error: (Error|null), response?: google.ads.datamanager.v1.IngestUsersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.ads.datamanager.v1.IngestionService|removeUsers}.
+                     * @param error Error, if any
+                     * @param [response] RemoveUsersResponse
+                     */
+                    type RemoveUsersCallback = (error: (Error|null), response?: google.ads.datamanager.v1.RemoveUsersResponse) => void;
 
                     /**
                      * Callback as used by {@link google.ads.datamanager.v1.IngestionService|ingestAdEvents}.
@@ -5763,6 +5807,442 @@ export namespace google {
 
                     /**
                      * Gets the default type url for IngestEventsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IngestUsersRequest. */
+                interface IIngestUsersRequest {
+
+                    /** IngestUsersRequest destinations */
+                    destinations?: (google.ads.datamanager.v1.IDestination[]|null);
+
+                    /** IngestUsersRequest users */
+                    users?: (google.ads.datamanager.v1.IUser[]|null);
+
+                    /** IngestUsersRequest encryptionInfo */
+                    encryptionInfo?: (google.ads.datamanager.v1.IEncryptionInfo|null);
+
+                    /** IngestUsersRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** IngestUsersRequest encoding */
+                    encoding?: (google.ads.datamanager.v1.Encoding|keyof typeof google.ads.datamanager.v1.Encoding|null);
+                }
+
+                /** Represents an IngestUsersRequest. */
+                class IngestUsersRequest implements IIngestUsersRequest {
+
+                    /**
+                     * Constructs a new IngestUsersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IIngestUsersRequest);
+
+                    /** IngestUsersRequest destinations. */
+                    public destinations: google.ads.datamanager.v1.IDestination[];
+
+                    /** IngestUsersRequest users. */
+                    public users: google.ads.datamanager.v1.IUser[];
+
+                    /** IngestUsersRequest encryptionInfo. */
+                    public encryptionInfo?: (google.ads.datamanager.v1.IEncryptionInfo|null);
+
+                    /** IngestUsersRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** IngestUsersRequest encoding. */
+                    public encoding: (google.ads.datamanager.v1.Encoding|keyof typeof google.ads.datamanager.v1.Encoding);
+
+                    /**
+                     * Creates a new IngestUsersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IngestUsersRequest instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IIngestUsersRequest): google.ads.datamanager.v1.IngestUsersRequest;
+
+                    /**
+                     * Encodes the specified IngestUsersRequest message. Does not implicitly {@link google.ads.datamanager.v1.IngestUsersRequest.verify|verify} messages.
+                     * @param message IngestUsersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IIngestUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IngestUsersRequest message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.IngestUsersRequest.verify|verify} messages.
+                     * @param message IngestUsersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IIngestUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IngestUsersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IngestUsersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.IngestUsersRequest;
+
+                    /**
+                     * Decodes an IngestUsersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IngestUsersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.IngestUsersRequest;
+
+                    /**
+                     * Verifies an IngestUsersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IngestUsersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IngestUsersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.IngestUsersRequest;
+
+                    /**
+                     * Creates a plain object from an IngestUsersRequest message. Also converts values to other types if specified.
+                     * @param message IngestUsersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.IngestUsersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IngestUsersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IngestUsersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IngestUsersResponse. */
+                interface IIngestUsersResponse {
+
+                    /** IngestUsersResponse requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an IngestUsersResponse. */
+                class IngestUsersResponse implements IIngestUsersResponse {
+
+                    /**
+                     * Constructs a new IngestUsersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IIngestUsersResponse);
+
+                    /** IngestUsersResponse requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new IngestUsersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IngestUsersResponse instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IIngestUsersResponse): google.ads.datamanager.v1.IngestUsersResponse;
+
+                    /**
+                     * Encodes the specified IngestUsersResponse message. Does not implicitly {@link google.ads.datamanager.v1.IngestUsersResponse.verify|verify} messages.
+                     * @param message IngestUsersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IIngestUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IngestUsersResponse message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.IngestUsersResponse.verify|verify} messages.
+                     * @param message IngestUsersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IIngestUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IngestUsersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IngestUsersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.IngestUsersResponse;
+
+                    /**
+                     * Decodes an IngestUsersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IngestUsersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.IngestUsersResponse;
+
+                    /**
+                     * Verifies an IngestUsersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IngestUsersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IngestUsersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.IngestUsersResponse;
+
+                    /**
+                     * Creates a plain object from an IngestUsersResponse message. Also converts values to other types if specified.
+                     * @param message IngestUsersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.IngestUsersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IngestUsersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IngestUsersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RemoveUsersRequest. */
+                interface IRemoveUsersRequest {
+
+                    /** RemoveUsersRequest destinations */
+                    destinations?: (google.ads.datamanager.v1.IDestination[]|null);
+
+                    /** RemoveUsersRequest userData */
+                    userData?: (google.ads.datamanager.v1.IUserData[]|null);
+
+                    /** RemoveUsersRequest encryptionInfo */
+                    encryptionInfo?: (google.ads.datamanager.v1.IEncryptionInfo|null);
+
+                    /** RemoveUsersRequest validateOnly */
+                    validateOnly?: (boolean|null);
+
+                    /** RemoveUsersRequest encoding */
+                    encoding?: (google.ads.datamanager.v1.Encoding|keyof typeof google.ads.datamanager.v1.Encoding|null);
+                }
+
+                /** Represents a RemoveUsersRequest. */
+                class RemoveUsersRequest implements IRemoveUsersRequest {
+
+                    /**
+                     * Constructs a new RemoveUsersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IRemoveUsersRequest);
+
+                    /** RemoveUsersRequest destinations. */
+                    public destinations: google.ads.datamanager.v1.IDestination[];
+
+                    /** RemoveUsersRequest userData. */
+                    public userData: google.ads.datamanager.v1.IUserData[];
+
+                    /** RemoveUsersRequest encryptionInfo. */
+                    public encryptionInfo?: (google.ads.datamanager.v1.IEncryptionInfo|null);
+
+                    /** RemoveUsersRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /** RemoveUsersRequest encoding. */
+                    public encoding: (google.ads.datamanager.v1.Encoding|keyof typeof google.ads.datamanager.v1.Encoding);
+
+                    /**
+                     * Creates a new RemoveUsersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoveUsersRequest instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IRemoveUsersRequest): google.ads.datamanager.v1.RemoveUsersRequest;
+
+                    /**
+                     * Encodes the specified RemoveUsersRequest message. Does not implicitly {@link google.ads.datamanager.v1.RemoveUsersRequest.verify|verify} messages.
+                     * @param message RemoveUsersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IRemoveUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoveUsersRequest message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RemoveUsersRequest.verify|verify} messages.
+                     * @param message RemoveUsersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IRemoveUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoveUsersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoveUsersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.RemoveUsersRequest;
+
+                    /**
+                     * Decodes a RemoveUsersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoveUsersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.RemoveUsersRequest;
+
+                    /**
+                     * Verifies a RemoveUsersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoveUsersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoveUsersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.RemoveUsersRequest;
+
+                    /**
+                     * Creates a plain object from a RemoveUsersRequest message. Also converts values to other types if specified.
+                     * @param message RemoveUsersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.RemoveUsersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoveUsersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoveUsersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RemoveUsersResponse. */
+                interface IRemoveUsersResponse {
+
+                    /** RemoveUsersResponse requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a RemoveUsersResponse. */
+                class RemoveUsersResponse implements IRemoveUsersResponse {
+
+                    /**
+                     * Constructs a new RemoveUsersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IRemoveUsersResponse);
+
+                    /** RemoveUsersResponse requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new RemoveUsersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoveUsersResponse instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IRemoveUsersResponse): google.ads.datamanager.v1.RemoveUsersResponse;
+
+                    /**
+                     * Encodes the specified RemoveUsersResponse message. Does not implicitly {@link google.ads.datamanager.v1.RemoveUsersResponse.verify|verify} messages.
+                     * @param message RemoveUsersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IRemoveUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoveUsersResponse message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.RemoveUsersResponse.verify|verify} messages.
+                     * @param message RemoveUsersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IRemoveUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoveUsersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoveUsersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.RemoveUsersResponse;
+
+                    /**
+                     * Decodes a RemoveUsersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoveUsersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.RemoveUsersResponse;
+
+                    /**
+                     * Verifies a RemoveUsersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoveUsersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoveUsersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.RemoveUsersResponse;
+
+                    /**
+                     * Creates a plain object from a RemoveUsersResponse message. Also converts values to other types if specified.
+                     * @param message RemoveUsersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.RemoveUsersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoveUsersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoveUsersResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -9276,6 +9756,109 @@ export namespace google {
                     TERMS_OF_SERVICE_STATUS_UNSPECIFIED = 0,
                     ACCEPTED = 1,
                     REJECTED = 2
+                }
+
+                /** Properties of a User. */
+                interface IUser {
+
+                    /** User userData */
+                    userData?: (google.ads.datamanager.v1.IUserData|null);
+
+                    /** User mobileData */
+                    mobileData?: (google.ads.datamanager.v1.IMobileData|null);
+                }
+
+                /** Represents a User. */
+                class User implements IUser {
+
+                    /**
+                     * Constructs a new User.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.ads.datamanager.v1.IUser);
+
+                    /** User userData. */
+                    public userData?: (google.ads.datamanager.v1.IUserData|null);
+
+                    /** User mobileData. */
+                    public mobileData?: (google.ads.datamanager.v1.IMobileData|null);
+
+                    /**
+                     * Creates a new User instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns User instance
+                     */
+                    public static create(properties?: google.ads.datamanager.v1.IUser): google.ads.datamanager.v1.User;
+
+                    /**
+                     * Encodes the specified User message. Does not implicitly {@link google.ads.datamanager.v1.User.verify|verify} messages.
+                     * @param message User message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.ads.datamanager.v1.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified User message, length delimited. Does not implicitly {@link google.ads.datamanager.v1.User.verify|verify} messages.
+                     * @param message User message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.ads.datamanager.v1.IUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a User message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns User
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.ads.datamanager.v1.User;
+
+                    /**
+                     * Decodes a User message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns User
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.ads.datamanager.v1.User;
+
+                    /**
+                     * Verifies a User message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a User message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns User
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.ads.datamanager.v1.User;
+
+                    /**
+                     * Creates a plain object from a User message. Also converts values to other types if specified.
+                     * @param message User
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.ads.datamanager.v1.User, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this User to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for User
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a MarketingDataInsightsService */

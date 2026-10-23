@@ -2545,6 +2545,13 @@
                               "type": "string",
                               "id": 3
                             },
+                            "codeBlockFunction": {
+                              "type": "string",
+                              "id": 17,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "setParameterActions": {
                               "rule": "repeated",
                               "type": "SetParameterAction",
@@ -15346,6 +15353,13 @@
                             "tag": {
                               "type": "string",
                               "id": 3
+                            },
+                            "codeBlockFunction": {
+                              "type": "string",
+                              "id": 17,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             },
                             "setParameterActions": {
                               "rule": "repeated",

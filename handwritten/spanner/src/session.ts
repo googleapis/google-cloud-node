@@ -21,6 +21,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const common = require('./common-grpc/service-object');
 import {promisifyAll} from '@google-cloud/promisify';
+// eslint-disable-next-line import/namespace
 import * as r from 'teeny-request';
 import {
   Snapshot,
@@ -386,7 +387,7 @@ export class Session extends common.GrpcServiceObject {
       name: this.formattedName_,
     };
 
-    const headers = this.commonHeaders_;
+    const headers = {...this.commonHeaders_};
     if (this._getSpanner().routeToLeaderEnabled) {
       addLeaderAwareRoutingHeader(headers);
     }

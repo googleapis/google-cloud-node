@@ -4,6 +4,20 @@
 [npm history][1]
 
 [1]: https://www.npmjs.com/package/@google-cloud/projectify?activeTab=versions
+## [6.2.1](https://github.com/googleapis/google-cloud-node/compare/projectify-v6.2.0...projectify-v6.2.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **tools:** Export test-utils types and exempt cloud-profiler on Bun ([#9611](https://github.com/googleapis/google-cloud-node/issues/9611)) ([ec74599](https://github.com/googleapis/google-cloud-node/commit/ec745996da1c3ced29382dbd4365e80e6800a840))
+
+## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/projectify-v6.1.0...projectify-v6.2.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
 ## [6.1.0](https://github.com/googleapis/google-cloud-node/compare/projectify-v6.0.1...projectify-v6.1.0) (2026-09-15)
 
 

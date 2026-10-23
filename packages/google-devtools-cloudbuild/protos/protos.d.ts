@@ -6768,6 +6768,9 @@ export namespace google {
                     /** BuildTrigger sourceToBuild */
                     sourceToBuild?: (google.devtools.cloudbuild.v1.IGitRepoSource|null);
 
+                    /** BuildTrigger approvalConfig */
+                    approvalConfig?: (google.devtools.cloudbuild.v1.IApprovalConfig|null);
+
                     /** BuildTrigger serviceAccount */
                     serviceAccount?: (string|null);
 
@@ -6843,6 +6846,9 @@ export namespace google {
 
                     /** BuildTrigger sourceToBuild. */
                     public sourceToBuild?: (google.devtools.cloudbuild.v1.IGitRepoSource|null);
+
+                    /** BuildTrigger approvalConfig. */
+                    public approvalConfig?: (google.devtools.cloudbuild.v1.IApprovalConfig|null);
 
                     /** BuildTrigger serviceAccount. */
                     public serviceAccount: string;
@@ -8371,6 +8377,12 @@ export namespace google {
 
                     /** BuildOptions enableStructuredLogging */
                     enableStructuredLogging?: (boolean|null);
+
+                    /** BuildOptions workerRelease */
+                    workerRelease?: (string|null);
+
+                    /** BuildOptions resolvedWorkerRelease */
+                    resolvedWorkerRelease?: (string|null);
                 }
 
                 /** Represents a BuildOptions. */
@@ -8429,6 +8441,12 @@ export namespace google {
 
                     /** BuildOptions enableStructuredLogging. */
                     public enableStructuredLogging: boolean;
+
+                    /** BuildOptions workerRelease. */
+                    public workerRelease: string;
+
+                    /** BuildOptions resolvedWorkerRelease. */
+                    public resolvedWorkerRelease: string;
 
                     /**
                      * Creates a new BuildOptions instance using the specified properties.
@@ -8545,6 +8563,12 @@ export namespace google {
 
                         /** PoolOption name */
                         name?: (string|null);
+
+                        /** PoolOption workerRelease */
+                        workerRelease?: (string|null);
+
+                        /** PoolOption resolvedWorkerRelease */
+                        resolvedWorkerRelease?: (string|null);
                     }
 
                     /** Represents a PoolOption. */
@@ -8558,6 +8582,12 @@ export namespace google {
 
                         /** PoolOption name. */
                         public name: string;
+
+                        /** PoolOption workerRelease. */
+                        public workerRelease: string;
+
+                        /** PoolOption resolvedWorkerRelease. */
+                        public resolvedWorkerRelease: string;
 
                         /**
                          * Creates a new PoolOption instance using the specified properties.
@@ -9416,6 +9446,9 @@ export namespace google {
 
                         /** WorkerConfig enableNestedVirtualization */
                         enableNestedVirtualization?: (boolean|null);
+
+                        /** WorkerConfig workerRelease */
+                        workerRelease?: (string|null);
                     }
 
                     /** Represents a WorkerConfig. */
@@ -9435,6 +9468,9 @@ export namespace google {
 
                         /** WorkerConfig enableNestedVirtualization. */
                         public enableNestedVirtualization?: (boolean|null);
+
+                        /** WorkerConfig workerRelease. */
+                        public workerRelease: string;
 
                         /**
                          * Creates a new WorkerConfig instance using the specified properties.

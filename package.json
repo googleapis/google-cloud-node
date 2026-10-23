@@ -17,7 +17,7 @@
     "lint": "node ./bin/linter.mjs",
     "clean": "echo nothing to clean",
     "precompile": "echo nothing to precompile",
-    "compile": "turbo run compile --concurrency=4",
+    "compile": "turbo run compile --concurrency=4 --filter=\"...[HEAD^1]\"",
     "system-test": "echo nothing to system test",
     "samples-test": "echo nothing to sample test"
   },
@@ -39,7 +39,7 @@
   "dependencies": {
     "chalk": "^5.0.0",
     "figures": "^6.0.0",
-    "gaxios": "^7.0.0-rc",
+    "gaxios": "^8.3.0",
     "parse-link-header": "^2.0.0"
   },
   "devDependencies": {
@@ -61,6 +61,8 @@
   },
   "pnpm": {
     "overrides": {
+      "gcp-metadata@>=8.0.0>gaxios": "^8.3.0",
+      "google-auth-library@>=10.0.0>gaxios": "^8.3.0",
       "yargs": "^17.7.2"
     }
   }

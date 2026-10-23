@@ -16,13 +16,13 @@
 
 import assert from 'assert';
 
+import {GaxiosError} from 'gaxios';
 import {beforeEach, afterEach, describe, it} from 'mocha';
 import nock from 'nock';
 import {SinonSandbox, createSandbox} from 'sinon';
 
 import * as gcp from '../src';
 import {GCPResidencyUtil} from './utils/gcp-residency';
-import {GaxiosError} from 'gaxios';
 
 // the metadata IP entry:
 const HOST = gcp.HOST_ADDRESS;
@@ -480,6 +480,8 @@ describe('unit test', () => {
     'ENOENT',
     'ENOTFOUND',
     'ECONNREFUSED',
+    'ConnectionRefused',
+    'FailedToOpenSocket',
   ].forEach(errorCode => {
     it(`should fail on isAvailable if ${errorCode} is returned for primary and secondary requests`, async () => {
       const secondary = secondaryHostRequest(500, errorCode);
@@ -490,6 +492,24 @@ describe('unit test', () => {
       await secondary;
       primary.done();
       assert.strictEqual(false, isGCE);
+    });
+  });
+
+  ['ConnectionRefused', 'FailedToOpenSocket'].forEach(errorCode => {
+    it(`should not emit MetadataLookupWarning when Bun socket error ${errorCode} is returned`, async () => {
+      const primary = nock(HOST)
+        .get(`${PATH}/${TYPE}`)
+        .replyWithError(Object.assign(new Error(errorCode), {code: errorCode}));
+      const secondary = nock(SECONDARY_HOST)
+        .get(`${PATH}/${TYPE}`)
+        .replyWithError(Object.assign(new Error(errorCode), {code: errorCode}));
+
+      const emitWarningStub = sandbox.stub(process, 'emitWarning');
+      const isGCE = await gcp.isAvailable();
+      assert.strictEqual(isGCE, false);
+      assert.strictEqual(emitWarningStub.called, false);
+      primary.done();
+      secondary.done();
     });
   });
 
@@ -546,6 +566,46 @@ describe('unit test', () => {
     assert.strictEqual(isGCE, false);
     assert.strictEqual(emitWarningStub.calledOnce, true);
     assert.match(String(emitWarningStub.firstCall.args[0]), /code = ETIMEDOUT/);
+    assert.strictEqual(
+      emitWarningStub.firstCall.args[1],
+      'MetadataLookupWarning',
+    );
+    primary.done();
+    secondary.done();
+  });
+
+  it('should emit MetadataLookupWarning with non-empty error message when AggregateError has empty message', async () => {
+    const subErr1 = Object.assign(new Error('Request aborted'), {
+      code: 'AbortError',
+    });
+    const subErr2 = Object.assign(new Error('connect ETIMEDOUT'), {
+      code: 'ETIMEDOUT',
+    });
+    const origPromiseAny = Promise.any.bind(Promise);
+    sandbox.stub(Promise, 'any').callsFake(async promises => {
+      try {
+        return await origPromiseAny(promises);
+      } catch {
+        throw new AggregateError([subErr1, subErr2], '');
+      }
+    });
+
+    const primary = nock(HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError({message: 'Request aborted', code: 'AbortError'});
+    const secondary = nock(SECONDARY_HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError({message: 'connect ETIMEDOUT', code: 'ETIMEDOUT'});
+
+    const emitWarningStub = sandbox.stub(process, 'emitWarning');
+
+    const isGCE = await gcp.isAvailable();
+    assert.strictEqual(isGCE, false);
+    assert.strictEqual(emitWarningStub.calledOnce, true);
+    assert.match(
+      String(emitWarningStub.firstCall.args[0]),
+      /received unexpected error = All promises were rejected code = ETIMEDOUT/,
+    );
     assert.strictEqual(
       emitWarningStub.firstCall.args[1],
       'MetadataLookupWarning',

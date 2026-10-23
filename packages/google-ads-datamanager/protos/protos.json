@@ -1412,12 +1412,14 @@
                         "CUSTOM_VARIABLE_NOT_ENABLED": 118,
                         "INVALID_CUSTOM_VARIABLE_VALUE": 119,
                         "CUSTOM_VARIABLE_NOT_FOUND": 120,
+                        "TOO_MANY_USERS": 121,
                         "BASELINE_LOCATION_AUTO_DETECTION_FAILED": 122,
                         "INSIGHTS_MISSING_FOR_DIMENSION": 123,
                         "REQUIRED_PREREQUISITE_LINK_MISSING": 124,
                         "INVALID_REMOVE_AS_OF_TIME": 125,
                         "REQUEST_TOO_OLD": 126,
-                        "CONVERSION_ACTION_TOO_RECENTLY_CREATED": 127
+                        "CONVERSION_ACTION_TOO_RECENTLY_CREATED": 127,
+                        "INVALID_AD_IDENTIFIER_FOR_ACCOUNT": 128
                       }
                     },
                     "Event": {
@@ -1949,6 +1951,38 @@
                             }
                           ]
                         },
+                        "IngestUsers": {
+                          "requestType": "IngestUsersRequest",
+                          "responseType": "IngestUsersResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/users:ingest",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/users:ingest",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "RemoveUsers": {
+                          "requestType": "RemoveUsersRequest",
+                          "responseType": "RemoveUsersResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/users:remove",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/users:remove",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "IngestAdEvents": {
                           "requestType": "IngestAdEventsRequest",
                           "responseType": "IngestAdEventsResponse",
@@ -2190,6 +2224,104 @@
                           "rule": "repeated",
                           "type": "FieldWarning",
                           "id": 2
+                        }
+                      }
+                    },
+                    "IngestUsersRequest": {
+                      "fields": {
+                        "destinations": {
+                          "rule": "repeated",
+                          "type": "Destination",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "users": {
+                          "rule": "repeated",
+                          "type": "User",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "encryptionInfo": {
+                          "type": "EncryptionInfo",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encoding": {
+                          "type": "Encoding",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "IngestUsersResponse": {
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RemoveUsersRequest": {
+                      "fields": {
+                        "destinations": {
+                          "rule": "repeated",
+                          "type": "Destination",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "userData": {
+                          "rule": "repeated",
+                          "type": "UserData",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "encryptionInfo": {
+                          "type": "EncryptionInfo",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encoding": {
+                          "type": "Encoding",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveUsersResponse": {
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 1
                         }
                       }
                     },
@@ -2812,6 +2944,24 @@
                         "TERMS_OF_SERVICE_STATUS_UNSPECIFIED": 0,
                         "ACCEPTED": 1,
                         "REJECTED": 2
+                      }
+                    },
+                    "User": {
+                      "fields": {
+                        "userData": {
+                          "type": "UserData",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "mobileData": {
+                          "type": "MobileData",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
                       }
                     },
                     "MarketingDataInsightsService": {

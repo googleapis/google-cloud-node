@@ -215,7 +215,19 @@ async function fastFailMetadataRequest<T>(
   //
   const r1: Promise<GaxiosResponse> = request<T>(options);
   const r2: Promise<GaxiosResponse> = request<T>(secondaryOptions);
-  return Promise.any([r1, r2]);
+  try {
+    return await Promise.any([r1, r2]);
+  } catch (err) {
+    // Per ECMA-262 (PerformPromiseAny), Promise.any constructs AggregateError
+    // without a message argument, so err.message defaults to '' in Bun
+    // (JavaScriptCore), whereas Node.js (V8) sets 'All promises were rejected'.
+    // Backfill 'All promises were rejected' so Bun matches Node.js behavior
+    // (including MetadataLookupWarning output and test expectations).
+    if (err instanceof AggregateError && !err.message) {
+      err.message = 'All promises were rejected';
+    }
+    throw err;
+  }
 }
 
 /**
@@ -338,6 +350,8 @@ const EXPECTED_NETWORK_ERROR_CODES: ReadonlySet<string> = new Set([
   'ENOENT',
   'ENOTFOUND',
   'ECONNREFUSED',
+  'ConnectionRefused',
+  'FailedToOpenSocket',
 ]);
 
 const TIMEOUT_NAMES_AND_CODES: ReadonlySet<string | number> = new Set([

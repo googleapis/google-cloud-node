@@ -4228,6 +4228,13 @@
                           "type": "AutomatedBackupPolicy",
                           "id": 13
                         },
+                        "effectiveAutomatedBackupPolicy": {
+                          "type": "AutomatedBackupPolicy",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "tieredStorageConfig": {
                           "type": "TieredStorageConfig",
                           "id": 14
@@ -4306,6 +4313,20 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "keepHotDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "disabled": {
+                              "type": "bool",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -7801,11 +7822,57 @@
                     }
                   }
                 },
-                "SessionClientConfiguration": {
+                "SessionScopeDiversionConfiguration": {
                   "fields": {
                     "sessionLoad": {
                       "type": "float",
                       "id": 1
+                    }
+                  }
+                },
+                "SessionDiversionConfiguration": {
+                  "oneofs": {
+                    "diversionStrategy": {
+                      "oneof": [
+                        "globalDiversion",
+                        "perScopeDiversion"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "globalDiversion": {
+                      "type": "SessionScopeDiversionConfiguration",
+                      "id": 1
+                    },
+                    "perScopeDiversion": {
+                      "type": "PerScopeDiversion",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "PerScopeDiversion": {
+                      "fields": {
+                        "scopeDiversions": {
+                          "keyType": "string",
+                          "type": "SessionScopeDiversionConfiguration",
+                          "id": 1
+                        }
+                      }
+                    }
+                  }
+                },
+                "SessionClientConfiguration": {
+                  "fields": {
+                    "sessionLoad": {
+                      "type": "float",
+                      "id": 1,
+                      "options": {
+                        "deprecated": true
+                      }
+                    },
+                    "sessionDiversionConfiguration": {
+                      "type": "SessionDiversionConfiguration",
+                      "id": 5
                     },
                     "loadBalancingOptions": {
                       "type": "LoadBalancingOptions",
@@ -7907,6 +7974,10 @@
                           "type": "google.protobuf.Duration",
                           "id": 6
                         },
+                        "softSessionCloseBudget": {
+                          "type": "int32",
+                          "id": 7
+                        },
                         "consecutiveSessionFailureThreshold": {
                           "type": "int32",
                           "id": 8
@@ -7998,7 +8069,9 @@
                       "oneof": [
                         "openSession",
                         "closeSession",
-                        "virtualRpc"
+                        "virtualRpc",
+                        "continueVirtualRpc",
+                        "cancelVirtualRpc"
                       ]
                     }
                   },
@@ -8014,6 +8087,14 @@
                     "virtualRpc": {
                       "type": "VirtualRpcRequest",
                       "id": 3
+                    },
+                    "continueVirtualRpc": {
+                      "type": "ContinueVirtualRpcRequest",
+                      "id": 4
+                    },
+                    "cancelVirtualRpc": {
+                      "type": "CancelVirtualRpcRequest",
+                      "id": 5
                     }
                   }
                 },
@@ -8274,8 +8355,28 @@
                         "traceparent": {
                           "type": "string",
                           "id": 3
+                        },
+                        "delay": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
                         }
                       }
+                    }
+                  }
+                },
+                "ContinueVirtualRpcRequest": {
+                  "fields": {
+                    "rpcId": {
+                      "type": "int64",
+                      "id": 1
+                    }
+                  }
+                },
+                "CancelVirtualRpcRequest": {
+                  "fields": {
+                    "rpcId": {
+                      "type": "int64",
+                      "id": 1
                     }
                   }
                 },
@@ -8316,6 +8417,10 @@
                     "payload": {
                       "type": "bytes",
                       "id": 3
+                    },
+                    "hasMore": {
+                      "type": "bool",
+                      "id": 5
                     }
                   }
                 },
@@ -8347,7 +8452,11 @@
                     "payload": {
                       "oneof": [
                         "readRow",
-                        "mutateRow"
+                        "mutateRow",
+                        "readRows",
+                        "checkAndMutateRow",
+                        "readModifyWriteRow",
+                        "mutateRows"
                       ]
                     }
                   },
@@ -8359,6 +8468,22 @@
                     "mutateRow": {
                       "type": "SessionMutateRowRequest",
                       "id": 2
+                    },
+                    "readRows": {
+                      "type": "SessionReadRowsRequest",
+                      "id": 3
+                    },
+                    "checkAndMutateRow": {
+                      "type": "SessionCheckAndMutateRowRequest",
+                      "id": 4
+                    },
+                    "readModifyWriteRow": {
+                      "type": "SessionReadModifyWriteRowRequest",
+                      "id": 5
+                    },
+                    "mutateRows": {
+                      "type": "SessionMutateRowsRequest",
+                      "id": 6
                     }
                   }
                 },
@@ -8370,7 +8495,11 @@
                     "payload": {
                       "oneof": [
                         "readRow",
-                        "mutateRow"
+                        "mutateRow",
+                        "readRows",
+                        "checkAndMutateRow",
+                        "readModifyWriteRow",
+                        "mutateRows"
                       ]
                     }
                   },
@@ -8382,6 +8511,22 @@
                     "mutateRow": {
                       "type": "SessionMutateRowResponse",
                       "id": 2
+                    },
+                    "readRows": {
+                      "type": "SessionReadRowsResponse",
+                      "id": 3
+                    },
+                    "checkAndMutateRow": {
+                      "type": "SessionCheckAndMutateRowResponse",
+                      "id": 4
+                    },
+                    "readModifyWriteRow": {
+                      "type": "SessionReadModifyWriteRowResponse",
+                      "id": 5
+                    },
+                    "mutateRows": {
+                      "type": "SessionMutateRowsResponse",
+                      "id": 6
                     }
                   }
                 },
@@ -8393,7 +8538,11 @@
                     "payload": {
                       "oneof": [
                         "readRow",
-                        "mutateRow"
+                        "mutateRow",
+                        "readRows",
+                        "checkAndMutateRow",
+                        "readModifyWriteRow",
+                        "mutateRows"
                       ]
                     }
                   },
@@ -8405,6 +8554,22 @@
                     "mutateRow": {
                       "type": "SessionMutateRowRequest",
                       "id": 2
+                    },
+                    "readRows": {
+                      "type": "SessionReadRowsRequest",
+                      "id": 3
+                    },
+                    "checkAndMutateRow": {
+                      "type": "SessionCheckAndMutateRowRequest",
+                      "id": 4
+                    },
+                    "readModifyWriteRow": {
+                      "type": "SessionReadModifyWriteRowRequest",
+                      "id": 5
+                    },
+                    "mutateRows": {
+                      "type": "SessionMutateRowsRequest",
+                      "id": 6
                     }
                   }
                 },
@@ -8416,7 +8581,11 @@
                     "payload": {
                       "oneof": [
                         "readRow",
-                        "mutateRow"
+                        "mutateRow",
+                        "readRows",
+                        "checkAndMutateRow",
+                        "readModifyWriteRow",
+                        "mutateRows"
                       ]
                     }
                   },
@@ -8428,6 +8597,22 @@
                     "mutateRow": {
                       "type": "SessionMutateRowResponse",
                       "id": 2
+                    },
+                    "readRows": {
+                      "type": "SessionReadRowsResponse",
+                      "id": 3
+                    },
+                    "checkAndMutateRow": {
+                      "type": "SessionCheckAndMutateRowResponse",
+                      "id": 4
+                    },
+                    "readModifyWriteRow": {
+                      "type": "SessionReadModifyWriteRowResponse",
+                      "id": 5
+                    },
+                    "mutateRows": {
+                      "type": "SessionMutateRowsResponse",
+                      "id": 6
                     }
                   }
                 },
@@ -8438,7 +8623,8 @@
                   "oneofs": {
                     "payload": {
                       "oneof": [
-                        "readRow"
+                        "readRow",
+                        "readRows"
                       ]
                     }
                   },
@@ -8446,6 +8632,10 @@
                     "readRow": {
                       "type": "SessionReadRowRequest",
                       "id": 1
+                    },
+                    "readRows": {
+                      "type": "SessionReadRowsRequest",
+                      "id": 2
                     }
                   }
                 },
@@ -8456,7 +8646,8 @@
                   "oneofs": {
                     "payload": {
                       "oneof": [
-                        "readRow"
+                        "readRow",
+                        "readRows"
                       ]
                     }
                   },
@@ -8464,6 +8655,10 @@
                     "readRow": {
                       "type": "SessionReadRowResponse",
                       "id": 1
+                    },
+                    "readRows": {
+                      "type": "SessionReadRowsResponse",
+                      "id": 2
                     }
                   }
                 },
@@ -8491,6 +8686,39 @@
                     }
                   }
                 },
+                "SessionReadRowsRequest": {
+                  "fields": {
+                    "rows": {
+                      "type": "RowSet",
+                      "id": 1
+                    },
+                    "filter": {
+                      "type": "RowFilter",
+                      "id": 2
+                    },
+                    "rowsLimit": {
+                      "type": "int64",
+                      "id": 3
+                    },
+                    "reversed": {
+                      "type": "bool",
+                      "id": 4
+                    }
+                  }
+                },
+                "SessionReadRowsResponse": {
+                  "fields": {
+                    "row": {
+                      "rule": "repeated",
+                      "type": "Row",
+                      "id": 1
+                    },
+                    "stats": {
+                      "type": "RequestStats",
+                      "id": 2
+                    }
+                  }
+                },
                 "SessionMutateRowRequest": {
                   "fields": {
                     "key": {
@@ -8507,11 +8735,143 @@
                 "SessionMutateRowResponse": {
                   "fields": {}
                 },
+                "SessionCheckAndMutateRowRequest": {
+                  "fields": {
+                    "key": {
+                      "type": "bytes",
+                      "id": 1
+                    },
+                    "predicateFilter": {
+                      "type": "RowFilter",
+                      "id": 2
+                    },
+                    "trueMutations": {
+                      "rule": "repeated",
+                      "type": "Mutation",
+                      "id": 3
+                    },
+                    "falseMutations": {
+                      "rule": "repeated",
+                      "type": "Mutation",
+                      "id": 4
+                    }
+                  }
+                },
+                "SessionCheckAndMutateRowResponse": {
+                  "fields": {
+                    "predicateMatched": {
+                      "type": "bool",
+                      "id": 1
+                    }
+                  }
+                },
+                "SessionReadModifyWriteRowRequest": {
+                  "fields": {
+                    "key": {
+                      "type": "bytes",
+                      "id": 1
+                    },
+                    "rules": {
+                      "rule": "repeated",
+                      "type": "ReadModifyWriteRule",
+                      "id": 2
+                    }
+                  }
+                },
+                "SessionReadModifyWriteRowResponse": {
+                  "fields": {
+                    "row": {
+                      "type": "Row",
+                      "id": 1
+                    }
+                  }
+                },
+                "SessionMutateRowsRequest": {
+                  "fields": {
+                    "entries": {
+                      "rule": "repeated",
+                      "type": "Entry",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "Entry": {
+                      "fields": {
+                        "key": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "mutations": {
+                          "rule": "repeated",
+                          "type": "Mutation",
+                          "id": 2
+                        },
+                        "idempotency": {
+                          "type": "Idempotency",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                },
+                "SessionMutateRowsResponse": {
+                  "oneofs": {
+                    "_rateLimitInfo": {
+                      "oneof": [
+                        "rateLimitInfo"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "entries": {
+                      "rule": "repeated",
+                      "type": "Entry",
+                      "id": 1
+                    },
+                    "rateLimitInfo": {
+                      "type": "RateLimitInfo",
+                      "id": 2,
+                      "options": {
+                        "proto3_optional": true
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Entry": {
+                      "fields": {
+                        "index": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RateLimitInfo": {
+                      "fields": {
+                        "period": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
+                        },
+                        "factor": {
+                          "type": "double",
+                          "id": 2
+                        }
+                      }
+                    }
+                  }
+                },
                 "SessionParametersResponse": {
                   "fields": {
                     "keepAlive": {
                       "type": "google.protobuf.Duration",
                       "id": 1
+                    },
+                    "softmaxStreamingPrefetchBufferBytes": {
+                      "type": "int32",
+                      "id": 2
                     }
                   }
                 },

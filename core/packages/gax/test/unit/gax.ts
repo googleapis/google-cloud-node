@@ -23,7 +23,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
 import assert from 'assert';
-import {describe, it} from 'mocha';
+import {afterEach, describe, it} from 'mocha';
 import * as gax from '../../src/gax';
 
 const SERVICE_NAME = 'test.interface.v1.api';
@@ -99,6 +99,10 @@ function expectBackoffSettings(obj: gax.BackoffSettings) {
 }
 
 describe('gax construct settings', () => {
+  afterEach(() => {
+    delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+  });
+
   it('creates settings', () => {
     const otherArgs = {key: 'value'};
     const defaults = gax.constructSettings(
@@ -115,7 +119,6 @@ describe('gax construct settings', () => {
     assert.deepStrictEqual(settings.retry.retryCodes, [1, 2]);
     assert.strictEqual(settings.otherArgs, otherArgs);
     assert.strictEqual(settings.enableTelemetryTracing, undefined);
-    assert.strictEqual(settings.otherArgs.internalTelemetryInfo, undefined);
     assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
 
     settings = defaults.pageStreamingMethod;
@@ -124,7 +127,6 @@ describe('gax construct settings', () => {
     assert.deepStrictEqual(settings.retry.retryCodes, [3]);
     assert.strictEqual(settings.otherArgs, otherArgs);
     assert.strictEqual(settings.enableTelemetryTracing, undefined);
-    assert.strictEqual(settings.otherArgs.internalTelemetryInfo, undefined);
     assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
   });
 
@@ -205,14 +207,8 @@ describe('gax construct settings', () => {
     assert.deepStrictEqual(settings.retry.retryCodes, [RETRY_DICT.code_c]);
   });
 
-  it('creates settings with enableTelemetryTracing and internalTelemetryInfo', () => {
+  it('creates settings with enableTelemetryTracing', () => {
     const otherArgs = {key: 'value'};
-    const telemetryInfo = {
-      gcpClientService: 'test.googleapis.com',
-      gcpVersion: '1.0.0',
-      gcpRepo: 'googleapis/google-cloud-node',
-      gcpArtifact: 'google-cloud-test',
-    };
     const defaults = gax.constructSettings(
       SERVICE_NAME,
       A_CONFIG,
@@ -220,52 +216,18 @@ describe('gax construct settings', () => {
       RETRY_DICT,
       otherArgs,
       true,
-      telemetryInfo,
     );
     const settings = defaults.bundlingMethod;
     assert.strictEqual(settings.enableTelemetryTracing, true);
     assert.strictEqual(settings.otherArgs.key, 'value');
-    assert.deepStrictEqual(
-      settings.otherArgs.internalTelemetryInfo,
-      telemetryInfo,
-    );
     assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
 
     const pageSettings = defaults.pageStreamingMethod;
     assert.strictEqual(pageSettings.enableTelemetryTracing, true);
-    assert.deepStrictEqual(
-      pageSettings.otherArgs.internalTelemetryInfo,
-      telemetryInfo,
-    );
     assert.strictEqual(
       pageSettings.otherArgs.internalMethodName,
       'PageStreamingMethod',
     );
-  });
-
-  it('creates settings with internalTelemetryInfo when otherArgs is undefined', () => {
-    const telemetryInfo = {
-      gcpClientService: 'test.googleapis.com',
-      gcpVersion: '1.0.0',
-      gcpRepo: 'googleapis/google-cloud-node',
-      gcpArtifact: 'google-cloud-test',
-    };
-    const defaults = gax.constructSettings(
-      SERVICE_NAME,
-      A_CONFIG,
-      {},
-      RETRY_DICT,
-      undefined,
-      true,
-      telemetryInfo,
-    );
-    const settings = defaults.bundlingMethod;
-    assert.strictEqual(settings.enableTelemetryTracing, true);
-    assert.deepStrictEqual(
-      settings.otherArgs.internalTelemetryInfo,
-      telemetryInfo,
-    );
-    assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
   });
 
   it('creates settings with enableTelemetryTracing set to false', () => {
@@ -279,7 +241,36 @@ describe('gax construct settings', () => {
     );
     const settings = defaults.bundlingMethod;
     assert.strictEqual(settings.enableTelemetryTracing, false);
-    assert.strictEqual(settings.otherArgs.internalTelemetryInfo, undefined);
+    assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
+  });
+
+  it('ignores client option when GOOGLE_SDK_NODE_ENABLE_TRACING=true', () => {
+    process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+    const defaults = gax.constructSettings(
+      SERVICE_NAME,
+      A_CONFIG,
+      {},
+      RETRY_DICT,
+      undefined,
+      false,
+    );
+    const settings = defaults.bundlingMethod;
+    assert.strictEqual(settings.enableTelemetryTracing, true);
+    assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
+  });
+
+  it('disables tracing when GOOGLE_SDK_NODE_ENABLE_TRACING=false even with client option', () => {
+    process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'false';
+    const defaults = gax.constructSettings(
+      SERVICE_NAME,
+      A_CONFIG,
+      {},
+      RETRY_DICT,
+      undefined,
+      true,
+    );
+    const settings = defaults.bundlingMethod;
+    assert.strictEqual(settings.enableTelemetryTracing, false);
     assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
   });
 

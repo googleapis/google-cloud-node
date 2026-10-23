@@ -4,6 +4,55 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [7.9.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.8.0...compute-v7.9.0) (2026-10-19)
+
+
+### Features
+
+* Update API sources and regenerate ([#9620](https://github.com/googleapis/google-cloud-node/issues/9620)) ([c812bc3](https://github.com/googleapis/google-cloud-node/commit/c812bc38fd5af3d710057ec9aa4a19eeff621175))
+
+## [7.8.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.7.0...compute-v7.8.0) (2026-10-08)
+
+
+### Features
+
+* Update API sources and regenerate ([#9554](https://github.com/googleapis/google-cloud-node/issues/9554)) ([8b6837a](https://github.com/googleapis/google-cloud-node/commit/8b6837a9757cc8bb281e0611b173cb19b58d4ac5))
+
+## [7.7.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.6.0...compute-v7.7.0) (2026-10-03)
+
+
+### Features
+
+* Update API sources and regenerate ([#9481](https://github.com/googleapis/google-cloud-node/issues/9481)) ([35a2b9a](https://github.com/googleapis/google-cloud-node/commit/35a2b9a4ff3b075124f6905c423acd8d11bdfa68))
+* Update Compute v1 API to version 2026-09-01 ([#9503](https://github.com/googleapis/google-cloud-node/issues/9503)) ([02e3361](https://github.com/googleapis/google-cloud-node/commit/02e3361248bed2d4993fd737ac753311391e9203))
+
+
+### Bug Fixes
+
+* All AggregatedList RPCs behavior is now return_partial_success=true ([02e3361](https://github.com/googleapis/google-cloud-node/commit/02e3361248bed2d4993fd737ac753311391e9203))
+* All AggregatedList RPCs return_partial_success fields removed ([02e3361](https://github.com/googleapis/google-cloud-node/commit/02e3361248bed2d4993fd737ac753311391e9203))
+
+## [7.6.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.5.1...compute-v7.6.0) (2026-09-29)
+
+
+### Features
+
+* Update API sources and regenerate ([#9472](https://github.com/googleapis/google-cloud-node/issues/9472)) ([514e2f6](https://github.com/googleapis/google-cloud-node/commit/514e2f64ba67ad3ab956fbe3eeafa507d44ca597))
+
+## [7.5.1](https://github.com/googleapis/google-cloud-node/compare/compute-v7.5.0...compute-v7.5.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
+## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.4.0...compute-v7.5.0) (2026-09-22)
+
+
+### Features
+
+* Update API sources and regenerate ([#9368](https://github.com/googleapis/google-cloud-node/issues/9368)) ([57d0cfd](https://github.com/googleapis/google-cloud-node/commit/57d0cfd84827933a5da83c370b38942d0c2eadd8))
+
 ## [7.4.0](https://github.com/googleapis/google-cloud-node/compare/compute-v7.3.0...compute-v7.4.0) (2026-09-15)
 
 

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {GrpcService} from './common-grpc/service';
 import {PreciseDate} from '@google-cloud/precise-date';
 import {
   isArray,
@@ -1294,79 +1293,150 @@ function parsePreciseDate(isoString: string): PreciseDate {
 /**
  * Encode a value in the format the API expects.
  *
+ * This emits the `google.protobuf.Value` shape in a single pass: values are
+ * normalized and wrapped in their protobuf kind at the same time, so neither an
+ * intermediate representation nor a per-value `ObjectToStructConverter` is
+ * allocated. The branches prioritize primitive and common types for fast
+ * dispatch in hot query execution paths.
+ *
  * @private
  *
  * @param {*} value The value to be encoded.
  * @returns {object} google.protobuf.Value
  */
 function encode(value: Value): p.IValue {
-  return GrpcService.encodeValue_(encodeValue(value));
+  switch (typeof value) {
+    case 'string':
+      return {stringValue: value};
+    case 'number':
+      // Only non-integer, finite numbers are sent as a protobuf number. Every
+      // other numeric value — integers (INT64 is a string on the wire) as well
+      // as NaN and ±Infinity — is sent as a string.
+      return Number.isFinite(value) && !Number.isInteger(value)
+        ? {numberValue: value}
+        : {stringValue: value.toString()};
+    case 'boolean':
+      return {boolValue: value};
+    case 'object':
+      return value === null ? {nullValue: 0} : encodeObject(value);
+    default:
+      throw new Error(`Value of type ${typeof value} not recognized.`);
+  }
 }
 
 /**
- * Formats values into expected format of google.protobuf.Value. The actual
- * conversion to a google.protobuf.Value object happens via
- * `Service.encodeValue_`
+ * Encodes a non-null object into a google.protobuf.Value.
  *
  * @private
  *
- * @param {*} value The value to be encoded.
- * @returns {*}
+ * @param {object} value The value to be encoded.
+ * @returns {object} google.protobuf.Value
  */
-function encodeValue(value: Value): Value {
-  if (isNumber(value) && !isDecimal(value)) {
-    return value.toString();
-  }
-
-  if (isDate(value)) {
-    return value.toJSON();
+function encodeObject(value: object): p.IValue {
+  if (value instanceof Date) {
+    // `Date.prototype.toJSON` returns null for invalid dates.
+    const json: string | null = value.toJSON();
+    return json === null ? {nullValue: 0} : {stringValue: json};
   }
 
   if (value instanceof WrappedNumber) {
-    return value.value;
+    // `Float`/`Float32` hold a number, `Int`/`PGOid` hold a string.
+    return encodeNumberOrString(value.value);
   }
 
-  if (value instanceof Numeric) {
-    return value.value;
-  }
-
-  if (value instanceof PGNumeric) {
-    return value.value;
+  if (Array.isArray(value)) {
+    return {listValue: {values: encodeArrayValues(value)}};
   }
 
   if (Buffer.isBuffer(value)) {
-    return value.toString('base64');
+    return {stringValue: value.toString('base64')};
   }
 
-  if (value instanceof ProtoMessage) {
-    return value.value.toString('base64');
-  }
-
-  if (value instanceof ProtoEnum) {
-    return value.value;
-  }
-
-  if (value instanceof Struct) {
-    return Array.from(value).map(field => encodeValue(field.value));
-  }
-
-  if (isArray(value)) {
-    return value.map(encodeValue);
-  }
-
-  if (value instanceof PGJsonb) {
-    return value.toString();
+  if (value instanceof Numeric || value instanceof PGNumeric) {
+    return {stringValue: value.value};
   }
 
   if (value instanceof Interval) {
-    return value.toISO8601();
+    return {stringValue: value.toISO8601()};
+  }
+
+  if (value instanceof ProtoMessage) {
+    return {stringValue: value.value.toString('base64')};
+  }
+
+  if (value instanceof ProtoEnum) {
+    // Holds either the numeric constant or its string representation.
+    return encodeNumberOrString(value.value);
+  }
+
+  if (value instanceof PGJsonb) {
+    return {stringValue: value.toString()};
   }
 
   if (isObject(value)) {
-    return JSON.stringify(value);
+    const json = JSON.stringify(value);
+    // `JSON.stringify` returns undefined only when an object's `toJSON()`
+    // method returns undefined. Other objects without a JSON representation
+    // (such as Functions, Symbols, and Maps) fail `isObject` and throw below.
+    // Note: `JSON.stringify` will throw a TypeError for circular structures
+    // or BigInt property values.
+    if (json !== undefined) {
+      return {stringValue: json};
+    }
   }
 
-  return value;
+  if (
+    value instanceof Number ||
+    value instanceof String ||
+    value instanceof Boolean
+  ) {
+    // Boxed primitives are never produced by the public API, but were accepted
+    // by the previous implementation.
+    return encode(value.valueOf());
+  }
+
+  if (isDate(value)) {
+    // A `Date` from another realm (e.g. a `vm` context) fails `instanceof`.
+    const json: string | null = (value as Date).toJSON();
+    return json === null ? {nullValue: 0} : {stringValue: json};
+  }
+
+  throw new Error('Value of type object not recognized.');
+}
+
+/**
+ * Encodes the members of an array — or the field values of a {@link Struct},
+ * which is itself an array — into google.protobuf.Value messages.
+ *
+ * @private
+ *
+ * @param {Array} value The array to be encoded.
+ * @returns {object[]} google.protobuf.Value[]
+ */
+function encodeArrayValues(value: Value[]): p.IValue[] {
+  const {length} = value;
+  const values: p.IValue[] = new Array(length);
+  const isStruct = value instanceof Struct;
+
+  for (let i = 0; i < length; i++) {
+    values[i] = encode(isStruct ? value[i].value : value[i]);
+  }
+
+  return values;
+}
+
+/**
+ * Wraps an already normalized value in the matching google.protobuf.Value kind.
+ *
+ * @private
+ *
+ * @param {string|number} value The value to be wrapped.
+ * @returns {object} google.protobuf.Value
+ */
+function encodeNumberOrString(value: string | number): p.IValue {
+  return typeof value === 'number'
+    ? {numberValue: value}
+    : {stringValue: value};
 }
 
 /**

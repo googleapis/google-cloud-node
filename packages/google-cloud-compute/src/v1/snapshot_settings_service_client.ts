@@ -40,6 +40,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  The SnapshotSettings API.
+ *
+ *  This client uses SnapshotSettingsService version 2026-09-01.
  * @class
  * @memberof v1
  */
@@ -202,7 +204,10 @@ export class SnapshotSettingsServiceClient {
       'google.cloud.compute.v1.SnapshotSettingsService',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')},
+      {
+        'x-goog-api-client': clientHeader.join(' '),
+        'x-goog-api-version': '2026-09-01',
+      },
     );
 
     // Set up a dictionary of "inner API calls"; the core implementation

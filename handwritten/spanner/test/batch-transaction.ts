@@ -215,6 +215,25 @@ describe('BatchTransaction', () => {
       assert.strictEqual(gaxOpts, undefined);
     });
 
+    it('should not mutate the original query object', () => {
+      const query = {
+        sql: 'SELECT * FROM Singers',
+        gaxOptions: GAX_OPTS as CallOptions,
+        params: {},
+        types: {},
+        dataBoostEnabled: true,
+      };
+      const queryCopy = Object.assign({}, query);
+      sandbox.stub(batchTransaction, 'createPartitions_');
+      (sandbox.stub(FakeTransaction, 'encodeParams') as sinon.SinonStub)
+        .withArgs(query)
+        .returns({});
+
+      batchTransaction.createQueryPartitions(query, assert.ifError);
+
+      assert.deepStrictEqual(query, queryCopy);
+    });
+
     it('should make the correct request using await', async () => {
       const fakeParams = {
         params: {a: 'b'},
@@ -346,6 +365,21 @@ describe('BatchTransaction', () => {
         done();
       });
     });
+
+    it('should not mutate config.reqOpts and should omit partitionOptions from returned partitions', done => {
+      const partitionOptions = {maxPartitions: 10};
+      const reqOpts = {sql: 'SELECT 1', partitionOptions};
+      const config = {reqOpts};
+
+      batchTransaction.createPartitions_(config, (err, parts) => {
+        assert.ifError(err);
+        assert.strictEqual(reqOpts.partitionOptions, partitionOptions);
+        parts.forEach(part => {
+          assert.strictEqual('partitionOptions' in part, false);
+        });
+        done();
+      });
+    });
   });
 
   describe('createReadPartitions', () => {
@@ -427,6 +461,25 @@ describe('BatchTransaction', () => {
         headers,
         Object.assign({[LEADER_AWARE_ROUTING_HEADER]: 'true'}),
       );
+    });
+
+    it('should not mutate the original options object', () => {
+      const options = {
+        table: 'abc',
+        keys: ['a', 'b'],
+        ranges: [{}, {}],
+        gaxOptions: GAX_OPTS,
+        dataBoostEnabled: true,
+      };
+      const optionsCopy = Object.assign({}, options);
+      sandbox.stub(batchTransaction, 'createPartitions_');
+      (sandbox.stub(FakeTransaction, 'encodeKeySet') as sinon.SinonStub)
+        .withArgs(options)
+        .returns({});
+
+      batchTransaction.createReadPartitions(options, assert.ifError);
+
+      assert.deepStrictEqual(options, optionsCopy);
     });
   });
 

@@ -30,14 +30,15 @@
   ],
   "scripts": {
     "clean": "gts clean",
-    "compile": "tsc -p . && cp -r protos build/{% if not api.legacyProtoLoad %} && minifyProtoJson{% endif %}",
+    "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos {% if api.legacyProtoLoad %}--skip-json {% endif %}src",
     "docs": "jsdoc -c .jsdoc.js",
     "fix": "gts fix",
     "lint": "gts check",
-    "prepare": "npm run compile-protos && npm run compile",
-    "system-test": "c8 mocha --config ../../.mocharc.cjs --no-parallel build/system-test",
-    "test": "c8 mocha --config ../../.mocharc.cjs build/test"
+    {% if not api.legacyProtoLoad %}"postpack": "minifyProtoJson",
+    {% endif %}"prepare": "npm run compile",
+    "system-test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs --no-parallel build/system-test",
+    "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
     "google-gax": "^6.0.0"

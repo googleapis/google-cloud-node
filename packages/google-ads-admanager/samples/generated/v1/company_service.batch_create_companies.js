@@ -29,10 +29,10 @@ function main(parent, requests) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource where Companies   will be created.
-   *  Format: `networks/{network_code}`
-   *  The parent field in the CreateCompanyRequest must match this
-   *  field.
+   *  Required. The parent resource where
+   *  Companies google.ads.admanager.v1.Company  will be created. Format:
+   *  `networks/{network_code}` The parent field in the CreateCompanyRequest must
+   *  match this field.
    */
   // const parent = 'abc123'
   /**

@@ -47,6 +47,7 @@ const {
   cacheSessionEvents,
 } = require('./helper');
 const {
+  AsyncLocalStorageContextManager,
   AsyncHooksContextManager,
 } = require('@opentelemetry/context-async-hooks');
 
@@ -146,12 +147,10 @@ async function setup(
 
 describe('EndToEnd', async () => {
   const sandbox = sinon.createSandbox();
-  const contextManager = new AsyncHooksContextManager();
+  const contextManager = new (
+    AsyncLocalStorageContextManager || AsyncHooksContextManager
+  )();
   setGlobalContextManager(contextManager);
-  afterEach(async () => {
-    disableContextAndManager(contextManager);
-  });
-
   const traceExporter = new InMemorySpanExporter();
   const sampler = new AlwaysOnSampler();
   const tracerProvider = new NodeTracerProvider({
@@ -177,6 +176,7 @@ describe('EndToEnd', async () => {
     await spanner.close();
     await server.tryShutdown(() => {});
     sandbox.restore();
+    disableContextAndManager(contextManager);
   });
 
   afterEach(async () => {
@@ -227,6 +227,7 @@ describe('EndToEnd', async () => {
             'Begin Transaction',
             'Transaction Creation Done',
             ...cacheSessionEvents,
+            'Using Session',
             'Starting stream',
           ];
           await verifySpansAndEvents(
@@ -319,6 +320,7 @@ describe('EndToEnd', async () => {
           'Starting Commit',
           'Commit Done',
           ...cacheSessionEvents,
+          'Using Session',
         ];
 
         await verifySpansAndEvents(
@@ -415,6 +417,44 @@ describe('EndToEnd', async () => {
             expectedSpanNames,
             expectedEventNames,
           );
+        });
+
+        it('runPartitionedUpdate with string query', async () => {
+          await database.runPartitionedUpdate(updateSql);
+
+          const expectedSpanNames = [
+            'CloudSpanner.Snapshot.begin',
+            'CloudSpanner.Snapshot.runStream',
+            'CloudSpanner.Snapshot.run',
+            'CloudSpanner.Dml.runUpdate',
+            'CloudSpanner.PartitionedDml.runUpdate',
+            'CloudSpanner.Database.runPartitionedUpdate',
+          ];
+          const expectedEventNames = [
+            'Begin Transaction',
+            'Transaction Creation Done',
+            'Starting stream',
+            'Acquiring session',
+            'Cache hit: has usable session',
+            'Acquired session',
+          ];
+          verifySpansAndEvents(
+            traceExporter,
+            expectedSpanNames,
+            expectedEventNames,
+          );
+
+          const finishedSpans = traceExporter.getFinishedSpans();
+          for (const span of finishedSpans) {
+            const hasNumericAttributeKeys = Object.keys(span.attributes).some(
+              key => /^\d+$/.test(key),
+            );
+            assert.strictEqual(
+              hasNumericAttributeKeys,
+              false,
+              `Span ${span.name} should not contain numeric attributes from string spreading`,
+            );
+          }
         });
       });
     });
@@ -843,6 +883,28 @@ describe('ObservabilityOptions injection and propagation', async () => {
         expectedEventNames,
         `Unexpected events:\n\tGot:  ${actualEventNames}\n\tWant: ${expectedEventNames}`,
       );
+
+      for (const span of spansFromInjected) {
+        if (
+          span.name === 'CloudSpanner.Database.run' ||
+          span.name === 'CloudSpanner.Database.runStream' ||
+          span.name === 'CloudSpanner.Snapshot.runStream'
+        ) {
+          assert.strictEqual(
+            span.attributes['db.statement'],
+            'SELECT 1',
+            `Span ${span.name} should have db.statement set to 'SELECT 1'`,
+          );
+          const hasNumericAttributeKeys = Object.keys(span.attributes).some(
+            key => /^\d+$/.test(key),
+          );
+          assert.strictEqual(
+            hasNumericAttributeKeys,
+            false,
+            `Span ${span.name} should not contain numeric attributes from string spreading`,
+          );
+        }
+      }
     } catch (err) {
       assert.ifError(err);
     } finally {
@@ -1114,9 +1176,6 @@ SELECT 1p
   function assertRunBadSyntaxExpectations() {
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
-    spans.sort((spanA, spanB) => {
-      return spanA.startTime < spanB.startTime;
-    });
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
@@ -1264,9 +1323,6 @@ SELECT 1p
   function assertDatabaseRunPlusAwaitTransactionForAlreadyExistentData() {
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
-    spans.sort((spanA, spanB) => {
-      return spanA.startTime < spanB.startTime;
-    });
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
@@ -1739,9 +1795,6 @@ describe('Traces for ExecuteStream broken stream retries', () => {
               .then(() => {
                 traceExporter.forceFlush();
                 const spans = traceExporter.getFinishedSpans();
-                spans.sort((spanA, spanB) => {
-                  return spanA.startTime < spanB.startTime;
-                });
 
                 const actualSpanNames: string[] = [];
                 const actualEventNames: string[] = [];
@@ -1778,6 +1831,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
                 );
 
                 done();
+                return null;
               })
               .catch(err => done(err));
           });
@@ -1805,9 +1859,6 @@ describe('Traces for ExecuteStream broken stream retries', () => {
 
     traceExporter.forceFlush();
     const spans = traceExporter.getFinishedSpans();
-    spans.sort((spanA, spanB) => {
-      return spanA.startTime < spanB.startTime;
-    });
 
     const actualSpanNames: string[] = [];
     const actualEventNames: string[] = [];
@@ -1938,9 +1989,7 @@ describe('Traces for ExecuteStream broken stream retries', () => {
         assert.strictEqual(attempts, 1);
         tx!
           .commit()
-          .then(() => {
-            database.close().catch(assert.ifError);
-          })
+          .then(() => database.close())
           .catch(assert.ifError);
       });
     });
@@ -1974,9 +2023,25 @@ describe('End to end tracing headers', () => {
   let spannerMock: mock.MockSpanner;
   let observabilityOptions: typeof ObservabilityOptions;
 
+  let provider: InstanceType<typeof NodeTracerProvider>;
+
+  before(() => {
+    const traceExporter = new InMemorySpanExporter();
+    provider = new NodeTracerProvider({
+      sampler: new AlwaysOnSampler(),
+      exporter: traceExporter,
+      spanProcessors: [new SimpleSpanProcessor(traceExporter)],
+    });
+  });
+
+  after(async () => {
+    await provider.shutdown();
+  });
+
   beforeEach(async () => {
     sandbox = sinon.createSandbox();
     observabilityOptions = {
+      tracerProvider: provider,
       enableEndToEndTracing: true,
     };
 

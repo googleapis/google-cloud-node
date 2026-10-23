@@ -20,9 +20,8 @@
 
 import assert from 'assert';
 import * as path from 'path';
-import proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
-import {mkdirSync, writeFileSync} from 'fs';
+import fs, {mkdirSync, writeFileSync} from 'fs';
 import * as fsp from 'fs/promises';
 import {afterEach, describe, it, beforeEach} from 'mocha';
 
@@ -142,6 +141,10 @@ describe('grpc', () => {
       },
     };
 
+    afterEach(() => {
+      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    });
+
     it('constructs settings without telemetry options', () => {
       const settings = grpcClient.constructSettings(
         'google.fake.service',
@@ -152,17 +155,47 @@ describe('grpc', () => {
       assert.strictEqual(settings.method.timeout, 10);
       assert.strictEqual(settings.method.enableTelemetryTracing, undefined);
       assert.strictEqual(
-        settings.method.otherArgs.internalTelemetryInfo,
-        undefined,
-      );
-      assert.strictEqual(
         settings.method.otherArgs.internalMethodName,
         undefined,
       );
     });
 
-    it('constructs settings with enableTelemetryTracing and internalTelemetryInfo', () => {
-      const telemetryInfo = {
+    it('constructs settings when enableTelemetryTracing: true is passed in client options', () => {
+      const clientWithTracing = gaxGrpc({
+        enableTelemetryTracing: true,
+      });
+      const settings = clientWithTracing.constructSettings(
+        'google.fake.service',
+        serviceConfig as unknown as ClientConfig,
+        {} as unknown as ClientConfig,
+        {},
+      );
+      assert.strictEqual(settings.method.timeout, 10);
+      assert.strictEqual(settings.method.enableTelemetryTracing, true);
+      assert.strictEqual(
+        settings.method.otherArgs.internalMethodName,
+        'method',
+      );
+    });
+
+    it('constructs settings when GOOGLE_SDK_NODE_ENABLE_TRACING=true environment variable is set', () => {
+      process.env.GOOGLE_SDK_NODE_ENABLE_TRACING = 'true';
+      const settings = grpcClient.constructSettings(
+        'google.fake.service',
+        serviceConfig as unknown as ClientConfig,
+        {} as unknown as ClientConfig,
+        {},
+      );
+      assert.strictEqual(settings.method.timeout, 10);
+      assert.strictEqual(settings.method.enableTelemetryTracing, true);
+      assert.strictEqual(
+        settings.method.otherArgs.internalMethodName,
+        'method',
+      );
+    });
+
+    it('accepts legacy 6-argument constructSettings calls while ignoring internalTelemetryInfo', () => {
+      const legacyTelemetryInfo = {
         gcpClientService: 'fake',
         gcpVersion: 'v1',
         gcpRepo: 'googleapis/google-cloud-node',
@@ -174,13 +207,13 @@ describe('grpc', () => {
         {} as unknown as ClientConfig,
         {},
         true,
-        telemetryInfo,
+        legacyTelemetryInfo,
       );
       assert.strictEqual(settings.method.timeout, 10);
       assert.strictEqual(settings.method.enableTelemetryTracing, true);
-      assert.deepStrictEqual(
+      assert.strictEqual(
         settings.method.otherArgs.internalTelemetryInfo,
-        telemetryInfo,
+        undefined,
       );
       assert.strictEqual(
         settings.method.otherArgs.internalMethodName,
@@ -613,28 +646,28 @@ describe('grpc', () => {
       const originPath = path.join('test', 'path', 'location');
       const includePath = path.join('example', 'import.proto');
 
+      afterEach(() => {
+        sinon.restore();
+      });
+
       it('should throw an error if a file is not found', () => {
-        const findIncludePath = proxyquire('../../src/grpc', {
-          fs: {
-            existsSync: () => {
-              return false;
-            },
-          },
-        }).GoogleProtoFilesRoot._findIncludePath;
-        assert.throws(findIncludePath.bind(null, originPath, includePath));
+        sinon.stub(fs, 'existsSync').returns(false);
+        assert.throws(
+          GoogleProtoFilesRoot._findIncludePath.bind(
+            null,
+            originPath,
+            includePath,
+          ),
+        );
       });
 
       it('should return the correct resolved import path', () => {
         const correctPath = path.join('test', 'example', 'import.proto');
-        const findIncludePath = proxyquire('../../src/grpc', {
-          fs: {
-            existsSync(path: string) {
-              return path === correctPath;
-            },
-          },
-        }).GoogleProtoFilesRoot._findIncludePath;
+        sinon
+          .stub(fs, 'existsSync')
+          .callsFake((p: fs.PathLike) => p === correctPath);
         assert.strictEqual(
-          findIncludePath(originPath, includePath),
+          GoogleProtoFilesRoot._findIncludePath(originPath, includePath),
           correctPath,
         );
       });

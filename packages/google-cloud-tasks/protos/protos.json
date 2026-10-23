@@ -12,7 +12,9 @@
                     "java_multiple_files": true,
                     "java_outer_classname": "TaskProto",
                     "java_package": "com.google.cloud.tasks.v2",
-                    "objc_class_prefix": "TASKS"
+                    "objc_class_prefix": "TASKS",
+                    "(google.api.resource_definition).type": "cloudkms.googleapis.com/CryptoKey",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}"
                   },
                   "nested": {
                     "CloudTasks": {
@@ -291,6 +293,34 @@
                             }
                           ]
                         },
+                        "BatchCreateTasks": {
+                          "requestType": "BatchCreateTasksRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*/queues/*}/tasks:batchCreate",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,requests",
+                            "(google.longrunning.operation_info).response_type": "BatchCreateTasksResponse",
+                            "(google.longrunning.operation_info).metadata_type": "BatchCreateTasksMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*/queues/*}/tasks:batchCreate",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,requests"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BatchCreateTasksResponse",
+                                "metadata_type": "BatchCreateTasksMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "DeleteTask": {
                           "requestType": "DeleteTaskRequest",
                           "responseType": "google.protobuf.Empty",
@@ -309,6 +339,34 @@
                             }
                           ]
                         },
+                        "BatchDeleteTasks": {
+                          "requestType": "BatchDeleteTasksRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v2/{parent=projects/*/locations/*/queues/*}/tasks:batchDelete",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,names",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "BatchDeleteTasksMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v2/{parent=projects/*/locations/*/queues/*}/tasks:batchDelete",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,names"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "BatchDeleteTasksMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "RunTask": {
                           "requestType": "RunTaskRequest",
                           "responseType": "Task",
@@ -322,6 +380,44 @@
                               "(google.api.http)": {
                                 "post": "/v2/{name=projects/*/locations/*/queues/*/tasks/*}:run",
                                 "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateCmekConfig": {
+                          "requestType": "UpdateCmekConfigRequest",
+                          "responseType": "CmekConfig",
+                          "options": {
+                            "(google.api.http).patch": "/v2/{cmek_config.name=projects/*/locations/*/cmekConfig}",
+                            "(google.api.http).body": "cmek_config",
+                            "(google.api.method_signature)": "cmek_config,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v2/{cmek_config.name=projects/*/locations/*/cmekConfig}",
+                                "body": "cmek_config"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "cmek_config,update_mask"
+                            }
+                          ]
+                        },
+                        "GetCmekConfig": {
+                          "requestType": "GetCmekConfigRequest",
+                          "responseType": "CmekConfig",
+                          "options": {
+                            "(google.api.http).get": "/v2/{name=projects/*/locations/*/cmekConfig}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v2/{name=projects/*/locations/*/cmekConfig}"
                               }
                             },
                             {
@@ -538,6 +634,34 @@
                         }
                       }
                     },
+                    "BatchCreateTasksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudtasks.googleapis.com/Queue"
+                          }
+                        },
+                        "requests": {
+                          "rule": "repeated",
+                          "type": "CreateTaskRequest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "DeleteTaskRequest": {
                       "fields": {
                         "name": {
@@ -546,6 +670,79 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudtasks.googleapis.com/Task"
+                          }
+                        }
+                      }
+                    },
+                    "BatchDeleteTasksRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudtasks.googleapis.com/Queue"
+                          }
+                        },
+                        "names": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudtasks.googleapis.com/Task"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_info).format": "UUID4",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BatchDeleteTasksMetadata": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "failedRequests": {
+                          "keyType": "int32",
+                          "type": "google.rpc.Status",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "SUCCEEDED": 2,
+                            "PARTIALLY_SUCCEEDED": 3,
+                            "FAILED": 4
                           }
                         }
                       }
@@ -566,6 +763,100 @@
                         }
                       }
                     },
+                    "UpdateCmekConfigRequest": {
+                      "fields": {
+                        "cmekConfig": {
+                          "type": "CmekConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetCmekConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudtasks.googleapis.com/CmekConfig"
+                          }
+                        }
+                      }
+                    },
+                    "BatchCreateTasksResponse": {
+                      "fields": {
+                        "tasks": {
+                          "rule": "repeated",
+                          "type": "Task",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BatchCreateTasksMetadata": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "failedRequests": {
+                          "keyType": "int32",
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "SUCCEEDED": 2,
+                            "PARTIALLY_SUCCEEDED": 5,
+                            "FAILED": 3,
+                            "CANCELLED": 4
+                          }
+                        }
+                      }
+                    },
+                    "CmekConfig": {
+                      "options": {
+                        "(google.api.resource).type": "cloudtasks.googleapis.com/CmekConfig",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/cmekConfig"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudkms.googleapis.com/CryptoKey"
+                          }
+                        }
+                      }
+                    },
                     "Queue": {
                       "options": {
                         "(google.api.resource).type": "cloudtasks.googleapis.com/Queue",
@@ -579,6 +870,10 @@
                         "appEngineRoutingOverride": {
                           "type": "AppEngineRouting",
                           "id": 2
+                        },
+                        "httpTarget": {
+                          "type": "HttpTarget",
+                          "id": 10
                         },
                         "rateLimits": {
                           "type": "RateLimits",
@@ -657,6 +952,147 @@
                         "samplingRatio": {
                           "type": "double",
                           "id": 1
+                        }
+                      }
+                    },
+                    "PathOverride": {
+                      "fields": {
+                        "path": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "QueryOverride": {
+                      "fields": {
+                        "queryParams": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "UriOverride": {
+                      "oneofs": {
+                        "_scheme": {
+                          "oneof": [
+                            "scheme"
+                          ]
+                        },
+                        "_host": {
+                          "oneof": [
+                            "host"
+                          ]
+                        },
+                        "_port": {
+                          "oneof": [
+                            "port"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "scheme": {
+                          "type": "Scheme",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "host": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "port": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pathOverride": {
+                          "type": "PathOverride",
+                          "id": 4
+                        },
+                        "queryOverride": {
+                          "type": "QueryOverride",
+                          "id": 5
+                        },
+                        "uriOverrideEnforceMode": {
+                          "type": "UriOverrideEnforceMode",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "Scheme": {
+                          "values": {
+                            "SCHEME_UNSPECIFIED": 0,
+                            "HTTP": 1,
+                            "HTTPS": 2
+                          }
+                        },
+                        "UriOverrideEnforceMode": {
+                          "values": {
+                            "URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED": 0,
+                            "IF_NOT_EXISTS": 1,
+                            "ALWAYS": 2
+                          }
+                        }
+                      }
+                    },
+                    "HttpTarget": {
+                      "oneofs": {
+                        "authorizationHeader": {
+                          "oneof": [
+                            "oauthToken",
+                            "oidcToken"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "uriOverride": {
+                          "type": "UriOverride",
+                          "id": 1
+                        },
+                        "httpMethod": {
+                          "type": "HttpMethod",
+                          "id": 2
+                        },
+                        "headerOverrides": {
+                          "rule": "repeated",
+                          "type": "HeaderOverride",
+                          "id": 3
+                        },
+                        "oauthToken": {
+                          "type": "OAuthToken",
+                          "id": 5
+                        },
+                        "oidcToken": {
+                          "type": "OidcToken",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "Header": {
+                          "fields": {
+                            "key": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "value": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "HeaderOverride": {
+                          "fields": {
+                            "header": {
+                              "type": "Header",
+                              "id": 1
+                            }
+                          }
                         }
                       }
                     },
@@ -838,6 +1274,13 @@
                         "view": {
                           "type": "View",
                           "id": 11
+                        },
+                        "retryConfig": {
+                          "type": "RetryConfig",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -3645,9 +4088,9 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "go_package": "google.golang.org/genproto/googleapis/api/httpbody;httpbody",
             "java_multiple_files": true,
-            "java_outer_classname": "FieldInfoProto",
+            "java_outer_classname": "HttpBodyProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI"
           },
@@ -4190,6 +4633,43 @@
                 "IDENTIFIER": 8
               }
             },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                },
+                "referencedTypes": {
+                  "rule": "repeated",
+                  "type": "TypeReference",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
+              }
+            },
+            "TypeReference": {
+              "fields": {
+                "typeName": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
             "resourceReference": {
               "type": "google.api.ResourceReference",
               "id": 1055,
@@ -4281,43 +4761,6 @@
                   "rule": "repeated",
                   "type": "google.protobuf.Any",
                   "id": 3
-                }
-              }
-            },
-            "fieldInfo": {
-              "type": "google.api.FieldInfo",
-              "id": 291403980,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldInfo": {
-              "fields": {
-                "format": {
-                  "type": "Format",
-                  "id": 1
-                },
-                "referencedTypes": {
-                  "rule": "repeated",
-                  "type": "TypeReference",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "Format": {
-                  "values": {
-                    "FORMAT_UNSPECIFIED": 0,
-                    "UUID4": 1,
-                    "IPV4": 2,
-                    "IPV6": 3,
-                    "IPV4_OR_IPV6": 4
-                  }
-                }
-              }
-            },
-            "TypeReference": {
-              "fields": {
-                "typeName": {
-                  "type": "string",
-                  "id": 1
                 }
               }
             }

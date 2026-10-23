@@ -20,7 +20,6 @@ import {
 import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach, before, after} from 'mocha';
 import * as extend from 'extend';
-import * as nock from 'nock';
 import {heap as heapProfiler, time as timeProfiler} from 'pprof';
 import * as sinon from 'sinon';
 import {promisify} from 'util';
@@ -72,18 +71,6 @@ const testConfig: ProfilerConfig = {
   apiEndpoint: API,
 };
 
-nock.disableNetConnect();
-function nockOauth2(): nock.Scope {
-  return nock('https://oauth2.googleapis.com')
-    .post(/\/token/, () => true)
-    .once()
-    .reply(200, {
-      refresh_token: 'hello',
-      access_token: 'goodbye',
-      expiry_date: new Date(9999, 1, 1),
-    });
-}
-
 describe('Retryer', () => {
   it('should backoff until max-backoff reached', () => {
     const retryer = new Retryer(1000, 1000000, 5, () => 0.5);
@@ -114,7 +101,6 @@ describe('Profiler', () => {
     sinonStubs.push(sinon.stub(heapProfiler, 'profile').returns(heapProfile));
   });
   afterEach(() => {
-    nock.cleanAll();
     sinonStubs.forEach(stub => {
       stub.restore();
     });
@@ -399,19 +385,14 @@ describe('Profiler', () => {
         profileType: 'WALL',
         labels: {instance: 'test-instance'},
       };
-      nockOauth2();
-      const apiMock = nock(FULL_API)
-        .patch('/' + requestProf.name)
-        .once()
-        .reply(500)
-        .patch('/' + requestProf.name)
-        .once()
-        .reply(200);
+      requestStub = sinon
+        .stub(common.ServiceObject.prototype, 'request')
+        .callsArgWith(1, null, {}, {statusCode: 500});
       const profiler = new Profiler(testConfig);
       await profiler.profileAndUpload(requestProf);
       assert.strictEqual(
-        apiMock.isDone(),
-        false,
+        requestStub.callCount,
+        1,
         'call to upload profile should not be retried'
       );
     });
@@ -422,14 +403,17 @@ describe('Profiler', () => {
         profileType: 'HEAP',
         labels: {instance: 'test-instance'},
       };
-      nockOauth2();
-      const apiMock = nock(FULL_API)
-        .patch('/' + requestProf.name)
-        .once()
-        .reply(200);
+      requestStub = sinon
+        .stub(common.ServiceObject.prototype, 'request')
+        .onCall(0)
+        .callsArgWith(1, null, {}, {statusCode: 200});
       const profiler = new Profiler(testConfig);
       await profiler.profileAndUpload(requestProf);
-      assert.strictEqual(apiMock.isDone(), true, 'completed call to real API');
+      assert.strictEqual(requestStub.calledOnce, true);
+      assert.strictEqual(
+        requestStub.firstCall.args[0].uri,
+        `${FULL_API}/${requestProf.name}`
+      );
     });
     it('should send request to upload profile to non-default API without error.', async () => {
       const requestProf = {
@@ -438,16 +422,19 @@ describe('Profiler', () => {
         profileType: 'HEAP',
         labels: {instance: 'test-instance'},
       };
-      nockOauth2();
-      const apiMock = nock(FULL_TEST_API)
-        .patch('/' + requestProf.name)
-        .once()
-        .reply(200);
+      requestStub = sinon
+        .stub(common.ServiceObject.prototype, 'request')
+        .onCall(0)
+        .callsArgWith(1, null, {}, {statusCode: 200});
       const config = extend(true, {}, testConfig);
       config.apiEndpoint = TEST_API;
       const profiler = new Profiler(config);
       await profiler.profileAndUpload(requestProf);
-      assert.strictEqual(apiMock.isDone(), true, 'completed call to test API');
+      assert.strictEqual(requestStub.calledOnce, true);
+      assert.strictEqual(
+        requestStub.firstCall.args[0].uri,
+        `${FULL_TEST_API}/${requestProf.name}`
+      );
     });
   });
   describe('createProfile', () => {
@@ -471,15 +458,14 @@ describe('Profiler', () => {
         },
         labels: {version: testConfig.serviceContext.version},
       };
-      nockOauth2();
-      const requestProfileMock = nock(FULL_API)
-        .post('/projects/' + testConfig.projectId + '/profiles')
-        .once()
-        .reply(200, response);
+      requestStub = sinon
+        .stub(common.ServiceObject.prototype, 'request')
+        .onCall(0)
+        .callsArgWith(1, null, response, {statusCode: 200});
       const profiler = new Profiler(testConfig);
       const actualResponse = await profiler.createProfile();
       assert.deepStrictEqual(response, actualResponse);
-      assert.ok(requestProfileMock.isDone(), 'expected call to create profile');
+      assert.strictEqual(requestStub.calledOnce, true);
     });
     it('should successfully create profile using non-default api', async () => {
       const config = extend(true, {}, testConfig);
@@ -495,15 +481,18 @@ describe('Profiler', () => {
         },
         labels: {version: config.serviceContext.version},
       };
-      nockOauth2();
-      const requestProfileMock = nock(FULL_TEST_API)
-        .post('/projects/' + config.projectId + '/profiles')
-        .once()
-        .reply(200, response);
+      requestStub = sinon
+        .stub(common.ServiceObject.prototype, 'request')
+        .onCall(0)
+        .callsArgWith(1, null, response, {statusCode: 200});
       const profiler = new Profiler(config);
       const actualResponse = await profiler.createProfile();
       assert.deepStrictEqual(response, actualResponse);
-      assert.ok(requestProfileMock.isDone(), 'expected call to create profile');
+      assert.strictEqual(requestStub.calledOnce, true);
+      assert.strictEqual(
+        (profiler as unknown as {baseApiUrl: string}).baseApiUrl,
+        FULL_TEST_API
+      );
     });
     it('should successfully create heap profile', async () => {
       const response = {
@@ -516,23 +505,21 @@ describe('Profiler', () => {
         },
         labels: {version: testConfig.serviceContext.version},
       };
-      nockOauth2();
-      const requestProfileMock = nock(FULL_API)
-        .post('/projects/' + testConfig.projectId + '/profiles')
-        .once()
-        .reply(200, response);
+      requestStub = sinon
+        .stub(common.ServiceObject.prototype, 'request')
+        .onCall(0)
+        .callsArgWith(1, null, response, {statusCode: 200});
       const profiler = new Profiler(testConfig);
       const actualResponse = await profiler.createProfile();
       assert.deepStrictEqual(response, actualResponse);
-      assert.ok(requestProfileMock.isDone(), 'expected call to create profile');
+      assert.strictEqual(requestStub.calledOnce, true);
     });
     it('should throw error when invalid profile created', async () => {
       const response = {name: 'projects/12345678901/test-projectId'};
-      nockOauth2();
-      nock(FULL_API)
-        .post('/projects/' + testConfig.projectId + '/profiles')
-        .once()
-        .reply(200, response);
+      requestStub = sinon
+        .stub(common.ServiceObject.prototype, 'request')
+        .onCall(0)
+        .callsArgWith(1, null, response, {statusCode: 200});
       const profiler = new Profiler(testConfig);
       try {
         await profiler.createProfile();
@@ -546,24 +533,9 @@ describe('Profiler', () => {
       }
     });
     it('should not retry on non-200 status codes', async () => {
-      const response = {
-        name: 'projects/12345678901/test-projectId',
-        profileType: 'HEAP',
-        deployment: {
-          labels: {version: 'test-version', language: 'nodejs'},
-          projectId: 'test-projectId',
-          target: 'test-service',
-        },
-        labels: {version: testConfig.serviceContext.version},
-      };
-      nockOauth2();
-      nock(FULL_API)
-        .post('/projects/' + testConfig.projectId + '/profiles')
-        .once()
-        .reply(503, {})
-        .post('/projects/' + testConfig.projectId + '/profiles')
-        .once()
-        .reply(200, response);
+      requestStub = sinon
+        .stub(common.ServiceObject.prototype, 'request')
+        .callsArgWith(1, null, {}, {statusCode: 503});
       const profiler = new Profiler(testConfig);
       try {
         await profiler.createProfile();
@@ -571,6 +543,7 @@ describe('Profiler', () => {
       } catch (_) {
         // 👻
       }
+      assert.strictEqual(requestStub.callCount, 1);
     });
     it(
       'should not have instance and zone in request body when instance and' +
@@ -646,14 +619,14 @@ describe('Profiler', () => {
         labels: {version: testConfig.serviceContext.version},
         additionalField: 'additionalField',
       };
-      nockOauth2();
-      nock(FULL_API)
-        .post('/projects/' + testConfig.projectId + '/profiles')
-        .once()
-        .reply(200, response);
+      requestStub = sinon
+        .stub(common.ServiceObject.prototype, 'request')
+        .onCall(0)
+        .callsArgWith(1, null, response, {statusCode: 200});
       const profiler = new Profiler(testConfig);
       const actualResponse = await profiler.createProfile();
       assert.deepStrictEqual(response, actualResponse);
+      assert.strictEqual(requestStub.calledOnce, true);
     });
     it('should throw error when error thrown by http request.', async () => {
       requestStub = sinon

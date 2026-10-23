@@ -48,6 +48,16 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "f508f5a5db0dc3b293e7e92574a982742bb7988c"
         },
+        "IngestUsers": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "f508f5a5db0dc3b293e7e92574a982742bb7988c"
+        },
+        "RemoveUsers": {
+          "timeout_millis": 120000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "f508f5a5db0dc3b293e7e92574a982742bb7988c"
+        },
         "IngestAdEvents": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

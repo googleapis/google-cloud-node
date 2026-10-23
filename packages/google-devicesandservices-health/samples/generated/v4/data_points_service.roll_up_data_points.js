@@ -48,6 +48,9 @@ function main(parent, range, windowSize) {
   /**
    *  Required. The size of the time window to group data points into before
    *  applying the aggregation functions. Must be at least 1 second.
+   *  If the requested range is not an exact multiple of `window_size`, the final
+   *  bucket chronologically will be truncated at the upper endpoint of the
+   *  range and will cover a duration shorter than `window_size`.
    */
   // const windowSize = {}
   /**
@@ -76,6 +79,16 @@ function main(parent, range, windowSize) {
    *  - `users/me/dataSourceFamilies/google-sources` - Includes first-party
    *  Google data, such as data from tracker devices, manually logged data, and
    *  Health Connect.
+   *  - `users/me/dataSourceFamilies/self-sources` - Includes only the data the
+   *  calling client wrote through this API, that is, data points whose data
+   *  source was registered through this API with the same OAuth client ID as
+   *  the caller.
+   *  Callers that were only granted write scopes for the requested data type
+   *  may only read the data they wrote themselves: their requests are
+   *  implicitly restricted to `self-sources`, and requesting any other data
+   *  source family fails with `PERMISSION_DENIED`.
+   *  If no data point matches the requested data source family, the response is
+   *  an empty list rather than an error.
    */
   // const dataSourceFamily = 'abc123'
 

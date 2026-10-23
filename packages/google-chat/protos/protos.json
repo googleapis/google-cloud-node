@@ -3675,6 +3675,20 @@
                         "(google.api.field_behavior)": "OUTPUT_ONLY"
                       }
                     },
+                    "avatarUrl": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
+                    "email": {
+                      "type": "string",
+                      "id": 4,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
+                    },
                     "domainId": {
                       "type": "string",
                       "id": 6
@@ -3697,6 +3711,28 @@
                         "TYPE_UNSPECIFIED": 0,
                         "HUMAN": 1,
                         "BOT": 2
+                      }
+                    }
+                  }
+                },
+                "AppCommandMetadata": {
+                  "fields": {
+                    "appCommandId": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "appCommandType": {
+                      "type": "AppCommandType",
+                      "id": 2
+                    }
+                  },
+                  "nested": {
+                    "AppCommandType": {
+                      "values": {
+                        "APP_COMMAND_TYPE_UNSPECIFIED": 0,
+                        "SLASH_COMMAND": 1,
+                        "QUICK_COMMAND": 3,
+                        "MESSAGE_ACTION": 4
                       }
                     }
                   }
@@ -5471,7 +5507,9 @@
                 "Thread": {
                   "options": {
                     "(google.api.resource).type": "chat.googleapis.com/Thread",
-                    "(google.api.resource).pattern": "spaces/{space}/threads/{thread}"
+                    "(google.api.resource).pattern": "spaces/{space}/threads/{thread}",
+                    "(google.api.resource).plural": "threads",
+                    "(google.api.resource).singular": "thread"
                   },
                   "fields": {
                     "name": {
@@ -6604,6 +6642,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "viewSpaceMembershipSetting": {
+                          "type": "AccessPermissionSetting",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -6682,6 +6727,11 @@
                           "oneof": [
                             "replyMessages"
                           ]
+                        },
+                        "_viewSpaceMembership": {
+                          "oneof": [
+                            "viewSpaceMembership"
+                          ]
                         }
                       },
                       "fields": {
@@ -6744,6 +6794,14 @@
                         "replyMessages": {
                           "type": "PermissionSetting",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "viewSpaceMembership": {
+                          "type": "PermissionSetting",
+                          "id": 9,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true

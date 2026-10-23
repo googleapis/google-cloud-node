@@ -3559,8 +3559,6 @@ export class Field
   // }
 
   /**
-   * @beta
-   *
    * Evaluates to the distance in meters between the location specified
    * by this field and the query location.
    *
@@ -10938,7 +10936,6 @@ export function pipelineValue(
 }
 
 // /**
-//  * @beta
 //  * Perform a full-text search on the specified field.
 //  *
 //  * @remarks This Expression can only be used within a `search` stage.
@@ -10955,8 +10952,6 @@ export function pipelineValue(
 // }
 
 /**
- * @beta
- *
  * Perform a full-text search on the document.
  *
  * @remarks This Expression can only be used within a `search` stage.
@@ -10973,8 +10968,6 @@ export function documentMatches(
 }
 
 /**
- * @beta
- *
  * Evaluates to the search score that reflects the topicality of the document
  * to all the text predicates (for example: `documentMatches`)
  * in the search `query` provided to the `search` stage. If the `query` provided to the search stage
@@ -11027,8 +11020,6 @@ export function score(): Expression {
 // }
 
 /**
- * @beta
- *
  * Evaluates to the distance in meters between the location in the specified
  * field and the query location.
  *
