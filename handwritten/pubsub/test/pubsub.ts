@@ -196,7 +196,7 @@ describe('PubSub', () => {
       './snapshot': {Snapshot: FakeSnapshot},
       './subscription': {Subscription},
       './topic': {Topic: FakeTopic},
-      './index': {v1:v1Override},
+      './index': {v1: v1Override},
       './util': fakeUtil,
     }).PubSub;
   });
@@ -338,6 +338,19 @@ describe('PubSub', () => {
 
       const pubsub = new PubSub(options);
       assert.strictEqual(pubsub.auth, fakeGoogleAuthInstance);
+    });
+
+    it('should reuse an existing GoogleAuth instance if provided in options.auth', () => {
+      const existingAuth = {} as gax.GoogleAuth;
+      let googleAuthCalled = false;
+      googleAuthOverride = () => {
+        googleAuthCalled = true;
+        return {};
+      };
+
+      const pubsub = new PubSub({auth: existingAuth});
+      assert.strictEqual(pubsub.auth, existingAuth);
+      assert.strictEqual(googleAuthCalled, false);
     });
 
     it('should localize the options provided', () => {
@@ -1553,11 +1566,63 @@ describe('PubSub', () => {
         options: pubsubTypes.ClientConfig,
       ) {
         assert.strictEqual(options, pubsub.options);
+        assert.strictEqual(options.auth, pubsub.auth);
         return FAKE_CLIENT_INSTANCE;
       };
 
       const client = await pubsub.getClientAsync_(CONFIG);
       assert.strictEqual(client, FAKE_CLIENT_INSTANCE);
+    });
+
+    it('should sync GAPIC JWT values on cachedCredential after instantiating client without overwriting defined properties', async () => {
+      pubsub.projectId = PROJECT_ID_PLACEHOLDER;
+      const fakeJwt: {
+        useJWTAccessWithScope?: boolean;
+        defaultServicePath?: string;
+        defaultScopes?: string[];
+      } = {
+        useJWTAccessWithScope: undefined,
+        defaultServicePath: 'custom.googleapis.com',
+        defaultScopes: undefined,
+      };
+      const setGapicJWTValuesSpy = sandbox.spy(function (
+        this: {
+          useJWTAccessWithScope?: boolean;
+          defaultServicePath?: string;
+          defaultScopes?: string[];
+        },
+        client: typeof fakeJwt,
+      ) {
+        // Simulate older google-auth-library setGapicJWTValues using '=' instead of '??='
+        client.defaultServicePath = this.defaultServicePath;
+        client.useJWTAccessWithScope = this.useJWTAccessWithScope;
+        client.defaultScopes = this.defaultScopes;
+      });
+      sandbox.stub(pubsub, 'auth').value({
+        cachedCredential: null,
+        useJWTAccessWithScope: true,
+        defaultServicePath: 'pubsub.googleapis.com',
+        defaultScopes: ['https://www.googleapis.com/auth/pubsub'],
+        getProjectId: async function () {
+          // Simulate getProjectId() caching a JWT client before GAPIC constructor runs
+          this.cachedCredential = fakeJwt;
+          return PROJECT_ID;
+        },
+        setGapicJWTValues: setGapicJWTValuesSpy,
+      });
+
+      // tslint:disable-next-line only-arrow-functions no-any
+      v1ClientOverrides.FakeClient = function () {
+        return FAKE_CLIENT_INSTANCE;
+      };
+
+      await pubsub.getClientAsync_(CONFIG);
+      assert(setGapicJWTValuesSpy.calledOnceWithExactly(fakeJwt));
+      assert.strictEqual(fakeJwt.useJWTAccessWithScope, true);
+      assert.strictEqual(fakeJwt.defaultServicePath, 'custom.googleapis.com');
+      assert.deepStrictEqual(fakeJwt.defaultScopes, [
+        'https://www.googleapis.com/auth/pubsub',
+      ]);
     });
   });
 
@@ -1885,6 +1950,50 @@ describe('PubSub', () => {
 
       await pubsub.validateSchema!(ischema, {});
       assert.ok(called);
+    });
+
+    it('syncs GAPIC JWT values on cachedCredential in getSchemaClient()', async () => {
+      pubsub.projectId = PROJECT_ID_PLACEHOLDER;
+      const fakeJwt: {
+        useJWTAccessWithScope?: boolean;
+        defaultServicePath?: string;
+        defaultScopes?: string[];
+      } = {
+        useJWTAccessWithScope: undefined,
+        defaultServicePath: undefined,
+        defaultScopes: ['https://www.googleapis.com/auth/custom'],
+      };
+      const setGapicJWTValuesSpy = sandbox.spy(function (
+        this: {
+          useJWTAccessWithScope?: boolean;
+          defaultServicePath?: string;
+          defaultScopes?: string[];
+        },
+        client: typeof fakeJwt,
+      ) {
+        client.defaultServicePath = this.defaultServicePath;
+        client.useJWTAccessWithScope = this.useJWTAccessWithScope;
+        client.defaultScopes = this.defaultScopes;
+      });
+      sandbox.stub(pubsub, 'auth').value({
+        cachedCredential: null,
+        getProjectId: async function () {
+          this.cachedCredential = fakeJwt;
+          return PROJECT_ID;
+        },
+        setGapicJWTValues: setGapicJWTValuesSpy,
+      });
+
+      const client = await pubsub.getSchemaClient();
+      assert(setGapicJWTValuesSpy.calledOnceWithExactly(fakeJwt));
+      assert.strictEqual(fakeJwt.useJWTAccessWithScope, true);
+      assert.strictEqual(fakeJwt.defaultServicePath, 'pubsub.googleapis.com');
+      assert.deepStrictEqual(fakeJwt.defaultScopes, [
+        'https://www.googleapis.com/auth/custom',
+      ]);
+      sandbox.stub(client!, 'close').resolves();
+      await pubsub.close();
+      sandbox.restore();
     });
   });
 });
