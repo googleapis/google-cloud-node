@@ -255,23 +255,30 @@ jobs:
               console.warn("Failed to check PR reviews:", err.message || err);
             }
 
-            const hasHumanReviewerOrAssignee =
-              humanRequestedReviewers.length > 0 ||
-              humanAssignees.length > 0 ||
-              hasReviews;
+            const defaultReviewerSet = new Set(defaultReviewers);
+            const hasDefaultTeamMemberReviewer = humanRequestedReviewers.some(r => defaultReviewerSet.has(r.login));
+            const hasDefaultTeamMemberAssignee = humanAssignees.some(a => defaultReviewerSet.has(a.login));
+            const hasDefaultTeamMemberReview = humanReviews.some(r => defaultReviewerSet.has(r.user.login));
+            const hasDefaultTeamMember =
+              hasDefaultTeamMemberReviewer ||
+              hasDefaultTeamMemberAssignee ||
+              hasDefaultTeamMemberReview;
 
             const partnerReviewSatisfied =
               assignedTeams.size === 0 ||
               hasAllAssignedTeams ||
-              hasHumanReviewerOrAssignee;
+              humanRequestedReviewers.length > 0 ||
+              humanAssignees.length > 0 ||
+              hasReviews;
             const defaultTeamReviewSatisfied =
               !requiresDefaultTeamReview ||
-              hasHumanReviewerOrAssignee;
+              hasDefaultTeamMember ||
+              (defaultReviewers.length === 0 && (humanRequestedReviewers.length > 0 || humanAssignees.length > 0 || hasReviews));
 
             const shouldExit =
               partnerReviewSatisfied &&
               defaultTeamReviewSatisfied &&
-              (hasHumanReviewerOrAssignee || hasAllAssignedTeams);
+              (hasDefaultTeamMember || hasAllAssignedTeams || (!requiresDefaultTeamReview && (humanRequestedReviewers.length > 0 || humanAssignees.length > 0 || hasReviews)));
 
             if (shouldExit) {
               if (hasDefaultTeam) {
@@ -294,7 +301,7 @@ jobs:
 
             let assigned =
               (hasAllAssignedTeams && !requiresDefaultTeamReview) ||
-              (requiresDefaultTeamReview && hasHumanReviewerOrAssignee);
+              (requiresDefaultTeamReview && hasDefaultTeamMember);
             if (!assigned) {
               if (defaultReviewers.length > 0) {
                 console.log(`Found default reviewers: ${defaultReviewers.join(', ')}. Load balancing among them.`);
