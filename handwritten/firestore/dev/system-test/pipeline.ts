@@ -183,6 +183,7 @@ import {afterEach, describe, it} from 'mocha';
 import '../test/util/mocha_extensions';
 import {verifyInstance, isRest} from '../test/util/helpers';
 import {getTestDb, getTestRoot} from './firestore';
+import {expectResults} from './pipeline_helpers';
 
 import {Firestore as InternalFirestore} from '../src';
 import {ServiceError} from 'google-gax';
@@ -207,26 +208,6 @@ async function testCollectionWithDocs(
   }
   endDocCreation = new Date().valueOf();
   return targetCol;
-}
-
-function expectResults(result: PipelineSnapshot, ...docs: string[]): void;
-function expectResults(result: PipelineSnapshot, ...data: DocumentData[]): void;
-function expectResults(
-  result: PipelineSnapshot,
-  ...data: DocumentData[] | string[]
-): void {
-  if (data.length > 0) {
-    if (typeof data[0] === 'string') {
-      const actualIds = result.results.map(result => result.id);
-      expect(actualIds).to.deep.equal(data);
-    } else {
-      result.results.forEach(r => {
-        expect(r.data()).to.deep.equal(data.shift());
-      });
-    }
-  } else {
-    expect(result.results.length).to.equal(data.length);
-  }
 }
 
 describe.skipClassic('Pipeline class', () => {

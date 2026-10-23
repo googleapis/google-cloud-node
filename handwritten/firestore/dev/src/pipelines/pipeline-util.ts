@@ -65,6 +65,8 @@ import {
   lessThan,
   Field,
   AggregateFunction,
+  AliasedWindowFunction,
+  WindowFunction,
   pipelineValue,
   AliasedExpression,
 } from './expression';
@@ -602,6 +604,24 @@ export function isAliasedAggregate(
   );
 }
 
+/**
+ * Returns `true` if the given value is an `AliasedWindowFunction`.
+ *
+ * @internal
+ * @private
+ */
+export function isAliasedWindowFunction(
+  val: unknown,
+): val is firestore.Pipelines.AliasedWindowFunction {
+  const candidate = val as firestore.Pipelines.AliasedWindowFunction;
+  return (
+    candidate !== undefined &&
+    candidate !== null &&
+    isString(candidate._alias) &&
+    candidate._windowFunction instanceof WindowFunction
+  );
+}
+
 export function isExpr(val: unknown): val is firestore.Pipelines.Expression {
   return val instanceof Expression;
 }
@@ -771,22 +791,70 @@ export function selectablesToObject(
   return result;
 }
 
+/**
+ * Converts a list of aliased aggregate functions, and/or aliased window
+ * functions, into a map of output field name to the function that computes it.
+ */
 export function aliasedAggregateToMap(
-  aliasedAggregatees: firestore.Pipelines.AliasedAggregate[],
-): Map<string, AggregateFunction> {
-  return aliasedAggregatees.reduce(
+  aliasedAggregates: firestore.Pipelines.AliasedAggregate[],
+): Map<string, AggregateFunction>;
+export function aliasedAggregateToMap(
+  aliasedAggregates: Array<
+    | firestore.Pipelines.AliasedAggregate
+    | firestore.Pipelines.AliasedWindowFunction
+  >,
+): Map<string, AggregateFunction | WindowFunction>;
+export function aliasedAggregateToMap(
+  aliasedAggregates: Array<
+    | firestore.Pipelines.AliasedAggregate
+    | firestore.Pipelines.AliasedWindowFunction
+  >,
+): Map<string, AggregateFunction | WindowFunction> {
+  return aliasedAggregates.reduce(
     (
-      map: Map<string, AggregateFunction>,
-      selectable: firestore.Pipelines.AliasedAggregate,
+      map: Map<string, AggregateFunction | WindowFunction>,
+      aliased:
+        | firestore.Pipelines.AliasedAggregate
+        | firestore.Pipelines.AliasedWindowFunction,
     ) => {
-      if (map.get(selectable._alias) !== undefined) {
-        throw new Error(`Duplicate alias or field '${selectable._alias}'`);
+      const alias = aliased._alias;
+      // Validated client side because a duplicate alias cannot be encoded: the
+      // second entry would silently overwrite the first in the map, and the
+      // backend would never see it.
+      if (map.get(alias) !== undefined) {
+        throw new Error(`Duplicate alias or field '${alias}'`);
       }
 
-      map.set(selectable._alias, selectable._aggregate as AggregateFunction);
+      map.set(
+        alias,
+        isAliasedWindowFunction(aliased)
+          ? (aliased._windowFunction as WindowFunction)
+          : (aliased._aggregate as AggregateFunction),
+      );
       return map;
     },
-    new Map() as Map<string, AggregateFunction>,
+    new Map() as Map<string, AggregateFunction | WindowFunction>,
+  );
+}
+
+/**
+ * Discriminates between the two `Pipeline.addWindowFields()` overloads.
+ *
+ * @private
+ * @internal
+ */
+export function isAddWindowFieldsStageOptions(
+  value:
+    | firestore.Pipelines.WindowSpec
+    | firestore.Pipelines.AddWindowFieldsStageOptions,
+): value is firestore.Pipelines.AddWindowFieldsStageOptions {
+  const candidate = value as firestore.Pipelines.AddWindowFieldsStageOptions;
+  return (
+    typeof candidate === 'object' &&
+    candidate !== null &&
+    typeof candidate.window === 'object' &&
+    candidate.window !== null &&
+    Array.isArray(candidate.fields)
   );
 }
 
