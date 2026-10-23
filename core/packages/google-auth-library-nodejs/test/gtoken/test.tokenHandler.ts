@@ -60,6 +60,27 @@ describe('TokenHandler', () => {
     // Check that options were updated
     assert.strictEqual(tokenOptions.key, credentials.privateKey);
     assert.strictEqual(tokenOptions.email, credentials.clientEmail);
+    assert.strictEqual(tokenOptions.iss, credentials.clientEmail);
+  });
+
+  it('should preserve existing iss when processing keyFile', async () => {
+    const tokenOptions: TokenOptions = {
+      keyFile: 'key.json',
+      iss: 'custom-iss@example.com',
+      transporter,
+    };
+    const credentials = {privateKey: 'private-key', clientEmail: 'email'};
+    const tokenData: TokenData = {access_token: 'token'};
+
+    getCredentialsStub.resolves(credentials);
+    getTokenStub.resolves(tokenData);
+
+    const handler = new TokenHandler(tokenOptions);
+    await handler.getToken(false);
+
+    assert.strictEqual(tokenOptions.key, credentials.privateKey);
+    assert.strictEqual(tokenOptions.email, credentials.clientEmail);
+    assert.strictEqual(tokenOptions.iss, 'custom-iss@example.com');
   });
 
   it('should use provided key to fetch a token', async () => {
