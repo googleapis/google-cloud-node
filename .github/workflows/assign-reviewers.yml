@@ -18,9 +18,7 @@ concurrency:
 jobs:
   assign-reviewers:
     runs-on: ubuntu-latest
-    if: >-
-      github.event.pull_request.draft == false &&
-      !(github.event.action == 'review_requested' && github.actor == 'github-actions[bot]')
+    if: github.event.pull_request.draft == false
     steps:
       - name: Assign Reviewers
         continue-on-error: true
@@ -28,6 +26,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            if (context.payload.action === 'review_requested' && context.actor === 'github-actions[bot]') {
+              console.log('Skipping review_requested event triggered by github-actions[bot].');
+              return;
+            }
+
             const author = context.payload.pull_request.user.login;
 
             // Fetch all files modified in the PR across all pages
