@@ -38,10 +38,7 @@ export type ExecuteQueryParameterValue =
   | null;
 
 export type SqlValue =
-  | ExecuteQueryParameterValue
-  | Struct
-  | Array<SqlValue>
-  | BigtableMap;
+  ExecuteQueryParameterValue | Struct | Array<SqlValue> | BigtableMap;
 
 /**
  * A custom class created to allow setting year, month and date to 0.
@@ -117,19 +114,25 @@ type MapKey = bigint | string | Uint8Array | null;
 // internal representation of the map contains the original key and value tuple
 type _MapValue = [MapKey, SqlValue];
 
-export class EncodedKeyMap
-  implements Map<bigint | string | Uint8Array | null, SqlValue>
-{
+/**
+ * Class representing a Map Value returned by ExecuteQuery. Native JS Map
+ * does not support Buffer comparison - it compares object id and not
+ * buffer values. This class solves this by encoding Buffer keys as
+ * base64 strings.
+ * Please note that an empty string and an empty buffer have the same
+ * representation, however, we do not ever use mixed key types (all keys are
+ * always all buffers or all strings) so we don't need to handle this.
+ *
+ * Implements `ReadonlyMap` rather than `Map` so emitted declarations remain
+ * compatible with TypeScript 7.0+ (`--target esnext`) without adding ESNext
+ * `Map` upsert methods (`getOrInsert` / `getOrInsertComputed`).
+ */
+export class EncodedKeyMap implements ReadonlyMap<
+  bigint | string | Uint8Array | null,
+  SqlValue
+> {
   private map_impl: Map<bigint | string | null, _MapValue>;
-  /**
-   * Class representing a Map Value returned by ExecuteQuery. Native JS Map
-   * does not support Buffer comparison - it compares object id and not
-   * buffer values. This class solves this by encoding Buffer keys as
-   * base64 strings.
-   * Please note that an empty string and an empty buffer have the same
-   * representation, however, we do not ever use mixed key types (all keys are
-   * always all buffers or all strings) so we don't need to handle this.
-   */
+
   constructor(
     entries?: ReadonlyArray<
       [bigint | string | Uint8Array | null, SqlValue]
