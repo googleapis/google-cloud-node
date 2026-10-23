@@ -17,7 +17,12 @@
 import {paginator} from '@google-cloud/paginator';
 import {replaceProjectIdToken} from '@google-cloud/projectify';
 import * as extend from 'extend';
-import {AuthClient, GoogleAuth, GoogleAuthOptions} from 'google-auth-library';
+import {
+  AuthClient,
+  GoogleAuth,
+  GoogleAuthOptions,
+  JWT,
+} from 'google-auth-library';
 import * as gax from 'google-gax';
 import {v1} from './';
 
@@ -127,10 +132,12 @@ type GetAllSubscriptionsResponse = PagedResponse<
 >;
 
 export type GetSubscriptionsCallback =
-  GetAllSubscriptionsCallback | GetTopicSubscriptionsCallback;
+  | GetAllSubscriptionsCallback
+  | GetTopicSubscriptionsCallback;
 
 export type GetSubscriptionsResponse =
-  GetAllSubscriptionsResponse | GetTopicSubscriptionsResponse;
+  | GetAllSubscriptionsResponse
+  | GetTopicSubscriptionsResponse;
 
 export type GetTopicsCallback = RequestCallback<
   Topic,
@@ -187,7 +194,8 @@ export interface PagedCallback<Item, Response> {
 }
 
 export type PagedResponse<Item, Response> =
-  [Item[]] | [Item[], {} | null, Response];
+  | [Item[]]
+  | [Item[], {} | null, Response];
 
 export type ObjectStream<O> = {
   addListener(event: 'data', listener: (data: O) => void): ObjectStream<O>;
@@ -214,10 +222,13 @@ interface GetClientCallback {
  * https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application
  * Application Default Credentials}, your project ID will be detected
  * automatically.
- * @property {string} [keyFilename] Full path to the a .json, .pem, or .p12 key
- *     downloaded from the Google Developers Console. If you provide a path to a
- *     JSON file, the `projectId` option above is not necessary. NOTE: .pem and
- *     .p12 require you to specify the `email` option as well.
+ * @property {string} [keyFilename] @deprecated The `keyFilename` option is
+ *     deprecated. Please use the `auth` object constructor instead. For more
+ *     details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.
+ *     Full path to the a .json, .pem, or .p12 key downloaded from the Google
+ *     Developers Console. If you provide a path to a JSON file, the `projectId`
+ *     option above is not necessary. NOTE: .pem and .p12 require you to specify
+ *     the `email` option as well.
  * @property {string} [apiEndpoint] The `apiEndpoint` from options will set the
  *     host. If not set, the `PUBSUB_EMULATOR_HOST` environment variable from the
  *     gcloud SDK is honored. We also check the `CLOUD_API_ENDPOINT_OVERRIDES_PUBSUB`
@@ -226,7 +237,10 @@ interface GetClientCallback {
  *     we will assume that it's an emulator and disable strict SSL checks.
  * @property {string} [email] Account email address. Required when using a .pem
  *     or .p12 keyFilename.
- * @property {object} [credentials] Credentials object.
+ * @property {object} [credentials] @deprecated The `credentials` option is
+ *     deprecated. Please use the `auth` object constructor instead. For more
+ *     details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.
+ *     Credentials object.
  * @property {string} [credentials.client_email]
  * @property {string} [credentials.private_key]
  * @property {boolean} [autoRetry=true] Automatically retry requests if the
@@ -332,7 +346,9 @@ export class PubSub {
     this.isEmulator = false;
     this.determineBaseUrl_();
     this.api = {};
-    this.auth = new GoogleAuth(this.options as GoogleAuthOptions<AuthClient>);
+    this.auth =
+      this.options.auth ||
+      new GoogleAuth(this.options as GoogleAuthOptions<AuthClient>);
     this.projectId = this.options.projectId || PROJECT_ID_PLACEHOLDER;
     if (this.projectId !== PROJECT_ID_PLACEHOLDER) {
       this.name = PubSub.formatName_(this.projectId);
@@ -1246,6 +1262,7 @@ export class PubSub {
       this.options.projectId = projectId!;
     }
 
+    this.options.auth ??= this.auth;
     return this.options;
   }
 
@@ -1259,6 +1276,18 @@ export class PubSub {
     if (!this.schemaClient) {
       const options = (await this.getClientConfig()) as gax.ClientOptions;
       this.schemaClient = new v1.SchemaServiceClient(options);
+      if (
+        this.auth.cachedCredential &&
+        'useJWTAccessWithScope' in this.auth.cachedCredential
+      ) {
+        const jwt = this.auth.cachedCredential as JWT;
+        const {defaultServicePath, useJWTAccessWithScope, defaultScopes} = jwt;
+        this.auth.setGapicJWTValues?.(jwt);
+        jwt.defaultServicePath = defaultServicePath ?? jwt.defaultServicePath;
+        jwt.useJWTAccessWithScope =
+          useJWTAccessWithScope ?? jwt.useJWTAccessWithScope;
+        jwt.defaultScopes = defaultScopes ?? jwt.defaultScopes;
+      }
     }
 
     return this.schemaClient!;
@@ -1308,6 +1337,18 @@ export class PubSub {
     if (!gaxClient) {
       // Lazily instantiate client.
       gaxClient = new v1[config.client](options) as unknown as gax.ClientStub;
+      if (
+        this.auth.cachedCredential &&
+        'useJWTAccessWithScope' in this.auth.cachedCredential
+      ) {
+        const jwt = this.auth.cachedCredential as JWT;
+        const {defaultServicePath, useJWTAccessWithScope, defaultScopes} = jwt;
+        this.auth.setGapicJWTValues?.(jwt);
+        jwt.defaultServicePath = defaultServicePath ?? jwt.defaultServicePath;
+        jwt.useJWTAccessWithScope =
+          useJWTAccessWithScope ?? jwt.useJWTAccessWithScope;
+        jwt.defaultScopes = defaultScopes ?? jwt.defaultScopes;
+      }
       this.api[config.client] = gaxClient;
     }
 
