@@ -79,7 +79,7 @@ libraries:
       package_name: '@google-ads/admanager'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/admanager/latest
   - name: google-ads-datamanager
-    version: 0.6.0
+    version: 1.4.0
     apis:
       - path: google/ads/datamanager/v1
     copyright_year: "2026"
@@ -235,13 +235,13 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-agentidentity
-    version: 0.3.0
+    version: 0.3.1
     apis:
       - path: google/cloud/agentidentity/v1
       - path: google/cloud/agentidentity/v1beta
     copyright_year: "2026"
   - name: google-cloud-agentregistry
-    version: 0.6.0
+    version: 0.6.1
     apis:
       - path: google/cloud/agentregistry/v1
     copyright_year: "2026"
@@ -329,7 +329,7 @@ libraries:
     nodejs:
       default_version: v1beta
   - name: google-cloud-apptopology
-    version: 0.4.0
+    version: 0.4.1
     apis:
       - path: google/cloud/apptopology/v1
     copyright_year: "2026"
@@ -498,7 +498,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-bigquery-storage-api
-    version: 0.6.0
+    version: 0.6.1
     apis:
       - path: google/cloud/bigquery/storage/v1
     copyright_year: "2026"
@@ -507,7 +507,7 @@ libraries:
       metadata_name_override: bigquerystorage-api
       name_pretty_override: BigQuery Storage API
   - name: google-cloud-bigtable-api
-    version: 0.11.0
+    version: 0.11.1
     apis:
       - path: google/bigtable/v2
       - path: google/bigtable/admin/v2
@@ -622,7 +622,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/procurement'
   - name: google-cloud-commerceproducer
-    version: 0.7.0
+    version: 0.7.1
     apis:
       - path: google/cloud/commerceproducer/v1beta
     copyright_year: "2026"
@@ -790,7 +790,7 @@ libraries:
       default_version: v1alpha
       package_name: '@google-cloud/data-qna'
   - name: google-cloud-datastore-api
-    version: 0.5.0
+    version: 0.5.1
     apis:
       - path: google/datastore/v1
       - path: google/datastore/admin/v1
@@ -928,7 +928,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-firestore-api
-    version: 0.7.0
+    version: 0.7.1
     apis:
       - path: google/firestore/v1
       - path: google/firestore/admin/v1
@@ -940,7 +940,7 @@ libraries:
       metadata_name_override: firestore-api
       name_pretty_override: Firestore API
   - name: google-cloud-ftp
-    version: 0.4.0
+    version: 0.4.1
     apis:
       - path: google/cloud/ftp/v1
     copyright_year: "2026"
@@ -1108,7 +1108,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-logging-api
-    version: 0.5.0
+    version: 0.5.1
     apis:
       - path: google/logging/v2
     copyright_year: "2026"
@@ -1350,7 +1350,7 @@ libraries:
       default_version: v1
       package_name: '@google-cloud/policy-troubleshooter'
   - name: google-cloud-policytroubleshooter-iam
-    version: 0.11.0
+    version: 0.11.1
     apis:
       - path: google/cloud/policytroubleshooter/iam/v3
       - path: google/cloud/policytroubleshooter/iam/v3beta
@@ -1376,7 +1376,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-productregistry
-    version: 2.2.0
+    version: 2.2.1
     apis:
       - path: google/cloud/productregistry/v1
     copyright_year: "2026"
@@ -1560,7 +1560,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-spanner-api
-    version: 0.6.0
+    version: 0.6.1
     apis:
       - path: google/spanner/v1
       - path: google/spanner/executor/v1
@@ -1572,7 +1572,7 @@ libraries:
       metadata_name_override: spanner-api
       name_pretty_override: Spanner API
   - name: google-cloud-speech
-    version: 8.2.0
+    version: 8.2.1
     apis:
       - path: google/cloud/speech/v2
       - path: google/cloud/speech/v1
@@ -1636,7 +1636,7 @@ libraries:
       default_version: v4
       main_service: talent
   - name: google-cloud-tasks
-    version: 7.3.0
+    version: 7.3.1
     apis:
       - path: google/cloud/tasks/v2
       - path: google/cloud/tasks/v2beta3
@@ -1826,7 +1826,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-workloadidentity
-    version: 0.4.0
+    version: 0.4.1
     apis:
       - path: google/cloud/workloadidentity/v1
     copyright_year: "2026"
@@ -1999,7 +1999,7 @@ libraries:
       default_version: v4
       package_name: '@google-cloud/geocode'
   - name: google-maps-isochrones
-    version: 0.3.0
+    version: 0.3.1
     apis:
       - path: google/maps/isochrones/v1
     copyright_year: "2026"
@@ -2138,7 +2138,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Data Sources
   - name: google-shopping-merchant-inventories
-    version: 0.15.0
+    version: 0.15.1
     apis:
       - path: google/shopping/merchant/inventories/v1
       - path: google/shopping/merchant/inventories/v1beta
@@ -2171,7 +2171,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant LFP
   - name: google-shopping-merchant-loyaltycustomers
-    version: 0.4.0
+    version: 0.4.1
     apis:
       - path: google/shopping/merchant/loyaltycustomers/v1
     copyright_year: "2026"
@@ -2236,7 +2236,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Quota
   - name: google-shopping-merchant-reports
-    version: 0.18.0
+    version: 0.18.1
     apis:
       - path: google/shopping/merchant/reports/v1
       - path: google/shopping/merchant/reports/v1beta
@@ -2248,7 +2248,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Reports
   - name: google-shopping-merchant-reviews
-    version: 0.8.0
+    version: 0.9.0
     apis:
       - path: google/shopping/merchant/reviews/v1
       - path: google/shopping/merchant/reviews/v1beta
@@ -2259,7 +2259,7 @@ libraries:
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/merchantapi/latest
       name_pretty_override: Shopping Merchant Reviews
   - name: google-storage-control
-    version: 0.13.0
+    version: 0.13.1
     apis:
       - path: google/storage/v2
       - path: google/storage/control/v2
