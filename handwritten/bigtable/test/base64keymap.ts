@@ -189,12 +189,11 @@ describe('Bigtable/EncodedKeyMap', () => {
         string | bigint | Uint8Array | null,
         SqlValue
       > = map;
-      const es2023Map: Map<string | bigint | Uint8Array | null, SqlValue> = map;
       assert.strictEqual(
         readonlyMap.get(Buffer.from('existingBuffer')),
         'initialBufferValue',
       );
-      assert.strictEqual(es2023Map.get('existingNullValue'), null);
+      assert.strictEqual(readonlyMap.get('existingNullValue'), null);
       assert.strictEqual('getOrInsert' in map, false);
       assert.strictEqual('getOrInsertComputed' in map, false);
     });
