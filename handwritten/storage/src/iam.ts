@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,14 +13,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {
-  BodyResponseCallback,
-  DecorateRequestOptions,
-} from './nodejs-common/index.js';
 import {promisifyAll} from '@google-cloud/promisify';
-
 import {Bucket} from './bucket.js';
 import {normalize} from './util.js';
+import {StorageQueryParameters, StorageTransport} from './storage-transport.js';
 
 export interface GetPolicyOptions {
   userProject?: string;
@@ -99,7 +96,7 @@ export interface TestIamPermissionsCallback {
   (
     err?: Error | null,
     acl?: {[key: string]: boolean} | null,
-    apiResponse?: unknown
+    apiResponse?: unknown,
   ): void;
 }
 
@@ -110,6 +107,9 @@ export interface TestIamPermissionsCallback {
  */
 export interface TestIamPermissionsOptions {
   userProject?: string;
+}
+interface TestPermissionsResponse {
+  permissions?: string[];
 }
 
 interface GetPolicyRequest {
@@ -141,15 +141,12 @@ export enum IAMExceptionMessages {
  * ```
  */
 class Iam {
-  private request_: (
-    reqOpts: DecorateRequestOptions,
-    callback: BodyResponseCallback
-  ) => void;
-  private resourceId_: string;
+  private bucket: Bucket;
+  private storageTransport: StorageTransport;
 
   constructor(bucket: Bucket) {
-    this.request_ = bucket.request.bind(bucket);
-    this.resourceId_ = 'buckets/' + bucket.getId();
+    this.bucket = bucket;
+    this.storageTransport = bucket.storageTransport;
   }
 
   getPolicy(options?: GetPolicyOptions): Promise<GetPolicyResponse>;
@@ -242,7 +239,7 @@ class Iam {
    */
   getPolicy(
     optionsOrCallback?: GetPolicyOptions | GetPolicyCallback,
-    callback?: GetPolicyCallback
+    callback?: GetPolicyCallback,
   ): Promise<GetPolicyResponse> | void {
     const {options, callback: cb} = normalize<
       GetPolicyOptions,
@@ -261,24 +258,35 @@ class Iam {
       qs.optionsRequestedPolicyVersion = options.requestedPolicyVersion;
     }
 
-    this.request_(
-      {
-        uri: '/iam',
-        qs,
-      },
-      cb!
-    );
+    this.storageTransport
+      .makeRequest(
+        {
+          method: 'GET',
+          url: `/storage/v1/b/${this.bucket.name}/iam`,
+          queryParameters: qs as unknown as StorageQueryParameters,
+        },
+        (err, data, resp) => {
+          if (err) {
+            cb(err);
+            return;
+          }
+          cb(null, data as Policy, resp);
+        },
+      )
+      .catch(err => {
+        callback!(err);
+      });
   }
 
   setPolicy(
     policy: Policy,
-    options?: SetPolicyOptions
+    options?: SetPolicyOptions,
   ): Promise<SetPolicyResponse>;
   setPolicy(policy: Policy, callback: SetPolicyCallback): void;
   setPolicy(
     policy: Policy,
     options: SetPolicyOptions,
-    callback: SetPolicyCallback
+    callback: SetPolicyCallback,
   ): void;
   /**
    * Set the IAM policy.
@@ -331,7 +339,7 @@ class Iam {
   setPolicy(
     policy: Policy,
     optionsOrCallback?: SetPolicyOptions | SetPolicyCallback,
-    callback?: SetPolicyCallback
+    callback?: SetPolicyCallback,
   ): Promise<SetPolicyResponse> | void {
     if (policy === null || typeof policy !== 'object') {
       throw new Error(IAMExceptionMessages.POLICY_OBJECT_REQUIRED);
@@ -347,35 +355,40 @@ class Iam {
       maxRetries = 0;
     }
 
-    this.request_(
-      {
-        method: 'PUT',
-        uri: '/iam',
-        maxRetries,
-        json: Object.assign(
-          {
-            resourceId: this.resourceId_,
-          },
-          policy
-        ),
-        qs: options,
-      },
-      cb
-    );
+    this.storageTransport
+      .makeRequest(
+        {
+          method: 'PUT',
+          url: `/storage/v1/b/${this.bucket.name}/iam`,
+          maxRetries,
+          body: JSON.stringify(policy),
+          headers: {'Content-Type': 'application/json'},
+          queryParameters: options as unknown as StorageQueryParameters,
+        },
+        (err, data, resp) => {
+          if (err) {
+            cb(err);
+            return;
+          }
+          cb(null, data as Policy, resp);
+        },
+      )
+      // eslint-disable-next-line promise/no-callback-in-promise
+      .catch(err => cb(err));
   }
 
   testPermissions(
     permissions: string | string[],
-    options?: TestIamPermissionsOptions
+    options?: TestIamPermissionsOptions,
   ): Promise<TestIamPermissionsResponse>;
   testPermissions(
     permissions: string | string[],
-    callback: TestIamPermissionsCallback
+    callback: TestIamPermissionsCallback,
   ): void;
   testPermissions(
     permissions: string | string[],
     options: TestIamPermissionsOptions,
-    callback: TestIamPermissionsCallback
+    callback: TestIamPermissionsCallback,
   ): void;
   /**
    * Test a set of permissions for a resource.
@@ -435,7 +448,7 @@ class Iam {
   testPermissions(
     permissions: string | string[],
     optionsOrCallback?: TestIamPermissionsOptions | TestIamPermissionsCallback,
-    callback?: TestIamPermissionsCallback
+    callback?: TestIamPermissionsCallback,
   ): Promise<TestIamPermissionsResponse> | void {
     if (!Array.isArray(permissions) && typeof permissions !== 'string') {
       throw new Error(IAMExceptionMessages.PERMISSIONS_REQUIRED);
@@ -450,40 +463,41 @@ class Iam {
       ? permissions
       : [permissions];
 
-    const req = Object.assign(
-      {
-        permissions: permissionsArray,
-      },
-      options
-    );
+    const req: {permissions: string[]; userProject?: string} = {
+      permissions: permissionsArray,
+    };
+    if (options.userProject) {
+      req.userProject = options.userProject;
+    }
 
-    this.request_(
-      {
-        uri: '/iam/testPermissions',
-        qs: req,
-        useQuerystring: true,
-      },
-      (err, resp) => {
-        if (err) {
-          cb!(err, null, resp);
-          return;
-        }
+    this.storageTransport
+      .makeRequest<TestPermissionsResponse>(
+        {
+          method: 'GET',
+          url: `/storage/v1/b/${this.bucket.name}/iam/testPermissions`,
+          queryParameters: req as unknown as StorageQueryParameters,
+        },
+        (err, data, resp) => {
+          if (err) {
+            cb!(err, null, resp);
+            return;
+          }
+          const availablePermissions = Array.isArray(data?.permissions)
+            ? data?.permissions
+            : [];
 
-        const availablePermissions = Array.isArray(resp.permissions)
-          ? resp.permissions
-          : [];
+          const permissionsHash = permissionsArray.reduce(
+            (acc: {[index: string]: boolean}, permission) => {
+              acc[permission] = availablePermissions.indexOf(permission) > -1;
+              return acc;
+            },
+            {},
+          );
 
-        const permissionsHash = permissionsArray.reduce(
-          (acc: {[index: string]: boolean}, permission) => {
-            acc[permission] = availablePermissions.indexOf(permission) > -1;
-            return acc;
-          },
-          {}
-        );
-
-        cb!(null, permissionsHash, resp);
-      }
-    );
+          cb!(null, permissionsHash, resp);
+        },
+      )
+      .catch(err => cb!(err));
   }
 }
 
