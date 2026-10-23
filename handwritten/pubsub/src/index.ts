@@ -184,5 +184,4 @@ if (process.env.DEBUG_GRPC) {
   grpc.setLogger(console);
   grpc.setLogVerbosity(grpc.logVerbosity.DEBUG);
 }
-import * as protos from '../protos/protos';
-export {protos};
+export {protos} from '@google-cloud/pubsub-api';
