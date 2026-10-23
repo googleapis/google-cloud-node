@@ -52,6 +52,8 @@ import {
   GetSignedUrlConfig,
   GenerateSignedPostPolicyV2Options,
   CRC32C,
+  CreateReadStreamOptions,
+  CreateWriteStreamOptions,
 } from '../src/index.js';
 import {
   SignedPostPolicyV4Output,
@@ -1320,6 +1322,12 @@ describe('File', () => {
         .resume();
     });
 
+    it('should pass highWaterMark to the returned stream', () => {
+      const options: CreateReadStreamOptions = {highWaterMark: 12345};
+      const stream = file.createReadStream(options);
+      assert.strictEqual(stream.readableHighWaterMark, 12345);
+    });
+
     describe('authenticating', () => {
       it('should create an authenticated request', done => {
         file.requestStream = (opts: DecorateRequestOptions) => {
@@ -2352,6 +2360,51 @@ describe('File', () => {
         done();
       };
 
+      writable.write('data');
+    });
+
+    it('should set highWaterMark on the returned stream', () => {
+      const options: CreateWriteStreamOptions = {highWaterMark: 12345};
+      const writable = file.createWriteStream(options);
+      assert.strictEqual(writable.writableHighWaterMark, 12345);
+    });
+
+    it('should propagate highWaterMark to resumable upload', done => {
+      const highWaterMark = 12345;
+      const options: CreateWriteStreamOptions = {
+        highWaterMark,
+        resumable: true,
+      };
+
+      resumableUploadOverride = {
+        upload(opts: resumableUpload.UploadConfig) {
+          assert.strictEqual(opts.highWaterMark, highWaterMark);
+          setImmediate(done);
+          return new PassThrough({highWaterMark: opts.highWaterMark});
+        },
+      };
+
+      const writable = file.createWriteStream(options);
+      assert.strictEqual(writable.writableHighWaterMark, highWaterMark);
+      writable.write('data');
+    });
+
+    it('should propagate highWaterMark to simple upload', done => {
+      const highWaterMark = 12345;
+      const options: CreateWriteStreamOptions = {
+        highWaterMark,
+        resumable: false,
+      };
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      makeWritableStreamOverride = (dup: duplexify.Duplexify, opts: any) => {
+        assert.strictEqual(dup.writableHighWaterMark, highWaterMark);
+        assert.strictEqual(opts.highWaterMark, highWaterMark);
+        setImmediate(done);
+      };
+
+      const writable = file.createWriteStream(options);
+      assert.strictEqual(writable.writableHighWaterMark, highWaterMark);
       writable.write('data');
     });
 
@@ -5954,6 +6007,7 @@ describe('File', () => {
           uri: 'http://resumable-uri',
           userProject: 'user-project-id',
           chunkSize: 262144, // 256 KiB
+          highWaterMark: 12345,
         };
 
         file.generation = 3;
@@ -6009,6 +6063,7 @@ describe('File', () => {
             });
             assert.strictEqual(opts.params, storage.preconditionOpts);
             assert.strictEqual(opts.chunkSize, options.chunkSize);
+            assert.strictEqual(opts.highWaterMark, options.highWaterMark);
 
             setImmediate(done);
             return new PassThrough();
@@ -6231,6 +6286,19 @@ describe('File', () => {
           options_.request.qs.userProject,
           options.userProject
         );
+        done();
+      };
+
+      file.startSimpleUpload_(duplexify(), options);
+    });
+
+    it('should pass highWaterMark if set', done => {
+      const options: CreateWriteStreamOptions = {
+        highWaterMark: 12345,
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      makeWritableStreamOverride = (stream: {}, options_: any) => {
+        assert.strictEqual(options_.highWaterMark, options.highWaterMark);
         done();
       };
 

@@ -606,6 +606,21 @@ describe('common/util', () => {
       util.makeWritableStream(dup, {makeAuthenticatedRequest() {}});
     });
 
+    it('should pass highWaterMark to the writable stream', done => {
+      const dup = duplexify();
+      const highWaterMark = 12345;
+
+      dup.setWritable = (writable: stream.Writable) => {
+        assert.strictEqual(writable.writableHighWaterMark, highWaterMark);
+        done();
+      };
+
+      util.makeWritableStream(dup, {
+        highWaterMark,
+        makeAuthenticatedRequest() {},
+      });
+    });
+
     it('dup should emit a progress event with the bytes written', done => {
       let happened = false;
 
