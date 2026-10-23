@@ -81,6 +81,12 @@ const HEDGE_TOKEN_SCALE = 1000;
  */
 export interface HedgingOptions {
   /**
+   * Whether publish hedging is enabled.
+   * Default: true when a HedgingOptions object is provided.
+   */
+  enabled?: boolean;
+
+  /**
    * Delay before sending a hedged (backup) publish RPC.
    * Default: 1000ms. Must satisfy 100ms <= hedgeDelay <= 10s.
    */
@@ -103,6 +109,7 @@ export interface HedgingOptions {
  * Validated and defaulted hedging configuration.
  */
 export interface ResolvedHedgingOptions {
+  readonly enabled?: boolean;
   readonly hedgeDelay: Duration;
   readonly maxTokens: number;
   readonly refillRatio: number;
@@ -161,6 +168,11 @@ export class HedgingTokenBucket {
     gaxOpts?: CallOptions,
   ): ResolvedHedgingOptions | undefined {
     if (!hedging) {
+      return undefined;
+    }
+
+    const enabled = hedging.enabled ?? defaultOptions.publish.hedging.enabled;
+    if (!enabled) {
       return undefined;
     }
 
@@ -224,6 +236,7 @@ export class HedgingTokenBucket {
     }
 
     return {
+      enabled: true,
       hedgeDelay,
       maxTokens,
       refillRatio,
