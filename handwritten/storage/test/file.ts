@@ -237,6 +237,9 @@ describe('File', () => {
       createBucket: util.noop,
       request: util.noop,
       apiEndpoint: 'https://storage.googleapis.com',
+      async getEndpoint() {
+        return this.apiEndpoint;
+      },
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       makeAuthenticatedRequest(req: {}, callback: any) {
         if (callback) {
@@ -257,7 +260,6 @@ describe('File', () => {
         },
         idempotencyStrategy: IdempotencyStrategy.RetryConditional,
       },
-      customEndpoint: false,
     };
 
     BUCKET = new Bucket(STORAGE, 'bucket-name');
@@ -3916,7 +3918,6 @@ describe('File', () => {
       const customEndpoint = 'https://my-custom-endpoint.com';
 
       STORAGE.apiEndpoint = customEndpoint;
-      STORAGE.customEndpoint = true;
 
       CONFIG.virtualHostedStyle = true;
       CONFIG.bucketBoundHostname = 'http://domain.tld';
@@ -3934,18 +3935,15 @@ describe('File', () => {
     it('should append bucket name to the URL when using the emulator', done => {
       const emulatorHost = 'http://127.0.0.1:9199';
       const originalApiEndpoint = STORAGE.apiEndpoint;
-      const originalCustomEndpoint = STORAGE.customEndpoint;
       const originalEnvHost = process.env.STORAGE_EMULATOR_HOST;
 
       process.env.STORAGE_EMULATOR_HOST = emulatorHost;
       STORAGE.apiEndpoint = emulatorHost;
-      STORAGE.customEndpoint = true;
 
       file.generateSignedPostPolicyV4(
         CONFIG,
         (err: Error, res: SignedPostPolicyV4Output) => {
           STORAGE.apiEndpoint = originalApiEndpoint;
-          STORAGE.customEndpoint = originalCustomEndpoint;
           if (originalEnvHost) {
             process.env.STORAGE_EMULATOR_HOST = originalEnvHost;
           } else {

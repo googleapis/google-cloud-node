@@ -36,6 +36,7 @@ import {
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import {getPackageJSON} from '../src/package-json-helper.cjs';
+import {GoogleAuth, PassThroughClient} from 'google-auth-library';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const hmacKeyModule = require('../src/hmacKey');
@@ -83,7 +84,12 @@ const fakePromisify = {
     }
 
     promisified = true;
-    assert.deepStrictEqual(options.exclude, ['bucket', 'channel', 'hmacKey']);
+    assert.deepStrictEqual(options.exclude, [
+      'bucket',
+      'channel',
+      'hmacKey',
+      'getEndpoint',
+    ]);
   },
 };
 
@@ -172,44 +178,6 @@ describe('Storage', () => {
       const calledWith = storage.calledWith_[0];
       assert.strictEqual(calledWith.baseUrl, `${apiEndpoint}/storage/v1`);
       assert.strictEqual(calledWith.apiEndpoint, `${apiEndpoint}`);
-    });
-
-    it('should not set `customEndpoint` if `apiEndpoint` matches default', () => {
-      const apiEndpoint = 'https://storage.googleapis.com';
-      const storage = new Storage({
-        apiEndpoint,
-      });
-
-      const calledWith = storage.calledWith_[0];
-      assert.strictEqual(calledWith.apiEndpoint, apiEndpoint);
-      assert.strictEqual(calledWith.customEndpoint, false);
-    });
-
-    it('should not set `customEndpoint` if `apiEndpoint` matches default (w/ universe domain)', () => {
-      const universeDomain = 'my.universe';
-      const apiEndpoint = `https://storage.${universeDomain}`;
-      const storage = new Storage({
-        apiEndpoint,
-        universeDomain,
-      });
-
-      const calledWith = storage.calledWith_[0];
-      assert.strictEqual(calledWith.apiEndpoint, apiEndpoint);
-      assert.strictEqual(calledWith.customEndpoint, false);
-    });
-
-    it('should propagate the useAuthWithCustomEndpoint option', () => {
-      const useAuthWithCustomEndpoint = true;
-      const apiEndpoint = 'https://some.fake.endpoint';
-      const storage = new Storage({
-        projectId: PROJECT_ID,
-        useAuthWithCustomEndpoint,
-        apiEndpoint,
-      });
-      const calledWith = storage.calledWith_[0];
-      assert.strictEqual(calledWith.apiEndpoint, 'https://some.fake.endpoint');
-      assert.strictEqual(calledWith.customEndpoint, true);
-      assert.strictEqual(calledWith.useAuthWithCustomEndpoint, true);
     });
 
     it('should propagate autoRetry in retryOptions', () => {
@@ -416,16 +384,6 @@ describe('Storage', () => {
       assert.strictEqual(calledWith.retryOptions.retryableErrorFn(error), true);
     });
 
-    it('should set customEndpoint to true when using apiEndpoint', () => {
-      const storage = new Storage({
-        projectId: PROJECT_ID,
-        apiEndpoint: 'https://apiendpoint',
-      });
-
-      const calledWith = storage.calledWith_[0];
-      assert.strictEqual(calledWith.customEndpoint, true);
-    });
-
     it('should prepend apiEndpoint with default protocol', () => {
       const protocollessApiEndpoint = 'some.fake.endpoint';
       const storage = new Storage({
@@ -468,12 +426,22 @@ describe('Storage', () => {
       );
     });
 
-    it('should accept and use a `universeDomain`', () => {
+    it('should accept and use a `universeDomain`', async () => {
       const universeDomain = 'my-universe.com';
+      const stub = sinon
+        .stub(GoogleAuth.prototype, 'getUniverseDomain')
+        .resolves(universeDomain);
 
-      const storage = new Storage({universeDomain});
+      try {
+        const storage = new Storage({universeDomain});
 
-      assert.equal(storage.apiEndpoint, `https://storage.${universeDomain}`);
+        assert.equal(
+          await storage.getEndpoint(),
+          `https://storage.${universeDomain}`
+        );
+      } finally {
+        stub.restore();
+      }
     });
 
     describe('STORAGE_EMULATOR_HOST', () => {
@@ -527,12 +495,33 @@ describe('Storage', () => {
         );
       });
 
-      it('should set customEndpoint to true', () => {
+      it('should use PassThroughClient when authClient is not provided', () => {
         const storage = new Storage({
           projectId: PROJECT_ID,
         });
 
-        assert.strictEqual(storage.customEndpoint, true);
+        const calledWith = storage.calledWith_[1];
+        assert(calledWith.authClient instanceof PassThroughClient);
+      });
+
+      it('should not use PassThroughClient when keyFilename or credentials are provided', () => {
+        const storageWithKeyFile = new Storage({
+          projectId: PROJECT_ID,
+          keyFilename: '/path/to/keyfile.json',
+        });
+        assert.strictEqual(
+          storageWithKeyFile.calledWith_[1].authClient,
+          undefined
+        );
+
+        const storageWithCreds = new Storage({
+          projectId: PROJECT_ID,
+          credentials: {client_email: 'a@b.com', private_key: 'key'},
+        });
+        assert.strictEqual(
+          storageWithCreds.calledWith_[1].authClient,
+          undefined
+        );
       });
     });
   });
