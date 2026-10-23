@@ -57,15 +57,13 @@ describe('adhoc-logging', () => {
     });
 
     it('obeys "all" as an alias for "*"', () => {
-      al.setBackend(sink);
-      sink.reset();
-
       process.env[al.env.nodeEnables] = 'all';
       const backend = new TestSink();
+      al.setBackend(backend);
       assert.deepStrictEqual(backend.filters, ['*']);
       const logger = al.log(system);
       logger({}, 'foo');
-      assert.deepStrictEqual(sink.logs, [
+      assert.deepStrictEqual(backend.logs, [
         {
           namespace: system,
           fields: {},
@@ -75,15 +73,13 @@ describe('adhoc-logging', () => {
     });
 
     it('obeys "true" as an alias for "*"', () => {
-      al.setBackend(sink);
-      sink.reset();
-
       process.env[al.env.nodeEnables] = 'true';
       const backend = new TestSink();
+      al.setBackend(backend);
       assert.deepStrictEqual(backend.filters, ['*']);
       const logger = al.log(system);
       logger({}, 'foo');
-      assert.deepStrictEqual(sink.logs, [
+      assert.deepStrictEqual(backend.logs, [
         {
           namespace: system,
           fields: {},
