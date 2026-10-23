@@ -88,9 +88,12 @@ func run(args []string, stdout, stderr io.Writer) int {
 		}
 	}
 
-	// A terminal Ctrl-C delivered to the Node.js process group must not kill
-	// in-flight queries; EOF on the sockets is the lifeline. SIGPIPE is
-	// ignored so that a closed stderr pipe cannot kill the process either.
+	// The sidecar's lifetime is bound to its Node.js parent: EOF on the
+	// inherited sockets is the lifeline. Terminal and service-manager signals
+	// delivered to the whole process group / cgroup (Ctrl-C, SIGHUP, systemd's
+	// control-group SIGTERM during a graceful drain) must therefore not kill
+	// in-flight queries; the sidecar exits once Node.js closes the sockets.
+	// SIGPIPE is ignored so that a closed stderr pipe cannot kill the process.
 	signal.Ignore(syscall.SIGINT, syscall.SIGHUP, syscall.SIGPIPE)
 
 	srv := newServer(serverOptions{
@@ -100,13 +103,18 @@ func run(args []string, stdout, stderr io.Writer) int {
 		warnf:        warn.Printf,
 	})
 
-	termCh := make(chan os.Signal, 1)
-	signal.Notify(termCh, syscall.SIGTERM)
-	go func() {
-		<-termCh
-		debugf("SIGTERM received")
-		srv.shutdown(0)
-	}()
+	if *fdsFlag != "" {
+		signal.Ignore(syscall.SIGTERM)
+	} else {
+		// Debug --socket mode has no parent lifeline: SIGTERM stops it.
+		termCh := make(chan os.Signal, 1)
+		signal.Notify(termCh, syscall.SIGTERM)
+		go func() {
+			<-termCh
+			debugf("SIGTERM received")
+			srv.shutdown(0)
+		}()
+	}
 
 	if *fdsFlag != "" {
 		srv.serveInherited(conns)

@@ -240,8 +240,12 @@ func (s *server) listen(path string) error {
 	if fi, err := os.Lstat(path); err == nil && fi.Mode()&os.ModeSocket != 0 {
 		_ = os.Remove(path)
 	}
-	ln, err := net.Listen("unix", path)
-	if err != nil {
+	var ln net.Listener
+	if err := withPrivateUmask(func() error {
+		var lerr error
+		ln, lerr = net.Listen("unix", path)
+		return lerr
+	}); err != nil {
 		return err
 	}
 	_ = os.Chmod(path, 0o600)

@@ -45,6 +45,7 @@
         ["OS=='linux'", {
           "libraries": [
             "-pthread",
+            "-ldl",
             "-Wl,-z,nodelete"
           ]
         }],

@@ -32,3 +32,5 @@ func getRusage() rusageInfo { return rusageInfo{} }
 func currentRSSBytes() uint64 { return 0 }
 
 func processAlive(int) bool { return true }
+
+func withPrivateUmask(fn func() error) error { return fn() }

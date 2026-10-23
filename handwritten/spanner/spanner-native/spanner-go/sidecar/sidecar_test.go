@@ -1442,6 +1442,36 @@ func TestE2ECancel(t *testing.T) {
 	env.tc.expectNoBatch(id, 100*time.Millisecond)
 }
 
+func TestE2ECancelAbandonsNonCancellableStream(t *testing.T) {
+	env := newE2E(t)
+	const id = 550
+	const total = 20000
+	env.tc.send(frameExecute, id, encodeExecuteForTest(env.handle, 0, execNonCancellable, 5, "", "", sqlRequest(t, fmt.Sprintf("SELECT many %d", total))))
+	if final, _ := env.tc.nextBatch(id); final {
+		t.Fatalf("first batch is FINAL")
+	}
+	// Like the FFI abandonedFlag: Node.js sends CANCEL when the JS callback
+	// gives up on a nonCancellable (Database#run) stream, and the sidecar must
+	// stop at the next batch instead of streaming the whole result.
+	env.tc.send(frameCancel, id, nil)
+	rows := 0
+	for {
+		final, wb := env.tc.nextBatch(id)
+		rows += int(wb.numRows)
+		if final {
+			if wb.status >= 0 {
+				t.Fatalf("FINAL status %d after CANCEL; want an error", wb.status)
+			}
+			break
+		}
+	}
+	if rows >= total-5 {
+		t.Fatalf("stream was not abandoned: received %d of %d rows", rows, total)
+	}
+	env.tc.ping(9004)
+	env.tc.expectNoBatch(id, 50*time.Millisecond)
+}
+
 func TestE2ECancelWhileFlowBlocked(t *testing.T) {
 	env := newE2E(t)
 	const id = 500

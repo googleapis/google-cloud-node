@@ -30,6 +30,7 @@
 #include <node_api.h>
 
 #include <errno.h>
+#include <dlfcn.h>
 #include <fcntl.h>
 #include <signal.h>
 #include <spawn.h>
@@ -39,6 +40,7 @@
 #include <sys/socket.h>
 #include <sys/time.h>
 #include <sys/types.h>
+#include <poll.h>
 #include <sys/uio.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -46,6 +48,7 @@
 #include <atomic>
 #include <chrono>
 #include <condition_variable>
+#include <deque>
 #include <memory>
 #include <mutex>
 #include <string>
@@ -77,6 +80,10 @@ constexpr size_t kExecuteFixedSize = 32;
 constexpr uint32_t kMaxPayloadLen = 1u << 30;
 constexpr size_t kReadBufferSize = 256 * 1024;
 constexpr size_t kDirectReadThreshold = 64 * 1024;
+// Requests queued while the sidecar does not drain its socket (bounded).
+constexpr size_t kMaxQueuedBytes = 64u << 20;
+// A sidecar that accepts no request bytes for this long is considered wedged.
+constexpr int kWriteStallTimeoutMs = 30000;
 
 constexpr uint8_t kFrameReady = 0x01;
 constexpr uint8_t kFrameInit = 0x02;
@@ -98,6 +105,14 @@ constexpr uint8_t kFramePong = 0x85;
 
 constexpr uint8_t kBatchFlagFinal = 0x01;
 
+// Spanner itself limits nesting; this only bounds materializer recursion.
+constexpr uint8_t kMaxNestingDepth = 64;
+
+// After a failed sidecar spawn / service INIT, fail fast for this long instead
+// of blocking every caller on another attempt.
+constexpr std::chrono::milliseconds kRetryCooldown{2000};
+
+constexpr int32_t kGrpcResourceExhausted = 8;
 constexpr int32_t kGrpcFailedPrecondition = 9;
 constexpr int32_t kGrpcUnavailable = 14;
 
@@ -120,7 +135,7 @@ inline T Load(const uint8_t* p) {
   return v;
 }
 
-inline size_t Pad8(size_t n) { return (n + 7) & ~static_cast<size_t>(7); }
+inline uint64_t Pad8(uint64_t n) { return (n + 7) & ~static_cast<uint64_t>(7); }
 
 inline void EncodeFrameHeader(
     uint8_t* h, uint32_t payload_len, uint8_t type, uint8_t flags, uint64_t id) {
@@ -247,6 +262,10 @@ IpcBatch* ParseBatchPayload(uint8_t* payload, size_t len, std::string* err) {
     *err = "negative batch dimension";
     return nullptr;
   }
+  if (b->status > 1) {
+    *err = "invalid batch status";
+    return nullptr;
+  }
   if (static_cast<int64_t>(b->num_rows) * b->num_cols > b->total_cells) {
     *err = "num_rows * num_cols exceeds total_cells";
     return nullptr;
@@ -259,7 +278,7 @@ IpcBatch* ParseBatchPayload(uint8_t* payload, size_t len, std::string* err) {
       return nullptr;
     }
     const uint64_t region = is_string ? size + 1 : size;
-    const uint64_t padded = Pad8(static_cast<size_t>(region));
+    const uint64_t padded = Pad8(region);
     if (padded > static_cast<uint64_t>(len - off)) {
       ok = false;
       return nullptr;
@@ -308,6 +327,10 @@ IpcBatch* ParseBatchPayload(uint8_t* payload, size_t len, std::string* err) {
   b->status_pb = status_ptr;
   b->status_len = static_cast<int32_t>(status_len);
   b->error_msg = reinterpret_cast<const char*>(error_ptr);
+  if (b->status < 0 && b->error_msg == nullptr) {
+    // FFI always passes a (possibly empty) C string for errors.
+    b->error_msg = "";
+  }
   b->request_id = reinterpret_cast<const char*>(request_id_ptr);
   b->logs_json = reinterpret_cast<const char*>(logs_ptr);
   b->logs_len = static_cast<int32_t>(logs_len);
@@ -315,9 +338,14 @@ IpcBatch* ParseBatchPayload(uint8_t* payload, size_t len, std::string* err) {
   b->trailers_len = static_cast<int32_t>(trailers_len);
 
   // Validate every cell off the V8 thread so a malformed frame can never make
-  // the materializer read out of bounds or recurse forever.
+  // the materializer read out of bounds, recurse unboundedly, or revisit the
+  // same cells (ARRAY/STRUCT children must form a forest rooted at the
+  // num_rows * num_cols top-level cells, exactly like sharedcore packing).
   const uint32_t total = static_cast<uint32_t>(b->total_cells);
+  const uint32_t top_cells =
+      static_cast<uint32_t>(b->num_rows) * static_cast<uint32_t>(b->num_cols);
   const uint64_t arena_len = static_cast<uint64_t>(b->byte_arena_len);
+  std::vector<uint8_t> depth;  // allocated lazily: only batches with nesting
   for (uint32_t i = 0; i < total; ++i) {
     const IpcCell& c = b->cells[i];
     switch (c.kind) {
@@ -335,14 +363,38 @@ IpcBatch* ParseBatchPayload(uint8_t* payload, size_t len, std::string* err) {
         }
         break;
       case spanner_native::kCellKindArray:
-      case spanner_native::kCellKindStruct:
-        if (c.len > 0 &&
-            (c.offset <= i ||
-             static_cast<uint64_t>(c.offset) + c.len > total)) {
+      case spanner_native::kCellKindStruct: {
+        if (c.len == 0) {
+          break;
+        }
+        if (c.offset <= i ||
+            static_cast<uint64_t>(c.offset) + c.len > total) {
           *err = "invalid ARRAY/STRUCT child range";
           return nullptr;
         }
+        if (depth.empty()) {
+          depth.assign(total, 0);
+          for (uint32_t t = 0; t < top_cells && t < total; ++t) {
+            depth[t] = 1;
+          }
+        }
+        const uint8_t d = depth[i];
+        if (d == 0) {
+          break;  // Not reachable from a top-level cell: never materialized.
+        }
+        if (d >= kMaxNestingDepth) {
+          *err = "ARRAY/STRUCT nesting is too deep";
+          return nullptr;
+        }
+        for (uint32_t j = c.offset; j < c.offset + c.len; ++j) {
+          if (depth[j] != 0) {
+            *err = "cell referenced by more than one parent";
+            return nullptr;
+          }
+          depth[j] = static_cast<uint8_t>(d + 1);
+        }
         break;
+      }
       default:
         *err = "unknown cell kind";
         return nullptr;
@@ -372,46 +424,118 @@ class IpcConnection {
   uint64_t generation() const { return generation_; }
   bool dead() const { return dead_.load(std::memory_order_acquire); }
 
-  // Writes one complete frame. parts[0] must start with the 16-byte header.
-  // Frames from different threads never interleave.
+  // Queues / writes one complete frame (parts[0] starts with the 16-byte
+  // header). NEVER blocks the caller (usually a V8 thread): the fast path is a
+  // single non-blocking sendmsg; if the socket buffer is full (sidecar slow or
+  // stalled) the unsent remainder is appended to an ordered userspace queue
+  // that the connection's writer thread drains. Frames never interleave.
   bool Write(const struct iovec* parts, int nparts) {
     if (dead() || nparts <= 0 || nparts > 8) {
       return false;
     }
-    std::lock_guard<std::mutex> lk(write_mu_);
+    size_t total = 0;
+    for (int i = 0; i < nparts; ++i) {
+      total += parts[i].iov_len;
+    }
+    std::unique_lock<std::mutex> lk(q_mu_);
     if (dead()) {
       return false;
     }
-    struct iovec iov[8];
-    memcpy(iov, parts, sizeof(struct iovec) * nparts);
-    int idx = 0;
-    while (idx < nparts && iov[idx].iov_len == 0) {
-      ++idx;
-    }
-    while (idx < nparts) {
-      struct msghdr msg;
-      memset(&msg, 0, sizeof(msg));
-      msg.msg_iov = iov + idx;
-      msg.msg_iovlen = nparts - idx;
-      ssize_t w = sendmsg(fd_, &msg, kSendFlags);
-      if (w < 0) {
-        if (errno == EINTR) {
-          continue;
-        }
-        MarkDead();
-        return false;
-      }
-      size_t left = static_cast<size_t>(w);
-      while (idx < nparts && left >= iov[idx].iov_len) {
-        left -= iov[idx].iov_len;
+    size_t written = 0;
+    if (queue_.empty() && !writer_busy_) {
+      struct iovec iov[8];
+      memcpy(iov, parts, sizeof(struct iovec) * nparts);
+      int idx = 0;
+      while (idx < nparts && iov[idx].iov_len == 0) {
         ++idx;
       }
-      if (idx < nparts && left > 0) {
-        iov[idx].iov_base = static_cast<char*>(iov[idx].iov_base) + left;
-        iov[idx].iov_len -= left;
+      while (idx < nparts) {
+        struct msghdr msg;
+        memset(&msg, 0, sizeof(msg));
+        msg.msg_iov = iov + idx;
+        msg.msg_iovlen = nparts - idx;
+        ssize_t w = sendmsg(fd_, &msg, kSendFlags | MSG_DONTWAIT);
+        if (w < 0) {
+          if (errno == EINTR) {
+            continue;
+          }
+          if (errno == EAGAIN || errno == EWOULDBLOCK) {
+            break;  // Socket buffer full: queue the remainder.
+          }
+          lk.unlock();
+          MarkDead();
+          return false;
+        }
+        written += static_cast<size_t>(w);
+        size_t left = static_cast<size_t>(w);
+        while (idx < nparts && left >= iov[idx].iov_len) {
+          left -= iov[idx].iov_len;
+          ++idx;
+        }
+        if (idx < nparts && left > 0) {
+          iov[idx].iov_base = static_cast<char*>(iov[idx].iov_base) + left;
+          iov[idx].iov_len -= left;
+        }
+      }
+      if (written == total) {
+        return true;
       }
     }
+    const size_t remaining = total - written;
+    if (queued_bytes_ + remaining > kMaxQueuedBytes) {
+      lk.unlock();
+      MarkDead();  // The sidecar is not draining requests at all.
+      return false;
+    }
+    std::vector<uint8_t> buf(remaining);
+    size_t skip = written;
+    size_t out = 0;
+    for (int i = 0; i < nparts; ++i) {
+      const uint8_t* src = static_cast<const uint8_t*>(parts[i].iov_base);
+      size_t len = parts[i].iov_len;
+      if (skip >= len) {
+        skip -= len;
+        continue;
+      }
+      memcpy(buf.data() + out, src + skip, len - skip);
+      out += len - skip;
+      skip = 0;
+    }
+    queued_bytes_ += remaining;
+    queue_.push_back(std::move(buf));
+    lk.unlock();
+    q_cv_.notify_one();
     return true;
+  }
+
+  // Writer thread: drains frames queued by Write() with poll-based sends. If
+  // the sidecar makes no progress reading for kWriteStallTimeoutMs it is
+  // considered wedged: the connection is torn down (streams fail with
+  // UNAVAILABLE and the sidecar is killed and respawned on demand).
+  void RunWriter() {
+    std::unique_lock<std::mutex> lk(q_mu_);
+    for (;;) {
+      q_cv_.wait(lk, [&] { return !queue_.empty() || dead(); });
+      if (dead()) {
+        break;
+      }
+      std::vector<uint8_t> buf = std::move(queue_.front());
+      queue_.pop_front();
+      writer_busy_ = true;
+      lk.unlock();
+      const bool ok = SendAllPolling(buf.data(), buf.size());
+      lk.lock();
+      writer_busy_ = false;
+      queued_bytes_ -= buf.size();
+      if (!ok) {
+        lk.unlock();
+        MarkDead();
+        lk.lock();
+        break;
+      }
+    }
+    queue_.clear();
+    queued_bytes_ = 0;
   }
 
   bool SendControl(uint8_t type, uint64_t id) {
@@ -434,6 +558,10 @@ class IpcConnection {
       std::lock_guard<std::mutex> lk(ready_mu_);
     }
     ready_cv_.notify_all();
+    {
+      std::lock_guard<std::mutex> lk(q_mu_);
+    }
+    q_cv_.notify_all();
   }
 
   void SetReady(uint32_t version, uint32_t pid) {
@@ -461,11 +589,48 @@ class IpcConnection {
   }
 
  private:
+  bool SendAllPolling(const uint8_t* p, size_t n) {
+    size_t off = 0;
+    while (off < n) {
+      if (dead()) {
+        return false;
+      }
+      ssize_t w = send(fd_, p + off, n - off, kSendFlags | MSG_DONTWAIT);
+      if (w > 0) {
+        off += static_cast<size_t>(w);
+        continue;
+      }
+      if (w < 0 && errno == EINTR) {
+        continue;
+      }
+      if (w < 0 && (errno == EAGAIN || errno == EWOULDBLOCK)) {
+        struct pollfd pfd;
+        pfd.fd = fd_;
+        pfd.events = POLLOUT;
+        pfd.revents = 0;
+        const int pr = poll(&pfd, 1, kWriteStallTimeoutMs);
+        if (pr == 0) {
+          return false;  // No progress: the sidecar is wedged.
+        }
+        if (pr < 0 && errno != EINTR) {
+          return false;
+        }
+        continue;
+      }
+      return false;
+    }
+    return true;
+  }
+
   int fd_;
   int index_;
   uint64_t generation_;
   std::atomic<bool> dead_{false};
-  std::mutex write_mu_;
+  std::mutex q_mu_;
+  std::condition_variable q_cv_;
+  std::deque<std::vector<uint8_t>> queue_;
+  size_t queued_bytes_ = 0;
+  bool writer_busy_ = false;
   std::mutex ready_mu_;
   std::condition_variable ready_cv_;
   bool ready_ = false;
@@ -573,7 +738,9 @@ struct EnvDispatchContext {
     std::vector<std::pair<std::shared_ptr<IpcConnection>, uint64_t>> to_cancel;
     for (AsyncStreamContext* cur = head; cur != nullptr; cur = cur->next) {
       cur->abandoned.store(1, std::memory_order_release);
-      if (cur->stream_id != 0 && cur->conn) {
+      // Cancel every stream, including non-cancellable ones (the sidecar
+      // abandons those at the next batch, like the FFI abandoned flag).
+      if (cur->conn) {
         to_cancel.emplace_back(cur->conn, cur->wire_id);
       }
     }
@@ -697,7 +864,7 @@ void CallJsBatchHandler(
           has_exception) {
         napi_get_and_clear_last_exception(env, &pending_exc);
       }
-      if (!is_final && ctx->stream_id != 0 && ctx->conn) {
+      if (!is_final && ctx->conn) {
         ctx->conn->SendControl(kFrameCancel, ctx->wire_id);
       }
     } else if (ret_val != nullptr) {
@@ -705,15 +872,18 @@ void CallJsBatchHandler(
       if (napi_get_value_bool(env, ret_val, &keep_going) == napi_ok &&
           !keep_going) {
         ctx->abandoned.store(1, std::memory_order_release);
-        if (!is_final && ctx->stream_id != 0 && ctx->conn) {
+        if (!is_final && ctx->conn) {
           ctx->conn->SendControl(kFrameCancel, ctx->wire_id);
         }
       }
     }
   }
 
-  if (!is_final && ctx != nullptr && ctx->enable_backpressure &&
-      ctx->stream_id != 0 && ctx->conn &&
+  // env == nullptr means the TSFN is draining its queue during teardown: a
+  // non-final event must not touch ctx then (a FINAL that raced the teardown
+  // may already have deleted it in DispatchBatchToJs).
+  if (env != nullptr && !is_final && ctx != nullptr &&
+      ctx->enable_backpressure && ctx->stream_id != 0 && ctx->conn &&
       ctx->abandoned.load(std::memory_order_relaxed) == 0) {
     ctx->conn->SendControl(kFrameAck, ctx->wire_id);
   }
@@ -763,6 +933,22 @@ void CleanupEnvDispatchContext(
   }
 }
 
+// Runs when Node destroys the TSFN (which can happen before the instance-data
+// finalizer on environment teardown). Afterwards nobody may touch the handle:
+// DispatchBatchToJs takes the closing path and Shutdown skips the release.
+void OnTsfnFinalize(napi_env /*env*/, void* finalize_data, void* /*hint*/) {
+  EnvDispatchContext* env_ctx = static_cast<EnvDispatchContext*>(finalize_data);
+  if (env_ctx == nullptr) {
+    return;
+  }
+  {
+    std::lock_guard<std::mutex> lk(env_ctx->tsfn_mu);
+    env_ctx->closing.store(true, std::memory_order_relaxed);
+    env_ctx->tsfn = nullptr;
+  }
+  env_ctx->Release();  // The reference held by the TSFN.
+}
+
 EnvDispatchContext* GetOrCreateEnvDispatchContext(napi_env env) {
   void* data = nullptr;
   if (napi_get_instance_data(env, &data) == napi_ok && data != nullptr) {
@@ -774,6 +960,7 @@ EnvDispatchContext* GetOrCreateEnvDispatchContext(napi_env env) {
       env, "noop", NAPI_AUTO_LENGTH, NoopJsCallback, nullptr, &noop_fn);
   napi_create_string_utf8(
       env, "SpannerCoreIpcTSFN", NAPI_AUTO_LENGTH, &resource_name);
+  env_ctx->AddRef();  // Owned by the TSFN; released in OnTsfnFinalize.
   napi_status st = napi_create_threadsafe_function(
       env,
       noop_fn,
@@ -781,13 +968,13 @@ EnvDispatchContext* GetOrCreateEnvDispatchContext(napi_env env) {
       resource_name,
       0,
       1,
-      nullptr,
-      nullptr,
+      env_ctx,
+      OnTsfnFinalize,
       env_ctx,
       CallJsBatchHandler,
       &env_ctx->tsfn);
   if (st != napi_ok || env_ctx->tsfn == nullptr) {
-    env_ctx->Shutdown();
+    env_ctx->tsfn = nullptr;
     delete env_ctx;
     return nullptr;
   }
@@ -871,17 +1058,26 @@ struct ServiceSlot {
   int64_t remote_handle = 0;
   uint64_t generation = 0;
   int32_t refs = 0;
+  // INIT round trips run WITHOUT mgr.mu; concurrent users of the same slot wait
+  // on SidecarManager::init_cv while `initializing` is set.
+  bool initializing = false;
+  std::chrono::steady_clock::time_point retry_not_before{};
+  std::string last_error;
 };
 
 struct SidecarManager {
+  // Guards all fields below. Never held across a blocking round trip to the
+  // sidecar (INIT/CLOSE/STATS); only spawning a new sidecar (READY wait) runs
+  // under it, because every caller needs a live sidecar at that point anyway.
   std::mutex mu;
+  std::condition_variable init_cv;
 
   // Configuration (configure()).
   std::string sidecar_path;
   int num_connections = 1;
   int socket_buffer = 0;
   int startup_timeout_ms = 15000;
-  int request_timeout_ms = 120000;
+  int request_timeout_ms = 30000;
   std::vector<std::string> extra_args;
 
   // Sidecar process state.
@@ -893,15 +1089,17 @@ struct SidecarManager {
   std::string last_exit;
   std::vector<std::shared_ptr<IpcConnection>> conns;
   std::atomic<uint32_t> rr{0};
+  std::chrono::steady_clock::time_point retry_not_before{};
 
   // Values forwarded to the sidecar.
   std::string root_pem;
   std::string pending_universe_domain;
-  std::string last_error;
+  std::string last_error;       // most recent transport-level error
+  std::string last_init_error;  // getLastInitError() (init failures only)
 
   // Local service handles (de-duplicated by INIT payload, survive restarts).
   int64_t next_local_handle = 0;
-  std::unordered_map<int64_t, ServiceSlot> services;
+  std::unordered_map<int64_t, std::shared_ptr<ServiceSlot>> services;
   std::unordered_map<std::string, int64_t> services_by_payload;
 };
 
@@ -915,14 +1113,6 @@ void ConfigureParentSocket(int fd, int sockbuf) {
     setsockopt(fd, SOL_SOCKET, SO_SNDBUF, &sockbuf, sizeof(sockbuf));
     setsockopt(fd, SOL_SOCKET, SO_RCVBUF, &sockbuf, sizeof(sockbuf));
   }
-  // Requests are tiny and the sidecar reads continuously; a send that cannot
-  // make progress for this long means the sidecar is wedged. Fail the write
-  // (the connection is then torn down and the sidecar respawned) instead of
-  // blocking a V8 thread forever.
-  struct timeval send_timeout;
-  send_timeout.tv_sec = 60;
-  send_timeout.tv_usec = 0;
-  setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, &send_timeout, sizeof(send_timeout));
 #if defined(SO_NOSIGPIPE)
   int one = 1;
   setsockopt(fd, SOL_SOCKET, SO_NOSIGPIPE, &one, sizeof(one));
@@ -1159,6 +1349,8 @@ bool HandleFrame(
   }
 }
 
+void WriterMain(std::shared_ptr<IpcConnection> conn) { conn->RunWriter(); }
+
 void ReaderMain(std::shared_ptr<IpcConnection> conn) {
   std::vector<uint8_t> buf(kReadBufferSize);
   size_t start = 0;
@@ -1387,16 +1579,26 @@ bool SpawnLocked(std::string* err) {
   posix_spawn_file_actions_init(&fa);
   posix_spawn_file_actions_addopen(&fa, 0, "/dev/null", O_RDONLY, 0);
   posix_spawn_file_actions_addopen(&fa, 1, "/dev/null", O_WRONLY, 0);
-#if defined(__APPLE__)
-  posix_spawn_file_actions_addinherit_np(&fa, 2);
-#endif
+  // Node.js marks its stdio descriptors close-on-exec, so fd 2 must be passed
+  // explicitly (dup2 into a different number clears FD_CLOEXEC); otherwise Go
+  // panics, SIGQUIT dumps and SPANNER_NATIVE_IPC_DEBUG output would be lost.
+  const int stderr_dup = fcntl(2, F_DUPFD_CLOEXEC, 64);
+  if (stderr_dup >= 0) {
+    posix_spawn_file_actions_adddup2(&fa, stderr_dup, 2);
+  }
   for (int i = 0; i < n; ++i) {
     posix_spawn_file_actions_adddup2(&fa, child_fds[i], 3 + i);
   }
-#if defined(__GLIBC__)
-#if __GLIBC_PREREQ(2, 34)
-  posix_spawn_file_actions_addclosefrom_np(&fa, 3 + n);
-#endif
+#if defined(__linux__)
+  // Close every other inherited descriptor in the child (fds that some other
+  // library opened without O_CLOEXEC). Resolved at runtime so the addon does
+  // not require glibc >= 2.34 and still works on musl.
+  using AddCloseFromFn = int (*)(posix_spawn_file_actions_t*, int);
+  static const AddCloseFromFn add_closefrom = reinterpret_cast<AddCloseFromFn>(
+      dlsym(RTLD_DEFAULT, "posix_spawn_file_actions_addclosefrom_np"));
+  if (add_closefrom != nullptr) {
+    add_closefrom(&fa, 3 + n);
+  }
 #endif
 
   posix_spawnattr_t attr;
@@ -1411,11 +1613,12 @@ bool SpawnLocked(std::string* err) {
     sigaddset(&defaults, s);
   }
   posix_spawnattr_setsigdefault(&attr, &defaults);
-  // Own process group: terminal job-control signals sent to the Node.js
-  // process group must not kill in-flight queries.
-  posix_spawnattr_setpgroup(&attr, 0);
-  short spawn_flags =
-      POSIX_SPAWN_SETSIGMASK | POSIX_SPAWN_SETSIGDEF | POSIX_SPAWN_SETPGROUP;
+  // The sidecar stays in the Node.js process group (job control such as
+  // Ctrl-Z / fg applies to both, and a background group can never get SIGTTOU
+  // for writing to the terminal). It ignores SIGINT / SIGHUP / SIGTERM itself
+  // and exits on EOF of its sockets, so group-wide signals cannot kill
+  // in-flight queries while Node.js drains.
+  short spawn_flags = POSIX_SPAWN_SETSIGMASK | POSIX_SPAWN_SETSIGDEF;
 #if defined(__APPLE__)
   spawn_flags |= POSIX_SPAWN_CLOEXEC_DEFAULT;
 #endif
@@ -1426,6 +1629,9 @@ bool SpawnLocked(std::string* err) {
       &pid, m.sidecar_path.c_str(), &fa, &attr, argv.data(), environ);
   posix_spawn_file_actions_destroy(&fa);
   posix_spawnattr_destroy(&attr);
+  if (stderr_dup >= 0) {
+    close(stderr_dup);
+  }
   for (int fd : child_fds) {
     close(fd);
   }
@@ -1448,10 +1654,31 @@ bool SpawnLocked(std::string* err) {
   m.conns = conns;
   m.spawn_count++;
   m.last_exit.clear();
-  for (auto& c : conns) {
-    std::thread(ReaderMain, c).detach();
+  // Start the reaper first so the child is always reaped, then the readers.
+  // Thread creation can throw (resource exhaustion); never let that escape
+  // through N-API.
+  try {
+    std::thread(ReaperMain, pid, gen, conns).detach();
+  } catch (const std::exception& e) {
+    kill(pid, SIGKILL);
+    int status = 0;
+    while (waitpid(pid, &status, 0) < 0 && errno == EINTR) {
+    }
+    m.pid = -1;
+    m.conns.clear();
+    *err = std::string("failed to start the sidecar reaper thread: ") + e.what();
+    return false;
   }
-  std::thread(ReaperMain, pid, gen, conns).detach();
+  for (auto& c : conns) {
+    try {
+      std::thread(ReaderMain, c).detach();
+      std::thread(WriterMain, c).detach();
+    } catch (const std::exception& e) {
+      *err = std::string("failed to start a sidecar I/O thread: ") + e.what();
+      TeardownLocked();
+      return false;
+    }
+  }
 
   const auto deadline = std::chrono::steady_clock::now() +
                         std::chrono::milliseconds(m.startup_timeout_ms);
@@ -1481,7 +1708,8 @@ bool SpawnLocked(std::string* err) {
   return true;
 }
 
-// Requires mgr.mu.
+// Requires mgr.mu. Spawns a sidecar if none is healthy. After a failed spawn
+// callers fail fast for kRetryCooldown instead of each attempting another one.
 bool EnsureRunningLocked(std::string* err) {
   SidecarManager& m = Mgr();
   if (m.running) {
@@ -1497,22 +1725,35 @@ bool EnsureRunningLocked(std::string* err) {
     }
     TeardownLocked();
   }
-  return SpawnLocked(err);
+  const auto now = std::chrono::steady_clock::now();
+  if (now < m.retry_not_before) {
+    *err = m.last_error.empty() ? "the Spanner Go sidecar is unavailable"
+                                : m.last_error;
+    return false;
+  }
+  if (!SpawnLocked(err)) {
+    m.last_error = *err;
+    m.retry_not_before = std::chrono::steady_clock::now() + kRetryCooldown;
+    return false;
+  }
+  m.retry_not_before = {};
+  return true;
 }
 
-// Requires mgr.mu and a running sidecar.
-bool RemoteInitLocked(
+// Sends INIT and waits for INIT_RESULT. Must NOT be called with mgr.mu held.
+bool RemoteInit(
+    const std::shared_ptr<IpcConnection>& conn,
     const std::string& payload,
+    int timeout_ms,
     int64_t* remote,
     std::string* err) {
-  SidecarManager& m = Mgr();
   std::vector<uint8_t> reply;
   if (!RoundTrip(
-          m.conns[0],
+          conn,
           kFrameInit,
           reinterpret_cast<const uint8_t*>(payload.data()),
           payload.size(),
-          m.request_timeout_ms,
+          timeout_ms,
           kFrameInitResult,
           &reply,
           err)) {
@@ -1536,43 +1777,81 @@ bool RemoteInitLocked(
   return true;
 }
 
-// Requires mgr.mu.
-bool ReinitServiceLocked(ServiceSlot& slot, std::string* err) {
+// Requires `lk` to hold mgr.mu. Makes sure `slot` has a remote handle for the
+// current sidecar generation, spawning the sidecar if needed. The INIT round
+// trip itself runs with mgr.mu released, so other isolates' queries on healthy
+// services are never blocked by a slow NewService; concurrent users of the same
+// slot wait for the in-flight INIT instead of issuing their own.
+bool EnsureSlotReadyLocked(
+    std::unique_lock<std::mutex>& lk,
+    const std::shared_ptr<ServiceSlot>& slot,
+    std::string* err) {
   SidecarManager& m = Mgr();
-  int64_t remote = 0;
-  if (!RemoteInitLocked(slot.init_payload, &remote, err)) {
-    return false;
+  for (int attempt = 0; attempt < 3; ++attempt) {
+    m.init_cv.wait(lk, [&] { return !slot->initializing; });
+    if (!EnsureRunningLocked(err)) {
+      return false;
+    }
+    if (slot->generation == m.generation && slot->remote_handle > 0) {
+      return true;
+    }
+    if (std::chrono::steady_clock::now() < slot->retry_not_before) {
+      *err = slot->last_error;
+      return false;
+    }
+    slot->initializing = true;
+    const uint64_t gen = m.generation;
+    const std::shared_ptr<IpcConnection> conn = m.conns[0];
+    const int timeout_ms = m.request_timeout_ms;
+    lk.unlock();
+    int64_t remote = 0;
+    std::string init_err;
+    const bool ok = RemoteInit(conn, slot->init_payload, timeout_ms, &remote, &init_err);
+    lk.lock();
+    slot->initializing = false;
+    m.init_cv.notify_all();
+    if (!ok) {
+      slot->last_error = init_err;
+      slot->retry_not_before = std::chrono::steady_clock::now() + kRetryCooldown;
+      *err = init_err;
+      return false;
+    }
+    slot->retry_not_before = {};
+    slot->last_error.clear();
+    if (gen == m.generation) {
+      slot->remote_handle = remote;
+      slot->generation = gen;
+      return true;
+    }
+    // The sidecar was restarted while INIT was in flight; retry on the new one.
   }
-  slot.remote_handle = remote;
-  slot.generation = m.generation;
-  return true;
+  *err = "the Spanner Go sidecar restarted repeatedly during service initialization";
+  return false;
 }
 
 // Resolves a local service handle to (remote handle, connection), spawning or
-// re-initializing the sidecar if needed. Returns 0 or a gRPC status code.
+// re-initializing the sidecar if needed. Returns 0 or a gRPC status code. The
+// common case is a short critical section with no I/O.
 int32_t ResolveExecuteTarget(
     int64_t local_handle,
     int64_t* remote,
     std::shared_ptr<IpcConnection>* conn,
     std::string* err) {
   SidecarManager& m = Mgr();
-  std::lock_guard<std::mutex> lk(m.mu);
+  std::unique_lock<std::mutex> lk(m.mu);
   auto it = m.services.find(local_handle);
   if (it == m.services.end()) {
     *err = "invalid or closed SpannerCore service handle";
     return kGrpcFailedPrecondition;
   }
-  if (!m.running || it->second.generation != m.generation ||
-      m.conns.empty()) {
-    if (!EnsureRunningLocked(err)) {
-      return kGrpcUnavailable;
-    }
-    if (it->second.generation != m.generation &&
-        !ReinitServiceLocked(it->second, err)) {
+  const std::shared_ptr<ServiceSlot> slot = it->second;
+  if (!m.running || m.conns.empty() || slot->initializing ||
+      slot->generation != m.generation || slot->remote_handle <= 0) {
+    if (!EnsureSlotReadyLocked(lk, slot, err)) {
       return kGrpcUnavailable;
     }
   }
-  *remote = it->second.remote_handle;
+  *remote = slot->remote_handle;
   const uint32_t idx =
       m.rr.fetch_add(1, std::memory_order_relaxed) %
       static_cast<uint32_t>(m.conns.size());
@@ -1803,7 +2082,7 @@ napi_value InitService(napi_env env, napi_callback_info info) {
   if (argc > 12) napi_get_value_int32(env, args[12], &dcp_selection_strategy);
 
   SidecarManager& m = Mgr();
-  std::lock_guard<std::mutex> lk(m.mu);
+  std::unique_lock<std::mutex> lk(m.mu);
 
   // Like SpannerCoreInit: the pending universe domain applies to this init only.
   std::string universe_domain;
@@ -1826,36 +2105,35 @@ napi_value InitService(napi_env env, napi_callback_info info) {
   w.Str(universe_domain);
   const std::string& payload = w.data();
 
-  std::string err;
-  if (!EnsureRunningLocked(&err)) {
-    m.last_error = err;
-    return MakeInt64(env, -1);
-  }
+  // De-duplicate by configuration like SpannerCoreInit: one remote service per
+  // payload per sidecar generation, reference counted locally.
+  int64_t local = 0;
+  std::shared_ptr<ServiceSlot> slot;
   auto existing = m.services_by_payload.find(payload);
   if (existing != m.services_by_payload.end()) {
-    ServiceSlot& slot = m.services[existing->second];
-    if (slot.generation != m.generation && !ReinitServiceLocked(slot, &err)) {
-      m.last_error = err;
-      return MakeInt64(env, -1);
-    }
-    slot.refs++;
-    m.last_error.clear();
-    return MakeInt64(env, existing->second);
+    local = existing->second;
+    slot = m.services[local];
+  } else {
+    local = ++m.next_local_handle;
+    slot = std::make_shared<ServiceSlot>();
+    slot->init_payload = payload;
+    m.services.emplace(local, slot);
+    m.services_by_payload.emplace(payload, local);
   }
-  int64_t remote = 0;
-  if (!RemoteInitLocked(payload, &remote, &err)) {
-    m.last_error = err;
+  std::string err;
+  if (!EnsureSlotReadyLocked(lk, slot, &err)) {
+    if (slot->refs <= 0) {
+      auto it = m.services.find(local);
+      if (it != m.services.end() && it->second == slot) {
+        m.services.erase(it);
+        m.services_by_payload.erase(slot->init_payload);
+      }
+    }
+    m.last_init_error = err;
     return MakeInt64(env, -1);
   }
-  const int64_t local = ++m.next_local_handle;
-  ServiceSlot slot;
-  slot.init_payload = payload;
-  slot.remote_handle = remote;
-  slot.generation = m.generation;
-  slot.refs = 1;
-  m.services.emplace(local, std::move(slot));
-  m.services_by_payload.emplace(payload, local);
-  m.last_error.clear();
+  slot->refs++;
+  m.last_init_error.clear();
   return MakeInt64(env, local);
 }
 
@@ -1867,44 +2145,47 @@ napi_value CloseService(napi_env env, napi_callback_info info) {
   if (argc > 0) napi_get_value_int64(env, args[0], &handle);
 
   napi_value result;
-  SidecarManager& m = Mgr();
-  std::unique_lock<std::mutex> lk(m.mu);
-  auto it = m.services.find(handle);
-  if (it == m.services.end()) {
-    napi_create_int32(env, -1, &result);
-    return result;
-  }
-  if (--it->second.refs > 0) {
-    napi_create_int32(env, 0, &result);
-    return result;
-  }
-  const int64_t remote = it->second.remote_handle;
-  const bool live = m.running && it->second.generation == m.generation &&
-                    !m.conns.empty();
-  m.services_by_payload.erase(it->second.init_payload);
-  m.services.erase(it);
-  int32_t rc = 0;
-  if (live) {
-    uint8_t payload[8];
-    PutI64(payload, remote);
-    std::vector<uint8_t> reply;
-    std::string err;
-    if (RoundTrip(
-            m.conns[0],
-            kFrameCloseService,
-            payload,
-            sizeof(payload),
-            m.request_timeout_ms,
-            kFrameCloseResult,
-            &reply,
-            &err) &&
-        reply.size() >= 4) {
-      rc = Load<int32_t>(reply.data());
-    } else {
-      rc = -1;
+  std::shared_ptr<IpcConnection> conn;
+  int64_t remote = 0;
+  {
+    SidecarManager& m = Mgr();
+    std::lock_guard<std::mutex> lk(m.mu);
+    auto it = m.services.find(handle);
+    if (it == m.services.end() || it->second->refs <= 0) {
+      napi_create_int32(env, -1, &result);
+      return result;
+    }
+    const std::shared_ptr<ServiceSlot> slot = it->second;
+    if (--slot->refs > 0) {
+      napi_create_int32(env, 0, &result);
+      return result;
+    }
+    m.services.erase(it);
+    m.services_by_payload.erase(slot->init_payload);
+    if (m.running && !m.conns.empty() && slot->generation == m.generation &&
+        slot->remote_handle > 0) {
+      conn = m.conns[0];
+      remote = slot->remote_handle;
     }
   }
-  napi_create_int32(env, rc, &result);
+  if (conn) {
+    // Fire-and-forget (the CLOSE_RESULT reply is ignored): closing a service
+    // must never stall the event loop. Re-initializing the same configuration
+    // right after is safe in either processing order thanks to refcounting.
+    uint8_t frame[kFrameHeaderSize + 8];
+    EncodeFrameHeader(
+        frame,
+        8,
+        kFrameCloseService,
+        0,
+        Routes().next_request_id.fetch_add(1, std::memory_order_relaxed));
+    PutI64(frame + kFrameHeaderSize, remote);
+    struct iovec iov;
+    iov.iov_base = frame;
+    iov.iov_len = sizeof(frame);
+    conn->Write(&iov, 1);
+  }
+  napi_create_int32(env, 0, &result);
   return result;
 }
 
@@ -1916,6 +2197,9 @@ napi_value SetRootCertsPEM(napi_env env, napi_callback_info info) {
     std::string pem = GetStringArg(env, args[0]);
     SidecarManager& m = Mgr();
     std::lock_guard<std::mutex> lk(m.mu);
+    if (pem == m.root_pem) {
+      return Undefined(env);  // Every isolate sends the same bundle.
+    }
     m.root_pem = std::move(pem);
     if (m.running) {
       SendRootCertsLocked();
@@ -1940,7 +2224,7 @@ napi_value GetLastInitError(napi_env env, napi_callback_info /*info*/) {
   {
     SidecarManager& m = Mgr();
     std::lock_guard<std::mutex> lk(m.mu);
-    err = m.last_error;
+    err = m.last_init_error;
   }
   napi_value out;
   napi_create_string_utf8(env, err.data(), err.size(), &out);
@@ -2011,6 +2295,18 @@ napi_value ExecuteStreamingSql(napi_env env, napi_callback_info info) {
   }
   const int64_t js_handle = ctx->stream_id;
 
+  const uint64_t payload_len64 = static_cast<uint64_t>(kExecuteFixedSize) +
+                                 routing_key.len + headers.len + req_len;
+  if (payload_len64 > kMaxPayloadLen) {
+    DispatchBatchToJs(
+        ctx,
+        MakeErrorBatch(
+            kGrpcResourceExhausted,
+            "the ExecuteSqlRequest exceeds the Spanner Go Shared Core IPC "
+            "frame limit"));
+    return MakeInt64(env, js_handle);
+  }
+
   int64_t remote = 0;
   std::shared_ptr<IpcConnection> conn;
   std::string err;
@@ -2024,11 +2320,13 @@ napi_value ExecuteStreamingSql(napi_env env, napi_callback_info info) {
   ctx->conn = conn;
   RegisterRoute(ctx->wire_id, ctx);
 
-  const size_t payload_len =
-      kExecuteFixedSize + routing_key.len + headers.len + req_len;
   uint8_t fixed[kFrameHeaderSize + kExecuteFixedSize];
   EncodeFrameHeader(
-      fixed, static_cast<uint32_t>(payload_len), kFrameExecute, 0, ctx->wire_id);
+      fixed,
+      static_cast<uint32_t>(payload_len64),
+      kFrameExecute,
+      0,
+      ctx->wire_id);
   uint8_t* e = fixed + kFrameHeaderSize;
   PutI64(e + 0, remote);
   PutI32(e + 8, timeout_ms);

@@ -50,9 +50,12 @@ func isBatchTooLarge(err error) bool {
 	return ok
 }
 
-// stream is one EXECUTE. Cancellable streams carry the FFI flow-control state
-// and are registered in their connection's stream map (keyed by the Node.js
-// stream id); nonCancellable streams are never registered.
+// stream is one EXECUTE. Every stream is registered in its connection's
+// stream map (keyed by the Node.js stream id) so that CANCEL can reach it.
+// Cancellable streams carry the FFI flow-control state and a cancellable
+// context; nonCancellable streams (Database#run / Snapshot#run fast path) use
+// context.Background() and are stopped through the abandoned flag, exactly
+// like the FFI abandonedFlag that the C++ side sets when JS gives up.
 type stream struct {
 	c   *conn
 	id  uint64
@@ -62,6 +65,7 @@ type stream struct {
 	nonCancellable bool
 	ctx            context.Context
 	cancel         context.CancelFunc
+	abandoned      atomic.Bool
 
 	inFlight atomic.Int32
 	paused   atomic.Bool
@@ -79,6 +83,7 @@ func (st *stream) signalFlow() {
 
 func (st *stream) close() {
 	if st != nil {
+		st.abandoned.Store(true)
 		st.paused.Store(false)
 		if st.cancel != nil {
 			st.cancel()
@@ -261,8 +266,8 @@ func (c *conn) execute(id uint64, payload []byte) {
 	} else {
 		st.ctx, st.cancel = context.WithCancel(context.Background())
 		st.flowCh = make(chan struct{}, 1)
-		c.addStream(st)
 	}
+	c.addStream(st)
 	go st.run()
 }
 
@@ -299,9 +304,7 @@ func (st *stream) run() {
 
 	defer func() {
 		r := recover()
-		if !st.nonCancellable {
-			c.removeStream(st)
-		}
+		c.removeStream(st)
 		if st.cancel != nil {
 			st.cancel()
 		}
@@ -354,8 +357,9 @@ func (st *stream) run() {
 
 	started = true
 	tel, err := se.svc.ExecuteStreamingSQL(st.ctx, req, func(sb sharedcore.StreamBatch) error {
-		// A dead connection is the IPC equivalent of the FFI abandoned flag.
-		if c.dead.Load() {
+		// A dead connection or a CANCEL from Node.js (sent when the JS callback
+		// gives up) is the IPC equivalent of the FFI abandoned flag.
+		if c.dead.Load() || st.abandoned.Load() {
 			if st.cancel != nil {
 				st.cancel()
 			}
@@ -494,7 +498,7 @@ func (c *conn) cancelStream(id uint64) {
 	}
 }
 
-// streamSnapshot returns the registered (cancellable) streams.
+// streamSnapshot returns the registered streams.
 func (c *conn) streamSnapshot() []*stream {
 	c.streamsMu.Lock()
 	defer c.streamsMu.Unlock()

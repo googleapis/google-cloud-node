@@ -2440,6 +2440,18 @@ describe('Database', () => {
       fakeStream.push(null);
     });
 
+    it('should cancel the query and end the snapshot when destroyed early', done => {
+      const endStub = sandbox.stub(fakeSnapshot, 'end');
+
+      const proxyStream = database.runStream(QUERY);
+      fakeStream.once('close', () => {
+        assert.strictEqual(fakeStream.destroyed, true);
+        assert.strictEqual(endStub.callCount, 1);
+        done();
+      });
+      proxyStream.destroy();
+    });
+
     it('should clean up the stream/transaction on error', done => {
       const fakeError = new Error('err');
       const endStub = sandbox.stub(fakeSnapshot, 'end');

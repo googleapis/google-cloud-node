@@ -41,6 +41,12 @@ func getRusage() rusageInfo {
 	if runtime.GOOS == "darwin" {
 		maxRSS /= 1024 // ru_maxrss is in bytes on Darwin, kilobytes elsewhere.
 	}
+	// On Linux ru_maxrss keeps the high-water mark inherited from the parent
+	// at spawn time (the child shares the parent's address space until exec),
+	// so it reports Node.js's RSS. VmHWM belongs to the sidecar's own image.
+	if hwm := linuxVmHWMKB(); hwm > 0 {
+		maxRSS = hwm
+	}
 	return rusageInfo{
 		utimeUs:  timevalMicros(ru.Utime),
 		stimeUs:  timevalMicros(ru.Stime),
@@ -79,4 +85,36 @@ func currentRSSBytes() uint64 {
 func processAlive(pid int) bool {
 	err := syscall.Kill(pid, 0)
 	return err == nil || err == syscall.EPERM
+}
+
+// withPrivateUmask runs fn with umask 0177 so that a socket created by fn is
+// accessible to the owner only from the moment it exists (no chmod window).
+// Only used by the debug --socket mode at startup.
+func withPrivateUmask(fn func() error) error {
+	old := syscall.Umask(0o177)
+	defer syscall.Umask(old)
+	return fn()
+}
+
+// linuxVmHWMKB returns the peak resident set size of this process image in KiB
+// from /proc/self/status (VmHWM), or 0 when unavailable.
+func linuxVmHWMKB() uint64 {
+	if runtime.GOOS != "linux" {
+		return 0
+	}
+	b, err := os.ReadFile("/proc/self/status")
+	if err != nil {
+		return 0
+	}
+	for _, line := range bytes.Split(b, []byte("\n")) {
+		if rest, ok := bytes.CutPrefix(line, []byte("VmHWM:")); ok {
+			fields := bytes.Fields(rest)
+			if len(fields) > 0 {
+				if v, err := strconv.ParseUint(string(fields[0]), 10, 64); err == nil {
+					return v
+				}
+			}
+		}
+	}
+	return 0
 }

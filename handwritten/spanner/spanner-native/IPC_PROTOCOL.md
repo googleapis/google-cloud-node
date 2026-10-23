@@ -34,18 +34,23 @@ branch the default is `ipc` whenever `NATIVE_CORE_ENABLED=true`).
   file descriptors `3 .. 3+N-1`. The sidecar is started as
   `spanner-go-sidecar --fds=3[,4,...] --parent-pid=<node pid>`.
   Unnamed socket pairs are not reachable by any other process.
-* The sidecar runs in its own process group, ignores `SIGINT` and `SIGHUP`
-  (so a terminal Ctrl-C delivered to the Node.js process group cannot kill
-  in-flight queries), and exits when:
+* The sidecar stays in the Node.js process group (job control applies to
+  both) but ignores `SIGINT`, `SIGHUP` and `SIGTERM`, so a terminal Ctrl-C or a
+  service manager's group-wide `SIGTERM` cannot kill in-flight queries while
+  Node.js drains gracefully. It exits when:
   1. every connection reached EOF (the Node.js process exited or closed the
      sockets — this is the primary lifeline and also covers `SIGKILL` of the
      Node.js process),
-  2. it receives a `SHUTDOWN` frame,
-  3. it receives `SIGTERM`, or
-  4. its parent pid changes (checked once per second).
+  2. it receives a `SHUTDOWN` frame, or
+  3. its parent pid changes (checked once per second).
+  (`SIGKILL` still stops it; the debug `--socket` mode also honors `SIGTERM`.)
 * If the sidecar dies, the addon fails every in-flight stream with
   `UNAVAILABLE`, and transparently respawns the sidecar and re-initializes
-  service handles on the next call.
+  service handles on the next call. After a failed spawn or service INIT,
+  calls fail fast for 2 s instead of each blocking on another attempt.
+* Locking: blocking round trips (INIT, CLOSE, STATS) never hold the addon's
+  process-wide lock, so one isolate creating a client cannot stall queries of
+  other isolates. CLOSE is fire-and-forget.
 * Debug mode: `spanner-go-sidecar --socket=/path/to.sock` listens on a
   filesystem socket instead of inherited fds and does not exit on EOF.
 
@@ -150,8 +155,10 @@ object) as FFI, including the `x-goog-spanner-request-id` split.
 Stream semantics are identical to the FFI goroutine in
 `SpannerCoreExecuteStreamingSqlAsync`:
 
-* `nonCancellable`: no stream registration, `context.Background()`, no flow
-  control, `FlushOnChunkBoundary = false`.
+* `nonCancellable`: `context.Background()`, no flow control,
+  `FlushOnChunkBoundary = false`. The stream is still registered so that a
+  `CANCEL` (sent by Node.js when the JS callback gives up, like the FFI
+  abandoned flag) stops it at the next batch.
 * otherwise: cancellable context, flow-control entry (`inFlight`, `paused`),
   `FlushOnChunkBoundary = true`. Before sending a non-last batch the sidecar
   waits while `paused || inFlight >= 2`; every sent non-last batch increments
@@ -247,3 +254,24 @@ already part of the Node.js process (`process.cpuUsage()`,
 `process.memoryUsage().rss`). From JavaScript use
 `getNativeCoreSidecarStats()` / `getNativeCoreTransportInfo()` exported by
 `build/src/native-core.js`.
+
+## 7. Known limitations
+
+* Node.js threads never block on the sidecar: every request write is a single
+  non-blocking `sendmsg`; when the socket buffer is full the remainder goes to
+  an ordered userspace queue (capped at 64 MiB) drained by a per-connection
+  writer thread. A sidecar that accepts no request bytes for 30 s is treated as
+  wedged: its streams fail with `UNAVAILABLE` and it is killed and respawned on
+  the next call. There is no liveness probe beyond that, so a sidecar that is
+  stalled (e.g. `SIGSTOP`ped) while no request is pending holds its streams
+  until it resumes; query deadlines are enforced inside Go.
+* Spawning (first use, or after a crash) runs synchronously on the calling
+  thread, like the FFI `init()`: normally tens of milliseconds, bounded by
+  `SPANNER_NATIVE_IPC_STARTUP_TIMEOUT_MS` (15 s) if the sidecar never becomes
+  ready.
+* Crash detection relies on the addon reaping its own child (`waitid` with
+  `WNOWAIT`); another library calling `waitpid(-1)` in the same process could
+  steal the exit status (detection then still happens through socket EOF).
+* Unix only (Linux, macOS). Windows keeps the FFI transport by default.
+* Payload frames are limited to 1 GiB; larger batches end the stream with
+  `RESOURCE_EXHAUSTED` (use a smaller batch row size).

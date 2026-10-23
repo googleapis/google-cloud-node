@@ -122,7 +122,25 @@ interface SpannerGoAddon {
  */
 export type NativeCoreTransport = 'ffi' | 'ipc';
 
-const DEFAULT_NATIVE_CORE_TRANSPORT: NativeCoreTransport = 'ipc';
+// The IPC addon is Unix-only (socketpair + posix_spawn); Windows keeps FFI.
+const DEFAULT_NATIVE_CORE_TRANSPORT: NativeCoreTransport =
+  process.platform === 'win32' ? 'ffi' : 'ipc';
+
+// Number of queries actually handed to the Go Shared Core (any transport).
+// Benchmarks use it to prove that no request silently fell back to pure JS.
+let nativeExecuteCount = 0;
+
+/**
+ * Returns how many queries have been executed through the Go Shared Core in
+ * this isolate (both transports). Diagnostics / benchmarks only.
+ */
+export function getNativeCoreExecuteCount(): number {
+  return nativeExecuteCount;
+}
+
+// After a failed IPC service init (e.g. the sidecar could not be spawned),
+// retry instead of caching the failure (and the pure-JS fallback) forever.
+const IPC_INIT_RETRY_MS = 30000;
 
 interface NativeIpcSidecarConfig {
   sidecarPath: string;
@@ -369,6 +387,7 @@ interface CachedSchemaEntry {
 interface GlobalNativeState {
   addon?: SpannerGoAddon | null;
   transport?: NativeCoreTransport;
+  ipcInitRetryAt?: Map<string, number>;
   serviceHandles: Map<string, number>;
   schemaCache: Map<string, CachedSchemaEntry>;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -402,6 +421,17 @@ function getGlobalState(): GlobalNativeState {
     st.generation = 1;
   }
   return st;
+}
+
+function isIpcInitRetryDue(
+  state: GlobalNativeState,
+  cacheKey: string | undefined,
+): boolean {
+  if (state.transport !== 'ipc' || !cacheKey) {
+    return false;
+  }
+  const retryAt = state.ipcInitRetryAt?.get(cacheKey);
+  return retryAt !== undefined && Date.now() >= retryAt;
 }
 
 function setSchemaCacheEntry(
@@ -481,7 +511,8 @@ export function parseNativeCoreTransport(
  * `SPANNER_NATIVE_CORE_TRANSPORT` (alias `NATIVE_CORE_TRANSPORT`):
  *   - `ipc` | `sidecar` | `uds` (default): out-of-process Go sidecar.
  *   - `ffi` | `cgo` | `in-process`: in-process cgo shared library.
- * The transport is fixed for the lifetime of the process once the addon loads.
+ * The transport is fixed per isolate (main thread / worker) once the addon loads;
+ * all isolates of a process share one sidecar when they select `ipc`.
  */
 export function getNativeCoreTransport(): NativeCoreTransport {
   const state = getGlobalState();
@@ -508,8 +539,9 @@ function resolveIpcSidecarPath(addonPath: string): string | undefined {
     process.platform === 'win32'
       ? 'spanner-go-sidecar.exe'
       : 'spanner-go-sidecar';
+  const override = process.env.SPANNER_NATIVE_IPC_SIDECAR_PATH;
   const candidates = [
-    process.env.SPANNER_NATIVE_IPC_SIDECAR_PATH,
+    override ? path.resolve(override) : undefined,
     path.resolve(path.dirname(addonPath), '..', '..', 'spanner-go', exe),
   ];
   for (const candidate of candidates) {
@@ -703,7 +735,11 @@ function getOrCreateServiceHandle(spanner: any): number {
   if (spanner && typeof spanner._nativeServiceHandle === 'number') {
     if (
       spanner._nativeServiceGen === state.generation &&
-      spanner._nativeServiceHandle !== 0
+      spanner._nativeServiceHandle !== 0 &&
+      !(
+        spanner._nativeServiceHandle === -1 &&
+        isIpcInitRetryDue(state, spanner._nativeServiceCacheKey)
+      )
     ) {
       return spanner._nativeServiceHandle;
     }
@@ -804,7 +840,7 @@ function getOrCreateServiceHandle(spanner: any): number {
 
   const cacheKey = `${endpoint}|${universeDomain}|${numChannels}|${usePlaintext}|${disableBuiltInAuth}|${enableDirectAccess}|${userAgent}|${dcpEnabled}|${dcpInitialChannels}|${dcpMinChannels}|${dcpMaxChannels}|${dcpMaxRpcPerChannel}|${dcpMinRpcPerChannel}|${dcpSelectionStrategy}`;
   const existing = state.serviceHandles.get(cacheKey);
-  if (existing === -1) {
+  if (existing === -1 && !isIpcInitRetryDue(state, cacheKey)) {
     if (spanner) {
       spanner._nativeServiceHandle = -1;
       spanner._nativeServiceCacheKey = cacheKey;
@@ -876,6 +912,7 @@ function getOrCreateServiceHandle(spanner: any): number {
     }
   }
   if (handle > 0) {
+    state.ipcInitRetryAt?.delete(cacheKey);
     state.serviceHandles.set(cacheKey, handle);
     state.handleRefCounts!.set(handle, 1);
     if (spanner) {
@@ -886,6 +923,12 @@ function getOrCreateServiceHandle(spanner: any): number {
     }
   } else {
     state.serviceHandles.set(cacheKey, -1);
+    if (state.transport === 'ipc') {
+      if (!state.ipcInitRetryAt) {
+        state.ipcInitRetryAt = new Map<string, number>();
+      }
+      state.ipcInitRetryAt.set(cacheKey, Date.now() + IPC_INIT_RETRY_MS);
+    }
     if (spanner) {
       spanner._nativeServiceHandle = -1;
       spanner._nativeServiceCacheKey = cacheKey;
@@ -1869,6 +1912,7 @@ export function executeNativeDatabaseRun(
         ? createFieldDecoders(cachedSchema.fields, rowOptions)
         : undefined;
 
+  nativeExecuteCount++;
   const streamHandle = addon.executeStreamingSql(
     serviceHandle,
     sessionName,
@@ -2143,6 +2187,7 @@ export function executeNativeTransactionRun(
       } as google.spanner.v1.ResultSetMetadata;
     }
 
+    nativeExecuteCount++;
     const streamHandle = addon.executeStreamingSql(
       serviceHandle,
       routingKey,
@@ -2539,6 +2584,7 @@ export function runStreamNative(
             ? timeoutMs
             : Infinity;
 
+      nativeExecuteCount++;
       streamHandle = addon.executeStreamingSql(
         serviceHandle,
         routingKey,
