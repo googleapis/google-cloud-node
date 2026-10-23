@@ -2,8 +2,9 @@
 
 const assert = require('assert');
 const async = require('async');
+const http = require('http');
 const range = require('lodash.range');
-const {describe, it, beforeEach} = require('mocha');
+const {describe, it, before, after, beforeEach} = require('mocha');
 const {PassThrough} = require('stream');
 const {teenyRequest} = require('teeny-request');
 
@@ -12,9 +13,40 @@ const retryRequest = require('./index.js');
 retryRequest.defaults.request = teenyRequest.defaults();
 
 describe('retry-request', () => {
-  const URI_404 = 'http://google.com/theblahstore';
-  const URI_200 = 'http://google.com/';
-  const URI_NON_EXISTENT = 'http://theblahstore';
+  let server;
+  let URI_404;
+  let URI_200;
+  let URI_NON_EXISTENT;
+
+  before(done => {
+    server = http.createServer((req, res) => {
+      if (req.url === '/theblahstore') {
+        res.writeHead(404, {'Content-Type': 'text/plain'});
+        res.end('Not Found');
+      } else {
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('OK');
+      }
+    });
+    server.listen(0, '127.0.0.1', () => {
+      const {port} = server.address();
+      URI_404 = `http://127.0.0.1:${port}/theblahstore`;
+      URI_200 = `http://127.0.0.1:${port}/`;
+
+      const unlisteningServer = http.createServer();
+      unlisteningServer.listen(0, '127.0.0.1', () => {
+        const unusedPort = unlisteningServer.address().port;
+        unlisteningServer.close(() => {
+          URI_NON_EXISTENT = `http://127.0.0.1:${unusedPort}`;
+          done();
+        });
+      });
+    });
+  });
+
+  after(done => {
+    server.close(done);
+  });
 
   describe('streams', () => {
     it('works with defaults in a stream', done => {
