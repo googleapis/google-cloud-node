@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
+## [6.14.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.13.0...google-gax-v6.14.0) (2026-10-23)
+
+
+### Features
+
+* **gax:** Add observability logging flag ([#9656](https://github.com/googleapis/google-cloud-node/issues/9656)) ([c0ab589](https://github.com/googleapis/google-cloud-node/commit/c0ab589ef64398cf139779619a147761029e3c03))
+
 ## [6.13.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.12.1...google-gax-v6.13.0) (2026-10-19)
 
 
