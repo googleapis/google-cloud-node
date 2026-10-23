@@ -88,6 +88,32 @@ describe('bin/run-test.cjs .only support', () => {
       ].join('\n'),
     );
     assert.strictEqual(fileHasOnly(file3), true);
+
+    const file4 = path.join(tmpDir, 'division-and-templates-before-only.js');
+    fs.writeFileSync(
+      file4,
+      [
+        'const secs = ms / 1000; const url = `https://example.com`;',
+        'const ratio = (a + b) / items[0]; const label = `status`;',
+        'it.only("detected after division and template literal", () => {});',
+        'const msg = `done`;',
+      ].join('\n'),
+    );
+    assert.strictEqual(fileHasOnly(file4), true);
+
+    const file5 = path.join(tmpDir, 'only-each-and-bracket.js');
+    fs.writeFileSync(
+      file5,
+      'it.only.each([1, 2])("case %d", () => {});',
+    );
+    assert.strictEqual(fileHasOnly(file5), true);
+
+    const file6 = path.join(tmpDir, 'bracket-only.js');
+    fs.writeFileSync(
+      file6,
+      'describe[\'only\']("bracket exclusive", () => {});',
+    );
+    assert.strictEqual(fileHasOnly(file6), true);
   });
 
   it('narrows target files, preserves Mocha flags (--retries, -c), and adds --no-parallel', () => {
@@ -233,8 +259,174 @@ describe('bin/run-test.cjs .only support', () => {
     const inputArgs = ['--config', '../../.mocharc.cjs', 'build/test'];
     const resolved = resolveTestArgs(inputArgs, tmpDir);
     assert.strictEqual(resolved.hasOnly, false);
+    assert.strictEqual(resolved.skip, false);
     assert.deepStrictEqual(resolved.onlyFiles, []);
     assert.deepStrictEqual(resolved.args, inputArgs);
+  });
+
+  it('isolates .only across multi-step glob targets and sibling suites without redundant compiles', () => {
+    const buildTestDir = path.join(tmpDir, 'build/test');
+    const srcTestDir = path.join(tmpDir, 'test');
+    const buildConformanceDir = path.join(tmpDir, 'build/conformance');
+    const srcConformanceDir = path.join(tmpDir, 'dev/conformance');
+    fs.mkdirSync(buildTestDir, {recursive: true});
+    fs.mkdirSync(srcTestDir, {recursive: true});
+    fs.mkdirSync(buildConformanceDir, {recursive: true});
+    fs.mkdirSync(srcConformanceDir, {recursive: true});
+
+    const compileMarker = path.join(tmpDir, 'compile-count.txt');
+    fs.writeFileSync(
+      path.join(tmpDir, 'compile.cjs'),
+      [
+        "const fs = require('fs');",
+        "const path = require('path');",
+        "for (const name of fs.readdirSync(path.join(__dirname, 'test'))) {",
+        "  if (name.endsWith('.ts')) {",
+        "    fs.copyFileSync(path.join(__dirname, 'test', name), path.join(__dirname, 'build/test', name.replace(/\\.ts$/, '.js')));",
+        '  }',
+        '}',
+        "const countFile = path.join(__dirname, 'compile-count.txt');",
+        "const prev = fs.existsSync(countFile) ? Number(fs.readFileSync(countFile, 'utf8')) : 0;",
+        'fs.writeFileSync(countFile, String(prev + 1));',
+      ].join('\n'),
+    );
+    fs.writeFileSync(
+      path.join(tmpDir, 'package.json'),
+      JSON.stringify({
+        name: 'multi-step-pkg',
+        scripts: {compile: 'node compile.cjs'},
+      }),
+    );
+
+    const v2Src = path.join(srcTestDir, 'agents_v2.ts');
+    const v2Out = path.join(buildTestDir, 'agents_v2.js');
+    const v2BetaSrc = path.join(srcTestDir, 'agents_v2beta1.ts');
+    const v2BetaOut = path.join(buildTestDir, 'agents_v2beta1.js');
+    const confSrc = path.join(srcConformanceDir, 'conformance.ts');
+    const confOut = path.join(buildConformanceDir, 'conformance.js');
+
+    fs.writeFileSync(v2Src, 'it.only("v2 exclusive", () => {});');
+    fs.writeFileSync(v2Out, 'it("stale v2", () => {});');
+    fs.writeFileSync(
+      v2BetaSrc,
+      'it("v2beta1 should not run", () => { throw new Error("v2beta1 ran"); });',
+    );
+    fs.writeFileSync(
+      v2BetaOut,
+      'it("v2beta1 should not run", () => { throw new Error("v2beta1 ran"); });',
+    );
+    fs.writeFileSync(
+      confSrc,
+      'it("conformance should not run", () => { throw new Error("conformance ran"); });',
+    );
+    fs.writeFileSync(
+      confOut,
+      'it("conformance should not run", () => { throw new Error("conformance ran"); });',
+    );
+
+    // Step 1 (build/test/*_v2.js): compiles once and selects agents_v2.js
+    const step1 = resolveTestArgs(['build/test/*_v2.js'], tmpDir);
+    assert.strictEqual(step1.hasOnly, true);
+    assert.strictEqual(step1.skip, false);
+    assert.deepStrictEqual(step1.onlyFiles, [
+      path.join('build', 'test', 'agents_v2.js'),
+    ]);
+    assert.strictEqual(fs.readFileSync(compileMarker, 'utf8'), '1');
+
+    // Step 2 (build/test/*_v2beta1.js): sees build/test is already in sync (no recompile) and skips
+    const step2 = resolveTestArgs(['build/test/*_v2beta1.js'], tmpDir);
+    assert.strictEqual(step2.hasOnly, false);
+    assert.strictEqual(step2.skip, true);
+    assert.strictEqual(fs.readFileSync(compileMarker, 'utf8'), '1');
+
+    // Step 3 (build/conformance): detects sibling suite .only and skips
+    const step3 = resolveTestArgs(['build/conformance'], tmpDir);
+    assert.strictEqual(step3.hasOnly, false);
+    assert.strictEqual(step3.skip, true);
+
+    // Running run-test.cjs on the skipped sibling target exits 0 without executing its throwing test
+    const skipRes = spawnSync(
+      process.execPath,
+      [runTestPath, '--no-c8', '--config', rootMocharc, 'build/conformance'],
+      {
+        cwd: tmpDir,
+        encoding: 'utf8',
+        env: {...process.env, JS_RUNTIME: 'node'},
+      },
+    );
+    assert.strictEqual(
+      skipRes.status,
+      0,
+      `stderr: ${skipRes.stderr}\nstdout: ${skipRes.stdout}`,
+    );
+  });
+
+  it('resolves package root and cjs/test sources when invoked from a parent directory', () => {
+    const pkgDir = path.join(tmpDir, 'packages/sub-pkg');
+    const srcCjsDir = path.join(pkgDir, 'cjs/test');
+    const buildCjsDir = path.join(pkgDir, 'build/cjs/test');
+    fs.mkdirSync(srcCjsDir, {recursive: true});
+    fs.mkdirSync(buildCjsDir, {recursive: true});
+
+    fs.writeFileSync(
+      path.join(pkgDir, 'compile.cjs'),
+      [
+        "const fs = require('fs');",
+        "const path = require('path');",
+        "fs.copyFileSync(path.join(__dirname, 'cjs/test/unit.ts'), path.join(__dirname, 'build/cjs/test/unit.js'));",
+      ].join('\n'),
+    );
+    fs.writeFileSync(
+      path.join(pkgDir, 'package.json'),
+      JSON.stringify({
+        name: 'sub-pkg',
+        scripts: {compile: 'node compile.cjs'},
+      }),
+    );
+    fs.writeFileSync(
+      path.join(srcCjsDir, 'unit.ts'),
+      'it.only("compiled from cjs/test", () => {});',
+    );
+    fs.writeFileSync(
+      path.join(buildCjsDir, 'unit.js'),
+      'it("stale build", () => {});',
+    );
+
+    const resolved = resolveTestArgs(
+      ['packages/sub-pkg/build/cjs/test'],
+      tmpDir,
+    );
+    assert.strictEqual(resolved.hasOnly, true);
+    assert.deepStrictEqual(resolved.onlyFiles, [
+      path.join('packages', 'sub-pkg', 'build', 'cjs', 'test', 'unit.js'),
+    ]);
+  });
+
+  it('disables parallel mode in .mocharc.cjs when Mocha is invoked directly on a target with .only', () => {
+    const testDir = path.join(tmpDir, 'build/test');
+    fs.mkdirSync(testDir, {recursive: true});
+    const exclusiveFile = path.join(testDir, 'direct-mocha.js');
+    fs.writeFileSync(
+      exclusiveFile,
+      'describe("direct mocha", () => { it.only("works with .mocharc.cjs", () => {}); });',
+    );
+
+    const mochaBin = resolveBin('mocha/bin/mocha.js');
+    const res = spawnSync(
+      process.execPath,
+      [mochaBin, '--config', rootMocharc, exclusiveFile],
+      {
+        cwd: tmpDir,
+        encoding: 'utf8',
+        env: {...process.env, JS_RUNTIME: 'node', MOCHA_PARALLEL: ''},
+      },
+    );
+    assert.strictEqual(
+      res.status,
+      0,
+      `stderr: ${res.stderr}\nstdout: ${res.stdout}`,
+    );
+    assert.match(res.stdout, /1 passing/);
   });
 
   it('executes only the .only test under Node.js even with parallel .mocharc.cjs', () => {
