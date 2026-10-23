@@ -16,7 +16,7 @@ import {describe, it} from 'mocha';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 
-import * as al from '../src/logging-utils';
+import * as al from '../src/index';
 import * as alTypes from '../src/types';
 
 interface TestLog {
@@ -61,6 +61,26 @@ describe('adhoc-logging', () => {
       sink.reset();
 
       process.env[al.env.nodeEnables] = 'all';
+      const backend = new TestSink();
+      assert.deepStrictEqual(backend.filters, ['*']);
+      const logger = al.log(system);
+      logger({}, 'foo');
+      assert.deepStrictEqual(sink.logs, [
+        {
+          namespace: system,
+          fields: {},
+          args: ['foo'],
+        },
+      ]);
+    });
+
+    it('obeys "true" as an alias for "*"', () => {
+      al.setBackend(sink);
+      sink.reset();
+
+      process.env[al.env.nodeEnables] = 'true';
+      const backend = new TestSink();
+      assert.deepStrictEqual(backend.filters, ['*']);
       const logger = al.log(system);
       logger({}, 'foo');
       assert.deepStrictEqual(sink.logs, [
@@ -296,5 +316,13 @@ describe('adhoc-logging', () => {
         },
       ]);
     });
+  });
+
+  it('exports LogSeverity as a runtime enum from index', () => {
+    assert.strictEqual(al.LogSeverity.DEFAULT, 'DEFAULT');
+    assert.strictEqual(al.LogSeverity.DEBUG, 'DEBUG');
+    assert.strictEqual(al.LogSeverity.INFO, 'INFO');
+    assert.strictEqual(al.LogSeverity.WARNING, 'WARNING');
+    assert.strictEqual(al.LogSeverity.ERROR, 'ERROR');
   });
 });
