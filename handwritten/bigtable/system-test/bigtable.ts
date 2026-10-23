@@ -1372,10 +1372,6 @@ describe('Bigtable', () => {
     // the real functionality - it is just a way to keep things organized!
     const backupIdFromCluster = generateId('backup');
     let backupNameFromCluster: string;
-    const restoreTableIdFromCluster = generateId('table');
-
-    const backupIdFromTable = generateId('backup');
-    let backupNameFromTable: string;
 
     // The minimum backup expiry time is 6 hours. The times here each have a 2
     // hour padding to tolerate latency and clock drift. Also, while the time
@@ -1399,10 +1395,6 @@ describe('Bigtable', () => {
         `${CLUSTER.name}/backups/${backupIdFromCluster}`,
         bigtable.projectId,
       );
-      backupNameFromTable = replaceProjectIdToken(
-        `${CLUSTER.name}/backups/${backupIdFromTable}`,
-        bigtable.projectId,
-      );
     });
 
     it('should create backup of a table (from cluster)', async () => {
@@ -1414,17 +1406,30 @@ describe('Bigtable', () => {
     });
 
     it('should create backup of a table (from table)', async () => {
+      const backupIdFromTable = generateId('backup');
+      const backupNameFromTable = replaceProjectIdToken(
+        `${CLUSTER.name}/backups/${backupIdFromTable}`,
+        bigtable.projectId,
+      );
       const [backup, op] = await withBackupQuotaRetry(() =>
         TABLE.createBackup(backupIdFromTable, {
           expireTime,
         }),
       );
-      await op.promise();
-      await backup.getMetadata();
+      try {
+        await op.promise();
+        await backup.getMetadata();
 
-      assert.strictEqual(backup.metadata!.name, backupNameFromTable);
+        assert.strictEqual(backup.metadata!.name, backupNameFromTable);
 
-      assert.deepStrictEqual(backup.expireDate, expireTime);
+        assert.deepStrictEqual(backup.expireDate, expireTime);
+      } finally {
+        try {
+          await withBackupQuotaRetry(() => backup.delete());
+        } catch {
+          // Ignore cleanup errors if the backup was not created.
+        }
+      }
     });
 
     it('should get a specific backup (cluster)', async () => {
@@ -1476,6 +1481,7 @@ describe('Bigtable', () => {
     });
 
     it('should restore a backup (cluster)', async () => {
+      const restoreTableIdFromCluster = generateId('table');
       const backup = CLUSTER.backup(backupIdFromCluster);
       const [table, op] = await backup.restore(restoreTableIdFromCluster);
       await op.promise();
@@ -1485,18 +1491,22 @@ describe('Bigtable', () => {
     });
 
     it('should restore a backup to a different instance', async () => {
-      const [, operation] = await DIFF_INSTANCE.create(
-        createInstanceConfig(
-          generateId('d-clust'),
-          'us-east1-c',
-          3,
-          Date.now(),
-        ),
-      );
-      await operation.promise();
+      const [alreadyExists] = await DIFF_INSTANCE.exists();
+      if (!alreadyExists) {
+        const [, operation] = await DIFF_INSTANCE.create(
+          createInstanceConfig(
+            generateId('d-clust'),
+            'us-east1-c',
+            3,
+            Date.now(),
+          ),
+        );
+        await operation.promise();
+      }
       const [iExists] = await DIFF_INSTANCE.exists();
       assert.strictEqual(iExists, true);
 
+      const restoreTableIdFromCluster = generateId('table');
       const backup = CLUSTER.backup(backupIdFromCluster);
       const [table, op] = await backup.restoreTo({
         tableId: restoreTableIdFromCluster,
@@ -1614,9 +1624,13 @@ describe('Bigtable', () => {
           assert.strictEqual(fetchedNewBackup.name, backupPath);
           // Delete the copied backup
         } finally {
-          await withBackupQuotaRetry(() =>
-            config.cluster.backup(newBackup.id).delete(),
-          );
+          try {
+            await withBackupQuotaRetry(() =>
+              config.cluster.backup(newBackup.id).delete(),
+            );
+          } catch {
+            // Ignore cleanup errors if the copied backup was not created.
+          }
         }
       }
 
@@ -1647,7 +1661,11 @@ describe('Bigtable', () => {
               INSTANCE,
             );
           } finally {
-            await withBackupQuotaRetry(() => backup.delete());
+            try {
+              await withBackupQuotaRetry(() => backup.delete());
+            } catch {
+              // Ignore cleanup errors if the source backup was not created.
+            }
           }
         }
         it('should copy to the same cluster with precise date expiry times', async () => {
@@ -1714,10 +1732,19 @@ describe('Bigtable', () => {
               instance,
             );
           } finally {
-            await instance.delete();
+            await reapBackups(instance);
+            try {
+              await instance.delete();
+            } catch {
+              // Ignore cleanup errors if the instance was not created.
+            }
           }
         } finally {
-          await withBackupQuotaRetry(() => backup.delete());
+          try {
+            await withBackupQuotaRetry(() => backup.delete());
+          } catch {
+            // Ignore cleanup errors if the source backup was not created.
+          }
         }
       });
       it('should create backup of a table and copy it on another cluster of the same instance', async () => {
@@ -1735,6 +1762,7 @@ describe('Bigtable', () => {
           }
           const destinationClusterId = generateId('cluster');
           const destinationCluster = INSTANCE.cluster(destinationClusterId);
+          const copiedBackupId = generateId('backup');
           // Create destination cluster with given options
           const [, operation] = await destinationCluster.create({
             location: 'us-central2-b',
@@ -1747,16 +1775,29 @@ describe('Bigtable', () => {
               backup,
               {
                 cluster: new Cluster(INSTANCE, destinationClusterId),
-                id: generateId('backup'),
+                id: copiedBackupId,
                 expireTime: copyExpireTime,
               },
               INSTANCE,
             );
           } finally {
-            await destinationCluster.delete();
+            try {
+              await destinationCluster.backup(copiedBackupId).delete();
+            } catch {
+              // Ignore cleanup errors if the copied backup was already deleted.
+            }
+            try {
+              await destinationCluster.delete();
+            } catch {
+              // Ignore cleanup errors if the destination cluster was not created.
+            }
           }
         } finally {
-          await withBackupQuotaRetry(() => backup.delete());
+          try {
+            await withBackupQuotaRetry(() => backup.delete());
+          } catch {
+            // Ignore cleanup errors if the source backup was not created.
+          }
         }
       });
       it('should create backup of a table and copy it on another project', async () => {
@@ -1809,10 +1850,19 @@ describe('Bigtable', () => {
               secondInstance,
             );
           } finally {
-            await secondInstance.delete();
+            await reapBackups(secondInstance);
+            try {
+              await secondInstance.delete();
+            } catch {
+              // Ignore cleanup errors if the second instance was not created.
+            }
           }
         } finally {
-          await withBackupQuotaRetry(() => backup.delete());
+          try {
+            await withBackupQuotaRetry(() => backup.delete());
+          } catch {
+            // Ignore cleanup errors if the source backup was not created.
+          }
         }
       });
       it('should restore a copied backup', async () => {
@@ -1848,33 +1898,35 @@ describe('Bigtable', () => {
           await createBackupOperation.promise();
           // Copy the backup
           const config = {
-            cluster: backup.cluster,
+            cluster: createdBackup.cluster,
             id: generateId('backup'),
             expireTime: copyExpireTime,
           };
           const [copiedBackup, copyOperation] = await withBackupQuotaRetry(() =>
-            backup!.copy(config),
+            createdBackup.copy(config),
           );
           newBackup = copiedBackup;
           await copyOperation.promise();
           // Restore a table from the copied backup
           const [restoredTable, restoreOperation] =
-            await newBackup.restore(restoredTableId);
+            await copiedBackup.restore(restoredTableId);
           newTable = restoredTable;
           await restoreOperation.promise();
-          const rows = await newTable.getRows();
+          const rows = await restoredTable.getRows();
           assert.deepStrictEqual(rows[0][0].id, 'some-data-to-copy-key');
         } finally {
           if (newBackup) {
+            const copiedBackupToDelete = newBackup;
             try {
-              await withBackupQuotaRetry(() => newBackup!.delete());
+              await withBackupQuotaRetry(() => copiedBackupToDelete.delete());
             } catch {
               // Ignore cleanup errors if the copied backup was not created.
             }
           }
           if (backup) {
+            const sourceBackupToDelete = backup;
             try {
-              await withBackupQuotaRetry(() => backup!.delete());
+              await withBackupQuotaRetry(() => sourceBackupToDelete.delete());
             } catch {
               // Ignore cleanup errors if the source backup was not created.
             }
@@ -2698,7 +2750,7 @@ function createInstanceConfig(
  */
 async function withBackupQuotaRetry<T>(
   fn: () => Promise<T>,
-  retries = 3,
+  retries = 2,
 ): Promise<T> {
   for (let attempt = 0; ; attempt++) {
     try {
