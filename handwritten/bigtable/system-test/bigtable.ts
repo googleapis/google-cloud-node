@@ -1762,7 +1762,6 @@ describe('Bigtable', () => {
           }
           const destinationClusterId = generateId('cluster');
           const destinationCluster = INSTANCE.cluster(destinationClusterId);
-          const copiedBackupId = generateId('backup');
           // Create destination cluster with given options
           const [, operation] = await destinationCluster.create({
             location: 'us-central2-b',
@@ -1775,17 +1774,12 @@ describe('Bigtable', () => {
               backup,
               {
                 cluster: new Cluster(INSTANCE, destinationClusterId),
-                id: copiedBackupId,
+                id: generateId('backup'),
                 expireTime: copyExpireTime,
               },
               INSTANCE,
             );
           } finally {
-            try {
-              await destinationCluster.backup(copiedBackupId).delete();
-            } catch {
-              // Ignore cleanup errors if the copied backup was already deleted.
-            }
             try {
               await destinationCluster.delete();
             } catch {
