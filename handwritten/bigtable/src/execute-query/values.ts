@@ -232,10 +232,12 @@ export class EncodedKeyMap
     key: string | bigint | Uint8Array | null,
     defaultValue: SqlValue,
   ): SqlValue {
-    if (this.has(key)) {
-      return this.get(key) as SqlValue;
+    const parsedKey = _parseBufferToMapKey(key);
+    const existing = this.map_impl.get(parsedKey);
+    if (existing !== undefined) {
+      return existing[1];
     }
-    this.set(key, defaultValue);
+    this.map_impl.set(parsedKey, [key, defaultValue]);
     return defaultValue;
   }
 
@@ -246,11 +248,13 @@ export class EncodedKeyMap
     if (typeof callback !== 'function') {
       throw new TypeError('callback is not a function');
     }
-    if (this.has(key)) {
-      return this.get(key) as SqlValue;
+    const parsedKey = _parseBufferToMapKey(key);
+    const existing = this.map_impl.get(parsedKey);
+    if (existing !== undefined) {
+      return existing[1];
     }
     const value = callback(key);
-    this.set(key, value);
+    this.map_impl.set(parsedKey, [key, value]);
     return value;
   }
 }

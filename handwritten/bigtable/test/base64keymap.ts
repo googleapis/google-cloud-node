@@ -238,6 +238,37 @@ describe('Bigtable/EncodedKeyMap', () => {
           ),
         TypeError,
       );
+
+      // Existing null value does not trigger callback in getOrInsertComputed
+      assert.strictEqual(
+        map.getOrInsertComputed('existingNullValue', () => {
+          callbackCount++;
+          return 'shouldNotBeCalled';
+        }),
+        null,
+      );
+      assert.strictEqual(callbackCount, 1);
+
+      // bigint, null, and Uint8Array keys
+      assert.strictEqual(map.getOrInsert(42n, 'bigintVal'), 'bigintVal');
+      assert.strictEqual(map.getOrInsert(42n, 'otherBigintVal'), 'bigintVal');
+      assert.strictEqual(map.getOrInsert(null, 'nullKeyVal'), 'nullKeyVal');
+      assert.strictEqual(
+        map.getOrInsertComputed(new Uint8Array([1, 2, 3]), () => 'uint8Val'),
+        'uint8Val',
+      );
+      assert.strictEqual(
+        map.get(new Uint8Array([1, 2, 3])),
+        'uint8Val',
+      );
+
+      // Error thrown by callback propagates and does not insert entry
+      assert.throws(() => {
+        map.getOrInsertComputed('throwingKey', () => {
+          throw new Error('computation failed');
+        });
+      }, /computation failed/);
+      assert.strictEqual(map.has('throwingKey'), false);
     });
   });
 });
