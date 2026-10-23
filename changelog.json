@@ -4,6 +4,33 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "2405101edaec264681f17d1038a6f65d126c7ea4",
+          "message": "Prefer AsyncLocalStorageContextManager in OpenTelemetry instrumentation",
+          "issues": [
+            "9610"
+          ],
+          "scope": "spanner"
+        },
+        {
+          "type": "fix",
+          "sha": "7a5db1185a0c21a6f554f8c6bf640144178d5b9c",
+          "message": "ExcludeTxnFromChangeStreams field and request headers i…",
+          "issues": [
+            "9618"
+          ],
+          "scope": "Spanner"
+        }
+      ],
+      "version": "9.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner",
+      "id": "463e391e-9ee3-449b-9964-3b52a64cda89",
+      "createTime": "2026-10-23T05:18:50.573Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "263965060a675d2819a6987d96d4e1b75c30adeb",
           "message": "Add DML stages (insert, upsert, delete, update), literals source, and atomic execution option to Node SDK pipelines",
@@ -106069,5 +106096,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-22T21:29:43.447Z"
+  "updateTime": "2026-10-23T05:18:50.573Z"
 }
