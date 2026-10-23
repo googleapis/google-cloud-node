@@ -50,9 +50,7 @@ export const TRACE_SAMPLED_KEY = 'logging.googleapis.com/trace_sampled';
 export type Timestamp = google.protobuf.ITimestamp | Date | string;
 export type LogSeverity = google.logging.type.LogSeverity | string;
 export type HttpRequest =
-  | google.logging.type.IHttpRequest
-  | CloudLoggingHttpRequest
-  | RawHttpRequest;
+  google.logging.type.IHttpRequest | CloudLoggingHttpRequest | RawHttpRequest;
 export type LogEntry = Omit<
   google.logging.v2.ILogEntry,
   'timestamp' | 'severity' | 'httpRequest'
@@ -69,7 +67,7 @@ export type Data = any;
 // LoggingService API.
 export interface EntryJson {
   timestamp: Timestamp;
-  insertId: number;
+  insertId: string;
   jsonPayload?: google.protobuf.IStruct;
   textPayload?: string;
   httpRequest?: google.logging.type.IHttpRequest;
@@ -178,13 +176,13 @@ class Entry {
      * @name Entry#metadata
      * @type {object}
      * @property {Date} timestamp
-     * @property {number} insertId
+     * @property {string} insertId
      */
     this.metadata = extend(
       {
         timestamp: new Date(),
       },
-      metadata,
+      metadata
     );
     // JavaScript date has a very coarse granularity (millisecond), which makes
     // it quite likely that multiple log entries would have the same timestamp.
