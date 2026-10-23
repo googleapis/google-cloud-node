@@ -21,7 +21,7 @@ import * as common from '../src/utils/common';
 import * as http from 'http';
 import {InMemorySpanExporter} from '@opentelemetry/sdk-trace-base';
 import {trace} from '@opentelemetry/api';
-import {Resource} from '@opentelemetry/resources';
+import {resourceFromAttributes} from '@opentelemetry/resources';
 import {SEMRESATTRS_SERVICE_NAME} from '@opentelemetry/semantic-conventions';
 import {NodeSDK} from '@opentelemetry/sdk-node';
 
@@ -315,7 +315,7 @@ describe('Entry', () => {
       let sdk: NodeSDK;
       before(() => {
         sdk = new NodeSDK({
-          resource: new Resource({
+          resource: resourceFromAttributes({
             [SEMRESATTRS_SERVICE_NAME]: 'nodejs-logging-entry-test',
           }),
           traceExporter: new InMemorySpanExporter(),
@@ -493,7 +493,7 @@ describe('Entry', () => {
       let sdk: NodeSDK;
       before(() => {
         sdk = new NodeSDK({
-          resource: new Resource({
+          resource: resourceFromAttributes({
             [SEMRESATTRS_SERVICE_NAME]: 'nodejs-logging-entry-test',
           }),
           traceExporter: new InMemorySpanExporter(),
