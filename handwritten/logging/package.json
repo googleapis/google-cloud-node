@@ -45,7 +45,7 @@
     "postpublish": "./.kokoro/publish-min.sh"
   },
   "dependencies": {
-    "@google-cloud/common": "^8.0.0",
+    "@google-cloud/common": "^8.2.2",
     "@google-cloud/logging-api": "^0.5.0",
     "@google-cloud/paginator": "^7.2.0",
     "@google-cloud/projectify": "^6.2.0",
