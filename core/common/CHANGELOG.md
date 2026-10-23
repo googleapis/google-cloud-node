@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/common?activeTab=versions
 
+## [8.2.2](https://github.com/googleapis/google-cloud-node/compare/common-v8.2.1...common-v8.2.2) (2026-10-23)
+
+
+### Bug Fixes
+
+* **common:** Preserve {{projectId}} token during URI path encoding ([#9668](https://github.com/googleapis/google-cloud-node/issues/9668)) ([14b0cc6](https://github.com/googleapis/google-cloud-node/commit/14b0cc6a45f1fcb94e29b48cd2d797e568560acc))
+
 ## [8.2.1](https://github.com/googleapis/google-cloud-node/compare/common-v8.2.0...common-v8.2.1) (2026-10-19)
 
 
