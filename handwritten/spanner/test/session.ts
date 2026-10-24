@@ -273,7 +273,7 @@ describe('Session', () => {
         assert.deepStrictEqual(config.gaxOpts, {});
         assert.deepStrictEqual(config.headers, {
           ...session.commonHeaders_,
-          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
         });
 
         assert.strictEqual(callback_, callback);
@@ -309,7 +309,10 @@ describe('Session', () => {
         assert.deepStrictEqual(
           config.headers,
           Object.assign(
-            {[LEADER_AWARE_ROUTING_HEADER]: 'true'},
+            {
+              [LEADER_AWARE_ROUTING_HEADER]: 'true',
+              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
+            },
             session.commonHeaders_,
           ),
         );
@@ -336,7 +339,10 @@ describe('Session', () => {
         assert.deepStrictEqual(
           config.headers,
           Object.assign(
-            {[LEADER_AWARE_ROUTING_HEADER]: 'true'},
+            {
+              [LEADER_AWARE_ROUTING_HEADER]: 'true',
+              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
+            },
             session.commonHeaders_,
           ),
         );
@@ -389,7 +395,10 @@ describe('Session', () => {
           name: session.formattedName_,
         });
         assert.deepStrictEqual(config.gaxOpts, {});
-        assert.deepStrictEqual(config.headers, session.commonHeaders_);
+        assert.deepStrictEqual(config.headers, {
+          ...session.commonHeaders_,
+          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
+        });
         return requestReturnValue;
       };
 
@@ -446,7 +455,7 @@ describe('Session', () => {
         assert.deepStrictEqual(config.gaxOpts, {});
         assert.deepStrictEqual(config.headers, {
           ...session.commonHeaders_,
-          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
         });
         assert.strictEqual(callback_, callback);
         return requestReturnValue;

@@ -443,7 +443,7 @@ describe('Transaction', () => {
         assert.strictEqual(method, 'streamingRead');
         assert.deepStrictEqual(headers, {
           ...snapshot.commonHeaders_,
-          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
         });
       });
 
@@ -1670,7 +1670,7 @@ describe('Transaction', () => {
         assert.strictEqual(method, 'executeStreamingSql');
         assert.deepStrictEqual(headers, {
           ...snapshot.commonHeaders_,
-          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
         });
       });
 
@@ -2731,7 +2731,7 @@ describe('Transaction', () => {
           headers,
           Object.assign(
             {
-              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
               [LEADER_AWARE_ROUTING_HEADER]: 'true',
             },
             transaction.commonHeaders_,
@@ -3134,7 +3134,7 @@ describe('Transaction', () => {
           headers,
           Object.assign(
             {
-              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
               [LEADER_AWARE_ROUTING_HEADER]: true,
             },
             transaction.commonHeaders_,
@@ -3446,6 +3446,82 @@ describe('Transaction', () => {
           assert.strictEqual(transaction.commitTimestampProto, fakeTimestamp);
           // assert on the successfull commit response
           assert.deepStrictEqual(resp, fakeResponse);
+        });
+      });
+
+      describe('x-goog-spanner-request-id on MultiplexedSessionRetry', () => {
+        const commitRetryResponse = {
+          commitTimestamp: null,
+          MultiplexedSessionRetry: 'precommitToken',
+          precommitToken: {
+            precommitToken: Buffer.from('precommit-token-commit-retry'),
+            seqNum: 2,
+          },
+        };
+        const okResponse = {commitTimestamp: {seconds: 0, nanos: 0}};
+        const splitId = (id: string) => {
+          const lastDot = id.lastIndexOf('.');
+          return {
+            base: id.substring(0, lastDot),
+            attempt: id.substring(lastDot + 1),
+          };
+        };
+
+        it('continues after gax-level retries instead of reusing an attempt', done => {
+          const requestStub = sandbox.stub(transaction, 'request');
+          const sentIds: string[] = [];
+
+          requestStub.onFirstCall().callsFake((config, callback) => {
+            const first = config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER];
+            sentIds.push(first);
+            // Simulate createRequestIdInterceptor after one gax retry
+            // (e.g. UNAVAILABLE): it writes attempt .2 back into the config.
+            const retried = `${splitId(first).base}.2`;
+            config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER] = retried;
+            sentIds.push(retried);
+            callback(null, commitRetryResponse);
+          });
+          requestStub.onSecondCall().callsFake((config, callback) => {
+            sentIds.push(config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER]);
+            callback(null, okResponse);
+          });
+
+          transaction.commit(err => {
+            assert.ifError(err);
+            assert.strictEqual(requestStub.callCount, 2);
+            const [a1, a2, a3] = sentIds.map(splitId);
+            assert.deepStrictEqual(
+              [a1.attempt, a2.attempt, a3.attempt],
+              ['1', '2', '3'],
+            );
+            // Same logical request throughout.
+            assert.strictEqual(a2.base, a1.base);
+            assert.strictEqual(a3.base, a1.base);
+            assert.strictEqual(new Set(sentIds).size, 3, 'no duplicate IDs');
+            done();
+          });
+        });
+
+        it('uses the next attempt when there was no gax-level retry', done => {
+          const requestStub = sandbox.stub(transaction, 'request');
+          const sentIds: string[] = [];
+
+          requestStub.onFirstCall().callsFake((config, callback) => {
+            sentIds.push(config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER]);
+            callback(null, commitRetryResponse);
+          });
+          requestStub.onSecondCall().callsFake((config, callback) => {
+            sentIds.push(config.headers[X_GOOG_SPANNER_REQUEST_ID_HEADER]);
+            callback(null, okResponse);
+          });
+
+          transaction.commit(err => {
+            assert.ifError(err);
+            const [a1, a2] = sentIds.map(splitId);
+            assert.deepStrictEqual([a1.attempt, a2.attempt], ['1', '2']);
+            assert.strictEqual(a2.base, a1.base);
+            done();
+          });
         });
       });
 
@@ -3776,7 +3852,10 @@ describe('Transaction', () => {
         assert.deepStrictEqual(
           headers,
           Object.assign(
-            {[LEADER_AWARE_ROUTING_HEADER]: 'true'},
+            {
+              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
+              [LEADER_AWARE_ROUTING_HEADER]: 'true',
+            },
             transaction.commonHeaders_,
           ),
         );
@@ -4471,7 +4550,7 @@ describe('Transaction', () => {
             config.headers,
             Object.assign(
               {
-                [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+                [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
                 [LEADER_AWARE_ROUTING_HEADER]: true,
               },
               transaction.commonHeaders_,
@@ -4566,7 +4645,7 @@ describe('Transaction', () => {
           headers,
           Object.assign(
             {
-              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
               [LEADER_AWARE_ROUTING_HEADER]: true,
             },
             transaction.commonHeaders_,
