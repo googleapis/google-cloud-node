@@ -637,6 +637,31 @@ describe('unit test', () => {
     secondary.done();
   });
 
+  it('should not emit MetadataLookupWarning when primary fails with ConnectionRefused and secondary fails with FailedToOpenSocket under Bun', async () => {
+    const primary = nock(HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError(
+        Object.assign(new Error('Unable to connect'), {
+          code: 'ConnectionRefused',
+        }),
+      );
+    const secondary = nock(SECONDARY_HOST)
+      .get(`${PATH}/${TYPE}`)
+      .replyWithError(
+        Object.assign(new Error('Was there a typo in the url or port?'), {
+          code: 'FailedToOpenSocket',
+        }),
+      );
+
+    const emitWarningStub = sandbox.stub(process, 'emitWarning');
+
+    const isGCE = await gcp.isAvailable();
+    assert.strictEqual(isGCE, false);
+    assert.strictEqual(emitWarningStub.called, false);
+    primary.done();
+    secondary.done();
+  });
+
   it('should return first successful response', async () => {
     const secondary = secondaryHostRequest(500);
     const primary = nock(HOST).get(`${PATH}/${TYPE}`).reply(404);
