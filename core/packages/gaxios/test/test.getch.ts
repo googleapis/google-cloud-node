@@ -33,6 +33,8 @@ import {
 import util from '../src/util.cjs';
 
 import fs from 'fs';
+import path from 'path';
+import ts from 'typescript';
 
 const pkg = util.pkg;
 
@@ -1934,6 +1936,113 @@ describe('fetch-compatible API', () => {
 
     scope.done();
     assert.deepStrictEqual(res.data, {});
+  });
+
+  it('should emit fetch call-signature types compatible with @types/bun when skipLibCheck is false', async () => {
+    const pkgRoot = fs.existsSync(
+      path.resolve(process.cwd(), 'build/esm/src/index.d.ts'),
+    )
+      ? process.cwd()
+      : path.resolve(process.cwd(), 'core/packages/gaxios');
+    const pkgRootNorm = pkgRoot.replace(/\\/g, '/');
+    const esmEntry = path
+      .resolve(pkgRoot, 'build/esm/src/index.js')
+      .replace(/\\/g, '/');
+    const cjsEntry = path
+      .resolve(pkgRoot, 'build/cjs/src/index.js')
+      .replace(/\\/g, '/');
+    const virtualFile = path
+      .resolve(pkgRoot, 'virtual-bun-consumer.ts')
+      .replace(/\\/g, '/');
+    const sourceText = [
+      'declare global {',
+      '  namespace fetch {',
+      '    function preconnect(url: string | URL): void;',
+      '  }',
+      '}',
+      `import {Gaxios as EsmGaxios, GaxiosOptions as EsmGaxiosOptions} from '${esmEntry}';`,
+      `import {Gaxios as CjsGaxios, GaxiosOptions as CjsGaxiosOptions} from '${cjsEntry}';`,
+      'const esmClient = new EsmGaxios();',
+      'const cjsClient = new CjsGaxios();',
+      'const esmFetch: EsmGaxiosOptions["fetchImplementation"] = (...args) => esmClient.fetch(...args);',
+      'const cjsFetch: CjsGaxiosOptions["fetchImplementation"] = (...args) => cjsClient.fetch(...args);',
+      'const esmOpts: EsmGaxiosOptions = {url: "https://example.com", fetchImplementation: esmFetch};',
+      'const cjsOpts: CjsGaxiosOptions = {url: "https://example.com", fetchImplementation: cjsFetch};',
+      'export {esmClient, cjsClient, esmOpts, cjsOpts};',
+    ].join('\n');
+
+    const compilerOptions: ts.CompilerOptions = {
+      target: ts.ScriptTarget.ES2023,
+      lib: ['lib.es2023.d.ts', 'lib.dom.d.ts'],
+      module: ts.ModuleKind.NodeNext,
+      moduleResolution: ts.ModuleResolutionKind.NodeNext,
+      strict: true,
+      skipLibCheck: false,
+      noEmit: true,
+      types: [],
+    };
+    const baseHost = ts.createCompilerHost(compilerOptions);
+    const origGetSourceFile = baseHost.getSourceFile.bind(baseHost);
+    const origFileExists = baseHost.fileExists.bind(baseHost);
+    const origReadFile = baseHost.readFile.bind(baseHost);
+    baseHost.fileExists = fileName =>
+      path.resolve(fileName).replace(/\\/g, '/') === virtualFile ||
+      origFileExists(fileName);
+    baseHost.readFile = fileName =>
+      path.resolve(fileName).replace(/\\/g, '/') === virtualFile
+        ? sourceText
+        : origReadFile(fileName);
+    baseHost.getSourceFile = (
+      fileName,
+      languageVersion,
+      onError,
+      shouldCreateNewSourceFile,
+    ) => {
+      if (path.resolve(fileName).replace(/\\/g, '/') === virtualFile) {
+        return ts.createSourceFile(fileName, sourceText, languageVersion);
+      }
+      return origGetSourceFile(
+        fileName,
+        languageVersion,
+        onError,
+        shouldCreateNewSourceFile,
+      );
+    };
+
+    const program = ts.createProgram([virtualFile], compilerOptions, baseHost);
+    const targetFiles = program
+      .getSourceFiles()
+      .filter(
+        sf =>
+          sf.fileName.replace(/\\/g, '/').startsWith(pkgRootNorm) &&
+          !sf.fileName.includes('node_modules'),
+      );
+    assert(
+      targetFiles.length >= 9,
+      `Expected ESM and CJS .d.ts files to be loaded, got ${targetFiles.length}`,
+    );
+    const diagnostics = targetFiles.flatMap(sf => [
+      ...program.getSyntacticDiagnostics(sf),
+      ...program.getSemanticDiagnostics(sf),
+    ]);
+    assert.strictEqual(
+      diagnostics.length,
+      0,
+      ts.formatDiagnosticsWithColorAndContext(diagnostics, baseHost),
+    );
+
+    const scope = nock(url).get('/').reply(200, {ok: true});
+    const gaxios = new Gaxios();
+    const bunStyleFetch = Object.assign(
+      (...args: Parameters<typeof fetch>) => fetch(...args),
+      {preconnect: (target: string | URL) => void target},
+    );
+    const res = await gaxios.request({
+      url,
+      fetchImplementation: bunStyleFetch,
+    });
+    scope.done();
+    assert.deepStrictEqual(res.data, {ok: true});
   });
 });
 
