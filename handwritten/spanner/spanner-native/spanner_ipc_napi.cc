@@ -482,9 +482,14 @@ class IpcConnection {
       }
     }
     const size_t remaining = total - written;
-    if (queued_bytes_ + remaining > kMaxQueuedBytes) {
+    if (total > kFrameHeaderSize &&
+        queued_bytes_ + remaining > kMaxQueuedBytes) {
       lk.unlock();
-      MarkDead();  // The sidecar is not draining requests at all.
+      if (written > 0) {
+        // A partial frame was already sent on the socket; tear down the
+        // connection so framing cannot desynchronize.
+        MarkDead();
+      }
       return false;
     }
     std::vector<uint8_t> buf(remaining);
@@ -671,6 +676,7 @@ struct EnvDispatchContext {
   std::atomic<int32_t> ref_count{1};
   int32_t active_rpcs = 0;
   bool tsfn_refed = false;
+  bool streams_swept = false;
   AsyncStreamContext* head = nullptr;
   std::unordered_map<int64_t, AsyncStreamContext*> active_streams;
 
@@ -729,31 +735,42 @@ struct EnvDispatchContext {
     }
   }
 
-  void Shutdown() {
-    std::unique_lock<std::mutex> lk(tsfn_mu);
-    bool expected = false;
-    if (!closing.compare_exchange_strong(expected, true)) {
-      return;
-    }
+  // Marks the isolate closing, abandons every active stream, and sends CANCEL
+  // frames outside tsfn_mu. Called from both OnTsfnFinalize and Shutdown()
+  // because Node may run the TSFN finalizer before the instance-data finalizer
+  // on worker exit/termination.
+  void TeardownStreams(bool release_tsfn) {
     std::vector<std::pair<std::shared_ptr<IpcConnection>, uint64_t>> to_cancel;
-    for (AsyncStreamContext* cur = head; cur != nullptr; cur = cur->next) {
-      cur->abandoned.store(1, std::memory_order_release);
-      // Cancel every stream, including non-cancellable ones (the sidecar
-      // abandons those at the next batch, like the FFI abandoned flag).
-      if (cur->conn) {
-        to_cancel.emplace_back(cur->conn, cur->wire_id);
+    {
+      std::lock_guard<std::mutex> lk(tsfn_mu);
+      closing.store(true, std::memory_order_relaxed);
+      if (!streams_swept) {
+        streams_swept = true;
+        for (AsyncStreamContext* cur = head; cur != nullptr; cur = cur->next) {
+          cur->abandoned.store(1, std::memory_order_release);
+          // Cancel every stream, including non-cancellable ones (the sidecar
+          // abandons those at the next batch, like the FFI abandoned flag).
+          if (cur->conn) {
+            to_cancel.emplace_back(cur->conn, cur->wire_id);
+          }
+        }
+        active_streams.clear();
+      }
+      if (release_tsfn) {
+        if (tsfn != nullptr) {
+          napi_release_threadsafe_function(tsfn, napi_tsfn_abort);
+          tsfn = nullptr;
+        }
+      } else {
+        tsfn = nullptr;
       }
     }
-    active_streams.clear();
-    if (tsfn != nullptr) {
-      napi_release_threadsafe_function(tsfn, napi_tsfn_abort);
-      tsfn = nullptr;
-    }
-    lk.unlock();
     for (auto& entry : to_cancel) {
       entry.first->SendControl(kFrameCancel, entry.second);
     }
   }
+
+  void Shutdown() { TeardownStreams(/*release_tsfn=*/true); }
 };
 
 // Posts a batch to the stream's isolate. Takes ownership of `batch`. Mirrors
@@ -941,11 +958,7 @@ void OnTsfnFinalize(napi_env /*env*/, void* finalize_data, void* /*hint*/) {
   if (env_ctx == nullptr) {
     return;
   }
-  {
-    std::lock_guard<std::mutex> lk(env_ctx->tsfn_mu);
-    env_ctx->closing.store(true, std::memory_order_relaxed);
-    env_ctx->tsfn = nullptr;
-  }
+  env_ctx->TeardownStreams(/*release_tsfn=*/false);
   env_ctx->Release();  // The reference held by the TSFN.
 }
 
@@ -1608,8 +1621,7 @@ bool SpawnLocked(std::string* err) {
   posix_spawnattr_setsigmask(&attr, &mask);
   sigset_t defaults;
   sigemptyset(&defaults);
-  for (int s : {SIGPIPE, SIGINT, SIGTERM, SIGHUP, SIGQUIT, SIGCHLD, SIGUSR1,
-                SIGUSR2}) {
+  for (int s : {SIGPIPE, SIGCHLD, SIGUSR1, SIGUSR2}) {
     sigaddset(&defaults, s);
   }
   posix_spawnattr_setsigdefault(&attr, &defaults);
@@ -1777,6 +1789,27 @@ bool RemoteInit(
   return true;
 }
 
+// Fire-and-forget CLOSE_SERVICE helper (must NOT be called with mgr.mu held).
+void SendCloseServiceAsync(
+    const std::shared_ptr<IpcConnection>& conn,
+    int64_t remote) {
+  if (!conn || remote <= 0) {
+    return;
+  }
+  uint8_t frame[kFrameHeaderSize + 8];
+  EncodeFrameHeader(
+      frame,
+      8,
+      kFrameCloseService,
+      0,
+      Routes().next_request_id.fetch_add(1, std::memory_order_relaxed));
+  PutI64(frame + kFrameHeaderSize, remote);
+  struct iovec iov;
+  iov.iov_base = frame;
+  iov.iov_len = sizeof(frame);
+  conn->Write(&iov, 1);
+}
+
 // Requires `lk` to hold mgr.mu. Makes sure `slot` has a remote handle for the
 // current sidecar generation, spawning the sidecar if needed. The INIT round
 // trip itself runs with mgr.mu released, so other isolates' queries on healthy
@@ -1789,6 +1822,10 @@ bool EnsureSlotReadyLocked(
   SidecarManager& m = Mgr();
   for (int attempt = 0; attempt < 3; ++attempt) {
     m.init_cv.wait(lk, [&] { return !slot->initializing; });
+    if (slot->refs <= 0) {
+      *err = "invalid or closed SpannerCore service handle";
+      return false;
+    }
     if (!EnsureRunningLocked(err)) {
       return false;
     }
@@ -1814,6 +1851,18 @@ bool EnsureSlotReadyLocked(
       slot->last_error = init_err;
       slot->retry_not_before = std::chrono::steady_clock::now() + kRetryCooldown;
       *err = init_err;
+      return false;
+    }
+    if (slot->refs <= 0) {
+      // All holders closed the slot while RemoteInit was in flight; release the
+      // remote handle on the sidecar so it does not leak.
+      const bool same_gen = (gen == m.generation);
+      lk.unlock();
+      if (same_gen) {
+        SendCloseServiceAsync(conn, remote);
+      }
+      lk.lock();
+      *err = "invalid or closed SpannerCore service handle";
       return false;
     }
     slot->retry_not_before = {};
@@ -2120,9 +2169,13 @@ napi_value InitService(napi_env env, napi_callback_info info) {
     m.services.emplace(local, slot);
     m.services_by_payload.emplace(payload, local);
   }
+  // Hold a reference across EnsureSlotReadyLocked so a concurrent CloseService
+  // from another client sharing this slot cannot drop refs to 0 and erase the
+  // slot while RemoteInit runs with mgr.mu unlocked.
+  slot->refs++;
   std::string err;
   if (!EnsureSlotReadyLocked(lk, slot, &err)) {
-    if (slot->refs <= 0) {
+    if (--slot->refs <= 0) {
       auto it = m.services.find(local);
       if (it != m.services.end() && it->second == slot) {
         m.services.erase(it);
@@ -2132,7 +2185,6 @@ napi_value InitService(napi_env env, napi_callback_info info) {
     m.last_init_error = err;
     return MakeInt64(env, -1);
   }
-  slot->refs++;
   m.last_init_error.clear();
   return MakeInt64(env, local);
 }
@@ -2168,23 +2220,7 @@ napi_value CloseService(napi_env env, napi_callback_info info) {
       remote = slot->remote_handle;
     }
   }
-  if (conn) {
-    // Fire-and-forget (the CLOSE_RESULT reply is ignored): closing a service
-    // must never stall the event loop. Re-initializing the same configuration
-    // right after is safe in either processing order thanks to refcounting.
-    uint8_t frame[kFrameHeaderSize + 8];
-    EncodeFrameHeader(
-        frame,
-        8,
-        kFrameCloseService,
-        0,
-        Routes().next_request_id.fetch_add(1, std::memory_order_relaxed));
-    PutI64(frame + kFrameHeaderSize, remote);
-    struct iovec iov;
-    iov.iov_base = frame;
-    iov.iov_len = sizeof(frame);
-    conn->Write(&iov, 1);
-  }
+  SendCloseServiceAsync(conn, remote);
   napi_create_int32(env, 0, &result);
   return result;
 }

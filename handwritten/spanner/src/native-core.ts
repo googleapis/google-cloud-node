@@ -733,19 +733,20 @@ export function canUseNativeCore(snapshot: any): boolean {
 function getOrCreateServiceHandle(spanner: any): number {
   const state = getGlobalState();
   if (spanner && typeof spanner._nativeServiceHandle === 'number') {
+    const cachedKey = spanner._nativeServiceCacheKey;
+    const retryDue =
+      spanner._nativeServiceHandle === -1 &&
+      isIpcInitRetryDue(state, cachedKey);
     if (
       spanner._nativeServiceGen === state.generation &&
       spanner._nativeServiceHandle !== 0 &&
-      !(
-        spanner._nativeServiceHandle === -1 &&
-        isIpcInitRetryDue(state, spanner._nativeServiceCacheKey)
-      )
+      !retryDue
     ) {
       return spanner._nativeServiceHandle;
     }
-    const cachedKey = spanner._nativeServiceCacheKey;
     if (
       cachedKey &&
+      !retryDue &&
       state.serviceHandles.get(cachedKey) === spanner._nativeServiceHandle
     ) {
       spanner._nativeServiceGen = state.generation;
