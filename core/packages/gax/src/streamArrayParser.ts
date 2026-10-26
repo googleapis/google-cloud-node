@@ -159,6 +159,9 @@ export class StreamArrayParser extends Transform {
 
   /**
    * Suppresses downstream abort errors triggered by explicit stream cancellation.
+   *
+   * @param {Error|null} err - Optional upstream error forwarded to destroy.
+   * @param {Function} callback - Callback invoked when stream destruction completes.
    */
   _destroy(err: Error | null, callback: (error?: Error | null) => void): void {
     this._prevBlock = Buffer.from('');
