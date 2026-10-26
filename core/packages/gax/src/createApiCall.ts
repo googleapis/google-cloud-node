@@ -41,7 +41,7 @@ import {
   traceAttempt,
   ResendRecorder,
 } from './observability/TracerHelper';
-import {checkTelemetryEnabled} from './observability/util';
+import {checkTracingEnabled} from './observability/util';
 import {
   StaticTraceContext,
   DynamicTraceContext,
@@ -83,7 +83,7 @@ export function createApiCall(
   // the following apiCaller will be used for all calls of this function...
   const apiCaller = createAPICaller(settings, descriptor);
 
-  const tracingEnabled = checkTelemetryEnabled(settings);
+  const tracingEnabled = checkTracingEnabled(settings);
   const staticArgs: StaticTraceContext | undefined = tracingEnabled
     ? resolveStaticTraceContext(settings)
     : undefined;
