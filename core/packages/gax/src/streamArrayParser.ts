@@ -153,6 +153,15 @@ export class StreamArrayParser extends Transform {
     callback();
   }
 
+  _destroy(err: Error | null, callback: (error?: Error | null) => void) {
+    // `_destroy` is necessary because `cancel()` aborts `cancelSignal`, which
+    // aborts the underlying HTTP `response.body` stream with an `AbortError`
+    // that `stream.pipeline` forwards to `this.destroy(err)`. Passing `null`
+    // when `this.cancelRequested` is true suppresses spurious cancellation
+    // abort errors while still forwarding genuine errors when not cancelled.
+    callback(this.cancelRequested ? null : err);
+  }
+
   cancel(): void {
     this._done = true;
     this.cancelRequested = true;
