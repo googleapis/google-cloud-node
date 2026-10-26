@@ -1513,7 +1513,9 @@ describe('Bigtable', () => {
         instance: DIFF_INSTANCE,
       });
       await op.promise();
-      const [tExists] = await table.exists();
+      const [tExists] = await DIFF_INSTANCE.table(
+        restoreTableIdFromCluster,
+      ).exists();
       assert.strictEqual(tExists, true);
       assert.strictEqual(table.id, restoreTableIdFromCluster);
     });
@@ -2751,7 +2753,7 @@ async function withBackupQuotaRetry<T>(
       return await fn();
     } catch (err) {
       const isQuotaError =
-        (err as ServiceError)?.code === 8 ||
+        (err as {code?: number})?.code === 8 ||
         (err as Error)?.message?.includes('RESOURCE_EXHAUSTED');
       if (!isQuotaError || attempt >= retries) {
         throw err;
