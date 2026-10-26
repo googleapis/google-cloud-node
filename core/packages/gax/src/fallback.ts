@@ -110,6 +110,7 @@ export class GrpcClient {
   private _servicePath?: string;
   private _port?: number;
   private _enableTelemetryTracing?: boolean;
+  private _enableTelemetryLogging?: boolean;
 
   /**
    * In rare cases users might need to deallocate all memory consumed by loaded protos.
@@ -166,6 +167,9 @@ export class GrpcClient {
     this._enableTelemetryTracing = (
       options as GrpcClientOptions
     ).enableTelemetryTracing;
+    this._enableTelemetryLogging = (
+      options as GrpcClientOptions
+    ).enableTelemetryLogging;
   }
 
   /**
@@ -221,6 +225,8 @@ export class GrpcClient {
    * @param {Object} headers - A dictionary of additional HTTP header name to
    *   its value.
    * @param {boolean} [enableTelemetryTracing] - Flag to enable telemetry tracing.
+   * @param {unknown} [_legacyTelemetryInfo] - Unused legacy parameter kept for backward compatibility.
+   * @param {boolean} [enableTelemetryLogging] - Flag to enable telemetry logging.
    * @return {Object} A mapping of method names to CallSettings.
    */
   constructSettings(
@@ -231,6 +237,7 @@ export class GrpcClient {
     enableTelemetryTracing?: boolean,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     _legacyTelemetryInfo?: unknown,
+    enableTelemetryLogging?: boolean,
   ) {
     function buildMetadata(abTests: {}, moreHeaders: OutgoingHttpHeaders) {
       const metadata: OutgoingHttpHeaders = {};
@@ -305,6 +312,8 @@ export class GrpcClient {
       Status,
       otherArgs,
       enableTelemetryTracing ?? this._enableTelemetryTracing,
+      _legacyTelemetryInfo,
+      enableTelemetryLogging ?? this._enableTelemetryLogging,
     );
   }
 

@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/datamanager-v1.3.0...datamanager-v1.4.0) (2026-10-23)
+
+
+### Features
+
+* Update API sources and regenerate ([#9472](https://github.com/googleapis/google-cloud-node/issues/9472)) ([514e2f6](https://github.com/googleapis/google-cloud-node/commit/514e2f64ba67ad3ab956fbe3eeafa507d44ca597))
+
+
+### Bug Fixes
+
+* Update package.json and .gitignore across packages ([#9378](https://github.com/googleapis/google-cloud-node/issues/9378)) ([9c54cec](https://github.com/googleapis/google-cloud-node/commit/9c54cece565b5cbcae63a9856c1ef3448307d46e))
+
 ## [1.3.0](https://github.com/googleapis/google-cloud-node/compare/google-ads-datamanager-v1.2.0...google-ads-datamanager-v1.3.0) (2026-10-08)
 
 
