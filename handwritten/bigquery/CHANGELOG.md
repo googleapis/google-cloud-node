@@ -5,6 +5,26 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery?activeTab=versions
 
+## [9.5.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.4.0...bigquery-v9.5.0) (2026-10-23)
+
+
+### Features
+
+* **bigquery:** Allow WRITE_APPEND in createQueryArrowStream ([#9648](https://github.com/googleapis/google-cloud-node/issues/9648)) ([2062403](https://github.com/googleapis/google-cloud-node/commit/2062403305eb8a63171c2e9fafb9103fe9bd1938))
+* **bigquery:** Resume interrupted Arrow ReadRows streams ([#9602](https://github.com/googleapis/google-cloud-node/issues/9602)) ([8372c9e](https://github.com/googleapis/google-cloud-node/commit/8372c9e9c856e260dac8bccf0669a43d9a7bba1c))
+* **bigquery:** Stream multi-page Arrow results from default job stream ([#9598](https://github.com/googleapis/google-cloud-node/issues/9598)) ([1aa6eb4](https://github.com/googleapis/google-cloud-node/commit/1aa6eb40c0a51acfd8e37988e900d3beac6ed148))
+* **bigquery:** Support arrowSerializationOptions in createQueryArrowStream ([#9603](https://github.com/googleapis/google-cloud-node/issues/9603)) ([2449fe4](https://github.com/googleapis/google-cloud-node/commit/2449fe498e49ef4405a6f985778223473753c261))
+* **bigquery:** Support explicit destination tables in createQueryArrowStream ([#9601](https://github.com/googleapis/google-cloud-node/issues/9601)) ([f22e2dd](https://github.com/googleapis/google-cloud-node/commit/f22e2ddb0fcc2ead9ab1d9fe613d170ea7a41a57))
+* **bigquery:** Support jobs.insert in createQueryArrowStream ([#9600](https://github.com/googleapis/google-cloud-node/issues/9600)) ([4c414c6](https://github.com/googleapis/google-cloud-node/commit/4c414c628c3a547b1ce9224b2023fd2a6ca21177))
+* **bigquery:** Support maxResults in createQueryArrowStream ([#9605](https://github.com/googleapis/google-cloud-node/issues/9605)) ([a7fdd05](https://github.com/googleapis/google-cloud-node/commit/a7fdd05a86ab4c6d554f4ad8364150789ceb0b78))
+* **bigquery:** Wait for unfinished jobs before streaming Arrow results ([#9599](https://github.com/googleapis/google-cloud-node/issues/9599)) ([5e465b7](https://github.com/googleapis/google-cloud-node/commit/5e465b745d91057a411432447629ed7a96f87c63))
+
+
+### Bug Fixes
+
+* **bigquery:** Preserve timestamp nanoseconds when microseconds are zero ([#9650](https://github.com/googleapis/google-cloud-node/issues/9650)) ([f6ca61d](https://github.com/googleapis/google-cloud-node/commit/f6ca61d2ca00826ae1a6e6f874c14e2b41d5a479))
+* **bigquery:** Raise when an Arrow batch arrives before its schema ([#9681](https://github.com/googleapis/google-cloud-node/issues/9681)) ([576a42e](https://github.com/googleapis/google-cloud-node/commit/576a42eb5eefa8314272c1a3fdf4e69723a9fdcc))
+
 ## [9.4.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-v9.3.0...bigquery-v9.4.0) (2026-10-19)
 
 

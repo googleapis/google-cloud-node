@@ -47,11 +47,11 @@
     "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "@google-cloud/promisify": "^6.0.0",
+    "@google-cloud/promisify": "^6.2.0",
     "google-gax": "^6.0.0"
   },
   "devDependencies": {
-    "@google-cloud/storage": "^7.15.2",
+    "@google-cloud/storage": "^8.4.0",
     "@types/is": "^0.0.25",
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.13.9",
