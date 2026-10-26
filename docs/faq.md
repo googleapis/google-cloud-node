@@ -19,6 +19,11 @@ Reference Issues: [#1287](https://github.com/GoogleCloudPlatform/google-cloud-no
 
 Cloud Node.js Client is a client library for using the broad set of Google APIs. This module is built specifically for the Google Cloud Platform and is the recommended way to integrate Cloud APIs into your Node.js applications. If your application requires both Google Cloud Platform and other Google APIs, the 2 libraries may be used together.
 
+
+## How do I use this module with Firebase and the Bun runtime?
+
+Managed Cloud Functions for Firebase (`firebase deploy --only functions`) only supports managed Node.js (V8) runtimes (`nodejs20`, `nodejs22`). To run `firebase-admin` and `@google-cloud/*` client libraries on Bun in a Firebase project, deploy an `oven/bun` container to Cloud Run and route traffic to it via Firebase Hosting `rewrites` in `firebase.json`. See our [Firebase & Bun Guide](firebase-bun.md) for templates and deployment instructions.
+
 [dev-console]: https://console.developers.google.com/project
 [gce-how-to]: https://developers.google.com/compute/docs/authentication#using
 [googleapis]: https://github.com/google/google-api-nodejs-client
