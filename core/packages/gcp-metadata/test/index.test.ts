@@ -638,6 +638,14 @@ describe('unit test', () => {
   });
 
   it('should not emit MetadataLookupWarning when primary fails with ConnectionRefused and secondary fails with FailedToOpenSocket under Bun', async () => {
+    assert.strictEqual(
+      gcp.EXPECTED_NETWORK_ERROR_CODES.has('ConnectionRefused'),
+      true,
+    );
+    assert.strictEqual(
+      gcp.EXPECTED_NETWORK_ERROR_CODES.has('FailedToOpenSocket'),
+      true,
+    );
     const primary = nock(HOST)
       .get(`${PATH}/${TYPE}`)
       .replyWithError(
