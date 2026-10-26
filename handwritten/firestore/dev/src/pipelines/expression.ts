@@ -11252,17 +11252,6 @@ export class Ordering implements HasUserData {
 }
 
 /**
- * A bound of a window frame. Either a numeric offset, one of the sentinel
- * strings `'current'` or `'unbounded'`, or an {@link Expression} that evaluates
- * to one of those values.
- *
- * @internal
- * @private
- */
-export type WindowFrameBound =
-  number | 'current' | 'unbounded' | firestore.Pipelines.Expression;
-
-/**
  * The normalized internal representation of a `WindowSpec`.
  *
  * This mirrors the wire format one-to-one: `partition` and `sort` are
@@ -11401,7 +11390,7 @@ export class WindowSpecInternal implements HasUserData {
    */
   private frameBoundToProto(
     serializer: Serializer,
-    bound: WindowFrameBound,
+    bound: firestore.Pipelines.DocumentWindowFrame['preceding'],
     boundName: 'preceding' | 'following',
   ): api.IValue {
     if (typeof bound === 'number') {

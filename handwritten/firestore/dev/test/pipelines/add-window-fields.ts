@@ -16,14 +16,13 @@
  */
 
 import {expect} from 'chai';
+import * as sinon from 'sinon';
 
-import {google} from '../../protos/firestore_v1_proto_api';
-import {Firestore, Pipelines} from '../../src';
-import {createInstance} from '../util/helpers';
+import {Pipelines} from '../../src';
+import {createInstance, stream} from '../util/helpers';
 
-import Pipeline = Pipelines.Pipeline;
-import ProtoStage = google.firestore.v1.Pipeline.IStage;
-import ProtoValue = google.firestore.v1.IValue;
+const FIRST_CALL = 0;
+const EXECUTE_PIPELINE_REQUEST = 0;
 
 const {
   arrayAgg,
@@ -46,234 +45,337 @@ const {
   toLower,
 } = Pipelines;
 
-let db: Firestore;
-
-/**
- * Serializes `pipeline` the same way `execute()` does, and returns the proto
- * for its (single) `add_window_fields` stage.
- */
-function windowStage(pipeline: Pipeline): ProtoStage {
-  pipeline._validateUserData(db._settings.ignoreUndefinedProperties ?? false);
-  const proto = pipeline._toProto();
-  const stages = (proto.stages ?? []).filter(
-    s => s.name === 'add_window_fields',
-  );
-  expect(stages).to.have.lengthOf(
-    1,
-    'expected exactly one add_window_fields stage',
-  );
-  return stages[0];
-}
-
-/** The `window_spec` argument (args[0]) of the `add_window_fields` stage. */
-function windowSpecArg(pipeline: Pipeline): ProtoValue {
-  const stage = windowStage(pipeline);
-  expect(stage.args).to.have.lengthOf(
-    2,
-    'add_window_fields must have exactly 2 args',
-  );
-  return stage.args![0];
-}
-
-/** The `fields` argument (args[1]) of the `add_window_fields` stage. */
-function fieldsArg(pipeline: Pipeline): ProtoValue {
-  const stage = windowStage(pipeline);
-  expect(stage.args).to.have.lengthOf(
-    2,
-    'add_window_fields must have exactly 2 args',
-  );
-  return stage.args![1];
-}
-
-function fieldRef(name: string): ProtoValue {
-  return {fieldReferenceValue: name};
-}
-
-function int(value: number): ProtoValue {
-  return {integerValue: value};
-}
-
-function str(value: string): ProtoValue {
-  return {stringValue: value};
-}
-
-function map(fields: Record<string, ProtoValue>): ProtoValue {
-  return {mapValue: {fields}};
-}
-
-function array(...values: ProtoValue[]): ProtoValue {
-  return {arrayValue: {values}};
-}
-
-function fn(name: string, ...args: ProtoValue[]): ProtoValue {
-  return {functionValue: {name, args}};
-}
-
-function ordering(expression: ProtoValue, direction: string): ProtoValue {
-  return map({direction: str(direction), expression});
-}
-
-function basePipeline(): Pipeline {
-  return db.pipeline().collection('sales');
-}
-
 describe('addWindowFields() serialization', () => {
-  beforeEach(async () => {
-    db = await createInstance();
-  });
-
   describe('stage shape', () => {
-    it('uses the add_window_fields stage name and 2 args', () => {
-      const stage = windowStage(
-        basePipeline().addWindowFields(
-          {partition: ['product']},
-          countAll().as('c'),
-        ),
-      );
+    it('uses the add_window_fields stage name and 2 args', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields({partition: ['product']}, countAll().as('c'))
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
 
-      expect(stage.name).to.equal('add_window_fields');
-      expect(stage.args).to.have.lengthOf(2);
+      expect(stages[1].name).to.equal('add_window_fields');
+      expect(stages[1].args).to.have.lengthOf(2);
     });
 
-    it('does not send any stage options', () => {
-      const stage = windowStage(
-        basePipeline().addWindowFields(
-          {partition: ['product']},
-          countAll().as('c'),
-        ),
-      );
+    it('does not send any stage options', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields({partition: ['product']}, countAll().as('c'))
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
 
-      expect(stage.options).to.deep.equal({});
+      expect(stages[1].options).to.deep.equal({});
     });
   });
 
   describe('window_spec', () => {
-    it('serializes an empty window spec as an empty map', () => {
-      expect(
-        windowSpecArg(basePipeline().addWindowFields({}, countAll().as('c'))),
-      ).to.deep.equal(map({}));
+    it('serializes an empty window spec as an empty map', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields({}, countAll().as('c'))
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({mapValue: {fields: {}}});
     });
 
-    it('serializes a partition of field name strings', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {partition: ['product', 'region']},
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({partition: array(fieldRef('product'), fieldRef('region'))}),
-      );
+    it('serializes a partition of field name strings', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields({partition: ['product', 'region']}, countAll().as('c'))
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            partition: {
+              arrayValue: {
+                values: [
+                  {fieldReferenceValue: 'product'},
+                  {fieldReferenceValue: 'region'},
+                ],
+              },
+            },
+          },
+        },
+      });
     });
 
-    it('serializes a partition of expressions', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {partition: [field('product'), toLower('region')]},
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          partition: array(
-            fieldRef('product'),
-            fn('to_lower', fieldRef('region')),
-          ),
-        }),
-      );
-    });
-
-    it('serializes a nested field path partition', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {partition: ['metadata.region']},
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(map({partition: array(fieldRef('metadata.region'))}));
-    });
-
-    it('serializes a single (non array) sort ordering', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {sort: ascending('date')},
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({sort: array(ordering(fieldRef('date'), 'ascending'))}),
-      );
-    });
-
-    it('serializes multiple sort orderings with mixed directions', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {sort: [ascending('date'), descending('salesPrice')]},
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          sort: array(
-            ordering(fieldRef('date'), 'ascending'),
-            ordering(fieldRef('salesPrice'), 'descending'),
-          ),
-        }),
-      );
-    });
-
-    it('serializes partition and sort together', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {partition: ['product'], sort: ascending('date')},
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          partition: array(fieldRef('product')),
-          sort: array(ordering(fieldRef('date'), 'ascending')),
-        }),
-      );
-    });
-
-    it('omits an empty partition array', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {partition: [], sort: ascending('date')},
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({sort: array(ordering(fieldRef('date'), 'ascending'))}),
-      );
-    });
-
-    it('omits an empty sort array', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {partition: ['product'], sort: []},
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(map({partition: array(fieldRef('product'))}));
-    });
-
-    it('omits the frame when using default framing', () => {
-      const spec = windowSpecArg(
-        basePipeline().addWindowFields(
-          {sort: ascending('date')},
+    it('serializes a partition of expressions', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {partition: [field('product'), toLower('region')]},
           countAll().as('c'),
-        ),
-      );
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            partition: {
+              arrayValue: {
+                values: [
+                  {fieldReferenceValue: 'product'},
+                  {
+                    functionValue: {
+                      name: 'to_lower',
+                      args: [{fieldReferenceValue: 'region'}],
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('serializes a nested field path partition', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields({partition: ['metadata.region']}, countAll().as('c'))
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            partition: {
+              arrayValue: {values: [{fieldReferenceValue: 'metadata.region'}]},
+            },
+          },
+        },
+      });
+    });
+
+    it('serializes a single (non array) sort ordering', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields({sort: ascending('date')}, countAll().as('c'))
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            sort: {
+              arrayValue: {
+                values: [
+                  {
+                    mapValue: {
+                      fields: {
+                        direction: {stringValue: 'ascending'},
+                        expression: {fieldReferenceValue: 'date'},
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('serializes multiple sort orderings with mixed directions', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {sort: [ascending('date'), descending('salesPrice')]},
+          countAll().as('c'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            sort: {
+              arrayValue: {
+                values: [
+                  {
+                    mapValue: {
+                      fields: {
+                        direction: {stringValue: 'ascending'},
+                        expression: {fieldReferenceValue: 'date'},
+                      },
+                    },
+                  },
+                  {
+                    mapValue: {
+                      fields: {
+                        direction: {stringValue: 'descending'},
+                        expression: {fieldReferenceValue: 'salesPrice'},
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('serializes partition and sort together', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {partition: ['product'], sort: ascending('date')},
+          countAll().as('c'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            partition: {
+              arrayValue: {values: [{fieldReferenceValue: 'product'}]},
+            },
+            sort: {
+              arrayValue: {
+                values: [
+                  {
+                    mapValue: {
+                      fields: {
+                        direction: {stringValue: 'ascending'},
+                        expression: {fieldReferenceValue: 'date'},
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('omits an empty partition array', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {partition: [], sort: ascending('date')},
+          countAll().as('c'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            sort: {
+              arrayValue: {
+                values: [
+                  {
+                    mapValue: {
+                      fields: {
+                        direction: {stringValue: 'ascending'},
+                        expression: {fieldReferenceValue: 'date'},
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('omits an empty sort array', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields({partition: ['product'], sort: []}, countAll().as('c'))
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            partition: {
+              arrayValue: {values: [{fieldReferenceValue: 'product'}]},
+            },
+          },
+        },
+      });
+    });
+
+    it('omits the frame when using default framing', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields({sort: ascending('date')}, countAll().as('c'))
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      const spec = stages[1].args![0];
 
       expect(spec.mapValue!.fields).to.not.have.property('documents');
       expect(spec.mapValue!.fields).to.not.have.property('range');
@@ -281,183 +383,422 @@ describe('addWindowFields() serialization', () => {
   });
 
   describe('stage level documents framing', () => {
-    it('serializes numeric offsets as integers', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {
-              sort: ascending('date'),
-              documents: {preceding: 2, following: 1},
+    it('serializes numeric offsets as integers', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {
+            sort: ascending('date'),
+            documents: {preceding: 2, following: 1},
+          },
+          countAll().as('c'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            sort: {
+              arrayValue: {
+                values: [
+                  {
+                    mapValue: {
+                      fields: {
+                        direction: {stringValue: 'ascending'},
+                        expression: {fieldReferenceValue: 'date'},
+                      },
+                    },
+                  },
+                ],
+              },
             },
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          sort: array(ordering(fieldRef('date'), 'ascending')),
-          documents: map({preceding: int(2), following: int(1)}),
-        }),
-      );
+            documents: {
+              mapValue: {
+                fields: {
+                  preceding: {integerValue: 2},
+                  following: {integerValue: 1},
+                },
+              },
+            },
+          },
+        },
+      });
     });
 
-    it('serializes zero offsets', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {
-              sort: ascending('date'),
-              documents: {preceding: 0, following: 0},
+    it('serializes zero offsets', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {
+            sort: ascending('date'),
+            documents: {preceding: 0, following: 0},
+          },
+          countAll().as('c'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            sort: {
+              arrayValue: {
+                values: [
+                  {
+                    mapValue: {
+                      fields: {
+                        direction: {stringValue: 'ascending'},
+                        expression: {fieldReferenceValue: 'date'},
+                      },
+                    },
+                  },
+                ],
+              },
             },
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          sort: array(ordering(fieldRef('date'), 'ascending')),
-          documents: map({preceding: int(0), following: int(0)}),
-        }),
-      );
+            documents: {
+              mapValue: {
+                fields: {
+                  preceding: {integerValue: 0},
+                  following: {integerValue: 0},
+                },
+              },
+            },
+          },
+        },
+      });
     });
 
-    it('serializes negative offsets (look ahead windows)', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {
-              sort: ascending('date'),
-              documents: {preceding: -1, following: 2},
+    it('serializes negative offsets (look ahead windows)', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {
+            sort: ascending('date'),
+            documents: {preceding: -1, following: 2},
+          },
+          countAll().as('c'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            sort: {
+              arrayValue: {
+                values: [
+                  {
+                    mapValue: {
+                      fields: {
+                        direction: {stringValue: 'ascending'},
+                        expression: {fieldReferenceValue: 'date'},
+                      },
+                    },
+                  },
+                ],
+              },
             },
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          sort: array(ordering(fieldRef('date'), 'ascending')),
-          documents: map({preceding: int(-1), following: int(2)}),
-        }),
-      );
+            documents: {
+              mapValue: {
+                fields: {
+                  preceding: {integerValue: -1},
+                  following: {integerValue: 2},
+                },
+              },
+            },
+          },
+        },
+      });
     });
 
-    it("serializes the 'unbounded' and 'current' sentinels", () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {
-              sort: ascending('date'),
-              documents: {preceding: 'unbounded', following: 'current'},
+    it("serializes the 'unbounded' and 'current' sentinels", async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {
+            sort: ascending('date'),
+            documents: {preceding: 'unbounded', following: 'current'},
+          },
+          countAll().as('c'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            sort: {
+              arrayValue: {
+                values: [
+                  {
+                    mapValue: {
+                      fields: {
+                        direction: {stringValue: 'ascending'},
+                        expression: {fieldReferenceValue: 'date'},
+                      },
+                    },
+                  },
+                ],
+              },
             },
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          sort: array(ordering(fieldRef('date'), 'ascending')),
-          documents: map({
-            preceding: str('unbounded'),
-            following: str('current'),
-          }),
-        }),
-      );
+            documents: {
+              mapValue: {
+                fields: {
+                  preceding: {stringValue: 'unbounded'},
+                  following: {stringValue: 'current'},
+                },
+              },
+            },
+          },
+        },
+      });
     });
 
-    it('serializes an unbounded to unbounded frame', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {documents: {preceding: 'unbounded', following: 'unbounded'}},
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          documents: map({
-            preceding: str('unbounded'),
-            following: str('unbounded'),
-          }),
-        }),
-      );
+    it('serializes an unbounded to unbounded frame', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {documents: {preceding: 'unbounded', following: 'unbounded'}},
+          countAll().as('c'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            documents: {
+              mapValue: {
+                fields: {
+                  preceding: {stringValue: 'unbounded'},
+                  following: {stringValue: 'unbounded'},
+                },
+              },
+            },
+          },
+        },
+      });
     });
 
-    it('serializes constant expression bounds', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {
-              sort: ascending('date'),
-              documents: {preceding: constant(3), following: constant(0)},
+    it('serializes constant expression bounds', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {
+            sort: ascending('date'),
+            documents: {preceding: constant(3), following: constant(0)},
+          },
+          countAll().as('c'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            sort: {
+              arrayValue: {
+                values: [
+                  {
+                    mapValue: {
+                      fields: {
+                        direction: {stringValue: 'ascending'},
+                        expression: {fieldReferenceValue: 'date'},
+                      },
+                    },
+                  },
+                ],
+              },
             },
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          sort: array(ordering(fieldRef('date'), 'ascending')),
-          documents: map({preceding: int(3), following: int(0)}),
-        }),
-      );
+            documents: {
+              mapValue: {
+                fields: {
+                  preceding: {integerValue: 3},
+                  following: {integerValue: 0},
+                },
+              },
+            },
+          },
+        },
+      });
     });
   });
 
   describe('stage level range framing', () => {
-    it('serializes numeric range offsets', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {
-              sort: ascending('salesPrice'),
-              range: {preceding: 10, following: 10},
+    it('serializes numeric range offsets', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {
+            sort: ascending('salesPrice'),
+            range: {preceding: 10, following: 10},
+          },
+          countAll().as('c'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            sort: {
+              arrayValue: {
+                values: [
+                  {
+                    mapValue: {
+                      fields: {
+                        direction: {stringValue: 'ascending'},
+                        expression: {fieldReferenceValue: 'salesPrice'},
+                      },
+                    },
+                  },
+                ],
+              },
             },
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          sort: array(ordering(fieldRef('salesPrice'), 'ascending')),
-          range: map({preceding: int(10), following: int(10)}),
-        }),
-      );
+            range: {
+              mapValue: {
+                fields: {
+                  preceding: {integerValue: 10},
+                  following: {integerValue: 10},
+                },
+              },
+            },
+          },
+        },
+      });
     });
 
-    it('serializes fractional range offsets as doubles', () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {
-              sort: ascending('salesPrice'),
-              range: {preceding: 2.5, following: 0},
+    it('serializes fractional range offsets as doubles', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {
+            sort: ascending('salesPrice'),
+            range: {preceding: 2.5, following: 0},
+          },
+          countAll().as('c'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            sort: {
+              arrayValue: {
+                values: [
+                  {
+                    mapValue: {
+                      fields: {
+                        direction: {stringValue: 'ascending'},
+                        expression: {fieldReferenceValue: 'salesPrice'},
+                      },
+                    },
+                  },
+                ],
+              },
             },
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          sort: array(ordering(fieldRef('salesPrice'), 'ascending')),
-          range: map({preceding: {doubleValue: 2.5}, following: int(0)}),
-        }),
-      );
+            range: {
+              mapValue: {
+                fields: {
+                  preceding: {doubleValue: 2.5},
+                  following: {integerValue: 0},
+                },
+              },
+            },
+          },
+        },
+      });
     });
 
-    it("serializes a range frame with a 'day' time unit", () => {
-      expect(
-        windowSpecArg(
-          basePipeline().addWindowFields(
-            {
-              sort: ascending('date'),
-              range: {preceding: 30, following: 'current', unit: 'day'},
+    it("serializes a range frame with a 'day' time unit", async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {
+            sort: ascending('date'),
+            range: {preceding: 30, following: 'current', unit: 'day'},
+          },
+          countAll().as('c'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![0]).to.deep.equal({
+        mapValue: {
+          fields: {
+            sort: {
+              arrayValue: {
+                values: [
+                  {
+                    mapValue: {
+                      fields: {
+                        direction: {stringValue: 'ascending'},
+                        expression: {fieldReferenceValue: 'date'},
+                      },
+                    },
+                  },
+                ],
+              },
             },
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          sort: array(ordering(fieldRef('date'), 'ascending')),
-          range: map({
-            preceding: int(30),
-            following: str('current'),
-            unit: str('day'),
-          }),
-        }),
-      );
+            range: {
+              mapValue: {
+                fields: {
+                  preceding: {integerValue: 30},
+                  following: {stringValue: 'current'},
+                  unit: {stringValue: 'day'},
+                },
+              },
+            },
+          },
+        },
+      });
     });
 
     for (const unit of [
@@ -472,272 +813,571 @@ describe('addWindowFields() serialization', () => {
       'quarter',
       'year',
     ] as const) {
-      it(`serializes the '${unit}' time unit`, () => {
-        const spec = windowSpecArg(
-          basePipeline().addWindowFields(
+      it(`serializes the '${unit}' time unit`, async () => {
+        const spy = sinon.fake.returns(stream());
+        const firestore = await createInstance({executePipeline: spy});
+        await firestore
+          .pipeline()
+          .collection('sales')
+          .addWindowFields(
             {
               sort: ascending('date'),
               range: {preceding: 1, following: 'current', unit},
             },
             countAll().as('c'),
-          ),
-        );
+          )
+          .execute();
+        const stages =
+          spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+            'pipeline'
+          ]['stages'];
+        const spec = stages[1].args![0];
 
-        expect(spec.mapValue!.fields!.range).to.deep.equal(
-          map({preceding: int(1), following: str('current'), unit: str(unit)}),
-        );
+        expect(spec.mapValue!.fields!.range).to.deep.equal({
+          mapValue: {
+            fields: {
+              preceding: {integerValue: 1},
+              following: {stringValue: 'current'},
+              unit: {stringValue: unit},
+            },
+          },
+        });
       });
     }
 
-    it("omits 'unit' when it is not specified", () => {
-      const spec = windowSpecArg(
-        basePipeline().addWindowFields(
+    it("omits 'unit' when it is not specified", async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
           {
             sort: ascending('salesPrice'),
             range: {preceding: 'unbounded', following: 'current'},
           },
           countAll().as('c'),
-        ),
-      );
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      const spec = stages[1].args![0];
 
-      expect(spec.mapValue!.fields!.range).to.deep.equal(
-        map({preceding: str('unbounded'), following: str('current')}),
-      );
+      expect(spec.mapValue!.fields!.range).to.deep.equal({
+        mapValue: {
+          fields: {
+            preceding: {stringValue: 'unbounded'},
+            following: {stringValue: 'current'},
+          },
+        },
+      });
     });
   });
 
   describe('fields', () => {
-    it('maps each alias to its aggregate function', () => {
-      expect(
-        fieldsArg(
-          basePipeline().addWindowFields(
-            {partition: ['product']},
-            sum('salesPrice').as('total'),
-            countAll().as('c'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          total: fn('sum', fieldRef('salesPrice')),
-          c: fn('count'),
-        }),
-      );
-    });
-
-    it('supports nested output field paths', () => {
-      expect(
-        fieldsArg(
-          basePipeline().addWindowFields(
-            {partition: ['product']},
-            sum('salesPrice').as('stats.total'),
-          ),
-        ),
-      ).to.deep.equal(map({'stats.total': fn('sum', fieldRef('salesPrice'))}));
-    });
-
-    it('serializes all supported aggregate function names', () => {
-      expect(
-        fieldsArg(
-          basePipeline().addWindowFields(
-            {partition: ['product']},
-            countAll().as('countAll'),
-            count('salesPrice').as('count'),
-            countIf(field('salesPrice').greaterThan(10)).as('countIf'),
-            countDistinct('salesPrice').as('countDistinct'),
-            sum('salesPrice').as('sum'),
-            average('salesPrice').as('average'),
-            minimum('salesPrice').as('minimum'),
-            maximum('salesPrice').as('maximum'),
-            first('salesPrice').as('first'),
-            last('salesPrice').as('last'),
-            arrayAgg('salesPrice').as('arrayAgg'),
-            arrayAggDistinct('salesPrice').as('arrayAggDistinct'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          countAll: fn('count'),
-          count: fn('count', fieldRef('salesPrice')),
-          countIf: fn(
-            'count_if',
-            fn('greater_than', fieldRef('salesPrice'), int(10)),
-          ),
-          countDistinct: fn('count_distinct', fieldRef('salesPrice')),
-          sum: fn('sum', fieldRef('salesPrice')),
-          average: fn('average', fieldRef('salesPrice')),
-          minimum: fn('minimum', fieldRef('salesPrice')),
-          maximum: fn('maximum', fieldRef('salesPrice')),
-          first: fn('first', fieldRef('salesPrice')),
-          last: fn('last', fieldRef('salesPrice')),
-          arrayAgg: fn('array_agg', fieldRef('salesPrice')),
-          arrayAggDistinct: fn('array_agg_distinct', fieldRef('salesPrice')),
-        }),
-      );
-    });
-
-    it('serializes aggregates over computed expressions', () => {
-      expect(
-        fieldsArg(
-          basePipeline().addWindowFields(
-            {partition: ['product']},
-            sum(field('salesPrice').multiply(2)).as('doubled'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          doubled: fn('sum', fn('multiply', fieldRef('salesPrice'), int(2))),
-        }),
-      );
-    });
-
-    it('serializes the rank window function', () => {
-      expect(
-        fieldsArg(
-          basePipeline().addWindowFields(
-            {sort: descending('salesPrice')},
-            rank().as('rank'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          rank: fn('rank'),
-        }),
-      );
-    });
-
-    it('rejects duplicate aliases', () => {
-      expect(() =>
-        basePipeline().addWindowFields(
+    it('maps each alias to its aggregate function', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
           {partition: ['product']},
           sum('salesPrice').as('total'),
-          average('salesPrice').as('total'),
-        ),
-      ).to.throw(/Duplicate alias or field 'total'/);
+          countAll().as('c'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![1]).to.deep.equal({
+        mapValue: {
+          fields: {
+            total: {
+              functionValue: {
+                name: 'sum',
+                args: [{fieldReferenceValue: 'salesPrice'}],
+              },
+            },
+            c: {functionValue: {name: 'count', args: []}},
+          },
+        },
+      });
+    });
+
+    it('supports nested output field paths', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {partition: ['product']},
+          sum('salesPrice').as('stats.total'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![1]).to.deep.equal({
+        mapValue: {
+          fields: {
+            'stats.total': {
+              functionValue: {
+                name: 'sum',
+                args: [{fieldReferenceValue: 'salesPrice'}],
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('serializes all supported aggregate function names', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {partition: ['product']},
+          countAll().as('countAll'),
+          count('salesPrice').as('count'),
+          countIf(field('salesPrice').greaterThan(10)).as('countIf'),
+          countDistinct('salesPrice').as('countDistinct'),
+          sum('salesPrice').as('sum'),
+          average('salesPrice').as('average'),
+          minimum('salesPrice').as('minimum'),
+          maximum('salesPrice').as('maximum'),
+          first('salesPrice').as('first'),
+          last('salesPrice').as('last'),
+          arrayAgg('salesPrice').as('arrayAgg'),
+          arrayAggDistinct('salesPrice').as('arrayAggDistinct'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![1]).to.deep.equal({
+        mapValue: {
+          fields: {
+            countAll: {functionValue: {name: 'count', args: []}},
+            count: {
+              functionValue: {
+                name: 'count',
+                args: [{fieldReferenceValue: 'salesPrice'}],
+              },
+            },
+            countIf: {
+              functionValue: {
+                name: 'count_if',
+                args: [
+                  {
+                    functionValue: {
+                      name: 'greater_than',
+                      args: [
+                        {fieldReferenceValue: 'salesPrice'},
+                        {integerValue: 10},
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+            countDistinct: {
+              functionValue: {
+                name: 'count_distinct',
+                args: [{fieldReferenceValue: 'salesPrice'}],
+              },
+            },
+            sum: {
+              functionValue: {
+                name: 'sum',
+                args: [{fieldReferenceValue: 'salesPrice'}],
+              },
+            },
+            average: {
+              functionValue: {
+                name: 'average',
+                args: [{fieldReferenceValue: 'salesPrice'}],
+              },
+            },
+            minimum: {
+              functionValue: {
+                name: 'minimum',
+                args: [{fieldReferenceValue: 'salesPrice'}],
+              },
+            },
+            maximum: {
+              functionValue: {
+                name: 'maximum',
+                args: [{fieldReferenceValue: 'salesPrice'}],
+              },
+            },
+            first: {
+              functionValue: {
+                name: 'first',
+                args: [{fieldReferenceValue: 'salesPrice'}],
+              },
+            },
+            last: {
+              functionValue: {
+                name: 'last',
+                args: [{fieldReferenceValue: 'salesPrice'}],
+              },
+            },
+            arrayAgg: {
+              functionValue: {
+                name: 'array_agg',
+                args: [{fieldReferenceValue: 'salesPrice'}],
+              },
+            },
+            arrayAggDistinct: {
+              functionValue: {
+                name: 'array_agg_distinct',
+                args: [{fieldReferenceValue: 'salesPrice'}],
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('serializes aggregates over computed expressions', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {partition: ['product']},
+          sum(field('salesPrice').multiply(2)).as('doubled'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![1]).to.deep.equal({
+        mapValue: {
+          fields: {
+            doubled: {
+              functionValue: {
+                name: 'sum',
+                args: [
+                  {
+                    functionValue: {
+                      name: 'multiply',
+                      args: [
+                        {fieldReferenceValue: 'salesPrice'},
+                        {integerValue: 2},
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      });
+    });
+
+    it('serializes the rank window function', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields({sort: descending('salesPrice')}, rank().as('rank'))
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![1]).to.deep.equal({
+        mapValue: {fields: {rank: {functionValue: {name: 'rank', args: []}}}},
+      });
+    });
+
+    it('rejects duplicate aliases', async () => {
+      {
+        const spy = sinon.fake.returns(stream());
+        const firestore = await createInstance({executePipeline: spy});
+        let err: Error | undefined;
+        try {
+          await firestore
+            .pipeline()
+            .collection('sales')
+            .addWindowFields(
+              {partition: ['product']},
+              sum('salesPrice').as('total'),
+              average('salesPrice').as('total'),
+            )
+            .execute();
+        } catch (e) {
+          err = e as Error;
+        }
+        expect(err, 'expected error to be thrown').to.not.be.undefined;
+        expect(err?.message).to.match(/Duplicate alias or field 'total'/);
+      }
     });
   });
 
   describe('accumulator level framing (over)', () => {
-    it("wraps an aggregate in over() with a 'documents' frame", () => {
-      expect(
-        fieldsArg(
-          basePipeline().addWindowFields(
-            {sort: ascending('date')},
-            average('salesPrice')
-              .over({documents: {preceding: 1, following: 1}})
-              .as('movingAverage'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          movingAverage: fn(
-            'over',
-            fn('average', fieldRef('salesPrice')),
-            map({
-              documents: map({preceding: int(1), following: int(1)}),
-            }),
-          ),
-        }),
-      );
+    it("wraps an aggregate in over() with a 'documents' frame", async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {sort: ascending('date')},
+          average('salesPrice')
+            .over({documents: {preceding: 1, following: 1}})
+            .as('movingAverage'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![1]).to.deep.equal({
+        mapValue: {
+          fields: {
+            movingAverage: {
+              functionValue: {
+                name: 'over',
+                args: [
+                  {
+                    functionValue: {
+                      name: 'average',
+                      args: [{fieldReferenceValue: 'salesPrice'}],
+                    },
+                  },
+                  {
+                    mapValue: {
+                      fields: {
+                        documents: {
+                          mapValue: {
+                            fields: {
+                              preceding: {integerValue: 1},
+                              following: {integerValue: 1},
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      });
     });
 
-    it("wraps an aggregate in over() with a 'range' frame and time unit", () => {
-      expect(
-        fieldsArg(
-          basePipeline().addWindowFields(
-            {sort: ascending('date')},
-            sum('salesPrice')
-              .over({
-                range: {preceding: 10, following: 0, unit: 'day'},
-              })
-              .as('tenDayTotal'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          tenDayTotal: fn(
-            'over',
-            fn('sum', fieldRef('salesPrice')),
-            map({
-              range: map({
-                preceding: int(10),
-                following: int(0),
-                unit: str('day'),
-              }),
-            }),
-          ),
-        }),
-      );
+    it("wraps an aggregate in over() with a 'range' frame and time unit", async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {sort: ascending('date')},
+          sum('salesPrice')
+            .over({
+              range: {preceding: 10, following: 0, unit: 'day'},
+            })
+            .as('tenDayTotal'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![1]).to.deep.equal({
+        mapValue: {
+          fields: {
+            tenDayTotal: {
+              functionValue: {
+                name: 'over',
+                args: [
+                  {
+                    functionValue: {
+                      name: 'sum',
+                      args: [{fieldReferenceValue: 'salesPrice'}],
+                    },
+                  },
+                  {
+                    mapValue: {
+                      fields: {
+                        range: {
+                          mapValue: {
+                            fields: {
+                              preceding: {integerValue: 10},
+                              following: {integerValue: 0},
+                              unit: {stringValue: 'day'},
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      });
     });
 
-    it('supports different frames for different accumulators', () => {
-      expect(
-        fieldsArg(
-          basePipeline().addWindowFields(
-            {partition: ['product'], sort: ascending('date')},
-            sum('salesPrice')
-              .over({
-                documents: {preceding: 'unbounded', following: 'current'},
-              })
-              .as('runningTotal'),
-            average('salesPrice')
-              .over({documents: {preceding: 1, following: 1}})
-              .as('movingAverage'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          runningTotal: fn(
-            'over',
-            fn('sum', fieldRef('salesPrice')),
-            map({
-              documents: map({
-                preceding: str('unbounded'),
-                following: str('current'),
-              }),
-            }),
-          ),
-          movingAverage: fn(
-            'over',
-            fn('average', fieldRef('salesPrice')),
-            map({documents: map({preceding: int(1), following: int(1)})}),
-          ),
-        }),
-      );
+    it('supports different frames for different accumulators', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {partition: ['product'], sort: ascending('date')},
+          sum('salesPrice')
+            .over({
+              documents: {preceding: 'unbounded', following: 'current'},
+            })
+            .as('runningTotal'),
+          average('salesPrice')
+            .over({documents: {preceding: 1, following: 1}})
+            .as('movingAverage'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![1]).to.deep.equal({
+        mapValue: {
+          fields: {
+            runningTotal: {
+              functionValue: {
+                name: 'over',
+                args: [
+                  {
+                    functionValue: {
+                      name: 'sum',
+                      args: [{fieldReferenceValue: 'salesPrice'}],
+                    },
+                  },
+                  {
+                    mapValue: {
+                      fields: {
+                        documents: {
+                          mapValue: {
+                            fields: {
+                              preceding: {stringValue: 'unbounded'},
+                              following: {stringValue: 'current'},
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+            movingAverage: {
+              functionValue: {
+                name: 'over',
+                args: [
+                  {
+                    functionValue: {
+                      name: 'average',
+                      args: [{fieldReferenceValue: 'salesPrice'}],
+                    },
+                  },
+                  {
+                    mapValue: {
+                      fields: {
+                        documents: {
+                          mapValue: {
+                            fields: {
+                              preceding: {integerValue: 1},
+                              following: {integerValue: 1},
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      });
     });
 
-    it('supports over() on a ranking window function', () => {
-      expect(
-        fieldsArg(
-          basePipeline().addWindowFields(
-            {sort: ascending('date')},
-            rank()
-              .over({
-                documents: {preceding: 'unbounded', following: 'current'},
-              })
-              .as('r'),
-          ),
-        ),
-      ).to.deep.equal(
-        map({
-          r: fn(
-            'over',
-            fn('rank'),
-            map({
-              documents: map({
-                preceding: str('unbounded'),
-                following: str('current'),
-              }),
-            }),
-          ),
-        }),
-      );
+    it('supports over() on a ranking window function', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
+          {sort: ascending('date')},
+          rank()
+            .over({
+              documents: {preceding: 'unbounded', following: 'current'},
+            })
+            .as('r'),
+        )
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
+      expect(stages[1].args![1]).to.deep.equal({
+        mapValue: {
+          fields: {
+            r: {
+              functionValue: {
+                name: 'over',
+                args: [
+                  {functionValue: {name: 'rank', args: []}},
+                  {
+                    mapValue: {
+                      fields: {
+                        documents: {
+                          mapValue: {
+                            fields: {
+                              preceding: {stringValue: 'unbounded'},
+                              following: {stringValue: 'current'},
+                            },
+                          },
+                        },
+                      },
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        },
+      });
     });
   });
 
   describe('options overload', () => {
-    it('produces the same proto as the varargs overload', () => {
-      const varargs = windowStage(
-        basePipeline().addWindowFields(
+    it('produces the same proto as the varargs overload', async () => {
+      const spy1 = sinon.fake.returns(stream());
+      const firestore1 = await createInstance({executePipeline: spy1});
+      await firestore1
+        .pipeline()
+        .collection('sales')
+        .addWindowFields(
           {
             partition: ['product'],
             sort: ascending('date'),
@@ -745,11 +1385,19 @@ describe('addWindowFields() serialization', () => {
           },
           average('salesPrice').as('movingAverage'),
           countAll().as('windowCount'),
-        ),
-      );
+        )
+        .execute();
+      const varargs =
+        spy1.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'][1];
 
-      const options = windowStage(
-        basePipeline().addWindowFields({
+      const spy2 = sinon.fake.returns(stream());
+      const firestore2 = await createInstance({executePipeline: spy2});
+      await firestore2
+        .pipeline()
+        .collection('sales')
+        .addWindowFields({
           window: {
             partition: ['product'],
             sort: ascending('date'),
@@ -759,21 +1407,33 @@ describe('addWindowFields() serialization', () => {
             average('salesPrice').as('movingAverage'),
             countAll().as('windowCount'),
           ],
-        }),
-      );
+        })
+        .execute();
+      const options =
+        spy2.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'][1];
 
       expect(options).to.deep.equal(varargs);
     });
 
-    it('does not leak window/fields into the stage options', () => {
-      const stage = windowStage(
-        basePipeline().addWindowFields({
+    it('does not leak window/fields into the stage options', async () => {
+      const spy = sinon.fake.returns(stream());
+      const firestore = await createInstance({executePipeline: spy});
+      await firestore
+        .pipeline()
+        .collection('sales')
+        .addWindowFields({
           window: {partition: ['product']},
           fields: [countAll().as('c')],
-        }),
-      );
+        })
+        .execute();
+      const stages =
+        spy.args[FIRST_CALL][EXECUTE_PIPELINE_REQUEST]['structuredPipeline'][
+          'pipeline'
+        ]['stages'];
 
-      expect(stage.options).to.deep.equal({});
+      expect(stages[1].options).to.deep.equal({});
     });
   });
 
@@ -781,77 +1441,137 @@ describe('addWindowFields() serialization', () => {
     const invalidExpr = constant(undefined as unknown as number);
     const expectedError = /Cannot use "undefined" as a Firestore value/;
 
-    it('validates expressions in partition', () => {
-      expect(() =>
-        windowStage(
-          basePipeline().addWindowFields(
-            {partition: [invalidExpr]},
-            countAll().as('c'),
-          ),
-        ),
-      ).to.throw(expectedError);
+    it('validates expressions in partition', async () => {
+      {
+        const spy = sinon.fake.returns(stream());
+        const firestore = await createInstance({executePipeline: spy});
+        let err: Error | undefined;
+        try {
+          await firestore
+            .pipeline()
+            .collection('sales')
+            .addWindowFields({partition: [invalidExpr]}, countAll().as('c'))
+            .execute();
+        } catch (e) {
+          err = e as Error;
+        }
+        expect(err, 'expected error to be thrown').to.not.be.undefined;
+        expect(err?.message).to.match(expectedError);
+      }
     });
 
-    it('validates expressions in sort', () => {
-      expect(() =>
-        windowStage(
-          basePipeline().addWindowFields(
-            {sort: ascending(invalidExpr)},
-            countAll().as('c'),
-          ),
-        ),
-      ).to.throw(expectedError);
+    it('validates expressions in sort', async () => {
+      {
+        const spy = sinon.fake.returns(stream());
+        const firestore = await createInstance({executePipeline: spy});
+        let err: Error | undefined;
+        try {
+          await firestore
+            .pipeline()
+            .collection('sales')
+            .addWindowFields({sort: ascending(invalidExpr)}, countAll().as('c'))
+            .execute();
+        } catch (e) {
+          err = e as Error;
+        }
+        expect(err, 'expected error to be thrown').to.not.be.undefined;
+        expect(err?.message).to.match(expectedError);
+      }
     });
 
-    it('validates expressions in documents and range frame bounds and unit', () => {
-      expect(() =>
-        windowStage(
-          basePipeline().addWindowFields(
-            {
-              sort: ascending('date'),
-              documents: {preceding: invalidExpr, following: 'current'},
-            },
-            countAll().as('c'),
-          ),
-        ),
-      ).to.throw(expectedError);
-
-      expect(() =>
-        windowStage(
-          basePipeline().addWindowFields(
-            {
-              sort: ascending('date'),
-              range: {
-                preceding: 1,
-                following: 'current',
-                unit: invalidExpr,
+    it('validates expressions in documents and range frame bounds and unit', async () => {
+      {
+        const spy = sinon.fake.returns(stream());
+        const firestore = await createInstance({executePipeline: spy});
+        let err: Error | undefined;
+        try {
+          await firestore
+            .pipeline()
+            .collection('sales')
+            .addWindowFields(
+              {
+                sort: ascending('date'),
+                documents: {preceding: invalidExpr, following: 'current'},
               },
-            },
-            countAll().as('c'),
-          ),
-        ),
-      ).to.throw(expectedError);
+              countAll().as('c'),
+            )
+            .execute();
+        } catch (e) {
+          err = e as Error;
+        }
+        expect(err, 'expected error to be thrown').to.not.be.undefined;
+        expect(err?.message).to.match(expectedError);
+      }
+
+      {
+        const spy = sinon.fake.returns(stream());
+        const firestore = await createInstance({executePipeline: spy});
+        let err: Error | undefined;
+        try {
+          await firestore
+            .pipeline()
+            .collection('sales')
+            .addWindowFields(
+              {
+                sort: ascending('date'),
+                range: {
+                  preceding: 1,
+                  following: 'current',
+                  unit: invalidExpr,
+                },
+              },
+              countAll().as('c'),
+            )
+            .execute();
+        } catch (e) {
+          err = e as Error;
+        }
+        expect(err, 'expected error to be thrown').to.not.be.undefined;
+        expect(err?.message).to.match(expectedError);
+      }
     });
 
-    it('validates expressions in fields and over() frames', () => {
-      expect(() =>
-        windowStage(
-          basePipeline().addWindowFields({}, sum(invalidExpr).as('total')),
-        ),
-      ).to.throw(expectedError);
+    it('validates expressions in fields and over() frames', async () => {
+      {
+        const spy = sinon.fake.returns(stream());
+        const firestore = await createInstance({executePipeline: spy});
+        let err: Error | undefined;
+        try {
+          await firestore
+            .pipeline()
+            .collection('sales')
+            .addWindowFields({}, sum(invalidExpr).as('total'))
+            .execute();
+        } catch (e) {
+          err = e as Error;
+        }
+        expect(err, 'expected error to be thrown').to.not.be.undefined;
+        expect(err?.message).to.match(expectedError);
+      }
 
-      expect(() =>
-        windowStage(
-          basePipeline().addWindowFields(
-            {sort: ascending('date')},
-            countAll()
-              .over({
-                documents: {preceding: 'unbounded', following: invalidExpr},
-              })
-              .as('c'),
-          ),
-        ),
-      ).to.throw(expectedError);
+      {
+        const spy = sinon.fake.returns(stream());
+        const firestore = await createInstance({executePipeline: spy});
+        let err: Error | undefined;
+        try {
+          await firestore
+            .pipeline()
+            .collection('sales')
+            .addWindowFields(
+              {sort: ascending('date')},
+              countAll()
+                .over({
+                  documents: {preceding: 'unbounded', following: invalidExpr},
+                })
+                .as('c'),
+            )
+            .execute();
+        } catch (e) {
+          err = e as Error;
+        }
+        expect(err, 'expected error to be thrown').to.not.be.undefined;
+        expect(err?.message).to.match(expectedError);
+      }
     });
   });
 });

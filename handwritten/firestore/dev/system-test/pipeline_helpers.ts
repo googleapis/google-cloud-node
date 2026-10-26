@@ -29,6 +29,7 @@ export function expectResults(
   result: PipelineSnapshot,
   ...data: DocumentData[] | string[]
 ): void {
+  expect(result.results.length).to.equal(data.length);
   if (data.length > 0) {
     if (typeof data[0] === 'string') {
       const actualIds = result.results.map(r => r.id);
@@ -38,7 +39,5 @@ export function expectResults(
         expect(r.data()).to.deep.equal(data.shift());
       });
     }
-  } else {
-    expect(result.results.length).to.equal(data.length);
   }
 }
