@@ -169,6 +169,7 @@ const CACHE_TTL_MS = 10000; // 10 seconds TTL
  */
 function isGlobalTracingEnabled(): boolean {
   if (globalTracingEnabled === true) {
+    ensureInitialContextManagerSet();
     return true;
   }
   const now = Date.now();
