@@ -2463,8 +2463,7 @@ describe.skipClassic('Pipeline class', () => {
           expect(e instanceof Error).to.be.true;
           const err = e as ServiceError;
           const isRestTest = isRest(firestore);
-          const expectedCode = isRestTest ? 400 : 3;
-          expect(err['code']).to.equal(expectedCode);
+          expect(err['code']).to.equal(3);
           expect(typeof err['message']).to.equal('string');
           if (!isRestTest) {
             expect(typeof err['details']).to.equal('string');
@@ -2498,28 +2497,28 @@ describe.skipClassic('Pipeline class', () => {
           expect(err instanceof Error).to.be.true;
 
           const isRestTest = isRest(firestore);
-          const expectedCode = isRestTest ? 429 : 8;
-          expect(err['code']).to.equal(expectedCode);
+          expect(err['code']).to.equal(8);
           expect(typeof err['message']).to.equal('string');
+          expect('statusDetails' in err).to.be.true;
+          expect(Array.isArray(err['statusDetails'])).to.be.true;
+
+          const statusDetails = err['statusDetails'] as Array<object>;
+
+          const foundExplainStats = statusDetails.find(x => {
+            const typeUrl =
+              ('type_url' in x && x['type_url']) ||
+              ('resourceType' in x && x['resourceType']);
+            return (
+              typeUrl ===
+              'type.googleapis.com/google.firestore.v1.ExplainStats'
+            );
+          });
+          expect(foundExplainStats).to.not.be.undefined;
           if (!isRestTest) {
             expect(typeof err['details']).to.equal('string');
             expect(err['message']).to.equal(
               `${err.code} RESOURCE_EXHAUSTED: ${err.details}`,
             );
-
-            expect('statusDetails' in err).to.be.true;
-            expect(Array.isArray(err['statusDetails'])).to.be.true;
-
-            const statusDetails = err['statusDetails'] as Array<object>;
-
-            const foundExplainStats = statusDetails.find(x => {
-              return (
-                'type_url' in x &&
-                x['type_url'] ===
-                  'type.googleapis.com/google.firestore.v1.ExplainStats'
-              );
-            });
-            expect(foundExplainStats).to.not.be.undefined;
             expect(err['metadata'] instanceof Object).to.be.true;
           }
           expect(typeof err['stack']).to.equal('string');
@@ -7999,11 +7998,9 @@ describe.skipClassic('Pipeline search', () => {
               // queryEnhancement: 'disabled'
             });
 
-          const isRestTest = isRest(firestore);
-          const expectedErrorPattern = isRestTest
-            ? /"code": 400/
-            : /3 INVALID_ARGUMENT.*/;
-          await expect(ppl.execute()).to.be.rejectedWith(expectedErrorPattern);
+          await expect(ppl.execute()).to.be.rejectedWith(
+            /Unsupported language_code: unknown/,
+          );
         });
       });
 

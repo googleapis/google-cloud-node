@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/gapic-generator",
-  "version": "5.7.1",
+  "version": "5.7.2",
   "type": "module",
   "description": "Google API Client Library Generator for TypeScript, written in TypeScript.",
   "homepage": "https://github.com/googleapis/google-cloud-node/tree/main/core/generator/gapic-generator-typescript",
@@ -49,10 +49,10 @@
     "js-yaml": "^4.3.0",
     "long": "^5.3.2",
     "object-hash": "^3.0.0",
-    "proto3-json-serializer": "^4.0.0",
+    "prettier": "^3.3.3",
+    "proto3-json-serializer": "^4.1.0",
     "protobufjs": "^8.6.6",
     "protobufjs-cli": "^2.6.2",
-    "prettier": "^3.3.3",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
@@ -63,9 +63,9 @@
     "@types/object-hash": "^3.0.6",
     "@types/yargs": "^17.0.34",
     "espower-typescript": "^10.0.1",
-    "gapic-node-processing": "^0.2.0",
-    "gapic-tools": "^2.0.0",
-    "google-gax": "^6.0.0",
+    "gapic-node-processing": "^0.3.0",
+    "gapic-tools": "^2.2.0",
+    "google-gax": "^6.12.1",
     "gts": "^6.0.2",
     "mocha": "^11.7.4",
     "nunjucks": "^3.2.4",
