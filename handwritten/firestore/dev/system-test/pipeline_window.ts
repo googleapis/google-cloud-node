@@ -232,6 +232,29 @@ describe.skipClassic('Pipeline window functions', () => {
     );
   });
 
+  it('computes rank', async () => {
+    const snapshot = await execute(
+      firestore
+        .pipeline()
+        .collection(productSales)
+        .addWindowFields(
+          {sort: ascending('salesPrice')},
+          rank().as('priceRank'),
+        )
+        .sort(ascending('date'))
+        .select('salesPrice', 'priceRank'),
+    );
+
+    expectResults(
+      snapshot,
+      {salesPrice: 12, priceRank: 1},
+      {salesPrice: 30, priceRank: 2},
+      {salesPrice: 30, priceRank: 2},
+      {salesPrice: 60, priceRank: 4},
+      {salesPrice: 60, priceRank: 4},
+    );
+  });
+
   it('rejects a range frame without a sort', async () => {
     await expect(
       execute(
@@ -1711,57 +1734,5 @@ comprehensiveDescribe('Pipeline window functions (aggregators)', () => {
         {product: 'tablet', windowCount: 1},
       );
     });
-  });
-});
-
-// Un-skip once the backend supports `rank()`.
-describe.skip('Pipeline window functions (ranking)', () => {
-  let firestore: Firestore;
-  let productSales: CollectionReference;
-
-  before(async () => {
-    productSales = getTestRoot();
-    await populateWindowDocs(productSales);
-    firestore = productSales.firestore;
-  });
-
-  afterEach(() => verifyInstance(firestore));
-
-  it('computes rank', async () => {
-    const snapshot = await execute(
-      firestore
-        .pipeline()
-        .collection(productSales)
-        .addWindowFields(
-          {sort: [ascending('salesPrice'), ascending('date')]},
-          rank().as('priceRank'),
-        )
-        .sort(ascending('date'))
-        .select('salesPrice', 'priceRank'),
-    );
-
-    expectResults(
-      snapshot,
-      {
-        salesPrice: 12,
-        priceRank: 1,
-      },
-      {
-        salesPrice: 30,
-        priceRank: 2,
-      },
-      {
-        salesPrice: 30,
-        priceRank: 2,
-      },
-      {
-        salesPrice: 60,
-        priceRank: 4,
-      },
-      {
-        salesPrice: 60,
-        priceRank: 4,
-      },
-    );
   });
 });
