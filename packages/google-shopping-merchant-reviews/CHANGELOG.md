@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/googleapis/google-cloud-node/compare/reviews-v0.8.0...reviews-v0.9.0) (2026-10-23)
+
+
+### Features
+
+* **google/shopping/merchant/reviews/v1:** Onboard a new library ([#9691](https://github.com/googleapis/google-cloud-node/issues/9691)) ([f369d0b](https://github.com/googleapis/google-cloud-node/commit/f369d0bd2044d2fccc89975a8efd5fe3407e8e9c))
+
 ## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/reviews-v0.7.1...reviews-v0.8.0) (2026-10-08)
 
 

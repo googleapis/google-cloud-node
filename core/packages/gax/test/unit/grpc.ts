@@ -143,6 +143,8 @@ describe('grpc', () => {
 
     afterEach(() => {
       delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+      delete process.env.GOOGLE_SDK_NODE_LOGGING;
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
     });
 
     it('constructs settings without telemetry options', () => {
@@ -154,6 +156,7 @@ describe('grpc', () => {
       );
       assert.strictEqual(settings.method.timeout, 10);
       assert.strictEqual(settings.method.enableTelemetryTracing, undefined);
+      assert.strictEqual(settings.method.enableTelemetryLogging, undefined);
       assert.strictEqual(
         settings.method.otherArgs.internalMethodName,
         undefined,
@@ -188,6 +191,25 @@ describe('grpc', () => {
       );
       assert.strictEqual(settings.method.timeout, 10);
       assert.strictEqual(settings.method.enableTelemetryTracing, true);
+      assert.strictEqual(
+        settings.method.otherArgs.internalMethodName,
+        'method',
+      );
+    });
+
+    it('constructs settings when enableTelemetryLogging: true is passed in client options and GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true', () => {
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+      const clientWithLogging = gaxGrpc({
+        enableTelemetryLogging: true,
+      });
+      const settings = clientWithLogging.constructSettings(
+        'google.fake.service',
+        serviceConfig as unknown as ClientConfig,
+        {} as unknown as ClientConfig,
+        {},
+      );
+      assert.strictEqual(settings.method.timeout, 10);
+      assert.strictEqual(settings.method.enableTelemetryLogging, true);
       assert.strictEqual(
         settings.method.otherArgs.internalMethodName,
         'method',
