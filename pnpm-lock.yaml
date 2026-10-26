@@ -1584,8 +1584,8 @@ importers:
   handwritten/bigquery:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@google-cloud/paginator':
         specifier: ^7.2.0
         version: 7.2.0
@@ -1977,8 +1977,8 @@ importers:
   handwritten/cloud-profiler:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@google-cloud/logging-min':
         specifier: ^11.0.0
         version: 11.2.2(encoding@0.1.13)
@@ -2219,8 +2219,8 @@ importers:
   handwritten/error-reporting:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       console-log-level:
         specifier: ^1.4.1
         version: 1.4.1
@@ -2464,8 +2464,8 @@ importers:
   handwritten/google-cloud-dns:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@google-cloud/paginator':
         specifier: ^7.2.0
         version: 7.2.0
@@ -2543,8 +2543,8 @@ importers:
   handwritten/logging:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@google-cloud/logging-api':
         specifier: ^0.5.0
         version: 0.5.1
@@ -2716,8 +2716,8 @@ importers:
         version: 11.3.1
     devDependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@types/bunyan':
         specifier: ^1.8.4
         version: 1.8.11
@@ -2795,8 +2795,8 @@ importers:
         version: 4.9.0
     devDependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@types/lodash.mapvalues':
         specifier: ^4.6.9
         version: 4.6.9
@@ -3039,8 +3039,8 @@ importers:
         specifier: 7.27.7
         version: 7.27.7
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@google-cloud/monitoring':
         specifier: ^6.0.0
         version: 6.0.0
@@ -12036,8 +12036,8 @@ importers:
   packages/google-cloud-speech:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.1
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@types/pumpify':
         specifier: ^1.4.4
         version: 1.4.5
@@ -12580,8 +12580,8 @@ importers:
   packages/google-cloud-translate:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.1
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@google-cloud/promisify':
         specifier: ^6.2.0
         version: 6.2.1
@@ -16441,8 +16441,8 @@ packages:
     resolution: {integrity: sha512-V7bmBKYQyu0eVG2BFejuUjlBt+zrya6vtsKdY+JxMM/dNntPF41vZ9+LhOshEUH01zOHEqBSvI7Dad7ZS6aUeA==}
     engines: {node: '>=14.0.0'}
 
-  '@google-cloud/common@8.0.1':
-    resolution: {integrity: sha512-dAq3mwl7s6Zlw+YQazohVuC1BunrRRuPj8ufK4QbKLQGMZ+TPppWByvIEY67n3zCDWbv3XRh8rV9t6fPQ/qd7A==}
+  '@google-cloud/common@8.2.2':
+    resolution: {integrity: sha512-sl6sfukASNpdCHGP8zAHgC+7qx3PBYR0tTEhFbiEPjyZs2QX5Ygl4Yuulql5MoD/VzXe9w55UzNgQQNVEVuVmw==}
     engines: {node: '>=22'}
 
   '@google-cloud/datastore-api@0.5.1':
@@ -25325,7 +25325,7 @@ snapshots:
 
   '@google-cloud/bigquery@9.0.2':
     dependencies:
-      '@google-cloud/common': 8.0.1
+      '@google-cloud/common': 8.2.2
       '@google-cloud/paginator': 7.2.0
       '@google-cloud/precise-date': 6.2.1
       '@google-cloud/promisify': 6.2.1
@@ -25374,7 +25374,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@google-cloud/common@8.0.1':
+  '@google-cloud/common@8.2.2':
     dependencies:
       '@google-cloud/projectify': 6.2.1
       '@google-cloud/promisify': 6.2.1
@@ -25456,7 +25456,7 @@ snapshots:
 
   '@google-cloud/logging@12.0.1':
     dependencies:
-      '@google-cloud/common': 8.0.1
+      '@google-cloud/common': 8.2.2
       '@google-cloud/logging-api': 0.3.0
       '@google-cloud/paginator': 7.2.0
       '@google-cloud/projectify': 6.2.1
@@ -25609,7 +25609,7 @@ snapshots:
       '@babel/core': 7.27.7
       '@babel/helpers': 7.27.6
       '@babel/traverse': 7.27.7
-      '@google-cloud/common': 8.0.1
+      '@google-cloud/common': 8.2.2
       '@google-cloud/monitoring': 6.0.0
       '@google-cloud/precise-date': 6.2.1
       '@google-cloud/promisify': 6.2.1

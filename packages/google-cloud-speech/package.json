@@ -48,7 +48,7 @@
     "test": "node ../../bin/run-test.cjs --config ../../.mocharc.cjs build/test"
   },
   "dependencies": {
-    "@google-cloud/common": "^8.0.1",
+    "@google-cloud/common": "^8.2.2",
     "@types/pumpify": "^1.4.4",
     "google-gax": "^6.0.0",
     "pumpify": "^2.0.1",
