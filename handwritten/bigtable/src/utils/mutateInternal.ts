@@ -12,16 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {
-  Entry,
-  MutateCallback,
-  MutateOptions,
-  PartialFailureError,
-} from '../table';
+import {Entry, MutateOptions} from '../table';
 import {OperationMetricsCollector} from '../client-side-metrics/operation-metrics-collector';
 import {
   DEFAULT_BACKOFF_SETTINGS,
   getNextDelay,
+  MutateCallback,
+  PartialFailureError,
   populateAttemptHeader,
   RETRYABLE_STATUS_CODES,
   TabularApiSurface,

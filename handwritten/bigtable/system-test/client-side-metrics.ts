@@ -334,7 +334,7 @@ async function checkForPublishedMetrics(projectId: string) {
         seriesLength = series.length;
         break;
       }
-      await new Promise(r => setTimeout(r, 2000));
+      await new Promise(resolve => setTimeout(resolve, 2000));
     }
     assert(seriesLength > 0);
   }
@@ -459,10 +459,10 @@ describe('Bigtable/ClientSideMetrics', () => {
           metrics: ResourceMetrics,
           resultCallback: (result: ExportResult) => void,
         ): Promise<void> {
-          try {
-            await super.export(metrics, (result: ExportResult) => {
-              if (!exported) {
-                exported = true;
+          if (!exported) {
+            exported = true;
+            try {
+              await super.export(metrics, (result: ExportResult) => {
                 try {
                   clearTimeout(timeout);
                   // The test passes when the code is 0 because that means the
@@ -470,6 +470,7 @@ describe('Bigtable/ClientSideMetrics', () => {
                   assert.strictEqual(result.code, 0);
                   resultCallback({code: 0});
                   void checkForPublishedMetrics(projectId)
+                    // eslint-disable-next-line promise/always-return
                     .then(() => {
                       done();
                     })
@@ -480,12 +481,12 @@ describe('Bigtable/ClientSideMetrics', () => {
                   // The code here isn't 0 so we report the original error to the mocha test runner.
                   done(error);
                 }
-              } else {
-                resultCallback({code: 0});
-              }
-            });
-          } catch (error) {
-            done(error);
+              });
+            } catch (error) {
+              done(error);
+            }
+          } else {
+            resultCallback({code: 0});
           }
         }
       }
@@ -582,6 +583,7 @@ describe('Bigtable/ClientSideMetrics', () => {
       done: mocha.Done,
       onExportSuccess?: () => void,
     ) {
+      let exported = false;
       class TestExporter extends CloudMonitoringExporter {
         constructor(options: ClientOptions) {
           super(options);
@@ -591,28 +593,32 @@ describe('Bigtable/ClientSideMetrics', () => {
           metrics: ResourceMetrics,
           resultCallback: (result: ExportResult) => void,
         ): Promise<void> {
-          try {
-            await super.export(metrics, async (result: ExportResult) => {
-              try {
-                // The code is expected to be 0 because the
-                // result from calling export was successful.
-                assert.strictEqual(result.code, 0);
-                resultCallback({code: 0});
-                if (onExportSuccess) {
-                  onExportSuccess();
+          if (!exported) {
+            exported = true;
+            try {
+              await super.export(metrics, async (result: ExportResult) => {
+                try {
+                  // The code is expected to be 0 because the
+                  // result from calling export was successful.
+                  assert.strictEqual(result.code, 0);
+                  resultCallback({code: 0});
+                  if (onExportSuccess) {
+                    onExportSuccess();
+                  }
+                } catch {
+                  // The code here isn't 0 so we report the original error to the
+                  // mocha test runner.
+                  // The test fails here because it means that an export was
+                  // unsuccessful.
+                  done(result);
+                  resultCallback({code: 0});
                 }
-              } catch (error) {
-                // The code here isn't 0 so we report the original error to the
-                // mocha test runner.
-                // The test fails here because it means that an export was
-                // unsuccessful.
-                done(result);
-                done(error);
-                resultCallback({code: 0});
-              }
-            });
-          } catch (error) {
-            done(error);
+              });
+            } catch (error) {
+              done(error);
+              resultCallback({code: 0});
+            }
+          } else {
             resultCallback({code: 0});
           }
         }

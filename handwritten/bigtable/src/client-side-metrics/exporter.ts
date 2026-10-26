@@ -53,9 +53,13 @@ function getInterval(
   const startSec = dataPoint.startTime[0];
   const startNanos = dataPoint.startTime[1];
 
-  if (startSec > endSec || (startSec === endSec && startNanos > endNanos)) {
+  if (startSec > endSec || (startSec === endSec && startNanos >= endNanos)) {
     endSec = startSec;
-    endNanos = startNanos;
+    endNanos = startNanos + 1_000_000;
+    if (endNanos >= 1_000_000_000) {
+      endSec += 1;
+      endNanos -= 1_000_000_000;
+    }
   }
 
   return {
