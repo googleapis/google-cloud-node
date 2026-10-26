@@ -154,14 +154,21 @@ export class StreamArrayParser extends Transform {
   }
 
   _destroy(err: Error | null, callback: (error?: Error | null) => void) {
-    // `_destroy` is now necessary because `cancel()` aborts `cancelSignal`,
-    // which aborts the underlying HTTP `response.body` stream with an
-    // `AbortError` that `stream.pipeline` forwards to `this.destroy(err)`.
-    // Before, the inherited `Transform._destroy` passed `err` directly to
-    // `callback(err)`, causing `StreamArrayParser` to emit a spurious `'error'`
-    // event even after an intentional `cancel()`. Now, it passes `null` when
-    // `this.cancelRequested` is true to suppress cancellation abort errors
-    // while still forwarding genuine errors when not cancelled.
+    // `_destroy` is necessary because `cancel()` aborts `cancelSignal` before
+    // calling `this.end()`. In Node.js, `gaxios` uses the npm `node-fetch`
+    // package, whose `abort` listener on the request `AbortSignal`
+    // synchronously calls `response.body.emit('error', new AbortError(...))`
+    // before `this.end()` runs; `stream.pipeline` catches that error on
+    // `response.body` and calls `this.destroy(err)`. (In Bun, `import('node-fetch')`
+    // uses Bun's built-in `nativeFetch` wrapper whose `ReadableFromWeb` body
+    // aborts asynchronously, so `this.end()` finishes the parser first without
+    // `this.destroy(err)` being called with an `AbortError`. Existing Node.js
+    // unit tests in `grpc-fallback.ts` had not caught this because they mocked
+    // `authClient.request()` with a bare `stream.Readable` that ignored the
+    // request's `AbortSignal`, whereas `bunCertificationMatrix.ts` exercises
+    // `cancel()` against a real `http.Server` in both Node.js and Bun.)
+    // Passing `null` when `this.cancelRequested` is true suppresses spurious
+    // cancellation abort errors while still forwarding genuine errors.
     callback(this.cancelRequested ? null : err);
   }
 

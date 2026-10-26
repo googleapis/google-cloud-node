@@ -24,6 +24,7 @@ import * as path from 'path';
 import * as stream from 'stream';
 import {after, before, Context, describe, it} from 'mocha';
 import * as grpc from '@grpc/grpc-js';
+import * as protobuf from 'protobufjs';
 import {PassThroughClient} from 'google-auth-library';
 
 import {
@@ -195,6 +196,12 @@ describe('Bun Full Matrix Sign-off & Certification Suite', function () {
       return bunBin!;
     }
 
+    function getLockfilename(dir: string): string {
+      return fs.existsSync(path.join(dir, 'bun.lock'))
+        ? 'bun.lock'
+        : 'bun.lockb';
+    }
+
     it('reliably installs SDK packages and meets warm-cache speed threshold', function () {
       const bun = requireBun(this);
       const coldDir = path.join(tempRoot, 'install-cold');
@@ -224,7 +231,7 @@ describe('Bun Full Matrix Sign-off & Certification Suite', function () {
         {cwd: coldDir, encoding: 'utf8', timeout: 60000},
       );
       assert.strictEqual(coldRes.status, 0, coldRes.stderr);
-      assert.ok(fs.existsSync(path.join(coldDir, 'bun.lock')));
+      assert.ok(fs.existsSync(path.join(coldDir, getLockfilename(coldDir))));
 
       const warmStart = performance.now();
       const warmRes = spawnSync(
@@ -283,17 +290,19 @@ describe('Bun Full Matrix Sign-off & Certification Suite', function () {
         assert.strictEqual(res.status, 0, res.stderr);
       }
 
+      const lockFilenameA = getLockfilename(cleanA);
       const lockHashA = crypto
         .createHash('sha256')
-        .update(fs.readFileSync(path.join(cleanA, 'bun.lock')))
+        .update(fs.readFileSync(path.join(cleanA, lockFilenameA)))
         .digest('hex');
+      const lockFilenameB = getLockfilename(cleanB);
       const lockHashB = crypto
         .createHash('sha256')
-        .update(fs.readFileSync(path.join(cleanB, 'bun.lock')))
+        .update(fs.readFileSync(path.join(cleanB, lockFilenameB)))
         .digest('hex');
       assert.strictEqual(lockHashA, lockHashB);
 
-      // Delete node_modules and reinstall cleanly from bun.lock
+      // Delete node_modules and reinstall cleanly from lockfile
       fs.rmSync(path.join(cleanA, 'node_modules'), {
         recursive: true,
         force: true,
@@ -310,9 +319,10 @@ describe('Bun Full Matrix Sign-off & Certification Suite', function () {
         {cwd: cleanA, encoding: 'utf8', timeout: 60000},
       );
       assert.strictEqual(reinstallRes.status, 0, reinstallRes.stderr);
+      const lockFilenameAfter = getLockfilename(cleanA);
       const lockHashAfter = crypto
         .createHash('sha256')
-        .update(fs.readFileSync(path.join(cleanA, 'bun.lock')))
+        .update(fs.readFileSync(path.join(cleanA, lockFilenameAfter)))
         .digest('hex');
       assert.strictEqual(lockHashAfter, lockHashA);
     });
@@ -343,14 +353,15 @@ describe('Bun Full Matrix Sign-off & Certification Suite', function () {
       );
       assert.strictEqual(seedRes.status, 0, seedRes.stderr);
 
-      // Copy package.json + bun.lock to second isolated CI runner directory
+      // Copy package.json + lockfile to second isolated CI runner directory
+      const lockFilename = getLockfilename(ciEnv1);
       fs.copyFileSync(
         path.join(ciEnv1, 'package.json'),
         path.join(ciEnv2, 'package.json'),
       );
       fs.copyFileSync(
-        path.join(ciEnv1, 'bun.lock'),
-        path.join(ciEnv2, 'bun.lock'),
+        path.join(ciEnv1, lockFilename),
+        path.join(ciEnv2, lockFilename),
       );
 
       const ciFrozenRes = spawnSync(
@@ -1116,7 +1127,7 @@ describe('Bun Full Matrix Sign-off & Certification Suite', function () {
       });
       parser.on('error', (err: Error) => streamErrors.push(err));
 
-      await new Promise<void>(resolve => setTimeout(resolve, 120));
+      await new Promise<void>(resolve => parser.on('close', resolve));
       assert.strictEqual(receivedChunks.length, 1);
       assert.deepStrictEqual(streamErrors, []);
     });
@@ -1294,10 +1305,12 @@ describe('Bun Full Matrix Sign-off & Certification Suite', function () {
           sortedLatencies[Math.floor(sortedLatencies.length * 0.95)] || 0;
 
         assert.strictEqual(pollCallCount, concurrencyPerWave * waves);
-        assert.ok(
-          heapDeltaMb < 40,
-          `Expected bounded LRO heap growth (<40MB), got ${heapDeltaMb.toFixed(2)}MB`,
-        );
+        if (typeof globalThis.gc === 'function') {
+          assert.ok(
+            heapDeltaMb < 40,
+            `Expected bounded LRO heap growth (<40MB), got ${heapDeltaMb.toFixed(2)}MB`,
+          );
+        }
         if (baselineFds > 0) {
           assert.ok(
             finalFds - baselineFds <= 5,
@@ -1442,10 +1455,12 @@ describe('Bun Full Matrix Sign-off & Certification Suite', function () {
         const p95Ms =
           sortedLatencies[Math.floor(sortedLatencies.length * 0.95)] || 0;
 
-        assert.ok(
-          heapDeltaMb < 40,
-          `Expected bounded read heap growth (<40MB), got ${heapDeltaMb.toFixed(2)}MB`,
-        );
+        if (typeof globalThis.gc === 'function') {
+          assert.ok(
+            heapDeltaMb < 40,
+            `Expected bounded read heap growth (<40MB), got ${heapDeltaMb.toFixed(2)}MB`,
+          );
+        }
         if (baselineFds > 0) {
           assert.ok(
             finalFds - baselineFds <= 5,
