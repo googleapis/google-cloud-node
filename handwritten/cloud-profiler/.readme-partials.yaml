@@ -2,12 +2,13 @@ body: |-
 
     ### Prerequisites
 
-    1. Your application will need to be using Node.js version between 14 and 20.
+    1. Your application will need to be using Node.js version between 14 and 20 (or a supported V8-based Node.js LTS release).
 
     1. `@google-cloud/profiler` depends on the
-    [`pprof`](https://www.npmjs.com/package/pprof) module, a module with a native
-    component that is used to collect profiles with v8's CPU and Heap profilers.
-    You may need to install additional dependencies to build the `pprof` module.
+    [`pprof`](https://www.npmjs.com/package/pprof) module, a module with a native C++
+    component (`pprof.node`) compiled against V8's `v8::CpuProfiler` and `v8::HeapProfiler`
+    C++ APIs (`v8-profiler.h`).
+        * **Bun / JavaScriptCore Incompatibility:** Because Bun uses JavaScriptCore (JSC) instead of V8 and does not expose V8's C++ profiling ABI, `@google-cloud/profiler` is **not supported on the Bun runtime**. For Bun workloads on Google Cloud, use OpenTelemetry (`@google-cloud/opentelemetry-cloud-trace-exporter` and `@google-cloud/opentelemetry-cloud-monitoring-exporter`) instead.
         * For Linux: `pprof` has prebuilt binaries available for Linux and Alpine
         Linux for Node 14 and 16. No additional dependencies are required.
         * For other environments: when using `@google-cloud/profiler` on environments
