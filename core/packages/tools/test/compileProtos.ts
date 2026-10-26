@@ -403,4 +403,33 @@ describe('compileProtos tool', () => {
     assert(json.nested.test.nested.Test.fields.snake_case_field);
     assert(js.includes('@property {number|null} [check_force_number]'));
   });
+
+  it('strips method bodies and enum assignments for pbts while cleaning up stub file', async function () {
+    this.timeout(20000);
+    const sampleJs = [
+      '    /** @exports TestMessage */',
+      '    function TestMessage(properties) {',
+      '        if (properties) {}',
+      '    }',
+      '    TestMessage.encode = function encode(message, writer) {',
+      '        return writer;',
+      '    };',
+      '    Object.defineProperty(LibraryService.prototype["getShelf"] = function getShelf(request, callback) {',
+      '        return this.rpcCall(getShelf, request, callback);',
+      '    }, "name", { value: "GetShelf" });',
+      '    TestEnum = (function() {',
+      '        var valuesById = {}, values = Object.create(valuesById);',
+      '        values[valuesById[0] = "UNKNOWN"] = 0;',
+      '        return values;',
+      '    })();',
+    ].join('\r\n');
+    const stripped = compileProtos.stripBodiesForPbts(sampleJs);
+    assert(!stripped.includes('if (properties)'));
+    assert(!stripped.includes('return writer;'));
+    assert(!stripped.includes('this.rpcCall'));
+    assert(!stripped.includes('values[valuesById['));
+    assert(stripped.includes('}, "name", { value: "GetShelf" });'));
+    await compileProtos.main(['protoLists']);
+    assert(!fs.existsSync(path.join(resultDir, 'protos.pbts-stub.js')));
+  });
 });
