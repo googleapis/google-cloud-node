@@ -63,6 +63,10 @@ export class StreamArrayParser extends Transform {
   }
 
   _transform(chunk: Buffer, _: string, callback: Function) {
+    if (this.cancelRequested || this._done) {
+      callback();
+      return;
+    }
     let objectStart = 0;
     let curIndex = 0;
     if (this._level === 0 && curIndex === 0) {
@@ -154,6 +158,7 @@ export class StreamArrayParser extends Transform {
   }
 
   _destroy(err: Error | null, callback: (error?: Error | null) => void) {
+    this._prevBlock = Buffer.from('');
     // `_destroy` is necessary because `cancel()` aborts `cancelSignal`, which
     // aborts the underlying HTTP `response.body` stream with an `AbortError`
     // that `stream.pipeline` forwards to `this.destroy(err)`. Passing `null`

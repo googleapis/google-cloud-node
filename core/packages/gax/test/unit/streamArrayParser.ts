@@ -222,4 +222,44 @@ describe('Parse REST stream array', () => {
     assert.strictEqual(emittedErrors.length, 1);
     assert.strictEqual(emittedErrors[0].message, 'Upstream socket failure');
   });
+
+  it('should ignore buffered chunks and clear _prevBlock when cancel() is called mid-object', async () => {
+    const source = new PassThrough();
+    const streamArrayParser = new StreamArrayParser(streamMethod);
+    const receivedData: User[] = [];
+    const emittedErrors: Error[] = [];
+    streamArrayParser.on('data', (data: User) => receivedData.push(data));
+    streamArrayParser.on('error', (err: Error) => emittedErrors.push(err));
+
+    pipeline(source, streamArrayParser, () => {});
+    const fullPayload = JSON.stringify([
+      {
+        name: {firstName: 'Grace', lastName: 'Hopper'},
+        occupation: ['computer scientist'],
+        updateTime: '2021-07-21T07:37:32.616613Z',
+        description: 'Partial chunk test',
+        age: 85,
+      },
+    ]);
+    // Write only the first half of the JSON array/object so _prevBlock holds partial bytes
+    source.write(Buffer.from(fullPayload.slice(0, 45)));
+    await new Promise<void>(resolve => setImmediate(resolve));
+
+    streamArrayParser.cancel();
+    // Attempt a direct _transform call after cancel() to verify the guard
+    let transformCallbackInvoked = false;
+    streamArrayParser._transform(
+      Buffer.from(fullPayload.slice(45)),
+      'utf8',
+      () => {
+        transformCallbackInvoked = true;
+      },
+    );
+    source.destroy(new Error('The operation was aborted.'));
+    await new Promise<void>(resolve => setTimeout(resolve, 30));
+
+    assert.strictEqual(transformCallbackInvoked, true);
+    assert.deepStrictEqual(receivedData, []);
+    assert.deepStrictEqual(emittedErrors, []);
+  });
 });
