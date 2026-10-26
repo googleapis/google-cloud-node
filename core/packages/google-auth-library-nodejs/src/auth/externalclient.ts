@@ -35,9 +35,7 @@ import {
 import {isAdcWarningSuppressed} from '../util';
 
 export type ExternalAccountClientOptions =
-  | IdentityPoolClientOptions
-  | AwsClientOptions
-  | PluggableAuthClientOptions;
+  IdentityPoolClientOptions | AwsClientOptions | PluggableAuthClientOptions;
 
 /**
  * Dummy class with no constructor. Developers are expected to use fromJSON.

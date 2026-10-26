@@ -255,10 +255,8 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
 
   // To save the contents of the JSON credential file
   jsonContent:
-    | JWTInput
-    | ExternalAccountClientOptions
-    | GdchCredentialsInput
-    | null = null;
+    JWTInput | ExternalAccountClientOptions | GdchCredentialsInput | null =
+    null;
   apiKey: string | null;
 
   cachedCredential: AnyAuthClient | T | null = null;
@@ -341,7 +339,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
   getProjectId(callback: ProjectIdCallback): void;
   getProjectId(callback?: ProjectIdCallback): Promise<string | null> | void {
     if (callback) {
-      this.getProjectIdAsync().then(r => callback(null, r), callback);
+      void this.getProjectIdAsync().then(r => callback!(null, r), callback);
     } else {
       return this.getProjectIdAsync();
     }
@@ -487,7 +485,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
       options = optionsOrCallback;
     }
     if (callback) {
-      this.getApplicationDefaultAsync(options).then(
+      void this.getApplicationDefaultAsync(options).then(
         r => callback!(null, r.credential, r.projectId),
         callback,
       );
@@ -945,7 +943,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
       options = optionsOrCallback;
     }
     if (callback) {
-      this.fromStreamAsync(inputStream, options, isADC).then(
+      void this.fromStreamAsync(inputStream, options, isADC).then(
         r => callback!(null, r),
         callback,
       );
@@ -1142,7 +1140,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
     callback?: (err: Error | null, credentials?: CredentialBody) => void,
   ): void | Promise<CredentialBody> {
     if (callback) {
-      this.getCredentialsAsync().then(r => callback(null, r), callback);
+      void this.getCredentialsAsync().then(r => callback!(null, r), callback);
     } else {
       return this.getCredentialsAsync();
     }
@@ -1169,7 +1167,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
       return {
         client_email: (this.jsonContent as JWTInput).client_email,
         private_key: (this.jsonContent as JWTInput).private_key,
-        universe_domain: (this.jsonContent as any).universe_domain,
+        universe_domain: (this.jsonContent as JWTInput).universe_domain,
       };
     }
 
@@ -1208,7 +1206,10 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
         this.setGapicJWTValues(client);
       }
       if (client instanceof GdchClient && !client.apiAudience) {
-        const opts = this.clientOptions as any;
+        const opts = this.clientOptions as {
+          apiEndpoint?: string;
+          servicePath?: string;
+        };
         const endpoint = opts.apiEndpoint || opts.servicePath;
         if (endpoint) {
           const scheme = endpoint.startsWith('http') ? '' : 'https://';
