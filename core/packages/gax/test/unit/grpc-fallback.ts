@@ -1174,6 +1174,34 @@ describe('grpc-fallback', () => {
         `a cancelled stream reported: ${reported.join(', ')}`,
       );
     });
+
+    it('should not report an error when the stream is destroyed after the JSON array ends', async () => {
+      const body = openNodeStream();
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      const reported: string[] = [];
+      const received: {}[] = [];
+      const parser = echoStub.expand({content: 'test'}, {}, {}, (err?: Error) =>
+        reported.push(`callback:${err?.message}`),
+      ) as StreamArrayParser;
+      parser.on('data', d => received.push(d));
+      parser.on('error', err =>
+        reported.push(`error:${(err as Error).message}`),
+      );
+      parser.on('end', () => {
+        parser.destroy();
+      });
+
+      body.push(']');
+      await new Promise<void>(resolve => setTimeout(resolve, 100));
+
+      assert.deepStrictEqual(received, [{content: 'one'}]);
+      assert.deepStrictEqual(
+        reported,
+        [],
+        `a completed stream reported: ${reported.join(', ')}`,
+      );
+    });
   });
 
   describe('transport error translation', () => {

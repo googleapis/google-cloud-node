@@ -475,7 +475,13 @@ export function generateServiceStub(
                 // ordinary Error. That check therefore never matched and every
                 // cancelled stream emitted a spurious error. Use the recorded
                 // state, as the handlers below do.
-                if (err && !parserErrored && (timedOut || !cancelRequested)) {
+                if (
+                  err &&
+                  !parserErrored &&
+                  !streamArrayParser.readableEnded &&
+                  !streamArrayParser.destroyed &&
+                  (timedOut || !cancelRequested)
+                ) {
                   const callErr = _toGoogleError(err, {
                     timedOut,
                     cancelRequested,
