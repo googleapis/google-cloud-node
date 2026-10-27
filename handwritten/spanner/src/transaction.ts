@@ -62,6 +62,7 @@ import {
   isRetryableInternalError,
 } from './transaction-runner';
 import {
+  injectRequestIDIntoError,
   injectRequestIDIntoHeaders,
   nextNthRequest,
   X_GOOG_SPANNER_REQUEST_ID_HEADER,
@@ -1569,6 +1570,7 @@ export class Snapshot extends EventEmitter {
         );
       };
 
+      let injectedHeaders: {[k: string]: string};
       const makeRequest = (resumeToken?: ResumeToken): Readable => {
         attempt++;
         if (!resumeToken) {
@@ -1599,7 +1601,7 @@ export class Snapshot extends EventEmitter {
           }
         }
 
-        const injectedHeaders = injectRequestIDIntoHeaders(
+        injectedHeaders = injectRequestIDIntoHeaders(
           this.commonHeaders_,
           this.session,
           nthRequest,
@@ -1665,6 +1667,15 @@ export class Snapshot extends EventEmitter {
           }
 
           const finalError = elapsed >= timeout ? new DeadlineError(err) : err;
+          if (elapsed >= timeout) {
+            const requestID =
+              (err as {requestID?: string}).requestID ||
+              injectedHeaders?.[X_GOOG_SPANNER_REQUEST_ID_HEADER];
+            injectRequestIDIntoError(
+              {headers: {[X_GOOG_SPANNER_REQUEST_ID_HEADER]: requestID}},
+              finalError,
+            );
+          }
           complete(finalError);
         };
 
@@ -2751,6 +2762,12 @@ export class Transaction extends Dml {
               metadata: Transaction.extractKnownMetadata(status.details!),
               rowCounts,
             }) as BatchUpdateError;
+            // Per-statement failures arrive with an OK gRPC status and the
+            // error in the response body, so the request layer never sees an
+            // error to decorate. Inject the request ID here instead; `headers`
+            // is updated in place by the request-id interceptor, so it holds
+            // the ID of the last attempt actually sent.
+            injectRequestIDIntoError({headers}, batchUpdateError);
             setSpanError(span, batchUpdateError);
           }
 

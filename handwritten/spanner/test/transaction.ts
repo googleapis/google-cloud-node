@@ -1508,6 +1508,13 @@ describe('Transaction', () => {
                 (error as any).code,
                 grpc.status.DEADLINE_EXCEEDED,
               );
+              const expectedRequestId = craftRequestId(1, 0, 1, 1);
+              assert.strictEqual((error as any).requestID, expectedRequestId);
+              assert.ok(
+                error.message.includes(
+                  `(${X_GOOG_SPANNER_REQUEST_ID_HEADER}: ${expectedRequestId})`,
+                ),
+              );
               assert.strictEqual(attempts, 1); // no retries allowed because elapsed > timeout
               done();
             } catch (assertionError) {
@@ -2851,7 +2858,13 @@ describe('Transaction', () => {
             assert(err instanceof Error);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             assert.strictEqual((err as any).code, fakeResponse.status.code);
-            assert.strictEqual(err.message, fakeResponse.status.message);
+            const expectedReqId = craftRequestId(1, 0, 1, 1);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            assert.strictEqual((err as any).requestID, expectedReqId);
+            assert.strictEqual(
+              err.message,
+              `${fakeResponse.status.message} (x-goog-spanner-request-id: ${expectedReqId})`,
+            );
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             assert.deepStrictEqual((err as any).rowCounts, expectedRowCounts);
             assert.deepStrictEqual(rowCounts, expectedRowCounts);

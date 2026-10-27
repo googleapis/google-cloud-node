@@ -2024,12 +2024,18 @@ class Database extends common.GrpcServiceObject {
       }
     }
 
+    const headers = this._metadataWithRequestId(
+      this._nextNthRequest(),
+      1,
+      this.commonHeaders_,
+    );
+
     return this.requestStream({
       client: 'SpannerClient',
       method: 'listSessionsStream',
       reqOpts,
       gaxOpts,
-      headers: this.commonHeaders_,
+      headers,
     });
   }
 
