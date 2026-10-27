@@ -294,6 +294,7 @@ describe('AuthClient', () => {
         // actual logs, so this mostly validates that a few key pieces of info are in there.
         assert.deepStrictEqual(testLogSink.logs.length, 1);
         assert.deepStrictEqual(testLogSink.logs[0].namespace, 'auth');
+        assert.strictEqual(testLogSink.logs[0].fields.severity, 'DEBUG');
         assert.deepStrictEqual(testLogSink.logs[0].args.length, 4);
         assert.strictEqual(
           (testLogSink.logs[0].args[0] as string).includes('request'),
@@ -340,6 +341,7 @@ describe('AuthClient', () => {
         // actual logs, so this mostly validates that a few key pieces of info are in there.
         assert.deepStrictEqual(testLogSink.logs.length, 1);
         assert.deepStrictEqual(testLogSink.logs[0].namespace, 'auth');
+        assert.strictEqual(testLogSink.logs[0].fields.severity, 'DEBUG');
         assert.deepStrictEqual(testLogSink.logs[0].args.length, 4);
         assert.strictEqual(
           (testLogSink.logs[0].args[0] as string).includes('response'),
@@ -374,6 +376,35 @@ describe('AuthClient', () => {
         assert.deepStrictEqual(testLogSink.logs[0].args[3] as {test: string}, {
           message: 'boo!',
         });
+      });
+
+      it('logs payloads without a method name at DEBUG severity', async () => {
+        const options: GaxiosOptionsPrepared = {
+          headers: new Headers(),
+          url: new URL('https://google.com'),
+        };
+        const response = {
+          config: options,
+          data: {test: 'test!'},
+        } as unknown as GaxiosResponse<{test: string}>;
+
+        AuthClient.log = replacementLogger;
+        await AuthClient.DEFAULT_REQUEST_INTERCEPTOR?.resolved?.(options);
+        await AuthClient.DEFAULT_RESPONSE_INTERCEPTOR?.resolved?.(response);
+
+        assert.deepStrictEqual(testLogSink.logs.length, 2);
+        const [requestLog, responseLog] = testLogSink.logs;
+        assert.strictEqual(requestLog.fields.severity, 'DEBUG');
+        assert.strictEqual(
+          (requestLog.args[0] as string).includes('request'),
+          true,
+        );
+        assert.strictEqual(responseLog.fields.severity, 'DEBUG');
+        assert.strictEqual(
+          (responseLog.args[0] as string).includes('response'),
+          true,
+        );
+        assert.deepStrictEqual(responseLog.args[2], {test: 'test!'});
       });
     });
   });

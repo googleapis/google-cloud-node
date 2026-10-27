@@ -450,14 +450,14 @@ export abstract class AuthClient
           headers: config.headers,
         };
         if (methodName) {
-          AuthClient.log.info(
+          AuthClient.log.debug(
             '%s [%s] request %j',
             methodName,
             logId,
             logObject,
           );
         } else {
-          AuthClient.log.info('[%s] request %j', logId, logObject);
+          AuthClient.log.debug('[%s] request %j', logId, logObject);
         }
       } catch (e) {
         // Logging must not create new errors; swallow them all.
@@ -477,14 +477,14 @@ export abstract class AuthClient
         const methodName = symbols[AuthClient.RequestMethodNameSymbol];
         const logId = symbols[AuthClient.RequestLogIdSymbol];
         if (methodName) {
-          AuthClient.log.info(
+          AuthClient.log.debug(
             '%s [%s] response %j',
             methodName,
             logId,
             response.data,
           );
         } else {
-          AuthClient.log.info('[%s] response %j', logId, response.data);
+          AuthClient.log.debug('[%s] response %j', logId, response.data);
         }
       } catch (e) {
         // Logging must not create new errors; swallow them all.
