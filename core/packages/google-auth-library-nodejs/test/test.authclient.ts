@@ -263,14 +263,19 @@ describe('AuthClient', () => {
     describe('logging', () => {
       // Enable and capture any log lines that happen during these tests.
       let testLogSink: TestLogSink;
-      let replacementLogger: logging.AdhocDebugLogFunction;
+      let originalLog: typeof AuthClient.log;
+      before(() => {
+        originalLog = AuthClient.log;
+      });
       beforeEach(() => {
         process.env[logging.env.nodeEnables] = 'auth';
         testLogSink = new TestLogSink();
         logging.setBackend(testLogSink);
-        replacementLogger = logging.log('auth');
+        // This will become nicer with the 1.1.0 release of google-logging-utils.
+        AuthClient.log = logging.log('auth');
       });
-      after(() => {
+      afterEach(() => {
+        AuthClient.log = originalLog;
         delete process.env[logging.env.nodeEnables];
         logging.setBackend(null);
       });
@@ -284,8 +289,6 @@ describe('AuthClient', () => {
         };
         AuthClient.setMethodName(options, 'testMethod');
 
-        // This will become nicer with the 1.1.0 release of google-logging-utils.
-        AuthClient.log = replacementLogger;
         const returned =
           await AuthClient.DEFAULT_REQUEST_INTERCEPTOR?.resolved?.(options);
         assert.strictEqual(returned, options);
@@ -331,8 +334,6 @@ describe('AuthClient', () => {
         } as unknown as GaxiosResponse<{test: string}>;
         AuthClient.setMethodName(response.config, 'testMethod');
 
-        // This will become nicer with the 1.1.0 release of google-logging-utils.
-        AuthClient.log = replacementLogger;
         const resolvedReturned =
           await AuthClient.DEFAULT_RESPONSE_INTERCEPTOR?.resolved?.(response);
         assert.strictEqual(resolvedReturned, response);
@@ -361,7 +362,9 @@ describe('AuthClient', () => {
           },
         } as unknown as GaxiosError<{test: string}>;
         testLogSink.reset();
-        AuthClient.DEFAULT_RESPONSE_INTERCEPTOR?.rejected?.(error);
+        await assert.rejects(async () => {
+          await AuthClient.DEFAULT_RESPONSE_INTERCEPTOR?.rejected?.(error);
+        });
 
         // Unfortunately, there is a fair amount of entropy and changeable formatting in the
         // actual logs, so this mostly validates that a few key pieces of info are in there.
@@ -393,7 +396,6 @@ describe('AuthClient', () => {
           response: {data: {message: 'boo!'}},
         } as unknown as GaxiosError<{test: string}>;
 
-        AuthClient.log = replacementLogger;
         await AuthClient.DEFAULT_REQUEST_INTERCEPTOR?.resolved?.(options);
         await AuthClient.DEFAULT_RESPONSE_INTERCEPTOR?.resolved?.(response);
         await assert.rejects(async () => {
