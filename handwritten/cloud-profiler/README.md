@@ -80,6 +80,8 @@ The dist-tags follow the naming convention `legacy-(version)`.
 For example, `npm install @google-cloud/profiler@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
+> **Note on Bun and Non-V8 Runtimes:** `@google-cloud/profiler` depends on [`pprof`](https://www.npmjs.com/package/pprof), a native C++ addon compiled against V8's `v8::CpuProfiler` and `v8::HeapProfiler` C++ APIs (`v8-profiler.h`). Because Bun uses JavaScriptCore (JSC) instead of V8, `@google-cloud/profiler` is **not supported on the Bun runtime**. For Bun applications on Google Cloud, use OpenTelemetry (`@google-cloud/opentelemetry-cloud-trace-exporter` and `@google-cloud/opentelemetry-cloud-monitoring-exporter`) for observability.
+
 ## Versioning
 
 This library follows [Semantic Versioning](http://semver.org/).
