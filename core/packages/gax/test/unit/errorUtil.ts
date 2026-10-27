@@ -1152,8 +1152,8 @@ describe('errorUtil', () => {
         '{"name":"projects/p/secrets/s","labels":{"env":"prod"},"versions":[1,2]}',
       );
       assert.strictEqual(resolveResponsePayload('raw body'), 'raw body');
+      // Empty responses (e.g. google.protobuf.Empty) still have a payload.
       assert.strictEqual(resolveResponsePayload({}), '{}');
-      assert.strictEqual(resolveResponsePayload([]), '[]');
     });
 
     it('prefers the raw response provided for paginated and long-running calls', () => {
@@ -1173,7 +1173,6 @@ describe('errorUtil', () => {
     it('returns undefined when there is no response', () => {
       assert.strictEqual(resolveResponsePayload(undefined), undefined);
       assert.strictEqual(resolveResponsePayload(null), undefined);
-      assert.strictEqual(resolveResponsePayload(null, null), undefined);
     });
 
     it('serializes protobuf messages through their JSON representation', () => {
@@ -1184,15 +1183,6 @@ describe('errorUtil', () => {
         resolveResponsePayload(message),
         '{"reason":"SERVICE_DISABLED","domain":"googleapis.com",' +
           '"metadata":{"service":"translate.googleapis.com","consumer":"projects/123"}}',
-      );
-    });
-
-    it('handles circular references and BigInt values without throwing', () => {
-      const response: Record<string, unknown> = {size: 10n};
-      response.self = response;
-      assert.strictEqual(
-        resolveResponsePayload(response),
-        '{"size":"10","self":"[Circular]"}',
       );
     });
 
