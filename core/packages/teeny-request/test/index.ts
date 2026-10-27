@@ -727,6 +727,27 @@ describe('teeny', () => {
           },
         );
       });
+
+      const emptyPostLengthScope = nock(uri)
+        .post('/empty-post')
+        .matchHeader('content-length', '0')
+        .reply(200, 'ok');
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest(
+          {uri: `${uri}/empty-post`, method: 'POST'},
+          (err, res, body) => {
+            if (err) return reject(err);
+            try {
+              assert.strictEqual(res.statusCode, 200);
+              assert.strictEqual(body, 'ok');
+              emptyPostLengthScope.done();
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          },
+        );
+      });
     } finally {
       if (!hadBun) {
         delete globalRecord.Bun;
