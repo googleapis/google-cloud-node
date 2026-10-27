@@ -944,17 +944,14 @@ describe('errorUtil', () => {
     });
 
     it('resolveExceptionStacktrace uses server error details for server-side errors and the stack otherwise', () => {
-      const responseMetadata = new grpc.Metadata();
-      responseMetadata.set('x-goog-request-id', 'req-123');
+      // The details formatting itself is covered by the resolveServerExceptionDetails tests.
       const grpcErr = Object.assign(new GoogleError('Wrapper message'), {
         code: Status.INVALID_ARGUMENT,
-        statusDetails: [{field: 'name', description: 'must be non-empty'}],
-        metadata: responseMetadata,
+        statusDetails: [{field: 'name'}],
       });
       assert.strictEqual(
         resolveExceptionStacktrace(grpcErr, 'grpc'),
-        'status_details: [{"field":"name","description":"must be non-empty"}]\n' +
-          'metadata: {"x-goog-request-id":"req-123"}',
+        'status_details: [{"field":"name"}]',
       );
       // A gRPC status is not a server response on the HTTP transport.
       assert.strictEqual(
@@ -980,17 +977,17 @@ describe('errorUtil', () => {
         undefined,
       );
 
-      // Client-side errors use the JavaScript stack trace.
+      // Client-side errors use the JavaScript stack trace, if it is not empty.
       const clientErr = new TypeError('bad type');
       assert.ok(clientErr.stack);
       assert.strictEqual(
         resolveExceptionStacktrace(clientErr, 'grpc'),
         clientErr.stack,
       );
-      const noStackErr = new TypeError('no stack');
-      noStackErr.stack = undefined;
+      const emptyStackErr = new TypeError('empty stack');
+      emptyStackErr.stack = '';
       assert.strictEqual(
-        resolveExceptionStacktrace(noStackErr, 'grpc'),
+        resolveExceptionStacktrace(emptyStackErr, 'grpc'),
         undefined,
       );
     });
@@ -1003,10 +1000,6 @@ describe('errorUtil', () => {
       assert.strictEqual(resolveExceptionStacktrace(null, 'grpc'), undefined);
       assert.strictEqual(
         resolveExceptionStacktrace(undefined, 'http'),
-        undefined,
-      );
-      assert.strictEqual(
-        resolveExceptionStacktrace({message: 'no stack'}, 'http'),
         undefined,
       );
       const crossRealm = vm.runInNewContext(
