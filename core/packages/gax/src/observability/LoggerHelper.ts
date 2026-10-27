@@ -14,6 +14,29 @@
  * limitations under the License.
  */
 
+import {EventEmitter} from 'events';
+import {context} from '@opentelemetry/api';
+import * as loggingUtils from 'google-logging-utils';
+import {APICallback, GaxCallResult} from '../apitypes';
+import {
+  AttemptTraceContext,
+  buildInitialAttributes,
+  getActiveTraceContext,
+  resolveEndpointAndDomain,
+  resolveRpcMethod,
+  StaticTraceContext,
+} from './contextUtil';
+import {
+  resolveErrorInfoDomain,
+  resolveErrorInfoMetadataAttributes,
+  resolveErrorType,
+  resolveExceptionMessage,
+  resolveExceptionStacktrace,
+  resolveExceptionType,
+  resolveResponseStatusCode,
+} from './errorUtil';
+import {getPromiseTarget, handlePromise, handleStream} from './TracerHelper';
+
 export interface LogPayload {
   'rpc.system.name'?: 'grpc' | 'http';
   'rpc.method'?: string;
@@ -32,4 +55,172 @@ export interface LogPayload {
   'exception.type'?: string;
   'exception.message'?: string;
   'exception.stacktrace'?: string;
+}
+
+/**
+ * Returns the `google-logging-utils` logger for the given GCP client service,
+ * defaulting to the `'google-gax'` namespace when no service name is provided.
+ *
+ * @param {string} [serviceName] - The GCP client service name (e.g. 'storage').
+ * @returns {loggingUtils.AdhocDebugLogFunction} The logger function.
+ */
+export function getGaxLogger(
+  serviceName?: string,
+): loggingUtils.AdhocDebugLogFunction {
+  return loggingUtils.log(serviceName || 'google-gax');
+}
+
+/**
+ * Builds the structured `LogPayload` attributes for a failed RPC call or attempt.
+ *
+ * @param {unknown} err - The error thrown or reported for the call.
+ * @param {AttemptTraceContext} dynamicArgs - Dynamic context for the RPC call or attempt.
+ * @param {StaticTraceContext} [staticArgs={}] - Static context for the client library.
+ * @returns {LogPayload} The populated log payload attributes with undefined fields omitted.
+ */
+export function buildLogAttributes(
+  err: unknown,
+  dynamicArgs: AttemptTraceContext,
+  staticArgs: StaticTraceContext = {},
+): LogPayload {
+  const {urlDomain} = resolveEndpointAndDomain(dynamicArgs, staticArgs);
+  const initialAttributes = buildInitialAttributes(
+    dynamicArgs,
+    staticArgs,
+    urlDomain,
+  );
+  const attributes: LogPayload = {};
+  for (const [key, value] of Object.entries(initialAttributes)) {
+    if (value !== undefined) {
+      (attributes as Record<string, unknown>)[key] = value;
+    }
+  }
+  attributes['gcp.client.language'] = 'node';
+
+  const rpcMethod = resolveRpcMethod(dynamicArgs);
+  if (rpcMethod) {
+    attributes['rpc.method'] = rpcMethod;
+  }
+
+  const {rpcStatusName, httpStatusCode} = resolveResponseStatusCode(
+    dynamicArgs.rpcType,
+    true,
+    err,
+  );
+  if (rpcStatusName !== undefined) {
+    attributes['rpc.response.status_code'] = rpcStatusName;
+  }
+  if (httpStatusCode !== undefined) {
+    attributes['http.response.status_code'] = httpStatusCode;
+  }
+
+  attributes['error.type'] = resolveErrorType(err, dynamicArgs.rpcType);
+
+  const errorDomain = resolveErrorInfoDomain(err);
+  if (errorDomain !== undefined) {
+    attributes['gcp.errors.domain'] = errorDomain;
+  }
+  Object.assign(attributes, resolveErrorInfoMetadataAttributes(err));
+
+  attributes['exception.type'] =
+    err && typeof err === 'object'
+      ? resolveExceptionType(err as Error)
+      : 'Error';
+  attributes['exception.message'] = resolveExceptionMessage(
+    err,
+    dynamicArgs.rpcType,
+  );
+  const stacktrace = resolveExceptionStacktrace(err, dynamicArgs.rpcType);
+  if (stacktrace !== undefined) {
+    attributes['exception.stacktrace'] = stacktrace;
+  }
+
+  return attributes;
+}
+
+/**
+ * Executes an API call and emits a single `WARNING` log entry if the logical
+ * request fails across promise, callback, stream, or synchronous execution boundaries.
+ *
+ * @template T
+ * @param {AttemptTraceContext} dynamicArgs - Dynamic context for the RPC call.
+ * @param {StaticTraceContext} staticArgs - Static context for the client library.
+ * @param {function} fn - The operation to execute. Receives the wrapped callback
+ *   when `userCallback` is supplied, otherwise `undefined`.
+ * @param {boolean} [isStreamCall=false] - Whether the operation returns a stream (`EventEmitter`).
+ * @param {APICallback} [userCallback] - Optional user callback for callback-style invocations.
+ * @returns {T} The return value of `fn`.
+ */
+export function logCall<T = GaxCallResult>(
+  dynamicArgs: AttemptTraceContext,
+  staticArgs: StaticTraceContext,
+  fn: (loggedCallback?: APICallback) => T,
+  isStreamCall = false,
+  userCallback?: APICallback,
+): T {
+  // One-time latch flag to enforce at most one L3 emission per logical request.
+  let hasLoggedL3 = false;
+  const initialContext = context.active();
+
+  const emitL3WarnLog = (err: unknown) => {
+    if (hasLoggedL3) {
+      return;
+    }
+    hasLoggedL3 = true;
+
+    const logger = getGaxLogger(staticArgs?.gcpClientService);
+    const activeTrace =
+      getActiveTraceContext() ?? getActiveTraceContext(initialContext);
+    const traceId = activeTrace?.traceId;
+    const spanId = activeTrace?.spanId;
+
+    const attributes = buildLogAttributes(err, dynamicArgs, staticArgs);
+
+    const warningSeverity =
+      (
+        loggingUtils as {
+          LogSeverity?: {WARNING: loggingUtils.LogSeverity};
+        }
+      ).LogSeverity?.WARNING ?? ('WARNING' as loggingUtils.LogSeverity);
+
+    logger(
+      {
+        severity: warningSeverity,
+        ...(traceId ? {telemetryTraceId: traceId} : {}),
+        ...(spanId ? {telemetrySpanId: spanId} : {}),
+        other: attributes,
+      },
+      'Client API call failed: %s',
+      attributes['exception.message'] || err,
+    );
+  };
+
+  let callbackInvoked = false;
+  const loggedCallback: APICallback | undefined = userCallback
+    ? function (this: unknown, ...args: Parameters<APICallback>) {
+        callbackInvoked = true;
+        const err = args[0];
+        if (err) {
+          emitL3WarnLog(err);
+        }
+        userCallback.apply(this, args);
+      }
+    : undefined;
+
+  // Intercept and dispatch execution boundaries (Unary Promise, Callback, and Streams).
+  try {
+    const result = fn(loggedCallback);
+    const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
+    if (isStreamCall && result instanceof EventEmitter) {
+      handleStream(result, emitL3WarnLog, () => {}, Boolean(loggedCallback));
+    } else if (promiseTarget) {
+      handlePromise(promiseTarget, emitL3WarnLog, () => {});
+    }
+    return result;
+  } catch (syncErr) {
+    if (!callbackInvoked) {
+      emitL3WarnLog(syncErr);
+    }
+    throw syncErr;
+  }
 }

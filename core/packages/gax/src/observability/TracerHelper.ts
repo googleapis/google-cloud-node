@@ -176,7 +176,9 @@ function isPromiseLike<T = unknown>(value: unknown): value is PromiseLike<T> {
  * @param {unknown} value - The operation return value to inspect.
  * @returns {PromiseLike<T> | null} The underlying PromiseLike target, or null if not promise-like.
  */
-function getPromiseTarget<T = unknown>(value: unknown): PromiseLike<T> | null {
+export function getPromiseTarget<T = unknown>(
+  value: unknown,
+): PromiseLike<T> | null {
   if (isPromiseLike<T>(value)) {
     return value;
   }
