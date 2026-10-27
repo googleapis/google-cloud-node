@@ -91,3 +91,15 @@ Reference Issue: [#1101](https://github.com/GoogleCloudPlatform/google-cloud-nod
 ## gRPC received a message exceeding the max size.
 
 If you're seeing an error message saying that your gRPC request is exceeding the max size, you may need to send smaller individual requests. Request bodies should not exceed 4MB.
+
+
+## Cloud Run returns `502 Bad Gateway` / `ECONNRESET` when running `@google-cloud/*` under `Bun.serve()`.
+
+`Bun.serve()` defaults to `idleTimeout: 10` (10 seconds). On Cloud Run—especially during cold starts, under default request-based CPU throttling, or when executing multi-RPC operations that take longer than 10 seconds before writing response bytes—`Bun.serve()` aborts the socket (`warn: Bun.serve() timed out a request after 10 seconds. Pass idleTimeout to configure.`), causing Cloud Run to return `502 Bad Gateway`.
+
+To resolve this:
+
+1. Configure `idleTimeout: 120` in `Bun.serve({ port: Number(process.env.PORT) || 8080, idleTimeout: 120, ... })`.
+2. Pass `--no-cpu-throttling` when deploying to Cloud Run if your service uses background batching (`@google-cloud/logging`, `@google-cloud/pubsub`, `@google-cloud/spanner`) or OpenTelemetry exporters.
+
+See [Running on Cloud Run with Bun](cloud-run-bun.md) for complete examples.
