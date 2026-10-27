@@ -367,6 +367,7 @@ describe('AuthClient', () => {
         // actual logs, so this mostly validates that a few key pieces of info are in there.
         assert.deepStrictEqual(testLogSink.logs.length, 1);
         assert.deepStrictEqual(testLogSink.logs[0].namespace, 'auth');
+        assert.strictEqual(testLogSink.logs[0].fields.severity, 'DEBUG');
         assert.deepStrictEqual(testLogSink.logs[0].args.length, 4);
         assert.strictEqual(
           (testLogSink.logs[0].args[0] as string).includes('error'),
@@ -387,13 +388,20 @@ describe('AuthClient', () => {
           config: options,
           data: {test: 'test!'},
         } as unknown as GaxiosResponse<{test: string}>;
+        const error = {
+          config: options,
+          response: {data: {message: 'boo!'}},
+        } as unknown as GaxiosError<{test: string}>;
 
         AuthClient.log = replacementLogger;
         await AuthClient.DEFAULT_REQUEST_INTERCEPTOR?.resolved?.(options);
         await AuthClient.DEFAULT_RESPONSE_INTERCEPTOR?.resolved?.(response);
+        await assert.rejects(async () => {
+          await AuthClient.DEFAULT_RESPONSE_INTERCEPTOR?.rejected?.(error);
+        });
 
-        assert.deepStrictEqual(testLogSink.logs.length, 2);
-        const [requestLog, responseLog] = testLogSink.logs;
+        assert.deepStrictEqual(testLogSink.logs.length, 3);
+        const [requestLog, responseLog, errorLog] = testLogSink.logs;
         assert.strictEqual(requestLog.fields.severity, 'DEBUG');
         assert.strictEqual(
           (requestLog.args[0] as string).includes('request'),
@@ -405,6 +413,12 @@ describe('AuthClient', () => {
           true,
         );
         assert.deepStrictEqual(responseLog.args[2], {test: 'test!'});
+        assert.strictEqual(errorLog.fields.severity, 'DEBUG');
+        assert.strictEqual(
+          (errorLog.args[0] as string).includes('error'),
+          true,
+        );
+        assert.deepStrictEqual(errorLog.args[2], {message: 'boo!'});
       });
     });
   });

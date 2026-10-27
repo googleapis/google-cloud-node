@@ -500,14 +500,14 @@ export abstract class AuthClient
         const methodName = symbols[AuthClient.RequestMethodNameSymbol];
         const logId = symbols[AuthClient.RequestLogIdSymbol];
         if (methodName) {
-          AuthClient.log.info(
+          AuthClient.log.debug(
             '%s [%s] error %j',
             methodName,
             logId,
             error.response?.data,
           );
         } else {
-          AuthClient.log.error('[%s] error %j', logId, error.response?.data);
+          AuthClient.log.debug('[%s] error %j', logId, error.response?.data);
         }
       } catch (e) {
         // Logging must not create new errors; swallow them all.
