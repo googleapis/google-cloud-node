@@ -263,7 +263,7 @@ describe('AuthClient', () => {
     describe('logging', () => {
       // Enable and capture any log lines that happen during these tests.
       let testLogSink: TestLogSink;
-      let replacementLogger: any;
+      let replacementLogger: logging.AdhocDebugLogFunction;
       beforeEach(() => {
         process.env[logging.env.nodeEnables] = 'auth';
         testLogSink = new TestLogSink();

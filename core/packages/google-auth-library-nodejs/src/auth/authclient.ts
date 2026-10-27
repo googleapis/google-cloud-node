@@ -93,8 +93,9 @@ interface AuthJSONOptions {
  * The camelCased options are aliases of the snake_cased options, supporting both
  * JSON API and JS conventions.
  */
-export interface AuthClientOptions
-  extends Partial<OriginalAndCamel<AuthJSONOptions>> {
+export interface AuthClientOptions extends Partial<
+  OriginalAndCamel<AuthJSONOptions>
+> {
   /**
    * An API key to use, optional.
    */
