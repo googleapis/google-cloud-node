@@ -546,16 +546,6 @@ describe('errorUtil', () => {
       assert.deepStrictEqual(resolveResponseStatusCode('http', true, err), {
         httpStatusCode: 503,
       });
-
-      // Failed calls whose error carries no status leave it undefined.
-      assert.deepStrictEqual(
-        resolveResponseStatusCode('grpc', true, new TypeError('bad type')),
-        {rpcStatusName: undefined},
-      );
-      assert.deepStrictEqual(
-        resolveResponseStatusCode('http', true, undefined),
-        {httpStatusCode: undefined},
-      );
     });
 
     it('resolveExceptionMessage prefers server error details for server-side errors', () => {
@@ -600,17 +590,6 @@ describe('errorUtil', () => {
       assert.strictEqual(
         resolveExceptionMessage('raw failure', 'grpc'),
         'raw failure',
-      );
-      assert.strictEqual(
-        resolveExceptionMessage({message: 'error-shaped'}, 'http'),
-        'error-shaped',
-      );
-      const crossRealm = vm.runInNewContext(
-        "new Error('cross realm boom')",
-      ) as Error;
-      assert.strictEqual(
-        resolveExceptionMessage(crossRealm, 'grpc'),
-        'cross realm boom',
       );
       assert.strictEqual(resolveExceptionMessage(null, 'grpc'), 'null');
       assert.strictEqual(

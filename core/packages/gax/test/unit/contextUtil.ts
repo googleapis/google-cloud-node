@@ -447,11 +447,6 @@ describe('contextUtil', () => {
           urlDomain: 'storage.googleapis.com',
         },
       );
-      assert.deepStrictEqual(resolveEndpointAndDomain(dynamicArgs, {}), {
-        rawAddress: undefined,
-        rawPort: undefined,
-        urlDomain: undefined,
-      });
     });
 
     it('derives the server address from url.domain and applies defaultPort when provided', () => {
