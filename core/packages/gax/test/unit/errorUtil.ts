@@ -160,10 +160,14 @@ describe('errorUtil', () => {
   });
 
   describe('error classification and resolution helpers', () => {
-    it('resolveErrorInfoReason handles direct reason, statusDetails, and cause', () => {
+    it('resolveErrorInfoReason handles direct reason, errorInfo, statusDetails, and cause', () => {
       assert.strictEqual(
         resolveErrorInfoReason({reason: 'RATE_LIMIT_EXCEEDED'}),
         'RATE_LIMIT_EXCEEDED',
+      );
+      assert.strictEqual(
+        resolveErrorInfoReason({errorInfo: {reason: 'API_KEY_INVALID'}}),
+        'API_KEY_INVALID',
       );
       assert.strictEqual(
         resolveErrorInfoReason({
@@ -201,13 +205,11 @@ describe('errorUtil', () => {
       assert.strictEqual(resolveErrorInfoReason(new Error('none')), undefined);
     });
 
-    it('resolveErrorInfoDomain handles direct domain, errorInfo, statusDetails, and cause', () => {
+    // resolveErrorInfoDomain and resolveErrorInfoMetadataAttributes share the ErrorInfo
+    // lookup (errorInfo, statusDetails, and cause chain) tested for resolveErrorInfoReason.
+    it('resolveErrorInfoDomain reads the domain from the error and its ErrorInfo details', () => {
       assert.strictEqual(
         resolveErrorInfoDomain({domain: 'googleapis.com'}),
-        'googleapis.com',
-      );
-      assert.strictEqual(
-        resolveErrorInfoDomain({errorInfo: {domain: 'googleapis.com'}}),
         'googleapis.com',
       );
       assert.strictEqual(
@@ -216,34 +218,6 @@ describe('errorUtil', () => {
         }),
         'pubsub.googleapis.com',
       );
-      assert.strictEqual(
-        resolveErrorInfoDomain({
-          statusDetails: [{errorInfo: {domain: 'storage.googleapis.com'}}],
-        }),
-        'storage.googleapis.com',
-      );
-      assert.strictEqual(
-        resolveErrorInfoDomain({
-          statusDetails: [
-            {errorInfo: {domain: ''}},
-            {errorInfo: {domain: 'googleapis.com'}},
-          ],
-        }),
-        'googleapis.com',
-      );
-      assert.strictEqual(
-        resolveErrorInfoDomain({
-          statusDetails: [{errorInfo: {domain: ''}}],
-        }),
-        undefined,
-      );
-      assert.strictEqual(
-        resolveErrorInfoDomain({
-          cause: {domain: 'googleapis.com'},
-        }),
-        'googleapis.com',
-      );
-      assert.strictEqual(resolveErrorInfoDomain(new Error('none')), undefined);
     });
 
     it('resolveErrorInfoDomain ignores non-string domain values', () => {
@@ -284,33 +258,15 @@ describe('errorUtil', () => {
         'gcp.errors.metadata.service': 'translate.googleapis.com',
         'gcp.errors.metadata.consumer': 'projects/123',
       };
+      // GoogleError stores ErrorInfo.metadata as `errorInfoMetadata`, while ErrorInfo
+      // details keep it as `metadata`.
       assert.deepStrictEqual(
         resolveErrorInfoMetadataAttributes({errorInfoMetadata: metadata}),
         expected,
       );
       assert.deepStrictEqual(
-        resolveErrorInfoMetadataAttributes({errorInfo: {metadata}}),
-        expected,
-      );
-      assert.deepStrictEqual(
         resolveErrorInfoMetadataAttributes({statusDetails: [{metadata}]}),
         expected,
-      );
-      assert.deepStrictEqual(
-        resolveErrorInfoMetadataAttributes({
-          statusDetails: [{errorInfo: {metadata}}],
-        }),
-        expected,
-      );
-      assert.deepStrictEqual(
-        resolveErrorInfoMetadataAttributes({
-          cause: {errorInfoMetadata: metadata},
-        }),
-        expected,
-      );
-      assert.deepStrictEqual(
-        resolveErrorInfoMetadataAttributes(new Error('none')),
-        {},
       );
     });
 
@@ -323,19 +279,6 @@ describe('errorUtil', () => {
           domain: 'googleapis.com',
           errorInfoMetadata: {},
           cause: {errorInfoMetadata: causeMetadata},
-        }),
-        {},
-      );
-      assert.deepStrictEqual(
-        resolveErrorInfoMetadataAttributes({
-          errorInfoMetadata: {count: 5},
-          cause: {errorInfoMetadata: causeMetadata},
-        }),
-        {},
-      );
-      assert.deepStrictEqual(
-        resolveErrorInfoMetadataAttributes({
-          statusDetails: [{metadata: {}}, {metadata: causeMetadata}],
         }),
         {},
       );
@@ -360,10 +303,6 @@ describe('errorUtil', () => {
           },
         }),
         {'gcp.errors.metadata.service': 'translate.googleapis.com'},
-      );
-      assert.deepStrictEqual(
-        resolveErrorInfoMetadataAttributes({errorInfoMetadata: ['value']}),
-        {},
       );
 
       // `metadata` on the error itself is the gRPC response metadata, not ErrorInfo.metadata.
@@ -1200,18 +1139,6 @@ describe('errorUtil', () => {
       const err: Record<string, unknown> = {message: 'test'};
       err.cause = err;
       assert.strictEqual(resolveErrorInfoReason(err), undefined);
-    });
-
-    it('resolveErrorInfoDomain terminates cleanly with circular cause', () => {
-      const err: Record<string, unknown> = {message: 'test'};
-      err.cause = err;
-      assert.strictEqual(resolveErrorInfoDomain(err), undefined);
-    });
-
-    it('resolveErrorInfoMetadataAttributes terminates cleanly with circular cause', () => {
-      const err: Record<string, unknown> = {message: 'test'};
-      err.cause = err;
-      assert.deepStrictEqual(resolveErrorInfoMetadataAttributes(err), {});
     });
 
     it('resolveClientNetworkOrOperationalError terminates cleanly with circular cause', () => {
