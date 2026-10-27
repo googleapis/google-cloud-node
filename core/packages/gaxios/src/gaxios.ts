@@ -26,7 +26,7 @@ import {
   defaultErrorRedactor,
 } from './common.js';
 import {getRetryConfig} from './retry.js';
-import {PassThrough, Readable, pipeline} from 'stream';
+import {PassThrough, Readable, Transform, pipeline} from 'stream';
 import {GaxiosInterceptorManager} from './interceptor.js';
 
 const randomUUID = async () =>
@@ -746,12 +746,16 @@ export class Gaxios implements FetchCompliance {
             tls?: AgentTlsOpts;
           })
         : undefined;
+      const inputUrl =
+        input instanceof URL
+          ? input.toString()
+          : typeof input === 'object' && input && 'url' in input
+            ? String((input as {url: unknown}).url)
+            : String(input);
       if (rawInit) {
         const resolvedAgent =
           typeof rawInit.agent === 'function'
-            ? rawInit.agent(
-                input instanceof URL ? input : new URL(String(input)),
-              )
+            ? rawInit.agent(input instanceof URL ? input : new URL(inputUrl))
             : rawInit.agent;
         if (resolvedAgent?.proxy) {
           rawInit.proxy = resolvedAgent.proxy.toString();
@@ -872,32 +876,58 @@ export class Gaxios implements FetchCompliance {
         const origJson = res.json.bind(res);
         const origArrayBuffer = res.arrayBuffer.bind(res);
         const origBlob = res.blob.bind(res);
-        const readBuffer = async () => {
-          nodeStream ||= Readable.fromWeb(rawBody);
-          const chunks: Buffer[] = [];
-          let totalBytes = 0;
-          for await (const chunk of nodeStream) {
-            const buf = Buffer.isBuffer(chunk)
-              ? chunk
-              : Buffer.from(chunk as Uint8Array);
-            totalBytes += buf.byteLength;
-            if (maxSize > 0 && totalBytes > maxSize) {
-              nodeStream.destroy();
-              throw Object.assign(
-                new Error(
-                  `content size at ${String(input)} over limit: ${maxSize}`,
-                ),
-                {type: 'max-size'},
-              );
+        const getNodeStream = () => {
+          if (!nodeStream) {
+            const webReadable = Readable.fromWeb(rawBody);
+            if (maxSize > 0) {
+              let totalBytes = 0;
+              const limiter = new Transform({
+                transform(chunk: Buffer | Uint8Array, _encoding, callback) {
+                  const buf = Buffer.isBuffer(chunk)
+                    ? chunk
+                    : Buffer.from(chunk);
+                  totalBytes += buf.byteLength;
+                  if (totalBytes > maxSize) {
+                    const maxErr = Object.assign(
+                      new Error(
+                        `content size at ${inputUrl} over limit: ${maxSize}`,
+                      ),
+                      {type: 'max-size'},
+                    );
+                    webReadable.destroy();
+                    callback(maxErr);
+                    return;
+                  }
+                  callback(null, buf);
+                },
+              });
+              webReadable.on('error', err => limiter.destroy(err));
+              limiter.once('close', () => {
+                if (!webReadable.destroyed) {
+                  webReadable.destroy();
+                }
+              });
+              webReadable.pipe(limiter);
+              nodeStream = limiter;
+            } else {
+              nodeStream = webReadable;
             }
-            chunks.push(buf);
+          }
+          return nodeStream;
+        };
+        const readBuffer = async () => {
+          const stream = getNodeStream();
+          const chunks: Buffer[] = [];
+          for await (const chunk of stream) {
+            chunks.push(
+              Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as Uint8Array),
+            );
           }
           return Buffer.concat(chunks);
         };
         Object.defineProperty(res, 'body', {
           get() {
-            nodeStream ||= Readable.fromWeb(rawBody);
-            return nodeStream;
+            return getNodeStream();
           },
           configurable: true,
           enumerable: true,
