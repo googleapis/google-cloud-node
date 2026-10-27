@@ -15,6 +15,7 @@
  */
 
 import {Attributes, Span} from '@opentelemetry/api';
+import * as protobuf from 'protobufjs';
 import {GoogleError} from '../googleError';
 import {Status} from '../status';
 /**
@@ -799,8 +800,45 @@ export function isServerSideError(
 }
 
 /**
+ * Returns the bytes of binary data: an ArrayBuffer, or a view of one such as a Buffer
+ * or Uint8Array.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {Uint8Array | undefined} The bytes of `value`, or undefined if it is not binary data.
+ */
+function toBytes(value: unknown): Uint8Array | undefined {
+  if (ArrayBuffer.isView(value)) {
+    return new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
+  }
+  if (value instanceof ArrayBuffer) {
+    return new Uint8Array(value);
+  }
+  return undefined;
+}
+
+/**
+ * Encodes bytes as base64, using Buffer when it is available and a pure JavaScript
+ * encoder otherwise (e.g. in browsers).
+ *
+ * @param {Uint8Array} bytes - The bytes to encode.
+ * @returns {string} The base64 encoding of `bytes`.
+ */
+function encodeBase64(bytes: Uint8Array): string {
+  if (typeof Buffer !== 'undefined') {
+    return Buffer.from(
+      bytes.buffer,
+      bytes.byteOffset,
+      bytes.byteLength,
+    ).toString('base64');
+  }
+  return protobuf.util.base64.encode(bytes, 0, bytes.length);
+}
+
+/**
  * Safely converts a value to a JSON string without throwing exceptions on
- * circular references, BigInt values, or non-serializable properties.
+ * circular references, BigInt values, or non-serializable properties. Binary data
+ * (e.g. a Buffer or Uint8Array) is serialized as a base64 string rather than one
+ * JSON entry per byte.
  *
  * @param {unknown} value - The value to serialize.
  * @returns {string | undefined} The serialized JSON string, or undefined if `value` is undefined or unserializable.
@@ -813,12 +851,23 @@ export function safeJsonStringify(value: unknown): string | undefined {
     const ancestors: unknown[] = [];
     return JSON.stringify(
       value,
-      function (this: unknown, _key: string, val: unknown) {
+      function (this: unknown, key: string, val: unknown) {
         if (typeof val === 'bigint') {
           return val.toString();
         }
         if (typeof val !== 'object' || val === null) {
           return val;
+        }
+        // Encode binary data as base64. Buffer#toJSON runs before this replacer and
+        // turns a Buffer into {type: 'Buffer', data: [...]}, so in that case the
+        // original Buffer is read back from the holder.
+        const bytes = toBytes(
+          (val as {type?: unknown}).type === 'Buffer'
+            ? (this as Record<string, unknown>)[key]
+            : val,
+        );
+        if (bytes) {
+          return encodeBase64(bytes);
         }
         // Track object ancestry to replace circular references.
         if (ancestors.includes(this)) {
@@ -847,10 +896,11 @@ export function safeJsonStringify(value: unknown): string | undefined {
 
 /**
  * Resolves the `response.payload` attribute: the full response payload of a call,
- * serialized as JSON (string payloads are returned as-is) without truncation or
- * redaction. Prefers `rawResponse`, the unprocessed response gax provides for
- * paginated and long-running calls (the full page response or the raw Operation),
- * over the processed `response`.
+ * serialized as JSON without truncation or redaction. String payloads are returned
+ * as-is and binary payloads (e.g. a Buffer or Uint8Array) as base64, as are binary
+ * values nested in the response (e.g. `bytes` fields). Prefers `rawResponse`, the
+ * unprocessed response gax provides for paginated and long-running calls (the full
+ * page response or the raw Operation), over the processed `response`.
  *
  * @param {unknown} response - The response passed to the callback or resolved by the promise.
  * @param {unknown} [rawResponse] - The raw (unprocessed) response, when gax provides one.
@@ -868,7 +918,12 @@ export function resolveResponsePayload(
   // as the raw response, so it can contain sensitive data (e.g. secret values or access
   // tokens). Only emit it when logging is explicitly enabled (see `checkLoggingEnabled`),
   // and consider redacting known sensitive fields.
-  return typeof payload === 'string' ? payload : safeJsonStringify(payload);
+  if (typeof payload === 'string') {
+    return payload;
+  }
+  // Binary payloads are base64 encoded and, like strings, not wrapped in JSON quotes.
+  const bytes = toBytes(payload);
+  return bytes ? encodeBase64(bytes) : safeJsonStringify(payload);
 }
 
 /**

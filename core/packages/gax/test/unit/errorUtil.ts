@@ -1122,6 +1122,23 @@ describe('errorUtil', () => {
       };
       assert.strictEqual(safeJsonStringify(badObj), undefined);
     });
+
+    it('serializes binary data as base64 instead of one entry per byte', () => {
+      // Buffers reach the replacer already converted by Buffer#toJSON, unlike other
+      // binary data such as Uint8Arrays, so both are covered.
+      assert.strictEqual(
+        safeJsonStringify({
+          buffer: Buffer.from('hello'),
+          list: [new Uint8Array([1, 2, 3])],
+        }),
+        '{"buffer":"aGVsbG8=","list":["AQID"]}',
+      );
+      // Objects that only look like a serialized Buffer are left as-is.
+      assert.strictEqual(
+        safeJsonStringify({type: 'Buffer', data: [1, 2]}),
+        '{"type":"Buffer","data":[1,2]}',
+      );
+    });
   });
 
   describe('resolveResponsePayload', () => {
@@ -1177,6 +1194,46 @@ describe('errorUtil', () => {
         resolveResponsePayload(response),
         '{"size":"10","self":"[Circular]"}',
       );
+    });
+
+    it('encodes binary payloads as base64', () => {
+      assert.strictEqual(
+        resolveResponsePayload(Buffer.from('hello')),
+        'aGVsbG8=',
+      );
+      assert.strictEqual(
+        resolveResponsePayload(new Uint8Array([1, 2, 3]).buffer),
+        'AQID',
+      );
+      // Only the viewed bytes are encoded, not the rest of the underlying ArrayBuffer.
+      assert.strictEqual(
+        resolveResponsePayload(new Uint8Array([0, 1, 2, 3, 4]).subarray(1, 4)),
+        'AQID',
+      );
+      // Typed arrays from another realm are recognized too.
+      assert.strictEqual(
+        resolveResponsePayload(vm.runInNewContext('new Uint8Array([1, 2, 3])')),
+        'AQID',
+      );
+    });
+
+    it('encodes binary payloads as base64 when Buffer is not defined', () => {
+      const originalBuffer = (globalThis as Record<string, unknown>).Buffer;
+      try {
+        delete (globalThis as Record<string, unknown>).Buffer;
+        assert.strictEqual(
+          resolveResponsePayload(
+            new Uint8Array([0, 1, 2, 3, 4]).subarray(1, 4),
+          ),
+          'AQID',
+        );
+        assert.strictEqual(
+          resolveResponsePayload(new Uint8Array([255])),
+          '/w==',
+        );
+      } finally {
+        (globalThis as Record<string, unknown>).Buffer = originalBuffer;
+      }
     });
   });
 
