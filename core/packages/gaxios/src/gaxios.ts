@@ -716,6 +716,10 @@ export class Gaxios implements FetchCompliance {
     return this.#proxyAgent;
   }
 
+  /**
+   * Creates a Bun-compatible fetch wrapper that bridges Node.js stream bodies,
+   * proxy/TLS agent options, and maxContentLength enforcement.
+   */
   static #createBunFetch(): NonNullable<GaxiosOptions['fetchImplementation']> {
     return async (input, init) => {
       type AgentTlsOpts = {
@@ -762,8 +766,7 @@ export class Gaxios implements FetchCompliance {
           rawInit.key ??
           resolvedAgent?.connectOpts?.key ??
           resolvedAgent?.options?.key;
-        const ca =
-          resolvedAgent?.connectOpts?.ca ?? resolvedAgent?.options?.ca;
+        const ca = resolvedAgent?.connectOpts?.ca ?? resolvedAgent?.options?.ca;
         const passphrase =
           resolvedAgent?.connectOpts?.passphrase ??
           resolvedAgent?.options?.passphrase;
