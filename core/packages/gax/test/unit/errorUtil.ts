@@ -995,6 +995,30 @@ describe('errorUtil', () => {
       );
     });
 
+    it('resolveExceptionStacktrace uses the stack of non-Error throws when they have one', () => {
+      assert.strictEqual(
+        resolveExceptionStacktrace('raw failure', 'grpc'),
+        undefined,
+      );
+      assert.strictEqual(resolveExceptionStacktrace(null, 'grpc'), undefined);
+      assert.strictEqual(
+        resolveExceptionStacktrace(undefined, 'http'),
+        undefined,
+      );
+      assert.strictEqual(
+        resolveExceptionStacktrace({message: 'no stack'}, 'http'),
+        undefined,
+      );
+      const crossRealm = vm.runInNewContext(
+        "new Error('cross realm boom')",
+      ) as Error;
+      assert.ok(crossRealm.stack);
+      assert.strictEqual(
+        resolveExceptionStacktrace(crossRealm, 'grpc'),
+        crossRealm.stack,
+      );
+    });
+
     it('recordExceptionEvent records exception.type and optionally exception.message', () => {
       const events: Array<{
         name: string;
