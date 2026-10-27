@@ -32,6 +32,7 @@ import {
   DEPTH_TO_CHECK,
   resolveErrorInfoReason,
   resolveErrorInfoDomain,
+  resolveErrorInfoMetadataAttributes,
   resolveServerErrorCode,
   isServerSideError,
   resolveClientNetworkOrOperationalError,
@@ -49,6 +50,65 @@ import {
   isPreConnectionFailure,
   safeJsonStringify,
 } from '../../src/observability/errorUtil';
+
+const SERVICE_DISABLED_ERROR_INFO = {
+  reason: 'SERVICE_DISABLED',
+  domain: 'googleapis.com',
+  metadata: {
+    service: 'translate.googleapis.com',
+    consumer: 'projects/123',
+  },
+};
+
+/**
+ * Builds the GoogleError produced for an HTTP error response that carries
+ * SERVICE_DISABLED_ERROR_INFO in its details.
+ */
+function httpErrorWithErrorInfo(): GoogleError {
+  return GoogleError.parseHttpError({
+    error: {
+      code: 403,
+      message: 'Cloud Translation API is disabled for project 123.',
+      status: 'PERMISSION_DENIED',
+      details: [
+        {
+          '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
+          ...SERVICE_DISABLED_ERROR_INFO,
+        },
+      ],
+    },
+  });
+}
+
+/**
+ * Builds a gRPC GoogleError whose SERVICE_DISABLED_ERROR_INFO is still encoded in the
+ * `grpc-status-details-bin` response metadata, as received from the server.
+ */
+function grpcErrorWithEncodedErrorInfo(): GoogleError {
+  const decoder = new GoogleErrorDecoder();
+  const errorInfo = decoder.root
+    .lookupType('google.rpc.ErrorInfo')
+    .encode(SERVICE_DISABLED_ERROR_INFO)
+    .finish();
+  const status = decoder.statusType
+    .encode({
+      code: Status.PERMISSION_DENIED,
+      message: 'Cloud Translation API is disabled for project 123.',
+      details: [
+        {
+          type_url: 'type.googleapis.com/google.rpc.ErrorInfo',
+          value: errorInfo,
+        },
+      ],
+    })
+    .finish();
+  const metadata = new grpc.Metadata();
+  metadata.set('grpc-status-details-bin', Buffer.from(status));
+  return Object.assign(new GoogleError('API disabled'), {
+    code: Status.PERMISSION_DENIED,
+    metadata,
+  });
+}
 
 describe('errorUtil', () => {
   describe('error code and class constants', () => {
@@ -204,49 +264,102 @@ describe('errorUtil', () => {
     });
 
     it('resolveErrorInfoDomain reads the domain promoted from HTTP and gRPC ErrorInfo details', () => {
-      const httpErr = GoogleError.parseHttpError({
-        error: {
-          code: 403,
-          message: 'Cloud Translation API is disabled for project 123.',
-          status: 'PERMISSION_DENIED',
-          details: [
-            {
-              '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
-              reason: 'SERVICE_DISABLED',
-              domain: 'googleapis.com',
-              metadata: {service: 'translate.googleapis.com'},
-            },
-          ],
-        },
-      });
-      assert.strictEqual(resolveErrorInfoDomain(httpErr), 'googleapis.com');
+      assert.strictEqual(
+        resolveErrorInfoDomain(httpErrorWithErrorInfo()),
+        'googleapis.com',
+      );
 
       // ErrorInfo still encoded in grpc-status-details-bin is decoded on demand.
-      const decoder = new GoogleErrorDecoder();
-      const errorInfo = decoder.root
-        .lookupType('google.rpc.ErrorInfo')
-        .encode({reason: 'SERVICE_DISABLED', domain: 'googleapis.com'})
-        .finish();
-      const status = decoder.statusType
-        .encode({
-          code: Status.PERMISSION_DENIED,
-          message: 'Cloud Translation API is disabled for project 123.',
-          details: [
-            {
-              type_url: 'type.googleapis.com/google.rpc.ErrorInfo',
-              value: errorInfo,
-            },
-          ],
-        })
-        .finish();
-      const metadata = new grpc.Metadata();
-      metadata.set('grpc-status-details-bin', Buffer.from(status));
-      const grpcErr = Object.assign(new GoogleError('API disabled'), {
-        code: Status.PERMISSION_DENIED,
-        metadata,
-      });
+      const grpcErr = grpcErrorWithEncodedErrorInfo();
       assert.strictEqual(grpcErr.domain, undefined);
       assert.strictEqual(resolveErrorInfoDomain(grpcErr), 'googleapis.com');
+    });
+
+    it('resolveErrorInfoMetadataAttributes flattens ErrorInfo metadata into gcp.errors.metadata.<key> attributes', () => {
+      const metadata = {
+        service: 'translate.googleapis.com',
+        consumer: 'projects/123',
+      };
+      const expected = {
+        'gcp.errors.metadata.service': 'translate.googleapis.com',
+        'gcp.errors.metadata.consumer': 'projects/123',
+      };
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({errorInfoMetadata: metadata}),
+        expected,
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({errorInfo: {metadata}}),
+        expected,
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({statusDetails: [{metadata}]}),
+        expected,
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({
+          statusDetails: [{errorInfo: {metadata}}],
+        }),
+        expected,
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({
+          statusDetails: [{metadata: {}}, {metadata}],
+        }),
+        expected,
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({
+          cause: {errorInfoMetadata: metadata},
+        }),
+        expected,
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes(new Error('none')),
+        {},
+      );
+    });
+
+    it('resolveErrorInfoMetadataAttributes skips unusable entries and ignores gRPC response metadata', () => {
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({
+          errorInfoMetadata: {
+            service: 'translate.googleapis.com',
+            '': 'empty key',
+            count: 5,
+            nested: {key: 'value'},
+          },
+        }),
+        {'gcp.errors.metadata.service': 'translate.googleapis.com'},
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({errorInfoMetadata: ['value']}),
+        {},
+      );
+
+      // `metadata` on the error itself is the gRPC response metadata, not ErrorInfo.metadata.
+      const responseMetadata = new grpc.Metadata();
+      responseMetadata.set('x-goog-request-id', 'req-123');
+      const grpcErr = Object.assign(new GoogleError('no ErrorInfo'), {
+        code: Status.UNAVAILABLE,
+        metadata: responseMetadata,
+      });
+      assert.deepStrictEqual(resolveErrorInfoMetadataAttributes(grpcErr), {});
+    });
+
+    it('resolveErrorInfoMetadataAttributes reads the metadata promoted from HTTP and gRPC ErrorInfo details', () => {
+      const expected = {
+        'gcp.errors.metadata.service': 'translate.googleapis.com',
+        'gcp.errors.metadata.consumer': 'projects/123',
+      };
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes(httpErrorWithErrorInfo()),
+        expected,
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes(grpcErrorWithEncodedErrorInfo()),
+        expected,
+      );
     });
 
     it('resolveServerErrorCode handles http and grpc', () => {
@@ -1064,6 +1177,12 @@ describe('errorUtil', () => {
       const err: Record<string, unknown> = {message: 'test'};
       err.cause = err;
       assert.strictEqual(resolveErrorInfoDomain(err), undefined);
+    });
+
+    it('resolveErrorInfoMetadataAttributes terminates cleanly with circular cause', () => {
+      const err: Record<string, unknown> = {message: 'test'};
+      err.cause = err;
+      assert.deepStrictEqual(resolveErrorInfoMetadataAttributes(err), {});
     });
 
     it('resolveClientNetworkOrOperationalError terminates cleanly with circular cause', () => {

@@ -133,28 +133,31 @@ export function ensureGrpcStatusDetailsParsed(e: unknown): void {
 }
 
 /**
- * Resolves a google.rpc.ErrorInfo string field (`reason` or `domain`) from the error
- * or its cause chain. At each level, checks the field directly on the error, then on its
- * `errorInfo` object, then on each `statusDetails` entry and that entry's `errorInfo`.
+ * Finds a google.rpc.ErrorInfo value on the error or its cause chain. At each level, reads
+ * `errorField` from the error itself, then `infoField` from its `errorInfo` object, from each
+ * `statusDetails` entry, and from that entry's `errorInfo`, returning the first value that
+ * `read` accepts.
  *
+ * @template T
  * @param {unknown} e - The error to inspect.
- * @param {'reason' | 'domain'} field - The ErrorInfo field to resolve.
- * @returns {string | undefined} The first non-empty value of the field, or undefined.
+ * @param {'reason' | 'domain' | 'errorInfoMetadata'} errorField - The property to read on the error itself.
+ * @param {'reason' | 'domain' | 'metadata'} infoField - The property to read on ErrorInfo objects.
+ * @param {function} read - Converts a raw property value to the result, or returns undefined to keep looking.
+ * @returns {T | undefined} The first accepted value, or undefined.
  */
-function resolveErrorInfoField(
+function findErrorInfoValue<T>(
   e: unknown,
-  field: 'reason' | 'domain',
-): string | undefined {
+  errorField: 'reason' | 'domain' | 'errorInfoMetadata',
+  infoField: 'reason' | 'domain' | 'metadata',
+  read: (value: unknown) => T | undefined,
+): T | undefined {
   ensureGrpcStatusDetailsParsed(e);
 
-  // Reads the field from an object when it holds a non-empty string.
-  const readField = (obj: unknown): string | undefined => {
-    if (!obj || typeof obj !== 'object') {
-      return undefined;
-    }
-    const value = (obj as Record<string, unknown>)[field];
-    return typeof value === 'string' && value.length > 0 ? value : undefined;
-  };
+  // Reads a property from an object and passes it to `read`.
+  const readFrom = (obj: unknown, field: string): T | undefined =>
+    obj && typeof obj === 'object'
+      ? read((obj as Record<string, unknown>)[field])
+      : undefined;
 
   let current: unknown = e;
   const seen = new Set<unknown>();
@@ -173,20 +176,21 @@ function resolveErrorInfoField(
       cause?: unknown;
     };
 
-    // Check the field directly on the error, then on its errorInfo object.
-    const value = readField(err) ?? readField(err.errorInfo);
-    if (value) {
+    // Check the error itself, then its errorInfo object.
+    const value =
+      readFrom(err, errorField) ?? readFrom(err.errorInfo, infoField);
+    if (value !== undefined) {
       return value;
     }
 
-    // Inspect statusDetails array for the field or errorInfo.
+    // Inspect statusDetails array entries and their errorInfo objects.
     if (Array.isArray(err.statusDetails)) {
       for (const detail of err.statusDetails) {
         if (detail && typeof detail === 'object') {
           const detailValue =
-            readField(detail) ??
-            readField((detail as {errorInfo?: unknown}).errorInfo);
-          if (detailValue) {
+            readFrom(detail, infoField) ??
+            readFrom((detail as {errorInfo?: unknown}).errorInfo, infoField);
+          if (detailValue !== undefined) {
             return detailValue;
           }
         }
@@ -201,6 +205,38 @@ function resolveErrorInfoField(
 }
 
 /**
+ * Returns the value if it is a non-empty string, or undefined otherwise.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {string | undefined} The non-empty string, or undefined.
+ */
+function readNonEmptyString(value: unknown): string | undefined {
+  return typeof value === 'string' && value.length > 0 ? value : undefined;
+}
+
+/**
+ * Returns the entries of a google.rpc.ErrorInfo metadata map that have a non-empty key
+ * and a string value, or undefined if there are none.
+ *
+ * @param {unknown} value - The metadata map to read.
+ * @returns {Array<[string, string]> | undefined} The usable metadata entries, or undefined.
+ */
+function readErrorInfoMetadataEntries(
+  value: unknown,
+): Array<[string, string]> | undefined {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return undefined;
+  }
+  const entries: Array<[string, string]> = [];
+  for (const [key, entryValue] of Object.entries(value)) {
+    if (key.length > 0 && typeof entryValue === 'string') {
+      entries.push([key, entryValue]);
+    }
+  }
+  return entries.length > 0 ? entries : undefined;
+}
+
+/**
  * Resolves google.rpc.ErrorInfo reason if present on the error or its cause chain.
  * Corresponds to Tier 1 in the error.type hierarchy.
  *
@@ -208,7 +244,7 @@ function resolveErrorInfoField(
  * @returns {string | undefined} The ErrorInfo reason string if found, or undefined.
  */
 export function resolveErrorInfoReason(e: unknown): string | undefined {
-  return resolveErrorInfoField(e, 'reason');
+  return findErrorInfoValue(e, 'reason', 'reason', readNonEmptyString);
 }
 
 /**
@@ -219,7 +255,36 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
  * @returns {string | undefined} The ErrorInfo domain string if found, or undefined.
  */
 export function resolveErrorInfoDomain(e: unknown): string | undefined {
-  return resolveErrorInfoField(e, 'domain');
+  return findErrorInfoValue(e, 'domain', 'domain', readNonEmptyString);
+}
+
+/**
+ * Resolves google.rpc.ErrorInfo metadata from the error or its cause chain as
+ * `gcp.errors.metadata.<key>` attributes, one per metadata entry (e.g.
+ * `{service: 'translate.googleapis.com'}` becomes
+ * `{'gcp.errors.metadata.service': 'translate.googleapis.com'}`).
+ * Entries with an empty key or a non-string value are skipped.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @returns {Record<`gcp.errors.metadata.${string}`, string>} The metadata attributes,
+ *   or an empty object if the error has no ErrorInfo metadata.
+ */
+export function resolveErrorInfoMetadataAttributes(
+  e: unknown,
+): Record<`gcp.errors.metadata.${string}`, string> {
+  // GoogleError stores ErrorInfo.metadata as `errorInfoMetadata`, because `metadata`
+  // already holds the gRPC response metadata.
+  const entries = findErrorInfoValue(
+    e,
+    'errorInfoMetadata',
+    'metadata',
+    readErrorInfoMetadataEntries,
+  );
+  const attributes: Record<`gcp.errors.metadata.${string}`, string> = {};
+  for (const [key, value] of entries ?? []) {
+    attributes[`gcp.errors.metadata.${key}`] = value;
+  }
+  return attributes;
 }
 
 /**
