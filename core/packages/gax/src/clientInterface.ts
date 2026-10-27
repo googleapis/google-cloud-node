@@ -50,6 +50,16 @@ export interface ClientOptions
    * this option whenever it is set.
    */
   enableTelemetryTracing?: boolean;
+  /**
+   * Whether to enable telemetry logging for the client.
+   *
+   * Logging is only enabled when `GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING` is enabled
+   * AND either the `GOOGLE_SDK_NODE_LOGGING` environment variable is enabled
+   * or a user passes `enableTelemetryLogging: true` in their client options. The
+   * `GOOGLE_SDK_NODE_LOGGING` environment variable overrides this option
+   * whenever it is set.
+   */
+  enableTelemetryLogging?: boolean;
 }
 
 export interface Descriptors {

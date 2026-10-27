@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.15.1](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.15.0...inventories-v0.15.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* Remove compile-protos from prepare ([#9690](https://github.com/googleapis/google-cloud-node/issues/9690)) ([1a4c864](https://github.com/googleapis/google-cloud-node/commit/1a4c864c569a884623eb38cc73dda4920b998f87))
+
 ## [0.15.0](https://github.com/googleapis/google-cloud-node/compare/inventories-v0.14.1...inventories-v0.15.0) (2026-10-08)
 
 

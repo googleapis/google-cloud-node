@@ -591,6 +591,27 @@ describe('Service', () => {
 
           service.request_(reqOpts, assert.ifError);
         });
+
+        it('should preserve DEFAULT_PROJECT_ID_TOKEN placeholder when projectId is not provided', done => {
+          const config = extend({}, CONFIG, {projectIdRequired: true});
+          const serviceWithoutProject = new Service(config);
+
+          const expectedUri = [
+            serviceWithoutProject.baseUrl,
+            'projects',
+            DEFAULT_PROJECT_ID_TOKEN,
+            reqOpts.uri,
+          ].join('/');
+
+          serviceWithoutProject.makeAuthenticatedRequest = (
+            reqOpts_: DecorateRequestOptions,
+          ) => {
+            assert.strictEqual(reqOpts_.uri, expectedUri);
+            done();
+          };
+
+          serviceWithoutProject.request_(reqOpts, assert.ifError);
+        });
       });
     });
 
