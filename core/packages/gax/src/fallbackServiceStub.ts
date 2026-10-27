@@ -423,6 +423,9 @@ export function generateServiceStub(
             response204Ok = true;
           }
           if (response.ok && rpc.responseStream) {
+            // Route response.body through an intermediate PassThrough so
+            // stream.pipeline does not destroy streamArrayParser with the raw
+            // runtime-specific error before _toGoogleError translates it.
             const bodyPassThrough = new PassThrough();
             let parserErrored = false;
             const tearDownBody = () => {
