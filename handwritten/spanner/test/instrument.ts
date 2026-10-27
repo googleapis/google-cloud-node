@@ -18,6 +18,7 @@ import * as assert from 'assert';
 import {context} from '@opentelemetry/api';
 import {describe, it} from 'mocha';
 import {
+  _resetTracingEnabledForTest,
   ensureInitialContextManagerSet,
   getActiveOrNoopSpan,
   getQueryTraceConfig,
@@ -133,22 +134,88 @@ describe('instrument', () => {
         return trace.setSpan(ctx, span);
       }
 
-      let activeSpanAfterAwait: unknown;
-      await startTrace(
-        'Test.asyncSpan',
-        {opts: {tracerProvider: fakeTracerProvider as any}},
-        async span => {
+      try {
+        let activeSpanAfterAwait: unknown;
+        await startTrace(
+          'Test.asyncSpan',
+          {opts: {tracerProvider: fakeTracerProvider as any}},
+          async span => {
+            await Promise.resolve();
+            activeSpanAfterAwait = getActiveOrNoopSpan();
+            span.end();
+          },
+        );
+
+        assert.strictEqual(
+          (activeSpanAfterAwait as any)?.spanContext?.().spanId,
+          '2'.repeat(16),
+        );
+      } finally {
+        ensureInitialContextManagerSet();
+      }
+    });
+
+    it('should re-enable context manager on cached global tracing check after context.disable()', async () => {
+      const {trace} = require('@opentelemetry/api');
+      const fakeTracerProvider = {
+        getTracer: () => ({
+          startActiveSpan: (
+            _name: string,
+            _opts: unknown,
+            fn: (span: unknown) => unknown,
+          ) => {
+            const fakeSpan = {
+              spanContext: () => ({
+                traceId: '3'.repeat(32),
+                spanId: '4'.repeat(16),
+                traceFlags: 1,
+              }),
+              setAttribute: () => fakeSpan,
+              setAttributes: () => fakeSpan,
+              addEvent: () => fakeSpan,
+              setStatus: () => fakeSpan,
+              updateName: () => fakeSpan,
+              end: () => {},
+              isRecording: () => true,
+              recordException: () => {},
+            };
+            return context.with(trace.setSpan(context.active(), fakeSpan), () =>
+              fn(fakeSpan),
+            );
+          },
+        }),
+      };
+
+      const origGetTracerProvider = trace.getTracerProvider;
+      const origGetTracer = trace.getTracer;
+      _resetTracingEnabledForTest();
+      trace.getTracerProvider = (() => fakeTracerProvider) as any;
+      trace.getTracer = (() => fakeTracerProvider.getTracer()) as any;
+      try {
+        // First trace primes globalTracingEnabled = true
+        await startTrace('Test.primedSpan', undefined, async span => {
+          span.end();
+        });
+        // Disable context manager while globalTracingEnabled remains cached as true
+        context.disable();
+
+        let activeSpanAfterAwait: unknown;
+        await startTrace('Test.cachedGlobalSpan', undefined, async span => {
           await Promise.resolve();
           activeSpanAfterAwait = getActiveOrNoopSpan();
           span.end();
-        },
-      );
+        });
 
-      assert.strictEqual(
-        (activeSpanAfterAwait as any)?.spanContext?.().spanId,
-        '2'.repeat(16),
-      );
-      context.disable();
+        assert.strictEqual(
+          (activeSpanAfterAwait as any)?.spanContext?.().spanId,
+          '4'.repeat(16),
+        );
+      } finally {
+        trace.getTracerProvider = origGetTracerProvider;
+        trace.getTracer = origGetTracer;
+        _resetTracingEnabledForTest();
+        ensureInitialContextManagerSet();
+      }
     });
   });
 });
