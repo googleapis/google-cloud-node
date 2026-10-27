@@ -706,6 +706,104 @@ describe('teeny', () => {
         await new Promise<void>(resolve => server.close(() => resolve()));
         nock.disableNetConnect();
       }
+
+      const rawDeflated = zlib.deflateRawSync(
+        Buffer.from(JSON.stringify({deflated: 'raw-rfc1951'})),
+      );
+      const rawDeflateScope = nock(uri)
+        .get('/raw-deflate')
+        .reply(200, rawDeflated, {
+          'content-type': 'application/json',
+          'content-encoding': 'deflate',
+        });
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest(
+          {uri: `${uri}/raw-deflate`, gzip: true},
+          (err, res, body) => {
+            if (err) return reject(err);
+            try {
+              assert.strictEqual(res.statusCode, 200);
+              assert.deepStrictEqual(body, {deflated: 'raw-rfc1951'});
+              rawDeflateScope.done();
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          },
+        );
+      });
+
+      const zlibDeflated = zlib.deflateSync(
+        Buffer.from(JSON.stringify({deflated: 'zlib-rfc1950'})),
+      );
+      const zlibDeflateScope = nock(uri)
+        .get('/zlib-deflate')
+        .reply(200, zlibDeflated, {
+          'content-type': 'application/json',
+          'content-encoding': 'deflate',
+        });
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest(
+          {uri: `${uri}/zlib-deflate`, gzip: true},
+          (err, res, body) => {
+            if (err) return reject(err);
+            try {
+              assert.strictEqual(res.statusCode, 200);
+              assert.deepStrictEqual(body, {deflated: 'zlib-rfc1950'});
+              zlibDeflateScope.done();
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          },
+        );
+      });
+
+      for (const enc of ['gzip', 'deflate', 'br']) {
+        const emptyEncScope = nock(uri)
+          .get(`/empty-${enc}`)
+          .reply(200, Buffer.alloc(0), {
+            'content-type': 'text/plain',
+            'content-encoding': enc,
+          });
+        await new Promise<void>((resolve, reject) => {
+          teenyRequest(
+            {uri: `${uri}/empty-${enc}`, gzip: true},
+            (err, res, body) => {
+              if (err) return reject(err);
+              try {
+                assert.strictEqual(res.statusCode, 200);
+                assert.strictEqual(body, '');
+                emptyEncScope.done();
+                resolve();
+              } catch (e) {
+                reject(e);
+              }
+            },
+          );
+        });
+      }
+
+      const contentLengthScope = nock(uri)
+        .post('/content-length', 'hello')
+        .matchHeader('content-length', '5')
+        .reply(200, 'ok');
+      await new Promise<void>((resolve, reject) => {
+        teenyRequest(
+          {uri: `${uri}/content-length`, method: 'POST', body: 'hello'},
+          (err, res, body) => {
+            if (err) return reject(err);
+            try {
+              assert.strictEqual(res.statusCode, 200);
+              assert.strictEqual(body, 'ok');
+              contentLengthScope.done();
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+          },
+        );
+      });
     } finally {
       if (!hadBun) {
         delete globalRecord.Bun;

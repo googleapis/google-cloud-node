@@ -20,7 +20,7 @@ import * as https from 'https';
 import {AgentOptions as HttpAgentOptions} from 'http';
 import * as http from 'http';
 import type * as f from 'node-fetch' with {'resolution-mode': 'import'};
-import {PassThrough, Readable, pipeline} from 'stream';
+import {PassThrough, Readable, Transform, pipeline} from 'stream';
 import * as zlib from 'zlib';
 import {getAgent} from './agents';
 import {TeenyStatistics} from './TeenyStatistics';
@@ -80,6 +80,23 @@ function bunFetch(
     );
     if (!hasAcceptEncoding) {
       headers['Accept-Encoding'] = 'gzip,deflate';
+    }
+  }
+
+  const hasContentLength = Object.keys(headers).some(
+    k =>
+      k.toLowerCase() === 'content-length' ||
+      k.toLowerCase() === 'transfer-encoding',
+  );
+  if (!hasContentLength) {
+    if (
+      init.body !== undefined &&
+      init.body !== null &&
+      (typeof init.body === 'string' ||
+        Buffer.isBuffer(init.body) ||
+        init.body instanceof Uint8Array)
+    ) {
+      headers['Content-Length'] = String(Buffer.byteLength(init.body));
     }
   }
 
@@ -213,15 +230,48 @@ function bunFetch(
         (encoding === 'gzip' ||
           encoding === 'x-gzip' ||
           encoding === 'deflate' ||
+          encoding === 'x-deflate' ||
           encoding === 'br')
       ) {
-        const decompressor =
-          encoding === 'br'
-            ? zlib.createBrotliDecompress()
-            : zlib.createUnzip();
-        incoming.on('error', err => decompressor.destroy(err));
-        decompressor.on('error', err => responseStream.destroy(err));
-        incoming.pipe(decompressor).pipe(responseStream);
+        let decompressor: Transform | undefined;
+        incoming.on('data', (chunk: Buffer | Uint8Array) => {
+          const buf = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+          if (buf.length === 0) {
+            return;
+          }
+          if (!decompressor) {
+            if (encoding === 'br') {
+              decompressor = zlib.createBrotliDecompress();
+            } else if (encoding === 'deflate' || encoding === 'x-deflate') {
+              decompressor =
+                (buf[0] & 0x0f) === 0x08
+                  ? zlib.createInflate()
+                  : zlib.createInflateRaw();
+            } else {
+              decompressor = zlib.createUnzip();
+            }
+            decompressor.on('error', err => responseStream.destroy(err));
+            decompressor.pipe(responseStream);
+          }
+          if (!decompressor.write(buf)) {
+            incoming.pause();
+            decompressor.once('drain', () => incoming.resume());
+          }
+        });
+        incoming.on('end', () => {
+          if (decompressor) {
+            decompressor.end();
+          } else {
+            responseStream.end();
+          }
+        });
+        incoming.on('error', err => {
+          if (decompressor) {
+            decompressor.destroy(err);
+          } else {
+            responseStream.destroy(err);
+          }
+        });
       } else {
         incoming.on('error', err => responseStream.destroy(err));
         incoming.pipe(responseStream);
