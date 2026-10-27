@@ -19,7 +19,7 @@ import * as vm from 'vm';
 import {describe, it} from 'mocha';
 import * as grpc from '@grpc/grpc-js';
 import {Span} from '@opentelemetry/api';
-import {GoogleError} from '../../src/googleError';
+import {GoogleError, GoogleErrorDecoder} from '../../src/googleError';
 import {Status} from '../../src/status';
 import {
   connectionCodes,
@@ -31,6 +31,7 @@ import {
   preConnectionCodes,
   DEPTH_TO_CHECK,
   resolveErrorInfoReason,
+  resolveErrorInfoDomain,
   resolveServerErrorCode,
   isServerSideError,
   resolveClientNetworkOrOperationalError,
@@ -138,6 +139,114 @@ describe('errorUtil', () => {
         'ACCESS_TOKEN_EXPIRED',
       );
       assert.strictEqual(resolveErrorInfoReason(new Error('none')), undefined);
+    });
+
+    it('resolveErrorInfoDomain handles direct domain, errorInfo, statusDetails, and cause', () => {
+      assert.strictEqual(
+        resolveErrorInfoDomain({domain: 'googleapis.com'}),
+        'googleapis.com',
+      );
+      assert.strictEqual(
+        resolveErrorInfoDomain({errorInfo: {domain: 'googleapis.com'}}),
+        'googleapis.com',
+      );
+      assert.strictEqual(
+        resolveErrorInfoDomain({
+          statusDetails: [{domain: 'pubsub.googleapis.com'}],
+        }),
+        'pubsub.googleapis.com',
+      );
+      assert.strictEqual(
+        resolveErrorInfoDomain({
+          statusDetails: [{errorInfo: {domain: 'storage.googleapis.com'}}],
+        }),
+        'storage.googleapis.com',
+      );
+      assert.strictEqual(
+        resolveErrorInfoDomain({
+          statusDetails: [
+            {errorInfo: {domain: ''}},
+            {errorInfo: {domain: 'googleapis.com'}},
+          ],
+        }),
+        'googleapis.com',
+      );
+      assert.strictEqual(
+        resolveErrorInfoDomain({
+          statusDetails: [{errorInfo: {domain: ''}}],
+        }),
+        undefined,
+      );
+      assert.strictEqual(
+        resolveErrorInfoDomain({
+          cause: {domain: 'googleapis.com'},
+        }),
+        'googleapis.com',
+      );
+      assert.strictEqual(resolveErrorInfoDomain(new Error('none')), undefined);
+    });
+
+    it('resolveErrorInfoDomain ignores non-string domain values', () => {
+      // Errors thrown inside a legacy Node.js `domain` carry the Domain object on `err.domain`.
+      const domainObjectErr = Object.assign(new Error('thrown in a domain'), {
+        domain: {members: []},
+      });
+      assert.strictEqual(resolveErrorInfoDomain(domainObjectErr), undefined);
+
+      const domainObjectErrWithCause = Object.assign(
+        new Error('thrown in a domain'),
+        {domain: {members: []}, cause: {domain: 'googleapis.com'}},
+      );
+      assert.strictEqual(
+        resolveErrorInfoDomain(domainObjectErrWithCause),
+        'googleapis.com',
+      );
+    });
+
+    it('resolveErrorInfoDomain reads the domain promoted from HTTP and gRPC ErrorInfo details', () => {
+      const httpErr = GoogleError.parseHttpError({
+        error: {
+          code: 403,
+          message: 'Cloud Translation API is disabled for project 123.',
+          status: 'PERMISSION_DENIED',
+          details: [
+            {
+              '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
+              reason: 'SERVICE_DISABLED',
+              domain: 'googleapis.com',
+              metadata: {service: 'translate.googleapis.com'},
+            },
+          ],
+        },
+      });
+      assert.strictEqual(resolveErrorInfoDomain(httpErr), 'googleapis.com');
+
+      // ErrorInfo still encoded in grpc-status-details-bin is decoded on demand.
+      const decoder = new GoogleErrorDecoder();
+      const errorInfo = decoder.root
+        .lookupType('google.rpc.ErrorInfo')
+        .encode({reason: 'SERVICE_DISABLED', domain: 'googleapis.com'})
+        .finish();
+      const status = decoder.statusType
+        .encode({
+          code: Status.PERMISSION_DENIED,
+          message: 'Cloud Translation API is disabled for project 123.',
+          details: [
+            {
+              type_url: 'type.googleapis.com/google.rpc.ErrorInfo',
+              value: errorInfo,
+            },
+          ],
+        })
+        .finish();
+      const metadata = new grpc.Metadata();
+      metadata.set('grpc-status-details-bin', Buffer.from(status));
+      const grpcErr = Object.assign(new GoogleError('API disabled'), {
+        code: Status.PERMISSION_DENIED,
+        metadata,
+      });
+      assert.strictEqual(grpcErr.domain, undefined);
+      assert.strictEqual(resolveErrorInfoDomain(grpcErr), 'googleapis.com');
     });
 
     it('resolveServerErrorCode handles http and grpc', () => {
@@ -949,6 +1058,12 @@ describe('errorUtil', () => {
       const err: Record<string, unknown> = {message: 'test'};
       err.cause = err;
       assert.strictEqual(resolveErrorInfoReason(err), undefined);
+    });
+
+    it('resolveErrorInfoDomain terminates cleanly with circular cause', () => {
+      const err: Record<string, unknown> = {message: 'test'};
+      err.cause = err;
+      assert.strictEqual(resolveErrorInfoDomain(err), undefined);
     });
 
     it('resolveClientNetworkOrOperationalError terminates cleanly with circular cause', () => {

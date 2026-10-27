@@ -133,14 +133,28 @@ export function ensureGrpcStatusDetailsParsed(e: unknown): void {
 }
 
 /**
- * Resolves google.rpc.ErrorInfo reason if present on the error or its cause chain.
- * Corresponds to Tier 1 in the error.type hierarchy.
+ * Resolves a google.rpc.ErrorInfo string field (`reason` or `domain`) from the error
+ * or its cause chain. At each level, checks the field directly on the error, then on its
+ * `errorInfo` object, then on each `statusDetails` entry and that entry's `errorInfo`.
  *
  * @param {unknown} e - The error to inspect.
- * @returns {string | undefined} The ErrorInfo reason string if found, or undefined.
+ * @param {'reason' | 'domain'} field - The ErrorInfo field to resolve.
+ * @returns {string | undefined} The first non-empty value of the field, or undefined.
  */
-export function resolveErrorInfoReason(e: unknown): string | undefined {
+function resolveErrorInfoField(
+  e: unknown,
+  field: 'reason' | 'domain',
+): string | undefined {
   ensureGrpcStatusDetailsParsed(e);
+
+  // Reads the field from an object when it holds a non-empty string.
+  const readField = (obj: unknown): string | undefined => {
+    if (!obj || typeof obj !== 'object') {
+      return undefined;
+    }
+    const value = (obj as Record<string, unknown>)[field];
+    return typeof value === 'string' && value.length > 0 ? value : undefined;
+  };
 
   let current: unknown = e;
   const seen = new Set<unknown>();
@@ -154,45 +168,26 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
     }
     seen.add(current);
     const err = current as {
-      reason?: unknown;
       statusDetails?: unknown;
       errorInfo?: unknown;
       cause?: unknown;
     };
 
-    // Check direct reason property on error.
-    if (typeof err.reason === 'string' && err.reason.length > 0) {
-      return err.reason;
+    // Check the field directly on the error, then on its errorInfo object.
+    const value = readField(err) ?? readField(err.errorInfo);
+    if (value) {
+      return value;
     }
 
-    // Check errorInfo object on error.
-    if (err.errorInfo && typeof err.errorInfo === 'object') {
-      const infoReason = (err.errorInfo as {reason?: unknown}).reason;
-      if (typeof infoReason === 'string' && infoReason.length > 0) {
-        return infoReason;
-      }
-    }
-
-    // Inspect statusDetails array for reason or errorInfo.
+    // Inspect statusDetails array for the field or errorInfo.
     if (Array.isArray(err.statusDetails)) {
       for (const detail of err.statusDetails) {
         if (detail && typeof detail === 'object') {
-          if (
-            'reason' in detail &&
-            typeof (detail as {reason?: unknown}).reason === 'string' &&
-            (detail as {reason: string}).reason.length > 0
-          ) {
-            return (detail as {reason: string}).reason;
-          }
-          if (
-            'errorInfo' in detail &&
-            detail.errorInfo &&
-            typeof detail.errorInfo === 'object' &&
-            typeof (detail.errorInfo as {reason?: unknown}).reason ===
-              'string' &&
-            (detail.errorInfo as {reason: string}).reason.length > 0
-          ) {
-            return (detail.errorInfo as {reason: string}).reason;
+          const detailValue =
+            readField(detail) ??
+            readField((detail as {errorInfo?: unknown}).errorInfo);
+          if (detailValue) {
+            return detailValue;
           }
         }
       }
@@ -203,6 +198,28 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
   }
 
   return undefined;
+}
+
+/**
+ * Resolves google.rpc.ErrorInfo reason if present on the error or its cause chain.
+ * Corresponds to Tier 1 in the error.type hierarchy.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @returns {string | undefined} The ErrorInfo reason string if found, or undefined.
+ */
+export function resolveErrorInfoReason(e: unknown): string | undefined {
+  return resolveErrorInfoField(e, 'reason');
+}
+
+/**
+ * Resolves google.rpc.ErrorInfo domain (e.g. 'googleapis.com') if present on the error
+ * or its cause chain. Populates the `gcp.errors.domain` attribute.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @returns {string | undefined} The ErrorInfo domain string if found, or undefined.
+ */
+export function resolveErrorInfoDomain(e: unknown): string | undefined {
+  return resolveErrorInfoField(e, 'domain');
 }
 
 /**
