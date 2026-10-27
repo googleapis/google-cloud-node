@@ -157,7 +157,13 @@ export class StreamArrayParser extends Transform {
     callback();
   }
 
-  _destroy(err: Error | null, callback: (error?: Error | null) => void) {
+  /**
+   * Suppresses downstream abort errors triggered by explicit stream cancellation.
+   *
+   * @param {Error|null} err - Optional upstream error forwarded to destroy.
+   * @param {Function} callback - Callback invoked when stream destruction completes.
+   */
+  _destroy(err: Error | null, callback: (error?: Error | null) => void): void {
     this._prevBlock = Buffer.from('');
     // `_destroy` is necessary because `cancel()` aborts `cancelSignal`, which
     // aborts the underlying HTTP `response.body` stream with an `AbortError`
