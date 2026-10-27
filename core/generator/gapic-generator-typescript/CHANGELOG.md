@@ -1,6 +1,14 @@
 # Changelog
 
 
+## [5.7.2](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.7.1...gapic-generator-v5.7.2) (2026-10-23)
+
+
+### Bug Fixes
+
+* **generator:** Compile protos before running tests in generator-tests ([#9701](https://github.com/googleapis/google-cloud-node/issues/9701)) ([cde8ae3](https://github.com/googleapis/google-cloud-node/commit/cde8ae31806cf36ad0fc29294b1be8dc5a7f883a))
+* Remove compile-protos from prepare ([#9690](https://github.com/googleapis/google-cloud-node/issues/9690)) ([1a4c864](https://github.com/googleapis/google-cloud-node/commit/1a4c864c569a884623eb38cc73dda4920b998f87))
+
 ## [5.7.1](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.7.0...gapic-generator-v5.7.1) (2026-10-19)
 
 

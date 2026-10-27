@@ -7593,131 +7593,6 @@
                         }
                       }
                     },
-                    "SkinTemperature": {
-                      "oneofs": {
-                        "_temperatureCelsius": {
-                          "oneof": [
-                            "temperatureCelsius"
-                          ]
-                        },
-                        "_baselineTemperatureCelsius": {
-                          "oneof": [
-                            "baselineTemperatureCelsius"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "sampleTime": {
-                          "type": "ObservationSampleTime",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "temperatureCelsius": {
-                          "type": "double",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "proto3_optional": true
-                          }
-                        },
-                        "baselineTemperatureCelsius": {
-                          "type": "double",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "proto3_optional": true
-                          }
-                        },
-                        "metadata": {
-                          "type": "SkinTemperatureMetadata",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "SkinTemperatureMetadata": {
-                          "fields": {
-                            "measurementLocation": {
-                              "type": "MeasurementLocation",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "measurementState": {
-                              "type": "MeasurementState",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "MeasurementLocation": {
-                          "values": {
-                            "MEASUREMENT_LOCATION_UNSPECIFIED": 0,
-                            "OTHER": 1,
-                            "FINGER": 2,
-                            "TOE": 3,
-                            "WRIST": 4
-                          }
-                        },
-                        "MeasurementState": {
-                          "values": {
-                            "MEASUREMENT_STATE_UNSPECIFIED": 0,
-                            "MEASUREMENT_STATE_OTHER": 1,
-                            "MEASUREMENT_STATE_AT_REST": 2,
-                            "MEASUREMENT_STATE_SLEEP": 3
-                          }
-                        }
-                      }
-                    },
-                    "SkinTemperatureRollupValue": {
-                      "oneofs": {
-                        "_temperatureCelsiusAvg": {
-                          "oneof": [
-                            "temperatureCelsiusAvg"
-                          ]
-                        },
-                        "_temperatureCelsiusMax": {
-                          "oneof": [
-                            "temperatureCelsiusMax"
-                          ]
-                        },
-                        "_temperatureCelsiusMin": {
-                          "oneof": [
-                            "temperatureCelsiusMin"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "temperatureCelsiusAvg": {
-                          "type": "double",
-                          "id": 1,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        },
-                        "temperatureCelsiusMax": {
-                          "type": "double",
-                          "id": 2,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        },
-                        "temperatureCelsiusMin": {
-                          "type": "double",
-                          "id": 3,
-                          "options": {
-                            "proto3_optional": true
-                          }
-                        }
-                      }
-                    },
                     "SkinTemperatureSensors": {
                       "fields": {
                         "sampleTime": {
@@ -11642,7 +11517,6 @@
                             "ovulationTest",
                             "symptoms",
                             "moods",
-                            "skinTemperature",
                             "skinTemperatureSensors"
                           ]
                         }
@@ -11942,13 +11816,6 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "skinTemperature": {
-                          "type": "SkinTemperature",
-                          "id": 54,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
                         "skinTemperatureSensors": {
                           "type": "SkinTemperatureSensors",
                           "id": 60,
@@ -12010,7 +11877,6 @@
                             "coreBodyTemperature",
                             "activeEnergyBurned",
                             "bloodGlucose",
-                            "skinTemperature",
                             "skinTemperatureSensors"
                           ]
                         }
@@ -12152,10 +12018,6 @@
                           "type": "BloodGlucose",
                           "id": 46
                         },
-                        "skinTemperature": {
-                          "type": "SkinTemperature",
-                          "id": 54
-                        },
                         "skinTemperatureSensors": {
                           "type": "SkinTemperatureSensors",
                           "id": 30
@@ -12193,8 +12055,7 @@
                             "swimLengthsData",
                             "coreBodyTemperature",
                             "activeEnergyBurned",
-                            "bloodGlucose",
-                            "skinTemperature"
+                            "bloodGlucose"
                           ]
                         }
                       },
@@ -12283,10 +12144,6 @@
                           "type": "BloodGlucoseRollupValue",
                           "id": 26
                         },
-                        "skinTemperature": {
-                          "type": "SkinTemperatureRollupValue",
-                          "id": 27
-                        },
                         "startTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 1
@@ -12323,8 +12180,7 @@
                             "swimLengthsData",
                             "coreBodyTemperature",
                             "activeEnergyBurned",
-                            "bloodGlucose",
-                            "skinTemperature"
+                            "bloodGlucose"
                           ]
                         }
                       },
@@ -12420,10 +12276,6 @@
                         "bloodGlucose": {
                           "type": "BloodGlucoseRollupValue",
                           "id": 28
-                        },
-                        "skinTemperature": {
-                          "type": "SkinTemperatureRollupValue",
-                          "id": 29
                         },
                         "civilStartTime": {
                           "type": "CivilDateTime",
@@ -12740,6 +12592,10 @@
                           "rule": "repeated",
                           "type": "DailyRollupDataPoint",
                           "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },

@@ -10102,6 +10102,118 @@ export namespace google {
                          * @returns Promise
                          */
                         public backupCluster(request: google.cloud.redis.cluster.v1beta1.IBackupClusterRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls ListTokenAuthUsers.
+                         * @param request ListTokenAuthUsersRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListTokenAuthUsersResponse
+                         */
+                        public listTokenAuthUsers(request: google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.ListTokenAuthUsersCallback): void;
+
+                        /**
+                         * Calls ListTokenAuthUsers.
+                         * @param request ListTokenAuthUsersRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listTokenAuthUsers(request: google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest): Promise<google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse>;
+
+                        /**
+                         * Calls GetTokenAuthUser.
+                         * @param request GetTokenAuthUserRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and TokenAuthUser
+                         */
+                        public getTokenAuthUser(request: google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.GetTokenAuthUserCallback): void;
+
+                        /**
+                         * Calls GetTokenAuthUser.
+                         * @param request GetTokenAuthUserRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getTokenAuthUser(request: google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest): Promise<google.cloud.redis.cluster.v1beta1.TokenAuthUser>;
+
+                        /**
+                         * Calls ListAuthTokens.
+                         * @param request ListAuthTokensRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListAuthTokensResponse
+                         */
+                        public listAuthTokens(request: google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.ListAuthTokensCallback): void;
+
+                        /**
+                         * Calls ListAuthTokens.
+                         * @param request ListAuthTokensRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listAuthTokens(request: google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest): Promise<google.cloud.redis.cluster.v1beta1.ListAuthTokensResponse>;
+
+                        /**
+                         * Calls GetAuthToken.
+                         * @param request GetAuthTokenRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and AuthToken
+                         */
+                        public getAuthToken(request: google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.GetAuthTokenCallback): void;
+
+                        /**
+                         * Calls GetAuthToken.
+                         * @param request GetAuthTokenRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getAuthToken(request: google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest): Promise<google.cloud.redis.cluster.v1beta1.AuthToken>;
+
+                        /**
+                         * Calls AddTokenAuthUser.
+                         * @param request AddTokenAuthUserRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public addTokenAuthUser(request: google.cloud.redis.cluster.v1beta1.IAddTokenAuthUserRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.AddTokenAuthUserCallback): void;
+
+                        /**
+                         * Calls AddTokenAuthUser.
+                         * @param request AddTokenAuthUserRequest message or plain object
+                         * @returns Promise
+                         */
+                        public addTokenAuthUser(request: google.cloud.redis.cluster.v1beta1.IAddTokenAuthUserRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls DeleteTokenAuthUser.
+                         * @param request DeleteTokenAuthUserRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteTokenAuthUser(request: google.cloud.redis.cluster.v1beta1.IDeleteTokenAuthUserRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.DeleteTokenAuthUserCallback): void;
+
+                        /**
+                         * Calls DeleteTokenAuthUser.
+                         * @param request DeleteTokenAuthUserRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteTokenAuthUser(request: google.cloud.redis.cluster.v1beta1.IDeleteTokenAuthUserRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls AddAuthToken.
+                         * @param request AddAuthTokenRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public addAuthToken(request: google.cloud.redis.cluster.v1beta1.IAddAuthTokenRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.AddAuthTokenCallback): void;
+
+                        /**
+                         * Calls AddAuthToken.
+                         * @param request AddAuthTokenRequest message or plain object
+                         * @returns Promise
+                         */
+                        public addAuthToken(request: google.cloud.redis.cluster.v1beta1.IAddAuthTokenRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls DeleteAuthToken.
+                         * @param request DeleteAuthTokenRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public deleteAuthToken(request: google.cloud.redis.cluster.v1beta1.IDeleteAuthTokenRequest, callback: google.cloud.redis.cluster.v1beta1.CloudRedisCluster.DeleteAuthTokenCallback): void;
+
+                        /**
+                         * Calls DeleteAuthToken.
+                         * @param request DeleteAuthTokenRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteAuthToken(request: google.cloud.redis.cluster.v1beta1.IDeleteAuthTokenRequest): Promise<google.longrunning.Operation>;
                     }
 
                     namespace CloudRedisCluster {
@@ -10259,6 +10371,62 @@ export namespace google {
                          * @param [response] Operation
                          */
                         type BackupClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|listTokenAuthUsers}.
+                         * @param error Error, if any
+                         * @param [response] ListTokenAuthUsersResponse
+                         */
+                        type ListTokenAuthUsersCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|getTokenAuthUser}.
+                         * @param error Error, if any
+                         * @param [response] TokenAuthUser
+                         */
+                        type GetTokenAuthUserCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.TokenAuthUser) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|listAuthTokens}.
+                         * @param error Error, if any
+                         * @param [response] ListAuthTokensResponse
+                         */
+                        type ListAuthTokensCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.ListAuthTokensResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|getAuthToken}.
+                         * @param error Error, if any
+                         * @param [response] AuthToken
+                         */
+                        type GetAuthTokenCallback = (error: (Error|null), response?: google.cloud.redis.cluster.v1beta1.AuthToken) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|addTokenAuthUser}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type AddTokenAuthUserCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|deleteTokenAuthUser}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteTokenAuthUserCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|addAuthToken}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type AddAuthTokenCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.redis.cluster.v1beta1.CloudRedisCluster|deleteAuthToken}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type DeleteAuthTokenCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                     }
 
                     /** PscConnectionStatus enum. */
@@ -10272,7 +10440,8 @@ export namespace google {
                     enum AuthorizationMode {
                         AUTH_MODE_UNSPECIFIED = 0,
                         AUTH_MODE_IAM_AUTH = 1,
-                        AUTH_MODE_DISABLED = 2
+                        AUTH_MODE_DISABLED = 2,
+                        AUTH_MODE_TOKEN_AUTH = 3
                     }
 
                     /** NodeType enum. */
@@ -12954,6 +13123,1072 @@ export namespace google {
 
                         /**
                          * Gets the default type url for BackupClusterRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListTokenAuthUsersRequest. */
+                    interface IListTokenAuthUsersRequest {
+
+                        /** ListTokenAuthUsersRequest parent */
+                        parent?: (string|null);
+
+                        /** ListTokenAuthUsersRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListTokenAuthUsersRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListTokenAuthUsersRequest filter */
+                        filter?: (string|null);
+
+                        /** ListTokenAuthUsersRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListTokenAuthUsersRequest. */
+                    class ListTokenAuthUsersRequest implements IListTokenAuthUsersRequest {
+
+                        /**
+                         * Constructs a new ListTokenAuthUsersRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest);
+
+                        /** ListTokenAuthUsersRequest parent. */
+                        public parent: string;
+
+                        /** ListTokenAuthUsersRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListTokenAuthUsersRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListTokenAuthUsersRequest filter. */
+                        public filter: string;
+
+                        /** ListTokenAuthUsersRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListTokenAuthUsersRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListTokenAuthUsersRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest): google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersRequest;
+
+                        /**
+                         * Encodes the specified ListTokenAuthUsersRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersRequest.verify|verify} messages.
+                         * @param message ListTokenAuthUsersRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListTokenAuthUsersRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersRequest.verify|verify} messages.
+                         * @param message ListTokenAuthUsersRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListTokenAuthUsersRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListTokenAuthUsersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersRequest;
+
+                        /**
+                         * Decodes a ListTokenAuthUsersRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListTokenAuthUsersRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersRequest;
+
+                        /**
+                         * Verifies a ListTokenAuthUsersRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListTokenAuthUsersRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListTokenAuthUsersRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersRequest;
+
+                        /**
+                         * Creates a plain object from a ListTokenAuthUsersRequest message. Also converts values to other types if specified.
+                         * @param message ListTokenAuthUsersRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListTokenAuthUsersRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListTokenAuthUsersRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListTokenAuthUsersResponse. */
+                    interface IListTokenAuthUsersResponse {
+
+                        /** ListTokenAuthUsersResponse tokenAuthUsers */
+                        tokenAuthUsers?: (google.cloud.redis.cluster.v1beta1.ITokenAuthUser[]|null);
+
+                        /** ListTokenAuthUsersResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListTokenAuthUsersResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListTokenAuthUsersResponse. */
+                    class ListTokenAuthUsersResponse implements IListTokenAuthUsersResponse {
+
+                        /**
+                         * Constructs a new ListTokenAuthUsersResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersResponse);
+
+                        /** ListTokenAuthUsersResponse tokenAuthUsers. */
+                        public tokenAuthUsers: google.cloud.redis.cluster.v1beta1.ITokenAuthUser[];
+
+                        /** ListTokenAuthUsersResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListTokenAuthUsersResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListTokenAuthUsersResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListTokenAuthUsersResponse instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersResponse): google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse;
+
+                        /**
+                         * Encodes the specified ListTokenAuthUsersResponse message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse.verify|verify} messages.
+                         * @param message ListTokenAuthUsersResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListTokenAuthUsersResponse message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse.verify|verify} messages.
+                         * @param message ListTokenAuthUsersResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IListTokenAuthUsersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListTokenAuthUsersResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListTokenAuthUsersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse;
+
+                        /**
+                         * Decodes a ListTokenAuthUsersResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListTokenAuthUsersResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse;
+
+                        /**
+                         * Verifies a ListTokenAuthUsersResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListTokenAuthUsersResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListTokenAuthUsersResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse;
+
+                        /**
+                         * Creates a plain object from a ListTokenAuthUsersResponse message. Also converts values to other types if specified.
+                         * @param message ListTokenAuthUsersResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ListTokenAuthUsersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListTokenAuthUsersResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListTokenAuthUsersResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetTokenAuthUserRequest. */
+                    interface IGetTokenAuthUserRequest {
+
+                        /** GetTokenAuthUserRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetTokenAuthUserRequest. */
+                    class GetTokenAuthUserRequest implements IGetTokenAuthUserRequest {
+
+                        /**
+                         * Constructs a new GetTokenAuthUserRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest);
+
+                        /** GetTokenAuthUserRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetTokenAuthUserRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetTokenAuthUserRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest): google.cloud.redis.cluster.v1beta1.GetTokenAuthUserRequest;
+
+                        /**
+                         * Encodes the specified GetTokenAuthUserRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetTokenAuthUserRequest.verify|verify} messages.
+                         * @param message GetTokenAuthUserRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetTokenAuthUserRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetTokenAuthUserRequest.verify|verify} messages.
+                         * @param message GetTokenAuthUserRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IGetTokenAuthUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetTokenAuthUserRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetTokenAuthUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.GetTokenAuthUserRequest;
+
+                        /**
+                         * Decodes a GetTokenAuthUserRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetTokenAuthUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.GetTokenAuthUserRequest;
+
+                        /**
+                         * Verifies a GetTokenAuthUserRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetTokenAuthUserRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetTokenAuthUserRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.GetTokenAuthUserRequest;
+
+                        /**
+                         * Creates a plain object from a GetTokenAuthUserRequest message. Also converts values to other types if specified.
+                         * @param message GetTokenAuthUserRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.GetTokenAuthUserRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetTokenAuthUserRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetTokenAuthUserRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAuthTokensRequest. */
+                    interface IListAuthTokensRequest {
+
+                        /** ListAuthTokensRequest parent */
+                        parent?: (string|null);
+
+                        /** ListAuthTokensRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListAuthTokensRequest pageToken */
+                        pageToken?: (string|null);
+
+                        /** ListAuthTokensRequest filter */
+                        filter?: (string|null);
+
+                        /** ListAuthTokensRequest orderBy */
+                        orderBy?: (string|null);
+                    }
+
+                    /** Represents a ListAuthTokensRequest. */
+                    class ListAuthTokensRequest implements IListAuthTokensRequest {
+
+                        /**
+                         * Constructs a new ListAuthTokensRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest);
+
+                        /** ListAuthTokensRequest parent. */
+                        public parent: string;
+
+                        /** ListAuthTokensRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListAuthTokensRequest pageToken. */
+                        public pageToken: string;
+
+                        /** ListAuthTokensRequest filter. */
+                        public filter: string;
+
+                        /** ListAuthTokensRequest orderBy. */
+                        public orderBy: string;
+
+                        /**
+                         * Creates a new ListAuthTokensRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAuthTokensRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest): google.cloud.redis.cluster.v1beta1.ListAuthTokensRequest;
+
+                        /**
+                         * Encodes the specified ListAuthTokensRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListAuthTokensRequest.verify|verify} messages.
+                         * @param message ListAuthTokensRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAuthTokensRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListAuthTokensRequest.verify|verify} messages.
+                         * @param message ListAuthTokensRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IListAuthTokensRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAuthTokensRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAuthTokensRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ListAuthTokensRequest;
+
+                        /**
+                         * Decodes a ListAuthTokensRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAuthTokensRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ListAuthTokensRequest;
+
+                        /**
+                         * Verifies a ListAuthTokensRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAuthTokensRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAuthTokensRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ListAuthTokensRequest;
+
+                        /**
+                         * Creates a plain object from a ListAuthTokensRequest message. Also converts values to other types if specified.
+                         * @param message ListAuthTokensRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ListAuthTokensRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAuthTokensRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAuthTokensRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListAuthTokensResponse. */
+                    interface IListAuthTokensResponse {
+
+                        /** ListAuthTokensResponse authTokens */
+                        authTokens?: (google.cloud.redis.cluster.v1beta1.IAuthToken[]|null);
+
+                        /** ListAuthTokensResponse nextPageToken */
+                        nextPageToken?: (string|null);
+
+                        /** ListAuthTokensResponse unreachable */
+                        unreachable?: (string[]|null);
+                    }
+
+                    /** Represents a ListAuthTokensResponse. */
+                    class ListAuthTokensResponse implements IListAuthTokensResponse {
+
+                        /**
+                         * Constructs a new ListAuthTokensResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IListAuthTokensResponse);
+
+                        /** ListAuthTokensResponse authTokens. */
+                        public authTokens: google.cloud.redis.cluster.v1beta1.IAuthToken[];
+
+                        /** ListAuthTokensResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /** ListAuthTokensResponse unreachable. */
+                        public unreachable: string[];
+
+                        /**
+                         * Creates a new ListAuthTokensResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListAuthTokensResponse instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IListAuthTokensResponse): google.cloud.redis.cluster.v1beta1.ListAuthTokensResponse;
+
+                        /**
+                         * Encodes the specified ListAuthTokensResponse message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListAuthTokensResponse.verify|verify} messages.
+                         * @param message ListAuthTokensResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IListAuthTokensResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListAuthTokensResponse message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.ListAuthTokensResponse.verify|verify} messages.
+                         * @param message ListAuthTokensResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IListAuthTokensResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListAuthTokensResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListAuthTokensResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.ListAuthTokensResponse;
+
+                        /**
+                         * Decodes a ListAuthTokensResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListAuthTokensResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.ListAuthTokensResponse;
+
+                        /**
+                         * Verifies a ListAuthTokensResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListAuthTokensResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListAuthTokensResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.ListAuthTokensResponse;
+
+                        /**
+                         * Creates a plain object from a ListAuthTokensResponse message. Also converts values to other types if specified.
+                         * @param message ListAuthTokensResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.ListAuthTokensResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListAuthTokensResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListAuthTokensResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetAuthTokenRequest. */
+                    interface IGetAuthTokenRequest {
+
+                        /** GetAuthTokenRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetAuthTokenRequest. */
+                    class GetAuthTokenRequest implements IGetAuthTokenRequest {
+
+                        /**
+                         * Constructs a new GetAuthTokenRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest);
+
+                        /** GetAuthTokenRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetAuthTokenRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetAuthTokenRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest): google.cloud.redis.cluster.v1beta1.GetAuthTokenRequest;
+
+                        /**
+                         * Encodes the specified GetAuthTokenRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetAuthTokenRequest.verify|verify} messages.
+                         * @param message GetAuthTokenRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetAuthTokenRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.GetAuthTokenRequest.verify|verify} messages.
+                         * @param message GetAuthTokenRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IGetAuthTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetAuthTokenRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetAuthTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.GetAuthTokenRequest;
+
+                        /**
+                         * Decodes a GetAuthTokenRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetAuthTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.GetAuthTokenRequest;
+
+                        /**
+                         * Verifies a GetAuthTokenRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetAuthTokenRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetAuthTokenRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.GetAuthTokenRequest;
+
+                        /**
+                         * Creates a plain object from a GetAuthTokenRequest message. Also converts values to other types if specified.
+                         * @param message GetAuthTokenRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.GetAuthTokenRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetAuthTokenRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetAuthTokenRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AddTokenAuthUserRequest. */
+                    interface IAddTokenAuthUserRequest {
+
+                        /** AddTokenAuthUserRequest cluster */
+                        cluster?: (string|null);
+
+                        /** AddTokenAuthUserRequest tokenAuthUser */
+                        tokenAuthUser?: (string|null);
+                    }
+
+                    /** Represents an AddTokenAuthUserRequest. */
+                    class AddTokenAuthUserRequest implements IAddTokenAuthUserRequest {
+
+                        /**
+                         * Constructs a new AddTokenAuthUserRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IAddTokenAuthUserRequest);
+
+                        /** AddTokenAuthUserRequest cluster. */
+                        public cluster: string;
+
+                        /** AddTokenAuthUserRequest tokenAuthUser. */
+                        public tokenAuthUser: string;
+
+                        /**
+                         * Creates a new AddTokenAuthUserRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AddTokenAuthUserRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IAddTokenAuthUserRequest): google.cloud.redis.cluster.v1beta1.AddTokenAuthUserRequest;
+
+                        /**
+                         * Encodes the specified AddTokenAuthUserRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AddTokenAuthUserRequest.verify|verify} messages.
+                         * @param message AddTokenAuthUserRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IAddTokenAuthUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AddTokenAuthUserRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AddTokenAuthUserRequest.verify|verify} messages.
+                         * @param message AddTokenAuthUserRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IAddTokenAuthUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AddTokenAuthUserRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AddTokenAuthUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.AddTokenAuthUserRequest;
+
+                        /**
+                         * Decodes an AddTokenAuthUserRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AddTokenAuthUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.AddTokenAuthUserRequest;
+
+                        /**
+                         * Verifies an AddTokenAuthUserRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AddTokenAuthUserRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AddTokenAuthUserRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.AddTokenAuthUserRequest;
+
+                        /**
+                         * Creates a plain object from an AddTokenAuthUserRequest message. Also converts values to other types if specified.
+                         * @param message AddTokenAuthUserRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.AddTokenAuthUserRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AddTokenAuthUserRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AddTokenAuthUserRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteTokenAuthUserRequest. */
+                    interface IDeleteTokenAuthUserRequest {
+
+                        /** DeleteTokenAuthUserRequest name */
+                        name?: (string|null);
+
+                        /** DeleteTokenAuthUserRequest requestId */
+                        requestId?: (string|null);
+
+                        /** DeleteTokenAuthUserRequest force */
+                        force?: (boolean|null);
+                    }
+
+                    /** Represents a DeleteTokenAuthUserRequest. */
+                    class DeleteTokenAuthUserRequest implements IDeleteTokenAuthUserRequest {
+
+                        /**
+                         * Constructs a new DeleteTokenAuthUserRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IDeleteTokenAuthUserRequest);
+
+                        /** DeleteTokenAuthUserRequest name. */
+                        public name: string;
+
+                        /** DeleteTokenAuthUserRequest requestId. */
+                        public requestId: string;
+
+                        /** DeleteTokenAuthUserRequest force. */
+                        public force: boolean;
+
+                        /**
+                         * Creates a new DeleteTokenAuthUserRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteTokenAuthUserRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IDeleteTokenAuthUserRequest): google.cloud.redis.cluster.v1beta1.DeleteTokenAuthUserRequest;
+
+                        /**
+                         * Encodes the specified DeleteTokenAuthUserRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.DeleteTokenAuthUserRequest.verify|verify} messages.
+                         * @param message DeleteTokenAuthUserRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IDeleteTokenAuthUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteTokenAuthUserRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.DeleteTokenAuthUserRequest.verify|verify} messages.
+                         * @param message DeleteTokenAuthUserRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IDeleteTokenAuthUserRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteTokenAuthUserRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteTokenAuthUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.DeleteTokenAuthUserRequest;
+
+                        /**
+                         * Decodes a DeleteTokenAuthUserRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteTokenAuthUserRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.DeleteTokenAuthUserRequest;
+
+                        /**
+                         * Verifies a DeleteTokenAuthUserRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteTokenAuthUserRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteTokenAuthUserRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.DeleteTokenAuthUserRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteTokenAuthUserRequest message. Also converts values to other types if specified.
+                         * @param message DeleteTokenAuthUserRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.DeleteTokenAuthUserRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteTokenAuthUserRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteTokenAuthUserRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of an AddAuthTokenRequest. */
+                    interface IAddAuthTokenRequest {
+
+                        /** AddAuthTokenRequest tokenAuthUser */
+                        tokenAuthUser?: (string|null);
+
+                        /** AddAuthTokenRequest authToken */
+                        authToken?: (google.cloud.redis.cluster.v1beta1.IAuthToken|null);
+                    }
+
+                    /** Represents an AddAuthTokenRequest. */
+                    class AddAuthTokenRequest implements IAddAuthTokenRequest {
+
+                        /**
+                         * Constructs a new AddAuthTokenRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IAddAuthTokenRequest);
+
+                        /** AddAuthTokenRequest tokenAuthUser. */
+                        public tokenAuthUser: string;
+
+                        /** AddAuthTokenRequest authToken. */
+                        public authToken?: (google.cloud.redis.cluster.v1beta1.IAuthToken|null);
+
+                        /**
+                         * Creates a new AddAuthTokenRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AddAuthTokenRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IAddAuthTokenRequest): google.cloud.redis.cluster.v1beta1.AddAuthTokenRequest;
+
+                        /**
+                         * Encodes the specified AddAuthTokenRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AddAuthTokenRequest.verify|verify} messages.
+                         * @param message AddAuthTokenRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IAddAuthTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AddAuthTokenRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AddAuthTokenRequest.verify|verify} messages.
+                         * @param message AddAuthTokenRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IAddAuthTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AddAuthTokenRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AddAuthTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.AddAuthTokenRequest;
+
+                        /**
+                         * Decodes an AddAuthTokenRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AddAuthTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.AddAuthTokenRequest;
+
+                        /**
+                         * Verifies an AddAuthTokenRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AddAuthTokenRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AddAuthTokenRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.AddAuthTokenRequest;
+
+                        /**
+                         * Creates a plain object from an AddAuthTokenRequest message. Also converts values to other types if specified.
+                         * @param message AddAuthTokenRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.AddAuthTokenRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AddAuthTokenRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AddAuthTokenRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteAuthTokenRequest. */
+                    interface IDeleteAuthTokenRequest {
+
+                        /** DeleteAuthTokenRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteAuthTokenRequest. */
+                    class DeleteAuthTokenRequest implements IDeleteAuthTokenRequest {
+
+                        /**
+                         * Constructs a new DeleteAuthTokenRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IDeleteAuthTokenRequest);
+
+                        /** DeleteAuthTokenRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteAuthTokenRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteAuthTokenRequest instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IDeleteAuthTokenRequest): google.cloud.redis.cluster.v1beta1.DeleteAuthTokenRequest;
+
+                        /**
+                         * Encodes the specified DeleteAuthTokenRequest message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.DeleteAuthTokenRequest.verify|verify} messages.
+                         * @param message DeleteAuthTokenRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IDeleteAuthTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteAuthTokenRequest message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.DeleteAuthTokenRequest.verify|verify} messages.
+                         * @param message DeleteAuthTokenRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IDeleteAuthTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteAuthTokenRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteAuthTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.DeleteAuthTokenRequest;
+
+                        /**
+                         * Decodes a DeleteAuthTokenRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteAuthTokenRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.DeleteAuthTokenRequest;
+
+                        /**
+                         * Verifies a DeleteAuthTokenRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteAuthTokenRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteAuthTokenRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.DeleteAuthTokenRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteAuthTokenRequest message. Also converts values to other types if specified.
+                         * @param message DeleteAuthTokenRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.DeleteAuthTokenRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteAuthTokenRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteAuthTokenRequest
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -17020,6 +18255,247 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a TokenAuthUser. */
+                    interface ITokenAuthUser {
+
+                        /** TokenAuthUser name */
+                        name?: (string|null);
+
+                        /** TokenAuthUser state */
+                        state?: (google.cloud.redis.cluster.v1beta1.TokenAuthUser.State|keyof typeof google.cloud.redis.cluster.v1beta1.TokenAuthUser.State|null);
+                    }
+
+                    /** Represents a TokenAuthUser. */
+                    class TokenAuthUser implements ITokenAuthUser {
+
+                        /**
+                         * Constructs a new TokenAuthUser.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.ITokenAuthUser);
+
+                        /** TokenAuthUser name. */
+                        public name: string;
+
+                        /** TokenAuthUser state. */
+                        public state: (google.cloud.redis.cluster.v1beta1.TokenAuthUser.State|keyof typeof google.cloud.redis.cluster.v1beta1.TokenAuthUser.State);
+
+                        /**
+                         * Creates a new TokenAuthUser instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TokenAuthUser instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.ITokenAuthUser): google.cloud.redis.cluster.v1beta1.TokenAuthUser;
+
+                        /**
+                         * Encodes the specified TokenAuthUser message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.TokenAuthUser.verify|verify} messages.
+                         * @param message TokenAuthUser message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.ITokenAuthUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TokenAuthUser message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.TokenAuthUser.verify|verify} messages.
+                         * @param message TokenAuthUser message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.ITokenAuthUser, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TokenAuthUser message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TokenAuthUser
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.TokenAuthUser;
+
+                        /**
+                         * Decodes a TokenAuthUser message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TokenAuthUser
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.TokenAuthUser;
+
+                        /**
+                         * Verifies a TokenAuthUser message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TokenAuthUser message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TokenAuthUser
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.TokenAuthUser;
+
+                        /**
+                         * Creates a plain object from a TokenAuthUser message. Also converts values to other types if specified.
+                         * @param message TokenAuthUser
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.TokenAuthUser, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TokenAuthUser to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for TokenAuthUser
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace TokenAuthUser {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ACTIVE = 1,
+                            CREATING = 2,
+                            UPDATING = 3,
+                            DELETING = 4
+                        }
+                    }
+
+                    /** Properties of an AuthToken. */
+                    interface IAuthToken {
+
+                        /** AuthToken name */
+                        name?: (string|null);
+
+                        /** AuthToken token */
+                        token?: (string|null);
+
+                        /** AuthToken createTime */
+                        createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AuthToken state */
+                        state?: (google.cloud.redis.cluster.v1beta1.AuthToken.State|keyof typeof google.cloud.redis.cluster.v1beta1.AuthToken.State|null);
+                    }
+
+                    /** Represents an AuthToken. */
+                    class AuthToken implements IAuthToken {
+
+                        /**
+                         * Constructs a new AuthToken.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.redis.cluster.v1beta1.IAuthToken);
+
+                        /** AuthToken name. */
+                        public name: string;
+
+                        /** AuthToken token. */
+                        public token: string;
+
+                        /** AuthToken createTime. */
+                        public createTime?: (google.protobuf.ITimestamp|null);
+
+                        /** AuthToken state. */
+                        public state: (google.cloud.redis.cluster.v1beta1.AuthToken.State|keyof typeof google.cloud.redis.cluster.v1beta1.AuthToken.State);
+
+                        /**
+                         * Creates a new AuthToken instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AuthToken instance
+                         */
+                        public static create(properties?: google.cloud.redis.cluster.v1beta1.IAuthToken): google.cloud.redis.cluster.v1beta1.AuthToken;
+
+                        /**
+                         * Encodes the specified AuthToken message. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AuthToken.verify|verify} messages.
+                         * @param message AuthToken message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.redis.cluster.v1beta1.IAuthToken, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AuthToken message, length delimited. Does not implicitly {@link google.cloud.redis.cluster.v1beta1.AuthToken.verify|verify} messages.
+                         * @param message AuthToken message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.redis.cluster.v1beta1.IAuthToken, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AuthToken message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AuthToken
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.redis.cluster.v1beta1.AuthToken;
+
+                        /**
+                         * Decodes an AuthToken message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AuthToken
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.redis.cluster.v1beta1.AuthToken;
+
+                        /**
+                         * Verifies an AuthToken message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AuthToken message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AuthToken
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.redis.cluster.v1beta1.AuthToken;
+
+                        /**
+                         * Creates a plain object from an AuthToken message. Also converts values to other types if specified.
+                         * @param message AuthToken
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.redis.cluster.v1beta1.AuthToken, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AuthToken to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for AuthToken
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace AuthToken {
+
+                        /** State enum. */
+                        enum State {
+                            STATE_UNSPECIFIED = 0,
+                            ACTIVE = 1,
+                            CREATING = 2,
+                            DELETING = 3
+                        }
                     }
 
                     /** Properties of a CertificateAuthority. */

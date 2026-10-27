@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/isochrones-v0.3.0...isochrones-v0.3.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* Remove compile-protos from prepare ([#9690](https://github.com/googleapis/google-cloud-node/issues/9690)) ([1a4c864](https://github.com/googleapis/google-cloud-node/commit/1a4c864c569a884623eb38cc73dda4920b998f87))
+
 ## [0.3.0](https://github.com/googleapis/google-cloud-node/compare/isochrones-v0.2.0...isochrones-v0.3.0) (2026-10-08)
 
 

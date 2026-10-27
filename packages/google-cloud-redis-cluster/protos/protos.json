@@ -3730,6 +3730,186 @@
                                   }
                                 }
                               ]
+                            },
+                            "ListTokenAuthUsers": {
+                              "requestType": "ListTokenAuthUsersRequest",
+                              "responseType": "ListTokenAuthUsersResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/clusters/*}/tokenAuthUsers",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{parent=projects/*/locations/*/clusters/*}/tokenAuthUsers"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetTokenAuthUser": {
+                              "requestType": "GetTokenAuthUserRequest",
+                              "responseType": "TokenAuthUser",
+                              "options": {
+                                "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "ListAuthTokens": {
+                              "requestType": "ListAuthTokensRequest",
+                              "responseType": "ListAuthTokensResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/*/clusters/*/tokenAuthUsers/*}/authTokens",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{parent=projects/*/locations/*/clusters/*/tokenAuthUsers/*}/authTokens"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
+                            },
+                            "GetAuthToken": {
+                              "requestType": "GetAuthTokenRequest",
+                              "responseType": "AuthToken",
+                              "options": {
+                                "(google.api.http).get": "/v1beta1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*/authTokens/*}",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1beta1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*/authTokens/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "AddTokenAuthUser": {
+                              "requestType": "AddTokenAuthUserRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v1beta1/{cluster=projects/*/locations/*/clusters/*}:addTokenAuthUser",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "cluster,token_auth_user",
+                                "(google.longrunning.operation_info).response_type": "Cluster",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{cluster=projects/*/locations/*/clusters/*}:addTokenAuthUser",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "cluster,token_auth_user"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "Cluster",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "DeleteTokenAuthUser": {
+                              "requestType": "DeleteTokenAuthUserRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*}",
+                                "(google.api.method_signature)": "name",
+                                "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1beta1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.protobuf.Empty",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "AddAuthToken": {
+                              "requestType": "AddAuthTokenRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v1beta1/{token_auth_user=projects/*/locations/*/clusters/*/tokenAuthUsers/*}:addAuthToken",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "token_auth_user,auth_token",
+                                "(google.longrunning.operation_info).response_type": "TokenAuthUser",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v1beta1/{token_auth_user=projects/*/locations/*/clusters/*/tokenAuthUsers/*}:addAuthToken",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "token_auth_user,auth_token"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "TokenAuthUser",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "DeleteAuthToken": {
+                              "requestType": "DeleteAuthTokenRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*/authTokens/*}",
+                                "(google.api.method_signature)": "name",
+                                "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                                "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "delete": "/v1beta1/{name=projects/*/locations/*/clusters/*/tokenAuthUsers/*/authTokens/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "google.protobuf.Empty",
+                                    "metadata_type": "OperationMetadata"
+                                  }
+                                }
+                              ]
                             }
                           }
                         },
@@ -3744,7 +3924,8 @@
                           "values": {
                             "AUTH_MODE_UNSPECIFIED": 0,
                             "AUTH_MODE_IAM_AUTH": 1,
-                            "AUTH_MODE_DISABLED": 2
+                            "AUTH_MODE_DISABLED": 2,
+                            "AUTH_MODE_TOKEN_AUTH": 3
                           }
                         },
                         "NodeType": {
@@ -4302,6 +4483,230 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
+                        "ListTokenAuthUsersRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "redis.googleapis.com/TokenAuthUser"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ListTokenAuthUsersResponse": {
+                          "fields": {
+                            "tokenAuthUsers": {
+                              "rule": "repeated",
+                              "type": "TokenAuthUser",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "UNORDERED_LIST"
+                              }
+                            }
+                          }
+                        },
+                        "GetTokenAuthUserRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/TokenAuthUser"
+                              }
+                            }
+                          }
+                        },
+                        "ListAuthTokensRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "redis.googleapis.com/AuthToken"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "filter": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "orderBy": {
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ListAuthTokensResponse": {
+                          "fields": {
+                            "authTokens": {
+                              "rule": "repeated",
+                              "type": "AuthToken",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "unreachable": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "UNORDERED_LIST"
+                              }
+                            }
+                          }
+                        },
+                        "GetAuthTokenRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/AuthToken"
+                              }
+                            }
+                          }
+                        },
+                        "AddTokenAuthUserRequest": {
+                          "fields": {
+                            "cluster": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/Cluster"
+                              }
+                            },
+                            "tokenAuthUser": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/TokenAuthUser"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteTokenAuthUserRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/TokenAuthUser"
+                              }
+                            },
+                            "requestId": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_info).format": "UUID4",
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "force": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "AddAuthTokenRequest": {
+                          "fields": {
+                            "tokenAuthUser": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/TokenAuthUser"
+                              }
+                            },
+                            "authToken": {
+                              "type": "AuthToken",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "DeleteAuthTokenRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "redis.googleapis.com/AuthToken"
                               }
                             }
                           }
@@ -5717,6 +6122,89 @@
                               "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "TokenAuthUser": {
+                          "options": {
+                            "(google.api.resource).type": "redis.googleapis.com/TokenAuthUser",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}",
+                            "(google.api.resource).plural": "tokenAuthUsers",
+                            "(google.api.resource).singular": "tokenAuthUser"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "ACTIVE": 1,
+                                "CREATING": 2,
+                                "UPDATING": 3,
+                                "DELETING": 4
+                              }
+                            }
+                          }
+                        },
+                        "AuthToken": {
+                          "options": {
+                            "(google.api.resource).type": "redis.googleapis.com/AuthToken",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/clusters/{cluster}/tokenAuthUsers/{token_auth_user}/authTokens/{auth_token}",
+                            "(google.api.resource).plural": "authTokens",
+                            "(google.api.resource).singular": "authToken"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "IDENTIFIER"
+                              }
+                            },
+                            "token": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "ACTIVE": 1,
+                                "CREATING": 2,
+                                "DELETING": 3
                               }
                             }
                           }
