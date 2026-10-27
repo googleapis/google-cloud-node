@@ -51,6 +51,7 @@ import {
   resolveExceptionMessage,
   resolveExceptionStacktrace,
   resolveResponseStatusCode,
+  resolveResponsePayload,
   resolveServerExceptionDetails,
   recordExceptionEvent,
   isPreConnectionFailure,
@@ -1120,6 +1121,62 @@ describe('errorUtil', () => {
         },
       };
       assert.strictEqual(safeJsonStringify(badObj), undefined);
+    });
+  });
+
+  describe('resolveResponsePayload', () => {
+    it('serializes the full response as JSON and returns string payloads as-is', () => {
+      assert.strictEqual(
+        resolveResponsePayload({
+          name: 'projects/p/secrets/s',
+          labels: {env: 'prod'},
+          versions: [1, 2],
+        }),
+        '{"name":"projects/p/secrets/s","labels":{"env":"prod"},"versions":[1,2]}',
+      );
+      assert.strictEqual(resolveResponsePayload('raw body'), 'raw body');
+      assert.strictEqual(resolveResponsePayload({}), '{}');
+      assert.strictEqual(resolveResponsePayload([]), '[]');
+    });
+
+    it('prefers the raw response provided for paginated and long-running calls', () => {
+      const resources = [{name: 'a'}, {name: 'b'}];
+      const rawResponse = {items: resources, nextPageToken: 'token'};
+      assert.strictEqual(
+        resolveResponsePayload(resources, rawResponse),
+        '{"items":[{"name":"a"},{"name":"b"}],"nextPageToken":"token"}',
+      );
+      // A null raw response falls back to the response.
+      assert.strictEqual(
+        resolveResponsePayload({name: 'a'}, null),
+        '{"name":"a"}',
+      );
+    });
+
+    it('returns undefined when there is no response', () => {
+      assert.strictEqual(resolveResponsePayload(undefined), undefined);
+      assert.strictEqual(resolveResponsePayload(null), undefined);
+      assert.strictEqual(resolveResponsePayload(null, null), undefined);
+    });
+
+    it('serializes protobuf messages through their JSON representation', () => {
+      const message = new GoogleErrorDecoder().root
+        .lookupType('google.rpc.ErrorInfo')
+        .fromObject(SERVICE_DISABLED_ERROR_INFO);
+      assert.strictEqual(
+        resolveResponsePayload(message),
+        '{"reason":"SERVICE_DISABLED","domain":"googleapis.com",' +
+          '"metadata":{"service":"translate.googleapis.com","consumer":"projects/123"}}',
+      );
+    });
+
+    it('handles circular references and BigInt values without throwing', () => {
+      const response: Record<string, unknown> = {size: 10n};
+      response.self = response;
+      assert.strictEqual(
+        resolveResponsePayload(response),
+        '{"size":"10","self":"[Circular]"}',
+      );
     });
   });
 

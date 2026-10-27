@@ -846,6 +846,32 @@ export function safeJsonStringify(value: unknown): string | undefined {
 }
 
 /**
+ * Resolves the `response.payload` attribute: the full response payload of a call,
+ * serialized as JSON (string payloads are returned as-is) without truncation or
+ * redaction. Prefers `rawResponse`, the unprocessed response gax provides for
+ * paginated and long-running calls (the full page response or the raw Operation),
+ * over the processed `response`.
+ *
+ * @param {unknown} response - The response passed to the callback or resolved by the promise.
+ * @param {unknown} [rawResponse] - The raw (unprocessed) response, when gax provides one.
+ * @returns {string | undefined} The serialized payload, or undefined if there is no response.
+ */
+export function resolveResponsePayload(
+  response: unknown,
+  rawResponse?: unknown,
+): string | undefined {
+  const payload = rawResponse ?? response;
+  if (payload === undefined || payload === null) {
+    return undefined;
+  }
+  // TODO(security): The payload is returned in full because `response.payload` is defined
+  // as the raw response, so it can contain sensitive data (e.g. secret values or access
+  // tokens). Only emit it when logging is explicitly enabled (see `checkLoggingEnabled`),
+  // and consider redacting known sensitive fields.
+  return typeof payload === 'string' ? payload : safeJsonStringify(payload);
+}
+
+/**
  * Extracts the server-side error details message attached by GFE/backend on
  * server-side errors, checking the error and its `.cause` chain and falling
  * back to `e.message` when no non-empty `details` string is present.
