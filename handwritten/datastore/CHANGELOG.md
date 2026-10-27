@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [11.3.1](https://github.com/googleapis/google-cloud-node/compare/datastore-v11.3.0...datastore-v11.3.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* **datastore:** Align Transaction JSDoc [@extends](https://github.com/extends) tag with DatastoreRequest ([#9671](https://github.com/googleapis/google-cloud-node/issues/9671)) ([733e9f1](https://github.com/googleapis/google-cloud-node/commit/733e9f1c7ea8e61f71e318b9cb77a58b857cc310))
+
 ## [11.3.0](https://github.com/googleapis/google-cloud-node/compare/datastore-v11.2.0...datastore-v11.3.0) (2026-10-08)
 
 
