@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/spanner-api-v0.6.0...spanner-api-v0.6.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* Remove compile-protos from prepare ([#9690](https://github.com/googleapis/google-cloud-node/issues/9690)) ([1a4c864](https://github.com/googleapis/google-cloud-node/commit/1a4c864c569a884623eb38cc73dda4920b998f87))
+
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/spanner-api-v0.5.0...spanner-api-v0.6.0) (2026-10-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#9683](https://github.com/googleapis/google-cloud-node/issues/9683)) ([b5aabd8](https://github.com/googleapis/google-cloud-node/commit/b5aabd830aa3597e9725af00524e14b87165a71d))
+
 ## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/spanner-api-v0.4.0...spanner-api-v0.5.0) (2026-10-08)
 
 

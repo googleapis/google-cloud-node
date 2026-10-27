@@ -27,7 +27,7 @@ import {CallSettings} from '../gax';
  * @param settings
  * @returns true if telemetry tracing is enabled, false otherwise
  */
-export function checkTelemetryEnabled(settings?: CallSettings): boolean {
+export function checkTracingEnabled(settings?: CallSettings): boolean {
   // `process` is undeclared in browsers and some edge runtimes, where reading
   // it would throw a ReferenceError rather than yield undefined, so it is
   // reached through a `typeof` guard and stands in as an empty environment.
@@ -45,5 +45,41 @@ export function checkTelemetryEnabled(settings?: CallSettings): boolean {
   return Boolean(
     settings?.enableTelemetryTracing ||
     settings?.otherArgs?.enableTelemetryTracing,
+  );
+}
+
+/**
+ * Checks if telemetry logging is enabled.
+ *
+ * Logging is only enabled when `GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING` is enabled
+ * AND either the `GOOGLE_SDK_NODE_LOGGING` environment variable is enabled
+ * or a user passes `enableTelemetryLogging: true` in their client options.
+ * If `GOOGLE_SDK_NODE_LOGGING` is explicitly set, it takes precedence over
+ * the client option.
+ *
+ * @param settings
+ * @returns true if telemetry logging is enabled, false otherwise
+ */
+export function checkLoggingEnabled(settings?: CallSettings): boolean {
+  const env: Record<string, string | undefined> =
+    typeof process === 'object' && typeof process.env === 'object'
+      ? process.env
+      : {};
+  const experimentalOptIn =
+    env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING?.trim().toLowerCase();
+  if (experimentalOptIn !== 'true' && experimentalOptIn !== '1') {
+    return false;
+  }
+
+  const envOptIn = env.GOOGLE_SDK_NODE_LOGGING?.trim();
+
+  if (envOptIn !== undefined && envOptIn !== '') {
+    const lower = envOptIn.toLowerCase();
+    return lower === 'true' || lower === '1';
+  }
+
+  return Boolean(
+    settings?.enableTelemetryLogging ||
+    settings?.otherArgs?.enableTelemetryLogging,
   );
 }

@@ -4,6 +4,772 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.13.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "f529891f-1656-4557-8463-f6f33492064e",
+      "createTime": "2026-10-23T15:29:30.412Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f369d0bd2044d2fccc89975a8efd5fe3407e8e9c",
+          "message": "Onboard a new library",
+          "issues": [
+            "9691"
+          ],
+          "scope": "google/shopping/merchant/reviews/v1"
+        }
+      ],
+      "version": "0.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "6e81cba8-b3f3-4ae1-adf3-d53d797f77c0",
+      "createTime": "2026-10-23T15:29:30.386Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.18.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "28deca80-8684-41db-a183-9bf095e0cda2",
+      "createTime": "2026-10-23T15:29:30.359Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/loyaltycustomers",
+      "id": "c8f05377-48a8-4feb-b06e-aabbe741722a",
+      "createTime": "2026-10-23T15:29:30.333Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.15.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "a32c085b-cea8-41e5-8f33-f15482170ef4",
+      "createTime": "2026-10-23T15:29:30.304Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-maps/isochrones",
+      "id": "c6a73fcf-2072-479d-ad51-767461ea3737",
+      "createTime": "2026-10-23T15:29:30.275Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workloadidentity",
+      "id": "8a6bbce0-c581-43cd-b897-e6cb001f031e",
+      "createTime": "2026-10-23T15:29:30.244Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "7.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "3c81ef49-87ea-47b2-9d3f-62e6cf008f87",
+      "createTime": "2026-10-23T15:29:30.216Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "8.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "4f981602-48a3-4396-b39d-df142d803ba2",
+      "createTime": "2026-10-23T15:29:30.184Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner-api",
+      "id": "b3becdae-ea4b-470b-9b2e-cb7ec418e181",
+      "createTime": "2026-10-23T15:29:30.140Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/productregistry",
+      "id": "7b10263e-5c2d-4e1f-aebe-f18840db126b",
+      "createTime": "2026-10-23T15:29:30.095Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.11.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "c939fa2d-b2a0-4325-92a1-8c5152faa343",
+      "createTime": "2026-10-23T15:29:30.066Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/logging-api",
+      "id": "bc0d9f85-66f0-4734-bca9-0650ddb41189",
+      "createTime": "2026-10-23T15:29:30.037Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ftp",
+      "id": "07e58208-3314-4bec-aee0-1da2598005c3",
+      "createTime": "2026-10-23T15:29:30.009Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore-api",
+      "id": "22ae5e15-3d1f-4922-9931-2a11096d0335",
+      "createTime": "2026-10-23T15:29:29.981Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastore-api",
+      "id": "7ccf8d58-a57a-443d-aa67-083a8f63d518",
+      "createTime": "2026-10-23T15:29:29.959Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/commerceproducer",
+      "id": "430cc4b6-1b6b-449d-a948-03f6b5a820c4",
+      "createTime": "2026-10-23T15:29:29.934Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.11.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable-api",
+      "id": "a463cd31-ee67-4a3c-b8f0-3b2134553a0f",
+      "createTime": "2026-10-23T15:29:29.911Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-storage-api",
+      "id": "fab46292-221b-4432-b798-4f0df1af5fb6",
+      "createTime": "2026-10-23T15:29:29.886Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apptopology",
+      "id": "db2ec5f3-4c5a-4d95-a18f-dc6aec5e8e71",
+      "createTime": "2026-10-23T15:29:29.863Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/agentregistry",
+      "id": "ef8c5d40-f2cf-4bc5-83a7-fab28b878d26",
+      "createTime": "2026-10-23T15:29:29.836Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/agentidentity",
+      "id": "fc328986-eedc-40bb-9789-54e4417f954c",
+      "createTime": "2026-10-23T15:29:29.813Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "514e2f64ba67ad3ab956fbe3eeafa507d44ca597",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9472"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "9c54cece565b5cbcae63a9856c1ef3448307d46e",
+          "message": "Update package.json and .gitignore across packages",
+          "issues": [
+            "9378"
+          ]
+        }
+      ],
+      "version": "1.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "fd920de4-9d7f-4f50-81ea-2dc4d6756d44",
+      "createTime": "2026-10-23T15:29:29.788Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "733e9f1c7ea8e61f71e318b9cb77a58b857cc310",
+          "message": "Align Transaction JSDoc @extends tag with DatastoreRequest",
+          "issues": [
+            "9671"
+          ],
+          "scope": "datastore"
+        }
+      ],
+      "version": "11.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastore",
+      "id": "29e4c9a8-16c2-487e-9260-8ec955de3e09",
+      "createTime": "2026-10-23T15:29:29.766Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f6ca61d2ca00826ae1a6e6f874c14e2b41d5a479",
+          "message": "Preserve timestamp nanoseconds when microseconds are zero",
+          "issues": [
+            "9650"
+          ],
+          "scope": "bigquery"
+        },
+        {
+          "type": "fix",
+          "sha": "576a42eb5eefa8314272c1a3fdf4e69723a9fdcc",
+          "message": "Raise when an Arrow batch arrives before its schema",
+          "issues": [
+            "9681"
+          ],
+          "scope": "bigquery"
+        },
+        {
+          "type": "feat",
+          "sha": "2062403305eb8a63171c2e9fafb9103fe9bd1938",
+          "message": "Allow WRITE_APPEND in createQueryArrowStream",
+          "issues": [
+            "9648"
+          ],
+          "scope": "bigquery"
+        },
+        {
+          "type": "feat",
+          "sha": "a7fdd05a86ab4c6d554f4ad8364150789ceb0b78",
+          "message": "Support maxResults in createQueryArrowStream",
+          "issues": [
+            "9605"
+          ],
+          "scope": "bigquery"
+        },
+        {
+          "type": "feat",
+          "sha": "2449fe498e49ef4405a6f985778223473753c261",
+          "message": "Support arrowSerializationOptions in createQueryArrowStream",
+          "issues": [
+            "9603"
+          ],
+          "scope": "bigquery"
+        },
+        {
+          "type": "feat",
+          "sha": "8372c9e9c856e260dac8bccf0669a43d9a7bba1c",
+          "message": "Resume interrupted Arrow ReadRows streams",
+          "issues": [
+            "9602"
+          ],
+          "scope": "bigquery"
+        },
+        {
+          "type": "feat",
+          "sha": "f22e2ddb0fcc2ead9ab1d9fe613d170ea7a41a57",
+          "message": "Support explicit destination tables in createQueryArrowStream",
+          "issues": [
+            "9601"
+          ],
+          "scope": "bigquery"
+        },
+        {
+          "type": "feat",
+          "sha": "4c414c628c3a547b1ce9224b2023fd2a6ca21177",
+          "message": "Support jobs.insert in createQueryArrowStream",
+          "issues": [
+            "9600"
+          ],
+          "scope": "bigquery"
+        },
+        {
+          "type": "feat",
+          "sha": "5e465b745d91057a411432447629ed7a96f87c63",
+          "message": "Wait for unfinished jobs before streaming Arrow results",
+          "issues": [
+            "9599"
+          ],
+          "scope": "bigquery"
+        },
+        {
+          "type": "feat",
+          "sha": "1aa6eb40c0a51acfd8e37988e900d3beac6ed148",
+          "message": "Stream multi-page Arrow results from default job stream",
+          "issues": [
+            "9598"
+          ],
+          "scope": "bigquery"
+        }
+      ],
+      "version": "9.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery",
+      "id": "b571c283-cfc1-46a7-816b-feaad1538dd9",
+      "createTime": "2026-10-23T15:29:29.740Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "2a3452854956eaec595c8da6be18c7b24b49aeff",
+          "message": "Narrow fetch types to call signature for @types/bun",
+          "issues": [
+            "9699"
+          ],
+          "scope": "gaxios"
+        }
+      ],
+      "version": "8.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "gaxios",
+      "id": "fe97287b-dc45-4f01-bc9f-e0cf5ec860fd",
+      "createTime": "2026-10-23T15:29:29.717Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "cde8ae31806cf36ad0fc29294b1be8dc5a7f883a",
+          "message": "Compile protos before running tests in generator-tests",
+          "issues": [
+            "9701"
+          ],
+          "scope": "generator"
+        },
+        {
+          "type": "fix",
+          "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
+          "message": "Remove compile-protos from prepare",
+          "issues": [
+            "9690"
+          ]
+        }
+      ],
+      "version": "5.7.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "bde2ff7f-efca-47d1-aa32-a02c1ffcb0a4",
+      "createTime": "2026-10-23T15:29:29.695Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "14b0cc6a45f1fcb94e29b48cd2d797e568560acc",
+          "message": "Preserve {{projectId}} token during URI path encoding",
+          "issues": [
+            "9668"
+          ],
+          "scope": "common"
+        }
+      ],
+      "version": "8.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/common",
+      "id": "06755e1e-3118-4cb1-b5b7-c6bad401a4df",
+      "createTime": "2026-10-23T15:29:29.659Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "263965060a675d2819a6987d96d4e1b75c30adeb",
+          "message": "Add DML stages (insert, upsert, delete, update), literals source, and atomic execution option to Node SDK pipelines",
+          "issues": [],
+          "scope": "firestore"
+        },
+        {
+          "type": "fix",
+          "sha": "25d945b34979849ea1c6df699212854f8d390d79",
+          "message": "Align types and proto re-exports with -api packages",
+          "issues": [
+            "9621"
+          ],
+          "scope": "firestore,pubsub"
+        },
+        {
+          "type": "fix",
+          "sha": "dc83ed8c08bf896489d29af6036b3ef72a8e7365",
+          "message": "Resolve api-extractor from cloud-rad in api-report.mjs",
+          "issues": [
+            "9505"
+          ],
+          "scope": "firestore"
+        }
+      ],
+      "version": "9.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/firestore",
+      "id": "2215db8b-2fcd-4a76-8d24-ea4e5a76b6b1",
+      "createTime": "2026-10-22T21:29:43.447Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "bec0c146-13ff-4c12-a5d1-53c408ea085f",
+      "createTime": "2026-10-21T16:19:51.864Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/health",
+      "id": "e1082617-d8e2-4d4b-b947-cbb32e3e88ac",
+      "createTime": "2026-10-21T16:19:51.822Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3fb024d6f3613c923b0b8dd8bc34b3990017c2c3",
+          "message": "Remove compile-protos from prepare script in pubsub-api and developer-knowledge",
+          "issues": [
+            "9666"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/developer-knowledge",
+      "id": "dd767c76-b2be-43ab-b823-98f2bffa4a63",
+      "createTime": "2026-10-21T16:19:51.783Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/spanner-api",
+      "id": "1ce90e99-d2fb-4af4-b1b7-c4cfa3b66dab",
+      "createTime": "2026-10-21T16:19:51.738Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "0.18.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "3699ae78-b5d5-416f-9a7d-886f70a7c031",
+      "createTime": "2026-10-21T16:19:51.698Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "3fb024d6f3613c923b0b8dd8bc34b3990017c2c3",
+          "message": "Remove compile-protos from prepare script in pubsub-api and developer-knowledge",
+          "issues": [
+            "9666"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub-api",
+      "id": "e8cfdcc4-fb1b-4f7b-89ae-a6c58895cf93",
+      "createTime": "2026-10-21T16:19:51.656Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "78151466-4c53-4e1f-8171-97631846650e",
+      "createTime": "2026-10-21T16:19:51.617Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "8.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "110c2e67-82e7-4b62-bc42-fd4e6987b938",
+      "createTime": "2026-10-21T16:19:51.570Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b5aabd830aa3597e9725af00524e14b87165a71d",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9683"
+          ]
+        }
+      ],
+      "version": "3.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "9ebb4434-2622-477a-92d9-a06a4ea37b03",
+      "createTime": "2026-10-21T16:19:51.525Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "c812bc38fd5af3d710057ec9aa4a19eeff621175",
           "message": "Update API sources and regenerate",
@@ -105882,5 +106648,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-19T19:49:06.448Z"
+  "updateTime": "2026-10-23T15:29:30.412Z"
 }

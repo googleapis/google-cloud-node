@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/modelarmor-v0.10.0...modelarmor-v0.11.0) (2026-10-21)
+
+
+### Features
+
+* Update API sources and regenerate ([#9683](https://github.com/googleapis/google-cloud-node/issues/9683)) ([b5aabd8](https://github.com/googleapis/google-cloud-node/commit/b5aabd830aa3597e9725af00524e14b87165a71d))
+
 ## [0.10.0](https://github.com/googleapis/google-cloud-node/compare/modelarmor-v0.9.1...modelarmor-v0.10.0) (2026-10-08)
 
 

@@ -1,10 +1,10 @@
 name: "Check PNPM Lockfile and Install Workspace Dependencies"
-description: "Sets up pnpm and installs workspace dependencies with frozen lockfile check"
+description: "Sets up pnpm, verifies frozen lockfile sync, and links in-repo workspace packages"
 inputs:
   link-workspace-packages:
     description: "Whether to link matching in-repo workspace packages after verifying the frozen lockfile"
     required: false
-    default: "true"
+    default: "false"
 runs:
   using: "composite"
   steps:
@@ -29,6 +29,8 @@ runs:
           echo ""
           exit 1
         fi
+        pnpm --dir core/test-utils run compile
+        node -e "require('./bin/run-test.cjs').ensureWorkspacePackagesLinked()"
     - name: Link In-Repo Workspace Packages
       if: ${{ inputs.link-workspace-packages == 'true' }}
       shell: bash
