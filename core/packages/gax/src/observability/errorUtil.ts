@@ -968,6 +968,28 @@ export function resolveExceptionMessage(
 }
 
 /**
+ * Resolves the `exception.stacktrace` for a failed call or attempt. Server-side errors
+ * use the server-provided status details and metadata (see
+ * `resolveServerExceptionDetails`) and have no stacktrace when the server sent neither,
+ * while all other errors use the JavaScript stack trace (`e.stack`).
+ *
+ * @param {Error} e - The Error instance.
+ * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
+ * @returns {string | undefined} The resolved `exception.stacktrace` string, if any.
+ */
+export function resolveExceptionStacktrace(
+  e: Error,
+  rpcType: 'grpc' | 'http',
+): string | undefined {
+  if (isServerSideError(e, rpcType)) {
+    return resolveServerExceptionDetails(e).stacktrace;
+  }
+  return typeof e.stack === 'string' && e.stack.length > 0
+    ? e.stack
+    : undefined;
+}
+
+/**
  * Records an `exception` span event with `exception.type` (and `exception.message`
  * when `includeMessage` is true, such as on low level network attempt spans).
  *

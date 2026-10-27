@@ -49,6 +49,7 @@ import {
   resolveHttpStatusCode,
   resolveErrorMessage,
   resolveExceptionMessage,
+  resolveExceptionStacktrace,
   resolveResponseStatusCode,
   resolveServerExceptionDetails,
   recordExceptionEvent,
@@ -939,6 +940,58 @@ describe('errorUtil', () => {
       assert.strictEqual(
         resolveExceptionMessage(undefined, 'http'),
         'undefined',
+      );
+    });
+
+    it('resolveExceptionStacktrace uses server error details for server-side errors and the stack otherwise', () => {
+      const responseMetadata = new grpc.Metadata();
+      responseMetadata.set('x-goog-request-id', 'req-123');
+      const grpcErr = Object.assign(new GoogleError('Wrapper message'), {
+        code: Status.INVALID_ARGUMENT,
+        statusDetails: [{field: 'name', description: 'must be non-empty'}],
+        metadata: responseMetadata,
+      });
+      assert.strictEqual(
+        resolveExceptionStacktrace(grpcErr, 'grpc'),
+        'status_details: [{"field":"name","description":"must be non-empty"}]\n' +
+          'metadata: {"x-goog-request-id":"req-123"}',
+      );
+      // A gRPC status is not a server response on the HTTP transport.
+      assert.strictEqual(
+        resolveExceptionStacktrace(grpcErr, 'http'),
+        grpcErr.stack,
+      );
+
+      const httpErr = Object.assign(new GoogleError('HTTP wrapper'), {
+        httpStatusCode: 400,
+        statusDetails: 'Quota exceeded',
+      });
+      assert.strictEqual(
+        resolveExceptionStacktrace(httpErr, 'http'),
+        'status_details: Quota exceeded',
+      );
+
+      // Server-side errors without status details or metadata have no stacktrace.
+      const noDetailsErr = Object.assign(new GoogleError('No details'), {
+        code: Status.UNAVAILABLE,
+      });
+      assert.strictEqual(
+        resolveExceptionStacktrace(noDetailsErr, 'grpc'),
+        undefined,
+      );
+
+      // Client-side errors use the JavaScript stack trace.
+      const clientErr = new TypeError('bad type');
+      assert.ok(clientErr.stack);
+      assert.strictEqual(
+        resolveExceptionStacktrace(clientErr, 'grpc'),
+        clientErr.stack,
+      );
+      const noStackErr = new TypeError('no stack');
+      noStackErr.stack = undefined;
+      assert.strictEqual(
+        resolveExceptionStacktrace(noStackErr, 'grpc'),
+        undefined,
       );
     });
 
