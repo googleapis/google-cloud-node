@@ -304,12 +304,6 @@ describe('errorUtil', () => {
       );
       assert.deepStrictEqual(
         resolveErrorInfoMetadataAttributes({
-          statusDetails: [{metadata: {}}, {metadata}],
-        }),
-        expected,
-      );
-      assert.deepStrictEqual(
-        resolveErrorInfoMetadataAttributes({
           cause: {errorInfoMetadata: metadata},
         }),
         expected,
@@ -317,6 +311,41 @@ describe('errorUtil', () => {
       assert.deepStrictEqual(
         resolveErrorInfoMetadataAttributes(new Error('none')),
         {},
+      );
+    });
+
+    it('resolveErrorInfoMetadataAttributes stops at the first ErrorInfo metadata, even when it has no usable entries', () => {
+      const causeMetadata = {service: 'translate.googleapis.com'};
+      // An ErrorInfo without metadata does not pick up metadata from a deeper cause.
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({
+          reason: 'SERVICE_DISABLED',
+          domain: 'googleapis.com',
+          errorInfoMetadata: {},
+          cause: {errorInfoMetadata: causeMetadata},
+        }),
+        {},
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({
+          errorInfoMetadata: {count: 5},
+          cause: {errorInfoMetadata: causeMetadata},
+        }),
+        {},
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({
+          statusDetails: [{metadata: {}}, {metadata: causeMetadata}],
+        }),
+        {},
+      );
+      // Values that are not metadata objects are skipped, so the search continues.
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes({
+          errorInfoMetadata: ['value'],
+          cause: {errorInfoMetadata: causeMetadata},
+        }),
+        {'gcp.errors.metadata.service': 'translate.googleapis.com'},
       );
     });
 

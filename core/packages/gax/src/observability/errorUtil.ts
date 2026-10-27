@@ -216,10 +216,13 @@ function readNonEmptyString(value: unknown): string | undefined {
 
 /**
  * Returns the entries of a google.rpc.ErrorInfo metadata map that have a non-empty key
- * and a string value, or undefined if there are none.
+ * and a string value. A metadata object without such entries yields an empty array, so
+ * the search stops at the first ErrorInfo metadata found instead of continuing into a
+ * deeper cause; only a value that is not a metadata object yields undefined.
  *
  * @param {unknown} value - The metadata map to read.
- * @returns {Array<[string, string]> | undefined} The usable metadata entries, or undefined.
+ * @returns {Array<[string, string]> | undefined} The usable metadata entries, or undefined
+ *   if `value` is not a metadata object.
  */
 function readErrorInfoMetadataEntries(
   value: unknown,
@@ -233,7 +236,7 @@ function readErrorInfoMetadataEntries(
       entries.push([key, entryValue]);
     }
   }
-  return entries.length > 0 ? entries : undefined;
+  return entries;
 }
 
 /**
@@ -263,7 +266,9 @@ export function resolveErrorInfoDomain(e: unknown): string | undefined {
  * `gcp.errors.metadata.<key>` attributes, one per metadata entry (e.g.
  * `{service: 'translate.googleapis.com'}` becomes
  * `{'gcp.errors.metadata.service': 'translate.googleapis.com'}`).
- * Entries with an empty key or a non-string value are skipped.
+ * Entries with an empty key or a non-string value are skipped. The first ErrorInfo
+ * metadata found is used even if it has no usable entries, so the attributes never
+ * mix in metadata from a deeper cause.
  *
  * @param {unknown} e - The error to inspect.
  * @returns {Record<`gcp.errors.metadata.${string}`, string>} The metadata attributes,
