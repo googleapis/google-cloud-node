@@ -831,21 +831,22 @@ export function resolveServerExceptionDetails(e: Error): {
 }
 
 /**
- * Resolves the `exception.message` for a failed call or attempt. Server-side errors
- * prefer the server-provided error details over the generic error message (see
- * `resolveServerExceptionDetails`), while all other errors use `e.message`.
+ * Resolves the `exception.message` for a failed call or attempt. Server-side Error
+ * instances prefer the server-provided error details over the generic error message
+ * (see `resolveServerExceptionDetails`). All other values use their `message`, or the
+ * stringified value for non-Error throws (see `resolveErrorMessage`).
  *
- * @param {Error} e - The Error instance.
+ * @param {unknown} e - The error or other value thrown or reported for the call.
  * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
  * @returns {string} The resolved `exception.message` string.
  */
 export function resolveExceptionMessage(
-  e: Error,
+  e: unknown,
   rpcType: 'grpc' | 'http',
 ): string {
-  return isServerSideError(e, rpcType)
+  return e instanceof Error && isServerSideError(e, rpcType)
     ? resolveServerExceptionDetails(e).message
-    : e.message;
+    : resolveErrorMessage(e);
 }
 
 /**

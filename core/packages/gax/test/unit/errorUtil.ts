@@ -596,6 +596,29 @@ describe('errorUtil', () => {
       );
     });
 
+    it('resolveExceptionMessage returns a string for non-Error throws', () => {
+      assert.strictEqual(
+        resolveExceptionMessage('raw failure', 'grpc'),
+        'raw failure',
+      );
+      assert.strictEqual(
+        resolveExceptionMessage({message: 'error-shaped'}, 'http'),
+        'error-shaped',
+      );
+      const crossRealm = vm.runInNewContext(
+        "new Error('cross realm boom')",
+      ) as Error;
+      assert.strictEqual(
+        resolveExceptionMessage(crossRealm, 'grpc'),
+        'cross realm boom',
+      );
+      assert.strictEqual(resolveExceptionMessage(null, 'grpc'), 'null');
+      assert.strictEqual(
+        resolveExceptionMessage(undefined, 'http'),
+        'undefined',
+      );
+    });
+
     it('recordExceptionEvent records exception.type and optionally exception.message', () => {
       const events: Array<{
         name: string;
