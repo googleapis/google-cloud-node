@@ -22,6 +22,7 @@ import {ncp} from 'ncp';
 import * as util from 'util';
 import * as path from 'path';
 import * as protobuf from 'protobufjs';
+import * as uglify from 'uglify-js';
 import * as compileProtos from '../src/compileProtos';
 
 const ncpp = util.promisify(ncp);
@@ -402,5 +403,76 @@ describe('compileProtos tool', () => {
     const js = await readFile(expectedJSResultFile);
     assert(json.nested.test.nested.Test.fields.snake_case_field);
     assert(js.includes('@property {number|null} [check_force_number]'));
+  });
+
+  it('strips method bodies and enum assignments for pbts while cleaning up stub file', async function () {
+    this.timeout(20000);
+    const sampleJs = [
+      '    /** @exports TestMessage */',
+      '    function TestMessage(properties) {',
+      '        if (properties) {}',
+      '    }',
+      '    TestMessage.encode = function encode(message, writer) {',
+      '        return writer;',
+      '    };',
+      '    Object.defineProperty(LibraryService.prototype["getShelf"] = function getShelf(request, callback) {',
+      '        return this.rpcCall(getShelf, request, callback);',
+      '    }, "name", { value: "GetShelf" });',
+      '    TestEnum = (function() {',
+      '        var valuesById = {}, values = Object.create(valuesById);',
+      '        values[valuesById[0] = "UNKNOWN"] = 0;',
+      '        return values;',
+      '    })();',
+    ].join('\r\n');
+    const stripped = compileProtos.stripBodiesForPbts(sampleJs);
+    assert(!stripped.includes('if (properties)'));
+    assert(!stripped.includes('return writer;'));
+    assert(!stripped.includes('this.rpcCall'));
+    assert(!stripped.includes('values[valuesById['));
+    assert(stripped.includes('}, "name", { value: "GetShelf" });'));
+    await compileProtos.main(['protoLists']);
+    assert(!fs.existsSync(path.join(resultDir, 'protos.pbts-stub.js')));
+  });
+
+  it('awaits pbtsPromise on minification error and preserves pbts error if stub is missing', async function () {
+    this.timeout(20000);
+    const dirName = path.join(testDir, 'protoLists', 'parameters');
+    const stubPath = path.join(resultDir, 'protos.pbts-stub.js');
+
+    const origMinify = uglify.minify;
+    (uglify as {minify: typeof uglify.minify}).minify = ((
+      files: string | string[] | {[file: string]: string},
+      options?: uglify.MinifyOptions,
+    ) => {
+      if (options?.output && options.output.comments === false) {
+        return {
+          error: new Error('Simulated UglifyJS error'),
+          code: '',
+        } as uglify.MinifyOutput;
+      }
+      return origMinify(files, options);
+    }) as typeof uglify.minify;
+    try {
+      await assert.rejects(
+        compileProtos.main(['--no-comments', dirName]),
+        /UglifyJS failed.*Simulated UglifyJS error/,
+      );
+      assert(!fs.existsSync(stubPath));
+      assert(fs.existsSync(expectedTSResultFile));
+    } finally {
+      (uglify as {minify: typeof uglify.minify}).minify = origMinify;
+    }
+
+    const origRm = fs.promises.rm;
+    fs.promises.rm = async (filePath, options) => {
+      await origRm(filePath);
+      return origRm(filePath, options);
+    };
+    try {
+      await compileProtos.main([dirName]);
+      assert(!fs.existsSync(stubPath));
+    } finally {
+      fs.promises.rm = origRm;
+    }
   });
 });
