@@ -77,7 +77,7 @@ jobs:
     name: Bun (${{ matrix.bun-version }})
     needs: bun-units
     runs-on: ubuntu-latest
-    if: always()
+    if: ${{ !cancelled() }}
     strategy:
       fail-fast: false
       matrix:
