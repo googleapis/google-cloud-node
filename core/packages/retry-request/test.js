@@ -59,6 +59,7 @@ describe('retry-request', () => {
   });
 
   after(done => {
+    server.closeAllConnections();
     server.close(done);
   });
 
