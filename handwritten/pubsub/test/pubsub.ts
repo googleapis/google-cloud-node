@@ -1993,7 +1993,6 @@ describe('PubSub', () => {
       ]);
       sandbox.stub(client!, 'close').resolves();
       await pubsub.close();
-      sandbox.restore();
     });
   });
 });

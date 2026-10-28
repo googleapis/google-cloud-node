@@ -132,12 +132,10 @@ type GetAllSubscriptionsResponse = PagedResponse<
 >;
 
 export type GetSubscriptionsCallback =
-  | GetAllSubscriptionsCallback
-  | GetTopicSubscriptionsCallback;
+  GetAllSubscriptionsCallback | GetTopicSubscriptionsCallback;
 
 export type GetSubscriptionsResponse =
-  | GetAllSubscriptionsResponse
-  | GetTopicSubscriptionsResponse;
+  GetAllSubscriptionsResponse | GetTopicSubscriptionsResponse;
 
 export type GetTopicsCallback = RequestCallback<
   Topic,
@@ -194,8 +192,7 @@ export interface PagedCallback<Item, Response> {
 }
 
 export type PagedResponse<Item, Response> =
-  | [Item[]]
-  | [Item[], {} | null, Response];
+  [Item[]] | [Item[], {} | null, Response];
 
 export type ObjectStream<O> = {
   addListener(event: 'data', listener: (data: O) => void): ObjectStream<O>;
@@ -1267,6 +1264,27 @@ export class PubSub {
   }
 
   /**
+   * Synchronizes GAPIC JWT settings onto a cached JWT credential without
+   * overwriting properties already defined on the credential.
+   *
+   * @private
+   */
+  private syncGapicJwt_(): void {
+    if (
+      this.auth.cachedCredential &&
+      'useJWTAccessWithScope' in this.auth.cachedCredential
+    ) {
+      const jwt = this.auth.cachedCredential as JWT;
+      const {defaultServicePath, useJWTAccessWithScope, defaultScopes} = jwt;
+      this.auth.setGapicJWTValues?.(jwt);
+      jwt.defaultServicePath = defaultServicePath ?? jwt.defaultServicePath;
+      jwt.useJWTAccessWithScope =
+        useJWTAccessWithScope ?? jwt.useJWTAccessWithScope;
+      jwt.defaultScopes = defaultScopes ?? jwt.defaultScopes;
+    }
+  }
+
+  /**
    * Gets a schema client, creating one if needed. This is a shortcut for
    * `new v1.SchemaServiceClient(await pubsub.getClientConfig())`.
    *
@@ -1276,18 +1294,7 @@ export class PubSub {
     if (!this.schemaClient) {
       const options = (await this.getClientConfig()) as gax.ClientOptions;
       this.schemaClient = new v1.SchemaServiceClient(options);
-      if (
-        this.auth.cachedCredential &&
-        'useJWTAccessWithScope' in this.auth.cachedCredential
-      ) {
-        const jwt = this.auth.cachedCredential as JWT;
-        const {defaultServicePath, useJWTAccessWithScope, defaultScopes} = jwt;
-        this.auth.setGapicJWTValues?.(jwt);
-        jwt.defaultServicePath = defaultServicePath ?? jwt.defaultServicePath;
-        jwt.useJWTAccessWithScope =
-          useJWTAccessWithScope ?? jwt.useJWTAccessWithScope;
-        jwt.defaultScopes = defaultScopes ?? jwt.defaultScopes;
-      }
+      this.syncGapicJwt_();
     }
 
     return this.schemaClient!;
@@ -1337,18 +1344,7 @@ export class PubSub {
     if (!gaxClient) {
       // Lazily instantiate client.
       gaxClient = new v1[config.client](options) as unknown as gax.ClientStub;
-      if (
-        this.auth.cachedCredential &&
-        'useJWTAccessWithScope' in this.auth.cachedCredential
-      ) {
-        const jwt = this.auth.cachedCredential as JWT;
-        const {defaultServicePath, useJWTAccessWithScope, defaultScopes} = jwt;
-        this.auth.setGapicJWTValues?.(jwt);
-        jwt.defaultServicePath = defaultServicePath ?? jwt.defaultServicePath;
-        jwt.useJWTAccessWithScope =
-          useJWTAccessWithScope ?? jwt.useJWTAccessWithScope;
-        jwt.defaultScopes = defaultScopes ?? jwt.defaultScopes;
-      }
+      this.syncGapicJwt_();
       this.api[config.client] = gaxClient;
     }
 
