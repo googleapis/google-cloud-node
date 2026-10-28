@@ -5,6 +5,14 @@
 
 [1]: https://www.npmjs.com/package/google-auth-library?activeTab=versions
 
+## [11.3.2](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.3.1...google-auth-library-v11.3.2) (2026-10-28)
+
+
+### Bug Fixes
+
+* **core:** Log request/response payloads at DEBUG severity ([#9754](https://github.com/googleapis/google-cloud-node/issues/9754)) ([bf46818](https://github.com/googleapis/google-cloud-node/commit/bf468181b2c85ffd17cc820d2459d6b42213f016))
+* **google-auth-library:** Add credential deprecation and validation warnings ([#9720](https://github.com/googleapis/google-cloud-node/issues/9720)) ([569678a](https://github.com/googleapis/google-cloud-node/commit/569678ac3f0917a6ac991548b83ae12819bf2715))
+
 ## [11.3.1](https://github.com/googleapis/google-cloud-node/compare/google-auth-library-v11.3.0...google-auth-library-v11.3.1) (2026-10-14)
 
 

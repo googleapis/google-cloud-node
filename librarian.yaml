@@ -79,7 +79,7 @@ libraries:
       package_name: '@google-ads/admanager'
       client_documentation_override: https://cloud.google.com/nodejs/docs/reference/admanager/latest
   - name: google-ads-datamanager
-    version: 1.4.0
+    version: 1.5.0
     apis:
       - path: google/ads/datamanager/v1
     copyright_year: "2026"
@@ -1269,7 +1269,7 @@ libraries:
     nodejs:
       default_version: v1
   - name: google-cloud-observability
-    version: 0.0.0
+    version: 0.1.0
     apis:
       - path: google/cloud/observability/v1
     copyright_year: "2026"
