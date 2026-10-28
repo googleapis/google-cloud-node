@@ -20,14 +20,15 @@ import {
 import * as assert from 'assert';
 import {describe, it, beforeEach, afterEach, before, after} from 'mocha';
 import * as extend from 'extend';
-import {heap as heapProfiler, time as timeProfiler} from 'pprof';
 import * as sinon from 'sinon';
 import {promisify} from 'util';
 import * as zlib from 'zlib';
 
-import {perftools} from 'pprof/proto/profile';
 import {ProfilerConfig} from '../src/config';
+import * as heapProfiler from '../src/heap-profiler';
+import {perftools} from '../src/profile-proto';
 import {Profiler, Retryer, BackoffResponseError} from '../src/profiler';
+import * as timeProfiler from '../src/time-profiler';
 
 import {
   decodedHeapProfile,
