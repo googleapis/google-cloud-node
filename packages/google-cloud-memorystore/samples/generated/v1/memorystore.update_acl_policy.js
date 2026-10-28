@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(message) {
-  // [START geminidataanalytics_v1alpha_generated_DataA2AService_SendMessage_async]
+function main(aclPolicy) {
+  // [START memorystore_v1_generated_Memorystore_UpdateAclPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,41 @@ function main(message) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The message to send to the agent.
+   *  Required. The ACL policy to be updated.
    */
-  // const message = {}
+  // const aclPolicy = {}
   /**
-   *  Optional. Configuration for the send request.
+   *  Optional. Mask of fields to be updated. At least one path must be supplied
+   *  in this field. The elements of the repeated paths field may only include
+   *  these fields from `AclPolicy`:
+   *   *   `rules`
    */
-  // const configuration = {}
+  // const updateMask = {}
   /**
-   *  Optional. Optional metadata for the request.
+   *  Optional. Idempotent request UUID.
    */
-  // const metadata = {}
-  /**
-   *  Optional. Optional tenant, provided as a path parameter.
-   */
-  // const tenant = 'abc123'
+  // const requestId = 'abc123'
 
-  // Imports the Geminidataanalytics library
-  const {DataA2AServiceClient} = require('@google-cloud/geminidataanalytics').v1alpha;
+  // Imports the Memorystore library
+  const {MemorystoreClient} = require('@google-cloud/memorystore').v1;
 
   // Instantiates a client
-  const geminidataanalyticsClient = new DataA2AServiceClient();
+  const memorystoreClient = new MemorystoreClient();
 
-  async function callSendMessage() {
+  async function callUpdateAclPolicy() {
     // Construct request
     const request = {
-      message,
+      aclPolicy,
     };
 
     // Run request
-    const response = await geminidataanalyticsClient.sendMessage(request);
+    const [operation] = await memorystoreClient.updateAclPolicy(request);
+    const [response] = await operation.promise();
     console.log(response);
   }
 
-  callSendMessage();
-  // [END geminidataanalytics_v1alpha_generated_DataA2AService_SendMessage_async]
+  callUpdateAclPolicy();
+  // [END memorystore_v1_generated_Memorystore_UpdateAclPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

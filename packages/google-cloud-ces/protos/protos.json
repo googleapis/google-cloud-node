@@ -8951,7 +8951,8 @@
                         "agentType": {
                           "oneof": [
                             "llmAgent",
-                            "remoteDialogflowAgent"
+                            "remoteDialogflowAgent",
+                            "remoteA2aAgent"
                           ]
                         }
                       },
@@ -8966,6 +8967,13 @@
                         "remoteDialogflowAgent": {
                           "type": "RemoteDialogflowAgent",
                           "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "remoteA2aAgent": {
+                          "type": "RemoteA2aAgent",
+                          "id": 41,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -9190,6 +9198,17 @@
                             }
                           }
                         },
+                        "RemoteA2aAgent": {
+                          "fields": {
+                            "a2aConfig": {
+                              "type": "RemoteA2aConfig",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
                         "AgentToolset": {
                           "fields": {
                             "toolset": {
@@ -9208,6 +9227,467 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "AgentCard": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "supportedInterfaces": {
+                          "rule": "repeated",
+                          "type": "AgentInterface",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "version": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "skills": {
+                          "rule": "repeated",
+                          "type": "AgentSkill",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AgentInterface": {
+                      "fields": {
+                        "url": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "protocolBinding": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tenant": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "protocolVersion": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "AgentSkill": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "examples": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        },
+                        "inputModes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "outputModes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "RemoteA2aConfig": {
+                      "oneofs": {
+                        "agentSpec": {
+                          "oneof": [
+                            "agentCard",
+                            "agentRegistry"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "agentCard": {
+                          "type": "AgentCard",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "agentRegistry": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "apiAuthentication": {
+                          "type": "ApiAuthentication",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inputVariableMapping": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "outputVariableMapping": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "streamingEnabled": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "contextId": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RemoteAgentTool": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "agentCard": {
+                          "type": "AgentCard",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "apiAuthentication": {
+                          "type": "ApiAuthentication",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "statefulAgent": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "inputVariableMapping": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "outputVariableMapping": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ApiKeyConfig": {
+                      "fields": {
+                        "keyName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "apiKeySecretVersion": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "requestLocation": {
+                          "type": "RequestLocation",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RequestLocation": {
+                          "values": {
+                            "REQUEST_LOCATION_UNSPECIFIED": 0,
+                            "HEADER": 1,
+                            "QUERY_STRING": 2
+                          }
+                        }
+                      }
+                    },
+                    "OAuthConfig": {
+                      "fields": {
+                        "oauthGrantType": {
+                          "type": "OauthGrantType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clientId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "clientSecretVersion": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "tokenEndpoint": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "scopes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "OauthGrantType": {
+                          "values": {
+                            "OAUTH_GRANT_TYPE_UNSPECIFIED": 0,
+                            "CLIENT_CREDENTIAL": 1
+                          }
+                        }
+                      }
+                    },
+                    "ServiceAgentIdTokenAuthConfig": {
+                      "fields": {}
+                    },
+                    "ServiceAccountAuthConfig": {
+                      "fields": {
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "scopes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BearerTokenConfig": {
+                      "fields": {
+                        "token": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "EndUserAuthConfig": {
+                      "oneofs": {
+                        "authConfig": {
+                          "oneof": [
+                            "oauth2AuthCodeConfig",
+                            "oauth2JwtBearerConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "oauth2AuthCodeConfig": {
+                          "type": "Oauth2AuthCodeConfig",
+                          "id": 2
+                        },
+                        "oauth2JwtBearerConfig": {
+                          "type": "Oauth2JwtBearerConfig",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Oauth2AuthCodeConfig": {
+                          "fields": {
+                            "oauthToken": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        },
+                        "Oauth2JwtBearerConfig": {
+                          "fields": {
+                            "issuer": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "subject": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "clientKey": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ApiAuthentication": {
+                      "oneofs": {
+                        "authConfig": {
+                          "oneof": [
+                            "apiKeyConfig",
+                            "oauthConfig",
+                            "serviceAgentIdTokenAuthConfig",
+                            "serviceAccountAuthConfig",
+                            "bearerTokenConfig"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "apiKeyConfig": {
+                          "type": "ApiKeyConfig",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "oauthConfig": {
+                          "type": "OAuthConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAgentIdTokenAuthConfig": {
+                          "type": "ServiceAgentIdTokenAuthConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "serviceAccountAuthConfig": {
+                          "type": "ServiceAccountAuthConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "bearerTokenConfig": {
+                          "type": "BearerTokenConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -9389,6 +9869,24 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
+                          }
+                        },
+                        "thinkingLevel": {
+                          "type": "ThinkingLevel",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ThinkingLevel": {
+                          "values": {
+                            "THINKING_LEVEL_UNSPECIFIED": 0,
+                            "DEFAULT": 1,
+                            "LOW": 2,
+                            "MEDIUM": 3,
+                            "HIGH": 4
                           }
                         }
                       }
@@ -9858,146 +10356,23 @@
                         }
                       }
                     },
-                    "AgentCard": {
+                    "UiEvent": {
                       "fields": {
-                        "name": {
+                        "mimeType": {
                           "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 1
                         },
-                        "description": {
+                        "jsonPayload": {
                           "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "supportedInterfaces": {
-                          "rule": "repeated",
-                          "type": "AgentInterface",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "version": {
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "skills": {
-                          "rule": "repeated",
-                          "type": "AgentSkill",
-                          "id": 6,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 2
                         }
                       }
                     },
-                    "AgentInterface": {
+                    "SessionCheckpoint": {
                       "fields": {
-                        "url": {
+                        "userIntent": {
                           "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "protocolBinding": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "tenant": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "protocolVersion": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "AgentSkill": {
-                      "fields": {
-                        "id": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "tags": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "examples": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5
-                        },
-                        "inputModes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 6
-                        },
-                        "outputModes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 7
-                        }
-                      }
-                    },
-                    "RemoteAgentTool": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "description": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "agentCard": {
-                          "type": "AgentCard",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
+                          "id": 1
                         }
                       }
                     },
@@ -10937,6 +11312,26 @@
                             }
                           ]
                         },
+                        "UpdateAppVersion": {
+                          "requestType": "UpdateAppVersionRequest",
+                          "responseType": "AppVersion",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta/{app_version.name=projects/*/locations/*/apps/*/versions/*}",
+                            "(google.api.http).body": "app_version",
+                            "(google.api.method_signature)": "app_version,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta/{app_version.name=projects/*/locations/*/apps/*/versions/*}",
+                                "body": "app_version"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "app_version,update_mask"
+                            }
+                          ]
+                        },
                         "DeleteAppVersion": {
                           "requestType": "DeleteAppVersionRequest",
                           "responseType": "google.protobuf.Empty",
@@ -11255,6 +11650,12 @@
                             "gcsUri",
                             "appContent"
                           ]
+                        },
+                        "jsonPatch": {
+                          "oneof": [
+                            "jsonPatchContent",
+                            "jsonPatchGcsUri"
+                          ]
                         }
                       },
                       "fields": {
@@ -11265,6 +11666,20 @@
                         "appContent": {
                           "type": "bytes",
                           "id": 5
+                        },
+                        "jsonPatchContent": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "jsonPatchGcsUri": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "parent": {
                           "type": "string",
@@ -11309,6 +11724,13 @@
                             "conflictResolutionStrategy": {
                               "type": "ConflictResolutionStrategy",
                               "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "validateOnly": {
+                              "type": "bool",
+                              "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -12135,6 +12557,14 @@
                         }
                       }
                     },
+                    "DeployChannelResponse": {
+                      "fields": {
+                        "deployment": {
+                          "type": "Deployment",
+                          "id": 1
+                        }
+                      }
+                    },
                     "UpdateDeploymentRequest": {
                       "fields": {
                         "deployment": {
@@ -12413,6 +12843,24 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateAppVersionRequest": {
+                      "fields": {
+                        "appVersion": {
+                          "type": "AppVersion",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -13295,6 +13743,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "dashboardSettings": {
+                          "type": "DashboardSettings",
+                          "id": 43,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -13328,6 +13783,18 @@
                             "TOOL_EXECUTION_MODE_UNSPECIFIED": 0,
                             "PARALLEL": 1,
                             "SEQUENTIAL": 2
+                          }
+                        }
+                      }
+                    },
+                    "DashboardSettings": {
+                      "fields": {
+                        "defaultDashboard": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/Dashboard"
                           }
                         }
                       }
@@ -13377,6 +13844,103 @@
                         }
                       }
                     },
+                    "CustomVoiceSample": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "voiceSampleGcsUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "consentAudioGcsUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "voiceInstruction": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "previewAudioContent": {
+                          "type": "bytes",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "previewText": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "warnings": {
+                          "rule": "repeated",
+                          "type": "Warning",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "voiceInstructionMode": {
+                          "type": "VoiceInstructionMode",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Warning": {
+                          "fields": {
+                            "message": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "type": {
+                              "type": "WarningType",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "WarningType": {
+                              "values": {
+                                "WARNING_TYPE_UNSPECIFIED": 0,
+                                "LOW_AUDIO_LEVEL": 1
+                              }
+                            }
+                          }
+                        },
+                        "VoiceInstructionMode": {
+                          "values": {
+                            "VOICE_INSTRUCTION_MODE_UNSPECIFIED": 0,
+                            "NO_INSTRUCTION": 1,
+                            "GENERATE_INSTRUCTION": 2,
+                            "CUSTOM_INSTRUCTION": 3
+                          }
+                        }
+                      }
+                    },
                     "AudioProcessingConfig": {
                       "fields": {
                         "synthesizeSpeechConfigs": {
@@ -13404,6 +13968,14 @@
                         "ambientSoundConfig": {
                           "type": "AmbientSoundConfig",
                           "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customVoiceSamples": {
+                          "rule": "repeated",
+                          "type": "CustomVoiceSample",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -13592,6 +14164,13 @@
                         "metricAnalysisSettings": {
                           "type": "MetricAnalysisSettings",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requiredRecordingConsent": {
+                          "type": "bool",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -14592,6 +15171,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "snapshot": {
                           "type": "AppSnapshot",
                           "id": 8,
@@ -14823,6 +15409,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "altText": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -14871,6 +15464,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "parentToolCallId": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "agentName": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -14918,6 +15525,20 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parentToolCallId": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "agentName": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -14974,7 +15595,8 @@
                             "llmPromptSecurity",
                             "llmPolicy",
                             "modelSafety",
-                            "codeCallback"
+                            "codeCallback",
+                            "supervisor"
                           ]
                         }
                       },
@@ -15010,6 +15632,13 @@
                         "codeCallback": {
                           "type": "CodeCallback",
                           "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "supervisor": {
+                          "type": "Supervisor",
+                          "id": 16,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -15108,6 +15737,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "sensitiveWordsExemptions": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -15116,7 +15753,8 @@
                                 "MATCH_TYPE_UNSPECIFIED": 0,
                                 "SIMPLE_STRING_MATCH": 1,
                                 "WORD_BOUNDARY_STRING_MATCH": 2,
-                                "REGEXP_MATCH": 3
+                                "REGEXP_MATCH": 3,
+                                "SENSITIVE_WORDS": 4
                               }
                             }
                           }
@@ -15259,7 +15897,9 @@
                                 "HARM_CATEGORY_HATE_SPEECH": 1,
                                 "HARM_CATEGORY_DANGEROUS_CONTENT": 2,
                                 "HARM_CATEGORY_HARASSMENT": 3,
-                                "HARM_CATEGORY_SEXUALLY_EXPLICIT": 4
+                                "HARM_CATEGORY_SEXUALLY_EXPLICIT": 4,
+                                "HARM_CATEGORY_PROFANITY": 5,
+                                "HARM_CATEGORY_TOXIC": 6
                               }
                             },
                             "HarmBlockThreshold": {
@@ -15302,6 +15942,46 @@
                               "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Supervisor": {
+                          "fields": {
+                            "type": {
+                              "type": "Type",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "detectionMode": {
+                              "type": "DetectionMode",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Type": {
+                              "values": {
+                                "TYPE_UNSPECIFIED": 0,
+                                "INVALID_TEXT": 1,
+                                "LANGUAGE_SHIFT": 2,
+                                "SPEAKER_SHIFT": 3,
+                                "AUDIO_MISMATCH": 4,
+                                "MISSING_TOOL_CALL": 5,
+                                "CUSTOM": 6,
+                                "CHOPPY_AUDIO": 7,
+                                "PROFANITY": 8
+                              }
+                            },
+                            "DetectionMode": {
+                              "values": {
+                                "DETECTION_MODE_UNSPECIFIED": 0,
+                                "NON_BLOCKING": 1,
+                                "BLOCKING": 2
                               }
                             }
                           }
@@ -15477,6 +16157,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "readOnly": {
+                          "type": "bool",
+                          "id": 29,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -15638,231 +16325,6 @@
                         },
                         "description": {
                           "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ApiKeyConfig": {
-                      "fields": {
-                        "keyName": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "apiKeySecretVersion": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
-                          }
-                        },
-                        "requestLocation": {
-                          "type": "RequestLocation",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "RequestLocation": {
-                          "values": {
-                            "REQUEST_LOCATION_UNSPECIFIED": 0,
-                            "HEADER": 1,
-                            "QUERY_STRING": 2
-                          }
-                        }
-                      }
-                    },
-                    "OAuthConfig": {
-                      "fields": {
-                        "oauthGrantType": {
-                          "type": "OauthGrantType",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "clientId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "clientSecretVersion": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
-                          }
-                        },
-                        "tokenEndpoint": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "scopes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "OauthGrantType": {
-                          "values": {
-                            "OAUTH_GRANT_TYPE_UNSPECIFIED": 0,
-                            "CLIENT_CREDENTIAL": 1
-                          }
-                        }
-                      }
-                    },
-                    "ServiceAgentIdTokenAuthConfig": {
-                      "fields": {}
-                    },
-                    "ServiceAccountAuthConfig": {
-                      "fields": {
-                        "serviceAccount": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "scopes": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "BearerTokenConfig": {
-                      "fields": {
-                        "token": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "EndUserAuthConfig": {
-                      "oneofs": {
-                        "authConfig": {
-                          "oneof": [
-                            "oauth2AuthCodeConfig",
-                            "oauth2JwtBearerConfig"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "oauth2AuthCodeConfig": {
-                          "type": "Oauth2AuthCodeConfig",
-                          "id": 2
-                        },
-                        "oauth2JwtBearerConfig": {
-                          "type": "Oauth2JwtBearerConfig",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "Oauth2AuthCodeConfig": {
-                          "fields": {
-                            "oauthToken": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        },
-                        "Oauth2JwtBearerConfig": {
-                          "fields": {
-                            "issuer": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "subject": {
-                              "type": "string",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "clientKey": {
-                              "type": "string",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ApiAuthentication": {
-                      "oneofs": {
-                        "authConfig": {
-                          "oneof": [
-                            "apiKeyConfig",
-                            "oauthConfig",
-                            "serviceAgentIdTokenAuthConfig",
-                            "serviceAccountAuthConfig",
-                            "bearerTokenConfig"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "apiKeyConfig": {
-                          "type": "ApiKeyConfig",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "oauthConfig": {
-                          "type": "OAuthConfig",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "serviceAgentIdTokenAuthConfig": {
-                          "type": "ServiceAgentIdTokenAuthConfig",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "serviceAccountAuthConfig": {
-                          "type": "ServiceAccountAuthConfig",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "bearerTokenConfig": {
-                          "type": "BearerTokenConfig",
                           "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
@@ -16172,6 +16634,24 @@
                             }
                           }
                         },
+                        "SnippetsConfig": {
+                          "fields": {
+                            "enableSnippets": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "maxSnippets": {
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "ModalityConfig": {
                           "fields": {
                             "modalityType": {
@@ -16198,6 +16678,13 @@
                             "groundingConfig": {
                               "type": "GroundingConfig",
                               "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "snippetsConfig": {
+                              "type": "SnippetsConfig",
+                              "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -17272,6 +17759,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "userIntendedText": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -17453,6 +17947,49 @@
                           "options": {
                             "(google.api.field_behavior)": "INPUT_ONLY"
                           }
+                        },
+                        "modelSettings": {
+                          "type": "ModelSettings",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "modality": {
+                          "type": "Modality",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "agentRegistryDeployment": {
+                          "type": "AgentRegistryDeployment",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Modality": {
+                          "values": {
+                            "MODALITY_UNSPECIFIED": 0,
+                            "MODALITY_TEXT": 1,
+                            "MODALITY_VOICE": 2,
+                            "MODALITY_VIDEO": 3
+                          }
+                        }
+                      }
+                    },
+                    "AgentRegistryDeployment": {
+                      "fields": {
+                        "agentRegistryServiceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "agentregistry.googleapis.com/Service"
+                          }
                         }
                       }
                     },
@@ -17497,7 +18034,7 @@
                           "type": "string",
                           "id": 6,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -17515,7 +18052,7 @@
                           "type": "string",
                           "id": 2,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -18479,6 +19016,20 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "rootSpan": {
+                          "type": "Span",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "outcomeMetadata": {
+                          "type": "OutcomeMetadata",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -19265,6 +19816,12 @@
                             "ERROR": 3,
                             "CANCELLED": 4
                           }
+                        },
+                        "OutcomeMetadata": {
+                          "values": {
+                            "OUTCOME_METADATA_UNSPECIFIED": 0,
+                            "GRACEFUL_HANDOFF": 1
+                          }
                         }
                       }
                     },
@@ -19821,7 +20378,6 @@
                           "type": "InputAudioConfig",
                           "id": 1,
                           "options": {
-                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -19829,7 +20385,6 @@
                           "type": "OutputAudioConfig",
                           "id": 2,
                           "options": {
-                            "deprecated": true,
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -20300,6 +20855,55 @@
                               }
                             }
                           ]
+                        },
+                        "StreamChatAiAssistant": {
+                          "requestType": "StreamChatAiAssistantRequest",
+                          "responseType": "StreamChatAiAssistantResponse",
+                          "responseStream": true,
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/apps/*/assistantSessions/*}:streamChatAiAssistant",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/apps/*/assistantSessions/*}:streamChatAiAssistant",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "CancelAssistantTurn": {
+                          "requestType": "CancelAssistantTurnRequest",
+                          "responseType": "CancelAssistantTurnResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/apps/*/assistantSessions/*}:cancelAssistantTurn",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/apps/*/assistantSessions/*}:cancelAssistantTurn",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "GenerateOnboardingSuggestions": {
+                          "requestType": "GenerateOnboardingSuggestionsRequest",
+                          "responseType": "GenerateOnboardingSuggestionsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{name=projects/*/locations/*/apps/*}:generateOnboardingSuggestions",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{name=projects/*/locations/*/apps/*}:generateOnboardingSuggestions",
+                                "body": "*"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -20456,6 +21060,27 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "includeLlmThoughtSummary": {
+                          "type": "bool",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "excludeDiagnosticInfo": {
+                          "type": "bool",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeProgressUpdate": {
+                          "type": "bool",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -20517,6 +21142,14 @@
                           "rule": "repeated",
                           "type": "CitedChunk",
                           "id": 1
+                        },
+                        "inlineCitations": {
+                          "rule": "repeated",
+                          "type": "InlineCitation",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -20539,6 +21172,23 @@
                               "id": 4
                             }
                           }
+                        },
+                        "InlineCitation": {
+                          "fields": {
+                            "startIndex": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "endIndex": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "citedChunkIndices": {
+                              "rule": "repeated",
+                              "type": "int32",
+                              "id": 3
+                            }
+                          }
                         }
                       }
                     },
@@ -20549,6 +21199,13 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "variables": {
+                          "type": "google.protobuf.Struct",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -20631,6 +21288,22 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "recordingControl": {
+                          "type": "RecordingControl",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RecordingControl": {
+                          "values": {
+                            "RECORDING_CONTROL_UNSPECIFIED": 0,
+                            "RECORDING_ENABLED": 1,
+                            "RECORDING_DISABLED": 2
+                          }
                         }
                       }
                     },
@@ -20644,7 +21317,9 @@
                             "citations",
                             "googleSearchSuggestions",
                             "endSession",
-                            "payload"
+                            "payload",
+                            "image",
+                            "progress"
                           ]
                         }
                       },
@@ -20676,6 +21351,14 @@
                         "payload": {
                           "type": "google.protobuf.Struct",
                           "id": 11
+                        },
+                        "image": {
+                          "type": "Image",
+                          "id": 13
+                        },
+                        "progress": {
+                          "type": "string",
+                          "id": 14
                         },
                         "turnIndex": {
                           "type": "int32",
@@ -20847,6 +21530,609 @@
                           "id": 6,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "StreamChatAiAssistantRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/AssistantSession"
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "attachedGcsUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "contextToken": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "confirmationResponse": {
+                          "type": "AssistantConfirmationResponse",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "clientCapabilities": {
+                          "rule": "repeated",
+                          "type": "ClientCapability",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "operationCompletedEvent": {
+                          "type": "OperationCompletedEvent",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "resumeFromSequenceNumber": {
+                          "type": "int64",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "attachOnly": {
+                          "type": "bool",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ClientCapability": {
+                          "values": {
+                            "CLIENT_CAPABILITY_UNSPECIFIED": 0,
+                            "CONFIRMATION_CARDS": 1,
+                            "CLIENT_MANAGED_LRO": 2
+                          }
+                        }
+                      }
+                    },
+                    "AssistantSuggestion": {
+                      "oneofs": {
+                        "action": {
+                          "oneof": [
+                            "seedPrompt",
+                            "loadSession",
+                            "sendMessage"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "seedPrompt": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "loadSession": {
+                          "type": "LoadSession",
+                          "id": 6
+                        },
+                        "sendMessage": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "suggestionId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "label": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "rationale": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "icon": {
+                          "type": "Icon",
+                          "id": 4
+                        },
+                        "source": {
+                          "type": "Source",
+                          "id": 8
+                        },
+                        "candidateType": {
+                          "type": "string",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "LoadSession": {
+                          "fields": {
+                            "assistantSessionId": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "Icon": {
+                          "values": {
+                            "ICON_UNSPECIFIED": 0,
+                            "RESUME": 1,
+                            "BUILD": 2,
+                            "EVALUATE": 3,
+                            "DEPLOY": 4,
+                            "EXPLORE": 5,
+                            "FIX": 6
+                          }
+                        },
+                        "Source": {
+                          "values": {
+                            "SOURCE_UNSPECIFIED": 0,
+                            "RULE": 1,
+                            "LLM_RANKED": 2
+                          }
+                        }
+                      }
+                    },
+                    "GenerateOnboardingSuggestionsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/App"
+                          }
+                        },
+                        "maxSuggestions": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GenerateOnboardingSuggestionsResponse": {
+                      "fields": {
+                        "userProfile": {
+                          "type": "UserProfile",
+                          "id": 1
+                        },
+                        "suggestions": {
+                          "rule": "repeated",
+                          "type": "AssistantSuggestion",
+                          "id": 2
+                        },
+                        "contextToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "UserProfile": {
+                          "values": {
+                            "USER_PROFILE_UNSPECIFIED": 0,
+                            "NEW": 1,
+                            "EXPLORING": 2,
+                            "RETURNING": 3
+                          }
+                        }
+                      }
+                    },
+                    "ArtifactChunk": {
+                      "fields": {
+                        "artifactId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "contentDelta": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "gcsUri": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STARTED": 1,
+                            "DELTA": 2,
+                            "FINALIZED": 3,
+                            "FAILED": 4,
+                            "CLOSED": 5
+                          }
+                        }
+                      }
+                    },
+                    "OptionQuestionsChunk": {
+                      "fields": {
+                        "questions": {
+                          "rule": "repeated",
+                          "type": "Question",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Option": {
+                          "fields": {
+                            "title": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "details": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "submitText": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "Question": {
+                          "fields": {
+                            "question": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "options": {
+                              "rule": "repeated",
+                              "type": "Option",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "AssistantConfirmationRequest": {
+                      "fields": {
+                        "confirmationId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "context": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "positiveLabel": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "negativeLabel": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "questions": {
+                          "rule": "repeated",
+                          "type": "OptionQuestionsChunk.Question",
+                          "id": 5
+                        },
+                        "tool": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "agentName": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "AssistantConfirmationResponse": {
+                      "oneofs": {
+                        "response": {
+                          "oneof": [
+                            "confirmed",
+                            "answerText"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "confirmed": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "answerText": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "confirmationId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "OperationCompletedEvent": {
+                      "fields": {
+                        "operationName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "targetResourceName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "operationType": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "status": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "deduplicationToken": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 6
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Struct",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "TurnMetadata": {
+                      "fields": {
+                        "contractRelated": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "contractFinalized": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "contractStreamingPhase": {
+                          "type": "ContractStreamingPhase",
+                          "id": 4
+                        },
+                        "contractDraftComplete": {
+                          "type": "bool",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "ContractStreamingPhase": {
+                          "values": {
+                            "CONTRACT_STREAMING_PHASE_UNSPECIFIED": 0,
+                            "DRAFTING": 1,
+                            "REVISING": 2
+                          }
+                        }
+                      }
+                    },
+                    "StreamChatAiAssistantResponse": {
+                      "oneofs": {
+                        "event": {
+                          "oneof": [
+                            "textChunk",
+                            "status",
+                            "thoughtChunk",
+                            "toolCall",
+                            "toolResponse",
+                            "artifactChunk",
+                            "optionQuestionsChunk",
+                            "confirmationRequest",
+                            "sessionCheckpoint",
+                            "resumeSnapshot",
+                            "handoff",
+                            "turnCompleted"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "textChunk": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "status": {
+                          "type": "google.rpc.Status",
+                          "id": 4
+                        },
+                        "thoughtChunk": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "toolCall": {
+                          "type": "ToolCall",
+                          "id": 7
+                        },
+                        "toolResponse": {
+                          "type": "ToolResponse",
+                          "id": 8
+                        },
+                        "artifactChunk": {
+                          "type": "ArtifactChunk",
+                          "id": 9
+                        },
+                        "optionQuestionsChunk": {
+                          "type": "OptionQuestionsChunk",
+                          "id": 10
+                        },
+                        "confirmationRequest": {
+                          "type": "AssistantConfirmationRequest",
+                          "id": 12
+                        },
+                        "sessionCheckpoint": {
+                          "type": "SessionCheckpoint",
+                          "id": 13
+                        },
+                        "resumeSnapshot": {
+                          "type": "TurnResumeSnapshot",
+                          "id": 17
+                        },
+                        "handoff": {
+                          "type": "TurnHandoffEvent",
+                          "id": 18
+                        },
+                        "turnCompleted": {
+                          "type": "TurnCompletedEvent",
+                          "id": 19
+                        },
+                        "eventId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "eventTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "uiEvent": {
+                          "type": "UiEvent",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "turnMetadata": {
+                          "type": "TurnMetadata",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "sequenceNumber": {
+                          "type": "int64",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "turnInProgress": {
+                          "type": "bool",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CancelAssistantTurnRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "turnId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CancelAssistantTurnResponse": {
+                      "fields": {
+                        "cancelled": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "TurnResumeSnapshot": {
+                      "fields": {
+                        "turnId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "resolvedSequenceNumber": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "events": {
+                          "rule": "repeated",
+                          "type": "StreamChatAiAssistantResponse",
+                          "id": 3
+                        },
+                        "orphanDeadlineTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "TurnHandoffEvent": {
+                      "fields": {
+                        "turnId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "reason": {
+                          "type": "Reason",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Reason": {
+                          "values": {
+                            "REASON_UNSPECIFIED": 0,
+                            "SERVER_RESTART": 1
+                          }
+                        }
+                      }
+                    },
+                    "TurnCompletedEvent": {
+                      "fields": {
+                        "turnId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "reason": {
+                          "type": "Reason",
+                          "id": 2
+                        },
+                        "finalSequenceNumber": {
+                          "type": "int64",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Reason": {
+                          "values": {
+                            "REASON_UNSPECIFIED": 0,
+                            "COMPLETED": 1,
+                            "ABANDONED": 2,
+                            "RESUME_UNAVAILABLE": 3
                           }
                         }
                       }
@@ -21041,6 +22327,696 @@
                             "ENFORCEMENT_SCOPE_UNSPECIFIED": 0,
                             "VPCSC_ONLY": 1,
                             "ALWAYS": 2
+                          }
+                        }
+                      }
+                    },
+                    "AssistantService": {
+                      "options": {
+                        "(google.api.default_host)": "ces.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/ces,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListAssistantSessions": {
+                          "requestType": "ListAssistantSessionsRequest",
+                          "responseType": "ListAssistantSessionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{parent=projects/*/locations/*/apps/*}/assistantSessions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{parent=projects/*/locations/*/apps/*}/assistantSessions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetAssistantSession": {
+                          "requestType": "GetAssistantSessionRequest",
+                          "responseType": "AssistantSession",
+                          "options": {
+                            "(google.api.http).get": "/v1beta/{name=projects/*/locations/*/apps/*/assistantSessions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta/{name=projects/*/locations/*/apps/*/assistantSessions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateAssistantSession": {
+                          "requestType": "CreateAssistantSessionRequest",
+                          "responseType": "AssistantSession",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{parent=projects/*/locations/*/apps/*}/assistantSessions",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "parent,assistant_session_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{parent=projects/*/locations/*/apps/*}/assistantSessions",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,assistant_session_id"
+                            }
+                          ]
+                        },
+                        "DeleteAssistantSession": {
+                          "requestType": "DeleteAssistantSessionRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta/{name=projects/*/locations/*/apps/*/assistantSessions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta/{name=projects/*/locations/*/apps/*/assistantSessions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "RunAssistant": {
+                          "requestType": "RunAssistantRequest",
+                          "responseType": "RunAssistantResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{app=projects/*/locations/*/apps/*}:runAssistant",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{app=projects/*/locations/*/apps/*}:runAssistant",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "ChatAiAssistant": {
+                          "requestType": "ChatAiAssistantRequest",
+                          "responseType": "ChatAiAssistantResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{app=projects/*/locations/*/apps/*}:chatAiAssistant",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{app=projects/*/locations/*/apps/*}:chatAiAssistant",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "AssistantSessionState": {
+                      "values": {
+                        "ASSISTANT_SESSION_STATE_UNSPECIFIED": 0,
+                        "PROCESSING": 1,
+                        "IDLE": 2,
+                        "PENDING_REVIEW": 3
+                      }
+                    },
+                    "ListAssistantSessionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "ces.googleapis.com/AssistantSession"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListAssistantSessionsResponse": {
+                      "fields": {
+                        "assistantSessions": {
+                          "rule": "repeated",
+                          "type": "AssistantSession",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "GetAssistantSessionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/AssistantSession"
+                          }
+                        }
+                      }
+                    },
+                    "CreateAssistantSessionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "ces.googleapis.com/AssistantSession"
+                          }
+                        },
+                        "assistantSessionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "assistantSessionMessages": {
+                          "rule": "repeated",
+                          "type": "AssistantMessage",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteAssistantSessionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/AssistantSession"
+                          }
+                        }
+                      }
+                    },
+                    "RunAssistantRequest": {
+                      "fields": {
+                        "app": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/App"
+                          }
+                        },
+                        "assistantSession": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/AssistantSession"
+                          }
+                        },
+                        "message": {
+                          "type": "AssistantMessage",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "interactionType": {
+                          "type": "InteractionType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "InteractionType": {
+                          "values": {
+                            "INTERACTION_TYPE_UNSPECIFIED": 0,
+                            "NEW_MESSAGE": 1,
+                            "POLL": 2,
+                            "DISMISS": 3
+                          }
+                        }
+                      }
+                    },
+                    "RunAssistantResponse": {
+                      "fields": {
+                        "output": {
+                          "type": "AssistantOutput",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "state": {
+                          "type": "AssistantSessionState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AssistantSession": {
+                      "options": {
+                        "(google.api.resource).type": "ces.googleapis.com/AssistantSession",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/apps/{app}/assistantSessions/{assistant_session}",
+                        "(google.api.resource).plural": "assistantSessions",
+                        "(google.api.resource).singular": "assistantSession"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestor": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "messages": {
+                          "rule": "repeated",
+                          "type": "AssistantMessage",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "state": {
+                          "type": "AssistantSessionState",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "userResponseSuggestions": {
+                          "type": "UserResponseSuggestions",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "artifacts": {
+                          "rule": "repeated",
+                          "type": "AssistantSessionArtifact",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "sessionCheckpoint": {
+                          "type": "SessionCheckpoint",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "activeTurn": {
+                          "type": "ActiveTurnInfo",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ActiveTurnInfo": {
+                      "fields": {
+                        "turnId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "status": {
+                          "type": "Status",
+                          "id": 2
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "lastProgressTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "orphanDeadlineTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Status": {
+                          "values": {
+                            "STATUS_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "DISCONNECTED": 2,
+                            "RESUMING": 3,
+                            "ABANDONED": 4
+                          }
+                        }
+                      }
+                    },
+                    "AssistantSessionArtifact": {
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "gcsUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "turnIndex": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AssistantChunk": {
+                      "oneofs": {
+                        "data": {
+                          "oneof": [
+                            "text",
+                            "thought",
+                            "payload",
+                            "typedPayload"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "thought": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "payload": {
+                          "type": "google.protobuf.Struct",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "typedPayload": {
+                          "type": "TypedPayload",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AssistantOutput": {
+                      "fields": {
+                        "message": {
+                          "type": "AssistantMessage",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "userResponseSuggestions": {
+                          "type": "UserResponseSuggestions",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "AssistantMessage": {
+                      "fields": {
+                        "role": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "chunks": {
+                          "rule": "repeated",
+                          "type": "AssistantChunk",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "eventTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "attachedGcsUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TypedPayload": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "value": {
+                          "type": "google.protobuf.Struct",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "metadata": {
+                          "type": "google.protobuf.Struct",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UserResponseSuggestions": {
+                      "fields": {
+                        "suggestions": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ChatAiAssistantRequest": {
+                      "fields": {
+                        "app": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/App"
+                          }
+                        },
+                        "assistantSession": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "ces.googleapis.com/AssistantSession"
+                          }
+                        },
+                        "message": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "attachedGcsUris": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "contextToken": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ChatAiAssistantResponse": {
+                      "oneofs": {
+                        "event": {
+                          "oneof": [
+                            "textChunk",
+                            "statusMessage",
+                            "sessionCheckpoint"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "textChunk": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "statusMessage": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "sessionCheckpoint": {
+                          "type": "SessionCheckpoint",
+                          "id": 13
+                        },
+                        "eventId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "eventTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "uiEvent": {
+                          "type": "UiEvent",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -23574,7 +25550,7 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "RoutingProto",
+            "java_outer_classname": "FieldInfoProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI"
           },
@@ -24217,6 +26193,43 @@
                 "pathTemplate": {
                   "type": "string",
                   "id": 2
+                }
+              }
+            },
+            "fieldInfo": {
+              "type": "google.api.FieldInfo",
+              "id": 291403980,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldInfo": {
+              "fields": {
+                "format": {
+                  "type": "Format",
+                  "id": 1
+                },
+                "referencedTypes": {
+                  "rule": "repeated",
+                  "type": "TypeReference",
+                  "id": 2
+                }
+              },
+              "nested": {
+                "Format": {
+                  "values": {
+                    "FORMAT_UNSPECIFIED": 0,
+                    "UUID4": 1,
+                    "IPV4": 2,
+                    "IPV6": 3,
+                    "IPV4_OR_IPV6": 4
+                  }
+                }
+              }
+            },
+            "TypeReference": {
+              "fields": {
+                "typeName": {
+                  "type": "string",
+                  "id": 1
                 }
               }
             }
