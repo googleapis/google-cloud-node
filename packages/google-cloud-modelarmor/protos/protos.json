@@ -293,6 +293,20 @@
                         "FILTER_VERSION_ALIAS_RETIRED": 4
                       }
                     },
+                    "MatchingScope": {
+                      "values": {
+                        "MATCHING_SCOPE_UNSPECIFIED": 0,
+                        "MATCHING_SCOPE_FULL_MATCH": 1,
+                        "MATCHING_SCOPE_PARTIAL_MATCH": 2
+                      }
+                    },
+                    "RuleFilterType": {
+                      "values": {
+                        "RULE_FILTER_TYPE_UNSPECIFIED": 0,
+                        "PROMPT_INJECTION_AND_JAILBREAK": 1,
+                        "RESPONSIBLE_AI": 2
+                      }
+                    },
                     "FilterVersionSelector": {
                       "oneofs": {
                         "versionSpec": {
@@ -890,6 +904,13 @@
                         "maliciousUriFilterSettings": {
                           "type": "MaliciousUriFilterSettings",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filterRuleSettings": {
+                          "type": "FilterRuleSettings",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -1666,6 +1687,124 @@
                         "extractedImageText": {
                           "type": "string",
                           "id": 6
+                        }
+                      }
+                    },
+                    "WordList": {
+                      "fields": {
+                        "words": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Dictionary": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "wordList"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "wordList": {
+                          "type": "WordList",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Regex": {
+                      "fields": {
+                        "pattern": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ExclusionRule": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "dictionary",
+                            "regex"
+                          ]
+                        },
+                        "_matchingScope": {
+                          "oneof": [
+                            "matchingScope"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dictionary": {
+                          "type": "Dictionary",
+                          "id": 1
+                        },
+                        "regex": {
+                          "type": "Regex",
+                          "id": 2
+                        },
+                        "matchingScope": {
+                          "type": "MatchingScope",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "FilterRule": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "exclusionRule"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "exclusionRule": {
+                          "type": "ExclusionRule",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "FilterRuleSet": {
+                      "fields": {
+                        "filterTypes": {
+                          "rule": "repeated",
+                          "type": "RuleFilterType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "rules": {
+                          "rule": "repeated",
+                          "type": "FilterRule",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "FilterRuleSettings": {
+                      "fields": {
+                        "ruleSets": {
+                          "rule": "repeated",
+                          "type": "FilterRuleSet",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },

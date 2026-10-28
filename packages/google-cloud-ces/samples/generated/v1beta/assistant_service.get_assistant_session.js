@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START geminidataanalytics_v1alpha_generated_DataA2AService_GetAgentCard_async]
+function main(name) {
+  // [START ces_v1beta_generated_AssistantService_GetAssistantSession_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,28 +29,31 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Optional. Optional tenant, provided as a path parameter.
+   *  Required. The name of the assistant session to retrieve.
+   *  Format:
+   *  `projects/{project}/locations/{location}/apps/{app}/assistantSessions/{assistant_session}`
    */
-  // const tenant = 'abc123'
+  // const name = 'abc123'
 
-  // Imports the Geminidataanalytics library
-  const {DataA2AServiceClient} = require('@google-cloud/geminidataanalytics').v1alpha;
+  // Imports the Ces library
+  const {AssistantServiceClient} = require('@google-cloud/ces').v1beta;
 
   // Instantiates a client
-  const geminidataanalyticsClient = new DataA2AServiceClient();
+  const cesClient = new AssistantServiceClient();
 
-  async function callGetAgentCard() {
+  async function callGetAssistantSession() {
     // Construct request
     const request = {
+      name,
     };
 
     // Run request
-    const response = await geminidataanalyticsClient.getAgentCard(request);
+    const response = await cesClient.getAssistantSession(request);
     console.log(response);
   }
 
-  callGetAgentCard();
-  // [END geminidataanalytics_v1alpha_generated_DataA2AService_GetAgentCard_async]
+  callGetAssistantSession();
+  // [END ces_v1beta_generated_AssistantService_GetAssistantSession_async]
 }
 
 process.on('unhandledRejection', err => {

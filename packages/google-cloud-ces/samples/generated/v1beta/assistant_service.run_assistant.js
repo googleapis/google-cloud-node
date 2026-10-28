@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main() {
-  // [START geminidataanalytics_v1beta_generated_DataA2AService_GetAgentCard_async]
+function main(app, assistantSession, message) {
+  // [START ces_v1beta_generated_AssistantService_RunAssistant_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,28 +29,47 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Optional. Optional tenant, provided as a path parameter.
+   *  Required. The app to run assistant for.
+   *  Format:
+   *  `projects/{project}/locations/{location}/apps/{app}`
    */
-  // const tenant = 'abc123'
+  // const app = 'abc123'
+  /**
+   *  Required. The assistant session to be used to run the assistant.
+   *  Format:
+   *  `projects/{project}/locations/{location}/apps/{app}/assistantSessions/{assistant_session}`
+   */
+  // const assistantSession = 'abc123'
+  /**
+   *  Required. The message to send to the assistant agent.
+   */
+  // const message = {}
+  /**
+   *  Optional. Different interaction types for the assistant message.
+   */
+  // const interactionType = {}
 
-  // Imports the Geminidataanalytics library
-  const {DataA2AServiceClient} = require('@google-cloud/geminidataanalytics').v1beta;
+  // Imports the Ces library
+  const {AssistantServiceClient} = require('@google-cloud/ces').v1beta;
 
   // Instantiates a client
-  const geminidataanalyticsClient = new DataA2AServiceClient();
+  const cesClient = new AssistantServiceClient();
 
-  async function callGetAgentCard() {
+  async function callRunAssistant() {
     // Construct request
     const request = {
+      app,
+      assistantSession,
+      message,
     };
 
     // Run request
-    const response = await geminidataanalyticsClient.getAgentCard(request);
+    const response = await cesClient.runAssistant(request);
     console.log(response);
   }
 
-  callGetAgentCard();
-  // [END geminidataanalytics_v1beta_generated_DataA2AService_GetAgentCard_async]
+  callRunAssistant();
+  // [END ces_v1beta_generated_AssistantService_RunAssistant_async]
 }
 
 process.on('unhandledRejection', err => {

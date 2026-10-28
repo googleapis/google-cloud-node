@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(message) {
-  // [START geminidataanalytics_v1beta_generated_DataA2AService_SendStreamingMessage_async]
+function main(name) {
+  // [START ces_v1beta_generated_SessionService_CancelAssistantTurn_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,43 +29,34 @@ function main(message) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The message to send to the agent.
+   *  Required. The assistant session whose in-flight turn to cancel.
    */
-  // const message = {}
+  // const name = 'abc123'
   /**
-   *  Optional. Configuration for the send request.
+   *  Optional. The turn to cancel; empty cancels whichever turn is running. A
+   *  cancel naming a turn that is no longer the running one is a no-op.
    */
-  // const configuration = {}
-  /**
-   *  Optional. Optional metadata for the request.
-   */
-  // const metadata = {}
-  /**
-   *  Optional. Optional tenant, provided as a path parameter.
-   */
-  // const tenant = 'abc123'
+  // const turnId = 'abc123'
 
-  // Imports the Geminidataanalytics library
-  const {DataA2AServiceClient} = require('@google-cloud/geminidataanalytics').v1beta;
+  // Imports the Ces library
+  const {SessionServiceClient} = require('@google-cloud/ces').v1beta;
 
   // Instantiates a client
-  const geminidataanalyticsClient = new DataA2AServiceClient();
+  const cesClient = new SessionServiceClient();
 
-  async function callSendStreamingMessage() {
+  async function callCancelAssistantTurn() {
     // Construct request
     const request = {
-      message,
+      name,
     };
 
     // Run request
-    const stream = await geminidataanalyticsClient.sendStreamingMessage(request);
-    stream.on('data', (response) => { console.log(response) });
-    stream.on('error', (err) => { throw(err) });
-    stream.on('end', () => { /* API call completed */ });
+    const response = await cesClient.cancelAssistantTurn(request);
+    console.log(response);
   }
 
-  callSendStreamingMessage();
-  // [END geminidataanalytics_v1beta_generated_DataA2AService_SendStreamingMessage_async]
+  callCancelAssistantTurn();
+  // [END ces_v1beta_generated_SessionService_CancelAssistantTurn_async]
 }
 
 process.on('unhandledRejection', err => {

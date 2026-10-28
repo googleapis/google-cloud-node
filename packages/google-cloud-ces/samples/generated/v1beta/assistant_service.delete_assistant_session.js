@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(message) {
-  // [START geminidataanalytics_v1beta_generated_DataA2AService_SendMessage_async]
+function main(name) {
+  // [START ces_v1beta_generated_AssistantService_DeleteAssistantSession_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,41 +29,31 @@ function main(message) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The message to send to the agent.
+   *  Required. The name of the assistant session to delete.
+   *  Format:
+   *  `projects/{project}/locations/{location}/apps/{app}/assistantSessions/{assistant_session}`
    */
-  // const message = {}
-  /**
-   *  Optional. Configuration for the send request.
-   */
-  // const configuration = {}
-  /**
-   *  Optional. Optional metadata for the request.
-   */
-  // const metadata = {}
-  /**
-   *  Optional. Optional tenant, provided as a path parameter.
-   */
-  // const tenant = 'abc123'
+  // const name = 'abc123'
 
-  // Imports the Geminidataanalytics library
-  const {DataA2AServiceClient} = require('@google-cloud/geminidataanalytics').v1beta;
+  // Imports the Ces library
+  const {AssistantServiceClient} = require('@google-cloud/ces').v1beta;
 
   // Instantiates a client
-  const geminidataanalyticsClient = new DataA2AServiceClient();
+  const cesClient = new AssistantServiceClient();
 
-  async function callSendMessage() {
+  async function callDeleteAssistantSession() {
     // Construct request
     const request = {
-      message,
+      name,
     };
 
     // Run request
-    const response = await geminidataanalyticsClient.sendMessage(request);
+    const response = await cesClient.deleteAssistantSession(request);
     console.log(response);
   }
 
-  callSendMessage();
-  // [END geminidataanalytics_v1beta_generated_DataA2AService_SendMessage_async]
+  callDeleteAssistantSession();
+  // [END ces_v1beta_generated_AssistantService_DeleteAssistantSession_async]
 }
 
 process.on('unhandledRejection', err => {
