@@ -16,6 +16,7 @@ import * as fs from 'fs';
 import * as Module from 'module';
 import * as os from 'os';
 import * as path from 'path';
+import {pathToFileURL} from 'url';
 import {createProxyquire, proxyquire} from '../src';
 
 describe('proxyquire utilities (unit)', () => {
@@ -187,5 +188,11 @@ describe('proxyquire utilities (unit)', () => {
       './non-existent-relative': {foo: 'bar'},
     });
     expect(loaded.sep).toBe('/custom-sep');
+  });
+
+  it('normalizes file:// URLs passed to createProxyquire or returned by stack frames', () => {
+    const pqFromUrl = createProxyquire(pathToFileURL(sutFile).href);
+    const loaded = pqFromUrl('./sut', {'./dep': {greet: () => 'url-caller'}});
+    expect(loaded.greet()).toBe('url-caller');
   });
 });

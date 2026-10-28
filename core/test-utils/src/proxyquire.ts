@@ -72,14 +72,22 @@ function getCallerFile(): string | undefined {
     const stack = err.stack as unknown as NodeJS.CallSite[] | undefined;
     if (Array.isArray(stack)) {
       for (const frame of stack) {
-        const file = frame.getFileName?.();
-        if (
-          file &&
-          file !== __filename &&
-          !file.startsWith('node:') &&
-          !file.startsWith('internal/')
-        ) {
-          return file;
+        let file = frame.getFileName?.();
+        if (file) {
+          if (file.startsWith('file://')) {
+            try {
+              file = fileURLToPath(file);
+            } catch {
+              // ignore
+            }
+          }
+          if (
+            file !== __filename &&
+            !file.startsWith('node:') &&
+            !file.startsWith('internal/')
+          ) {
+            return file;
+          }
         }
       }
     }
@@ -93,8 +101,15 @@ function resolveModule(target: NodeModule | string | undefined): NodeModule {
   if (target && typeof target === 'object') {
     return target;
   }
-  const filename =
+  let filename =
     typeof target === 'string' ? target : (getCallerFile() ?? __filename);
+  if (filename.startsWith('file://')) {
+    try {
+      filename = fileURLToPath(filename);
+    } catch {
+      // ignore
+    }
+  }
   const cached = require.cache[filename];
   if (cached) {
     return cached;
