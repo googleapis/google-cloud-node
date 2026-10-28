@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/gcp-metadata?activeTab=versions
 
+## [9.2.3](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.2.2...gcp-metadata-v9.2.3) (2026-10-28)
+
+
+### Bug Fixes
+
+* **core:** Log request/response payloads at DEBUG severity ([#9754](https://github.com/googleapis/google-cloud-node/issues/9754)) ([bf46818](https://github.com/googleapis/google-cloud-node/commit/bf468181b2c85ffd17cc820d2459d6b42213f016))
+
 ## [9.2.2](https://github.com/googleapis/google-cloud-node/compare/gcp-metadata-v9.2.1...gcp-metadata-v9.2.2) (2026-10-19)
 
 
