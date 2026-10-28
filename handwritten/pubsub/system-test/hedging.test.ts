@@ -31,7 +31,7 @@ import {
 } from '../src';
 import {RequestCallback, RequestConfig} from '../src/pubsub';
 import * as tracing from '../src/telemetry-tracing';
-import {waitForMessage, waitForMessages} from './common';
+import {waitForMessages} from './common';
 
 interface TopicWithSubscription {
   readonly topic: Topic;
