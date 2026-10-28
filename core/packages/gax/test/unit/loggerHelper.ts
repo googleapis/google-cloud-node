@@ -25,6 +25,7 @@ import {
   buildLogAttributes,
   getGaxLogger,
   logCall,
+  logNetworkAttempt,
   LogPayload,
 } from '../../src/observability/LoggerHelper';
 import {traceAttempt, traceCall} from '../../src/observability/TracerHelper';
@@ -865,6 +866,150 @@ describe('LoggerHelper', () => {
           }),
         (caught: unknown) => caught === hostileErr,
       );
+    });
+  });
+
+  describe('logNetworkAttempt', () => {
+    it('does not log when an attempt succeeds across promise, callback, stream, or sync boundaries', async () => {
+      const asyncResult = await logNetworkAttempt(
+        dynamicArgs,
+        staticArgs,
+        async () => ({ok: true}),
+      );
+      assert.deepStrictEqual(asyncResult, {ok: true});
+
+      const syncResult = logNetworkAttempt(dynamicArgs, staticArgs, () => 42);
+      assert.strictEqual(syncResult, 42);
+
+      let callbackResult: unknown;
+      logNetworkAttempt(
+        dynamicArgs,
+        staticArgs,
+        loggedCallback => {
+          loggedCallback!(null, {cb: true});
+          return undefined as unknown as ResultTuple;
+        },
+        false,
+        (_err, res) => {
+          callbackResult = res;
+        },
+      );
+      assert.deepStrictEqual(callbackResult, {cb: true});
+
+      const stream = new EventEmitter();
+      logNetworkAttempt(dynamicArgs, staticArgs, () => stream, true);
+      stream.emit('end');
+
+      assert.strictEqual(sink.logs.length, 0);
+    });
+
+    it('emits a DEBUG log with response.payload when err.metadata is present and omits it when absent', async () => {
+      const errWithMeta = Object.assign(new GoogleError('Unavailable'), {
+        code: Status.UNAVAILABLE,
+        metadata: {'x-goog-request-id': 'req-123'},
+      });
+
+      await assert.rejects(
+        async () => {
+          await logNetworkAttempt(dynamicArgs, staticArgs, async () => {
+            throw errWithMeta;
+          });
+        },
+        (caught: unknown) => caught === errWithMeta,
+      );
+
+      assert.strictEqual(sink.logs.length, 1);
+      const entry = sink.logs[0];
+      assert.strictEqual(entry.namespace, 'storage');
+      assert.strictEqual(entry.fields.severity, 'DEBUG');
+      assert.deepStrictEqual(entry.args, [
+        'RPC attempt failed: %s',
+        'Unavailable',
+      ]);
+      const other = entry.fields.other as LogPayload;
+      assert.deepStrictEqual(other, {
+        'gcp.client.service': 'storage',
+        'gcp.client.version': '1.2.3',
+        'gcp.client.repo': DEFAULT_GCP_REPO,
+        'gcp.client.artifact': '@google-cloud/storage',
+        'gcp.client.language': 'node',
+        'rpc.system.name': 'grpc',
+        'rpc.method': 'google.storage.v2.Storage/GetObject',
+        'url.domain': 'storage.googleapis.com',
+        'rpc.response.status_code': 'UNAVAILABLE',
+        'error.type': 'UNAVAILABLE',
+        'response.payload': '{"x-goog-request-id":"req-123"}',
+      });
+      assert.strictEqual('exception.type' in other, false);
+      assert.strictEqual('exception.message' in other, false);
+      assert.strictEqual('exception.stacktrace' in other, false);
+
+      sink.reset();
+      const errWithoutMeta = new TypeError('client error');
+      assert.throws(
+        () =>
+          logNetworkAttempt(dynamicArgs, staticArgs, () => {
+            throw errWithoutMeta;
+          }),
+        errWithoutMeta,
+      );
+
+      assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(sink.logs[0].fields.severity, 'DEBUG');
+      assert.deepStrictEqual(sink.logs[0].args, [
+        'RPC attempt failed: %s',
+        'client error',
+      ]);
+      const otherWithoutMeta = sink.logs[0].fields.other as LogPayload;
+      assert.strictEqual('response.payload' in otherWithoutMeta, false);
+      assert.strictEqual('exception.type' in otherWithoutMeta, false);
+      assert.strictEqual('exception.message' in otherWithoutMeta, false);
+      assert.strictEqual('exception.stacktrace' in otherWithoutMeta, false);
+    });
+
+    it('captures the attempt span context and logs on callback and stream failures', () => {
+      const stream = new EventEmitter();
+      let receivedCallback: APICallback | undefined;
+
+      traceCall(dynamicArgs, staticArgs, () =>
+        traceAttempt(dynamicArgs, staticArgs, () =>
+          logNetworkAttempt(
+            dynamicArgs,
+            staticArgs,
+            loggedCallback => {
+              receivedCallback = loggedCallback;
+              return stream;
+            },
+            true,
+            () => {},
+          ),
+        ),
+      );
+
+      const attemptErr = new GoogleError('attempt failed');
+      receivedCallback!(attemptErr);
+      stream.emit('error', attemptErr);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      const attemptSpan = spans[0];
+
+      assert.strictEqual(sink.logs.length, 2);
+      for (const logEntry of sink.logs) {
+        assert.strictEqual(logEntry.fields.severity, 'DEBUG');
+        assert.strictEqual(
+          logEntry.fields.telemetryTraceId,
+          attemptSpan.spanContext().traceId,
+        );
+        assert.strictEqual(
+          logEntry.fields.telemetrySpanId,
+          attemptSpan.spanContext().spanId,
+        );
+        assert.deepStrictEqual(logEntry.args, [
+          'RPC attempt failed: %s',
+          'attempt failed',
+        ]);
+      }
     });
   });
 });
