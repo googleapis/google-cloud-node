@@ -93,6 +93,10 @@ export class Publisher {
   queue: Queue;
   orderedQueues: Map<string, OrderedQueue>;
   flowControl: FlowControl;
+  /**
+   * @private
+   * @internal
+   */
   hedgingOptions?: ResolvedHedgingOptions;
   private tokenBucket_?: HedgingTokenBucket;
 
