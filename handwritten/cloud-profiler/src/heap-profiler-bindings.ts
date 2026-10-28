@@ -87,11 +87,13 @@ export function startSamplingHeapProfiler(
 ): void {
   void heapStackDepth;
   if (!heapSession) {
-    heapSession = new inspector.Session();
+    const session = new inspector.Session();
     try {
-      heapSession.connect();
+      session.connect();
+      heapSession = session;
     } catch {
       // Ignore connection errors on unsupported runtimes.
+      return;
     }
   }
   try {

@@ -61,9 +61,8 @@ async function processSourceMap(
 
   let consumer: sourceMap.SourceMapConsumer;
   try {
-    consumer = await new sourceMap.SourceMapConsumer(
-      contents as unknown as sourceMap.RawSourceMap
-    );
+    const rawSourceMap = JSON.parse(contents) as sourceMap.RawSourceMap;
+    consumer = await new sourceMap.SourceMapConsumer(rawSourceMap);
   } catch (e) {
     throw new Error(
       'An error occurred while reading the sourceMap file ' + mapPath + ': ' + e
@@ -88,9 +87,7 @@ export class SourceMapper {
     for (const dir of searchDirs) {
       try {
         const mf = await getMapFiles(dir);
-        mf.forEach(mapFile => {
-          mapFiles.push(path.resolve(dir, mapFile));
-        });
+        mapFiles.push(...mf);
       } catch (e) {
         throw new Error(`failed to get source maps from ${dir}: ${e}`);
       }
@@ -196,5 +193,5 @@ async function getMapFiles(baseDir: string): Promise<string[]> {
   } else if (stat.isFile() && /\.js\.map$/.test(baseDir)) {
     fileList.push(baseDir);
   }
-  return fileList.map(file => path.relative(process.cwd(), file));
+  return fileList.map(file => path.resolve(file));
 }

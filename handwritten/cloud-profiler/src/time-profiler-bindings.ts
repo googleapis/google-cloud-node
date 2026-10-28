@@ -200,7 +200,8 @@ export function translateCpuProfile(
   if (
     !hasIdleNode &&
     elapsedWallMicros !== undefined &&
-    elapsedWallMicros > 0
+    elapsedWallMicros > 0 &&
+    samplingIntervalMicros > 0
   ) {
     const activeMicros = totalHits * samplingIntervalMicros;
     const idleMicros = elapsedWallMicros - activeMicros;

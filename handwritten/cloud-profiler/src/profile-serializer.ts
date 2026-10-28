@@ -115,7 +115,11 @@ function serialize<T extends ProfileNode>(
   while (entries.length > 0) {
     const entry = entries.pop()!;
     const node = entry.node;
-    if (ignoreSamplesPath && node.scriptName.indexOf(ignoreSamplesPath) > -1) {
+    if (
+      ignoreSamplesPath &&
+      node.scriptName &&
+      node.scriptName.indexOf(ignoreSamplesPath) > -1
+    ) {
       continue;
     }
     const stack = entry.stack;
