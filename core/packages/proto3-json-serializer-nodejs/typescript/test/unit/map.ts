@@ -40,6 +40,10 @@ function testMap(root: protobuf.Root) {
       'minus one': '-1',
       zero: '0',
     },
+    bytesMapField: {
+      key1: 'dmFsdWUgMQo=',
+      key2: 'dmFsdWUgMgo=',
+    },
   });
   const json = {
     mapField: {
@@ -61,6 +65,10 @@ function testMap(root: protobuf.Root) {
       zero: '0',
     },
     enumMapField: {},
+    bytesMapField: {
+      key1: 'dmFsdWUgMQo=',
+      key2: 'dmFsdWUgMgo=',
+    },
   };
 
   it('serializes to proto3 JSON', () => {
@@ -90,6 +98,7 @@ function testEnumMap(root: protobuf.Root) {
       key1: 'UNKNOWN',
       key2: 'KNOWN',
     },
+    bytesMapField: {},
   };
   const jsonWithNumericEnums = {
     mapField: {},
@@ -99,6 +108,7 @@ function testEnumMap(root: protobuf.Root) {
       key1: 0,
       key2: 1,
     },
+    bytesMapField: {},
   };
 
   it('serializes to proto3 JSON with string enums', () => {
