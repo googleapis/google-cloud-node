@@ -124,7 +124,20 @@ describe('compileProtos tool', () => {
 
   it('compiles protos to CJS and ES6 if --esm is specified', async function () {
     this.timeout(20000);
-    await compileProtos.main(['--esm', 'esm']);
+    const origRm = fs.promises.rm;
+    let stubCleanupCount = 0;
+    fs.promises.rm = async (filePath, options) => {
+      if (String(filePath).endsWith('protos.pbts-stub.js')) {
+        stubCleanupCount++;
+      }
+      return origRm(filePath, options);
+    };
+    try {
+      await compileProtos.main(['--esm', 'esm']);
+    } finally {
+      fs.promises.rm = origRm;
+    }
+    assert.strictEqual(stubCleanupCount, 1);
     assert(fs.existsSync(expectedJsonResultFile));
     assert(fs.existsSync(expectedJSResultFile));
     assert(fs.existsSync(expectedTSResultFile));
