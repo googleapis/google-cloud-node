@@ -41,7 +41,8 @@ import {
   traceAttempt,
   ResendRecorder,
 } from './observability/TracerHelper';
-import {checkTracingEnabled} from './observability/util';
+import {logCall, logNetworkAttempt} from './observability/LoggerHelper';
+import {checkLoggingEnabled, checkTracingEnabled} from './observability/util';
 import {
   StaticTraceContext,
   DynamicTraceContext,
@@ -84,21 +85,24 @@ export function createApiCall(
   const apiCaller = createAPICaller(settings, descriptor);
 
   const tracingEnabled = checkTracingEnabled(settings);
-  const staticArgs: StaticTraceContext | undefined = tracingEnabled
-    ? resolveStaticTraceContext(settings)
-    : undefined;
+  const loggingEnabled = checkLoggingEnabled(settings);
+  const staticArgs: StaticTraceContext | undefined =
+    tracingEnabled || loggingEnabled
+      ? resolveStaticTraceContext(settings)
+      : undefined;
   const serviceName = settings.apiName?.split('.').pop() ?? '';
   const isFallback = Boolean(_fallback);
-  const dynamicArgs: DynamicTraceContext | undefined = tracingEnabled
-    ? {
-        clientName: serviceName ? `${serviceName}Client` : '',
-        methodName: settings.otherArgs?.internalMethodName ?? '',
-        rpcType: isFallback ? 'http' : 'grpc',
-      }
-    : undefined;
+  const dynamicArgs: DynamicTraceContext | undefined =
+    tracingEnabled || loggingEnabled
+      ? {
+          clientName: serviceName ? `${serviceName}Client` : '',
+          methodName: settings.otherArgs?.internalMethodName ?? '',
+          rpcType: isFallback ? 'http' : 'grpc',
+        }
+      : undefined;
   // Context for per-attempt low level network CLIENT spans.
   const attemptDynamicArgs: AttemptTraceContext | undefined =
-    tracingEnabled && dynamicArgs
+    (tracingEnabled || loggingEnabled) && dynamicArgs
       ? {
           ...dynamicArgs,
           apiName: settings.apiName ?? '',
@@ -181,7 +185,11 @@ export function createApiCall(
           ?.streaming;
 
         // Wrap the transport call so each attempt (initial send and retries) emits a low level network CLIENT span.
-        if (tracingEnabled && attemptDynamicArgs && staticArgs) {
+        if (
+          (tracingEnabled || loggingEnabled) &&
+          attemptDynamicArgs &&
+          staticArgs
+        ) {
           const callerWrappedFunc = wrappedFunc;
           wrappedFunc = (
             argument: {},
@@ -189,25 +197,48 @@ export function createApiCall(
             options: {},
             attemptCallback: APICallback,
           ): GRPCCallResult => {
-            if (!isRetryAttempt) {
-              attemptResendCount = 0;
+            let attemptExecution = (cb: APICallback): GRPCCallResult =>
+              Reflect.apply(callerWrappedFunc, undefined, [
+                argument,
+                metadata,
+                options,
+                cb,
+              ]);
+
+            // If logging is enabled, wrap with L4 attempt error logging
+            if (loggingEnabled) {
+              const originalAttemptExecution = attemptExecution;
+              attemptExecution = (cb: APICallback) =>
+                logNetworkAttempt(
+                  attemptDynamicArgs,
+                  staticArgs,
+                  loggedCallback =>
+                    originalAttemptExecution(loggedCallback ?? cb),
+                  Boolean(streaming),
+                  cb,
+                );
             }
-            isRetryAttempt = false;
-            const resendCount = attemptResendCount;
-            return traceAttempt(
-              {...attemptDynamicArgs, resendCount},
-              staticArgs,
-              tracedAttemptCallback =>
-                Reflect.apply(callerWrappedFunc, undefined, [
-                  argument,
-                  metadata,
-                  options,
-                  tracedAttemptCallback ?? attemptCallback,
-                ]),
-              Boolean(streaming),
-              attemptCallback,
-              parentContext,
-            );
+
+            if (tracingEnabled) {
+              if (!isRetryAttempt) {
+                attemptResendCount = 0;
+              }
+              isRetryAttempt = false;
+              const resendCount = attemptResendCount;
+              const originalAttemptExecution = attemptExecution;
+              attemptExecution = (cb: APICallback) =>
+                traceAttempt(
+                  {...attemptDynamicArgs, resendCount},
+                  staticArgs,
+                  tracedAttemptCallback =>
+                    originalAttemptExecution(tracedAttemptCallback ?? cb),
+                  Boolean(streaming),
+                  cb,
+                  parentContext,
+                );
+            }
+
+            return attemptExecution(attemptCallback);
           };
         }
 
@@ -279,27 +310,54 @@ export function createApiCall(
     return currentApiCaller.result(ongoingCall);
   };
 
-  if (tracingEnabled && dynamicArgs && staticArgs) {
+  if (
+    (tracingEnabled || loggingEnabled) &&
+    dynamicArgs &&
+    attemptDynamicArgs &&
+    staticArgs
+  ) {
     const isStreamingCall = apiCaller instanceof StreamingApiCaller;
     return (
       request: RequestType,
       callOptions?: CallOptions,
       callback?: APICallback,
     ) => {
-      return traceCall(
-        dynamicArgs,
-        staticArgs,
-        (tracedCallback?: APICallback) => {
-          // `traceCall` wraps the user's callback whenever one was supplied,
-          // for stream and non-stream calls alike, and that wrapper is what
-          // closes the span. It is undefined only when there is no callback to
-          // wrap, in which case the span is bound to the returned promise or
-          // stream instead; the fallback keeps this correct either way.
-          return invokeCall(request, callOptions, tracedCallback ?? callback);
-        },
-        isStreamingCall,
-        callback,
-      );
+      let callExecution = (cb?: APICallback) =>
+        invokeCall(request, callOptions, cb);
+
+      // Wrap with L3 terminal logging
+      if (loggingEnabled) {
+        const originalCallExecution = callExecution;
+        callExecution = (cb?: APICallback) =>
+          logCall(
+            attemptDynamicArgs,
+            staticArgs,
+            loggedCallback => originalCallExecution(loggedCallback ?? cb),
+            isStreamingCall,
+            cb,
+          );
+      }
+
+      if (tracingEnabled) {
+        const originalCallExecution = callExecution;
+        callExecution = (cb?: APICallback) =>
+          traceCall(
+            dynamicArgs,
+            staticArgs,
+            (tracedCallback?: APICallback) => {
+              // `traceCall` wraps the user's callback whenever one was supplied,
+              // for stream and non-stream calls alike, and that wrapper is what
+              // closes the span. It is undefined only when there is no callback to
+              // wrap, in which case the span is bound to the returned promise or
+              // stream instead; the fallback keeps this correct either way.
+              return originalCallExecution(tracedCallback ?? cb);
+            },
+            isStreamingCall,
+            cb,
+          );
+      }
+
+      return callExecution(callback);
     };
   } else {
     return invokeCall;
