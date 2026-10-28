@@ -14,6 +14,7 @@
 
 import * as Module from 'module';
 import * as path from 'path';
+import {fileURLToPath} from 'url';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ProxyquireStubs = Record<string, any>;
