@@ -157,12 +157,14 @@ export function logCall<T = GaxCallResult>(
     }
     hasLoggedL3 = true;
 
-    // Resolve logger and active trace/span context.
+    // Resolve logger and active T3 client request span context.
     const logger = getGaxLogger(staticArgs?.gcpClientService);
-    const activeTrace =
-      getActiveTraceContext() ?? getActiveTraceContext(initialContext);
-    const traceId = activeTrace?.traceId;
-    const spanId = activeTrace?.spanId;
+    const clientRequestSpan =
+      getActiveTraceContext()?.clientRequestSpan ??
+      getActiveTraceContext(initialContext)?.clientRequestSpan;
+    const spanContext = clientRequestSpan?.spanContext();
+    const traceId = spanContext?.traceId;
+    const spanId = spanContext?.spanId;
 
     // Build structured log attributes with exception details.
     const exceptionMessage = resolveExceptionMessage(err, dynamicArgs.rpcType);

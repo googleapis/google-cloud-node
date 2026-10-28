@@ -449,13 +449,13 @@ describe('LoggerHelper', () => {
       ]);
     });
 
-    it('attaches telemetryTraceId and telemetrySpanId when an OpenTelemetry span is active', async () => {
+    it('attaches the T3 client request span telemetryTraceId and telemetrySpanId when active', async () => {
       const err = new GoogleError('traced failure');
 
       await assert.rejects(async () => {
         await traceCall(dynamicArgs, staticArgs, () =>
-          traceAttempt(dynamicArgs, staticArgs, () =>
-            logCall(dynamicArgs, staticArgs, async () => {
+          logCall(dynamicArgs, staticArgs, () =>
+            traceAttempt(dynamicArgs, staticArgs, async () => {
               throw err;
             }),
           ),
@@ -465,15 +465,20 @@ describe('LoggerHelper', () => {
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
       const attemptSpan = spans[0];
+      const clientRequestSpan = spans[1];
+      assert.notStrictEqual(
+        clientRequestSpan.spanContext().spanId,
+        attemptSpan.spanContext().spanId,
+      );
 
       assert.strictEqual(sink.logs.length, 1);
       assert.strictEqual(
         sink.logs[0].fields.telemetryTraceId,
-        attemptSpan.spanContext().traceId,
+        clientRequestSpan.spanContext().traceId,
       );
       assert.strictEqual(
         sink.logs[0].fields.telemetrySpanId,
-        attemptSpan.spanContext().spanId,
+        clientRequestSpan.spanContext().spanId,
       );
     });
   });
