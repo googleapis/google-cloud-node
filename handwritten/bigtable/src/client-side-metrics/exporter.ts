@@ -48,24 +48,14 @@ function getInterval(
   dataPoint:
     DataPoint<number> | DataPoint<Histogram> | DataPoint<ExponentialHistogram>,
 ) {
-  let endSec = dataPoint.endTime[0];
-  let endNanos = dataPoint.endTime[1];
-  const startSec = dataPoint.startTime[0];
-  const startNanos = dataPoint.startTime[1];
-
-  if (startSec > endSec || (startSec === endSec && startNanos > endNanos)) {
-    endSec = startSec;
-    endNanos = startNanos;
-  }
-
   return {
     endTime: {
-      seconds: endSec,
-      nanos: endNanos,
+      seconds: dataPoint.endTime[0],
+      nanos: dataPoint.endTime[1],
     },
     startTime: {
-      seconds: startSec,
-      nanos: startNanos,
+      seconds: dataPoint.startTime[0],
+      nanos: dataPoint.startTime[1],
     },
   };
 }
