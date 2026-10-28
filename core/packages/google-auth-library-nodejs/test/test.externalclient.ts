@@ -275,7 +275,7 @@ describe('ExternalAccountClient', () => {
     });
 
     it('should log a warning when called directly', () => {
-      const warnSpy = sinon.spy(console, 'warn');
+      const warnSpy = sinon.stub(console, 'warn');
       try {
         ExternalAccountClient.fromJSON(fileSourcedOptions);
         assert(

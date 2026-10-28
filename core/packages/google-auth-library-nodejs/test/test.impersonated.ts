@@ -593,7 +593,7 @@ describe('impersonated', () => {
 
   it('should log a warning when instantiated directly', () => {
     const sourceClient = createSampleJWTClient();
-    const warnSpy = sinon.spy(console, 'warn');
+    const warnSpy = sinon.stub(console, 'warn');
     try {
       new Impersonated({
         sourceClient,

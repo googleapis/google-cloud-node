@@ -61,7 +61,10 @@ import {
 import {AuthClient, DEFAULT_UNIVERSE} from '../src/auth/authclient';
 import {ExternalAccountAuthorizedUserClient} from '../src/auth/externalAccountAuthorizedUserClient';
 import {stringify} from 'querystring';
-import {GoogleAuthExceptionMessages} from '../src/auth/googleauth';
+import {
+  GoogleAuthExceptionMessages,
+  GoogleAuthOptions,
+} from '../src/auth/googleauth';
 import {IMPERSONATED_ACCOUNT_TYPE} from '../src/auth/impersonated';
 import {USER_REFRESH_ACCOUNT_TYPE} from '../src/auth/refreshclient';
 import {Gaxios, GaxiosError, GaxiosPromise, GaxiosResponse} from 'gaxios';
@@ -3053,7 +3056,7 @@ describe('googleauth', () => {
         credentials: gdchJson,
         clientOptions: {
           apiEndpoint: 'hardwaremanagement.us-west1.gdch.google.com',
-        } as any,
+        } as GoogleAuthOptions['clientOptions'],
       });
 
       const client = await auth.getClient();
@@ -3069,7 +3072,7 @@ describe('googleauth', () => {
         credentials: gdchJson,
         clientOptions: {
           servicePath: 'hardwaremanagement.us-west1.gdch.google.com',
-        } as any,
+        } as GoogleAuthOptions['clientOptions'],
       });
 
       const client = await auth.getClient();
@@ -3085,7 +3088,7 @@ describe('googleauth', () => {
         credentials: gdchJson,
         clientOptions: {
           apiEndpoint: 'http://hardwaremanagement.us-west1.gdch.google.com///',
-        } as any,
+        } as GoogleAuthOptions['clientOptions'],
       });
 
       const client = await auth.getClient();
@@ -3102,7 +3105,7 @@ describe('googleauth', () => {
         clientOptions: {
           apiAudience: 'https://explicit-audience.local/',
           apiEndpoint: 'hardwaremanagement.us-west1.gdch.google.com',
-        } as any,
+        } as GoogleAuthOptions['clientOptions'],
       });
 
       const client = await auth.getClient();
@@ -3130,12 +3133,12 @@ describe('googleauth', () => {
 
     let sandbox: sinon.SinonSandbox;
     let auth: GoogleAuth;
-    let warnSpy: sinon.SinonSpy;
+    let warnSpy: sinon.SinonStub;
 
     beforeEach(() => {
       sandbox = sinon.createSandbox();
       auth = new GoogleAuth();
-      warnSpy = sandbox.spy(console, 'warn');
+      warnSpy = sandbox.stub(console, 'warn');
     });
 
     afterEach(() => {
