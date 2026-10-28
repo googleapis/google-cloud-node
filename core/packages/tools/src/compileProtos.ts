@@ -395,37 +395,40 @@ async function compileProtos(
     try {
       await pbtsMain([pbtsInput, '-o', tsOutput]);
     } finally {
-      await fs.promises.unlink(pbtsInput);
+      await fs.promises.rm(pbtsInput, {force: true});
     }
     let tsResult = (await readFile(tsOutput)).toString();
     tsResult = fixDtsFile(tsResult);
     await writeFile(tsOutput, tsResult);
   })();
 
-  if (options.noComments) {
-    const uglifyOptions: uglify.MinifyOptions = {
-      output: {comments: false, beautify: false},
-      compress: false,
-      mangle: false,
-    };
+  try {
+    if (options.noComments) {
+      const uglifyOptions: uglify.MinifyOptions = {
+        output: {comments: false, beautify: false},
+        compress: false,
+        mangle: false,
+      };
 
-    const minified = uglify.minify(jsResult, uglifyOptions);
-    if (minified.error) {
-      throw new Error(`UglifyJS failed on ${jsOutput}: ${minified.error}`);
-    }
-    await writeFile(jsOutput, minified.code);
-
-    if (options.esm && jsOutputEsm && esmResult !== undefined) {
-      const minifiedEsm = uglify.minify(esmResult, uglifyOptions);
-      if (minifiedEsm.error) {
-        throw new Error(
-          `UglifyJS failed on ${jsOutputEsm}: ${minifiedEsm.error}`,
-        );
+      const minified = uglify.minify(jsResult, uglifyOptions);
+      if (minified.error) {
+        throw new Error(`UglifyJS failed on ${jsOutput}: ${minified.error}`);
       }
-      await writeFile(jsOutputEsm, minifiedEsm.code);
+      await writeFile(jsOutput, minified.code);
+
+      if (options.esm && jsOutputEsm && esmResult !== undefined) {
+        const minifiedEsm = uglify.minify(esmResult, uglifyOptions);
+        if (minifiedEsm.error) {
+          throw new Error(
+            `UglifyJS failed on ${jsOutputEsm}: ${minifiedEsm.error}`,
+          );
+        }
+        await writeFile(jsOutputEsm, minifiedEsm.code);
+      }
     }
+  } finally {
+    await pbtsPromise;
   }
-  await pbtsPromise;
 }
 
 /**
