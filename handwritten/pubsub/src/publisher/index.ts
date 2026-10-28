@@ -105,6 +105,10 @@ export class Publisher {
    */
   hedgingOptions?: ResolvedHedgingOptions;
   private tokenBucket_?: HedgingTokenBucket;
+  /**
+   * @private
+   * @internal
+   */
   hedgingScheduler?: HedgingScheduler;
 
   constructor(topic: Topic, options?: PublishOptions) {
