@@ -113,8 +113,8 @@ function translateLineNumbersTimeProfileNode(
     parent.callFrame.functionName,
     parent.callFrame.url,
     Number(parent.callFrame.scriptId) || 0,
-    node.callFrame.lineNumber >= 0 ? node.callFrame.lineNumber + 1 : 0,
-    node.callFrame.columnNumber >= 0 ? node.callFrame.columnNumber + 1 : 0,
+    parent.callFrame.lineNumber >= 0 ? parent.callFrame.lineNumber + 1 : 0,
+    parent.callFrame.columnNumber >= 0 ? parent.callFrame.columnNumber + 1 : 0,
     0,
     getLineNumberTimeProfileChildren(nodeMap, parent, node)
   );
@@ -266,28 +266,36 @@ export function stopProfiling(
   const s = getSession();
 
   let syncResult: TimeProfile | undefined;
+  let syncError: Error | undefined;
+  let isSync = true;
+
   let resolveAsync: ((value: TimeProfile) => void) | undefined;
   let rejectAsync: ((reason?: unknown) => void) | undefined;
 
   try {
     s.post('Profiler.stop', (err, params) => {
+      let result: TimeProfile | undefined;
+      let error: Error | undefined;
+
       if (err || !params || !params.profile) {
-        if (rejectAsync) {
-          rejectAsync(
-            err || new Error('No profile returned from Profiler.stop')
-          );
-        }
-        return;
-      }
-      const translated = translateCpuProfile(
-        params.profile,
-        includeLineInfo,
-        elapsedWallMicros
-      );
-      if (resolveAsync) {
-        resolveAsync(translated);
+        error = err || new Error('No profile returned from Profiler.stop');
       } else {
-        syncResult = translated;
+        result = translateCpuProfile(
+          params.profile,
+          includeLineInfo,
+          elapsedWallMicros
+        );
+      }
+
+      if (isSync) {
+        syncResult = result;
+        syncError = error;
+      } else {
+        if (error) {
+          rejectAsync!(error);
+        } else {
+          resolveAsync!(result!);
+        }
       }
     });
   } catch {
@@ -298,6 +306,11 @@ export function stopProfiling(
     };
   }
 
+  isSync = false;
+
+  if (syncError) {
+    throw syncError;
+  }
   if (syncResult !== undefined) {
     return syncResult;
   }
