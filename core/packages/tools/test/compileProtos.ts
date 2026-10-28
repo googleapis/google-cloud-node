@@ -124,24 +124,20 @@ describe('compileProtos tool', () => {
 
   it('compiles protos to CJS and ES6 if --esm is specified', async function () {
     this.timeout(20000);
-    const origJoin = path.join;
-    let dtsJoinCount = 0;
-    (path as {join: typeof path.join}).join = (...paths: string[]) => {
-      if (
-        paths.length === 2 &&
-        paths[0] === 'protos' &&
-        paths[1] === 'protos.d.ts'
-      ) {
-        dtsJoinCount++;
+    const origRm = fs.promises.rm;
+    let stubCleanupCount = 0;
+    fs.promises.rm = async (filePath, options) => {
+      if (String(filePath).endsWith('protos.pbts-stub.js')) {
+        stubCleanupCount++;
       }
-      return origJoin(...paths);
+      return origRm(filePath, options);
     };
     try {
       await compileProtos.main(['--esm', 'esm']);
     } finally {
-      (path as {join: typeof path.join}).join = origJoin;
+      fs.promises.rm = origRm;
     }
-    assert.strictEqual(dtsJoinCount, 1);
+    assert.strictEqual(stubCleanupCount, 1);
     assert(fs.existsSync(expectedJsonResultFile));
     assert(fs.existsSync(expectedJSResultFile));
     assert(fs.existsSync(expectedTSResultFile));
