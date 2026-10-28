@@ -189,6 +189,7 @@
     "packages/google-cloud-datastore-api": {},
     "packages/google-cloud-datastream": {},
     "packages/google-cloud-deploy": {},
+    "packages/google-cloud-designcenter": {},
     "packages/google-cloud-developerconnect": {},
     "packages/google-cloud-devicestreaming": {},
     "packages/google-cloud-dialogflow": {},
