@@ -31,13 +31,13 @@
                               "requestType": "GetAccountLimitRequest",
                               "responseType": "AccountLimit",
                               "options": {
-                                "(google.api.http).get": "/accounts/v1/{name=accounts/*/limits/*}",
+                                "(google.api.http).get": "/quota/v1/{name=accounts/*/limits/*}",
                                 "(google.api.method_signature)": "name"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/accounts/v1/{name=accounts/*/limits/*}"
+                                    "get": "/quota/v1/{name=accounts/*/limits/*}"
                                   }
                                 },
                                 {
@@ -49,13 +49,13 @@
                               "requestType": "ListAccountLimitsRequest",
                               "responseType": "ListAccountLimitsResponse",
                               "options": {
-                                "(google.api.http).get": "/accounts/v1/{parent=accounts/*}/limits",
+                                "(google.api.http).get": "/quota/v1/{parent=accounts/*}/limits",
                                 "(google.api.method_signature)": "parent"
                               },
                               "parsedOptions": [
                                 {
                                   "(google.api.http)": {
-                                    "get": "/accounts/v1/{parent=accounts/*}/limits"
+                                    "get": "/quota/v1/{parent=accounts/*}/limits"
                                   }
                                 },
                                 {

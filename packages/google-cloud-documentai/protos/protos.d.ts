@@ -34105,6 +34105,9 @@ export namespace google {
 
                     /** TrainProcessorVersionRequest baseProcessorVersion */
                     baseProcessorVersion?: (string|null);
+
+                    /** TrainProcessorVersionRequest processorVersionOverrides */
+                    processorVersionOverrides?: (google.cloud.documentai.v1beta3.IProcessorVersionOverrides|null);
                 }
 
                 /** Represents a TrainProcessorVersionRequest. */
@@ -34136,6 +34139,9 @@ export namespace google {
 
                     /** TrainProcessorVersionRequest baseProcessorVersion. */
                     public baseProcessorVersion: string;
+
+                    /** TrainProcessorVersionRequest processorVersionOverrides. */
+                    public processorVersionOverrides?: (google.cloud.documentai.v1beta3.IProcessorVersionOverrides|null);
 
                     /** TrainProcessorVersionRequest processorFlags. */
                     public processorFlags?: ("customDocumentExtractionOptions"|"foundationModelTuningOptions");
@@ -37444,6 +37450,9 @@ export namespace google {
 
                     /** ProcessorVersion genAiModelInfo */
                     genAiModelInfo?: (google.cloud.documentai.v1beta3.ProcessorVersion.IGenAiModelInfo|null);
+
+                    /** ProcessorVersion groundingSettings */
+                    groundingSettings?: (google.cloud.documentai.v1beta3.IGroundingSettings|null);
                 }
 
                 /** Represents a ProcessorVersion. */
@@ -37496,6 +37505,9 @@ export namespace google {
 
                     /** ProcessorVersion genAiModelInfo. */
                     public genAiModelInfo?: (google.cloud.documentai.v1beta3.ProcessorVersion.IGenAiModelInfo|null);
+
+                    /** ProcessorVersion groundingSettings. */
+                    public groundingSettings?: (google.cloud.documentai.v1beta3.IGroundingSettings|null);
 
                     /**
                      * Creates a new ProcessorVersion instance using the specified properties.
@@ -38299,6 +38311,211 @@ export namespace google {
                         FAILED = 6,
                         DELETING = 7
                     }
+                }
+
+                /** Properties of a GroundingSettings. */
+                interface IGroundingSettings {
+
+                    /** GroundingSettings groundingType */
+                    groundingType?: (google.cloud.documentai.v1beta3.GroundingSettings.GroundingType|keyof typeof google.cloud.documentai.v1beta3.GroundingSettings.GroundingType|null);
+                }
+
+                /** Represents a GroundingSettings. */
+                class GroundingSettings implements IGroundingSettings {
+
+                    /**
+                     * Constructs a new GroundingSettings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IGroundingSettings);
+
+                    /** GroundingSettings groundingType. */
+                    public groundingType: (google.cloud.documentai.v1beta3.GroundingSettings.GroundingType|keyof typeof google.cloud.documentai.v1beta3.GroundingSettings.GroundingType);
+
+                    /**
+                     * Creates a new GroundingSettings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GroundingSettings instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IGroundingSettings): google.cloud.documentai.v1beta3.GroundingSettings;
+
+                    /**
+                     * Encodes the specified GroundingSettings message. Does not implicitly {@link google.cloud.documentai.v1beta3.GroundingSettings.verify|verify} messages.
+                     * @param message GroundingSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IGroundingSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GroundingSettings message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.GroundingSettings.verify|verify} messages.
+                     * @param message GroundingSettings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IGroundingSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GroundingSettings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GroundingSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.GroundingSettings;
+
+                    /**
+                     * Decodes a GroundingSettings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GroundingSettings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.GroundingSettings;
+
+                    /**
+                     * Verifies a GroundingSettings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GroundingSettings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GroundingSettings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.GroundingSettings;
+
+                    /**
+                     * Creates a plain object from a GroundingSettings message. Also converts values to other types if specified.
+                     * @param message GroundingSettings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.GroundingSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GroundingSettings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GroundingSettings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GroundingSettings {
+
+                    /** GroundingType enum. */
+                    enum GroundingType {
+                        GROUNDING_TYPE_UNSPECIFIED = 0,
+                        HARD = 1,
+                        OCR_RELAXED = 2,
+                        NO_GROUNDING = 3
+                    }
+                }
+
+                /** Properties of a ProcessorVersionOverrides. */
+                interface IProcessorVersionOverrides {
+
+                    /** ProcessorVersionOverrides groundingSettings */
+                    groundingSettings?: (google.cloud.documentai.v1beta3.IGroundingSettings|null);
+                }
+
+                /** Represents a ProcessorVersionOverrides. */
+                class ProcessorVersionOverrides implements IProcessorVersionOverrides {
+
+                    /**
+                     * Constructs a new ProcessorVersionOverrides.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IProcessorVersionOverrides);
+
+                    /** ProcessorVersionOverrides groundingSettings. */
+                    public groundingSettings?: (google.cloud.documentai.v1beta3.IGroundingSettings|null);
+
+                    /**
+                     * Creates a new ProcessorVersionOverrides instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProcessorVersionOverrides instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IProcessorVersionOverrides): google.cloud.documentai.v1beta3.ProcessorVersionOverrides;
+
+                    /**
+                     * Encodes the specified ProcessorVersionOverrides message. Does not implicitly {@link google.cloud.documentai.v1beta3.ProcessorVersionOverrides.verify|verify} messages.
+                     * @param message ProcessorVersionOverrides message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IProcessorVersionOverrides, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProcessorVersionOverrides message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ProcessorVersionOverrides.verify|verify} messages.
+                     * @param message ProcessorVersionOverrides message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IProcessorVersionOverrides, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProcessorVersionOverrides message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProcessorVersionOverrides
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ProcessorVersionOverrides;
+
+                    /**
+                     * Decodes a ProcessorVersionOverrides message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProcessorVersionOverrides
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ProcessorVersionOverrides;
+
+                    /**
+                     * Verifies a ProcessorVersionOverrides message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProcessorVersionOverrides message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProcessorVersionOverrides
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ProcessorVersionOverrides;
+
+                    /**
+                     * Creates a plain object from a ProcessorVersionOverrides message. Also converts values to other types if specified.
+                     * @param message ProcessorVersionOverrides
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.ProcessorVersionOverrides, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProcessorVersionOverrides to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ProcessorVersionOverrides
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Properties of a ProcessorType. */

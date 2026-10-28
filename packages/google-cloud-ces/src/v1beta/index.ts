@@ -17,6 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 export {AgentServiceClient} from './agent_service_client';
+export {AssistantServiceClient} from './assistant_service_client';
 export {EvaluationServiceClient} from './evaluation_service_client';
 export {SessionServiceClient} from './session_service_client';
 export {ToolServiceClient} from './tool_service_client';

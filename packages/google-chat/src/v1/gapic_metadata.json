@@ -210,6 +210,11 @@
                 "moveSectionItem"
               ]
             },
+            "ReplaceMessageCards": {
+              "methods": [
+                "replaceMessageCards"
+              ]
+            },
             "ListMessages": {
               "methods": [
                 "listMessages",
@@ -497,6 +502,11 @@
             "MoveSectionItem": {
               "methods": [
                 "moveSectionItem"
+              ]
+            },
+            "ReplaceMessageCards": {
+              "methods": [
+                "replaceMessageCards"
               ]
             },
             "ListMessages": {

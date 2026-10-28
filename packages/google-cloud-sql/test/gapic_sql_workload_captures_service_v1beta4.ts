@@ -316,15 +316,15 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStartRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
@@ -354,15 +354,15 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStartRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
@@ -407,15 +407,15 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStartRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
@@ -442,15 +442,15 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStartRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
@@ -473,15 +473,15 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStopRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
@@ -511,15 +511,15 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStopRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
@@ -564,15 +564,15 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStopRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
@@ -599,15 +599,15 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStopRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
@@ -630,20 +630,20 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest',
         ['workloadId'],
       );
       request.workloadId = defaultValue3;
@@ -674,20 +674,20 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest',
         ['workloadId'],
       );
       request.workloadId = defaultValue3;
@@ -734,20 +734,20 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest',
         ['workloadId'],
       );
       request.workloadId = defaultValue3;
@@ -778,20 +778,20 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStartReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStartReplayRequest',
         ['workloadId'],
       );
       request.workloadId = defaultValue3;
@@ -814,15 +814,15 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
@@ -853,15 +853,15 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
@@ -908,15 +908,15 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
@@ -947,15 +947,15 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
         );
       await client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest(),
+        new protos.google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest(),
       );
       const defaultValue1 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest',
         ['project'],
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        '.google.cloud.sql.v1beta4.SqlWorkloadCapturesStopReplayRequest',
+        '.google.cloud.sql.v1beta4.WorkloadCapturesStopReplayRequest',
         ['instance'],
       );
       request.instance = defaultValue2;
@@ -1465,6 +1465,58 @@ describe('v1beta4.SqlWorkloadCapturesServiceClient', () => {
             client.pathTemplates.blueGreenDeploymentPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('instance', async () => {
+      const fakePath = '/rendered/path/instance';
+      const expectedParameters = {
+        project: 'projectValue',
+        instance: 'instanceValue',
+      };
+      const client =
+        new sqlworkloadcapturesserviceModule.v1beta4.SqlWorkloadCapturesServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          },
+        );
+      await client.initialize();
+      client.pathTemplates.instancePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.instancePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('instancePath', () => {
+        const result = client.instancePath('projectValue', 'instanceValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.instancePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromInstanceName', () => {
+        const result = client.matchProjectFromInstanceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchInstanceFromInstanceName', () => {
+        const result = client.matchInstanceFromInstanceName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.instancePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

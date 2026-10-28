@@ -1197,7 +1197,7 @@ export class DataChatServiceClient {
 
   /**
    * Answers a data question by generating a stream of
-   * {@link protos.google.cloud.geminidataanalytics.v1.Message|Message} objects.
+   * {@link protos.google.cloud.geminidataanalytics.v1beta.Message|Message} objects.
    *
    * @param {Object} request
    *   The request object that will be sent.

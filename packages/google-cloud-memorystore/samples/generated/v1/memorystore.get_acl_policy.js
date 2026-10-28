@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(message) {
-  // [START geminidataanalytics_v1alpha_generated_DataA2AService_SendStreamingMessage_async]
+function main(name) {
+  // [START memorystore_v1_generated_Memorystore_GetAclPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,43 +29,31 @@ function main(message) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The message to send to the agent.
+   *  Required. Memorystore ACL policy resource name using the form:
+   *      `projects/{project}/locations/{location}/aclPolicies/{acl_policy}`
+   *  where `location` refers to a Google Cloud region.
    */
-  // const message = {}
-  /**
-   *  Optional. Configuration for the send request.
-   */
-  // const configuration = {}
-  /**
-   *  Optional. Optional metadata for the request.
-   */
-  // const metadata = {}
-  /**
-   *  Optional. Optional tenant, provided as a path parameter.
-   */
-  // const tenant = 'abc123'
+  // const name = 'abc123'
 
-  // Imports the Geminidataanalytics library
-  const {DataA2AServiceClient} = require('@google-cloud/geminidataanalytics').v1alpha;
+  // Imports the Memorystore library
+  const {MemorystoreClient} = require('@google-cloud/memorystore').v1;
 
   // Instantiates a client
-  const geminidataanalyticsClient = new DataA2AServiceClient();
+  const memorystoreClient = new MemorystoreClient();
 
-  async function callSendStreamingMessage() {
+  async function callGetAclPolicy() {
     // Construct request
     const request = {
-      message,
+      name,
     };
 
     // Run request
-    const stream = await geminidataanalyticsClient.sendStreamingMessage(request);
-    stream.on('data', (response) => { console.log(response) });
-    stream.on('error', (err) => { throw(err) });
-    stream.on('end', () => { /* API call completed */ });
+    const response = await memorystoreClient.getAclPolicy(request);
+    console.log(response);
   }
 
-  callSendStreamingMessage();
-  // [END geminidataanalytics_v1alpha_generated_DataA2AService_SendStreamingMessage_async]
+  callGetAclPolicy();
+  // [END memorystore_v1_generated_Memorystore_GetAclPolicy_async]
 }
 
 process.on('unhandledRejection', err => {
