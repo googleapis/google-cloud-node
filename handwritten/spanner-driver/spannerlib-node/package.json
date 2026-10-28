@@ -1,0 +1,64 @@
+{
+  "name": "spannerlib-node",
+  "version": "0.1.0",
+  "main": "./build/cjs/src/index.cjs",
+  "module": "./build/esm/src/index.js",
+  "types": "./build/cjs/src/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./build/esm/src/index.d.ts",
+        "default": "./build/esm/src/index.js"
+      },
+      "require": {
+        "types": "./build/cjs/src/index.d.ts",
+        "default": "./build/cjs/src/index.cjs"
+      }
+    }
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build:go": "bash scripts/build-shared-lib.sh",
+    "build": "npm run build:go && node-gyp rebuild && npm run compile",
+    "postbuild": "node -e \"if (process.platform === 'darwin') require('child_process').execSync('install_name_tool -change libspanner.dylib @loader_path/libspanner.dylib ./build/Release/spanner_napi.node')\"",
+    "compile:esm": "tsc -p .",
+    "compile:cjs": "tsc -p ./tsconfig.cjs.json && babel build/cjs --out-dir build/cjs --out-file-extension .cjs && node scripts/fix-extensions.cjs",
+    "compile": "npm run compile:esm && npm run compile:cjs",
+    "test:esm": "mocha build/esm/test/**/*.js",
+    "test:cjs": "mocha build/cjs/test/**/*.cjs",
+    "test": "npm run test:esm && npm run test:cjs",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile"
+  },
+  "files": [
+    "build/esm/src",
+    "build/cjs/src",
+    "build/Release/*.node"
+  ],
+  "dependencies": {
+    "node-addon-api": "^8.0.0",
+    "bindings": "^1.5.0",
+    "@google-cloud/spanner": "^8.7.1"
+  },
+  "devDependencies": {
+    "mocha": "^11.0.1",
+    "typescript": "^6.0.0",
+    "@types/node": "^24.0.0",
+    "@types/bindings": "^1.5.0",
+    "@types/mocha": "^10.0.6",
+    "@babel/core": "^8.0.0",
+    "@babel/cli": "^8.0.0",
+    "sinon": "^22.0.0",
+    "@types/sinon": "^21.0.0",
+    "gts": "^7.0.0",
+    "@grpc/grpc-js": "^1.12.0",
+    "@grpc/proto-loader": "^0.8.0"
+  },
+  "gypfile": false
+}
