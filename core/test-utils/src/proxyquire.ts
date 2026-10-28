@@ -192,10 +192,20 @@ export function createProxyquire(caller?: NodeModule | string): Proxyquire {
                       );
                     },
                     getOwnPropertyDescriptor(target, prop) {
-                      const desc =
-                        Reflect.getOwnPropertyDescriptor(target, prop) ||
-                        Reflect.getOwnPropertyDescriptor(real, prop);
-                      return desc ? {...desc, configurable: true} : undefined;
+                      const targetDesc = Reflect.getOwnPropertyDescriptor(
+                        target,
+                        prop,
+                      );
+                      if (targetDesc) {
+                        return targetDesc;
+                      }
+                      const realDesc = Reflect.getOwnPropertyDescriptor(
+                        real,
+                        prop,
+                      );
+                      return realDesc
+                        ? {...realDesc, configurable: true}
+                        : undefined;
                     },
                   });
                 }
@@ -218,8 +228,14 @@ export function createProxyquire(caller?: NodeModule | string): Proxyquire {
           : prev.call(parent, request);
     } finally {
       modProto.require = prev;
+      const savedMap = new Map(saved);
       for (const id of global ? Object.keys(cache) : [sut]) {
-        if (!id.endsWith('.node')) delete cache[id];
+        if (!id.endsWith('.node')) {
+          const original = savedMap.get(id);
+          if (!opts.keepCache || id !== sut || original !== undefined) {
+            delete cache[id];
+          }
+        }
       }
       for (const [id, m] of saved) {
         if (m && (opts.keepCache || id !== sut)) cache[id] = m;
