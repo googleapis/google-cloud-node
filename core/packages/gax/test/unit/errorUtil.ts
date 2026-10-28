@@ -41,6 +41,8 @@ import {
   resolveRpcStatusName,
   resolveHttpStatusCode,
   resolveErrorMessage,
+  resolveExceptionMessage,
+  resolveResponseStatusCode,
   resolveServerExceptionDetails,
   recordExceptionEvent,
   isPreConnectionFailure,
@@ -523,6 +525,77 @@ describe('errorUtil', () => {
       );
       assert.strictEqual(resolveErrorMessage(new Error()), '');
       assert.strictEqual(resolveErrorMessage('raw'), 'raw');
+    });
+
+    it('resolveResponseStatusCode defaults successful calls to OK / 200 and resolves failed calls from the error', () => {
+      assert.deepStrictEqual(resolveResponseStatusCode('grpc', false), {
+        rpcStatusName: 'OK',
+      });
+      assert.deepStrictEqual(resolveResponseStatusCode('http', false), {
+        httpStatusCode: 200,
+      });
+
+      // Failed calls resolve only the status for the call's transport.
+      const err = Object.assign(new GoogleError('unavailable'), {
+        code: Status.UNAVAILABLE,
+        httpStatusCode: 503,
+      });
+      assert.deepStrictEqual(resolveResponseStatusCode('grpc', true, err), {
+        rpcStatusName: 'UNAVAILABLE',
+      });
+      assert.deepStrictEqual(resolveResponseStatusCode('http', true, err), {
+        httpStatusCode: 503,
+      });
+    });
+
+    it('resolveExceptionMessage prefers server error details for server-side errors', () => {
+      const grpcErr = Object.assign(new GoogleError('Wrapper message'), {
+        code: Status.INVALID_ARGUMENT,
+        details: 'Detailed backend message',
+      });
+      assert.strictEqual(
+        resolveExceptionMessage(grpcErr, 'grpc'),
+        'Detailed backend message',
+      );
+      // A gRPC status is not a server response on the HTTP transport.
+      assert.strictEqual(
+        resolveExceptionMessage(grpcErr, 'http'),
+        'Wrapper message',
+      );
+
+      const httpErr = Object.assign(new GoogleError('HTTP wrapper'), {
+        httpStatusCode: 400,
+        details: 'Bad HTTP Request',
+      });
+      assert.strictEqual(
+        resolveExceptionMessage(httpErr, 'http'),
+        'Bad HTTP Request',
+      );
+
+      // Server-side errors without details and client-side errors use e.message.
+      const noDetailsErr = Object.assign(new GoogleError('No details'), {
+        code: Status.UNAVAILABLE,
+      });
+      assert.strictEqual(
+        resolveExceptionMessage(noDetailsErr, 'grpc'),
+        'No details',
+      );
+      assert.strictEqual(
+        resolveExceptionMessage(new TypeError('bad type'), 'grpc'),
+        'bad type',
+      );
+    });
+
+    it('resolveExceptionMessage returns a string for non-Error throws', () => {
+      assert.strictEqual(
+        resolveExceptionMessage('raw failure', 'grpc'),
+        'raw failure',
+      );
+      assert.strictEqual(resolveExceptionMessage(null, 'grpc'), 'null');
+      assert.strictEqual(
+        resolveExceptionMessage(undefined, 'http'),
+        'undefined',
+      );
     });
 
     it('recordExceptionEvent records exception.type and optionally exception.message', () => {
