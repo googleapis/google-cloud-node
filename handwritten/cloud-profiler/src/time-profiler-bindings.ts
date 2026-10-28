@@ -25,8 +25,8 @@ let startWallMicros = 0;
 function getSession(): inspector.Session {
   if (!session) {
     session = new inspector.Session();
-    session.connect();
     try {
+      session.connect();
       session.post('Profiler.enable', () => {});
     } catch {
       // Ignore if already enabled or unsupported.
@@ -271,9 +271,11 @@ export function stopProfiling(
 
   try {
     s.post('Profiler.stop', (err, params) => {
-      if (err) {
+      if (err || !params || !params.profile) {
         if (rejectAsync) {
-          rejectAsync(err);
+          rejectAsync(
+            err || new Error('No profile returned from Profiler.stop')
+          );
         }
         return;
       }

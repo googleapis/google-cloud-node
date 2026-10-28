@@ -88,7 +88,11 @@ export function startSamplingHeapProfiler(
   void heapStackDepth;
   if (!heapSession) {
     heapSession = new inspector.Session();
-    heapSession.connect();
+    try {
+      heapSession.connect();
+    } catch {
+      // Ignore connection errors on unsupported runtimes.
+    }
   }
   try {
     heapSession.post('HeapProfiler.enable', () => {});
@@ -120,22 +124,7 @@ export function stopSamplingHeapProfiler(): void {
   }
 }
 
-export function getAllocationProfile(): AllocationProfileNode {
-  if (heapSession) {
-    let profile: RawSamplingHeapProfile | undefined;
-    try {
-      heapSession.post('HeapProfiler.getSamplingProfile', (err, params) => {
-        if (!err && params && params.profile) {
-          profile = params.profile as RawSamplingHeapProfile;
-        }
-      });
-    } catch {
-      // Fall through to empty root node.
-    }
-    if (profile && profile.head) {
-      return translateSamplingHeapProfile(profile);
-    }
-  }
+function createEmptyRoot(): AllocationProfileNode {
   return {
     name: '(root)',
     scriptName: '(root)',
@@ -145,4 +134,28 @@ export function getAllocationProfile(): AllocationProfileNode {
     allocations: [],
     children: [],
   };
+}
+
+export function getAllocationProfile(): Promise<AllocationProfileNode> {
+  return new Promise(resolve => {
+    if (heapSession) {
+      try {
+        heapSession.post('HeapProfiler.getSamplingProfile', (err, params) => {
+          if (!err && params && params.profile) {
+            resolve(
+              translateSamplingHeapProfile(
+                params.profile as RawSamplingHeapProfile
+              )
+            );
+          } else {
+            resolve(createEmptyRoot());
+          }
+        });
+        return;
+      } catch {
+        // Fall through to empty root node.
+      }
+    }
+    resolve(createEmptyRoot());
+  });
 }

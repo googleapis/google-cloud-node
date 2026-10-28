@@ -28,7 +28,7 @@ let heapStackDepth = 0;
  *
  * Data is returned in V8 allocation profile format.
  */
-export function v8Profile(): AllocationProfileNode {
+export function v8Profile(): Promise<AllocationProfileNode> {
   if (!enabled) {
     throw new Error('Heap profiler is not enabled.');
   }
@@ -42,12 +42,12 @@ export function v8Profile(): AllocationProfileNode {
  * @param ignoreSamplePath
  * @param sourceMapper
  */
-export function profile(
+export async function profile(
   ignoreSamplePath?: string,
   sourceMapper?: SourceMapper
-): perftools.profiles.IProfile {
+): Promise<perftools.profiles.IProfile> {
   const startTimeNanos = Date.now() * 1000 * 1000;
-  const result = v8Profile();
+  const result = await v8Profile();
   // Add node for external memory usage.
   const {external} = process.memoryUsage();
   if (external > 0) {

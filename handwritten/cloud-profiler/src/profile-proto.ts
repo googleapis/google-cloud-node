@@ -232,7 +232,15 @@ export namespace perftools {
     export const Function = root.lookupType('perftools.profiles.Function')
       .ctor as unknown as ProtoConstructor<Function, IFunction>;
 
-    export type Profile = IProfile;
+    export interface Profile extends IProfile {
+      sampleType: IValueType[];
+      sample: ISample[];
+      mapping: IMapping[];
+      location: ILocation[];
+      function: IFunction[];
+      stringTable: string[];
+      comment: LongLike[];
+    }
     export const Profile = root.lookupType('perftools.profiles.Profile')
       .ctor as unknown as ProtoConstructor<Profile, IProfile>;
   }

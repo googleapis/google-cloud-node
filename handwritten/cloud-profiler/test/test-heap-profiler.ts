@@ -48,12 +48,12 @@ describe('HeapProfiler', () => {
   });
 
   describe('profile (end-to-end)', () => {
-    it('should throw when heap profiler has not been started', () => {
-      assert.throws(() => {
-        heapProfiler.profile();
+    it('should throw when heap profiler has not been started', async () => {
+      await assert.rejects(async () => {
+        await heapProfiler.profile();
       }, /Heap profiler is not enabled\./);
       assert.throws(() => {
-        heapProfiler.v8Profile();
+        void heapProfiler.v8Profile();
       }, /Heap profiler is not enabled\./);
     });
 
@@ -64,15 +64,15 @@ describe('HeapProfiler', () => {
       }, /Heap profiler is already started {2}with intervalBytes 524288 and stackDepth 64/);
     });
 
-    it('should return a valid profile when started', () => {
+    it('should return a valid profile when started', async () => {
       heapProfiler.start(intervalBytes, stackDepth);
       const buffers: Buffer[] = [];
       for (let i = 0; i < 10; i++) {
         buffers.push(Buffer.alloc(64 * 1024));
       }
-      const v8Result = heapProfiler.v8Profile();
+      const v8Result = await heapProfiler.v8Profile();
       assert.strictEqual(v8Result.name, '(root)');
-      const result = heapProfiler.profile();
+      const result = await heapProfiler.profile();
       assert.ok(result.sampleType && result.sampleType.length === 2);
       assert.strictEqual(result.period, intervalBytes);
       assert.ok(buffers.length === 10);
@@ -80,7 +80,7 @@ describe('HeapProfiler', () => {
   });
 
   describe('profile (with stubs)', () => {
-    it('should return a profile equal to the expected profile', () => {
+    it('should return a profile equal to the expected profile', async () => {
       const v8HeapProfileCopy = copy(v8HeapProfile);
       sinonStubs.push(
         sinon.stub(heapProfilerBindings, 'startSamplingHeapProfiler')
@@ -91,7 +91,7 @@ describe('HeapProfiler', () => {
       sinonStubs.push(
         sinon
           .stub(heapProfilerBindings, 'getAllocationProfile')
-          .returns(v8HeapProfileCopy)
+          .resolves(v8HeapProfileCopy)
       );
       sinonStubs.push(sinon.stub(Date, 'now').returns(0));
       sinonStubs.push(
@@ -105,11 +105,11 @@ describe('HeapProfiler', () => {
       );
 
       heapProfiler.start(intervalBytes, stackDepth);
-      const prof = heapProfiler.profile();
+      const prof = await heapProfiler.profile();
       assert.deepStrictEqual(heapProfile, prof);
     });
 
-    it('should add external memory to the profile when external > 0', () => {
+    it('should add external memory to the profile when external > 0', async () => {
       const v8HeapProfileCopy = copy(v8HeapProfile);
       sinonStubs.push(
         sinon.stub(heapProfilerBindings, 'startSamplingHeapProfiler')
@@ -120,7 +120,7 @@ describe('HeapProfiler', () => {
       sinonStubs.push(
         sinon
           .stub(heapProfilerBindings, 'getAllocationProfile')
-          .returns(v8HeapProfileCopy)
+          .resolves(v8HeapProfileCopy)
       );
       sinonStubs.push(sinon.stub(Date, 'now').returns(0));
       sinonStubs.push(
@@ -134,11 +134,11 @@ describe('HeapProfiler', () => {
       );
 
       heapProfiler.start(intervalBytes, stackDepth);
-      const prof = heapProfiler.profile();
+      const prof = await heapProfiler.profile();
       assert.deepStrictEqual(heapProfileWithExternal, prof);
     });
 
-    it('should exclude samples matching ignoreSamplePath', () => {
+    it('should exclude samples matching ignoreSamplePath', async () => {
       const v8HeapProfileCopy = copy(v8HeapWithPathProfile);
       sinonStubs.push(
         sinon.stub(heapProfilerBindings, 'startSamplingHeapProfiler')
@@ -149,7 +149,7 @@ describe('HeapProfiler', () => {
       sinonStubs.push(
         sinon
           .stub(heapProfilerBindings, 'getAllocationProfile')
-          .returns(v8HeapProfileCopy)
+          .resolves(v8HeapProfileCopy)
       );
       sinonStubs.push(sinon.stub(Date, 'now').returns(0));
       sinonStubs.push(
@@ -163,11 +163,11 @@ describe('HeapProfiler', () => {
       );
 
       heapProfiler.start(intervalBytes, stackDepth);
-      const profInclude = heapProfiler.profile();
+      const profInclude = await heapProfiler.profile();
       assert.deepStrictEqual(heapProfileIncludePath, profInclude);
 
-      sinonStubs[2].returns(copy(v8HeapWithPathProfile));
-      const profExclude = heapProfiler.profile('@google-cloud/profiler');
+      sinonStubs[2].resolves(copy(v8HeapWithPathProfile));
+      const profExclude = await heapProfiler.profile('@google-cloud/profiler');
       assert.deepStrictEqual(heapProfileExcludePath, profExclude);
     });
 
@@ -183,7 +183,7 @@ describe('HeapProfiler', () => {
       sinonStubs.push(
         sinon
           .stub(heapProfilerBindings, 'getAllocationProfile')
-          .returns(v8HeapProfileCopy)
+          .resolves(v8HeapProfileCopy)
       );
       sinonStubs.push(sinon.stub(Date, 'now').returns(0));
       sinonStubs.push(
@@ -197,7 +197,7 @@ describe('HeapProfiler', () => {
       );
 
       heapProfiler.start(intervalBytes, stackDepth);
-      const prof = heapProfiler.profile(undefined, sourceMapper);
+      const prof = await heapProfiler.profile(undefined, sourceMapper);
       assert.deepStrictEqual(heapSourceProfile, prof);
     });
   });

@@ -563,7 +563,7 @@ export class Profiler extends ServiceObject {
     if (this.config.disableHeap) {
       throw Error('Cannot collect heap profile, heap profiler not enabled.');
     }
-    const p = heapProfiler.profile(
+    const p = await heapProfiler.profile(
       this.config.ignoreHeapSamplesPath,
       this.sourceMapper
     );

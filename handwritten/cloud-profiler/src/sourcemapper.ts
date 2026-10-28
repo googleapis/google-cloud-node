@@ -196,6 +196,5 @@ async function getMapFiles(baseDir: string): Promise<string[]> {
   } else if (stat.isFile() && /\.js\.map$/.test(baseDir)) {
     fileList.push(baseDir);
   }
-  const cwdPrefix = path.normalize(process.cwd() + path.sep);
-  return fileList.map(file => path.normalize(file).replace(cwdPrefix, ''));
+  return fileList.map(file => path.relative(process.cwd(), file));
 }

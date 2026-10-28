@@ -99,7 +99,9 @@ describe('Profiler', () => {
 
     sinonStubs.push(sinon.stub(heapProfiler, 'stop'));
     sinonStubs.push(sinon.stub(heapProfiler, 'start'));
-    sinonStubs.push(sinon.stub(heapProfiler, 'profile').returns(heapProfile));
+    sinonStubs.push(
+      sinon.stub(heapProfiler, 'profile').returns(Promise.resolve(heapProfile))
+    );
   });
   afterEach(() => {
     sinonStubs.forEach(stub => {
