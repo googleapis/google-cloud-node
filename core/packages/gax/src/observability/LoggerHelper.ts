@@ -122,19 +122,6 @@ export function buildLogAttributes(
   }
   Object.assign(attributes, resolveErrorInfoMetadataAttributes(err));
 
-  attributes['exception.type'] =
-    err && typeof err === 'object'
-      ? resolveExceptionType(err as Error)
-      : 'Error';
-  attributes['exception.message'] = resolveExceptionMessage(
-    err,
-    dynamicArgs.rpcType,
-  );
-  const stacktrace = resolveExceptionStacktrace(err, dynamicArgs.rpcType);
-  if (stacktrace !== undefined) {
-    attributes['exception.stacktrace'] = stacktrace;
-  }
-
   return attributes;
 }
 
@@ -158,23 +145,37 @@ export function logCall<T = GaxCallResult>(
   isStreamCall = false,
   userCallback?: APICallback,
 ): T {
-  // One-time latch flag to enforce at most one L3 emission per logical request.
+  // Latch to emit at most one warning log per logical request.
   let hasLoggedL3 = false;
+  // Snapshot initial context in case async rejection loses active context.
   const initialContext = context.active();
 
   const emitL3WarnLog = (err: unknown) => {
+    // Suppress duplicate emissions for the same call.
     if (hasLoggedL3) {
       return;
     }
     hasLoggedL3 = true;
 
+    // Resolve logger and active trace/span context.
     const logger = getGaxLogger(staticArgs?.gcpClientService);
     const activeTrace =
       getActiveTraceContext() ?? getActiveTraceContext(initialContext);
     const traceId = activeTrace?.traceId;
     const spanId = activeTrace?.spanId;
 
-    const attributes = buildLogAttributes(err, dynamicArgs, staticArgs);
+    // Build structured log attributes with exception details.
+    const exceptionMessage = resolveExceptionMessage(err, dynamicArgs.rpcType);
+    const stacktrace = resolveExceptionStacktrace(err, dynamicArgs.rpcType);
+    const attributes: LogPayload = {
+      ...buildLogAttributes(err, dynamicArgs, staticArgs),
+      'exception.type':
+        err && typeof err === 'object'
+          ? resolveExceptionType(err as Error)
+          : 'Error',
+      'exception.message': exceptionMessage,
+      ...(stacktrace !== undefined ? {'exception.stacktrace': stacktrace} : {}),
+    };
 
     const warningSeverity =
       (
@@ -183,6 +184,7 @@ export function logCall<T = GaxCallResult>(
         }
       ).LogSeverity?.WARNING ?? ('WARNING' as loggingUtils.LogSeverity);
 
+    // Emit structured WARNING log.
     logger(
       {
         severity: warningSeverity,
@@ -191,10 +193,11 @@ export function logCall<T = GaxCallResult>(
         other: attributes,
       },
       'Client API call failed: %s',
-      attributes['exception.message'] || err,
+      exceptionMessage || err,
     );
   };
 
+  // Wrap user callback to log RPC errors before forwarding.
   let callbackInvoked = false;
   const loggedCallback: APICallback | undefined = userCallback
     ? function (this: unknown, ...args: Parameters<APICallback>) {
@@ -207,7 +210,7 @@ export function logCall<T = GaxCallResult>(
       }
     : undefined;
 
-  // Intercept and dispatch execution boundaries (Unary Promise, Callback, and Streams).
+  // Execute call and attach error handlers for streams, promises, or sync throws.
   try {
     const result = fn(loggedCallback);
     const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
@@ -218,6 +221,7 @@ export function logCall<T = GaxCallResult>(
     }
     return result;
   } catch (syncErr) {
+    // Avoid logging errors thrown inside userCallback after RPC completion.
     if (!callbackInvoked) {
       emitL3WarnLog(syncErr);
     }

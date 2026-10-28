@@ -116,7 +116,7 @@ describe('LoggerHelper', () => {
   });
 
   describe('buildLogAttributes', () => {
-    it('populates client, RPC, error, ErrorInfo, and exception attributes for gRPC errors', () => {
+    it('populates client, RPC, error, and ErrorInfo attributes for gRPC errors', () => {
       const err = Object.assign(
         new GoogleError('3 INVALID_ARGUMENT: wrapper'),
         {
@@ -148,9 +148,6 @@ describe('LoggerHelper', () => {
         'gcp.errors.domain': 'googleapis.com',
         'gcp.errors.metadata.service': 'storage.googleapis.com',
         'gcp.errors.metadata.field': 'bucket',
-        'exception.type': 'GoogleError',
-        'exception.message': 'Field name is invalid',
-        'exception.stacktrace': 'status_details: [{"field":"bucket"}]',
       });
     });
 
@@ -174,13 +171,13 @@ describe('LoggerHelper', () => {
         'rpc.system.name': 'http',
         'http.response.status_code': 404,
         'error.type': '404',
-        'exception.type': 'GoogleError',
-        'exception.message': 'Not Found',
       });
       assert.strictEqual('gcp.client.service' in attributes, false);
       assert.strictEqual('rpc.method' in attributes, false);
       assert.strictEqual('rpc.response.status_code' in attributes, false);
       assert.strictEqual('gcp.errors.domain' in attributes, false);
+      assert.strictEqual('exception.type' in attributes, false);
+      assert.strictEqual('exception.message' in attributes, false);
       assert.strictEqual('exception.stacktrace' in attributes, false);
     });
 
@@ -192,9 +189,6 @@ describe('LoggerHelper', () => {
         staticArgs,
       );
       assert.strictEqual(clientAttrs['error.type'], 'TypeError');
-      assert.strictEqual(clientAttrs['exception.type'], 'TypeError');
-      assert.strictEqual(clientAttrs['exception.message'], 'invalid argument');
-      assert.strictEqual(clientAttrs['exception.stacktrace'], clientErr.stack);
       assert.strictEqual('rpc.response.status_code' in clientAttrs, false);
 
       const primitiveAttrs = buildLogAttributes(
@@ -203,9 +197,6 @@ describe('LoggerHelper', () => {
         staticArgs,
       );
       assert.strictEqual(primitiveAttrs['error.type'], 'INTERNAL');
-      assert.strictEqual(primitiveAttrs['exception.type'], 'Error');
-      assert.strictEqual(primitiveAttrs['exception.message'], 'string failure');
-      assert.strictEqual('exception.stacktrace' in primitiveAttrs, false);
     });
   });
 
@@ -251,9 +242,17 @@ describe('LoggerHelper', () => {
       assert.strictEqual(sink.logs.length, 0);
     });
 
-    it('emits a single WARNING log when a promise or OngoingCallPromise rejects', async () => {
+    it('emits a single WARNING log with only the expected attributes when a promise or OngoingCallPromise rejects', async () => {
       const err = Object.assign(new GoogleError('Permission denied'), {
         code: Status.PERMISSION_DENIED,
+        details: 'Permission denied',
+        reason: 'IAM_PERMISSION_DENIED',
+        domain: 'googleapis.com',
+        errorInfoMetadata: {
+          permission: 'storage.objects.get',
+        },
+        statusDetails: [{permission: 'storage.objects.get'}],
+        metadata: {'x-request-id': 'req-123'},
       });
 
       await assert.rejects(
@@ -276,13 +275,25 @@ describe('LoggerHelper', () => {
         'Permission denied',
       ]);
       const other = entry.fields.other as LogPayload;
-      assert.strictEqual(
-        other['rpc.response.status_code'],
-        'PERMISSION_DENIED',
-      );
-      assert.strictEqual(other['error.type'], 'PERMISSION_DENIED');
-      assert.strictEqual(other['exception.type'], 'GoogleError');
-      assert.strictEqual(other['exception.message'], 'Permission denied');
+      assert.deepStrictEqual(other, {
+        'gcp.client.service': 'storage',
+        'gcp.client.version': '1.2.3',
+        'gcp.client.repo': DEFAULT_GCP_REPO,
+        'gcp.client.artifact': '@google-cloud/storage',
+        'gcp.client.language': 'node',
+        'rpc.system.name': 'grpc',
+        'rpc.method': 'google.storage.v2.Storage/GetObject',
+        'url.domain': 'storage.googleapis.com',
+        'rpc.response.status_code': 'PERMISSION_DENIED',
+        'error.type': 'IAM_PERMISSION_DENIED',
+        'gcp.errors.domain': 'googleapis.com',
+        'gcp.errors.metadata.permission': 'storage.objects.get',
+        'exception.type': 'GoogleError',
+        'exception.message': 'Permission denied',
+        'exception.stacktrace':
+          'status_details: [{"permission":"storage.objects.get"}]\nmetadata: {"x-request-id":"req-123"}',
+      });
+      assert.strictEqual('response.payload' in other, false);
 
       // Also supports OngoingCallPromise wrappers.
       sink.reset();
