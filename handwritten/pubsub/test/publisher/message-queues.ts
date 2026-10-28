@@ -1146,7 +1146,8 @@ describe('Message Queues', () => {
       // Verify x-goog-pubsub-client-telemetry header on all attempts
       const decodedTelemetry = calls.map(call => {
         const headers = call.config.gaxOpts?.otherArgs?.headers as
-          Record<string, string> | undefined;
+          | Record<string, string>
+          | undefined;
         const b64 = headers?.['x-goog-pubsub-client-telemetry'];
         assert.ok(b64, 'Expected x-goog-pubsub-client-telemetry header');
         return google.pubsub.v1.PubsubClientTelemetry.decode(
