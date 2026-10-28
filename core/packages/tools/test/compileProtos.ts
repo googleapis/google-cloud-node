@@ -124,7 +124,24 @@ describe('compileProtos tool', () => {
 
   it('compiles protos to CJS and ES6 if --esm is specified', async function () {
     this.timeout(20000);
-    await compileProtos.main(['--esm', 'esm']);
+    const origJoin = path.join;
+    let dtsJoinCount = 0;
+    (path as {join: typeof path.join}).join = (...paths: string[]) => {
+      if (
+        paths.length === 2 &&
+        paths[0] === 'protos' &&
+        paths[1] === 'protos.d.ts'
+      ) {
+        dtsJoinCount++;
+      }
+      return origJoin(...paths);
+    };
+    try {
+      await compileProtos.main(['--esm', 'esm']);
+    } finally {
+      (path as {join: typeof path.join}).join = origJoin;
+    }
+    assert.strictEqual(dtsJoinCount, 1);
     assert(fs.existsSync(expectedJsonResultFile));
     assert(fs.existsSync(expectedJSResultFile));
     assert(fs.existsSync(expectedTSResultFile));

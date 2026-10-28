@@ -506,16 +506,6 @@ export async function main(parameters: string[]): Promise<void> {
     protoJsonFiles.push(...(await findProtoJsonFiles(directory)));
   }
   const rootName = await generateRootName(directories);
-  if (esm) {
-    const esmProtos = await buildListOfProtos(protoJsonFiles, esm);
-    await compileProtos(rootName, esmProtos, {
-      skipJson,
-      esm,
-      keepCase,
-      forceNumber,
-      noComments,
-    });
-  }
   const protos = await buildListOfProtos(protoJsonFiles, esm);
   await compileProtos(rootName, protos, {
     skipJson,
