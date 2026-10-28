@@ -101,6 +101,11 @@ describe('compileProtos tool', () => {
         .includes('require("google-gax/build/src/protobuf").protobufMinimal'),
     );
     assert(!js.toString().includes('require("protobufjs/minimal")'));
+    // The UMD wrapper's AMD branch used to leave a bare "protobufjs/minimal"
+    // specifier behind, which bundlers try to resolve even though the branch
+    // never executes. No reference to protobufjs may remain.
+    assert(!js.toString().includes('protobufjs/minimal'));
+    assert(!js.toString().includes('define('));
 
     // check that it uses proper root object; it's taken from fixtures/package.json
     assert(js.toString().includes('_org_fake_package'));
@@ -146,6 +151,8 @@ describe('compileProtos tool', () => {
         .includes('require("google-gax/build/src/protobuf").protobufMinimal'),
     );
     assert(!cjs.toString().includes('require("protobufjs/minimal")'));
+    assert(!cjs.toString().includes('protobufjs/minimal'));
+    assert(!cjs.toString().includes('define('));
 
     // check that it uses proper root object; it's taken from fixtures/package.json
     assert(cjs.toString().includes('_org_fake_package'));
@@ -208,6 +215,11 @@ describe('compileProtos tool', () => {
         .includes('require("google-gax/build/src/protobuf").protobufMinimal'),
     );
     assert(!js.toString().includes('require("protobufjs/minimal")'));
+    // The UMD wrapper's AMD branch used to leave a bare "protobufjs/minimal"
+    // specifier behind, which bundlers try to resolve even though the branch
+    // never executes. No reference to protobufjs may remain.
+    assert(!js.toString().includes('protobufjs/minimal'));
+    assert(!js.toString().includes('define('));
 
     // check that it uses proper root object; it's taken from fixtures/package.json
     assert(js.toString().includes('_org_fake_package'));
