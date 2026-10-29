@@ -177,7 +177,7 @@ jobs:
   presubmit:
     needs: [changes, generator-tests]
     runs-on: ubuntu-latest
-    if: always()
+    if: ${{ !cancelled() }}
     env:
       CHANGES_RESULT: ${{ needs.changes.result }}
       GENERATOR_CHANGED: ${{ needs.changes.outputs.generator }}
