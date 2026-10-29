@@ -749,6 +749,34 @@ describe('🥁 configuration options', () => {
       assert.equal(res3.config.agent.connectOpts.key, 'other key');
     });
 
+    it('should not share a cached proxy agent across partial or ambiguous client credentials', async () => {
+      const direct = new URL(url);
+      const credentials = [
+        {cert: 'cert'},
+        {},
+        {key: 'key'},
+        {cert: 'a\nb', key: 'c'},
+        {cert: 'a', key: 'b\nc'},
+      ];
+      const agents = [];
+
+      for (const credential of credentials) {
+        if (agents.length) {
+          scope = nock(direct.origin)
+            .get(direct.pathname)
+            .reply(200, responseBody);
+        }
+        const res = await request({url, proxy, ...credential});
+        expectProxy(res);
+        assert(res.config.agent instanceof HttpsProxyAgent);
+        assert.equal(res.config.agent.connectOpts.cert, credential.cert);
+        assert.equal(res.config.agent.connectOpts.key, credential.key);
+        agents.push(res.config.agent);
+      }
+
+      assert.equal(new Set(agents).size, credentials.length);
+    });
+
     describe('noProxy', () => {
       it('should not proxy when url matches `noProxy` (config > string)', async () => {
         const noProxy = [new URL(url).host];
@@ -1672,8 +1700,7 @@ describe('🍂 defaults & instances', () => {
       scope.done();
       assert.strictEqual(res.config.headers.get('apple'), 'juice');
       assert.strictEqual(res.config.headers.get('figgy'), 'pudding');
-      const agentCache = inst.getAgentCache();
-      assert(agentCache.get(key));
+      assert.equal(inst.getAgentCache().size, 1);
     });
     it('uses HTTPS agent if cert and key provided, on subsequent requests', async () => {
       const key = fs.readFileSync('./test/fixtures/fake.key', 'utf8');
@@ -1686,8 +1713,16 @@ describe('🍂 defaults & instances', () => {
       await inst.request({url, headers: new Headers({figgy: 'pudding'})});
       await inst.request({url, headers: new Headers({figgy: 'pudding'})});
       scope.done();
-      const agentCache = inst.getAgentCache();
-      assert(agentCache.get(key));
+      assert.equal(inst.getAgentCache().size, 1);
+    });
+    it('does not share an HTTPS agent across certificates with the same key', async () => {
+      const scope = nock(url).get('/').reply(200).get('/').reply(200);
+      const inst = new GaxiosAssertAgentCache({key: 'key'});
+      const res1 = await inst.request({url, cert: 'cert'});
+      const res2 = await inst.request({url, cert: 'other cert'});
+      scope.done();
+      assert.notStrictEqual(res1.config.agent, res2.config.agent);
+      assert.equal(inst.getAgentCache().size, 2);
     });
   });
 });
