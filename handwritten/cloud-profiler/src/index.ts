@@ -16,10 +16,10 @@ import delay from 'delay';
 import * as extend from 'extend';
 import * as fs from 'fs';
 import * as gcpMetadata from 'gcp-metadata';
-import {heap as heapProfiler} from 'pprof';
 import * as semver from 'semver';
 
 import {Config, defaultConfig, LocalConfig, ProfilerConfig} from './config';
+import * as heapProfiler from './heap-profiler';
 import {createLogger} from './logger';
 import {Profiler} from './profiler';
 

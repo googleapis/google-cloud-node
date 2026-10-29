@@ -2006,9 +2006,6 @@ importers:
       ms:
         specifier: ^2.1.3
         version: 2.1.3
-      pprof:
-        specifier: 5.0.0
-        version: 5.0.0
       pretty-ms:
         specifier: ^7.0.0
         version: 7.0.1
@@ -2018,6 +2015,9 @@ importers:
       semver:
         specifier: ^7.0.0
         version: 7.8.5
+      source-map:
+        specifier: ^0.7.0
+        version: 0.7.6
       teeny-request:
         specifier: ^11.1.1
         version: 11.1.1
@@ -2079,15 +2079,9 @@ importers:
       nock:
         specifier: ^13.0.0
         version: 13.5.6
-      node-gyp:
-        specifier: ^11.5.0
-        version: 11.5.0
       sinon:
         specifier: ^18.0.0
         version: 18.0.1
-      source-map:
-        specifier: ^0.7.0
-        version: 0.7.6
       tmp:
         specifier: 0.2.7
         version: 0.2.7
