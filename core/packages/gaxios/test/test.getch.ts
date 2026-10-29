@@ -16,6 +16,7 @@ import nock from 'nock';
 import {createSandbox, fake} from 'sinon';
 import stream, {Readable} from 'stream';
 import {describe, it, beforeEach, afterEach} from 'mocha';
+import {Agent as HTTPSAgent} from 'https';
 import {HttpsProxyAgent} from 'https-proxy-agent';
 import {
   Gaxios,
@@ -618,6 +619,38 @@ describe('🥁 configuration options', () => {
           noProxy: ['domain.example.com'],
         });
         assert.strictEqual(capturedInits[2]?.proxy, undefined);
+
+        const customAgent = new HTTPSAgent({
+          cert: 'agent-cert',
+          key: 'agent-key',
+          ca: 'agent-ca',
+          passphrase: 'secret',
+          rejectUnauthorized: false,
+        });
+        await request({
+          url,
+          agent: customAgent,
+        });
+        assert.deepStrictEqual(capturedInits[3]?.tls, {
+          cert: 'agent-cert',
+          key: 'agent-key',
+          ca: 'agent-ca',
+          passphrase: 'secret',
+          rejectUnauthorized: false,
+        });
+
+        await request({
+          url,
+          agent: () =>
+            new HTTPSAgent({
+              ca: 'factory-ca',
+              rejectUnauthorized: true,
+            }),
+        });
+        assert.deepStrictEqual(capturedInits[4]?.tls, {
+          ca: 'factory-ca',
+          rejectUnauthorized: true,
+        });
       } finally {
         globalThis.fetch = origFetch;
         if (!hadBun) {
