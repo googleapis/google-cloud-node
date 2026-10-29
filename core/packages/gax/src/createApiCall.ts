@@ -45,7 +45,6 @@ import {logCall, logNetworkAttempt} from './observability/LoggerHelper';
 import {checkLoggingEnabled, checkTracingEnabled} from './observability/util';
 import {
   StaticTraceContext,
-  DynamicTraceContext,
   AttemptTraceContext,
   resolveStaticTraceContext,
 } from './observability/contextUtil';
@@ -92,19 +91,12 @@ export function createApiCall(
       : undefined;
   const serviceName = settings.apiName?.split('.').pop() ?? '';
   const isFallback = Boolean(_fallback);
-  const dynamicArgs: DynamicTraceContext | undefined =
+  const dynamicArgs: AttemptTraceContext | undefined =
     tracingEnabled || loggingEnabled
       ? {
           clientName: serviceName ? `${serviceName}Client` : '',
           methodName: settings.otherArgs?.internalMethodName ?? '',
           rpcType: isFallback ? 'http' : 'grpc',
-        }
-      : undefined;
-  // Context for per-attempt low level network CLIENT spans.
-  const attemptDynamicArgs: AttemptTraceContext | undefined =
-    (tracingEnabled || loggingEnabled) && dynamicArgs
-      ? {
-          ...dynamicArgs,
           apiName: settings.apiName ?? '',
         }
       : undefined;
@@ -114,8 +106,10 @@ export function createApiCall(
     callOptions?: CallOptions,
     callback?: APICallback,
   ) => {
-    // Capture the active client request span context to parent async low level network attempt spans.
-    const parentContext = tracingEnabled ? context.active() : undefined;
+    // Capture the active OpenTelemetry context to parent async attempt spans and preserve
+    // outer span correlation on attempt logs when context does not propagate across async gaps.
+    const parentContext =
+      tracingEnabled || loggingEnabled ? context.active() : undefined;
     let currentApiCaller = apiCaller;
 
     let thisSettings: CallSettings;
@@ -185,11 +179,7 @@ export function createApiCall(
           ?.streaming;
 
         // Wrap the transport call so each attempt (initial send and retries) emits a low level network CLIENT span.
-        if (
-          (tracingEnabled || loggingEnabled) &&
-          attemptDynamicArgs &&
-          staticArgs
-        ) {
+        if ((tracingEnabled || loggingEnabled) && dynamicArgs && staticArgs) {
           const callerWrappedFunc = wrappedFunc;
           wrappedFunc = (
             argument: {},
@@ -205,18 +195,26 @@ export function createApiCall(
                 cb,
               ]);
 
-            // If logging is enabled, wrap with L4 attempt error logging
+            // If logging is enabled, wrap with L4 attempt error logging.
+            // When tracing is disabled, restore `parentContext` around the attempt so
+            // `logNetworkAttempt` preserves the caller's outer OpenTelemetry span even
+            // without an async ContextManager across `funcPromise.then` or retry timers.
             if (loggingEnabled) {
               const originalAttemptExecution = attemptExecution;
-              attemptExecution = (cb: APICallback) =>
-                logNetworkAttempt(
-                  attemptDynamicArgs,
-                  staticArgs,
-                  loggedCallback =>
-                    originalAttemptExecution(loggedCallback ?? cb),
-                  Boolean(streaming),
-                  cb,
-                );
+              attemptExecution = (cb: APICallback) => {
+                const runLoggedAttempt = () =>
+                  logNetworkAttempt(
+                    dynamicArgs,
+                    staticArgs,
+                    loggedCallback =>
+                      originalAttemptExecution(loggedCallback ?? cb),
+                    Boolean(streaming),
+                    cb,
+                  );
+                return !tracingEnabled && parentContext
+                  ? context.with(parentContext, runLoggedAttempt)
+                  : runLoggedAttempt();
+              };
             }
 
             if (tracingEnabled) {
@@ -228,7 +226,7 @@ export function createApiCall(
               const originalAttemptExecution = attemptExecution;
               attemptExecution = (cb: APICallback) =>
                 traceAttempt(
-                  {...attemptDynamicArgs, resendCount},
+                  {...dynamicArgs, resendCount},
                   staticArgs,
                   tracedAttemptCallback =>
                     originalAttemptExecution(tracedAttemptCallback ?? cb),
@@ -310,12 +308,7 @@ export function createApiCall(
     return currentApiCaller.result(ongoingCall);
   };
 
-  if (
-    (tracingEnabled || loggingEnabled) &&
-    dynamicArgs &&
-    attemptDynamicArgs &&
-    staticArgs
-  ) {
+  if ((tracingEnabled || loggingEnabled) && dynamicArgs && staticArgs) {
     const isStreamingCall = apiCaller instanceof StreamingApiCaller;
     return (
       request: RequestType,
@@ -330,7 +323,7 @@ export function createApiCall(
         const originalCallExecution = callExecution;
         callExecution = (cb?: APICallback) =>
           logCall(
-            attemptDynamicArgs,
+            dynamicArgs,
             staticArgs,
             loggedCallback => originalCallExecution(loggedCallback ?? cb),
             isStreamingCall,
