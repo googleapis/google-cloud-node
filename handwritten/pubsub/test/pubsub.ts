@@ -1741,6 +1741,59 @@ describe('PubSub', () => {
 
       pubsub.request(CONFIG, assert.ifError);
     });
+
+    it('should immediately invoke callback with CANCELLED error if gaxOpts.signal is already aborted', done => {
+      const abortController = new AbortController();
+      abortController.abort();
+
+      let getClientCalled = false;
+      pubsub.getClient_ = () => {
+        getClientCalled = true;
+      };
+
+      const configWithSignal: pubsubTypes.RequestConfig = {
+        client: 'PublisherClient',
+        method: 'publish',
+        reqOpts: {},
+        gaxOpts: {signal: abortController.signal},
+      };
+
+      pubsub.request(configWithSignal, (err: gax.ServiceError | null) => {
+        assert.strictEqual(getClientCalled, false);
+        assert.ok(err);
+        assert.strictEqual(err.code, gax.Status.CANCELLED);
+        done();
+      });
+    });
+
+    it('should invoke callback with CANCELLED error if gaxOpts.signal is aborted while getClient_ is in flight', done => {
+      const abortController = new AbortController();
+      let clientMethodCalled = false;
+      const fakeClient = {
+        publish() {
+          clientMethodCalled = true;
+        },
+      };
+
+      pubsub.getClient_ = (_config, callback) => {
+        abortController.abort();
+        callback(null, fakeClient as unknown as gax.ClientStub);
+      };
+
+      const configWithSignal: pubsubTypes.RequestConfig = {
+        client: 'PublisherClient',
+        method: 'publish',
+        reqOpts: {},
+        gaxOpts: {signal: abortController.signal},
+      };
+
+      pubsub.request(configWithSignal, (err: gax.ServiceError | null) => {
+        assert.strictEqual(clientMethodCalled, false);
+        assert.ok(err);
+        assert.strictEqual(err.code, gax.Status.CANCELLED);
+        done();
+      });
+    });
   });
 
   describe('snapshot', () => {
