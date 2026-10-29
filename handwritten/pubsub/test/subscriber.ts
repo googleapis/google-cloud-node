@@ -838,12 +838,11 @@ describe('Subscriber', () => {
       it('should dispense and drain flow-controlled pending messages in WaitForProcessing', async () => {
         clock.restore();
 
-        const {LeaseManager} = require('../src/lease-manager');
         const realInventory = new LeaseManager(subscriber, {
           maxMessages: 2,
           allowExcessMessages: false,
         });
-        subInternals._inventory = realInventory;
+        (subscriber as unknown as PublicInventory)._inventory = realInventory;
 
         subscriber.setOptions({
           flowControl: {maxMessages: 2, allowExcessMessages: false},

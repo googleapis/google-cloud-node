@@ -1007,11 +1007,16 @@ export class Subscriber extends EventEmitter {
     ) {
       const waitTimeout = timeout.subtract(FINAL_NACK_TIMEOUT);
 
+      let onEmpty: (() => void) | undefined;
       const emptyPromise = new Promise<void>(resolve => {
+        onEmpty = resolve;
         this._inventory.once('empty', resolve);
       });
 
       await this.#awaitTimeoutAndCheck(emptyPromise, waitTimeout);
+      if (onEmpty) {
+        this._inventory.removeListener('empty', onEmpty);
+      }
     }
 
     // Now we head into immediate shutdown mode with what time is left.
