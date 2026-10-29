@@ -27,7 +27,7 @@ import {defaultToObjectOptions} from './fallback';
 import {GoogleError} from './googleError';
 import {setAttemptHttpMethod} from './observability/TracerHelper';
 import {rpcCodeFromHttpStatusCode, Status} from './status';
-import {pipeline, PipelineSource} from 'stream';
+import {PassThrough, pipeline, PipelineSource} from 'stream';
 import type {Agent as HttpAgent} from 'http';
 import type {Agent as HttpsAgent} from 'https';
 
@@ -423,9 +423,49 @@ export function generateServiceStub(
             response204Ok = true;
           }
           if (response.ok && rpc.responseStream) {
+            // Route response.body through an intermediate PassThrough so
+            // stream.pipeline does not destroy streamArrayParser with the raw
+            // runtime-specific error before _toGoogleError translates it.
+            const bodyPassThrough = new PassThrough();
+            let parserErrored = false;
+            const tearDownBody = () => {
+              if (!bodyPassThrough.destroyed) {
+                bodyPassThrough.destroy();
+              }
+            };
+            bodyPassThrough.on(
+              'data',
+              (chunk: Buffer | Uint8Array | string) => {
+                if (
+                  !streamArrayParser.writableEnded &&
+                  !streamArrayParser.destroyed
+                ) {
+                  if (!streamArrayParser.write(chunk)) {
+                    bodyPassThrough.pause();
+                    streamArrayParser.once('drain', () =>
+                      bodyPassThrough.resume(),
+                    );
+                  }
+                }
+              },
+            );
+            bodyPassThrough.on('end', () => {
+              if (
+                !streamArrayParser.writableEnded &&
+                !streamArrayParser.destroyed
+              ) {
+                streamArrayParser.end();
+              }
+            });
+            streamArrayParser.once('error', () => {
+              parserErrored = true;
+              tearDownBody();
+            });
+            streamArrayParser.once('finish', tearDownBody);
+            streamArrayParser.once('close', tearDownBody);
             pipeline(
               response.body as PipelineSource<unknown>,
-              streamArrayParser,
+              bodyPassThrough,
               (err: unknown) => {
                 // A caller that cancelled has already torn this stream down
                 // and is not waiting to be told about the consequences. The
@@ -435,11 +475,23 @@ export function generateServiceStub(
                 // ordinary Error. That check therefore never matched and every
                 // cancelled stream emitted a spurious error. Use the recorded
                 // state, as the handlers below do.
-                if (err && (timedOut || !cancelRequested)) {
+                if (
+                  err &&
+                  !parserErrored &&
+                  !streamArrayParser.readableEnded &&
+                  !streamArrayParser.destroyed &&
+                  (timedOut || !cancelRequested)
+                ) {
+                  const callErr = _toGoogleError(err, {
+                    timedOut,
+                    cancelRequested,
+                    rpcName,
+                    timeoutMs,
+                  });
                   if (callback) {
-                    callback(err);
+                    callback(callErr);
                   }
-                  streamArrayParser.emit('error', err);
+                  streamArrayParser.emit('error', callErr);
                 }
               },
             );

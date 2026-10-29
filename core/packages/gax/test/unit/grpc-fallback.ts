@@ -1207,6 +1207,34 @@ describe('grpc-fallback', () => {
         `a cancelled stream reported: ${reported.join(', ')}`,
       );
     });
+
+    it('should not report an error when the stream is destroyed after the JSON array ends', async () => {
+      const body = openNodeStream();
+      const echoStub = await gaxGrpc.createStub(echoService, stubOptions);
+
+      const reported: string[] = [];
+      const received: {}[] = [];
+      const parser = echoStub.expand({content: 'test'}, {}, {}, (err?: Error) =>
+        reported.push(`callback:${err?.message}`),
+      ) as StreamArrayParser;
+      parser.on('data', d => received.push(d));
+      parser.on('error', err =>
+        reported.push(`error:${(err as Error).message}`),
+      );
+      parser.on('end', () => {
+        parser.destroy();
+      });
+
+      body.push(']');
+      await new Promise<void>(resolve => setTimeout(resolve, 100));
+
+      assert.deepStrictEqual(received, [{content: 'one'}]);
+      assert.deepStrictEqual(
+        reported,
+        [],
+        `a completed stream reported: ${reported.join(', ')}`,
+      );
+    });
   });
 
   describe('transport error translation', () => {
@@ -1369,6 +1397,79 @@ describe('grpc-fallback', () => {
       });
 
       assert.strictEqual(err.code, Status.UNAVAILABLE);
+    });
+
+    it('should translate mid-stream transport errors on server streaming calls into a single UNAVAILABLE GoogleError', async () => {
+      const http = await import('http');
+      const prevNoProxy = process.env.NO_PROXY;
+      const prevLowerNoProxy = process.env.no_proxy;
+      process.env.NO_PROXY = '127.0.0.1,localhost';
+      process.env.no_proxy = '127.0.0.1,localhost';
+      const server = http.createServer((_req, res) => {
+        res.writeHead(200, {
+          'Content-Type': 'application/json',
+          'Transfer-Encoding': 'chunked',
+        });
+        res.write('[{"content":"one"},');
+        setTimeout(() => {
+          res.socket?.destroy();
+        }, 20);
+      });
+      await new Promise<void>(resolve =>
+        server.listen(0, '127.0.0.1', resolve),
+      );
+      const port = (server.address() as {port: number}).port;
+      try {
+        const localClient = new GrpcClient({
+          auth: new GoogleAuth({authClient: new PassThroughClient()}),
+          fallback: 'rest',
+        });
+        const localStub = await localClient.createStub(echoService, {
+          servicePath: '127.0.0.1',
+          port,
+          protocol: 'http',
+        });
+        const received: Array<{content?: string}> = [];
+        const streamErrors: GoogleError[] = [];
+        const callbackErrors: Error[] = [];
+        const parser = localStub.expand(
+          {content: 'test content'},
+          {},
+          {},
+          (err?: Error) => {
+            if (err) {
+              callbackErrors.push(err);
+            }
+          },
+        ) as StreamArrayParser;
+        parser.on('data', (chunk: {content?: string}) => received.push(chunk));
+        await new Promise<void>(resolve => {
+          parser.on('error', (err: GoogleError) => {
+            streamErrors.push(err);
+            setTimeout(resolve, 30);
+          });
+        });
+
+        assert.deepStrictEqual(received, [{content: 'one'}]);
+        assert.strictEqual(streamErrors.length, 1);
+        assert(streamErrors[0] instanceof GoogleError);
+        assert.strictEqual(streamErrors[0].code, Status.UNAVAILABLE);
+        assert.strictEqual(callbackErrors.length, 1);
+        assert.strictEqual(callbackErrors[0], streamErrors[0]);
+      } finally {
+        server.closeAllConnections?.();
+        await new Promise<void>(resolve => server.close(() => resolve()));
+        if (prevNoProxy === undefined) {
+          delete process.env.NO_PROXY;
+        } else {
+          process.env.NO_PROXY = prevNoProxy;
+        }
+        if (prevLowerNoProxy === undefined) {
+          delete process.env.no_proxy;
+        } else {
+          process.env.no_proxy = prevLowerNoProxy;
+        }
+      }
     });
 
     it('should let the auth client handle 401 and 403, and decode every other status', async () => {
