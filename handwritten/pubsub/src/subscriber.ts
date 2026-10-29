@@ -1310,6 +1310,7 @@ export class Subscriber extends EventEmitter {
           message
             .modAckWithResponse(this.ackDeadline)
             .then(() => {
+              message.subSpans.modAckEnd();
               if (this.isOpen) {
                 this._inventory.add(message);
               } else {
@@ -1319,12 +1320,10 @@ export class Subscriber extends EventEmitter {
               return undefined;
             })
             .catch(() => {
+              message.subSpans.modAckEnd();
               // Temporary failures will retry, so if an error reaches us
               // here, that means a permanent failure. Silently drop these.
               this._discardMessage(message);
-            })
-            .finally(() => {
-              message.subSpans.modAckEnd();
             });
         } else {
           message.subSpans.modAckStart(
@@ -1355,29 +1354,52 @@ export class Subscriber extends EventEmitter {
    * @returns {Promise<void>}
    */
   private async _waitForFlush(): Promise<void> {
-    const promises: Array<Promise<void>> = [];
+    while (
+      this._acks.numPendingRequests ||
+      this._modAcks.numPendingRequests ||
+      this._acks.numInFlightRequests ||
+      this._modAcks.numInFlightRequests
+    ) {
+      const promises: Array<Promise<void>> = [];
 
-    // Flush any batched requests immediately.
-    if (this._acks.numPendingRequests) {
-      promises.push(this._acks.onFlush());
-      this._acks.flush('message count').catch(() => {});
+      // Flush any batched requests immediately.
+      if (this._acks.numPendingRequests) {
+        promises.push(this._acks.onFlush());
+        this._acks.flush('message count').catch(() => {});
+      }
+
+      if (this._modAcks.numPendingRequests) {
+        promises.push(this._modAcks.onFlush());
+        this._modAcks.flush('message count').catch(() => {});
+      }
+
+      // Now, prepare the drain promises.
+      if (this._acks.numInFlightRequests) {
+        promises.push(this._acks.onDrain());
+      }
+
+      if (this._modAcks.numInFlightRequests) {
+        promises.push(this._modAcks.onDrain());
+      }
+
+      const pendingAcksAfterFlush = this._acks.numPendingRequests;
+      const pendingModAcksAfterFlush = this._modAcks.numPendingRequests;
+
+      // Wait for the flush promises.
+      await Promise.all(promises);
+
+      // Allow microtask continuations (such as EOD receipt modAck .then()
+      // handlers that nack on a closing subscriber) to enqueue follow-up requests.
+      for (let i = 0; i < 4; i++) {
+        await Promise.resolve();
+      }
+
+      if (
+        this._acks.numPendingRequests <= pendingAcksAfterFlush &&
+        this._modAcks.numPendingRequests <= pendingModAcksAfterFlush
+      ) {
+        break;
+      }
     }
-
-    if (this._modAcks.numPendingRequests) {
-      promises.push(this._modAcks.onFlush());
-      this._modAcks.flush('message count').catch(() => {});
-    }
-
-    // Now, prepare the drain promises.
-    if (this._acks.numInFlightRequests) {
-      promises.push(this._acks.onDrain());
-    }
-
-    if (this._modAcks.numInFlightRequests) {
-      promises.push(this._modAcks.onDrain());
-    }
-
-    // Wait for the flush promises.
-    await Promise.all(promises);
   }
 }

@@ -382,22 +382,39 @@ describe('Subscriber', () => {
 
     it('should nack incoming messages w/exactly-once if closed before modAck resolves', async () => {
       const sub = new Subscriber(subscription);
-      sub.isOpen = true;
+      sub.open();
       const subint = getSubInternals(sub);
-      subint._stream = new FakeMessageStream(sub, {});
-      subint._inventory = new FakeLeaseManager(sub, {});
+      const modAckQueue: FakeModAckQueue = stubs.get('modAckQueue');
       const modAckDeferred = defer<s.AckResponse>();
       const modAckStub = sandbox
         .stub(sub, 'modAckWithResponse')
-        .returns(modAckDeferred.promise);
-      const addStub = sandbox.stub(subint._inventory, 'add');
-      const nackStub = sandbox.stub(sub, 'nack').resolves();
-      const done = defer();
-      nackStub.callsFake(async () => {
-        assert.ok(modAckStub.calledOnce);
-        assert.ok(addStub.notCalled);
-        done.resolve();
+        .callsFake(() => {
+          modAckQueue.numInFlightRequests = 1;
+          return modAckDeferred.promise;
+        });
+      sandbox.stub(modAckQueue, 'onDrain').callsFake(async () => {
+        modAckQueue.numInFlightRequests = 0;
+        modAckDeferred.resolve(s.AckResponses.Success);
       });
+      const addStub = sandbox.stub(subint._inventory, 'add');
+      let flushedNackBeforeClose = false;
+      let queueClosed = false;
+      sandbox.stub(modAckQueue, 'add').callsFake(async (_msg, deadline) => {
+        if (deadline === 0) {
+          modAckQueue.numPendingRequests = 1;
+        }
+        return s.AckResponses.Success;
+      });
+      sandbox.stub(modAckQueue, 'flush').callsFake(async () => {
+        if (modAckQueue.numPendingRequests === 1 && !queueClosed) {
+          flushedNackBeforeClose = true;
+        }
+        modAckQueue.numPendingRequests = 0;
+      });
+      sandbox.stub(modAckQueue, 'close').callsFake(() => {
+        queueClosed = true;
+      });
+      const nackSpy = sandbox.spy(sub, 'nack');
 
       subint._onData({
         subscriptionProperties: {
@@ -415,10 +432,12 @@ describe('Subscriber', () => {
         ],
       });
 
-      sub.isOpen = false;
-      modAckDeferred.resolve(s.AckResponses.Success);
+      await sub.close();
 
-      await done.promise;
+      assert.ok(modAckStub.calledOnce);
+      assert.ok(addStub.notCalled);
+      assert.ok(nackSpy.calledOnce);
+      assert.strictEqual(flushedNackBeforeClose, true);
     });
   });
 
