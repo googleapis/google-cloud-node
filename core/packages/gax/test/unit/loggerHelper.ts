@@ -17,6 +17,7 @@
 import * as assert from 'assert';
 import {EventEmitter} from 'events';
 import {Writable} from 'stream';
+import {context, ROOT_CONTEXT, Span, trace} from '@opentelemetry/api';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as loggingUtils from 'google-logging-utils';
 import {
@@ -151,7 +152,7 @@ describe('LoggerHelper', () => {
       });
     });
 
-    it('populates HTTP status code and omits undefined optional attributes', () => {
+    it('populates HTTP and normalized gRPC status codes and omits undefined optional attributes', () => {
       const httpErr = Object.assign(new GoogleError('Not Found'), {
         httpStatusCode: 404,
       });
@@ -169,16 +170,58 @@ describe('LoggerHelper', () => {
       assert.deepStrictEqual(attributes, {
         'gcp.client.language': 'node',
         'rpc.system.name': 'http',
+        'rpc.response.status_code': 'NOT_FOUND',
         'http.response.status_code': 404,
         'error.type': '404',
       });
       assert.strictEqual('gcp.client.service' in attributes, false);
       assert.strictEqual('rpc.method' in attributes, false);
-      assert.strictEqual('rpc.response.status_code' in attributes, false);
       assert.strictEqual('gcp.errors.domain' in attributes, false);
       assert.strictEqual('exception.type' in attributes, false);
       assert.strictEqual('exception.message' in attributes, false);
       assert.strictEqual('exception.stacktrace' in attributes, false);
+
+      // Prefers explicit gRPC status code parsed from Google HTTP error body over generic HTTP bucket.
+      const specificHttpErr = Object.assign(
+        new GoogleError('Failed precondition'),
+        {
+          httpStatusCode: 400,
+          code: Status.FAILED_PRECONDITION,
+        },
+      );
+      const specificAttrs = buildLogAttributes(
+        specificHttpErr,
+        {
+          clientName: 'StorageClient',
+          methodName: 'GetObject',
+          rpcType: 'http',
+        },
+        {},
+      );
+      assert.strictEqual(
+        specificAttrs['rpc.response.status_code'],
+        'FAILED_PRECONDITION',
+      );
+      assert.strictEqual(specificAttrs['http.response.status_code'], 400);
+
+      // Translates HTTP transport errors carrying a gRPC status code without an HTTP status.
+      const httpTransportErr = Object.assign(new GoogleError('Unavailable'), {
+        code: Status.UNAVAILABLE,
+      });
+      const transportAttrs = buildLogAttributes(
+        httpTransportErr,
+        {
+          clientName: 'StorageClient',
+          methodName: 'GetObject',
+          rpcType: 'http',
+        },
+        {},
+      );
+      assert.strictEqual(
+        transportAttrs['rpc.response.status_code'],
+        'UNAVAILABLE',
+      );
+      assert.strictEqual('http.response.status_code' in transportAttrs, false);
     });
 
     it('handles client-side errors and non-Error throws safely', () => {
@@ -190,6 +233,15 @@ describe('LoggerHelper', () => {
       );
       assert.strictEqual(clientAttrs['error.type'], 'TypeError');
       assert.strictEqual('rpc.response.status_code' in clientAttrs, false);
+
+      const httpClientAttrs = buildLogAttributes(
+        clientErr,
+        {...dynamicArgs, rpcType: 'http'},
+        staticArgs,
+      );
+      assert.strictEqual(httpClientAttrs['error.type'], 'TypeError');
+      assert.strictEqual('rpc.response.status_code' in httpClientAttrs, false);
+      assert.strictEqual('http.response.status_code' in httpClientAttrs, false);
 
       const primitiveAttrs = buildLogAttributes(
         'string failure',
@@ -323,6 +375,20 @@ describe('LoggerHelper', () => {
       assert.strictEqual(other['exception.type'], 'TypeError');
       assert.strictEqual(other['exception.message'], 'sync failure');
       assert.strictEqual(other['exception.stacktrace'], syncErr.stack);
+
+      sink.reset();
+      const nonErrorObj = {name: 123, message: 'bad name throw'};
+      assert.throws(
+        () =>
+          logCall(dynamicArgs, staticArgs, () => {
+            throw nonErrorObj;
+          }),
+        (caught: unknown) => caught === nonErrorObj,
+      );
+      assert.strictEqual(sink.logs.length, 1);
+      const nonErrorOther = sink.logs[0].fields.other as LogPayload;
+      assert.strictEqual(nonErrorOther['exception.type'], 'Error');
+      assert.strictEqual(nonErrorOther['exception.message'], 'bad name throw');
     });
 
     it('emits a single WARNING log on callback error and preserves this and arguments', done => {
@@ -478,6 +544,70 @@ describe('LoggerHelper', () => {
       assert.strictEqual(
         sink.logs[0].fields.telemetrySpanId,
         clientRequestSpan.spanContext().spanId,
+      );
+    });
+
+    it('falls back to the active outer OpenTelemetry span when GAX tracing is disabled', async () => {
+      const tracer = trace.getTracer('customer-app');
+      const err = new GoogleError('app-traced failure');
+      let outerSpan: Span | undefined;
+
+      await assert.rejects(async () => {
+        await tracer.startActiveSpan('http-handler', async span => {
+          outerSpan = span;
+          try {
+            await logCall(dynamicArgs, staticArgs, async () => {
+              throw err;
+            });
+          } finally {
+            span.end();
+          }
+        });
+      });
+
+      assert.ok(outerSpan);
+      assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(
+        sink.logs[0].fields.telemetryTraceId,
+        outerSpan.spanContext().traceId,
+      );
+      assert.strictEqual(
+        sink.logs[0].fields.telemetrySpanId,
+        outerSpan.spanContext().spanId,
+      );
+
+      // Also preserves initialContext outer span when async callback loses active context.
+      sink.reset();
+      let capturedCallback: APICallback | undefined;
+      let initialOuterSpan: Span | undefined;
+      tracer.startActiveSpan('lost-context-handler', span => {
+        initialOuterSpan = span;
+        logCall(
+          dynamicArgs,
+          staticArgs,
+          loggedCallback => {
+            capturedCallback = loggedCallback;
+            return undefined as unknown as ResultTuple;
+          },
+          false,
+          () => {},
+        );
+        span.end();
+      });
+
+      assert.ok(initialOuterSpan);
+      context.with(ROOT_CONTEXT, () => {
+        capturedCallback!(err);
+      });
+
+      assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(
+        sink.logs[0].fields.telemetryTraceId,
+        initialOuterSpan.spanContext().traceId,
+      );
+      assert.strictEqual(
+        sink.logs[0].fields.telemetrySpanId,
+        initialOuterSpan.spanContext().spanId,
       );
     });
   });

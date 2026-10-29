@@ -842,6 +842,20 @@ describe('errorUtil', () => {
         namedErr.name = 'AbortError';
         assert.strictEqual(resolveExceptionType(namedErr), 'AbortError');
         assert.strictEqual(resolveExceptionType(new Error('generic')), 'Error');
+        assert.strictEqual(
+          resolveExceptionType({name: 'CustomError'}),
+          'CustomError',
+        );
+        assert.strictEqual(resolveExceptionType({name: 123}), 'Error');
+        assert.strictEqual(resolveExceptionType({name: ''}), 'Error');
+        assert.strictEqual(
+          resolveExceptionType({constructor: {name: 456}}),
+          'Error',
+        );
+        assert.strictEqual(resolveExceptionType(Object.create(null)), 'Error');
+        assert.strictEqual(resolveExceptionType('raw string'), 'Error');
+        assert.strictEqual(resolveExceptionType(null), 'Error');
+        assert.strictEqual(resolveExceptionType(undefined), 'Error');
       });
     });
 

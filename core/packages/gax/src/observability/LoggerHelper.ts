@@ -18,6 +18,7 @@ import {EventEmitter} from 'events';
 import {context} from '@opentelemetry/api';
 import * as loggingUtils from 'google-logging-utils';
 import {APICallback, GaxCallResult} from '../apitypes';
+import {rpcCodeFromHttpStatusCode, Status} from '../status';
 import {
   AttemptTraceContext,
   buildInitialAttributes,
@@ -34,6 +35,7 @@ import {
   resolveExceptionStacktrace,
   resolveExceptionType,
   resolveResponseStatusCode,
+  resolveRpcStatusName,
 } from './errorUtil';
 import {getPromiseTarget, handlePromise, handleStream} from './TracerHelper';
 
@@ -107,8 +109,15 @@ export function buildLogAttributes(
     true,
     err,
   );
-  if (rpcStatusName !== undefined) {
-    attributes['rpc.response.status_code'] = rpcStatusName;
+  const normalizedRpcStatusName =
+    dynamicArgs.rpcType === 'http'
+      ? (resolveRpcStatusName(err) ??
+        (httpStatusCode !== undefined
+          ? Status[rpcCodeFromHttpStatusCode(httpStatusCode)]
+          : undefined))
+      : rpcStatusName;
+  if (normalizedRpcStatusName !== undefined) {
+    attributes['rpc.response.status_code'] = normalizedRpcStatusName;
   }
   if (httpStatusCode !== undefined) {
     attributes['http.response.status_code'] = httpStatusCode;
@@ -157,12 +166,16 @@ export function logCall<T = GaxCallResult>(
     }
     hasLoggedL3 = true;
 
-    // Resolve logger and active T3 client request span context.
+    // Resolve logger and active T3 client request span (or outer OpenTelemetry span when GAX tracing is disabled).
     const logger = getGaxLogger(staticArgs?.gcpClientService);
-    const clientRequestSpan =
-      getActiveTraceContext()?.clientRequestSpan ??
-      getActiveTraceContext(initialContext)?.clientRequestSpan;
-    const spanContext = clientRequestSpan?.spanContext();
+    const activeTrace = getActiveTraceContext();
+    const initialTrace = getActiveTraceContext(initialContext);
+    const activeSpan =
+      activeTrace?.clientRequestSpan ??
+      initialTrace?.clientRequestSpan ??
+      activeTrace?.span ??
+      initialTrace?.span;
+    const spanContext = activeSpan?.spanContext();
     const traceId = spanContext?.traceId;
     const spanId = spanContext?.spanId;
 
@@ -171,10 +184,7 @@ export function logCall<T = GaxCallResult>(
     const stacktrace = resolveExceptionStacktrace(err);
     const attributes: LogPayload = {
       ...buildLogAttributes(err, dynamicArgs, staticArgs),
-      'exception.type':
-        err && typeof err === 'object'
-          ? resolveExceptionType(err as Error)
-          : 'Error',
+      'exception.type': resolveExceptionType(err),
       'exception.message': exceptionMessage,
       ...(stacktrace !== undefined ? {'exception.stacktrace': stacktrace} : {}),
     };
