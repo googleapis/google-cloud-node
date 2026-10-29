@@ -14,6 +14,7 @@
 
 import * as Module from 'module';
 import * as path from 'path';
+import {fileURLToPath} from 'url';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ProxyquireStubs = Record<string, any>;
@@ -71,14 +72,22 @@ function getCallerFile(): string | undefined {
     const stack = err.stack as unknown as NodeJS.CallSite[] | undefined;
     if (Array.isArray(stack)) {
       for (const frame of stack) {
-        const file = frame.getFileName?.();
-        if (
-          file &&
-          file !== __filename &&
-          !file.startsWith('node:') &&
-          !file.startsWith('internal/')
-        ) {
-          return file;
+        let file = frame.getFileName?.();
+        if (file) {
+          if (file.startsWith('file://')) {
+            try {
+              file = fileURLToPath(file);
+            } catch {
+              // ignore
+            }
+          }
+          if (
+            file !== __filename &&
+            !file.startsWith('node:') &&
+            !file.startsWith('internal/')
+          ) {
+            return file;
+          }
         }
       }
     }
@@ -92,8 +101,15 @@ function resolveModule(target: NodeModule | string | undefined): NodeModule {
   if (target && typeof target === 'object') {
     return target;
   }
-  const filename =
+  let filename =
     typeof target === 'string' ? target : (getCallerFile() ?? __filename);
+  if (filename.startsWith('file://')) {
+    try {
+      filename = fileURLToPath(filename);
+    } catch {
+      // ignore
+    }
+  }
   const cached = require.cache[filename];
   if (cached) {
     return cached;
@@ -192,10 +208,20 @@ export function createProxyquire(caller?: NodeModule | string): Proxyquire {
                       );
                     },
                     getOwnPropertyDescriptor(target, prop) {
-                      const desc =
-                        Reflect.getOwnPropertyDescriptor(target, prop) ||
-                        Reflect.getOwnPropertyDescriptor(real, prop);
-                      return desc ? {...desc, configurable: true} : undefined;
+                      const targetDesc = Reflect.getOwnPropertyDescriptor(
+                        target,
+                        prop,
+                      );
+                      if (targetDesc) {
+                        return targetDesc;
+                      }
+                      const realDesc = Reflect.getOwnPropertyDescriptor(
+                        real,
+                        prop,
+                      );
+                      return realDesc
+                        ? {...realDesc, configurable: true}
+                        : undefined;
                     },
                   });
                 }
@@ -218,8 +244,14 @@ export function createProxyquire(caller?: NodeModule | string): Proxyquire {
           : prev.call(parent, request);
     } finally {
       modProto.require = prev;
+      const savedMap = new Map(saved);
       for (const id of global ? Object.keys(cache) : [sut]) {
-        if (!id.endsWith('.node')) delete cache[id];
+        if (!id.endsWith('.node')) {
+          const original = savedMap.get(id);
+          if (!opts.keepCache || id !== sut || original !== undefined) {
+            delete cache[id];
+          }
+        }
       }
       for (const [id, m] of saved) {
         if (m && (opts.keepCache || id !== sut)) cache[id] = m;

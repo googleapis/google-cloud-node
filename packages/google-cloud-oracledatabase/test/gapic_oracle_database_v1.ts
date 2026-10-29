@@ -1308,6 +1308,138 @@ describe('v1.OracleDatabaseClient', () => {
     });
   });
 
+  describe('getOdbDnsZone', () => {
+    it('invokes getOdbDnsZone without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+      );
+      client.innerApiCalls.getOdbDnsZone = stubSimpleCall(expectedResponse);
+      const [response] = await client.getOdbDnsZone(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getOdbDnsZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getOdbDnsZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getOdbDnsZone without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+      );
+      client.innerApiCalls.getOdbDnsZone =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getOdbDnsZone(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.oracledatabase.v1.IOdbDnsZone | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getOdbDnsZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getOdbDnsZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getOdbDnsZone with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getOdbDnsZone = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.getOdbDnsZone(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getOdbDnsZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getOdbDnsZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getOdbDnsZone with closed client', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.GetOdbDnsZoneRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.getOdbDnsZone(request), expectedError);
+    });
+  });
+
   describe('getExadbVmCluster', () => {
     it('invokes getExadbVmCluster without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
@@ -6268,6 +6400,394 @@ describe('v1.OracleDatabaseClient', () => {
       );
       await assert.rejects(
         client.checkDeleteOdbSubnetProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createOdbDnsZone', () => {
+    it('invokes createOdbDnsZone without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createOdbDnsZone =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createOdbDnsZone(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createOdbDnsZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createOdbDnsZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createOdbDnsZone without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.createOdbDnsZone =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createOdbDnsZone(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+              protos.google.cloud.oracledatabase.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.createOdbDnsZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createOdbDnsZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createOdbDnsZone with call error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createOdbDnsZone = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.createOdbDnsZone(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createOdbDnsZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createOdbDnsZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes createOdbDnsZone with LRO error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.CreateOdbDnsZoneRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createOdbDnsZone = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.createOdbDnsZone(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.createOdbDnsZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createOdbDnsZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkCreateOdbDnsZoneProgress without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateOdbDnsZoneProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateOdbDnsZoneProgress with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkCreateOdbDnsZoneProgress(''),
+        expectedError,
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteOdbDnsZone', () => {
+    it('invokes deleteOdbDnsZone without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteOdbDnsZone =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteOdbDnsZone(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteOdbDnsZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteOdbDnsZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteOdbDnsZone without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation(),
+      );
+      client.innerApiCalls.deleteOdbDnsZone =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteOdbDnsZone(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.oracledatabase.v1.IOperationMetadata
+            > | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.deleteOdbDnsZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteOdbDnsZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteOdbDnsZone with call error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteOdbDnsZone = stubLongRunningCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.deleteOdbDnsZone(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteOdbDnsZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteOdbDnsZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes deleteOdbDnsZone with LRO error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.DeleteOdbDnsZoneRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteOdbDnsZone = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError,
+      );
+      const [operation] = await client.deleteOdbDnsZone(request);
+      await assert.rejects(operation.promise(), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.deleteOdbDnsZone as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteOdbDnsZone as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes checkDeleteOdbDnsZoneProgress without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation(),
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteOdbDnsZoneProgress(
+        expectedResponse.name,
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteOdbDnsZoneProgress with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.checkDeleteOdbDnsZoneProgress(''),
         expectedError,
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -14187,6 +14707,334 @@ describe('v1.OracleDatabaseClient', () => {
     });
   });
 
+  describe('listOdbDnsZones', () => {
+    it('invokes listOdbDnsZones without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+        ),
+      ];
+      client.innerApiCalls.listOdbDnsZones = stubSimpleCall(expectedResponse);
+      const [response] = await client.listOdbDnsZones(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listOdbDnsZones as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listOdbDnsZones as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listOdbDnsZones without error using callback', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+        ),
+      ];
+      client.innerApiCalls.listOdbDnsZones =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listOdbDnsZones(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.oracledatabase.v1.IOdbDnsZone[] | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.listOdbDnsZones as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listOdbDnsZones as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listOdbDnsZones with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listOdbDnsZones = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.listOdbDnsZones(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.listOdbDnsZones as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listOdbDnsZones as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes listOdbDnsZonesStream without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+        ),
+      ];
+      client.descriptors.page.listOdbDnsZones.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listOdbDnsZonesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.OdbDnsZone[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.oracledatabase.v1.OdbDnsZone) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listOdbDnsZones.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listOdbDnsZones, request),
+      );
+      assert(
+        (client.descriptors.page.listOdbDnsZones.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('invokes listOdbDnsZonesStream with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listOdbDnsZones.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listOdbDnsZonesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.oracledatabase.v1.OdbDnsZone[] =
+          [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.oracledatabase.v1.OdbDnsZone) => {
+            responses.push(response);
+          },
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listOdbDnsZones.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listOdbDnsZones, request),
+      );
+      assert(
+        (client.descriptors.page.listOdbDnsZones.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listOdbDnsZones without error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.oracledatabase.v1.OdbDnsZone(),
+        ),
+      ];
+      client.descriptors.page.listOdbDnsZones.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.oracledatabase.v1.IOdbDnsZone[] = [];
+      const iterable = client.listOdbDnsZonesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listOdbDnsZones.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listOdbDnsZones.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+
+    it('uses async iteration with listOdbDnsZones with error', async () => {
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oracledatabase.v1.ListOdbDnsZonesRequest',
+        ['parent'],
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.descriptors.page.listOdbDnsZones.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listOdbDnsZonesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.oracledatabase.v1.IOdbDnsZone[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listOdbDnsZones.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request,
+      );
+      assert(
+        (client.descriptors.page.listOdbDnsZones.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams,
+          ),
+      );
+    });
+  });
+
   describe('listExadbVmClusters', () => {
     it('invokes listExadbVmClusters without error', async () => {
       const client = new oracledatabaseModule.v1.OracleDatabaseClient({
@@ -21913,6 +22761,82 @@ describe('v1.OracleDatabaseClient', () => {
         assert.strictEqual(result, 'minorVersionValue');
         assert(
           (client.pathTemplates.minorVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('odbDnsZone', async () => {
+      const fakePath = '/rendered/path/odbDnsZone';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        odb_network: 'odbNetworkValue',
+        odb_dns_zone: 'odbDnsZoneValue',
+      };
+      const client = new oracledatabaseModule.v1.OracleDatabaseClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.odbDnsZonePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.odbDnsZonePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('odbDnsZonePath', () => {
+        const result = client.odbDnsZonePath(
+          'projectValue',
+          'locationValue',
+          'odbNetworkValue',
+          'odbDnsZoneValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.odbDnsZonePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromOdbDnsZoneName', () => {
+        const result = client.matchProjectFromOdbDnsZoneName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.odbDnsZonePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromOdbDnsZoneName', () => {
+        const result = client.matchLocationFromOdbDnsZoneName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.odbDnsZonePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchOdbNetworkFromOdbDnsZoneName', () => {
+        const result = client.matchOdbNetworkFromOdbDnsZoneName(fakePath);
+        assert.strictEqual(result, 'odbNetworkValue');
+        assert(
+          (client.pathTemplates.odbDnsZonePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchOdbDnsZoneFromOdbDnsZoneName', () => {
+        const result = client.matchOdbDnsZoneFromOdbDnsZoneName(fakePath);
+        assert.strictEqual(result, 'odbDnsZoneValue');
+        assert(
+          (client.pathTemplates.odbDnsZonePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

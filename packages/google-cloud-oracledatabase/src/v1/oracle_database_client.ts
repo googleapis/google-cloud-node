@@ -293,6 +293,9 @@ export class OracleDatabaseClient {
       minorVersionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/giVersions/{gi_version}/minorVersions/{minor_version}',
       ),
+      odbDnsZonePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/odbNetworks/{odb_network}/odbDnsZones/{odb_dns_zone}',
+      ),
       odbNetworkPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/odbNetworks/{odb_network}',
       ),
@@ -388,6 +391,11 @@ export class OracleDatabaseClient {
         'pageToken',
         'nextPageToken',
         'odbSubnets',
+      ),
+      listOdbDnsZones: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'odbDnsZones',
       ),
       listExadbVmClusters: new this._gaxModule.PageDescriptor(
         'pageToken',
@@ -621,6 +629,18 @@ export class OracleDatabaseClient {
       '.google.protobuf.Empty',
     ) as gax.protobuf.Type;
     const deleteOdbSubnetMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const createOdbDnsZoneResponse = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OdbDnsZone',
+    ) as gax.protobuf.Type;
+    const createOdbDnsZoneMetadata = protoFilesRoot.lookup(
+      '.google.cloud.oracledatabase.v1.OperationMetadata',
+    ) as gax.protobuf.Type;
+    const deleteOdbDnsZoneResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty',
+    ) as gax.protobuf.Type;
+    const deleteOdbDnsZoneMetadata = protoFilesRoot.lookup(
       '.google.cloud.oracledatabase.v1.OperationMetadata',
     ) as gax.protobuf.Type;
     const createExadbVmClusterResponse = protoFilesRoot.lookup(
@@ -871,6 +891,16 @@ export class OracleDatabaseClient {
         deleteOdbSubnetResponse.decode.bind(deleteOdbSubnetResponse),
         deleteOdbSubnetMetadata.decode.bind(deleteOdbSubnetMetadata),
       ),
+      createOdbDnsZone: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createOdbDnsZoneResponse.decode.bind(createOdbDnsZoneResponse),
+        createOdbDnsZoneMetadata.decode.bind(createOdbDnsZoneMetadata),
+      ),
+      deleteOdbDnsZone: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteOdbDnsZoneResponse.decode.bind(deleteOdbDnsZoneResponse),
+        deleteOdbDnsZoneMetadata.decode.bind(deleteOdbDnsZoneMetadata),
+      ),
       createExadbVmCluster: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createExadbVmClusterResponse.decode.bind(createExadbVmClusterResponse),
@@ -1090,6 +1120,10 @@ export class OracleDatabaseClient {
       'getOdbSubnet',
       'createOdbSubnet',
       'deleteOdbSubnet',
+      'listOdbDnsZones',
+      'getOdbDnsZone',
+      'createOdbDnsZone',
+      'deleteOdbDnsZone',
       'listExadbVmClusters',
       'getExadbVmCluster',
       'createExadbVmCluster',
@@ -2249,6 +2283,144 @@ export class OracleDatabaseClient {
           {} | undefined,
         ]) => {
           this._log.info('getOdbSubnet response %j', response);
+          return [response, options, rawResponse];
+        },
+      )
+      .catch((error: any) => {
+        if (
+          error &&
+          'statusDetails' in error &&
+          error.statusDetails instanceof Array
+        ) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(
+            jsonProtos,
+          ) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(
+            error.statusDetails,
+            protos,
+          );
+        }
+        throw error;
+      });
+  }
+  /**
+   * Gets details of a single ODB DNS Zone.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the OdbDnsZone in the following format:
+   *   projects/{project}/locations/{location}/odbNetworks/{odb_network}/odbDnsZones/{odb_dns_zone}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing {@link protos.google.cloud.oracledatabase.v1.OdbDnsZone|OdbDnsZone}.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.get_odb_dns_zone.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_GetOdbDnsZone_async
+   */
+  getOdbDnsZone(
+    request?: protos.google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+      protos.google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest | undefined,
+      {} | undefined,
+    ]
+  >;
+  getOdbDnsZone(
+    request: protos.google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+      | protos.google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getOdbDnsZone(
+    request: protos.google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest,
+    callback: Callback<
+      protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+      | protos.google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  getOdbDnsZone(
+    request?: protos.google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+          | protos.google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+      | protos.google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+      protos.google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('getOdbDnsZone request %j', request);
+    const wrappedCallback:
+      | Callback<
+          protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+          | protos.google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getOdbDnsZone response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls
+      .getOdbDnsZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, options, rawResponse]: [
+          protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+          (
+            | protos.google.cloud.oracledatabase.v1.IGetOdbDnsZoneRequest
+            | undefined
+          ),
+          {} | undefined,
+        ]) => {
+          this._log.info('getOdbDnsZone response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -6989,6 +7161,371 @@ export class OracleDatabaseClient {
     const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteOdbSubnet,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Creates a new ODB DNS Zone in a given ODB Network.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for the OdbDnsZone in the following format:
+   *   projects/{project}/locations/{location}/odbNetworks/{odb_network}.
+   * @param {string} request.odbDnsZoneId
+   *   Required. The ID of the OdbDnsZone to create. This value is restricted
+   *   to (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$) and must be a maximum of 63
+   *   characters in length. The value must start with a letter and end with
+   *   a letter or a number.
+   * @param {google.cloud.oracledatabase.v1.OdbDnsZone} request.odbDnsZone
+   *   Required. Details of the OdbDnsZone instance to create.
+   * @param {string} [request.requestId]
+   *   Optional. An optional ID to identify the request. This value is used to
+   *   identify duplicate requests. If you make a request with the same request ID
+   *   and the original request is still in progress or completed, the server
+   *   ignores the second request. This prevents clients from
+   *   accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.create_odb_dns_zone.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateOdbDnsZone_async
+   */
+  createOdbDnsZone(
+    request?: protos.google.cloud.oracledatabase.v1.ICreateOdbDnsZoneRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  createOdbDnsZone(
+    request: protos.google.cloud.oracledatabase.v1.ICreateOdbDnsZoneRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createOdbDnsZone(
+    request: protos.google.cloud.oracledatabase.v1.ICreateOdbDnsZoneRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  createOdbDnsZone(
+    request?: protos.google.cloud.oracledatabase.v1.ICreateOdbDnsZoneRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createOdbDnsZone response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createOdbDnsZone request %j', request);
+    return this.innerApiCalls
+      .createOdbDnsZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.cloud.oracledatabase.v1.IOdbDnsZone,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('createOdbDnsZone response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `createOdbDnsZone()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.create_odb_dns_zone.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_CreateOdbDnsZone_async
+   */
+  async checkCreateOdbDnsZoneProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.cloud.oracledatabase.v1.OdbDnsZone,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('createOdbDnsZone long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.createOdbDnsZone,
+      this._gaxModule.createDefaultBackoffSettings(),
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.oracledatabase.v1.OdbDnsZone,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >;
+  }
+  /**
+   * Deletes a single ODB DNS Zone.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the resource in the following format:
+   *   projects/{project}/locations/{location}/odbNetworks/{odb_network}/odbDnsZones/{odb_dns_zone}.
+   * @param {string} [request.requestId]
+   *   Optional. An optional ID to identify the request. This value is used to
+   *   identify duplicate requests. If you make a request with the same request ID
+   *   and the original request is still in progress or completed, the server
+   *   ignores the second request. This prevents clients from
+   *   accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.delete_odb_dns_zone.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteOdbDnsZone_async
+   */
+  deleteOdbDnsZone(
+    request?: protos.google.cloud.oracledatabase.v1.IDeleteOdbDnsZoneRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  >;
+  deleteOdbDnsZone(
+    request: protos.google.cloud.oracledatabase.v1.IDeleteOdbDnsZoneRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteOdbDnsZone(
+    request: protos.google.cloud.oracledatabase.v1.IDeleteOdbDnsZoneRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): void;
+  deleteOdbDnsZone(
+    request?: protos.google.cloud.oracledatabase.v1.IDeleteOdbDnsZoneRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >,
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.oracledatabase.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >
+      | undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteOdbDnsZone response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteOdbDnsZone request %j', request);
+    return this.innerApiCalls
+      .deleteOdbDnsZone(request, options, wrappedCallback)
+      ?.then(
+        ([response, rawResponse, _]: [
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.oracledatabase.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | undefined,
+          {} | undefined,
+        ]) => {
+          this._log.info('deleteOdbDnsZone response %j', rawResponse);
+          return [response, rawResponse, _];
+        },
+      );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteOdbDnsZone()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.delete_odb_dns_zone.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_DeleteOdbDnsZone_async
+   */
+  async checkDeleteOdbDnsZoneProgress(
+    name: string,
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.oracledatabase.v1.OperationMetadata
+    >
+  > {
+    this._log.info('deleteOdbDnsZone long-running');
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name},
+      );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(
+      operation,
+      this.descriptors.longrunning.deleteOdbDnsZone,
       this._gaxModule.createDefaultBackoffSettings(),
     );
     return decodeOperation as LROperation<
@@ -13325,6 +13862,247 @@ export class OracleDatabaseClient {
     ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IOdbSubnet>;
   }
   /**
+   * Lists all the ODB DNS Zones in a given ODB Network.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for the OdbDnsZone in the following format:
+   *   projects/{project}/locations/{location}/odbNetworks/{odb_network}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *   If unspecified, at most 50 OdbDnsZones will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   * @param {string} [request.orderBy]
+   *   Optional. An expression for ordering the results of the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of {@link protos.google.cloud.oracledatabase.v1.OdbDnsZone|OdbDnsZone}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listOdbDnsZonesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listOdbDnsZones(
+    request?: protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest,
+    options?: CallOptions,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IOdbDnsZone[],
+      protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesResponse,
+    ]
+  >;
+  listOdbDnsZones(
+    request: protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest,
+      | protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IOdbDnsZone
+    >,
+  ): void;
+  listOdbDnsZones(
+    request: protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest,
+      | protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IOdbDnsZone
+    >,
+  ): void;
+  listOdbDnsZones(
+    request?: protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest,
+          | protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IOdbDnsZone
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest,
+      | protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesResponse
+      | null
+      | undefined,
+      protos.google.cloud.oracledatabase.v1.IOdbDnsZone
+    >,
+  ): Promise<
+    [
+      protos.google.cloud.oracledatabase.v1.IOdbDnsZone[],
+      protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest | null,
+      protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesResponse,
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    this.initialize().catch(err => {
+      throw err;
+    });
+    const wrappedCallback:
+      | PaginationCallback<
+          protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest,
+          | protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesResponse
+          | null
+          | undefined,
+          protos.google.cloud.oracledatabase.v1.IOdbDnsZone
+        >
+      | undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listOdbDnsZones values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listOdbDnsZones request %j', request);
+    return this.innerApiCalls
+      .listOdbDnsZones(request, options, wrappedCallback)
+      ?.then(
+        ([response, input, output]: [
+          protos.google.cloud.oracledatabase.v1.IOdbDnsZone[],
+          protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest | null,
+          protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesResponse,
+        ]) => {
+          this._log.info('listOdbDnsZones values %j', response);
+          return [response, input, output];
+        },
+      );
+  }
+
+  /**
+   * Equivalent to `listOdbDnsZones`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for the OdbDnsZone in the following format:
+   *   projects/{project}/locations/{location}/odbNetworks/{odb_network}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *   If unspecified, at most 50 OdbDnsZones will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   * @param {string} [request.orderBy]
+   *   Optional. An expression for ordering the results of the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing {@link protos.google.cloud.oracledatabase.v1.OdbDnsZone|OdbDnsZone} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listOdbDnsZonesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   */
+  listOdbDnsZonesStream(
+    request?: protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest,
+    options?: CallOptions,
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listOdbDnsZones'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOdbDnsZones stream %j', request);
+    return this.descriptors.page.listOdbDnsZones.createStream(
+      this.innerApiCalls.listOdbDnsZones as GaxCall,
+      request,
+      callSettings,
+    );
+  }
+
+  /**
+   * Equivalent to `listOdbDnsZones`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent value for the OdbDnsZone in the following format:
+   *   projects/{project}/locations/{location}/odbNetworks/{odb_network}.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return.
+   *   If unspecified, at most 50 OdbDnsZones will be returned.
+   *   The maximum value is 1000; values above 1000 will be coerced to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A token identifying a page of results the server should return.
+   * @param {string} [request.filter]
+   *   Optional. An expression for filtering the results of the request.
+   * @param {string} [request.orderBy]
+   *   Optional. An expression for ordering the results of the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   {@link protos.google.cloud.oracledatabase.v1.OdbDnsZone|OdbDnsZone}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/oracle_database.list_odb_dns_zones.js</caption>
+   * region_tag:oracledatabase_v1_generated_OracleDatabase_ListOdbDnsZones_async
+   */
+  listOdbDnsZonesAsync(
+    request?: protos.google.cloud.oracledatabase.v1.IListOdbDnsZonesRequest,
+    options?: CallOptions,
+  ): AsyncIterable<protos.google.cloud.oracledatabase.v1.IOdbDnsZone> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
+      });
+    const defaultCallSettings = this._defaults['listOdbDnsZones'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {
+      throw err;
+    });
+    this._log.info('listOdbDnsZones iterate %j', request);
+    return this.descriptors.page.listOdbDnsZones.asyncIterate(
+      this.innerApiCalls['listOdbDnsZones'] as GaxCall,
+      request as {},
+      callSettings,
+    ) as AsyncIterable<protos.google.cloud.oracledatabase.v1.IOdbDnsZone>;
+  }
+  /**
    * Lists all the Exadb (Exascale) VM Clusters for the given project and
    * location.
    *
@@ -18921,6 +19699,77 @@ export class OracleDatabaseClient {
   matchMinorVersionFromMinorVersionName(minorVersionName: string) {
     return this.pathTemplates.minorVersionPathTemplate.match(minorVersionName)
       .minor_version;
+  }
+
+  /**
+   * Return a fully-qualified odbDnsZone resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} odb_network
+   * @param {string} odb_dns_zone
+   * @returns {string} Resource name string.
+   */
+  odbDnsZonePath(
+    project: string,
+    location: string,
+    odbNetwork: string,
+    odbDnsZone: string,
+  ) {
+    return this.pathTemplates.odbDnsZonePathTemplate.render({
+      project: project,
+      location: location,
+      odb_network: odbNetwork,
+      odb_dns_zone: odbDnsZone,
+    });
+  }
+
+  /**
+   * Parse the project from OdbDnsZone resource.
+   *
+   * @param {string} odbDnsZoneName
+   *   A fully-qualified path representing OdbDnsZone resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromOdbDnsZoneName(odbDnsZoneName: string) {
+    return this.pathTemplates.odbDnsZonePathTemplate.match(odbDnsZoneName)
+      .project;
+  }
+
+  /**
+   * Parse the location from OdbDnsZone resource.
+   *
+   * @param {string} odbDnsZoneName
+   *   A fully-qualified path representing OdbDnsZone resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOdbDnsZoneName(odbDnsZoneName: string) {
+    return this.pathTemplates.odbDnsZonePathTemplate.match(odbDnsZoneName)
+      .location;
+  }
+
+  /**
+   * Parse the odb_network from OdbDnsZone resource.
+   *
+   * @param {string} odbDnsZoneName
+   *   A fully-qualified path representing OdbDnsZone resource.
+   * @returns {string} A string representing the odb_network.
+   */
+  matchOdbNetworkFromOdbDnsZoneName(odbDnsZoneName: string) {
+    return this.pathTemplates.odbDnsZonePathTemplate.match(odbDnsZoneName)
+      .odb_network;
+  }
+
+  /**
+   * Parse the odb_dns_zone from OdbDnsZone resource.
+   *
+   * @param {string} odbDnsZoneName
+   *   A fully-qualified path representing OdbDnsZone resource.
+   * @returns {string} A string representing the odb_dns_zone.
+   */
+  matchOdbDnsZoneFromOdbDnsZoneName(odbDnsZoneName: string) {
+    return this.pathTemplates.odbDnsZonePathTemplate.match(odbDnsZoneName)
+      .odb_dns_zone;
   }
 
   /**

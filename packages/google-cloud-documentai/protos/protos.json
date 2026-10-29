@@ -7672,6 +7672,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "processorVersionOverrides": {
+                          "type": "ProcessorVersionOverrides",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -8413,6 +8420,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "groundingSettings": {
+                          "type": "GroundingSettings",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -8610,6 +8624,35 @@
                             "CREATING": 5,
                             "FAILED": 6,
                             "DELETING": 7
+                          }
+                        }
+                      }
+                    },
+                    "GroundingSettings": {
+                      "fields": {
+                        "groundingType": {
+                          "type": "GroundingType",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "GroundingType": {
+                          "values": {
+                            "GROUNDING_TYPE_UNSPECIFIED": 0,
+                            "HARD": 1,
+                            "OCR_RELAXED": 2,
+                            "NO_GROUNDING": 3
+                          }
+                        }
+                      }
+                    },
+                    "ProcessorVersionOverrides": {
+                      "fields": {
+                        "groundingSettings": {
+                          "type": "GroundingSettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

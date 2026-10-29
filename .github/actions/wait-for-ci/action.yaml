@@ -46,12 +46,43 @@ runs:
                 per_page: 100,
               });
 
-              // Keep only the most recent workflow run per workflow_id
+              // Keep only the most recent active workflow run per workflow_id.
+              // Rapid events on the same SHA (e.g. stacked PR updates triggering both
+              // `synchronize` and `edited` within the same second) can share a 1s
+              // `created_at` timestamp while `concurrency: cancel-in-progress` cancels
+              // one of the runs. Prefer non-cancelled runs and compare monotonic
+              // `run_number` / `id` rather than `created_at`.
+              const isPreferredRun = (candidate, existing) => {
+                const candidateCancelled = candidate.conclusion === 'cancelled';
+                const existingCancelled = existing.conclusion === 'cancelled';
+                if (candidateCancelled !== existingCancelled) {
+                  return !candidateCancelled;
+                }
+                if (candidate.run_number !== existing.run_number) {
+                  return candidate.run_number > existing.run_number;
+                }
+                return candidate.id > existing.id;
+              };
+
               const latestByWorkflow = new Map();
+              let currentRun = null;
               for (const run of runs) {
+                if (run.id === context.runId) {
+                  currentRun = run;
+                }
                 const existing = latestByWorkflow.get(run.workflow_id);
-                if (!existing || new Date(run.created_at) > new Date(existing.created_at)) {
+                if (!existing || isPreferredRun(run, existing)) {
                   latestByWorkflow.set(run.workflow_id, run);
+                }
+              }
+
+              if (currentRun) {
+                const latestSelf = latestByWorkflow.get(currentRun.workflow_id);
+                if (latestSelf && latestSelf.id !== context.runId) {
+                  core.info(
+                    `This workflow run (${context.runId}) has been superseded by run ${latestSelf.id}; exiting early to release concurrency lock.`,
+                  );
+                  return;
                 }
               }
 

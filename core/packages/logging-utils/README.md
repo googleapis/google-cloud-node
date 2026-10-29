@@ -60,6 +60,34 @@ The package provides several built-in options:
 * `getDebugBackend(debugpkg)` This interfaces with the `debug` npm package. You'd essentially do something like `setBackend(getDebugBackend(require('debug')))`.
 * `getStructuredBackend(upstream?)`. This converts log output into structured log JSON objects, suitable for feeding into Cloud Logging. An optional `upstream` parameter lets you funnel the output through another backend instead of `console.log`.
 
+## Severity and request/response payloads
+Google Cloud client libraries log request and response payloads at `DEBUG` severity. Payloads can contain sensitive data.
+
+`GOOGLE_SDK_NODE_LOGGING` selects systems, not severities, and the built-in backends do not filter by severity. With the default Node backend, setting `GOOGLE_SDK_NODE_LOGGING=translate` (or `*`) prints `DEBUG` payloads to stderr along with everything else.
+
+To keep payloads out of your logs, filter on severity:
+
+* **Cloud Logging:** use `setBackend(getStructuredBackend())`. Each log line is written as JSON with a `severity` field, which becomes the log entry's severity when ingested by Cloud Logging. Set your Log Router sink's inclusion filter to `severity >= INFO` (or `severity >= WARNING` to keep only warnings and errors), and no request/response payloads are ingested. Per-attempt errors are also logged at `DEBUG`; to keep them, also include `DEBUG` entries that carry an `error.type` or `gcp.errors.domain` attribute.
+* **In process:** pass your own backend to `setBackend()` and drop entries based on `fields.severity`. The same approach works when forwarding logs to Winston, Pino, Bunyan, or another logger.
+
+```
+const logging = require('google-logging-utils');
+
+// Run with GOOGLE_SDK_NODE_LOGGING set as usual.
+const nodeBackend = logging.getNodeBackend();
+logging.setBackend({
+  log(namespace, fields, ...args) {
+    // Request/response payloads are logged at DEBUG.
+    if (fields.severity !== 'DEBUG') {
+      nodeBackend.log(namespace, fields, ...args);
+    }
+  },
+  setFilters(filters) {
+    nodeBackend.setFilters(filters);
+  },
+});
+```
+
 ## Hooking logs
 The log objects you receive from calling `log()` can be hooked as event emitters, like so:
 

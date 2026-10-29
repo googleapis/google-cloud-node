@@ -15,21 +15,37 @@
  */
 
 import * as extend from 'extend';
-import {CallOptions} from 'google-gax';
+import {CallOptions, ServiceError} from 'google-gax';
 import {isSpanContextValid, Span} from '@opentelemetry/api';
 
 import {BatchPublishOptions} from './message-batch';
-import {Queue, OrderedQueue} from './message-queues';
+import {Queue, OrderedQueue, logs} from './message-queues';
 import {Topic} from '../topic';
 import {RequestCallback, EmptyCallback} from '../pubsub';
 import {defaultOptions} from '../default-options';
 import * as tracing from '../telemetry-tracing';
 
 import {FlowControl, FlowControlOptions} from './flow-control';
+import {
+  HedgingOptions,
+  HedgingScheduler,
+  ResolvedHedgingOptions,
+  HedgingTokenBucket,
+} from './hedging';
 import {promisifySome} from '../util';
 
 import {PubsubMessage, Attributes} from './pubsub-message';
 export {PubsubMessage, Attributes} from './pubsub-message';
+export {
+  CancellationSharer,
+  HedgedPublishResult,
+  HedgedRequest,
+  HedgingOptions,
+  HedgingScheduler,
+  HedgingTokenBucket,
+  ResolvedHedgingOptions,
+  StartHedgedAttemptCallback,
+} from './hedging';
 
 export type PublishCallback = RequestCallback<string>;
 
@@ -38,6 +54,7 @@ export interface PublishOptions {
   flowControlOptions?: FlowControlOptions;
   gaxOpts?: CallOptions;
   messageOrdering?: boolean;
+  hedging?: HedgingOptions;
 }
 
 /**
@@ -52,6 +69,7 @@ export interface PublishOptions {
  * same order key in Message will be delivered to the subscribers in the order in which they
  *  are received by the Pub/Sub system. Otherwise, they may be delivered in
  * any order.
+ * @property {HedgingOptions} [hedging] Settings for configuring publish hedging.
  */
 
 export const BATCH_LIMITS: BatchPublishOptions = {
@@ -81,6 +99,17 @@ export class Publisher {
   queue: Queue;
   orderedQueues: Map<string, OrderedQueue>;
   flowControl: FlowControl;
+  /**
+   * @private
+   * @internal
+   */
+  hedgingOptions?: ResolvedHedgingOptions;
+  private tokenBucket_?: HedgingTokenBucket;
+  /**
+   * @private
+   * @internal
+   */
+  hedgingScheduler?: HedgingScheduler;
 
   constructor(topic: Topic, options?: PublishOptions) {
     this.flowControl = new FlowControl(
@@ -130,9 +159,14 @@ export class Publisher {
     allPublishes
       .then(() => allDrains)
       .then(() => {
+        this.hedgingScheduler?.clear();
         definedCallback(null);
+        return undefined;
       })
-      .catch(definedCallback);
+      .catch(err => {
+        this.hedgingScheduler?.clear();
+        definedCallback(err);
+      });
   }
 
   /**
@@ -213,6 +247,18 @@ export class Publisher {
     // to hang off of.
     this.getParentSpan(message, 'Publisher.publishMessage');
 
+    if (
+      this.hedgingOptions &&
+      (this.settings.messageOrdering || message.orderingKey)
+    ) {
+      callback!(
+        new Error(
+          'Publish hedging and message ordering cannot be enabled at the same time.',
+        ) as ServiceError,
+      );
+      return;
+    }
+
     if (!message.orderingKey) {
       this.queue.add(message, callback!);
     } else {
@@ -292,18 +338,46 @@ export class Publisher {
       options,
     );
 
+    const resolvedHedging = HedgingTokenBucket.validateAndResolveHedgingOptions(
+      options?.hedging ?? this.settings?.hedging,
+      messageOrdering,
+      gaxOpts,
+    );
+    this.hedgingScheduler?.clear();
+    this.hedgingOptions = resolvedHedging;
+    if (resolvedHedging) {
+      const tokenBucket = new HedgingTokenBucket(resolvedHedging);
+      this.tokenBucket_ = tokenBucket;
+      this.hedgingScheduler = new HedgingScheduler(
+        resolvedHedging,
+        tokenBucket,
+        () => {
+          logs.publishHedged.debug(
+            'Hedging rate limited due to lack of tokens.',
+          );
+        },
+      );
+    } else {
+      this.tokenBucket_ = undefined;
+      this.hedgingScheduler = undefined;
+    }
+
     this.settings = {
       batching: {
-        maxBytes: Math.min(batching!.maxBytes!, BATCH_LIMITS.maxBytes!),
-        maxMessages: Math.min(
-          batching!.maxMessages!,
-          BATCH_LIMITS.maxMessages!,
+        maxBytes: Math.min(
+          batching?.maxBytes ?? BATCH_LIMITS.maxBytes ?? 0,
+          BATCH_LIMITS.maxBytes ?? 0,
         ),
-        maxMilliseconds: batching!.maxMilliseconds,
+        maxMessages: Math.min(
+          batching?.maxMessages ?? BATCH_LIMITS.maxMessages ?? 0,
+          BATCH_LIMITS.maxMessages ?? 0,
+        ),
+        maxMilliseconds: batching?.maxMilliseconds,
       },
       gaxOpts,
       messageOrdering,
       flowControlOptions,
+      ...(resolvedHedging ? {hedging: resolvedHedging} : {}),
     };
 
     // We also need to let all of our queues know that they need to update their options.
@@ -318,7 +392,18 @@ export class Publisher {
     }
 
     // This will always be filled in by our defaults if nothing else.
-    this.flowControl.setOptions(this.settings.flowControlOptions!);
+    if (this.settings.flowControlOptions) {
+      this.flowControl.setOptions(this.settings.flowControlOptions);
+    }
+  }
+
+  /**
+   * Returns the hedging token bucket instance, or undefined if hedging is disabled.
+   *
+   * @private
+   */
+  get tokenBucket(): HedgingTokenBucket | undefined {
+    return this.tokenBucket_;
   }
 
   /**
