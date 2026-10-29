@@ -90,6 +90,7 @@ let globallyEnabled = false;
  */
 export function setGloballyEnabled(enabled: boolean) {
   globallyEnabled = enabled;
+  cachedTracer = undefined;
 }
 
 /**

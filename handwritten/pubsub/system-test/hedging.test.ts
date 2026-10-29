@@ -16,6 +16,7 @@ import * as assert from 'assert';
 import {describe, it, before, after} from 'mocha';
 import {TestResources} from 'google-test-utils';
 import * as gax from 'google-gax';
+import {trace} from '@opentelemetry/api';
 import {NodeTracerProvider} from '@opentelemetry/sdk-trace-node';
 import {
   SimpleSpanProcessor,
@@ -96,6 +97,21 @@ async function warmUpTokenBucket(
   for (let i = 0; i < count; i++) {
     await topic.publishMessage({data: Buffer.from(`${prefix}-${i}`)});
   }
+}
+
+async function waitForCondition(
+  predicate: () => boolean,
+  timeoutMs = 5000,
+  intervalMs = 25,
+): Promise<boolean> {
+  const start = Date.now();
+  while (!predicate()) {
+    if (Date.now() - start > timeoutMs) {
+      return false;
+    }
+    await new Promise(resolve => setTimeout(resolve, intervalMs));
+  }
+  return true;
 }
 
 describe('Publish Hedging System Tests', () => {
@@ -281,7 +297,7 @@ describe('Publish Hedging System Tests', () => {
         stallTimer = setTimeout(() => {
           stallTimer = undefined;
           originalPublish(argument, metadata, options, callback);
-        }, 2500);
+        }, 20000);
         return {
           cancel: () => {
             primaryCancelledByGax = true;
@@ -308,7 +324,11 @@ describe('Publish Hedging System Tests', () => {
       });
       assert.ok(messageId);
       assert.strictEqual(hedgedAttemptSent, true);
-      assert.strictEqual(primaryCancelledByGax, true);
+      assert.strictEqual(
+        await waitForCondition(() => primaryCancelledByGax),
+        true,
+        'Expected stalled primary attempt to be cancelled by GAX',
+      );
       assert.strictEqual(
         hedgedTelemetry?.publishOperation?.hedgedAttemptCount,
         1,
@@ -390,7 +410,7 @@ describe('Publish Hedging System Tests', () => {
         hedgedTimer = setTimeout(() => {
           hedgedTimer = undefined;
           originalPublish(argument, metadata, options, callback);
-        }, 2500);
+        }, 20000);
         return {
           cancel: () => {
             hedgedCancelledByGax = true;
@@ -412,7 +432,11 @@ describe('Publish Hedging System Tests', () => {
         data: Buffer.from(payload),
       });
       assert.ok(messageId);
-      assert.strictEqual(hedgedCancelledByGax, true);
+      assert.strictEqual(
+        await waitForCondition(() => hedgedCancelledByGax),
+        true,
+        'Expected in-flight hedged attempt to be cancelled by GAX',
+      );
       assert.strictEqual(topic.publisher.tokenBucket?.getTokenBalance(), 0.2);
 
       const received = await waitForMessages(subscription, {
@@ -553,7 +577,7 @@ describe('Publish Hedging System Tests', () => {
           stallTimer = setTimeout(() => {
             stallTimer = undefined;
             originalPublish(argument, metadata, options, callback);
-          }, 2500);
+          }, 20000);
           return {
             cancel: () => {
               if (stallTimer) {
@@ -601,6 +625,7 @@ describe('Publish Hedging System Tests', () => {
     } finally {
       tracing.setGloballyEnabled(false);
       await provider.shutdown();
+      trace.disable();
       await otelPubSub.close();
     }
   });
