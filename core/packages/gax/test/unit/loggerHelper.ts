@@ -17,7 +17,9 @@
 import * as assert from 'assert';
 import {EventEmitter} from 'events';
 import {Writable} from 'stream';
+import * as grpc from '@grpc/grpc-js';
 import {context, ROOT_CONTEXT, Span, trace} from '@opentelemetry/api';
+import {GoogleAuth, PassThroughClient} from 'google-auth-library';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as sinon from 'sinon';
 import * as loggingUtils from 'google-logging-utils';
@@ -43,10 +45,13 @@ import {
   ResultTuple,
 } from '../../src/apitypes';
 import {OngoingCallPromise} from '../../src/call';
+import {GrpcClient as FallbackGrpcClient} from '../../src/fallback';
 import {CallSettings} from '../../src/gax';
 import {GoogleError} from '../../src/googleError';
 import {Status} from '../../src/status';
+import echoProtoJson = require('../fixtures/echo.json');
 import {OtelHarness} from './otelHarness';
+import {setMockFallbackError, setMockFallbackHttpResponse} from './utils';
 
 interface CapturedLog {
   namespace: string;
@@ -903,10 +908,13 @@ describe('LoggerHelper', () => {
       assert.strictEqual(sink.logs.length, 0);
     });
 
-    it('emits a DEBUG log with response.payload when err.metadata is present and omits it when absent', async () => {
+    it('serializes populated grpc.Metadata via getMap and omits empty Metadata on pre-connection failures', async () => {
+      const metadata = new grpc.Metadata();
+      metadata.set('x-goog-request-id', 'req-123');
+      metadata.set('trace-bin', Buffer.from('abc'));
       const errWithMeta = Object.assign(new GoogleError('Unavailable'), {
         code: Status.UNAVAILABLE,
-        metadata: {'x-goog-request-id': 'req-123'},
+        metadata,
       });
 
       await assert.rejects(
@@ -938,11 +946,40 @@ describe('LoggerHelper', () => {
         'url.domain': 'storage.googleapis.com',
         'rpc.response.status_code': 'UNAVAILABLE',
         'error.type': 'UNAVAILABLE',
-        'response.payload': '{"x-goog-request-id":"req-123"}',
+        'response.payload':
+          '{"x-goog-request-id":"req-123","trace-bin":"YWJj"}',
       });
       assert.strictEqual('exception.type' in other, false);
       assert.strictEqual('exception.message' in other, false);
       assert.strictEqual('exception.stacktrace' in other, false);
+
+      sink.reset();
+      const preConnectGrpcErr = Object.assign(
+        new GoogleError('14 UNAVAILABLE: No connection established'),
+        {
+          code: Status.UNAVAILABLE,
+          metadata: new grpc.Metadata(),
+          cause: Object.assign(new Error('connect ECONNREFUSED 127.0.0.1'), {
+            code: 'ECONNREFUSED',
+          }),
+        },
+      );
+      await assert.rejects(
+        async () => {
+          await logNetworkAttempt(dynamicArgs, staticArgs, async () => {
+            throw preConnectGrpcErr;
+          });
+        },
+        (caught: unknown) => caught === preConnectGrpcErr,
+      );
+
+      assert.strictEqual(sink.logs.length, 1);
+      const preConnectOther = sink.logs[0].fields.other as LogPayload;
+      assert.strictEqual('response.payload' in preConnectOther, false);
+      assert.strictEqual(
+        preConnectOther['error.type'],
+        'CLIENT_CONNECTION_ERROR',
+      );
 
       sink.reset();
       const errWithoutMeta = new TypeError('client error');
@@ -967,7 +1004,137 @@ describe('LoggerHelper', () => {
       assert.strictEqual('exception.stacktrace' in otherWithoutMeta, false);
     });
 
-    it('captures the attempt span context and logs on callback and stream failures', () => {
+    it('emits response.payload on HTTP REST error responses and omits it on empty or transport failures', async () => {
+      const httpArgs: AttemptTraceContext = {
+        ...dynamicArgs,
+        rpcType: 'http',
+      };
+      const invokeEchoFallback = async (
+        configure: (gaxGrpc: FallbackGrpcClient) => void,
+      ): Promise<GoogleError> => {
+        const gaxGrpc = new FallbackGrpcClient({
+          auth: new GoogleAuth({authClient: new PassThroughClient()}),
+          fallback: 'rest',
+        });
+        const protos = gaxGrpc.loadProto(echoProtoJson);
+        const echoService = protos.lookupService('Echo');
+        configure(gaxGrpc);
+        const echoStub = await gaxGrpc.createStub(echoService, {
+          servicePath: 'foo.example.com',
+          port: 443,
+        });
+        return new Promise<GoogleError>((resolve, reject) => {
+          echoStub.echo({content: 'test'}, {}, {}, (err?: Error) => {
+            if (err instanceof GoogleError) {
+              resolve(err);
+            } else {
+              reject(new Error(`Expected GoogleError, got ${err}`));
+            }
+          });
+        });
+      };
+
+      const json503Body = JSON.stringify({
+        error: {
+          code: 503,
+          message: 'Backend unavailable',
+          status: 'UNAVAILABLE',
+        },
+      });
+      const err503 = await invokeEchoFallback(gaxGrpc =>
+        setMockFallbackHttpResponse(
+          gaxGrpc,
+          new Response(json503Body, {status: 503}),
+        ),
+      );
+      await assert.rejects(() =>
+        logNetworkAttempt(httpArgs, staticArgs, async () => {
+          throw err503;
+        }),
+      );
+      assert.strictEqual(sink.logs.length, 1);
+      const other503 = sink.logs[0].fields.other as LogPayload;
+      assert.strictEqual(other503['http.response.status_code'], 503);
+      assert.strictEqual(other503['rpc.response.status_code'], 'UNAVAILABLE');
+      assert.strictEqual(other503['response.payload'], json503Body);
+
+      sink.reset();
+      const json403Body = JSON.stringify({
+        error: {
+          code: 403,
+          message: 'Permission denied reading secret projects/p/secrets/s',
+          status: 'PERMISSION_DENIED',
+        },
+      });
+      const err403 = await invokeEchoFallback(gaxGrpc =>
+        setMockFallbackError(
+          gaxGrpc,
+          Object.assign(new Error(json403Body), {
+            status: 403,
+            response: {
+              status: 403,
+              data: '<<REDACTED> - See `errorRedactor` option in `gaxios` for configuration>.',
+            },
+          }),
+        ),
+      );
+      await assert.rejects(() =>
+        logNetworkAttempt(httpArgs, staticArgs, async () => {
+          throw err403;
+        }),
+      );
+      const other403 = sink.logs[0].fields.other as LogPayload;
+      assert.strictEqual(other403['http.response.status_code'], 403);
+      assert.strictEqual(
+        other403['rpc.response.status_code'],
+        'PERMISSION_DENIED',
+      );
+      assert.strictEqual(other403['response.payload'], json403Body);
+
+      sink.reset();
+      const longHtml502 = `<html>${'x'.repeat(2048)}</html>`;
+      const errHtml502 = await invokeEchoFallback(gaxGrpc =>
+        setMockFallbackHttpResponse(
+          gaxGrpc,
+          new Response(longHtml502, {status: 502}),
+        ),
+      );
+      await assert.rejects(() =>
+        logNetworkAttempt(httpArgs, staticArgs, async () => {
+          throw errHtml502;
+        }),
+      );
+      const otherHtml502 = sink.logs[0].fields.other as LogPayload;
+      assert.strictEqual(otherHtml502['response.payload'], longHtml502);
+
+      sink.reset();
+      const errEmpty502 = await invokeEchoFallback(gaxGrpc =>
+        setMockFallbackHttpResponse(gaxGrpc, new Response(null, {status: 502})),
+      );
+      const errEmpty403 = await invokeEchoFallback(gaxGrpc =>
+        setMockFallbackHttpResponse(gaxGrpc, new Response(null, {status: 403})),
+      );
+      const errTransport = await invokeEchoFallback(gaxGrpc =>
+        setMockFallbackError(
+          gaxGrpc,
+          Object.assign(new Error('connect ECONNREFUSED'), {
+            code: 'ECONNREFUSED',
+          }),
+        ),
+      );
+      for (const emptyErr of [errEmpty502, errEmpty403, errTransport]) {
+        sink.reset();
+        await assert.rejects(() =>
+          logNetworkAttempt(httpArgs, staticArgs, async () => {
+            throw emptyErr;
+          }),
+        );
+        const otherEmpty = sink.logs[0].fields.other as LogPayload;
+        assert.strictEqual('response.payload' in otherEmpty, false);
+      }
+    });
+
+    it('captures the attempt span context and logs at most once across callback and stream failures', () => {
       const stream = new EventEmitter();
       let receivedCallback: APICallback | undefined;
 
@@ -987,6 +1154,7 @@ describe('LoggerHelper', () => {
       );
 
       const attemptErr = new GoogleError('attempt failed');
+      // Simulates HTTP streaming fallback invoking both callback(err) and stream.emit('error', err).
       receivedCallback!(attemptErr);
       stream.emit('error', attemptErr);
 
@@ -994,22 +1162,115 @@ describe('LoggerHelper', () => {
       assert.strictEqual(spans.length, 2);
       const attemptSpan = spans[0];
 
-      assert.strictEqual(sink.logs.length, 2);
-      for (const logEntry of sink.logs) {
-        assert.strictEqual(logEntry.fields.severity, 'DEBUG');
-        assert.strictEqual(
-          logEntry.fields.telemetryTraceId,
-          attemptSpan.spanContext().traceId,
+      assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(sink.logs[0].fields.severity, 'DEBUG');
+      assert.strictEqual(
+        sink.logs[0].fields.telemetryTraceId,
+        attemptSpan.spanContext().traceId,
+      );
+      assert.strictEqual(
+        sink.logs[0].fields.telemetrySpanId,
+        attemptSpan.spanContext().spanId,
+      );
+      assert.deepStrictEqual(sink.logs[0].args, [
+        'RPC attempt failed: %s',
+        'attempt failed',
+      ]);
+
+      sink.reset();
+      harness.reset();
+      const streamOnly = new EventEmitter();
+      streamOnly.on('error', () => {});
+      traceCall(dynamicArgs, staticArgs, () =>
+        traceAttempt(dynamicArgs, staticArgs, () =>
+          logNetworkAttempt(dynamicArgs, staticArgs, () => streamOnly, true),
+        ),
+      );
+      const streamErr = new GoogleError('stream attempt failed');
+      streamOnly.emit('error', streamErr);
+      streamOnly.emit('error', new GoogleError('duplicate stream error'));
+
+      const streamSpans = harness.getSpans('google-gax');
+      assert.strictEqual(streamSpans.length, 2);
+      assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(
+        sink.logs[0].fields.telemetryTraceId,
+        streamSpans[0].spanContext().traceId,
+      );
+      assert.strictEqual(
+        sink.logs[0].fields.telemetrySpanId,
+        streamSpans[0].spanContext().spanId,
+      );
+      assert.deepStrictEqual(sink.logs[0].args, [
+        'RPC attempt failed: %s',
+        'stream attempt failed',
+      ]);
+    });
+
+    it('falls back to the active outer OpenTelemetry span when GAX tracing is disabled', async () => {
+      const err = Object.assign(new GoogleError('Unavailable'), {
+        code: Status.UNAVAILABLE,
+      });
+      const tracer = trace.getTracer('external-app');
+      let outerSpan: Span | undefined;
+
+      await assert.rejects(async () => {
+        await tracer.startActiveSpan('http-handler', async span => {
+          outerSpan = span;
+          try {
+            await logNetworkAttempt(dynamicArgs, staticArgs, async () => {
+              throw err;
+            });
+          } finally {
+            span.end();
+          }
+        });
+      });
+
+      assert.ok(outerSpan);
+      assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(
+        sink.logs[0].fields.telemetryTraceId,
+        outerSpan.spanContext().traceId,
+      );
+      assert.strictEqual(
+        sink.logs[0].fields.telemetrySpanId,
+        outerSpan.spanContext().spanId,
+      );
+
+      // Also preserves initialContext outer span when async callback loses active context.
+      sink.reset();
+      let capturedCallback: APICallback | undefined;
+      let initialOuterSpan: Span | undefined;
+      tracer.startActiveSpan('lost-context-attempt', span => {
+        initialOuterSpan = span;
+        logNetworkAttempt(
+          dynamicArgs,
+          staticArgs,
+          loggedCallback => {
+            capturedCallback = loggedCallback;
+            return undefined as unknown as ResultTuple;
+          },
+          false,
+          () => {},
         );
-        assert.strictEqual(
-          logEntry.fields.telemetrySpanId,
-          attemptSpan.spanContext().spanId,
-        );
-        assert.deepStrictEqual(logEntry.args, [
-          'RPC attempt failed: %s',
-          'attempt failed',
-        ]);
-      }
+        span.end();
+      });
+
+      assert.ok(initialOuterSpan);
+      context.with(ROOT_CONTEXT, () => {
+        capturedCallback!(err);
+      });
+
+      assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(
+        sink.logs[0].fields.telemetryTraceId,
+        initialOuterSpan.spanContext().traceId,
+      );
+      assert.strictEqual(
+        sink.logs[0].fields.telemetrySpanId,
+        initialOuterSpan.spanContext().spanId,
+      );
     });
   });
 });
