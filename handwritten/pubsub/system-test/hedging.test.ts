@@ -114,14 +114,6 @@ async function waitForCondition(
   return true;
 }
 
-// In environments where google-gax has not yet been released with
-// CallOptions.signal support (e.g. google-gax < 6.15.0), GAX will not
-// invoke the cancellation handler on the gRPC stub.
-const gaxSupportsSignal = Boolean(
-  typeof gax.CallSettings === 'function' &&
-    'signal' in new gax.CallSettings(),
-);
-
 describe('Publish Hedging System Tests', () => {
   const pubsub = new PubSub();
   const resources = new TestResources('ps-sys-hedge');
@@ -332,13 +324,11 @@ describe('Publish Hedging System Tests', () => {
       });
       assert.ok(messageId);
       assert.strictEqual(hedgedAttemptSent, true);
-      if (gaxSupportsSignal) {
-        assert.strictEqual(
-          await waitForCondition(() => primaryCancelledByGax),
-          true,
-          'Expected stalled primary attempt to be cancelled by GAX',
-        );
-      }
+      assert.strictEqual(
+        await waitForCondition(() => primaryCancelledByGax),
+        true,
+        'Expected stalled primary attempt to be cancelled by GAX',
+      );
       assert.strictEqual(
         hedgedTelemetry?.publishOperation?.hedgedAttemptCount,
         1,
@@ -442,13 +432,11 @@ describe('Publish Hedging System Tests', () => {
         data: Buffer.from(payload),
       });
       assert.ok(messageId);
-      if (gaxSupportsSignal) {
-        assert.strictEqual(
-          await waitForCondition(() => hedgedCancelledByGax),
-          true,
-          'Expected in-flight hedged attempt to be cancelled by GAX',
-        );
-      }
+      assert.strictEqual(
+        await waitForCondition(() => hedgedCancelledByGax),
+        true,
+        'Expected in-flight hedged attempt to be cancelled by GAX',
+      );
       assert.strictEqual(topic.publisher.tokenBucket?.getTokenBalance(), 0.2);
 
       const received = await waitForMessages(subscription, {
