@@ -19,8 +19,12 @@ import * as vm from 'vm';
 import {describe, it} from 'mocha';
 import * as grpc from '@grpc/grpc-js';
 import {Span} from '@opentelemetry/api';
+import {GoogleAuth, PassThroughClient} from 'google-auth-library';
+import {GrpcClient as FallbackGrpcClient} from '../../src/fallback';
 import {GoogleError, GoogleErrorDecoder} from '../../src/googleError';
 import {Status} from '../../src/status';
+import echoProtoJson = require('../fixtures/echo.json');
+import {setMockFallbackHttpResponse} from './utils';
 import {
   connectionCodes,
   requestCodes,
@@ -61,22 +65,48 @@ const SERVICE_DISABLED_ERROR_INFO = {
 };
 
 /**
- * Builds the GoogleError produced for an HTTP error response that carries
- * SERVICE_DISABLED_ERROR_INFO in its details.
+ * Builds the GoogleError produced by a `fallback: 'rest'` call that fails with
+ * HTTP 403 (rejected by `validateStatus` and translated by `_toGoogleError`)
+ * carrying SERVICE_DISABLED_ERROR_INFO in its details.
  */
-function httpErrorWithErrorInfo(): GoogleError {
-  return GoogleError.parseHttpError({
-    error: {
-      code: 403,
-      message: 'Cloud Translation API is disabled for project 123.',
-      status: 'PERMISSION_DENIED',
-      details: [
-        {
-          '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
-          ...SERVICE_DISABLED_ERROR_INFO,
+async function httpErrorWithErrorInfo(): Promise<GoogleError> {
+  const gaxGrpc = new FallbackGrpcClient({
+    auth: new GoogleAuth({authClient: new PassThroughClient()}),
+    fallback: 'rest',
+  });
+  const protos = gaxGrpc.loadProto(echoProtoJson);
+  const echoService = protos.lookupService('Echo');
+  setMockFallbackHttpResponse(
+    gaxGrpc,
+    new Response(
+      JSON.stringify({
+        error: {
+          code: 403,
+          message: 'Cloud Translation API is disabled for project 123.',
+          status: 'PERMISSION_DENIED',
+          details: [
+            {
+              '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
+              ...SERVICE_DISABLED_ERROR_INFO,
+            },
+          ],
         },
-      ],
-    },
+      }),
+      {status: 403},
+    ),
+  );
+  const echoStub = await gaxGrpc.createStub(echoService, {
+    servicePath: 'foo.example.com',
+    port: 443,
+  });
+  return new Promise<GoogleError>((resolve, reject) => {
+    echoStub.echo({content: 'test'}, {}, {}, (err?: Error) => {
+      if (err instanceof GoogleError) {
+        resolve(err);
+      } else {
+        reject(new Error(`Expected GoogleError, got ${err}`));
+      }
+    });
   });
 }
 
@@ -237,10 +267,15 @@ describe('errorUtil', () => {
       );
     });
 
-    it('resolveErrorInfoDomain reads the domain promoted from HTTP and gRPC ErrorInfo details', () => {
+    it('resolveErrorInfoDomain reads the domain promoted from HTTP and gRPC ErrorInfo details', async () => {
+      const httpErr = await httpErrorWithErrorInfo();
+      assert.strictEqual(resolveErrorInfoReason(httpErr), 'SERVICE_DISABLED');
+      assert.strictEqual(resolveErrorInfoDomain(httpErr), 'googleapis.com');
+      assert.strictEqual(resolveErrorType(httpErr, 'http'), 'SERVICE_DISABLED');
+      assert.strictEqual(resolveHttpStatusCode(httpErr), 403);
       assert.strictEqual(
-        resolveErrorInfoDomain(httpErrorWithErrorInfo()),
-        'googleapis.com',
+        resolveExceptionMessage(httpErr, 'http'),
+        'Cloud Translation API is disabled for project 123.',
       );
 
       // ErrorInfo still encoded in grpc-status-details-bin is decoded on demand.
@@ -315,13 +350,13 @@ describe('errorUtil', () => {
       assert.deepStrictEqual(resolveErrorInfoMetadataAttributes(grpcErr), {});
     });
 
-    it('resolveErrorInfoMetadataAttributes reads the metadata promoted from HTTP and gRPC ErrorInfo details', () => {
+    it('resolveErrorInfoMetadataAttributes reads the metadata promoted from HTTP and gRPC ErrorInfo details', async () => {
       const expected = {
         'gcp.errors.metadata.service': 'translate.googleapis.com',
         'gcp.errors.metadata.consumer': 'projects/123',
       };
       assert.deepStrictEqual(
-        resolveErrorInfoMetadataAttributes(httpErrorWithErrorInfo()),
+        resolveErrorInfoMetadataAttributes(await httpErrorWithErrorInfo()),
         expected,
       );
       assert.deepStrictEqual(
