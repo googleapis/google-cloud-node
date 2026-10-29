@@ -820,6 +820,9 @@ libraries:
     apis:
       - path: google/cloud/designcenter/v1
     copyright_year: "2026"
+    nodejs:
+      default_version: v1
+      main_service: DesignCenter
   - name: google-cloud-developerconnect
     version: 0.10.0
     apis:

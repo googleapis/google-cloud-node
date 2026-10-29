@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'Config',
-    filename: './config.js',
+    library: 'DesignCenter',
+    filename: './design-center.js',
   },
   node: {
     child_process: 'empty',
