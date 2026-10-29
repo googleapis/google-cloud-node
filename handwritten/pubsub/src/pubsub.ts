@@ -1374,9 +1374,9 @@ export class PubSub {
     ) => void;
     const clientWithGax = gaxClient as unknown as {
       _gaxModule?: {
-        CallSettings?: new (
-          settings?: gax.CallOptions,
-        ) => {signal?: AbortSignal};
+        CallSettings?: new (settings?: gax.CallOptions) => {
+          signal?: AbortSignal;
+        };
         createApiCall?: (
           func: unknown,
           settings?: {
@@ -1470,24 +1470,25 @@ export class PubSub {
           signal.addEventListener('abort', abortListener, {once: true});
 
           if (callback) {
-            cancellablePromise.then(
-              result => {
+            cancellablePromise
+              .then(result => {
                 signal.removeEventListener('abort', abortListener);
                 const [response, next, rawResponse] = result;
                 callback(null, response, next, rawResponse);
-              },
-              err => {
+                return null;
+              })
+              .catch(err => {
                 signal.removeEventListener('abort', abortListener);
                 callback(err);
-              },
-            );
+              });
             return undefined;
           }
 
-          cancellablePromise.then(
-            () => signal.removeEventListener('abort', abortListener),
-            () => signal.removeEventListener('abort', abortListener),
-          );
+          cancellablePromise
+            .finally(() => {
+              signal.removeEventListener('abort', abortListener);
+            })
+            .catch(() => {});
           return cancellablePromise;
         };
       },
