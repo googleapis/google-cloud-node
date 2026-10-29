@@ -426,13 +426,18 @@ export function resolveEndpointAndDomain(
     splitHostAndPort(rawAddress);
   }
 
-  let urlDomain = dynamicArgs.urlDomain ?? staticArgs.urlDomain ?? rawAddress;
-  if (!urlDomain && staticArgs.gcpClientService) {
-    // Append ".googleapis.com" when gcpClientService is a short service name.
-    urlDomain = staticArgs.gcpClientService.includes('.')
+  // Prefer nominal service domain from gcpClientService over an overridden
+  // serverAddress (e.g. 127.0.0.1 or a regional endpoint) so url.domain stays canonical.
+  const serviceDomain = staticArgs.gcpClientService
+    ? staticArgs.gcpClientService.includes('.')
       ? staticArgs.gcpClientService
-      : `${staticArgs.gcpClientService}.googleapis.com`;
-  }
+      : `${staticArgs.gcpClientService}.googleapis.com`
+    : undefined;
+  const urlDomain =
+    dynamicArgs.urlDomain ??
+    staticArgs.urlDomain ??
+    serviceDomain ??
+    rawAddress;
 
   if (defaultPort !== undefined) {
     if (!rawAddress && urlDomain) {

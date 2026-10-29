@@ -144,11 +144,15 @@ describe('LoggerHelper', () => {
         'rpc.system.name': 'grpc',
         'rpc.method': 'google.storage.v2.Storage/GetObject',
         'url.domain': 'storage.googleapis.com',
+        'server.address': 'storage.googleapis.com',
         'rpc.response.status_code': 'INVALID_ARGUMENT',
         'error.type': 'INVALID_FIELD',
         'gcp.errors.domain': 'googleapis.com',
         'gcp.errors.metadata.service': 'storage.googleapis.com',
         'gcp.errors.metadata.field': 'bucket',
+        'exception.type': 'GoogleError',
+        'exception.message': 'Field name is invalid',
+        'exception.stacktrace': err.stack,
       });
     });
 
@@ -173,13 +177,14 @@ describe('LoggerHelper', () => {
         'rpc.response.status_code': 'NOT_FOUND',
         'http.response.status_code': 404,
         'error.type': '404',
+        'exception.type': 'GoogleError',
+        'exception.message': 'Not Found',
+        'exception.stacktrace': httpErr.stack,
       });
       assert.strictEqual('gcp.client.service' in attributes, false);
       assert.strictEqual('rpc.method' in attributes, false);
+      assert.strictEqual('server.address' in attributes, false);
       assert.strictEqual('gcp.errors.domain' in attributes, false);
-      assert.strictEqual('exception.type' in attributes, false);
-      assert.strictEqual('exception.message' in attributes, false);
-      assert.strictEqual('exception.stacktrace' in attributes, false);
 
       // Prefers explicit gRPC status code parsed from Google HTTP error body over generic HTTP bucket.
       const specificHttpErr = Object.assign(
@@ -195,6 +200,7 @@ describe('LoggerHelper', () => {
           clientName: 'StorageClient',
           methodName: 'GetObject',
           rpcType: 'http',
+          serverAddress: 'custom.storage.googleapis.com:8443',
         },
         {},
       );
@@ -203,11 +209,46 @@ describe('LoggerHelper', () => {
         'FAILED_PRECONDITION',
       );
       assert.strictEqual(specificAttrs['http.response.status_code'], 400);
+      assert.strictEqual(
+        specificAttrs['server.address'],
+        'custom.storage.googleapis.com',
+      );
 
-      // Translates HTTP transport errors carrying a gRPC status code without an HTTP status.
-      const httpTransportErr = Object.assign(new GoogleError('Unavailable'), {
-        code: Status.UNAVAILABLE,
-      });
+      // Omits rpc.response.status_code on HTTP timeouts and pre-response transport
+      // errors where fallbackServiceStub sets a synthetic retry Status code without httpStatusCode.
+      const httpTimeoutErr = Object.assign(
+        new GoogleError(
+          'Deadline exceeded: GetObject did not respond within 1000 milliseconds.',
+        ),
+        {
+          code: Status.DEADLINE_EXCEEDED,
+        },
+      );
+      const timeoutAttrs = buildLogAttributes(
+        httpTimeoutErr,
+        {
+          clientName: 'StorageClient',
+          methodName: 'GetObject',
+          rpcType: 'http',
+        },
+        staticArgs,
+      );
+      assert.strictEqual(timeoutAttrs['error.type'], 'CLIENT_TIMEOUT');
+      assert.strictEqual('rpc.response.status_code' in timeoutAttrs, false);
+      assert.strictEqual('http.response.status_code' in timeoutAttrs, false);
+
+      const econnRefusedCause = Object.assign(
+        new Error('connect ECONNREFUSED'),
+        {
+          code: 'ECONNREFUSED',
+        },
+      );
+      const httpTransportErr = Object.assign(
+        new GoogleError('connect ECONNREFUSED', {cause: econnRefusedCause}),
+        {
+          code: Status.UNAVAILABLE,
+        },
+      );
       const transportAttrs = buildLogAttributes(
         httpTransportErr,
         {
@@ -215,12 +256,13 @@ describe('LoggerHelper', () => {
           methodName: 'GetObject',
           rpcType: 'http',
         },
-        {},
+        staticArgs,
       );
       assert.strictEqual(
-        transportAttrs['rpc.response.status_code'],
-        'UNAVAILABLE',
+        transportAttrs['error.type'],
+        'CLIENT_CONNECTION_ERROR',
       );
+      assert.strictEqual('rpc.response.status_code' in transportAttrs, false);
       assert.strictEqual('http.response.status_code' in transportAttrs, false);
     });
 
@@ -232,7 +274,20 @@ describe('LoggerHelper', () => {
         staticArgs,
       );
       assert.strictEqual(clientAttrs['error.type'], 'TypeError');
+      assert.strictEqual(clientAttrs['exception.type'], 'TypeError');
+      assert.strictEqual(clientAttrs['exception.message'], 'invalid argument');
+      assert.strictEqual(clientAttrs['exception.stacktrace'], clientErr.stack);
+      assert.strictEqual(clientAttrs['url.domain'], 'storage.googleapis.com');
+      assert.strictEqual('server.address' in clientAttrs, false);
       assert.strictEqual('rpc.response.status_code' in clientAttrs, false);
+
+      const dnsErr = Object.assign(new Error('getaddrinfo ENOTFOUND'), {
+        code: 'ENOTFOUND',
+      });
+      const dnsAttrs = buildLogAttributes(dnsErr, dynamicArgs, staticArgs);
+      assert.strictEqual(dnsAttrs['error.type'], 'CLIENT_CONNECTION_ERROR');
+      assert.strictEqual(dnsAttrs['url.domain'], 'storage.googleapis.com');
+      assert.strictEqual('server.address' in dnsAttrs, false);
 
       const httpClientAttrs = buildLogAttributes(
         clientErr,
@@ -249,6 +304,10 @@ describe('LoggerHelper', () => {
         staticArgs,
       );
       assert.strictEqual(primitiveAttrs['error.type'], 'INTERNAL');
+      assert.strictEqual(primitiveAttrs['exception.type'], 'Error');
+      assert.strictEqual(primitiveAttrs['exception.message'], 'string failure');
+      assert.strictEqual('exception.stacktrace' in primitiveAttrs, false);
+      assert.strictEqual('server.address' in primitiveAttrs, false);
     });
   });
 
@@ -336,6 +395,7 @@ describe('LoggerHelper', () => {
         'rpc.system.name': 'grpc',
         'rpc.method': 'google.storage.v2.Storage/GetObject',
         'url.domain': 'storage.googleapis.com',
+        'server.address': 'storage.googleapis.com',
         'rpc.response.status_code': 'PERMISSION_DENIED',
         'error.type': 'IAM_PERMISSION_DENIED',
         'gcp.errors.domain': 'googleapis.com',

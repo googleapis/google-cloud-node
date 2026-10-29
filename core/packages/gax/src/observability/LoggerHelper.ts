@@ -28,6 +28,7 @@ import {
   StaticTraceContext,
 } from './contextUtil';
 import {
+  isPreConnectionFailure,
   resolveErrorInfoDomain,
   resolveErrorInfoMetadataAttributes,
   resolveErrorType,
@@ -53,6 +54,7 @@ export interface LogPayload {
   'gcp.client.language'?: 'node';
   'gcp.client.service'?: string;
   'url.domain'?: string;
+  'server.address'?: string;
   'response.payload'?: string;
   'exception.type'?: string;
   'exception.message'?: string;
@@ -85,7 +87,11 @@ export function buildLogAttributes(
   dynamicArgs: AttemptTraceContext,
   staticArgs: StaticTraceContext = {},
 ): LogPayload {
-  const {urlDomain} = resolveEndpointAndDomain(dynamicArgs, staticArgs);
+  const {rawAddress, urlDomain} = resolveEndpointAndDomain(
+    dynamicArgs,
+    staticArgs,
+    443,
+  );
   const initialAttributes = buildInitialAttributes(
     dynamicArgs,
     staticArgs,
@@ -98,6 +104,9 @@ export function buildLogAttributes(
     }
   }
   attributes['gcp.client.language'] = 'node';
+  if (rawAddress !== undefined && !isPreConnectionFailure(err)) {
+    attributes['server.address'] = rawAddress;
+  }
 
   const rpcMethod = resolveRpcMethod(dynamicArgs);
   if (rpcMethod) {
@@ -111,10 +120,10 @@ export function buildLogAttributes(
   );
   const normalizedRpcStatusName =
     dynamicArgs.rpcType === 'http'
-      ? (resolveRpcStatusName(err) ??
-        (httpStatusCode !== undefined
-          ? Status[rpcCodeFromHttpStatusCode(httpStatusCode)]
-          : undefined))
+      ? httpStatusCode !== undefined
+        ? (resolveRpcStatusName(err) ??
+          Status[rpcCodeFromHttpStatusCode(httpStatusCode)])
+        : undefined
       : rpcStatusName;
   if (normalizedRpcStatusName !== undefined) {
     attributes['rpc.response.status_code'] = normalizedRpcStatusName;
@@ -130,6 +139,16 @@ export function buildLogAttributes(
     attributes['gcp.errors.domain'] = errorDomain;
   }
   Object.assign(attributes, resolveErrorInfoMetadataAttributes(err));
+
+  attributes['exception.type'] = resolveExceptionType(err);
+  attributes['exception.message'] = resolveExceptionMessage(
+    err,
+    dynamicArgs.rpcType,
+  );
+  const stacktrace = resolveExceptionStacktrace(err);
+  if (stacktrace !== undefined) {
+    attributes['exception.stacktrace'] = stacktrace;
+  }
 
   return attributes;
 }
@@ -180,14 +199,7 @@ export function logCall<T = GaxCallResult>(
     const spanId = spanContext?.spanId;
 
     // Build structured log attributes with exception details.
-    const exceptionMessage = resolveExceptionMessage(err, dynamicArgs.rpcType);
-    const stacktrace = resolveExceptionStacktrace(err);
-    const attributes: LogPayload = {
-      ...buildLogAttributes(err, dynamicArgs, staticArgs),
-      'exception.type': resolveExceptionType(err),
-      'exception.message': exceptionMessage,
-      ...(stacktrace !== undefined ? {'exception.stacktrace': stacktrace} : {}),
-    };
+    const attributes = buildLogAttributes(err, dynamicArgs, staticArgs);
 
     const warningSeverity =
       (
@@ -205,7 +217,7 @@ export function logCall<T = GaxCallResult>(
         other: attributes,
       },
       'Client API call failed: %s',
-      exceptionMessage || err,
+      attributes['exception.message'] || err,
     );
   };
 

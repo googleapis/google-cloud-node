@@ -415,11 +415,35 @@ describe('contextUtil', () => {
       );
     });
 
-    it('falls back to the server address, then gcpClientService, for url.domain', () => {
+    it('prefers nominal gcpClientService domain over an overridden server address for url.domain', () => {
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {...dynamicArgs, serverAddress: '127.0.0.1'},
+          {gcpClientService: 'texttospeech'},
+        ),
+        {
+          rawAddress: '127.0.0.1',
+          rawPort: undefined,
+          urlDomain: 'texttospeech.googleapis.com',
+        },
+      );
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          dynamicArgs,
+          {gcpClientService: 'texttospeech', serverAddress: '127.0.0.1:8080'},
+          443,
+        ),
+        {
+          rawAddress: '127.0.0.1',
+          rawPort: 8080,
+          urlDomain: 'texttospeech.googleapis.com',
+        },
+      );
+      // Falls back to server address only when neither urlDomain nor gcpClientService is set.
       assert.deepStrictEqual(
         resolveEndpointAndDomain(
           {...dynamicArgs, serverAddress: 'example.com'},
-          {gcpClientService: 'cloudkms'},
+          {},
         ),
         {
           rawAddress: 'example.com',
