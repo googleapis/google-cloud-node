@@ -1474,12 +1474,17 @@ export class PubSub {
               .then(result => {
                 signal.removeEventListener('abort', abortListener);
                 const [response, next, rawResponse] = result;
-                callback(null, response, next, rawResponse);
-                return null;
+                return process.nextTick(
+                  callback,
+                  null,
+                  response,
+                  next,
+                  rawResponse,
+                );
               })
               .catch(err => {
                 signal.removeEventListener('abort', abortListener);
-                callback(err);
+                process.nextTick(callback, err);
               });
             return undefined;
           }
