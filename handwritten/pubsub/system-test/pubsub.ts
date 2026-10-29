@@ -627,6 +627,7 @@ describe('pubsub', () => {
       const pop = await subPop('wfp', 1);
       const subscription = pop.topic.subscription(pop.testSubs[0].name, {
         useLegacyFlowControl: true,
+        streamingOptions: {maxStreams: 1},
         flowControl: {maxMessages, allowExcessMessages: false},
         closeOptions: {
           behavior: SubscriptionCloseBehaviors.WaitForProcessing,
@@ -636,20 +637,27 @@ describe('pubsub', () => {
 
       const received: Message[] = [];
       let closePromise: Promise<void> | undefined;
+      let closeStart = 0;
 
-      await new Promise<void>((resolve, reject) => {
-        subscription.on('error', reject);
-        subscription.on('message', msg => {
-          received.push(msg);
-          if (received.length === maxMessages && !closePromise) {
-            closePromise = subscription.close().then(resolve, reject);
-          }
-          setTimeout(() => msg.ack(), 50);
+      try {
+        await new Promise<void>((resolve, reject) => {
+          subscription.on('error', reject);
+          subscription.on('message', msg => {
+            received.push(msg);
+            if (received.length === maxMessages && !closePromise) {
+              closeStart = Date.now();
+              closePromise = subscription.close().then(resolve, reject);
+            }
+            setTimeout(() => msg.ack(), 50);
+          });
         });
-      });
 
-      await closePromise;
-      assert.ok(received.length >= maxMessages);
+        await closePromise;
+        assert.ok(received.length > maxMessages);
+        assert.ok(Date.now() - closeStart < 15000);
+      } finally {
+        subscription.removeAllListeners();
+      }
     });
 
     it('should send and receive large messages', async () => {
