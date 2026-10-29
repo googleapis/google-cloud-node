@@ -290,6 +290,15 @@ export class LeaseManager extends EventEmitter {
       delete this._timer;
     }
   }
+  private _hasMessageListeners(): boolean {
+    const sub = (this._subscriber as unknown as {_subscription?: EventEmitter})
+      ._subscription;
+    if (sub && typeof sub.listenerCount === 'function') {
+      return sub.listenerCount('message') > 0;
+    }
+    return this._subscriber.listenerCount('message') > 0;
+  }
+
   /**
    * Emits the message. Emitting messages is very slow, so to avoid it acting
    * as a bottleneck, we're wrapping it in nextTick.
@@ -302,9 +311,21 @@ export class LeaseManager extends EventEmitter {
    */
   private _dispense(message: Message): void {
     if (this._messages.has(message)) {
+      if (!this._subscriber.isOpen && !this._hasMessageListeners()) {
+        message.subSpans.shutdown();
+        message.nack();
+        this.remove(message);
+        return;
+      }
       message.subSpans.flowEnd();
       process.nextTick(() => {
         if (!this._messages.has(message)) {
+          return;
+        }
+        if (!this._subscriber.isOpen && !this._hasMessageListeners()) {
+          message.subSpans.shutdown();
+          message.nack();
+          this.remove(message);
           return;
         }
         message.dispatched();

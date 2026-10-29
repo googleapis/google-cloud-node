@@ -629,6 +629,31 @@ describe('LeaseManager', () => {
       leaseManager.remove(temp);
     });
 
+    it('should nack and remove pending messages if subscriber.isOpen is false and no message listeners remain', done => {
+      const temp = new FakeMessage() as {} as Message;
+      const pending = new FakeMessage() as {} as Message;
+      const nackSpy = sandbox.spy(pending, 'nack');
+      const shutdownSpy = sandbox.spy(pending.subSpans, 'shutdown');
+
+      leaseManager.setOptions({allowExcessMessages: false, maxMessages: 1});
+
+      const onMessage = (message: Message) => {
+        assert.strictEqual(message, temp);
+      };
+      subscriber.on('message', onMessage);
+
+      leaseManager.add(temp);
+      leaseManager.add(pending);
+      subscriber.removeListener('message', onMessage);
+      subscriber.isOpen = false;
+      leaseManager.remove(temp);
+
+      assert.strictEqual(nackSpy.callCount, 1);
+      assert.strictEqual(shutdownSpy.callCount, 1);
+      assert.strictEqual(leaseManager.size, 0);
+      setImmediate(done);
+    });
+
     it('should not emit a dispensed message if clear() is called before nextTick', done => {
       const temp = new FakeMessage() as {} as Message;
       const pending = new FakeMessage() as {} as Message;
