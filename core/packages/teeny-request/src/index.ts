@@ -33,6 +33,10 @@ import type nodeFetch from 'node-fetch' with {'resolution-mode': 'import'};
 const MAX_REDIRECTS = 20;
 const REDIRECT_STATUS_CODES = new Set([301, 302, 303, 307, 308]);
 
+/**
+ * Node.js http/https transport adapter for Bun that preserves custom http.Agent
+ * instances, Content-Length calculation, and node-fetch decompression semantics.
+ */
 function bunFetch(
   url: URL | f.RequestInfo,
   init: f.RequestInit & {timeout?: number} = {},
