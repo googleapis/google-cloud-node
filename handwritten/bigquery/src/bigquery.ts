@@ -2930,11 +2930,14 @@ export class BigQueryTimestamp {
     }
     // to keep backward compatibility, only converts with microsecond,
     // nanosecond, or picosecond precision if needed.
-    if (
-      pd.getMicroseconds() > 0 ||
-      pd.getNanoseconds() > 0 ||
-      (pd.getPicoseconds?.() ?? 0) > 0
-    ) {
+if (!pd) {
+  throw new TypeError('Invalid or missing date argument');
+}
+if (
+  pd.getMicroseconds() > 0 ||
+  pd.getNanoseconds() > 0 ||
+  (typeof pd.getPicoseconds === 'function' && pd.getPicoseconds() > 0)
+) {
       this.value = pd.toISOString();
     } else {
       this.value = new Date(pd.getTime()).toJSON();
