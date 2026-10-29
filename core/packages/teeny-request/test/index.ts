@@ -752,6 +752,29 @@ describe('teeny', () => {
           },
         );
       });
+
+      for (const method of ['POST', 'PUT']) {
+        const emptyBodyLengthScope = nock(uri)
+          .intercept(`/empty-${method.toLowerCase()}`, method)
+          .matchHeader('content-length', '0')
+          .reply(200, 'ok');
+        await new Promise<void>((resolve, reject) => {
+          teenyRequest(
+            {uri: `${uri}/empty-${method.toLowerCase()}`, method},
+            (err, res, body) => {
+              if (err) return reject(err);
+              try {
+                assert.strictEqual(res.statusCode, 200);
+                assert.strictEqual(body, 'ok');
+                emptyBodyLengthScope.done();
+                resolve();
+              } catch (e) {
+                reject(e);
+              }
+            },
+          );
+        });
+      }
     } finally {
       if (!hadBun) {
         delete globalRecord.Bun;

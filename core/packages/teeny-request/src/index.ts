@@ -95,6 +95,11 @@ function bunFetch(
       init.body instanceof Uint8Array
     ) {
       headers['Content-Length'] = String(Buffer.byteLength(init.body));
+    } else if (
+      (init.body === undefined || init.body === null) &&
+      /^(post|put)$/i.test(init.method || 'GET')
+    ) {
+      headers['Content-Length'] = '0';
     }
   }
 
