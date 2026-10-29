@@ -26,7 +26,7 @@ import {
   defaultErrorRedactor,
 } from './common.js';
 import {getRetryConfig} from './retry.js';
-import {PassThrough, Readable, pipeline} from 'stream';
+import {PassThrough, Readable, Transform, pipeline} from 'stream';
 import {GaxiosInterceptorManager} from './interceptor.js';
 
 const randomUUID = async () =>
@@ -478,12 +478,12 @@ export class Gaxios implements FetchCompliance {
       }
     }
 
-    if (typeof options.maxContentLength === 'number') {
-      opts.size = options.maxContentLength;
+    if (typeof opts.maxContentLength === 'number') {
+      opts.size = opts.maxContentLength;
     }
 
-    if (typeof options.maxRedirects === 'number') {
-      opts.follow = options.maxRedirects;
+    if (typeof opts.maxRedirects === 'number') {
+      opts.follow = opts.maxRedirects;
     }
 
     const shouldDirectlyPassData =
@@ -716,35 +716,85 @@ export class Gaxios implements FetchCompliance {
     return this.#proxyAgent;
   }
 
+  /**
+   * Creates a Bun-compatible fetch wrapper that bridges Node.js stream bodies,
+   * proxy/TLS agent options, and maxContentLength enforcement.
+   */
   static #createBunFetch(): NonNullable<GaxiosOptions['fetchImplementation']> {
     return async (input, init) => {
+      type AgentTlsOpts = {
+        cert?: string | Buffer | Array<string | Buffer>;
+        key?: string | Buffer | Array<string | Buffer>;
+        ca?: string | Buffer | Array<string | Buffer>;
+        passphrase?: string;
+        rejectUnauthorized?: boolean;
+      };
+      type AgentLike = {
+        proxy?: URL;
+        connectOpts?: AgentTlsOpts;
+        options?: AgentTlsOpts;
+      };
       const rawInit = init
         ? ({...init} as Omit<RequestInit, 'body'> & {
             body?: unknown;
-            agent?: {
-              proxy?: URL;
-              connectOpts?: {cert?: string; key?: string};
-            };
+            agent?: AgentLike | ((parsedUrl: URL) => AgentLike);
             proxy?: string;
-            cert?: string;
-            key?: string;
-            tls?: {cert?: string; key?: string};
+            cert?: string | Buffer | Array<string | Buffer>;
+            key?: string | Buffer | Array<string | Buffer>;
+            size?: number;
+            maxContentLength?: number;
+            tls?: AgentTlsOpts;
           })
         : undefined;
+      const inputUrl =
+        input instanceof URL
+          ? input.toString()
+          : typeof input === 'object' && input && 'url' in input
+            ? String((input as {url: unknown}).url)
+            : String(input);
       if (rawInit) {
-        const proxyAgent = rawInit.agent;
-        if (proxyAgent?.proxy) {
-          rawInit.proxy = proxyAgent.proxy.toString();
+        const resolvedAgent =
+          typeof rawInit.agent === 'function'
+            ? rawInit.agent(input instanceof URL ? input : new URL(inputUrl))
+            : rawInit.agent;
+        if (resolvedAgent?.proxy) {
+          rawInit.proxy = resolvedAgent.proxy.toString();
         } else {
           delete rawInit.proxy;
         }
-        const cert = rawInit.cert ?? proxyAgent?.connectOpts?.cert;
-        const key = rawInit.key ?? proxyAgent?.connectOpts?.key;
+        const cert =
+          rawInit.cert ??
+          resolvedAgent?.connectOpts?.cert ??
+          resolvedAgent?.options?.cert;
+        const key =
+          rawInit.key ??
+          resolvedAgent?.connectOpts?.key ??
+          resolvedAgent?.options?.key;
+        const ca = resolvedAgent?.connectOpts?.ca ?? resolvedAgent?.options?.ca;
+        const passphrase =
+          resolvedAgent?.connectOpts?.passphrase ??
+          resolvedAgent?.options?.passphrase;
+        const rejectUnauthorized =
+          resolvedAgent?.connectOpts?.rejectUnauthorized ??
+          resolvedAgent?.options?.rejectUnauthorized;
+        const tlsOpts: AgentTlsOpts = {};
         if (cert && key) {
+          tlsOpts.cert = cert;
+          tlsOpts.key = key;
+        }
+        if (ca !== undefined) {
+          tlsOpts.ca = ca;
+        }
+        if (passphrase !== undefined) {
+          tlsOpts.passphrase = passphrase;
+        }
+        if (rejectUnauthorized !== undefined) {
+          tlsOpts.rejectUnauthorized = rejectUnauthorized;
+        }
+        if (Object.keys(tlsOpts).length > 0) {
           rawInit.tls = {
             ...rawInit.tls,
-            cert,
-            key,
+            ...tlsOpts,
           };
         }
       }
@@ -807,6 +857,13 @@ export class Gaxios implements FetchCompliance {
         }
         throw err;
       }
+      const maxSize =
+        typeof rawInit?.size === 'number' && rawInit.size > 0
+          ? rawInit.size
+          : typeof rawInit?.maxContentLength === 'number' &&
+              rawInit.maxContentLength > 0
+            ? rawInit.maxContentLength
+            : 0;
       if (
         res?.body &&
         typeof Readable.fromWeb === 'function' &&
@@ -819,9 +876,49 @@ export class Gaxios implements FetchCompliance {
         const origJson = res.json.bind(res);
         const origArrayBuffer = res.arrayBuffer.bind(res);
         const origBlob = res.blob.bind(res);
+        const getNodeStream = () => {
+          if (!nodeStream) {
+            const webReadable = Readable.fromWeb(rawBody);
+            if (maxSize > 0) {
+              let totalBytes = 0;
+              const limiter = new Transform({
+                transform(chunk: Buffer | Uint8Array, _encoding, callback) {
+                  const buf = Buffer.isBuffer(chunk)
+                    ? chunk
+                    : Buffer.from(chunk);
+                  totalBytes += buf.byteLength;
+                  if (totalBytes > maxSize) {
+                    const maxErr = Object.assign(
+                      new Error(
+                        `content size at ${inputUrl} over limit: ${maxSize}`,
+                      ),
+                      {type: 'max-size'},
+                    );
+                    webReadable.destroy();
+                    callback(maxErr);
+                    return;
+                  }
+                  callback(null, buf);
+                },
+              });
+              webReadable.on('error', err => limiter.destroy(err));
+              limiter.once('close', () => {
+                if (!webReadable.destroyed) {
+                  webReadable.destroy();
+                }
+              });
+              webReadable.pipe(limiter);
+              nodeStream = limiter;
+            } else {
+              nodeStream = webReadable;
+            }
+          }
+          return nodeStream;
+        };
         const readBuffer = async () => {
+          const stream = getNodeStream();
           const chunks: Buffer[] = [];
-          for await (const chunk of nodeStream!) {
+          for await (const chunk of stream) {
             chunks.push(
               Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as Uint8Array),
             );
@@ -830,22 +927,21 @@ export class Gaxios implements FetchCompliance {
         };
         Object.defineProperty(res, 'body', {
           get() {
-            nodeStream ||= Readable.fromWeb(rawBody);
-            return nodeStream;
+            return getNodeStream();
           },
           configurable: true,
           enumerable: true,
         });
         res.text = async () => {
-          if (!nodeStream) return origText();
+          if (!nodeStream && maxSize <= 0) return origText();
           return (await readBuffer()).toString('utf8');
         };
         res.json = async () => {
-          if (!nodeStream) return origJson();
+          if (!nodeStream && maxSize <= 0) return origJson();
           return JSON.parse(await res.text());
         };
         res.arrayBuffer = async () => {
-          if (!nodeStream) return origArrayBuffer();
+          if (!nodeStream && maxSize <= 0) return origArrayBuffer();
           const buf = await readBuffer();
           return buf.buffer.slice(
             buf.byteOffset,
@@ -853,7 +949,7 @@ export class Gaxios implements FetchCompliance {
           );
         };
         res.blob = async () => {
-          if (!nodeStream) return origBlob();
+          if (!nodeStream && maxSize <= 0) return origBlob();
           const buf = await readBuffer();
           const contentType = res.headers?.get?.('content-type') ?? '';
           return new Blob([buf], contentType ? {type: contentType} : undefined);

@@ -16,6 +16,7 @@ import nock from 'nock';
 import {createSandbox, fake} from 'sinon';
 import stream, {Readable} from 'stream';
 import {describe, it, beforeEach, afterEach} from 'mocha';
+import {Agent as HTTPSAgent} from 'https';
 import {HttpsProxyAgent} from 'https-proxy-agent';
 import {
   Gaxios,
@@ -343,6 +344,31 @@ describe('🥁 configuration options', () => {
     scope.done();
   });
 
+  it('should enforce maxContentLength on responses without a Content-Length header and from instance defaults', async () => {
+    const body = {hello: 'world'};
+    for (const responseType of [
+      'json',
+      'text',
+      'arraybuffer',
+      'blob',
+    ] as const) {
+      const scope = nock(url).get('/').reply(200, body);
+      await assert.rejects(
+        request({url, maxContentLength: 5, responseType}),
+        (err: Error) => err instanceof GaxiosError && /limit/.test(err.message),
+      );
+      scope.done();
+    }
+
+    const defaultScope = nock(url).get('/').reply(200, body);
+    const client = new Gaxios({maxContentLength: 5});
+    await assert.rejects(
+      client.request({url}),
+      (err: Error) => err instanceof GaxiosError && /limit/.test(err.message),
+    );
+    defaultScope.done();
+  });
+
   it('should support redirects by default', async () => {
     const body = {hello: '🌎'};
     const scopes = [
@@ -593,6 +619,38 @@ describe('🥁 configuration options', () => {
           noProxy: ['domain.example.com'],
         });
         assert.strictEqual(capturedInits[2]?.proxy, undefined);
+
+        const customAgent = new HTTPSAgent({
+          cert: 'agent-cert',
+          key: 'agent-key',
+          ca: 'agent-ca',
+          passphrase: 'secret',
+          rejectUnauthorized: false,
+        });
+        await request({
+          url,
+          agent: customAgent,
+        });
+        assert.deepStrictEqual(capturedInits[3]?.tls, {
+          cert: 'agent-cert',
+          key: 'agent-key',
+          ca: 'agent-ca',
+          passphrase: 'secret',
+          rejectUnauthorized: false,
+        });
+
+        await request({
+          url,
+          agent: () =>
+            new HTTPSAgent({
+              ca: 'factory-ca',
+              rejectUnauthorized: true,
+            }),
+        });
+        assert.deepStrictEqual(capturedInits[4]?.tls, {
+          ca: 'factory-ca',
+          rejectUnauthorized: true,
+        });
       } finally {
         globalThis.fetch = origFetch;
         if (!hadBun) {
@@ -657,6 +715,26 @@ describe('🥁 configuration options', () => {
 
         const jsonRes = await request({url});
         assert.deepStrictEqual(jsonRes.data, responseBody);
+
+        await assert.rejects(
+          request({url, maxContentLength: 2}),
+          (err: Error) =>
+            err instanceof GaxiosError && /over limit: 2/.test(err.message),
+        );
+
+        const streamMaxRes = await request<Readable>({
+          url,
+          maxContentLength: 2,
+          responseType: 'stream',
+        });
+        await assert.rejects(
+          (async () => {
+            for await (const chunk of streamMaxRes.data) {
+              assert.ok(chunk);
+            }
+          })(),
+          (err: Error) => /over limit: 2/.test(err.message),
+        );
 
         globalThis.fetch = (async () => {
           throw {code: 'ECONNRESET', message: 'socket hang up'};
