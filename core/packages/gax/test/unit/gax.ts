@@ -398,4 +398,69 @@ describe('gax construct settings', () => {
       assert.strictEqual(mergedEmpty.enableTelemetryLogging, true);
     });
   });
+
+  describe('CallSettings timeout and backoffSettings isolation', () => {
+    it('preserves timeout: 0 instead of defaulting to 30000ms', () => {
+      assert.strictEqual(new gax.CallSettings({timeout: 0}).timeout, 0);
+      assert.strictEqual(new gax.CallSettings().timeout, 30000);
+      assert.strictEqual(
+        new gax.CallSettings({timeout: undefined}).timeout,
+        30000,
+      );
+    });
+
+    it('preserves timeout: 0 when merging { timeout: 0, retry: null }', () => {
+      const defaults = gax.constructSettings(
+        SERVICE_NAME,
+        A_CONFIG,
+        {},
+        RETRY_DICT,
+      );
+      const merged = defaults.bundlingMethod.merge({timeout: 0, retry: null});
+      assert.strictEqual(merged.timeout, 0);
+      assert.strictEqual(merged.retry, null);
+    });
+
+    it('clones backoffSettings in merge so per-call overrides do not mutate shared defaults', () => {
+      const defaults = gax.constructSettings(
+        SERVICE_NAME,
+        A_CONFIG,
+        {},
+        RETRY_DICT,
+      );
+      const baseSettings: gax.CallSettings = defaults.bundlingMethod;
+      const originalBackoffSnapshot = {...baseSettings.retry!.backoffSettings};
+
+      const mergedZeroTimeout = baseSettings.merge({timeout: 0});
+      assert.strictEqual(mergedZeroTimeout.timeout, 0);
+      assert.strictEqual(
+        mergedZeroTimeout.retry!.backoffSettings.initialRpcTimeoutMillis,
+        0,
+      );
+      assert.strictEqual(
+        mergedZeroTimeout.retry!.backoffSettings.maxRpcTimeoutMillis,
+        0,
+      );
+      assert.strictEqual(
+        mergedZeroTimeout.retry!.backoffSettings.totalTimeoutMillis,
+        0,
+      );
+
+      // Mutating via per-call maxRetries or no-arg merge must also leave defaults untouched.
+      const mergedMaxRetries = baseSettings.merge({maxRetries: 3});
+      assert.strictEqual(mergedMaxRetries.retry!.backoffSettings.maxRetries, 3);
+      assert.strictEqual(
+        mergedMaxRetries.retry!.backoffSettings.totalTimeoutMillis,
+        undefined,
+      );
+
+      const mergedNull = baseSettings.merge(null);
+      mergedNull.retry!.backoffSettings.initialRpcTimeoutMillis = 99999;
+
+      assert.deepStrictEqual(
+        baseSettings.retry!.backoffSettings,
+        originalBackoffSnapshot,
+      );
+    });
+  });
 });

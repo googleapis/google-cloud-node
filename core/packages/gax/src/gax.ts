@@ -224,7 +224,7 @@ export class CallSettings {
    */
   constructor(settings?: CallOptions) {
     settings = settings || {};
-    this.timeout = settings.timeout || 30 * 1000;
+    this.timeout = settings.timeout ?? 30 * 1000;
     this.retry = settings.retry as RetryOptions;
     this.autoPaginate =
       'autoPaginate' in settings ? settings.autoPaginate : true;
@@ -253,10 +253,13 @@ export class CallSettings {
    */
   merge(options?: CallOptions | null) {
     if (!options) {
-      return new CallSettings(this);
+      return new CallSettings({
+        ...this,
+        retry: cloneRetryOptions(this.retry),
+      });
     }
     let timeout = this.timeout;
-    let retry = this.retry;
+    let retry = cloneRetryOptions(this.retry);
     let autoPaginate = this.autoPaginate;
     let maxResults = this.maxResults;
     let otherArgs = this.otherArgs;
@@ -310,8 +313,14 @@ export class CallSettings {
     }
 
     if ('maxRetries' in options && options.maxRetries !== undefined) {
-      retry!.backoffSettings!.maxRetries = options.maxRetries;
-      delete retry!.backoffSettings!.totalTimeoutMillis;
+      retry = createRetryOptions(
+        retry!.retryCodes,
+        {...retry!.backoffSettings!},
+        retry!.shouldRetryFn,
+        retry!.getResumptionRequestFn,
+      );
+      retry.backoffSettings.maxRetries = options.maxRetries;
+      delete retry.backoffSettings.totalTimeoutMillis;
     }
 
     if ('longrunning' in options) {
@@ -679,6 +688,20 @@ function constructRetry(
     );
   }
   return createRetryOptions(codes!, backoffSettings!);
+}
+
+function cloneRetryOptions(
+  retry?: RetryOptions | null,
+): RetryOptions | null | undefined {
+  if (!retry) {
+    return retry;
+  }
+  return createRetryOptions(
+    retry.retryCodes ? [...retry.retryCodes] : retry.retryCodes,
+    retry.backoffSettings ? {...retry.backoffSettings} : retry.backoffSettings,
+    retry.shouldRetryFn,
+    retry.getResumptionRequestFn,
+  );
 }
 
 /**

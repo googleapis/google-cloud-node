@@ -2195,6 +2195,130 @@ describe('retryable', () => {
     });
   });
 
+  it('runs attempt #1 once with a 0ms deadline and T4 span then stops when totalTimeoutMillis is 0', async () => {
+    const harness = new OtelHarness();
+    harness.setup();
+    const deadlines: number[] = [];
+    function func(
+      argument: {},
+      metadata: {},
+      options: {deadline?: Date},
+      callback: (err: GoogleError | null) => void,
+    ) {
+      deadlines.push(options.deadline!.getTime());
+      const error = new GoogleError('Deadline Exceeded');
+      error.code = status.DEADLINE_EXCEEDED;
+      callback(error);
+      return {cancel: () => {}};
+    }
+    try {
+      const baseSettings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        timeout: 30000,
+        retry: gax.createRetryOptions(
+          [status.DEADLINE_EXCEEDED],
+          gax.createBackoffSettings(100, 1.3, 60000, 2000, 1.5, 30000, 45000),
+        ),
+        otherArgs: {
+          internalMethodName: 'Echo',
+        },
+      });
+
+      const apiCall = gaxCreateApiCall(func, baseSettings);
+      const before = Date.now();
+      await assert.rejects(
+        async () => {
+          await apiCall({}, {timeout: 0});
+        },
+        (err: GoogleError) => {
+          assert.strictEqual(err.code, status.DEADLINE_EXCEEDED);
+          assert.match(
+            err.message,
+            /Total timeout of API google\.example\.v1\.Echo exceeded 0 milliseconds/,
+          );
+          return true;
+        },
+      );
+      const after = Date.now();
+
+      // Attempt #1 ran exactly once with a 0ms per-attempt deadline (not infinite loop, not 30s).
+      assert.strictEqual(deadlines.length, 1);
+      assert(deadlines[0] >= before && deadlines[0] <= after);
+
+      const spans = harness.getSpans('google-gax');
+      const attemptSpans = spans.filter(
+        s => s.name === 'google.example.v1.Echo/Echo',
+      );
+      assert.strictEqual(attemptSpans.length, 1);
+      assert.strictEqual(attemptSpans[0].status.code, SpanStatusCode.ERROR);
+    } finally {
+      harness.teardown();
+    }
+  });
+
+  it('passes a 0ms deadline for { timeout: 0, retry: null } and does not corrupt subsequent calls', async () => {
+    const observedDeadlines: number[] = [];
+    let failZeroDeadline = true;
+    function func(
+      argument: {},
+      metadata: {},
+      options: {deadline?: Date},
+      callback: (err: GoogleError | null, resp?: unknown) => void,
+    ) {
+      const remainingMs = options.deadline!.getTime() - Date.now();
+      observedDeadlines.push(remainingMs);
+      if (failZeroDeadline && remainingMs <= 0) {
+        const err = new GoogleError('Deadline Exceeded');
+        err.code = status.DEADLINE_EXCEEDED;
+        callback(err);
+      } else {
+        callback(null, {ok: true});
+      }
+      return {cancel: () => {}};
+    }
+
+    const baseSettings = new gax.CallSettings({
+      timeout: 30000,
+      retry: gax.createRetryOptions(
+        [status.DEADLINE_EXCEEDED],
+        gax.createBackoffSettings(100, 1.3, 60000, 5000, 1.5, 30000, 45000),
+      ),
+    });
+    const apiCall = gaxCreateApiCall(func, baseSettings);
+
+    // 1. { timeout: 0, retry: null } must apply 0ms deadline instead of falling back to 30000ms.
+    await assert.rejects(
+      async () => {
+        await apiCall({}, {timeout: 0, retry: null});
+      },
+      (err: GoogleError) => {
+        assert.strictEqual(err.code, status.DEADLINE_EXCEEDED);
+        return true;
+      },
+    );
+    assert(observedDeadlines[0] <= 50);
+
+    // 2. { timeout: 0 } on retrying call must not permanently overwrite baseSettings.retry.backoffSettings.
+    await assert.rejects(async () => {
+      await apiCall({}, {timeout: 0});
+    });
+
+    // 3. Subsequent default call on the same callable still gets its normal non-zero deadline and succeeds.
+    failZeroDeadline = true;
+    const [resp] = (await apiCall({}, undefined)) as ResultTuple;
+    assert.deepStrictEqual(resp, {ok: true});
+    assert(observedDeadlines[2] > 4000 && observedDeadlines[2] <= 5000);
+    assert.strictEqual(
+      baseSettings.retry!.backoffSettings.initialRpcTimeoutMillis,
+      5000,
+    );
+    assert.strictEqual(
+      baseSettings.retry!.backoffSettings.totalTimeoutMillis,
+      45000,
+    );
+  });
+
   // maxRetries is unsupported, and intended for internal use only or
   // use with retry-request backwards compatibility
   it('errors when totalTimeoutMillis and maxRetries set', done => {
