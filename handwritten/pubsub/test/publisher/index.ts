@@ -384,6 +384,25 @@ describe('Publisher', () => {
           done();
         });
       });
+
+      it('should reject ordered messages when hedging is enabled', async () => {
+        publisher.setOptions({hedging: {}});
+
+        await assert.rejects(
+          publisher.publishMessage(fakeMessage),
+          /Publish hedging and message ordering cannot be enabled at the same time\./,
+        );
+      });
+
+      it('should reject publishing when hedging and messageOrdering are both enabled', async () => {
+        publisher.setOptions({hedging: {}});
+        publisher.settings.messageOrdering = true;
+
+        await assert.rejects(
+          publisher.publishMessage({data}),
+          /Publish hedging and message ordering cannot be enabled at the same time\./,
+        );
+      });
     });
   });
 

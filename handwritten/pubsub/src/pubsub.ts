@@ -24,6 +24,13 @@ import {
   JWT,
 } from 'google-auth-library';
 import * as gax from 'google-gax';
+
+// Module augmentation for google-gax CallOptions until the updated google-gax package is published.
+declare module 'google-gax' {
+  export interface CallOptions {
+    signal?: AbortSignal;
+  }
+}
 import {v1} from './';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -1367,6 +1374,16 @@ export class PubSub {
 
     await Promise.all(promises);
   }
+  private createCancelledError_(): gax.grpc.ServiceError {
+    const statusObject = {
+      code: gax.Status.CANCELLED,
+      details: 'Call cancelled.',
+      metadata: new gax.grpc.Metadata(),
+    };
+    const err = new Error(statusObject.details);
+    return Object.assign(err, statusObject) as gax.grpc.ServiceError;
+  }
+
   /**
    * Funnel all API requests through this method, to be sure we have a project
    * ID.
@@ -1393,14 +1410,23 @@ export class PubSub {
       return;
     }
 
+    if (config.gaxOpts?.signal?.aborted) {
+      callback(this.createCancelledError_());
+      return;
+    }
+
     this.getClient_(config, (err, client) => {
       if (err) {
         callback(err as gax.grpc.ServiceError);
         return;
       }
+      if (config.gaxOpts?.signal?.aborted) {
+        callback(this.createCancelledError_());
+        return;
+      }
       let reqOpts = extend(true, {}, config.reqOpts);
       reqOpts = replaceProjectIdToken(reqOpts, this.projectId);
-      client![config.method](reqOpts, config.gaxOpts, callback);
+      client?.[config.method](reqOpts, config.gaxOpts, callback);
     });
   }
 
