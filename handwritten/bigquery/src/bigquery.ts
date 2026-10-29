@@ -2933,7 +2933,7 @@ export class BigQueryTimestamp {
     if (
       pd.getMicroseconds() > 0 ||
       pd.getNanoseconds() > 0 ||
-      pd.getPicoseconds() > 0
+      (pd.getPicoseconds?.() ?? 0) > 0
     ) {
       this.value = pd.toISOString();
     } else {
