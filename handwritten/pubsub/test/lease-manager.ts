@@ -32,7 +32,6 @@ import {
 import {defaultOptions} from '../src/default-options';
 import {FakeLog, TestUtils} from './test-utils';
 import {Duration} from '../src';
-import {loggingUtils} from 'google-gax';
 
 const FREE_MEM = 9376387072;
 const fakeos = {
@@ -208,10 +207,7 @@ describe('LeaseManager', () => {
 
       subscriber.on('message', () => {
         assert.strictEqual(fakeLog!.called, true);
-        assert.strictEqual(
-          fakeLog!.fields!.severity,
-          'INFO',
-        );
+        assert.strictEqual(fakeLog!.fields!.severity, 'INFO');
         assert.strictEqual(fakeLog!.args![1] as string, 'a');
         assert.strictEqual(fakeLog!.args![2] as string, 'b');
         done();
@@ -241,10 +237,7 @@ describe('LeaseManager', () => {
       await deferred.promise;
 
       assert.strictEqual(fakeLog.called, true);
-      assert.strictEqual(
-        fakeLog.fields!.severity,
-        'ERROR',
-      );
+      assert.strictEqual(fakeLog.fields!.severity, 'ERROR');
       assert.strictEqual(
         (fakeLog.args![0] as string).includes('exception'),
         true,
@@ -318,6 +311,31 @@ describe('LeaseManager', () => {
 
       leaseManager.on('full', done);
       leaseManager.add(new FakeMessage() as {} as Message);
+    });
+
+    it('should queue behind pending messages in FIFO order if pending > 0', done => {
+      const m1 = new FakeMessage() as {} as Message;
+      const m2 = new FakeMessage() as {} as Message;
+      const m3 = new FakeMessage() as {} as Message;
+
+      leaseManager.setOptions({allowExcessMessages: false, maxMessages: 1});
+      leaseManager.add(m1);
+      leaseManager.add(m2);
+      assert.strictEqual(leaseManager.pending, 1);
+
+      // Increase maxMessages so isFull() is false while m2 is still pending.
+      leaseManager.setOptions({allowExcessMessages: false, maxMessages: 10});
+      assert.strictEqual(leaseManager.isFull(), false);
+
+      subscriber.on('message', message => {
+        if (message === m3) {
+          done(new Error('m3 should not jump ahead of pending m2.'));
+        }
+      });
+
+      leaseManager.add(m3);
+      assert.strictEqual(leaseManager.pending, 2);
+      setImmediate(done);
     });
 
     describe('extending deadlines', () => {
@@ -402,10 +420,7 @@ describe('LeaseManager', () => {
 
         // make sure the expired messages were forgotten
         assert.strictEqual(removeStub.callCount, badMessages.length);
-        assert.strictEqual(
-          fakeLog.fields!.severity,
-          'WARNING',
-        );
+        assert.strictEqual(fakeLog.fields!.severity, 'WARNING');
         assert.strictEqual(fakeLog.called, true);
 
         badMessages.forEach((fakeMessage, i) => {
@@ -573,6 +588,7 @@ describe('LeaseManager', () => {
 
     it('should remove a message from the pending state', done => {
       const pending = new FakeMessage() as {} as Message;
+      const flowEndSpy = sandbox.spy(pending.subSpans, 'flowEnd');
 
       leaseManager.setOptions({allowExcessMessages: false, maxMessages: 1});
 
@@ -587,7 +603,46 @@ describe('LeaseManager', () => {
       leaseManager.remove(pending);
 
       assert.strictEqual(leaseManager.pending, 0);
+      assert.strictEqual(flowEndSpy.calledOnce, true);
       setImmediate(done);
+    });
+
+    it('should dispense all fitting pending messages when removing a large message unblocks maxBytes', done => {
+      const big = new FakeMessage();
+      big.length = 100;
+      const small1 = new FakeMessage();
+      small1.length = 20;
+      const small2 = new FakeMessage();
+      small2.length = 20;
+      const small3 = new FakeMessage();
+      small3.length = 20;
+
+      leaseManager.setOptions({
+        allowExcessMessages: false,
+        maxBytes: 100,
+        maxMessages: 10,
+      });
+
+      const received: Message[] = [];
+      subscriber.on('message', (message: Message) => {
+        received.push(message);
+        if (received.length === 4) {
+          assert.strictEqual(received[0], big as unknown as Message);
+          assert.strictEqual(received[1], small1 as unknown as Message);
+          assert.strictEqual(received[2], small2 as unknown as Message);
+          assert.strictEqual(received[3], small3 as unknown as Message);
+          assert.strictEqual(leaseManager.pending, 0);
+          done();
+        }
+      });
+
+      leaseManager.add(big as {} as Message);
+      leaseManager.add(small1 as {} as Message);
+      leaseManager.add(small2 as {} as Message);
+      leaseManager.add(small3 as {} as Message);
+      assert.strictEqual(leaseManager.pending, 3);
+
+      leaseManager.remove(big as {} as Message);
     });
 
     it('should dispense a pending message', done => {

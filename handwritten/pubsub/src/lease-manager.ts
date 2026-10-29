@@ -28,10 +28,16 @@ import {logs as baseLogs, LoggingFunction} from './logs';
  * @private
  */
 export const logs = {
-  callbackDelivery: baseLogs.pubsub.sublog('callback-delivery') as LoggingFunction,
-  callbackExceptions: baseLogs.pubsub.sublog('callback-exceptions') as LoggingFunction,
+  callbackDelivery: baseLogs.pubsub.sublog(
+    'callback-delivery',
+  ) as LoggingFunction,
+  callbackExceptions: baseLogs.pubsub.sublog(
+    'callback-exceptions',
+  ) as LoggingFunction,
   expiry: baseLogs.pubsub.sublog('expiry') as LoggingFunction,
-  subscriberFlowControl: baseLogs.pubsub.sublog('subscriber-flow-control') as LoggingFunction,
+  subscriberFlowControl: baseLogs.pubsub.sublog(
+    'subscriber-flow-control',
+  ) as LoggingFunction,
 };
 
 export interface FlowControlOptions {
@@ -118,7 +124,7 @@ export class LeaseManager extends EventEmitter {
 
     message.subSpans.flowStart();
 
-    if (allowExcessMessages! || !wasFull) {
+    if (allowExcessMessages! || (!wasFull && this.pending === 0)) {
       this._dispense(message);
     } else {
       if (this.pending === 0) {
@@ -218,23 +224,18 @@ export class LeaseManager extends EventEmitter {
 
     if (wasFull && !this.isFull()) {
       process.nextTick(() => this.emit('free'));
-    } else if (this._pending.includes(message)) {
+    }
+
+    if (this._pending.includes(message)) {
       const index = this._pending.indexOf(message);
       this._pending.splice(index, 1);
+      message.subSpans.flowEnd();
     } else if (this.pending > 0) {
-      if (this.pending > 1) {
-        logs.subscriberFlowControl.info(
-          'subscriber for %s dispensing one blocked message',
-          this._subscriber.name,
-        );
-      } else {
-        logs.subscriberFlowControl.info(
-          'subscriber for %s fully unblocked on client-side flow control',
-          this._subscriber.name,
-        );
-      }
+      this._dispenseNextPending();
+    }
 
-      this._dispense(this._pending.shift()!);
+    while (!this.isFull() && this.pending > 0) {
+      this._dispenseNextPending();
     }
 
     if (this.isEmpty()) {
@@ -244,6 +245,26 @@ export class LeaseManager extends EventEmitter {
     if (this.size === 0 && this._isLeasing) {
       this._cancelExtension();
     }
+  }
+  /**
+   * Dispenses the next pending message in FIFO order.
+   *
+   * @private
+   */
+  private _dispenseNextPending(): void {
+    if (this.pending > 1) {
+      logs.subscriberFlowControl.info(
+        'subscriber for %s dispensing one blocked message',
+        this._subscriber.name,
+      );
+    } else {
+      logs.subscriberFlowControl.info(
+        'subscriber for %s fully unblocked on client-side flow control',
+        this._subscriber.name,
+      );
+    }
+
+    this._dispense(this._pending.shift()!);
   }
   /**
    * Sets options for the LeaseManager.
@@ -333,6 +354,7 @@ export class LeaseManager extends EventEmitter {
         message.subSpans.modAckStart(deadline, false);
 
         if (this._subscriber.isExactlyOnceDelivery) {
+          // eslint-disable-next-line promise/catch-or-return
           message
             .modAckWithResponse(deadline.totalOf('second'))
             .catch(e => {

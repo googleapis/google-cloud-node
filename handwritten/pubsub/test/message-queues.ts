@@ -325,6 +325,32 @@ describe('MessageQueues', () => {
 
         assert.strictEqual(promise1, promise2);
       });
+
+      it('should resolve immediately if the queue is closed', async () => {
+        messageQueue.close();
+        await messageQueue.onFlush();
+        await messageQueue.onDrain();
+      });
+    });
+
+    describe('close', () => {
+      it('should cancel scheduled batch timers and resolve pending onFlush/onDrain', async () => {
+        const clock = TestUtils.useFakeTimers(sandbox);
+        const flushSpy = sandbox.spy(messageQueue, 'flush');
+        const delay = 1000;
+
+        messageQueue.setOptions({maxMilliseconds: delay});
+        void messageQueue.add(new FakeMessage() as Message);
+        const flushPromise = messageQueue.onFlush();
+        const drainPromise = messageQueue.onDrain();
+
+        messageQueue.close();
+        clock.tick(delay * 2);
+
+        assert.strictEqual(flushSpy.callCount, 0);
+        await flushPromise;
+        await drainPromise;
+      });
     });
 
     describe('setOptions', () => {

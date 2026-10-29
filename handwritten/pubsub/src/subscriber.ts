@@ -227,6 +227,9 @@ export class SubscriberSpans {
 
   // If we shut down before processing can finish.
   shutdown() {
+    this.flowEnd();
+    this.schedulerEnd();
+    this.processingEnd();
     tracing.PubsubEvents.shutdown(this.parent);
   }
 
@@ -986,7 +989,11 @@ export class Subscriber extends EventEmitter {
 
     // If the user specified a zero timeout, just bail immediately.
     if (!timeout.milliseconds) {
-      this._inventory.clear();
+      const remaining = this._inventory.clear();
+      remaining.forEach(m => {
+        m.subSpans.shutdown();
+        m.endParentSpan();
+      });
       return;
     }
 
@@ -1007,11 +1014,16 @@ export class Subscriber extends EventEmitter {
     ) {
       const waitTimeout = timeout.subtract(FINAL_NACK_TIMEOUT);
 
-      const emptyPromise = new Promise<void>(r => {
-        this._inventory.on('empty', r);
+      let onEmpty: (() => void) | undefined;
+      const emptyPromise = new Promise<void>(resolve => {
+        onEmpty = resolve;
+        this._inventory.on('empty', resolve);
       });
 
       await this.#awaitTimeoutAndCheck(emptyPromise, waitTimeout);
+      if (onEmpty) {
+        this._inventory.removeListener('empty', onEmpty);
+      }
     }
 
     // Now we head into immediate shutdown mode with what time is left.
@@ -1026,7 +1038,10 @@ export class Subscriber extends EventEmitter {
     // Grab everything left in inventory. This includes messages that have already
     // been dispatched to user callbacks.
     const remaining = this._inventory.clear();
-    remaining.forEach(m => m.nack());
+    remaining.forEach(m => {
+      m.subSpans.shutdown();
+      m.nack();
+    });
 
     // Wait for user callbacks to complete.
     const flushCompleted = this._waitForFlush();
@@ -1034,7 +1049,6 @@ export class Subscriber extends EventEmitter {
 
     // Clean up OTel spans for any remaining messages.
     remaining.forEach(m => {
-      m.subSpans.shutdown();
       m.endParentSpan();
     });
 
@@ -1306,10 +1320,12 @@ export class Subscriber extends EventEmitter {
             Duration.from({seconds: this.ackDeadline}),
             true,
           );
+          // eslint-disable-next-line promise/catch-or-return
           message
             .modAckWithResponse(this.ackDeadline)
             .then(() => {
               this._inventory.add(message);
+              return undefined;
             })
             .catch(() => {
               // Temporary failures will retry, so if an error reaches us

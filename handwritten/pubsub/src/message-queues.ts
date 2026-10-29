@@ -170,6 +170,11 @@ export abstract class MessageQueue {
    * @private
    */
   close() {
+    if (this._timer) {
+      clearTimeout(this._timer);
+      delete this._timer;
+    }
+
     let requests = this._requests;
     this._requests = [];
     this.numInFlightRequests = this.numPendingRequests = 0;
@@ -186,6 +191,16 @@ export abstract class MessageQueue {
         }
       }
     });
+
+    if (this._onFlush) {
+      this._onFlush.resolve();
+      delete this._onFlush;
+    }
+
+    if (this._onDrain) {
+      this._onDrain.resolve();
+      delete this._onDrain;
+    }
 
     this._closed = true;
   }
@@ -394,6 +409,9 @@ export abstract class MessageQueue {
    * @private
    */
   onFlush(): Promise<void> {
+    if (this._closed) {
+      return Promise.resolve();
+    }
     if (!this._onFlush) {
       this._onFlush = defer();
     }
@@ -404,6 +422,9 @@ export abstract class MessageQueue {
    * Returns a promise that resolves when all in-flight messages have settled.
    */
   onDrain(): Promise<void> {
+    if (this._closed) {
+      return Promise.resolve();
+    }
     if (!this._onDrain) {
       this._onDrain = defer();
     }
@@ -698,10 +719,10 @@ export class ModAckQueue extends MessageQueue {
 
     // This catches the sub-failures and bubbles up anything we need to bubble.
     const allNewBatches: QueuedMessages[] = await Promise.all(modAckRequests);
-    return allNewBatches.reduce((p: QueuedMessage[], c: QueuedMessage[]) => [
-      ...(p ?? []),
-      ...c,
-    ]);
+    return allNewBatches.reduce(
+      (p: QueuedMessage[], c: QueuedMessage[]) => [...(p ?? []), ...c],
+      [],
+    );
   }
 
   // For modacks only, we'll stop retrying after 3 tries.

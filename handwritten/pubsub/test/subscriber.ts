@@ -798,6 +798,29 @@ describe('Subscriber', () => {
         });
       });
 
+      it('should shut down subSpans and end flow spans before nacking remaining messages', async () => {
+        const msg = new Message(subscriber, RECEIVED_MESSAGE);
+        msg.subSpans.flowStart();
+        const flowEndSpy = sandbox.spy(msg.subSpans, 'flowEnd');
+        const shutdownSpy = sandbox.spy(msg.subSpans, 'shutdown');
+        const nackSpy = sandbox.spy(msg, 'nack');
+        sandbox.stub(inventory, 'clear').returns([msg]);
+
+        subscriber.setOptions({
+          closeOptions: {
+            timeout: Duration.from({seconds: 5}),
+          },
+        });
+        const prom = subscriber.close();
+        clock.tick(6000);
+        await prom;
+
+        assert.strictEqual(shutdownSpy.calledOnce, true);
+        assert.strictEqual(flowEndSpy.calledOnce, true);
+        assert.strictEqual(nackSpy.calledOnce, true);
+        assert.strictEqual(shutdownSpy.calledBefore(nackSpy), true);
+      });
+
       it('should wait for drain promises and respect timeout', async () => {
         const ackDrainDeferred = defer<void>();
         const modAckDrainDeferred = defer<void>();
