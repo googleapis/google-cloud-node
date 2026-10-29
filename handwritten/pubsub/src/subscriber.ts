@@ -1008,7 +1008,7 @@ export class Subscriber extends EventEmitter {
       const waitTimeout = timeout.subtract(FINAL_NACK_TIMEOUT);
 
       const emptyPromise = new Promise<void>(resolve => {
-        this._inventory.on('empty', resolve);
+        this._inventory.once('empty', resolve);
       });
 
       await this.#awaitTimeoutAndCheck(emptyPromise, waitTimeout);

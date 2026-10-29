@@ -59,6 +59,7 @@ class FakeSubscriberTelemetry {
   modAckStop() {}
   processingStart() {}
   processingEnd() {}
+  shutdown() {}
 }
 
 class FakeMessage {
@@ -71,6 +72,7 @@ class FakeMessage {
     this.received = Date.now();
   }
   modAck(): void {}
+  nack(): void {}
   async modAckWithResponse(): Promise<AckResponse> {
     return AckResponses.Success;
   }
@@ -294,6 +296,8 @@ describe('LeaseManager', () => {
 
     it('should not dispatch the message if the sub closes', done => {
       const fakeMessage = new FakeMessage() as {} as Message;
+      const nackSpy = sandbox.spy(fakeMessage, 'nack');
+      const shutdownSpy = sandbox.spy(fakeMessage.subSpans, 'shutdown');
 
       leaseManager.isFull = () => false;
 
@@ -303,6 +307,8 @@ describe('LeaseManager', () => {
       });
 
       leaseManager.add(fakeMessage);
+      assert.strictEqual(nackSpy.callCount, 1);
+      assert.strictEqual(shutdownSpy.callCount, 1);
       setImmediate(done);
     });
 

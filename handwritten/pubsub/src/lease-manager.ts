@@ -117,6 +117,8 @@ export class LeaseManager extends EventEmitter {
    */
   add(message: Message): void {
     if (!this._subscriber.isOpen) {
+      message.subSpans.shutdown();
+      message.nack();
       return;
     }
 
