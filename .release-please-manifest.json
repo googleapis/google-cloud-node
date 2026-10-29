@@ -120,6 +120,7 @@
   "packages/google-cloud-datastore-api": "0.5.1",
   "packages/google-cloud-datastream": "5.3.0",
   "packages/google-cloud-deploy": "6.2.0",
+  "packages/google-cloud-designcenter": "0.0.0",
   "packages/google-cloud-developerconnect": "0.10.0",
   "packages/google-cloud-devicestreaming": "0.6.0",
   "packages/google-cloud-dialogflow": "8.4.0",
