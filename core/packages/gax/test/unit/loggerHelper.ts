@@ -290,8 +290,7 @@ describe('LoggerHelper', () => {
         'gcp.errors.metadata.permission': 'storage.objects.get',
         'exception.type': 'GoogleError',
         'exception.message': 'Permission denied',
-        'exception.stacktrace':
-          'status_details: [{"permission":"storage.objects.get"}]\nmetadata: {"x-request-id":"req-123"}',
+        'exception.stacktrace': err.stack,
       });
       assert.strictEqual('response.payload' in other, false);
 

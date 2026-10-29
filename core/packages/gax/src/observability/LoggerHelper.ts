@@ -168,7 +168,7 @@ export function logCall<T = GaxCallResult>(
 
     // Build structured log attributes with exception details.
     const exceptionMessage = resolveExceptionMessage(err, dynamicArgs.rpcType);
-    const stacktrace = resolveExceptionStacktrace(err, dynamicArgs.rpcType);
+    const stacktrace = resolveExceptionStacktrace(err);
     const attributes: LogPayload = {
       ...buildLogAttributes(err, dynamicArgs, staticArgs),
       'exception.type':
