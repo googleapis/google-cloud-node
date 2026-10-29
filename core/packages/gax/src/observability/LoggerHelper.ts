@@ -465,7 +465,6 @@ export function logNetworkAttempt<T = GaxCallResult>(
     }
 
     // Emit structured DEBUG log for the failed attempt.
-    const message = resolveExceptionMessage(err, attemptDynamicArgs.rpcType);
     logger(
       {
         severity: resolveLogSeverity('DEBUG'),
@@ -474,7 +473,7 @@ export function logNetworkAttempt<T = GaxCallResult>(
         other: attributes,
       },
       'RPC attempt failed: %s',
-      message || err,
+      attributes['exception.message'] || err,
     );
   };
 

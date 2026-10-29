@@ -944,14 +944,15 @@ describe('LoggerHelper', () => {
         'rpc.system.name': 'grpc',
         'rpc.method': 'google.storage.v2.Storage/GetObject',
         'url.domain': 'storage.googleapis.com',
+        'server.address': 'storage.googleapis.com',
         'rpc.response.status_code': 'UNAVAILABLE',
         'error.type': 'UNAVAILABLE',
+        'exception.type': 'GoogleError',
+        'exception.message': 'Unavailable',
+        'exception.stacktrace': errWithMeta.stack,
         'response.payload':
           '{"x-goog-request-id":"req-123","trace-bin":"YWJj"}',
       });
-      assert.strictEqual('exception.type' in other, false);
-      assert.strictEqual('exception.message' in other, false);
-      assert.strictEqual('exception.stacktrace' in other, false);
 
       sink.reset();
       const preConnectGrpcErr = Object.assign(
@@ -999,9 +1000,13 @@ describe('LoggerHelper', () => {
       ]);
       const otherWithoutMeta = sink.logs[0].fields.other as LogPayload;
       assert.strictEqual('response.payload' in otherWithoutMeta, false);
-      assert.strictEqual('exception.type' in otherWithoutMeta, false);
-      assert.strictEqual('exception.message' in otherWithoutMeta, false);
-      assert.strictEqual('exception.stacktrace' in otherWithoutMeta, false);
+      assert.strictEqual('server.address' in otherWithoutMeta, false);
+      assert.strictEqual(otherWithoutMeta['exception.type'], 'TypeError');
+      assert.strictEqual(otherWithoutMeta['exception.message'], 'client error');
+      assert.strictEqual(
+        otherWithoutMeta['exception.stacktrace'],
+        errWithoutMeta.stack,
+      );
     });
 
     it('emits response.payload on HTTP REST error responses and omits it on empty or transport failures', async () => {
