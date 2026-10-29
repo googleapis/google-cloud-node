@@ -554,11 +554,12 @@ export class Gaxios implements FetchCompliance {
       // don't do any of the following options - use the user-provided agent.
     } else if (proxy && this.#urlMayUseProxy(opts.url, opts.noProxy)) {
       const HttpsProxyAgent = await Gaxios.#getProxyAgent();
+      const {cert, key} = opts;
+      const cacheKey = cert && key ? `${proxy}\n${cert}\n${key}` : proxy;
 
-      if (this.agentCache.has(proxy)) {
-        opts.agent = this.agentCache.get(proxy);
+      if (this.agentCache.has(cacheKey)) {
+        opts.agent = this.agentCache.get(cacheKey);
       } else {
-        const {cert, key} = opts;
         const agent = new HttpsProxyAgent(proxy, {cert, key});
 
         if (cert && key) {
@@ -571,7 +572,7 @@ export class Gaxios implements FetchCompliance {
         }
 
         opts.agent = agent;
-        this.agentCache.set(proxy, agent);
+        this.agentCache.set(cacheKey, agent);
       }
     } else if (opts.cert && opts.key) {
       // Configure client for mTLS

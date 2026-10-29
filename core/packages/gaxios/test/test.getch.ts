@@ -594,16 +594,12 @@ describe('🥁 configuration options', () => {
           key: 'key',
         });
 
-        // Cached mTLS proxy agent hit (cert/key omitted on second request)
         await request({
           url,
           proxy,
         });
         assert.strictEqual(capturedInits[1]?.proxy, proxy);
-        assert.deepStrictEqual(capturedInits[1]?.tls, {
-          cert: 'cert',
-          key: 'key',
-        });
+        assert.strictEqual(capturedInits[1]?.tls, undefined);
 
         await request({
           url,
@@ -717,13 +713,40 @@ describe('🥁 configuration options', () => {
 
       scope = nock(direct.origin).get(direct.pathname).reply(200, responseBody);
 
-      const res2 = await request({url, proxy});
+      const res2 = await request({url, proxy, cert, key});
       assert.strictEqual(agent, res2.config.agent);
       expectProxy(res2);
 
       assert(res2.config.agent instanceof HttpsProxyAgent);
       assert.equal(res2.config.agent.connectOpts.cert, cert);
       assert.equal(res2.config.agent.connectOpts.key, key);
+    });
+
+    it('should not share a cached mTLS proxy agent across different client certificates', async () => {
+      const cert = 'cert';
+      const res1 = await request({url, proxy, cert, key: 'key'});
+      expectProxy(res1);
+
+      const direct = new URL(url);
+      const reply = () =>
+        (scope = nock(direct.origin)
+          .get(direct.pathname)
+          .reply(200, responseBody));
+
+      reply();
+      const res2 = await request({url, proxy});
+      expectProxy(res2);
+      assert.notStrictEqual(res1.config.agent, res2.config.agent);
+      assert(res2.config.agent instanceof HttpsProxyAgent);
+      assert.equal(res2.config.agent.connectOpts.cert, undefined);
+
+      reply();
+      const res3 = await request({url, proxy, cert, key: 'other key'});
+      expectProxy(res3);
+      assert.notStrictEqual(res1.config.agent, res3.config.agent);
+      assert.notStrictEqual(res2.config.agent, res3.config.agent);
+      assert(res3.config.agent instanceof HttpsProxyAgent);
+      assert.equal(res3.config.agent.connectOpts.key, 'other key');
     });
 
     describe('noProxy', () => {
