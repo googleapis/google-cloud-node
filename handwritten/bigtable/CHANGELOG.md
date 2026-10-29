@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigtable?activeTab=versions
 
+## [7.5.1](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.5.0...bigtable-v7.5.1) (2026-10-28)
+
+
+### Bug Fixes
+
+* **bigtable:** Use ReadonlyMap for EncodedKeyMap implements clause ([#9709](https://github.com/googleapis/google-cloud-node/issues/9709)) ([f803bff](https://github.com/googleapis/google-cloud-node/commit/f803bff4714360aa7c05387251bcb319536ae3f3))
+
 ## [7.5.0](https://github.com/googleapis/google-cloud-node/compare/bigtable-v7.4.0...bigtable-v7.5.0) (2026-10-08)
 
 

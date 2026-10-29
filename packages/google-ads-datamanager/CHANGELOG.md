@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/googleapis/google-cloud-node/compare/datamanager-v1.4.0...datamanager-v1.5.0) (2026-10-28)
+
+
+### Features
+
+* **datamanager:** Update release_level to stable in .repo-metadata.json ([#9725](https://github.com/googleapis/google-cloud-node/issues/9725)) ([6eb9340](https://github.com/googleapis/google-cloud-node/commit/6eb93400e80b72cce51ff4ee299b66c08894196a)), refs [#9685](https://github.com/googleapis/google-cloud-node/issues/9685)
+
 ## [1.4.0](https://github.com/googleapis/google-cloud-node/compare/datamanager-v1.3.0...datamanager-v1.4.0) (2026-10-23)
 
 

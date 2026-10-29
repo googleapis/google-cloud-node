@@ -619,11 +619,11 @@ export class AnalyticsServiceClient {
         >
       | undefined = callback
       ? (error, response, rawResponse, _) => {
-          this._log.info('exportAnalyticsMetrics response %j', rawResponse);
+          this._log.debug('exportAnalyticsMetrics response %j', rawResponse);
           callback!(error, response, rawResponse, _); // We verified `callback` above.
         }
       : undefined;
-    this._log.info('exportAnalyticsMetrics request %j', request);
+    this._log.debug('exportAnalyticsMetrics request %j', request);
     return this.innerApiCalls
       .exportAnalyticsMetrics(request, options, wrappedCallback)
       ?.then(
@@ -635,7 +635,7 @@ export class AnalyticsServiceClient {
           protos.google.longrunning.IOperation | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('exportAnalyticsMetrics response %j', rawResponse);
+          this._log.debug('exportAnalyticsMetrics response %j', rawResponse);
           return [response, rawResponse, _];
         },
       );

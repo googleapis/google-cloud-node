@@ -70,7 +70,7 @@
     "cross-env": "^7.0.3",
     "delay": "^5.0.0",
     "express": "^4.16.3",
-    "google-test-utils": "^0.3.0",
+    "google-test-utils": "^0.4.0",
     "gts": "^6.0.2",
     "jsdoc": "^4.0.0",
     "jsdoc-fresh": "^6.1.0",

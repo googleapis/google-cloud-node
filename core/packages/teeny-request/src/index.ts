@@ -83,6 +83,21 @@ function bunFetch(
     }
   }
 
+  const hasContentLength = Object.keys(headers).some(
+    k =>
+      k.toLowerCase() === 'content-length' ||
+      k.toLowerCase() === 'transfer-encoding',
+  );
+  if (!hasContentLength) {
+    if (
+      typeof init.body === 'string' ||
+      Buffer.isBuffer(init.body) ||
+      init.body instanceof Uint8Array
+    ) {
+      headers['Content-Length'] = String(Buffer.byteLength(init.body));
+    }
+  }
+
   const reqOptions: https.RequestOptions & {proto?: string} = {
     protocol: parsedUrl.protocol,
     proto: isHttps ? 'https' : 'http',

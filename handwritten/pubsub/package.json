@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/pubsub",
   "description": "Cloud Pub/Sub Client Library for Node.js",
-  "version": "6.3.1",
+  "version": "6.3.2",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
@@ -88,7 +88,7 @@
     "codecov": "^3.8.3",
     "execa": "~5.1.0",
     "gapic-tools": "^2.2.0",
-    "google-test-utils": "^0.3.0",
+    "google-test-utils": "^0.4.0",
     "gts": "^6.0.0",
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^6.1.0",

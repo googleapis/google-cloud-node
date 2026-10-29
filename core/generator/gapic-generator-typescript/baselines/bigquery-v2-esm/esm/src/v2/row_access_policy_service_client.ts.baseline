@@ -511,11 +511,11 @@ export class RowAccessPolicyServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listRowAccessPolicies values %j', values);
+          this._log.debug('listRowAccessPolicies values %j', values);
           callback!(error, values, nextPageRequest, rawResponse);
         }
       : undefined;
-    this._log.info('listRowAccessPolicies request %j', request);
+    this._log.debug('listRowAccessPolicies request %j', request);
     return this.innerApiCalls
       .listRowAccessPolicies(request, options, wrappedCallback)
       ?.then(
@@ -524,7 +524,7 @@ export class RowAccessPolicyServiceClient {
           protos.google.cloud.bigquery.v2.IListRowAccessPoliciesRequest | null,
           protos.google.cloud.bigquery.v2.IListRowAccessPoliciesResponse,
         ]) => {
-          this._log.info('listRowAccessPolicies values %j', response);
+          this._log.debug('listRowAccessPolicies values %j', response);
           return [response, input, output];
         },
       );
@@ -576,7 +576,7 @@ export class RowAccessPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRowAccessPolicies stream %j', request);
+    this._log.debug('listRowAccessPolicies stream %j', request);
     return this.descriptors.page.listRowAccessPolicies.createStream(
       this.innerApiCalls.listRowAccessPolicies as GaxCall,
       request,
@@ -633,7 +633,7 @@ export class RowAccessPolicyServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listRowAccessPolicies iterate %j', request);
+    this._log.debug('listRowAccessPolicies iterate %j', request);
     return this.descriptors.page.listRowAccessPolicies.asyncIterate(
       this.innerApiCalls['listRowAccessPolicies'] as GaxCall,
       request as {},

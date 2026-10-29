@@ -1,6 +1,6 @@
 {
   "name": "google-test-utils",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Testing utilities for Google Cloud client libraries",
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
@@ -19,7 +19,8 @@
     "docs": "jsdoc -c .jsdoc.js",
     "samples-test": "echo 'no samples test'",
     "system-test": "echo 'no system test'",
-    "clean": "gts clean"
+    "clean": "gts clean",
+    "precompile": "gts clean"
   },
   "keywords": [
     "google",

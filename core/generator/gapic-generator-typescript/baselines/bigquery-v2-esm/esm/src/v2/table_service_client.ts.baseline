@@ -505,7 +505,7 @@ export class TableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getTable request %j', request);
+    this._log.debug('getTable request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.v2.ITable,
@@ -514,7 +514,7 @@ export class TableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getTable response %j', response);
+          this._log.debug('getTable response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -526,7 +526,7 @@ export class TableServiceClient {
           protos.google.cloud.bigquery.v2.IGetTableRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getTable response %j', response);
+          this._log.debug('getTable response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -636,7 +636,7 @@ export class TableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('insertTable request %j', request);
+    this._log.debug('insertTable request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.v2.ITable,
@@ -647,7 +647,7 @@ export class TableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('insertTable response %j', response);
+          this._log.debug('insertTable response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -659,7 +659,7 @@ export class TableServiceClient {
           protos.google.cloud.bigquery.v2.IInsertTableRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('insertTable response %j', response);
+          this._log.debug('insertTable response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -783,7 +783,7 @@ export class TableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('patchTable request %j', request);
+    this._log.debug('patchTable request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.v2.ITable,
@@ -794,7 +794,7 @@ export class TableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('patchTable response %j', response);
+          this._log.debug('patchTable response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -809,7 +809,7 @@ export class TableServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('patchTable response %j', response);
+          this._log.debug('patchTable response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -932,7 +932,7 @@ export class TableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('updateTable request %j', request);
+    this._log.debug('updateTable request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.bigquery.v2.ITable,
@@ -943,7 +943,7 @@ export class TableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('updateTable response %j', response);
+          this._log.debug('updateTable response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -958,7 +958,7 @@ export class TableServiceClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('updateTable response %j', response);
+          this._log.debug('updateTable response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1070,7 +1070,7 @@ export class TableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteTable request %j', request);
+    this._log.debug('deleteTable request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1081,7 +1081,7 @@ export class TableServiceClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteTable response %j', response);
+          this._log.debug('deleteTable response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1093,7 +1093,7 @@ export class TableServiceClient {
           protos.google.cloud.bigquery.v2.IDeleteTableRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteTable response %j', response);
+          this._log.debug('deleteTable response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1223,11 +1223,11 @@ export class TableServiceClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTables values %j', values);
+          this._log.debug('listTables values %j', values);
           callback!(error, values, nextPageRequest, rawResponse);
         }
       : undefined;
-    this._log.info('listTables request %j', request);
+    this._log.debug('listTables request %j', request);
     return this.innerApiCalls
       .listTables(request, options, wrappedCallback)
       ?.then(
@@ -1236,7 +1236,7 @@ export class TableServiceClient {
           protos.google.cloud.bigquery.v2.IListTablesRequest | null,
           protos.google.cloud.bigquery.v2.ITableList,
         ]) => {
-          this._log.info('listTables values %j', response);
+          this._log.debug('listTables values %j', response);
           return [response, input, output];
         },
       );
@@ -1285,7 +1285,7 @@ export class TableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTables stream %j', request);
+    this._log.debug('listTables stream %j', request);
     return this.descriptors.page.listTables.createStream(
       this.innerApiCalls.listTables as GaxCall,
       request,
@@ -1339,7 +1339,7 @@ export class TableServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTables iterate %j', request);
+    this._log.debug('listTables iterate %j', request);
     return this.descriptors.page.listTables.asyncIterate(
       this.innerApiCalls['listTables'] as GaxCall,
       request as {},

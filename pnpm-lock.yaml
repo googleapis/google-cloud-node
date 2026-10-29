@@ -130,8 +130,8 @@ importers:
         specifier: ^3.8.3
         version: 3.8.3(encoding@0.1.13)
       google-test-utils:
-        specifier: ^0.3.0
-        version: 0.3.1
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -1663,8 +1663,8 @@ importers:
         specifier: ^5.2.6
         version: 5.5.6(eslint-config-prettier@9.1.2(eslint@8.57.1))(eslint@8.57.1)(prettier@3.9.6)
       google-test-utils:
-        specifier: ^0.3.0
-        version: 0.3.1
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2177,8 +2177,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@7.5.9)
       google-test-utils:
-        specifier: ^0.3.0
-        version: 0.3.1
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2522,8 +2522,8 @@ importers:
         specifier: ^3.8.3
         version: 3.8.3(encoding@0.1.13)
       google-test-utils:
-        specifier: ^0.3.0
-        version: 0.3.1
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2670,8 +2670,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@8.8.0)
       google-test-utils:
-        specifier: ^0.3.0
-        version: 0.3.1
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^5.0.0
         version: 5.3.1(typescript@5.9.3)
@@ -2770,8 +2770,8 @@ importers:
         specifier: ^4.16.3
         version: 4.22.2
       google-test-utils:
-        specifier: ^0.3.0
-        version: 0.3.1
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2840,8 +2840,8 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       google-test-utils:
-        specifier: ^0.3.0
-        version: 0.3.1
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.2
         version: 6.0.2(typescript@5.9.3)
@@ -2985,8 +2985,8 @@ importers:
         specifier: ^2.2.0
         version: 2.2.0(protobufjs@7.5.9)
       google-test-utils:
-        specifier: ^0.3.0
-        version: 0.3.1
+        specifier: ^0.4.0
+        version: 0.4.0
       gts:
         specifier: ^6.0.0
         version: 6.0.2(typescript@5.9.3)
@@ -7622,6 +7622,55 @@ importers:
       typescript:
         specifier: ^5.8.2
         version: 5.9.3
+
+  packages/google-cloud-designcenter:
+    dependencies:
+      google-gax:
+        specifier: ^6.0.0
+        version: 6.13.0
+    devDependencies:
+      '@types/mocha':
+        specifier: ^10.0.10
+        version: 10.0.10
+      '@types/node':
+        specifier: ^22.18.12
+        version: 22.20.1
+      '@types/sinon':
+        specifier: ^20.0.0
+        version: 20.0.0
+      c8:
+        specifier: ^10.1.3
+        version: 10.1.3
+      gapic-tools:
+        specifier: ^2.0.0
+        version: 2.2.0(protobufjs@8.8.0)
+      gts:
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.8.3)
+      jsdoc:
+        specifier: ^4.0.5
+        version: 4.0.5
+      jsdoc-fresh:
+        specifier: ^6.0.0
+        version: 6.1.0
+      jsdoc-region-tag:
+        specifier: ^5.0.0
+        version: 5.1.0
+      long:
+        specifier: ^5.3.2
+        version: 5.3.2
+      mocha:
+        specifier: ^11.7.4
+        version: 11.8.0
+      pack-n-play:
+        specifier: ^5.0.0
+        version: 5.3.0
+      sinon:
+        specifier: ^20.0.0
+        version: 20.0.0
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
 
   packages/google-cloud-developerconnect:
     dependencies:
@@ -20532,6 +20581,10 @@ packages:
     resolution: {integrity: sha512-lyoeWglF387Kfdd7zw8tuKS0GWlF/lNknoUmK08TdncVeOyHtTV9HKzgScVt1JrQsvx5qT7tihmXJSYVwbLZaA==}
     engines: {node: '>=22'}
 
+  google-test-utils@0.4.0:
+    resolution: {integrity: sha512-MMlNdyzy/i51cJXqjgzqgvu7qR1uNierj2+bZj1hMoJixJBEdnw51XuVjLu5n6DsKGo1dVbUI0UyU9OP8nYgdg==}
+    engines: {node: '>=22'}
+
   googleapis-common@4.4.3:
     resolution: {integrity: sha512-W46WKCk3QtlCCfmZyQIH5zxmDOyeV5Qj+qs7nr2ox08eRkEJMWp6iwv542R/PsokXaGUSrmif4vCC4+rGzRSsQ==}
     engines: {node: '>=10.10.0'}
@@ -31080,6 +31133,8 @@ snapshots:
       walkdir: 0.4.1
 
   google-test-utils@0.3.1: {}
+
+  google-test-utils@0.4.0: {}
 
   googleapis-common@4.4.3(encoding@0.1.13):
     dependencies:
