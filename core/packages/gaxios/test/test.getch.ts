@@ -343,6 +343,23 @@ describe('🥁 configuration options', () => {
     scope.done();
   });
 
+  it('should enforce maxContentLength on responses without a Content-Length header', async () => {
+    const body = {hello: 'world'};
+    for (const responseType of [
+      'json',
+      'text',
+      'arraybuffer',
+      'blob',
+    ] as const) {
+      const scope = nock(url).get('/').reply(200, body);
+      await assert.rejects(
+        request({url, maxContentLength: 5, responseType}),
+        (err: Error) => err instanceof GaxiosError && /limit/.test(err.message),
+      );
+      scope.done();
+    }
+  });
+
   it('should support redirects by default', async () => {
     const body = {hello: '🌎'};
     const scopes = [
@@ -657,6 +674,12 @@ describe('🥁 configuration options', () => {
 
         const jsonRes = await request({url});
         assert.deepStrictEqual(jsonRes.data, responseBody);
+
+        await assert.rejects(
+          request({url, maxContentLength: 2}),
+          (err: Error) =>
+            err instanceof GaxiosError && /over limit: 2/.test(err.message),
+        );
 
         globalThis.fetch = (async () => {
           throw {code: 'ECONNRESET', message: 'socket hang up'};
