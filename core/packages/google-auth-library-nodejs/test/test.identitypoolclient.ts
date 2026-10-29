@@ -1970,7 +1970,7 @@ describe('IdentityPoolClient', () => {
         };
       }
 
-      it('should tunnel both mTLS requests through HTTPS_PROXY with the client certificate', async () => {
+      it('should route both mTLS requests through HTTPS_PROXY and pass the certificate to gaxios', async () => {
         const agents = await getAccessTokenAgents({HTTPS_PROXY: proxy});
 
         for (const agent of [agents.sts, agents.impersonation]) {
