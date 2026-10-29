@@ -2314,6 +2314,7 @@ describe('createApiCall', () => {
         enableTelemetryLogging: true,
         otherArgs: {
           internalMethodName: 'Echo',
+          servicePath: 'example.googleapis.com',
         },
       });
 
@@ -2374,17 +2375,25 @@ describe('createApiCall', () => {
         attemptOther['rpc.response.status_code'],
         'UNAVAILABLE',
       );
+      assert.strictEqual(
+        attemptOther['server.address'],
+        'example.googleapis.com',
+      );
       assert.strictEqual('exception.type' in attemptOther, false);
+      assert.strictEqual('exception.message' in attemptOther, false);
+      assert.strictEqual('exception.stacktrace' in attemptOther, false);
       assert.strictEqual(
         callOther['rpc.method'],
         'google.example.v1.Echo/Echo',
       );
       assert.strictEqual(callOther['rpc.response.status_code'], 'UNAVAILABLE');
+      assert.strictEqual(callOther['server.address'], 'example.googleapis.com');
       assert.strictEqual(callOther['exception.type'], 'GoogleError');
       assert.strictEqual(
         callOther['exception.message'],
         'streaming test failure',
       );
+      assert.strictEqual(typeof callOther['exception.stacktrace'], 'string');
 
       const spans = harness.getSpans('google-gax');
       assert.strictEqual(spans.length, 2);
