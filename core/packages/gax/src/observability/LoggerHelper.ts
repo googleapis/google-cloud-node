@@ -31,11 +31,11 @@ import {
   isPreConnectionFailure,
   resolveErrorInfoDomain,
   resolveErrorInfoMetadataAttributes,
+  resolveErrorResponsePayload,
   resolveErrorType,
   resolveExceptionMessage,
   resolveExceptionStacktrace,
   resolveExceptionType,
-  resolveResponsePayload,
   resolveResponseStatusCode,
   resolveRpcStatusName,
 } from './errorUtil';
@@ -181,19 +181,15 @@ function emitGaxLog(
 }
 
 /**
- * Resolves a `LogSeverity` value across `google-logging-utils` versions where
- * `LogSeverity` may be exported as a type only.
+ * Resolves a `LogSeverity` enum value. Until a `google-logging-utils` release
+ * containing #9718 is published to npm (this repo uses `link-workspace-packages=false`),
+ * the published package exports `LogSeverity` as a type only while each enum member's
+ * runtime value equals its uppercase level string.
  */
 function resolveLogSeverity(
   level: 'DEBUG' | 'INFO' | 'WARNING' | 'ERROR',
 ): loggingUtils.LogSeverity {
-  return (
-    (
-      loggingUtils as {
-        LogSeverity?: Record<string, loggingUtils.LogSeverity>;
-      }
-    ).LogSeverity?.[level] ?? (level as loggingUtils.LogSeverity)
-  );
+  return level as loggingUtils.LogSeverity;
 }
 
 /**
@@ -448,20 +444,22 @@ export function logNetworkAttempt<T = GaxCallResult>(
   const initialContext = context.active();
 
   const emitL4DebugLog = (err: unknown) => {
-    // Resolve logger and active T4 attempt span context for this attempt.
+    // Resolve logger and active T4 attempt span (or outer OpenTelemetry span when GAX tracing is disabled).
     const logger = getGaxLogger(staticArgs?.gcpClientService);
+    const activeTrace = getActiveTraceContext();
+    const initialTrace = getActiveTraceContext(initialContext);
     const attemptSpan =
-      getActiveTraceContext()?.attemptSpan ??
-      getActiveTraceContext(initialContext)?.attemptSpan;
+      activeTrace?.attemptSpan ??
+      initialTrace?.attemptSpan ??
+      activeTrace?.span ??
+      initialTrace?.span;
     const spanContext = attemptSpan?.spanContext();
     const traceId = spanContext?.traceId;
     const spanId = spanContext?.spanId;
 
-    // Build structured log attributes and attach attempt metadata payload.
+    // Build structured log attributes and attach raw attempt response payload when present.
     const attributes = buildLogAttributes(err, attemptDynamicArgs, staticArgs);
-    const responsePayload = resolveResponsePayload(
-      (err as {metadata?: unknown} | null | undefined)?.metadata,
-    );
+    const responsePayload = resolveErrorResponsePayload(err);
     if (responsePayload !== undefined) {
       attributes['response.payload'] = responsePayload;
     }

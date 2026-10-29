@@ -16,7 +16,7 @@
 
 import {Attributes, Span} from '@opentelemetry/api';
 import * as protobuf from 'protobufjs';
-import {GoogleError} from '../googleError';
+import {getRawHttpResponsePayload, GoogleError} from '../googleError';
 import {Status} from '../status';
 /**
  * System and network error codes mapped to CLIENT_CONNECTION_ERROR.
@@ -936,6 +936,106 @@ export function resolveResponsePayload(
   // Binary payloads are base64 encoded and, like strings, not wrapped in JSON quotes.
   const bytes = toBytes(payload);
   return bytes ? encodeBase64(bytes) : safeJsonStringify(payload);
+}
+
+const GAXIOS_REDACTED_BODY =
+  '<<REDACTED> - See `errorRedactor` option in `gaxios` for configuration>.';
+
+function isStreamLike(value: unknown): boolean {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+  const stream = value as {pipe?: unknown; getReader?: unknown};
+  return (
+    typeof stream.pipe === 'function' || typeof stream.getReader === 'function'
+  );
+}
+
+/**
+ * Resolves the `response.payload` attribute from a failed RPC attempt error:
+ * - For HTTP REST errors translated by GAX fallback, extracts the full raw HTTP
+ *   response payload attached to the {@link GoogleError} (or a direct `response.data`
+ *   payload when usable).
+ * - For gRPC errors, unwraps `Metadata#getMap()` so header values are serialized
+ *   as scalar strings / base64 rather than single-element arrays from `Metadata#toJSON()`,
+ *   and omits empty `Metadata` instances (such as the empty `new grpc.Metadata()`
+ *   attached by `@grpc/grpc-js` on pre-connection failures like `ECONNREFUSED`).
+ *
+ * @param {unknown} e - The error thrown or returned by a failed attempt.
+ * @returns {string | undefined} The serialized response payload, or undefined if none arrived.
+ */
+export function resolveErrorResponsePayload(e: unknown): string | undefined {
+  let current: unknown = e;
+  const seen = new Set<unknown>();
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object' || seen.has(current)) {
+      break;
+    }
+    seen.add(current);
+
+    const rawHttpPayload = getRawHttpResponsePayload(current);
+    if (rawHttpPayload !== undefined) {
+      return resolveResponsePayload(rawHttpPayload);
+    }
+
+    const errObj = current as {
+      response?: {data?: unknown} | null;
+      metadata?: unknown;
+      cause?: unknown;
+    };
+
+    const responseData =
+      errObj.response && typeof errObj.response === 'object'
+        ? errObj.response.data
+        : undefined;
+    if (
+      responseData !== undefined &&
+      responseData !== null &&
+      responseData !== '' &&
+      responseData !== GAXIOS_REDACTED_BODY &&
+      !isStreamLike(responseData)
+    ) {
+      return resolveResponsePayload(responseData);
+    }
+
+    if (errObj.metadata !== undefined && errObj.metadata !== null) {
+      if (typeof errObj.metadata === 'string') {
+        if (errObj.metadata.length > 0) {
+          return errObj.metadata;
+        }
+      } else {
+        const bytes = toBytes(errObj.metadata);
+        if (bytes) {
+          if (bytes.byteLength > 0) {
+            return encodeBase64(bytes);
+          }
+        } else if (typeof errObj.metadata === 'object') {
+          let map: unknown = errObj.metadata;
+          if (
+            typeof (errObj.metadata as {getMap?: unknown}).getMap === 'function'
+          ) {
+            try {
+              map = (
+                errObj.metadata as {getMap: () => Record<string, unknown>}
+              ).getMap();
+            } catch {
+              map = errObj.metadata;
+            }
+          }
+          if (
+            map &&
+            typeof map === 'object' &&
+            Object.keys(map as Record<string, unknown>).length > 0
+          ) {
+            return resolveResponsePayload(map);
+          }
+        }
+      }
+    }
+
+    current = errObj.cause;
+  }
+  return undefined;
 }
 
 /**
