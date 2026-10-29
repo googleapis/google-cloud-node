@@ -343,7 +343,7 @@ describe('🥁 configuration options', () => {
     scope.done();
   });
 
-  it('should enforce maxContentLength on responses without a Content-Length header', async () => {
+  it('should enforce maxContentLength on responses without a Content-Length header and from instance defaults', async () => {
     const body = {hello: 'world'};
     for (const responseType of [
       'json',
@@ -358,6 +358,14 @@ describe('🥁 configuration options', () => {
       );
       scope.done();
     }
+
+    const defaultScope = nock(url).get('/').reply(200, body);
+    const client = new Gaxios({maxContentLength: 5});
+    await assert.rejects(
+      client.request({url}),
+      (err: Error) => err instanceof GaxiosError && /limit/.test(err.message),
+    );
+    defaultScope.done();
   });
 
   it('should support redirects by default', async () => {
