@@ -1624,6 +1624,81 @@ describe('PubSub', () => {
         'https://www.googleapis.com/auth/pubsub',
       ]);
     });
+
+    it('should bridge CallOptions.signal when google-gax CallSettings does not preserve signal', async () => {
+      let cancelCalled = false;
+      let capturedRetryCodes: number[] | undefined;
+      let rejectInnerPromise: ((err: Error) => void) | undefined;
+
+      // Simulate google-gax < 6.14.0 where CallSettings drops `signal`
+      class LegacyCallSettings {
+        signal?: AbortSignal;
+        constructor() {
+          this.signal = undefined;
+        }
+      }
+
+      const fakeGaxClient = {
+        _gaxModule: {
+          CallSettings: LegacyCallSettings,
+          createApiCall(
+            _func: unknown,
+            settings?: {retry?: {retryCodes?: number[]}},
+          ) {
+            return (
+              _req: unknown,
+              callOptions?: gax.CallOptions,
+              callback?: Function,
+            ) => {
+              capturedRetryCodes =
+                callOptions?.retry?.retryCodes ?? settings?.retry?.retryCodes;
+              if (callback) {
+                return undefined;
+              }
+              const p = new Promise((_resolve, reject) => {
+                rejectInnerPromise = reject;
+              }) as gax.CancellablePromise<[unknown, unknown, unknown]>;
+              p.cancel = () => {
+                cancelCalled = true;
+                const err = Object.assign(new Error('Call cancelled.'), {
+                  code: gax.Status.CANCELLED,
+                });
+                rejectInnerPromise?.(err);
+              };
+              return p;
+            };
+          },
+        },
+        close: sandbox.stub(),
+      };
+
+      v1ClientOverrides.FakeClient = function () {
+        return fakeGaxClient;
+      };
+
+      const client = (await pubsub.getClientAsync_(
+        CONFIG,
+      )) as unknown as typeof fakeGaxClient;
+      const wrappedCall = client._gaxModule.createApiCall(
+        {},
+        {retry: {retryCodes: [gax.Status.CANCELLED, gax.Status.UNAVAILABLE]}},
+      );
+
+      const abortController = new AbortController();
+      const callbackPromise = new Promise<Error | null>(resolve => {
+        void wrappedCall(
+          {},
+          {signal: abortController.signal},
+          (err: Error | null) => resolve(err),
+        );
+      });
+
+      abortController.abort();
+      const err = await callbackPromise;
+      assert.strictEqual(cancelCalled, true);
+      assert.deepStrictEqual(capturedRetryCodes, [-1]);
+      assert.strictEqual((err as {code?: number})?.code, gax.Status.CANCELLED);
+    });
   });
 
   describe('getClient_', () => {
