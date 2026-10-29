@@ -137,18 +137,14 @@ describe('Entry', () => {
     const date = new Date();
 
     beforeEach(() => {
-      const seconds = date.getTime() / 1000;
-      const secondsRounded = Math.floor(seconds);
+      const {seconds, nanos} = common.toNanosAndSecondsObj(date);
       fakeStructToObj = (data: {}) => data;
       entry = Entry.fromApiResponse_({
         resource: RESOURCE,
         payload: 'jsonPayload',
         jsonPayload: DATA,
         extraProperty: true,
-        timestamp: {
-          seconds: secondsRounded,
-          nanos: Math.floor((seconds - secondsRounded) * 1e9),
-        },
+        timestamp: {seconds, nanos},
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any);
     });
