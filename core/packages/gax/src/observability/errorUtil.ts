@@ -858,7 +858,8 @@ export function safeJsonStringify(value: unknown): string | undefined {
 /**
  * Extracts and formats server-side error details (message, status details, and metadata)
  * attached by GFE/backend on server-side errors. Note that only `message` is used on
- * low level network `exception` span events (`exception.stacktrace` is not recorded on spans).
+ * low level network `exception` span events (`exception.stacktrace` uses the natural
+ * JavaScript call stack and is not recorded on spans).
  *
  * @param {Error} e - The server Error instance.
  * @returns {{message: string; stacktrace?: string}} The resolved server message and formatted details string.
@@ -867,33 +868,66 @@ export function resolveServerExceptionDetails(e: Error): {
   message: string;
   stacktrace?: string;
 } {
-  ensureGrpcStatusDetailsParsed(e);
+  let serverDetails: string | undefined;
+  let rawStatusDetails: unknown;
+  let rawMetadata: Record<string, unknown> | undefined;
 
-  const errObj = e as {
-    details?: unknown;
-    statusDetails?: unknown;
-    metadata?: unknown;
-    cause?: unknown;
-  };
+  let current: unknown = e;
+  const seen = new Set<unknown>();
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
 
-  const causeObj =
-    errObj.cause && typeof errObj.cause === 'object'
-      ? (errObj.cause as {
-          details?: unknown;
-          statusDetails?: unknown;
-          metadata?: unknown;
-        })
-      : undefined;
+    ensureGrpcStatusDetailsParsed(current);
+
+    const errObj = current as {
+      details?: unknown;
+      statusDetails?: unknown;
+      metadata?: unknown;
+      cause?: unknown;
+    };
+
+    if (
+      serverDetails === undefined &&
+      typeof errObj.details === 'string' &&
+      errObj.details.length > 0
+    ) {
+      serverDetails = errObj.details;
+    }
+    if (
+      rawStatusDetails === undefined &&
+      errObj.statusDetails !== undefined &&
+      errObj.statusDetails !== null
+    ) {
+      rawStatusDetails = errObj.statusDetails;
+    }
+    if (
+      rawMetadata === undefined &&
+      errObj.metadata &&
+      typeof errObj.metadata === 'object'
+    ) {
+      rawMetadata = errObj.metadata as Record<string, unknown>;
+    }
+    if (
+      serverDetails !== undefined &&
+      rawStatusDetails !== undefined &&
+      rawMetadata !== undefined
+    ) {
+      break;
+    }
+
+    current = errObj.cause;
+  }
 
   // Prefer server error details over generic error message.
-  const serverDetails = errObj.details ?? causeObj?.details;
-  const message =
-    typeof serverDetails === 'string' && serverDetails.length > 0
-      ? serverDetails
-      : e.message;
+  const message = serverDetails ?? e.message;
 
   // Serialize status details if present.
-  const rawStatusDetails = errObj.statusDetails ?? causeObj?.statusDetails;
   let statusDetailsStr: string | undefined;
   if (rawStatusDetails !== undefined && rawStatusDetails !== null) {
     statusDetailsStr =
@@ -903,7 +937,6 @@ export function resolveServerExceptionDetails(e: Error): {
   }
 
   // Serialize backend metadata, encoding Buffer values as base64.
-  const rawMetadata = errObj.metadata ?? causeObj?.metadata;
   let metadataStr: string | undefined;
   if (rawMetadata && typeof rawMetadata === 'object') {
     try {
@@ -931,7 +964,7 @@ export function resolveServerExceptionDetails(e: Error): {
     }
   }
 
-  // Combine status details and metadata into a formatted stacktrace string.
+  // Combine status details and metadata into a formatted diagnostic string.
   const stacktraceParts: string[] = [];
   if (statusDetailsStr) {
     stacktraceParts.push(`status_details: ${statusDetailsStr}`);
@@ -968,24 +1001,32 @@ export function resolveExceptionMessage(
 }
 
 /**
- * Resolves the `exception.stacktrace` for a failed call or attempt. Server-side Error
- * instances use the server-provided status details and metadata (see
- * `resolveServerExceptionDetails`) and have no stacktrace when the server sent neither.
- * All other values use their JavaScript stack trace (`stack`), if they have one.
+ * Resolves the `exception.stacktrace` attribute as the natural JavaScript call stack
+ * (`stack`) from the error (or the first non-empty `stack` along its `.cause` chain).
+ * Raw server status details and metadata belong in L4 `response.payload`, not
+ * `exception.stacktrace`.
  *
  * @param {unknown} e - The error or other value thrown or reported for the call.
- * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
  * @returns {string | undefined} The resolved `exception.stacktrace` string, if any.
  */
-export function resolveExceptionStacktrace(
-  e: unknown,
-  rpcType: 'grpc' | 'http',
-): string | undefined {
-  if (e instanceof Error && isServerSideError(e, rpcType)) {
-    return resolveServerExceptionDetails(e).stacktrace;
+export function resolveExceptionStacktrace(e: unknown): string | undefined {
+  let current: unknown = e;
+  const seen = new Set<unknown>();
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
+    const stack = (current as {stack?: unknown}).stack;
+    if (typeof stack === 'string' && stack.length > 0) {
+      return stack;
+    }
+    current = (current as {cause?: unknown}).cause;
   }
-  const stack = (e as {stack?: unknown} | null | undefined)?.stack;
-  return typeof stack === 'string' && stack.length > 0 ? stack : undefined;
+  return undefined;
 }
 
 /**

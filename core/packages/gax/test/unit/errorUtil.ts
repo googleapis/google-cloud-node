@@ -943,71 +943,71 @@ describe('errorUtil', () => {
       );
     });
 
-    it('resolveExceptionStacktrace uses server error details for server-side errors and the stack otherwise', () => {
-      // The details formatting itself is covered by the resolveServerExceptionDetails tests.
-      const grpcErr = Object.assign(new GoogleError('Wrapper message'), {
-        code: Status.INVALID_ARGUMENT,
-        statusDetails: [{field: 'name'}],
+    it('resolveExceptionStacktrace returns the JavaScript call stack for server-side and client-side errors', async () => {
+      const metadata = new grpc.Metadata();
+      metadata.set('x-goog-request-id', 'req-123');
+      const grpcErr = Object.assign(new GoogleError('NOT_FOUND: missing'), {
+        code: Status.NOT_FOUND,
+        statusDetails: [{detail: 'secret not found'}],
+        metadata,
       });
-      assert.strictEqual(
-        resolveExceptionStacktrace(grpcErr, 'grpc'),
-        'status_details: [{"field":"name"}]',
-      );
-      // A gRPC status is not a server response on the HTTP transport.
-      assert.strictEqual(
-        resolveExceptionStacktrace(grpcErr, 'http'),
-        grpcErr.stack,
-      );
+      assert.ok(grpcErr.stack);
+      assert.strictEqual(resolveExceptionStacktrace(grpcErr), grpcErr.stack);
 
-      const httpErr = Object.assign(new GoogleError('HTTP wrapper'), {
-        httpStatusCode: 400,
-        statusDetails: 'Quota exceeded',
-      });
-      assert.strictEqual(
-        resolveExceptionStacktrace(httpErr, 'http'),
-        'status_details: Quota exceeded',
-      );
-
-      // Server-side errors without status details or metadata have no stacktrace.
-      const noDetailsErr = Object.assign(new GoogleError('No details'), {
+      // Server-side errors without statusDetails or metadata still report e.stack.
+      const noDetailsGrpcErr = Object.assign(new GoogleError('No details'), {
         code: Status.UNAVAILABLE,
       });
+      assert.ok(noDetailsGrpcErr.stack);
       assert.strictEqual(
-        resolveExceptionStacktrace(noDetailsErr, 'grpc'),
-        undefined,
+        resolveExceptionStacktrace(noDetailsGrpcErr),
+        noDetailsGrpcErr.stack,
       );
 
-      // Client-side errors use the JavaScript stack trace, if it is not empty.
+      const rest403Err = await httpErrorWithErrorInfo();
+      assert.ok(rest403Err.stack);
+      assert.strictEqual(
+        resolveExceptionStacktrace(rest403Err),
+        rest403Err.stack,
+      );
+
+      const httpNoDetailsErr = Object.assign(new GoogleError('Forbidden'), {
+        httpStatusCode: 403,
+      });
+      assert.ok(httpNoDetailsErr.stack);
+      assert.strictEqual(
+        resolveExceptionStacktrace(httpNoDetailsErr),
+        httpNoDetailsErr.stack,
+      );
+
       const clientErr = new TypeError('bad type');
       assert.ok(clientErr.stack);
       assert.strictEqual(
-        resolveExceptionStacktrace(clientErr, 'grpc'),
+        resolveExceptionStacktrace(clientErr),
         clientErr.stack,
       );
+
       const emptyStackErr = new TypeError('empty stack');
       emptyStackErr.stack = '';
+      assert.strictEqual(resolveExceptionStacktrace(emptyStackErr), undefined);
+
+      // Falls back through .cause when an outer wrapper lacks a non-empty stack.
       assert.strictEqual(
-        resolveExceptionStacktrace(emptyStackErr, 'grpc'),
-        undefined,
+        resolveExceptionStacktrace({message: 'wrapper', cause: clientErr}),
+        clientErr.stack,
       );
     });
 
     it('resolveExceptionStacktrace uses the stack of non-Error throws when they have one', () => {
-      assert.strictEqual(
-        resolveExceptionStacktrace('raw failure', 'grpc'),
-        undefined,
-      );
-      assert.strictEqual(resolveExceptionStacktrace(null, 'grpc'), undefined);
-      assert.strictEqual(
-        resolveExceptionStacktrace(undefined, 'http'),
-        undefined,
-      );
+      assert.strictEqual(resolveExceptionStacktrace('raw failure'), undefined);
+      assert.strictEqual(resolveExceptionStacktrace(null), undefined);
+      assert.strictEqual(resolveExceptionStacktrace(undefined), undefined);
       const crossRealm = vm.runInNewContext(
         "new Error('cross realm boom')",
       ) as Error;
       assert.ok(crossRealm.stack);
       assert.strictEqual(
-        resolveExceptionStacktrace(crossRealm, 'grpc'),
+        resolveExceptionStacktrace(crossRealm),
         crossRealm.stack,
       );
     });
@@ -1356,6 +1356,31 @@ describe('errorUtil', () => {
       const {stacktrace} = resolveServerExceptionDetails(error);
       assert.strictEqual(stacktrace, 'metadata: [object Object]');
     });
+
+    it('resolves details, metadata, and binary gRPC status details across deep cause chains', () => {
+      const innerGrpcErr = Object.assign(grpcErrorWithEncodedErrorInfo(), {
+        details: 'Translation service is disabled',
+      });
+      assert.strictEqual(innerGrpcErr.statusDetails, undefined);
+
+      const deeplyWrapped = new Error('outer wrapper', {
+        cause: new Error('middle wrapper', {cause: innerGrpcErr}),
+      });
+
+      const resolved = resolveServerExceptionDetails(deeplyWrapped);
+      assert.strictEqual(resolved.message, 'Translation service is disabled');
+      assert.ok(resolved.stacktrace?.includes('status_details: '));
+      assert.ok(resolved.stacktrace?.includes('SERVICE_DISABLED'));
+      assert.ok(resolved.stacktrace?.includes('metadata: '));
+      assert.strictEqual(
+        resolveExceptionMessage(deeplyWrapped, 'grpc'),
+        'Translation service is disabled',
+      );
+      assert.strictEqual(
+        resolveExceptionStacktrace(deeplyWrapped),
+        deeplyWrapped.stack,
+      );
+    });
   });
 
   describe('cause traversal circular reference protection in helpers', () => {
@@ -1363,6 +1388,19 @@ describe('errorUtil', () => {
       const err: Record<string, unknown> = {message: 'test'};
       err.cause = err;
       assert.strictEqual(resolveErrorInfoReason(err), undefined);
+    });
+
+    it('resolveExceptionStacktrace and resolveServerExceptionDetails terminate cleanly with circular cause', () => {
+      const noStackObj: Record<string, unknown> = {message: 'test'};
+      noStackObj.cause = noStackObj;
+      assert.strictEqual(resolveExceptionStacktrace(noStackObj), undefined);
+
+      const err = new GoogleError('circular');
+      err.cause = err;
+      assert.strictEqual(
+        resolveServerExceptionDetails(err).message,
+        'circular',
+      );
     });
 
     it('resolveClientNetworkOrOperationalError terminates cleanly with circular cause', () => {
