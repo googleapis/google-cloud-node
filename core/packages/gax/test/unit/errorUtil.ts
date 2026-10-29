@@ -34,6 +34,7 @@ import {
   genericClasses,
   preConnectionCodes,
   DEPTH_TO_CHECK,
+  resolveErrorInfo,
   resolveErrorInfoReason,
   resolveErrorInfoDomain,
   resolveErrorInfoMetadataAttributes,
@@ -363,6 +364,102 @@ describe('errorUtil', () => {
         resolveErrorInfoMetadataAttributes(grpcErrorWithEncodedErrorInfo()),
         expected,
       );
+    });
+
+    it('resolveErrorInfo decodes binary grpc-status-details-bin on wrapped cause errors', () => {
+      const innerGrpcErr = grpcErrorWithEncodedErrorInfo();
+      assert.strictEqual(innerGrpcErr.reason, undefined);
+      assert.strictEqual(innerGrpcErr.domain, undefined);
+      assert.strictEqual(innerGrpcErr.errorInfoMetadata, undefined);
+
+      const wrappedErr = new Error('outer wrapper', {cause: innerGrpcErr});
+      assert.deepStrictEqual(resolveErrorInfo(wrappedErr), {
+        reason: 'SERVICE_DISABLED',
+        domain: 'googleapis.com',
+        metadataAttributes: {
+          'gcp.errors.metadata.service': 'translate.googleapis.com',
+          'gcp.errors.metadata.consumer': 'projects/123',
+        },
+      });
+    });
+
+    it('resolveErrorInfo does not mix optional ErrorInfo fields across causes or details and walks cause once', () => {
+      const outerPartialReason = {
+        reason: 'RATE_LIMIT_EXCEEDED',
+        cause: {
+          reason: 'SERVICE_DISABLED',
+          domain: 'googleapis.com',
+          errorInfoMetadata: {service: 'translate.googleapis.com'},
+        },
+      };
+      assert.deepStrictEqual(resolveErrorInfo(outerPartialReason), {
+        reason: 'RATE_LIMIT_EXCEEDED',
+        domain: undefined,
+        metadataAttributes: {},
+      });
+      assert.strictEqual(
+        resolveErrorInfoReason(outerPartialReason),
+        'RATE_LIMIT_EXCEEDED',
+      );
+      assert.strictEqual(resolveErrorInfoDomain(outerPartialReason), undefined);
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes(outerPartialReason),
+        {},
+      );
+
+      const outerPartialDomain = {
+        domain: 'pubsub.googleapis.com',
+        cause: {
+          reason: 'SERVICE_DISABLED',
+          errorInfoMetadata: {service: 'translate.googleapis.com'},
+        },
+      };
+      assert.strictEqual(resolveErrorInfoReason(outerPartialDomain), undefined);
+      assert.strictEqual(
+        resolveErrorInfoDomain(outerPartialDomain),
+        'pubsub.googleapis.com',
+      );
+      assert.deepStrictEqual(
+        resolveErrorInfoMetadataAttributes(outerPartialDomain),
+        {},
+      );
+
+      const multiDetailErr = {
+        statusDetails: [
+          {reason: 'RATE_LIMIT_EXCEEDED'},
+          {domain: 'googleapis.com', metadata: {service: 'foo.googleapis.com'}},
+        ],
+      };
+      assert.deepStrictEqual(resolveErrorInfo(multiDetailErr), {
+        reason: 'RATE_LIMIT_EXCEEDED',
+        domain: undefined,
+        metadataAttributes: {},
+      });
+
+      let causeReads = 0;
+      const leaf = {
+        code: Status.PERMISSION_DENIED,
+        reason: 'IAM_PERMISSION_DENIED',
+        domain: 'iam.googleapis.com',
+        errorInfoMetadata: {permission: 'resourcemanager.projects.get'},
+      };
+      const trackedErr = {};
+      Object.defineProperty(trackedErr, 'cause', {
+        get() {
+          causeReads++;
+          return leaf;
+        },
+      });
+      const info = resolveErrorInfo(trackedErr);
+      assert.strictEqual(
+        resolveErrorType(trackedErr, 'grpc', info),
+        'IAM_PERMISSION_DENIED',
+      );
+      assert.strictEqual(info.domain, 'iam.googleapis.com');
+      assert.deepStrictEqual(info.metadataAttributes, {
+        'gcp.errors.metadata.permission': 'resourcemanager.projects.get',
+      });
+      assert.strictEqual(causeReads, 1);
     });
 
     it('resolveServerErrorCode handles http and grpc', () => {
