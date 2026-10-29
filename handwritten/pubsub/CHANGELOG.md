@@ -5,6 +5,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/pubsub?activeTab=versions
 
+## [6.3.2](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.3.1...pubsub-v6.3.2) (2026-10-28)
+
+
+### Bug Fixes
+
+* **pubsub:** Reuse GoogleAuth instance and deprecate credential options ([#9721](https://github.com/googleapis/google-cloud-node/issues/9721)) ([4c4ba34](https://github.com/googleapis/google-cloud-node/commit/4c4ba3451bf2c87f9e36971765d19f6070973ae4))
+
 ## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/pubsub-v6.3.0...pubsub-v6.3.1) (2026-10-19)
 
 

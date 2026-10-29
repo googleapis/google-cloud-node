@@ -29,8 +29,6 @@ runs:
           echo ""
           exit 1
         fi
-        pnpm --dir core/test-utils run compile
-        node -e "require('./bin/run-test.cjs').ensureWorkspacePackagesLinked()"
     - name: Link In-Repo Workspace Packages
       if: ${{ inputs.link-workspace-packages == 'true' }}
       shell: bash
@@ -41,5 +39,3 @@ runs:
         git checkout -- pnpm-lock.yaml
         pnpm --dir core/packages/gaxios run compile
         pnpm --dir core/packages/teeny-request run compile
-        pnpm --dir core/test-utils run compile
-        node -e "require('./bin/run-test.cjs').ensureWorkspacePackagesLinked()"

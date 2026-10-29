@@ -110,7 +110,7 @@
     "cross-env": "^7.0.3",
     "form-data": "^4.0.4",
     "gapic-tools": "^2.2.0",
-    "google-test-utils": "^0.3.0",
+    "google-test-utils": "^0.4.0",
     "gts": "^5.0.0",
     "jsdoc": "^4.0.4",
     "jsdoc-fresh": "^6.1.0",

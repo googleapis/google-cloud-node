@@ -1769,8 +1769,8 @@ describe('createApiCall', () => {
 });
 
 describe('Promise', () => {
-  it('calls api call', done => {
-    let deadlineArg: string;
+  it('calls api call', async () => {
+    let deadlineArg = '';
     function func(
       argument: {},
       metadata: {},
@@ -1782,14 +1782,10 @@ describe('Promise', () => {
     }
     const apiCall = createApiCall(func);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (apiCall as any)(null)
-      .then((response: number[]) => {
-        assert.ok(Array.isArray(response));
-        assert.strictEqual(response[0], 42);
-        assert.ok(deadlineArg);
-        return done();
-      })
-      .catch(done);
+    const response = await (apiCall as any)(null);
+    assert.ok(Array.isArray(response));
+    assert.strictEqual(response[0], 42);
+    assert.ok(deadlineArg);
   });
 
   it('emits error on rejected promise', async () => {
@@ -1806,28 +1802,24 @@ describe('Promise', () => {
     await assert.rejects(apiCall({}, undefined));
   });
 
-  it('has cancel method', done => {
+  it('has cancel method', async () => {
     function func(argument: {}, metadata: {}, options: {}, callback: Function) {
       setTimeout(() => {
         callback(null, 42);
       }, 0);
     }
-    const apiCall = createApiCall(func, {cancel: done});
+    const apiCall = createApiCall(func);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const promise = (apiCall as any)(null);
-    promise
-      .then(() => {
-        return done(new Error('should not reach'));
-      })
-      .catch((err: {code: number}) => {
-        assert(err instanceof GoogleError);
-        assert.strictEqual(err.code, status.CANCELLED);
-        done();
-      });
     promise.cancel();
+    await assert.rejects(promise, (err: unknown) => {
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, status.CANCELLED);
+      return true;
+    });
   });
 
-  it('cancels retrying call', done => {
+  it('cancels retrying call', async () => {
     const retryOptions = utils.createRetryOptions(0, 0, 0, 0, 0, 0, 100);
 
     let callCount = 0;
@@ -1855,18 +1847,11 @@ describe('Promise', () => {
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const promise = (apiCall as any)(null);
-    promise
-      .then(() => {
-        return done(new Error('should not reach'));
-      })
-      .catch(() => {
-        assert(callCount < 4);
-        done();
-      })
-      .catch(done);
     setTimeout(() => {
       promise.cancel();
     }, 15);
+    await assert.rejects(promise);
+    assert(callCount < 4);
   });
 
   it('does not return promise when callback is supplied', done => {
@@ -1882,6 +1867,91 @@ describe('Promise', () => {
       }),
       undefined,
     );
+  });
+
+  it('cancels promise-based call via AbortSignal', async () => {
+    function func(argument: {}, metadata: {}, options: {}, callback: Function) {
+      setTimeout(() => {
+        callback(null, 42);
+      }, 10);
+    }
+    const controller = new AbortController();
+    const apiCall = createApiCall(func);
+    const promise = apiCall({}, {signal: controller.signal});
+    controller.abort();
+    await assert.rejects(promise, (err: unknown) => {
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, status.CANCELLED);
+      return true;
+    });
+  });
+
+  it('cancels callback-based call via AbortSignal', done => {
+    let cancelCalled = false;
+    function func(argument: {}, metadata: {}, options: {}, callback: Function) {
+      const timer = setTimeout(() => {
+        callback(null, 42);
+      }, 50);
+      return () => {
+        cancelCalled = true;
+        clearTimeout(timer);
+        const err = new GoogleError('cancelled');
+        err.code = status.CANCELLED;
+        callback(err);
+      };
+    }
+    const controller = new AbortController();
+    const apiCall = createApiCall(func, {returnCancelFunc: true});
+    void apiCall({}, {signal: controller.signal}, err => {
+      try {
+        assert.strictEqual(cancelCalled, true);
+        assert(err instanceof GoogleError);
+        assert.strictEqual(err.code, status.CANCELLED);
+        done();
+      } catch (assertErr) {
+        done(assertErr);
+      }
+    });
+    setTimeout(() => {
+      controller.abort();
+    }, 5);
+  });
+
+  it('immediately cancels call when AbortSignal is already aborted', done => {
+    let funcCalled = false;
+    let returnedSynchronously = false;
+    function func(argument: {}, metadata: {}, options: {}, callback: Function) {
+      funcCalled = true;
+      callback(null, 42);
+    }
+    const controller = new AbortController();
+    controller.abort();
+    const apiCall = createApiCall(func);
+    void apiCall({}, {signal: controller.signal}, err => {
+      try {
+        assert.strictEqual(returnedSynchronously, true);
+        assert.strictEqual(funcCalled, false);
+        assert(err instanceof GoogleError);
+        assert.strictEqual(err.code, status.CANCELLED);
+        done();
+      } catch (assertErr) {
+        done(assertErr);
+      }
+    });
+    returnedSynchronously = true;
+  });
+
+  it('removes abort listener from AbortSignal when call completes', async () => {
+    function func(argument: {}, metadata: {}, options: {}, callback: Function) {
+      callback(null, 42);
+    }
+    const controller = new AbortController();
+    const removeSpy = sinon.spy(controller.signal, 'removeEventListener');
+    const apiCall = createApiCall(func);
+    const [response] = await apiCall({}, {signal: controller.signal});
+    assert.strictEqual(response, 42);
+    assert.strictEqual(removeSpy.calledWith('abort'), true);
+    removeSpy.restore();
   });
 });
 
@@ -1922,9 +1992,9 @@ describe('retryable', () => {
     });
   });
 
-  it('retries the API call with promise', done => {
+  it('retries the API call with promise', async () => {
     let toAttempt = 3;
-    let deadlineArg: string;
+    let deadlineArg = '';
     function func(
       argument: {},
       metadata: {},
@@ -1940,18 +2010,14 @@ describe('retryable', () => {
       callback(null, 1729);
     }
     const apiCall = createApiCall(func, settings);
-    apiCall({}, undefined)
-      .then(resp => {
-        assert.ok(Array.isArray(resp));
-        assert.strictEqual(resp[0], 1729);
-        assert.strictEqual(toAttempt, 0);
-        assert.ok(deadlineArg);
-        return done();
-      })
-      .catch(done);
+    const resp = await apiCall({}, undefined);
+    assert.ok(Array.isArray(resp));
+    assert.strictEqual(resp[0], 1729);
+    assert.strictEqual(toAttempt, 0);
+    assert.ok(deadlineArg);
   });
 
-  it('cancels in the middle of retries', done => {
+  it('cancels in the middle of retries', async () => {
     let callCount = 0;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     function func(argument: {}, metadata: {}, options: {}, callback: Function) {
@@ -1969,14 +2035,50 @@ describe('retryable', () => {
     }
     const apiCall = createApiCall(func, settings);
     const promise = apiCall({}, undefined);
-    promise
-      .then(() => {
-        return done(new Error('should not reach'));
-      })
-      .catch((err: Error) => {
-        assert(err instanceof Error);
-        done();
-      });
+    await assert.rejects(promise, (err: unknown) => {
+      assert(err instanceof Error);
+      return true;
+    });
+  });
+
+  it('does not retry when cancelled in-flight even if Status.CANCELLED is in retryCodes', async () => {
+    const retryWithCancelled = gax.createRetryOptions(
+      [status.CANCELLED],
+      gax.createBackoffSettings(1, 1, 5, 50, 1, 50, 500),
+    );
+    const cancelRetrySettings = {
+      settings: {timeout: 0, retry: retryWithCancelled, apiName: 'TestApi'},
+      returnCancelFunc: true,
+    };
+
+    let callCount = 0;
+    function func(argument: {}, metadata: {}, options: {}, callback: Function) {
+      callCount++;
+      const timer = setTimeout(() => {
+        callback(null, 42);
+      }, 50);
+      return () => {
+        clearTimeout(timer);
+        const err = new GoogleError('cancelled by caller');
+        err.code = status.CANCELLED;
+        callback(err);
+      };
+    }
+
+    const controller = new AbortController();
+    const apiCall = createApiCall(func, cancelRetrySettings);
+    const promise = apiCall({}, {signal: controller.signal});
+    setTimeout(() => {
+      controller.abort();
+    }, 5);
+
+    await assert.rejects(promise, (err: unknown) => {
+      assert(err instanceof GoogleError);
+      assert.strictEqual(err.code, status.CANCELLED);
+      return true;
+    });
+    await new Promise(resolve => setTimeout(resolve, 20));
+    assert.strictEqual(callCount, 1);
   });
 
   it("doesn't retry if no codes", done => {
@@ -2188,7 +2290,7 @@ describe('retryable', () => {
       assert(spy.callCount > callsLowerBound);
       assert(spy.callCount < callsUpperBound);
       done();
-    }).catch(done);
+    });
   });
 
   it.skip('reports A/B testing', () => {
@@ -2236,12 +2338,12 @@ describe('retryable', () => {
       });
   });
 
-  it('forwards metadata to builder', done => {
+  it('forwards metadata to builder', async () => {
     function func(argument: {}, metadata: {}, options: {}, callback: Function) {
       callback(null, {});
     }
 
-    let gotHeaders: {h1?: string; h2?: string};
+    let gotHeaders: {h1?: string; h2?: string} = {};
     const mockBuilder = (abTest: {}, headers: {}) => {
       gotHeaders = headers;
     };
@@ -2255,14 +2357,8 @@ describe('retryable', () => {
       h1: 'val1',
       h2: 'val2',
     };
-    void apiCall({}, {otherArgs: {headers}}).then(() => {
-      try {
-        assert.strictEqual(gotHeaders.h1, 'val1');
-        assert.strictEqual(gotHeaders.h2, 'val2');
-        return done();
-      } catch (err) {
-        return done(err);
-      }
-    });
+    await apiCall({}, {otherArgs: {headers}});
+    assert.strictEqual(gotHeaders.h1, 'val1');
+    assert.strictEqual(gotHeaders.h2, 'val2');
   });
 });

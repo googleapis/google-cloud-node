@@ -4607,6 +4607,142 @@ describe('v1beta.AgentServiceClient', () => {
     });
   });
 
+  describe('updateAppVersion', () => {
+    it('invokes updateAppVersion without error', async () => {
+      const client = new agentserviceModule.v1beta.AgentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.UpdateAppVersionRequest(),
+      );
+      request.appVersion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.UpdateAppVersionRequest',
+        ['appVersion', 'name'],
+      );
+      request.appVersion.name = defaultValue1;
+      const expectedHeaderRequestParams = `app_version.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.AppVersion(),
+      );
+      client.innerApiCalls.updateAppVersion = stubSimpleCall(expectedResponse);
+      const [response] = await client.updateAppVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAppVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAppVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAppVersion without error using callback', async () => {
+      const client = new agentserviceModule.v1beta.AgentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.UpdateAppVersionRequest(),
+      );
+      request.appVersion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.UpdateAppVersionRequest',
+        ['appVersion', 'name'],
+      );
+      request.appVersion.name = defaultValue1;
+      const expectedHeaderRequestParams = `app_version.name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.AppVersion(),
+      );
+      client.innerApiCalls.updateAppVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateAppVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.ces.v1beta.IAppVersion | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.updateAppVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAppVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAppVersion with error', async () => {
+      const client = new agentserviceModule.v1beta.AgentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.UpdateAppVersionRequest(),
+      );
+      request.appVersion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.UpdateAppVersionRequest',
+        ['appVersion', 'name'],
+      );
+      request.appVersion.name = defaultValue1;
+      const expectedHeaderRequestParams = `app_version.name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateAppVersion = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.updateAppVersion(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.updateAppVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAppVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes updateAppVersion with closed client', async () => {
+      const client = new agentserviceModule.v1beta.AgentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.UpdateAppVersionRequest(),
+      );
+      request.appVersion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.UpdateAppVersionRequest',
+        ['appVersion', 'name'],
+      );
+      request.appVersion.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.updateAppVersion(request), expectedError);
+    });
+  });
+
   describe('deleteAppVersion', () => {
     it('invokes deleteAppVersion without error', async () => {
       const client = new agentserviceModule.v1beta.AgentServiceClient({
@@ -9963,6 +10099,86 @@ describe('v1beta.AgentServiceClient', () => {
         assert.strictEqual(result, 'versionValue');
         assert(
           (client.pathTemplates.appVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('assistantSession', async () => {
+      const fakePath = '/rendered/path/assistantSession';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        app: 'appValue',
+        assistant_session: 'assistantSessionValue',
+      };
+      const client = new agentserviceModule.v1beta.AgentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.assistantSessionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.assistantSessionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('assistantSessionPath', () => {
+        const result = client.assistantSessionPath(
+          'projectValue',
+          'locationValue',
+          'appValue',
+          'assistantSessionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.assistantSessionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAssistantSessionName', () => {
+        const result = client.matchProjectFromAssistantSessionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.assistantSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAssistantSessionName', () => {
+        const result = client.matchLocationFromAssistantSessionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.assistantSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAppFromAssistantSessionName', () => {
+        const result = client.matchAppFromAssistantSessionName(fakePath);
+        assert.strictEqual(result, 'appValue');
+        assert(
+          (client.pathTemplates.assistantSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAssistantSessionFromAssistantSessionName', () => {
+        const result =
+          client.matchAssistantSessionFromAssistantSessionName(fakePath);
+        assert.strictEqual(result, 'assistantSessionValue');
+        assert(
+          (client.pathTemplates.assistantSessionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

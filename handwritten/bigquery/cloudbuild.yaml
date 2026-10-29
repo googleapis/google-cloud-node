@@ -5,7 +5,7 @@ steps:
   args:
   - '-c'
   - |
-    cd ../.. && corepack enable pnpm && pnpm install --filter "./core/test-utils" --filter "...{./handwritten/bigquery}" --ignore-scripts && pnpm --dir core/test-utils run compile && node -e "require('./bin/run-test.cjs').ensureWorkspacePackagesLinked()" && pnpm --filter "...{./handwritten/bigquery}" run prepare --if-present
+    cd ../.. && corepack enable pnpm && pnpm install --filter "...{./handwritten/bigquery}"
   dir: 'handwritten/bigquery'
   id: 'install-dependencies'
 

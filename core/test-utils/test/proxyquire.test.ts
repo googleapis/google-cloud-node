@@ -13,8 +13,10 @@
 // limitations under the License.
 
 import * as fs from 'fs';
+import * as Module from 'module';
 import * as os from 'os';
 import * as path from 'path';
+import {pathToFileURL} from 'url';
 import {createProxyquire, proxyquire} from '../src';
 
 describe('proxyquire utilities (unit)', () => {
@@ -126,13 +128,58 @@ describe('proxyquire utilities (unit)', () => {
   });
 
   it('supports noPreserveCache() and preserveCache()', () => {
+    const rawMod = ((
+      Module as unknown as {Module?: {_cache?: NodeJS.Dict<NodeModule>}}
+    ).Module ?? Module) as {_cache?: NodeJS.Dict<NodeModule>};
+    const modCache =
+      rawMod._cache ??
+      (Object.getPrototypeOf(rawMod) as {_cache?: NodeJS.Dict<NodeModule>})
+        ?._cache ??
+      require.cache;
     const pq = createProxyquire(module);
     pq.noPreserveCache();
     const loaded1 = pq(sutFile, {'./dep': {greet: () => 'a'}});
     expect(loaded1.greet()).toBe('a');
+    expect(modCache[sutFile]).toBeUndefined();
+
     pq.preserveCache();
     const loaded2 = pq(sutFile, {'./dep': {greet: () => 'b'}});
     expect(loaded2.greet()).toBe('b');
+    expect(modCache[sutFile]).toBeDefined();
+  });
+
+  it('respects Proxy getOwnPropertyDescriptor invariants for non-configurable stub properties', () => {
+    const fnStub = Object.assign(function customFn() {}, {
+      greet: () => 'fn-greet',
+    });
+    Object.defineProperty(fnStub, 'locked', {
+      value: 123,
+      configurable: false,
+      enumerable: true,
+    });
+    const depCheckFile = path.join(tmpDir, 'dep-check.js');
+    fs.writeFileSync(
+      depCheckFile,
+      [
+        'const dep = require("./dep");',
+        'module.exports = {',
+        '  protoDesc: Object.getOwnPropertyDescriptor(dep, "prototype"),',
+        '  lockedDesc: Object.getOwnPropertyDescriptor(dep, "locked"),',
+        '  extraDesc: Object.getOwnPropertyDescriptor(dep, "extra"),',
+        '  missingDesc: Object.getOwnPropertyDescriptor(dep, "nonExistent"),',
+        '  keys: Object.keys(dep),',
+        '};',
+      ].join('\n'),
+    );
+    const loaded = proxyquire(depCheckFile, {'./dep': fnStub});
+    expect(loaded.protoDesc?.configurable).toBe(false);
+    expect(loaded.lockedDesc?.configurable).toBe(false);
+    expect(loaded.lockedDesc?.value).toBe(123);
+    expect(loaded.extraDesc?.configurable).toBe(true);
+    expect(loaded.missingDesc).toBeUndefined();
+    expect(loaded.keys).toEqual(
+      expect.arrayContaining(['greet', 'locked', 'extra', 'constant']),
+    );
   });
 
   it('supports bare module stubs and unresolvable relative paths', () => {
@@ -141,5 +188,11 @@ describe('proxyquire utilities (unit)', () => {
       './non-existent-relative': {foo: 'bar'},
     });
     expect(loaded.sep).toBe('/custom-sep');
+  });
+
+  it('normalizes file:// URLs passed to createProxyquire or returned by stack frames', () => {
+    const pqFromUrl = createProxyquire(pathToFileURL(sutFile).href);
+    const loaded = pqFromUrl('./sut', {'./dep': {greet: () => 'url-caller'}});
+    expect(loaded.greet()).toBe('url-caller');
   });
 });
