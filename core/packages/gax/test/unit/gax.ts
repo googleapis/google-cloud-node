@@ -317,42 +317,69 @@ describe('gax construct settings', () => {
     assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
   });
 
-  it('ignores client option when GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING=true and GOOGLE_SDK_NODE_LOGGING=true', () => {
+  it('enables logging when GOOGLE_SDK_NODE_LOGGING matches the service namespace or wildcard', () => {
     process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
-    process.env.GOOGLE_SDK_NODE_LOGGING = 'true';
-    const defaults = gax.constructSettings(
-      SERVICE_NAME,
-      A_CONFIG,
-      {},
-      RETRY_DICT,
-      undefined,
-      undefined,
-      undefined,
-      false,
-    );
-    const settings = defaults.bundlingMethod;
-    assert.strictEqual(settings.enableTelemetryLogging, true);
-    assert.strictEqual(settings.otherArgs.internalMethodName, 'BundlingMethod');
-    assert.strictEqual(settings.otherArgs.enableTelemetryTracing, false);
-    assert.strictEqual(settings.otherArgs.enableTelemetryLogging, true);
+    for (const envValue of ['true', '*', 'all', 'auth,interface']) {
+      process.env.GOOGLE_SDK_NODE_LOGGING = envValue;
+      const defaults = gax.constructSettings(
+        SERVICE_NAME,
+        A_CONFIG,
+        {},
+        RETRY_DICT,
+        undefined,
+        undefined,
+        undefined,
+        false,
+      );
+      const settings = defaults.bundlingMethod;
+      assert.strictEqual(settings.enableTelemetryLogging, true);
+      assert.strictEqual(
+        settings.otherArgs.internalMethodName,
+        'BundlingMethod',
+      );
+      assert.strictEqual(settings.otherArgs.enableTelemetryTracing, false);
+      assert.strictEqual(settings.otherArgs.enableTelemetryLogging, true);
+    }
   });
 
-  it('disables logging when GOOGLE_SDK_NODE_LOGGING=false even with client option', () => {
+  it('preserves enableTelemetryLogging=true when GOOGLE_SDK_NODE_LOGGING targets another namespace or is false', () => {
     process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
-    process.env.GOOGLE_SDK_NODE_LOGGING = 'false';
-    const defaults = gax.constructSettings(
-      SERVICE_NAME,
-      A_CONFIG,
-      {},
-      RETRY_DICT,
-      undefined,
-      undefined,
-      undefined,
-      true,
-    );
-    const settings = defaults.bundlingMethod;
-    assert.strictEqual(settings.enableTelemetryLogging, false);
-    assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
+    for (const envValue of ['auth,storage', 'false']) {
+      process.env.GOOGLE_SDK_NODE_LOGGING = envValue;
+      const enabledDefaults = gax.constructSettings(
+        SERVICE_NAME,
+        A_CONFIG,
+        {},
+        RETRY_DICT,
+        undefined,
+        undefined,
+        undefined,
+        true,
+      );
+      const enabledSettings = enabledDefaults.bundlingMethod;
+      assert.strictEqual(enabledSettings.enableTelemetryLogging, true);
+      assert.strictEqual(
+        enabledSettings.otherArgs.internalMethodName,
+        'BundlingMethod',
+      );
+      assert.strictEqual(
+        enabledSettings.otherArgs.enableTelemetryLogging,
+        true,
+      );
+
+      const unsetDefaults = gax.constructSettings(
+        SERVICE_NAME,
+        A_CONFIG,
+        {},
+        RETRY_DICT,
+        undefined,
+        undefined,
+        undefined,
+      );
+      const unsetSettings = unsetDefaults.bundlingMethod;
+      assert.strictEqual(unsetSettings.enableTelemetryLogging, undefined);
+      assert.strictEqual(unsetSettings.otherArgs.internalMethodName, undefined);
+    }
   });
 
   describe('CallSettings telemetry fields', () => {

@@ -15,6 +15,7 @@
  */
 
 import {CallSettings} from '../gax';
+import {extractServiceFromApiName} from './contextUtil';
 
 /**
  * Checks if telemetry tracing is enabled.
@@ -49,13 +50,55 @@ export function checkTracingEnabled(settings?: CallSettings): boolean {
 }
 
 /**
+ * Matches a `GOOGLE_SDK_NODE_LOGGING` filter string against the logger namespace
+ * following `DebugLogBackendBase` / `NodeBackend` semantics in `google-logging-utils`
+ * (comma-separated case-insensitive filters with `*` wildcards, plus `'all'`, `'true'`,
+ * and `'1'` enabling all namespaces and `'false'` / `'0'` matching none).
+ */
+function matchesLoggingEnvFilter(envOptIn: string, namespace: string): boolean {
+  const lower = envOptIn.toLowerCase();
+  if (lower === 'false' || lower === '0') {
+    return false;
+  }
+  if (lower === 'true' || lower === '1' || lower === 'all' || lower === '*') {
+    return true;
+  }
+
+  for (const rawToken of envOptIn.split(',')) {
+    const token = rawToken.trim();
+    if (!token) {
+      continue;
+    }
+    const lowerToken = token.toLowerCase();
+    if (lowerToken === 'false' || lowerToken === '0') {
+      continue;
+    }
+    if (
+      lowerToken === 'true' ||
+      lowerToken === '1' ||
+      lowerToken === 'all' ||
+      lowerToken === '*'
+    ) {
+      return true;
+    }
+    const pattern = token
+      .replace(/[|\\{}()[\]^$+?.]/g, '\\$&')
+      .replace(/\*+/g, '.*');
+    if (new RegExp(`^${pattern}$`, 'i').test(namespace)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
  * Checks if telemetry logging is enabled.
  *
  * Logging is only enabled when `GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING` is enabled
- * AND either the `GOOGLE_SDK_NODE_LOGGING` environment variable is enabled
- * or a user passes `enableTelemetryLogging: true` in their client options.
- * If `GOOGLE_SDK_NODE_LOGGING` is explicitly set, it takes precedence over
- * the client option.
+ * AND either a user passes `enableTelemetryLogging: true` in their client options
+ * or the `GOOGLE_SDK_NODE_LOGGING` environment variable matches the client service
+ * namespace (supporting `'true'`, `'1'`, `'all'`, `'*'`, or comma-separated wildcard
+ * filters matching `google-logging-utils`).
  *
  * @param settings
  * @returns true if telemetry logging is enabled, false otherwise
@@ -71,15 +114,26 @@ export function checkLoggingEnabled(settings?: CallSettings): boolean {
     return false;
   }
 
-  const envOptIn = env.GOOGLE_SDK_NODE_LOGGING?.trim();
-
-  if (envOptIn !== undefined && envOptIn !== '') {
-    const lower = envOptIn.toLowerCase();
-    return lower === 'true' || lower === '1';
+  if (
+    settings?.enableTelemetryLogging ||
+    settings?.otherArgs?.enableTelemetryLogging
+  ) {
+    return true;
   }
 
-  return Boolean(
-    settings?.enableTelemetryLogging ||
-    settings?.otherArgs?.enableTelemetryLogging,
-  );
+  const envOptIn = env.GOOGLE_SDK_NODE_LOGGING?.trim();
+  if (envOptIn === undefined || envOptIn === '') {
+    return false;
+  }
+
+  const envService = (
+    env.GOOGLE_SDK_NODE_CLIENT_SERVICE || env.GCP_CLIENT_SERVICE
+  )?.trim();
+  const apiService =
+    typeof settings?.apiName === 'string' && settings.apiName
+      ? extractServiceFromApiName(settings.apiName)
+      : undefined;
+  const namespace = envService || apiService || 'google-gax';
+
+  return matchesLoggingEnvFilter(envOptIn, namespace);
 }

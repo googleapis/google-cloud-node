@@ -67,8 +67,9 @@ export interface GrpcClientOptions extends GoogleAuthOptions {
    * Whether to enable telemetry logging for the client.
    *
    * Logging is only enabled when `GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING` is enabled
-   * AND either the `GOOGLE_SDK_NODE_LOGGING` environment variable is enabled
-   * or a user passes `enableTelemetryLogging: true` in their client options.
+   * AND either a user passes `enableTelemetryLogging: true` in their client options
+   * or the `GOOGLE_SDK_NODE_LOGGING` environment variable matches the client service
+   * namespace.
    */
   enableTelemetryLogging?: boolean;
 }

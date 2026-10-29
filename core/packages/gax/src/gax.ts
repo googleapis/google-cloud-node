@@ -870,7 +870,7 @@ export interface ClientConfig {
  *   when passed in client options (or overridden by `GOOGLE_SDK_NODE_ENABLE_TRACING`).
  * @param {unknown} [_legacyTelemetryInfo] - Unused legacy parameter kept for backward compatibility.
  * @param {boolean} [enableTelemetryLogging] - Flag to enable telemetry logging
- *   when passed in client options (or overridden by `GOOGLE_SDK_NODE_LOGGING`).
+ *   when passed in client options (or when `GOOGLE_SDK_NODE_LOGGING` matches the service namespace).
  * @return {Object} A mapping from method name to CallSettings, or null if the
  *   service is not found in the config.
  */
@@ -905,13 +905,13 @@ export function constructSettings(
     env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING?.trim().toLowerCase();
   const isExperimentalLoggingEnabled =
     experimentalLogging === 'true' || experimentalLogging === '1';
-  const envLogging = env.GOOGLE_SDK_NODE_LOGGING?.trim();
-  const isLoggingEnvSet = envLogging !== undefined && envLogging !== '';
-  const isLoggingEnvEnabled = checkLoggingEnabled();
+  const isLoggingEnvEnabled = checkLoggingEnabled(
+    new CallSettings({apiName: serviceName}),
+  );
 
   const loggingRequested =
     isExperimentalLoggingEnabled &&
-    (isLoggingEnvSet ? isLoggingEnvEnabled : Boolean(enableTelemetryLogging));
+    (isLoggingEnvEnabled || Boolean(enableTelemetryLogging));
 
   otherArgs = otherArgs || {};
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -982,10 +982,10 @@ export function constructSettings(
       apiName,
       enableTelemetryTracing: isEnvSet ? isEnvEnabled : enableTelemetryTracing,
       enableTelemetryLogging: isExperimentalLoggingEnabled
-        ? isLoggingEnvSet
-          ? isLoggingEnvEnabled
+        ? isLoggingEnvEnabled
+          ? true
           : enableTelemetryLogging
-        : enableTelemetryLogging !== undefined || isLoggingEnvSet
+        : enableTelemetryLogging !== undefined
           ? false
           : undefined,
     });
