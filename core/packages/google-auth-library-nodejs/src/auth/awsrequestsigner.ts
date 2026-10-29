@@ -225,7 +225,8 @@ async function generateAuthenticationHeaderMap(
   const requestPayload = options.requestPayload || '';
   // iam.amazonaws.com host => iam service.
   // sts.us-east-2.amazonaws.com => sts service.
-  const serviceName = options.host.split('.')[0];
+  // sts-fips.us-east-2.amazonaws.com => sts service.
+  const serviceName = options.host.split('.')[0].replace(/-fips$/, '');
   const now = new Date();
   // Format: '%Y%m%dT%H%M%SZ'.
   const amzDate = now
