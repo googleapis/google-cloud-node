@@ -1007,8 +1007,8 @@ export class Subscriber extends EventEmitter {
     ) {
       const waitTimeout = timeout.subtract(FINAL_NACK_TIMEOUT);
 
-      const emptyPromise = new Promise<void>(r => {
-        this._inventory.on('empty', r);
+      const emptyPromise = new Promise<void>(resolve => {
+        this._inventory.on('empty', resolve);
       });
 
       await this.#awaitTimeoutAndCheck(emptyPromise, waitTimeout);
@@ -1306,10 +1306,17 @@ export class Subscriber extends EventEmitter {
             Duration.from({seconds: this.ackDeadline}),
             true,
           );
+          // eslint-disable-next-line promise/catch-or-return
           message
             .modAckWithResponse(this.ackDeadline)
             .then(() => {
-              this._inventory.add(message);
+              if (this.isOpen) {
+                this._inventory.add(message);
+              } else {
+                message.subSpans.shutdown();
+                message.nack();
+              }
+              return undefined;
             })
             .catch(() => {
               // Temporary failures will retry, so if an error reaches us

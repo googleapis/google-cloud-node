@@ -32,7 +32,6 @@ import {
 import {defaultOptions} from '../src/default-options';
 import {FakeLog, TestUtils} from './test-utils';
 import {Duration} from '../src';
-import {loggingUtils} from 'google-gax';
 
 const FREE_MEM = 9376387072;
 const fakeos = {
@@ -208,10 +207,7 @@ describe('LeaseManager', () => {
 
       subscriber.on('message', () => {
         assert.strictEqual(fakeLog!.called, true);
-        assert.strictEqual(
-          fakeLog!.fields!.severity,
-          'INFO',
-        );
+        assert.strictEqual(fakeLog!.fields!.severity, 'INFO');
         assert.strictEqual(fakeLog!.args![1] as string, 'a');
         assert.strictEqual(fakeLog!.args![2] as string, 'b');
         done();
@@ -241,10 +237,7 @@ describe('LeaseManager', () => {
       await deferred.promise;
 
       assert.strictEqual(fakeLog.called, true);
-      assert.strictEqual(
-        fakeLog.fields!.severity,
-        'ERROR',
-      );
+      assert.strictEqual(fakeLog.fields!.severity, 'ERROR');
       assert.strictEqual(
         (fakeLog.args![0] as string).includes('exception'),
         true,
@@ -402,10 +395,7 @@ describe('LeaseManager', () => {
 
         // make sure the expired messages were forgotten
         assert.strictEqual(removeStub.callCount, badMessages.length);
-        assert.strictEqual(
-          fakeLog.fields!.severity,
-          'WARNING',
-        );
+        assert.strictEqual(fakeLog.fields!.severity, 'WARNING');
         assert.strictEqual(fakeLog.called, true);
 
         badMessages.forEach((fakeMessage, i) => {
@@ -609,6 +599,83 @@ describe('LeaseManager', () => {
       leaseManager.add(temp);
       leaseManager.add(pending);
       leaseManager.remove(temp);
+    });
+
+    it('should dispense a pending message even if subscriber.isOpen is false', done => {
+      const temp = new FakeMessage() as {} as Message;
+      const pending = new FakeMessage() as {} as Message;
+
+      leaseManager.setOptions({allowExcessMessages: false, maxMessages: 1});
+
+      subscriber.on('message', message => {
+        if (message === temp) {
+          return;
+        }
+
+        assert.strictEqual(leaseManager.size, 1);
+        assert.strictEqual(message, pending);
+        done();
+      });
+
+      leaseManager.add(temp);
+      leaseManager.add(pending);
+      subscriber.isOpen = false;
+      leaseManager.remove(temp);
+    });
+
+    it('should not emit a dispensed message if clear() is called before nextTick', done => {
+      const temp = new FakeMessage() as {} as Message;
+      const pending = new FakeMessage() as {} as Message;
+
+      leaseManager.setOptions({allowExcessMessages: false, maxMessages: 1});
+
+      subscriber.on('message', message => {
+        if (message === pending) {
+          done(new Error('Cleared message should not have been emitted.'));
+        }
+      });
+
+      leaseManager.add(temp);
+      leaseManager.add(pending);
+      leaseManager.remove(temp);
+      leaseManager.clear();
+
+      setImmediate(done);
+    });
+
+    it('should dispense a pending message when removing transitions from full to non-full', done => {
+      const big = new FakeMessage();
+      big.length = 100;
+      const small = new FakeMessage();
+      small.length = 20;
+
+      leaseManager.setOptions({
+        allowExcessMessages: false,
+        maxBytes: 90,
+        maxMessages: 10,
+      });
+
+      let freeEmitted = false;
+      leaseManager.on('free', () => {
+        freeEmitted = true;
+      });
+
+      subscriber.on('message', message => {
+        if (message === (big as {} as Message)) {
+          return;
+        }
+
+        assert.strictEqual(message, small);
+        setImmediate(() => {
+          assert.strictEqual(freeEmitted, true);
+          done();
+        });
+      });
+
+      leaseManager.add(big as {} as Message);
+      leaseManager.add(small as {} as Message);
+      assert.strictEqual(leaseManager.pending, 1);
+      leaseManager.remove(big as {} as Message);
     });
 
     it('log when dispensing a pending message', () => {

@@ -379,6 +379,47 @@ describe('Subscriber', () => {
 
       await done.promise;
     });
+
+    it('should nack incoming messages w/exactly-once if closed before modAck resolves', async () => {
+      const sub = new Subscriber(subscription);
+      sub.isOpen = true;
+      const subint = getSubInternals(sub);
+      subint._stream = new FakeMessageStream(sub, {});
+      subint._inventory = new FakeLeaseManager(sub, {});
+      const modAckDeferred = defer<s.AckResponse>();
+      const modAckStub = sandbox
+        .stub(sub, 'modAckWithResponse')
+        .returns(modAckDeferred.promise);
+      const addStub = sandbox.stub(subint._inventory, 'add');
+      const nackStub = sandbox.stub(sub, 'nack').resolves();
+      const done = defer();
+      nackStub.callsFake(async () => {
+        assert.ok(modAckStub.calledOnce);
+        assert.ok(addStub.notCalled);
+        done.resolve();
+      });
+
+      subint._onData({
+        subscriptionProperties: {
+          exactlyOnceDeliveryEnabled: true,
+          messageOrderingEnabled: false,
+        },
+        receivedMessages: [
+          {
+            ackId: 'ackack',
+            message: {
+              data: 'foo',
+              attributes: {},
+            },
+          },
+        ],
+      });
+
+      sub.isOpen = false;
+      modAckDeferred.resolve(s.AckResponses.Success);
+
+      await done.promise;
+    });
   });
 
   describe('modAckLatency', () => {
@@ -773,6 +814,61 @@ describe('Subscriber', () => {
         assert.strictEqual(onSpy.callCount, 1);
         clock.tick(3000);
         await prom;
+      });
+
+      it('should dispense and drain flow-controlled pending messages in WaitForProcessing', async () => {
+        clock.restore();
+
+        const {LeaseManager} = require('../src/lease-manager');
+        const realInventory = new LeaseManager(subscriber, {
+          maxMessages: 2,
+          allowExcessMessages: false,
+        });
+        subInternals._inventory = realInventory;
+
+        subscriber.setOptions({
+          flowControl: {maxMessages: 2, allowExcessMessages: false},
+          closeOptions: {
+            behavior: s.SubscriberCloseBehaviors.WaitForProcessing,
+            timeout: Duration.from({seconds: 5}),
+          },
+        });
+
+        sandbox.stub(ackQueue, 'onFlush').resolves();
+        const nackSpy = sandbox.spy(subscriber, 'nack');
+
+        const totalMessages = 5;
+        const receivedIds: string[] = [];
+        let closePromise: Promise<void> | undefined;
+
+        subscriber.on('message', (msg: s.Message) => {
+          receivedIds.push(msg.id);
+          if (receivedIds.length === 2 && !closePromise) {
+            closePromise = subscriber.close();
+          }
+          msg.ack();
+        });
+
+        for (let i = 0; i < totalMessages; i++) {
+          const msg = new Message(subscriber, {
+            ...RECEIVED_MESSAGE,
+            ackId: `ack-${i}`,
+            message: {
+              ...RECEIVED_MESSAGE.message,
+              messageId: `msg-${i}`,
+            },
+          });
+          realInventory.add(msg);
+        }
+
+        // Wait for initial messages to be dispatched and close() to complete
+        await new Promise(resolve => setImmediate(resolve));
+        assert.ok(closePromise);
+        await closePromise;
+
+        assert.strictEqual(receivedIds.length, totalMessages);
+        assert.strictEqual(realInventory.isEmpty(), true);
+        assert.strictEqual(nackSpy.callCount, 0);
       });
 
       it('should nack remaining messages if timeout is non-zero', async () => {

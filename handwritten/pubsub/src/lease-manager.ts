@@ -28,10 +28,16 @@ import {logs as baseLogs, LoggingFunction} from './logs';
  * @private
  */
 export const logs = {
-  callbackDelivery: baseLogs.pubsub.sublog('callback-delivery') as LoggingFunction,
-  callbackExceptions: baseLogs.pubsub.sublog('callback-exceptions') as LoggingFunction,
+  callbackDelivery: baseLogs.pubsub.sublog(
+    'callback-delivery',
+  ) as LoggingFunction,
+  callbackExceptions: baseLogs.pubsub.sublog(
+    'callback-exceptions',
+  ) as LoggingFunction,
   expiry: baseLogs.pubsub.sublog('expiry') as LoggingFunction,
-  subscriberFlowControl: baseLogs.pubsub.sublog('subscriber-flow-control') as LoggingFunction,
+  subscriberFlowControl: baseLogs.pubsub.sublog(
+    'subscriber-flow-control',
+  ) as LoggingFunction,
 };
 
 export interface FlowControlOptions {
@@ -110,6 +116,10 @@ export class LeaseManager extends EventEmitter {
    * @private
    */
   add(message: Message): void {
+    if (!this._subscriber.isOpen) {
+      return;
+    }
+
     const {allowExcessMessages} = this._options;
     const wasFull = this.isFull();
 
@@ -218,7 +228,9 @@ export class LeaseManager extends EventEmitter {
 
     if (wasFull && !this.isFull()) {
       process.nextTick(() => this.emit('free'));
-    } else if (this._pending.includes(message)) {
+    }
+
+    if (this._pending.includes(message)) {
       const index = this._pending.indexOf(message);
       this._pending.splice(index, 1);
     } else if (this.pending > 0) {
@@ -287,9 +299,12 @@ export class LeaseManager extends EventEmitter {
    * @param {Message} message The message to emit.
    */
   private _dispense(message: Message): void {
-    if (this._subscriber.isOpen) {
+    if (this._messages.has(message)) {
       message.subSpans.flowEnd();
       process.nextTick(() => {
+        if (!this._messages.has(message)) {
+          return;
+        }
         message.dispatched();
         logs.callbackDelivery.info(
           'message (ID %s, ackID %s) delivery to user callbacks',
@@ -333,6 +348,7 @@ export class LeaseManager extends EventEmitter {
         message.subSpans.modAckStart(deadline, false);
 
         if (this._subscriber.isExactlyOnceDelivery) {
+          // eslint-disable-next-line promise/catch-or-return
           message
             .modAckWithResponse(deadline.totalOf('second'))
             .catch(e => {

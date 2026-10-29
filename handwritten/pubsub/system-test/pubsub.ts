@@ -32,6 +32,7 @@ import {
   Duration,
   Schema,
   SubscriptionOptions,
+  SubscriptionCloseBehaviors,
 } from '../src';
 import {MessageOptions} from '../src/topic';
 import {TestResources} from 'google-test-utils';
@@ -618,6 +619,37 @@ describe('pubsub', () => {
         closeWhenDone: true,
       });
       assert.strictEqual(messages.length, maxMessages);
+    });
+
+    it('should wait for flow-controlled messages to process on close with WaitForProcessing', async () => {
+      const maxMessages = 3;
+
+      const pop = await subPop('wfp', 1);
+      const subscription = pop.topic.subscription(pop.testSubs[0].name, {
+        useLegacyFlowControl: true,
+        flowControl: {maxMessages, allowExcessMessages: false},
+        closeOptions: {
+          behavior: SubscriptionCloseBehaviors.WaitForProcessing,
+          timeout: Duration.from({seconds: 30}),
+        },
+      });
+
+      const received: Message[] = [];
+      let closePromise: Promise<void> | undefined;
+
+      await new Promise<void>((resolve, reject) => {
+        subscription.on('error', reject);
+        subscription.on('message', msg => {
+          received.push(msg);
+          if (received.length === maxMessages && !closePromise) {
+            closePromise = subscription.close().then(resolve, reject);
+          }
+          setTimeout(() => msg.ack(), 50);
+        });
+      });
+
+      await closePromise;
+      assert.ok(received.length >= maxMessages);
     });
 
     it('should send and receive large messages', async () => {
