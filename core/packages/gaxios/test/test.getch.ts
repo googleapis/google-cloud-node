@@ -17,6 +17,7 @@ import {createSandbox, fake} from 'sinon';
 import stream, {Readable} from 'stream';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {HttpsProxyAgent} from 'https-proxy-agent';
+import {ClientRequest} from 'http';
 import {
   Gaxios,
   GaxiosError,
@@ -540,6 +541,23 @@ describe('🥁 configuration options', () => {
       assert(res.config.agent instanceof HttpsProxyAgent);
       assert.equal(res.config.agent.connectOpts.cert, cert);
       assert.equal(res.config.agent.connectOpts.key, key);
+    });
+
+    it('should present the mTLS client certificate to the server behind the proxy', async () => {
+      const cert = 'cert';
+      const key = 'key';
+      const connect = sandbox.stub(HttpsProxyAgent.prototype, 'connect');
+      const res = await request({url, proxy, cert, key});
+      expectProxy(res);
+
+      const target = {
+        host: 'domain.example.com',
+        port: 443,
+        secureEndpoint: true,
+      };
+      assert(res.config.agent instanceof HttpsProxyAgent);
+      await res.config.agent.connect({} as ClientRequest, target);
+      assert.deepStrictEqual(connect.firstCall.args[1], {...target, cert, key});
     });
 
     it('should pass proxy and tls options to Bun fetch and omit proxy when noProxy matches', async () => {

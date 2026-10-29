@@ -253,17 +253,18 @@ export class IdentityPoolClient extends BaseExternalAccountClient {
     );
 
     if (this.subjectTokenSupplier instanceof CertificateSubjectTokenSupplier) {
-      const mtlsAgent = await this.subjectTokenSupplier.createMtlsHttpsAgent();
+      const mtlsOptions = this.subjectTokenSupplier.getMtlsOptions();
 
       this.stsCredential = new StsCredentials({
         tokenExchangeEndpoint: this.getTokenUrl(),
         clientAuthentication: this.clientAuth,
-        transporter: new Gaxios({agent: mtlsAgent}),
+        transporter: new Gaxios(mtlsOptions),
       });
 
       this.transporter = new Gaxios({
         ...(this.transporter.defaults || {}),
-        agent: mtlsAgent,
+        ...mtlsOptions,
+        agent: undefined,
       });
     }
 

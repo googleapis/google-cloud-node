@@ -558,12 +558,20 @@ export class Gaxios implements FetchCompliance {
       if (this.agentCache.has(proxy)) {
         opts.agent = this.agentCache.get(proxy);
       } else {
-        opts.agent = new HttpsProxyAgent(proxy, {
-          cert: opts.cert,
-          key: opts.key,
-        });
+        const {cert, key} = opts;
+        const agent = new HttpsProxyAgent(proxy, {cert, key});
 
-        this.agentCache.set(proxy, opts.agent);
+        if (cert && key) {
+          const connect = agent.connect.bind(agent);
+          agent.connect = (req, target) =>
+            connect(
+              req,
+              target.secureEndpoint ? {...target, cert, key} : target,
+            );
+        }
+
+        opts.agent = agent;
+        this.agentCache.set(proxy, agent);
       }
     } else if (opts.cert && opts.key) {
       // Configure client for mTLS

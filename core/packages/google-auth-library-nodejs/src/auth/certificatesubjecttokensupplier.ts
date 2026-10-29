@@ -16,7 +16,7 @@ import {SubjectTokenSupplier} from './identitypoolclient';
 import {getWellKnownCertificateConfigFileLocation, isValidFile} from '../util';
 import * as fs from 'fs';
 import {createPrivateKey, X509Certificate} from 'crypto';
-import * as https from 'https';
+import {GaxiosOptions} from 'gaxios';
 
 export const CERTIFICATE_CONFIGURATION_ENV_VARIABLE =
   'GOOGLE_API_CERTIFICATE_CONFIG';
@@ -110,17 +110,13 @@ export class CertificateSubjectTokenSupplier implements SubjectTokenSupplier {
     this.certificateConfigPath = opts.certificateConfigLocation ?? '';
   }
 
-  /**
-   * Creates an HTTPS agent configured with the client certificate and private key for mTLS.
-   * @returns An mTLS-configured https.Agent.
-   */
-  public async createMtlsHttpsAgent(): Promise<https.Agent> {
+  public getMtlsOptions(): Required<Pick<GaxiosOptions, 'cert' | 'key'>> {
     if (!this.key || !this.cert) {
       throw new InvalidConfigurationError(
-        'Cannot create mTLS Agent with missing certificate or key',
+        'Cannot use mTLS with missing certificate or key',
       );
     }
-    return new https.Agent({key: this.key, cert: this.cert});
+    return {cert: this.cert.toString(), key: this.key.toString()};
   }
 
   /**

@@ -41,6 +41,8 @@ import {
   InvalidConfigurationError,
 } from '../src/auth/certificatesubjecttokensupplier';
 import * as sinon from 'sinon';
+import * as https from 'https';
+import {Gaxios, GaxiosOptions} from 'gaxios';
 import * as util from '../src/util';
 
 nock.disableNetConnect();
@@ -1893,6 +1895,115 @@ describe('IdentityPoolClient', () => {
             }`,
           ),
         );
+      });
+    });
+
+    describe('getAccessToken()', () => {
+      const proxy = 'http://127.0.0.1:3128';
+      const cert = fs.readFileSync(
+        './test/fixtures/external-account-cert/leaf.crt',
+        'utf-8',
+      );
+      const key = fs.readFileSync(
+        './test/fixtures/external-account-cert/leaf.key',
+        'utf-8',
+      );
+
+      interface AgentShape {
+        proxy?: URL;
+        connectOpts?: {cert?: unknown; key?: unknown};
+        options?: {cert?: unknown; key?: unknown};
+      }
+
+      async function getAccessTokenAgents(
+        env: NodeJS.ProcessEnv,
+        transporterOptions?: GaxiosOptions,
+      ): Promise<{sts: AgentShape; impersonation: AgentShape}> {
+        const scopes = [
+          mockStsTokenExchange(
+            [
+              {
+                statusCode: 200,
+                response: stsSuccessfulResponse,
+                request: {
+                  grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
+                  audience,
+                  scope: 'https://www.googleapis.com/auth/cloud-platform',
+                  requested_token_type:
+                    'urn:ietf:params:oauth:token-type:access_token',
+                  subject_token: certSubjectToken,
+                  subject_token_type: 'urn:ietf:params:oauth:token-type:mtls',
+                },
+              },
+            ],
+            undefined,
+            new URL(getMtlsTokenUrl()).origin,
+          ),
+          mockGenerateAccessToken({
+            statusCode: 200,
+            response: {
+              accessToken: 'SA_ACCESS_TOKEN',
+              expireTime: new Date(
+                Date.now() + ONE_HOUR_IN_SECS * 1000,
+              ).toISOString(),
+            },
+            token: stsSuccessfulResponse.access_token,
+            scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+          }),
+        ];
+        sandbox.stub(process, 'env').value(env);
+        const request = sandbox.spy(Gaxios.prototype, 'request');
+        const client = new IdentityPoolClient({
+          ...certificateSourcedOptions,
+          service_account_impersonation_url:
+            getServiceAccountImpersonationUrl(),
+          transporterOptions,
+        });
+
+        await client.getAccessToken();
+
+        scopes.forEach(scope => scope.done());
+        const [sts, impersonation] = await Promise.all(request.returnValues);
+        return {
+          sts: sts.config.agent as AgentShape,
+          impersonation: impersonation.config.agent as AgentShape,
+        };
+      }
+
+      it('should tunnel both mTLS requests through HTTPS_PROXY with the client certificate', async () => {
+        const agents = await getAccessTokenAgents({HTTPS_PROXY: proxy});
+
+        for (const agent of [agents.sts, agents.impersonation]) {
+          assert.strictEqual(agent.proxy?.href, `${proxy}/`);
+          assert.strictEqual(String(agent.connectOpts?.cert), cert);
+          assert.strictEqual(String(agent.connectOpts?.key), key);
+        }
+      });
+
+      it('should honor https_proxy and NO_PROXY for mTLS requests', async () => {
+        const agents = await getAccessTokenAgents({
+          https_proxy: proxy,
+          NO_PROXY: new URL(getMtlsTokenUrl()).hostname,
+        });
+
+        assert.strictEqual(agents.sts.proxy, undefined);
+        assert.strictEqual(String(agents.sts.options?.cert), cert);
+        assert.strictEqual(String(agents.sts.options?.key), key);
+        assert.strictEqual(agents.impersonation.proxy?.href, `${proxy}/`);
+        assert.strictEqual(
+          String(agents.impersonation.connectOpts?.cert),
+          cert,
+        );
+      });
+
+      it('should present the client certificate even when transporterOptions sets an agent', async () => {
+        const agents = await getAccessTokenAgents(
+          {},
+          {agent: new https.Agent()},
+        );
+
+        assert.strictEqual(String(agents.impersonation.options?.cert), cert);
+        assert.strictEqual(String(agents.impersonation.options?.key), key);
       });
     });
   });
