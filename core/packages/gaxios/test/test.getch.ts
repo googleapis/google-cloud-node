@@ -681,6 +681,20 @@ describe('🥁 configuration options', () => {
             err instanceof GaxiosError && /over limit: 2/.test(err.message),
         );
 
+        const streamMaxRes = await request<Readable>({
+          url,
+          maxContentLength: 2,
+          responseType: 'stream',
+        });
+        await assert.rejects(
+          (async () => {
+            for await (const chunk of streamMaxRes.data) {
+              assert.ok(chunk);
+            }
+          })(),
+          (err: Error) => /over limit: 2/.test(err.message),
+        );
+
         globalThis.fetch = (async () => {
           throw {code: 'ECONNRESET', message: 'socket hang up'};
         }) as typeof fetch;

@@ -26,7 +26,7 @@ import {
   defaultErrorRedactor,
 } from './common.js';
 import {getRetryConfig} from './retry.js';
-import {PassThrough, Readable, pipeline} from 'stream';
+import {PassThrough, Readable, Transform, pipeline} from 'stream';
 import {GaxiosInterceptorManager} from './interceptor.js';
 
 const randomUUID = async () =>
@@ -822,31 +822,56 @@ export class Gaxios implements FetchCompliance {
         const origJson = res.json.bind(res);
         const origArrayBuffer = res.arrayBuffer.bind(res);
         const origBlob = res.blob.bind(res);
-        const readBuffer = async () => {
-          nodeStream ||= Readable.fromWeb(rawBody);
-          const chunks: Buffer[] = [];
-          let totalBytes = 0;
-          for await (const chunk of nodeStream) {
-            const buf = Buffer.isBuffer(chunk)
-              ? chunk
-              : Buffer.from(chunk as Uint8Array);
-            totalBytes += buf.byteLength;
-            if (maxSize > 0 && totalBytes > maxSize) {
-              throw Object.assign(
-                new Error(
-                  `content size at ${String((input as {url?: unknown})?.url ?? input)} over limit: ${maxSize}`,
-                ),
-                {type: 'max-size'},
-              );
+        const getNodeStream = () => {
+          // Lazily converts the Web ReadableStream response body into a Node.js
+          // Readable stream and wraps it in a byte-counting Transform when
+          // maxSize is set so both res.body and buffered body readers enforce
+          // maxContentLength.
+          if (!nodeStream) {
+            const webReadable = Readable.fromWeb(rawBody);
+            if (maxSize > 0) {
+              let totalBytes = 0;
+              const limiter = new Transform({
+                transform(chunk: Buffer | Uint8Array, _encoding, callback) {
+                  totalBytes += chunk.byteLength;
+                  if (totalBytes > maxSize) {
+                    webReadable.destroy();
+                    callback(
+                      Object.assign(
+                        new Error(
+                          `content size at ${String((input as {url?: unknown})?.url ?? input)} over limit: ${maxSize}`,
+                        ),
+                        {type: 'max-size'},
+                      ),
+                    );
+                    return;
+                  }
+                  callback(null, chunk);
+                },
+              });
+              webReadable.on('error', err => limiter.destroy(err));
+              limiter.once('close', () => {
+                if (!webReadable.destroyed) webReadable.destroy();
+              });
+              nodeStream = webReadable.pipe(limiter);
+            } else {
+              nodeStream = webReadable;
             }
-            chunks.push(buf);
+          }
+          return nodeStream;
+        };
+        const readBuffer = async () => {
+          const chunks: Buffer[] = [];
+          for await (const chunk of getNodeStream()) {
+            chunks.push(
+              Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as Uint8Array),
+            );
           }
           return Buffer.concat(chunks);
         };
         Object.defineProperty(res, 'body', {
           get() {
-            nodeStream ||= Readable.fromWeb(rawBody);
-            return nodeStream;
+            return getNodeStream();
           },
           configurable: true,
           enumerable: true,
