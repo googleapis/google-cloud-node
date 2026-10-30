@@ -331,6 +331,25 @@ describe('retry-request', () => {
       });
     });
 
+    it('should allow overriding totalTimeout', done => {
+      let numAttempts = 0;
+      const error = new Error('ENOTFOUND');
+
+      const opts = {
+        totalTimeout: 0,
+        request: function (_, callback) {
+          numAttempts++;
+          callback(error);
+        },
+      };
+
+      retryRequest(URI_NON_EXISTENT, opts, err => {
+        assert.strictEqual(numAttempts, 1);
+        assert.strictEqual(err, error);
+        done();
+      });
+    });
+
     it('should allow overriding currentRetryAttempt', done => {
       let numAttempts = 0;
       const opts = {
