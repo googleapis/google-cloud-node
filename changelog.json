@@ -5,6 +5,363 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "5437a0be98cb47e56f549f3e7212014572f2cf2e",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9769"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "89c0c7f5-e729-4171-89c9-33454fc98b1e",
+      "createTime": "2026-10-30T23:38:34.197Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5437a0be98cb47e56f549f3e7212014572f2cf2e",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9769"
+          ]
+        }
+      ],
+      "version": "5.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "21232b6b-1e35-4abd-9ca0-1aac2d648029",
+      "createTime": "2026-10-30T23:38:34.166Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5437a0be98cb47e56f549f3e7212014572f2cf2e",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9769"
+          ]
+        }
+      ],
+      "version": "0.31.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "cba475b4-5fa8-48b9-89b9-5134bf111397",
+      "createTime": "2026-10-30T23:38:34.145Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5437a0be98cb47e56f549f3e7212014572f2cf2e",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9769"
+          ]
+        }
+      ],
+      "version": "0.19.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "21caf9e0-3d0b-4523-b467-d958938e1bff",
+      "createTime": "2026-10-30T23:38:34.123Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5437a0be98cb47e56f549f3e7212014572f2cf2e",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9769"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "b54ffe38-8435-4639-b55f-1504a3fbb367",
+      "createTime": "2026-10-30T23:38:34.102Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "dcaea8869b9639e9a6cc4f4f44795339824d9332",
+          "message": "Update package.json scripts",
+          "issues": [
+            "9770"
+          ],
+          "scope": "observability"
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/observability",
+      "id": "71ec1b6b-19db-4707-9ed6-bc2ec6a20bc8",
+      "createTime": "2026-10-30T23:38:34.078Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5437a0be98cb47e56f549f3e7212014572f2cf2e",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9769"
+          ]
+        }
+      ],
+      "version": "6.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "18c22cf1-d8dc-4301-bd15-df4fad4b5b1c",
+      "createTime": "2026-10-30T23:38:34.058Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5437a0be98cb47e56f549f3e7212014572f2cf2e",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9769"
+          ]
+        }
+      ],
+      "version": "0.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "03fb188f-6b97-4bd4-aada-d0e2935f418b",
+      "createTime": "2026-10-30T23:38:34.036Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5437a0be98cb47e56f549f3e7212014572f2cf2e",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9769"
+          ]
+        }
+      ],
+      "version": "0.13.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "8c4e119d-67ea-4916-a4c4-dcdfc9fbad47",
+      "createTime": "2026-10-30T23:38:34.015Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5437a0be98cb47e56f549f3e7212014572f2cf2e",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9769"
+          ]
+        }
+      ],
+      "version": "0.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "478f0c9c-9cb9-4893-b0c8-fb6a5e4cf729",
+      "createTime": "2026-10-30T23:38:33.989Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5437a0be98cb47e56f549f3e7212014572f2cf2e",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9769"
+          ]
+        }
+      ],
+      "version": "10.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "176dbdfe-b0e8-4d53-ba44-83b8b789a69d",
+      "createTime": "2026-10-30T23:38:33.969Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "28f6a4ba4a5a433576113e967deefa1f0547c3c8",
+          "message": "Add google-cloud-designcenter",
+          "issues": [
+            "9767"
+          ],
+          "scope": "google/cloud/designcenter/v1"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/designcenter",
+      "id": "11e900d7-58c0-4c63-a1d1-e4881dd4322e",
+      "createTime": "2026-10-30T23:38:33.946Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5437a0be98cb47e56f549f3e7212014572f2cf2e",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9769"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ces",
+      "id": "06334a95-b7d2-4f72-8a0d-9771d5dc4d4c",
+      "createTime": "2026-10-30T23:38:33.925Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5437a0be98cb47e56f549f3e7212014572f2cf2e",
+          "message": "Update API sources and regenerate",
+          "issues": [
+            "9769"
+          ]
+        }
+      ],
+      "version": "0.36.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "83070bfd-d951-4fdf-b262-edffe8403e46",
+      "createTime": "2026-10-30T23:38:33.903Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "cdb23f50bec6859ac8387e127dbfb25ef26b5ec7",
+          "message": "Add enabled option to HedgingOptions (post-merge adjustments)",
+          "issues": [
+            "9654"
+          ],
+          "scope": "pubsub"
+        },
+        {
+          "type": "feat",
+          "sha": "89fd786ca068856ea28e8a38f0f21fe314457e91",
+          "message": "Integrate publish hedging into MessageQueue",
+          "issues": [
+            "9466"
+          ],
+          "scope": "pubsub"
+        },
+        {
+          "type": "feat",
+          "sha": "8636dbae72652ddaa9b1818aa9d30fa0d9f0595b",
+          "message": "Add OpenTelemetry events and logging for hedged publish",
+          "issues": [
+            "9465"
+          ],
+          "scope": "pubsub"
+        },
+        {
+          "type": "feat",
+          "sha": "43ef4dd20590f314bf8e4333140e3a514a6bca79",
+          "message": "Add CancellationSharer and HedgingScheduler",
+          "issues": [
+            "9464"
+          ],
+          "scope": "pubsub"
+        },
+        {
+          "type": "feat",
+          "sha": "764347a763f9d0a20ed750e9c1a3073b68c15439",
+          "message": "Add HedgingOptions validation and token bucket",
+          "issues": [
+            "9463"
+          ],
+          "scope": "pubsub"
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub",
+      "id": "bade4e25-665b-46a8-9304-84c934a3ba08",
+      "createTime": "2026-10-30T23:38:33.882Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "6f475fbce4c949941c095d1281110ed8ed358b9d",
+          "message": "Remove duplicate compileProtos invocation in ESM mode",
+          "issues": [
+            "9764"
+          ],
+          "scope": "tools"
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-tools",
+      "id": "886cb8f3-a4a4-4d26-8165-b98e88827b2e",
+      "createTime": "2026-10-30T23:38:33.861Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "f4da96e90e84d77adeed85ed9c11c119ab98c1b5",
+          "message": "Add resolveResponsePayload helper for response.payload",
+          "issues": [
+            "9745"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "baed8c419d05f9f7554690b9435fd143d3b3ff3f",
+          "message": "Add resolveExceptionStacktrace helper for exception.stacktrace",
+          "issues": [
+            "9744"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "9ad830ff456b135e33e85de8a8754c10c0b19985",
+          "message": "Add error attributes for error logging",
+          "issues": [
+            "9743"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "4e1f88f1265595f1da1283f7310148dabcf3f8ee",
+          "message": "Support cancelling API calls via CallOptions.signal",
+          "issues": [
+            "9462"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.15.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "717a72d7-d5be-4190-83eb-48d619aba309",
+      "createTime": "2026-10-30T23:38:33.824Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "5e53e2e78a9103005899350313b2777d86967e73",
           "message": "Onboard a new library",
           "issues": [
@@ -106874,5 +107231,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-28T20:45:53.018Z"
+  "updateTime": "2026-10-30T23:38:34.197Z"
 }
