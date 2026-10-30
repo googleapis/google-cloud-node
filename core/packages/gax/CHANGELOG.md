@@ -5,6 +5,18 @@
 
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
+## [6.14.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.13.0...google-gax-v6.14.0) (2026-10-28)
+
+
+### Features
+
+* **gax:** Add observability logging flag ([#9656](https://github.com/googleapis/google-cloud-node/issues/9656)) ([c0ab589](https://github.com/googleapis/google-cloud-node/commit/c0ab589ef64398cf139779619a147761029e3c03))
+
+
+### Bug Fixes
+
+* **gax:** Suppress cancel destroy error in StreamArrayParser and add Bun certification matrix ([#9652](https://github.com/googleapis/google-cloud-node/issues/9652)) ([a802909](https://github.com/googleapis/google-cloud-node/commit/a802909df71f384c44c16e3564127151ef74f445))
+
 ## [6.13.0](https://github.com/googleapis/google-cloud-node/compare/google-gax-v6.12.1...google-gax-v6.13.0) (2026-10-19)
 
 

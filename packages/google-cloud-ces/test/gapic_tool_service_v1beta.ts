@@ -1089,6 +1089,86 @@ describe('v1beta.ToolServiceClient', () => {
       });
     });
 
+    describe('assistantSession', async () => {
+      const fakePath = '/rendered/path/assistantSession';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        app: 'appValue',
+        assistant_session: 'assistantSessionValue',
+      };
+      const client = new toolserviceModule.v1beta.ToolServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.assistantSessionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.assistantSessionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('assistantSessionPath', () => {
+        const result = client.assistantSessionPath(
+          'projectValue',
+          'locationValue',
+          'appValue',
+          'assistantSessionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.assistantSessionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAssistantSessionName', () => {
+        const result = client.matchProjectFromAssistantSessionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.assistantSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAssistantSessionName', () => {
+        const result = client.matchLocationFromAssistantSessionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.assistantSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAppFromAssistantSessionName', () => {
+        const result = client.matchAppFromAssistantSessionName(fakePath);
+        assert.strictEqual(result, 'appValue');
+        assert(
+          (client.pathTemplates.assistantSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAssistantSessionFromAssistantSessionName', () => {
+        const result =
+          client.matchAssistantSessionFromAssistantSessionName(fakePath);
+        assert.strictEqual(result, 'assistantSessionValue');
+        assert(
+          (client.pathTemplates.assistantSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
     describe('changelog', async () => {
       const fakePath = '/rendered/path/changelog';
       const expectedParameters = {

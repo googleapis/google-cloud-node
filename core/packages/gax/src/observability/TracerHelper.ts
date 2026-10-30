@@ -26,7 +26,6 @@ import {
   Tracer,
 } from '@opentelemetry/api';
 import {APICallback, GaxCallResult} from '../apitypes';
-import {Status} from '../status';
 import {
   ATTEMPT_SPAN_KEY,
   AttemptTraceContext,
@@ -34,6 +33,8 @@ import {
   CLIENT_REQUEST_SPAN_KEY,
   DynamicTraceContext,
   getActiveTraceContext,
+  resolveEndpointAndDomain,
+  resolveRpcMethod,
   StaticTraceContext,
 } from './contextUtil';
 import {
@@ -41,8 +42,7 @@ import {
   recordExceptionEvent,
   resolveErrorMessage,
   resolveErrorType,
-  resolveHttpStatusCode,
-  resolveRpcStatusName,
+  resolveResponseStatusCode,
 } from './errorUtil';
 
 const attemptUrlTemplates = new WeakMap<Span, string>();
@@ -285,59 +285,6 @@ export function handleStream(
 }
 
 /**
- * Resolves and parses the server address, port, and target service domain (`url.domain`)
- * from dynamic and static trace contexts, splitting `"host:port"` or `"[ipv6]:port"`
- * strings. When `defaultPort` is provided (for low level network attempt spans), falls back to `url.domain`
- * for the server address and defaults the port to `defaultPort` if not otherwise specified.
- *
- * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the call or attempt.
- * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
- * @param {number} [defaultPort] - Optional default port (e.g. 443 for low level network attempt spans).
- * @returns {{rawAddress?: string; rawPort?: number; urlDomain?: string}} Resolved address, port, and domain.
- */
-function resolveEndpointAndDomain(
-  dynamicArgs: DynamicTraceContext,
-  staticArgs: StaticTraceContext,
-  defaultPort?: number,
-): {rawAddress?: string; rawPort?: number; urlDomain?: string} {
-  let rawAddress = dynamicArgs.serverAddress ?? staticArgs.serverAddress;
-  let rawPort = dynamicArgs.serverPort ?? staticArgs.serverPort;
-  const splitHostAndPort = (addr: string) => {
-    const match = addr.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
-    if (match) {
-      rawAddress = match[1];
-      rawPort = rawPort ?? Number(match[2]);
-    } else {
-      rawAddress = addr;
-    }
-  };
-
-  if (rawAddress) {
-    // Split embedded port from "host:port" or "[ipv6]:port" if present.
-    splitHostAndPort(rawAddress);
-  }
-
-  let urlDomain = dynamicArgs.urlDomain ?? staticArgs.urlDomain ?? rawAddress;
-  if (!urlDomain && staticArgs.gcpClientService) {
-    // Append ".googleapis.com" when gcpClientService is a short service name.
-    urlDomain = staticArgs.gcpClientService.includes('.')
-      ? staticArgs.gcpClientService
-      : `${staticArgs.gcpClientService}.googleapis.com`;
-  }
-
-  if (defaultPort !== undefined) {
-    if (!rawAddress && urlDomain) {
-      splitHostAndPort(urlDomain);
-    }
-    if (rawAddress) {
-      rawPort = rawPort ?? defaultPort;
-    }
-  }
-
-  return {rawAddress, rawPort, urlDomain};
-}
-
-/**
  * Returns the transport-specific resend count attribute key.
  *
  * Named per transport, the same way the status attributes are.
@@ -402,25 +349,20 @@ function setFinalStatusAttributes(
 
 /**
  * Records error attributes (`error.type`, `status.message`), `exception` span event,
- * and `ERROR` status on a span, returning the resolved transport status codes.
+ * and `ERROR` status on a span.
  *
  * @param {Span} span - The span on which to record the error.
  * @param {unknown} e - The error thrown or passed to the callback/stream/promise.
  * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
  * @param {boolean} [includeExceptionMessage=false] - Whether to include `exception.message`
  *   on the `exception` event (true for low level network attempt spans, false for client request spans).
- * @returns {{rpcStatusName?: string; httpStatusCode?: number}} The resolved status codes.
  */
 function recordSpanError(
   span: Span,
   e: unknown,
   rpcType: 'grpc' | 'http',
   includeExceptionMessage = false,
-): {rpcStatusName?: string; httpStatusCode?: number} {
-  const rpcStatusName =
-    rpcType === 'grpc' ? resolveRpcStatusName(e) : undefined;
-  const httpStatusCode =
-    rpcType === 'http' ? resolveHttpStatusCode(e) : undefined;
+): void {
   const message = e instanceof Error ? e.message : resolveErrorMessage(e);
   span.setAttributes({
     'error.type': resolveErrorType(e, rpcType),
@@ -430,7 +372,6 @@ function recordSpanError(
     recordExceptionEvent(span, e, rpcType, includeExceptionMessage);
   }
   span.setStatus({code: SpanStatusCode.ERROR, message});
-  return {rpcStatusName, httpStatusCode};
 }
 
 /**
@@ -471,28 +412,22 @@ function createSpanCompletionHandlers(
   let spanEnded = false;
   let errorRecorded = false;
   let recordedError: unknown;
-  let rpcStatusName: string | undefined;
-  let httpStatusCode: number | undefined;
 
   const recordError = (e: unknown) => {
     recordedError = e;
     errorRecorded = true;
-    ({rpcStatusName, httpStatusCode} = recordSpanError(
-      span,
-      e,
-      rpcType,
-      includeExceptionMessage,
-    ));
+    recordSpanError(span, e, rpcType, includeExceptionMessage);
   };
 
   const endSpan = () => {
     if (!spanEnded) {
       spanEnded = true;
       // Default to OK / 200 when no error was recorded.
-      if (!errorRecorded) {
-        rpcStatusName = Status[Status.OK];
-        httpStatusCode = 200;
-      }
+      const {rpcStatusName, httpStatusCode} = resolveResponseStatusCode(
+        rpcType,
+        errorRecorded,
+        recordedError,
+      );
       setFinalStatusAttributes(
         span,
         rpcType,
@@ -675,9 +610,7 @@ export function traceAttempt<T = GaxCallResult>(
   parentContext?: Context,
 ): T {
   // Resolve RPC method and transport-specific span name.
-  const rpcMethod = dynamicArgs.apiName
-    ? `${dynamicArgs.apiName}/${dynamicArgs.methodName}`
-    : dynamicArgs.methodName;
+  const rpcMethod = resolveRpcMethod(dynamicArgs);
   const httpMethod = dynamicArgs.httpMethod ?? 'POST';
   const urlTemplate = dynamicArgs.urlTemplate;
   const spanName =

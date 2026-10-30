@@ -16,12 +16,11 @@ import {describe, it} from 'mocha';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 
-import * as al from '../src/logging-utils';
-import * as alTypes from '../src/types';
+import * as al from '../src/index';
 
 interface TestLog {
   namespace: string;
-  fields: alTypes.LogFields;
+  fields: al.LogFields;
   args: unknown[];
 }
 
@@ -29,7 +28,7 @@ class TestSink extends al.DebugLogBackendBase {
   logs: TestLog[] = [];
 
   makeLogger(namespace: string): any {
-    return (fields: alTypes.LogFields, ...args: unknown[]) => {
+    return (fields: al.LogFields, ...args: unknown[]) => {
       this.logs.push({namespace, fields, args});
     };
   }
@@ -57,13 +56,29 @@ describe('adhoc-logging', () => {
     });
 
     it('obeys "all" as an alias for "*"', () => {
-      al.setBackend(sink);
-      sink.reset();
-
       process.env[al.env.nodeEnables] = 'all';
+      const backend = new TestSink();
+      al.setBackend(backend);
+      assert.deepStrictEqual(backend.filters, ['*']);
       const logger = al.log(system);
       logger({}, 'foo');
-      assert.deepStrictEqual(sink.logs, [
+      assert.deepStrictEqual(backend.logs, [
+        {
+          namespace: system,
+          fields: {},
+          args: ['foo'],
+        },
+      ]);
+    });
+
+    it('obeys "true" as an alias for "*"', () => {
+      process.env[al.env.nodeEnables] = 'true';
+      const backend = new TestSink();
+      al.setBackend(backend);
+      assert.deepStrictEqual(backend.filters, ['*']);
+      const logger = al.log(system);
+      logger({}, 'foo');
+      assert.deepStrictEqual(backend.logs, [
         {
           namespace: system,
           fields: {},
@@ -121,13 +136,13 @@ describe('adhoc-logging', () => {
     });
 
     it('logs with fields', () => {
-      logger({severity: alTypes.LogSeverity.INFO}, 'test log', 5, {
+      logger({severity: al.LogSeverity.INFO}, 'test log', 5, {
         other: 'foo',
       });
       assert.deepStrictEqual(sink.logs, [
         {
           namespace: system,
-          fields: {severity: alTypes.LogSeverity.INFO},
+          fields: {severity: al.LogSeverity.INFO},
           args: ['test log', 5, {other: 'foo'}],
         },
       ]);
@@ -141,22 +156,22 @@ describe('adhoc-logging', () => {
       assert.deepStrictEqual(sink.logs, [
         {
           namespace: system,
-          fields: {severity: alTypes.LogSeverity.INFO},
+          fields: {severity: al.LogSeverity.INFO},
           args: ['test info'],
         },
         {
           namespace: system,
-          fields: {severity: alTypes.LogSeverity.WARNING},
+          fields: {severity: al.LogSeverity.WARNING},
           args: ['test warn'],
         },
         {
           namespace: system,
-          fields: {severity: alTypes.LogSeverity.DEBUG},
+          fields: {severity: al.LogSeverity.DEBUG},
           args: ['test debug'],
         },
         {
           namespace: system,
-          fields: {severity: alTypes.LogSeverity.ERROR},
+          fields: {severity: al.LogSeverity.ERROR},
           args: ['test error'],
         },
       ]);
@@ -190,13 +205,13 @@ describe('adhoc-logging', () => {
     it('allows receiving logs', () => {
       const received = [{fields: {}, args: [] as unknown[]}];
       received.pop();
-      logger.on('log', (fields: alTypes.LogFields, args: unknown[]) => {
+      logger.on('log', (fields: al.LogFields, args: unknown[]) => {
         received.push({fields, args});
       });
       logger.info('cool cool');
       assert.deepStrictEqual(received, [
         {
-          fields: {severity: alTypes.LogSeverity.INFO},
+          fields: {severity: al.LogSeverity.INFO},
           args: ['cool cool'],
         },
       ]);
@@ -295,6 +310,92 @@ describe('adhoc-logging', () => {
           args: ['test log', 5, {other: 'foo'}],
         },
       ]);
+    });
+  });
+
+  describe('Public entrypoint contract (src/index.ts)', () => {
+    it('exports LogSeverity as a runtime enum from index', () => {
+      assert.strictEqual(al.LogSeverity.DEFAULT, 'DEFAULT');
+      assert.strictEqual(al.LogSeverity.DEBUG, 'DEBUG');
+      assert.strictEqual(al.LogSeverity.INFO, 'INFO');
+      assert.strictEqual(al.LogSeverity.WARNING, 'WARNING');
+      assert.strictEqual(al.LogSeverity.ERROR, 'ERROR');
+    });
+
+    it('exports required functions, classes, and constants on the public entrypoint', () => {
+      assert.strictEqual(typeof al.log, 'function');
+      assert.strictEqual(typeof al.placeholder, 'function');
+      assert.strictEqual(typeof al.setBackend, 'function');
+      assert.strictEqual(typeof al.getNodeBackend, 'function');
+      assert.strictEqual(typeof al.getDebugBackend, 'function');
+      assert.strictEqual(typeof al.getStructuredBackend, 'function');
+      assert.strictEqual(typeof al.AdhocDebugLogger, 'function');
+      assert.strictEqual(typeof al.DebugLogBackendBase, 'function');
+      assert.strictEqual(typeof al.env, 'object');
+      assert.strictEqual(al.env.nodeEnables, 'GOOGLE_SDK_NODE_LOGGING');
+    });
+
+    it('exports placeholder conforming to AdhocDebugLogFunction contract', () => {
+      const fn: al.AdhocDebugLogFunction = al.placeholder;
+      assert.strictEqual(typeof fn.debug, 'function');
+      assert.strictEqual(typeof fn.info, 'function');
+      assert.strictEqual(typeof fn.warn, 'function');
+      assert.strictEqual(typeof fn.error, 'function');
+      assert.strictEqual(typeof fn.sublog, 'function');
+      assert.strictEqual(typeof fn.on, 'function');
+      assert.ok(fn.instance instanceof al.AdhocDebugLogger);
+
+      // Invoking placeholder methods when disabled is a safe no-op.
+      al.setBackend(null);
+      assert.doesNotThrow(() => {
+        fn({severity: al.LogSeverity.DEBUG, other: {key: 'val'}}, 'noop');
+        fn.debug('noop');
+        fn.info('noop');
+        fn.warn('noop');
+        fn.error('noop');
+        assert.strictEqual(fn.sublog('child'), al.placeholder);
+      });
+    });
+
+    it('preserves AdhocDebugLogFunction, LogFields, and DebugLogBackend contracts via log()', () => {
+      al.setBackend(sink);
+      sink.reset();
+      process.env[al.env.nodeEnables] = '*';
+
+      const logger: al.AdhocDebugLogFunction = al.log('contract-system');
+      assert.strictEqual(typeof logger, 'function');
+      assert.strictEqual(typeof logger.debug, 'function');
+      assert.strictEqual(typeof logger.info, 'function');
+      assert.strictEqual(typeof logger.warn, 'function');
+      assert.strictEqual(typeof logger.error, 'function');
+      assert.strictEqual(typeof logger.sublog, 'function');
+      assert.strictEqual(typeof logger.on, 'function');
+      assert.ok(logger.instance instanceof al.AdhocDebugLogger);
+
+      const fields: al.LogFields = {
+        severity: al.LogSeverity.INFO,
+        telemetryTraceId: 'trace-123',
+        telemetrySpanId: 'span-456',
+        other: {'rpc.system': 'grpc'},
+      };
+      logger(fields, 'contract message %s', 'arg1');
+
+      assert.deepStrictEqual(sink.logs, [
+        {
+          namespace: 'contract-system',
+          fields,
+          args: ['contract message %s', 'arg1'],
+        },
+      ]);
+
+      const nodeBackend: al.DebugLogBackend = al.getNodeBackend();
+      assert.strictEqual(typeof nodeBackend.log, 'function');
+      assert.strictEqual(typeof nodeBackend.setFilters, 'function');
+
+      const structuredBackend: al.DebugLogBackend =
+        al.getStructuredBackend(nodeBackend);
+      assert.strictEqual(typeof structuredBackend.log, 'function');
+      assert.strictEqual(typeof structuredBackend.setFilters, 'function');
     });
   });
 });

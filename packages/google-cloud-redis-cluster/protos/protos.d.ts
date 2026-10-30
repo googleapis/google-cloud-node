@@ -9409,6 +9409,12 @@ export namespace google {
 
                         /** ZoneDistributionConfig zone */
                         zone?: (string|null);
+
+                        /** ZoneDistributionConfig zones */
+                        zones?: (string[]|null);
+
+                        /** ZoneDistributionConfig activeZones */
+                        activeZones?: (string[]|null);
                     }
 
                     /** Represents a ZoneDistributionConfig. */
@@ -9425,6 +9431,12 @@ export namespace google {
 
                         /** ZoneDistributionConfig zone. */
                         public zone: string;
+
+                        /** ZoneDistributionConfig zones. */
+                        public zones: string[];
+
+                        /** ZoneDistributionConfig activeZones. */
+                        public activeZones: string[];
 
                         /**
                          * Creates a new ZoneDistributionConfig instance using the specified properties.
@@ -19155,6 +19167,12 @@ export namespace google {
 
                         /** ZoneDistributionConfig zone */
                         zone?: (string|null);
+
+                        /** ZoneDistributionConfig zones */
+                        zones?: (string[]|null);
+
+                        /** ZoneDistributionConfig activeZones */
+                        activeZones?: (string[]|null);
                     }
 
                     /** Represents a ZoneDistributionConfig. */
@@ -19171,6 +19189,12 @@ export namespace google {
 
                         /** ZoneDistributionConfig zone. */
                         public zone: string;
+
+                        /** ZoneDistributionConfig zones. */
+                        public zones: string[];
+
+                        /** ZoneDistributionConfig activeZones. */
+                        public activeZones: string[];
 
                         /**
                          * Creates a new ZoneDistributionConfig instance using the specified properties.
