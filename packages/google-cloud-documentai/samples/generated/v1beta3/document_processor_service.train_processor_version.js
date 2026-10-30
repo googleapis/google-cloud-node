@@ -61,6 +61,10 @@ function main(parent, processorVersion) {
    *  `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`.
    */
   // const baseProcessorVersion = 'abc123'
+  /**
+   *  Optional. Options to override structures in the base processor version.
+   */
+  // const processorVersionOverrides = {}
 
   // Imports the Documentai library
   const {DocumentProcessorServiceClient} = require('@google-cloud/documentai').v1beta3;

@@ -4904,6 +4904,22 @@
                           "(google.api.method_signature)": "name,target_section"
                         }
                       ]
+                    },
+                    "ReplaceMessageCards": {
+                      "requestType": "ReplaceMessageCardsRequest",
+                      "responseType": "ReplaceMessageCardsResponse",
+                      "options": {
+                        "(google.api.http).post": "/v1/{name=spaces/*/messages/*}:replaceCards",
+                        "(google.api.http).body": "*"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "post": "/v1/{name=spaces/*/messages/*}:replaceCards",
+                            "body": "*"
+                          }
+                        }
+                      ]
                     }
                   }
                 },
@@ -5367,6 +5383,13 @@
                       "rule": "repeated",
                       "type": "AccessoryWidget",
                       "id": 44,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "elements": {
+                      "type": "Elements",
+                      "id": 45,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
                       }
@@ -5872,8 +5895,38 @@
                     "card": {
                       "type": "google.apps.card.v1.Card",
                       "id": 2
+                    },
+                    "ownerUser": {
+                      "type": "User",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OUTPUT_ONLY"
+                      }
                     }
                   }
+                },
+                "ReplaceMessageCardsRequest": {
+                  "fields": {
+                    "name": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED",
+                        "(google.api.resource_reference).type": "chat.googleapis.com/Message"
+                      }
+                    },
+                    "cardsV2": {
+                      "rule": "repeated",
+                      "type": "CardWithId",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "ReplaceMessageCardsResponse": {
+                  "fields": {}
                 },
                 "SearchMessagesRequest": {
                   "fields": {
@@ -6333,6 +6386,126 @@
                         "CREATOR_VIA_APP": 5,
                         "SPACE_OWNER_VIA_APP": 6,
                         "SPACE_MEMBER": 7
+                      }
+                    }
+                  }
+                },
+                "Elements": {
+                  "fields": {
+                    "citedSources": {
+                      "rule": "repeated",
+                      "type": "CitedSource",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "citations": {
+                      "rule": "repeated",
+                      "type": "Citation",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "Citation": {
+                  "fields": {
+                    "id": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "citedSources": {
+                      "rule": "repeated",
+                      "type": "CitedSource",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  }
+                },
+                "CitedSource": {
+                  "fields": {
+                    "title": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "uri": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "snippet": {
+                      "type": "Snippet",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    },
+                    "footer": {
+                      "type": "Footer",
+                      "id": 5,
+                      "options": {
+                        "(google.api.field_behavior)": "OPTIONAL"
+                      }
+                    }
+                  },
+                  "nested": {
+                    "Snippet": {
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "imagePreview": {
+                          "type": "ElementsImage",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Footer": {
+                      "fields": {
+                        "text": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "ElementsImage": {
+                  "oneofs": {
+                    "image": {
+                      "oneof": [
+                        "imageUri"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "imageUri": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
                       }
                     }
                   }
@@ -8034,38 +8207,6 @@
             }
           }
         },
-        "rpc": {
-          "options": {
-            "go_package": "google.golang.org/genproto/googleapis/rpc/code;code",
-            "java_multiple_files": true,
-            "java_outer_classname": "CodeProto",
-            "java_package": "com.google.rpc",
-            "objc_class_prefix": "RPC"
-          },
-          "nested": {
-            "Code": {
-              "values": {
-                "OK": 0,
-                "CANCELLED": 1,
-                "UNKNOWN": 2,
-                "INVALID_ARGUMENT": 3,
-                "DEADLINE_EXCEEDED": 4,
-                "NOT_FOUND": 5,
-                "ALREADY_EXISTS": 6,
-                "PERMISSION_DENIED": 7,
-                "UNAUTHENTICATED": 16,
-                "RESOURCE_EXHAUSTED": 8,
-                "FAILED_PRECONDITION": 9,
-                "ABORTED": 10,
-                "OUT_OF_RANGE": 11,
-                "UNIMPLEMENTED": 12,
-                "INTERNAL": 13,
-                "UNAVAILABLE": 14,
-                "DATA_LOSS": 15
-              }
-            }
-          }
-        },
         "api": {
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api;api",
@@ -8725,6 +8866,38 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/rpc/code;code",
+            "java_multiple_files": true,
+            "java_outer_classname": "CodeProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Code": {
+              "values": {
+                "OK": 0,
+                "CANCELLED": 1,
+                "UNKNOWN": 2,
+                "INVALID_ARGUMENT": 3,
+                "DEADLINE_EXCEEDED": 4,
+                "NOT_FOUND": 5,
+                "ALREADY_EXISTS": 6,
+                "PERMISSION_DENIED": 7,
+                "UNAUTHENTICATED": 16,
+                "RESOURCE_EXHAUSTED": 8,
+                "FAILED_PRECONDITION": 9,
+                "ABORTED": 10,
+                "OUT_OF_RANGE": 11,
+                "UNIMPLEMENTED": 12,
+                "INTERNAL": 13,
+                "UNAVAILABLE": 14,
+                "DATA_LOSS": 15
               }
             }
           }

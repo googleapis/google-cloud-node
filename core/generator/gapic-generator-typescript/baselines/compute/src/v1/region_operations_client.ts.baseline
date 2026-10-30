@@ -458,7 +458,7 @@ export class RegionOperationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('get request %j', request);
+    this._log.debug('get request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -469,7 +469,7 @@ export class RegionOperationsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -481,7 +481,7 @@ export class RegionOperationsClient {
           protos.google.cloud.compute.v1.IGetRegionOperationRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('get response %j', response);
+          this._log.debug('get response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -602,7 +602,7 @@ export class RegionOperationsClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('wait request %j', request);
+    this._log.debug('wait request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
@@ -613,7 +613,7 @@ export class RegionOperationsClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('wait response %j', response);
+          this._log.debug('wait response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
@@ -628,7 +628,7 @@ export class RegionOperationsClient {
           ),
           {} | undefined,
         ]) => {
-          this._log.info('wait response %j', response);
+          this._log.debug('wait response %j', response);
           return [response, options, rawResponse];
         },
       )

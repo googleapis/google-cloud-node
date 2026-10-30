@@ -300,3 +300,48 @@ export function getWellKnownCertificateConfigFileLocation(): string {
 function _isWindows(): boolean {
   return os.platform().startsWith('win');
 }
+
+let adcWarningSuppressionDepth = 0;
+let fromJsonWarningSuppressionDepth = 0;
+
+/**
+ * Returns true if ADC deprecation/validation warnings are currently suppressed.
+ * @internal
+ */
+export function isAdcWarningSuppressed(): boolean {
+  return adcWarningSuppressionDepth > 0;
+}
+
+/**
+ * Runs a synchronous callback while suppressing ADC deprecation/validation warnings.
+ * @internal
+ */
+export function suppressAdcWarning<T>(fn: () => T): T {
+  adcWarningSuppressionDepth++;
+  try {
+    return fn();
+  } finally {
+    adcWarningSuppressionDepth--;
+  }
+}
+
+/**
+ * Returns true if the `GoogleAuth.fromJSON` deprecation warning is currently suppressed.
+ * @internal
+ */
+export function isFromJsonWarningSuppressed(): boolean {
+  return adcWarningSuppressionDepth > 0 || fromJsonWarningSuppressionDepth > 0;
+}
+
+/**
+ * Runs a synchronous callback while suppressing the `GoogleAuth.fromJSON` deprecation warning.
+ * @internal
+ */
+export function suppressFromJsonWarning<T>(fn: () => T): T {
+  fromJsonWarningSuppressionDepth++;
+  try {
+    return fn();
+  } finally {
+    fromJsonWarningSuppressionDepth--;
+  }
+}

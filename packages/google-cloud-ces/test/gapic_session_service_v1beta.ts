@@ -450,6 +450,278 @@ describe('v1beta.SessionServiceClient', () => {
     });
   });
 
+  describe('cancelAssistantTurn', () => {
+    it('invokes cancelAssistantTurn without error', async () => {
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.CancelAssistantTurnRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.CancelAssistantTurnRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.CancelAssistantTurnResponse(),
+      );
+      client.innerApiCalls.cancelAssistantTurn =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.cancelAssistantTurn(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.cancelAssistantTurn as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelAssistantTurn as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelAssistantTurn without error using callback', async () => {
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.CancelAssistantTurnRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.CancelAssistantTurnRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.CancelAssistantTurnResponse(),
+      );
+      client.innerApiCalls.cancelAssistantTurn =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.cancelAssistantTurn(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.ces.v1beta.ICancelAssistantTurnResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.cancelAssistantTurn as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelAssistantTurn as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelAssistantTurn with error', async () => {
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.CancelAssistantTurnRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.CancelAssistantTurnRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.cancelAssistantTurn = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(client.cancelAssistantTurn(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.cancelAssistantTurn as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelAssistantTurn as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes cancelAssistantTurn with closed client', async () => {
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.CancelAssistantTurnRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.CancelAssistantTurnRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(client.cancelAssistantTurn(request), expectedError);
+    });
+  });
+
+  describe('generateOnboardingSuggestions', () => {
+    it('invokes generateOnboardingSuggestions without error', async () => {
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.GenerateOnboardingSuggestionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.GenerateOnboardingSuggestionsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.GenerateOnboardingSuggestionsResponse(),
+      );
+      client.innerApiCalls.generateOnboardingSuggestions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.generateOnboardingSuggestions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generateOnboardingSuggestions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateOnboardingSuggestions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateOnboardingSuggestions without error using callback', async () => {
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.GenerateOnboardingSuggestionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.GenerateOnboardingSuggestionsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.GenerateOnboardingSuggestionsResponse(),
+      );
+      client.innerApiCalls.generateOnboardingSuggestions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.generateOnboardingSuggestions(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.ces.v1beta.IGenerateOnboardingSuggestionsResponse | null,
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          },
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.generateOnboardingSuggestions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateOnboardingSuggestions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateOnboardingSuggestions with error', async () => {
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.GenerateOnboardingSuggestionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.GenerateOnboardingSuggestionsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.generateOnboardingSuggestions = stubSimpleCall(
+        undefined,
+        expectedError,
+      );
+      await assert.rejects(
+        client.generateOnboardingSuggestions(request),
+        expectedError,
+      );
+      const actualRequest = (
+        client.innerApiCalls.generateOnboardingSuggestions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateOnboardingSuggestions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes generateOnboardingSuggestions with closed client', async () => {
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.GenerateOnboardingSuggestionsRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.GenerateOnboardingSuggestionsRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      await assert.rejects(
+        client.generateOnboardingSuggestions(request),
+        expectedError,
+      );
+    });
+  });
+
   describe('streamRunSession', () => {
     it('invokes streamRunSession without error', async () => {
       const client = new sessionserviceModule.v1beta.SessionServiceClient({
@@ -612,6 +884,189 @@ describe('v1beta.SessionServiceClient', () => {
         stream.on(
           'data',
           (response: protos.google.cloud.ces.v1beta.RunSessionResponse) => {
+            resolve(response);
+          },
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+    });
+    it('should create a client with gaxServerStreamingRetries enabled', () => {
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        gaxServerStreamingRetries: true,
+      });
+      assert(client);
+    });
+  });
+
+  describe('streamChatAiAssistant', () => {
+    it('invokes streamChatAiAssistant without error', async () => {
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.StreamChatAiAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.StreamChatAiAssistantRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.StreamChatAiAssistantResponse(),
+      );
+      client.innerApiCalls.streamChatAiAssistant =
+        stubServerStreamingCall(expectedResponse);
+      const stream = client.streamChatAiAssistant(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.ces.v1beta.StreamChatAiAssistantResponse,
+          ) => {
+            resolve(response);
+          },
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.streamChatAiAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.streamChatAiAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes streamChatAiAssistant without error and gaxServerStreamingRetries enabled', async () => {
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+        gaxServerStreamingRetries: true,
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.StreamChatAiAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.StreamChatAiAssistantRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.StreamChatAiAssistantResponse(),
+      );
+      client.innerApiCalls.streamChatAiAssistant =
+        stubServerStreamingCall(expectedResponse);
+      const stream = client.streamChatAiAssistant(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.ces.v1beta.StreamChatAiAssistantResponse,
+          ) => {
+            resolve(response);
+          },
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.streamChatAiAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.streamChatAiAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes streamChatAiAssistant with error', async () => {
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.StreamChatAiAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.StreamChatAiAssistantRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1 ?? ''}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.streamChatAiAssistant = stubServerStreamingCall(
+        undefined,
+        expectedError,
+      );
+      const stream = client.streamChatAiAssistant(request);
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.ces.v1beta.StreamChatAiAssistantResponse,
+          ) => {
+            resolve(response);
+          },
+        );
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      const actualRequest = (
+        client.innerApiCalls.streamChatAiAssistant as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.streamChatAiAssistant as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes streamChatAiAssistant with closed client', async () => {
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.ces.v1beta.StreamChatAiAssistantRequest(),
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ces.v1beta.StreamChatAiAssistantRequest',
+        ['name'],
+      );
+      request.name = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close().catch(err => {
+        throw err;
+      });
+      const stream = client.streamChatAiAssistant(request, {
+        retryRequestOptions: {noResponseRetries: 0},
+      });
+      const promise = new Promise((resolve, reject) => {
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.ces.v1beta.StreamChatAiAssistantResponse,
+          ) => {
             resolve(response);
           },
         );
@@ -1128,6 +1583,86 @@ describe('v1beta.SessionServiceClient', () => {
         assert.strictEqual(result, 'versionValue');
         assert(
           (client.pathTemplates.appVersionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+    });
+
+    describe('assistantSession', async () => {
+      const fakePath = '/rendered/path/assistantSession';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        app: 'appValue',
+        assistant_session: 'assistantSessionValue',
+      };
+      const client = new sessionserviceModule.v1beta.SessionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      await client.initialize();
+      client.pathTemplates.assistantSessionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.assistantSessionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('assistantSessionPath', () => {
+        const result = client.assistantSessionPath(
+          'projectValue',
+          'locationValue',
+          'appValue',
+          'assistantSessionValue',
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.assistantSessionPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters),
+        );
+      });
+
+      it('matchProjectFromAssistantSessionName', () => {
+        const result = client.matchProjectFromAssistantSessionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.assistantSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchLocationFromAssistantSessionName', () => {
+        const result = client.matchLocationFromAssistantSessionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.assistantSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAppFromAssistantSessionName', () => {
+        const result = client.matchAppFromAssistantSessionName(fakePath);
+        assert.strictEqual(result, 'appValue');
+        assert(
+          (client.pathTemplates.assistantSessionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath),
+        );
+      });
+
+      it('matchAssistantSessionFromAssistantSessionName', () => {
+        const result =
+          client.matchAssistantSessionFromAssistantSessionName(fakePath);
+        assert.strictEqual(result, 'assistantSessionValue');
+        assert(
+          (client.pathTemplates.assistantSessionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath),
         );

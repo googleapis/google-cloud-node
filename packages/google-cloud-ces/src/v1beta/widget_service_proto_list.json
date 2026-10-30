@@ -6,6 +6,7 @@
   "../../protos/google/cloud/ces/v1beta/agent_transfers.proto",
   "../../protos/google/cloud/ces/v1beta/app.proto",
   "../../protos/google/cloud/ces/v1beta/app_version.proto",
+  "../../protos/google/cloud/ces/v1beta/assistant_service.proto",
   "../../protos/google/cloud/ces/v1beta/auth.proto",
   "../../protos/google/cloud/ces/v1beta/bigquery_export.proto",
   "../../protos/google/cloud/ces/v1beta/changelog.proto",
