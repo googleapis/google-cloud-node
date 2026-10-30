@@ -33,7 +33,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "@google-cloud/common": "^8.0.0",
+    "@google-cloud/common": "^8.2.2",
     "console-log-level": "^1.4.1"
   },
   "devDependencies": {

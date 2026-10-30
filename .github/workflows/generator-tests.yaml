@@ -10,9 +10,6 @@ on:
       - 'core/generator/**'
       - '.github/workflows/generator-tests.yaml'
   pull_request:
-    paths:
-      - 'core/generator/**'
-      - '.github/workflows/generator-tests.yaml'
   workflow_dispatch:
 
 concurrency:
@@ -20,8 +17,29 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  presubmit:
-    if: github.event_name == 'pull_request'
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      generator: ${{ steps.filter.outputs.generator }}
+    steps:
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: dorny/paths-filter@fbd0ab8f3e69293af611ebaee6363fc25e6d187d # v4.0.1
+        id: filter
+        with:
+          filters: |
+            generator:
+              - 'core/generator/**'
+              - '.github/workflows/generator-tests.yaml'
+
+  generator-tests:
+    needs: changes
+    if: >-
+      (github.event_name == 'pull_request' && needs.changes.outputs.generator == 'true') ||
+      github.event_name == 'push' ||
+      github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     container: gcr.io/gapic-images/googleapis:20250404
@@ -154,3 +172,30 @@ jobs:
           echo "Some ESM library tests failed!"
           exit 1
         fi
+
+  # Consolidate generator test status to satisfy branch protection requirements
+  presubmit:
+    needs: [changes, generator-tests]
+    runs-on: ubuntu-latest
+    if: ${{ !cancelled() }}
+    env:
+      CHANGES_RESULT: ${{ needs.changes.result }}
+      GENERATOR_CHANGED: ${{ needs.changes.outputs.generator }}
+      TESTS_RESULT: ${{ needs.generator-tests.result }}
+      EVENT_NAME: ${{ github.event_name }}
+    steps:
+      - name: Check generator test status
+        run: |
+          if [ "$CHANGES_RESULT" != "success" ]; then
+            echo "Path filter job failed (result: $CHANGES_RESULT)."
+            exit 1
+          fi
+          if [ "$EVENT_NAME" = "pull_request" ] && [ "$GENERATOR_CHANGED" != "true" ]; then
+            echo "No generator changes detected; skipping generator tests."
+            exit 0
+          fi
+          if [ "$TESTS_RESULT" != "success" ]; then
+            echo "Generator tests did not succeed (result: $TESTS_RESULT)."
+            exit 1
+          fi
+          echo "Generator tests passed!"

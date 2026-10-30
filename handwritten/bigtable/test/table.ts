@@ -25,6 +25,7 @@ import * as inst from '../src/instance';
 import {ChunkTransformer} from '../src/chunktransformer.js';
 import {Family} from '../src/family.js';
 import {Mutation} from '../src/mutation.js';
+import '../src/table.js';
 import {Row} from '../src/row.js';
 import * as tblTypes from '../src/table';
 import {Bigtable, RequestOptions} from '../src';
@@ -2072,12 +2073,12 @@ describe('Bigtable/Table', () => {
       let responses: any[] = [];
 
       beforeEach(() => {
-        clock = sinon.useFakeTimers({
+        clock = sandbox.useFakeTimers({
           toFake: ['setTimeout', 'clearTimeout'],
         });
-        setTimeoutSpy = sinon.spy(global, 'setTimeout');
-        clearTimeoutSpy = sinon.spy(global, 'clearTimeout');
-        checkConsistencySpy = sinon.spy(table, 'checkConsistency');
+        setTimeoutSpy = sandbox.spy(global, 'setTimeout');
+        clearTimeoutSpy = sandbox.spy(global, 'clearTimeout');
+        checkConsistencySpy = sandbox.spy(table, 'checkConsistency');
 
         table.bigtable.request = (config: {}, callback: Function) => {
           responses.shift()(config, callback);
@@ -2085,7 +2086,7 @@ describe('Bigtable/Table', () => {
       });
 
       afterEach(() => {
-        clock.restore();
+        sandbox.restore();
       });
 
       it('should return true if token is consistent', done => {

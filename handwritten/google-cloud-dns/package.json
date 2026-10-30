@@ -46,7 +46,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "@google-cloud/common": "^8.0.0",
+    "@google-cloud/common": "^8.2.2",
     "@google-cloud/paginator": "^7.2.0",
     "@google-cloud/promisify": "^6.2.0",
     "arrify": "^2.0.0",

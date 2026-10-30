@@ -17,10 +17,9 @@
 import assert from 'assert';
 import {StreamArrayParser} from '../../src/streamArrayParser';
 import {before, describe, it} from 'mocha';
-import {pipeline} from 'stream';
+import {pipeline, PassThrough} from 'stream';
 import path = require('path');
 import protobuf = require('protobufjs');
-import {PassThrough} from 'stream';
 import {toProtobufJSON} from './utils';
 
 interface User {
@@ -175,5 +174,39 @@ describe('Parse REST stream array', () => {
       assert(err instanceof Error);
       done();
     });
+  });
+
+  it('should not emit an error when source stream aborts upon cancel()', async () => {
+    const source = new PassThrough();
+    const streamArrayParser = new StreamArrayParser(streamMethod);
+    const emittedErrors: Error[] = [];
+    streamArrayParser.on('error', (err: Error) => emittedErrors.push(err));
+
+    streamArrayParser.cancelSignal.addEventListener(
+      'abort',
+      () => {
+        source.destroy(new Error('The operation was aborted.'));
+      },
+      {once: true},
+    );
+
+    pipeline(source, streamArrayParser, () => {});
+    source.write(
+      Buffer.from(
+        JSON.stringify([
+          {
+            name: {firstName: 'Ada', lastName: 'Lovelace'},
+            occupation: ['mathematician'],
+            updateTime: '2021-07-21T07:37:32.616613Z',
+            description: 'Cancel test',
+            age: 36,
+          },
+        ]).slice(0, -1),
+      ),
+    );
+
+    streamArrayParser.cancel();
+    await new Promise<void>(resolve => setTimeout(resolve, 30));
+    assert.deepStrictEqual(emittedErrors, []);
   });
 });

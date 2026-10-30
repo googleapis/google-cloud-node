@@ -1,6 +1,13 @@
 # Changelog
 
 
+## [5.7.3](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.7.2...gapic-generator-v5.7.3) (2026-10-28)
+
+
+### Bug Fixes
+
+* **core:** Log request/response payloads at DEBUG severity ([#9754](https://github.com/googleapis/google-cloud-node/issues/9754)) ([bf46818](https://github.com/googleapis/google-cloud-node/commit/bf468181b2c85ffd17cc820d2459d6b42213f016))
+
 ## [5.7.2](https://github.com/googleapis/google-cloud-node/compare/gapic-generator-v5.7.1...gapic-generator-v5.7.2) (2026-10-23)
 
 
