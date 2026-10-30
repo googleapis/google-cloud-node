@@ -10384,6 +10384,9 @@ export namespace google {
                     /** Endpoint dmsPrivateConnection */
                     dmsPrivateConnection?: (string|null);
 
+                    /** Endpoint datastreamPrivateConnection */
+                    datastreamPrivateConnection?: (string|null);
+
                     /** Endpoint cloudFunction */
                     cloudFunction?: (google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null);
 
@@ -10456,6 +10459,9 @@ export namespace google {
 
                     /** Endpoint dmsPrivateConnection. */
                     public dmsPrivateConnection: string;
+
+                    /** Endpoint datastreamPrivateConnection. */
+                    public datastreamPrivateConnection: string;
 
                     /** Endpoint cloudFunction. */
                     public cloudFunction?: (google.cloud.networkmanagement.v1beta1.Endpoint.ICloudFunctionEndpoint|null);
@@ -11837,6 +11843,9 @@ export namespace google {
 
                     /** Step dmsPrivateConnection */
                     dmsPrivateConnection?: (google.cloud.networkmanagement.v1beta1.IPrivateConnectionInfo|null);
+
+                    /** Step datastreamPrivateConnection */
+                    datastreamPrivateConnection?: (google.cloud.networkmanagement.v1beta1.IPrivateConnectionInfo|null);
                 }
 
                 /** Represents a Step. */
@@ -11974,8 +11983,11 @@ export namespace google {
                     /** Step dmsPrivateConnection. */
                     public dmsPrivateConnection?: (google.cloud.networkmanagement.v1beta1.IPrivateConnectionInfo|null);
 
+                    /** Step datastreamPrivateConnection. */
+                    public datastreamPrivateConnection?: (google.cloud.networkmanagement.v1beta1.IPrivateConnectionInfo|null);
+
                     /** Step stepInfo. */
-                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"gkeNetworkPolicy"|"gkeNetworkPolicySkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"cloudRunJob"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|"ngfwPacketInspection"|"dmsPrivateConnection");
+                    public stepInfo?: ("instance"|"firewall"|"route"|"endpoint"|"googleService"|"forwardingRule"|"hybridSubnet"|"vpnGateway"|"vpnTunnel"|"interconnectAttachment"|"vpcConnector"|"directVpcEgressConnection"|"serverlessExternalConnection"|"deliver"|"forward"|"abort"|"drop"|"loadBalancer"|"network"|"gkeMaster"|"gkePod"|"ipMasqueradingSkipped"|"gkeNetworkPolicy"|"gkeNetworkPolicySkipped"|"cloudSqlInstance"|"redisInstance"|"redisCluster"|"cloudFunction"|"appEngineVersion"|"cloudRunRevision"|"cloudRunJob"|"nat"|"proxyConnection"|"loadBalancerBackendInfo"|"storageBucket"|"serverlessNeg"|"ngfwPacketInspection"|"dmsPrivateConnection"|"datastreamPrivateConnection");
 
                     /**
                      * Creates a new Step instance using the specified properties.
@@ -12077,6 +12089,7 @@ export namespace google {
                         START_FROM_PSC_PUBLISHED_SERVICE = 30,
                         START_FROM_SERVERLESS_NEG = 31,
                         START_FROM_DMS_PRIVATE_CONNECTION = 48,
+                        START_FROM_DATASTREAM_PRIVATE_CONNECTION = 49,
                         APPLY_INGRESS_FIREWALL_RULE = 4,
                         APPLY_EGRESS_FIREWALL_RULE = 5,
                         APPLY_ROUTE = 6,
@@ -14244,7 +14257,8 @@ export namespace google {
                         REDIS_CLUSTER = 17,
                         GKE_POD = 19,
                         CLOUD_RUN_JOB = 20,
-                        DMS_PRIVATE_CONNECTION = 21
+                        DMS_PRIVATE_CONNECTION = 21,
+                        DATASTREAM_PRIVATE_CONNECTION = 22
                     }
 
                     /** GoogleServiceType enum. */
@@ -14728,6 +14742,7 @@ export namespace google {
                         DROPPED_INSIDE_GKE_SERVICE = 18,
                         DROPPED_INSIDE_CLOUD_SQL_SERVICE = 19,
                         DROPPED_INSIDE_DMS_PRIVATE_CONNECTION = 114,
+                        DROPPED_INSIDE_DATASTREAM_PRIVATE_CONNECTION = 115,
                         GOOGLE_MANAGED_SERVICE_NO_PEERING = 20,
                         GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT = 38,
                         GKE_PSC_ENDPOINT_MISSING = 36,

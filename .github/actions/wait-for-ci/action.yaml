@@ -1,0 +1,163 @@
+name: "Wait for CI"
+description: "Waits for all PR CI workflow runs to finish and verifies generator-tests succeeded when applicable"
+inputs:
+  generator-changed:
+    required: false
+    default: "false"
+    description: "Whether generator files were modified in the PR"
+runs:
+  using: "composite"
+  steps:
+    - name: Wait for all CI workflows to finish
+      uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
+      env:
+        GENERATOR_CHANGED: ${{ inputs.generator-changed }}
+      with:
+        script: |
+          const owner = context.repo.owner;
+          const repo = context.repo.repo;
+          const headSha = context.payload.pull_request?.head?.sha || context.sha;
+          const generatorChanged = process.env.GENERATOR_CHANGED === 'true';
+          const pollIntervalMs = 30000;
+          const maxWaitMs = 46 * 60 * 1000;
+          const startTime = Date.now();
+          const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+          const isPresubmitUnitWorkflow = run =>
+            run.path === '.github/workflows/presubmit.yaml' ||
+            run.path === '.github/workflows/windows-presubmit.yaml' ||
+            run.name === 'presubmit' ||
+            run.name === 'presubmit-windows';
+
+          const isGateJob = jobName =>
+            jobName === 'Wait for CI' || /^units \(\d+\)$/.test(jobName);
+
+          const isGeneratorWorkflow = run =>
+            run.path === '.github/workflows/generator-tests.yaml' ||
+            run.name === 'generator-tests';
+
+          while (Date.now() - startTime < maxWaitMs) {
+            try {
+              const { data: { workflow_runs: runs } } = await github.rest.actions.listWorkflowRunsForRepo({
+                owner,
+                repo,
+                head_sha: headSha,
+                event: 'pull_request',
+                per_page: 100,
+              });
+
+              // Keep only the most recent active workflow run per workflow_id.
+              // Rapid events on the same SHA (e.g. stacked PR updates triggering both
+              // `synchronize` and `edited` within the same second) can share a 1s
+              // `created_at` timestamp while `concurrency: cancel-in-progress` cancels
+              // one of the runs. Prefer non-cancelled runs and compare monotonic
+              // `run_number` / `id` rather than `created_at`.
+              const isPreferredRun = (candidate, existing) => {
+                const candidateCancelled = candidate.conclusion === 'cancelled';
+                const existingCancelled = existing.conclusion === 'cancelled';
+                if (candidateCancelled !== existingCancelled) {
+                  return !candidateCancelled;
+                }
+                if (candidate.run_number !== existing.run_number) {
+                  return candidate.run_number > existing.run_number;
+                }
+                return candidate.id > existing.id;
+              };
+
+              const latestByWorkflow = new Map();
+              let currentRun = null;
+              for (const run of runs) {
+                if (run.id === context.runId) {
+                  currentRun = run;
+                }
+                const existing = latestByWorkflow.get(run.workflow_id);
+                if (!existing || isPreferredRun(run, existing)) {
+                  latestByWorkflow.set(run.workflow_id, run);
+                }
+              }
+
+              if (currentRun) {
+                const latestSelf = latestByWorkflow.get(currentRun.workflow_id);
+                if (latestSelf && latestSelf.id !== context.runId) {
+                  core.info(
+                    `This workflow run (${context.runId}) has been superseded by run ${latestSelf.id}; exiting early to release concurrency lock.`,
+                  );
+                  return;
+                }
+              }
+
+              const pendingItems = [];
+              let generatorRun = null;
+
+              for (const run of latestByWorkflow.values()) {
+                if (isGeneratorWorkflow(run)) {
+                  generatorRun = run;
+                }
+
+                if (isPresubmitUnitWorkflow(run)) {
+                  if (run.status === 'completed') {
+                    continue;
+                  }
+                  const { data: { jobs } } = await github.rest.actions.listJobsForWorkflowRun({
+                    owner,
+                    repo,
+                    run_id: run.id,
+                    per_page: 100,
+                  });
+                  const workJobs = jobs.filter(j => !isGateJob(j.name));
+                  if (workJobs.length === 0) {
+                    pendingItems.push(`${run.name} (initializing jobs)`);
+                  } else {
+                    const runningJobs = workJobs.filter(j => j.status !== 'completed');
+                    for (const j of runningJobs) {
+                      pendingItems.push(`${run.name} / ${j.name} (${j.status})`);
+                    }
+                  }
+                } else if (run.status !== 'completed') {
+                  pendingItems.push(`${run.name} (${run.status})`);
+                }
+              }
+
+              if (generatorChanged && !generatorRun) {
+                pendingItems.push('generator-tests (waiting for workflow run to register)');
+              }
+
+              if (pendingItems.length === 0) {
+                core.info(`All CI workflows for SHA ${headSha} have finished.`);
+                for (const run of latestByWorkflow.values()) {
+                  if (isPresubmitUnitWorkflow(run)) {
+                    continue;
+                  }
+                  core.info(`- ${run.name}: conclusion=${run.conclusion} (${run.html_url})`);
+                  if (
+                    !isGeneratorWorkflow(run) &&
+                    run.conclusion !== 'success' &&
+                    run.conclusion !== 'skipped' &&
+                    run.conclusion !== 'neutral'
+                  ) {
+                    core.warning(`Non-required workflow '${run.name}' finished with conclusion '${run.conclusion}': ${run.html_url}`);
+                  }
+                }
+
+                if (generatorRun && generatorRun.conclusion !== 'success' && generatorRun.conclusion !== 'skipped') {
+                  core.setFailed(`generator-tests finished with conclusion '${generatorRun.conclusion}': ${generatorRun.html_url}`);
+                  return;
+                }
+                if (generatorChanged && (!generatorRun || generatorRun.conclusion !== 'success')) {
+                  core.setFailed(
+                    `generator-tests did not succeed (conclusion: ${generatorRun ? generatorRun.conclusion : 'missing'})`,
+                  );
+                  return;
+                }
+                return;
+              }
+
+              core.info(`Waiting for ${pendingItems.length} CI step(s) to finish:\n- ${pendingItems.join('\n- ')}`);
+            } catch (err) {
+              core.warning(`Error polling CI workflow status (will retry in ${pollIntervalMs / 1000}s): ${err instanceof Error ? err.message : String(err)}`);
+            }
+
+            await sleep(pollIntervalMs);
+          }
+
+          core.setFailed(`Timed out waiting for CI workflows to finish on SHA ${headSha}`);

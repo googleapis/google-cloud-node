@@ -3,7 +3,6 @@
   "../../protos/google/cloud/geminidataanalytics/v1alpha/context.proto",
   "../../protos/google/cloud/geminidataanalytics/v1alpha/conversation.proto",
   "../../protos/google/cloud/geminidataanalytics/v1alpha/credentials.proto",
-  "../../protos/google/cloud/geminidataanalytics/v1alpha/data_a2a_service.proto",
   "../../protos/google/cloud/geminidataanalytics/v1alpha/data_agent.proto",
   "../../protos/google/cloud/geminidataanalytics/v1alpha/data_agent_service.proto",
   "../../protos/google/cloud/geminidataanalytics/v1alpha/data_analytics_agent.proto",

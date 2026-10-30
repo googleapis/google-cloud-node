@@ -118,6 +118,8 @@ export function ensureGrpcStatusDetailsParsed(e: unknown): void {
   const errWithMeta = e as GoogleError & {statusDetails?: unknown};
   if (
     !errWithMeta.reason &&
+    !errWithMeta.domain &&
+    !errWithMeta.errorInfoMetadata &&
     !errWithMeta.statusDetails &&
     errWithMeta.metadata &&
     typeof errWithMeta.metadata.get === 'function' &&
@@ -133,15 +135,94 @@ export function ensureGrpcStatusDetailsParsed(e: unknown): void {
 }
 
 /**
- * Resolves google.rpc.ErrorInfo reason if present on the error or its cause chain.
- * Corresponds to Tier 1 in the error.type hierarchy.
+ * Normalized `google.rpc.ErrorInfo` fields resolved from a single `ErrorInfo` source.
+ */
+export interface ResolvedErrorInfo {
+  reason?: string;
+  domain?: string;
+  metadataAttributes: Record<`gcp.errors.metadata.${string}`, string>;
+}
+
+/**
+ * Returns the value if it is a non-empty string, or undefined otherwise.
+ *
+ * @param {unknown} value - The value to check.
+ * @returns {string | undefined} The non-empty string, or undefined.
+ */
+function readNonEmptyString(value: unknown): string | undefined {
+  return typeof value === 'string' && value.length > 0 ? value : undefined;
+}
+
+/**
+ * Returns the entries of a google.rpc.ErrorInfo metadata map that have a non-empty key
+ * and a string value. A metadata object without such entries yields an empty array, so
+ * the search stops at the first ErrorInfo metadata found instead of continuing into a
+ * deeper cause; only a value that is not a metadata object yields undefined.
+ *
+ * @param {unknown} value - The metadata map to read.
+ * @returns {Array<[string, string]> | undefined} The usable metadata entries, or undefined
+ *   if `value` is not a metadata object.
+ */
+function readErrorInfoMetadataEntries(
+  value: unknown,
+): Array<[string, string]> | undefined {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return undefined;
+  }
+  const entries: Array<[string, string]> = [];
+  for (const [key, entryValue] of Object.entries(value)) {
+    if (key.length > 0 && typeof entryValue === 'string') {
+      entries.push([key, entryValue]);
+    }
+  }
+  return entries;
+}
+
+/**
+ * Reads `reason`, `domain`, and `metadataField` atomically from a single candidate object,
+ * returning undefined if none of the three fields carries a valid `ErrorInfo` value.
+ */
+function readErrorInfoFrom(
+  obj: unknown,
+  metadataField: 'errorInfoMetadata' | 'metadata',
+): ResolvedErrorInfo | undefined {
+  if (!obj || typeof obj !== 'object' || Array.isArray(obj)) {
+    return undefined;
+  }
+  const record = obj as Record<string, unknown>;
+  const reason = readNonEmptyString(record.reason);
+  const domain = readNonEmptyString(record.domain);
+  const metadataEntries = readErrorInfoMetadataEntries(record[metadataField]);
+  if (
+    reason === undefined &&
+    domain === undefined &&
+    metadataEntries === undefined
+  ) {
+    return undefined;
+  }
+  const metadataAttributes: Record<`gcp.errors.metadata.${string}`, string> =
+    {};
+  for (const [key, value] of metadataEntries ?? []) {
+    metadataAttributes[`gcp.errors.metadata.${key}`] = value;
+  }
+  return {reason, domain, metadataAttributes};
+}
+
+/**
+ * Resolves `google.rpc.ErrorInfo` (`reason`, `domain`, and `gcp.errors.metadata.*`
+ * attributes) in a single walk of the error and its `.cause` chain.
+ *
+ * At each depth, decodes binary `grpc-status-details-bin` metadata if present, then
+ * inspects the error itself, its `errorInfo` object, each `statusDetails` entry, and
+ * that entry's `errorInfo`. Stops at the first `ErrorInfo` source found so optional
+ * fields omitted by an outer `ErrorInfo` are never mixed with fields from a deeper
+ * `.cause` or another detail entry.
  *
  * @param {unknown} e - The error to inspect.
- * @returns {string | undefined} The ErrorInfo reason string if found, or undefined.
+ * @returns {ResolvedErrorInfo} The resolved `ErrorInfo` fields, or `{metadataAttributes: {}}`
+ *   if no `ErrorInfo` is present.
  */
-export function resolveErrorInfoReason(e: unknown): string | undefined {
-  ensureGrpcStatusDetailsParsed(e);
-
+export function resolveErrorInfo(e: unknown): ResolvedErrorInfo {
   let current: unknown = e;
   const seen = new Set<unknown>();
   for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
@@ -153,46 +234,37 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
       break;
     }
     seen.add(current);
+
+    ensureGrpcStatusDetailsParsed(current);
+
     const err = current as {
-      reason?: unknown;
       statusDetails?: unknown;
       errorInfo?: unknown;
       cause?: unknown;
     };
 
-    // Check direct reason property on error.
-    if (typeof err.reason === 'string' && err.reason.length > 0) {
-      return err.reason;
+    // Check the error itself, then its errorInfo object.
+    // GoogleError stores ErrorInfo.metadata as `errorInfoMetadata`, because `metadata`
+    // already holds the gRPC response metadata.
+    const info =
+      readErrorInfoFrom(err, 'errorInfoMetadata') ??
+      readErrorInfoFrom(err.errorInfo, 'metadata');
+    if (info !== undefined) {
+      return info;
     }
 
-    // Check errorInfo object on error.
-    if (err.errorInfo && typeof err.errorInfo === 'object') {
-      const infoReason = (err.errorInfo as {reason?: unknown}).reason;
-      if (typeof infoReason === 'string' && infoReason.length > 0) {
-        return infoReason;
-      }
-    }
-
-    // Inspect statusDetails array for reason or errorInfo.
+    // Inspect statusDetails array entries and their errorInfo objects.
     if (Array.isArray(err.statusDetails)) {
       for (const detail of err.statusDetails) {
         if (detail && typeof detail === 'object') {
-          if (
-            'reason' in detail &&
-            typeof (detail as {reason?: unknown}).reason === 'string' &&
-            (detail as {reason: string}).reason.length > 0
-          ) {
-            return (detail as {reason: string}).reason;
-          }
-          if (
-            'errorInfo' in detail &&
-            detail.errorInfo &&
-            typeof detail.errorInfo === 'object' &&
-            typeof (detail.errorInfo as {reason?: unknown}).reason ===
-              'string' &&
-            (detail.errorInfo as {reason: string}).reason.length > 0
-          ) {
-            return (detail.errorInfo as {reason: string}).reason;
+          const detailInfo =
+            readErrorInfoFrom(detail, 'metadata') ??
+            readErrorInfoFrom(
+              (detail as {errorInfo?: unknown}).errorInfo,
+              'metadata',
+            );
+          if (detailInfo !== undefined) {
+            return detailInfo;
           }
         }
       }
@@ -202,7 +274,48 @@ export function resolveErrorInfoReason(e: unknown): string | undefined {
     current = err.cause;
   }
 
-  return undefined;
+  return {metadataAttributes: {}};
+}
+
+/**
+ * Resolves google.rpc.ErrorInfo reason if present on the error or its cause chain.
+ * Corresponds to Tier 1 in the error.type hierarchy.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @returns {string | undefined} The ErrorInfo reason string if found, or undefined.
+ */
+export function resolveErrorInfoReason(e: unknown): string | undefined {
+  return resolveErrorInfo(e).reason;
+}
+
+/**
+ * Resolves google.rpc.ErrorInfo domain (e.g. 'googleapis.com') if present on the error
+ * or its cause chain. Populates the `gcp.errors.domain` attribute.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @returns {string | undefined} The ErrorInfo domain string if found, or undefined.
+ */
+export function resolveErrorInfoDomain(e: unknown): string | undefined {
+  return resolveErrorInfo(e).domain;
+}
+
+/**
+ * Resolves google.rpc.ErrorInfo metadata from the error or its cause chain as
+ * `gcp.errors.metadata.<key>` attributes, one per metadata entry (e.g.
+ * `{service: 'translate.googleapis.com'}` becomes
+ * `{'gcp.errors.metadata.service': 'translate.googleapis.com'}`).
+ * Entries with an empty key or a non-string value are skipped. The first ErrorInfo
+ * found is used even if it omits metadata or has no usable entries, so the attributes
+ * never mix in metadata from a deeper cause.
+ *
+ * @param {unknown} e - The error to inspect.
+ * @returns {Record<`gcp.errors.metadata.${string}`, string>} The metadata attributes,
+ *   or an empty object if the error has no ErrorInfo metadata.
+ */
+export function resolveErrorInfoMetadataAttributes(
+  e: unknown,
+): Record<`gcp.errors.metadata.${string}`, string> {
+  return resolveErrorInfo(e).metadataAttributes;
 }
 
 /**
@@ -413,13 +526,18 @@ export function resolveLanguageSpecificErrorType(
  *
  * @param {unknown} e - The error to classify.
  * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
+ * @param {ResolvedErrorInfo} [errorInfo] - Pre-resolved `ErrorInfo` from {@link resolveErrorInfo},
+ *   when the caller also reads `domain` or `metadataAttributes`, to avoid walking `.cause` again.
  * @returns {string} The resolved `error.type` value.
  */
-export function resolveErrorType(e: unknown, rpcType: 'grpc' | 'http'): string {
+export function resolveErrorType(
+  e: unknown,
+  rpcType: 'grpc' | 'http',
+  errorInfo: ResolvedErrorInfo = resolveErrorInfo(e),
+): string {
   // Tier 1: google.rpc.ErrorInfo.reason
-  const errorInfoReason = resolveErrorInfoReason(e);
-  if (errorInfoReason) {
-    return errorInfoReason;
+  if (errorInfo.reason) {
+    return errorInfo.reason;
   }
 
   // Tier 2: Specific Server Error Code
@@ -551,6 +669,34 @@ export function resolveHttpStatusCode(e: unknown): number | undefined {
     current = (current as {cause?: unknown}).cause;
   }
   return undefined;
+}
+
+/**
+ * Resolves the transport response status code for a completed call or attempt,
+ * recorded as `rpc.response.status_code` (gRPC) or `http.response.status_code` (HTTP).
+ * Successful calls resolve to `OK` (gRPC) or `200` (HTTP). Failed calls resolve the
+ * status from the error, which is undefined when the error carries no status.
+ *
+ * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
+ * @param {boolean} failed - Whether the call or attempt failed.
+ * @param {unknown} [e] - The error the call or attempt failed with, if it failed.
+ * @returns {{rpcStatusName?: string; httpStatusCode?: number}} The gRPC status name
+ *   (gRPC) or HTTP status code (HTTP) for the transport.
+ */
+export function resolveResponseStatusCode(
+  rpcType: 'grpc' | 'http',
+  failed: boolean,
+  e?: unknown,
+): {rpcStatusName?: string; httpStatusCode?: number} {
+  if (rpcType === 'grpc') {
+    return {
+      rpcStatusName: failed ? resolveRpcStatusName(e) : Status[Status.OK],
+    };
+  }
+  if (rpcType === 'http') {
+    return {httpStatusCode: failed ? resolveHttpStatusCode(e) : 200};
+  }
+  return {};
 }
 
 /**
@@ -803,6 +949,25 @@ export function resolveServerExceptionDetails(e: Error): {
 }
 
 /**
+ * Resolves the `exception.message` for a failed call or attempt. Server-side Error
+ * instances prefer the server-provided error details over the generic error message
+ * (see `resolveServerExceptionDetails`). All other values use their `message`, or the
+ * stringified value for non-Error throws (see `resolveErrorMessage`).
+ *
+ * @param {unknown} e - The error or other value thrown or reported for the call.
+ * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
+ * @returns {string} The resolved `exception.message` string.
+ */
+export function resolveExceptionMessage(
+  e: unknown,
+  rpcType: 'grpc' | 'http',
+): string {
+  return e instanceof Error && isServerSideError(e, rpcType)
+    ? resolveServerExceptionDetails(e).message
+    : resolveErrorMessage(e);
+}
+
+/**
  * Records an `exception` span event with `exception.type` (and `exception.message`
  * when `includeMessage` is true, such as on low level network attempt spans).
  *
@@ -822,9 +987,7 @@ export function recordExceptionEvent(
     'exception.type': resolveExceptionType(e),
   };
   if (includeMessage) {
-    attributes['exception.message'] = isServerSideError(e, rpcType)
-      ? resolveServerExceptionDetails(e).message
-      : e.message;
+    attributes['exception.message'] = resolveExceptionMessage(e, rpcType);
   }
   span.addEvent('exception', attributes);
 }
