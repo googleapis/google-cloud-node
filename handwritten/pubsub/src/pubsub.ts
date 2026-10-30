@@ -1351,11 +1351,153 @@ export class PubSub {
     if (!gaxClient) {
       // Lazily instantiate client.
       gaxClient = new v1[config.client](options) as unknown as gax.ClientStub;
+      this.wrapClientForSignal_(gaxClient);
       this.syncGapicJwt_();
       this.api[config.client] = gaxClient;
     }
 
     return gaxClient;
+  }
+  /**
+   * Bridge `CallOptions.signal` onto unary GAPIC client calls when running
+   * against an older `google-gax` release that does not yet natively preserve
+   * `signal` on `CallSettings`.
+   *
+   * @private
+   */
+  private wrapClientForSignal_(gaxClient: gax.ClientStub): void {
+    type GaxTupleCallback = (
+      err: Error | null,
+      response?: unknown,
+      next?: unknown,
+      rawResponse?: unknown,
+    ) => void;
+    const clientWithGax = gaxClient as unknown as {
+      _gaxModule?: {
+        CallSettings?: new (settings?: gax.CallOptions) => {
+          signal?: AbortSignal;
+        };
+        createApiCall?: (
+          func: unknown,
+          settings?: {
+            retry?: gax.RetryOptions | null;
+          },
+          descriptor?: unknown,
+          fallback?: unknown,
+        ) => (
+          request: unknown,
+          callOptions?: gax.CallOptions,
+          callback?: GaxTupleCallback,
+        ) => gax.CancellablePromise<[unknown, unknown, unknown]> | undefined;
+      };
+    };
+    const gaxModule = clientWithGax._gaxModule;
+    if (!gaxModule || typeof gaxModule.createApiCall !== 'function') {
+      return;
+    }
+
+    const probeSignal = new AbortController().signal;
+    const gaxSupportsSignal =
+      typeof gaxModule.CallSettings === 'function' &&
+      new gaxModule.CallSettings({signal: probeSignal}).signal === probeSignal;
+    if (gaxSupportsSignal) {
+      return;
+    }
+
+    const originalCreateApiCall = gaxModule.createApiCall.bind(gaxModule);
+    clientWithGax._gaxModule = {
+      ...gaxModule,
+      createApiCall: (func, settings, descriptor, fallback) => {
+        const innerApiCall = originalCreateApiCall(
+          func,
+          settings,
+          descriptor,
+          fallback,
+        );
+        if (descriptor) {
+          return innerApiCall;
+        }
+        return (request, callOptions, callback) => {
+          const signal = callOptions?.signal;
+          if (!signal) {
+            return innerApiCall(request, callOptions, callback);
+          }
+          if (signal.aborted) {
+            if (callback) {
+              process.nextTick(() => {
+                callback(this.createCancelledError_());
+              });
+              return undefined;
+            }
+            const cancelledPromise = innerApiCall(request, callOptions);
+            process.nextTick(() => {
+              cancelledPromise?.cancel();
+            });
+            return cancelledPromise;
+          }
+
+          const defaultRetryCodes =
+            callOptions.retry === null
+              ? undefined
+              : (callOptions.retry?.retryCodes ?? settings?.retry?.retryCodes);
+          const retryCodes = defaultRetryCodes
+            ? [...defaultRetryCodes]
+            : undefined;
+          const effectiveCallOptions: gax.CallOptions = retryCodes
+            ? {
+                ...callOptions,
+                retry: {
+                  ...callOptions.retry,
+                  retryCodes,
+                },
+              }
+            : callOptions;
+
+          const cancellablePromise = innerApiCall(
+            request,
+            effectiveCallOptions,
+          );
+          if (!cancellablePromise) {
+            return innerApiCall(request, callOptions, callback);
+          }
+
+          const abortListener = () => {
+            if (retryCodes) {
+              retryCodes.splice(0, retryCodes.length, -1);
+            }
+            cancellablePromise.cancel();
+          };
+          signal.addEventListener('abort', abortListener, {once: true});
+
+          if (callback) {
+            cancellablePromise
+              .then(result => {
+                signal.removeEventListener('abort', abortListener);
+                const [response, next, rawResponse] = result;
+                return process.nextTick(
+                  callback,
+                  null,
+                  response,
+                  next,
+                  rawResponse,
+                );
+              })
+              .catch(err => {
+                signal.removeEventListener('abort', abortListener);
+                process.nextTick(callback, err);
+              });
+            return undefined;
+          }
+
+          cancellablePromise
+            .finally(() => {
+              signal.removeEventListener('abort', abortListener);
+            })
+            .catch(() => {});
+          return cancellablePromise;
+        };
+      },
+    };
   }
   /**
    * Close all open client objects.
