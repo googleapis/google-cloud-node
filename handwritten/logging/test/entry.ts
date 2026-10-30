@@ -19,6 +19,7 @@ import * as proxyquire from 'proxyquire';
 import * as entryTypes from '../src/entry';
 import * as common from '../src/utils/common';
 import * as http from 'http';
+import Long = require('long');
 import {InMemorySpanExporter} from '@opentelemetry/sdk-trace-base';
 import {trace} from '@opentelemetry/api';
 import {resourceFromAttributes} from '@opentelemetry/resources';
@@ -136,18 +137,14 @@ describe('Entry', () => {
     const date = new Date();
 
     beforeEach(() => {
-      const seconds = date.getTime() / 1000;
-      const secondsRounded = Math.floor(seconds);
+      const {seconds, nanos} = common.toNanosAndSecondsObj(date);
       fakeStructToObj = (data: {}) => data;
       entry = Entry.fromApiResponse_({
         resource: RESOURCE,
         payload: 'jsonPayload',
         jsonPayload: DATA,
         extraProperty: true,
-        timestamp: {
-          seconds: secondsRounded,
-          nanos: Math.floor((seconds - secondsRounded) * 1e9),
-        },
+        timestamp: {seconds, nanos},
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any);
     });
@@ -186,6 +183,86 @@ describe('Entry', () => {
       } as any);
 
       assert.strictEqual(entry.data, DATA);
+    });
+
+    describe('timestamp', () => {
+      const cases = [
+        {
+          name: 'sub millisecond nanos',
+          timestamp: {seconds: '1738936802', nanos: 565396000},
+          iso: '2025-02-07T14:00:02.565Z',
+          expected: {seconds: 1738936802, nanos: 565396000},
+        },
+        {
+          name: 'zero nanos',
+          timestamp: {seconds: '1738936802', nanos: 0},
+          iso: '2025-02-07T14:00:02.000Z',
+          expected: {seconds: 1738936802, nanos: 0},
+        },
+        {
+          name: 'missing nanos',
+          timestamp: {seconds: '1738936802'},
+          iso: '2025-02-07T14:00:02.000Z',
+          expected: {seconds: 1738936802, nanos: 0},
+        },
+        {
+          name: 'nanos just below one second',
+          timestamp: {seconds: '1738936802', nanos: 999999999},
+          iso: '2025-02-07T14:00:02.999Z',
+          expected: {seconds: 1738936802, nanos: 999999999},
+        },
+        {
+          name: 'pre epoch seconds',
+          timestamp: {seconds: '-1', nanos: 565396000},
+          iso: '1969-12-31T23:59:59.565Z',
+          expected: {seconds: -1, nanos: 565396000},
+        },
+        {
+          name: 'number seconds',
+          timestamp: {seconds: 1738936802, nanos: 1},
+          iso: '2025-02-07T14:00:02.000Z',
+          expected: {seconds: 1738936802, nanos: 1},
+        },
+        {
+          name: 'Long seconds',
+          timestamp: {
+            seconds: Long.fromString('1738936802'),
+            nanos: 565396000,
+          },
+          iso: '2025-02-07T14:00:02.565Z',
+          expected: {seconds: 1738936802, nanos: 565396000},
+        },
+      ];
+
+      for (const {name, timestamp, iso, expected} of cases) {
+        it(`should keep the API nanos for ${name}`, () => {
+          const entry = Entry.fromApiResponse_({
+            payload: 'textPayload',
+            textPayload: 'log',
+            timestamp,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          } as any);
+          assert.strictEqual(
+            (entry.metadata.timestamp as Date).toISOString(),
+            iso,
+          );
+          assert.deepStrictEqual(entry.toJSON().timestamp, expected);
+          assert.deepStrictEqual(entry.toStructuredJSON().timestamp, expected);
+        });
+      }
+
+      it('should use a timestamp changed after fetching', () => {
+        const entry = Entry.fromApiResponse_({
+          payload: 'textPayload',
+          textPayload: 'log',
+          timestamp: {seconds: '1738936802', nanos: 565396000},
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } as any);
+        entry.metadata.timestamp = new Date('2020-01-01T00:00:00.123Z');
+        const expected = {seconds: 1577836800, nanos: 123000000};
+        assert.deepStrictEqual(entry.toJSON().timestamp, expected);
+        assert.deepStrictEqual(entry.toStructuredJSON().timestamp, expected);
+      });
     });
   });
 
@@ -238,15 +315,16 @@ describe('Entry', () => {
     });
 
     it('should convert a date timestamp', () => {
-      const date = new Date();
-      entry.metadata.timestamp = date as entryTypes.Timestamp;
-      const json = entry.toJSON();
-      const seconds = date.getTime() / 1000;
-      const secondsRounded = Math.floor(seconds);
-      assert.deepStrictEqual(json.timestamp, {
-        seconds: secondsRounded,
-        nanos: Math.floor((seconds - secondsRounded) * 1e9),
-      });
+      const cases = [
+        {iso: '2025-02-07T14:00:02.565Z', seconds: 1738936802, nanos: 565e6},
+        {iso: '2025-02-07T14:00:02.000Z', seconds: 1738936802, nanos: 0},
+        {iso: '2025-02-07T14:00:02.999Z', seconds: 1738936802, nanos: 999e6},
+        {iso: '1969-12-31T23:59:59.565Z', seconds: -1, nanos: 565e6},
+      ];
+      for (const {iso, seconds, nanos} of cases) {
+        entry.metadata.timestamp = new Date(iso);
+        assert.deepStrictEqual(entry.toJSON().timestamp, {seconds, nanos});
+      }
     });
 
     it('should convert a string timestamp', () => {

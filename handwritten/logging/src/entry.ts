@@ -173,6 +173,7 @@ export interface ToJsonOptions {
 class Entry {
   metadata: LogEntry;
   data: Data;
+  private apiTimestamp?: {seconds: number; nanos: number};
   constructor(metadata?: LogEntry, data?: Data) {
     /**
      * @name Entry#metadata
@@ -225,7 +226,7 @@ class Entry {
     }
     // Format log timestamp
     if (entry.timestamp instanceof Date) {
-      entry.timestamp = toNanosAndSecondsObj(entry.timestamp);
+      entry.timestamp = this.toTimestampObj(entry.timestamp);
     } else if (typeof entry.timestamp === 'string') {
       entry.timestamp = zuluToDateObj(entry.timestamp);
     }
@@ -307,7 +308,7 @@ class Entry {
     }
     // Format timestamp
     if (meta.timestamp instanceof Date) {
-      entry.timestamp = toNanosAndSecondsObj(meta.timestamp);
+      entry.timestamp = this.toTimestampObj(meta.timestamp);
     }
     // Format httprequest
     const req = meta.httpRequest;
@@ -361,11 +362,23 @@ class Entry {
     }
     const serializedEntry = new Entry(entry, data);
     if (entry.timestamp) {
-      let ms = Number(entry.timestamp.seconds) * 1000;
-      ms += Number(entry.timestamp.nanos) / 1e6;
-      serializedEntry.metadata.timestamp = new Date(ms);
+      const seconds = Number(entry.timestamp.seconds ?? 0);
+      const nanos = Number(entry.timestamp.nanos ?? 0);
+      serializedEntry.metadata.timestamp = new Date(
+        seconds * 1000 + Math.floor(nanos / 1e6),
+      );
+      serializedEntry.apiTimestamp = {seconds, nanos};
     }
     return serializedEntry;
+  }
+
+  private toTimestampObj(date: Date) {
+    const fromDate = toNanosAndSecondsObj(date);
+    const api = this.apiTimestamp;
+    const sameMs =
+      api?.seconds === fromDate.seconds &&
+      Math.floor(api.nanos / 1e6) * 1e6 === fromDate.nanos;
+    return sameMs ? {...api} : fromDate;
   }
 
   /**
