@@ -28,7 +28,7 @@
   "handwritten/cloud-profiler": "8.2.1",
   "handwritten/datastore": "11.3.1",
   "handwritten/error-reporting": "4.3.0",
-  "handwritten/firestore": "9.4.0",
+  "handwritten/firestore": "9.4.1",
   "handwritten/google-cloud-dns": "6.3.0",
   "handwritten/logging": "12.3.0",
   "handwritten/logging-bunyan": "6.3.0",
