@@ -1902,7 +1902,7 @@ class Table extends ServiceObject {
       : {
           'formatOptions.useInt64Timestamp': true,
         };
-    if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+    if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'false') {
       defaultOpts = hasAnyFormatOpts
         ? {}
         : {

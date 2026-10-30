@@ -1042,7 +1042,7 @@ describe('BigQuery', () => {
     });
 
     it('should create a table with timestampPrecision', async () => {
-      if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'true') {
+      if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'false') {
         const table = dataset.table(generateName('timestamp-precision-table'));
         const schema = {
           fields: [
@@ -1564,7 +1564,7 @@ describe('BigQuery', () => {
 
             testCases.forEach(testCase => {
               it(`should handle ${testCase.name}`, async () => {
-                if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+                if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'false') {
                   // These tests are only important when the high precision
                   // timestamp support is turned on.
                   return;
@@ -1621,7 +1621,7 @@ describe('BigQuery', () => {
                 }
               });
               it(`should handle nested ${testCase.name}`, async () => {
-                if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+                if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'false') {
                   // These tests are only important when the high precision
                   // timestamp support is turned on.
                   return;
@@ -2021,7 +2021,7 @@ describe('BigQuery', () => {
 
             testCases.forEach(testCase => {
               it(`should handle ${testCase.name}`, async () => {
-                if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+                if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'false') {
                   // These tests are only important when the high precision
                   // timestamp support is turned on.
                   return;
@@ -2080,7 +2080,7 @@ describe('BigQuery', () => {
                 }
               });
               it(`should handle nested ${testCase.name}`, async () => {
-                if (process.env.BIGQUERY_PICOSECOND_SUPPORT !== 'true') {
+                if (process.env.BIGQUERY_PICOSECOND_SUPPORT === 'false') {
                   // These tests are only important when the high precision
                   // timestamp support is turned on.
                   return;
