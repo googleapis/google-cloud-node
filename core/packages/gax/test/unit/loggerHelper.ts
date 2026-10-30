@@ -1277,5 +1277,63 @@ describe('LoggerHelper', () => {
         initialOuterSpan.spanContext().spanId,
       );
     });
+
+    it('fails open in logNetworkAttempt and setRawHttpResponsePayload when error mutation or attribute extraction throws', async () => {
+      const {
+        getRawHttpResponsePayload,
+        setRawHttpResponsePayload,
+      } = require('../../src/googleError');
+      const contextUtilModule = require('../../src/observability/contextUtil');
+
+      // Frozen / non-extensible GoogleError and throwing Proxy fail open in setRawHttpResponsePayload / getRawHttpResponsePayload.
+      const frozenErr = Object.freeze(new GoogleError('frozen'));
+      assert.doesNotThrow(() =>
+        setRawHttpResponsePayload(frozenErr, '{"error":"frozen"}'),
+      );
+      assert.strictEqual(getRawHttpResponsePayload(frozenErr), undefined);
+
+      const hostileProxy = new Proxy(new GoogleError('proxy'), {
+        defineProperty() {
+          throw new Error('defineProperty boom');
+        },
+        get() {
+          throw new Error('get boom');
+        },
+      });
+      assert.doesNotThrow(() =>
+        setRawHttpResponsePayload(hostileProxy, '{"error":"proxy"}'),
+      );
+      assert.strictEqual(getRawHttpResponsePayload(hostileProxy), undefined);
+
+      // Throwing getActiveTraceContext or response getter inside logNetworkAttempt never masks the attempt error.
+      const attemptErr = Object.assign(new GoogleError('Unavailable'), {
+        code: Status.UNAVAILABLE,
+      });
+      sinon
+        .stub(contextUtilModule, 'getActiveTraceContext')
+        .throws(new Error('otel context exploded'));
+      await assert.rejects(
+        () =>
+          logNetworkAttempt(dynamicArgs, staticArgs, async () => {
+            throw attemptErr;
+          }),
+        (caught: unknown) => caught === attemptErr,
+      );
+      sinon.restore();
+
+      const hostileResponseErr = new GoogleError('hostile response');
+      Object.defineProperty(hostileResponseErr, 'response', {
+        get() {
+          throw new Error('response getter boom');
+        },
+      });
+      await assert.rejects(
+        () =>
+          logNetworkAttempt(dynamicArgs, staticArgs, async () => {
+            throw hostileResponseErr;
+          }),
+        (caught: unknown) => caught === hostileResponseErr,
+      );
+    });
   });
 });

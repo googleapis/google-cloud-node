@@ -42,12 +42,16 @@ export function setRawHttpResponsePayload(
   err: GoogleError,
   payload: unknown,
 ): void {
-  Object.defineProperty(err, RAW_HTTP_RESPONSE_PAYLOAD, {
-    value: payload,
-    configurable: true,
-    enumerable: false,
-    writable: true,
-  });
+  try {
+    Object.defineProperty(err, RAW_HTTP_RESPONSE_PAYLOAD, {
+      value: payload,
+      configurable: true,
+      enumerable: false,
+      writable: true,
+    });
+  } catch {
+    // Fail open if err is frozen, non-extensible, or traps defineProperty.
+  }
 }
 
 /**
@@ -55,7 +59,11 @@ export function setRawHttpResponsePayload(
  * {@link setRawHttpResponsePayload}, if any.
  */
 export function getRawHttpResponsePayload(err: object): unknown {
-  return (err as Record<symbol, unknown>)[RAW_HTTP_RESPONSE_PAYLOAD];
+  try {
+    return (err as Record<symbol, unknown>)[RAW_HTTP_RESPONSE_PAYLOAD];
+  } catch {
+    return undefined;
+  }
 }
 
 export class GoogleError extends Error {

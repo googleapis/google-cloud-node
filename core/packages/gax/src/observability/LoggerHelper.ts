@@ -441,13 +441,20 @@ export function logNetworkAttempt<T = GaxCallResult>(
   userCallback?: APICallback,
 ): T {
   // Snapshot attempt context in case async rejection loses active context.
-  const initialContext = context.active();
+  let initialContext: ReturnType<typeof context.active> | undefined;
+  try {
+    initialContext = context.active();
+  } catch {
+    // Fail open if active context retrieval throws.
+  }
 
   const emitL4DebugLog = (err: unknown) => {
     // Resolve logger and active T4 attempt span (or outer OpenTelemetry span when GAX tracing is disabled).
     const logger = getGaxLogger(staticArgs?.gcpClientService);
     const activeTrace = getActiveTraceContext();
-    const initialTrace = getActiveTraceContext(initialContext);
+    const initialTrace = initialContext
+      ? getActiveTraceContext(initialContext)
+      : undefined;
     const attemptSpan =
       activeTrace?.attemptSpan ??
       initialTrace?.attemptSpan ??
