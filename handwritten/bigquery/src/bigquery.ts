@@ -2917,16 +2917,6 @@ export class BigQueryTimestamp {
     } else if (typeof value === 'string') {
       if (/^\d{4}-\d{1,2}-\d{1,2}/.test(value)) {
         pd = new PreciseDate(value);
-        if (value.match(/\.\d{10,}/) && !Number.isNaN(pd.getTime())) {
-          /*
-          TODO:
-          When https://github.com/googleapis/nodejs-precise-date/pull/302
-          is released and we have full support for picoseconds in PreciseData
-          then we can remove this if block.
-           */
-          this.value = value;
-          return;
-        }
       } else {
         const floatValue = Number.parseFloat(value);
         if (!Number.isNaN(floatValue)) {
@@ -2938,9 +2928,16 @@ export class BigQueryTimestamp {
     } else {
       pd = this.fromFloatValue_(value);
     }
-    // to keep backward compatibility, only converts with microsecond
-    // or nanosecond precision if needed.
-    if (pd.getMicroseconds() > 0 || pd.getNanoseconds() > 0) {
+    // to keep backward compatibility, only converts with microsecond,
+    // nanosecond, or picosecond precision if needed.
+if (!pd) {
+  throw new TypeError('Invalid or missing date argument');
+}
+if (
+  pd.getMicroseconds() > 0 ||
+  pd.getNanoseconds() > 0 ||
+  (typeof pd.getPicoseconds === 'function' && pd.getPicoseconds() > 0)
+) {
       this.value = pd.toISOString();
     } else {
       this.value = new Date(pd.getTime()).toJSON();
