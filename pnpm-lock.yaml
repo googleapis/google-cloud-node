@@ -20587,10 +20587,6 @@ packages:
     resolution: {integrity: sha512-MMlNdyzy/i51cJXqjgzqgvu7qR1uNierj2+bZj1hMoJixJBEdnw51XuVjLu5n6DsKGo1dVbUI0UyU9OP8nYgdg==}
     engines: {node: '>=22'}
 
-  google-test-utils@0.4.0:
-    resolution: {integrity: sha512-MMlNdyzy/i51cJXqjgzqgvu7qR1uNierj2+bZj1hMoJixJBEdnw51XuVjLu5n6DsKGo1dVbUI0UyU9OP8nYgdg==}
-    engines: {node: '>=22'}
-
   googleapis-common@4.4.3:
     resolution: {integrity: sha512-W46WKCk3QtlCCfmZyQIH5zxmDOyeV5Qj+qs7nr2ox08eRkEJMWp6iwv542R/PsokXaGUSrmif4vCC4+rGzRSsQ==}
     engines: {node: '>=10.10.0'}
@@ -31141,8 +31137,6 @@ snapshots:
     dependencies:
       protobufjs: 7.5.9
       walkdir: 0.4.1
-
-  google-test-utils@0.4.0: {}
 
   google-test-utils@0.4.0: {}
 
