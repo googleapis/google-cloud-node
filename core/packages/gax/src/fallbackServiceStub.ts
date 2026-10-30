@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-import type {Response as NodeFetchResponse} from 'node-fetch' with {
-  'resolution-mode': 'import',
-};
-
 import {AuthClient, GoogleAuth, gaxios} from 'google-auth-library';
 import * as serializer from 'proto3-json-serializer';
 
@@ -27,7 +23,8 @@ import {defaultToObjectOptions} from './fallback';
 import {GoogleError} from './googleError';
 import {setAttemptHttpMethod} from './observability/TracerHelper';
 import {rpcCodeFromHttpStatusCode, Status} from './status';
-import {pipeline, PipelineSource} from 'stream';
+import {pipeline} from 'stream';
+import type {ReadableStream as WebReadableStream} from 'stream/web';
 import type {Agent as HttpAgent} from 'http';
 import type {Agent as HttpsAgent} from 'https';
 
@@ -516,7 +513,7 @@ export function generateServiceStub(
 
       auth
         .fetch(url, fetchRequest)
-        .then((response: Response | NodeFetchResponse) => {
+        .then((response: gaxios.GaxiosResponse) => {
           // There is a legacy Apiary configuration that some services
           // use which allows 204 empty responses on success instead of
           // a 200 OK. This most commonly is seen in delete RPCs,
@@ -529,7 +526,11 @@ export function generateServiceStub(
           }
           if (response.ok && rpc.responseStream) {
             pipeline(
-              response.body as PipelineSource<unknown>,
+              // `GaxiosResponse` is typed as the DOM `Response`, but the body
+              // is a Node.js Readable when gaxios uses node-fetch and an async
+              // iterable web ReadableStream when it uses native fetch; either
+              // is a valid `pipeline` source in Node.js.
+              response.body as WebReadableStream,
               streamArrayParser,
               (err: unknown) => {
                 // A caller that cancelled has already torn this stream down

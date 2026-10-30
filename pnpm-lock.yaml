@@ -410,9 +410,6 @@ importers:
       google-logging-utils:
         specifier: ^2.1.0
         version: 2.1.0
-      node-fetch:
-        specifier: ^3.3.2
-        version: 3.3.2
       object-hash:
         specifier: ^3.0.0
         version: 3.0.0
