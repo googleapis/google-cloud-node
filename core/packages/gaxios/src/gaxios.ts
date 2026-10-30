@@ -824,13 +824,11 @@ export class Gaxios implements FetchCompliance {
         const origBlob = res.blob.bind(res);
         const readBuffer = async () => {
           nodeStream ||= Readable.fromWeb(rawBody);
-          const chunks: Buffer[] = [];
+          const chunks: Uint8Array[] = [];
           let totalBytes = 0;
           for await (const chunk of nodeStream) {
-            const buf = Buffer.isBuffer(chunk)
-              ? chunk
-              : Buffer.from(chunk as Uint8Array);
-            totalBytes += buf.byteLength;
+            const bytes = chunk as Uint8Array;
+            totalBytes += bytes.byteLength;
             if (maxSize > 0 && totalBytes > maxSize) {
               throw Object.assign(
                 new Error(
@@ -839,9 +837,9 @@ export class Gaxios implements FetchCompliance {
                 {type: 'max-size'},
               );
             }
-            chunks.push(buf);
+            chunks.push(bytes);
           }
-          return Buffer.concat(chunks);
+          return Buffer.concat(chunks, totalBytes);
         };
         Object.defineProperty(res, 'body', {
           get() {
