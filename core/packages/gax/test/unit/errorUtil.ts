@@ -383,6 +383,28 @@ describe('errorUtil', () => {
       });
     });
 
+    it('ensureGrpcStatusDetailsParsed skips binary decoding when domain or errorInfoMetadata is already populated', () => {
+      const errWithDomain = grpcErrorWithEncodedErrorInfo();
+      errWithDomain.domain = 'custom.googleapis.com';
+      assert.deepStrictEqual(resolveErrorInfo(errWithDomain), {
+        reason: undefined,
+        domain: 'custom.googleapis.com',
+        metadataAttributes: {},
+      });
+      assert.strictEqual(errWithDomain.statusDetails, undefined);
+
+      const errWithMetadata = grpcErrorWithEncodedErrorInfo();
+      errWithMetadata.errorInfoMetadata = {service: 'custom.googleapis.com'};
+      assert.deepStrictEqual(resolveErrorInfo(errWithMetadata), {
+        reason: undefined,
+        domain: undefined,
+        metadataAttributes: {
+          'gcp.errors.metadata.service': 'custom.googleapis.com',
+        },
+      });
+      assert.strictEqual(errWithMetadata.statusDetails, undefined);
+    });
+
     it('resolveErrorInfo does not mix optional ErrorInfo fields across causes or details and walks cause once', () => {
       const outerPartialReason = {
         reason: 'RATE_LIMIT_EXCEEDED',

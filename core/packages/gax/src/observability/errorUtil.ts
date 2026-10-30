@@ -118,6 +118,8 @@ export function ensureGrpcStatusDetailsParsed(e: unknown): void {
   const errWithMeta = e as GoogleError & {statusDetails?: unknown};
   if (
     !errWithMeta.reason &&
+    !errWithMeta.domain &&
+    !errWithMeta.errorInfoMetadata &&
     !errWithMeta.statusDetails &&
     errWithMeta.metadata &&
     typeof errWithMeta.metadata.get === 'function' &&
