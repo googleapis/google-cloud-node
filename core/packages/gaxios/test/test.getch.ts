@@ -17,6 +17,7 @@ import {createSandbox, fake} from 'sinon';
 import stream, {Readable} from 'stream';
 import {describe, it, beforeEach, afterEach} from 'mocha';
 import {HttpsProxyAgent} from 'https-proxy-agent';
+import {ClientRequest} from 'http';
 import {
   Gaxios,
   GaxiosError,
@@ -542,6 +543,23 @@ describe('🥁 configuration options', () => {
       assert.equal(res.config.agent.connectOpts.key, key);
     });
 
+    it('should present the mTLS client certificate to the server behind the proxy', async () => {
+      const cert = 'cert';
+      const key = 'key';
+      const connect = sandbox.stub(HttpsProxyAgent.prototype, 'connect');
+      const res = await request({url, proxy, cert, key});
+      expectProxy(res);
+
+      const target = {
+        host: 'domain.example.com',
+        port: 443,
+        secureEndpoint: true,
+      };
+      assert(res.config.agent instanceof HttpsProxyAgent);
+      await res.config.agent.connect({} as ClientRequest, target);
+      assert.deepStrictEqual(connect.firstCall.args[1], {...target, cert, key});
+    });
+
     it('should pass proxy and tls options to Bun fetch and omit proxy when noProxy matches', async () => {
       scope.persist(false);
       nock.cleanAll();
@@ -576,16 +594,12 @@ describe('🥁 configuration options', () => {
           key: 'key',
         });
 
-        // Cached mTLS proxy agent hit (cert/key omitted on second request)
         await request({
           url,
           proxy,
         });
         assert.strictEqual(capturedInits[1]?.proxy, proxy);
-        assert.deepStrictEqual(capturedInits[1]?.tls, {
-          cert: 'cert',
-          key: 'key',
-        });
+        assert.strictEqual(capturedInits[1]?.tls, undefined);
 
         await request({
           url,
@@ -699,13 +713,68 @@ describe('🥁 configuration options', () => {
 
       scope = nock(direct.origin).get(direct.pathname).reply(200, responseBody);
 
-      const res2 = await request({url, proxy});
+      const res2 = await request({url, proxy, cert, key});
       assert.strictEqual(agent, res2.config.agent);
       expectProxy(res2);
 
       assert(res2.config.agent instanceof HttpsProxyAgent);
       assert.equal(res2.config.agent.connectOpts.cert, cert);
       assert.equal(res2.config.agent.connectOpts.key, key);
+    });
+
+    it('should not share a cached mTLS proxy agent across different client certificates', async () => {
+      const cert = 'cert';
+      const res1 = await request({url, proxy, cert, key: 'key'});
+      expectProxy(res1);
+
+      const direct = new URL(url);
+      const reply = () =>
+        (scope = nock(direct.origin)
+          .get(direct.pathname)
+          .reply(200, responseBody));
+
+      reply();
+      const res2 = await request({url, proxy});
+      expectProxy(res2);
+      assert.notStrictEqual(res1.config.agent, res2.config.agent);
+      assert(res2.config.agent instanceof HttpsProxyAgent);
+      assert.equal(res2.config.agent.connectOpts.cert, undefined);
+
+      reply();
+      const res3 = await request({url, proxy, cert, key: 'other key'});
+      expectProxy(res3);
+      assert.notStrictEqual(res1.config.agent, res3.config.agent);
+      assert.notStrictEqual(res2.config.agent, res3.config.agent);
+      assert(res3.config.agent instanceof HttpsProxyAgent);
+      assert.equal(res3.config.agent.connectOpts.key, 'other key');
+    });
+
+    it('should not share a cached proxy agent across partial or ambiguous client credentials', async () => {
+      const direct = new URL(url);
+      const credentials = [
+        {cert: 'cert'},
+        {},
+        {key: 'key'},
+        {cert: 'a\nb', key: 'c'},
+        {cert: 'a', key: 'b\nc'},
+      ];
+      const agents = [];
+
+      for (const credential of credentials) {
+        if (agents.length) {
+          scope = nock(direct.origin)
+            .get(direct.pathname)
+            .reply(200, responseBody);
+        }
+        const res = await request({url, proxy, ...credential});
+        expectProxy(res);
+        assert(res.config.agent instanceof HttpsProxyAgent);
+        assert.equal(res.config.agent.connectOpts.cert, credential.cert);
+        assert.equal(res.config.agent.connectOpts.key, credential.key);
+        agents.push(res.config.agent);
+      }
+
+      assert.equal(new Set(agents).size, credentials.length);
     });
 
     describe('noProxy', () => {
@@ -1631,8 +1700,7 @@ describe('🍂 defaults & instances', () => {
       scope.done();
       assert.strictEqual(res.config.headers.get('apple'), 'juice');
       assert.strictEqual(res.config.headers.get('figgy'), 'pudding');
-      const agentCache = inst.getAgentCache();
-      assert(agentCache.get(key));
+      assert.equal(inst.getAgentCache().size, 1);
     });
     it('uses HTTPS agent if cert and key provided, on subsequent requests', async () => {
       const key = fs.readFileSync('./test/fixtures/fake.key', 'utf8');
@@ -1645,8 +1713,16 @@ describe('🍂 defaults & instances', () => {
       await inst.request({url, headers: new Headers({figgy: 'pudding'})});
       await inst.request({url, headers: new Headers({figgy: 'pudding'})});
       scope.done();
-      const agentCache = inst.getAgentCache();
-      assert(agentCache.get(key));
+      assert.equal(inst.getAgentCache().size, 1);
+    });
+    it('does not share an HTTPS agent across certificates with the same key', async () => {
+      const scope = nock(url).get('/').reply(200).get('/').reply(200);
+      const inst = new GaxiosAssertAgentCache({key: 'key'});
+      const res1 = await inst.request({url, cert: 'cert'});
+      const res2 = await inst.request({url, cert: 'other cert'});
+      scope.done();
+      assert.notStrictEqual(res1.config.agent, res2.config.agent);
+      assert.equal(inst.getAgentCache().size, 2);
     });
   });
 });
