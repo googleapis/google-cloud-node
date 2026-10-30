@@ -2257,7 +2257,7 @@ describe('retryable', () => {
     }
   });
 
-  it('passes a 0ms deadline for { timeout: 0, retry: null } and does not corrupt subsequent calls', async () => {
+  it('defaults { timeout: 0, retry: null } to 30000ms deadline and does not corrupt subsequent calls', async () => {
     const observedDeadlines: number[] = [];
     let failZeroDeadline = true;
     function func(
@@ -2287,17 +2287,13 @@ describe('retryable', () => {
     });
     const apiCall = gaxCreateApiCall(func, baseSettings);
 
-    // 1. { timeout: 0, retry: null } must apply 0ms deadline instead of falling back to 30000ms.
-    await assert.rejects(
-      async () => {
-        await apiCall({}, {timeout: 0, retry: null});
-      },
-      (err: GoogleError) => {
-        assert.strictEqual(err.code, status.DEADLINE_EXCEEDED);
-        return true;
-      },
-    );
-    assert(observedDeadlines[0] <= 50);
+    // 1. { timeout: 0, retry: null } falls back to default 30000ms deadline (e.g. proto3 default 0).
+    const [firstResp] = (await apiCall(
+      {},
+      {timeout: 0, retry: null},
+    )) as ResultTuple;
+    assert.deepStrictEqual(firstResp, {ok: true});
+    assert(observedDeadlines[0] > 29000 && observedDeadlines[0] <= 30000);
 
     // 2. { timeout: 0 } on retrying call must not permanently overwrite baseSettings.retry.backoffSettings.
     await assert.rejects(async () => {

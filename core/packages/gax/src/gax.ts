@@ -224,7 +224,7 @@ export class CallSettings {
    */
   constructor(settings?: CallOptions) {
     settings = settings || {};
-    this.timeout = settings.timeout ?? 30 * 1000;
+    this.timeout = settings.timeout || 30 * 1000;
     this.retry = settings.retry as RetryOptions;
     this.autoPaginate =
       'autoPaginate' in settings ? settings.autoPaginate : true;
@@ -253,13 +253,11 @@ export class CallSettings {
    */
   merge(options?: CallOptions | null) {
     if (!options) {
-      return new CallSettings({
-        ...this,
-        retry: cloneRetryOptions(this.retry),
-      });
+      return new CallSettings(this);
     }
     let timeout = this.timeout;
-    let retry = cloneRetryOptions(this.retry);
+    let retry = this.retry;
+    let retryCloned = false;
     let autoPaginate = this.autoPaginate;
     let maxResults = this.maxResults;
     let otherArgs = this.otherArgs;
@@ -280,14 +278,37 @@ export class CallSettings {
     // If a method-specific timeout is set in the service config, and the retry codes for that
     // method are non-null, then that timeout value will be used to
     // override backoff settings.
-    if (retry?.retryCodes) {
-      retry!.backoffSettings.initialRpcTimeoutMillis = timeout;
-      retry!.backoffSettings.maxRpcTimeoutMillis = timeout;
-      retry!.backoffSettings.totalTimeoutMillis = timeout;
+    if (
+      retry?.retryCodes &&
+      !('retry' in options && (!options.retry || options.retry.backoffSettings))
+    ) {
+      const backoff = retry.backoffSettings;
+      if (
+        !backoff ||
+        backoff.initialRpcTimeoutMillis !== timeout ||
+        backoff.maxRpcTimeoutMillis !== timeout ||
+        backoff.totalTimeoutMillis !== timeout
+      ) {
+        retry = cloneRetryOptions(retry);
+        retryCloned = true;
+        retry!.backoffSettings.initialRpcTimeoutMillis = timeout;
+        retry!.backoffSettings.maxRpcTimeoutMillis = timeout;
+        retry!.backoffSettings.totalTimeoutMillis = timeout;
+      }
     }
 
     if ('retry' in options) {
-      retry = mergeRetryOptions(retry || ({} as RetryOptions), options.retry!);
+      const mergedRetry = mergeRetryOptions(
+        retry || ({} as RetryOptions),
+        options.retry!,
+      );
+      if (
+        !mergedRetry ||
+        mergedRetry.backoffSettings !== retry?.backoffSettings
+      ) {
+        retryCloned = false;
+      }
+      retry = mergedRetry;
     }
 
     if ('autoPaginate' in options && !options.autoPaginate) {
@@ -313,14 +334,12 @@ export class CallSettings {
     }
 
     if ('maxRetries' in options && options.maxRetries !== undefined) {
-      retry = createRetryOptions(
-        retry!.retryCodes,
-        {...retry!.backoffSettings!},
-        retry!.shouldRetryFn,
-        retry!.getResumptionRequestFn,
-      );
-      retry.backoffSettings.maxRetries = options.maxRetries;
-      delete retry.backoffSettings.totalTimeoutMillis;
+      if (!retryCloned) {
+        retry = cloneRetryOptions(retry);
+        retryCloned = true;
+      }
+      retry!.backoffSettings!.maxRetries = options.maxRetries;
+      delete retry!.backoffSettings!.totalTimeoutMillis;
     }
 
     if ('longrunning' in options) {

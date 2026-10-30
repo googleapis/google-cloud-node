@@ -400,8 +400,8 @@ describe('gax construct settings', () => {
   });
 
   describe('CallSettings timeout and backoffSettings isolation', () => {
-    it('preserves timeout: 0 instead of defaulting to 30000ms', () => {
-      assert.strictEqual(new gax.CallSettings({timeout: 0}).timeout, 0);
+    it('defaults timeout: 0 and undefined to 30000ms', () => {
+      assert.strictEqual(new gax.CallSettings({timeout: 0}).timeout, 30000);
       assert.strictEqual(new gax.CallSettings().timeout, 30000);
       assert.strictEqual(
         new gax.CallSettings({timeout: undefined}).timeout,
@@ -409,7 +409,7 @@ describe('gax construct settings', () => {
       );
     });
 
-    it('preserves timeout: 0 when merging { timeout: 0, retry: null }', () => {
+    it('defaults timeout to 30000ms when merging { timeout: 0, retry: null }', () => {
       const defaults = gax.constructSettings(
         SERVICE_NAME,
         A_CONFIG,
@@ -417,11 +417,11 @@ describe('gax construct settings', () => {
         RETRY_DICT,
       );
       const merged = defaults.bundlingMethod.merge({timeout: 0, retry: null});
-      assert.strictEqual(merged.timeout, 0);
+      assert.strictEqual(merged.timeout, 30000);
       assert.strictEqual(merged.retry, null);
     });
 
-    it('clones backoffSettings in merge so per-call overrides do not mutate shared defaults', () => {
+    it('shares retry references on no-op merge and clones copy-on-write on mutation', () => {
       const defaults = gax.constructSettings(
         SERVICE_NAME,
         A_CONFIG,
@@ -431,8 +431,21 @@ describe('gax construct settings', () => {
       const baseSettings: gax.CallSettings = defaults.bundlingMethod;
       const originalBackoffSnapshot = {...baseSettings.retry!.backoffSettings};
 
+      // Copy-on-write: merging undefined/null options must not allocate a clone.
+      const mergedUndefined = baseSettings.merge(undefined);
+      assert.strictEqual(mergedUndefined.retry, baseSettings.retry);
+      const mergedNull = baseSettings.merge(null);
+      assert.strictEqual(mergedNull.retry, baseSettings.retry);
+
+      // Merging non-timeout options when backoff timeouts already match timeout also skips cloning.
+      const syncedSettings = baseSettings.merge({});
+      const mergedOtherArgs = syncedSettings.merge({otherArgs: {foo: 'bar'}});
+      assert.strictEqual(mergedOtherArgs.retry, syncedSettings.retry);
+
+      // Per-call timeout override clones copy-on-write without mutating baseSettings.
       const mergedZeroTimeout = baseSettings.merge({timeout: 0});
-      assert.strictEqual(mergedZeroTimeout.timeout, 0);
+      assert.strictEqual(mergedZeroTimeout.timeout, 30000);
+      assert.notStrictEqual(mergedZeroTimeout.retry, baseSettings.retry);
       assert.strictEqual(
         mergedZeroTimeout.retry!.backoffSettings.initialRpcTimeoutMillis,
         0,
@@ -446,16 +459,39 @@ describe('gax construct settings', () => {
         0,
       );
 
-      // Mutating via per-call maxRetries or no-arg merge must also leave defaults untouched.
+      // Mutating via per-call maxRetries also clones copy-on-write and leaves defaults untouched.
       const mergedMaxRetries = baseSettings.merge({maxRetries: 3});
+      assert.notStrictEqual(mergedMaxRetries.retry, baseSettings.retry);
       assert.strictEqual(mergedMaxRetries.retry!.backoffSettings.maxRetries, 3);
       assert.strictEqual(
         mergedMaxRetries.retry!.backoffSettings.totalTimeoutMillis,
         undefined,
       );
 
-      const mergedNull = baseSettings.merge(null);
-      mergedNull.retry!.backoffSettings.initialRpcTimeoutMillis = 99999;
+      // Passing caller-owned backoffSettings alongside maxRetries does not mutate caller object either.
+      const callerBackoff = gax.createBackoffSettings(
+        50,
+        1.5,
+        5000,
+        500,
+        1.5,
+        5000,
+        20000,
+      );
+      const callerBackoffSnapshot = {...callerBackoff};
+      const mergedCallerRetry = baseSettings.merge({
+        retry: {backoffSettings: callerBackoff},
+        maxRetries: 4,
+      });
+      assert.strictEqual(
+        mergedCallerRetry.retry!.backoffSettings.maxRetries,
+        4,
+      );
+      assert.strictEqual(
+        mergedCallerRetry.retry!.backoffSettings.totalTimeoutMillis,
+        undefined,
+      );
+      assert.deepStrictEqual(callerBackoff, callerBackoffSnapshot);
 
       assert.deepStrictEqual(
         baseSettings.retry!.backoffSettings,

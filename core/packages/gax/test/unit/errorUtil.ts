@@ -1214,150 +1214,62 @@ describe('errorUtil', () => {
   });
 
   describe('resolveServerExceptionDetails', () => {
-    it('formats status details and metadata in resolveServerExceptionDetails for gRPC server errors', () => {
+    it('resolves server details message for gRPC server errors without serializing statusDetails or metadata', () => {
+      let metadataGetMapCalled = false;
       const metadata = new grpc.Metadata();
       metadata.set('x-goog-request-id', 'req-123');
+      const origGetMap = metadata.getMap.bind(metadata);
+      metadata.getMap = () => {
+        metadataGetMapCalled = true;
+        return origGetMap();
+      };
       const error = Object.assign(new GoogleError('Detailed server failure'), {
         code: Status.INVALID_ARGUMENT,
         details: 'Field name is invalid',
-        statusDetails: [{field: 'name', description: 'must be non-empty'}],
         metadata,
         reason: 'INVALID_FIELD',
         domain: 'googleapis.com',
         errorInfoMetadata: {consumer: 'projects/123'},
       });
-
-      const details = resolveServerExceptionDetails(error);
-      assert.strictEqual(details.message, 'Field name is invalid');
-      assert.strictEqual(
-        details.stacktrace,
-        'status_details: [{"field":"name","description":"must be non-empty"}]\n' +
-          'metadata: {"x-goog-request-id":"req-123"}',
-      );
-    });
-
-    it('formats status details and metadata in resolveServerExceptionDetails for HTTP fallback server errors', () => {
-      const error = Object.assign(new GoogleError('HTTP server error'), {
-        httpStatusCode: 400,
-        details: 'Bad HTTP Request',
-        statusDetails: 'Quota exceeded',
-        metadata: {'content-type': 'application/json'},
+      Object.defineProperty(error, 'statusDetails', {
+        get() {
+          throw new Error('statusDetails should not be read');
+        },
       });
 
       const details = resolveServerExceptionDetails(error);
-      assert.strictEqual(details.message, 'Bad HTTP Request');
-      assert.strictEqual(
-        details.stacktrace,
-        'status_details: Quota exceeded\n' +
-          'metadata: {"content-type":"application/json"}',
-      );
+      assert.deepStrictEqual(details, {message: 'Field name is invalid'});
+      assert.strictEqual(metadataGetMapCalled, false);
     });
 
-    it('encodes Buffer and Array of Buffers in metadata as base64', () => {
-      const error = Object.assign(new GoogleError('Buffer error'), {
-        metadata: {
-          'bin-key': Buffer.from('hello'),
-          'bin-array': [Buffer.from('foo'), 'bar', Buffer.from('baz')],
-          'regular-key': 'value',
-        },
-      });
-      const {stacktrace} = resolveServerExceptionDetails(error);
-      assert.strictEqual(
-        stacktrace,
-        'metadata: {"bin-key":"aGVsbG8=","bin-array":["Zm9v","bar","YmF6"],"regular-key":"value"}',
-      );
-    });
-
-    it('formats metadata safely without ReferenceError when Buffer is not defined', () => {
-      const originalBuffer = (globalThis as Record<string, unknown>).Buffer;
-      try {
-        delete (globalThis as Record<string, unknown>).Buffer;
-        const error = Object.assign(new GoogleError('Browser error'), {
-          metadata: {
-            'content-type': 'application/json',
-            headers: ['x-goog-request-id', 'req-456'],
-          },
-        });
-        const {stacktrace} = resolveServerExceptionDetails(error);
-        assert.strictEqual(
-          stacktrace,
-          'metadata: {"content-type":"application/json","headers":["x-goog-request-id","req-456"]}',
-        );
-      } finally {
-        (globalThis as Record<string, unknown>).Buffer = originalBuffer;
-      }
-    });
-
-    it('safely formats statusDetails containing circular references', () => {
-      const detail: Record<string, unknown> = {
-        reason: 'RATE_LIMIT_EXCEEDED',
-      };
-      detail.self = detail;
-      const error = Object.assign(
-        new GoogleError('Circular statusDetails error'),
+    it('resolves server details message and falls back to e.message for HTTP fallback server errors', () => {
+      const errorWithDetails = Object.assign(
+        new GoogleError('HTTP server error'),
         {
-          statusDetails: [detail],
+          httpStatusCode: 400,
+          details: 'Bad HTTP Request',
+          statusDetails: 'Quota exceeded',
+          metadata: {'content-type': 'application/json'},
         },
       );
-      const {stacktrace} = resolveServerExceptionDetails(error);
-      assert.strictEqual(
-        stacktrace,
-        'status_details: [{"reason":"RATE_LIMIT_EXCEEDED","self":"[Circular]"}]',
-      );
-    });
+      assert.deepStrictEqual(resolveServerExceptionDetails(errorWithDetails), {
+        message: 'Bad HTTP Request',
+      });
 
-    it('safely formats statusDetails containing BigInt values', () => {
-      const error = Object.assign(
-        new GoogleError('BigInt statusDetails error'),
+      const errorWithoutDetails = Object.assign(
+        new GoogleError('Fallback HTTP message'),
         {
-          statusDetails: [{retryDelayNanos: 5000000000n}],
+          httpStatusCode: 503,
+          details: '',
         },
       );
-      const {stacktrace} = resolveServerExceptionDetails(error);
-      assert.strictEqual(
-        stacktrace,
-        'status_details: [{"retryDelayNanos":"5000000000"}]',
+      assert.deepStrictEqual(
+        resolveServerExceptionDetails(errorWithoutDetails),
+        {message: 'Fallback HTTP message'},
       );
     });
 
-    it('safely formats metadata containing circular references', () => {
-      const meta: Record<string, unknown> = {'x-request-id': 'req-123'};
-      meta.self = meta;
-      const error = Object.assign(new GoogleError('Circular metadata error'), {
-        metadata: meta,
-      });
-      const {stacktrace} = resolveServerExceptionDetails(error);
-      assert.strictEqual(
-        stacktrace,
-        'metadata: {"x-request-id":"req-123","self":{"x-request-id":"req-123","self":"[Circular]"}}',
-      );
-    });
-
-    it('safely formats metadata containing BigInt values', () => {
-      const error = Object.assign(new GoogleError('BigInt metadata error'), {
-        metadata: {'quota-consumed': 1000000000000n},
-      });
-      const {stacktrace} = resolveServerExceptionDetails(error);
-      assert.strictEqual(
-        stacktrace,
-        'metadata: {"quota-consumed":"1000000000000"}',
-      );
-    });
-
-    it('safely handles non-serializable throwing properties in metadata without throwing', () => {
-      const badMeta = {
-        get bad() {
-          throw new Error('boom');
-        },
-      };
-      const error = Object.assign(new GoogleError('Throwing metadata error'), {
-        metadata: badMeta,
-      });
-      const {stacktrace} = resolveServerExceptionDetails(error);
-      assert.strictEqual(stacktrace, 'metadata: [object Object]');
-    });
-
-    it('resolves details, metadata, and binary gRPC status details across deep cause chains', () => {
+    it('resolves details across deep cause chains', () => {
       const innerGrpcErr = Object.assign(grpcErrorWithEncodedErrorInfo(), {
         details: 'Translation service is disabled',
       });
@@ -1368,14 +1280,15 @@ describe('errorUtil', () => {
       });
 
       const resolved = resolveServerExceptionDetails(deeplyWrapped);
-      assert.strictEqual(resolved.message, 'Translation service is disabled');
-      assert.ok(resolved.stacktrace?.includes('status_details: '));
-      assert.ok(resolved.stacktrace?.includes('SERVICE_DISABLED'));
-      assert.ok(resolved.stacktrace?.includes('metadata: '));
+      assert.deepStrictEqual(resolved, {
+        message: 'Translation service is disabled',
+      });
       assert.strictEqual(
         resolveExceptionMessage(deeplyWrapped, 'grpc'),
         'Translation service is disabled',
       );
+      // resolveServerExceptionDetails must not eagerly decode grpc-status-details-bin either.
+      assert.strictEqual(innerGrpcErr.statusDetails, undefined);
       assert.strictEqual(
         resolveExceptionStacktrace(deeplyWrapped),
         deeplyWrapped.stack,
