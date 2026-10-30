@@ -15,6 +15,8 @@
  */
 
 import assert from 'assert';
+import {spawnSync} from 'child_process';
+import * as path from 'path';
 import {PassThrough} from 'stream';
 import {status} from '@grpc/grpc-js';
 import {
@@ -45,6 +47,7 @@ import {
   createApiCall as fallbackCreateApiCall,
   GrpcClient as FallbackGrpcClient,
 } from '../../src/fallback';
+import {GrpcClient} from '../../src/grpc';
 import {PageDescriptor, StreamDescriptor} from '../../src/descriptor';
 import {StreamType} from '../../src/streamingCalls/streaming';
 import * as gax from '../../src/gax';
@@ -1878,7 +1881,7 @@ describe('createApiCall', () => {
 
     afterEach(() => {
       clearMetadataCache();
-      loggingUtils.setBackend(null);
+      loggingUtils.setBackend(undefined);
       harness.teardown();
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
       delete process.env.GOOGLE_SDK_NODE_LOGGING;
@@ -2409,6 +2412,460 @@ describe('createApiCall', () => {
         callLog.fields.telemetrySpanId,
         clientRequestSpan.spanContext().spanId,
       );
+    });
+
+    describe('with default NodeBackend (no custom setBackend or .on("log"))', () => {
+      interface ParsedStderrLog {
+        namespace: string;
+        severity: string;
+        message: string;
+        fields: loggingUtils.LogFields;
+      }
+
+      // eslint-disable-next-line no-control-regex
+      const ANSI_ESCAPE_RE = /\u001b\[[0-9;]*m/g;
+      function stripAnsi(value: string): string {
+        return value.replace(ANSI_ESCAPE_RE, '');
+      }
+
+      function parseStderrLogs(stderrStub: sinon.SinonStub): ParsedStderrLog[] {
+        return stderrStub.getCalls().map(call => {
+          assert.strictEqual(call.args[0], '%s [%s|%s] %s%s');
+          const namespace = stripAnsi(String(call.args[2]));
+          const severity = stripAnsi(String(call.args[3]));
+          const message = stripAnsi(String(call.args[4]));
+          const rawFields = stripAnsi(String(call.args[5] ?? '')).trim();
+          const fields = (
+            rawFields ? JSON.parse(rawFields) : {}
+          ) as loggingUtils.LogFields;
+          return {namespace, severity, message, fields};
+        });
+      }
+
+      beforeEach(() => {
+        // Clear parent beforeEach's TestLogSink so google-logging-utils runs its real default NodeBackend.
+        loggingUtils.setBackend(undefined);
+        delete process.env.GOOGLE_SDK_NODE_LOGGING;
+      });
+
+      it('emits correlated L4 DEBUG and L3 WARNING logs through NodeBackend for GrpcClient.constructSettings + createApiCall with enableTelemetryLogging: true and GOOGLE_SDK_NODE_LOGGING unset', async () => {
+        const stderrStub = sinon.stub(console, 'error');
+        const gaxGrpc = new GrpcClient({
+          auth: new GoogleAuth({authClient: new PassThroughClient()}),
+          servicePath: 'cloudkms.googleapis.com',
+          port: 443,
+          enableTelemetryTracing: true,
+          enableTelemetryLogging: true,
+        });
+        const serviceName = 'google.cloud.kms.v1.KeyManagementService';
+        const clientConfig: gax.ClientConfig = {
+          interfaces: {
+            [serviceName]: {
+              retry_codes: {retryable: ['UNAVAILABLE']},
+              retry_params: {
+                default: {
+                  initial_retry_delay_millis: 1,
+                  retry_delay_multiplier: 1,
+                  max_retry_delay_millis: 1,
+                  initial_rpc_timeout_millis: 500,
+                  rpc_timeout_multiplier: 1,
+                  max_rpc_timeout_millis: 500,
+                  total_timeout_millis: 2000,
+                },
+              },
+              methods: {
+                GetKeyRing: {
+                  timeout_millis: 500,
+                  retry_codes_name: 'retryable',
+                  retry_params_name: 'default',
+                },
+              },
+            },
+          },
+        };
+        const defaults = gaxGrpc.constructSettings(
+          serviceName,
+          clientConfig,
+          {},
+          {},
+        );
+        // Simulate generated GAPIC constructor initializing `this._log = logging.log('kms')`.
+        loggingUtils.log('kms');
+
+        let attempts = 0;
+        const apiCall = gaxCreateApiCall(
+          (
+            _arg: {},
+            _metadata: {},
+            _opts: {},
+            cb: (err: GoogleError | null, resp?: unknown) => void,
+          ) => {
+            attempts++;
+            setImmediate(() => {
+              const err = new GoogleError(
+                attempts === 1 ? 'backend unavailable' : 'permission denied',
+              );
+              err.code =
+                attempts === 1 ? status.UNAVAILABLE : status.PERMISSION_DENIED;
+              cb(err);
+            });
+            return {cancel: () => {}};
+          },
+          defaults.getKeyRing,
+        );
+
+        await assert.rejects(async () => {
+          await apiCall({}, undefined);
+        });
+
+        assert.strictEqual(attempts, 2);
+        const spans = harness.getSpans('google-gax');
+        const attemptSpans = spans.filter(
+          s => s.name === 'google.cloud.kms.v1.KeyManagementService/GetKeyRing',
+        );
+        const clientSpan = spans.find(
+          s => s.name === 'KeyManagementServiceClient.GetKeyRing',
+        )!;
+        assert.strictEqual(attemptSpans.length, 2);
+        assert.ok(clientSpan);
+
+        const records = parseStderrLogs(stderrStub);
+        assert.strictEqual(records.length, 3);
+        const [attempt1, attempt2, callLog] = records;
+
+        for (const [idx, rec] of [attempt1, attempt2].entries()) {
+          assert.strictEqual(rec.namespace, 'kms');
+          assert.strictEqual(rec.severity, 'DEBUG');
+          assert.strictEqual(
+            rec.fields.telemetryTraceId,
+            attemptSpans[idx].spanContext().traceId,
+          );
+          assert.strictEqual(
+            rec.fields.telemetrySpanId,
+            attemptSpans[idx].spanContext().spanId,
+          );
+          const other = rec.fields.other as loggerHelper.LogPayload;
+          assert.strictEqual(other['gcp.client.service'], 'kms');
+          assert.strictEqual(other['url.domain'], 'cloudkms.googleapis.com');
+          assert.strictEqual(
+            other['server.address'],
+            'cloudkms.googleapis.com',
+          );
+          assert.strictEqual(
+            other['rpc.method'],
+            'google.cloud.kms.v1.KeyManagementService/GetKeyRing',
+          );
+          assert.strictEqual('exception.type' in other, false);
+          assert.strictEqual('exception.message' in other, false);
+          assert.strictEqual('exception.stacktrace' in other, false);
+        }
+        assert.strictEqual(
+          attempt1.message,
+          'RPC attempt failed: backend unavailable',
+        );
+        assert.strictEqual(
+          attempt2.message,
+          'RPC attempt failed: permission denied',
+        );
+
+        assert.strictEqual(callLog.namespace, 'kms');
+        assert.strictEqual(callLog.severity, 'WARNING');
+        assert.strictEqual(
+          callLog.message,
+          'Client API call failed: permission denied',
+        );
+        assert.strictEqual(
+          callLog.fields.telemetryTraceId,
+          clientSpan.spanContext().traceId,
+        );
+        assert.strictEqual(
+          callLog.fields.telemetrySpanId,
+          clientSpan.spanContext().spanId,
+        );
+        const callOther = callLog.fields.other as loggerHelper.LogPayload;
+        assert.strictEqual(callOther['url.domain'], 'cloudkms.googleapis.com');
+        assert.strictEqual(
+          callOther['server.address'],
+          'cloudkms.googleapis.com',
+        );
+        assert.strictEqual(
+          callOther['rpc.response.status_code'],
+          'PERMISSION_DENIED',
+        );
+        assert.strictEqual(callOther['exception.type'], 'GoogleError');
+        assert.strictEqual(callOther['exception.message'], 'permission denied');
+        assert.strictEqual(typeof callOther['exception.stacktrace'], 'string');
+      });
+
+      it('honors GOOGLE_SDK_NODE_LOGGING filters and enableTelemetryLogging overrides end-to-end through FallbackGrpcClient and NodeBackend', async () => {
+        const stderrStub = sinon.stub(console, 'error');
+        const json404Body = JSON.stringify({
+          error: {
+            code: 404,
+            message: 'Secret not found',
+            status: 'NOT_FOUND',
+          },
+        });
+        const serviceName = 'google.example.v1beta1.Echo';
+        const clientConfig: gax.ClientConfig = {
+          interfaces: {
+            [serviceName]: {
+              retry_codes: {non_idempotent: []},
+              retry_params: {
+                default: {
+                  initial_retry_delay_millis: 100,
+                  retry_delay_multiplier: 1.3,
+                  max_retry_delay_millis: 1000,
+                  initial_rpc_timeout_millis: 5000,
+                  rpc_timeout_multiplier: 1,
+                  max_rpc_timeout_millis: 5000,
+                  total_timeout_millis: 5000,
+                },
+              },
+              methods: {
+                Echo: {
+                  timeout_millis: 5000,
+                  retry_codes_name: 'non_idempotent',
+                  retry_params_name: 'default',
+                },
+              },
+            },
+          },
+        };
+
+        const runFallbackEcho = async (
+          envValue: string | undefined,
+          enableTelemetryLogging?: boolean,
+        ): Promise<ParsedStderrLog[]> => {
+          stderrStub.resetHistory();
+          clearMetadataCache();
+          loggingUtils.setBackend(undefined);
+          if (envValue === undefined) {
+            delete process.env.GOOGLE_SDK_NODE_LOGGING;
+          } else {
+            process.env.GOOGLE_SDK_NODE_LOGGING = envValue;
+          }
+          // Pre-warm namespace logger as generated GAPIC constructors do.
+          loggingUtils.log('example');
+
+          const gaxGrpc = new FallbackGrpcClient({
+            auth: new GoogleAuth({authClient: new PassThroughClient()}),
+            fallback: 'rest',
+            servicePath: 'example.googleapis.com',
+            port: 443,
+            ...(enableTelemetryLogging !== undefined
+              ? {enableTelemetryLogging}
+              : {}),
+          });
+          const protos = gaxGrpc.loadProto(echoProtoJson);
+          const echoService = protos.lookupService('Echo');
+          utils.setMockFallbackHttpResponse(
+            gaxGrpc,
+            new Response(json404Body, {status: 404}),
+          );
+          const echoStub = await gaxGrpc.createStub(echoService, {
+            servicePath: 'example.googleapis.com',
+            port: 443,
+          });
+          const defaults = gaxGrpc.constructSettings(
+            serviceName,
+            clientConfig,
+            {},
+            {},
+          );
+          const apiCall = fallbackCreateApiCall(
+            Promise.resolve(
+              echoStub.echo.bind(echoStub) as unknown as GRPCCall,
+            ),
+            defaults.echo,
+          );
+          await assert.rejects(async () => {
+            await apiCall({content: 'hello'}, undefined);
+          });
+          return parseStderrLogs(stderrStub);
+        };
+
+        // Matching GOOGLE_SDK_NODE_LOGGING filters emit L4 DEBUG + L3 WARNING records via NodeBackend.
+        for (const accepted of [
+          'example',
+          'storage,EXAMPLE',
+          'exam*',
+          '*',
+          'all',
+          'true',
+        ]) {
+          const records = await runFallbackEcho(accepted, undefined);
+          assert.strictEqual(
+            records.length,
+            2,
+            `expected 2 stderr records for GOOGLE_SDK_NODE_LOGGING=${JSON.stringify(accepted)}`,
+          );
+          const [attemptLog, callLog] = records;
+          assert.strictEqual(attemptLog.namespace, 'example');
+          assert.strictEqual(attemptLog.severity, 'DEBUG');
+          const attemptOther = attemptLog.fields
+            .other as loggerHelper.LogPayload;
+          assert.strictEqual(attemptOther['rpc.system.name'], 'http');
+          assert.strictEqual(
+            attemptOther['rpc.method'],
+            'google.example.v1beta1.Echo/Echo',
+          );
+          assert.strictEqual(attemptOther['http.response.status_code'], 404);
+          assert.strictEqual(
+            attemptOther['rpc.response.status_code'],
+            'NOT_FOUND',
+          );
+          assert.strictEqual(attemptOther['response.payload'], json404Body);
+          assert.strictEqual(
+            attemptOther['url.domain'],
+            'example.googleapis.com',
+          );
+          assert.strictEqual(
+            attemptOther['server.address'],
+            'example.googleapis.com',
+          );
+
+          assert.strictEqual(callLog.namespace, 'example');
+          assert.strictEqual(callLog.severity, 'WARNING');
+          const callOther = callLog.fields.other as loggerHelper.LogPayload;
+          assert.strictEqual(callOther['rpc.system.name'], 'http');
+          assert.strictEqual('response.payload' in callOther, false);
+          assert.strictEqual(callOther['exception.type'], 'GoogleError');
+        }
+
+        // Non-matching or truthy-looking invalid filters rejected by NodeBackend.setFilters() emit zero logs.
+        for (const rejected of [
+          undefined,
+          '',
+          '1',
+          'TRUE',
+          'ALL',
+          ' true ',
+          'foo,true',
+          'storage, example',
+          'spanner',
+          'false',
+        ]) {
+          const records = await runFallbackEcho(rejected, undefined);
+          assert.strictEqual(
+            records.length,
+            0,
+            `expected 0 stderr records for GOOGLE_SDK_NODE_LOGGING=${JSON.stringify(rejected)}`,
+          );
+        }
+
+        // Explicit enableTelemetryLogging: true emits once even when GOOGLE_SDK_NODE_LOGGING mismatches or is false/unset.
+        for (const overridden of [undefined, 'spanner', 'false', '1']) {
+          const records = await runFallbackEcho(overridden, true);
+          assert.strictEqual(
+            records.length,
+            2,
+            `expected 2 stderr records with enableTelemetryLogging: true and GOOGLE_SDK_NODE_LOGGING=${JSON.stringify(overridden)}`,
+          );
+        }
+
+        // Explicit enableTelemetryLogging: false suppresses matching GOOGLE_SDK_NODE_LOGGING filters.
+        for (const suppressed of ['*', 'all', 'true', 'example']) {
+          const records = await runFallbackEcho(suppressed, false);
+          assert.strictEqual(
+            records.length,
+            0,
+            `expected 0 stderr records with enableTelemetryLogging: false and GOOGLE_SDK_NODE_LOGGING=${JSON.stringify(suppressed)}`,
+          );
+        }
+      });
+
+      it('writes real L4 and L3 records to process.stderr in a fresh child Node process that never calls setBackend or .on("log")', () => {
+        const compiledEntry = path.resolve(
+          __dirname,
+          __filename.endsWith('.js')
+            ? '../../src/index.js'
+            : '../../build/src/index.js',
+        );
+        const childScript = `
+          const gaxPkg = require(${JSON.stringify(compiledEntry)});
+          const optEnabled = process.env.CHILD_ENABLE_OPT === 'true';
+          const settings = new gaxPkg.CallSettings({
+            apiName: 'google.example.v1.Echo',
+            enableTelemetryLogging: optEnabled ? true : undefined,
+            otherArgs: {
+              internalMethodName: 'Echo',
+              servicePath: 'example.googleapis.com',
+            },
+          });
+          // Simulate GAPIC client constructor calling loggingUtils.log(ns) before any RPC.
+          gaxPkg.loggingUtils.log('example');
+          const apiCall = gaxPkg.createApiCall(
+            (_arg, _meta, _opts, cb) => {
+              const err = new gaxPkg.GoogleError('cold-process failure');
+              err.code = gaxPkg.Status.UNAVAILABLE;
+              cb(err);
+              return {cancel: () => {}};
+            },
+            settings,
+          );
+          apiCall({}, undefined).catch(() => {});
+        `;
+
+        for (const childEnv of [
+          {
+            GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING: 'true',
+            CHILD_ENABLE_OPT: 'true',
+          },
+          {
+            GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING: 'true',
+            GOOGLE_SDK_NODE_LOGGING: 'storage,example',
+          },
+        ]) {
+          const envCopy: NodeJS.ProcessEnv = {...process.env, ...childEnv};
+          if (!('GOOGLE_SDK_NODE_LOGGING' in childEnv)) {
+            delete envCopy.GOOGLE_SDK_NODE_LOGGING;
+          }
+          const result = spawnSync(process.execPath, ['-e', childScript], {
+            encoding: 'utf8',
+            env: envCopy,
+          });
+          assert.strictEqual(result.status, 0, result.stderr);
+          const stderr = result.stderr;
+          const lines = stderr
+            .split(/\r?\n/)
+            .map(l => stripAnsi(l).trim())
+            .filter(Boolean);
+          assert.strictEqual(
+            lines.length,
+            2,
+            `expected 2 stderr lines from child process, got: ${stderr}`,
+          );
+          assert.match(
+            lines[0],
+            /\[example\|DEBUG\] RPC attempt failed: cold-process failure \{/,
+          );
+          assert.match(
+            lines[1],
+            /\[example\|WARNING\] Client API call failed: cold-process failure \{/,
+          );
+          const attemptJson = JSON.parse(
+            lines[0].slice(lines[0].indexOf('{')),
+          ) as {other: loggerHelper.LogPayload};
+          const callJson = JSON.parse(
+            lines[1].slice(lines[1].indexOf('{')),
+          ) as {other: loggerHelper.LogPayload};
+          assert.strictEqual(
+            attemptJson.other['rpc.method'],
+            'google.example.v1.Echo/Echo',
+          );
+          assert.strictEqual(
+            attemptJson.other['rpc.response.status_code'],
+            'UNAVAILABLE',
+          );
+          assert.strictEqual('exception.type' in attemptJson.other, false);
+          assert.strictEqual(callJson.other['exception.type'], 'GoogleError');
+          assert.strictEqual(
+            callJson.other['exception.message'],
+            'cold-process failure',
+          );
+        }
+      });
     });
   });
 });
