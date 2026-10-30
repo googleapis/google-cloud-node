@@ -19,6 +19,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as util from 'util';
+import {parseSync, traverse} from '@babel/core';
 import * as pbjs from 'protobufjs-cli/pbjs';
 import * as pbts from 'protobufjs-cli/pbts';
 import * as crypto from 'crypto';
@@ -251,6 +252,49 @@ interface CompileProtosOptions {
 }
 
 /**
+ * Strips function bodies and enum value assignments from pbjs static-module
+ * output using Babel AST traversal so pbts only parses JSDoc comments and
+ * declarations.
+ */
+export function stripBodiesForPbts(js: string): string {
+  const ast = parseSync(js, {sourceType: 'module', comments: false});
+  if (!ast) {
+    return js;
+  }
+  const ranges: Array<[number, number]> = [];
+  traverse(ast, {
+    noScope: true,
+    Function(nodePath) {
+      const {node} = nodePath;
+      if (node.body.type !== 'BlockStatement' || node.body.body.length === 0) {
+        return;
+      }
+      const firstStmt = node.body.body[0];
+      const isEnumIife =
+        firstStmt.type === 'VariableDeclaration' &&
+        firstStmt.declarations[0]?.id?.type === 'Identifier' &&
+        firstStmt.declarations[0].id.name === 'valuesById';
+      const isNamedFunction = 'id' in node && Boolean(node.id);
+      if (
+        (isNamedFunction || isEnumIife) &&
+        typeof node.body.start === 'number' &&
+        typeof node.body.end === 'number'
+      ) {
+        ranges.push([node.body.start + 1, node.body.end - 1]);
+        nodePath.skip();
+      }
+    },
+  });
+  let out = '';
+  let last = 0;
+  for (const [start, end] of ranges) {
+    out += js.slice(last, start) + '\n';
+    last = end;
+  }
+  return out + js.slice(last);
+}
+
+/**
  * Runs `pbjs` to compile the given proto files, placing the result into
  * `./protos/protos.json`. No support for changing output filename for now
  * (but it's a TODO!)
@@ -317,7 +361,8 @@ async function compileProtos(
   jsResult = fixJsFile(jsResult);
   await writeFile(jsOutput, jsResult);
 
-  let jsOutputEsm;
+  let jsOutputEsm: string | undefined;
+  let esmResult: string | undefined;
   if (options.esm) {
     jsOutputEsm = path.join('protos', 'protos.js');
     const pbjsArgs4jsEsm = [
@@ -338,46 +383,51 @@ async function compileProtos(
     pbjsArgs4jsEsm.push(...protos);
     await pbjsMain(pbjsArgs4jsEsm);
 
-    let jsResult = (await readFile(jsOutputEsm)).toString();
-    jsResult = fixJsFile(jsResult);
-    await writeFile(jsOutputEsm, jsResult);
+    esmResult = fixJsFile((await readFile(jsOutputEsm)).toString());
+    await writeFile(jsOutputEsm, esmResult);
   }
 
-  // generate protos/protos.d.ts
+  // generate protos/protos.d.ts in child process while minifying protos.js in parent process
   const tsOutput = path.join('protos', 'protos.d.ts');
-  const pbjsArgs4ts = [options.esm ? jsOutputEsm! : jsOutput, '-o', tsOutput];
-  await pbtsMain(pbjsArgs4ts);
-
-  let tsResult = (await readFile(tsOutput)).toString();
-  tsResult = fixDtsFile(tsResult);
-  await writeFile(tsOutput, tsResult);
-
-  if (options.noComments) {
-    const uglifyOptions: uglify.MinifyOptions = {
-      output: {comments: false, beautify: false},
-      compress: false,
-      mangle: false,
-    };
-
-    const minified = uglify.minify(
-      (await readFile(jsOutput)).toString(),
-      uglifyOptions,
-    );
-    if (minified.error) {
-      throw new Error(`UglifyJS failed on ${jsOutput}: ${minified.error}`);
+  const pbtsInput = path.join('protos', 'protos.pbts-stub.js');
+  await writeFile(pbtsInput, stripBodiesForPbts(esmResult ?? jsResult));
+  const pbtsPromise = (async () => {
+    try {
+      await pbtsMain([pbtsInput, '-o', tsOutput]);
+    } finally {
+      await fs.promises.rm(pbtsInput, {force: true});
     }
-    await writeFile(jsOutput, minified.code);
+    let tsResult = (await readFile(tsOutput)).toString();
+    tsResult = fixDtsFile(tsResult);
+    await writeFile(tsOutput, tsResult);
+  })();
 
-    if (options.esm && jsOutputEsm) {
-      const esmContent = (await readFile(jsOutputEsm)).toString();
-      const minifiedEsm = uglify.minify(esmContent, uglifyOptions);
-      if (minifiedEsm.error) {
-        throw new Error(
-          `UglifyJS failed on ${jsOutputEsm}: ${minifiedEsm.error}`,
-        );
+  try {
+    if (options.noComments) {
+      const uglifyOptions: uglify.MinifyOptions = {
+        output: {comments: false, beautify: false},
+        compress: false,
+        mangle: false,
+      };
+
+      const minified = uglify.minify(jsResult, uglifyOptions);
+      if (minified.error) {
+        throw new Error(`UglifyJS failed on ${jsOutput}: ${minified.error}`);
       }
-      await writeFile(jsOutputEsm, minifiedEsm.code);
+      await writeFile(jsOutput, minified.code);
+
+      if (options.esm && jsOutputEsm && esmResult !== undefined) {
+        const minifiedEsm = uglify.minify(esmResult, uglifyOptions);
+        if (minifiedEsm.error) {
+          throw new Error(
+            `UglifyJS failed on ${jsOutputEsm}: ${minifiedEsm.error}`,
+          );
+        }
+        await writeFile(jsOutputEsm, minifiedEsm.code);
+      }
     }
+  } finally {
+    await pbtsPromise;
   }
 }
 
@@ -456,16 +506,6 @@ export async function main(parameters: string[]): Promise<void> {
     protoJsonFiles.push(...(await findProtoJsonFiles(directory)));
   }
   const rootName = await generateRootName(directories);
-  if (esm) {
-    const esmProtos = await buildListOfProtos(protoJsonFiles, esm);
-    await compileProtos(rootName, esmProtos, {
-      skipJson,
-      esm,
-      keepCase,
-      forceNumber,
-      noComments,
-    });
-  }
   const protos = await buildListOfProtos(protoJsonFiles, esm);
   await compileProtos(rootName, protos, {
     skipJson,

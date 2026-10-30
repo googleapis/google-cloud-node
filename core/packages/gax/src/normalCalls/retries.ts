@@ -74,6 +74,7 @@ export function retryable(
   return (argument: RequestType, callback: APICallback) => {
     let canceller: GRPCCallResult | null;
     let timeoutId: ReturnType<typeof setTimeout> | null;
+    let cancelled = false;
     let now = new Date();
     let deadline: number;
     if (retry.backoffSettings.totalTimeoutMillis) {
@@ -161,6 +162,10 @@ export function retryable(
           return;
         }
         canceller = null;
+        if (cancelled) {
+          callback(err);
+          return;
+        }
         if (
           retry.retryCodes.length > 0 &&
           retry.retryCodes.indexOf(err!.code!) < 0
@@ -203,6 +208,7 @@ export function retryable(
 
     return {
       cancel() {
+        cancelled = true;
         if (timeoutId) {
           clearTimeout(timeoutId);
         }

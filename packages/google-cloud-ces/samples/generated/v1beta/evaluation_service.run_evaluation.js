@@ -51,8 +51,8 @@ function main(app) {
    */
   // const displayName = 'abc123'
   /**
-   *  Optional. The app version to evaluate.
-   *  Format:
+   *  Optional. The app version to evaluate. At most one of `app_version` or
+   *  `deployment` can be set. Format:
    *  `projects/{project}/locations/{location}/apps/{app}/versions/{version}`
    */
   // const appVersion = 'abc123'
