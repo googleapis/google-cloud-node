@@ -799,16 +799,6 @@ export function isServerSideError(
 }
 
 /**
- * Checks whether a value is a Node.js Buffer instance.
- *
- * @param {unknown} val - The value to check.
- * @returns {boolean} True if `val` is a Buffer.
- */
-function isBuffer(val: unknown): val is Buffer {
-  return typeof Buffer !== 'undefined' && Buffer.isBuffer(val);
-}
-
-/**
  * Safely converts a value to a JSON string without throwing exceptions on
  * circular references, BigInt values, or non-serializable properties.
  *
@@ -856,96 +846,41 @@ export function safeJsonStringify(value: unknown): string | undefined {
 }
 
 /**
- * Extracts and formats server-side error details (message, status details, and metadata)
- * attached by GFE/backend on server-side errors. Note that only `message` is used on
- * low level network `exception` span events (`exception.stacktrace` is not recorded on spans).
+ * Extracts the server-side error details message attached by GFE/backend on
+ * server-side errors, checking the error and its `.cause` chain and falling
+ * back to `e.message` when no non-empty `details` string is present.
  *
  * @param {Error} e - The server Error instance.
- * @returns {{message: string; stacktrace?: string}} The resolved server message and formatted details string.
+ * @returns {{message: string}} The resolved server error message.
  */
 export function resolveServerExceptionDetails(e: Error): {
   message: string;
-  stacktrace?: string;
 } {
-  ensureGrpcStatusDetailsParsed(e);
+  let current: unknown = e;
+  const seen = new Set<unknown>();
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
 
-  const errObj = e as {
-    details?: unknown;
-    statusDetails?: unknown;
-    metadata?: unknown;
-    cause?: unknown;
-  };
+    const errObj = current as {
+      details?: unknown;
+      cause?: unknown;
+    };
 
-  const causeObj =
-    errObj.cause && typeof errObj.cause === 'object'
-      ? (errObj.cause as {
-          details?: unknown;
-          statusDetails?: unknown;
-          metadata?: unknown;
-        })
-      : undefined;
+    if (typeof errObj.details === 'string' && errObj.details.length > 0) {
+      return {message: errObj.details};
+    }
+
+    current = errObj.cause;
+  }
 
   // Prefer server error details over generic error message.
-  const serverDetails = errObj.details ?? causeObj?.details;
-  const message =
-    typeof serverDetails === 'string' && serverDetails.length > 0
-      ? serverDetails
-      : e.message;
-
-  // Serialize status details if present.
-  const rawStatusDetails = errObj.statusDetails ?? causeObj?.statusDetails;
-  let statusDetailsStr: string | undefined;
-  if (rawStatusDetails !== undefined && rawStatusDetails !== null) {
-    statusDetailsStr =
-      typeof rawStatusDetails === 'string'
-        ? rawStatusDetails
-        : safeJsonStringify(rawStatusDetails);
-  }
-
-  // Serialize backend metadata, encoding Buffer values as base64.
-  const rawMetadata = errObj.metadata ?? causeObj?.metadata;
-  let metadataStr: string | undefined;
-  if (rawMetadata && typeof rawMetadata === 'object') {
-    try {
-      let map: Record<string, unknown>;
-      if (typeof (rawMetadata as {getMap?: unknown}).getMap === 'function') {
-        map = (rawMetadata as {getMap: () => Record<string, unknown>}).getMap();
-      } else {
-        map = rawMetadata as Record<string, unknown>;
-      }
-      const cleanMap: Record<string, unknown> = {};
-      for (const [key, val] of Object.entries(map)) {
-        if (isBuffer(val)) {
-          cleanMap[key] = val.toString('base64');
-        } else if (Array.isArray(val)) {
-          cleanMap[key] = val.map(item =>
-            isBuffer(item) ? item.toString('base64') : item,
-          );
-        } else {
-          cleanMap[key] = val;
-        }
-      }
-      metadataStr = safeJsonStringify(cleanMap);
-    } catch {
-      metadataStr = safeJsonStringify(rawMetadata);
-    }
-  }
-
-  // Combine status details and metadata into a formatted stacktrace string.
-  const stacktraceParts: string[] = [];
-  if (statusDetailsStr) {
-    stacktraceParts.push(`status_details: ${statusDetailsStr}`);
-  }
-  if (metadataStr) {
-    stacktraceParts.push(`metadata: ${metadataStr}`);
-  }
-  const stacktrace =
-    stacktraceParts.length > 0 ? stacktraceParts.join('\n') : undefined;
-
-  return {
-    message,
-    stacktrace,
-  };
+  return {message: e.message};
 }
 
 /**
@@ -965,6 +900,35 @@ export function resolveExceptionMessage(
   return e instanceof Error && isServerSideError(e, rpcType)
     ? resolveServerExceptionDetails(e).message
     : resolveErrorMessage(e);
+}
+
+/**
+ * Resolves the `exception.stacktrace` attribute as the natural JavaScript call stack
+ * (`stack`) from the error (or the first non-empty `stack` along its `.cause` chain).
+ * Raw server status details and metadata belong in L4 `response.payload`, not
+ * `exception.stacktrace`.
+ *
+ * @param {unknown} e - The error or other value thrown or reported for the call.
+ * @returns {string | undefined} The resolved `exception.stacktrace` string, if any.
+ */
+export function resolveExceptionStacktrace(e: unknown): string | undefined {
+  let current: unknown = e;
+  const seen = new Set<unknown>();
+  for (let depth = 0; depth < DEPTH_TO_CHECK; depth++) {
+    if (!current || typeof current !== 'object') {
+      break;
+    }
+    if (seen.has(current)) {
+      break;
+    }
+    seen.add(current);
+    const stack = (current as {stack?: unknown}).stack;
+    if (typeof stack === 'string' && stack.length > 0) {
+      return stack;
+    }
+    current = (current as {cause?: unknown}).cause;
+  }
+  return undefined;
 }
 
 /**
