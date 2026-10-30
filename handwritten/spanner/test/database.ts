@@ -459,7 +459,7 @@ describe('Database', () => {
         Object.assign(
           {
             [LEADER_AWARE_ROUTING_HEADER]: 'true',
-            [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+            [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
           },
           database.commonHeaders_,
         ),
@@ -766,7 +766,7 @@ describe('Database', () => {
         Object.assign(
           {
             [LEADER_AWARE_ROUTING_HEADER]: 'true',
-            [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+            [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
           },
           database.commonHeaders_,
         ),
@@ -806,7 +806,7 @@ describe('Database', () => {
       assert.strictEqual(headers[LEADER_AWARE_ROUTING_HEADER], undefined);
       assert.strictEqual(
         headers[X_GOOG_SPANNER_REQUEST_ID_HEADER],
-        craftRequestId(1, 1, 1, 1),
+        craftRequestId(1, 0, 1, 1),
       );
     });
 
@@ -2401,7 +2401,7 @@ describe('Database', () => {
           Object.assign(
             {
               [LEADER_AWARE_ROUTING_HEADER]: 'true',
-              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+              [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
             },
             database.commonHeaders_,
           ),
@@ -2748,7 +2748,7 @@ describe('Database', () => {
         assert.deepStrictEqual(config.gaxOpts, gaxOpts);
         assert.deepStrictEqual(config.headers, {
           ...database.commonHeaders_,
-          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 1, 1, 1),
+          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
         });
         done();
       };
@@ -2926,7 +2926,10 @@ describe('Database', () => {
         assert.notStrictEqual(config.reqOpts, OPTIONS);
 
         assert.deepStrictEqual(config.gaxOpts, OPTIONS.gaxOptions);
-        assert.deepStrictEqual(config.headers, database.commonHeaders_);
+        assert.deepStrictEqual(config.headers, {
+          ...database.commonHeaders_,
+          [X_GOOG_SPANNER_REQUEST_ID_HEADER]: craftRequestId(1, 0, 1, 1),
+        });
         return returnValue;
       };
 
