@@ -718,36 +718,53 @@ export class Gaxios implements FetchCompliance {
 
   static #createBunFetch(): NonNullable<GaxiosOptions['fetchImplementation']> {
     return async (input, init) => {
+      type AgentTlsOpts = {
+        cert?: string | Buffer | Array<string | Buffer>;
+        key?: string | Buffer | Array<string | Buffer>;
+        ca?: string | Buffer | Array<string | Buffer>;
+        passphrase?: string;
+        rejectUnauthorized?: boolean;
+      };
+      type AgentLike = {
+        proxy?: URL;
+        connectOpts?: AgentTlsOpts;
+        options?: AgentTlsOpts;
+      };
       const rawInit = init
         ? ({...init} as Omit<RequestInit, 'body'> & {
             body?: unknown;
-            agent?: {
-              proxy?: URL;
-              connectOpts?: {cert?: string; key?: string};
-            };
+            agent?: AgentLike | ((parsedUrl: URL) => AgentLike);
             proxy?: string;
-            cert?: string;
-            key?: string;
+            cert?: AgentTlsOpts['cert'];
+            key?: AgentTlsOpts['key'];
             size?: number;
             maxContentLength?: number;
-            tls?: {cert?: string; key?: string};
+            tls?: AgentTlsOpts;
           })
         : undefined;
+      const inputUrl = String((input as {url?: unknown})?.url ?? input);
       if (rawInit) {
-        const proxyAgent = rawInit.agent;
-        if (proxyAgent?.proxy) {
-          rawInit.proxy = proxyAgent.proxy.toString();
+        const agent =
+          typeof rawInit.agent === 'function'
+            ? rawInit.agent(input instanceof URL ? input : new URL(inputUrl))
+            : rawInit.agent;
+        if (agent?.proxy) {
+          rawInit.proxy = agent.proxy.toString();
         } else {
           delete rawInit.proxy;
         }
-        const cert = rawInit.cert ?? proxyAgent?.connectOpts?.cert;
-        const key = rawInit.key ?? proxyAgent?.connectOpts?.key;
-        if (cert && key) {
-          rawInit.tls = {
-            ...rawInit.tls,
-            cert,
-            key,
-          };
+        const cert =
+          rawInit.cert ?? agent?.connectOpts?.cert ?? agent?.options?.cert;
+        const key =
+          rawInit.key ?? agent?.connectOpts?.key ?? agent?.options?.key;
+        const tls: Record<string, unknown> = {...rawInit.tls};
+        if (cert && key) Object.assign(tls, {cert, key});
+        for (const k of ['ca', 'passphrase', 'rejectUnauthorized'] as const) {
+          const val = agent?.connectOpts?.[k] ?? agent?.options?.[k];
+          if (val !== undefined) tls[k] = val;
+        }
+        if (Object.keys(tls).length > 0) {
+          rawInit.tls = tls as AgentTlsOpts;
         }
       }
       let fetchInit = rawInit;
