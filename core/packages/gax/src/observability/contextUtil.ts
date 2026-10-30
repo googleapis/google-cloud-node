@@ -394,6 +394,74 @@ export function resolveStaticTraceContext(
 }
 
 /**
+ * Resolves and parses the server address, port, and target service domain (`url.domain`)
+ * from dynamic and static trace contexts, splitting `"host:port"` or `"[ipv6]:port"`
+ * strings. When `defaultPort` is provided (for low level network attempt spans), falls back to `url.domain`
+ * for the server address and defaults the port to `defaultPort` if not otherwise specified.
+ *
+ * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the call or attempt.
+ * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
+ * @param {number} [defaultPort] - Optional default port (e.g. 443 for low level network attempt spans).
+ * @returns {{rawAddress?: string; rawPort?: number; urlDomain?: string}} Resolved address, port, and domain.
+ */
+export function resolveEndpointAndDomain(
+  dynamicArgs: DynamicTraceContext,
+  staticArgs: StaticTraceContext,
+  defaultPort?: number,
+): {rawAddress?: string; rawPort?: number; urlDomain?: string} {
+  let rawAddress = dynamicArgs.serverAddress ?? staticArgs.serverAddress;
+  let rawPort = dynamicArgs.serverPort ?? staticArgs.serverPort;
+  const splitHostAndPort = (addr: string) => {
+    const match = addr.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
+    if (match) {
+      rawAddress = match[1];
+      rawPort = rawPort ?? Number(match[2]);
+    } else {
+      rawAddress = addr;
+    }
+  };
+
+  if (rawAddress) {
+    // Split embedded port from "host:port" or "[ipv6]:port" if present.
+    splitHostAndPort(rawAddress);
+  }
+
+  let urlDomain = dynamicArgs.urlDomain ?? staticArgs.urlDomain ?? rawAddress;
+  if (!urlDomain && staticArgs.gcpClientService) {
+    // Append ".googleapis.com" when gcpClientService is a short service name.
+    urlDomain = staticArgs.gcpClientService.includes('.')
+      ? staticArgs.gcpClientService
+      : `${staticArgs.gcpClientService}.googleapis.com`;
+  }
+
+  if (defaultPort !== undefined) {
+    if (!rawAddress && urlDomain) {
+      splitHostAndPort(urlDomain);
+    }
+    if (rawAddress) {
+      rawPort = rawPort ?? defaultPort;
+    }
+  }
+
+  return {rawAddress, rawPort, urlDomain};
+}
+
+/**
+ * Resolves the `rpc.method` attribute value as `"{apiName}/{methodName}"` when the
+ * fully-qualified protobuf service name is available, or `"{methodName}"` otherwise.
+ *
+ * @param {Pick<AttemptTraceContext, 'apiName' | 'methodName'>} dynamicArgs - API and method names for the call or attempt.
+ * @returns {string} The resolved `rpc.method` value.
+ */
+export function resolveRpcMethod(
+  dynamicArgs: Pick<AttemptTraceContext, 'apiName' | 'methodName'>,
+): string {
+  return dynamicArgs.apiName
+    ? `${dynamicArgs.apiName}/${dynamicArgs.methodName}`
+    : dynamicArgs.methodName;
+}
+
+/**
  * Builds the common initial client, transport, and domain attributes shared by
  * client request spans and low level network attempt spans.
  *

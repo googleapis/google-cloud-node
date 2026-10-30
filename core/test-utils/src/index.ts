@@ -28,3 +28,9 @@ export {
   isReadOnlyPropertyError,
   requiresStrictArrayPrototypeEquality,
 } from './runtime';
+export {
+  type Proxyquire,
+  type ProxyquireStubs,
+  createProxyquire,
+  proxyquire,
+} from './proxyquire';

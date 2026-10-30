@@ -55,5 +55,16 @@ export const defaultOptions = {
 
     // The maximum time we'll wait to send batched messages, in milliseconds.
     maxDelayMillis: 10,
+
+    hedging: {
+      // The default delay before sending a hedged publish RPC.
+      hedgeDelay: Duration.from({milliseconds: 1000}),
+
+      // The default maximum number of tokens in the hedging token bucket.
+      maxTokens: 50,
+
+      // The default token refill ratio per successful publish batch.
+      refillRatio: 0.1,
+    },
   },
 };

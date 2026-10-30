@@ -522,7 +522,7 @@ export class TestingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('createSession request %j', request);
+    this._log.debug('createSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.ISession,
@@ -533,7 +533,7 @@ export class TestingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('createSession response %j', response);
+          this._log.debug('createSession response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -545,7 +545,7 @@ export class TestingClient {
           protos.google.showcase.v1beta1.ICreateSessionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('createSession response %j', response);
+          this._log.debug('createSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -648,7 +648,7 @@ export class TestingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('getSession request %j', request);
+    this._log.debug('getSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.ISession,
@@ -657,7 +657,7 @@ export class TestingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('getSession response %j', response);
+          this._log.debug('getSession response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -669,7 +669,7 @@ export class TestingClient {
           protos.google.showcase.v1beta1.IGetSessionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('getSession response %j', response);
+          this._log.debug('getSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -774,7 +774,7 @@ export class TestingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteSession request %j', request);
+    this._log.debug('deleteSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -785,7 +785,7 @@ export class TestingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteSession response %j', response);
+          this._log.debug('deleteSession response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -797,7 +797,7 @@ export class TestingClient {
           protos.google.showcase.v1beta1.IDeleteSessionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteSession response %j', response);
+          this._log.debug('deleteSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -904,7 +904,7 @@ export class TestingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('reportSession request %j', request);
+    this._log.debug('reportSession request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IReportSessionResponse,
@@ -915,7 +915,7 @@ export class TestingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('reportSession response %j', response);
+          this._log.debug('reportSession response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -927,7 +927,7 @@ export class TestingClient {
           protos.google.showcase.v1beta1.IReportSessionRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('reportSession response %j', response);
+          this._log.debug('reportSession response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1035,7 +1035,7 @@ export class TestingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('deleteTest request %j', request);
+    this._log.debug('deleteTest request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.protobuf.IEmpty,
@@ -1044,7 +1044,7 @@ export class TestingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('deleteTest response %j', response);
+          this._log.debug('deleteTest response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1056,7 +1056,7 @@ export class TestingClient {
           protos.google.showcase.v1beta1.IDeleteTestRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('deleteTest response %j', response);
+          this._log.debug('deleteTest response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1166,7 +1166,7 @@ export class TestingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('verifyTest request %j', request);
+    this._log.debug('verifyTest request %j', request);
     const wrappedCallback:
       | Callback<
           protos.google.showcase.v1beta1.IVerifyTestResponse,
@@ -1175,7 +1175,7 @@ export class TestingClient {
         >
       | undefined = callback
       ? (error, response, options, rawResponse) => {
-          this._log.info('verifyTest response %j', response);
+          this._log.debug('verifyTest response %j', response);
           callback!(error, response, options, rawResponse);
         }
       : undefined;
@@ -1187,7 +1187,7 @@ export class TestingClient {
           protos.google.showcase.v1beta1.IVerifyTestRequest | undefined,
           {} | undefined,
         ]) => {
-          this._log.info('verifyTest response %j', response);
+          this._log.debug('verifyTest response %j', response);
           return [response, options, rawResponse];
         },
       )
@@ -1304,11 +1304,11 @@ export class TestingClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listSessions values %j', values);
+          this._log.debug('listSessions values %j', values);
           callback!(error, values, nextPageRequest, rawResponse);
         }
       : undefined;
-    this._log.info('listSessions request %j', request);
+    this._log.debug('listSessions request %j', request);
     return this.innerApiCalls
       .listSessions(request, options, wrappedCallback)
       ?.then(
@@ -1317,7 +1317,7 @@ export class TestingClient {
           protos.google.showcase.v1beta1.IListSessionsRequest | null,
           protos.google.showcase.v1beta1.IListSessionsResponse,
         ]) => {
-          this._log.info('listSessions values %j', response);
+          this._log.debug('listSessions values %j', response);
           return [response, input, output];
         },
       );
@@ -1355,7 +1355,7 @@ export class TestingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSessions stream %j', request);
+    this._log.debug('listSessions stream %j', request);
     return this.descriptors.page.listSessions.createStream(
       this.innerApiCalls.listSessions as GaxCall,
       request,
@@ -1398,7 +1398,7 @@ export class TestingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listSessions iterate %j', request);
+    this._log.debug('listSessions iterate %j', request);
     return this.descriptors.page.listSessions.asyncIterate(
       this.innerApiCalls['listSessions'] as GaxCall,
       request as {},
@@ -1502,11 +1502,11 @@ export class TestingClient {
         >
       | undefined = callback
       ? (error, values, nextPageRequest, rawResponse) => {
-          this._log.info('listTests values %j', values);
+          this._log.debug('listTests values %j', values);
           callback!(error, values, nextPageRequest, rawResponse);
         }
       : undefined;
-    this._log.info('listTests request %j', request);
+    this._log.debug('listTests request %j', request);
     return this.innerApiCalls
       .listTests(request, options, wrappedCallback)
       ?.then(
@@ -1515,7 +1515,7 @@ export class TestingClient {
           protos.google.showcase.v1beta1.IListTestsRequest | null,
           protos.google.showcase.v1beta1.IListTestsResponse,
         ]) => {
-          this._log.info('listTests values %j', response);
+          this._log.debug('listTests values %j', response);
           return [response, input, output];
         },
       );
@@ -1559,7 +1559,7 @@ export class TestingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTests stream %j', request);
+    this._log.debug('listTests stream %j', request);
     return this.descriptors.page.listTests.createStream(
       this.innerApiCalls.listTests as GaxCall,
       request,
@@ -1608,7 +1608,7 @@ export class TestingClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('listTests iterate %j', request);
+    this._log.debug('listTests iterate %j', request);
     return this.descriptors.page.listTests.asyncIterate(
       this.innerApiCalls['listTests'] as GaxCall,
       request as {},

@@ -33,67 +33,67 @@
       },
       "methods": {
         "ListDataAgents": {
-          "timeout_millis": 600000,
+          "timeout_millis": 1800000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListAccessibleDataAgents": {
-          "timeout_millis": 600000,
+          "timeout_millis": 1800000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "GetDataAgent": {
-          "timeout_millis": 600000,
+          "timeout_millis": 1800000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "CreateDataAgent": {
-          "timeout_millis": 600000,
+          "timeout_millis": 1800000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "CreateDataAgentSync": {
-          "timeout_millis": 600000,
+          "timeout_millis": 1800000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "UpdateDataAgent": {
-          "timeout_millis": 600000,
+          "timeout_millis": 1800000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "UpdateDataAgentSync": {
-          "timeout_millis": 600000,
+          "timeout_millis": 1800000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "DeleteDataAgent": {
-          "timeout_millis": 600000,
+          "timeout_millis": 1800000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "DeleteDataAgentSync": {
-          "timeout_millis": 600000,
+          "timeout_millis": 1800000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "GetIamPolicy": {
-          "timeout_millis": 600000,
+          "timeout_millis": 1800000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "SetIamPolicy": {
-          "timeout_millis": 600000,
+          "timeout_millis": 1800000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "SetAgentOpsObservability": {
-          "timeout_millis": 600000,
+          "timeout_millis": 1800000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "RetrieveAgentOpsObservability": {
-          "timeout_millis": 600000,
+          "timeout_millis": 1800000,
           "retry_codes_name": "unavailable",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         }

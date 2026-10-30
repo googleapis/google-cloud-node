@@ -922,8 +922,8 @@ importers:
         specifier: ^2.1.0
         version: 2.1.0
       qs:
-        specifier: ^6.7.0
-        version: 6.16.0
+        specifier: ^6.16.1
+        version: 6.17.0
       url-template:
         specifier: ^2.0.8
         version: 2.0.8
@@ -1584,8 +1584,8 @@ importers:
   handwritten/bigquery:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@google-cloud/paginator':
         specifier: ^7.2.0
         version: 7.2.0
@@ -1977,8 +1977,8 @@ importers:
   handwritten/cloud-profiler:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@google-cloud/logging-min':
         specifier: ^11.0.0
         version: 11.2.2(encoding@0.1.13)
@@ -2219,8 +2219,8 @@ importers:
   handwritten/error-reporting:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       console-log-level:
         specifier: ^1.4.1
         version: 1.4.1
@@ -2464,8 +2464,8 @@ importers:
   handwritten/google-cloud-dns:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@google-cloud/paginator':
         specifier: ^7.2.0
         version: 7.2.0
@@ -2543,8 +2543,8 @@ importers:
   handwritten/logging:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@google-cloud/logging-api':
         specifier: ^0.5.0
         version: 0.5.1
@@ -2716,8 +2716,8 @@ importers:
         version: 11.3.1
     devDependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@types/bunyan':
         specifier: ^1.8.4
         version: 1.8.11
@@ -2795,8 +2795,8 @@ importers:
         version: 4.9.0
     devDependencies:
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@types/lodash.mapvalues':
         specifier: ^4.6.9
         version: 4.6.9
@@ -3039,8 +3039,8 @@ importers:
         specifier: 7.27.7
         version: 7.27.7
       '@google-cloud/common':
-        specifier: ^8.0.0
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@google-cloud/monitoring':
         specifier: ^6.0.0
         version: 6.0.0
@@ -7569,6 +7569,55 @@ importers:
         specifier: ^5.8.2
         version: 5.9.3
 
+  packages/google-cloud-designcenter:
+    dependencies:
+      google-gax:
+        specifier: ^6.0.0
+        version: 6.13.0
+    devDependencies:
+      '@types/mocha':
+        specifier: ^10.0.10
+        version: 10.0.10
+      '@types/node':
+        specifier: ^22.18.12
+        version: 22.20.1
+      '@types/sinon':
+        specifier: ^20.0.0
+        version: 20.0.0
+      c8:
+        specifier: ^10.1.3
+        version: 10.1.3
+      gapic-tools:
+        specifier: ^2.0.0
+        version: 2.2.0(protobufjs@8.8.0)
+      gts:
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.8.3)
+      jsdoc:
+        specifier: ^4.0.5
+        version: 4.0.5
+      jsdoc-fresh:
+        specifier: ^6.0.0
+        version: 6.1.0
+      jsdoc-region-tag:
+        specifier: ^5.0.0
+        version: 5.1.0
+      long:
+        specifier: ^5.3.2
+        version: 5.3.2
+      mocha:
+        specifier: ^11.7.4
+        version: 11.8.0
+      pack-n-play:
+        specifier: ^5.0.0
+        version: 5.3.0
+      sinon:
+        specifier: ^20.0.0
+        version: 20.0.0
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
+
   packages/google-cloud-developerconnect:
     dependencies:
       google-gax:
@@ -10227,6 +10276,55 @@ importers:
         specifier: ^5.8.2
         version: 5.9.3
 
+  packages/google-cloud-observability:
+    dependencies:
+      google-gax:
+        specifier: ^6.0.0
+        version: 6.13.0
+    devDependencies:
+      '@types/mocha':
+        specifier: ^10.0.10
+        version: 10.0.10
+      '@types/node':
+        specifier: ^22.18.12
+        version: 22.20.1
+      '@types/sinon':
+        specifier: ^20.0.0
+        version: 20.0.0
+      c8:
+        specifier: ^10.1.3
+        version: 10.1.3
+      gapic-tools:
+        specifier: ^2.0.0
+        version: 2.2.0(protobufjs@8.8.0)
+      gts:
+        specifier: ^6.0.2
+        version: 6.0.2(typescript@5.8.3)
+      jsdoc:
+        specifier: ^4.0.5
+        version: 4.0.5
+      jsdoc-fresh:
+        specifier: ^6.0.0
+        version: 6.1.0
+      jsdoc-region-tag:
+        specifier: ^5.0.0
+        version: 5.1.0
+      long:
+        specifier: ^5.3.2
+        version: 5.3.2
+      mocha:
+        specifier: ^11.7.4
+        version: 11.8.0
+      pack-n-play:
+        specifier: ^5.0.0
+        version: 5.3.0
+      sinon:
+        specifier: ^20.0.0
+        version: 20.0.0
+      typescript:
+        specifier: 5.8.3
+        version: 5.8.3
+
   packages/google-cloud-oracledatabase:
     dependencies:
       google-gax:
@@ -11954,8 +12052,8 @@ importers:
   packages/google-cloud-speech:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.1
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@types/pumpify':
         specifier: ^1.4.4
         version: 1.4.5
@@ -12498,8 +12596,8 @@ importers:
   packages/google-cloud-translate:
     dependencies:
       '@google-cloud/common':
-        specifier: ^8.0.1
-        version: 8.0.1
+        specifier: ^8.2.2
+        version: 8.2.2
       '@google-cloud/promisify':
         specifier: ^6.2.0
         version: 6.2.1
@@ -16359,8 +16457,8 @@ packages:
     resolution: {integrity: sha512-V7bmBKYQyu0eVG2BFejuUjlBt+zrya6vtsKdY+JxMM/dNntPF41vZ9+LhOshEUH01zOHEqBSvI7Dad7ZS6aUeA==}
     engines: {node: '>=14.0.0'}
 
-  '@google-cloud/common@8.0.1':
-    resolution: {integrity: sha512-dAq3mwl7s6Zlw+YQazohVuC1BunrRRuPj8ufK4QbKLQGMZ+TPppWByvIEY67n3zCDWbv3XRh8rV9t6fPQ/qd7A==}
+  '@google-cloud/common@8.2.2':
+    resolution: {integrity: sha512-sl6sfukASNpdCHGP8zAHgC+7qx3PBYR0tTEhFbiEPjyZs2QX5Ygl4Yuulql5MoD/VzXe9w55UzNgQQNVEVuVmw==}
     engines: {node: '>=22'}
 
   '@google-cloud/datastore-api@0.5.1':
@@ -17147,6 +17245,7 @@ packages:
   '@opentelemetry/propagator-jaeger@2.7.1':
     resolution: {integrity: sha512-KMjVBHzP4N60bOzxja76M1F1hZZ43lGPga5ix+mkv9+kk1nx9SbkxSvJsMbuVUxdPQmsPTqGShmhN8ulrMOg6Q==}
     engines: {node: ^18.19.0 || >=20.6.0}
+    deprecated: Package no longer supported. See https://github.com/open-telemetry/opentelemetry-js/pull/7077
     peerDependencies:
       '@opentelemetry/api': '>=1.0.0 <1.10.0'
 
@@ -17219,6 +17318,7 @@ packages:
   '@opentelemetry/sdk-trace-base@2.10.0':
     resolution: {integrity: sha512-GuYQQT7QD2EeO8lcZLRQzcbOyhqAzL+6WWTKTU9mSUBYBazkEDl+VrQcXQhbB08OWM9anD1aHleVadzulpOaUQ==}
     engines: {node: ^18.19.0 || >=20.6.0}
+    deprecated: Use @opentelemetry/sdk-trace package
     peerDependencies:
       '@opentelemetry/api': '>=1.3.0 <1.10.0'
 
@@ -17239,6 +17339,7 @@ packages:
   '@opentelemetry/sdk-trace-node@2.10.0':
     resolution: {integrity: sha512-GZK/G6oZyBLGlH1pUgeDch7D91KoHd2uotUGIkWCPi9GI5T9X0p4L7nNAMDR1BQjkRYoDqo+ddfVx9t5Uhys+Q==}
     engines: {node: ^18.19.0 || >=20.6.0}
+    deprecated: Use @opentelemetry/sdk-trace package
     peerDependencies:
       '@opentelemetry/api': '>=1.0.0 <1.10.0'
 
@@ -22747,8 +22848,12 @@ packages:
     resolution: {integrity: sha512-O9gl3zCl5h5blw1KGUzQKhA5oUXSl8rwUIM5o0S3nCXMliSvy5Dzx7/DJcI+SwgICv+IneSZwhBh1oSyEHA71A==}
     engines: {node: '>=0.6'}
 
-  qs@6.16.0:
-    resolution: {integrity: sha512-h6fhOIaRrID2CbEY2fqs+7t+UXZo+MLAnU5gRIq85uFtdiUPCdsApMlHhXogKVM4HM2DVbIjGNTTYH2OcmP1vA==}
+  qs@6.15.4:
+    resolution: {integrity: sha512-d1zNHS+ltAfSgTmYjzXXH9gy9d6pEb33n0ZtUUkukA8UHhFSjv2mSYRiePyjbRiJh0g5sFJbMdAtMIg01Xf5/w==}
+    engines: {node: '>=0.6'}
+
+  qs@6.17.0:
+    resolution: {integrity: sha512-5LK5BZ2XDHMvcUJaf0CQ5HL3aVgKbpklvByC7qLSxYkfE8COEEbJg5xCHWCTqzqi0Gs4Jn5Mv5v3R38W6edscA==}
     engines: {node: '>=0.6'}
 
   querystring-es3@0.2.1:
@@ -25232,7 +25337,7 @@ snapshots:
 
   '@google-cloud/bigquery@9.0.2':
     dependencies:
-      '@google-cloud/common': 8.0.1
+      '@google-cloud/common': 8.2.2
       '@google-cloud/paginator': 7.2.0
       '@google-cloud/precise-date': 6.2.1
       '@google-cloud/promisify': 6.2.1
@@ -25281,7 +25386,7 @@ snapshots:
       - encoding
       - supports-color
 
-  '@google-cloud/common@8.0.1':
+  '@google-cloud/common@8.2.2':
     dependencies:
       '@google-cloud/projectify': 6.2.1
       '@google-cloud/promisify': 6.2.1
@@ -25363,7 +25468,7 @@ snapshots:
 
   '@google-cloud/logging@12.0.1':
     dependencies:
-      '@google-cloud/common': 8.0.1
+      '@google-cloud/common': 8.2.2
       '@google-cloud/logging-api': 0.3.0
       '@google-cloud/paginator': 7.2.0
       '@google-cloud/projectify': 6.2.1
@@ -25516,7 +25621,7 @@ snapshots:
       '@babel/core': 7.27.7
       '@babel/helpers': 7.27.6
       '@babel/traverse': 7.27.7
-      '@google-cloud/common': 8.0.1
+      '@google-cloud/common': 8.2.2
       '@google-cloud/monitoring': 6.0.0
       '@google-cloud/precise-date': 6.2.1
       '@google-cloud/promisify': 6.2.1
@@ -28387,7 +28492,7 @@ snapshots:
       http-errors: 2.0.1
       iconv-lite: 0.4.24
       on-finished: 2.4.1
-      qs: 6.15.3
+      qs: 6.15.4
       raw-body: 2.5.3
       type-is: 1.6.18
       unpipe: 1.0.0
@@ -28402,7 +28507,7 @@ snapshots:
       http-errors: 2.0.1
       iconv-lite: 0.7.3
       on-finished: 2.4.1
-      qs: 6.15.3
+      qs: 6.17.0
       raw-body: 3.0.2
       type-is: 2.1.0
     transitivePeerDependencies:
@@ -30182,7 +30287,7 @@ snapshots:
       parseurl: 1.3.3
       path-to-regexp: 0.1.13
       proxy-addr: 2.0.7
-      qs: 6.15.3
+      qs: 6.15.4
       range-parser: 1.2.1
       safe-buffer: 5.2.1
       send: 0.19.2
@@ -30977,7 +31082,7 @@ snapshots:
       extend: 3.0.2
       gaxios: 4.3.3(encoding@0.1.13)
       google-auth-library: 6.1.6(encoding@0.1.13)
-      qs: 6.16.0
+      qs: 6.17.0
       url-template: 2.0.8
       uuid: 8.0.0
     transitivePeerDependencies:
@@ -30989,7 +31094,7 @@ snapshots:
       extend: 3.0.2
       gaxios: 6.7.1(encoding@0.1.13)
       google-auth-library: 9.15.1(encoding@0.1.13)
-      qs: 6.16.0
+      qs: 6.17.0
       url-template: 2.0.8
       uuid: 9.0.1
     transitivePeerDependencies:
@@ -31002,7 +31107,7 @@ snapshots:
       gaxios: 7.1.3
       google-auth-library: 10.5.0
       google-logging-utils: 1.1.3
-      qs: 6.16.0
+      qs: 6.17.0
       url-template: 2.0.8
     transitivePeerDependencies:
       - supports-color
@@ -33904,7 +34009,12 @@ snapshots:
       es-define-property: 1.0.1
       side-channel: 1.1.1
 
-  qs@6.16.0:
+  qs@6.15.4:
+    dependencies:
+      es-define-property: 1.0.1
+      side-channel: 1.1.1
+
+  qs@6.17.0:
     dependencies:
       es-define-property: 1.0.1
       side-channel: 1.1.1
@@ -35442,7 +35552,7 @@ snapshots:
   url@0.11.4:
     dependencies:
       punycode: 1.4.1
-      qs: 6.16.0
+      qs: 6.17.0
 
   urlgrey@1.0.0:
     dependencies:

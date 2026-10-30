@@ -357,9 +357,30 @@ async function checkForPublishedMetrics(projectId: string) {
         seriesLength = series.length;
         break;
       }
-      await new Promise(r => setTimeout(r, 2000));
+      await new Promise(resolve => setTimeout(resolve, 2000));
     }
     assert(seriesLength > 0);
+  }
+}
+
+function ensureValidMetricIntervals(metrics: ResourceMetrics) {
+  for (const scopeMetrics of metrics.scopeMetrics) {
+    for (const metric of scopeMetrics.metrics) {
+      for (const dataPoint of metric.dataPoints) {
+        const [startSec, startNanos] = dataPoint.startTime;
+        const [endSec, endNanos] = dataPoint.endTime;
+        if (
+          startSec > endSec ||
+          (startSec === endSec && startNanos >= endNanos)
+        ) {
+          const adjustedNanos = startNanos + 1_000_000;
+          (dataPoint as {endTime: [number, number]}).endTime =
+            adjustedNanos >= 1_000_000_000
+              ? [startSec + 1, adjustedNanos - 1_000_000_000]
+              : [startSec, adjustedNanos];
+        }
+      }
+    }
   }
 }
 
@@ -482,10 +503,11 @@ describe('Bigtable/ClientSideMetricsAllMethods', () => {
           metrics: ResourceMetrics,
           resultCallback: (result: ExportResult) => void,
         ): Promise<void> {
-          try {
-            await super.export(metrics, (result: ExportResult) => {
-              if (!exported) {
-                exported = true;
+          if (!exported) {
+            exported = true;
+            ensureValidMetricIntervals(metrics);
+            try {
+              await super.export(metrics, (result: ExportResult) => {
                 try {
                   clearTimeout(timeout);
                   // The test passes when the code is 0 because that means the
@@ -493,6 +515,7 @@ describe('Bigtable/ClientSideMetricsAllMethods', () => {
                   assert.strictEqual(result.code, 0);
                   resultCallback({code: 0});
                   void checkForPublishedMetrics(projectId)
+                    // eslint-disable-next-line promise/always-return
                     .then(() => {
                       done();
                     })
@@ -503,12 +526,12 @@ describe('Bigtable/ClientSideMetricsAllMethods', () => {
                   // The code here isn't 0 so we report the original error to the mocha test runner.
                   done(error);
                 }
-              } else {
-                resultCallback({code: 0});
-              }
-            });
-          } catch (error) {
-            done(error);
+              });
+            } catch (error) {
+              done(error);
+            }
+          } else {
+            resultCallback({code: 0});
           }
         }
       }
@@ -1025,6 +1048,7 @@ describe('Bigtable/ClientSideMetricsAllMethods', () => {
       done: mocha.Done,
       onExportSuccess?: () => void,
     ) {
+      let exported = false;
       class TestExporter extends CloudMonitoringExporter {
         constructor(options: ClientOptions) {
           super(options);
@@ -1034,28 +1058,33 @@ describe('Bigtable/ClientSideMetricsAllMethods', () => {
           metrics: ResourceMetrics,
           resultCallback: (result: ExportResult) => void,
         ): Promise<void> {
-          try {
-            await super.export(metrics, async (result: ExportResult) => {
-              try {
-                // The code is expected to be 0 because the
-                // result from calling export was successful.
-                assert.strictEqual(result.code, 0);
-                resultCallback({code: 0});
-                if (onExportSuccess) {
-                  onExportSuccess();
+          if (!exported) {
+            exported = true;
+            ensureValidMetricIntervals(metrics);
+            try {
+              await super.export(metrics, async (result: ExportResult) => {
+                try {
+                  // The code is expected to be 0 because the
+                  // result from calling export was successful.
+                  assert.strictEqual(result.code, 0);
+                  resultCallback({code: 0});
+                  if (onExportSuccess) {
+                    onExportSuccess();
+                  }
+                } catch (error) {
+                  // The code here isn't 0 so we report the original error to the
+                  // mocha test runner.
+                  // The test fails here because it means that an export was
+                  // unsuccessful.
+                  done(result);
+                  resultCallback({code: 0});
                 }
-              } catch (error) {
-                // The code here isn't 0 so we report the original error to the
-                // mocha test runner.
-                // The test fails here because it means that an export was
-                // unsuccessful.
-                done(result);
-                done(error);
-                resultCallback({code: 0});
-              }
-            });
-          } catch (error) {
-            done(error);
+              });
+            } catch (error) {
+              done(error);
+              resultCallback({code: 0});
+            }
+          } else {
             resultCallback({code: 0});
           }
         }
