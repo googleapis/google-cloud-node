@@ -51,54 +51,34 @@ export function checkTracingEnabled(settings?: CallSettings): boolean {
 
 /**
  * Matches a `GOOGLE_SDK_NODE_LOGGING` filter string against the logger namespace
- * following `DebugLogBackendBase` / `NodeBackend` semantics in `google-logging-utils`
- * (comma-separated case-insensitive filters with `*` wildcards, plus `'all'`, `'true'`,
- * and `'1'` enabling all namespaces and `'false'` / `'0'` matching none).
+ * using the exact `DebugLogBackendBase` / `NodeBackend.setFilters()` algorithm
+ * in `google-logging-utils` (literal `'all'` or `'true'` maps to `'*'`, followed by
+ * comma-separated case-insensitive patterns with `*` wildcards and no whitespace trimming).
  */
 function matchesLoggingEnvFilter(envOptIn: string, namespace: string): boolean {
-  const lower = envOptIn.toLowerCase();
-  if (lower === 'false' || lower === '0') {
+  if (!envOptIn) {
     return false;
   }
-  if (lower === 'true' || lower === '1' || lower === 'all' || lower === '*') {
-    return true;
-  }
-
-  for (const rawToken of envOptIn.split(',')) {
-    const token = rawToken.trim();
-    if (!token) {
-      continue;
-    }
-    const lowerToken = token.toLowerCase();
-    if (lowerToken === 'false' || lowerToken === '0') {
-      continue;
-    }
-    if (
-      lowerToken === 'true' ||
-      lowerToken === '1' ||
-      lowerToken === 'all' ||
-      lowerToken === '*'
-    ) {
-      return true;
-    }
-    const pattern = token
-      .replace(/[|\\{}()[\]^$+?.]/g, '\\$&')
-      .replace(/\*+/g, '.*');
-    if (new RegExp(`^${pattern}$`, 'i').test(namespace)) {
-      return true;
-    }
-  }
-  return false;
+  const totalFilters =
+    envOptIn === 'all' || envOptIn === 'true' ? '*' : envOptIn;
+  const regexp = totalFilters
+    .replace(/[|\\{}()[\]^$+?.]/g, '\\$&')
+    .replace(/\*/g, '.*')
+    .replace(/,/g, '$|^');
+  return new RegExp(`^${regexp}$`, 'i').test(namespace);
 }
 
 /**
  * Checks if telemetry logging is enabled.
  *
  * Logging is only enabled when `GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING` is enabled
- * AND either a user passes `enableTelemetryLogging: true` in their client options
- * or the `GOOGLE_SDK_NODE_LOGGING` environment variable matches the client service
- * namespace (supporting `'true'`, `'1'`, `'all'`, `'*'`, or comma-separated wildcard
- * filters matching `google-logging-utils`).
+ * AND either a user explicitly passes `enableTelemetryLogging: true` in their
+ * client/call options or, when `enableTelemetryLogging` is unset, the
+ * `GOOGLE_SDK_NODE_LOGGING` environment variable matches the client service
+ * namespace using `google-logging-utils` filter semantics (`'*'`, exact `'all'` /
+ * `'true'`, or comma-separated wildcard patterns). Passing
+ * `enableTelemetryLogging: false` suppresses logging for that client/call even
+ * when `GOOGLE_SDK_NODE_LOGGING` matches.
  *
  * @param settings
  * @returns true if telemetry logging is enabled, false otherwise
@@ -114,15 +94,15 @@ export function checkLoggingEnabled(settings?: CallSettings): boolean {
     return false;
   }
 
-  if (
-    settings?.enableTelemetryLogging ||
-    settings?.otherArgs?.enableTelemetryLogging
-  ) {
+  if (typeof settings?.enableTelemetryLogging === 'boolean') {
+    return settings.enableTelemetryLogging;
+  }
+  if (settings?.otherArgs?.enableTelemetryLogging === true) {
     return true;
   }
 
-  const envOptIn = env.GOOGLE_SDK_NODE_LOGGING?.trim();
-  if (envOptIn === undefined || envOptIn === '') {
+  const envOptIn = env.GOOGLE_SDK_NODE_LOGGING;
+  if (!envOptIn) {
     return false;
   }
 

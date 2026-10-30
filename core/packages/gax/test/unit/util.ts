@@ -315,6 +315,8 @@ describe('util.ts', () => {
       delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
       delete process.env.GOOGLE_SDK_NODE_CLIENT_SERVICE;
       delete process.env.GCP_CLIENT_SERVICE;
+      delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
+      delete process.env.GCP_ARTIFACT;
     });
 
     const mockSettings = new CallSettings({
@@ -359,9 +361,9 @@ describe('util.ts', () => {
       assert.strictEqual(checkLoggingEnabled(undefined), false);
     });
 
-    it('returns true when GOOGLE_SDK_NODE_LOGGING is true, 1, all, or * (case-insensitively)', () => {
+    it('returns true when GOOGLE_SDK_NODE_LOGGING is exact true, all, or *', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'TRUE';
-      for (const value of ['true', 'TRUE', '1', 'all', 'ALL', '*']) {
+      for (const value of ['true', 'all', '*']) {
         process.env.GOOGLE_SDK_NODE_LOGGING = value;
         assert.strictEqual(checkLoggingEnabled(storageSettings), true);
         assert.strictEqual(checkLoggingEnabled(new CallSettings({})), true);
@@ -369,8 +371,11 @@ describe('util.ts', () => {
       }
     });
 
-    it('matches comma-separated and wildcard namespace filters against client service or google-gax fallback', () => {
+    it('matches comma-separated and wildcard namespace filters identically to NodeBackend.setFilters()', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+      const secretManagerSettings = new CallSettings({
+        apiName: 'google.cloud.secretmanager.v1.SecretManagerService',
+      });
 
       process.env.GOOGLE_SDK_NODE_LOGGING = 'storage';
       assert.strictEqual(checkLoggingEnabled(storageSettings), true);
@@ -379,11 +384,26 @@ describe('util.ts', () => {
       process.env.GOOGLE_SDK_NODE_LOGGING = 'auth,STORAGE,bigquery';
       assert.strictEqual(checkLoggingEnabled(storageSettings), true);
 
-      process.env.GOOGLE_SDK_NODE_LOGGING = 'auth, stor*';
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'auth,stor*';
       assert.strictEqual(checkLoggingEnabled(storageSettings), true);
 
       process.env.GOOGLE_SDK_NODE_LOGGING = 'auth,bigquery';
       assert.strictEqual(checkLoggingEnabled(storageSettings), false);
+
+      // Rejects values that DebugLogBackendBase / NodeBackend.setFilters() drops.
+      for (const dropped of ['1', 'TRUE', 'ALL', ' true ', 'foo,true']) {
+        process.env.GOOGLE_SDK_NODE_LOGGING = dropped;
+        assert.strictEqual(
+          checkLoggingEnabled(storageSettings),
+          false,
+          `expected ${JSON.stringify(dropped)} to return false`,
+        );
+      }
+
+      // Does not trim whitespace around comma-separated tokens, matching NodeBackend.setFilters().
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'storage, secretmanager';
+      assert.strictEqual(checkLoggingEnabled(storageSettings), true);
+      assert.strictEqual(checkLoggingEnabled(secretManagerSettings), false);
 
       process.env.GOOGLE_SDK_NODE_LOGGING = 'google-gax';
       assert.strictEqual(checkLoggingEnabled(new CallSettings({})), true);
@@ -397,26 +417,26 @@ describe('util.ts', () => {
       assert.strictEqual(checkLoggingEnabled(storageSettings), false);
     });
 
-    it('combines GOOGLE_SDK_NODE_LOGGING and enableTelemetryLogging with logical OR', () => {
+    it('gives explicit enableTelemetryLogging precedence over GOOGLE_SDK_NODE_LOGGING', () => {
       process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
       const disabledStorageSettings = new CallSettings({
         apiName: 'google.cloud.storage.v1.Storage',
         enableTelemetryLogging: false,
       });
 
-      // Matching GOOGLE_SDK_NODE_LOGGING enables logging even when client option is false.
-      for (const value of ['true', '1', 'all', '*', 'auth,storage']) {
+      // Explicit enableTelemetryLogging: false suppresses matching GOOGLE_SDK_NODE_LOGGING filters.
+      for (const value of ['true', 'all', '*', 'auth,storage']) {
         process.env.GOOGLE_SDK_NODE_LOGGING = value;
-        assert.strictEqual(checkLoggingEnabled(disabledStorageSettings), true);
+        assert.strictEqual(checkLoggingEnabled(disabledStorageSettings), false);
       }
 
-      // Non-matching or false/0 GOOGLE_SDK_NODE_LOGGING does not disable explicit enableTelemetryLogging: true.
-      for (const value of ['auth', 'false', '0', '', '   ']) {
+      // Explicit enableTelemetryLogging: true stays enabled even when GOOGLE_SDK_NODE_LOGGING targets another namespace or is false/unset.
+      for (const value of ['spanner', 'auth', 'false', '0', '', '   ']) {
         process.env.GOOGLE_SDK_NODE_LOGGING = value;
         assert.strictEqual(checkLoggingEnabled(mockSettings), true);
       }
 
-      // false, 0, and non-matching filters stay disabled when client option is not enabled.
+      // false, 0, and non-matching filters remain disabled when client option is unset or false.
       for (const value of ['false', '0', 'yes']) {
         process.env.GOOGLE_SDK_NODE_LOGGING = value;
         assert.strictEqual(checkLoggingEnabled(disabledStorageSettings), false);

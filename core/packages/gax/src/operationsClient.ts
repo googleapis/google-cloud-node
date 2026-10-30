@@ -98,6 +98,17 @@ export class OperationsClient {
       opts.clientConfig || {},
       {'x-goog-api-client': googleApiClient.join(' ')},
     );
+    for (const methodName of Object.keys(defaults)) {
+      const otherArgs = defaults[methodName].otherArgs;
+      if (otherArgs) {
+        if (!otherArgs.servicePath && opts.servicePath) {
+          otherArgs.servicePath = opts.servicePath;
+        }
+        if (otherArgs.port === undefined && opts.port !== undefined) {
+          otherArgs.port = opts.port;
+        }
+      }
+    }
 
     this.auth = gaxGrpc.auth;
 

@@ -19,6 +19,7 @@ import {EventEmitter} from 'events';
 import {Writable} from 'stream';
 import {context, ROOT_CONTEXT, Span, trace} from '@opentelemetry/api';
 import {describe, it, beforeEach, afterEach} from 'mocha';
+import * as sinon from 'sinon';
 import * as loggingUtils from 'google-logging-utils';
 import {
   buildLogAttributes,
@@ -30,6 +31,7 @@ import {traceAttempt, traceCall} from '../../src/observability/TracerHelper';
 import {
   AttemptTraceContext,
   DEFAULT_GCP_REPO,
+  resolveStaticTraceContext,
   StaticTraceContext,
 } from '../../src/observability/contextUtil';
 import {
@@ -40,6 +42,7 @@ import {
   ResultTuple,
 } from '../../src/apitypes';
 import {OngoingCallPromise} from '../../src/call';
+import {CallSettings} from '../../src/gax';
 import {GoogleError} from '../../src/googleError';
 import {Status} from '../../src/status';
 import {OtelHarness} from './otelHarness';
@@ -88,6 +91,7 @@ describe('LoggerHelper', () => {
     gcpVersion: '1.2.3',
     gcpRepo: DEFAULT_GCP_REPO,
     gcpArtifact: '@google-cloud/storage',
+    serverAddress: 'storage.googleapis.com',
   };
 
   beforeEach(() => {
@@ -98,7 +102,9 @@ describe('LoggerHelper', () => {
   });
 
   afterEach(() => {
-    loggingUtils.setBackend(null);
+    delete process.env.GOOGLE_SDK_NODE_LOGGING;
+    sinon.restore();
+    loggingUtils.setBackend(undefined);
     harness.teardown();
   });
 
@@ -113,6 +119,77 @@ describe('LoggerHelper', () => {
       assert.strictEqual(sink.logs[0].namespace, 'storage');
       assert.strictEqual(sink.logs[1].namespace, 'google-gax');
       assert.strictEqual(sink.logs[2].namespace, 'google-gax');
+      assert.strictEqual(getGaxLogger('storage'), getGaxLogger('storage'));
+    });
+
+    it('delivers logs via fallback NodeBackend when no backend is cached and GOOGLE_SDK_NODE_LOGGING is unset', () => {
+      loggingUtils.setBackend(undefined);
+      delete process.env.GOOGLE_SDK_NODE_LOGGING;
+      assert.strictEqual(
+        loggingUtils.log('storage'),
+        loggingUtils.placeholder,
+        'precondition: bare loggingUtils.log hits no-op placeholder',
+      );
+
+      const stderrStub = sinon.stub(console, 'error');
+      const warnSeverity = 'WARNING' as loggingUtils.LogSeverity;
+      getGaxLogger('storage')(
+        {severity: warnSeverity, other: {'rpc.system.name': 'grpc'}},
+        'Client API call failed: %s',
+        'boom',
+      );
+
+      assert.strictEqual(stderrStub.callCount, 1);
+      // Does not enable logging globally for other non-GAX namespaces.
+      assert.strictEqual(loggingUtils.log('auth'), loggingUtils.placeholder);
+    });
+
+    it('delivers logs without duplication when GOOGLE_SDK_NODE_LOGGING is unmatched, false, or wildcard', () => {
+      const stderrStub = sinon.stub(console, 'error');
+      const warnSeverity = 'WARNING' as loggingUtils.LogSeverity;
+
+      for (const envValue of [
+        'spanner',
+        'false',
+        'true',
+        '1',
+        '*',
+        'storage',
+      ]) {
+        stderrStub.resetHistory();
+        loggingUtils.setBackend(undefined);
+        process.env.GOOGLE_SDK_NODE_LOGGING = envValue;
+        // Simulate GAPIC client field initialization (`this._log = logging.log(service)`)
+        // populating logging-utils's default NodeBackend before GAX logs.
+        loggingUtils.log('storage');
+
+        getGaxLogger('storage')(
+          {severity: warnSeverity},
+          'Client API call failed: %s',
+          `err-${envValue}`,
+        );
+        assert.strictEqual(
+          stderrStub.callCount,
+          1,
+          `expected exactly 1 stderr log when GOOGLE_SDK_NODE_LOGGING=${envValue}`,
+        );
+      }
+
+      // Custom setBackend(sink) receives the log once with zero stderr fallback even when env filter mismatches.
+      stderrStub.resetHistory();
+      sink.reset();
+      process.env.GOOGLE_SDK_NODE_LOGGING = 'spanner';
+      loggingUtils.setBackend(sink);
+      getGaxLogger('storage')({severity: warnSeverity}, 'custom sink msg');
+      assert.strictEqual(sink.logs.length, 1);
+      assert.strictEqual(stderrStub.callCount, 0);
+
+      // Explicit setBackend(null) disables output when GOOGLE_SDK_NODE_LOGGING is set.
+      stderrStub.resetHistory();
+      process.env.GOOGLE_SDK_NODE_LOGGING = '*';
+      loggingUtils.setBackend(null);
+      getGaxLogger('storage')({severity: warnSeverity}, 'silenced msg');
+      assert.strictEqual(stderrStub.callCount, 0);
     });
   });
 
@@ -308,6 +385,56 @@ describe('LoggerHelper', () => {
       assert.strictEqual(primitiveAttrs['exception.message'], 'string failure');
       assert.strictEqual('exception.stacktrace' in primitiveAttrs, false);
       assert.strictEqual('server.address' in primitiveAttrs, false);
+    });
+
+    it('uses real servicePath for cloud*.googleapis.com APIs and never fabricates url.domain or server.address when servicePath is unset', () => {
+      const serverErr = Object.assign(new GoogleError('Unavailable'), {
+        code: Status.UNAVAILABLE,
+      });
+      const kmsDynamic: AttemptTraceContext = {
+        clientName: 'KeyManagementServiceClient',
+        methodName: 'GetKeyRing',
+        apiName: 'google.cloud.kms.v1.KeyManagementService',
+        rpcType: 'grpc',
+      };
+
+      // With servicePath set, emits canonical cloudkms.googleapis.com (never bogus kms.googleapis.com).
+      const withEndpoint = buildLogAttributes(
+        serverErr,
+        kmsDynamic,
+        resolveStaticTraceContext(
+          new CallSettings({
+            apiName: kmsDynamic.apiName,
+            otherArgs: {servicePath: 'cloudkms.googleapis.com'},
+          }),
+        ),
+      );
+      assert.strictEqual(withEndpoint['gcp.client.service'], 'kms');
+      assert.strictEqual(withEndpoint['url.domain'], 'cloudkms.googleapis.com');
+      assert.strictEqual(
+        withEndpoint['server.address'],
+        'cloudkms.googleapis.com',
+      );
+
+      // Without servicePath, omits both url.domain and server.address cleanly.
+      const withoutEndpoint = buildLogAttributes(
+        serverErr,
+        kmsDynamic,
+        resolveStaticTraceContext(
+          new CallSettings({apiName: kmsDynamic.apiName}),
+        ),
+      );
+      assert.strictEqual(withoutEndpoint['gcp.client.service'], 'kms');
+      assert.strictEqual('url.domain' in withoutEndpoint, false);
+      assert.strictEqual('server.address' in withoutEndpoint, false);
+
+      // Even when urlDomain is set explicitly without serverAddress, server.address is not fabricated in logs.
+      const domainOnly = buildLogAttributes(serverErr, kmsDynamic, {
+        gcpClientService: 'kms',
+        urlDomain: 'cloudkms.googleapis.com',
+      });
+      assert.strictEqual(domainOnly['url.domain'], 'cloudkms.googleapis.com');
+      assert.strictEqual('server.address' in domainOnly, false);
     });
   });
 
@@ -668,6 +795,75 @@ describe('LoggerHelper', () => {
       assert.strictEqual(
         sink.logs[0].fields.telemetrySpanId,
         initialOuterSpan.spanContext().spanId,
+      );
+    });
+
+    it('fails open inside logOnce without masking or altering application errors when trace or attribute resolution throws', async () => {
+      const contextUtilModule = require('../../src/observability/contextUtil');
+      const appErr = Object.assign(new GoogleError('Original failure'), {
+        code: Status.UNAVAILABLE,
+      });
+
+      // 1. Throwing getActiveTraceContext across promise, callback, stream, and sync boundaries.
+      sinon
+        .stub(contextUtilModule, 'getActiveTraceContext')
+        .throws(new Error('otel context exploded'));
+
+      await assert.rejects(
+        () =>
+          logCall(dynamicArgs, staticArgs, async () => {
+            throw appErr;
+          }),
+        (caught: unknown) => caught === appErr,
+      );
+
+      let cbErr: unknown;
+      logCall(
+        dynamicArgs,
+        staticArgs,
+        loggedCb => {
+          loggedCb!(appErr);
+          return undefined as unknown as ResultTuple;
+        },
+        false,
+        err => {
+          cbErr = err;
+        },
+      );
+      assert.strictEqual(cbErr, appErr);
+
+      const stream = new EventEmitter();
+      let streamErr: unknown;
+      stream.on('error', err => {
+        streamErr = err;
+      });
+      logCall(dynamicArgs, staticArgs, () => stream, true);
+      stream.emit('error', appErr);
+      assert.strictEqual(streamErr, appErr);
+
+      assert.throws(
+        () =>
+          logCall(dynamicArgs, staticArgs, () => {
+            throw appErr;
+          }),
+        (caught: unknown) => caught === appErr,
+      );
+
+      sinon.restore();
+
+      // 2. Hostile error getter causing buildLogAttributes to throw never masks the error.
+      const hostileErr = new Error('hostile');
+      Object.defineProperty(hostileErr, 'stack', {
+        get() {
+          throw new Error('stack getter boom');
+        },
+      });
+      await assert.rejects(
+        () =>
+          logCall(dynamicArgs, staticArgs, async () => {
+            throw hostileErr;
+          }),
+        (caught: unknown) => caught === hostileErr,
       );
     });
   });

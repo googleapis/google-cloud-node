@@ -317,7 +317,7 @@ describe('gax construct settings', () => {
     assert.strictEqual(settings.otherArgs.internalMethodName, undefined);
   });
 
-  it('enables logging when GOOGLE_SDK_NODE_LOGGING matches the service namespace or wildcard', () => {
+  it('enables logging when enableTelemetryLogging is unset and GOOGLE_SDK_NODE_LOGGING matches the service namespace or wildcard', () => {
     process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
     for (const envValue of ['true', '*', 'all', 'auth,interface']) {
       process.env.GOOGLE_SDK_NODE_LOGGING = envValue;
@@ -329,7 +329,7 @@ describe('gax construct settings', () => {
         undefined,
         undefined,
         undefined,
-        false,
+        undefined,
       );
       const settings = defaults.bundlingMethod;
       assert.strictEqual(settings.enableTelemetryLogging, true);
@@ -339,6 +339,23 @@ describe('gax construct settings', () => {
       );
       assert.strictEqual(settings.otherArgs.enableTelemetryTracing, false);
       assert.strictEqual(settings.otherArgs.enableTelemetryLogging, true);
+
+      const suppressedDefaults = gax.constructSettings(
+        SERVICE_NAME,
+        A_CONFIG,
+        {},
+        RETRY_DICT,
+        undefined,
+        undefined,
+        undefined,
+        false,
+      );
+      const suppressedSettings = suppressedDefaults.bundlingMethod;
+      assert.strictEqual(suppressedSettings.enableTelemetryLogging, false);
+      assert.strictEqual(
+        suppressedSettings.otherArgs.internalMethodName,
+        undefined,
+      );
     }
   });
 

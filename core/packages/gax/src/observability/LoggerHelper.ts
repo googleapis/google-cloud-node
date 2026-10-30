@@ -61,9 +61,132 @@ export interface LogPayload {
   'exception.stacktrace'?: string;
 }
 
+interface NodeBackendInternals extends loggingUtils.DebugLogBackend {
+  filters?: string[];
+  isEnabled?: (namespace: string) => boolean;
+}
+
+const gaxLoggerCache = new Map<string, loggingUtils.AdhocDebugLogFunction>();
+let fallbackNodeBackend: loggingUtils.DebugLogBackend | undefined;
+let nodeBackendPrototype: NodeBackendInternals | null | undefined;
+
+function getFallbackNodeBackend(): loggingUtils.DebugLogBackend {
+  if (!fallbackNodeBackend) {
+    const backend = loggingUtils.getNodeBackend() as NodeBackendInternals;
+    if (Array.isArray(backend.filters)) {
+      backend.filters = ['*'];
+    }
+    fallbackNodeBackend = backend;
+  }
+  return fallbackNodeBackend;
+}
+
+function getNodeBackendPrototype(): NodeBackendInternals | null {
+  if (nodeBackendPrototype === undefined) {
+    try {
+      const proto = Object.getPrototypeOf(
+        loggingUtils.getNodeBackend(),
+      ) as NodeBackendInternals | null;
+      nodeBackendPrototype = proto ?? null;
+    } catch {
+      nodeBackendPrototype = null;
+    }
+  }
+  return nodeBackendPrototype;
+}
+
+function emitGaxLog(
+  namespace: string,
+  fields: loggingUtils.LogFields,
+  ...args: unknown[]
+): void {
+  const target = loggingUtils.log(namespace);
+  if (target === loggingUtils.placeholder) {
+    const env: Record<string, string | undefined> =
+      typeof process === 'object' && typeof process.env === 'object'
+        ? process.env
+        : {};
+    const envKey = loggingUtils.env?.nodeEnables ?? 'GOOGLE_SDK_NODE_LOGGING';
+    // When `GOOGLE_SDK_NODE_LOGGING` is non-empty, `loggingUtils.log()` only returns
+    // `placeholder` if the backend was explicitly disabled via `setBackend(null)`.
+    // When unset/empty, `loggingUtils.log()` returns `placeholder` whenever no backend
+    // was cached, so fall back to an unfiltered `NodeBackend` so `{enableTelemetryLogging: true}`
+    // delivers logs without requiring `GOOGLE_SDK_NODE_LOGGING` or mutating global state.
+    if (!env[envKey]) {
+      getFallbackNodeBackend().log(namespace, fields, ...args);
+    }
+    return;
+  }
+
+  const nodeProto = getNodeBackendPrototype();
+  if (!nodeProto || typeof nodeProto.log !== 'function') {
+    target(fields, ...args);
+    return;
+  }
+
+  // Detect when the active backend is `google-logging-utils`'s built-in `NodeBackend`
+  // dropping an unmatched namespace (e.g. `{enableTelemetryLogging: true}` paired with
+  // `GOOGLE_SDK_NODE_LOGGING=spanner` or `=false`), without interfering with custom
+  // backends set via `setBackend()`.
+  let droppedByNodeBackend = false;
+  let dispatchDepth = 0;
+  const originalNodeLog = nodeProto.log;
+  const hadOwnLog = Object.prototype.hasOwnProperty.call(nodeProto, 'log');
+  const wrappedNodeLog: typeof nodeProto.log = function (
+    this: NodeBackendInternals,
+    ns: string,
+    logFields: loggingUtils.LogFields,
+    ...logArgs: unknown[]
+  ) {
+    dispatchDepth++;
+    try {
+      originalNodeLog.call(this, ns, logFields, ...logArgs);
+      if (
+        dispatchDepth === 1 &&
+        ns === namespace &&
+        typeof this.isEnabled === 'function' &&
+        !this.isEnabled(ns)
+      ) {
+        droppedByNodeBackend = true;
+      }
+    } finally {
+      dispatchDepth--;
+    }
+  };
+
+  let patched = false;
+  try {
+    nodeProto.log = wrappedNodeLog;
+    patched = true;
+  } catch {
+    // Prototype may be frozen; dispatch directly.
+  }
+
+  try {
+    target(fields, ...args);
+  } finally {
+    if (patched && nodeProto.log === wrappedNodeLog) {
+      if (hadOwnLog) {
+        nodeProto.log = originalNodeLog;
+      } else {
+        delete (nodeProto as {log?: unknown}).log;
+      }
+    }
+  }
+
+  if (droppedByNodeBackend) {
+    getFallbackNodeBackend().log(namespace, fields, ...args);
+  }
+}
+
 /**
  * Returns the `google-logging-utils` logger for the given GCP client service,
  * defaulting to the `'google-gax'` namespace when no service name is provided.
+ *
+ * Ensures telemetry logs are still delivered to `NodeBackend` when logging was
+ * enabled via `{enableTelemetryLogging: true}` without `GOOGLE_SDK_NODE_LOGGING`
+ * matching the namespace, while preserving any custom backend installed via
+ * `loggingUtils.setBackend()`.
  *
  * @param {string} [serviceName] - The GCP client service name (e.g. 'storage').
  * @returns {loggingUtils.AdhocDebugLogFunction} The logger function.
@@ -71,7 +194,20 @@ export interface LogPayload {
 export function getGaxLogger(
   serviceName?: string,
 ): loggingUtils.AdhocDebugLogFunction {
-  return loggingUtils.log(serviceName || 'google-gax');
+  const namespace = serviceName || 'google-gax';
+  const existing = gaxLoggerCache.get(namespace);
+  if (existing) {
+    return existing;
+  }
+  const wrapper = new loggingUtils.AdhocDebugLogger(
+    namespace,
+    (fields: loggingUtils.LogFields, ...args: unknown[]) => {
+      emitGaxLog(namespace, fields, ...args);
+    },
+  ).func;
+  wrapper.sublog = (sub: string) => getGaxLogger(`${namespace}:${sub}`);
+  gaxLoggerCache.set(namespace, wrapper);
+  return wrapper;
 }
 
 /**
@@ -90,7 +226,6 @@ export function buildLogAttributes(
   const {rawAddress, urlDomain} = resolveEndpointAndDomain(
     dynamicArgs,
     staticArgs,
-    443,
   );
   const initialAttributes = buildInitialAttributes(
     dynamicArgs,
@@ -154,6 +289,62 @@ export function buildLogAttributes(
 }
 
 /**
+ * Executes `fn` and attaches stream, promise, callback, or synchronous error
+ * handlers to invoke `onError` at most once when the operation fails.
+ */
+function executeLoggedOperation<T>(
+  fn: (loggedCallback?: APICallback) => T,
+  onError: (err: unknown) => void,
+  isStreamCall: boolean,
+  userCallback?: APICallback,
+): T {
+  // Latch to emit at most one log per invocation across execution boundaries.
+  let hasLogged = false;
+  const logOnce = (err: unknown) => {
+    if (hasLogged) {
+      return;
+    }
+    hasLogged = true;
+    try {
+      onError(err);
+    } catch {
+      // Fail open: telemetry logging must never mask or replace application errors.
+    }
+  };
+
+  // Wrap user callback to log RPC errors before forwarding.
+  let callbackInvoked = false;
+  const loggedCallback: APICallback | undefined = userCallback
+    ? function (this: unknown, ...args: Parameters<APICallback>) {
+        callbackInvoked = true;
+        const err = args[0];
+        if (err) {
+          logOnce(err);
+        }
+        userCallback.apply(this, args);
+      }
+    : undefined;
+
+  // Execute call and attach error handlers for streams, promises, or sync throws.
+  try {
+    const result = fn(loggedCallback);
+    const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
+    if (isStreamCall && result instanceof EventEmitter) {
+      handleStream(result, logOnce, () => {}, Boolean(loggedCallback));
+    } else if (promiseTarget) {
+      handlePromise(promiseTarget, logOnce, () => {});
+    }
+    return result;
+  } catch (syncErr) {
+    // Avoid logging errors thrown inside userCallback after RPC completion.
+    if (!callbackInvoked) {
+      logOnce(syncErr);
+    }
+    throw syncErr;
+  }
+}
+
+/**
  * Executes an API call and emits a single `WARNING` log entry if the logical
  * request fails across promise, callback, stream, or synchronous execution boundaries.
  *
@@ -173,22 +364,21 @@ export function logCall<T = GaxCallResult>(
   isStreamCall = false,
   userCallback?: APICallback,
 ): T {
-  // Latch to emit at most one warning log per logical request.
-  let hasLoggedL3 = false;
   // Snapshot initial context in case async rejection loses active context.
-  const initialContext = context.active();
+  let initialContext: ReturnType<typeof context.active> | undefined;
+  try {
+    initialContext = context.active();
+  } catch {
+    // Fail open if active context retrieval throws.
+  }
 
   const emitL3WarnLog = (err: unknown) => {
-    // Suppress duplicate emissions for the same call.
-    if (hasLoggedL3) {
-      return;
-    }
-    hasLoggedL3 = true;
-
     // Resolve logger and active T3 client request span (or outer OpenTelemetry span when GAX tracing is disabled).
     const logger = getGaxLogger(staticArgs?.gcpClientService);
     const activeTrace = getActiveTraceContext();
-    const initialTrace = getActiveTraceContext(initialContext);
+    const initialTrace = initialContext
+      ? getActiveTraceContext(initialContext)
+      : undefined;
     const activeSpan =
       activeTrace?.clientRequestSpan ??
       initialTrace?.clientRequestSpan ??
@@ -221,34 +411,5 @@ export function logCall<T = GaxCallResult>(
     );
   };
 
-  // Wrap user callback to log RPC errors before forwarding.
-  let callbackInvoked = false;
-  const loggedCallback: APICallback | undefined = userCallback
-    ? function (this: unknown, ...args: Parameters<APICallback>) {
-        callbackInvoked = true;
-        const err = args[0];
-        if (err) {
-          emitL3WarnLog(err);
-        }
-        userCallback.apply(this, args);
-      }
-    : undefined;
-
-  // Execute call and attach error handlers for streams, promises, or sync throws.
-  try {
-    const result = fn(loggedCallback);
-    const promiseTarget = !isStreamCall ? getPromiseTarget(result) : null;
-    if (isStreamCall && result instanceof EventEmitter) {
-      handleStream(result, emitL3WarnLog, () => {}, Boolean(loggedCallback));
-    } else if (promiseTarget) {
-      handlePromise(promiseTarget, emitL3WarnLog, () => {});
-    }
-    return result;
-  } catch (syncErr) {
-    // Avoid logging errors thrown inside userCallback after RPC completion.
-    if (!callbackInvoked) {
-      emitL3WarnLog(syncErr);
-    }
-    throw syncErr;
-  }
+  return executeLoggedOperation(fn, emitL3WarnLog, isStreamCall, userCallback);
 }

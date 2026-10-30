@@ -23,7 +23,7 @@ import {
   Span,
   trace,
 } from '@opentelemetry/api';
-import {CallSettings} from '../gax';
+import type {CallSettings} from '../gax';
 import {ignoredClientHeaderTokens} from '../util';
 export const DEFAULT_GCP_REPO = 'googleapis/google-cloud-node';
 
@@ -146,6 +146,40 @@ export interface AttemptTraceContext extends DynamicTraceContext {
    * Populates `url.template`.
    */
   urlTemplate?: string;
+}
+
+const settingsDefaultDomain = new WeakMap<CallSettings, string>();
+const staticContextDefaultDomain = new WeakMap<StaticTraceContext, string>();
+
+function normalizeDomainHost(value?: string): string | undefined {
+  if (!value || !value.includes('.')) {
+    return undefined;
+  }
+  const match = value.match(/^(\[[^\]]+\]|[^:]+):(\d+)$/);
+  return match ? match[1] : value;
+}
+
+/**
+ * Associates the nominal service domain (e.g. GAPIC `this._servicePath`) with a
+ * `CallSettings` instance without mutating `CallSettings.otherArgs`.
+ */
+export function setSettingsDefaultDomain(
+  settings: CallSettings,
+  domain: string,
+): void {
+  const normalized = normalizeDomainHost(domain.trim());
+  if (normalized) {
+    settingsDefaultDomain.set(settings, normalized);
+  }
+}
+
+/**
+ * Returns any nominal service domain previously associated with `settings`.
+ */
+export function getSettingsDefaultDomain(
+  settings?: CallSettings,
+): string | undefined {
+  return settings ? settingsDefaultDomain.get(settings) : undefined;
 }
 
 /**
@@ -379,6 +413,10 @@ export function resolveStaticTraceContext(
     gcpRepo: DEFAULT_GCP_REPO,
     gcpArtifact: envMeta.gcpArtifact ?? dynamic.gcpArtifact,
   };
+  const defaultDomain = getSettingsDefaultDomain(settings);
+  if (defaultDomain && !envMeta.gcpClientService?.includes('.')) {
+    staticContextDefaultDomain.set(context, defaultDomain);
+  }
 
   const serverAddress = envMeta.serverAddress ?? dynamic.serverAddress;
   if (serverAddress !== undefined) {
@@ -396,8 +434,11 @@ export function resolveStaticTraceContext(
 /**
  * Resolves and parses the server address, port, and target service domain (`url.domain`)
  * from dynamic and static trace contexts, splitting `"host:port"` or `"[ipv6]:port"`
- * strings. When `defaultPort` is provided (for low level network attempt spans), falls back to `url.domain`
- * for the server address and defaults the port to `defaultPort` if not otherwise specified.
+ * strings. Never synthesizes `${gcpClientService}.googleapis.com` from short protobuf
+ * service identifiers (which would fabricate bogus domains for `cloud*.googleapis.com`
+ * APIs). When `defaultPort` is provided (for low level network attempt spans), falls
+ * back to `url.domain` for the server address and defaults the port to `defaultPort`
+ * if not otherwise specified.
  *
  * @param {DynamicTraceContext} dynamicArgs - Dynamic trace context for the call or attempt.
  * @param {StaticTraceContext} staticArgs - Static trace context for the client library.
@@ -426,16 +467,15 @@ export function resolveEndpointAndDomain(
     splitHostAndPort(rawAddress);
   }
 
-  // Prefer nominal service domain from gcpClientService over an overridden
-  // serverAddress (e.g. 127.0.0.1 or a regional endpoint) so url.domain stays canonical.
-  const serviceDomain = staticArgs.gcpClientService
-    ? staticArgs.gcpClientService.includes('.')
-      ? staticArgs.gcpClientService
-      : `${staticArgs.gcpClientService}.googleapis.com`
-    : undefined;
+  // Prefer the client's nominal default service domain (or an explicit dotted
+  // gcpClientService domain) over an overridden serverAddress (e.g. 127.0.0.1 or a
+  // regional endpoint) so url.domain stays canonical without fabricating bogus domains
+  // from bare protobuf service identifiers.
+  const serviceDomain = normalizeDomainHost(staticArgs.gcpClientService);
   const urlDomain =
     dynamicArgs.urlDomain ??
     staticArgs.urlDomain ??
+    staticContextDefaultDomain.get(staticArgs) ??
     serviceDomain ??
     rawAddress;
 

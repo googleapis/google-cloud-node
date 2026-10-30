@@ -242,6 +242,78 @@ describe('grpc', () => {
         'method',
       );
     });
+
+    it('captures GAPIC auth.defaultServicePath as canonical url.domain across default, emulator, and merged settings', () => {
+      const {
+        resolveEndpointAndDomain,
+        resolveStaticTraceContext,
+      } = require('../../src/observability/contextUtil');
+      const kmsConfig = {
+        interfaces: {
+          'google.cloud.kms.v1.KeyManagementService': {
+            methods: {GetKeyRing: {timeout_millis: 10}},
+          },
+        },
+      };
+
+      const defaultClient = gaxGrpc({
+        servicePath: 'cloudkms.googleapis.com',
+        port: 443,
+      });
+      defaultClient.auth.defaultServicePath = 'cloudkms.googleapis.com';
+      const defaultSettings = defaultClient.constructSettings(
+        'google.cloud.kms.v1.KeyManagementService',
+        kmsConfig as unknown as ClientConfig,
+        {} as unknown as ClientConfig,
+        {},
+      );
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {
+            clientName: 'KeyManagementServiceClient',
+            methodName: 'GetKeyRing',
+            rpcType: 'grpc',
+          },
+          resolveStaticTraceContext(defaultSettings.getKeyRing.merge()),
+          443,
+        ),
+        {
+          rawAddress: 'cloudkms.googleapis.com',
+          rawPort: 443,
+          urlDomain: 'cloudkms.googleapis.com',
+        },
+      );
+
+      const emulatorClient = gaxGrpc({
+        servicePath: '127.0.0.1',
+        port: 8080,
+      });
+      emulatorClient.auth.defaultServicePath = 'cloudkms.googleapis.com';
+      const emulatorSettings = emulatorClient.constructSettings(
+        'google.cloud.kms.v1.KeyManagementService',
+        kmsConfig as unknown as ClientConfig,
+        {} as unknown as ClientConfig,
+        {},
+      );
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {
+            clientName: 'KeyManagementServiceClient',
+            methodName: 'GetKeyRing',
+            rpcType: 'grpc',
+          },
+          resolveStaticTraceContext(
+            emulatorSettings.getKeyRing.merge({timeout: 50}),
+          ),
+          443,
+        ),
+        {
+          rawAddress: '127.0.0.1',
+          rawPort: 8080,
+          urlDomain: 'cloudkms.googleapis.com',
+        },
+      );
+    });
   });
 
   describe('createStub', () => {

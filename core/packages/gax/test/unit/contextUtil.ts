@@ -31,6 +31,7 @@ import {
   resolveEndpointAndDomain,
   resolveRpcMethod,
   resolveStaticTraceContext,
+  setSettingsDefaultDomain,
   StaticTraceContext,
   DEFAULT_GCP_REPO,
 } from '../../src/observability/contextUtil';
@@ -45,6 +46,7 @@ describe('contextUtil', () => {
     delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
     delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    delete process.env.GOOGLE_SDK_NODE_LOGGING;
     delete process.env.GOOGLE_SDK_NODE_SERVER_ADDRESS;
     delete process.env.GOOGLE_SDK_NODE_SERVER_PORT;
     delete process.env.SERVER_ADDRESS;
@@ -60,6 +62,7 @@ describe('contextUtil', () => {
     delete process.env.GOOGLE_SDK_NODE_CLIENT_VERSION;
     delete process.env.GOOGLE_SDK_NODE_ARTIFACT;
     delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    delete process.env.GOOGLE_SDK_NODE_LOGGING;
     delete process.env.GOOGLE_SDK_NODE_SERVER_ADDRESS;
     delete process.env.GOOGLE_SDK_NODE_SERVER_PORT;
     delete process.env.SERVER_ADDRESS;
@@ -415,11 +418,28 @@ describe('contextUtil', () => {
       );
     });
 
-    it('prefers nominal gcpClientService domain over an overridden server address for url.domain', () => {
+    it('preserves canonical url.domain without fabricating <service>.googleapis.com from short gcpClientService names', () => {
+      // Captured GAPIC default service domain stays canonical over emulator/regional overrides.
+      const emulatorSettings = new CallSettings({
+        apiName: 'google.cloud.kms.v1.KeyManagementService',
+        otherArgs: {servicePath: '127.0.0.1:8080'},
+      });
+      setSettingsDefaultDomain(emulatorSettings, 'cloudkms.googleapis.com');
+      const emulatorStatic = resolveStaticTraceContext(emulatorSettings);
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(dynamicArgs, emulatorStatic, 443),
+        {
+          rawAddress: '127.0.0.1',
+          rawPort: 8080,
+          urlDomain: 'cloudkms.googleapis.com',
+        },
+      );
+
+      // Explicit dotted gcpClientService stays canonical over an overridden serverAddress.
       assert.deepStrictEqual(
         resolveEndpointAndDomain(
           {...dynamicArgs, serverAddress: '127.0.0.1'},
-          {gcpClientService: 'texttospeech'},
+          {gcpClientService: 'texttospeech.googleapis.com'},
         ),
         {
           rawAddress: '127.0.0.1',
@@ -428,18 +448,58 @@ describe('contextUtil', () => {
         },
       );
       assert.deepStrictEqual(
-        resolveEndpointAndDomain(
-          dynamicArgs,
-          {gcpClientService: 'texttospeech', serverAddress: '127.0.0.1:8080'},
-          443,
-        ),
+        resolveEndpointAndDomain(dynamicArgs, {
+          gcpClientService: 'storage.googleapis.com',
+        }),
         {
-          rawAddress: '127.0.0.1',
-          rawPort: 8080,
-          urlDomain: 'texttospeech.googleapis.com',
+          rawAddress: undefined,
+          rawPort: undefined,
+          urlDomain: 'storage.googleapis.com',
         },
       );
-      // Falls back to server address only when neither urlDomain nor gcpClientService is set.
+
+      // Short gcpClientService never shadows this._servicePath (serverAddress) for cloud*.googleapis.com APIs.
+      const cloudApis: Array<[string, string]> = [
+        ['kms', 'cloudkms.googleapis.com'],
+        ['asset', 'cloudasset.googleapis.com'],
+        ['resourcemanager', 'cloudresourcemanager.googleapis.com'],
+        ['functions', 'cloudfunctions.googleapis.com'],
+        ['tasks', 'cloudtasks.googleapis.com'],
+        ['trace', 'cloudtrace.googleapis.com'],
+        ['storage', 'bigquerystorage.googleapis.com'],
+      ];
+      for (const [svc, host] of cloudApis) {
+        assert.deepStrictEqual(
+          resolveEndpointAndDomain(dynamicArgs, {
+            gcpClientService: svc,
+            serverAddress: host,
+          }),
+          {
+            rawAddress: host,
+            rawPort: undefined,
+            urlDomain: host,
+          },
+        );
+        // When servicePath/serverAddress is unset, never fabricates a bogus domain or fallback server.address.
+        assert.deepStrictEqual(
+          resolveEndpointAndDomain(dynamicArgs, {gcpClientService: svc}),
+          {
+            rawAddress: undefined,
+            rawPort: undefined,
+            urlDomain: undefined,
+          },
+        );
+        assert.deepStrictEqual(
+          resolveEndpointAndDomain(dynamicArgs, {gcpClientService: svc}, 443),
+          {
+            rawAddress: undefined,
+            rawPort: undefined,
+            urlDomain: undefined,
+          },
+        );
+      }
+
+      // Falls back to server address when neither urlDomain nor default domain is set.
       assert.deepStrictEqual(
         resolveEndpointAndDomain(
           {...dynamicArgs, serverAddress: 'example.com'},
@@ -451,39 +511,31 @@ describe('contextUtil', () => {
           urlDomain: 'example.com',
         },
       );
-      // Short service names are expanded to "<service>.googleapis.com".
-      assert.deepStrictEqual(
-        resolveEndpointAndDomain(dynamicArgs, {gcpClientService: 'cloudkms'}),
-        {
-          rawAddress: undefined,
-          rawPort: undefined,
-          urlDomain: 'cloudkms.googleapis.com',
-        },
-      );
-      // Fully-qualified service domains are used as-is.
-      assert.deepStrictEqual(
-        resolveEndpointAndDomain(dynamicArgs, {
-          gcpClientService: 'storage.googleapis.com',
-        }),
-        {
-          rawAddress: undefined,
-          rawPort: undefined,
-          urlDomain: 'storage.googleapis.com',
-        },
-      );
     });
 
-    it('derives the server address from url.domain and applies defaultPort when provided', () => {
+    it('derives the server address from an explicit url.domain and applies defaultPort when provided', () => {
       assert.deepStrictEqual(
         resolveEndpointAndDomain(
           dynamicArgs,
-          {gcpClientService: 'cloudkms'},
+          {gcpClientService: 'kms', urlDomain: 'cloudkms.googleapis.com'},
           443,
         ),
         {
           rawAddress: 'cloudkms.googleapis.com',
           rawPort: 443,
           urlDomain: 'cloudkms.googleapis.com',
+        },
+      );
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          dynamicArgs,
+          {gcpClientService: 'storage.googleapis.com'},
+          443,
+        ),
+        {
+          rawAddress: 'storage.googleapis.com',
+          rawPort: 443,
+          urlDomain: 'storage.googleapis.com',
         },
       );
       // An explicit server port is kept over defaultPort.
