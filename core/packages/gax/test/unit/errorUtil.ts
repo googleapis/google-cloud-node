@@ -52,6 +52,7 @@ import {
   resolveExceptionStacktrace,
   resolveResponseStatusCode,
   resolveResponsePayload,
+  resolveErrorResponsePayload,
   resolveServerExceptionDetails,
   recordExceptionEvent,
   isPreConnectionFailure,
@@ -1241,6 +1242,87 @@ describe('errorUtil', () => {
     });
   });
 
+  describe('resolveErrorResponsePayload', () => {
+    it('extracts the raw HTTP response payload from translated REST errors', async () => {
+      const httpErr = await httpErrorWithErrorInfo();
+      const payload = resolveErrorResponsePayload(httpErr);
+      assert.ok(payload);
+      assert.deepStrictEqual(JSON.parse(payload), {
+        error: {
+          code: 403,
+          message: 'Cloud Translation API is disabled for project 123.',
+          status: 'PERMISSION_DENIED',
+          details: [
+            {
+              '@type': 'type.googleapis.com/google.rpc.ErrorInfo',
+              ...SERVICE_DISABLED_ERROR_INFO,
+            },
+          ],
+        },
+      });
+    });
+
+    it('unwraps populated grpc.Metadata via getMap and omits empty Metadata', () => {
+      const metadata = new grpc.Metadata();
+      metadata.set('x-goog-request-id', 'req-123');
+      metadata.set('grpc-status-details-bin', Buffer.from([1, 2, 3]));
+      const grpcErr = Object.assign(new GoogleError('Unavailable'), {
+        code: Status.UNAVAILABLE,
+        metadata,
+      });
+      assert.strictEqual(
+        resolveErrorResponsePayload(grpcErr),
+        '{"x-goog-request-id":"req-123","grpc-status-details-bin":"AQID"}',
+      );
+
+      const emptyMetaErr = Object.assign(
+        new GoogleError('connect ECONNREFUSED'),
+        {
+          code: Status.UNAVAILABLE,
+          metadata: new grpc.Metadata(),
+        },
+      );
+      assert.strictEqual(resolveErrorResponsePayload(emptyMetaErr), undefined);
+      assert.strictEqual(
+        resolveErrorResponsePayload(
+          Object.assign(new GoogleError('empty plain meta'), {metadata: {}}),
+        ),
+        undefined,
+      );
+    });
+
+    it('supports plain-object metadata, response.data, and cause-chain traversal', () => {
+      const plainMetaErr = Object.assign(new GoogleError('Unavailable'), {
+        metadata: {'x-goog-request-id': 'req-456'},
+      });
+      assert.strictEqual(
+        resolveErrorResponsePayload(plainMetaErr),
+        '{"x-goog-request-id":"req-456"}',
+      );
+
+      const wrapped = new Error('outer', {cause: plainMetaErr});
+      assert.strictEqual(
+        resolveErrorResponsePayload(wrapped),
+        '{"x-goog-request-id":"req-456"}',
+      );
+
+      const responseDataErr = Object.assign(new Error('HTTP 500'), {
+        response: {status: 500, data: {error: 'internal'}},
+      });
+      assert.strictEqual(
+        resolveErrorResponsePayload(responseDataErr),
+        '{"error":"internal"}',
+      );
+
+      assert.strictEqual(resolveErrorResponsePayload(undefined), undefined);
+      assert.strictEqual(resolveErrorResponsePayload(null), undefined);
+      assert.strictEqual(
+        resolveErrorResponsePayload(new TypeError('bad arg')),
+        undefined,
+      );
+    });
+  });
+
   describe('isPreConnectionFailure', () => {
     it('handles circular references in cause without infinite recursion', () => {
       const circularError = new GoogleError('circular error');
@@ -1454,6 +1536,14 @@ describe('errorUtil', () => {
       err.cause = err;
       assert.strictEqual(isServerSideError(err, 'grpc'), false);
       assert.strictEqual(isServerSideError(err, 'http'), false);
+    });
+
+    it('resolveErrorResponsePayload terminates cleanly with circular cause', () => {
+      const err = Object.assign(new GoogleError('test'), {
+        metadata: new grpc.Metadata(),
+      });
+      err.cause = err;
+      assert.strictEqual(resolveErrorResponsePayload(err), undefined);
     });
   });
 });

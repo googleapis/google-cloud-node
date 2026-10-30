@@ -24,7 +24,7 @@ import * as serializer from 'proto3-json-serializer';
 import {isNodeJS} from './featureDetection';
 import {StreamArrayParser} from './streamArrayParser';
 import {defaultToObjectOptions} from './fallback';
-import {GoogleError} from './googleError';
+import {GoogleError, setRawHttpResponsePayload} from './googleError';
 import {setAttemptHttpMethod} from './observability/TracerHelper';
 import {rpcCodeFromHttpStatusCode, Status} from './status';
 import {pipeline, PipelineSource} from 'stream';
@@ -234,6 +234,43 @@ function _parseHttpErrorFromRejection(
   return undefined;
 }
 
+const GAXIOS_REDACTED_BODY =
+  '<<REDACTED> - See `errorRedactor` option in `gaxios` for configuration>.';
+
+function _isStreamLike(value: unknown): boolean {
+  if (!value || typeof value !== 'object') {
+    return false;
+  }
+  const stream = value as {pipe?: unknown; getReader?: unknown};
+  return (
+    typeof stream.pipe === 'function' || typeof stream.getReader === 'function'
+  );
+}
+
+function _extractRawPayloadFromRejection(
+  err: Error,
+  responseData: unknown,
+  httpStatus: number,
+): unknown {
+  if (
+    responseData !== undefined &&
+    responseData !== null &&
+    responseData !== '' &&
+    responseData !== GAXIOS_REDACTED_BODY &&
+    !_isStreamLike(responseData)
+  ) {
+    return responseData;
+  }
+  if (
+    err.message.length > 0 &&
+    err.message !== GAXIOS_REDACTED_BODY &&
+    err.message !== `Request failed with status code ${httpStatus}`
+  ) {
+    return err.message;
+  }
+  return undefined;
+}
+
 function _toGoogleError(err: unknown, outcome: CallOutcome): unknown {
   if (err instanceof GoogleError) {
     return err;
@@ -264,13 +301,22 @@ function _toGoogleError(err: unknown, outcome: CallOutcome): unknown {
       ? fetchError.status
       : fetchError.response?.status;
   if (typeof httpStatus === 'number') {
+    const responseData = fetchError.response?.data;
     const parsedError =
-      _parseHttpErrorFromRejection(err, fetchError.response?.data) ?? error;
+      _parseHttpErrorFromRejection(err, responseData) ?? error;
     parsedError.cause = err;
     if (typeof parsedError.code !== 'number') {
       parsedError.code = rpcCodeFromHttpStatusCode(httpStatus);
     }
     parsedError.httpStatusCode = httpStatus;
+    const rawPayload = _extractRawPayloadFromRejection(
+      err,
+      responseData,
+      httpStatus,
+    );
+    if (rawPayload !== undefined) {
+      setRawHttpResponsePayload(parsedError, rawPayload);
+    }
     return parsedError;
   }
 

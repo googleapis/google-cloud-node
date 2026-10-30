@@ -19,7 +19,7 @@
 import * as serializer from 'proto3-json-serializer';
 import {defaultToObjectOptions} from './fallback';
 import {FetchParameters, FetchParametersMethod} from './fallbackServiceStub';
-import {GoogleError} from './googleError';
+import {GoogleError, setRawHttpResponsePayload} from './googleError';
 import {rpcCodeFromHttpStatusCode} from './status';
 import {getMatchedUrlTemplate, transcode} from './transcoding';
 
@@ -160,7 +160,7 @@ export function decodeResponse(
     if (ok) {
       throw err;
     }
-    throw _undecodableErrorResponse(
+    const undecodableError = _undecodableErrorResponse(
       rpc,
       httpStatusCode,
       `the response body is not JSON: ${
@@ -170,6 +170,8 @@ export function decodeResponse(
       }`,
       err,
     );
+    setRawHttpResponsePayload(undecodableError, decodedString);
+    throw undecodableError;
   }
   if (!ok) {
     let error: GoogleError;
@@ -179,12 +181,14 @@ export function decodeResponse(
       // `parseHttpError` indexes into the body, so JSON that parses but is not
       // an object — `null`, a string, a number — fails there for the same
       // reason an HTML body fails above, and must not lose the status either.
-      throw _undecodableErrorResponse(
+      const undecodableError = _undecodableErrorResponse(
         rpc,
         httpStatusCode,
         'the response body is not a JSON error object',
         err,
       );
+      setRawHttpResponsePayload(undecodableError, decodedString);
+      throw undecodableError;
     }
     // `parseHttpError` reads the status out of the response body and maps it
     // onto the gRPC `code`, keeping no record of the status the transport
@@ -197,6 +201,7 @@ export function decodeResponse(
     if (httpStatusCode !== undefined) {
       error.httpStatusCode = httpStatusCode;
     }
+    setRawHttpResponsePayload(error, decodedString);
     throw error;
   }
   const message = serializer.fromProto3JSON(rpc.resolvedResponseType!, json);
