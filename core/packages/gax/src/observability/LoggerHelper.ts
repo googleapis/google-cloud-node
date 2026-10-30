@@ -229,12 +229,15 @@ export function getGaxLogger(
  * @param {unknown} err - The error thrown or reported for the call.
  * @param {AttemptTraceContext} dynamicArgs - Dynamic context for the RPC call or attempt.
  * @param {StaticTraceContext} [staticArgs={}] - Static context for the client library.
+ * @param {boolean} [includeExceptionAttributes=true] - Whether to populate `exception.*`
+ *   attributes (set on L3 client call logs, omitted on L4 transport attempt logs).
  * @returns {LogPayload} The populated log payload attributes with undefined fields omitted.
  */
 export function buildLogAttributes(
   err: unknown,
   dynamicArgs: AttemptTraceContext,
   staticArgs: StaticTraceContext = {},
+  includeExceptionAttributes = true,
 ): LogPayload {
   const {rawAddress, urlDomain} = resolveEndpointAndDomain(
     dynamicArgs,
@@ -288,14 +291,16 @@ export function buildLogAttributes(
   }
   Object.assign(attributes, resolveErrorInfoMetadataAttributes(err));
 
-  attributes['exception.type'] = resolveExceptionType(err);
-  attributes['exception.message'] = resolveExceptionMessage(
-    err,
-    dynamicArgs.rpcType,
-  );
-  const stacktrace = resolveExceptionStacktrace(err);
-  if (stacktrace !== undefined) {
-    attributes['exception.stacktrace'] = stacktrace;
+  if (includeExceptionAttributes) {
+    attributes['exception.type'] = resolveExceptionType(err);
+    attributes['exception.message'] = resolveExceptionMessage(
+      err,
+      dynamicArgs.rpcType,
+    );
+    const stacktrace = resolveExceptionStacktrace(err);
+    if (stacktrace !== undefined) {
+      attributes['exception.stacktrace'] = stacktrace;
+    }
   }
 
   return attributes;
@@ -464,14 +469,20 @@ export function logNetworkAttempt<T = GaxCallResult>(
     const traceId = spanContext?.traceId;
     const spanId = spanContext?.spanId;
 
-    // Build structured log attributes and attach raw attempt response payload when present.
-    const attributes = buildLogAttributes(err, attemptDynamicArgs, staticArgs);
+    // Build structured log attributes without exception details and attach raw attempt response payload when present.
+    const attributes = buildLogAttributes(
+      err,
+      attemptDynamicArgs,
+      staticArgs,
+      false,
+    );
     const responsePayload = resolveErrorResponsePayload(err);
     if (responsePayload !== undefined) {
       attributes['response.payload'] = responsePayload;
     }
 
     // Emit structured DEBUG log for the failed attempt.
+    const message = resolveExceptionMessage(err, attemptDynamicArgs.rpcType);
     logger(
       {
         severity: resolveLogSeverity('DEBUG'),
@@ -480,7 +491,7 @@ export function logNetworkAttempt<T = GaxCallResult>(
         other: attributes,
       },
       'RPC attempt failed: %s',
-      attributes['exception.message'] || err,
+      message || err,
     );
   };
 

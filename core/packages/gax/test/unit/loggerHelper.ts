@@ -947,12 +947,12 @@ describe('LoggerHelper', () => {
         'server.address': 'storage.googleapis.com',
         'rpc.response.status_code': 'UNAVAILABLE',
         'error.type': 'UNAVAILABLE',
-        'exception.type': 'GoogleError',
-        'exception.message': 'Unavailable',
-        'exception.stacktrace': errWithMeta.stack,
         'response.payload':
           '{"x-goog-request-id":"req-123","trace-bin":"YWJj"}',
       });
+      assert.strictEqual('exception.type' in other, false);
+      assert.strictEqual('exception.message' in other, false);
+      assert.strictEqual('exception.stacktrace' in other, false);
 
       sink.reset();
       const preConnectGrpcErr = Object.assign(
@@ -981,6 +981,9 @@ describe('LoggerHelper', () => {
         preConnectOther['error.type'],
         'CLIENT_CONNECTION_ERROR',
       );
+      assert.strictEqual('exception.type' in preConnectOther, false);
+      assert.strictEqual('exception.message' in preConnectOther, false);
+      assert.strictEqual('exception.stacktrace' in preConnectOther, false);
 
       sink.reset();
       const errWithoutMeta = new TypeError('client error');
@@ -1001,12 +1004,9 @@ describe('LoggerHelper', () => {
       const otherWithoutMeta = sink.logs[0].fields.other as LogPayload;
       assert.strictEqual('response.payload' in otherWithoutMeta, false);
       assert.strictEqual('server.address' in otherWithoutMeta, false);
-      assert.strictEqual(otherWithoutMeta['exception.type'], 'TypeError');
-      assert.strictEqual(otherWithoutMeta['exception.message'], 'client error');
-      assert.strictEqual(
-        otherWithoutMeta['exception.stacktrace'],
-        errWithoutMeta.stack,
-      );
+      assert.strictEqual('exception.type' in otherWithoutMeta, false);
+      assert.strictEqual('exception.message' in otherWithoutMeta, false);
+      assert.strictEqual('exception.stacktrace' in otherWithoutMeta, false);
     });
 
     it('emits response.payload on HTTP REST error responses and omits it on empty or transport failures', async () => {
@@ -1062,6 +1062,9 @@ describe('LoggerHelper', () => {
       assert.strictEqual(other503['http.response.status_code'], 503);
       assert.strictEqual(other503['rpc.response.status_code'], 'UNAVAILABLE');
       assert.strictEqual(other503['response.payload'], json503Body);
+      assert.strictEqual('exception.type' in other503, false);
+      assert.strictEqual('exception.message' in other503, false);
+      assert.strictEqual('exception.stacktrace' in other503, false);
 
       sink.reset();
       const json403Body = JSON.stringify({
