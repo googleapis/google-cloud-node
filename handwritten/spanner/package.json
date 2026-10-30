@@ -54,7 +54,7 @@
     "@babel/core": "7.27.7",
     "@babel/helpers": "7.27.6",
     "@babel/traverse": "7.27.7",
-    "@google-cloud/common": "^8.0.0",
+    "@google-cloud/common": "^8.2.2",
     "@google-cloud/monitoring": "^6.0.0",
     "@google-cloud/precise-date": "^6.2.0",
     "@google-cloud/promisify": "^6.2.0",

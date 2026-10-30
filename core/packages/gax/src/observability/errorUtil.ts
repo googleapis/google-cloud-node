@@ -554,6 +554,34 @@ export function resolveHttpStatusCode(e: unknown): number | undefined {
 }
 
 /**
+ * Resolves the transport response status code for a completed call or attempt,
+ * recorded as `rpc.response.status_code` (gRPC) or `http.response.status_code` (HTTP).
+ * Successful calls resolve to `OK` (gRPC) or `200` (HTTP). Failed calls resolve the
+ * status from the error, which is undefined when the error carries no status.
+ *
+ * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
+ * @param {boolean} failed - Whether the call or attempt failed.
+ * @param {unknown} [e] - The error the call or attempt failed with, if it failed.
+ * @returns {{rpcStatusName?: string; httpStatusCode?: number}} The gRPC status name
+ *   (gRPC) or HTTP status code (HTTP) for the transport.
+ */
+export function resolveResponseStatusCode(
+  rpcType: 'grpc' | 'http',
+  failed: boolean,
+  e?: unknown,
+): {rpcStatusName?: string; httpStatusCode?: number} {
+  if (rpcType === 'grpc') {
+    return {
+      rpcStatusName: failed ? resolveRpcStatusName(e) : Status[Status.OK],
+    };
+  }
+  if (rpcType === 'http') {
+    return {httpStatusCode: failed ? resolveHttpStatusCode(e) : 200};
+  }
+  return {};
+}
+
+/**
  * Determines if a failure occurred on the client side before DNS resolution
  * or connection establishment.
  *
@@ -803,6 +831,25 @@ export function resolveServerExceptionDetails(e: Error): {
 }
 
 /**
+ * Resolves the `exception.message` for a failed call or attempt. Server-side Error
+ * instances prefer the server-provided error details over the generic error message
+ * (see `resolveServerExceptionDetails`). All other values use their `message`, or the
+ * stringified value for non-Error throws (see `resolveErrorMessage`).
+ *
+ * @param {unknown} e - The error or other value thrown or reported for the call.
+ * @param {'grpc' | 'http'} rpcType - The RPC transport protocol.
+ * @returns {string} The resolved `exception.message` string.
+ */
+export function resolveExceptionMessage(
+  e: unknown,
+  rpcType: 'grpc' | 'http',
+): string {
+  return e instanceof Error && isServerSideError(e, rpcType)
+    ? resolveServerExceptionDetails(e).message
+    : resolveErrorMessage(e);
+}
+
+/**
  * Records an `exception` span event with `exception.type` (and `exception.message`
  * when `includeMessage` is true, such as on low level network attempt spans).
  *
@@ -822,9 +869,7 @@ export function recordExceptionEvent(
     'exception.type': resolveExceptionType(e),
   };
   if (includeMessage) {
-    attributes['exception.message'] = isServerSideError(e, rpcType)
-      ? resolveServerExceptionDetails(e).message
-      : e.message;
+    attributes['exception.message'] = resolveExceptionMessage(e, rpcType);
   }
   span.addEvent('exception', attributes);
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/test-utils-v0.3.1...test-utils-v0.4.0) (2026-10-28)
+
+
+### Features
+
+* **test-utils:** Add createProxyquire and proxyquire helper ([#9759](https://github.com/googleapis/google-cloud-node/issues/9759)) ([763d1bd](https://github.com/googleapis/google-cloud-node/commit/763d1bd904ee93145ad8a27655fcef277a188b1a))
+
 ## [0.3.1](https://github.com/googleapis/google-cloud-node/compare/test-utils-v0.3.0...test-utils-v0.3.1) (2026-10-19)
 
 

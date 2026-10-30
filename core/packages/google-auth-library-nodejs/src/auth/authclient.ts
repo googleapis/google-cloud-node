@@ -93,8 +93,9 @@ interface AuthJSONOptions {
  * The camelCased options are aliases of the snake_cased options, supporting both
  * JSON API and JS conventions.
  */
-export interface AuthClientOptions
-  extends Partial<OriginalAndCamel<AuthJSONOptions>> {
+export interface AuthClientOptions extends Partial<
+  OriginalAndCamel<AuthJSONOptions>
+> {
   /**
    * An API key to use, optional.
    */
@@ -450,14 +451,14 @@ export abstract class AuthClient
           headers: config.headers,
         };
         if (methodName) {
-          AuthClient.log.info(
+          AuthClient.log.debug(
             '%s [%s] request %j',
             methodName,
             logId,
             logObject,
           );
         } else {
-          AuthClient.log.info('[%s] request %j', logId, logObject);
+          AuthClient.log.debug('[%s] request %j', logId, logObject);
         }
       } catch (e) {
         // Logging must not create new errors; swallow them all.
@@ -477,14 +478,14 @@ export abstract class AuthClient
         const methodName = symbols[AuthClient.RequestMethodNameSymbol];
         const logId = symbols[AuthClient.RequestLogIdSymbol];
         if (methodName) {
-          AuthClient.log.info(
+          AuthClient.log.debug(
             '%s [%s] response %j',
             methodName,
             logId,
             response.data,
           );
         } else {
-          AuthClient.log.info('[%s] response %j', logId, response.data);
+          AuthClient.log.debug('[%s] response %j', logId, response.data);
         }
       } catch (e) {
         // Logging must not create new errors; swallow them all.
@@ -499,14 +500,14 @@ export abstract class AuthClient
         const methodName = symbols[AuthClient.RequestMethodNameSymbol];
         const logId = symbols[AuthClient.RequestLogIdSymbol];
         if (methodName) {
-          AuthClient.log.info(
+          AuthClient.log.debug(
             '%s [%s] error %j',
             methodName,
             logId,
             error.response?.data,
           );
         } else {
-          AuthClient.log.error('[%s] error %j', logId, error.response?.data);
+          AuthClient.log.debug('[%s] error %j', logId, error.response?.data);
         }
       } catch (e) {
         // Logging must not create new errors; swallow them all.

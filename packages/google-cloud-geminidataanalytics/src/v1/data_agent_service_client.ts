@@ -2121,8 +2121,7 @@ export class DataAgentServiceClient {
   }
   /**
    * Enables/Disables required GCP services and configures AgentOps
-   * observability settings calling the Admin Settings executable node to
-   * update the AgentOps Observability feature.
+   * observability settings.
    *
    * @param {Object} request
    *   The request object that will be sent.

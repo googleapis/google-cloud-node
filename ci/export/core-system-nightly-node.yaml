@@ -1,5 +1,5 @@
 createTime: '2025-09-18T18:59:45.514768458Z'
-description: Nightly build with node 18
+description: Nightly build with node 22
 gitFileSource:
   path: ci/cloudbuild_with_gapic_showcase.yaml
   repoType: GITHUB

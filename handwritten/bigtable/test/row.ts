@@ -18,6 +18,7 @@ import {afterEach, beforeEach, describe, it} from 'mocha';
 import * as proxyquire from 'proxyquire';
 import * as sinon from 'sinon';
 import {Mutation} from '../src/mutation.js';
+import '../src/table';
 import * as rw from '../src/row';
 import {
   Table,
