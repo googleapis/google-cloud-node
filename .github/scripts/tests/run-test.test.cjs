@@ -220,6 +220,25 @@ describe('bin/run-test.cjs .only support', () => {
     );
     assert.strictEqual(dualResolved.hasOnly, true);
     assert.strictEqual(fs.readFileSync(compileMarker, 'utf8'), '2');
+
+    // 4. Sibling suite/glob targets skip without recompiling, while explicit file targets still run
+    const confDir = path.join(tmpDir, 'build/conformance');
+    fs.mkdirSync(confDir, {recursive: true});
+    const confFile = path.join(confDir, 'conf.js');
+    fs.writeFileSync(confFile, 'it("conformance", () => {});');
+    assert.strictEqual(
+      resolveTestArgs(['build/conformance'], tmpDir).skip,
+      true,
+    );
+    assert.strictEqual(
+      resolveTestArgs(['build/test/*_v2beta1.js'], tmpDir).skip,
+      true,
+    );
+    assert.strictEqual(
+      resolveTestArgs(['build/conformance/conf.js'], tmpDir).skip,
+      false,
+    );
+    assert.strictEqual(fs.readFileSync(compileMarker, 'utf8'), '2');
   });
 
   it('preserves original arguments when no test file contains .only', () => {
@@ -233,6 +252,7 @@ describe('bin/run-test.cjs .only support', () => {
     const inputArgs = ['--config', '../../.mocharc.cjs', 'build/test'];
     const resolved = resolveTestArgs(inputArgs, tmpDir);
     assert.strictEqual(resolved.hasOnly, false);
+    assert.strictEqual(resolved.skip, false);
     assert.deepStrictEqual(resolved.onlyFiles, []);
     assert.deepStrictEqual(resolved.args, inputArgs);
   });

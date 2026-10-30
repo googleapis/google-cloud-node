@@ -265,8 +265,16 @@ const DEFAULT_TEST_DIRS = [
   'test',
 ];
 
+const BUILD_TEST_DIRS = [
+  'build/test',
+  'build/cjs/test',
+  'build/esm/test',
+  'build/conformance',
+];
+
 const FALLBACK_SOURCE_DIRS = [
   'test',
+  'cjs/test',
   'esm/test',
   'system-test',
   'conformance-test',
@@ -477,6 +485,7 @@ function getCandidateSourceDirs(targets, cwd) {
       }
       if (sub && sub !== '.') {
         derived.add(sub);
+        derived.add(path.posix.join('cjs', sub));
         derived.add(path.posix.join('esm', sub));
         derived.add(path.posix.join('dev', sub));
       }
@@ -507,11 +516,16 @@ function maybeCompileStaleSourceOnly(targets, onlyFiles, cwd) {
       }
     }
   }
-  if (!hasTsFiles || (sourceOnlyFiles.length === 0 && onlyFiles.length === 0)) {
+  const buildOnlyFiles =
+    onlyFiles.length > 0 ? onlyFiles : findOnlyFiles(BUILD_TEST_DIRS, cwd);
+  if (
+    !hasTsFiles ||
+    (sourceOnlyFiles.length === 0 && buildOnlyFiles.length === 0)
+  ) {
     return onlyFiles;
   }
   const onlyStems = [
-    ...new Set(onlyFiles.map(f => getRelativeTestStem(f, cwd))),
+    ...new Set(buildOnlyFiles.map(f => getRelativeTestStem(f, cwd))),
   ]
     .sort()
     .join('\0');
@@ -525,15 +539,15 @@ function maybeCompileStaleSourceOnly(targets, onlyFiles, cwd) {
     0,
   );
   const minTargetMtime =
-    onlyFiles.length > 0
-      ? onlyFiles.reduce(
+    buildOnlyFiles.length > 0
+      ? buildOnlyFiles.reduce(
           (min, f) => Math.min(min, fs.statSync(f).mtimeMs),
           Infinity,
         )
       : 0;
   const isInSync =
     onlyStems === sourceOnlyStems &&
-    (onlyFiles.length === 0 || minTargetMtime >= maxSourceOnlyMtime);
+    (buildOnlyFiles.length === 0 || minTargetMtime >= maxSourceOnlyMtime);
   if (isInSync) {
     return onlyFiles;
   }
@@ -553,6 +567,7 @@ function maybeCompileStaleSourceOnly(targets, onlyFiles, cwd) {
       const compileRes = spawnSync(pm, ['run', 'compile'], {
         cwd,
         stdio: 'inherit',
+        shell: process.platform === 'win32' && pm !== 'bun',
         env: {...process.env, RUN_TEST_SKIP_COMPILE: 'true'},
       });
       if (compileRes.status === 0) {
@@ -579,7 +594,19 @@ function resolveTestArgs(inputArgs, cwd = process.cwd()) {
   let onlyFiles = findOnlyFiles(positionalArgs, cwd);
   onlyFiles = maybeCompileStaleSourceOnly(positionalArgs, onlyFiles, cwd);
   if (onlyFiles.length === 0) {
-    return {args: [...inputArgs], hasOnly: false, onlyFiles: []};
+    const isSuiteTarget =
+      positionalArgs.length === 0 ||
+      positionalArgs.some(t => {
+        const clean = t.replace(/^(['"])(.*)\1$/, '$2');
+        return (
+          /[*?]/.test(clean) ||
+          (fs.existsSync(path.resolve(cwd, clean)) &&
+            fs.statSync(path.resolve(cwd, clean)).isDirectory())
+        );
+      });
+    const skip =
+      isSuiteTarget && findOnlyFiles(BUILD_TEST_DIRS, cwd).length > 0;
+    return {args: [...inputArgs], hasOnly: false, onlyFiles: [], skip};
   }
   const filteredOptions = optionArgs.filter(a => !isParallelFlag(a));
   if (!filteredOptions.includes('--no-parallel')) {
@@ -590,6 +617,7 @@ function resolveTestArgs(inputArgs, cwd = process.cwd()) {
     args: [...filteredOptions, ...relOnlyFiles],
     hasOnly: true,
     onlyFiles: relOnlyFiles,
+    skip: false,
   };
 }
 
@@ -670,7 +698,10 @@ if (require.main === module) {
       process.exit(res.status ?? 1);
     }
 
-    const {args: resolvedArgs} = resolveTestArgs(args);
+    const {args: resolvedArgs, skip} = resolveTestArgs(args);
+    if (skip) {
+      process.exit(0);
+    }
 
     const mochaBin = resolveBin('mocha/bin/mocha.js');
     const mochaArgs = resolvedArgs.filter(a => !isParallelFlag(a));
@@ -698,7 +729,10 @@ if (require.main === module) {
     // test file contains `.only`, disable parallel mode and run only the
     // exclusive test file(s) so `.only` is respected without throwing
     // "`.only` is not supported in parallel mode".
-    const {args: resolvedArgs, hasOnly} = resolveTestArgs(args);
+    const {args: resolvedArgs, hasOnly, skip} = resolveTestArgs(args);
+    if (skip) {
+      process.exit(0);
+    }
     if (hasOnly) {
       process.env.MOCHA_PARALLEL = 'false';
     }
