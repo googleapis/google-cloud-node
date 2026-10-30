@@ -64,6 +64,9 @@ describe('signer', () => {
     afterEach(() => fakeTimers.restore());
 
     beforeEach(() => {
+      sandbox
+        .stub(GoogleAuth.prototype, 'getUniverseDomain')
+        .resolves('googleapis.com');
       authClient = {
         sign: async () => 'signature',
         getCredentials: async () => ({client_email: CLIENT_EMAIL}),

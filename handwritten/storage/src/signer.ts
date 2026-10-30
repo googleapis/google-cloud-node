@@ -204,11 +204,15 @@ export class URLSigner {
       );
     }
 
-    return promise.then(query => {
+    return promise.then(async query => {
       query = Object.assign(query, cfg.queryParams);
 
+      const endpoint =
+        typeof this.storage.getEndpoint === 'function'
+          ? await this.storage.getEndpoint()
+          : this.storage['apiEndpoint'];
       const signedUrl = new url.URL(
-        cfg.host?.toString() || config.cname || this.storage.apiEndpoint
+        cfg.host?.toString() || config.cname || endpoint
       );
 
       signedUrl.pathname = this.getResourcePath(
@@ -284,17 +288,6 @@ export class URLSigner {
     }
 
     const extensionHeaders = Object.assign({}, config.extensionHeaders);
-    const fqdn = new url.URL(
-      config.host?.toString() || config.cname || this.storage.apiEndpoint
-    );
-    extensionHeaders.host = fqdn.hostname;
-    if (config.contentMd5) {
-      extensionHeaders['content-md5'] = config.contentMd5;
-    }
-    if (config.contentType) {
-      extensionHeaders['content-type'] = config.contentType;
-    }
-
     let contentSha256: string;
     const sha256Header = extensionHeaders['x-goog-content-sha256'];
     if (sha256Header) {
@@ -307,17 +300,32 @@ export class URLSigner {
       contentSha256 = sha256Header;
     }
 
-    const signedHeaders = Object.keys(extensionHeaders)
-      .map(header => header.toLowerCase())
-      .sort()
-      .join(';');
-
-    const extensionHeadersString = this.getCanonicalHeaders(extensionHeaders);
-
     const datestamp = formatAsUTCISO(config.accessibleAt);
     const credentialScope = `${datestamp}/auto/storage/goog4_request`;
 
     const sign = async () => {
+      const endpoint =
+        typeof this.storage.getEndpoint === 'function'
+          ? await this.storage.getEndpoint()
+          : this.storage['apiEndpoint'];
+      const fqdn = new url.URL(
+        config.host?.toString() || config.cname || endpoint
+      );
+      extensionHeaders.host = fqdn.hostname;
+      if (config.contentMd5) {
+        extensionHeaders['content-md5'] = config.contentMd5;
+      }
+      if (config.contentType) {
+        extensionHeaders['content-type'] = config.contentType;
+      }
+
+      const signedHeaders = Object.keys(extensionHeaders)
+        .map(header => header.toLowerCase())
+        .sort()
+        .join(';');
+
+      const extensionHeadersString = this.getCanonicalHeaders(extensionHeaders);
+
       const credentials = await this.auth.getCredentials();
       const credential = `${credentials.client_email}/${credentialScope}`;
       const dateISO = formatAsUTCISO(

@@ -170,11 +170,13 @@ export interface MakeAuthenticatedRequestFactoryConfig extends Omit<
 
   /**
    * If true, just return the provided request options. Default: false.
+   * @deprecated
    */
   customEndpoint?: boolean;
 
   /**
    * If true, will authenticate when using a custom endpoint. Default: false.
+   * @deprecated
    */
   useAuthWithCustomEndpoint?: boolean;
 
@@ -628,8 +630,6 @@ export class Util {
    * errors. We will exponentially backoff subsequent requests by default.
    * (default: true)
    * @param {object=} config.credentials - Credentials object.
-   * @param {boolean=} config.customEndpoint - If true, just return the provided request options. Default: false.
-   * @param {boolean=} config.useAuthWithCustomEndpoint - If true, will authenticate when using a custom endpoint. Default: false.
    * @param {string=} config.email - Account email address, required for PEM/P12 usage.
    * @param {number=} config.maxRetries - Maximum number of automatic retries attempted before returning the error. (default: 3)
    * @param {string=} config.keyFile - Path to a .json, .pem, or .p12 keyfile.
@@ -805,22 +805,9 @@ export class Util {
             return setProjectId();
           };
 
-          const authorizeRequest = async () => {
-            if (
-              reqConfig.customEndpoint &&
-              !reqConfig.useAuthWithCustomEndpoint
-            ) {
-              // Using a custom API override. Do not use `google-auth-library` for
-              // authentication. (ex: connecting to a local Datastore server)
-              return reqOpts;
-            } else {
-              return authClient.authorizeRequest(reqOpts);
-            }
-          };
-
           const [_projectId, authorizedReqOpts] = await Promise.all([
             getProjectId(),
-            authorizeRequest(),
+            authClient.authorizeRequest(reqOpts),
           ]);
 
           if (_projectId) {

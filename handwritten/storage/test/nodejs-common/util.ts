@@ -735,6 +735,7 @@ describe('common/util', () => {
     const authClient = {
       getCredentials() {},
       getProjectId: () => Promise.resolve(AUTH_CLIENT_PROJECT_ID),
+      authorizeRequest: async (rOpts: {}) => rOpts,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } as any;
 
@@ -826,101 +827,6 @@ describe('common/util', () => {
       assert.strictEqual(mar.authClient, authClient);
     });
 
-    describe('customEndpoint (no authentication attempted)', () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      let makeAuthenticatedRequest: any;
-      const config = {customEndpoint: true};
-
-      beforeEach(() => {
-        sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
-        makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(config);
-      });
-
-      it('should decorate the request', done => {
-        const decoratedRequest = {};
-        stub('decorateRequest', reqOpts_ => {
-          assert.strictEqual(reqOpts_, fakeReqOpts);
-          return decoratedRequest;
-        });
-
-        makeAuthenticatedRequest(fakeReqOpts, {
-          onAuthenticated(
-            err: Error,
-            authenticatedReqOpts: DecorateRequestOptions
-          ) {
-            assert.ifError(err);
-            assert.strictEqual(authenticatedReqOpts, decoratedRequest);
-            done();
-          },
-        });
-      });
-
-      it('should return an error while decorating', done => {
-        const error = new Error('Error.');
-        stub('decorateRequest', () => {
-          throw error;
-        });
-        makeAuthenticatedRequest(fakeReqOpts, {
-          onAuthenticated(err: Error) {
-            assert.strictEqual(err, error);
-            done();
-          },
-        });
-      });
-
-      it('should pass options back to callback', done => {
-        const reqOpts = {a: 'b', c: 'd'};
-        makeAuthenticatedRequest(reqOpts, {
-          onAuthenticated(
-            err: Error,
-            authenticatedReqOpts: DecorateRequestOptions
-          ) {
-            assert.ifError(err);
-            assert.deepStrictEqual(reqOpts, authenticatedReqOpts);
-            done();
-          },
-        });
-      });
-
-      it('should not authenticate requests with a custom API', done => {
-        const reqOpts = {a: 'b', c: 'd'};
-
-        stub('makeRequest', rOpts => {
-          assert.deepStrictEqual(rOpts, reqOpts);
-          done();
-        });
-
-        makeAuthenticatedRequest(reqOpts, assert.ifError);
-      });
-    });
-
-    describe('customEndpoint (authentication attempted)', () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      let makeAuthenticatedRequest: any;
-      const config = {customEndpoint: true, useAuthWithCustomEndpoint: true};
-
-      beforeEach(() => {
-        sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
-        makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(config);
-      });
-
-      it('should authenticate requests with a custom API', done => {
-        const reqOpts = {a: 'b', c: 'd'};
-
-        stub('makeRequest', rOpts => {
-          assert.deepStrictEqual(rOpts, reqOpts);
-          done();
-        });
-
-        authClient.authorizeRequest = async (opts: {}) => {
-          assert.strictEqual(opts, reqOpts);
-          done();
-        };
-
-        makeAuthenticatedRequest(reqOpts, assert.ifError);
-      });
-    });
-
     describe('authentication', () => {
       it('should pass correct args to authorizeRequest', done => {
         const fake = {
@@ -967,7 +873,7 @@ describe('common/util', () => {
           });
 
           const makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory(
-            {customEndpoint: true}
+            {}
           );
 
           makeAuthenticatedRequest(reqOpts, {
@@ -979,7 +885,6 @@ describe('common/util', () => {
           sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
 
           const config = {
-            customEndpoint: true,
             projectId: 'user-provided-project-id',
           };
 
@@ -1002,7 +907,6 @@ describe('common/util', () => {
           sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
 
           const config = {
-            customEndpoint: true,
             projectIdRequired: false,
           };
 
@@ -1028,7 +932,6 @@ describe('common/util', () => {
           sandbox.stub(fakeGoogleAuth, 'GoogleAuth').returns(authClient);
 
           const config = {
-            customEndpoint: true,
             projectIdRequired: false,
           };
 

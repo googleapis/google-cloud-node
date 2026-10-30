@@ -1959,7 +1959,7 @@ class File extends ServiceObject<File, FileMetadata> {
     resumableUpload.createURI(
       {
         authClient: this.storage.authClient,
-        apiEndpoint: this.storage.apiEndpoint,
+        apiEndpoint: this.storage['apiEndpoint'],
         bucket: this.bucket.name,
         customRequestOptions: this.getRequestInterceptors().reduce(
           (reqOpts, interceptorFn) => interceptorFn(reqOpts),
@@ -1979,7 +1979,6 @@ class File extends ServiceObject<File, FileMetadata> {
         retryOptions: retryOptions,
         params: options?.preconditionOpts || this.instancePreconditionOpts,
         universeDomain: this.bucket.storage.universeDomain,
-        useAuthWithCustomEndpoint: this.storage.useAuthWithCustomEndpoint,
         [GCCL_GCS_CMD_KEY]: options[GCCL_GCS_CMD_KEY],
       },
       callback!
@@ -3147,11 +3146,18 @@ class File extends ServiceObject<File, FileMetadata> {
         let url: string;
 
         const EMULATOR_HOST = process.env.STORAGE_EMULATOR_HOST;
+        const endpoint =
+          typeof this.storage.getEndpoint === 'function'
+            ? await this.storage.getEndpoint()
+            : this.storage['apiEndpoint'];
+        const defaultEndpoint = `https://storage.${
+          universe || 'googleapis.com'
+        }`;
 
-        if (this.storage.customEndpoint && typeof EMULATOR_HOST === 'string') {
-          url = `${this.storage.apiEndpoint}/${this.bucket.name}`;
-        } else if (this.storage.customEndpoint) {
-          url = this.storage.apiEndpoint;
+        if (endpoint !== defaultEndpoint && typeof EMULATOR_HOST === 'string') {
+          url = `${endpoint}/${this.bucket.name}`;
+        } else if (endpoint !== defaultEndpoint) {
+          url = endpoint;
         } else if (options.virtualHostedStyle) {
           url = `https://${this.bucket.name}.storage.${universe}/`;
         } else if (options.bucketBoundHostname) {
@@ -3484,7 +3490,7 @@ class File extends ServiceObject<File, FileMetadata> {
     const allInterceptors = storageInterceptors.concat(fileInterceptors);
     const headers = allInterceptors.reduce((acc, curInterceptor) => {
       const currentHeaders = curInterceptor.request({
-        uri: `${this.storage.apiEndpoint}/${
+        uri: `${this.storage['apiEndpoint']}/${
           this.bucket.name
         }/${encodeURIComponent(this.name)}`,
       });
@@ -3496,7 +3502,7 @@ class File extends ServiceObject<File, FileMetadata> {
     util.makeRequest(
       {
         method: 'GET',
-        uri: `${this.storage.apiEndpoint}/${
+        uri: `${this.storage['apiEndpoint']}/${
           this.bucket.name
         }/${encodeURIComponent(this.name)}`,
         headers,
@@ -3687,7 +3693,7 @@ class File extends ServiceObject<File, FileMetadata> {
    * ```
    */
   publicUrl(): string {
-    return `${this.storage.apiEndpoint}/${
+    return `${this.storage['apiEndpoint']}/${
       this.bucket.name
     }/${encodeURIComponent(this.name)}`;
   }
@@ -4636,7 +4642,7 @@ class File extends ServiceObject<File, FileMetadata> {
     }
     const cfg = {
       authClient: this.storage.authClient,
-      apiEndpoint: this.storage.apiEndpoint,
+      apiEndpoint: this.storage['apiEndpoint'],
       bucket: this.bucket.name,
       customRequestOptions: this.getRequestInterceptors().reduce(
         (reqOpts, interceptorFn) => interceptorFn(reqOpts),
@@ -4708,7 +4714,7 @@ class File extends ServiceObject<File, FileMetadata> {
   ): void {
     options.metadata ??= {};
 
-    const apiEndpoint = this.storage.apiEndpoint;
+    const apiEndpoint = this.storage['apiEndpoint'];
     const bucketName = this.bucket.name;
     const uri = `${apiEndpoint}/upload/storage/v1/b/${bucketName}/o`;
 

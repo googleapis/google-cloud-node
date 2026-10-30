@@ -65,11 +65,13 @@ export interface ServiceConfig {
 
   /**
    * Set to true if the endpoint is a custom URL
+   * @deprecated
    */
   customEndpoint?: boolean;
 
   /**
    * Controls whether or not to use authentication when using a custom endpoint.
+   * @deprecated
    */
   useAuthWithCustomEndpoint?: boolean;
 }
@@ -81,6 +83,9 @@ export interface ServiceOptions extends Omit<GoogleAuthOptions, 'authClient'> {
   token?: string;
   timeout?: number; // http.request.options.timeout
   userAgent?: string;
+  /**
+   * @deprecated
+   */
   useAuthWithCustomEndpoint?: boolean;
 }
 
@@ -94,10 +99,16 @@ export class Service {
   providedUserAgent?: string;
   makeAuthenticatedRequest: MakeAuthenticatedRequest;
   authClient: GoogleAuth<AuthClient>;
-  apiEndpoint: string;
+  protected apiEndpoint: string;
   timeout?: number;
   universeDomain: string;
-  customEndpoint: boolean;
+  /**
+   * @deprecated
+   */
+  customEndpoint = false;
+  /**
+   * @deprecated
+   */
   useAuthWithCustomEndpoint?: boolean;
 
   /**
@@ -128,8 +139,6 @@ export class Service {
     this.projectIdRequired = config.projectIdRequired !== false;
     this.providedUserAgent = options.userAgent;
     this.universeDomain = options.universeDomain || DEFAULT_UNIVERSE;
-    this.customEndpoint = config.customEndpoint || false;
-    this.useAuthWithCustomEndpoint = config.useAuthWithCustomEndpoint;
 
     this.makeAuthenticatedRequest = util.makeAuthenticatedRequestFactory({
       ...config,
