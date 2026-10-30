@@ -105,17 +105,27 @@ export class LocationsClient {
     // Ensure that options include all the required fields.
     this.gaxGrpc = gaxGrpc;
     const staticMembers = this.constructor as typeof LocationsClient;
+    const gaxGrpcEndpoint = gaxGrpc as unknown as {
+      _servicePath?: string;
+      _port?: number;
+    };
     const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+      opts?.servicePath ||
+      opts?.apiEndpoint ||
+      gaxGrpcEndpoint._servicePath ||
+      staticMembers.servicePath;
     this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
+      opts?.servicePath ||
+      opts?.apiEndpoint ||
+      gaxGrpcEndpoint._servicePath
     );
-    const port = opts?.port || staticMembers.port;
+    const port = opts?.port ?? gaxGrpcEndpoint._port ?? staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     const fallback =
       opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
-    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+      (gaxGrpc.fallback ||
+        (typeof window !== 'undefined' && typeof window?.fetch === 'function'));
+    opts = Object.assign({clientConfig}, opts, {servicePath, port, fallback});
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
     if (servicePath !== staticMembers.servicePath && !('scopes' in opts)) {
@@ -168,7 +178,23 @@ export class LocationsClient {
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')},
+      opts.enableTelemetryTracing,
+      undefined,
+      opts.enableTelemetryLogging,
     );
+    const parsedPort =
+      typeof opts.port === 'string' ? parseInt(opts.port, 10) : opts.port;
+    for (const methodName of Object.keys(this._defaults)) {
+      const otherArgs = this._defaults[methodName].otherArgs;
+      if (otherArgs) {
+        if (opts.servicePath) {
+          otherArgs.servicePath = opts.servicePath;
+        }
+        if (parsedPort !== undefined && !Number.isNaN(parsedPort)) {
+          otherArgs.port = parsedPort;
+        }
+      }
+    }
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -232,6 +258,7 @@ export class LocationsClient {
         callPromise,
         this._defaults[methodName],
         descriptor,
+        this._opts.fallback || this.gaxGrpc.fallback,
       );
 
       this.innerApiCalls[methodName] = apiCall;

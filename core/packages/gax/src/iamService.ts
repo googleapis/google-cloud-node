@@ -63,6 +63,9 @@ export class IamClient {
       },
       options,
     ) as ClientOptions & ClientStubOptions;
+    if (!opts.fallback && gaxGrpc.fallback) {
+      opts.fallback = gaxGrpc.fallback;
+    }
     version = opts.fallback ? fallback.version : version;
     opts.scopes = (this.constructor as typeof IamClient).scopes;
     // Save options to use in initialize() method.
@@ -91,7 +94,24 @@ export class IamClient {
       gapicConfig as gax.ClientConfig,
       opts!.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')},
+      opts.enableTelemetryTracing,
+      undefined,
+      opts.enableTelemetryLogging,
     );
+    const servicePath = opts.servicePath || opts.apiEndpoint;
+    const parsedPort =
+      typeof opts.port === 'string' ? parseInt(opts.port, 10) : opts.port;
+    for (const methodName of Object.keys(this._defaults)) {
+      const otherArgs = this._defaults[methodName].otherArgs;
+      if (otherArgs) {
+        if (servicePath) {
+          otherArgs.servicePath = servicePath;
+        }
+        if (parsedPort !== undefined && !Number.isNaN(parsedPort)) {
+          otherArgs.port = parsedPort;
+        }
+      }
+    }
     this.innerApiCalls = {};
   }
 
@@ -145,6 +165,7 @@ export class IamClient {
         innerCallPromise,
         this._defaults[methodName],
         this.descriptors.page[methodName],
+        this._opts.fallback || this.gaxGrpc.fallback,
       );
     }
     return this.iamPolicyStub;
