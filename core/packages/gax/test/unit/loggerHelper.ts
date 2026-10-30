@@ -223,7 +223,6 @@ describe('LoggerHelper', () => {
         'gcp.client.version': '1.2.3',
         'gcp.client.repo': DEFAULT_GCP_REPO,
         'gcp.client.artifact': '@google-cloud/storage',
-        'gcp.client.language': 'node',
         'rpc.system.name': 'grpc',
         'rpc.method': 'google.storage.v2.Storage/GetObject',
         'url.domain': 'storage.googleapis.com',
@@ -255,7 +254,6 @@ describe('LoggerHelper', () => {
       );
 
       assert.deepStrictEqual(attributes, {
-        'gcp.client.language': 'node',
         'rpc.system.name': 'http',
         'rpc.response.status_code': 'NOT_FOUND',
         'http.response.status_code': 404,
@@ -524,7 +522,6 @@ describe('LoggerHelper', () => {
         'gcp.client.version': '1.2.3',
         'gcp.client.repo': DEFAULT_GCP_REPO,
         'gcp.client.artifact': '@google-cloud/storage',
-        'gcp.client.language': 'node',
         'rpc.system.name': 'grpc',
         'rpc.method': 'google.storage.v2.Storage/GetObject',
         'url.domain': 'storage.googleapis.com',
@@ -940,7 +937,6 @@ describe('LoggerHelper', () => {
         'gcp.client.version': '1.2.3',
         'gcp.client.repo': DEFAULT_GCP_REPO,
         'gcp.client.artifact': '@google-cloud/storage',
-        'gcp.client.language': 'node',
         'rpc.system.name': 'grpc',
         'rpc.method': 'google.storage.v2.Storage/GetObject',
         'url.domain': 'storage.googleapis.com',
@@ -1337,6 +1333,172 @@ describe('LoggerHelper', () => {
           }),
         (caught: unknown) => caught === hostileResponseErr,
       );
+    });
+  });
+
+  describe('integration with default NodeBackend (no custom setBackend or .on("log"))', () => {
+    interface ParsedStderrLog {
+      namespace: string;
+      severity: string;
+      message: string;
+      fields: loggingUtils.LogFields;
+    }
+
+    // eslint-disable-next-line no-control-regex
+    const ANSI_ESCAPE_RE = /\u001b\[[0-9;]*m/g;
+    function stripAnsi(value: string): string {
+      return value.replace(ANSI_ESCAPE_RE, '');
+    }
+
+    function parseStderrLogs(stderrStub: sinon.SinonStub): ParsedStderrLog[] {
+      return stderrStub.getCalls().map(call => {
+        assert.strictEqual(call.args[0], '%s [%s|%s] %s%s');
+        const namespace = stripAnsi(String(call.args[2]));
+        const severity = stripAnsi(String(call.args[3]));
+        const message = stripAnsi(String(call.args[4]));
+        const rawFields = stripAnsi(String(call.args[5] ?? '')).trim();
+        const fields = (
+          rawFields ? JSON.parse(rawFields) : {}
+        ) as loggingUtils.LogFields;
+        return {namespace, severity, message, fields};
+      });
+    }
+
+    beforeEach(() => {
+      // Clear TestLogSink so google-logging-utils instantiates and runs its real default NodeBackend.
+      loggingUtils.setBackend(undefined);
+    });
+
+    it('delivers logCall and logNetworkAttempt records through NodeBackend across unset, matching, and mismatched GOOGLE_SDK_NODE_LOGGING', async () => {
+      const stderrStub = sinon.stub(console, 'error');
+      const json503Body = JSON.stringify({
+        error: {
+          code: 503,
+          message: 'Backend unavailable',
+          status: 'UNAVAILABLE',
+        },
+      });
+      const gaxGrpc = new FallbackGrpcClient({
+        auth: new GoogleAuth({authClient: new PassThroughClient()}),
+        fallback: 'rest',
+      });
+      const protos = gaxGrpc.loadProto(echoProtoJson);
+      const echoService = protos.lookupService('Echo');
+      setMockFallbackHttpResponse(
+        gaxGrpc,
+        new Response(json503Body, {status: 503}),
+      );
+      const echoStub = await gaxGrpc.createStub(echoService, {
+        servicePath: 'storage.googleapis.com',
+        port: 443,
+      });
+      const restErr = await new Promise<GoogleError>((resolve, reject) => {
+        echoStub.echo({content: 'test'}, {}, {}, (err?: Error) => {
+          if (err instanceof GoogleError) {
+            resolve(err);
+          } else {
+            reject(new Error(`Expected GoogleError, got ${err}`));
+          }
+        });
+      });
+
+      const httpArgs: AttemptTraceContext = {
+        ...dynamicArgs,
+        rpcType: 'http',
+      };
+
+      for (const envValue of [
+        undefined,
+        'storage',
+        'auth,STORAGE',
+        '*',
+        'all',
+        'true',
+        'spanner',
+        'false',
+      ]) {
+        stderrStub.resetHistory();
+        harness.reset();
+        loggingUtils.setBackend(undefined);
+        if (envValue === undefined) {
+          delete process.env.GOOGLE_SDK_NODE_LOGGING;
+        } else {
+          process.env.GOOGLE_SDK_NODE_LOGGING = envValue;
+        }
+        // Pre-warm namespace logger like generated GAPIC constructors (`this._log = logging.log(ns)`).
+        loggingUtils.log('storage');
+
+        await assert.rejects(() =>
+          traceCall(httpArgs, staticArgs, () =>
+            logCall(httpArgs, staticArgs, () =>
+              traceAttempt(httpArgs, staticArgs, () =>
+                logNetworkAttempt(httpArgs, staticArgs, async () => {
+                  throw restErr;
+                }),
+              ),
+            ),
+          ),
+        );
+
+        const spans = harness.getSpans('google-gax');
+        assert.strictEqual(spans.length, 2);
+        const attemptSpan = spans[0];
+        const clientSpan = spans[1];
+
+        const records = parseStderrLogs(stderrStub);
+        assert.strictEqual(
+          records.length,
+          2,
+          `expected L4 + L3 stderr logs when GOOGLE_SDK_NODE_LOGGING=${String(envValue)}`,
+        );
+
+        const [attemptLog, callLog] = records;
+        assert.strictEqual(attemptLog.namespace, 'storage');
+        assert.strictEqual(attemptLog.severity, 'DEBUG');
+        assert.ok(attemptLog.message.startsWith('RPC attempt failed: '));
+        assert.strictEqual(
+          attemptLog.fields.telemetryTraceId,
+          attemptSpan.spanContext().traceId,
+        );
+        assert.strictEqual(
+          attemptLog.fields.telemetrySpanId,
+          attemptSpan.spanContext().spanId,
+        );
+        const attemptOther = attemptLog.fields.other as LogPayload;
+        assert.strictEqual(attemptOther['rpc.system.name'], 'http');
+        assert.strictEqual(
+          attemptOther['rpc.method'],
+          'google.storage.v2.Storage/GetObject',
+        );
+        assert.strictEqual(attemptOther['http.response.status_code'], 503);
+        assert.strictEqual(
+          attemptOther['rpc.response.status_code'],
+          'UNAVAILABLE',
+        );
+        assert.strictEqual(attemptOther['response.payload'], json503Body);
+        assert.strictEqual('exception.type' in attemptOther, false);
+        assert.strictEqual('exception.message' in attemptOther, false);
+        assert.strictEqual('exception.stacktrace' in attemptOther, false);
+
+        assert.strictEqual(callLog.namespace, 'storage');
+        assert.strictEqual(callLog.severity, 'WARNING');
+        assert.ok(callLog.message.startsWith('Client API call failed: '));
+        assert.strictEqual(
+          callLog.fields.telemetryTraceId,
+          clientSpan.spanContext().traceId,
+        );
+        assert.strictEqual(
+          callLog.fields.telemetrySpanId,
+          clientSpan.spanContext().spanId,
+        );
+        const callOther = callLog.fields.other as LogPayload;
+        assert.strictEqual(callOther['rpc.system.name'], 'http');
+        assert.strictEqual(callOther['http.response.status_code'], 503);
+        assert.strictEqual('response.payload' in callOther, false);
+        assert.strictEqual(callOther['exception.type'], 'GoogleError');
+        assert.strictEqual(typeof callOther['exception.message'], 'string');
+        assert.strictEqual(typeof callOther['exception.stacktrace'], 'string');
+      }
     });
   });
 });

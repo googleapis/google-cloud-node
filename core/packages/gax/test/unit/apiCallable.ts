@@ -15,10 +15,22 @@
  */
 
 import assert from 'assert';
+import {spawnSync} from 'child_process';
+import * as path from 'path';
 import {PassThrough} from 'stream';
 import {status} from '@grpc/grpc-js';
-import {SpanKind, SpanStatusCode} from '@opentelemetry/api';
+import {
+  Context,
+  ContextManager,
+  ROOT_CONTEXT,
+  Span,
+  SpanKind,
+  SpanStatusCode,
+  context,
+  trace,
+} from '@opentelemetry/api';
 import {GoogleAuth, PassThroughClient} from 'google-auth-library';
+import * as loggingUtils from 'google-logging-utils';
 import {afterEach, beforeEach, describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import echoProtoJson = require('../fixtures/echo.json');
@@ -35,11 +47,13 @@ import {
   createApiCall as fallbackCreateApiCall,
   GrpcClient as FallbackGrpcClient,
 } from '../../src/fallback';
+import {GrpcClient} from '../../src/grpc';
 import {PageDescriptor, StreamDescriptor} from '../../src/descriptor';
 import {StreamType} from '../../src/streamingCalls/streaming';
 import * as gax from '../../src/gax';
 import {GoogleError} from '../../src/googleError';
 import {OtelHarness} from './otelHarness';
+import * as loggerHelper from '../../src/observability/LoggerHelper';
 import * as tracerHelper from '../../src/observability/TracerHelper';
 import {clearMetadataCache} from '../../src/observability/contextUtil';
 import * as utils from './utils';
@@ -400,6 +414,7 @@ describe('createApiCall', () => {
         clientName: 'EchoClient',
         methodName: 'Echo',
         rpcType: 'grpc',
+        apiName: 'google.example.v1.Echo',
       });
       assert.deepStrictEqual(staticArgs, {
         gcpClientService: 'example',
@@ -466,6 +481,7 @@ describe('createApiCall', () => {
         clientName: '',
         methodName: '',
         rpcType: 'grpc',
+        apiName: '',
       });
     });
 
@@ -1823,6 +1839,1032 @@ describe('createApiCall', () => {
           networkExpand.parentSpanContext?.spanId,
           clientRequestExpand.spanContext().spanId,
         );
+      });
+    });
+  });
+
+  describe('in regards to Telemetry Logging', () => {
+    interface CapturedLog {
+      namespace: string;
+      fields: loggingUtils.LogFields;
+      args: unknown[];
+    }
+
+    class TestLogSink implements loggingUtils.DebugLogBackend {
+      logs: CapturedLog[] = [];
+      filters: string[] = [];
+
+      log(
+        namespace: string,
+        fields: loggingUtils.LogFields,
+        ...args: unknown[]
+      ): void {
+        this.logs.push({namespace, fields, args});
+      }
+
+      setFilters(filters: string[]): void {
+        this.filters = filters;
+      }
+    }
+
+    let sink: TestLogSink;
+    let harness: OtelHarness;
+
+    beforeEach(() => {
+      clearMetadataCache();
+      sink = new TestLogSink();
+      loggingUtils.setBackend(sink);
+      harness = new OtelHarness();
+      harness.setup();
+      process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING = 'true';
+    });
+
+    afterEach(() => {
+      clearMetadataCache();
+      loggingUtils.setBackend(undefined);
+      harness.teardown();
+      delete process.env.GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING;
+      delete process.env.GOOGLE_SDK_NODE_LOGGING;
+      delete process.env.GOOGLE_SDK_NODE_ENABLE_TRACING;
+    });
+
+    it('calls logCall and logNetworkAttempt with attemptDynamicArgs, staticArgs, and isStreamingCall when logging is enabled', async () => {
+      const logCallSpy = sinon.spy(loggerHelper, 'logCall');
+      const logNetworkAttemptSpy = sinon.spy(loggerHelper, 'logNetworkAttempt');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryLogging: true,
+        otherArgs: {
+          internalMethodName: 'Echo',
+          headers: {
+            'x-goog-api-client': 'gapic/1.2.3',
+          },
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(null, {data: 'hello'});
+        return {cancel: () => {}};
+      }
+
+      const apiCall = gaxCreateApiCall(func, settings);
+      await apiCall({param: 'test'}, undefined);
+
+      assert.strictEqual(logCallSpy.calledOnce, true);
+      assert.strictEqual(logNetworkAttemptSpy.calledOnce, true);
+
+      const expectedDynamicArgs = {
+        clientName: 'EchoClient',
+        methodName: 'Echo',
+        rpcType: 'grpc',
+        apiName: 'google.example.v1.Echo',
+      };
+      const expectedStaticArgs = {
+        gcpClientService: 'example',
+        gcpVersion: '1.2.3',
+        gcpRepo: 'googleapis/google-cloud-node',
+        gcpArtifact: '@google-cloud/example',
+      };
+
+      const [callDynamicArgs, callStaticArgs, callFn, callIsStreaming] =
+        logCallSpy.firstCall.args;
+      assert.deepStrictEqual(callDynamicArgs, expectedDynamicArgs);
+      assert.deepStrictEqual(callStaticArgs, expectedStaticArgs);
+      assert.strictEqual(typeof callFn, 'function');
+      assert.strictEqual(callIsStreaming, false);
+
+      const [
+        attemptDynamicArgs,
+        attemptStaticArgs,
+        attemptFn,
+        attemptIsStreaming,
+      ] = logNetworkAttemptSpy.firstCall.args;
+      assert.deepStrictEqual(attemptDynamicArgs, expectedDynamicArgs);
+      assert.deepStrictEqual(attemptStaticArgs, expectedStaticArgs);
+      assert.strictEqual(typeof attemptFn, 'function');
+      assert.strictEqual(attemptIsStreaming, false);
+
+      assert.strictEqual(sink.logs.length, 0);
+
+      // Verify streaming flag is forwarded as true for streaming calls.
+      const streamSpy = sinon.spy(() => {
+        const s = new PassThrough({objectMode: true});
+        s.push(null);
+        return Object.assign(s, {cancel: () => {}});
+      });
+      const streamingApiCall = gaxCreateApiCall(
+        streamSpy as unknown as GRPCCall,
+        settings,
+        new StreamDescriptor(StreamType.SERVER_STREAMING, true),
+      );
+      void streamingApiCall({}, undefined);
+      await new Promise<void>(resolve => setImmediate(resolve));
+
+      assert.strictEqual(logCallSpy.secondCall.args[3], true);
+      assert.strictEqual(logNetworkAttemptSpy.secondCall.args[3], true);
+    });
+
+    it('returns invokeCall directly without calling logCall or logNetworkAttempt when logging and tracing are disabled', async () => {
+      const logCallSpy = sinon.spy(loggerHelper, 'logCall');
+      const logNetworkAttemptSpy = sinon.spy(loggerHelper, 'logNetworkAttempt');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryLogging: false,
+        otherArgs: {
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        callback(new GoogleError('RPC failure'));
+        return {cancel: () => {}};
+      }
+
+      const apiCall = gaxCreateApiCall(func, settings);
+      await assert.rejects(async () => {
+        await apiCall({}, undefined);
+      });
+
+      assert.strictEqual(logCallSpy.called, false);
+      assert.strictEqual(logNetworkAttemptSpy.called, false);
+      assert.strictEqual(sink.logs.length, 0);
+    });
+
+    it('emits L4 DEBUG logs for failed retry attempts and omits L3 WARNING log when retry succeeds', async () => {
+      let attempts = 0;
+      function func(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        attempts++;
+        if (attempts < 3) {
+          const error = new GoogleError('transient failure');
+          error.code = FAKE_STATUS_CODE_1;
+          callback(error);
+        } else {
+          callback(null, {data: 'hello'});
+        }
+        return {cancel: () => {}};
+      }
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryLogging: true,
+        timeout: 0,
+        retry: utils.createRetryOptions(0, 0, 0, 0, 0, 0, 100),
+        otherArgs: {
+          internalMethodName: 'Echo',
+        },
+      });
+
+      const apiCall = gaxCreateApiCall(func, settings);
+      await apiCall({}, undefined);
+
+      assert.strictEqual(attempts, 3);
+      assert.strictEqual(sink.logs.length, 2);
+      for (const entry of sink.logs) {
+        assert.strictEqual(entry.fields.severity, 'DEBUG');
+        assert.deepStrictEqual(entry.args, [
+          'RPC attempt failed: %s',
+          'transient failure',
+        ]);
+      }
+    });
+
+    it('correlates L4 DEBUG logs with the T4 attempt span and L3 WARNING log with the T3 client request span when tracing and logging are both enabled', async () => {
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        enableTelemetryLogging: true,
+        otherArgs: {
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function failingFunc(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        setImmediate(() => {
+          callback(new GoogleError('correlated failure'));
+        });
+        return {cancel: () => {}};
+      }
+
+      const apiCall = gaxCreateApiCall(failingFunc, settings);
+      await assert.rejects(async () => {
+        await apiCall({}, undefined);
+      });
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      const attemptSpan = spans.find(
+        s => s.name === 'google.example.v1.Echo/Echo',
+      )!;
+      const clientRequestSpan = spans.find(s => s.name === 'EchoClient.Echo')!;
+      assert.ok(attemptSpan);
+      assert.ok(clientRequestSpan);
+
+      assert.strictEqual(sink.logs.length, 2);
+      const attemptLog = sink.logs.find(l => l.fields.severity === 'DEBUG')!;
+      const callLog = sink.logs.find(l => l.fields.severity === 'WARNING')!;
+      assert.ok(attemptLog);
+      assert.ok(callLog);
+
+      assert.strictEqual(
+        attemptLog.fields.telemetryTraceId,
+        attemptSpan.spanContext().traceId,
+      );
+      assert.strictEqual(
+        attemptLog.fields.telemetrySpanId,
+        attemptSpan.spanContext().spanId,
+      );
+      assert.strictEqual(
+        callLog.fields.telemetryTraceId,
+        clientRequestSpan.spanContext().traceId,
+      );
+      assert.strictEqual(
+        callLog.fields.telemetrySpanId,
+        clientRequestSpan.spanContext().spanId,
+      );
+    });
+
+    it('emits logs with rpc.method and without spans when logging is enabled and tracing is disabled', async () => {
+      const logCallSpy = sinon.spy(loggerHelper, 'logCall');
+      const logNetworkAttemptSpy = sinon.spy(loggerHelper, 'logNetworkAttempt');
+      const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
+      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: false,
+        enableTelemetryLogging: true,
+        otherArgs: {
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function failingFunc(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        setImmediate(() => {
+          callback(new GoogleError('logging only failure'));
+        });
+        return {cancel: () => {}};
+      }
+
+      const apiCall = gaxCreateApiCall(failingFunc, settings);
+      await assert.rejects(async () => {
+        await apiCall({}, undefined);
+      });
+
+      assert.strictEqual(logCallSpy.calledOnce, true);
+      assert.strictEqual(logNetworkAttemptSpy.calledOnce, true);
+      assert.strictEqual(traceCallSpy.called, false);
+      assert.strictEqual(traceAttemptSpy.called, false);
+      assert.strictEqual(harness.getSpans('google-gax').length, 0);
+
+      assert.strictEqual(sink.logs.length, 2);
+      const [attemptLog, callLog] = sink.logs;
+      assert.strictEqual(attemptLog.fields.severity, 'DEBUG');
+      assert.strictEqual(attemptLog.fields.telemetryTraceId, undefined);
+      assert.strictEqual(attemptLog.fields.telemetrySpanId, undefined);
+      assert.strictEqual(
+        (attemptLog.fields.other as loggerHelper.LogPayload)['rpc.method'],
+        'google.example.v1.Echo/Echo',
+      );
+      assert.strictEqual(callLog.fields.severity, 'WARNING');
+      assert.strictEqual(callLog.fields.telemetryTraceId, undefined);
+      assert.strictEqual(callLog.fields.telemetrySpanId, undefined);
+      assert.strictEqual(
+        (callLog.fields.other as loggerHelper.LogPayload)['rpc.method'],
+        'google.example.v1.Echo/Echo',
+      );
+    });
+
+    it('emits spans without logs when tracing is enabled and logging is disabled', async () => {
+      const logCallSpy = sinon.spy(loggerHelper, 'logCall');
+      const logNetworkAttemptSpy = sinon.spy(loggerHelper, 'logNetworkAttempt');
+      const traceCallSpy = sinon.spy(tracerHelper, 'traceCall');
+      const traceAttemptSpy = sinon.spy(tracerHelper, 'traceAttempt');
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        enableTelemetryLogging: false,
+        otherArgs: {
+          internalMethodName: 'Echo',
+        },
+      });
+
+      function failingFunc(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        setImmediate(() => {
+          callback(new GoogleError('tracing only failure'));
+        });
+        return {cancel: () => {}};
+      }
+
+      const apiCall = gaxCreateApiCall(failingFunc, settings);
+      await assert.rejects(async () => {
+        await apiCall({}, undefined);
+      });
+
+      assert.strictEqual(traceCallSpy.calledOnce, true);
+      assert.strictEqual(traceAttemptSpy.calledOnce, true);
+      assert.strictEqual(logCallSpy.called, false);
+      assert.strictEqual(logNetworkAttemptSpy.called, false);
+      assert.strictEqual(sink.logs.length, 0);
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      assert.ok(spans.find(s => s.name === 'google.example.v1.Echo/Echo'));
+      assert.ok(spans.find(s => s.name === 'EchoClient.Echo'));
+    });
+
+    it('preserves outer OpenTelemetry span correlation across funcPromise and retries in logging-only mode without async context propagation', async () => {
+      // Replace OtelHarness's AsyncLocalStorageContextManager with a synchronous
+      // stack-only ContextManager so context.active() resets to ROOT_CONTEXT across
+      // funcPromise.then(...) microtasks and retry timers.
+      harness.teardown();
+      class StackOnlyContextManager implements ContextManager {
+        private stack: Context[] = [];
+        active(): Context {
+          return this.stack[this.stack.length - 1] ?? ROOT_CONTEXT;
+        }
+        with<A extends unknown[], F extends (...args: A) => ReturnType<F>>(
+          ctx: Context,
+          fn: F,
+          thisArg?: ThisParameterType<F>,
+          ...args: A
+        ): ReturnType<F> {
+          this.stack.push(ctx);
+          try {
+            return fn.apply(thisArg, args);
+          } finally {
+            this.stack.pop();
+          }
+        }
+        bind<T>(_ctx: Context, target: T): T {
+          return target;
+        }
+        enable(): this {
+          return this;
+        }
+        disable(): this {
+          this.stack = [];
+          return this;
+        }
+      }
+      context.setGlobalContextManager(new StackOnlyContextManager().enable());
+      trace.setGlobalTracerProvider(harness.provider);
+
+      let attempts = 0;
+      function failingRetriedFunc(
+        argument: {},
+        metadata: {},
+        options: {},
+        callback: (err: GoogleError | null, resp?: unknown) => void,
+      ) {
+        attempts++;
+        setTimeout(() => {
+          const error = new GoogleError(
+            attempts === 1 ? 'retryable failure' : 'terminal failure',
+          );
+          error.code = attempts === 1 ? FAKE_STATUS_CODE_1 : FAKE_STATUS_CODE_2;
+          callback(error);
+        }, 0);
+        return {cancel: () => {}};
+      }
+
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: false,
+        enableTelemetryLogging: true,
+        timeout: 0,
+        retry: utils.createRetryOptions(1, 1, 1, 0, 0, 0, 500),
+        otherArgs: {
+          internalMethodName: 'Echo',
+        },
+      });
+
+      const apiCall = gaxCreateApiCall(
+        Promise.resolve(failingRetriedFunc),
+        settings,
+      );
+
+      let outerSpan: Span | undefined;
+      const callPromise = trace
+        .getTracer('external-app')
+        .startActiveSpan('outer-request', span => {
+          outerSpan = span;
+          const p = apiCall({}, undefined);
+          span.end();
+          return p;
+        });
+
+      await assert.rejects(async () => {
+        await callPromise;
+      });
+
+      assert.ok(outerSpan);
+      assert.strictEqual(attempts, 2);
+      // 2 L4 DEBUG attempt logs + 1 L3 WARNING call log, all correlated to outerSpan.
+      assert.strictEqual(sink.logs.length, 3);
+      assert.deepStrictEqual(
+        sink.logs.map(l => l.fields.severity),
+        ['DEBUG', 'DEBUG', 'WARNING'],
+      );
+      for (const logEntry of sink.logs) {
+        assert.strictEqual(
+          logEntry.fields.telemetryTraceId,
+          outerSpan.spanContext().traceId,
+        );
+        assert.strictEqual(
+          logEntry.fields.telemetrySpanId,
+          outerSpan.spanContext().spanId,
+        );
+      }
+    });
+
+    it('emits one L4 DEBUG log and one L3 WARNING log when a streaming API call emits an error', async () => {
+      const settings = new gax.CallSettings({
+        apiName: 'google.example.v1.Echo',
+        enableTelemetryTracing: true,
+        enableTelemetryLogging: true,
+        otherArgs: {
+          internalMethodName: 'Echo',
+          servicePath: 'example.googleapis.com',
+        },
+      });
+
+      const streamError = Object.assign(
+        new GoogleError('streaming test failure'),
+        {
+          code: status.UNAVAILABLE,
+        },
+      );
+      const spy = sinon.spy(() => {
+        const s = new PassThrough({objectMode: true});
+        setImmediate(() => {
+          s.emit('error', streamError);
+        });
+        return Object.assign(s, {cancel: () => {}});
+      });
+
+      const apiCall = gaxCreateApiCall(
+        spy as unknown as GRPCCall,
+        settings,
+        new StreamDescriptor(StreamType.SERVER_STREAMING, true),
+      );
+      const stream = apiCall({}, undefined) as CancellableStream;
+      assert.strictEqual(sink.logs.length, 0);
+
+      const caught = await new Promise<GoogleError>(resolve => {
+        stream.on('error', (err: GoogleError) => resolve(err));
+      });
+      // Allow StreamProxy / downstream 'error' listeners installed after caller listener (if any) to settle.
+      await new Promise<void>(resolve => setImmediate(resolve));
+
+      assert.strictEqual(caught, streamError);
+      assert.strictEqual(sink.logs.length, 2);
+
+      const debugLogs = sink.logs.filter(l => l.fields.severity === 'DEBUG');
+      const warnLogs = sink.logs.filter(l => l.fields.severity === 'WARNING');
+      assert.strictEqual(debugLogs.length, 1);
+      assert.strictEqual(warnLogs.length, 1);
+
+      const attemptLog = debugLogs[0];
+      const callLog = warnLogs[0];
+      assert.deepStrictEqual(attemptLog.args, [
+        'RPC attempt failed: %s',
+        'streaming test failure',
+      ]);
+      assert.deepStrictEqual(callLog.args, [
+        'Client API call failed: %s',
+        'streaming test failure',
+      ]);
+
+      const attemptOther = attemptLog.fields.other as loggerHelper.LogPayload;
+      const callOther = callLog.fields.other as loggerHelper.LogPayload;
+      assert.strictEqual(
+        attemptOther['rpc.method'],
+        'google.example.v1.Echo/Echo',
+      );
+      assert.strictEqual(
+        attemptOther['rpc.response.status_code'],
+        'UNAVAILABLE',
+      );
+      assert.strictEqual(
+        attemptOther['server.address'],
+        'example.googleapis.com',
+      );
+      assert.strictEqual('exception.type' in attemptOther, false);
+      assert.strictEqual('exception.message' in attemptOther, false);
+      assert.strictEqual('exception.stacktrace' in attemptOther, false);
+      assert.strictEqual(
+        callOther['rpc.method'],
+        'google.example.v1.Echo/Echo',
+      );
+      assert.strictEqual(callOther['rpc.response.status_code'], 'UNAVAILABLE');
+      assert.strictEqual(callOther['server.address'], 'example.googleapis.com');
+      assert.strictEqual(callOther['exception.type'], 'GoogleError');
+      assert.strictEqual(
+        callOther['exception.message'],
+        'streaming test failure',
+      );
+      assert.strictEqual(typeof callOther['exception.stacktrace'], 'string');
+
+      const spans = harness.getSpans('google-gax');
+      assert.strictEqual(spans.length, 2);
+      const attemptSpan = spans.find(
+        s => s.name === 'google.example.v1.Echo/Echo',
+      )!;
+      const clientRequestSpan = spans.find(s => s.name === 'EchoClient.Echo')!;
+      assert.strictEqual(
+        attemptLog.fields.telemetrySpanId,
+        attemptSpan.spanContext().spanId,
+      );
+      assert.strictEqual(
+        callLog.fields.telemetrySpanId,
+        clientRequestSpan.spanContext().spanId,
+      );
+    });
+
+    describe('with default NodeBackend (no custom setBackend or .on("log"))', () => {
+      interface ParsedStderrLog {
+        namespace: string;
+        severity: string;
+        message: string;
+        fields: loggingUtils.LogFields;
+      }
+
+      // eslint-disable-next-line no-control-regex
+      const ANSI_ESCAPE_RE = /\u001b\[[0-9;]*m/g;
+      function stripAnsi(value: string): string {
+        return value.replace(ANSI_ESCAPE_RE, '');
+      }
+
+      function parseStderrLogs(stderrStub: sinon.SinonStub): ParsedStderrLog[] {
+        return stderrStub.getCalls().map(call => {
+          assert.strictEqual(call.args[0], '%s [%s|%s] %s%s');
+          const namespace = stripAnsi(String(call.args[2]));
+          const severity = stripAnsi(String(call.args[3]));
+          const message = stripAnsi(String(call.args[4]));
+          const rawFields = stripAnsi(String(call.args[5] ?? '')).trim();
+          const fields = (
+            rawFields ? JSON.parse(rawFields) : {}
+          ) as loggingUtils.LogFields;
+          return {namespace, severity, message, fields};
+        });
+      }
+
+      beforeEach(() => {
+        // Clear parent beforeEach's TestLogSink so google-logging-utils runs its real default NodeBackend.
+        loggingUtils.setBackend(undefined);
+        delete process.env.GOOGLE_SDK_NODE_LOGGING;
+      });
+
+      it('emits correlated L4 DEBUG and L3 WARNING logs through NodeBackend for GrpcClient.constructSettings + createApiCall with enableTelemetryLogging: true and GOOGLE_SDK_NODE_LOGGING unset', async () => {
+        const stderrStub = sinon.stub(console, 'error');
+        const gaxGrpc = new GrpcClient({
+          auth: new GoogleAuth({authClient: new PassThroughClient()}),
+          servicePath: 'cloudkms.googleapis.com',
+          port: 443,
+          enableTelemetryTracing: true,
+          enableTelemetryLogging: true,
+        });
+        const serviceName = 'google.cloud.kms.v1.KeyManagementService';
+        const clientConfig: gax.ClientConfig = {
+          interfaces: {
+            [serviceName]: {
+              retry_codes: {retryable: ['UNAVAILABLE']},
+              retry_params: {
+                default: {
+                  initial_retry_delay_millis: 1,
+                  retry_delay_multiplier: 1,
+                  max_retry_delay_millis: 1,
+                  initial_rpc_timeout_millis: 500,
+                  rpc_timeout_multiplier: 1,
+                  max_rpc_timeout_millis: 500,
+                  total_timeout_millis: 2000,
+                },
+              },
+              methods: {
+                GetKeyRing: {
+                  timeout_millis: 500,
+                  retry_codes_name: 'retryable',
+                  retry_params_name: 'default',
+                },
+              },
+            },
+          },
+        };
+        const defaults = gaxGrpc.constructSettings(
+          serviceName,
+          clientConfig,
+          {},
+          {},
+        );
+        // Simulate generated GAPIC constructor initializing `this._log = logging.log('kms')`.
+        loggingUtils.log('kms');
+
+        let attempts = 0;
+        const apiCall = gaxCreateApiCall(
+          (
+            _arg: {},
+            _metadata: {},
+            _opts: {},
+            cb: (err: GoogleError | null, resp?: unknown) => void,
+          ) => {
+            attempts++;
+            setImmediate(() => {
+              const err = new GoogleError(
+                attempts === 1 ? 'backend unavailable' : 'permission denied',
+              );
+              err.code =
+                attempts === 1 ? status.UNAVAILABLE : status.PERMISSION_DENIED;
+              cb(err);
+            });
+            return {cancel: () => {}};
+          },
+          defaults.getKeyRing,
+        );
+
+        await assert.rejects(async () => {
+          await apiCall({}, undefined);
+        });
+
+        assert.strictEqual(attempts, 2);
+        const spans = harness.getSpans('google-gax');
+        const attemptSpans = spans.filter(
+          s => s.name === 'google.cloud.kms.v1.KeyManagementService/GetKeyRing',
+        );
+        const clientSpan = spans.find(
+          s => s.name === 'KeyManagementServiceClient.GetKeyRing',
+        )!;
+        assert.strictEqual(attemptSpans.length, 2);
+        assert.ok(clientSpan);
+
+        const records = parseStderrLogs(stderrStub);
+        assert.strictEqual(records.length, 3);
+        const [attempt1, attempt2, callLog] = records;
+
+        for (const [idx, rec] of [attempt1, attempt2].entries()) {
+          assert.strictEqual(rec.namespace, 'kms');
+          assert.strictEqual(rec.severity, 'DEBUG');
+          assert.strictEqual(
+            rec.fields.telemetryTraceId,
+            attemptSpans[idx].spanContext().traceId,
+          );
+          assert.strictEqual(
+            rec.fields.telemetrySpanId,
+            attemptSpans[idx].spanContext().spanId,
+          );
+          const other = rec.fields.other as loggerHelper.LogPayload;
+          assert.strictEqual(other['gcp.client.service'], 'kms');
+          assert.strictEqual(other['url.domain'], 'cloudkms.googleapis.com');
+          assert.strictEqual(
+            other['server.address'],
+            'cloudkms.googleapis.com',
+          );
+          assert.strictEqual(
+            other['rpc.method'],
+            'google.cloud.kms.v1.KeyManagementService/GetKeyRing',
+          );
+          assert.strictEqual('exception.type' in other, false);
+          assert.strictEqual('exception.message' in other, false);
+          assert.strictEqual('exception.stacktrace' in other, false);
+        }
+        assert.strictEqual(
+          attempt1.message,
+          'RPC attempt failed: backend unavailable',
+        );
+        assert.strictEqual(
+          attempt2.message,
+          'RPC attempt failed: permission denied',
+        );
+
+        assert.strictEqual(callLog.namespace, 'kms');
+        assert.strictEqual(callLog.severity, 'WARNING');
+        assert.strictEqual(
+          callLog.message,
+          'Client API call failed: permission denied',
+        );
+        assert.strictEqual(
+          callLog.fields.telemetryTraceId,
+          clientSpan.spanContext().traceId,
+        );
+        assert.strictEqual(
+          callLog.fields.telemetrySpanId,
+          clientSpan.spanContext().spanId,
+        );
+        const callOther = callLog.fields.other as loggerHelper.LogPayload;
+        assert.strictEqual(callOther['url.domain'], 'cloudkms.googleapis.com');
+        assert.strictEqual(
+          callOther['server.address'],
+          'cloudkms.googleapis.com',
+        );
+        assert.strictEqual(
+          callOther['rpc.response.status_code'],
+          'PERMISSION_DENIED',
+        );
+        assert.strictEqual(callOther['exception.type'], 'GoogleError');
+        assert.strictEqual(callOther['exception.message'], 'permission denied');
+        assert.strictEqual(typeof callOther['exception.stacktrace'], 'string');
+      });
+
+      it('honors GOOGLE_SDK_NODE_LOGGING filters and enableTelemetryLogging overrides end-to-end through FallbackGrpcClient and NodeBackend', async () => {
+        const stderrStub = sinon.stub(console, 'error');
+        const json404Body = JSON.stringify({
+          error: {
+            code: 404,
+            message: 'Secret not found',
+            status: 'NOT_FOUND',
+          },
+        });
+        const serviceName = 'google.example.v1beta1.Echo';
+        const clientConfig: gax.ClientConfig = {
+          interfaces: {
+            [serviceName]: {
+              retry_codes: {non_idempotent: []},
+              retry_params: {
+                default: {
+                  initial_retry_delay_millis: 100,
+                  retry_delay_multiplier: 1.3,
+                  max_retry_delay_millis: 1000,
+                  initial_rpc_timeout_millis: 5000,
+                  rpc_timeout_multiplier: 1,
+                  max_rpc_timeout_millis: 5000,
+                  total_timeout_millis: 5000,
+                },
+              },
+              methods: {
+                Echo: {
+                  timeout_millis: 5000,
+                  retry_codes_name: 'non_idempotent',
+                  retry_params_name: 'default',
+                },
+              },
+            },
+          },
+        };
+
+        const runFallbackEcho = async (
+          envValue: string | undefined,
+          enableTelemetryLogging?: boolean,
+        ): Promise<ParsedStderrLog[]> => {
+          stderrStub.resetHistory();
+          clearMetadataCache();
+          loggingUtils.setBackend(undefined);
+          if (envValue === undefined) {
+            delete process.env.GOOGLE_SDK_NODE_LOGGING;
+          } else {
+            process.env.GOOGLE_SDK_NODE_LOGGING = envValue;
+          }
+          // Pre-warm namespace logger as generated GAPIC constructors do.
+          loggingUtils.log('example');
+
+          const gaxGrpc = new FallbackGrpcClient({
+            auth: new GoogleAuth({authClient: new PassThroughClient()}),
+            fallback: 'rest',
+            servicePath: 'example.googleapis.com',
+            port: 443,
+            ...(enableTelemetryLogging !== undefined
+              ? {enableTelemetryLogging}
+              : {}),
+          });
+          const protos = gaxGrpc.loadProto(echoProtoJson);
+          const echoService = protos.lookupService('Echo');
+          utils.setMockFallbackHttpResponse(
+            gaxGrpc,
+            new Response(json404Body, {status: 404}),
+          );
+          const echoStub = await gaxGrpc.createStub(echoService, {
+            servicePath: 'example.googleapis.com',
+            port: 443,
+          });
+          const defaults = gaxGrpc.constructSettings(
+            serviceName,
+            clientConfig,
+            {},
+            {},
+          );
+          const apiCall = fallbackCreateApiCall(
+            Promise.resolve(
+              echoStub.echo.bind(echoStub) as unknown as GRPCCall,
+            ),
+            defaults.echo,
+          );
+          await assert.rejects(async () => {
+            await apiCall({content: 'hello'}, undefined);
+          });
+          return parseStderrLogs(stderrStub);
+        };
+
+        // Matching GOOGLE_SDK_NODE_LOGGING filters emit L4 DEBUG + L3 WARNING records via NodeBackend.
+        for (const accepted of [
+          'example',
+          'storage,EXAMPLE',
+          'exam*',
+          '*',
+          'all',
+          'true',
+        ]) {
+          const records = await runFallbackEcho(accepted, undefined);
+          assert.strictEqual(
+            records.length,
+            2,
+            `expected 2 stderr records for GOOGLE_SDK_NODE_LOGGING=${JSON.stringify(accepted)}`,
+          );
+          const [attemptLog, callLog] = records;
+          assert.strictEqual(attemptLog.namespace, 'example');
+          assert.strictEqual(attemptLog.severity, 'DEBUG');
+          const attemptOther = attemptLog.fields
+            .other as loggerHelper.LogPayload;
+          assert.strictEqual(attemptOther['rpc.system.name'], 'http');
+          assert.strictEqual(
+            attemptOther['rpc.method'],
+            'google.example.v1beta1.Echo/Echo',
+          );
+          assert.strictEqual(attemptOther['http.response.status_code'], 404);
+          assert.strictEqual(
+            attemptOther['rpc.response.status_code'],
+            'NOT_FOUND',
+          );
+          assert.strictEqual(attemptOther['response.payload'], json404Body);
+          assert.strictEqual(
+            attemptOther['url.domain'],
+            'example.googleapis.com',
+          );
+          assert.strictEqual(
+            attemptOther['server.address'],
+            'example.googleapis.com',
+          );
+
+          assert.strictEqual(callLog.namespace, 'example');
+          assert.strictEqual(callLog.severity, 'WARNING');
+          const callOther = callLog.fields.other as loggerHelper.LogPayload;
+          assert.strictEqual(callOther['rpc.system.name'], 'http');
+          assert.strictEqual('response.payload' in callOther, false);
+          assert.strictEqual(callOther['exception.type'], 'GoogleError');
+        }
+
+        // Non-matching or truthy-looking invalid filters rejected by NodeBackend.setFilters() emit zero logs.
+        for (const rejected of [
+          undefined,
+          '',
+          '1',
+          'TRUE',
+          'ALL',
+          ' true ',
+          'foo,true',
+          'storage, example',
+          'spanner',
+          'false',
+        ]) {
+          const records = await runFallbackEcho(rejected, undefined);
+          assert.strictEqual(
+            records.length,
+            0,
+            `expected 0 stderr records for GOOGLE_SDK_NODE_LOGGING=${JSON.stringify(rejected)}`,
+          );
+        }
+
+        // Explicit enableTelemetryLogging: true emits once even when GOOGLE_SDK_NODE_LOGGING mismatches or is false/unset.
+        for (const overridden of [undefined, 'spanner', 'false', '1']) {
+          const records = await runFallbackEcho(overridden, true);
+          assert.strictEqual(
+            records.length,
+            2,
+            `expected 2 stderr records with enableTelemetryLogging: true and GOOGLE_SDK_NODE_LOGGING=${JSON.stringify(overridden)}`,
+          );
+        }
+
+        // Explicit enableTelemetryLogging: false suppresses matching GOOGLE_SDK_NODE_LOGGING filters.
+        for (const suppressed of ['*', 'all', 'true', 'example']) {
+          const records = await runFallbackEcho(suppressed, false);
+          assert.strictEqual(
+            records.length,
+            0,
+            `expected 0 stderr records with enableTelemetryLogging: false and GOOGLE_SDK_NODE_LOGGING=${JSON.stringify(suppressed)}`,
+          );
+        }
+      });
+
+      it('writes real L4 and L3 records to process.stderr in a fresh child Node process that never calls setBackend or .on("log")', () => {
+        const compiledEntry = path.resolve(
+          __dirname,
+          __filename.endsWith('.js')
+            ? '../../src/index.js'
+            : '../../build/src/index.js',
+        );
+        const childScript = `
+          const gaxPkg = require(${JSON.stringify(compiledEntry)});
+          const optEnabled = process.env.CHILD_ENABLE_OPT === 'true';
+          const settings = new gaxPkg.CallSettings({
+            apiName: 'google.example.v1.Echo',
+            enableTelemetryLogging: optEnabled ? true : undefined,
+            otherArgs: {
+              internalMethodName: 'Echo',
+              servicePath: 'example.googleapis.com',
+            },
+          });
+          // Simulate GAPIC client constructor calling loggingUtils.log(ns) before any RPC.
+          gaxPkg.loggingUtils.log('example');
+          const apiCall = gaxPkg.createApiCall(
+            (_arg, _meta, _opts, cb) => {
+              const err = new gaxPkg.GoogleError('cold-process failure');
+              err.code = gaxPkg.Status.UNAVAILABLE;
+              cb(err);
+              return {cancel: () => {}};
+            },
+            settings,
+          );
+          apiCall({}, undefined).catch(() => {});
+        `;
+
+        for (const childEnv of [
+          {
+            GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING: 'true',
+            CHILD_ENABLE_OPT: 'true',
+          },
+          {
+            GOOGLE_SDK_NODE_EXPERIMENTAL_LOGGING: 'true',
+            GOOGLE_SDK_NODE_LOGGING: 'storage,example',
+          },
+        ]) {
+          const envCopy: NodeJS.ProcessEnv = {...process.env, ...childEnv};
+          if (!('GOOGLE_SDK_NODE_LOGGING' in childEnv)) {
+            delete envCopy.GOOGLE_SDK_NODE_LOGGING;
+          }
+          const result = spawnSync(process.execPath, ['-e', childScript], {
+            encoding: 'utf8',
+            env: envCopy,
+          });
+          assert.strictEqual(result.status, 0, result.stderr);
+          const stderr = result.stderr;
+          const lines = stderr
+            .split(/\r?\n/)
+            .map(l => stripAnsi(l).trim())
+            .filter(Boolean);
+          assert.strictEqual(
+            lines.length,
+            2,
+            `expected 2 stderr lines from child process, got: ${stderr}`,
+          );
+          assert.match(
+            lines[0],
+            /\[example\|DEBUG\] RPC attempt failed: cold-process failure \{/,
+          );
+          assert.match(
+            lines[1],
+            /\[example\|WARNING\] Client API call failed: cold-process failure \{/,
+          );
+          const attemptJson = JSON.parse(
+            lines[0].slice(lines[0].indexOf('{')),
+          ) as {other: loggerHelper.LogPayload};
+          const callJson = JSON.parse(
+            lines[1].slice(lines[1].indexOf('{')),
+          ) as {other: loggerHelper.LogPayload};
+          assert.strictEqual(
+            attemptJson.other['rpc.method'],
+            'google.example.v1.Echo/Echo',
+          );
+          assert.strictEqual(
+            attemptJson.other['rpc.response.status_code'],
+            'UNAVAILABLE',
+          );
+          assert.strictEqual('exception.type' in attemptJson.other, false);
+          assert.strictEqual(callJson.other['exception.type'], 'GoogleError');
+          assert.strictEqual(
+            callJson.other['exception.message'],
+            'cold-process failure',
+          );
+        }
       });
     });
   });
