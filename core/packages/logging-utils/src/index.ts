@@ -14,9 +14,5 @@
 
 export * from './logging-utils';
 // 🌟 ADDED EXPORT FOR TYPES 🌟
-export type {
-  LogFields,
-  LogSeverity,
-  AdhocDebugLogFunction,
-  DebugLogBackend,
-} from './types';
+export {LogSeverity} from './types';
+export type {LogFields, AdhocDebugLogFunction, DebugLogBackend} from './types';

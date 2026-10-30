@@ -4,6 +4,232 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "5e53e2e78a9103005899350313b2777d86967e73",
+          "message": "Onboard a new library",
+          "issues": [
+            "9689"
+          ],
+          "scope": "google/cloud/observability/v1"
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/observability",
+      "id": "5c14b660-9ddf-4fa5-9052-6b8ab5498881",
+      "createTime": "2026-10-28T20:45:53.018Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6eb93400e80b72cce51ff4ee299b66c08894196a",
+          "message": "Update release_level to stable in .repo-metadata.json",
+          "issues": [
+            "9725",
+            "9685"
+          ],
+          "scope": "datamanager"
+        }
+      ],
+      "version": "1.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/datamanager",
+      "id": "8b7d2d70-237a-40c6-96a7-e6b686d9cec2",
+      "createTime": "2026-10-28T20:45:52.977Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "4c4ba3451bf2c87f9e36971765d19f6070973ae4",
+          "message": "Reuse GoogleAuth instance and deprecate credential options",
+          "issues": [
+            "9721"
+          ],
+          "scope": "pubsub"
+        }
+      ],
+      "version": "6.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/pubsub",
+      "id": "953029fd-aa47-4a04-987d-c4b569802f25",
+      "createTime": "2026-10-28T20:45:52.936Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "f803bff4714360aa7c05387251bcb319536ae3f3",
+          "message": "Use ReadonlyMap for EncodedKeyMap implements clause",
+          "issues": [
+            "9709"
+          ],
+          "scope": "bigtable"
+        }
+      ],
+      "version": "7.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigtable",
+      "id": "4e37812e-ae66-42c0-ade4-8619cc746dcb",
+      "createTime": "2026-10-28T20:45:52.909Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "763d1bd904ee93145ad8a27655fcef277a188b1a",
+          "message": "Add createProxyquire and proxyquire helper",
+          "issues": [
+            "9759"
+          ],
+          "scope": "test-utils"
+        }
+      ],
+      "version": "0.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-test-utils",
+      "id": "fa8e9ad8-9851-46ae-a9b7-725d5f0f31a4",
+      "createTime": "2026-10-28T20:45:52.871Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "c7884b87b2fca6662d41c46010b211d8339a48bf",
+          "message": "Strip JS method bodies before pbts and parallelize minification",
+          "issues": [
+            "9737"
+          ],
+          "scope": "gapic-tools"
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-tools",
+      "id": "9edfaba3-f0bb-47d8-874a-04ade76f9ad2",
+      "createTime": "2026-10-28T20:45:52.849Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "bf468181b2c85ffd17cc820d2459d6b42213f016",
+          "message": "Log request/response payloads at DEBUG severity",
+          "issues": [
+            "9754"
+          ],
+          "scope": "core"
+        },
+        {
+          "type": "fix",
+          "sha": "e8da4f0fbb776ff6f52cf77414cb0e1284eaa6e4",
+          "message": "Export LogSeverity as value and treat 'true' as '*' alias",
+          "issues": [
+            "9718"
+          ],
+          "scope": "logging-utils"
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-logging-utils",
+      "id": "fa7bdc39-18af-41f5-b987-1b30b538926a",
+      "createTime": "2026-10-28T20:45:52.823Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "569678ac3f0917a6ac991548b83ae12819bf2715",
+          "message": "Add credential deprecation and validation warnings",
+          "issues": [
+            "9720"
+          ],
+          "scope": "google-auth-library"
+        },
+        {
+          "type": "fix",
+          "sha": "bf468181b2c85ffd17cc820d2459d6b42213f016",
+          "message": "Log request/response payloads at DEBUG severity",
+          "issues": [
+            "9754"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "11.3.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-auth-library",
+      "id": "de4c608c-ce2d-4640-80de-dc13ea2c360a",
+      "createTime": "2026-10-28T20:45:52.799Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "bf468181b2c85ffd17cc820d2459d6b42213f016",
+          "message": "Log request/response payloads at DEBUG severity",
+          "issues": [
+            "9754"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "9.2.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "gcp-metadata",
+      "id": "34de7a5b-6ca1-432a-97b6-802d6a2cd461",
+      "createTime": "2026-10-28T20:45:52.773Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "a802909df71f384c44c16e3564127151ef74f445",
+          "message": "Suppress cancel destroy error in StreamArrayParser and add Bun certification matrix",
+          "issues": [
+            "9652"
+          ],
+          "scope": "gax"
+        },
+        {
+          "type": "feat",
+          "sha": "c0ab589ef64398cf139779619a147761029e3c03",
+          "message": "Add observability logging flag",
+          "issues": [
+            "9656"
+          ],
+          "scope": "gax"
+        }
+      ],
+      "version": "6.14.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "google-gax",
+      "id": "f78cf0a2-910d-42af-9896-4f766b019151",
+      "createTime": "2026-10-28T20:45:52.750Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "bf468181b2c85ffd17cc820d2459d6b42213f016",
+          "message": "Log request/response payloads at DEBUG severity",
+          "issues": [
+            "9754"
+          ],
+          "scope": "core"
+        }
+      ],
+      "version": "5.7.3",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gapic-generator",
+      "id": "9848c60e-1ee2-47e9-b583-1f06daa93dbb",
+      "createTime": "2026-10-28T20:45:52.724Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "1a4c864c569a884623eb38cc73dda4920b998f87",
           "message": "Remove compile-protos from prepare",
@@ -106648,5 +106874,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2026-10-23T15:29:30.412Z"
+  "updateTime": "2026-10-28T20:45:53.018Z"
 }

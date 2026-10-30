@@ -14,6 +14,7 @@
 
 import * as assert from 'assert';
 import {describe, it} from 'mocha';
+import * as sinon from 'sinon';
 import {AwsClient} from '../src/auth/awsclient';
 import {IdentityPoolClient} from '../src/auth/identitypoolclient';
 import {ExternalAccountClient} from '../src/auth/externalclient';
@@ -271,6 +272,20 @@ describe('ExternalAccountClient', () => {
       assert.throws(() => {
         return ExternalAccountClient.fromJSON(invalidOptions);
       });
+    });
+
+    it('should log a warning when called directly', () => {
+      const warnSpy = sinon.stub(console, 'warn');
+      try {
+        ExternalAccountClient.fromJSON(fileSourcedOptions);
+        assert(
+          warnSpy.calledOnceWithExactly(
+            'The `fromJSON` method does not validate the credential configuration. A security risk occurs when a credential configuration configured with malicious URLs is used. When the credential configuration is accepted from an untrusted source, you should validate it before using it with this method. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.',
+          ),
+        );
+      } finally {
+        warnSpy.restore();
+      }
     });
   });
 });

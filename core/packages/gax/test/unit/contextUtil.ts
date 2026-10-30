@@ -28,6 +28,8 @@ import {
   extractFromSettings,
   extractServiceFromApiName,
   getActiveTraceContext,
+  resolveEndpointAndDomain,
+  resolveRpcMethod,
   resolveStaticTraceContext,
   StaticTraceContext,
   DEFAULT_GCP_REPO,
@@ -346,6 +348,155 @@ describe('contextUtil', () => {
       const metadata = resolveStaticTraceContext();
       assert.strictEqual(metadata.serverAddress, 'custom.endpoint.com');
       assert.strictEqual(metadata.serverPort, 8443);
+    });
+  });
+
+  describe('resolveEndpointAndDomain', () => {
+    const dynamicArgs: DynamicTraceContext = {
+      clientName: 'KeyManagementServiceClient',
+      methodName: 'GetKeyRing',
+      rpcType: 'grpc',
+    };
+
+    it('splits embedded ports from host:port and [ipv6]:port server addresses', () => {
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {...dynamicArgs, serverAddress: 'example.com:8443'},
+          {},
+        ),
+        {rawAddress: 'example.com', rawPort: 8443, urlDomain: 'example.com'},
+      );
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {...dynamicArgs, serverAddress: '[::1]:8080'},
+          {},
+        ),
+        {rawAddress: '[::1]', rawPort: 8080, urlDomain: '[::1]'},
+      );
+      // An explicit server port takes precedence over the embedded port.
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {...dynamicArgs, serverAddress: 'example.com:8443', serverPort: 443},
+          {},
+        ),
+        {rawAddress: 'example.com', rawPort: 443, urlDomain: 'example.com'},
+      );
+    });
+
+    it('prefers dynamic endpoint and domain values over static ones', () => {
+      const staticArgs: StaticTraceContext = {
+        serverAddress: 'static.example.com',
+        serverPort: 9443,
+        urlDomain: 'static.googleapis.com',
+      };
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {
+            ...dynamicArgs,
+            serverAddress: 'dynamic.example.com',
+            serverPort: 8443,
+            urlDomain: 'dynamic.googleapis.com',
+          },
+          staticArgs,
+        ),
+        {
+          rawAddress: 'dynamic.example.com',
+          rawPort: 8443,
+          urlDomain: 'dynamic.googleapis.com',
+        },
+      );
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(dynamicArgs, staticArgs),
+        {
+          rawAddress: 'static.example.com',
+          rawPort: 9443,
+          urlDomain: 'static.googleapis.com',
+        },
+      );
+    });
+
+    it('falls back to the server address, then gcpClientService, for url.domain', () => {
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {...dynamicArgs, serverAddress: 'example.com'},
+          {gcpClientService: 'cloudkms'},
+        ),
+        {
+          rawAddress: 'example.com',
+          rawPort: undefined,
+          urlDomain: 'example.com',
+        },
+      );
+      // Short service names are expanded to "<service>.googleapis.com".
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(dynamicArgs, {gcpClientService: 'cloudkms'}),
+        {
+          rawAddress: undefined,
+          rawPort: undefined,
+          urlDomain: 'cloudkms.googleapis.com',
+        },
+      );
+      // Fully-qualified service domains are used as-is.
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(dynamicArgs, {
+          gcpClientService: 'storage.googleapis.com',
+        }),
+        {
+          rawAddress: undefined,
+          rawPort: undefined,
+          urlDomain: 'storage.googleapis.com',
+        },
+      );
+    });
+
+    it('derives the server address from url.domain and applies defaultPort when provided', () => {
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          dynamicArgs,
+          {gcpClientService: 'cloudkms'},
+          443,
+        ),
+        {
+          rawAddress: 'cloudkms.googleapis.com',
+          rawPort: 443,
+          urlDomain: 'cloudkms.googleapis.com',
+        },
+      );
+      // An explicit server port is kept over defaultPort.
+      assert.deepStrictEqual(
+        resolveEndpointAndDomain(
+          {...dynamicArgs, serverAddress: 'example.com', serverPort: 8443},
+          {},
+          443,
+        ),
+        {rawAddress: 'example.com', rawPort: 8443, urlDomain: 'example.com'},
+      );
+      // defaultPort is not applied when there is no address or domain.
+      assert.deepStrictEqual(resolveEndpointAndDomain(dynamicArgs, {}, 443), {
+        rawAddress: undefined,
+        rawPort: undefined,
+        urlDomain: undefined,
+      });
+    });
+  });
+
+  describe('resolveRpcMethod', () => {
+    it('prefixes methodName with apiName when apiName is available', () => {
+      assert.strictEqual(
+        resolveRpcMethod({
+          apiName: 'google.cloud.kms.v1.KeyManagementService',
+          methodName: 'GetKeyRing',
+        }),
+        'google.cloud.kms.v1.KeyManagementService/GetKeyRing',
+      );
+      assert.strictEqual(
+        resolveRpcMethod({methodName: 'GetKeyRing'}),
+        'GetKeyRing',
+      );
+      assert.strictEqual(
+        resolveRpcMethod({apiName: '', methodName: 'GetKeyRing'}),
+        'GetKeyRing',
+      );
     });
   });
 

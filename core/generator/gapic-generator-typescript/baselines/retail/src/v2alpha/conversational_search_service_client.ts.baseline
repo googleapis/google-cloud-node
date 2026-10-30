@@ -514,7 +514,7 @@ export class ConversationalSearchServiceClient {
     this.initialize().catch(err => {
       throw err;
     });
-    this._log.info('conversationalSearch stream %j', options);
+    this._log.debug('conversationalSearch stream %j', options);
     return this.innerApiCalls.conversationalSearch(request, options);
   }
 

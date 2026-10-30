@@ -26,6 +26,7 @@
   "../../protos/google/cloud/oracledatabase/v1/goldengate_deployment_version.proto",
   "../../protos/google/cloud/oracledatabase/v1/location_metadata.proto",
   "../../protos/google/cloud/oracledatabase/v1/minor_version.proto",
+  "../../protos/google/cloud/oracledatabase/v1/odb_dns_zone.proto",
   "../../protos/google/cloud/oracledatabase/v1/odb_network.proto",
   "../../protos/google/cloud/oracledatabase/v1/odb_subnet.proto",
   "../../protos/google/cloud/oracledatabase/v1/oracledatabase.proto",

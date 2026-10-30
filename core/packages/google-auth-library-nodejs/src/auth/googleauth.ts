@@ -47,7 +47,13 @@ import {
   GDCH_SERVICE_ACCOUNT_TYPE,
   GdchCredentialsInput,
 } from './gdchclient';
-import {originalOrCamelOptions} from '../util';
+import {
+  isAdcWarningSuppressed,
+  isFromJsonWarningSuppressed,
+  originalOrCamelOptions,
+  suppressAdcWarning,
+  suppressFromJsonWarning,
+} from '../util';
 import {AnyAuthClient, AnyAuthClientConstructor} from '..';
 
 /**
@@ -248,7 +254,9 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
   private _cachedProjectId?: string | null;
 
   // To save the contents of the JSON credential file
-  jsonContent: JWTInput | ExternalAccountClientOptions | GdchCredentialsInput | null = null;
+  jsonContent:
+    JWTInput | ExternalAccountClientOptions | GdchCredentialsInput | null =
+    null;
   apiKey: string | null;
 
   cachedCredential: AnyAuthClient | T | null = null;
@@ -281,9 +289,19 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
     this._cachedProjectId = opts.projectId || null;
     this.cachedCredential = opts.authClient || null;
     this.keyFilename = opts.keyFilename || opts.keyFile;
+    if (this.keyFilename) {
+      console.warn(
+        'The `keyFilename` option is deprecated. Please use the `auth` object constructor instead. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.',
+      );
+    }
     this.scopes = opts.scopes;
     this.clientOptions = opts.clientOptions || {};
     this.jsonContent = opts.credentials || null;
+    if (this.jsonContent) {
+      console.warn(
+        'The `credentials` option is deprecated. Please use the `auth` object constructor instead. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.',
+      );
+    }
     this.apiKey = opts.apiKey || this.clientOptions.apiKey || null;
 
     // Cannot use both API Key + Credentials
@@ -302,9 +320,9 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
   // variables are set on the JWT client in order to indicate the type of library,
   // and sign the JWT with the correct audience and scopes (if not supplied).
   setGapicJWTValues(client: JWT) {
-    client.defaultServicePath = this.defaultServicePath;
-    client.useJWTAccessWithScope = this.useJWTAccessWithScope;
-    client.defaultScopes = this.defaultScopes;
+    client.defaultServicePath ??= this.defaultServicePath;
+    client.useJWTAccessWithScope ??= this.useJWTAccessWithScope;
+    client.defaultScopes ??= this.defaultScopes;
   }
 
   /**
@@ -321,7 +339,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
   getProjectId(callback: ProjectIdCallback): void;
   getProjectId(callback?: ProjectIdCallback): Promise<string | null> | void {
     if (callback) {
-      this.getProjectIdAsync().then(r => callback(null, r), callback);
+      void this.getProjectIdAsync().then(r => callback!(null, r), callback);
     } else {
       return this.getProjectIdAsync();
     }
@@ -467,7 +485,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
       options = optionsOrCallback;
     }
     if (callback) {
-      this.getApplicationDefaultAsync(options).then(
+      void this.getApplicationDefaultAsync(options).then(
         r => callback!(null, r.credential, r.projectId),
         callback,
       );
@@ -666,7 +684,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
 
     // Now open a read stream on the file, and parse it.
     const readStream = fs.createReadStream(filePath);
-    return this.fromStream(readStream, options);
+    return suppressAdcWarning(() => this.fromStream(readStream, options));
   }
 
   /**
@@ -696,7 +714,9 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
       );
     }
 
-    const sourceClient = this.fromJSON(json.source_credentials);
+    const sourceClient = suppressFromJsonWarning(() =>
+      this.fromJSON(json.source_credentials!),
+    );
 
     if (json.service_account_impersonation_url?.length > 256) {
       /**
@@ -774,10 +794,20 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
    * @returns JWT or UserRefresh Client with data
    */
   fromJSON(
-    json: JWTInput | ImpersonatedJWTInput | GdchCredentialsInput | ExternalAccountClientOptions,
+    json:
+      | JWTInput
+      | ImpersonatedJWTInput
+      | GdchCredentialsInput
+      | ExternalAccountClientOptions,
     options: AuthClientOptions = {},
   ): JSONClient {
     let client: JSONClient;
+
+    if (!isFromJsonWarningSuppressed()) {
+      console.warn(
+        'The `fromJSON` method is deprecated. Please use the `JWT` constructor instead. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.',
+      );
+    }
 
     // user's preferred universe domain
     const preferredUniverseDomain =
@@ -824,10 +854,14 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
    * @returns JWT or UserRefresh Client with data
    */
   private _cacheClientFromJSON(
-    json: JWTInput | ImpersonatedJWTInput | GdchCredentialsInput | ExternalAccountClientOptions,
+    json:
+      | JWTInput
+      | ImpersonatedJWTInput
+      | GdchCredentialsInput
+      | ExternalAccountClientOptions,
     options?: AuthClientOptions,
   ): JSONClient {
-    const client = this.fromJSON(json, options);
+    const client = suppressFromJsonWarning(() => this.fromJSON(json, options));
 
     // cache both raw data used to instantiate client and client itself.
     this.jsonContent = json;
@@ -896,6 +930,12 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
     optionsOrCallback: AuthClientOptions | CredentialCallback = {},
     callback?: CredentialCallback,
   ): Promise<JSONClient> | void {
+    const isADC = isAdcWarningSuppressed();
+    if (!isADC) {
+      console.warn(
+        'The `fromStream` method is deprecated. Please use the `JWT` constructor with a parsed stream instead. For more details, see https://cloud.google.com/docs/authentication/external/externally-sourced-credentials.',
+      );
+    }
     let options: AuthClientOptions = {};
     if (typeof optionsOrCallback === 'function') {
       callback = optionsOrCallback;
@@ -903,18 +943,19 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
       options = optionsOrCallback;
     }
     if (callback) {
-      this.fromStreamAsync(inputStream, options).then(
+      void this.fromStreamAsync(inputStream, options, isADC).then(
         r => callback!(null, r),
         callback,
       );
     } else {
-      return this.fromStreamAsync(inputStream, options);
+      return this.fromStreamAsync(inputStream, options, isADC);
     }
   }
 
   private fromStreamAsync(
     inputStream: stream.Readable,
     options?: AuthClientOptions,
+    isADC = false,
   ): Promise<JSONClient> {
     return new Promise((resolve, reject) => {
       if (!inputStream) {
@@ -931,7 +972,11 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
           try {
             try {
               const data = JSON.parse(chunks.join(''));
-              const r = this._cacheClientFromJSON(data, options);
+              const r = isADC
+                ? suppressAdcWarning(() =>
+                    this._cacheClientFromJSON(data, options),
+                  )
+                : this._cacheClientFromJSON(data, options);
               return resolve(r);
             } catch (err) {
               // If we failed parsing this.keyFileName, assume that it
@@ -1095,7 +1140,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
     callback?: (err: Error | null, credentials?: CredentialBody) => void,
   ): void | Promise<CredentialBody> {
     if (callback) {
-      this.getCredentialsAsync().then(r => callback(null, r), callback);
+      void this.getCredentialsAsync().then(r => callback!(null, r), callback);
     } else {
       return this.getCredentialsAsync();
     }
@@ -1122,7 +1167,7 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
       return {
         client_email: (this.jsonContent as JWTInput).client_email,
         private_key: (this.jsonContent as JWTInput).private_key,
-        universe_domain: (this.jsonContent as any).universe_domain,
+        universe_domain: (this.jsonContent as JWTInput).universe_domain,
       };
     }
 
@@ -1145,6 +1190,9 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
    */
   async getClient(): Promise<AnyAuthClient | T> {
     if (this.cachedCredential) {
+      if (this.cachedCredential instanceof JWT) {
+        this.setGapicJWTValues(this.cachedCredential);
+      }
       return this.cachedCredential;
     }
 
@@ -1154,8 +1202,14 @@ export class GoogleAuth<T extends AuthClient = AuthClient> {
 
     try {
       const client = await this.#pendingAuthClient;
+      if (client instanceof JWT) {
+        this.setGapicJWTValues(client);
+      }
       if (client instanceof GdchClient && !client.apiAudience) {
-        const opts = this.clientOptions as any;
+        const opts = this.clientOptions as {
+          apiEndpoint?: string;
+          servicePath?: string;
+        };
         const endpoint = opts.apiEndpoint || opts.servicePath;
         if (endpoint) {
           const scheme = endpoint.startsWith('http') ? '' : 'https://';
